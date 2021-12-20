@@ -71,19 +71,19 @@ in
     speedtest-cli
     translate-shell
     aspellDicts.en
-    elvish
 
     # GUI
     v2ray
     qv2ray
     emacsGit
+    # emacsPgtkGcc
     # emacs
     firefox-wayland
     qbittorrent
     vlc
     # ffmpeg
+    # rhythmbox
     audacious
-    rhythmbox
     spotify-2k
     # gimp
     shutter
@@ -113,6 +113,7 @@ in
       st = "status";
       unstage = "reset HEAD --";
       pr = "pull --rebase";
+      al = "add *";
       addp = "add --patch";
       comp = "commit --patch";
       co = "checkout";
@@ -187,7 +188,7 @@ in
   };
 
   programs.starship = {
-    enable = false;
+    enable = true;
     enableBashIntegration = true;
     settings = {
       add_newline = false;
@@ -342,26 +343,6 @@ in
     '';
   };
 
-  # xdg = {
-  #   mimeApps = {
-  #     enable = true;
-  #     defaultApplications = {
-  #       # Documents
-  #       "application/pdf" = [ "evince.desktop" ];
-
-  #       # Browsers
-  #       "text/html" = [ "firefox.desktop" ];
-  #       "x-scheme-handler/http" = [ "firefox.desktop" ];
-  #       "x-scheme-handler/https" = [ "firefox.desktop" ];
-
-  #       # Images
-  #       "image/jpeg" = [ "eog.desktop" ];
-  #       "image/png" = [ "eog.desktop" ];
-  #       "image/gif" = [ "eog.desktop" ];
-  #       "image/webp" = [ "eog.desktop" ];
-  #     };
-  #   };
-  # };
 
   # Make cursor not tiny on HiDPI screens
   # xsession.pointerCursor = {

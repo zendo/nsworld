@@ -32,54 +32,9 @@
     { self
     , nixpkgs
     , home-manager
+    , emacs-overlay
     , ...
-    }@inputs:
-
-    # let
-    #   system = "x86_64-linux";
-
-    #   pkgs = import nixpkgs {
-    #     inherit system;
-    #     overlays = [ inputs.emacs-overlay.overlay ];
-    #     nixpkgs.config = {
-    #       allowUnfree = true;
-    #       allowBroken = true;
-    #       allowUnsupportedSystem = true;
-    #     };
-    #   };
-
-    #   lib = nixpkgs.lib;
-
-    # in
-    {
-      # homeManagerConfigurations = {
-      #   iab = home-manager.lib.homeManagerConfiguration {
-      #     inherit system pkgs;
-      #     username = "iab";
-      #     homeDirectory = "/home/iab";
-      #     configuration = {
-            
-      #       imports = [
-      #         ./home.nix
-      #       ];
-      #     };
-      #   };
-      # };
-
-      # nixosConfigurations = {
-      #   nix = lib.nixosSystem {
-      #     inherit system;
-      #     modules = [
-      #       ./modules/hardware-configuration.nix
-      #       ./modules/amd.nix
-      #       # ./modules/intel.nix
-      #       ./modules/gnome.nix
-      #       # ./modules/kde.nix
-      #       ./modules/iab.nix
-      #       ./configuration.nix
-      #     ];
-      #   };
-      # };
+    }@inputs:{
 
       nixosConfigurations = {
         "nix" = nixpkgs.lib.nixosSystem {
@@ -94,7 +49,7 @@
             ./configuration.nix
 
             {
-              nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+              nixpkgs.overlays = [ emacs-overlay.overlay ];
               nixpkgs.config = {
                 allowUnfree = true;
                 allowBroken = true;
@@ -112,13 +67,14 @@
           ];
         };
 
-        # "nix2" = nixpkgs.lib.nixosSystem {
-        #   system = "x86_64-linux";
-        #   modules = [
-        #     ./configuration2.nix
-        #   ];
-        # };
+      # "nix2" = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   modules = [
+      #     ./configuration2.nix
+      #   ];
+      # };
 
-      };
+      # };
     };
+};
 }
