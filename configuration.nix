@@ -69,7 +69,7 @@
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen; # latest or zen
     # kernelParams = [ "mem_sleep_default=deep" ]; #深度睡眠
   };
 
@@ -126,7 +126,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true; #jack-device ?
+    # jack.enable = true; #jack-device ?
   };
 
   # Handles input devices
@@ -159,6 +159,7 @@
     wget
     curl
     bind
+    git
   ];
 
   environment.variables = {
@@ -168,6 +169,8 @@
 
   # flatpak
   services.flatpak.enable = true;
+
+  # programs.steam.enable = true;
 
   # virtualisation
   virtualisation = {

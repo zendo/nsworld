@@ -9,7 +9,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # nur = {
@@ -34,8 +34,51 @@
     , home-manager
     , emacs-overlay
     , ...
-    }@inputs:{
+    }:
+    # let
+    #   system = "x86_64-linux";
+    #   pkgs = import nixpkgs {
+    #     inherit system;
+    #     config = { allowUnfree = true; };
+    #     overlays = [
+    #       emacs-overlay.overlay
+    #     ];
+    #   };
+    #   lib = nixpkgs.lib;
+    # in {
+    #   homeManagerConfigurations = {
+    #     iab = home-manager.lib.homeManagerConfiguration {
+    #       inherit system pkgs;
+    #       username = "iab";
+    #       stateVersion = "21.11";
+    #       homeDirectory = "/home/iab";
+    #       configuration = {
+    #         imports = [
+    #           ./home.nix
+    #         ];
+    #       };
+    #     };
+    #   };
 
+    #   nixosConfigurations = {
+    #     "nix" = lib.nixosSystem {
+    #       inherit system;
+    #       modules = [
+    #         ./modules/hardware-configuration.nix
+    #         ./modules/amd.nix
+    #         # ./modules/intel.nix
+    #         # ./modules/kde.nix
+    #         ./modules/gnome.nix
+    #         ./modules/iab.nix
+    #         ./configuration.nix
+    #         {
+    #           nixpkgs.config = {allowUnfree = true;};
+    #         }
+    #       ];
+    #     };
+    #   };
+    # };
+    {
       nixosConfigurations = {
         "nix" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -57,24 +100,14 @@
               };
             }
 
-
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.iab = import ./home.nix;
+              home-manager.users.iab = import ./hmwork/home.nix;
             }
           ];
         };
-
-      # "nix2" = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   modules = [
-      #     ./configuration2.nix
-      #   ];
-      # };
-
-      # };
+      };
     };
-};
 }

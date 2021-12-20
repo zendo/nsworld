@@ -17,6 +17,8 @@ in
   home.username = "iab";
   home.homeDirectory = "/home/iab";
 
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
     # HARDWARE TEST
     efitools
@@ -75,9 +77,8 @@ in
     # GUI
     v2ray
     qv2ray
-    emacsGit
+    # emacsGit
     # emacsPgtkGcc
-    # emacs
     firefox-wayland
     qbittorrent
     vlc
@@ -103,9 +104,7 @@ in
     # tela-icon-theme
   ];
 
-  programs.home-manager.enable = true;
-
-  programs.git = {
+   programs.git = {
     enable = true;
     userName = "zendo";
     userEmail = "linzway@qq.com";
@@ -150,6 +149,8 @@ in
     ixio = "curl -F 'f:1=<-' ix.io";
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#nix";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix";
+    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix \
+    --recreate-lock-file";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \
       export https_proxy=http://127.0.0.1:20171";
   };
@@ -191,7 +192,9 @@ in
     enable = true;
     enableBashIntegration = true;
     settings = {
-      add_newline = false;
+      add_newline = true;
+      # disable "It took 3s"
+      cmd_duration.disabled = true;
     };
   };
 
@@ -233,12 +236,12 @@ in
     # };
   };
 
-  # programs.emacs = {
-  #   enable = true;
-  #   #package = (pkgs.emacs.override {
-  #   # withXwidgets = true;
-  #   #});
-  # };
+  programs.emacs = {
+    enable = true;
+    #package = (pkgs.emacs.override {
+    # withXwidgets = true;
+    #});
+  };
   # home.file.".emacs.d/init.el".source = ./emacs/init.el;
   # home.file.".emacs.d/early-init.el".source = ./emacs/early-init.el;
   # home.file.".emacs.d/lisp".source = ./emacs/lisp;
@@ -343,8 +346,7 @@ in
     '';
   };
 
-
-  # Make cursor not tiny on HiDPI screens
+  # cursor
   # xsession.pointerCursor = {
   #   name = "Vanilla-DMZ";
   #   package = pkgs.vanilla-dmz;
