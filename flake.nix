@@ -84,12 +84,12 @@
           system = "x86_64-linux";
           modules = [
             ./modules/hardware-configuration.nix
+            ./modules/configuration.nix
+            ./modules/iab.nix
+            ./modules/gnome.nix
             ./modules/amd.nix
             # ./modules/intel.nix
             # ./modules/kde.nix
-            ./modules/gnome.nix
-            ./modules/iab.nix
-            ./configuration.nix
 
             {
               nixpkgs.overlays = [ emacs-overlay.overlay ];
@@ -109,5 +109,7 @@
           ];
         };
       };
+
+
     };
 }

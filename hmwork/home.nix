@@ -66,8 +66,6 @@ in
     zenith
     cht-sh
     trash-cli
-    fzf
-    skim
     unp
     imagemagick
     speedtest-cli
@@ -149,10 +147,10 @@ in
     ixio = "curl -F 'f:1=<-' ix.io";
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#nix";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix";
-    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix \
+    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix \\
     --recreate-lock-file";
-    ssr = "export http_proxy=http://127.0.0.1:20171 ; \
-      export https_proxy=http://127.0.0.1:20171";
+    ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
+    export https_proxy=http://127.0.0.1:20171";
   };
 
   programs.exa = {
@@ -186,6 +184,16 @@ in
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
+  };
+
+  programs.fzf = {
+    enable = false;
+    enableBashIntegration = true;
+  };
+
+  programs.skim = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   programs.starship = {
