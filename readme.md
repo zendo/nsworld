@@ -1,5 +1,3 @@
-sudo nixos-rebuild switch --flake ~/.dotfile#iab --recreate-lock-file
-
 ## Nix is a package manager, a functional programming language with lazy evaluation.
 惰性求值的函数式编程语言。
 
@@ -23,36 +21,3 @@ nixos-install 命令是幂等的，所以多次运行它是完全没问题的。
 
 没有浮点数
 
-
-{
-      nixosConfigurations = {
-        "nix" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./modules/hardware-configuration.nix
-            ./modules/amd.nix
-            # ./modules/intel.nix
-            # ./modules/kde.nix
-            ./modules/gnome.nix
-            ./modules/iab.nix
-            ./configuration.nix
-
-            {
-              nixpkgs.overlays = [ emacs-overlay.overlay ];
-              nixpkgs.config = {
-                allowUnfree = true;
-                allowBroken = true;
-                allowUnsupportedSystem = true;
-              };
-            }
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.iab = import ./home.nix;
-            }
-          ];
-        };
-      };
-    };

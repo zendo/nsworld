@@ -89,12 +89,12 @@ in
     # gimp
     shutter
     foliate
-    yacreader
     ghostwriter
     tdesktop
     meld
-    vorta
     deja-dup
+    # vorta
+    # yacreader
     # standardnotes
 
     # OFFICE
