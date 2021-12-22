@@ -102,7 +102,7 @@ in
     # tela-icon-theme
   ];
 
-   programs.git = {
+  programs.git = {
     enable = true;
     userName = "zendo";
     userEmail = "linzway@qq.com";
@@ -145,9 +145,9 @@ in
     ee = "emacs -nw";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
-    nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#nix";
-    nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix";
-    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#nix \\
+    nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#yoga";
+    nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#yoga";
+    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#yoga \\
     --recreate-lock-file";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
@@ -187,7 +187,7 @@ in
   };
 
   programs.fzf = {
-    enable = false;
+    enable = true;
     enableBashIntegration = true;
   };
 
@@ -197,7 +197,7 @@ in
   };
 
   programs.starship = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
     settings = {
       add_newline = true;
@@ -222,11 +222,10 @@ in
     enable = false;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
-    # oh-my-zsh = {
-    #   enable = true;
-    #   # plugins = [ "git" "thefuck" ];
-    #   theme = "lambda";
-    # };
+    prezto = {
+      enable = true;
+      prompt.theme = "pure";
+    };
     initExtra = ''
       bindkey -e
     '';

@@ -4,112 +4,76 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    # nur = {
-    #   url = "github:nix-community/NUR";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    # Managing your secrets.
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixos-cn = {
-    #   url = "github:nixos-cn/flakes";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    # Easy access to development environments.
+    # devshell.url = "github:numtide/devshell";
+
+    # nur.url = "github:nix-community/NUR";
+    # nur.inputs.nixpkgs.follows = "nixpkgs";
+
+    # nixos-cn.url = "github:nixos-cn/flakes";
+    # nixos-cn.inputs.nixpkgs.follows = "nixpkgs";
 
     # flake-utils.url = "github:numtide/flake-utils";
-
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-
   outputs =
+    inputs@
     { self
     , nixpkgs
     , home-manager
+    , utils
     , emacs-overlay
     , ...
     }:
-    # let
-    #   system = "x86_64-linux";
-    #   pkgs = import nixpkgs {
-    #     inherit system;
-    #     config = { allowUnfree = true; };
-    #     overlays = [
-    #       emacs-overlay.overlay
-    #     ];
-    #   };
-    #   lib = nixpkgs.lib;
-    # in {
-    #   homeManagerConfigurations = {
-    #     iab = home-manager.lib.homeManagerConfiguration {
-    #       inherit system pkgs;
-    #       username = "iab";
-    #       stateVersion = "21.11";
-    #       homeDirectory = "/home/iab";
-    #       configuration = {
-    #         imports = [
-    #           ./home.nix
-    #         ];
-    #       };
-    #     };
-    #   };
 
-    #   nixosConfigurations = {
-    #     "nix" = lib.nixosSystem {
-    #       inherit system;
-    #       modules = [
-    #         ./modules/hardware-configuration.nix
-    #         ./modules/amd.nix
-    #         # ./modules/intel.nix
-    #         # ./modules/kde.nix
-    #         ./modules/gnome.nix
-    #         ./modules/iab.nix
-    #         ./configuration.nix
-    #         {
-    #           nixpkgs.config = {allowUnfree = true;};
-    #         }
-    #       ];
-    #     };
-    #   };
-    # };
-    {
-      nixosConfigurations = {
-        "nix" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./modules/hardware-configuration.nix
-            ./modules/configuration.nix
-            ./modules/iab.nix
-            ./modules/gnome.nix
-            ./modules/amd.nix
-            # ./modules/intel.nix
-            # ./modules/kde.nix
+    utils.lib.mkFlake {
+      inherit self inputs;
+      # supportedSystems = [ "x86_64-linux" ];
 
-            {
-              nixpkgs.overlays = [ emacs-overlay.overlay ];
-              nixpkgs.config = {
-                allowUnfree = true;
-                allowBroken = true;
-                allowUnsupportedSystem = true;
-              };
-            }
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.iab = import ./hmwork/home.nix;
-            }
-          ];
-        };
+      channelsConfig = {
+        allowUnfree = true;
+        allowBroken = true;
+        allowUnsupportedSystem = true;
       };
 
+      sharedOverlays = [
+      ];
 
+      # custom overlays
+      # overlay = import ./overlays;
+
+      hostDefaults = {
+        system = "x86_64-linux";
+      };
+
+      # Modules shared between all hosts
+      hostDefaults.modules = [
+        ./modules/nix-config.nix
+        ./modules/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.iab = import ./hmwork/home.nix;
+        }
+      ];
+
+      hosts.yoga.modules = [
+        ./modules/amd.nix
+        ./hosts/yoga/hardware-configuration.nix
+        ./hosts/yoga/user.nix
+        ./modules/gnome.nix
+      ];
     };
 }

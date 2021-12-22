@@ -1,13 +1,14 @@
 { config, pkgs, ... }:
 
+# nixos-install --root /mnt --flake /home/nixos/dotworld/#nix --impure
 # nixos-install --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 
-# sudo nix-channel --add https://mirrors.ustc.edu.cn/nix-channels/nixos-unstable nixos
-# sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-
 # sudo nix-channel --add https://mirrors.ustc.edu.cn/nix-channels/nixos-21.11 nixos
-# sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
-# sudo nix-channel --update
+# sudo nix-channel --add https://mirrors.ustc.edu.cn/nix-channels/nixos-unstable nixos
+
+# nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+# nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+# nix-channel --update
 # nix-shell '<home-manager>' -A install
 
 # LC_ALL=C xdg-user-dirs-update --force
@@ -22,34 +23,6 @@
 
 {
   system.stateVersion = "21.11";
-
-  nix = {
-    package = pkgs.nixUnstable; # nix v2.5pre
-    useSandbox = true;
-    autoOptimiseStore = true;
-    allowedUsers = [ "@wheel" ];
-    trustedUsers = [ "@wheel" ];
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-    '';
-    binaryCaches = [
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
-      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-      # "https://mirror.sjtu.edu.cn/nix-channels/store"
-    ];
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 5d --max-freed $((64 * 1024**3))";
-    };
-    optimise = {
-      automatic = true;
-      dates = [ "weekly" ];
-    };
-  };
-
 
   ############################################################################
   # Hardware
@@ -135,9 +108,6 @@
     touchpad.disableWhileTyping = true;
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   ###########################################################################
   # essential apps
   ###########################################################################
@@ -186,7 +156,6 @@
   ###########################################################################
   # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";
-  # i18n.supportedLocales = [ "zh_CN.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
 
   console.keyMap = "us";
 
@@ -227,7 +196,7 @@
   #############################################################################
 
   networking = {
-    hostName = "nix";
+    # hostName = "in flake";
     networkmanager.enable = true;
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # defaultGateway = "192.168.2.1";
@@ -253,7 +222,8 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
+  # Enable CUPS to print documents.
+  # services.printing.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
