@@ -81,10 +81,8 @@ in
     qbittorrent
     vlc
     # ffmpeg
-    # rhythmbox
     audacious
     spotify-2k
-    # gimp
     shutter
     foliate
     ghostwriter
@@ -93,7 +91,6 @@ in
     deja-dup
     # vorta
     # yacreader
-    # standardnotes
 
     # OFFICE
     # libreoffice-fresh
@@ -122,9 +119,10 @@ in
     enable = true;
   };
 
-  home.file.".inputrc".text = ''
+  home.file = {
+    # ".vimrc".source = ./vimrc;
+    ".inputrc".text = ''
     set completion-ignore-case on
-
     # Show all tab-completion options on first <tab>
     set show-all-if-ambiguous on
     $if Bash
@@ -135,7 +133,21 @@ in
     $endif
   '';
 
-  # home.file.".vimrc".source = ./vimrc;
+    ".config/ibus/rime/default.custom.yaml".text = ''
+    patch:
+      menu/page_size: 6 # 候选词数
+      "punctuator/symbols":
+        "/emo": [😂️, 😅️, 😱️, 😭️, 😇️, 🙃️, 🤔️, 💊️, 💯️, 👍️, 🙈️, 💩️, 😈️ ]
+      # schema_list:
+      #      - schema:luna_pinyin_simp
+           # - schema: clover
+      '';
+    ".config/ibus/rime/ibus_rime.yaml".text = ''
+      style:
+        horizontal: true
+      '';
+  };
+
 
   home.shellAliases = {
     cat = "bat";
@@ -145,9 +157,9 @@ in
     ee = "emacs -nw";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
-    nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#yoga";
-    nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#yoga";
-    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#yoga \\
+    nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
+    nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
+    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname) \\
     --recreate-lock-file";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
@@ -158,11 +170,6 @@ in
     # ll, la, lla, lt ...
     enableAliases = true;
   };
-
-  # programs.lsd = {
-  #   enable = true;
-  #   enableAliases = true;
-  # };
 
   programs.bat = {
     enable = true;
@@ -201,7 +208,7 @@ in
     enableBashIntegration = true;
     settings = {
       add_newline = true;
-      # disable "It took 3s"
+      # disable "It took xxs"
       cmd_duration.disabled = true;
     };
   };
@@ -234,8 +241,9 @@ in
   programs.vscode = {
     enable = true;
     # extensions = with pkgs.vscode-extensions; [
-    #   # Nix language support
-    #   bbenoist.Nix
+    #   ms-ceintl.vscode-language-pack-zh-hans
+    #   mattn.lisp
+    #   jnoortheen.nix-ide
     # ];
     # userSettings = {
     #   "editor.formatOnSave" = false;
@@ -265,38 +273,6 @@ in
     ]);
   };
 
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      env = {
-        "TERM" = "xterm-256color";
-      };
-      window = {
-        padding = {
-          x = 6;
-          y = 6;
-        };
-      };
-      font = {
-        size = 12.0;
-        offset = {
-          x = 0;
-          y = 0;
-        };
-      };
-      # colors = {
-      #   };
-      key_bindings = [
-        { key = "C"; mods = "Control"; action = "Copy"; }
-        { key = "V"; mods = "Control"; action = "Paste"; }
-        { key = "Key0"; mods = "Control"; action = "ResetFontSize"; }
-        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-        { key = "Equals"; mods = "Control"; action = "IncreaseFontSize"; }
-        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-        { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
-      ];
-    };
-  };
 
   programs.gnome-terminal = {
     enable = true;
@@ -336,6 +312,39 @@ in
           backgroundColor = "rgb(29,31,33)";
         };
       };
+    };
+  };
+
+    programs.alacritty = {
+    enable = false;
+    settings = {
+      env = {
+        "TERM" = "xterm-256color";
+      };
+      window = {
+        padding = {
+          x = 6;
+          y = 6;
+        };
+      };
+      font = {
+        size = 12.0;
+        offset = {
+          x = 0;
+          y = 0;
+        };
+      };
+      # colors = {
+      #   };
+      key_bindings = [
+        { key = "C"; mods = "Control"; action = "Copy"; }
+        { key = "V"; mods = "Control"; action = "Paste"; }
+        { key = "Key0"; mods = "Control"; action = "ResetFontSize"; }
+        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
+        { key = "Equals"; mods = "Control"; action = "IncreaseFontSize"; }
+        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
+        { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
+      ];
     };
   };
 

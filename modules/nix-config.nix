@@ -20,7 +20,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 5d --max-freed $((64 * 1024**3))";
+      options = "--delete-older-than 5d";
     };
     optimise = {
       automatic = true;

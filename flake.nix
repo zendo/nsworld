@@ -7,7 +7,7 @@
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Managing your secrets.
     agenix.url = "github:ryantm/agenix";
@@ -37,25 +37,36 @@
     , ...
     }:
 
+    # let
+    #   pkgs = self.pkgs.x86_64-linux.nixpkgs;
+    # in
+
     utils.lib.mkFlake {
       inherit self inputs;
       # supportedSystems = [ "x86_64-linux" ];
 
       channelsConfig = {
         allowUnfree = true;
-        allowBroken = true;
-        allowUnsupportedSystem = true;
+        # allowBroken = true;
+        # allowUnsupportedSystem = true;
       };
 
       sharedOverlays = [
       ];
 
-      # custom overlays
       # overlay = import ./overlays;
+      overlays = [
+        emacs-overlay.overlay
+      ];
 
       hostDefaults = {
         system = "x86_64-linux";
       };
+
+      # hostDefaults.channelName = "nixpkgs-unstable";
+
+      # Extra arguments to be passed to all modules. Merged with host's extraArgs.
+      # hostDefaults.extraArgs = { inherit utils inputs; foo = "foo"; };
 
       # Modules shared between all hosts
       hostDefaults.modules = [
@@ -66,6 +77,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.iab = import ./hmwork/home.nix;
+          # home-manager.sharedModules = [ ./programs doom.hmModule neomacs.hmModule ];
         }
       ];
 

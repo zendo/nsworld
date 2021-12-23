@@ -44,6 +44,7 @@
     supportedFilesystems = [ "ntfs" ];
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
     # kernelParams = [ "mem_sleep_default=deep" ]; #深度睡眠
+    # kernelParams = [ drm.edid_firmware=edid/ ];
   };
 
   services = {

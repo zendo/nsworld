@@ -42,8 +42,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;; Extensions ;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme)
 (use-package atom-one-dark-theme)
@@ -52,6 +51,8 @@
 (use-package leuven-theme)
 ;; (use-package eclipse-theme)
 (load-theme 'atom-one-dark t)
+
+(use-package all-the-icons)
 
 ;; counsel
 (use-package counsel
@@ -208,10 +209,16 @@
 ;;   (use-package auto-sudoedit
 ;;     :config (auto-sudoedit-mode)))
 
+
+;; doom-modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 ;; powerline
-(use-package powerline
-  :config
-  (powerline-default-theme))
+;; (use-package powerline
+;;   :config
+;;   (powerline-default-theme))
 
 ;; vterm
 ;; (when (eq system-type 'gnu/linux)
@@ -228,6 +235,13 @@
                  '("ansi-term" "*ansi-term*"
                    (lambda () (ansi-term shell-pop-term-shell))))))
           (setq shell-pop-shell-type val)))
+
+;; neotree
+(use-package neotree
+  :bind ([f5] . neotree-toggle)
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;; Projectile
 (use-package projectile
