@@ -16,17 +16,11 @@
 # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 # flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 
-# https://sub.fnf.one/link/6bZAqpNKobYVB4FP?sub=3&extend=1
-
 # ext4 option "noatime" "nodiratime"
 # btrfs option "compress=zstd" "autodefrag" "noatime"
 
 {
   system.stateVersion = "21.11";
-
-  ############################################################################
-  # Hardware
-  ############################################################################
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true; # non-free firmware
@@ -45,6 +39,7 @@
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
     # kernelParams = [ "mem_sleep_default=deep" ]; #深度睡眠
     # kernelParams = [ drm.edid_firmware=edid/ ];
+    # initrd.extraFiles = {  };
   };
 
   services = {
@@ -54,7 +49,7 @@
       autodetect = true;
     };
     # fstrim periodically
-    # Noneed continuous TRIM "discard" in /etc/fstab
+    # == "discard" in /etc/fstab
     fstrim = {
       enable = true;
       interval = "weekly";
@@ -192,29 +187,6 @@
   };
 
 
-  #############################################################################
-  # Networking and Security
-  #############################################################################
-
-  networking = {
-    # hostName = "in flake";
-    networkmanager.enable = true;
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    # defaultGateway = "192.168.2.1";
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
-    useDHCP = false;
-    #interfaces.eno1.useDHCP = true;
-    #interfaces.wlp1s0.useDHCP = true;
-    nameservers = [
-      "223.5.5.5"
-      "223.6.6.6"
-    ];
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -222,33 +194,4 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Publish this server and its address on the network
-  services.avahi = {
-    enable = true;
-    # nssmdns = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-    };
-  };
-
-  # Open ports for avahi zeroconf
-  # networking.firewall.allowedUDPPorts = [ 5353 ];
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # OpenSnitch
-  # services.opensnitch.enable = true;
 }
