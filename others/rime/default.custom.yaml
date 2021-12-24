@@ -1,0 +1,7 @@
+patch:
+  # 候选词数
+  menu/page_size: 6 
+
+  schema_list:
+    - schema: "luna_pinyin_simp"
+  #   - schema: "clover"

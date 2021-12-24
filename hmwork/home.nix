@@ -133,19 +133,8 @@ in
     $endif
   '';
 
-    ".config/ibus/rime/default.custom.yaml".text = ''
-    patch:
-      menu/page_size: 6 # 候选词数
-      "punctuator/symbols":
-        "/emo": [😂️, 😅️, 😱️, 😭️, 😇️, 🙃️, 🤔️, 💊️, 💯️, 👍️, 🙈️, 💩️, 😈️ ]
-      # schema_list:
-      #      - schema:luna_pinyin_simp
-           # - schema: clover
-      '';
-    ".config/ibus/rime/ibus_rime.yaml".text = ''
-      style:
-        horizontal: true
-      '';
+    # ibus-rime
+
   };
 
 

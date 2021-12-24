@@ -72,6 +72,7 @@
       hostDefaults.modules = [
         ./modules/nix-config.nix
         ./modules/configuration.nix
+        ./modules/network.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
