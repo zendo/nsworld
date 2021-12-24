@@ -29,13 +29,13 @@
 ;; align
 ;;----------------------------------------------------------------------------
 ;;;###autoload
-(defun xzway/align-whitespace (start end)
+(defun zendo/align-whitespace (start end)
   "Align columns by whitespace"
   (interactive "r")
   (align-regexp start end
                 "\\(\\s-*\\)\\s-" 1 0 t))
 
-(defun xzway/align-& (start end)
+(defun zendo/align-& (start end)
   "Align columns by ampersand"
   (interactive "r")
   (align-regexp start end
@@ -45,7 +45,7 @@
 ;; space to newline
 ;;----------------------------------------------------------------------------
 ;;;###autoload
-(defun xzway/space-to-newline ()
+(defun zendo/space-to-newline ()
   "Replace space sequence to a newline char.
 Works on current block or selection.
 

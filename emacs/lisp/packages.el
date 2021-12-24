@@ -54,6 +54,7 @@
 
 (use-package all-the-icons)
 
+
 ;; counsel
 (use-package counsel
   :diminish ivy-mode counsel-mode)
@@ -204,18 +205,12 @@
     :init
     (exec-path-from-shell-initialize)))
 
-;; auto-sudoedit
-;; (when (eq system-type 'gnu/linux)
-;;   (use-package auto-sudoedit
-;;     :config (auto-sudoedit-mode)))
-
-
 ;; doom-modeline
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
 
-;; powerline
+;; powerline modeline
 ;; (use-package powerline
 ;;   :config
 ;;   (powerline-default-theme))
@@ -226,9 +221,31 @@
 ;;   (with-eval-after-load 'vterm
 ;;     (define-key vterm-mode-map (kbd "<f4>") 'shell-pop)))
 
+;; all-the-icons-dired
+(use-package all-the-icons-dired
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
+;; all-the-icons-ivy-rich
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1))
+
+;; dired-sidebar
+(use-package dired-sidebar
+  :bind (([f5] . dired-sidebar-toggle-sidebar))
+  :init
+  (add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode))))
+  :config
+  ;; (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-theme 'icons))
+
 ;; shell-pop
 (use-package shell-pop
-  :bind ([f4] . shell-pop)
+  :bind ([f6] . shell-pop)
   :init (let ((val
                (if (eq system-type 'windows-nt)
                    '("eshell" "*eshell*" (lambda () (eshell)))
@@ -236,12 +253,6 @@
                    (lambda () (ansi-term shell-pop-term-shell))))))
           (setq shell-pop-shell-type val)))
 
-;; neotree
-(use-package neotree
-  :bind ([f5] . neotree-toggle)
-  :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;; Projectile
 (use-package projectile
@@ -275,6 +286,7 @@
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   :bind (("C-x g s" . magit-status)
+          ("C-c g" . magit-status)
          ("C-x g x" . magit-checkout)
          ;; ("C-x g c" . magit-commit)
          ;; ("C-x g p" . magit-push)

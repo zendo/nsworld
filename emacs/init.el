@@ -58,6 +58,7 @@
 (require 'packages)
 (require 'functions)
 (require 'lang-main)
+(require 'lang-org)
 ;; (require 'lang-c-cpp-java)
 ;; (require 'lang-web)
 (require 'keybindings)
