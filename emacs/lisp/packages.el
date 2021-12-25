@@ -280,7 +280,7 @@
   (dashboard-set-footer nil)
   (dashboard-center-content t)
 
-  (dashboard-items '((recents  . 8)
+  (dashboard-items '((recents  . 12)
                      (bookmarks . 5)
                      (projects . 5)))
   :config

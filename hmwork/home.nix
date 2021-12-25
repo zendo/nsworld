@@ -48,7 +48,6 @@ in
     niv
 
     # develop
-    gnumake
     tig
     gitui
     lazygit

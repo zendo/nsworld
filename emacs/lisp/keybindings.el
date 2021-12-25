@@ -23,9 +23,14 @@
              (global-set-key [remap mark-sexp] 'easy-mark)
              (global-set-key [remap kill-ring-save] 'easy-kill))
 
+(use-package mwim
+  :bind
+  ("C-a" . mwim-beginning-of-code-or-line)
+  ("C-e" . mwim-end-of-code-or-line))
+
 ;; crux
 (use-package crux
-  :bind (("C-a" . crux-move-beginning-of-line)
+  :bind (;("C-a" . crux-move-beginning-of-line)
          ("C-k" . crux-smart-kill-line)
          ("C-x 4 x" . crux-swap-windows)))
 (global-set-key [(control return)] #'crux-smart-open-line)
