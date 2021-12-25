@@ -27,7 +27,6 @@
 (use-package crux
   :bind (("C-a" . crux-move-beginning-of-line)
          ("C-k" . crux-smart-kill-line)
-         ;; ("<f4>" . crux-visit-term-buffer)
          ("C-x 4 x" . crux-swap-windows)))
 (global-set-key [(control return)] #'crux-smart-open-line)
 (global-set-key [(control shift return)] #'crux-smart-open-line-above)
@@ -39,8 +38,7 @@
            ("o" . crux-open-with)
            ("r" . crux-rename-file-and-buffer)
            ("x" . crux-delete-file-and-buffer)
-           ("s" . crux-sudo-edit)
-           ("/" . doom/sudo-find-file))
+           ("s" . crux-sudo-edit))
 
 (bind-keys :prefix-map window-map
            :prefix "C-c w"
@@ -55,19 +53,16 @@
  ("C-h v" . helpful-variable)
  ("C-h k" . helpful-key)
  ("C-h a" . counsel-apropos)
+ ([f2] . open-dashboard)
 
  ("M-+" . text-scale-increase)
  ("M-_" . text-scale-decrease)
- ("<f2>" . crux-rename-file-and-buffer)
 
  ("M-x" . counsel-M-x)
  ("M-y" . counsel-yank-pop)
  ("C-x C-f" . counsel-find-file)
  ("C-x C-r" . counsel-recentf)
  ("C-c r" . counsel-rg)
- ;; ("C-c j" . counsel-git-grep)
- ;; ("C-c a" . counsel-ag)
- ;; ("C-x l" . counsel-locate)
  ("C-c b" . counsel-bookmark)
  ("C-x 8 i" . counsel-unicode-char)
 
@@ -80,7 +75,9 @@
  ;; ("C-/" . undo-fu-only-undo)
  ;; ("C-?" . undo-fu-only-redo)
  ("C-=" . er/expand-region)
- ("C-." . hippie-expand)
+ ;; ("C-." . company-complete)
+ ;; ("C-." . hippie-expand)
+
  ("C-;" . iedit-mode)
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
@@ -95,17 +92,7 @@
  ("C-c Y" . youdao-dictionary-search-at-point)
  ("C-c y" . youdao-dictionary-search-at-point-tooltip))
 
-;; 新建 window 并直接切换至新窗口
-(global-set-key (kbd "C-x 2")
-                (lambda()
-                  (interactive)
-                  (split-window-below)
-                  (select-window (next-window))))
-(global-set-key (kbd "C-x 3")
-                (lambda()
-                  (interactive)
-                  (split-window-right)
-                  (select-window (next-window))))
+
 
 ;; dired key
 (define-key dired-mode-map "f" 'counsel-find-file)
@@ -134,6 +121,18 @@
   (bind-key "l" 'forward-char view-mode-map)
   (bind-key "b" 'View-scroll-page-backward view-mode-map))
 
+
+;; 新建 window 并直接切换至新窗口
+;; (global-set-key (kbd "C-x 2")
+;;                 (lambda()
+;;                   (interactive)
+;;                   (split-window-below)
+;;                   (select-window (next-window))))
+;; (global-set-key (kbd "C-x 3")
+;;                 (lambda()
+;;                   (interactive)
+;;                   (split-window-right)
+;;                   (select-window (next-window))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

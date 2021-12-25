@@ -1,6 +1,59 @@
-;;; functions.el --- functions -*- lexical-binding: t; -*-
-;;; Commentary:
-;;; Code:
+(global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
+(global-set-key [remap kill-buffer] #'kill-this-buffer)
+
+;; crux
+(use-package crux
+  :bind (("C-k" . crux-smart-kill-line)
+         ("C-x 4 x" . crux-swap-windows)))
+;; (with-eval-after-load 'rect
+;;   (global-set-key [(control return)] #'crux-smart-open-line))
+(global-set-key [(control shift return)] #'crux-smart-open-line-above)
+
+(bind-keys*
+ ("C-." . company-complete) ;; counsel-imenu
+ ("C-\\" . align-regexp)
+ ("C-x \\" . toggle-input-method)
+ ("M-m" . pop-to-mark-command)
+ ("C-}" . mc/mark-next-like-this)
+ ("C-{" . mc/mark-previous-like-this)
+ ("C-|" . mc/mark-all-like-this-dwim))
+
+;; nixos
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+
+
+
+
+
+;; dired key
+(define-key dired-mode-map "f" 'counsel-find-file)
+(define-key dired-mode-map "F" 'find-name-dired)
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+(define-key dired-mode-map "." 'dired-hide-details-mode)
+(define-key dired-mode-map "/" 'funs/dired-filter-show-match)
+(define-key dired-mode-map "b"
+  (lambda ()
+    (interactive)
+    (find-alternate-file "..")))
+;;;###autoload
+(defun funs/dired-filter-show-match ()
+  "Only show filter file."
+  (interactive)
+  (call-interactively #'dired-mark-files-regexp)
+  (command-execute "tk"))
+
+;; view-mode key
+(defvar view-mode-map) ;定义变量消除 flaycheck error
+(with-eval-after-load 'view
+  (bind-key "g" 'goto-line view-mode-map)
+  (bind-key "h" 'backward-char view-mode-map)
+  (bind-key "j" 'next-line view-mode-map)
+  (bind-key "k" 'previous-line view-mode-map)
+  (bind-key "l" 'forward-char view-mode-map)
+  (bind-key "b" 'View-scroll-page-backward view-mode-map))
+
 
 ;;----------------------------------------------------------------------------
 ;; stop using mouse minibuffer
@@ -71,37 +124,3 @@ Version 2017-08-19"
         (goto-char (point-min))
         (while (re-search-forward " +" nil t)
           (replace-match "\n" ))))))
-
-
-;; dashboard
- (defun open-dashboard ()
-      "Open the *dashboard* buffer and jump to the first widget."
-      (interactive)
-      ;; Check if need to recover layout
-      (if (> (length (window-list-1))
-             ;; exclude `treemacs' window
-             (if (and (fboundp 'treemacs-current-visibility)
-                      (eq (treemacs-current-visibility) 'visible))
-                 2
-               1))
-          (setq dashboard-recover-layout-p t))
-
-      (delete-other-windows)
-
-      ;; Refresh dashboard buffer
-      (when (get-buffer dashboard-buffer-name)
-        (kill-buffer dashboard-buffer-name))
-      (dashboard-insert-startupify-lists)
-      (switch-to-buffer dashboard-buffer-name)
-
-      ;; Jump to the first section
-      (dashboard-goto-recent-files))
-
-    (defun dashboard-goto-recent-files ()
-      "Go to recent files."
-      (interactive)
-      (let ((func (local-key-binding "r")))
-        (and func (funcall func))))
-
-(provide 'functions)
-;;; functions.el ends here

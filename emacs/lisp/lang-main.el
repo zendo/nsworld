@@ -66,6 +66,14 @@
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (setq company-show-numbers t))
 
+(with-eval-after-load 'company
+    (setq-default company-dabbrev-other-buffers 'all
+                  company-tooltip-align-annotations t)
+    (define-key company-mode-map (kbd "C-.") 'company-complete)
+    (define-key company-mode-map [remap completion-at-point] 'company-complete)
+    (define-key company-mode-map [remap indent-for-tab-command] 'company-indent-or-complete-common)
+    (define-key company-active-map (kbd "C-.") 'company-other-backend))
+
 ;; tabnine
 ;; ;; M-x company-tabnine-install-binary
 ;; (use-package company-tabnine

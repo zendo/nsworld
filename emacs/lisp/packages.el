@@ -26,6 +26,7 @@
 (require 'use-package)
 
 (require 'cl-lib)
+
 ;; (use-package dash)
 (use-package s) ;string manipulation
 (use-package f) ;file manipulation
@@ -53,7 +54,6 @@
 (load-theme 'atom-one-dark t)
 
 (use-package all-the-icons)
-
 
 ;; counsel
 (use-package counsel
@@ -121,6 +121,10 @@
 ;; multiple-cursors
 (use-package multiple-cursors
   :defer t)
+
+;; Smartly select region, rectangle, multi cursors
+(use-package smart-region
+  :hook (after-init . smart-region-on))
 
 ;; anzu
 (use-package anzu)
@@ -267,17 +271,20 @@
     (setq projectile-switch-project-action #'projectile-dired)))
 
 ;; dashboard
-;; (use-package dashboard
-;;   :diminish (dashboard-mode page-break-lines-mode)
-;;   :custom
-;;   (dashboard-center-content t)
-;;   (dashboard-set-footer nil)
-;;   (dashboard-startup-banner 2)
-;;   (dashboard-items '((recents  . 8)
-;;                      (bookmarks . 5)
-;;                      (projects . 5)))
-;;   :config
-;;   (dashboard-setup-startup-hook))
+(use-package dashboard
+  :diminish (dashboard-mode page-break-lines-mode)
+  :custom
+  (dashboard-startup-banner 2)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-set-footer nil)
+  (dashboard-center-content t)
+
+  (dashboard-items '((recents  . 8)
+                     (bookmarks . 5)
+                     (projects . 5)))
+  :config
+  (dashboard-setup-startup-hook))
 
 
 ;; Magit
