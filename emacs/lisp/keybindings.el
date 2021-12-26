@@ -128,16 +128,16 @@
 
 
 ;; 新建 window 并直接切换至新窗口
-;; (global-set-key (kbd "C-x 2")
-;;                 (lambda()
-;;                   (interactive)
-;;                   (split-window-below)
-;;                   (select-window (next-window))))
-;; (global-set-key (kbd "C-x 3")
-;;                 (lambda()
-;;                   (interactive)
-;;                   (split-window-right)
-;;                   (select-window (next-window))))
+(global-set-key (kbd "C-x 2")
+                (lambda()
+                  (interactive)
+                  (split-window-below)
+                  (select-window (next-window))))
+(global-set-key (kbd "C-x 3")
+                (lambda()
+                  (interactive)
+                  (split-window-right)
+                  (select-window (next-window))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

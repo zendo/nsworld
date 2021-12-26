@@ -25,9 +25,7 @@
                                "* Event: %?\n\n  %i\n\n"
                                :empty-lines 1)))
 
-;; Org-table font
-(custom-set-faces
- '(org-table ((t (:family "等距更纱黑体 SC")))))
+
 
 (bind-keys :prefix-map org-map
            :prefix "C-c o"

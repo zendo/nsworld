@@ -31,6 +31,7 @@
     inputs@
     { self
     , nixpkgs
+    , nixpkgs-unstable
     , home-manager
     , utils
     , emacs-overlay
@@ -51,8 +52,13 @@
         # allowUnsupportedSystem = true;
       };
 
+      # Overlays which are applied to all channels.
       sharedOverlays = [
+        (final: prev: {
+          unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+        })
       ];
+
 
       # overlay = import ./overlays;
       overlays = [

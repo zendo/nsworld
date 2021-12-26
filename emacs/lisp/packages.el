@@ -302,8 +302,7 @@
          ("C-x g r" . magit-rebase-interactive)
          ("C-x g f" . magit-format-patch)))
 
-;; (use-package magit-popup
-;;   :defer t)
+
 
 
 (provide 'packages)

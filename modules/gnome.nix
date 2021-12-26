@@ -6,8 +6,14 @@
     autoLogin.enable = true;
   };
 
+  services.xserver.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
   services.packagekit.enable = false;
+  services.gnome.tracker-miners.enable = false;
+  services.gnome.tracker.enable = false;
 
   environment.gnome.excludePackages = with pkgs; [
     gnome.geary
@@ -18,14 +24,7 @@
     gnome.gnome-music
   ];
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  services.gnome.tracker-miners.enable = false;
-  services.gnome.tracker.enable = false;
-
   environment.systemPackages = with pkgs; [
-
     gthumb
     gparted
     celluloid
@@ -44,6 +43,8 @@
     gnomeExtensions.proxy-switcher
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.espresso
+    unstable.gnomeExtensions.arcmenu
+    # gnomeExtensions.kimpanel # not work?
     # gnomeExtensions.ddterm
     # gnomeExtensions.blur-my-shell
   ];
@@ -54,14 +55,5 @@
   #   style = "gtk2";
   #   platformTheme = "gtk2";
   # };
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      libpinyin
-      rime
-      typing-booster
-    ];
-  };
 
 }

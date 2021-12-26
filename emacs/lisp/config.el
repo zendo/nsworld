@@ -8,9 +8,9 @@
   (setq org-directory "~/Documents/org/"))
 
 ;; (when (eq system-type 'windows-nt)
-;;   ;; (set-fontset-font t 'han (font-spec :family "Microsoft Yahei" :size 17))
-;;   (setq default-directory "C:/Users/xzway/Desktop/" ;主目录
-;;         org-directory "c:/Users/xzway/OneDrive/org/"))
+;; ;; (set-fontset-font t 'han (font-spec :family "Microsoft Yahei" :size 17))
+;;   (setq default-directory "C:/Users/gecko/Desktop/" ;主目录
+;;         org-directory "c:/Users/gecko/Documents/org/"))
 
 ;; 字体 fonts
 ;; Consolas, Hack, Source Code Pro,
@@ -21,7 +21,9 @@
 ;;                     charset
 ;;                     (font-spec :family "NotoSansSC" :size 16)))
 
-
+;; Org-table font
+(custom-set-faces
+ '(org-table ((t (:family "等距更纱黑体 SC")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;; Editor ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -59,17 +61,20 @@
 (ffap-bindings)                             ;find-file-at-point, smarter C-x C-f when point on path or URL
 
 ;; 鼠标 Mouse & Smooth Scroll
-(setq mouse-yank-at-point t     ;禁用鼠标点击粘贴
-      ;; mouse-wheel-scroll-amount '(5 ((shift) . 2))
-      ;; mouse-wheel-progressive-speed nil ;don't accelerate scrolling
-      ;; scroll-margin 0
-      ;; scroll-conservatively 100000
-      ;; scroll-preserve-screen-position 1
-      )
+;; Scroll one line at a time (less "jumpy" than defaults)
+(when (display-graphic-p)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . hscroll))
+        mouse-wheel-scroll-amount-horizontal 1
+        mouse-wheel-progressive-speed nil))
+(setq scroll-step 1
+      scroll-margin 0
+      scroll-conservatively 100000
+      auto-window-vscroll nil
+      scroll-preserve-screen-position t)
+(blink-cursor-mode -1)               ;禁用指针闪烁
+(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
-(blink-cursor-mode -1) ;禁用指针闪烁
-;; (setq auto-window-vscroll nil)          ;Speed up line movement
 
 ;; 编码 encoding, last is highest priority.
 ;; (prefer-coding-system 'cp950)
