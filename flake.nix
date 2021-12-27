@@ -57,12 +57,12 @@
         (final: prev: {
           unstable = nixpkgs-unstable.legacyPackages.${prev.system};
         })
+        emacs-overlay.overlay
       ];
 
 
       # overlay = import ./overlays;
       overlays = [
-        emacs-overlay.overlay
       ];
 
       hostDefaults = {

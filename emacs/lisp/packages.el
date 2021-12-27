@@ -211,19 +211,12 @@
 
 ;; doom-modeline
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1))
 
 ;; powerline modeline
 ;; (use-package powerline
 ;;   :config
 ;;   (powerline-default-theme))
-
-;; vterm
-;; (when (eq system-type 'gnu/linux)
-;;   (use-package vterm)
-;;   (with-eval-after-load 'vterm
-;;     (define-key vterm-mode-map (kbd "<f4>") 'shell-pop)))
 
 ;; all-the-icons-dired
 (use-package all-the-icons-dired
@@ -247,15 +240,28 @@
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-theme 'icons))
 
+;; vterm
+(use-package vterm
+  :defer t
+  :config
+  (set-face-attribute 'vterm-color-black nil :background monokai-comments :foreground monokai-comments)
+  (set-face-attribute 'vterm-color-blue nil :background monokai-blue :foreground monokai-blue)
+  (set-face-attribute 'vterm-color-green nil :background monokai-green :foreground monokai-green)
+  (set-face-attribute 'vterm-color-red nil :background monokai-red :foreground monokai-red)
+  (set-face-attribute 'vterm-color-yellow nil :background monokai-yellow :foreground monokai-yellow)
+  (set-face-attribute 'vterm-color-magenta nil :background monokai-magenta :foreground monokai-magenta)
+  (set-face-attribute 'vterm-color-cyan nil :background monokai-cyan :foreground monokai-cyan))
+
 ;; shell-pop
 (use-package shell-pop
   :bind ([f6] . shell-pop)
-  :init (let ((val
-               (if (eq system-type 'windows-nt)
-                   '("eshell" "*eshell*" (lambda () (eshell)))
-                 '("ansi-term" "*ansi-term*"
-                   (lambda () (ansi-term shell-pop-term-shell))))))
-          (setq shell-pop-shell-type val)))
+  :init
+  (setq shell-pop-window-size 30
+        shell-pop-shell-type
+        (cond ((fboundp 'vterm) '("vterm" "*vterm*" #'vterm))
+              ((eq system-type 'windows-nt) '("eshell" "*eshell*" #'eshell))
+              (t '("terminal" "*terminal*"
+                   (lambda () (term shell-pop-term-shell)))))))
 
 
 ;; Projectile
@@ -295,13 +301,12 @@
   :bind (("C-x g s" . magit-status)
           ("C-c g" . magit-status)
          ("C-x g x" . magit-checkout)
-         ;; ("C-x g c" . magit-commit)
-         ;; ("C-x g p" . magit-push)
-         ;; ("C-x g u" . magit-pull)
+         ("C-x g c" . magit-commit)
+         ("C-x g p" . magit-push)
+         ("C-x g u" . magit-pull)
          ("C-x g e" . magit-ediff-resolve)
          ("C-x g r" . magit-rebase-interactive)
          ("C-x g f" . magit-format-patch)))
-
 
 
 

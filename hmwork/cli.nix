@@ -135,6 +135,7 @@
     };
     initExtra = ''
       bindkey -e
+      setopt no_nomatch
     '';
   };
 

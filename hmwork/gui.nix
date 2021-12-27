@@ -16,9 +16,7 @@
 
   programs.emacs = {
     enable = true;
-    #package = (pkgs.emacs.override {
-    # withXwidgets = true;
-    #});
+    extraPackages = epkgs: with epkgs.melpaPackages; [ vterm telega ];
   };
   # home.file.".emacs.d/init.el".source = ./emacs/init.el;
   # home.file.".emacs.d/early-init.el".source = ./emacs/early-init.el;
@@ -141,4 +139,5 @@
   #   package = pkgs.vanilla-dmz;
   #   size = 128;
   # };
+
 }

@@ -40,8 +40,12 @@ in
     direnv
     lorri
     niv
+    cachix
 
     # develop
+    gcc
+    cmake
+    gnumake
     tig
     gitui
     lazygit

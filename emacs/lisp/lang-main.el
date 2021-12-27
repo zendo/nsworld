@@ -121,7 +121,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; rustic https://github.com/brotzeit/rustic
-(use-package rustic)
+(use-package rustic
+  :defer t)
 
 ;; (use-package rust-mode
 ;;   :mode "\\.rs\\'"

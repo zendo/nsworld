@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{inputs, config, pkgs, ... }:
 
 {
   nix = {
@@ -18,20 +18,22 @@
     # gobal registry
     # flake-registry = https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json
     # flake-registry = ${flakesEmpty}
-    registry.nixpkgs = {
-      from = {
-        id = "nixpkgs";
-        type = "indirect";
-      };
-      to = {
-        owner = "NixOS";
-        ref = "nixos-21.11";
-        repo = "nixpkgs";
-        type = "github";
-      };
-    };
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    # registry.nixpkgs = {
+    #   from = {
+    #     id = "nixpkgs";
+    #     type = "indirect";
+    #   };
+    #   to = {
+    #     owner = "NixOS";
+    #     ref = "nixos-21.11";
+    #     repo = "nixpkgs";
+    #     type = "github";
+    #   };
+    # };
     binaryCaches = [
       "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://nix-community.cachix.org"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       # "https://mirror.sjtu.edu.cn/nix-channels/store"
     ];
