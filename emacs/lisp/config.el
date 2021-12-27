@@ -31,7 +31,7 @@
 ;; 界面 interface
 (setq inhibit-startup-message t     ;关闭欢迎界面
       inhibit-default-init t
-      initial-scratch-message nil       ;Don't insert instructions in the *scratch* buffer
+      initial-scratch-message nil
       initial-major-mode 'fundamental-mode
       initial-frame-alist (quote ((fullscreen . maximized))) ;启动最大化
       visible-bell 1                ;关闭错误警示
@@ -88,7 +88,7 @@
 ;; Tab and Space
 (setq-default c-basic-offset   4
               tab-width        4
-              indent-tabs-mode nil ;Permanently indent with spaces, never with TABs
+              indent-tabs-mode nil ;indent with spaces, never with TABs
               tab-always-indent 'complete) ;Tab key indent first then completion.
 
 ;; 备份 Backup
@@ -98,12 +98,12 @@
       auto-save-default nil        ;stop creating #autosave# files
       create-lockfiles nil         ;stop creating .#lockfile# files 多人编辑中
       delete-by-moving-to-trash t) ;删除至回收站
-(setq backup-by-copying t     ; don't clobber symlinks
-      kept-new-versions 10    ; keep 10 latest versions
-      kept-old-versions 0     ; don't bother with old versions
-      delete-old-versions t   ; don't ask about deleting old versions
-      version-control t       ; number backups
-      vc-make-backup-files t) ; backup version controlled files
+(setq backup-by-copying t          ; don't clobber symlinks
+      kept-new-versions 10         ; keep 10 latest versions
+      kept-old-versions 0          ; don't bother with old versions
+      delete-old-versions t        ; don't ask about deleting old versions
+      version-control t            ; number backups
+      vc-make-backup-files t)      ; backup version controlled files
 
 ;; 自动保存 autosave
 ;; (setq auto-save-visited-interval 15) ;default is 5s

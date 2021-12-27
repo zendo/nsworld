@@ -55,7 +55,7 @@
         default = true;
         visibleName = "Tomorrow Night";
         cursorShape = "ibeam";
-        # customCommand = "/usr/bin/env zsh";
+        customCommand = "/usr/bin/env zsh";
         # font = "DejaVu Sans Mono 11";
         font = "Hack 11";
         # showScrollbar = false;

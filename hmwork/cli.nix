@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   home.shellAliases = {
     cat = "bat";
     ps = "ps -ef";
@@ -95,11 +94,13 @@
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.skim = {
     enable = true;
     enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.starship = {
@@ -121,11 +122,11 @@
   };
 
   programs.fish = {
-    enable = true;
+    enable = false;
   };
 
   programs.zsh = {
-    enable = false;
+    enable = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     prezto = {

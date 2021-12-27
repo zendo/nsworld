@@ -76,7 +76,7 @@
 
       # Modules shared between all hosts
       hostDefaults.modules = [
-        ./modules/nix-config.nix
+        ./modules/nixconfig.nix
         ./modules/configuration.nix
         ./modules/network.nix
         home-manager.nixosModules.home-manager

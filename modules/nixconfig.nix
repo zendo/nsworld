@@ -7,11 +7,29 @@
     autoOptimiseStore = true;
     allowedUsers = [ "@wheel" ];
     trustedUsers = [ "@wheel" ];
-    extraOptions = ''
+    extraOptions =
+      let flakesEmpty = pkgs.writeText "flakes-empty.json" (builtins.toJSON { flakes = []; version = 2; });
+      in ''
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      flake-registry = ${flakesEmpty}
     '';
+    # gobal registry
+    # flake-registry = https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json
+    # flake-registry = ${flakesEmpty}
+    registry.nixpkgs = {
+      from = {
+        id = "nixpkgs";
+        type = "indirect";
+      };
+      to = {
+        owner = "NixOS";
+        ref = "nixos-21.11";
+        repo = "nixpkgs";
+        type = "github";
+      };
+    };
     binaryCaches = [
       "https://mirrors.ustc.edu.cn/nix-channels/store"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"

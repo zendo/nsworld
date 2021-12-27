@@ -25,14 +25,12 @@
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true; # non-free firmware
 
-  # Systemd-boot
   boot.loader = {
-    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+    systemd-boot.enable = true;
     systemd-boot.configurationLimit = 3; #限制启动项数量
     systemd-boot.consoleMode = "max"; #resolution max for hidpi
   };
-  boot.plymouth.enable = true;
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
@@ -40,6 +38,7 @@
     # kernelParams = [ "mem_sleep_default=deep" ]; #深度睡眠
     # kernelParams = [ drm.edid_firmware=edid/ ];
     # initrd.extraFiles = {  };
+    plymouth.enable = true;
   };
 
   services = {
@@ -145,6 +144,10 @@
       autoPrune.enable = true;
       enableOnBoot = true;
     };
+    # podman = {
+    #   enable = true;
+    #   dockerCompat = true;
+    # };
   };
 
   ###########################################################################
