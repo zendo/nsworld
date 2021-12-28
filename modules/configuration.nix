@@ -53,6 +53,10 @@
       enable = true;
       interval = "weekly";
     };
+    # /etc/systemd/journald.conf
+    journald.extraConfig = ''
+      SystemMaxUse=100M
+    '';
   };
 
   # Allows for updating firmware via `fwupdmgr`.

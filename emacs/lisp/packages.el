@@ -242,15 +242,15 @@
 
 ;; vterm
 (use-package vterm
-  :defer t
-  :config
-  (set-face-attribute 'vterm-color-black nil :background monokai-comments :foreground monokai-comments)
-  (set-face-attribute 'vterm-color-blue nil :background monokai-blue :foreground monokai-blue)
-  (set-face-attribute 'vterm-color-green nil :background monokai-green :foreground monokai-green)
-  (set-face-attribute 'vterm-color-red nil :background monokai-red :foreground monokai-red)
-  (set-face-attribute 'vterm-color-yellow nil :background monokai-yellow :foreground monokai-yellow)
-  (set-face-attribute 'vterm-color-magenta nil :background monokai-magenta :foreground monokai-magenta)
-  (set-face-attribute 'vterm-color-cyan nil :background monokai-cyan :foreground monokai-cyan))
+  :defer t)
+  ;; :config
+  ;; (set-face-attribute 'vterm-color-black nil :background monokai-comments :foreground monokai-comments)
+  ;; (set-face-attribute 'vterm-color-blue nil :background monokai-blue :foreground monokai-blue)
+  ;; (set-face-attribute 'vterm-color-green nil :background monokai-green :foreground monokai-green)
+  ;; (set-face-attribute 'vterm-color-red nil :background monokai-red :foreground monokai-red)
+  ;; (set-face-attribute 'vterm-color-yellow nil :background monokai-yellow :foreground monokai-yellow)
+  ;; (set-face-attribute 'vterm-color-magenta nil :background monokai-magenta :foreground monokai-magenta)
+  ;; (set-face-attribute 'vterm-color-cyan nil :background monokai-cyan :foreground monokai-cyan))
 
 ;; shell-pop
 (use-package shell-pop

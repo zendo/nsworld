@@ -24,14 +24,14 @@
 
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [
-      vim-nix
-      vim-lsp
-      vim-markdown
-      rust-vim
-      fzf-vim
-      vim-colorschemes
-    ];
+    # plugins = with pkgs.vimPlugins; [
+    #   vim-nix
+    #   vim-lsp
+    #   vim-markdown
+    #   rust-vim
+    #   fzf-vim
+    #   vim-colorschemes
+    # ];
   };
 
   programs.neovim = {
@@ -87,7 +87,7 @@
   };
 
   programs.alacritty = {
-    enable = false;
+    enable = true;
     settings = {
       env = {
         "TERM" = "xterm-256color";
@@ -120,7 +120,7 @@
   };
 
   programs.tmux = {
-    enable = true;
+    enable = false;
     extraConfig = ''
       # Set the prefix.
       # set -g prefix M-a

@@ -2,7 +2,7 @@
 
 {
   nix = {
-    package = pkgs.nixUnstable; # nix v2.5pre
+    package = pkgs.nixUnstable;
     useSandbox = true;
     autoOptimiseStore = true;
     allowedUsers = [ "@wheel" ];

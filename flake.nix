@@ -93,6 +93,7 @@
         ./hosts/yoga/hardware-configuration.nix
         ./hosts/yoga/user.nix
         ./modules/gnome.nix
+
       ];
     };
 }
