@@ -12,8 +12,6 @@
       "docker" ];
   };
 
-  services.xserver.displayManager.autoLogin.user = "iab";
-
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 }

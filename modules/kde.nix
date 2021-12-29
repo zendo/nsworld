@@ -4,7 +4,7 @@
   services.xserver.displayManager = {
     sddm.enable = true;
     # defaultSession = "plasmawayland";
-    autoLogin.enable = true;
+    autoLogin.user = "iab";
   };
 
   services.xserver.enable = true;
