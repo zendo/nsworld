@@ -28,14 +28,14 @@
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 3; #限制启动项数量
-    systemd-boot.consoleMode = "max"; #resolution max for hidpi
+    systemd-boot.configurationLimit = 3; # 限制启动项数量
+    systemd-boot.consoleMode = "max"; # resolution max for hidpi
   };
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
-    # kernelParams = [ "mem_sleep_default=deep" ]; #深度睡眠
+    # kernelParams = [ "mem_sleep_default=deep" ]; # 深度睡眠
     # kernelParams = [ drm.edid_firmware=edid/ ];
     # initrd.extraFiles = {  };
     plymouth.enable = true;
@@ -66,28 +66,15 @@
   # 或许跟 gnome power-profiles-daemon 功能重叠？
   # powerManagement.cpuFreqGovernor = "ondemand";
 
-  # TLP
-  # services.tlp = {
-  #   enable = true;
-  #   settings = {
-  #     # Disable too aggressive power-management autosuspend
-  #     USB_AUTOSUSPEND = 0;
-  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
-  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-  #   };
-  # };
-
   # Set your time zone
   time.timeZone = "Asia/Shanghai";
-  networking.timeServers = [ "ntp.tuna.tsinghua.edu.cn" ];
 
   # Local time for dual OS
   time.hardwareClockInLocalTime = true;
 
   # Sounds
-  #sound.enable = true; #comment in pipewire
-  hardware.pulseaudio.enable = false; #false in pipewire
-
+  # sound.enable = true; # comment in pipewire
+  hardware.pulseaudio.enable = false; # false in pipewire
   # Pipewire
   security.rtkit.enable = true;
   services.pipewire = {
@@ -100,7 +87,7 @@
 
   # Handles input devices
   services.xserver.libinput = {
-    # enable = true; #enabled default by desktopManager
+    # enable = true; # enabled default by desktopManager
     touchpad.disableWhileTyping = true;
   };
 
@@ -190,7 +177,7 @@
     };
   };
 
-    # i18n.inputMethod = {
+  # i18n.inputMethod = {
   #   enabled = "ibus";
   #   ibus.engines = with pkgs.ibus-engines; [
   #     libpinyin

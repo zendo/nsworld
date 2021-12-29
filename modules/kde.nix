@@ -14,23 +14,21 @@
   # https://bugs.kde.org/show_bug.cgi?id=356446
   services.xserver.desktopManager.plasma5.useQtScaling = true;
 
-  services.dbus.packages = [ pkgs.libsForQt5.kpmcore ];
-
   environment.systemPackages = with pkgs; [
     libsForQt5.ark
     libsForQt5.kate
     libsForQt5.kde-gtk-config
     gparted
     kcolorchooser
-    partition-manager
     gnome.gnome-calculator
-    gnome.gnome-font-viewer
     gnome.gnome-color-manager
   ];
 
   programs.kdeconnect.enable = true;
+  programs.partition-manager.enable = true;
 
   services.colord.enable = true;
+
 
   # tlp
   # services.tlp = {
@@ -42,5 +40,6 @@
   #     cpu_energy_perf_policy_on_bat = "power";
   #   };
   # };
+
 
 }

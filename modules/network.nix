@@ -15,6 +15,7 @@
     useDHCP = false;
     #interfaces.eno1.useDHCP = true;
     #interfaces.wlp1s0.useDHCP = true;
+    timeServers = [ "ntp.tuna.tsinghua.edu.cn" ];
     nameservers = [
       "223.5.5.5"
       "223.6.6.6"
