@@ -84,9 +84,6 @@
   # Local time for dual OS
   time.hardwareClockInLocalTime = true;
 
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-
   # Sounds
   #sound.enable = true; #comment in pipewire
   hardware.pulseaudio.enable = false; #false in pipewire
@@ -137,7 +134,7 @@
   };
 
   # flatpak
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   # programs.steam.enable = true;
 
@@ -212,6 +209,7 @@
       fcitx5-configtool
     ];
   };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

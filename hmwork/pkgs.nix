@@ -72,6 +72,7 @@ in
     # GUI
     v2ray
     qv2ray
+    # waydroid
     # emacsGit
     # emacsPgtkGcc
     firefox-wayland

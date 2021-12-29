@@ -16,7 +16,11 @@
 
   programs.emacs = {
     enable = true;
-    extraPackages = epkgs: with epkgs.melpaPackages; [ vterm telega ];
+    extraPackages = epkgs: with epkgs.melpaPackages; [
+      vterm
+      # telega
+      # pdf-tools
+    ];
   };
   # home.file.".emacs.d/init.el".source = ./emacs/init.el;
   # home.file.".emacs.d/early-init.el".source = ./emacs/early-init.el;
@@ -46,7 +50,7 @@
   };
 
   programs.gnome-terminal = {
-    enable = true;
+    enable = false;
     showMenubar = false;
     profile = {
       "5ddfe964-7ee6-4131-b449-26bdd97518f7" = {

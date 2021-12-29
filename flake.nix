@@ -92,8 +92,8 @@
         ./modules/amd.nix
         ./hosts/yoga/hardware-configuration.nix
         ./hosts/yoga/user.nix
-        ./modules/gnome.nix
-
+        # ./modules/gnome.nix
+         ./modules/kde.nix
       ];
     };
 }

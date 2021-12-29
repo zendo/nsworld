@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+
   networking = {
     # hostName = "in flake";
     networkmanager.enable = true;
@@ -70,7 +73,7 @@
   # Publish this server and its address on the network
   services.avahi = {
     enable = true;
-    # nssmdns = true;
+    nssmdns = true;
     publish = {
       enable = true;
       addresses = true;
