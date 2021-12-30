@@ -23,13 +23,14 @@
   };
 
   services = {
+    # Allows for updating firmware via `fwupdmgr`.
+    fwupd.enable = true;
     # Monitoring health of drives
     smartd = {
       enable = true;
       autodetect = true;
     };
-    # fstrim periodically
-    # == "discard" in /etc/fstab
+    # fstrim = "discard" in /etc/fstab
     fstrim = {
       enable = true;
       interval = "weekly";
@@ -39,9 +40,6 @@
       SystemMaxUse=100M
     '';
   };
-
-  # Allows for updating firmware via `fwupdmgr`.
-  services.fwupd.enable = true;
 
   # PowerManagement check cpufreq-info
   # 或许跟 gnome power-profiles-daemon 功能重叠？
@@ -96,15 +94,8 @@
     git
   ];
 
-  environment.variables = {
-    EDITOR = "mg";
-    VISUAL = "mg";
-  };
-
-  # flatpak
-  # services.flatpak.enable = true;
-
-  # programs.steam.enable = true;
+  # environment.variables = {
+  # };
 
   # virtualisation
   virtualisation = {
@@ -119,6 +110,9 @@
     # };
     # waydroid.enable = true;
   };
+
+  # services.flatpak.enable = true;
+  # programs.steam.enable = true;
 
   ###########################################################################
   # i18n and Fonts
@@ -159,6 +153,7 @@
     };
   };
 
+  # ibus
   # i18n.inputMethod = {
   #   enabled = "ibus";
   #   ibus.engines = with pkgs.ibus-engines; [
@@ -168,6 +163,7 @@
   #   ];
   # };
 
+  # fcitx5
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [

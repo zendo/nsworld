@@ -67,12 +67,10 @@
 
       hostDefaults = {
         system = "x86_64-linux";
+        # channelName = "nixpkgs-unstable";
+        # Extra arguments to be passed to all modules. Merged with host's extraArgs.
+        # extraArgs = { inherit utils inputs; foo = "foo"; };
       };
-
-      # hostDefaults.channelName = "nixpkgs-unstable";
-
-      # Extra arguments to be passed to all modules. Merged with host's extraArgs.
-      # hostDefaults.extraArgs = { inherit utils inputs; foo = "foo"; };
 
       # Modules shared between all hosts
       hostDefaults.modules = [
@@ -92,6 +90,7 @@
         ./modules/amd.nix
         ./hosts/yoga/hardware-configuration.nix
         ./hosts/yoga/user.nix
+        ./hosts/yoga/user-2.nix
         # ./modules/gnome.nix
          ./modules/kde.nix
       ];
