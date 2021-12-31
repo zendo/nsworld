@@ -13,6 +13,9 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Real-time audio
+    musnix.url = github:musnix/musnix;
+
     # Easy access to development environments.
     # devshell.url = "github:numtide/devshell";
 
@@ -34,6 +37,7 @@
     , nixpkgs-unstable
     , home-manager
     , utils
+    , musnix
     , emacs-overlay
     , ...
     }:
@@ -77,6 +81,7 @@
         ./modules/nixconfig.nix
         ./modules/configuration.nix
         ./modules/network.nix
+        musnix.nixosModules.musnix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -88,11 +93,11 @@
 
       hosts.yoga.modules = [
         ./modules/amd.nix
-        ./hosts/yoga/hardware-configuration.nix
+        ./modules/kde.nix
+        # ./modules/gnome.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/user-2.nix
-        # ./modules/gnome.nix
-         ./modules/kde.nix
+        ./hosts/yoga/hardware-configuration.nix
       ];
     };
 }

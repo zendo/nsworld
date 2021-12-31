@@ -93,24 +93,17 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      env = {
-        "TERM" = "xterm-256color";
-      };
-      window = {
-        padding = {
-          x = 6;
-          y = 6;
-        };
+      # env.TERM = "xterm-256color";
+      shell.program = "${pkgs.zsh}/bin/zsh";
+      background_opacity = 0.85;
+      window.dimensions = {
+        columns = 90;
+        lines = 30;
       };
       font = {
-        size = 12.0;
-        offset = {
-          x = 0;
-          y = 0;
-        };
+        size = 11;
+        normal = { family = "JetBrains Mono"; };
       };
-      # colors = {
-      #   };
       key_bindings = [
         { key = "C"; mods = "Control"; action = "Copy"; }
         { key = "V"; mods = "Control"; action = "Paste"; }

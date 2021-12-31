@@ -35,7 +35,6 @@
       enable = true;
       interval = "weekly";
     };
-    # /etc/systemd/journald.conf
     journald.extraConfig = ''
       SystemMaxUse=100M
     '';
@@ -63,6 +62,7 @@
     pulse.enable = true;
     # jack.enable = true; #jack-device ?
   };
+  musnix.enable = true;
 
   # Handles input devices
   services.xserver.libinput = {
@@ -113,6 +113,11 @@
 
   # services.flatpak.enable = true;
   # programs.steam.enable = true;
+
+  documentation = {
+    enable = false;
+    nixos.enable = false;
+  };
 
   ###########################################################################
   # i18n and Fonts

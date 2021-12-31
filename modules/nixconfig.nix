@@ -42,9 +42,9 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
-    optimise = {
-      automatic = true;
-      dates = [ "weekly" ];
-    };
+    # optimise = {
+    #   automatic = true;
+    #   dates = [ "weekly" ];
+    # };
   };
 }

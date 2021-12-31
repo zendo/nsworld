@@ -229,7 +229,8 @@
 
 ;; dired-sidebar
 (use-package dired-sidebar
-  :bind (([f5] . dired-sidebar-toggle-sidebar))
+  :defer t
+  :bind (([f1] . dired-sidebar-toggle-sidebar))
   :init
   (add-hook 'dired-sidebar-mode-hook
             (lambda ()
@@ -239,6 +240,10 @@
   ;; (setq dired-sidebar-subtree-line-prefix "__")
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-theme 'icons))
+
+;; ibuffer-sidebar
+(use-package ibuffer-sidebar
+  :defer t)
 
 ;; vterm
 (use-package vterm
@@ -254,7 +259,8 @@
 
 ;; shell-pop
 (use-package shell-pop
-  :bind ([f6] . shell-pop)
+  :defer t
+  :bind ([f5] . shell-pop)
   :init
   (setq shell-pop-window-size 30
         shell-pop-shell-type
@@ -295,6 +301,7 @@
 
 ;; Magit
 (use-package magit
+  :defer t
   :if (executable-find "git")
   :config
   (setq magit-completing-read-function 'ivy-completing-read)

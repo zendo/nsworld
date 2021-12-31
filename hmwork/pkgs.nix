@@ -13,6 +13,14 @@ let
 
 in
 {
+  home = {
+    stateVersion = "21.11";
+    username = "iab";
+    homeDirectory = "/home/iab";
+  };
+
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
     # HARDWARE TEST
     efitools
@@ -31,9 +39,7 @@ in
     edid-decode
 
     # NIX TOOLS
-    manix
     nix-bash-completions
-    nixos-option
     nixpkgs-fmt
     nixfmt
     rnix-lsp
@@ -72,7 +78,6 @@ in
     # GUI
     v2ray
     qv2ray
-    # waydroid
     # emacsGit
     # emacsPgtkGcc
     firefox-wayland
