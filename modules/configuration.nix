@@ -17,7 +17,7 @@
     plymouth.enable = true;
     supportedFilesystems = [ "ntfs" ];
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
-    # kernelParams = [ "mem_sleep_default=deep" ];
+    # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
   };
 
@@ -40,12 +40,12 @@
   };
 
   # Hibernate after sleeping in suspend mode for 30 minutes
-  systemd.sleep.extraConfig = ''
-    HandleSuspendKey=suspend-then-hibernate
-    HandleHibernateKey=suspend-then-hibernate
-    HandleLidSwitch=suspend-then-hibernate
-    HibernateDelaySec=30min
-  '';
+  # systemd.sleep.extraConfig = ''
+  #   HandleSuspendKey=suspend-then-hibernate
+  #   HandleHibernateKey=suspend-then-hibernate
+  #   HandleLidSwitch=suspend-then-hibernate
+  #   HibernateDelaySec=30min
+  # '';
 
 
   # Set your time zone

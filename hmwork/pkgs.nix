@@ -52,7 +52,6 @@ in
     # gcc
     # cmake
     # gnumake
-    tig
     gitui
     lazygit
     jq
@@ -86,7 +85,7 @@ in
     # ffmpeg
     audacious
     spotify-2k
-    shutter
+    # shutter
     foliate
     ghostwriter
     tdesktop
