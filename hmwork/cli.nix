@@ -19,7 +19,7 @@
 
   home.file = {
     # ".vimrc".source = ./vimrc;
-    ".config/alacritty/alacritty.yml".source = ./alacritty.yml;
+    ".config/alacritty/alacritty.yml".source = ../others/alacritty.yml;
 
     ".inputrc".text = ''
     set completion-ignore-case on
@@ -129,15 +129,33 @@
 
   programs.zsh = {
     enable = true;
+    dotDir = ".config/zsh";
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     prezto = {
       enable = true;
       prompt.theme = "pure";
     };
+    shellAliases = {
+      history = "history 0";
+    };
     initExtra = ''
       bindkey -e
       setopt no_nomatch
+    '';
+  };
+
+  programs.tmux = {
+    enable = false;
+    extraConfig = ''
+      # Set the prefix.
+      # set -g prefix M-a
+
+      # Close the current session.
+      bind -n M-q kill-session
+
+      # Close the current pane.
+      bind -n M-w kill-pane
     '';
   };
 
