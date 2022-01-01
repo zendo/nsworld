@@ -1,22 +1,22 @@
-;; centaur specifieqd
-
+;; Centaur specifieqd
 (when sys/linuxp
   (setq centaur-org-directory "~/.dotworld/org/"))
 
-;; 鼠标
+;;
+(setq system-time-locale "C")
+
+;; Mouse
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 
-;; 按键绑定
+;; Keybindings
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
-;; crux
-(use-package crux
-  :bind (("C-k" . crux-smart-kill-line)
-         ("C-x 4 x" . crux-swap-windows)))
+(use-package crux)
+(global-set-key [remap kill-line]  #'crux-smart-kill-line)
 (global-set-key [remap rect-hydra/body]  #'crux-smart-open-line)
 (global-set-key [(control shift return)] #'crux-smart-open-line-above)
 
@@ -51,6 +51,11 @@
 ;; nixos
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+;; vterm
+(with-eval-after-load 'vterm
+  (setq vterm-shell "zsh")
+  (define-key vterm-mode-map (kbd "<f9>")  'shell-pop))
 
 
 ;; dired key
@@ -90,20 +95,7 @@
   "Kill the minibuffer."
   (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
     (abort-recursive-edit)))
-(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
-
-;;----------------------------------------------------------------------------
-;; Pop until marker actually moves
-;;----------------------------------------------------------------------------
-;;;###autoload
-(defun modi/multi-pop-to-mark (orig-fun &rest args)
-  "Call ORIG-FUN until the cursor moves.Try the repeated popping up to 10 times."
-  (let ((p (point)))
-    (dotimes (i 10)
-      (when (= p (point))
-        (apply orig-fun args)))))
-(advice-add 'pop-to-mark-command :around
-            #'modi/multi-pop-to-mark)
+;; (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
 
 ;;----------------------------------------------------------------------------
 ;; align

@@ -35,9 +35,6 @@
     kcolorchooser
     gnome.gnome-calculator
     gnome.gnome-color-manager
-
-    qogir-theme
-    qogir-icon-theme
   ];
 
   # tlp 与 rfkill 管理蓝牙冲突
