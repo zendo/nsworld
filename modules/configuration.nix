@@ -14,16 +14,15 @@
   };
 
   boot = {
+    plymouth.enable = true;
     supportedFilesystems = [ "ntfs" ];
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
-    # kernelParams = [ "mem_sleep_default=deep" ]; # 深度睡眠
-    # kernelParams = [ drm.edid_firmware=edid/ ];
+    # kernelParams = [ "mem_sleep_default=deep" ];
     # initrd.extraFiles = {  };
-    plymouth.enable = true;
   };
 
   services = {
-    # Allows for updating firmware via `fwupdmgr`.
+    # logind.lidSwitch = "suspend-then-hibernate";
     fwupd.enable = true;
     # Monitoring health of drives
     smartd = {
@@ -40,9 +39,14 @@
     '';
   };
 
-  # PowerManagement check cpufreq-info
-  # 或许跟 gnome power-profiles-daemon 功能重叠？
-  # powerManagement.cpuFreqGovernor = "ondemand";
+  # Hibernate after sleeping in suspend mode for 30 minutes
+  systemd.sleep.extraConfig = ''
+    HandleSuspendKey=suspend-then-hibernate
+    HandleHibernateKey=suspend-then-hibernate
+    HandleLidSwitch=suspend-then-hibernate
+    HibernateDelaySec=30min
+  '';
+
 
   # Set your time zone
   time.timeZone = "Asia/Shanghai";
@@ -62,6 +66,7 @@
     pulse.enable = true;
     # jack.enable = true; #jack-device ?
   };
+  # 玄学音质提升
   musnix.enable = true;
 
   # Handles input devices
@@ -127,13 +132,13 @@
 
   console.keyMap = "us";
 
-  # Configure keymap in X11
   services.xserver = {
     layout = "us";
   };
 
   # Fonts
   fonts = {
+    # /run/current-system/sw/share/X11/fonts
     fontDir.enable = true;
     fonts = with pkgs; [
       noto-fonts
@@ -148,7 +153,6 @@
       symbola
     ];
     fontconfig = {
-      # subpixel.rgba = "rgb";
       defaultFonts = {
         monospace = [ "Sarsa Mono SC" "DejaVu Sans Mono" ];
         emoji = [ "Noto Color Emoji" ];
@@ -180,12 +184,4 @@
     ];
   };
 
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 }

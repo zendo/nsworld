@@ -19,6 +19,8 @@
 
   home.file = {
     # ".vimrc".source = ./vimrc;
+    ".config/alacritty/alacritty.yml".source = ./alacritty.yml;
+
     ".inputrc".text = ''
     set completion-ignore-case on
     # Show all tab-completion options on first <tab>
@@ -137,6 +139,10 @@
       bindkey -e
       setopt no_nomatch
     '';
+  };
+
+  programs.alacritty = {
+    enable = true;
   };
 
 }

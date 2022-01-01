@@ -49,9 +49,9 @@ in
     cachix
 
     # develop
-    gcc
-    cmake
-    gnumake
+    # gcc
+    # cmake
+    # gnumake
     tig
     gitui
     lazygit

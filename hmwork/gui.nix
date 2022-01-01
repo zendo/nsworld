@@ -90,32 +90,6 @@
     };
   };
 
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      # env.TERM = "xterm-256color";
-      shell.program = "${pkgs.zsh}/bin/zsh";
-      background_opacity = 0.85;
-      window.dimensions = {
-        columns = 90;
-        lines = 30;
-      };
-      font = {
-        size = 11;
-        normal = { family = "JetBrains Mono"; };
-      };
-      key_bindings = [
-        { key = "C"; mods = "Control"; action = "Copy"; }
-        { key = "V"; mods = "Control"; action = "Paste"; }
-        { key = "Key0"; mods = "Control"; action = "ResetFontSize"; }
-        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-        { key = "Equals"; mods = "Control"; action = "IncreaseFontSize"; }
-        { key = "Minus"; mods = "Control"; action = "DecreaseFontSize"; }
-        { key = "Plus"; mods = "Control"; action = "IncreaseFontSize"; }
-      ];
-    };
-  };
-
   programs.tmux = {
     enable = false;
     extraConfig = ''
