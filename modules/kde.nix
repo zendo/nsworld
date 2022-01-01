@@ -30,6 +30,7 @@
     # libsForQt5.kcontacts
     # libsForQt5.korganizer
     neochat
+    nheko
     gparted
     kcolorchooser
     gnome.gnome-calculator

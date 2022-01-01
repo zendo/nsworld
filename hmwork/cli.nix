@@ -79,6 +79,10 @@
     enable = true;
   };
 
+  programs.lf = {
+    enable = true;
+  };
+
   # z: autojump
   programs.zoxide = {
     enable = true;

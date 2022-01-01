@@ -14,7 +14,7 @@ btrfs option "compress=zstd" "autodefrag" "noatime"
 # Desktop Setup
 
 ``` shell
-# force en home dirs name
+# force en home directory
 LC_ALL=C xdg-user-dirs-update --force
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

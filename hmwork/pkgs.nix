@@ -47,6 +47,7 @@ in
     lorri
     niv
     cachix
+    dconf2nix
 
     # develop
     # gcc
@@ -64,15 +65,21 @@ in
     lsof
     elinks
     powertop
+    unp
+    unrar
+    gdu
+    duf
     btop
+    bottom
     zenith
     cht-sh
     trash-cli
-    unp
     imagemagick
     speedtest-cli
     translate-shell
     aspellDicts.en
+    nyancat
+    asciinema            # record the terminal
 
     # GUI
     v2ray
@@ -82,6 +89,9 @@ in
     firefox-wayland
     qbittorrent
     vlc
+    mpv
+    haruna
+    simplescreenrecorder
     # ffmpeg
     audacious
     spotify-2k

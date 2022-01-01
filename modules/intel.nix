@@ -6,6 +6,9 @@
   services.xserver.videoDrivers = [ "modesetting" ];
   services.xserver.useGlamor = true;
 
+  # prevent the overheating of Intel CPUs
+  services.thermald.enable = true;
+
   # openGL
   hardware.opengl.extraPackages = with pkgs; [
     intel-compute-runtime

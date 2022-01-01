@@ -82,15 +82,9 @@
     binutils
     tree
     p7zip
-    unrar
-    duf
-    gdu
-    pydf
-    ncdu
     fd
     ripgrep
     mg
-    zile
     micro
     neofetch
     wget
@@ -112,6 +106,10 @@
     # podman = {
     #   enable = true;
     #   dockerCompat = true;
+    # };
+    # libvirtd = {
+    #   enable = true;
+    #   qemu.runAsRoot = false;
     # };
     # waydroid.enable = true;
   };

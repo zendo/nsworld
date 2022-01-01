@@ -9,7 +9,9 @@
       "networkmanager"
       "video"
       "audio"
-      "docker" ];
+      "docker"
+      "libvirtd"
+    ];
   };
 
   # Don't require password for sudo
