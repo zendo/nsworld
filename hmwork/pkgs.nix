@@ -53,6 +53,7 @@ in
     # gcc
     # cmake
     # gnumake
+    nodejs
     gitui
     lazygit
     jq
@@ -79,7 +80,7 @@ in
     translate-shell
     aspellDicts.en
     nyancat
-    asciinema            # record the terminal
+    asciinema # record the terminal
 
     # GUI
     v2ray

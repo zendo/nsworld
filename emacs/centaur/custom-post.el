@@ -1,3 +1,15 @@
+;; centaur specifieqd
+
+(when sys/linuxp
+  (setq centaur-org-directory "~/.dotworld/org/"))
+
+;; 鼠标
+(blink-cursor-mode -1)               ;禁用指针闪烁
+(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
+(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
+(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+
+;; 按键绑定
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
@@ -5,29 +17,44 @@
 (use-package crux
   :bind (("C-k" . crux-smart-kill-line)
          ("C-x 4 x" . crux-swap-windows)))
-;; (with-eval-after-load 'rect
-;;   (global-set-key [(control return)] #'crux-smart-open-line))
+(global-set-key [remap rect-hydra/body]  #'crux-smart-open-line)
 (global-set-key [(control shift return)] #'crux-smart-open-line-above)
 
 (bind-keys*
- ("C-." . company-complete) ;; counsel-imenu
+ ([f1] . treemacs)
+ ;; ("C-." . company-complete) ;; imenu-counsel
+ ("C-." . hippie-expand)
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
  ("M-m" . pop-to-mark-command)
+ ;; ("M-s" . avy-goto-char) ;; isearch 冲突
+ ("C-c C-o" . ivy-occur)
  ("C-}" . mc/mark-next-like-this)
  ("C-{" . mc/mark-previous-like-this)
  ("C-|" . mc/mark-all-like-this-dwim))
+
+;; 失去焦点时保存
+(defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+(add-hook 'focus-out-hook 'save-all)
+
+
+;; 备份
+;; (setq backup-directory-alist `((".*" . ,my-backup))
+;;       make-backup-files t          ;备份文件 backup~
+;;       ;; create-lockfiles nil         ;stop creating .#lockfile# files 多人编辑中
+;;       )
+
+;; undo-tree
 
 ;; nixos
 (use-package nix-mode
   :mode "\\.nix\\'")
 
 
-
-
-
-
 ;; dired key
+(put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
 (define-key dired-mode-map "f" 'counsel-find-file)
 (define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)

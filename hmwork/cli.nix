@@ -1,12 +1,18 @@
 { config, pkgs, ... }:
 
 {
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   home.shellAliases = {
     cat = "bat";
     ps = "ps -ef";
     # sudo = "sudo -E";
     ip = "ip --color=auto";
+    myip = "curl ip.sb";
     ee = "emacs -nw";
+    gu = "gitui";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
