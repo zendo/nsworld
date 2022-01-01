@@ -41,16 +41,31 @@
 
 
 ;; 备份
-;; (setq backup-directory-alist `((".*" . ,my-backup))
-;;       make-backup-files t          ;备份文件 backup~
-;;       ;; create-lockfiles nil         ;stop creating .#lockfile# files 多人编辑中
-;;       )
+(defconst my-backup (expand-file-name "my-backup" user-emacs-directory))
+(unless (file-exists-p my-backup)
+  (make-directory my-backup))
 
-;; undo-tree
+(setq backup-directory-alist `((".*" . ,my-backup))
+      undo-tree-auto-save-history t
+      undo-tree-history-directory-alist
+      `((".*" . ,my-backup))
+      ;; create-lockfiles nil         ;stop creating .#lockfile# files 多人编辑中
+      make-backup-files t          ;备份文件 backup~
+      backup-by-copying t          ; don't clobber symlinks
+      kept-new-versions 10         ; keep 10 latest versions
+      kept-old-versions 0          ; don't bother with old versions
+      delete-old-versions t        ; don't ask about deleting old versions
+      version-control t            ; number backups
+      vc-make-backup-files t      ; backup version controlled files
+      )
 
 ;; nixos
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+;; light theme
+(use-package cloud-theme)
+
 
 ;; vterm
 (with-eval-after-load 'vterm
