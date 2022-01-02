@@ -47,7 +47,7 @@ in
     lorri
     niv
     cachix
-    dconf2nix
+
 
     # develop
     # gcc
@@ -91,7 +91,6 @@ in
     qbittorrent
     vlc
     mpv
-    haruna
     simplescreenrecorder
     # ffmpeg
     audacious
@@ -103,7 +102,7 @@ in
     meld
     deja-dup
     # vorta
-    # yacreader
+    yacreader
 
     # OFFICE
     # libreoffice-fresh

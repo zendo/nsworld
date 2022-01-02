@@ -3,8 +3,7 @@
 {
   system.stateVersion = "21.11";
 
-  hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true; # non-free firmware
+  hardware.enableAllFirmware = true; # contains non-redistributable firmware
 
   boot.loader = {
     efi.canTouchEfiVariables = true;
@@ -86,6 +85,7 @@
     ripgrep
     mg
     micro
+    helix
     neofetch
     wget
     curl

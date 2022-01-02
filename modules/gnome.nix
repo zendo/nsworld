@@ -28,6 +28,7 @@
     gthumb
     gparted
     celluloid
+    dconf2nix
 
     gnome.gnome-tweaks
     gnome.gnome-todo

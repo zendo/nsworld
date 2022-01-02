@@ -2,7 +2,7 @@
 (when sys/linuxp
   (setq centaur-org-directory "~/.dotworld/org/"))
 
-;;
+
 (setq system-time-locale "C")
 
 ;; Mouse
