@@ -1,9 +1,14 @@
+;;; custom-post.el --- user custom-post file    -*- lexical-binding: t no-byte-compile: t -*-
+;;; Commentary:
+;;; Code:
+
 ;; Centaur specifieqd
 (when sys/linuxp
   (setq centaur-org-directory "~/.dotworld/org/"))
 
 
-(setq system-time-locale "C")
+(setq system-time-locale "C"
+      confirm-kill-processes 'nil)
 
 ;; Mouse
 (blink-cursor-mode -1)               ;禁用指针闪烁
@@ -27,8 +32,12 @@
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
  ("M-m" . pop-to-mark-command)
- ;; ("M-s" . avy-goto-char) ;; isearch 冲突
+ ("M-s" . avy-goto-char) ;; 覆盖默认 isearch
  ("C-c C-o" . ivy-occur)
+
+ ("M-+" . text-scale-increase)
+ ("M-_" . text-scale-decrease)
+
  ("C-}" . mc/mark-next-like-this)
  ("C-{" . mc/mark-previous-like-this)
  ("C-|" . mc/mark-all-like-this-dwim))
@@ -49,14 +58,14 @@
       undo-tree-auto-save-history t
       undo-tree-history-directory-alist
       `((".*" . ,my-backup))
-      ;; create-lockfiles nil         ;stop creating .#lockfile# files 多人编辑中
-      make-backup-files t          ;备份文件 backup~
-      backup-by-copying t          ; don't clobber symlinks
-      kept-new-versions 10         ; keep 10 latest versions
-      kept-old-versions 0          ; don't bother with old versions
-      delete-old-versions t        ; don't ask about deleting old versions
-      version-control t            ; number backups
-      vc-make-backup-files t      ; backup version controlled files
+      ;; create-lockfiles nil   ;stop creating .#lockfile# files 多人编辑中
+      make-backup-files t    ;备份文件 backup~
+      backup-by-copying t    ; don't clobber symlinks
+      kept-new-versions 10   ; keep 10 latest versions
+      kept-old-versions 0    ; don't bother with old versions
+      delete-old-versions t  ; don't ask about deleting old versions
+      version-control t      ; number backups
+      vc-make-backup-files t ; backup version controlled files
       )
 
 ;; nixos
