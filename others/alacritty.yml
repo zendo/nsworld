@@ -30,6 +30,7 @@ font:
 key_bindings:
   - { key: C,        mods: Control|Shift, action: Copy                }
   - { key: V,        mods: Control|Shift, action: Paste               }
+  - { key: V,        mods: Control,       action: Paste               }
   - { key: W,        mods: Alt,           action: Copy                }
   - { key: Y,        mods: Alt,           action: Paste               }
   - { key: Y,        mods: Control,       action: Paste               }

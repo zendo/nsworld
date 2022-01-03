@@ -32,7 +32,7 @@
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
  ("M-m" . pop-to-mark-command)
- ("M-s" . avy-goto-char) ;; 覆盖默认 isearch
+ ("M-s" . avy-goto-char) ;; 覆盖默认按键 isearch
  ("C-c C-o" . ivy-occur)
 
  ("M-+" . text-scale-increase)

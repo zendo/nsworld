@@ -33,6 +33,12 @@
       enable = true;
       interval = "weekly";
     };
+    # verify checksums, repair corrupted blocks
+    btrfs.autoScrub = {
+      enable = true;
+      interval = "monthly";
+      fileSystems = [ "/" ];
+    };
     journald.extraConfig = ''
       SystemMaxUse=100M
     '';

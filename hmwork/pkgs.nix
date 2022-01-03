@@ -39,6 +39,7 @@ in
     edid-decode
 
     # NIX TOOLS
+    # nur.repos.xe.comma # Not support flake now
     nix-bash-completions
     nixpkgs-fmt
     nixfmt
@@ -47,7 +48,6 @@ in
     lorri
     niv
     cachix
-
 
     # develop
     # gcc

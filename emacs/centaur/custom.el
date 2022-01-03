@@ -10,7 +10,7 @@
 (setq centaur-chinese-calendar t)
 (setq centaur-theme 'doom-tomorrow-night) ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
 
-;; 消除 cl 废弃提示
+;; 消除提示 package cl is deprecated
 (setq byte-compile-warnings '(cl-functions))
 
 

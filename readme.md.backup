@@ -21,7 +21,7 @@ mount -o subvol=@,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt
 mkdir -p /mnt/{boot,nix,home}
 mount -o subvol=@nix,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt/nix
 mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt/home
-[NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
+[]
 ```
 
 # Desktop Setup

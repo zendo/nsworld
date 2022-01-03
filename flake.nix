@@ -16,11 +16,12 @@
     # Real-time audio
     musnix.url = github:musnix/musnix;
 
+
     # Easy access to development environments.
     # devshell.url = "github:numtide/devshell";
 
-    # nur.url = "github:nix-community/NUR";
-    # nur.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
 
     # nixos-cn.url = "github:nixos-cn/flakes";
     # nixos-cn.inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +39,7 @@
     , home-manager
     , utils
     , musnix
+    , nur
     , emacs-overlay
     , ...
     }:
@@ -62,6 +64,7 @@
           unstable = nixpkgs-unstable.legacyPackages.${prev.system};
         })
         emacs-overlay.overlay
+        nur.overlay
       ];
 
 
