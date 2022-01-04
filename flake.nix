@@ -16,7 +16,6 @@
     # Real-time audio
     musnix.url = github:musnix/musnix;
 
-
     # Easy access to development environments.
     # devshell.url = "github:numtide/devshell";
 

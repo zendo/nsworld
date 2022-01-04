@@ -24,7 +24,8 @@
           ("C-x b" . ivy-switch-buffer)
           ("C-x C-b" . ivy-switch-buffer)
           ("C-c C-o" . ivy-occur)
-         ))
+          ))
+(global-set-key [remap find-file-read-only-other-window] 'counsel-switch-buffer-other-window)
 
 ;; ivy
 (use-package ivy

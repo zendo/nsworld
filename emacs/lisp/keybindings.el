@@ -43,14 +43,21 @@
            ("o" . crux-open-with)
            ("r" . crux-rename-file-and-buffer)
            ("x" . crux-delete-file-and-buffer)
-           ("s" . crux-sudo-edit))
+           ("s" . crux-sudo-edit)
 
-(bind-keys :prefix-map window-map
+           :prefix-map window-map
            :prefix "C-c w"
            ("w" . burly-bookmark-windows)
            ("f" . burly-bookmark-frames)
            ("o" . burly-open-bookmark)
-           ("x" . crux-swap-windows))
+           ("x" . crux-swap-windows)
+
+           :prefix-map remove-lists
+           :prefix "C-c -"
+           ("b" . bookmark-delete)
+           ("r" . recentf-edit-list)
+           ("p" . projectile-remove-known-project)
+           )
 
 
 (bind-keys*
