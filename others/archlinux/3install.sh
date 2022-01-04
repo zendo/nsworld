@@ -1,4 +1,5 @@
-#!/bin/bash
+#! /usr/bin/env bash
+
 # print command before executing, and exit when any command fails
 set -xe
 

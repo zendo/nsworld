@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 ################################################################
 # rsync: fast and extraordinarily versatile file copying tool.
