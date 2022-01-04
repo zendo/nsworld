@@ -45,45 +45,17 @@
 ;;;;;;;;;;;;;;; Extensions ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-(use-package monokai-theme)
+(use-package doom-themes)
 (use-package atom-one-dark-theme)
-(use-package vscode-dark-plus-theme)
-;; (use-package zenburn)
 (use-package leuven-theme)
+;; (use-package monokai-theme)
+;; (use-package vscode-dark-plus-theme)
+;; (use-package zenburn)
 ;; (use-package eclipse-theme)
-(load-theme 'atom-one-dark t)
+;; (load-theme 'atom-one-dark t)
+(load-theme 'doom-tomorrow-night t)
 
 (use-package all-the-icons)
-
-;; counsel
-(use-package counsel
-  :diminish ivy-mode counsel-mode)
-
-;; ivy
-(use-package ivy
-  :config
-  (progn
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t) ;Add recent files and bookmarks to the ivy-switch-buffer
-    (setq ivy-initial-inputs-alist nil) ;Don't use ^ as initial input
-    (setq counsel-yank-pop-separator "\n-------\n")
-    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)))
-
-;; orderless
-;; (use-package orderless
-;;   :ensure t
-;;   :custom (completion-styles '(orderless)))
-;; (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-
-;; amx
-(use-package amx
-  :config
-  (setq amx-save-file (expand-file-name "amx" my-temp)))
-
-;; ivy-rich
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
 
 ;; Which-Key
 (use-package which-key
@@ -217,11 +189,6 @@
 ;;   :config
 ;;   (powerline-default-theme))
 
-;; all-the-icons-dired
-(use-package all-the-icons-dired
-  :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-
 ;; all-the-icons-ivy-rich
 (use-package all-the-icons-ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
@@ -245,12 +212,15 @@
 
 ;; vterm
 (use-package vterm
-  :defer t)
+  :defer t
+  :config
+  (setq vterm-shell "zsh")
+  (define-key vterm-mode-map (kbd "<f9>")  'shell-pop))
 
 ;; shell-pop
 (use-package shell-pop
   :defer t
-  :bind ([f5] . shell-pop)
+  :bind ([f9] . shell-pop)
   :init
   (setq shell-pop-window-size 30
         shell-pop-shell-type
@@ -295,16 +265,17 @@
   :if (executable-find "git")
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
-  :bind (("C-x g s" . magit-status)
-          ("C-c g" . magit-status)
-         ("C-x g x" . magit-checkout)
-         ("C-x g c" . magit-commit)
-         ("C-x g p" . magit-push)
-         ("C-x g u" . magit-pull)
-         ("C-x g e" . magit-ediff-resolve)
-         ("C-x g r" . magit-rebase-interactive)
-         ("C-x g f" . magit-format-patch)))
-
+  :bind (
+         ("C-x C-g" . magit-dispatch)
+         ("C-x g" . magit-status)
+         ("C-c g s" . magit-status)
+         ("C-c g x" . magit-checkout)
+         ("C-c g c" . magit-commit)
+         ("C-c g p" . magit-push)
+         ("C-c g u" . magit-pull)
+         ("C-c g e" . magit-ediff-resolve)
+         ("C-c g r" . magit-rebase-interactive)
+         ("C-c g f" . magit-format-patch)))
 
 
 (provide 'packages)

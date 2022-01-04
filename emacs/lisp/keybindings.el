@@ -57,33 +57,18 @@
  ("C-h f" . helpful-callable)
  ("C-h v" . helpful-variable)
  ("C-h k" . helpful-key)
- ("C-h a" . counsel-apropos)
  ([f2] . open-dashboard)
 
  ("M-+" . text-scale-increase)
  ("M-_" . text-scale-decrease)
 
- ("M-x" . counsel-M-x)
- ("M-y" . counsel-yank-pop)
- ("C-x C-f" . counsel-find-file)
- ("C-x C-r" . counsel-recentf)
- ("C-c r" . counsel-rg)
- ("C-c b" . counsel-bookmark)
- ("C-x 8 i" . counsel-unicode-char)
-
- ("C-s" . swiper)
- ("C-c C-r" . ivy-resume)
- ("C-x b" . ivy-switch-buffer)
- ("C-x C-b" . ivy-switch-buffer)
- ("C-c C-o" . ivy-occur)
-
  ;; ("C-/" . undo-fu-only-undo)
  ;; ("C-?" . undo-fu-only-redo)
  ("C-=" . er/expand-region)
  ;; ("C-." . company-complete)
- ;; ("C-." . hippie-expand)
+ ("C-." . hippie-expand)
 
- ("C-;" . iedit-mode)
+ ;; ("C-;" . iedit-mode)
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
  ("M-s" . avy-goto-char)
@@ -97,24 +82,6 @@
  ("C-c Y" . youdao-dictionary-search-at-point)
  ("C-c y" . youdao-dictionary-search-at-point-tooltip))
 
-
-
-;; dired key
-(define-key dired-mode-map "f" 'counsel-find-file)
-(define-key dired-mode-map "F" 'find-name-dired)
-(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-(define-key dired-mode-map "." 'dired-hide-details-mode)
-(define-key dired-mode-map "/" 'funs/dired-filter-show-match)
-(define-key dired-mode-map "b"
-  (lambda ()
-    (interactive)
-    (find-alternate-file "..")))
-;;;###autoload
-(defun funs/dired-filter-show-match ()
-  "Only show filter file."
-  (interactive)
-  (call-interactively #'dired-mark-files-regexp)
-  (command-execute "tk"))
 
 ;; view-mode key
 (defvar view-mode-map) ;定义变量消除 flaycheck error

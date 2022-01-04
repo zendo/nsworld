@@ -147,16 +147,6 @@
         ".recentf" "emacs_backup" "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\)$"))
 (recentf-mode 1)
 
-;; Dired
-(put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
-(setq dired-recursive-copies 'always           ;递归操作目录
-      dired-recursive-deletes 'top             ;询问一次;
-      dired-listing-switches "-lha "           ;human-readable listing
-      )
-;; auto refresh dired when file changes
-(add-hook 'dired-mode-hook 'auto-revert-mode)
-(require 'dired-x)
-
 ;; ibuffer
 (defalias 'list-buffers 'ibuffer)
 (setq ibuffer-expert t) ; 直接操作不询问

@@ -1,9 +1,11 @@
 # Network
 
 dhcpcd  有线
+
 ping www.baidu.com
 
 无线  iwctl
+
 station wlan0 get-networks
 station wlan0 connect SSID
 
@@ -27,7 +29,9 @@ sh 3install.sh
 ## 驱动
 
 21.1) AMD: sudo pacman -S mesa xf86-video-ati xf86-video-amdgpu vulkan-radeon amd-ucode
+
 21.2) Intel: sudo pacman -S mesa xf86-video-intel vulkan-intel intel-ucode
+
 21.3) NVIDIA: sudo pacman -S mesa nvidia xf86-video-nouveau nvidia-utils
 
 # 参考链接
@@ -42,4 +46,5 @@ https://gitee.com/auroot/arch_wiki
 
 # 一些技巧
 sudo sed -i '1i Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
+
 sudo sed -i 's/^# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/' /etc/sudoers

@@ -61,6 +61,10 @@
 (require 'lang-org)
 ;; (require 'lang-c-cpp-java)
 ;; (require 'lang-web)
+(require 'init-dired)
+;; (require 'init-selectrum)
+(require 'init-ivy)
+;; (require 'init-meow)
 (require 'keybindings)
 
 
