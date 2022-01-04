@@ -7,7 +7,7 @@ nixos-install --root /mnt --flake ~/dotworld/#yoga --impure --option substituter
 
 # Hardware
 
-``` nix
+``` shell
 ext4 option "noatime" "nodiratime"
 btrfs option "compress=zstd" "autodefrag" "noatime"
 
@@ -21,8 +21,8 @@ mount -o subvol=@,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt
 mkdir -p /mnt/{boot,nix,home}
 mount -o subvol=@nix,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt/nix
 mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt/home
-[NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 ```
+[NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 
 # Desktop Setup
 

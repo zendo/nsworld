@@ -53,7 +53,7 @@ in
     # gcc
     # cmake
     # gnumake
-    nodejs
+    # nodejs
     gitui
     lazygit
     jq
