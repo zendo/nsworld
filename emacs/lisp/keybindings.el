@@ -4,8 +4,6 @@
 
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
-(global-set-key [remap query-replace] 'anzu-query-replace)
-(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
 (global-set-key (kbd "<f7>") #'compile)
 (global-set-key (kbd "<C-f7>")
@@ -80,7 +78,6 @@
  ("C-x \\" . toggle-input-method)
  ("M-s" . avy-goto-char)
  ("M-z" . avy-zap-up-to-char-dwim)
- ("M-m" . pop-to-mark-command)
  ("C-}" . mc/mark-next-like-this)
  ("C-{" . mc/mark-previous-like-this)
  ("C-|" . mc/mark-all-like-this-dwim)

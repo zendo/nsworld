@@ -22,8 +22,8 @@
     (dotimes (i 10)
       (when (= p (point))
         (apply orig-fun args)))))
-(advice-add 'pop-to-mark-command :around
-            #'modi/multi-pop-to-mark)
+;; (advice-add 'pop-to-mark-command :around
+;;             #'modi/multi-pop-to-mark)
 
 ;;----------------------------------------------------------------------------
 ;; align
