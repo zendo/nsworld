@@ -34,9 +34,9 @@
 
 
 ;; Load Path
-(defvar my-dir (concat user-emacs-directory "lisp"))
-(add-to-list 'load-path my-dir)
-;;(add-to-list 'load-path (expand-file-name "conf" user-emacs-directory))
+;; (defvar my-dir (concat user-emacs-directory "lisp"))
+;; (add-to-list 'load-path my-dir)
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; Backup files
 (defconst my-backup (expand-file-name "my-backup" user-emacs-directory))
@@ -62,8 +62,8 @@
 (require 'init-dired)
 (require 'init-shell)
 (require 'init-project)
-(require 'init-ivy)
-;; (require 'init-vertico)
+;; (require 'init-ivy)
+(require 'init-vertico)
 ;; (require 'init-selectrum)
 ;; (require 'init-meow)
 (require 'keybindings)

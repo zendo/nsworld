@@ -16,10 +16,12 @@
     #interfaces.eno1.useDHCP = true;
     #interfaces.wlp1s0.useDHCP = true;
     timeServers = [ "ntp.tuna.tsinghua.edu.cn" ];
+
     nameservers = [
       "223.5.5.5"
       "223.6.6.6"
     ];
+
     hosts = {
       "140.82.112.22" = [ "central.github.com" ];
       "140.82.112.25" = [ "live.github.com" ];
