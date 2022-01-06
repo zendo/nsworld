@@ -63,7 +63,6 @@ in
 
     # CLI
     dnspeep
-    ssh-agents
     lsof
     elinks
     powertop
