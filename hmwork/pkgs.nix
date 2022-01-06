@@ -58,6 +58,7 @@ in
     lazygit
     jq
     jql
+    sqlite
     openssl
     python3
 

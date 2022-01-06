@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  programs.alacritty = {
+    enable = true;
+  };
+
   programs.vscode = {
     enable = true;
     # extensions = with pkgs.vscode-extensions; [
@@ -16,10 +20,9 @@
 
   programs.emacs = {
     enable = true;
-    extraPackages = epkgs: with epkgs.melpaPackages; [
-      vterm
-      # telega
-      # pdf-tools
+    extraPackages = epkgs: [
+      epkgs.vterm
+      # epkgs.telega
     ];
   };
   home.file.".emacs.d/custom.el".source = ../emacs/centaur/custom.el;

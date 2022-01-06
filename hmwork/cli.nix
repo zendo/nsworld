@@ -25,6 +25,7 @@
 
   home.file = {
     # ".vimrc".source = ./vimrc;
+
     ".config/alacritty/alacritty.yml".source = ../others/alacritty.yml;
 
     ".inputrc".text = ''
@@ -69,7 +70,12 @@
   programs.gpg = {
     enable = true;
   };
-  services.gpg-agent.enable = true;
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 1800;
+    enableSshSupport = true;
+  };
 
   programs.exa = {
     enable = true;
@@ -173,10 +179,6 @@
       # Close the current pane.
       bind -n M-w kill-pane
     '';
-  };
-
-  programs.alacritty = {
-    enable = true;
   };
 
 }
