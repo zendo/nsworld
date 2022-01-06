@@ -7,6 +7,10 @@
   :config
   (setq amx-save-file (expand-file-name "amx" my-temp)))
 
+;; all-the-icons-ivy-rich
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1))
+
 ;; counsel
 (use-package counsel
   :diminish ivy-mode counsel-mode
@@ -41,6 +45,23 @@
 (use-package ivy-rich
   :init
   (ivy-rich-mode 1))
+
+
+;;----------------------------------------------------------------------------
+;; Pop until marker actually moves
+;;----------------------------------------------------------------------------
+;;;###autoload
+(defun modi/multi-pop-to-mark (orig-fun &rest args)
+  "Call ORIG-FUN until the cursor moves.Try the repeated popping up to 10 times."
+  (let ((p (point)))
+    (dotimes (i 10)
+      (when (= p (point))
+        (apply orig-fun args)))))
+(advice-add 'pop-to-mark-command :around
+            #'modi/multi-pop-to-mark)
+
+(global-set-key (kbd "M-m") 'pop-to-mark-command)
+
 
 (provide 'init-ivy)
 ;;; init-ivy.el ends here

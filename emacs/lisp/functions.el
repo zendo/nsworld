@@ -13,19 +13,6 @@
 (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
 
 ;;----------------------------------------------------------------------------
-;; Pop until marker actually moves
-;;----------------------------------------------------------------------------
-;;;###autoload
-(defun modi/multi-pop-to-mark (orig-fun &rest args)
-  "Call ORIG-FUN until the cursor moves.Try the repeated popping up to 10 times."
-  (let ((p (point)))
-    (dotimes (i 10)
-      (when (= p (point))
-        (apply orig-fun args)))))
-;; (advice-add 'pop-to-mark-command :around
-;;             #'modi/multi-pop-to-mark)
-
-;;----------------------------------------------------------------------------
 ;; align
 ;;----------------------------------------------------------------------------
 ;;;###autoload
@@ -71,37 +58,6 @@ Version 2017-08-19"
         (goto-char (point-min))
         (while (re-search-forward " +" nil t)
           (replace-match "\n" ))))))
-
-
-;; dashboard
- (defun open-dashboard ()
-      "Open the *dashboard* buffer and jump to the first widget."
-      (interactive)
-      ;; Check if need to recover layout
-      (if (> (length (window-list-1))
-             ;; exclude `treemacs' window
-             (if (and (fboundp 'treemacs-current-visibility)
-                      (eq (treemacs-current-visibility) 'visible))
-                 2
-               1))
-          (setq dashboard-recover-layout-p t))
-
-      (delete-other-windows)
-
-      ;; Refresh dashboard buffer
-      (when (get-buffer dashboard-buffer-name)
-        (kill-buffer dashboard-buffer-name))
-      (dashboard-insert-startupify-lists)
-      (switch-to-buffer dashboard-buffer-name)
-
-      ;; Jump to the first section
-      (dashboard-goto-recent-files))
-
-    (defun dashboard-goto-recent-files ()
-      "Go to recent files."
-      (interactive)
-      (let ((func (local-key-binding "r")))
-        (and func (funcall func))))
 
 (provide 'functions)
 ;;; functions.el ends here

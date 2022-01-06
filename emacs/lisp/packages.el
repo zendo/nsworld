@@ -68,21 +68,6 @@
   :defer t
   :defines ivy-initial-inputs-alist)
 
-;; undo-fu
-;; (use-package undo-fu)
-
-;; undo-tree C-x u
-(use-package undo-tree
-  :diminish undo-tree-mode
-  :config
-  (progn
-    (global-undo-tree-mode)
-    (setq undo-tree-visualizer-timestamps t)
-    ;; (setq undo-tree-visualizer-diff t)
-    (setq undo-tree-history-directory-alist
-          `((".*" . ,my-temp)))
-    (setq undo-tree-auto-save-history t)))
-
 ;; expand-region
 (use-package expand-region)
 
@@ -161,27 +146,6 @@
   (setq olivetti-body-width 100)
   (setq olivetti-hide-mode-line t))
 
-;; bash-completion
-(when (eq system-type 'gnu/linux)
-  (use-package bash-completion
-    :defer t
-    :init
-    (autoload 'bash-completion-dynamic-complete
-      "bash-completion"
-      "BASH completion hook")
-    (add-hook 'shell-dynamic-complete-functions
-              'bash-completion-dynamic-complete)))
-
-;; exec-path-from-shell
-(when (eq system-type 'gnu/linux)
-  (use-package exec-path-from-shell
-    :custom
-    (exec-path-from-shell-check-startup-files nil)
-    (exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
-    (exec-path-from-shell-arguments '("-l"))
-    :init
-    (exec-path-from-shell-initialize)))
-
 ;; doom-modeline
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
@@ -191,93 +155,8 @@
 ;;   :config
 ;;   (powerline-default-theme))
 
-;; all-the-icons-ivy-rich
-(use-package all-the-icons-ivy-rich
-  :init (all-the-icons-ivy-rich-mode 1))
-
-;; dired-sidebar
-(use-package dired-sidebar
-  :defer t
-  :bind (([f1] . dired-sidebar-toggle-sidebar))
-  :init
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
-  :config
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-theme 'icons))
-
-;; ibuffer-sidebar
-(use-package ibuffer-sidebar
-  :defer t)
-
-;; vterm
-(use-package vterm
-  :defer t
-  :config
-  (setq vterm-shell "zsh")
-  (define-key vterm-mode-map (kbd "<f9>")  'shell-pop))
-
-;; shell-pop
-(use-package shell-pop
-  :defer t
-  :bind ([f9] . shell-pop)
-  :init
-  (setq shell-pop-window-size 30
-        shell-pop-shell-type
-        (cond ((fboundp 'vterm) '("vterm" "*vterm*" #'vterm))
-              ((eq system-type 'windows-nt) '("eshell" "*eshell*" #'eshell))
-              (t '("terminal" "*terminal*"
-                   (lambda () (term shell-pop-term-shell)))))))
 
 
-;; Projectile
-(use-package projectile
-  :diminish projectile-mode
-  :commands projectile-mode
-  :bind-keymap ("C-c p" . projectile-command-map)
-  :init (setq projectile-require-project-root nil) ; make projectile usable for every directory
-  :config
-  (progn
-    (projectile-mode 1)
-    (setq projectile-completion-system 'ivy)
-    (setq projectile-switch-project-action #'projectile-dired)))
-
-;; dashboard
-(use-package dashboard
-  :diminish (dashboard-mode page-break-lines-mode)
-  :custom
-  (dashboard-startup-banner 2)
-  (dashboard-set-heading-icons t)
-  (dashboard-set-file-icons t)
-  (dashboard-set-footer nil)
-  (dashboard-center-content t)
-
-  (dashboard-items '((recents  . 12)
-                     (bookmarks . 5)
-                     (projects . 5)))
-  :config
-  (dashboard-setup-startup-hook))
-
-
-;; Magit
-(use-package magit
-  :defer t
-  :if (executable-find "git")
-  :config
-  (setq magit-completing-read-function 'ivy-completing-read)
-  :bind (
-         ("C-x C-g" . magit-dispatch)
-         ("C-x g" . magit-status)
-         ("C-c g s" . magit-status)
-         ("C-c g x" . magit-checkout)
-         ("C-c g c" . magit-commit)
-         ("C-c g p" . magit-push)
-         ("C-c g u" . magit-pull)
-         ("C-c g e" . magit-ediff-resolve)
-         ("C-c g r" . magit-rebase-interactive)
-         ("C-c g f" . magit-format-patch)))
 
 
 (provide 'packages)

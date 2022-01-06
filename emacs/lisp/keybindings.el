@@ -21,6 +21,7 @@
              (global-set-key [remap mark-sexp] 'easy-mark)
              (global-set-key [remap kill-ring-save] 'easy-kill))
 
+;; mwim
 (use-package mwim
   :bind
   ("C-a" . mwim-beginning-of-code-or-line)

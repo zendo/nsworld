@@ -57,16 +57,21 @@
 (require 'config)
 (require 'packages)
 (require 'functions)
-(require 'lang-main)
-(require 'lang-org)
-;; (require 'lang-c-cpp-java)
-;; (require 'lang-web)
+
+(require 'init-backup)
 (require 'init-dired)
+(require 'init-shell)
+(require 'init-project)
 (require 'init-ivy)
 ;; (require 'init-vertico)
 ;; (require 'init-selectrum)
 ;; (require 'init-meow)
 (require 'keybindings)
+
+(require 'lang-main)
+(require 'lang-org)
+;; (require 'lang-c-cpp-java)
+;; (require 'lang-web)
 
 
 ;;; init.el ends here
