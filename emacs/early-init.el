@@ -23,11 +23,15 @@
 (setq frame-inhibit-implied-resize t)
 
 ;; Disable GUI elements
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(setq inhibit-splash-screen t)
-(setq use-file-dialog nil)
+(add-hook 'before-make-frame-hook
+          #'(lambda ()
+              (menu-bar-mode -1)
+              (tool-bar-mode -1)
+              (scroll-bar-mode -1)
+              (setq inhibit-splash-screen t)
+              (setq use-file-dialog nil)
+              (setq initial-frame-alist (quote ((fullscreen . maximized))))
+              ))
 
 ;; Prevent unwanted runtime builds in gccemacs (native-comp); packages are
 ;; compiled ahead-of-time when they are installed and site files are compiled

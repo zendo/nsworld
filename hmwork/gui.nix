@@ -20,6 +20,7 @@
 
   programs.emacs = {
     enable = true;
+    package = pkgs.emacsGit;
     extraPackages = epkgs: [
       epkgs.vterm
       # epkgs.telega

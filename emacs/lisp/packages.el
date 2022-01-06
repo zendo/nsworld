@@ -8,6 +8,9 @@
 (require 'package)
 (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
                          ("melpa" . "http://elpa.zilongshanren.com/melpa/")))
+;; (setq package-archives
+;;       '(("gnu"   . "http://elpa.gnu.org/packages/")
+;;         ("melpa" . "http://melpa.org/packages/")))
 
 ;; Initialize packages
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27

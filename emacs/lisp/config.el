@@ -15,7 +15,8 @@
 ;; 字体 fonts
 ;; Consolas, Hack, Source Code Pro,
 ;; Microsoft Yahei, NotoSansSC,
-(set-face-attribute 'default nil :font "等距更纱黑体 SC-12")
+;; (set-face-attribute 'default nil :font "等距更纱黑体 SC-12")
+(setq default-frame-alist '((font . "等距更纱黑体 SC-12")))
 ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
 ;;   (set-fontset-font (frame-parameter nil 'font)
 ;;                     charset
@@ -25,6 +26,10 @@
 (custom-set-faces
  '(org-table ((t (:family "等距更纱黑体 SC")))))
 
+;; Proxy
+;; (setq url-gateway-method 'socks)
+;; (setq socks-server '("Default server" "127.0.0.1" 20170 5))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;; Editor ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -33,7 +38,6 @@
       inhibit-default-init t
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
-      initial-frame-alist (quote ((fullscreen . maximized))) ;启动最大化
       visible-bell 1                ;关闭错误警示
       system-time-locale "C"        ;使用英文时间格式
       ispell-dictionary "en"        ;使用英文词典
@@ -45,6 +49,12 @@
 (defun display-startup-echo-area-message ()
   "删除启动讯息"
   (message ""))
+
+;; kill emacsclient message
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (setq inhibit-message t)
+            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
 
 ;; Modeline
 (column-number-mode t)      ;显示列数
@@ -62,14 +72,14 @@
 ;; 鼠标 Mouse & Smooth Scroll
 ;; Scroll one line at a time (less "jumpy" than defaults)
 (when (display-graphic-p)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . hscroll))
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . hscroll))
         mouse-wheel-scroll-amount-horizontal 1
         mouse-wheel-progressive-speed nil))
-(setq scroll-step 1
-      scroll-margin 0
-      scroll-conservatively 100000
-      auto-window-vscroll nil
-      scroll-preserve-screen-position t)
+;; (setq scroll-step 1
+;;       scroll-margin 0
+;;       scroll-conservatively 100000
+;;       auto-window-vscroll nil
+;;       scroll-preserve-screen-position t)
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键

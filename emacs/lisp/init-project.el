@@ -46,6 +46,8 @@
                      (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
+;; emacsclient open dashboard
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
 
 ;; Magit

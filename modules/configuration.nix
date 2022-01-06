@@ -36,6 +36,9 @@
       interval = "weekly";
     };
 
+    # emacser habit
+    xserver.xkbOptions = "ctrl:swapcaps";
+
     journald.extraConfig = ''
       SystemMaxUse=100M
     '';
