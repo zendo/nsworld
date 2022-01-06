@@ -27,8 +27,8 @@
     libsForQt5.kompare
 
     libsForQt5.krdc
-    libsForQt5.kleopatra
     libsForQt5.konqueror
+    libsForQt5.kleopatra
     # libsForQt5.kcontacts
     # libsForQt5.korganizer
     neochat
