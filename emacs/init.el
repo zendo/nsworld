@@ -62,9 +62,9 @@
 ;; (require 'lang-c-cpp-java)
 ;; (require 'lang-web)
 (require 'init-dired)
-;; (require 'init-ivy)
+(require 'init-ivy)
 ;; (require 'init-vertico)
-(require 'init-selectrum)
+;; (require 'init-selectrum)
 ;; (require 'init-meow)
 (require 'keybindings)
 

@@ -49,7 +49,7 @@
 ;; Mini-Buffer Actions Rooted in Keymaps
 (use-package embark
   :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
+  (("C-." . embark-act)
    ;; ("C-;" . embark-dwim)        ;; good alternative: M-.
    ("C-h b" . embark-bindings)) ;; alternative for `describe-bindings'
 

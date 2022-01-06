@@ -73,7 +73,7 @@
  ;; ("C-." . company-complete)
  ("C-." . hippie-expand)
 
- ;; ("C-;" . iedit-mode)
+ ("C-;" . iedit-mode)
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
  ("M-s" . avy-goto-char)
