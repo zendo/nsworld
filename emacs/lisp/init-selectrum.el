@@ -75,3 +75,4 @@
 
 
 (provide 'init-selectrum)
+;;; init-selectrum.el ends here

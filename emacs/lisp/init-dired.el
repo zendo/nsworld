@@ -36,3 +36,4 @@
 
 
 (provide 'init-dired)
+;;; init-dired.el ends here

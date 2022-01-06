@@ -61,3 +61,4 @@
 
 
 (provide 'init-vertico)
+;;; init-vertico.el ends here

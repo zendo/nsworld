@@ -58,7 +58,6 @@
       st = "status";
       unstage = "reset HEAD --";
       pr = "pull --rebase";
-      al = "add *";
       addp = "add --patch";
       comp = "commit --patch";
       co = "checkout";

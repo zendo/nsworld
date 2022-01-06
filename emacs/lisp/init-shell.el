@@ -52,4 +52,4 @@
                    (lambda () (term shell-pop-term-shell)))))))
 
 (provide 'init-shell)
-;;; lang-main.el ends here
+;;; init-shell.el ends here

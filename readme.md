@@ -30,6 +30,7 @@ mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt
 # force en home directory
 LC_ALL=C xdg-user-dirs-update --force
 
+# flatpak useless
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
 flatpak install Flatseal Spotify StandardNotes VideoTrimmer

@@ -96,3 +96,4 @@
   :commands (impatient-mode))
 
 (provide 'lang-web)
+;;; lang-web.el ends here
