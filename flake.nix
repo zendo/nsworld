@@ -89,7 +89,6 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.iab = import ./hmwork/home.nix;
-          # home-manager.sharedModules = [ ./programs doom.hmModule neomacs.hmModule ];
         }
       ];
 

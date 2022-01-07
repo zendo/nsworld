@@ -22,6 +22,7 @@
 
   services = {
     # logind.lidSwitch = "suspend-then-hibernate";
+
     fwupd.enable = true;
 
     # Monitoring health of drives
@@ -71,7 +72,8 @@
     pulse.enable = true;
     # jack.enable = true; #jack-device ?
   };
-  # 玄学音质提升
+
+  # Musnix
   musnix.enable = true;
 
   # Handles input devices
@@ -80,9 +82,9 @@
     touchpad.disableWhileTyping = true;
   };
 
-  ###########################################################################
+  #########################################################################
   # essential apps
-  ###########################################################################
+  #########################################################################
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -131,9 +133,9 @@
     nixos.enable = false;
   };
 
-  ###########################################################################
+  #########################################################################
   # i18n and Fonts
-  ###########################################################################
+  #########################################################################
   # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";
 

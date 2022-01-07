@@ -104,5 +104,20 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; 箭头显示当前项
+(advice-add #'vertico--format-candidate :around
+            (lambda (orig cand prefix suffix index _start)
+              (setq cand (funcall orig cand prefix suffix index _start))
+              (concat
+               (if (= vertico--index index)
+                   (propertize "» " 'face 'vertico-current)
+                 "  ")
+               cand)))
+
+;; find-file kill word
+
 (provide 'init-vertico)
 ;;; init-vertico.el ends here

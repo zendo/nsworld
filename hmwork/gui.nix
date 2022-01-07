@@ -4,6 +4,7 @@
   programs.alacritty = {
     enable = true;
   };
+  home.file.".config/alacritty/alacritty.yml".source = ../others/alacritty.yml;
 
   programs.vscode = {
     enable = true;

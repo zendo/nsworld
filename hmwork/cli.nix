@@ -26,8 +26,6 @@
   home.file = {
     # ".vimrc".source = ./vimrc;
 
-    ".config/alacritty/alacritty.yml".source = ../others/alacritty.yml;
-
     ".inputrc".text = ''
     set completion-ignore-case on
     # Show all tab-completion options on first <tab>

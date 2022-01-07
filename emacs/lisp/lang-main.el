@@ -76,8 +76,7 @@
 
 ;; tabnine
 ;; ;; M-x company-tabnine-install-binary
-;; (use-package company-tabnine
-;;   :ensure t)
+;; (use-package company-tabnine)
 ;; (add-to-list 'company-backends #'company-tabnine)
 
 ;; flycheck

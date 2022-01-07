@@ -86,7 +86,6 @@ in
     # GUI
     v2ray
     qv2ray
-    # emacsPgtkGcc
     firefox-wayland
     qbittorrent
     vlc
