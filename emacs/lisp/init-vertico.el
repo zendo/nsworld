@@ -2,9 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+;; TODO: ivy-resume  ivy-occur
+
+;; VERTical Interactive COmpletion
 (use-package vertico
   :init
   (vertico-mode)
+  (vertico-mouse-mode +1)
 
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
@@ -19,6 +23,19 @@
   ;; (setq vertico-cycle t)
   )
 
+;; Configure directory extension.
+(use-package vertico-directory
+  :after vertico
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-word)
+              ;; ("M-DEL" . vertico-directory-delete-word)
+              )
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+;; Completion style for matching regexps in any order
 (use-package orderless
   :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
@@ -51,6 +68,7 @@
   (setq enable-recursive-minibuffers t))
 
 
+;; Enrich existing commands with completion annotations
 (use-package marginalia
   :after vertico
   :custom
@@ -105,8 +123,9 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;----------------------------------------------------------------------------
+;; Functions
+;;----------------------------------------------------------------------------
 ;; 箭头显示当前项
 (advice-add #'vertico--format-candidate :around
             (lambda (orig cand prefix suffix index _start)

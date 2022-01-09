@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; TODO: ivy-resume  ivy-occur
 
 ;; Easily select item from list
 (use-package selectrum

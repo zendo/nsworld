@@ -8,7 +8,7 @@
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 3; # 限制启动项数量
+    systemd-boot.configurationLimit = 3; # startup menus
     systemd-boot.consoleMode = "max"; # resolution max for hidpi
   };
 

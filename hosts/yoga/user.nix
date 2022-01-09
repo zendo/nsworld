@@ -3,7 +3,7 @@
 {
   users.users.iab = {
     isNormalUser = true;
-    password = "123";
+    password = "123"; # Don't learn me
     extraGroups = [
       "wheel"
       "networkmanager"

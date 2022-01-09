@@ -62,6 +62,7 @@
       co = "checkout";
       ci = "commit";
       ca = "commit -a -m";
+      lg = "log --graph --decorate --all --oneline";
     };
   };
 
