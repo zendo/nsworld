@@ -21,19 +21,13 @@
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
   ;; (setq vertico-cycle t)
-  )
 
-;; Configure directory extension.
-(use-package vertico-directory
-  :after vertico
-  ;; More convenient directory navigation commands
   :bind (:map vertico-map
-              ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-word)
+              ;; ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-up)
               ;; ("M-DEL" . vertico-directory-delete-word)
               )
-  ;; Tidy shadowed file names
-  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+  )
 
 ;; Completion style for matching regexps in any order
 (use-package orderless
@@ -127,6 +121,7 @@
 ;; Functions
 ;;----------------------------------------------------------------------------
 ;; 箭头显示当前项
+;;;###autoload
 (advice-add #'vertico--format-candidate :around
             (lambda (orig cand prefix suffix index _start)
               (setq cand (funcall orig cand prefix suffix index _start))
@@ -136,7 +131,6 @@
                  "  ")
                cand)))
 
-;; find-file kill word
 
 (provide 'init-vertico)
 ;;; init-vertico.el ends here
