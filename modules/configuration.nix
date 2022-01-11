@@ -3,6 +3,11 @@
 {
   system.stateVersion = "21.11";
 
+  time.timeZone = "Asia/Shanghai";
+
+  # Local time for dual OS
+  time.hardwareClockInLocalTime = true;
+
   hardware.enableAllFirmware = true; # contains non-redistributable firmware
 
   boot.loader = {
@@ -37,9 +42,6 @@
       interval = "weekly";
     };
 
-    # emacser habit
-    xserver.xkbOptions = "ctrl:swapcaps";
-
     journald.extraConfig = ''
       SystemMaxUse=100M
     '';
@@ -53,15 +55,10 @@
   #   HibernateDelaySec=30min
   # '';
 
-
-  # Set your time zone
-  time.timeZone = "Asia/Shanghai";
-
-  # Local time for dual OS
-  time.hardwareClockInLocalTime = true;
-
+  #########################################################################
   # Sounds
-  # sound.enable = true; # comment in pipewire
+  #########################################################################
+
   hardware.pulseaudio.enable = false; # false in pipewire
   # Pipewire
   security.rtkit.enable = true;
@@ -76,15 +73,32 @@
   # Musnix
   musnix.enable = true;
 
-  # Handles input devices
-  services.xserver.libinput = {
-    # enable = true; # enabled default by desktopManager
-    touchpad.disableWhileTyping = true;
+  #########################################################################
+  # i18n
+  #########################################################################
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "zh_CN.UTF-8";
+
+  console.keyMap = "us";
+
+  services.xserver = {
+    layout = "us";
+
+    # Handles input devices
+    libinput = {
+      # enable = true; # enabled default by desktopManager
+      touchpad.disableWhileTyping = true;
+    };
+
+    # emacser habit
+    xkbOptions = "ctrl:swapcaps";
   };
 
   #########################################################################
   # essential apps
   #########################################################################
+
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -104,7 +118,18 @@
   # environment.variables = {
   # };
 
+  # services.flatpak.enable = true;
+  # programs.steam.enable = true;
+
+  documentation = {
+    enable = false;
+    nixos.enable = false;
+  };
+
+  #########################################################################
   # virtualisation
+  #########################################################################
+
   virtualisation = {
     docker = {
       enable = true;
@@ -123,26 +148,6 @@
     # };
 
     # waydroid.enable = true;
-  };
-
-  # services.flatpak.enable = true;
-  # programs.steam.enable = true;
-
-  documentation = {
-    enable = false;
-    nixos.enable = false;
-  };
-
-  #########################################################################
-  # i18n
-  #########################################################################
-  # Select internationalisation properties.
-  i18n.defaultLocale = "zh_CN.UTF-8";
-
-  console.keyMap = "us";
-
-  services.xserver = {
-    layout = "us";
   };
 
 }

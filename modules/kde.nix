@@ -13,7 +13,10 @@
 
   # export PLASMA_USE_QT_SCALING=1 in X11
   # https://bugs.kde.org/show_bug.cgi?id=356446
-  services.xserver.desktopManager.plasma5.useQtScaling = true;
+  # services.xserver.desktopManager.plasma5.useQtScaling = true;
+
+  # services.gnome.gnome-keyring.enable = true;
+  # security.pam.services.login.enableGnomeKeyring = true;
 
   services.colord.enable = true;
 
