@@ -4,17 +4,9 @@
   system.stateVersion = "21.11";
 
   time.timeZone = "Asia/Shanghai";
-
   time.hardwareClockInLocalTime = true; # Local time for dual OS
 
   hardware.enableAllFirmware = true; # contains non-redistributable firmware
-
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 3; # startup menu items
-    systemd-boot.consoleMode = "max"; # resolution max for hidpi
-  };
 
   boot = {
     plymouth.enable = true;
@@ -22,6 +14,12 @@
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+      systemd-boot.configurationLimit = 3; # startup menu items
+      systemd-boot.consoleMode = "max"; # resolution max for hidpi
+    };
   };
 
   services = {
@@ -58,7 +56,7 @@
   #########################################################################
   # Pipewire
   hardware.pulseaudio.enable = false; # false in pipewire
-  security.rtkit.enable = true;
+  security.rtkit.enable = true; # Realtime Policy and Watchdog Daemon
   services.pipewire = {
     enable = true;
     alsa.enable = true;

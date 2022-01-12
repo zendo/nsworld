@@ -101,7 +101,6 @@ in
     meld
     deja-dup
     # vorta
-    wezterm
     yacreader
 
     # OFFICE

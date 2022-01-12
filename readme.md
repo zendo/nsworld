@@ -4,6 +4,7 @@
 nix-shell -p nixUnstable git
 nixos-install --root /mnt --flake github:zendo/dotworld#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
+[Starter Config](https://github.com/Misterio77/nix-starter-config/)
 
 # Hardware
 
