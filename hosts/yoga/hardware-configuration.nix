@@ -47,9 +47,12 @@
       options = [ "subvol=@swap" ];
     };
 
-  swapDevices = [{
-    device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821/swap/swapfile";
-  }];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = (1024 * 16) + (1024 * 2); # RAM size + 2 GB1
+    }
+  ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display

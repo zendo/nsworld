@@ -6,7 +6,7 @@ nixos-install --root /mnt --flake github:zendo/dotworld#yoga --option substitute
 ```
 [Starter Config](https://github.com/Misterio77/nix-starter-config/)
 
-# Hardware
+# Btrfs
 
 ``` shell
 ext4 option "noatime" "nodiratime"
@@ -17,11 +17,23 @@ mount /dev/nvme0n1p5 /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@nix
 btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@swap
 umount /mnt
 mount -o subvol=@,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt
-mkdir -p /mnt/{boot,nix,home}
+mkdir -p /mnt/{boot,nix,home,swap}
+
+truncate -s 0 /mnt/swap/swapfile
+chattr +C /mnt/swap/swapfile
+btrfs property set /mnt/swap compression none
+# fallocate -l 16G /mnt/swapfile # if ext4
+dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=18432
+chmod 600 /swapfile
+mkswap /mnt/swap/swapfile
+swapon /mnt/swap/swapfile
+
 mount -o subvol=@nix,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt/nix
 mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt/home
+mount -o subvol=@swap /dev/nvme0n1p5 /mnt/swap
 ```
 [NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 
