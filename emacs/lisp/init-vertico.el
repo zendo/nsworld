@@ -22,11 +22,11 @@
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
   ;; (setq vertico-cycle t)
 
-  :bind (:map vertico-map
+  ;; :bind (:map vertico-map
               ;; ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-up)
+              ;; ("DEL" . vertico-directory-up)
               ;; ("M-DEL" . vertico-directory-delete-word)
-              )
+              ;; )
   )
 
 ;; Completion style for matching regexps in any order

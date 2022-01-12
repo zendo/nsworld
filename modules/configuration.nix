@@ -5,8 +5,7 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  # Local time for dual OS
-  time.hardwareClockInLocalTime = true;
+  time.hardwareClockInLocalTime = true; # Local time for dual OS
 
   hardware.enableAllFirmware = true; # contains non-redistributable firmware
 
@@ -36,7 +35,6 @@
       autodetect = true;
     };
 
-    # fstrim = "discard" in /etc/fstab
     fstrim = {
       enable = true;
       interval = "weekly";
@@ -58,9 +56,8 @@
   #########################################################################
   # Sounds
   #########################################################################
-
-  hardware.pulseaudio.enable = false; # false in pipewire
   # Pipewire
+  hardware.pulseaudio.enable = false; # false in pipewire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -73,11 +70,12 @@
   # Musnix
   musnix.enable = true;
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+
   #########################################################################
   # i18n
   #########################################################################
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";
 
   console.keyMap = "us";
@@ -91,14 +89,12 @@
       touchpad.disableWhileTyping = true;
     };
 
-    # emacser habit
-    xkbOptions = "ctrl:swapcaps";
+    xkbOptions = "ctrl:swapcaps"; # emacser habit
   };
 
   #########################################################################
   # essential apps
   #########################################################################
-
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -129,7 +125,6 @@
   #########################################################################
   # virtualisation
   #########################################################################
-
   virtualisation = {
     docker = {
       enable = true;

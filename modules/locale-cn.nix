@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Fonts
   fonts = {
     # /run/current-system/sw/share/X11/fonts
     fontDir.enable = true;

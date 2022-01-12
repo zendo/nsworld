@@ -2,6 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
+;; 鼠标 Mouse & Smooth Scroll
+;; Scroll one line at a time (less "jumpy" than defaults)
+;; (when (display-graphic-p)
+;;   (setq mouse-wheel-scroll-amount '(3 ((shift) . hscroll))
+;;         mouse-wheel-scroll-amount-horizontal 1
+;;         mouse-wheel-progressive-speed nil))
+;; (setq scroll-step 1
+;;       scroll-margin 0
+;;       scroll-conservatively 100000
+;;       auto-window-vscroll nil
+;;       scroll-preserve-screen-position t)
+(blink-cursor-mode -1)               ;禁用指针闪烁
+(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
+(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
+(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+
+
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 

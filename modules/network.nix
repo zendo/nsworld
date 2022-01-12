@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-
   networking = {
     # hostName = "in flake";
     networkmanager.enable = true;

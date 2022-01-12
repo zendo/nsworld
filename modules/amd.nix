@@ -1,11 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  # AMD GPU
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # openGL
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 

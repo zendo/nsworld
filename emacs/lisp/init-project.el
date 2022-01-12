@@ -57,9 +57,9 @@
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   :bind (
-         ("C-x C-g" . magit-dispatch)
          ("C-x g" . magit-status)
          ("C-c g s" . magit-status)
+         ("C-c g d" . magit-dispatch)
          ("C-c g x" . magit-checkout)
          ("C-c g c" . magit-commit)
          ("C-c g p" . magit-push)
