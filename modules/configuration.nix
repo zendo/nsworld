@@ -14,6 +14,8 @@
     kernelPackages = pkgs.linuxPackages_zen; # latest or zen
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
+    cleanTmpDir = true;
+
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;

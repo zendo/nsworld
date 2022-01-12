@@ -41,8 +41,14 @@
       fsType = "vfat";
     };
 
+  fileSystems."/swap" =
+    { device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ];
+    };
+
   swapDevices = [{
-    device = "/dev/disk/by-uuid/e5e717e5-fcc0-410f-b945-a37c0653cdae";
+    device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821/swap/swapfile";
   }];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

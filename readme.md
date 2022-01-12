@@ -12,16 +12,16 @@ nixos-install --root /mnt --flake github:zendo/dotworld#yoga --option substitute
 ext4 option "noatime" "nodiratime"
 btrfs option "compress=zstd" "autodefrag" "noatime"
 
-mkfs.btrfs -L nixos /dev/nvme0n1p3
-mount /dev/nvme0n1p3 /mnt
+mkfs.btrfs -L nixos /dev/nvme0n1p5
+mount /dev/nvme0n1p5 /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@nix
 btrfs subvolume create /mnt/@home
 umount /mnt
-mount -o subvol=@,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt
+mount -o subvol=@,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt
 mkdir -p /mnt/{boot,nix,home}
-mount -o subvol=@nix,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt/nix
-mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p3 /mnt/home
+mount -o subvol=@nix,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt/nix
+mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt/home
 ```
 [NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 

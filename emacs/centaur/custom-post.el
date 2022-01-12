@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Centaur specifieqd
 (when sys/linuxp
   (setq centaur-org-directory "~/.dotworld/org/"))
 
@@ -42,6 +41,13 @@
  ("C-{" . mc/mark-previous-like-this)
  ("C-|" . mc/mark-all-like-this-dwim))
 
+(bind-keys
+ :prefix-map remove-lists
+ :prefix "C-c -"
+ ("b" . bookmark-delete)
+ ("r" . recentf-edit-list)
+ ("p" . projectile-remove-known-project))
+
 ;; 失去焦点时保存
 (defun save-all ()
   (interactive)
@@ -71,9 +77,6 @@
 ;; nixos
 (use-package nix-mode
   :mode "\\.nix\\'")
-
-;; light theme
-(use-package cloud-theme)
 
 
 ;; vterm
