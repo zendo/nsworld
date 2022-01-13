@@ -9,9 +9,6 @@ nixos-install --root /mnt --flake github:zendo/dotworld#yoga --option substitute
 # Btrfs
 
 ``` shell
-ext4 option "noatime" "nodiratime"
-btrfs option "compress=zstd" "autodefrag" "noatime"
-
 mkfs.btrfs -L nixos /dev/nvme0n1p5
 mount /dev/nvme0n1p5 /mnt
 btrfs subvolume create /mnt/@
@@ -24,7 +21,7 @@ mkdir -p /mnt/{boot,nix,home,swap}
 
 truncate -s 0 /mnt/swap/swapfile
 chattr +C /mnt/swap/swapfile
-btrfs property set /mnt/swap compression none
+btrfs property set /mnt/swap/swapfile compression none
 # fallocate -l 16G /mnt/swapfile # if ext4
 dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=18432
 chmod 600 /swapfile
@@ -34,6 +31,9 @@ swapon /mnt/swap/swapfile
 mount -o subvol=@nix,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt/nix
 mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt/home
 mount -o subvol=@swap /dev/nvme0n1p5 /mnt/swap
+
+ext4 option "noatime" "nodiratime"
+btrfs option "compress=zstd" "autodefrag" "noatime"
 ```
 [NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 

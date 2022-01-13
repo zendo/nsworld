@@ -90,7 +90,7 @@ in
     qbittorrent
     vlc
     mpv
-    simplescreenrecorder
+    # simplescreenrecorder # Xorg
     # ffmpeg
     audacious
     spotify-2k
@@ -102,6 +102,7 @@ in
     deja-dup
     # vorta
     yacreader
+    unstable.wezterm
 
     # OFFICE
     # libreoffice-fresh

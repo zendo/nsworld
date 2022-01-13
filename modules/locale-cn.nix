@@ -28,23 +28,27 @@
 
   # ibus
   # i18n.inputMethod = {
-  #   enabled = "ibus";
-  #   ibus.engines = with pkgs.ibus-engines; [
-  #     libpinyin
-  #     rime
-  #     typing-booster
-  #   ];
+
   # };
 
   # fcitx5
   i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      libsForQt5.fcitx5-qt
-      fcitx5-gtk
-      fcitx5-rime
-      fcitx5-configtool
-      fcitx5-chinese-addons
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      libpinyin
+      rime
+      typing-booster
     ];
+
+    # enabled = "fcitx5";
+    # fcitx5.addons = with pkgs; [
+    #   libsForQt5.fcitx5-qt
+    #   fcitx5-gtk
+    #   fcitx5-configtool
+
+    #   fcitx5-rime
+    #   fcitx5-chinese-addons
+    # ];
+
   };
 }

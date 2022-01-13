@@ -18,7 +18,7 @@ window:
     y: 6
 
 # 背景透明
-background_opacity: 0.9
+background_opacity: 0.95
 
 # 字体
 font:
@@ -40,5 +40,5 @@ key_bindings:
   - { key: W,        mods: Command,       action: Quit                }
 
 mouse_bindings:
-  - { mouse: Right,  action: Paste }
+  # - { mouse: Right,  action: Paste }
   - { mouse: Middle, action: PasteSelection }

@@ -25,6 +25,7 @@
 
   home.file = {
     # ".vimrc".source = ./vimrc;
+    ".config/wezterm/wezterm.lua".source = ../others/wezterm.lua;
 
     ".inputrc".text = ''
     set completion-ignore-case on

@@ -46,7 +46,11 @@
 
 ;; nixos
 (use-package nix-mode
-  :mode "\\.nix\\'")
+  :mode "\\.nix'")
+
+;; lua
+(use-package lua-mode
+  :mode "\\.lua'")
 
 
 

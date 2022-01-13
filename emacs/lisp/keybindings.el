@@ -20,6 +20,7 @@
 
 
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
+;; (global-set-key (kbd "C-SPC") 'nil)
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
 (global-set-key (kbd "<f7>") #'compile)

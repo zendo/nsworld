@@ -89,7 +89,7 @@
       touchpad.disableWhileTyping = true;
     };
 
-    xkbOptions = "ctrl:swapcaps"; # emacser habit
+    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
   #########################################################################
@@ -126,11 +126,11 @@
   # virtualisation
   #########################################################################
   virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      enableOnBoot = true;
-    };
+    # docker = {
+    #   enable = true;
+    #   autoPrune.enable = true;
+    #   enableOnBoot = true;
+    # };
 
     # podman = {
     #   enable = true;

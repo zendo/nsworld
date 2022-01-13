@@ -5,6 +5,9 @@
 (when sys/linuxp
   (setq centaur-org-directory "~/.dotworld/org/"))
 
+(setq mouse-wheel-scroll-amount '(3 ((shift) . hscroll))
+      mouse-wheel-scroll-amount-horizontal 1
+      mouse-wheel-progressive-speed nil)
 
 (setq system-time-locale "C"
       confirm-kill-processes 'nil)
