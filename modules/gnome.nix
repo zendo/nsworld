@@ -44,7 +44,7 @@
     gnomeExtensions.proxy-switcher
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.espresso
-    unstable.gnomeExtensions.arcmenu
+    # gnomeExtensions.arcmenu
     # gnomeExtensions.kimpanel # not work?
     # gnomeExtensions.ddterm
     # gnomeExtensions.blur-my-shell

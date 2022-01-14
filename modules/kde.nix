@@ -2,20 +2,14 @@
 
 {
   services.xserver.displayManager = {
-    sddm.enable = true;
-    # defaultSession = "plasmawayland";
-    # autoLogin.user = "iab";
+    # sddm.enable = true;
+    lightdm.enable = true;
+    lightdm.greeters.gtk.extraConfig = ''
+    xft-dpi=192
+    '';
+    defaultSession = "plasmawayland";
+    autoLogin.user = "iab";
   };
-
-  # services.xserver.displayManager.sddm = {
-  #   enable = true;
-  #   settings = {
-  #     Autologin = {
-  #       Session = "plasmawayland.desktop";
-  #       User = "iab";
-  #     };
-  #   };
-  # };
 
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;

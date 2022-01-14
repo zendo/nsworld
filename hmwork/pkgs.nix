@@ -1,17 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  spotify-2k = pkgs.symlinkJoin {
-    name = "spotify";
-    paths = [ pkgs.spotify ];
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/spotify \
-        --add-flags "--force-device-scale-factor=1.8"
-    '';
-  };
-
-in
 {
   home = {
     stateVersion = "22.05";
@@ -39,7 +27,6 @@ in
     edid-decode
 
     # NIX TOOLS
-    # nur.repos.xe.comma # Not support flake now
     nix-bash-completions
     nixpkgs-fmt
     nixfmt
@@ -49,7 +36,7 @@ in
     niv
     cachix
 
-    # develop
+    # Develop
     # gcc
     # cmake
     # gnumake
@@ -73,7 +60,6 @@ in
     duf
     btop
     bottom
-    zenith
     cht-sh
     trash-cli
     imagemagick
@@ -93,7 +79,7 @@ in
     # simplescreenrecorder # Xorg
     # ffmpeg
     audacious
-    spotify-2k
+    spotify
     # shutter
     foliate
     ghostwriter
@@ -102,7 +88,7 @@ in
     deja-dup
     # vorta
     yacreader
-    unstable.wezterm
+    wezterm
 
     # OFFICE
     # libreoffice-fresh
