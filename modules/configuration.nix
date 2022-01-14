@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  system.stateVersion = "21.11";
+  system.stateVersion = "22.05";
 
   time.timeZone = "Asia/Shanghai";
   time.hardwareClockInLocalTime = true; # Local time for dual OS
@@ -83,10 +83,8 @@
   services.xserver = {
     layout = "us";
 
-    # Handles input devices
     libinput = {
       # enable = true; # enabled default by desktopManager
-      touchpad.disableWhileTyping = true;
     };
 
     # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg

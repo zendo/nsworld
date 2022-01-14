@@ -2,7 +2,8 @@
   description = "Zendo NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -89,8 +90,8 @@
 
       hosts.yoga.modules = [
         ./modules/amd.nix
-        # ./modules/kde.nix
-        ./modules/gnome.nix
+        ./modules/kde.nix
+        # ./modules/gnome.nix
         ./modules/locale-cn.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/user-2.nix
