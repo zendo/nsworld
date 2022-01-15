@@ -6,6 +6,8 @@
 (setq confirm-kill-emacs nil
       delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
+      user-full-name "zendo"
+      user-mail-address "linzway@qq.com"
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       )
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -16,18 +18,14 @@
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 14))
 
-
 (setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
 
+;; 失去焦点时保存
+(defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+(add-hook 'focus-out-hook 'save-all)
 
-
-
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "zendo"
-      user-mail-address "linzway@qq.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in D
 ;; oom. Here
@@ -75,7 +73,9 @@
 ;; they are implemented.
 
 
-
+;;----------------------------------------------------------------------------
+;; vertico
+;;----------------------------------------------------------------------------
 ;; 箭头显示当前项
 ;;;###autoload
 (advice-add #'vertico--format-candidate :around
@@ -86,3 +86,50 @@
                    (propertize "» " 'face 'vertico-current)
                  "  ")
                cand)))
+
+;;----------------------------------------------------------------------------
+;; align
+;;----------------------------------------------------------------------------
+;;;###autoload
+(defun zendo/align-whitespace (start end)
+  "Align columns by whitespace"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)\\s-" 1 0 t))
+
+(defun zendo/align-& (start end)
+  "Align columns by ampersand"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)&" 1 1 t))
+
+;;----------------------------------------------------------------------------
+;; space to newline
+;;----------------------------------------------------------------------------
+;;;###autoload
+(defun zendo/space-to-newline ()
+  "Replace space sequence to a newline char.
+Works on current block or selection.
+
+URL `http://ergoemacs.org/emacs/emacs_space_to_newline.html'
+Version 2017-08-19"
+  (interactive)
+  (let* ( $p1 $p2 )
+    (if (use-region-p)
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (re-search-forward "\n[ \t]*\n" nil "move")
+        (skip-chars-backward " \t\n" )
+        (setq $p2 (point))))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region $p1 $p2)
+        (goto-char (point-min))
+        (while (re-search-forward " +" nil t)
+          (replace-match "\n" ))))))
