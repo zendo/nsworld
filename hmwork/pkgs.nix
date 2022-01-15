@@ -76,6 +76,7 @@
     qbittorrent
     vlc
     mpv
+    # kooha
     # simplescreenrecorder # Xorg
     # ffmpeg
     audacious
