@@ -1,31 +1,49 @@
-
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (load! "+keybindings")
 
-(setq confirm-kill-emacs nil
+(setq user-full-name "zendo"
+      user-mail-address "linzway@qq.com"
+
+      confirm-kill-emacs nil
+      confirm-kill-processes nil
       delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
-      user-full-name "zendo"
-      user-mail-address "linzway@qq.com"
+
+      display-line-numbers-type 't ;t/nil/relative
+      calendar-week-start-day 1 ;Monday as first day of week
+
+      doom-theme 'doom-tomorrow-night
+      doom-font (font-spec :family "JetBrains Mono" :size 14)
+
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
+      recentf-exclude
+      '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist")
       )
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-      
 
-(global-visual-line-mode 1)                 ;折叠 word wrap
-(global-prettify-symbols-mode 1)            ;Show lambda as λ.
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
+(add-hook! 'focus-out-hook (save-some-buffers t)) ;失去焦点时保存
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 14))
+(+global-word-wrap-mode t)
+;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
-(setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
+;; (add-to-list 'auto-mode-alist
+             ;; '("bashrc\\'" . conf-mode))
 
-;; 失去焦点时保存
-(defun save-all ()
-  (interactive)
-  (save-some-buffers t))
-(add-hook 'focus-out-hook 'save-all)
-
+;; Bacup sth TODO
+;; (setq backup-directory-alist `((".*" . ,my-backup))
+;;       undo-tree-auto-save-history t
+;;       undo-tree-history-directory-alist
+;;       `((".*" . ,my-backup))
+;;       ;; create-lockfiles nil   ;stop creating .#lockfile# files 多人编辑中
+;;       make-backup-files t    ;备份文件 backup~
+;;       backup-by-copying t    ; don't clobber symlinks
+;;       kept-new-versions 10   ; keep 10 latest versions
+;;       kept-old-versions 0    ; don't bother with old versions
+;;       delete-old-versions t  ; don't ask about deleting old versions
+;;       version-control t      ; number backups
+;;       vc-make-backup-files t ; backup version controlled files
+;;       )
 
 ;; Doom exposes five (optional) variables for controlling fonts in D
 ;; oom. Here
@@ -44,16 +62,6 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tomorrow-night)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 't)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -71,6 +79,18 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+(setq org-directory "~/Documents/Notes/")
+
+(setq deft-directory "~/Documents/Notes/"
+      deft-extensions '("org", "md", "txt", "tex")
+      deft-recursive t)
+
+
+(setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 
 ;;----------------------------------------------------------------------------

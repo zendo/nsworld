@@ -9,8 +9,8 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 (package! crux)
-(package! easy-kill)
 (package! iedit)
+(package! easy-kill)
 (package! youdao-dictionary)
 
 ;; To install a package directly from a remote git repo, you must specify a

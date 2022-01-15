@@ -3,6 +3,7 @@
 {
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/.emacs.d/bin"
   ];
 
   home.shellAliases = {

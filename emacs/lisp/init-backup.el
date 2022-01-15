@@ -24,12 +24,7 @@
 ;; (setq auto-save-visited-interval 15) ;default is 5s
 ;; (auto-save-visited-mode 1)
 
-;; 失去焦点时保存
-(defun save-all ()
-  (interactive)
-  (save-some-buffers t))
-(add-hook 'focus-out-hook 'save-all)
-
+(add-hook! 'focus-out-hook (save-some-buffers t)) ;失去焦点时保存
 
 ;; save-place 记住光标所在位置
 (setq save-place-file (expand-file-name "saveplace" my-temp))

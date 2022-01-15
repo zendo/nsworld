@@ -25,10 +25,13 @@
 (global-set-key [remap mark-sexp] 'easy-mark)
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
+(global-set-key [remap query-replace] 'anzu-query-replace)
+(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+
 (map!
  "C-." #'hippie-expand
  "C-\\" #'align-regexp
- "M-s" #'avy-goto-char ;; 默认 isearch 被覆盖
+ "M-s" #'avy-goto-char ;默认 isearch 被覆盖
  "C-k" #'crux-smart-kill-line
 
  "C-s" #'consult-line
@@ -47,3 +50,56 @@
 
  "C-c y" #'youdao-dictionary-search-at-point-tooltip
  )
+
+(map!
+ :leader
+ :prefix ("-" . "remove-lists")
+ "b" #'bookmark-delete
+ "r" #'recentf-edit-list
+ "p" #'projectile-remove-known-project
+ )
+
+;; Dired
+(put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
+(map! :map dired-mode-map
+    :after dired
+    "f" #'ido-find-file
+    "F" #'find-name-dired
+    "<RET>" #'dired-find-alternate-file
+    "." #'dired-hide-details-mode
+    "/" #'funs/dired-filter-show-match
+    "b" #'(lambda ()
+    (interactive)
+    (find-alternate-file ".."))
+    )
+;;;###autoload
+(defun funs/dired-filter-show-match ()
+  "Only show filter file."
+  (interactive)
+  (call-interactively #'dired-mark-files-regexp)
+  (command-execute "tk"))
+
+
+;; view-mode key
+;; (defvar view-mode-map) ;定义变量消除 flaycheck error
+;; (with-eval-after-load 'view
+;;   (bind-key "g" 'goto-line view-mode-map)
+;;   (bind-key "h" 'backward-char view-mode-map)
+;;   (bind-key "j" 'next-line view-mode-map)
+;;   (bind-key "k" 'previous-line view-mode-map)
+;;   (bind-key "l" 'forward-char view-mode-map)
+  ;; (bind-key "b" 'View-scroll-page-backward view-mode-map))
+
+
+
+;; 新建 window 并直接切换至新窗口
+;; (global-set-key (kbd "C-x 2")
+;;                 (lambda()
+;;                   (interactive)
+;;                   (split-window-below)
+;;                   (select-window (next-window))))
+;; (global-set-key (kbd "C-x 3")
+;;                 (lambda()
+;;                   (interactive)
+;;                   (split-window-right)
+;;                   (select-window (next-window))))
