@@ -27,11 +27,12 @@
       # epkgs.telega
     ];
   };
-  home.file.".emacs.d/custom.el".source = ../emacs/centaur/custom.el;
-  home.file.".emacs.d/custom-post.el".source = ../emacs/centaur/custom-post.el;
-  # home.file.".emacs.d/init.el".source = ./emacs/init.el;
-  # home.file.".emacs.d/early-init.el".source = ./emacs/early-init.el;
-  # home.file.".emacs.d/lisp".source = ./emacs/lisp;
+#   home.file.".doom.d".source = ../emacs/doom;
+  # home.file.".emacs.d/custom.el".source = ../emacs/centaur/custom.el;
+  # home.file.".emacs.d/custom-post.el".source = ../emacs/centaur/custom-post.el;
+  # home.file.".emacs.d/init.el".source = ../emacs/init.el;
+  # home.file.".emacs.d/early-init.el".source = ../emacs/early-init.el;
+  # home.file.".emacs.d/lisp".source = ../emacs/lisp;
 
   programs.neovim = {
     enable = true;

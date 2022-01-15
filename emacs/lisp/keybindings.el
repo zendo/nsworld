@@ -13,6 +13,8 @@
 ;;       scroll-conservatively 100000
 ;;       auto-window-vscroll nil
 ;;       scroll-preserve-screen-position t)
+(setq pixel-scroll-precision-mode t) ;像素滑动 29
+
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键

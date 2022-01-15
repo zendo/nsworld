@@ -1,10 +1,12 @@
+
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (load! "+keybindings")
 
 (setq confirm-kill-emacs nil
-      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
+      delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
+      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       )
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
       
@@ -12,24 +14,20 @@
 (global-visual-line-mode 1)                 ;折叠 word wrap
 (global-prettify-symbols-mode 1)            ;Show lambda as λ.
 
-(setq doom-font (font-spec :family "Fira Code" :size 24))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14))
 
 
 (setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
 
 
-;; Mouse
-(blink-cursor-mode -1)               ;禁用指针闪烁
-(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
-(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
-(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+
 
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "zendo"
+      user-mail-address "linzway@qq.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in D
 ;; oom. Here
@@ -75,3 +73,16 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+
+;; 箭头显示当前项
+;;;###autoload
+(advice-add #'vertico--format-candidate :around
+            (lambda (orig cand prefix suffix index _start)
+              (setq cand (funcall orig cand prefix suffix index _start))
+              (concat
+               (if (= vertico--index index)
+                   (propertize "» " 'face 'vertico-current)
+                 "  ")
+               cand)))
