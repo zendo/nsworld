@@ -7,10 +7,10 @@
   ;; (set-fontset-font t 'han (font-spec :family "NotoSansSC" :size 17))
   (setq org-directory "~/Documents/org/"))
 
-;; (when (eq system-type 'windows-nt)
-;; ;; (set-fontset-font t 'han (font-spec :family "Microsoft Yahei" :size 17))
-;;   (setq default-directory "C:/Users/gecko/Desktop/" ;主目录
-;;         org-directory "c:/Users/gecko/Documents/org/"))
+(when (eq system-type 'windows-nt)
+;; (set-fontset-font t 'han (font-spec :family "Microsoft Yahei" :size 17))
+  (setq default-directory "C:/Users/gecko/Desktop/" ;主目录
+        org-directory "c:/Users/gecko/Documents/org/"))
 
 ;; 字体 fonts
 ;; Consolas, Hack, Source Code Pro,
@@ -27,8 +27,10 @@
  '(org-table ((t (:family "等距更纱黑体 SC")))))
 
 ;; Proxy
-;; (setq url-gateway-method 'socks)
-;; (setq socks-server '("Default server" "127.0.0.1" 20170 5))
+(setq url-proxy-services '(
+                           ("http" . "127.0.0.1:10809")
+                           ("https" . "127.0.0.1:10809")
+                           ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;; Editor ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

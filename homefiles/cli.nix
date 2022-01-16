@@ -23,16 +23,16 @@
     ixio = "curl -F 'f:1=<-' ix.io";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
+    journalctl-last = "journalctl -p err..alert --since \"50 min ago\"";
 
-    nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
+    nsboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
-    nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname) \\
+    nsupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname) \\
     --recreate-lock-file";
   };
 
   home.file = {
     # ".vimrc".source = ./vimrc;
-    ".config/wezterm/wezterm.lua".source = ../others/wezterm.lua;
 
     ".inputrc".text = ''
       set completion-ignore-case on
@@ -46,15 +46,10 @@
       $endif
     '';
 
-    # ibus-rime
-    # not work!!
-    # ".local/share/fcitx5/themes".source = "${(pkgs.fetchFromGitHub {
-    #   owner = "hosxy";
-    #   repo = "Fcitx5-Material-Color";
-    #   rev = "2256feeae48dcc87f19a3cfe98f171862f8fcace";
-    #   hash = "sha256-i9JHIJ+cHLTBZUNzj9Ujl3LIdkCllTWpO1Ta4OT1LTc=";
-    # })}";
+  };
 
+  xdg.configFile = {
+    "wezterm/wezterm.lua".source = ../others/wezterm.lua;
   };
 
   programs.git = {
@@ -78,7 +73,7 @@
     enable = true;
   };
 
-  # not sure what?
+  # not sure how to work
   # services.gpg-agent = {
   #   enable = true;
   #   defaultCacheTtl = 1800;

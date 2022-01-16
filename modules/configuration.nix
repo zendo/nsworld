@@ -25,8 +25,6 @@
   };
 
   services = {
-    # logind.lidSwitch = "suspend-then-hibernate";
-
     fwupd.enable = true;
 
     # Monitoring health of drives
@@ -39,6 +37,8 @@
       enable = true;
       interval = "weekly";
     };
+
+    # logind.lidSwitch = "suspend-then-hibernate";
 
     journald.extraConfig = ''
       SystemMaxUse=100M

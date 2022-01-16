@@ -1,8 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  services.xserver.enable = true;
+
   services.xserver.displayManager = {
-    # sddm.enable = true;
+    # sddm.enable = true; # wayland bug
     lightdm.enable = true;
     lightdm.greeters.gtk.extraConfig = ''
     xft-dpi=240
@@ -11,7 +13,6 @@
     autoLogin.user = "iab";
   };
 
-  services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.plasma5.runUsingSystemd = true;
 
@@ -21,6 +22,7 @@
   services.colord.enable = true;
 
   programs.kdeconnect.enable = true;
+
   programs.partition-manager.enable = true;
 
   environment.systemPackages = with pkgs; [

@@ -21,14 +21,18 @@
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist")
       )
 
-(add-hook 'window-setup-hook #'toggle-frame-maximized)
 (add-hook! 'focus-out-hook (save-some-buffers t)) ;失去焦点时保存
+;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
+(add-to-list 'default-frame-alist '(height . 40))
+(add-to-list 'default-frame-alist '(width . 80))
 
 (+global-word-wrap-mode t)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 ;; (add-to-list 'auto-mode-alist
              ;; '("bashrc\\'" . conf-mode))
+
+
 
 ;; Bacup sth TODO
 ;; (setq backup-directory-alist `((".*" . ,my-backup))

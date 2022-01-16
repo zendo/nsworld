@@ -84,7 +84,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.iab = import ./hmwork/home.nix;
+          home-manager.users.iab = import ./homefiles/home.nix;
         }
       ];
 

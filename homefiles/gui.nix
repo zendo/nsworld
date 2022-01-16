@@ -4,7 +4,7 @@
   programs.alacritty = {
     enable = true;
   };
-  home.file.".config/alacritty/alacritty.yml".source = ../others/alacritty.yml;
+  xdg.configFile."alacritty/alacritty.yml".source = ../others/alacritty.yml;
 
   programs.vscode = {
     enable = true;
@@ -21,7 +21,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtkGcc;
+    package = pkgs.emacsPgtk;
     extraPackages = epkgs: [
       epkgs.vterm
       # epkgs.telega
