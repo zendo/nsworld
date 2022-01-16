@@ -3,7 +3,6 @@ shell:
   args:
     - zsh
 
-# 窗口大小
 window:
   dimensions:
     columns: 90
@@ -17,16 +16,13 @@ window:
     x: 6
     y: 6
 
-# 背景透明
 background_opacity: 0.95
 
-# 字体
 font:
   size: 11
   normal:
     family: JetBrains Mono
 
-# Key bindings
 key_bindings:
   - { key: C,        mods: Control|Shift, action: Copy                }
   - { key: V,        mods: Control|Shift, action: Paste               }
@@ -38,6 +34,9 @@ key_bindings:
   - { key: G,        mods: Control,       chars: "\x03"               } # emacs
   - { key: Q,        mods: Control,       action: Quit                }
   - { key: W,        mods: Command,       action: Quit                }
+
+  # - { key: N,        mods: Control,       action: CreateNewWindow     }
+  - { key: F11,                           action: ToggleFullscreen    }
 
 mouse_bindings:
   # - { mouse: Right,  action: Paste }

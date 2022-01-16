@@ -18,7 +18,7 @@ return {
    color_scheme = "Afterglow",
    -- color_scheme = "Batman",
 
-   -- enable_wayland = true,
+   enable_wayland = true,
 
    check_for_updates = false,
    show_update_window = false,

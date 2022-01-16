@@ -6,8 +6,9 @@
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 
-(setq pixel-scroll-precision-mode t) ;像素滑动 29
-
+;; Scroll
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode t))
 
 (global-set-key (kbd "C-z") nil)
 

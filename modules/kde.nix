@@ -5,7 +5,7 @@
     # sddm.enable = true;
     lightdm.enable = true;
     lightdm.greeters.gtk.extraConfig = ''
-    xft-dpi=192
+    xft-dpi=240
     '';
     defaultSession = "plasmawayland";
     autoLogin.user = "iab";

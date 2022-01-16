@@ -7,21 +7,27 @@
   ];
 
   home.shellAliases = {
+    l = "ls";
     cat = "bat";
     ps = "ps -ef";
+    rm = "${pkgs.trash-cli}/bin/trash-put";
+    rm-list = "${pkgs.trash-cli}/bin/trash-list";
+    rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
     # sudo = "sudo -E";
     ip = "ip --color=auto";
     myip = "curl ip.sb";
-    ee = "emacs -nw";
+
     gu = "gitui";
+    ee = "emacs -nw";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
+    ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
+    export https_proxy=http://127.0.0.1:20171";
+
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
     nupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname) \\
     --recreate-lock-file";
-    ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
-    export https_proxy=http://127.0.0.1:20171";
   };
 
   home.file = {
