@@ -25,9 +25,9 @@
     export https_proxy=http://127.0.0.1:20171";
     journalctl-last = "journalctl -p err..alert --since \"50 min ago\"";
 
-    nsboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
-    nsupgrade = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname) \\
+    nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
+    nupgrade = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname) \\
     --recreate-lock-file";
   };
 
@@ -68,17 +68,6 @@
       lg = "log --graph --decorate --all --oneline";
     };
   };
-
-  programs.gpg = {
-    enable = true;
-  };
-
-  # not sure how to work
-  # services.gpg-agent = {
-  #   enable = true;
-  #   defaultCacheTtl = 1800;
-  #   enableSshSupport = true;
-  # };
 
   programs.exa = {
     enable = true;

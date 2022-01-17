@@ -11,7 +11,7 @@
   boot = {
     plymouth.enable = true;
     supportedFilesystems = [ "ntfs" ];
-    kernelPackages = pkgs.linuxPackages_zen; # latest or zen
+    kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
     cleanTmpDir = true;
@@ -110,6 +110,15 @@
     bind
     git
   ];
+
+  programs.gnupg = {
+    package = pkgs.gnupg;
+    agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "qt";
+    };
+  };
 
   # environment.variables = {
   # };

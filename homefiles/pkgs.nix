@@ -64,6 +64,7 @@
     trash-cli
     imagemagick
     speedtest-cli
+    bandwhich
     translate-shell
     aspellDicts.en
     nyancat
@@ -73,6 +74,7 @@
     v2ray
     qv2ray
     firefox-wayland
+    # chromium
     qbittorrent
     vlc
     mpv
