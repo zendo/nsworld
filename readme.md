@@ -37,6 +37,8 @@ btrfs option "compress=zstd" "autodefrag" "noatime"
 ```
 [NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 
+[ZFS and Flakes](https://github.com/cole-h/nixos-config)
+
 # Desktop Setup
 
 ``` shell

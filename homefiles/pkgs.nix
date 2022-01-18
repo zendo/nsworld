@@ -75,6 +75,7 @@
     qv2ray
     firefox-wayland
     # chromium
+    # google-chrome
     qbittorrent
     vlc
     mpv
