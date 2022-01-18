@@ -70,7 +70,7 @@
   };
 
   programs.gh = {
-    enable = true;
+    enable = false;
     enableGitCredentialHelper = true;
   };
 

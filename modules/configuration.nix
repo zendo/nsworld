@@ -123,7 +123,7 @@
   # environment.variables = {
   # };
 
-  # Does not work without channels.
+  # Can not work without channels.
   programs.command-not-found.enable = false;
 
   documentation = {
