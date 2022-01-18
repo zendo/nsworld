@@ -69,6 +69,11 @@
     };
   };
 
+  programs.gh = {
+    enable = true;
+    enableGitCredentialHelper = true;
+  };
+
   programs.exa = {
     enable = true;
     # ll, la, lla, lt ...
