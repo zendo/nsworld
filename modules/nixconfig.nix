@@ -8,18 +8,17 @@
     allowedUsers = [ "@wheel" ];
     trustedUsers = [ "@wheel" ];
 
-    extraOptions =
-      let flakesEmpty = pkgs.writeText "flakes-empty.json" (builtins.toJSON { flakes = []; version = 2; });
-      in ''
+    extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
-      flake-registry = ${flakesEmpty}
+      flake-registry = /etc/nix/registry.json
     '';
     # flake-registry = https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json
-    # flake-registry = ${flakesEmpty}
 
-    registry.nixpkgs.flake = inputs.nixpkgs;
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+    };
 
     binaryCaches = [
       "https://mirror.sjtu.edu.cn/nix-channels/store"

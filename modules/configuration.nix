@@ -123,8 +123,8 @@
   # environment.variables = {
   # };
 
-  # services.flatpak.enable = true;
-  # programs.steam.enable = true;
+  # Does not work without channels.
+  programs.command-not-found.enable = false;
 
   documentation = {
     enable = false;
@@ -153,5 +153,9 @@
 
     # waydroid.enable = true;
   };
+
+  # services.flatpak.enable = true;
+
+  # programs.steam.enable = true;
 
 }

@@ -6,7 +6,7 @@ shell:
 window:
   dimensions:
     columns: 90
-    lines: 30
+    lines: 28
 
   # position:
   #   x: 0
@@ -27,6 +27,7 @@ key_bindings:
   - { key: C,        mods: Control|Shift, action: Copy                }
   - { key: V,        mods: Control|Shift, action: Paste               }
   - { key: V,        mods: Control,       action: Paste               }
+  - { key: X,        mods: Control,       action: Copy                }
   - { key: W,        mods: Alt,           action: Copy                } # emacs 
   - { key: Y,        mods: Alt,           action: Paste               } # emacs 
   - { key: Y,        mods: Control,       action: Paste               } # emacs 
@@ -36,6 +37,7 @@ key_bindings:
   - { key: W,        mods: Command,       action: Quit                }
 
   # - { key: N,        mods: Control,       action: CreateNewWindow     }
+  - { key: N,        mods: Control,       action: SpawnNewInstance    }
   - { key: F11,                           action: ToggleFullscreen    }
 
 mouse_bindings:
