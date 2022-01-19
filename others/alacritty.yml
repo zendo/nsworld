@@ -16,30 +16,31 @@ window:
     x: 6
     y: 6
 
-background_opacity: 0.95
+window.opacity: 0.95
 
 font:
   size: 11
   normal:
     family: JetBrains Mono
 
+mouse_bindings:
+  # - { mouse: Right,  action: Paste }
+  - { mouse: Middle, action: PasteSelection }
+
 key_bindings:
   - { key: C,        mods: Control|Shift, action: Copy                }
   - { key: V,        mods: Control|Shift, action: Paste               }
   - { key: V,        mods: Control,       action: Paste               }
   - { key: W,        mods: Control,       action: Copy                }
-  - { key: W,        mods: Alt,           action: Copy                } # emacs 
-  - { key: Y,        mods: Alt,           action: Paste               } # emacs 
-  - { key: Y,        mods: Control,       action: Paste               } # emacs 
 
-  - { key: G,        mods: Control,       chars: "\x03"               } # emacs
+  # emacs
+  - { key: W,        mods: Alt,           action: Copy                }
+  - { key: Y,        mods: Alt,           action: Paste               }
+  - { key: Y,        mods: Control,       action: Paste               }
+  - { key: G,        mods: Control,       chars: "\x03"               }
+
   - { key: Q,        mods: Control,       action: Quit                }
   - { key: W,        mods: Command,       action: Quit                }
 
-  # - { key: N,        mods: Control,       action: CreateNewWindow     }
-  - { key: N,        mods: Control,       action: SpawnNewInstance    }
-  - { key: F11,                           action: ToggleFullscreen    }
-
-mouse_bindings:
-  # - { mouse: Right,  action: Paste }
-  - { mouse: Middle, action: PasteSelection }
+  - { key: N,        mods: Control|Shift,   action: CreateNewWindow    }
+  - { key: F11,                             action: ToggleFullscreen    }

@@ -99,6 +99,8 @@
     mg
     micro
     helix
+    gdu
+    duf
     pfetch
     neofetch
     parted

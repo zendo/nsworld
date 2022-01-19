@@ -7,7 +7,7 @@
     # /run/current-system/sw/share/X11/fonts
     fontDir.enable = true;
     fonts = with pkgs; [
-      # noto-fonts
+      noto-fonts
       # noto-fonts-cjk-sans
       # noto-fonts-cjk-serif
       source-han-sans

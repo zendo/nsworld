@@ -25,6 +25,7 @@
     export https_proxy=http://127.0.0.1:20171";
     journalctl-last = "journalctl -p err..alert --since \"50 min ago\"";
 
+    ndiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
     nupgrade = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname) \\

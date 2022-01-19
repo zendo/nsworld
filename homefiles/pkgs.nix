@@ -46,9 +46,9 @@
     # gnumake
     # nodejs
     gitui
-    lazygit
     jq
     jql
+    cloc # count code lines
     sqlite
     openssl
     python3
@@ -67,8 +67,6 @@
     powertop
     unp
     unrar
-    gdu
-    duf
     btop
     bottom # btm
     cht-sh
