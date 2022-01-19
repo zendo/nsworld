@@ -12,6 +12,7 @@
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      warn-dirty = false
       flake-registry = /etc/nix/registry.json
     '';
     # flake-registry = https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json

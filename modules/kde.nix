@@ -35,6 +35,8 @@
     libsForQt5.kleopatra
     # libsForQt5.kcontacts
     # libsForQt5.korganizer
+    libsForQt5.bismuth # tiling layout
+
     neochat
     nheko
     gparted
@@ -43,7 +45,6 @@
     gnome.gnome-color-manager
   ];
 
-  # tlp 与 rfkill 管理蓝牙冲突
   services.tlp = {
     enable = true;
     settings = {

@@ -65,6 +65,7 @@
     imagemagick
     speedtest-cli
     bandwhich
+    traceroute
     translate-shell
     aspellDicts.en
     nyancat

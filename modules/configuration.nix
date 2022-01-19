@@ -61,12 +61,12 @@
   security.rtkit.enable = true; # Realtime Policy and Watchdog Daemon
   services.pipewire = {
     enable = true;
+    media-session.enable = false;
+    wireplumber.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
-    media-session.enable = false;
-    wireplumber.enable = true;
+    jack.enable = false;
   };
 
   # Musnix
@@ -111,13 +111,10 @@
     git
   ];
 
-  programs.gnupg = {
-    package = pkgs.gnupg;
-    agent = {
-      enable = true;
-      enableSSHSupport = true;
-      pinentryFlavor = "qt";
-    };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryFlavor = "qt";
   };
 
   # environment.variables = {
