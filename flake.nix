@@ -21,7 +21,7 @@
     # flake-utils.url = "github:numtide/flake-utils";
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/1d0d11aa23f1b8866457d4736404a4840877ad81";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";

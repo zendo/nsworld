@@ -104,6 +104,7 @@
     mg
     micro
     helix
+    pfetch
     neofetch
     wget
     curl

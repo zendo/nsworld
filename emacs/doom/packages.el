@@ -11,6 +11,7 @@
 (package! crux)
 (package! iedit)
 (package! easy-kill)
+;; (package! telega)
 (package! youdao-dictionary)
 
 ;; To install a package directly from a remote git repo, you must specify a

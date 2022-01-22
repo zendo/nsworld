@@ -34,6 +34,8 @@
     direnv
     lorri
     niv
+    # nvd diff /nix/var/nix/profiles/system-{14,15}-link
+    nvd
     cachix
 
     # Develop
@@ -49,10 +51,17 @@
     openssl
     python3
 
-    # CLI
-    dnspeep
+    # Network
     lsof
     elinks
+    dnspeep
+    bandwhich
+    traceroute
+    speedtest-cli
+    v2ray
+    qv2ray
+
+    # CLI
     powertop
     unp
     unrar
@@ -63,23 +72,17 @@
     cht-sh
     trash-cli
     imagemagick
-    speedtest-cli
-    bandwhich
-    traceroute
     translate-shell
     aspellDicts.en
     nyancat
     asciinema # record the terminal
 
     # GUI
-    v2ray
-    qv2ray
     firefox-wayland
     # chromium
     # google-chrome
     qbittorrent
     vlc
-    mpv
     # kooha
     # simplescreenrecorder # Xorg
     # ffmpeg
@@ -91,6 +94,8 @@
     tdesktop
     meld
     deja-dup
+    rclone
+    rclone-browser
     # vorta
     yacreader
     wezterm

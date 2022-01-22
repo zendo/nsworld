@@ -27,7 +27,8 @@
       # epkgs.telega
     ];
   };
-#   home.file.".doom.d".source = ../emacs/doom;
+
+  # home.file.".doom.d".source = ../emacs/doom;
   # home.file.".emacs.d/custom.el".source = ../emacs/centaur/custom.el;
   # home.file.".emacs.d/custom-post.el".source = ../emacs/centaur/custom-post.el;
   # home.file.".emacs.d/init.el".source = ../emacs/init.el;
@@ -43,6 +44,16 @@
       vim-lsp
       vim-markdown
     ];
+  };
+
+  programs.mpv = {
+    enable = true;
+    config = {
+      profile = "gpu-hq";
+      hwdec = "vappi";
+      gpu-api = "vulkan";
+      osc = false;
+    };
   };
 
   # cursor
