@@ -14,7 +14,6 @@
       hack-font
       fira-code
       jetbrains-mono
-      symbola
     ];
     fontconfig = {
       defaultFonts = {

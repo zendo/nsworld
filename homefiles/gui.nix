@@ -52,7 +52,6 @@
       profile = "gpu-hq";
       hwdec = "vappi";
       gpu-api = "vulkan";
-      osc = false;
     };
   };
 
