@@ -4,7 +4,7 @@
   services.xserver.enable = true;
 
   services.xserver.displayManager = {
-    # sddm.enable = true; # wayland bug
+    #sddm.enable = true; # wayland bug
     lightdm.enable = true;
     lightdm.greeters.gtk.extraConfig = ''
     xft-dpi=240
