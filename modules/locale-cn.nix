@@ -5,9 +5,11 @@
     # /run/current-system/sw/share/X11/fonts
     fontDir.enable = true;
     fonts = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk
+      # noto-fonts
+      # noto-fonts-cjk-sans
+      # noto-fonts-cjk-serif
       source-han-sans
+      source-han-serif
       source-code-pro
       sarasa-gothic
       emacs-all-the-icons-fonts
@@ -19,8 +21,8 @@
       defaultFonts = {
         monospace = [ "Sarasa Mono SC" "DejaVu Sans Mono" ];
         emoji = [ "Noto Color Emoji" ];
-        sansSerif = [ "Noto Sans CJK SC" ];
-        serif = [ "Noto Serif CJK SC" ];
+        sansSerif = [ "Noto Sans CJK SC" "Source Han Sans SC"];
+        serif = [ "Noto Serif CJK SC" "Source Han Serif SC"];
       };
     };
   };
