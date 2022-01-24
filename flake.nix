@@ -2,15 +2,13 @@
   description = "Zendo NixOS Flake";
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Managing your secrets.
-    agenix.url = "github:ryantm/agenix";
+    # agenix.url = "github:ryantm/agenix";
 
     # Real-time audio
     musnix.url = github:musnix/musnix;
@@ -66,6 +64,7 @@
       overlays = [
         # import ./overlays;
       ];
+
 
       hostDefaults = {
         system = "x86_64-linux";

@@ -22,6 +22,8 @@
 ;;                     charset
 ;;                     (font-spec :family "NotoSansSC" :size 16)))
 
+(setq x-gtk-use-native-input t)
+
 ;; Org-table font
 (custom-set-faces
  '(org-table ((t (:family "等距更纱黑体 SC")))))

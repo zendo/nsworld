@@ -16,6 +16,7 @@
       doom-theme 'doom-tomorrow-night
       doom-font (font-spec :family "JetBrains Mono" :size 14)
 
+      x-gtk-use-native-input t          ;使用外部输入法
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       recentf-exclude
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist")

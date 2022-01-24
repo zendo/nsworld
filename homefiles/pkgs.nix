@@ -86,6 +86,7 @@
     # kooha
     # simplescreenrecorder # Xorg
     # ffmpeg
+    easyeffects
     audacious
     spotify
     # shutter

@@ -106,6 +106,7 @@
     helix
     pfetch
     neofetch
+    parted
     wget
     curl
     bind
