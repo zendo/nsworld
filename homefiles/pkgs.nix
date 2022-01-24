@@ -37,6 +37,7 @@
     # nvd diff /nix/var/nix/profiles/system-{14,15}-link
     nvd
     cachix
+    nixos-generators
 
     # Develop
     # gcc
@@ -68,7 +69,7 @@
     gdu
     duf
     btop
-    bottom
+    bottom # btm
     cht-sh
     trash-cli
     imagemagick

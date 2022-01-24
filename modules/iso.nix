@@ -1,3 +1,7 @@
+# sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+# sudo nix-channel --update
+# nix-generate -f iso -c .dotworld/modules/iso.nix
+#
 # nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
 
 {config, pkgs, ...}:
@@ -14,8 +18,8 @@
   hardware.enableAllFirmware = true; # contains non-redistributable firmware
 
   boot = {
-    supportedFilesystems = [ "ntfs" "bcachefs"];
-    # kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
+    supportedFilesystems = [ "ntfs" ];
+    kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
   };
 
   # Keyborad
@@ -44,7 +48,6 @@
       # "https://mirror.sjtu.edu.cn/nix-channels/store"
     ];
 
-  # programs that should be available in the installer
   environment.systemPackages = with pkgs; [
     binutils
     fish
