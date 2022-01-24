@@ -21,7 +21,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtkGcc;
+    package = pkgs.emacsPgtk;
     # package = pkgs.emacsGit;
     extraPackages = epkgs: [
       epkgs.vterm
@@ -53,6 +53,7 @@
       profile = "gpu-hq";
       hwdec = "vappi";
       gpu-api = "vulkan";
+      osd-on-seek = "msg";
     };
   };
 

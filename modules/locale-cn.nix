@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  i18n.defaultLocale = "zh_CN.UTF-8";
+
   fonts = {
     # /run/current-system/sw/share/X11/fonts
     fontDir.enable = true;

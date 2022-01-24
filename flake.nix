@@ -90,7 +90,7 @@
       hosts.yoga.modules = [
         ./modules/amd.nix
         ./modules/kde.nix
-        # ./modules/gnome.nix
+        #./modules/gnome.nix
         ./modules/locale-cn.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/user-2.nix

@@ -20,14 +20,13 @@
     gnome.totem
     gnome.yelp
     gnome.gnome-software
-    gnome.gnome-photos
+    gnome-photos
     gnome.gnome-music
   ];
 
   environment.systemPackages = with pkgs; [
     gthumb
     gparted
-    celluloid
     dconf2nix
 
     gnome.gnome-tweaks
@@ -44,6 +43,7 @@
     gnomeExtensions.proxy-switcher
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.espresso
+    gnomeExtensions.just-perfection
     # gnomeExtensions.arcmenu
     # gnomeExtensions.kimpanel # not work?
     # gnomeExtensions.ddterm

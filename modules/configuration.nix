@@ -4,7 +4,6 @@
   system.stateVersion = "22.05";
 
   time.timeZone = "Asia/Shanghai";
-  time.hardwareClockInLocalTime = true; # Local time for dual OS
 
   hardware.enableAllFirmware = true; # contains non-redistributable firmware
 
@@ -75,11 +74,7 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
 
-  #########################################################################
-  # i18n
-  #########################################################################
-  i18n.defaultLocale = "zh_CN.UTF-8";
-
+  # Keyborad
   console.keyMap = "us";
 
   services.xserver = {
