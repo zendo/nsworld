@@ -22,6 +22,7 @@
     dmidecode
     glxinfo
     libva-utils #vainfo
+    vulkan-tools
     cpufrequtils
     pciutils
     edid-decode

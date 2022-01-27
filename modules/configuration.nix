@@ -26,17 +26,6 @@
   services = {
     fwupd.enable = true;
 
-    # Monitoring health of drives
-    smartd = {
-      enable = true;
-      autodetect = true;
-    };
-
-    fstrim = {
-      enable = true;
-      interval = "weekly";
-    };
-
     # logind.lidSwitch = "suspend-then-hibernate";
 
     journald.extraConfig = ''

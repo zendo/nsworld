@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixos-hardware.url = github:NixOS/nixos-hardware/master;
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +39,7 @@
     { self
     , nixpkgs
     , nixpkgs-unstable
+    , nixos-hardware
     , home-manager
     , utils
     , musnix
@@ -95,7 +98,9 @@
       ];
 
       hosts.yoga.modules = [
-        ./modules/amd.nix
+        nixos-hardware.nixosModules.common-pc-laptop-ssd
+        nixos-hardware.nixosModules.common-pc-laptop-acpi_call
+        nixos-hardware.nixosModules.common-gpu-amd
         ./modules/kde.nix
         #./modules/gnome.nix
         ./modules/locale-cn.nix
@@ -103,5 +108,17 @@
         ./hosts/yoga/user-2.nix
         ./hosts/yoga/hardware-configuration.nix
       ];
+
+      hosts.svp.modules = [
+        nixos-hardware.nixosModules.common-pc-laptop-ssd
+        nixos-hardware.nixosModules.common-cpu-intel
+        ./modules/kde.nix
+        #./modules/gnome.nix
+        ./modules/locale-cn.nix
+        ./hosts/yoga/user.nix
+        ./hosts/yoga/user-2.nix
+        ./hosts/yoga/hardware-configuration.nix
+      ];
+
     };
 }

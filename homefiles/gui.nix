@@ -66,6 +66,7 @@
       profile = "gpu-hq";
       hwdec = "vappi";
       gpu-api = "vulkan";
+      gpu-context = "wayland";
       osd-on-seek = "msg";
     };
   };
