@@ -115,9 +115,6 @@
         ./modules/kde.nix
         #./modules/gnome.nix
         ./modules/locale-cn.nix
-        ./hosts/yoga/user.nix
-        ./hosts/yoga/user-2.nix
-        ./hosts/yoga/hardware-configuration.nix
       ];
 
     };
