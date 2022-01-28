@@ -94,6 +94,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.iab = import ./homefiles/home.nix;
+          # home-manager.users.zen = import ./homefiles/home.nix;
         }
 
         {
@@ -103,11 +104,10 @@
       ];
 
       hosts.yoga.modules = [
-        # nixos-hardware.nixosModules.common-pc-laptop-acpi_call
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
-        ./modules/kde.nix
-        #./modules/gnome.nix
+        # ./modules/kde.nix
+        ./modules/gnome.nix
         ./modules/locale-cn.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/user-2.nix

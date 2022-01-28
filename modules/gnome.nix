@@ -16,12 +16,12 @@
   services.gnome.tracker.enable = false;
 
   environment.gnome.excludePackages = with pkgs; [
+    gnome-photos
+    gnome.yelp
     gnome.geary
     gnome.totem
-    gnome.yelp
-    gnome.gnome-software
-    gnome-photos
     gnome.gnome-music
+    gnome.gnome-software
   ];
 
   environment.systemPackages = with pkgs; [
@@ -39,22 +39,15 @@
     # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
+    gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.espresso
-    gnomeExtensions.just-perfection
     # gnomeExtensions.arcmenu
     # gnomeExtensions.kimpanel # not work?
     # gnomeExtensions.ddterm
     # gnomeExtensions.blur-my-shell
   ];
-
-  # Theme
-  # qt5 = {
-  #   enable = true;
-  #   style = "gtk2";
-  #   platformTheme = "gtk2";
-  # };
 
 }

@@ -1,7 +1,3 @@
-# sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-# sudo nix-channel --update
-# NIX_PATH="nixpkgs=https://github.com/NixOS/nixpkgs/archive/release-21.11.tar.gz" nixos-generate -f iso -c .dotworld/modules/iso.nix
-#
 # nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
 
 {config, pkgs, ...}:
@@ -41,11 +37,9 @@
       experimental-features = nix-command flakes
       '';
   nix.binaryCaches = [
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=30"
-      "https://nix-community.cachix.org"
-      # "https://mirrors.ustc.edu.cn/nix-channels/store"
-      # "https://mirror.sjtu.edu.cn/nix-channels/store"
     ];
 
   environment.systemPackages = with pkgs; [

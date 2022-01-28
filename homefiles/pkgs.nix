@@ -100,7 +100,7 @@
     rclone-browser
     # vorta
     yacreader
-    wezterm
+    # wezterm
 
     # OFFICE
     # libreoffice-fresh

@@ -41,7 +41,6 @@
     mcfly
     fzf
     skim
-    emacs
 
     # CLI
     powertop
