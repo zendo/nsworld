@@ -1,6 +1,6 @@
 # sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 # sudo nix-channel --update
-# nix-generate -f iso -c .dotworld/modules/iso.nix
+# NIX_PATH="nixpkgs=https://github.com/NixOS/nixpkgs/archive/release-21.11.tar.gz" nixos-generate -f iso -c .dotworld/modules/iso.nix
 #
 # nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
 

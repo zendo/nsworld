@@ -95,6 +95,11 @@
           home-manager.useUserPackages = true;
           home-manager.users.iab = import ./homefiles/home.nix;
         }
+
+        {
+          nix.generateNixPathFromInputs = true;
+          nix.generateRegistryFromInputs = true;
+        }
       ];
 
       hosts.yoga.modules = [

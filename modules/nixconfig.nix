@@ -17,9 +17,9 @@
     '';
     # flake-registry = https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json
 
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-    };
+    # registry = {
+    #   nixpkgs.flake = inputs.nixpkgs;
+    # };
 
     binaryCaches = [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
