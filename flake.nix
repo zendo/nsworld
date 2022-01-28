@@ -98,8 +98,8 @@
       ];
 
       hosts.yoga.modules = [
+        # nixos-hardware.nixosModules.common-pc-laptop-acpi_call
         nixos-hardware.nixosModules.common-pc-laptop-ssd
-        nixos-hardware.nixosModules.common-pc-laptop-acpi_call
         nixos-hardware.nixosModules.common-gpu-amd
         ./modules/kde.nix
         #./modules/gnome.nix
