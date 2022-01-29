@@ -1,10 +1,12 @@
 # nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
 
-{config, pkgs, ...}:
+{config, pkgs, modulesPath, lib, ...}:
 {
   imports = [
-    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    # <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix>
+    # <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+    "${modulesPath}/installer/cd-dvd/channel.nix"
     ./network.nix
   ];
 
@@ -14,7 +16,7 @@
   hardware.enableAllFirmware = true; # contains non-redistributable firmware
 
   boot = {
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
   };
 

@@ -1,7 +1,7 @@
 # Installtion
 
 ``` nix
-nixos-generate -f iso -c .dotworld/modules/iso.nix
+nixos-generate -f iso -c .dotworld/modules/iso.nix -o result
 nix-shell -p nixUnstable git
 nixos-install --root /mnt --flake github:zendo/dotworld#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
@@ -64,3 +64,13 @@ dconf load /org/gnome/ < my_gnome_settings
 # shebangs for NixOS/BSD
 #!/usr/bin/env bash
 ```
+
+[Learn Nix in minutes](https://learnxinyminutes.com/docs/nix/)
+
+[Nix one pager](https://github.com/tazjin/nix-1p)
+
+[Nix by example](https://medium.com/@MrJamesFisher/nix-by-example-a0063a1a4c55)
+
+[Intro Nix Family](https://web.archive.org/web/20210123223258/https://ebzzry.io/en/nix/)
+
+[Nix builtins functions](https://teu5us.github.io/nix-lib.html)
