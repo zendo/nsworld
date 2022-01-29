@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   xdg.desktopEntries.spotify = {
     name = "Spotify";
     genericName = "Music Player";
@@ -12,7 +11,7 @@
   };
 
   programs.alacritty = {
-    enable = true;
+    enable = false;
   };
   xdg.configFile."alacritty/alacritty.yml".source = ../others/alacritty.yml;
 
