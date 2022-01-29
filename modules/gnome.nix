@@ -44,6 +44,7 @@
     gnomeExtensions.proxy-switcher
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.espresso
+    # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
     # gnomeExtensions.kimpanel # not work?
     # gnomeExtensions.ddterm

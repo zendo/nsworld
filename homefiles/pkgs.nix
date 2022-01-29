@@ -90,6 +90,7 @@
     # ffmpeg
     audacious
     spotify
+    # easyeffects
     # shutter
     foliate
     ghostwriter
