@@ -1,10 +1,26 @@
 { config, pkgs, ... }:
 
 {
+
+  xdg.desktopEntries.spotify = {
+    name = "Spotify";
+    genericName = "Music Player";
+    icon = "spotify-client";
+    exec = "spotify %U --force-device-scale-factor=1.8";
+    terminal = false;
+    categories = [ "Application" "Music" ];
+  };
+
   programs.alacritty = {
     enable = true;
   };
   xdg.configFile."alacritty/alacritty.yml".source = ../others/alacritty.yml;
+
+  programs.foot = {
+    enable = true;
+    # server.enable = false;
+  };
+  xdg.configFile."foot/foot.ini".source = ../others/foot.ini;
 
   programs.vscode = {
     enable = true;

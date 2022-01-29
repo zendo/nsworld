@@ -62,6 +62,8 @@
         # allowUnsupportedSystem = true;
       };
 
+      overlay = import ./overlays;
+
       # Overlays which are applied to all channels.
       sharedOverlays = [
         (final: prev: {
@@ -69,12 +71,8 @@
         })
         emacs-overlay.overlay
         nur.overlay
+        self.overlay
       ];
-
-      overlays = [
-        # import ./overlays;
-      ];
-
 
       hostDefaults = {
         system = "x86_64-linux";

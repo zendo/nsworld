@@ -79,6 +79,7 @@
     asciinema # record the terminal
 
     # GUI
+    # alacritty-desktop
     firefox-wayland
     # chromium
     # google-chrome
@@ -87,7 +88,6 @@
     # kooha
     # simplescreenrecorder # Xorg
     # ffmpeg
-    easyeffects
     audacious
     spotify
     # shutter
@@ -100,7 +100,7 @@
     rclone-browser
     # vorta
     yacreader
-    # wezterm
+    wezterm
 
     # OFFICE
     # libreoffice-fresh
