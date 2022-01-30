@@ -47,6 +47,7 @@
     # gnumake
     # nodejs
     gitui
+    onefetch
     jq
     jql
     cloc # count code lines
@@ -75,17 +76,15 @@
     imagemagick
     translate-shell
     aspellDicts.en
-    nyancat
     asciinema # record the terminal
 
     # GUI
-    # alacritty-desktop
     firefox-wayland
     # chromium
     # google-chrome
     qbittorrent
     vlc
-    # kooha
+1    # kooha
     # simplescreenrecorder # Xorg
     # ffmpeg
     audacious
