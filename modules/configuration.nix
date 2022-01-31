@@ -16,10 +16,10 @@
     cleanTmpDir = true;
 
     loader = {
-      efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
-      systemd-boot.configurationLimit = 3; # startup menu items
       systemd-boot.consoleMode = "max"; # resolution max for hidpi
+      systemd-boot.configurationLimit = 3; # startup menu items
+      efi.canTouchEfiVariables = true;
     };
   };
 
@@ -82,6 +82,7 @@
   environment.systemPackages = with pkgs; [
     binutils
     tree
+    file
     p7zip
     fd
     ripgrep
@@ -92,17 +93,12 @@
     pfetch
     neofetch
     parted
+    gptfdisk
     wget
     curl
     bind
     git
   ];
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "qt";
-  };
 
   # environment.variables = {
   # };

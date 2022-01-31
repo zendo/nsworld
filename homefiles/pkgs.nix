@@ -84,7 +84,7 @@
     # google-chrome
     qbittorrent
     vlc
-1    # kooha
+    # kooha
     # simplescreenrecorder # Xorg
     # ffmpeg
     audacious

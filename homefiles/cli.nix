@@ -160,8 +160,10 @@
       history = "history 0";
     };
     initExtra = ''
-      bindkey -e
       setopt no_nomatch
+      bindkey -e
+      bindkey "\e[27;2;13~" accept-line  # shift+return
+      bindkey "\e[27;5;13~" accept-line  # ctrl+return
     '';
   };
 

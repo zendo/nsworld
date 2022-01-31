@@ -25,6 +25,12 @@
 
   programs.partition-manager.enable = true;
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryFlavor = "qt";
+  };
+
   environment.systemPackages = with pkgs; [
     libsForQt5.ark
     libsForQt5.kate

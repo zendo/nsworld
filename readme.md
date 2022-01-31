@@ -36,7 +36,7 @@ mount -o subvol=@home,compress-force=zstd,noatime,autodefrag /dev/nvme0n1p5 /mnt
 mount -o subvol=@swap /dev/nvme0n1p5 /mnt/swap
 
 ext4 option "noatime" "nodiratime"
-btrfs option "compress=zstd" "autodefrag" "noatime"
+btrfs option "compress=zstd" "noatime"
 ```
 [NixOS on btrfs](https://litschi.dev/posts/nixos-on-btrfs/)
 
