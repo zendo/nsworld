@@ -5,7 +5,7 @@
     name = "Spotify";
     genericName = "Music Player";
     icon = "spotify-client";
-    exec = "spotify %U --force-device-scale-factor=1.8";
+    exec = "spotify %U --force-device-scale-factor=2";
     terminal = false;
     categories = [ "Application" "Music" ];
   };

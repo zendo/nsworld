@@ -1,12 +1,12 @@
-{inputs, config, ... }:
+{inputs, config, lib, ... }:
 
 {
   nix.settings = {
     # sandbox = true; # true by default
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
-    substituters = [
-      "https://mirror.sjtu.edu.cn/nix-channels/store?priority=30"
+    substituters = lib.mkBefore [
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=30"
       "https://nix-community.cachix.org"
       # "https://mirrors.ustc.edu.cn/nix-channels/store"

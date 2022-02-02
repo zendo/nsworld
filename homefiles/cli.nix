@@ -50,7 +50,7 @@
   };
 
   xdg.configFile = {
-    "wezterm/wezterm.lua".source = ../others/wezterm.lua;
+    # "wezterm/wezterm.lua".source = ../others/wezterm.lua;
   };
 
   programs.git = {

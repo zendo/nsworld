@@ -26,6 +26,7 @@
 
   environment.systemPackages = with pkgs; [
     gthumb
+    notejot
     gparted
     dconf2nix
 

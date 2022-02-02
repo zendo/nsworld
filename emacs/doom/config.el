@@ -26,6 +26,7 @@
 ;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist '(alpha-background . 98))
 
 (+global-word-wrap-mode t)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
