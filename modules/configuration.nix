@@ -33,13 +33,6 @@
     '';
   };
 
-  # Hibernate after sleeping in suspend mode for 30 minutes
-  # systemd.sleep.extraConfig = ''
-  #   HandleSuspendKey=suspend-then-hibernate
-  #   HandleHibernateKey=suspend-then-hibernate
-  #   HandleLidSwitch=suspend-then-hibernate
-  #   HibernateDelaySec=30min
-  # '';
 
   #########################################################################
   # Sounds

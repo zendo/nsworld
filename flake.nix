@@ -69,9 +69,9 @@
         (final: prev: {
           unstable = nixpkgs-unstable.legacyPackages.${prev.system};
         })
-        emacs-overlay.overlay
-        nur.overlay
         self.overlay
+        nur.overlay
+        emacs-overlay.overlay
       ];
 
       hostDefaults = {
