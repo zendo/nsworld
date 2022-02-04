@@ -26,6 +26,9 @@
     cpufrequtils
     pciutils
     edid-decode
+    libinput
+    wallutils # lsmon getdpi wayinfo
+    # wdisplays # wlr
 
     # NIX TOOLS
     nix-bash-completions

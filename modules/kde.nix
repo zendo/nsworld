@@ -2,6 +2,8 @@
 
 {
   services.xserver.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.plasma5.runUsingSystemd = true;
 
   services.xserver.displayManager = {
     #sddm.enable = true; # wayland bug
@@ -12,9 +14,6 @@
     defaultSession = "plasmawayland";
     autoLogin.user = "iab";
   };
-
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.desktopManager.plasma5.runUsingSystemd = true;
 
   # services.gnome.gnome-keyring.enable = true;
   # security.pam.services.login.enableGnomeKeyring = true;

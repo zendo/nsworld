@@ -8,8 +8,8 @@
     fontDir.enable = true;
     fonts = with pkgs; [
       noto-fonts
-      # noto-fonts-cjk-sans
-      # noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       source-han-sans
       source-han-serif
       source-code-pro
@@ -38,8 +38,8 @@
 
     enabled = "ibus";
     ibus.engines = with pkgs.ibus-engines; [
-      libpinyin
       rime
+      libpinyin
       typing-booster
     ];
   };

@@ -80,6 +80,7 @@
     fd
     ripgrep
     mg
+    micro
     helix
     gdu
     duf

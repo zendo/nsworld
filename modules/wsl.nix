@@ -84,7 +84,6 @@
     # nvd diff /nix/var/nix/profiles/system-{14,15}-link
     nvd
     cachix
-    nixos-option
     nixos-generators
   ];
 
