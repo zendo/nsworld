@@ -26,7 +26,7 @@
     cpufrequtils
     pciutils
     edid-decode
-    libinput
+    # libinput
     wallutils # lsmon getdpi wayinfo
     # wdisplays # wlr
 
@@ -41,6 +41,7 @@
     # nvd diff /nix/var/nix/profiles/system-{14,15}-link
     nvd
     cachix
+    nvfetcher
     nixos-generators
 
     # Develop
@@ -79,6 +80,9 @@
     translate-shell
     aspellDicts.en
     asciinema # record the terminal
+
+    # overlay
+    # ydict
 
     # GUI
     firefox-wayland

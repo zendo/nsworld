@@ -66,9 +66,9 @@
 
       # Overlays which are applied to all channels.
       sharedOverlays = [
-        (final: prev: {
-          unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-        })
+        # (final: prev: {
+        #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+        # })
         self.overlay
         nur.overlay
         emacs-overlay.overlay

@@ -42,6 +42,10 @@ btrfs option "compress=zstd" "noatime"
 
 [ZFS and Flakes](https://github.com/cole-h/nixos-config)
 
+[tmpfs](https://elis.nu/blog/2020/05/nixos-tmpfs-as-root/)
+
+[impermanence](https://github.com/nix-community/impermanence)
+
 # Desktop Setup
 
 ``` shell
