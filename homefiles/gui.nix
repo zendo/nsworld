@@ -86,6 +86,15 @@
     };
   };
 
+  programs.chromium = {
+    enable = false;
+  };
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-wayland;
+  };
+
   # cursor
   # xsession.pointerCursor = {
   #   name = "Vanilla-DMZ";

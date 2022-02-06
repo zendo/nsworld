@@ -86,8 +86,6 @@
     nur.repos.ilya-fedin.kotatogram-desktop
 
     # GUI
-    firefox-wayland
-    # chromium
     # google-chrome
     qbittorrent
     vlc

@@ -13,7 +13,8 @@
   system.stateVersion = "22.05";
 
   time.timeZone = "Asia/Shanghai";
-  hardware.enableAllFirmware = true; # contains non-redistributable firmware
+
+  hardware.enableAllFirmware = true;
 
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
@@ -38,16 +39,15 @@
   nix.extraOptions = ''
       experimental-features = nix-command flakes
       '';
-  nix.binaryCaches = [
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
+  nix.binaryCaches = lib.mkBefore [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=30"
     ];
 
   environment.systemPackages = with pkgs; [
     binutils
     fish
-    bcachefs-tools
     tree
     p7zip
     fd
@@ -58,6 +58,7 @@
     pfetch
     neofetch
     parted
+    gptfdisk
     gparted
     wget
     curl

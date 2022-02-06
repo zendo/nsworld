@@ -12,6 +12,7 @@
     useDHCP = false;
     #interfaces.eno1.useDHCP = true;
     #interfaces.wlp1s0.useDHCP = true;
+
     # timeServers = [
     #   "0.nixos.pool.ntp.org"
     #   "1.nixos.pool.ntp.org" ];
