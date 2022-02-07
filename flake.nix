@@ -28,6 +28,7 @@
       flake = false;
     };
 
+
     emacs-overlay.url = "github:nix-community/emacs-overlay/7ba0cd76c4e5cbd4a8ac7387c8ad2493caa800f0";
 
     nur.url = "github:nix-community/NUR";
@@ -79,27 +80,25 @@
         # channelName = "nixpkgs-unstable";
         # Extra arguments to be passed to all modules. Merged with host's extraArgs.
         # extraArgs = { inherit utils inputs; foo = "foo"; };
+        modules = [
+          ./modules/nixconfig.nix
+          ./modules/configuration.nix
+          ./modules/network.nix
+          musnix.nixosModules.musnix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.iab = import ./homefiles/home.nix;
+            # home-manager.users.zen = import ./homefiles/home.nix;
+          }
+
+          {
+            nix.generateNixPathFromInputs = true;
+            nix.generateRegistryFromInputs = true;
+          }
+        ];
       };
-
-      # Modules shared between all hosts
-      hostDefaults.modules = [
-        ./modules/nixconfig.nix
-        ./modules/configuration.nix
-        ./modules/network.nix
-        musnix.nixosModules.musnix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.iab = import ./homefiles/home.nix;
-          # home-manager.users.zen = import ./homefiles/home.nix;
-        }
-
-        {
-          nix.generateNixPathFromInputs = true;
-          nix.generateRegistryFromInputs = true;
-        }
-      ];
 
       hosts.yoga.modules = [
         nixos-hardware.nixosModules.common-pc-laptop-ssd

@@ -25,6 +25,8 @@
     export https_proxy=http://127.0.0.1:20171";
     journalctl-last = "journalctl -p err..alert --since \"50 min ago\"";
 
+    nse = "nix search nixpkgs";
+    pkgs-repl = "nix repl '<nixpkgs>'";
     ndiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
@@ -58,7 +60,7 @@
     userName = "zendo";
     userEmail = "linzway@qq.com";
     aliases = {
-      st = "status";
+      st = "status -sb";
       unstage = "reset HEAD --";
       pr = "pull --rebase";
       addp = "add --patch";
@@ -73,6 +75,13 @@
   programs.gh = {
     enable = false;
     enableGitCredentialHelper = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv = {
+      enable = true;
+    };
   };
 
   programs.exa = {

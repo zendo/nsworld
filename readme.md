@@ -67,6 +67,9 @@ dconf load /org/gnome/ < my_gnome_settings
 
 # shebangs for NixOS/BSD
 #!/usr/bin/env bash
+
+# Build Environments
+nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
 ```
 
 [Learn Nix in minutes](https://learnxinyminutes.com/docs/nix/)

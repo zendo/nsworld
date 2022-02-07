@@ -35,7 +35,6 @@
     nixpkgs-fmt
     nixfmt
     rnix-lsp
-    direnv
     lorri
     niv
     # nvd diff /nix/var/nix/profiles/system-{14,15}-link
@@ -83,7 +82,6 @@
 
     # overlay
     # ydict
-    nur.repos.ilya-fedin.kotatogram-desktop
 
     # GUI
     # google-chrome
