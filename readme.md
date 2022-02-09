@@ -1,14 +1,13 @@
 # Installtion
 
 ``` nix
-nixos-generate -f iso -c .dotworld/modules/iso.nix -o result
 nix-shell -p nixUnstable git
-nixos-install --root /mnt --flake github:zendo/dotworld#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
+nixos-install --flake github:zendo/dotworld#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
 [Flake Example](https://github.com/arnarg/config)
 
-# FileSystems
+# FileSystem
 
 ``` shell
 ext4 option "noatime" "nodiratime"
@@ -18,7 +17,7 @@ btrfs option "compress=zstd" "noatime"
 # Desktop Setup
 
 ``` shell
-# force using english home-directorys
+# force using en home-directorys
 LC_ALL=C xdg-user-dirs-update --force
 
 # flatpak useless
@@ -36,6 +35,9 @@ dconf load /org/gnome/ < my_gnome_settings
 
 # shebangs for NixOS/BSD
 #!/usr/bin/env bash
+
+# make livecd
+nixos-generate -f iso -c .dotworld/modules/iso.nix -o result
 
 # Build Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
