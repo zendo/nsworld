@@ -27,6 +27,8 @@
 
     nse = "nix search nixpkgs";
     pkgs-repl = "nix repl '<nixpkgs>'";
+    nslink = "readlink -f /nix/var/nix/profiles/system";
+
     ndiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";
     nboot = "sudo -E nixos-rebuild boot --flake ~/.dotworld#$(hostname)";
