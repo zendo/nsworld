@@ -88,7 +88,6 @@
     qbittorrent
     vlc
     # kooha
-    # simplescreenrecorder # Xorg
     # ffmpeg
     audacious
     spotify

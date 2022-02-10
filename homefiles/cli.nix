@@ -15,7 +15,8 @@
     rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
     # sudo = "sudo -E";
     ip = "ip --color=auto";
-    myip = "curl ip.sb";
+    p-ip = "curl ipinfo.io";
+    p-ipsb = "curl ip.sb";
 
     gu = "gitui";
     ee = "emacs -nw";
@@ -27,7 +28,9 @@
 
     nse = "nix search nixpkgs";
     pkgs-repl = "nix repl '<nixpkgs>'";
-    nslink = "readlink -f /nix/var/nix/profiles/system";
+    p-generations = "nix profile history --profile /nix/var/nix/profiles/system";
+    p-generations-old = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+    p-nixosReadlink = "readlink -f /nix/var/nix/profiles/system";
 
     ndiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/.dotworld#$(hostname)";

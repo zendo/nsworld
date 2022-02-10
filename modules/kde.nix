@@ -38,13 +38,14 @@
 
     libsForQt5.krdc
     libsForQt5.kleopatra
-    libsForQt5.konqueror
+    # libsForQt5.konqueror
     # libsForQt5.kcontacts
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
 
-    neochat
+    falkon
     nheko
+    neochat
     gparted
     kcolorchooser
     gnome.gnome-calculator
