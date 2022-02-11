@@ -7,7 +7,7 @@ nixos-install --flake github:zendo/dotworld#yoga --option substituters "https://
 
 [Flake Example](https://github.com/arnarg/config)
 
-# FileSystem
+# Filesystem
 
 ``` shell
 ext4 option "noatime" "nodiratime"

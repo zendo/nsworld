@@ -14,7 +14,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  system.stateVersion = "22.05";
   time.timeZone = "Asia/Shanghai";
 
   environment.systemPackages = with pkgs; [

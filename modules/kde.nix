@@ -43,9 +43,9 @@
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
 
+    # nheko
+    # neochat
     falkon
-    nheko
-    neochat
     gparted
     kcolorchooser
     gnome.gnome-calculator

@@ -87,7 +87,7 @@
     # google-chrome
     qbittorrent
     vlc
-    kooha
+    # kooha
     # ffmpeg
     audacious
     spotify
