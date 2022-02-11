@@ -94,8 +94,10 @@
     git
   ];
 
-  # environment.variables = {
-  # };
+  environment.variables = {
+    # wayland ozone support
+    # NIXOS_OZONE_WL = "1";
+  };
 
   # Can not work without channels.
   programs.command-not-found.enable = false;
