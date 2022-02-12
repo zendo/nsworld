@@ -12,6 +12,7 @@ nixos-install --flake github:zendo/dotworld#yoga --option substituters "https://
 ``` shell
 ext4 option "noatime" "nodiratime"
 btrfs option "compress=zstd" "noatime"
+services.btrfs.autoScrub.enable = true;
 ```
 
 # Desktop Setup

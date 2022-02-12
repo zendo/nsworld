@@ -60,10 +60,6 @@
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 
-  # verify checksums, repair corrupted blocks
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "monthly";
-    fileSystems = [ "/" ];
-  };
+  services.btrfs.autoScrub.enable = true;
+
 }
