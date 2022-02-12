@@ -20,6 +20,7 @@
       jetbrains-mono
     ];
     fontconfig = {
+      antialias = false;
       defaultFonts = {
         monospace = [ "Sarasa Mono SC" "DejaVu Sans Mono" ];
         emoji = [ "Noto Color Emoji" ];

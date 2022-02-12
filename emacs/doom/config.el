@@ -14,7 +14,11 @@
       calendar-week-start-day 1 ;Monday as first day of week
 
       doom-theme 'doom-tomorrow-night
+      ;; doom-theme 'doom-vibrant
       doom-font (font-spec :family "JetBrains Mono" :size 14)
+      doom-variable-pitch-font (font-spec :family "Fira Code")
+      doom-big-font-increment 2
+      doom-unicode-font (font-spec :family "Noto Sans Mono")
 
       x-gtk-use-native-input t          ;使用外部输入法
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号

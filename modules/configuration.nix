@@ -26,20 +26,29 @@
   services = {
     fwupd.enable = true;
 
+    # waitting systemd-oomd
+    earlyoom.enable = true;
+
     # logind.lidSwitch = "suspend-then-hibernate";
 
     journald.extraConfig = ''
-      SystemMaxUse=100M
+      SystemMaxUse=500M
     '';
   };
 
+  # Enable zram to have better memory management
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
 
   #########################################################################
   # Sounds
   #########################################################################
   # Pipewire
   hardware.pulseaudio.enable = false; # false in pipewire
-  security.rtkit.enable = true; # Realtime Policy and Watchdog Daemon
+  # This allows PipeWire to run with realtime privileges (i.e: less cracks)
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     media-session.enable = false;

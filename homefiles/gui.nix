@@ -23,11 +23,12 @@
 
   programs.vscode = {
     enable = true;
-    # extensions = with pkgs.vscode-extensions; [
-    #   ms-ceintl.vscode-language-pack-zh-hans
-    #   mattn.lisp
-    #   jnoortheen.nix-ide
-    # ];
+    extensions = with pkgs.vscode-extensions; [
+      ms-ceintl.vscode-language-pack-zh-hans
+      file-icons.file-icons
+      jnoortheen.nix-ide
+      # mattn.lisp
+    ];
     # userSettings = {
     #   "editor.formatOnSave" = false;
     #   "editor.minimap.enabled" = false;

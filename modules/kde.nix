@@ -4,9 +4,11 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.plasma5.runUsingSystemd = true;
+  # services.xserver.desktopManager.plasma5.useQtScaling = true;
 
   services.xserver.displayManager = {
     #sddm.enable = true; # wayland bug
+    #sddm.settings.Wayland.SessionDir = "${pkgs.plasma5Packages.plasma-workspace}/share/wayland-sessions";
     lightdm.enable = true;
     lightdm.greeters.gtk.extraConfig = ''
     xft-dpi=240
@@ -48,6 +50,7 @@
     falkon
     gparted
     kcolorchooser
+    qalculate-gtk
     gnome.gnome-calculator
     gnome.gnome-color-manager
   ];
