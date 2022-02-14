@@ -1,7 +1,7 @@
 # Installtion
 
 ``` nix
-git clone git@github.com:zendo/dotworld.git
+git clone git@github.com:zendo/nsworld.git
 nixos-install --flake .#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
@@ -38,7 +38,7 @@ dconf load /org/gnome/ < my_gnome_settings
 #!/usr/bin/env bash
 
 # make livecd
-nixos-generate -f iso -c .dotworld/modules/iso.nix
+nixos-generate -f iso -c ~/nsworld/modules/iso.nix
 
 # Build Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
