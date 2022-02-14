@@ -3,14 +3,22 @@
 {
   users.users.zen = {
     isNormalUser = true;
-    hashedPassword = "$6$LuQacq/E/Dy9uw.I$PdSDOZ3H7vRVgZ3vNpiuX2TWRvupaB6wfpaVDhLMB3zQ4WUHF6/Vh./YI01voWCUAeIZjg3poQSGvBIUGxiVJ/";
+    # mkpasswd -m sha-512
+    hashedPassword = "$6$1uAdBaFQVioF3CM1$n5BXqp7m6ZW41eIaBnrHc/9Aa25b7ux3QAy3.SwcxsTUHwCSFUZ2Qh2oEJUz02Wqg/Sg8Muw5YYgkTr3XZ9Pn1";
     extraGroups = [
       "wheel"
       "networkmanager"
       "video"
       "audio"
-      "docker" ];
+      "docker"
+      "libvirtd"
+    ];
   };
+
+  users.mutableUsers = false;
+
+  # Don't require password for sudo
+  security.sudo.wheelNeedsPassword = false;
 
 
 }
