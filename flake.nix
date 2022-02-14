@@ -2,7 +2,7 @@
   description = "Zendo NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
@@ -29,7 +29,7 @@
     };
 
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/7ba0cd76c4e5cbd4a8ac7387c8ad2493caa800f0";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/31e9b8c9f4d69d47625efb2510815ec5f529b20c";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";

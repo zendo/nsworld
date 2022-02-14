@@ -18,28 +18,21 @@
     loader = {
       systemd-boot.enable = true;
       systemd-boot.consoleMode = "max"; # resolution max for hidpi
-      systemd-boot.configurationLimit = 3; # startup menu items
+      systemd-boot.configurationLimit = 3; # boot-menu items
       efi.canTouchEfiVariables = true;
     };
   };
 
+  zramSwap.enable = true;
+
   services = {
     fwupd.enable = true;
-
-    # waitting systemd-oomd
-    earlyoom.enable = true;
 
     # logind.lidSwitch = "suspend-then-hibernate";
 
     journald.extraConfig = ''
       SystemMaxUse=500M
     '';
-  };
-
-  # Enable zram to have better memory management
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
   };
 
   #########################################################################
@@ -65,11 +58,7 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
 
-  # Keyborad
-  console.keyMap = "us";
-
   services.xserver = {
-    layout = "us";
 
     libinput = {
       # enable = true; # enabled default by desktopManager

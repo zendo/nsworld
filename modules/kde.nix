@@ -48,6 +48,7 @@
     # nheko
     # neochat
     falkon
+    kalendar
     gparted
     kcolorchooser
     qalculate-gtk
