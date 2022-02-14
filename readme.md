@@ -1,7 +1,8 @@
 # Installtion
 
 ``` nix
-nixos-install --flake github:zendo/dotworld#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
+git clone git@github.com:zendo/dotworld.git
+nixos-install --flake .#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
 [Flake Example](https://github.com/arnarg/config)

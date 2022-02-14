@@ -5,8 +5,7 @@
 
 {
   imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
@@ -14,52 +13,27 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-
-
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821";
-      fsType = "btrfs";
-      options = [ "subvol=@" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821";
-      fsType = "btrfs";
-      options = [ "subvol=@home" "compress=zstd" "noatime" ];
+    { device = "/dev/disk/by-uuid/cc0578d9-0be5-4128-b232-92fad3d01646";
+      fsType = "xfs";
     };
 
   fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/A402-7E3F";
+    { device = "/dev/disk/by-uuid/6848-B0C9";
       fsType = "vfat";
     };
 
-  fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/1754f52f-b613-4499-aeb2-821f22e49821";
-      fsType = "btrfs";
-      options = [ "subvol=@swap" ];
-    };
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/1f585a18-b230-472e-96f0-525d3c595b62"; }
+    ];
 
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = (1024 * 16) + (1024 * 2); # RAM size + 2 GB1
-    }
-  ];
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  # networking.useDHCP = lib.mkDefault false;
+  # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
-
-  services.btrfs.autoScrub.enable = true;
-
 }
