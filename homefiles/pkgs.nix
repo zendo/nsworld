@@ -4,7 +4,7 @@
   home = {
     stateVersion = "22.05";
     username = "iab";
-    homeDirectory = "/home/iab";
+    # homeDirectory = "/home/iab";
   };
 
   programs.home-manager.enable = true;
@@ -86,7 +86,7 @@
     # GUI
     # google-chrome
     qbittorrent
-    vlc
+    # vlc
     # kooha
     # ffmpeg
     audacious

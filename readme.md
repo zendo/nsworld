@@ -38,7 +38,7 @@ dconf load /org/gnome/ < my_gnome_settings
 #!/usr/bin/env bash
 
 # make livecd
-nixos-generate -f iso -c .dotworld/modules/iso.nix -o result
+nixos-generate -f iso -c .dotworld/modules/iso.nix
 
 # Build Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt

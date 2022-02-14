@@ -53,7 +53,7 @@
   };
 
   # Musnix
-  # musnix.enable = true;
+  musnix.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;

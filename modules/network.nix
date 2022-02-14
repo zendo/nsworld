@@ -2,7 +2,7 @@
 
 {
   networking = {
-    # hostName = "in flake";
+    # hostName = "";
     networkmanager.enable = true;
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # defaultGateway = "192.168.2.1";
