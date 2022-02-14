@@ -1,7 +1,6 @@
 # Installtion
 
 ``` nix
-nix-shell -p nixUnstable git
 nixos-install --flake github:zendo/dotworld#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
