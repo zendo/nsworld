@@ -33,9 +33,9 @@
     p-nixosReadlink = "readlink -f /nix/var/nix/profiles/system";
 
     ndiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
-    nswitch = "sudo -E nixos-rebuild switch --flake ~/dotworld#$(hostname)";
-    nboot = "sudo -E nixos-rebuild boot --flake ~/dotworld#$(hostname)";
-    nupgrade = "sudo -E nixos-rebuild boot --flake ~/dotworld#$(hostname) \\
+    nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
+    nboot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";
+    nupgrade = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname) \\
     --recreate-lock-file";
   };
 
@@ -68,6 +68,7 @@
       st = "status -sb";
       unstage = "reset HEAD --";
       pr = "pull --rebase";
+      pm = "push -u origin main";
       addp = "add --patch";
       comp = "commit --patch";
       co = "checkout";
