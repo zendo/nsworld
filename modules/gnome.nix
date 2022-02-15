@@ -15,6 +15,11 @@
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable = false;
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   environment.gnome.excludePackages = with pkgs; [
     gnome-photos
     gnome.yelp

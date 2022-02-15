@@ -28,12 +28,20 @@
   services = {
     fwupd.enable = true;
 
+    acpid.enable = true;
     # logind.lidSwitch = "suspend-then-hibernate";
+    # logind.extraConfig = ''
+    # HandlePowerKey=ignore
+    # '';
 
     journald.extraConfig = ''
       SystemMaxUse=500M
     '';
   };
+
+  # systemd.sleep.extraConfig = ''
+  # HibernateDelaySec=10min
+  # '';
 
   #########################################################################
   # Sounds

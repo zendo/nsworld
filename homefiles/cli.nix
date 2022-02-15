@@ -15,8 +15,8 @@
     rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
     # sudo = "sudo -E";
     ip = "ip --color=auto";
-    p-ip = "curl ipinfo.io";
-    p-ipsb = "curl ip.sb";
+    pp-ip = "curl ipinfo.io";
+    pp-ipsb = "curl ip.sb";
 
     gu = "gitui";
     ee = "emacs -nw";
@@ -24,18 +24,17 @@
     ixio = "curl -F 'f:1=<-' ix.io";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
-    journalctl-last = "journalctl -p err..alert --since \"50 min ago\"";
+    pp-journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
 
     nse = "nix search nixpkgs";
-    pkgs-repl = "nix repl '<nixpkgs>'";
-    p-generations = "nix profile history --profile /nix/var/nix/profiles/system";
-    p-generations-old = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-    p-nixosReadlink = "readlink -f /nix/var/nix/profiles/system";
+    ns-pkgsRepl = "nix repl '<nixpkgs>'";
+    ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
+    ns-osReadlink = "readlink -f /nix/var/nix/profiles/system";
 
-    ndiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
+    nsdiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
-    nboot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";
-    nupgrade = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname) \\
+    ns-boot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";
+    ns-upgrade = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname) \\
     --recreate-lock-file";
   };
 
