@@ -1,10 +1,8 @@
 { config, pkgs, modulesPath, lib, ... }:
 {
   imports = [
-    # <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix>
     # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
-    ./network.nix
   ];
 
   system.stateVersion = "22.05";
@@ -18,9 +16,18 @@
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
   };
 
+  networking = {
+    useDHCP = false;
+    networkmanager.enable = true;
+  };
+
   services.xserver = {
     libinput = {
       # enable = true; # enabled default by desktopManager
+      tapping = true;
+      touchpad = {
+        clickMethod = "buttonareas";
+      };
     };
     xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
@@ -52,6 +59,7 @@
     p7zip
     fd
     ripgrep
+    vim
     mg
     micro
     helix

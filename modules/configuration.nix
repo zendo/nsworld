@@ -77,6 +77,7 @@
     p7zip
     fd
     ripgrep
+    vim
     mg
     micro
     helix
