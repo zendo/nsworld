@@ -1,18 +1,23 @@
 # Installtion
 
-``` nix
+``` shell
 git clone git@github.com:zendo/nsworld.git
 nixos-install --flake .#yoga --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
 [Flake Example](https://github.com/arnarg/config)
 
-# Filesystem
+# Nix Commands
 
 ``` shell
-ext4 option "noatime" "nodiratime"
-btrfs option "compress=zstd" "noatime"
-services.btrfs.autoScrub.enable = true;
+# make livecd
+nixos-generate -f iso -c ~/nsworld/modules/iso.nix
+
+# Developer Environments
+nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
+
+# shebangs for NixOS/BSD
+#!/usr/bin/env bash
 ```
 
 # Desktop Setup
@@ -33,15 +38,6 @@ curl -O https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh
 dconf dump /org/gnome/ > my_gnome_settings
 dconf reset -f /org/gnome/
 dconf load /org/gnome/ < my_gnome_settings
-
-# shebangs for NixOS/BSD
-#!/usr/bin/env bash
-
-# make livecd
-nixos-generate -f iso -c ~/nsworld/modules/iso.nix
-
-# Build Environments
-nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
 ```
 
 # Nix Lang
