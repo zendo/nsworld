@@ -72,6 +72,5 @@
     curl
     bind
     git
-    gnome.gnome-tweaks
   ];
 }

@@ -41,7 +41,6 @@ curl -O https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh
 dconf dump /org/gnome/ > my_gnome_settings
 dconf reset -f /org/gnome/
 dconf load /org/gnome/ < my_gnome_settings
-org.gnome.settings-daemon.plugins.power hibernate
 ```
 
 # Nix Lang
