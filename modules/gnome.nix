@@ -50,11 +50,11 @@
     gnomeExtensions.proxy-switcher
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.espresso
+    gnomeExtensions.kimpanel
+    gnomeExtensions.blur-my-shell
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
-    # gnomeExtensions.kimpanel # not work?
     # gnomeExtensions.ddterm
-    # gnomeExtensions.blur-my-shell
   ];
 
 }

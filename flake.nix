@@ -29,6 +29,7 @@
     };
 
 
+
     emacs-overlay.url = "github:nix-community/emacs-overlay/31e9b8c9f4d69d47625efb2510815ec5f529b20c";
 
     nur.url = "github:nix-community/NUR";
@@ -105,7 +106,7 @@
         nixos-hardware.nixosModules.common-gpu-amd
         # ./modules/kde.nix
         ./modules/gnome.nix
-        ./modules/locale-cn.nix
+        ./modules/chinese.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/user-2.nix
         ./hosts/yoga/hardware-configuration.nix
@@ -116,7 +117,7 @@
         nixos-hardware.nixosModules.common-cpu-intel
         ./modules/kde.nix
         #./modules/gnome.nix
-        ./modules/locale-cn.nix
+        ./modules/chinese.nix
       ];
 
     };

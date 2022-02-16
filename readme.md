@@ -26,9 +26,6 @@ nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
 # force using en home-directorys
 LC_ALL=C xdg-user-dirs-update --force
 
-# rime
-sh ~/nsworld/others/rime/ln_ibus.sh
-
 # flatpak useless
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
@@ -41,6 +38,9 @@ curl -O https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh
 dconf dump /org/gnome/ > my_gnome_settings
 dconf reset -f /org/gnome/
 dconf load /org/gnome/ < my_gnome_settings
+
+~/.ssh
+~/.config/fcitx5/conf
 ```
 
 # Nix Lang
