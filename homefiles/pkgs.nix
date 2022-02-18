@@ -91,6 +91,7 @@
     # ffmpeg
     audacious
     spotify
+    # tauon
     # easyeffects
     # shutter
     foliate
@@ -109,6 +110,7 @@
 
     # Themes
     # tela-icon-theme
+    # vanilla-dmz
   ];
 
 }

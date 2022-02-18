@@ -18,20 +18,19 @@
     pp-ip = "curl ipinfo.io";
     pp-ipsb = "curl ip.sb";
 
-    gu = "gitui";
     ee = "emacs -nw";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
-    pp-journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
+    journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
 
     nse = "nix search nixpkgs";
     ns-pkgsRepl = "nix repl '<nixpkgs>'";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-osReadlink = "readlink -f /nix/var/nix/profiles/system";
 
-    nsdiff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
+    ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
     ns-boot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";
     ns-upgrade = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname) \\

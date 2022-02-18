@@ -39,6 +39,10 @@ dconf dump /org/gnome/ > my_gnome_settings
 dconf reset -f /org/gnome/
 dconf load /org/gnome/ < my_gnome_settings
 
+# RIME
+git clone --depth 1 https://github.com/rime/plum.git
+rime_dir="$HOME/.local/share/fcitx5/rime" bash rime-install :preset
+
 ~/.ssh
 ~/.config/fcitx5/conf
 ```

@@ -97,11 +97,15 @@
     package = pkgs.firefox-wayland;
   };
 
-  # cursor
-  # xsession.pointerCursor = {
-  #   name = "Vanilla-DMZ";
-  #   package = pkgs.vanilla-dmz;
-  #   size = 128;
-  # };
+  # fix tiny cursor in qt-apps @gnome
+  xsession.pointerCursor = {
+    name = "Vanilla-DMZ-AA";
+    package = pkgs.vanilla-dmz;
+    size = 128;
+  };
 
+  # xresources.properties = {
+  #   "Xcursor.size" = 128;
+  #   "Xcursor.theme" = "Vanilla-DMZ";
+  # };
 }
