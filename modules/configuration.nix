@@ -5,7 +5,7 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  hardware.enableAllFirmware = true; # contains non-redistributable firmware
+  hardware.enableAllFirmware = true;
 
   boot = {
     plymouth.enable = true;
@@ -85,10 +85,8 @@
     p7zip
     fd
     ripgrep
-    vim
     mg
     micro
-    helix
     gdu
     duf
     pfetch

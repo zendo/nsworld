@@ -73,6 +73,7 @@
     unrar
     btop
     bottom # btm
+    psmisc # pstree
     cht-sh
     trash-cli
     imagemagick
@@ -99,11 +100,12 @@
     tdesktop
     meld
     deja-dup
-    rclone
-    rclone-browser
+    # rclone
+    # rclone-browser
     # vorta
     yacreader
     # wezterm
+    # bottles # wine like
 
     # OFFICE
     # libreoffice-fresh
