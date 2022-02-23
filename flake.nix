@@ -29,7 +29,6 @@
     };
 
 
-
     emacs-overlay.url = "github:nix-community/emacs-overlay/31e9b8c9f4d69d47625efb2510815ec5f529b20c";
 
     nur.url = "github:nix-community/NUR";
@@ -108,7 +107,6 @@
         ./modules/gnome.nix
         ./modules/chinese.nix
         ./hosts/yoga/user.nix
-        ./hosts/yoga/user-2.nix
         ./hosts/yoga/hardware-configuration.nix
       ];
 
