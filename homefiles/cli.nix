@@ -13,10 +13,9 @@
     rm = "${pkgs.trash-cli}/bin/trash-put";
     rm-list = "${pkgs.trash-cli}/bin/trash-list";
     rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
-    # sudo = "sudo -E";
     ip = "ip --color=auto";
-    pp-ip = "curl ipinfo.io";
-    pp-ipsb = "curl ip.sb";
+    ipsb = "curl ip.sb";
+    ipinfo = "curl ipinfo.io";
 
     ee = "emacs -nw";
     nctb = "nc termbin.com 9999";
@@ -29,6 +28,7 @@
     ns-pkgsRepl = "nix repl '<nixpkgs>'";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-osReadlink = "readlink -f /nix/var/nix/profiles/system";
+    ns-link = "";
 
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo tsocks nixos-rebuild switch --flake ~/nsworld#$(hostname)";

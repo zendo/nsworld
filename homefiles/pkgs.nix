@@ -83,6 +83,7 @@
 
     # overlay
     # ydict
+    # harmonyos-sans
 
     # GUI
     # google-chrome

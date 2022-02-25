@@ -5,4 +5,5 @@ final: prev: {
   #   inherit (prev.sources.manix) pname version src;
   # });
   ydict = prev.callPackage ./ydict {};
+  harmonyos-sans = prev.callPackage ./harmonyos-sans {};
 }

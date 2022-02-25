@@ -13,6 +13,7 @@
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
+    tmpOnTmpfs = true;
     cleanTmpDir = true;
 
     loader = {

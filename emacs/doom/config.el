@@ -32,7 +32,7 @@
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 
-(+global-word-wrap-mode t)
+(+global-word-wrap-mode +1)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 ;; (add-to-list 'auto-mode-alist
