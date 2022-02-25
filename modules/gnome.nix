@@ -48,7 +48,8 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
-    gnomeExtensions.clipboard-indicator
+    # gnomeExtensions.clipboard-indicator
+    gnomeExtensions.gnome-clipboard 
     gnomeExtensions.espresso
     gnomeExtensions.kimpanel
     gnomeExtensions.blur-my-shell

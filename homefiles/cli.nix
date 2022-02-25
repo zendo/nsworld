@@ -31,9 +31,9 @@
     ns-osReadlink = "readlink -f /nix/var/nix/profiles/system";
 
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
-    nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
-    ns-boot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";
-    ns-upgrade = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname) \\
+    nswitch = "sudo tsocks nixos-rebuild switch --flake ~/nsworld#$(hostname)";
+    ns-boot = "sudo tsocks nixos-rebuild boot --flake ~/nsworld#$(hostname)";
+    ns-upgrade = "sudo tsocks nixos-rebuild boot --flake ~/nsworld#$(hostname) \\
     --recreate-lock-file";
   };
 
