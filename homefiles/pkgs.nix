@@ -86,7 +86,6 @@
     # ydict
     # harmonyos-sans
 
-    # GUI
     # google-chrome
     qbittorrent
     # persepolis
@@ -108,7 +107,7 @@
     # vorta
     yacreader
     # wezterm
-    # bottles # wine like
+    # bottles # wine manager
 
     # OFFICE
     # libreoffice-fresh

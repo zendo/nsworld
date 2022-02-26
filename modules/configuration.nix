@@ -16,12 +16,18 @@
     tmpOnTmpfs = true;
     cleanTmpDir = true;
 
-    loader = {
-      systemd-boot.enable = true;
-      systemd-boot.consoleMode = "max"; # resolution max for hidpi
-      systemd-boot.configurationLimit = 3; # boot-menu items
-      efi.canTouchEfiVariables = true;
+    loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot = {
+      enable = true;
+      consoleMode = "max"; # resolution max for hidpi
+      configurationLimit = 3; # boot-menu items
     };
+    # loader.grub = {
+    #   enable = true;
+    #   device = "nodev";
+    #   efiSupport = true;
+    #   useOSProber = true;
+    # };
   };
 
   zramSwap.enable = true;

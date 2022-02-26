@@ -44,8 +44,8 @@
     gnomeExtensions.appindicator
     # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.just-perfection
+    # gnomeExtensions.dash-to-panel
+    # gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     # gnomeExtensions.clipboard-indicator
