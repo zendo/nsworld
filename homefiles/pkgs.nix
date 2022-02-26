@@ -49,6 +49,7 @@
     # gnumake
     # nodejs
     gitui
+    git-cola
     onefetch
     jq
     jql
@@ -88,6 +89,7 @@
     # GUI
     # google-chrome
     qbittorrent
+    # persepolis
     # vlc
     # kooha
     # ffmpeg

@@ -7,5 +7,5 @@ patch:
     - "Control+grave"
 
   schema_list:
-    - schema: "luna_pinyin_simp"
     - schema: "clover"
+    - schema: "luna_pinyin_simp"

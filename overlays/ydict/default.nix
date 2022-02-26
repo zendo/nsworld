@@ -1,4 +1,4 @@
-{ lib,  libnotify, fetchFromGitHub, buildGoModule }:
+{ lib, libnotify, fetchFromGitHub, buildGoModule }:
 
 buildGoModule rec {
   pname = "ydict";
@@ -15,11 +15,13 @@ buildGoModule rec {
 
   # buildInputs = [ libnotify ];
 
+
+  ldflags = [ "-s" "-w" "-X=main.Version=${version}" ];
+
   # makeWrapperArgs = [
   #   "--prefix" "PATH" ":" (lib.makeBinPath [ libnotify ])
   # ];
 
-  ldflags = [ "-s" "-w" "-X=main.Version=${version}" ];
 
   # postFixup = ''
   #   substituteInPlace $out/bin/ydict --replace "(notify-send " "(${libnotify}/bin/notify-send "
