@@ -45,7 +45,6 @@
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
 
-    # nheko
     # neochat
     falkon
     kalendar

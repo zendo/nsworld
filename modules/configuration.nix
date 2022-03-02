@@ -17,16 +17,19 @@
     cleanTmpDir = true;
 
     loader.efi.canTouchEfiVariables = true;
+    # boot.loader.efi.efiSysMountPoint = "/boot/efi"; # default /boot
     loader.systemd-boot = {
       enable = true;
       consoleMode = "max"; # resolution max for hidpi
-      configurationLimit = 3; # boot-menu items
+      configurationLimit = 3; # bootmenu items
     };
     # loader.grub = {
     #   enable = true;
     #   device = "nodev";
+    #   default = "2";
     #   efiSupport = true;
     #   useOSProber = true;
+    #   gfxmodeEfi = "1024x768";
     # };
   };
 
@@ -144,6 +147,12 @@
 
   # services.flatpak.enable = true;
 
+  # use NixOS libraries instead of Steam-provided
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   steam = pkgs.steam.override {
+  #     nativeOnly = true;
+  #   };
+  # };
   # programs.steam.enable = true;
 
 }

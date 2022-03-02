@@ -88,12 +88,12 @@
 
     # google-chrome
     qbittorrent
-    # persepolis
     # vlc
     # kooha
     # ffmpeg
     audacious
     spotify
+    mousai # 听歌识曲
     # tauon
     # easyeffects
     # shutter

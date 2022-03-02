@@ -25,10 +25,10 @@
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
 
     nse = "nix search nixpkgs";
-    ns-pkgsRepl = "nix repl '<nixpkgs>'";
+    ns-pkgs-repl = "nix repl '<nixpkgs>'";
+    ns-pkgs-installed = "nix path-info --recursive /run/current-system";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-osReadlink = "readlink -f /nix/var/nix/profiles/system";
-    ns-link = "";
 
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";

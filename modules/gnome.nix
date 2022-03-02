@@ -34,6 +34,7 @@
     notejot
     gparted
     dconf2nix
+    # fractal
 
     gnome.gnome-tweaks
     gnome.gnome-todo
