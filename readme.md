@@ -15,6 +15,7 @@ nixos-generate -f iso -c ~/nsworld/modules/iso.nix
 
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
+nix shell github:oxalica/rust-overlay
 
 # shebangs for NixOS/BSD
 #!/usr/bin/env bash

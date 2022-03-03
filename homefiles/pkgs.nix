@@ -90,7 +90,7 @@
     qbittorrent
     # vlc
     # kooha
-    # ffmpeg
+    ffmpeg
     audacious
     spotify
     mousai # 听歌识曲
@@ -99,7 +99,8 @@
     # shutter
     foliate
     ghostwriter
-    tdesktop
+    # tdesktop
+    kotatogram-desktop
     meld
     deja-dup
     # rclone

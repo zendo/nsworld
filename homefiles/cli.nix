@@ -10,6 +10,7 @@
     l = "ls";
     cat = "bat";
     ps = "ps -ef";
+    beep = "echo -en \"\\007\"";
     rm = "${pkgs.trash-cli}/bin/trash-put";
     rm-list = "${pkgs.trash-cli}/bin/trash-list";
     rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
@@ -41,6 +42,7 @@
     # ".vimrc".source = ./vimrc;
 
     ".inputrc".text = ''
+      set bell-style none
       set completion-ignore-case on
       # Show all tab-completion options on first <tab>
       set show-all-if-ambiguous on
