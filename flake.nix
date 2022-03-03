@@ -28,6 +28,7 @@
       flake = false;
     };
 
+    comma.url = github:nix-community/comma;
 
     emacs-overlay.url = "github:nix-community/emacs-overlay/31e9b8c9f4d69d47625efb2510815ec5f529b20c";
 
@@ -45,6 +46,7 @@
     , utils
     , musnix
     , nur
+    , comma
     , emacs-overlay
     , ...
     }:

@@ -183,6 +183,7 @@
     };
     initExtra = ''
       setopt no_nomatch
+      unsetopt correct
       bindkey -e
       bindkey "\e[27;2;13~" accept-line  # shift+return
       bindkey "\e[27;5;13~" accept-line  # ctrl+return

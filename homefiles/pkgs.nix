@@ -36,6 +36,7 @@
     nixfmt
     rnix-lsp
     lorri
+    comma # , hello
     niv
     # nvd diff /nix/var/nix/profiles/system-{14,15}-link
     nvd
@@ -88,13 +89,11 @@
 
     # google-chrome
     qbittorrent
-    # vlc
     # kooha
     ffmpeg
     audacious
     spotify
     mousai # 听歌识曲
-    # tauon
     # easyeffects
     # shutter
     foliate
