@@ -50,7 +50,6 @@
     # gnumake
     # nodejs
     gitui
-    git-cola
     onefetch
     jq
     jql
@@ -66,8 +65,6 @@
     bandwhich
     traceroute
     speedtest-cli
-    v2ray
-    qv2ray
 
     # CLI
     powertop
@@ -87,6 +84,9 @@
     # ydict
     # harmonyos-sans
 
+    git-cola
+    v2ray
+    qv2ray
     # google-chrome
     qbittorrent
     # kooha

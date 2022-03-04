@@ -1,8 +1,17 @@
-# git clone git://github.com/Trundle/NixOS-WSL
-# cp wsl ./
-# nix build .#nixosConfigurations.mysystem.config.system.build.tarball
+# git clone https://github.com/nzbr/NixOS-WSL.git
+# nix build .#nixosConfigurations.mysystem.config.system.build.installer
+
 # inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-# (import ./wsl.nix)
+# home-manager.url = "github:nix-community/home-manager";
+# home-manager.inputs.nixpkgs.follows = "nixpkgs";
+# configuration.nix : defaultUser
+# ./wsl.nix
+#   home-manager.nixosModules.home-manager
+# {
+#   home-manager.useGlobalPkgs = true;
+#   home-manager.useUserPackages = true;
+#   home-manager.users.iab = import ./homefiles/home.nix;
+# }
 #   {
 #     nixpkgs.config = {
 #       allowUnfree = true;
@@ -11,10 +20,14 @@
 #     };
 #   }
 
+# ssr = "export http_proxy=http://192.168.2.118:10809 ; \\
+#     export https_proxy=http://192.168.2.118:10809";
+
 { config, lib, pkgs, ... }:
 
 {
   time.timeZone = "Asia/Shanghai";
+  system.stateVersion = "22.05";
 
   environment.systemPackages = with pkgs; [
     binutils
@@ -24,6 +37,8 @@
     ripgrep
     mg
     helix
+    neovim
+    emacs
     gdu
     duf
     pfetch
@@ -31,60 +46,12 @@
     wget
     curl
     bind
-    git
-
-    fish
-    exa
-    bat
-    zoxide
-    mcfly
-    fzf
-    skim
-
-    # CLI
-    powertop
-    unp
-    unrar
-    btop
-    bottom # btm
-    cht-sh
-    trash-cli
-    translate-shell
-
-    # Develop
-    # gcc
-    # cmake
-    # gnumake
-    # nodejs
-    gitui
-    jq
-    jql
-    cloc # count code lines
-    sqlite
-    openssl
-    python3
-
-    # Network
-    lsof
-    elinks
-    dnspeep
-    bandwhich
-    traceroute
-    speedtest-cli
-
-    # NIX TOOLS
-    nix-bash-completions
-    nixpkgs-fmt
-    nixfmt
-    rnix-lsp
-    direnv
-    lorri
-    niv
-    # nvd diff /nix/var/nix/profiles/system-{14,15}-link
-    nvd
-    cachix
-    nixos-generators
+    hack-font
+    fira-code
+    jetbrains-mono
   ];
+
+  programs.command-not-found.enable = false;
 
   documentation = {
     enable = false;
@@ -95,20 +62,14 @@
     warn-dirty = false;
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
-    flake-registry = /etc/nix/registry.json;
     substituters = lib.mkBefore [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
-      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=30"
       "https://nix-community.cachix.org"
-      # "https://mirrors.ustc.edu.cn/nix-channels/store"
     ];
-    # trusted-substituters = [
-    # ]; # List of binary cache URLs that non-root users can use
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 
-
-
+  # users.defaultUserShell = pkgs.zsh;
 }

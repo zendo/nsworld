@@ -26,11 +26,11 @@
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
 
     nse = "nix search nixpkgs";
-    ns-pkgs-repl = "nix repl '<nixpkgs>'";
-    ns-pkgs-installed = "nix path-info --recursive /run/current-system";
-    ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
-    ns-osReadlink = "readlink -f /nix/var/nix/profiles/system";
+    nix-repl-pkgs = "nix repl '<nixpkgs>'";
+    nix-pkgs-installed = "nix path-info --recursive /run/current-system";
+    nix-readlink-os = "readlink -f /nix/var/nix/profiles/system";
 
+    ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
     ns-boot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";

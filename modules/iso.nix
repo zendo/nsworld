@@ -9,6 +9,9 @@
 
   time.timeZone = "Asia/Shanghai";
 
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
+
   hardware.enableAllFirmware = true;
 
   boot = {
@@ -32,11 +35,8 @@
     xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
 
   nix.settings = {
-    flake-registry = /etc/nix/registry.json;
     substituters = lib.mkBefore [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=30"
@@ -57,6 +57,7 @@
     fish
     tree
     p7zip
+    unrar
     fd
     ripgrep
     vim
