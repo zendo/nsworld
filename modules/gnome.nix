@@ -24,6 +24,7 @@
     gnome-photos
     gnome.yelp
     gnome.geary
+
     gnome.totem
     gnome.gnome-music
     gnome.gnome-software
@@ -56,7 +57,7 @@
     gnomeExtensions.blur-my-shell
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
-    # gnomeExtensions.ddterm
+    gnomeExtensions.ddterm
   ];
 
 }

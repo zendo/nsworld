@@ -94,7 +94,7 @@
 
           {
             nix.generateNixPathFromInputs = true;
-            nix.generateRegistryFromInputs = true;
+          #   nix.generateRegistryFromInputs = true;
           }
         ];
       };
