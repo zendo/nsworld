@@ -10,6 +10,7 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      lxgw-wenkai
       # source-han-sans
       # source-han-serif
       source-code-pro

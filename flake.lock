@@ -1,36 +1,18 @@
 {
   "nodes": {
-    "comma": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1645081562,
-        "narHash": "sha256-iSkHFMgYh31UDFZ5BZ9AHBivdgO0n2iCrYKjwAWxXvY=",
-        "owner": "nix-community",
-        "repo": "comma",
-        "rev": "54149dc417819af14ddc0d59216d4add5280ad14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "comma",
-        "type": "github"
-      }
-    },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1644747720,
-        "narHash": "sha256-X1D6tIzEkMDK+qvQkBN5KLIwdu9lRUZmXXPSct4f5Wo=",
+        "lastModified": 1646272874,
+        "narHash": "sha256-I/AKq8Jh4JHfKguf/h6BZoLYK/Ws7RUh+qKYH44kw54=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "31e9b8c9f4d69d47625efb2510815ec5f529b20c",
+        "rev": "9c80561882612903edf2a31007f9be2e8fc484d6",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "31e9b8c9f4d69d47625efb2510815ec5f529b20c",
+        "rev": "9c80561882612903edf2a31007f9be2e8fc484d6",
         "type": "github"
       }
     },
@@ -72,11 +54,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1645970334,
-        "narHash": "sha256-6nn4YF9bPtkxkB7bM6yJO3m//p3sGilxNQFjm1epLEM=",
+        "lastModified": 1646354208,
+        "narHash": "sha256-eldsDbNPqYNAtK8Pu79fGGGGOVpWUPWkz83Gzvhz0Jk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ea85f4b1fdf3f25cf97dc49f4a9ec4eafda2ea25",
+        "rev": "541874f55d7c15b4c67329ec0370b245dea322e8",
         "type": "github"
       },
       "original": {
@@ -87,7 +69,7 @@
     },
     "musnix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1628019651,
@@ -121,17 +103,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1638110343,
-        "narHash": "sha256-hQaow8sGPyUrXgrqgDRsfA+73uR0vms2goTQNxIAaRQ=",
+        "lastModified": 1623743177,
+        "narHash": "sha256-57OM8Ya/yGHAHBq/h0I8Ah/HJFmk0VNpEASYxr+BgK8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "942eb9a335b4cd22fa6a7be31c494e53e76f5637",
+        "rev": "4b7c8d538e1aed2bc30b6e7eb1cbd96063ad4132",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-unstable": {
@@ -152,22 +135,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1623743177,
-        "narHash": "sha256-57OM8Ya/yGHAHBq/h0I8Ah/HJFmk0VNpEASYxr+BgK8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4b7c8d538e1aed2bc30b6e7eb1cbd96063ad4132",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1646254136,
         "narHash": "sha256-8nQx02tTzgYO21BP/dy5BCRopE8OwE8Drsw98j+Qoaw=",
         "owner": "NixOS",
@@ -184,11 +151,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1646280459,
-        "narHash": "sha256-1cGOtHTcughBTA7d1o25yQuUaXJNQ757CRlqgW4+2dM=",
+        "lastModified": 1646356916,
+        "narHash": "sha256-w3mJm21ExCsFtA09iC8vFhD+cqh/t4WfN4Wck4EjbSs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "85e1183ae72422e883cb57c10ed677be29a80d4e",
+        "rev": "65e295c2c2d84e1c953a5bc7ef9df30710f7710c",
         "type": "github"
       },
       "original": {
@@ -199,13 +166,12 @@
     },
     "root": {
       "inputs": {
-        "comma": "comma",
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
         "musnix": "musnix",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "utils": "utils"

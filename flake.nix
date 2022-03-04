@@ -28,9 +28,7 @@
       flake = false;
     };
 
-    comma.url = github:nix-community/comma;
-
-    emacs-overlay.url = "github:nix-community/emacs-overlay/31e9b8c9f4d69d47625efb2510815ec5f529b20c";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/9c80561882612903edf2a31007f9be2e8fc484d6";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
@@ -46,7 +44,6 @@
     , utils
     , musnix
     , nur
-    , comma
     , emacs-overlay
     , ...
     }:
