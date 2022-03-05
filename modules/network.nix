@@ -3,19 +3,12 @@
 {
   networking = {
     # hostName = "";
+    useDHCP = false;
     networkmanager.enable = true;
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # defaultGateway = "192.168.2.1";
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
-    useDHCP = false;
     #interfaces.eno1.useDHCP = true;
     #interfaces.wlp1s0.useDHCP = true;
-
-    # timeServers = [
-    #   "0.nixos.pool.ntp.org"
-    #   "1.nixos.pool.ntp.org" ];
 
     nameservers = [
       "223.5.5.5"

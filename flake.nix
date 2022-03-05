@@ -83,18 +83,9 @@
           ./modules/nixconfig.nix
           ./modules/configuration.nix
           ./modules/network.nix
-          musnix.nixosModules.musnix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.iab = import ./homefiles/home.nix;
-            # home-manager.users.zen = import ./homefiles/home.nix;
-          }
-
           {
             nix.generateNixPathFromInputs = true;
-          #   nix.generateRegistryFromInputs = true;
+            #   nix.generateRegistryFromInputs = true;
           }
         ];
       };
@@ -107,6 +98,25 @@
         ./modules/chinese.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/hardware-configuration.nix
+
+        musnix.nixosModules.musnix
+        { musnix.enable = true; }
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.iab = { ... }: {
+            home.stateVersion = "22.05";
+            programs.home-manager.enable = true;
+            imports = [
+              ./homefiles/pkgs.nix
+              ./homefiles/cli.nix
+              ./homefiles/gui.nix
+            ];
+          };
+        }
+
       ];
 
       hosts.svp.modules = [

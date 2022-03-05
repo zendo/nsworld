@@ -6,7 +6,6 @@
   ];
 
   system.stateVersion = "22.05";
-
   time.timeZone = "Asia/Shanghai";
 
   nixpkgs.config.allowUnfree = true;

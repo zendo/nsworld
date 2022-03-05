@@ -1,14 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home = {
-    stateVersion = "22.05";
-    username = "iab";
-    # homeDirectory = "/home/iab";
-  };
-
-  programs.home-manager.enable = true;
-
   home.packages = with pkgs; [
     # HARDWARE TEST
     efitools
@@ -37,6 +29,7 @@
     rnix-lsp
     lorri
     comma # , hello
+    manix
     niv
     # nvd diff /nix/var/nix/profiles/system-{14,15}-link
     nvd
@@ -77,6 +70,7 @@
     trash-cli
     imagemagick
     translate-shell
+    magic-wormhole
     aspellDicts.en
     asciinema # record the terminal
 

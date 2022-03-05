@@ -2,9 +2,9 @@
 
 {
   system.stateVersion = "22.05";
-
   time.timeZone = "Asia/Shanghai";
 
+  zramSwap.enable = true;
   hardware.enableAllFirmware = true;
 
   boot = {
@@ -33,11 +33,8 @@
     # };
   };
 
-  zramSwap.enable = true;
-
   services = {
     fwupd.enable = true;
-
     acpid.enable = true;
     # logind.lidSwitch = "suspend-then-hibernate";
     # logind.extraConfig = ''
@@ -69,9 +66,6 @@
     pulse.enable = true;
     jack.enable = false;
   };
-
-  # Musnix
-  musnix.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
