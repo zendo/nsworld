@@ -1,4 +1,7 @@
+;;; Package --- Summary
+;;; Commentary:
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;; Code:
 
 (load! "+keybindings")
 

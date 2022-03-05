@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq save-interprogram-paste-before-kill t ;save system clipboard before emacs clipboard replacing
-      )
+;save system clipboard before emacs clipboard replacing
+(setq save-interprogram-paste-before-kill t)
 
 ;; 备份 Backup
 (global-auto-revert-mode 1)        ;自动加载被外部修改过的文件
@@ -21,10 +21,8 @@
 
 
 ;; 自动保存 autosave
+(auto-save-visited-mode 1)
 ;; (setq auto-save-visited-interval 15) ;default is 5s
-;; (auto-save-visited-mode 1)
-
-(add-hook 'focus-out-hook (save-some-buffers t)) ;失去焦点时保存
 
 ;; save-place 记住光标所在位置
 (setq save-place-file (expand-file-name "saveplace" my-temp))

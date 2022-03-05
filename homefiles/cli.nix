@@ -27,12 +27,11 @@
 
     nse = "nix search nixpkgs";
     nix-repl-pkgs = "nix repl '<nixpkgs>'";
-    nix-pkgs-installed = "nix path-info --recursive /run/current-system";
-    nix-readlink-os = "readlink -f /nix/var/nix/profiles/system";
-
+    ns-pkgs-installed = "nix path-info --recursive /run/current-system";
+    ns-oslink = "readlink -f /nix/var/nix/profiles/system";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
-    nswitch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
+    ns-switch = "sudo -E nixos-rebuild switch --flake ~/nsworld#$(hostname)";
     ns-boot = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname)";
     ns-upgrade = "sudo -E nixos-rebuild boot --flake ~/nsworld#$(hostname) \\
     --recreate-lock-file";

@@ -6,7 +6,6 @@
     # keep-derivations = true
     warn-dirty = false;
     auto-optimise-store = true;
-
     flake-registry = "https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json";
     # flake-registry = /etc/nix/registry.json;
     substituters = lib.mkBefore [
