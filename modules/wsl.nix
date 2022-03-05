@@ -36,6 +36,7 @@
     fd
     ripgrep
     mg
+    micro
     helix
     neovim
     emacs
@@ -51,17 +52,12 @@
     jetbrains-mono
   ];
 
-  programs.command-not-found.enable = false;
-
-  documentation = {
-    enable = false;
-    nixos.enable = false;
-  };
-
+  nixpkgs.config.allowUnfree = true;
   nix.settings = {
     warn-dirty = false;
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
+    flake-registry = "https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json";
     substituters = lib.mkBefore [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://nix-community.cachix.org"
@@ -70,6 +66,4 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
-
-  # users.defaultUserShell = pkgs.zsh;
 }
