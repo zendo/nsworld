@@ -110,9 +110,9 @@
             home.stateVersion = "22.05";
             programs.home-manager.enable = true;
             imports = [
-              ./homefiles/pkgs.nix
-              ./homefiles/cli.nix
-              ./homefiles/gui.nix
+              ./dotfiles/hm-pkgs.nix
+              ./dotfiles/hm-cli.nix
+              ./dotfiles/hm-gui.nix
             ];
           };
         }

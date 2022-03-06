@@ -1,5 +1,0 @@
-style:
-  # 横排
-  horizontal: true
-  # 有些软件的行内预测支持有 bug
-  # inline_preedit: false 

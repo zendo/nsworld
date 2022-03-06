@@ -1,9 +1,0 @@
-name: luna_pinyin_simp.extended
-version: "0.1"
-# `by_weight`（按词频高低排序）或 `original`（保持原码表中的顺序）。
-sort: by_weight
-use_preset_vocabulary: true
-
-import_tables:
-  - luna_pinyin
-  - std_cn_chars_table

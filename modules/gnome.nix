@@ -54,6 +54,7 @@
     gnomeExtensions.gnome-clipboard 
     gnomeExtensions.espresso
     gnomeExtensions.kimpanel
+    gnomeExtensions.logo-menu
     gnomeExtensions.blur-my-shell
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
