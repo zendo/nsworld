@@ -1,0 +1,16 @@
+patch:
+  # translator/dictionary: luna_pinyin_simp.extended
+  "punctuator/symbols":
+    "/emo": [😂️, 😅️, 😱️, 😭️, 😇️, 🙃️, 🤔️, 💊️, 💯️, 👍️, 🙈️, 💩️, 😈️ ]
+
+  "switches":
+    - name: ascii_mode
+      reset: 1
+      states: ["中文", "西文"]
+    - name: full_shape
+      states: ["半角", "全角"]
+    - name: zh_simp
+      reset: 1
+      states: ["漢字", "汉字"]
+    - name: ascii_punct
+      states: ["。，", "．，"]
