@@ -1,5 +1,5 @@
 {
-  description = "Zendo NixOS Flake";
+  description = "Zendo NixOS Flakes";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -80,12 +80,12 @@
         # Extra arguments to be passed to all modules. Merged with host's extraArgs.
         # extraArgs = { inherit utils inputs; foo = "foo"; };
         modules = [
+          ./modules/network.nix
           ./modules/nixconfig.nix
           ./modules/configuration.nix
-          ./modules/network.nix
           {
             nix.generateNixPathFromInputs = true;
-            #   nix.generateRegistryFromInputs = true;
+            # nix.generateRegistryFromInputs = true;
           }
         ];
       };

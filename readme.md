@@ -5,7 +5,7 @@ git clone git@github.com:zendo/nsworld.git
 nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
-[Flake Example](https://github.com/arnarg/config)
+[Config Example](https://github.com/thiagokokada/nix-configs)
 
 # Nix Commands
 
