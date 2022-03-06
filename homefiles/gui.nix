@@ -28,7 +28,6 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacsPgtk;
-    # package = pkgs.emacsGit;
     extraPackages = epkgs: [
       epkgs.vterm
       # epkgs.telega
@@ -38,10 +37,6 @@
   # centaur
   # home.file.".emacs.d/custom.el".source = ../emacs/centaur/custom.el;
   # home.file.".emacs.d/custom-post.el".source = ../emacs/centaur/custom-post.el;
-  # myself
-  # home.file.".emacs.d/init.el".source = ../emacs/init.el;
-  # home.file.".emacs.d/early-init.el".source = ../emacs/early-init.el;
-  # home.file.".emacs.d/lisp".source = ../emacs/lisp;
 
   programs.neovim = {
     enable = true;

@@ -37,12 +37,15 @@ curl -O https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh
 
 # Backup Gnome Settings
 dconf dump /org/gnome/ > my_gnome_settings
-dconf reset -f /org/gnome/
 dconf load /org/gnome/ < my_gnome_settings
+dconf reset -f /org/gnome/
 
 # RIME
 git clone --depth 1 https://github.com/rime/plum.git
 rime_dir="$HOME/.local/share/fcitx5/rime" bash rime-install :preset
+
+# Clover
+curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO 
 
 ~/.ssh
 ~/.config/fcitx5/conf

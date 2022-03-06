@@ -28,10 +28,9 @@
     nixfmt
     rnix-lsp
     lorri
-    comma # , hello
+    comma
     manix
     niv
-    # nvd diff /nix/var/nix/profiles/system-{14,15}-link
     nvd
     cachix
     nvfetcher
