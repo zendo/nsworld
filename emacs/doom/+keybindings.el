@@ -1,4 +1,7 @@
+;;; Package --- Summary
+;;; Commentary:
 ;;; $DOOMDIR/+keybindings.el -*- lexical-binding: t; -*-
+;;; Code:
 
 ;; Mouse
 (blink-cursor-mode -1)               ;禁用指针闪烁

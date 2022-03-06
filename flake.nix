@@ -84,8 +84,8 @@
           ./modules/nixconfig.nix
           ./modules/configuration.nix
           {
-            nix.generateNixPathFromInputs = true;
-            # nix.generateRegistryFromInputs = true;
+            nix.generateNixPathFromInputs = true;  # nix-path
+            nix.generateRegistryFromInputs = true; # registry system flake
           }
         ];
       };
