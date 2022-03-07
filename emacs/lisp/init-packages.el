@@ -1,4 +1,4 @@
-;;; packages.el --- main core settings -*- lexical-binding: t; -*-
+;;; init-packages.el --- main core settings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -153,5 +153,5 @@
   :config
   (centaur-tabs-mode t))
 
-(provide 'packages)
+(provide 'init-packages)
 ;;; packages.el ends here

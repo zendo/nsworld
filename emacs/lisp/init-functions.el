@@ -1,4 +1,4 @@
-;;; functions.el --- functions -*- lexical-binding: t; -*-
+;;; init-functions.el --- functions -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -49,5 +49,5 @@ Version 2017-08-19"
         (while (re-search-forward " +" nil t)
           (replace-match "\n" ))))))
 
-(provide 'functions)
+(provide 'init-functions)
 ;;; functions.el ends here

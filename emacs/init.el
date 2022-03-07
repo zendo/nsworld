@@ -54,9 +54,9 @@
 ;;   (load custom-file 'noerror))
 
 
-(require 'config)
-(require 'packages)
-(require 'functions)
+(require 'init-config)
+(require 'init-packages)
+(require 'init-functions)
 
 (require 'init-backup)
 (require 'init-dired)
@@ -65,7 +65,7 @@
 ;; (require 'init-ivy)
 (require 'init-vertico)
 ;; (require 'init-meow)
-(require 'keybindings)
+(require 'init-keybindings)
 
 (require 'lang-main)
 (require 'lang-org)

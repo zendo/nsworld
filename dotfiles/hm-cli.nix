@@ -63,8 +63,8 @@
   };
 
   xdg.configFile = {
-    # "wezterm/wezterm.lua".source = ./wezterm.lua;
     "mpv".source = ./mpv;
+    "wezterm/wezterm.lua".source = ./wezterm.lua;
   };
 
   programs.git = {

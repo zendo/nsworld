@@ -1,4 +1,4 @@
-;;; keybindings.el --- Modify key bindings -*- lexical-binding: t; -*-
+;;; init-keybindings.el --- Modify key bindings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -123,5 +123,5 @@
                   (select-window (next-window))))
 
 
-(provide 'keybindings)
+(provide 'init-keybindings)
 ;;; keybindings.el ends here

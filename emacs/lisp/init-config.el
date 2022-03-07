@@ -1,4 +1,4 @@
-;;; config.el --- main core settings -*- lexical-binding: t; -*-
+;;; init-config.el --- main core settings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -131,5 +131,5 @@
       ispell-extra-args '("--sug-mode=ultra"))
 
 
-(provide 'config)
+(provide 'init-config)
 ;;; config.el ends here
