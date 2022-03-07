@@ -51,7 +51,7 @@
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     # gnomeExtensions.clipboard-indicator
-    gnomeExtensions.gnome-clipboard 
+    gnomeExtensions.gnome-clipboard
     gnomeExtensions.espresso
     gnomeExtensions.kimpanel
     gnomeExtensions.logo-menu

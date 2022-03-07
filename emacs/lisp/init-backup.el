@@ -23,6 +23,10 @@
 ;; 自动保存 autosave
 (auto-save-visited-mode 1)
 ;; (setq auto-save-visited-interval 15) ;default is 5s
+(defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+(add-hook 'focus-out-hook 'save-all)
 
 ;; save-place 记住光标所在位置
 (setq save-place-file (expand-file-name "saveplace" my-temp))

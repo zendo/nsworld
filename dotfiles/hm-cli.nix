@@ -64,7 +64,9 @@
 
   xdg.configFile = {
     "mpv".source = ./mpv;
+    "foot/foot.ini".source = ./foot.ini;
     "wezterm/wezterm.lua".source = ./wezterm.lua;
+    "alacritty/alacritty.yml".source = ./alacritty.yml;
   };
 
   programs.git = {

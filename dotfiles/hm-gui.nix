@@ -10,17 +10,6 @@
     categories = [ "Application" "Music" ];
   };
 
-  programs.alacritty = {
-    enable = false;
-  };
-  xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
-
-  programs.foot = {
-    enable = true;
-    # server.enable = false;
-  };
-  xdg.configFile."foot/foot.ini".source = ./foot.ini;
-
   programs.vscode = {
     enable = true;
   };
@@ -30,6 +19,7 @@
     package = pkgs.emacsPgtk;
     extraPackages = epkgs: [
       epkgs.vterm
+      epkgs.emacsql-sqlite
       # epkgs.telega
     ];
   };

@@ -82,6 +82,9 @@
     distrobox
     v2ray
     qv2ray
+    foot
+    # alacritty
+    # wezterm
     # google-chrome
     qbittorrent
     # kooha
@@ -102,7 +105,6 @@
     # rclone-browser
     # vorta
     yacreader
-    # wezterm
     # bottles # wine manager
 
     # OFFICE
