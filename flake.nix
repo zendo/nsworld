@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # agenix.url = "github:ryantm/agenix";
+    agenix.url = github:ryantm/agenix;
 
     # Real-time audio
     musnix.url = github:musnix/musnix;

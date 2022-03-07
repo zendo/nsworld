@@ -62,5 +62,10 @@
 ;;                                ))
 
 
+(use-package org-modern
+  :after org
+  :config
+  (add-hook 'org-mode-hook #'org-modern-mode))
+
 (provide 'lang-org)
 ;;; lang-org.el ends here

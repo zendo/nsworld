@@ -147,7 +147,11 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
-
+;; centaur tab
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t))
 
 (provide 'packages)
 ;;; packages.el ends here

@@ -24,9 +24,7 @@
 
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-word)
-              )
-  )
+              ("DEL" . vertico-directory-delete-char)))
 
 ;; Completion style for matching regexps in any order
 (use-package orderless
@@ -88,8 +86,7 @@
 ;; Mini-Buffer Actions Rooted in Keymaps
 (use-package embark
   :bind
-  (
-   ("C-c C-c" . embark-act)
+  (("C-c C-c" . embark-act)
    ("C-c C-o" . embark-export)
    ;; ("C-;" . embark-dwim)        ;; good alternative: M-.
    ("C-h b" . embark-bindings)) ;; alternative for `describe-bindings'
