@@ -4,16 +4,9 @@
 # inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 # home-manager.url = "github:nix-community/home-manager";
 # home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-#   home-manager.nixosModules.home-manager
-# {
-#   home-manager.useGlobalPkgs = true;
-#   home-manager.useUserPackages = true;
-#   home-manager.users.iab = import ./homefiles/home.nix;
-# }
-
-# ssr = "export http_proxy=http://192.168.2.118:10809 ; \\
-#     export https_proxy=http://192.168.2.118:10809";
+#
+# add home-manager
+# ssr ip change
 
 { config, lib, pkgs, ... }:
 

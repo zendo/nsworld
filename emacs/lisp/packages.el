@@ -68,8 +68,7 @@
 
 ;; Helpful
 (use-package helpful
-  :defer t
-  :defines ivy-initial-inputs-alist)
+  :defer t)
 
 ;; expand-region
 (use-package expand-region)
@@ -137,11 +136,6 @@
   ;; Enable Chinese word segmentation support (支持中文分词)
   (setq youdao-dictionary-use-chinese-word-segmentation t))
 
-;; RIME 中文输入法
-;; (use-package rime
-;;   :custom
-;;   (default-input-method "rime"))
-
 ;; olivetti 文档居中
 (use-package olivetti
   :commands olivetti-mode
@@ -152,13 +146,6 @@
 ;; doom-modeline
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
-
-;; powerline modeline
-;; (use-package powerline
-;;   :config
-;;   (powerline-default-theme))
-
-
 
 
 

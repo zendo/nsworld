@@ -33,11 +33,12 @@
     (exec-path-from-shell-initialize)))
 
 ;; vterm
-(use-package vterm
-  :defer t
-  :config
-  (setq vterm-shell "zsh")
-  (define-key vterm-mode-map (kbd "<f9>")  'shell-pop))
+(when (eq system-type 'gnu/linux)
+  (use-package vterm
+    :defer t
+    :config
+    (setq vterm-shell "zsh")
+    (define-key vterm-mode-map (kbd "<f9>")  'shell-pop)))
 
 ;; shell-pop
 (use-package shell-pop

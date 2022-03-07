@@ -3,16 +3,6 @@
 ;;; Code:
 
 ;;----------------------------------------------------------------------------
-;; stop using mouse minibuffer
-;;----------------------------------------------------------------------------
-;;;###autoload
-(defun stop-using-minibuffer ()
-  "Kill the minibuffer."
-  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
-    (abort-recursive-edit)))
-;; (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
-
-;;----------------------------------------------------------------------------
 ;; align
 ;;----------------------------------------------------------------------------
 ;;;###autoload

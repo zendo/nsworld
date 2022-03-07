@@ -36,12 +36,12 @@
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
       x-gtk-use-native-input t
+      confirm-kill-processes nil
       visible-bell 1                ;关闭错误警示
       system-time-locale "C"        ;使用英文时间格式
       ispell-dictionary "en"        ;使用英文词典
       sentence-end-double-space nil ;Sentences should end in one space
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
-      confirm-kill-processes nil
       require-final-newline t)
 
 (defun display-startup-echo-area-message ()
@@ -101,14 +101,6 @@
                          indentation empty space-after-tab))
 (whitespace-mode 1)
 
-;; pulse 滚动焦点闪烁
-(defun pulse-line (&rest _)
-      "Pulse the current line."
-      (pulse-momentary-highlight-one-line (point)))
-
-(dolist (command '(scroll-up-command scroll-down-command
-                   recenter-top-bottom other-window))
-  (advice-add command :after #'pulse-line))
 
 ;; narrow 命令跳过初始化提醒
 (put 'narrow-to-region 'disabled nil)

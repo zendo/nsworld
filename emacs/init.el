@@ -64,7 +64,6 @@
 (require 'init-project)
 ;; (require 'init-ivy)
 (require 'init-vertico)
-;; (require 'init-selectrum)
 ;; (require 'init-meow)
 (require 'keybindings)
 

@@ -2,18 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; 鼠标 Mouse & Smooth Scroll
-;; Scroll one line at a time (less "jumpy" than defaults)
-;; (when (display-graphic-p)
-;;   (setq mouse-wheel-scroll-amount '(3 ((shift) . hscroll))
-;;         mouse-wheel-scroll-amount-horizontal 1
-;;         mouse-wheel-progressive-speed nil))
-;; (setq scroll-step 1
-;;       scroll-margin 0
-;;       scroll-conservatively 100000
-;;       auto-window-vscroll nil
-;;       scroll-preserve-screen-position t)
-
 ;; Scroll
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode t))
