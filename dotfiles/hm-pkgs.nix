@@ -79,6 +79,7 @@
     # harmonyos-sans
 
     git-cola
+    distrobox
     v2ray
     qv2ray
     # google-chrome

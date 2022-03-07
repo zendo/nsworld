@@ -94,6 +94,7 @@
  ("C-{" . mc/mark-previous-like-this)
  ("C-|" . mc/mark-all-like-this-dwim)
 
+ ("C-x C-d" . dired-jump)
  ("C-c C-e" . macrostep-expand)
  ("C-c Y" . youdao-dictionary-search-at-point)
  ("C-c y" . youdao-dictionary-search-at-point-tooltip))

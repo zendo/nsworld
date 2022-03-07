@@ -31,7 +31,7 @@
               (scroll-bar-mode -1)
               (setq inhibit-splash-screen t)
               (setq use-file-dialog nil)
-              (setq initial-frame-alist (quote ((fullscreen . maximized))))
+              ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
               ))
 
 ;; Prevent unwanted runtime builds in gccemacs (native-comp); packages are
