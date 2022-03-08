@@ -3,17 +3,35 @@
 ;;; Code:
 
 ;; dired-sidebar
-(use-package dired-sidebar
+;; (use-package dired-sidebar
+;;   :defer t
+;;   :bind (([f1] . dired-sidebar-toggle-sidebar))
+;;   :init
+;;   (add-hook 'dired-sidebar-mode-hook
+;;             (lambda ()
+;;               (unless (file-remote-p default-directory)
+;;                 (auto-revert-mode))))
+;;   :config
+;;   (setq dired-sidebar-use-term-integration t)
+;;   (setq dired-sidebar-theme 'icons))
+
+;; treemacs
+(use-package treemacs
   :defer t
-  :bind (([f1] . dired-sidebar-toggle-sidebar))
-  :init
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
+  :bind (([f1]        . treemacs)
+         ("M-0"       . treemacs-select-window)
+         :map treemacs-mode-map
+         ([mouse-1]   . treemacs-single-click-expand-action))
   :config
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-theme 'icons))
+  ;; (setq treemacs-no-png-images t) ; tui
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode 'always))
+
+;; treemacs-all-the-icons
+(use-package treemacs-all-the-icons
+  :after (treemacs)
+  :config (treemacs-load-theme "all-the-icons"))
 
 ;; ibuffer-sidebar
 (use-package ibuffer-sidebar

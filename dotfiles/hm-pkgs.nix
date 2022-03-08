@@ -63,6 +63,7 @@
     powertop
     unp
     unrar
+    htop
     btop
     bottom # btm
     psmisc # pstree

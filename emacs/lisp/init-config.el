@@ -65,7 +65,6 @@
 (global-prettify-symbols-mode 1)            ;Show lambda as λ.
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名
-(ffap-bindings)                             ;find-file-at-point, smarter C-x C-f when point on path or URL
 
 ;; 编码 encoding, last is highest priority.
 ;; (prefer-coding-system 'cp950)

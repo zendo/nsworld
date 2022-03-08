@@ -11,7 +11,7 @@
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 
-
+(ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
 ;; (global-set-key (kbd "C-SPC") 'nil)
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
