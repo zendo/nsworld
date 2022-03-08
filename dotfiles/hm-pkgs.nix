@@ -98,7 +98,7 @@
     # shutter
     foliate
     ghostwriter
-    # tdesktop
+    tdesktop
     kotatogram-desktop
     meld
     deja-dup
