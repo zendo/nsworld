@@ -72,6 +72,8 @@
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
   :hook (prog-mode . corfu-mode)
+  :bind (:map corfu-map
+              ("<escape>" . corfu-quit))
   :init
   (corfu-global-mode))
 
