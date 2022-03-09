@@ -13,6 +13,10 @@
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode t))
 
+;; Doom special
+(setq +default-want-RET-continue-comments nil)
+
+;; Common
 (global-set-key (kbd "C-z") nil)
 
 (global-set-key (kbd "<f1>") '+treemacs/toggle)

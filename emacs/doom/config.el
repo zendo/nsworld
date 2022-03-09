@@ -13,7 +13,7 @@
       delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
 
-      display-line-numbers-type 't ;t/nil/relative
+      display-line-numbers-type 't ;t nil relative
       calendar-week-start-day 1 ;Monday as first day of week
 
       doom-theme 'doom-tomorrow-night
@@ -29,21 +29,31 @@
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist")
       )
 
-(add-hook! 'focus-out-hook (save-some-buffers t)) ;失去焦点时保存
+(setq org-directory "~/Documents/org/")
+
+(setq deft-directory "~/Documents/org/"
+      deft-extensions '("org", "md", "txt", "tex")
+      deft-recursive t)
+
+;; UI
 ;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 
+;; Editor
 (+global-word-wrap-mode +1)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
+;;禁用 flycheck
+(setq flycheck-disabled-checkers '(sh-shellscript
+                                   emacs-lisp
+                                   emacs-lisp-checkdoc))
 ;; (add-to-list 'auto-mode-alist
              ;; '("bashrc\\'" . conf-mode))
 
-
-
-;; Bacup sth TODO
+;; Backup TODO
+(add-hook! 'focus-out-hook (save-some-buffers t)) ;失去窗口焦点时保存
 ;; (setq backup-directory-alist `((".*" . ,my-backup))
 ;;       undo-tree-auto-save-history t
 ;;       undo-tree-history-directory-alist
@@ -57,24 +67,6 @@
 ;;       version-control t      ; number backups
 ;;       vc-make-backup-files t ; backup version controlled files
 ;;       )
-
-;; Doom exposes five (optional) variables for controlling fonts in D
-;; oom. Here
-;; 1are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -93,12 +85,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
-(setq org-directory "~/Documents/Notes/")
-
-(setq deft-directory "~/Documents/Notes/"
-      deft-extensions '("org", "md", "txt", "tex")
-      deft-recursive t)
 
 
 (setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
@@ -166,3 +152,4 @@ Version 2017-08-19"
         (goto-char (point-min))
         (while (re-search-forward " +" nil t)
           (replace-match "\n" ))))))
+
