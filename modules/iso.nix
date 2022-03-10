@@ -26,12 +26,12 @@
   services.xserver = {
     libinput = {
       # enable = true; # enabled default by desktopManager
-      tapping = true;
       touchpad = {
+        tapping = true;
         clickMethod = "buttonareas";
       };
     };
-    xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
 

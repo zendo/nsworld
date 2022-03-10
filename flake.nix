@@ -84,8 +84,14 @@
           ./modules/nixconfig.nix
           ./modules/configuration.nix
           {
-            nix.generateNixPathFromInputs = true;  # nix-path
-            nix.generateRegistryFromInputs = true; # registry system flake
+            nix.registry = {
+              nixpkgs.flake = inputs.nixpkgs;
+            };
+            nix.nixPath = [
+              "nixpkgs=${nixpkgs}"
+              "nixos-config=${self}"
+              "/nix/var/nix/profiles/per-user/root/channels"
+            ];
           }
         ];
       };
@@ -116,7 +122,6 @@
             ];
           };
         }
-
       ];
 
       hosts.svp.modules = [

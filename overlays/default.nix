@@ -4,6 +4,5 @@ final: prev: {
   # manix = prev.manix.overrideAttrs (o: rec{
   #   inherit (prev.sources.manix) pname version src;
   # });
-  ydict = prev.callPackage ./ydict {};
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
 }

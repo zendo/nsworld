@@ -68,8 +68,4 @@
     size = 128;
   };
 
-  # xresources.properties = {
-  #   "Xcursor.size" = 128;
-  #   "Xcursor.theme" = "Vanilla-DMZ";
-  # };
 }
