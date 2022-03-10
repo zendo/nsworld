@@ -44,10 +44,7 @@ dconf reset -f /org/gnome/
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"  bash -s -- :preset
 
 # Clover
-curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO 
-
-# Ydict
-curl -s https://api.github.com/repos/TimothyYe/ydict/releases/latest | grep "browser_download_url.*linux64.*gz.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO
+curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO
 
 ~/.ssh
 ~/.config/fcitx5/conf

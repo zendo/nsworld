@@ -1,4 +1,4 @@
-{inputs, config, lib, ... }:
+{ config, lib, inputs, ... }:
 
 {
   nix.settings = {
@@ -16,14 +16,23 @@
     ];
 
     trusted-users = [ "@wheel" ];
+    # List of binary cache URLs that non-root users can use
     trusted-substituters = [
-    ]; # List of binary cache URLs that non-root users can use
+    ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 
   nix = {
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+    };
+    nixPath = [
+      "nixpkgs=${inputs.nixpkgs}"
+      "nixos-config=${inputs.self}"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
     gc = {
       automatic = true;
       options = "--max-freed 10G";

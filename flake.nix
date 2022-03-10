@@ -83,16 +83,6 @@
           ./modules/network.nix
           ./modules/nixconfig.nix
           ./modules/configuration.nix
-          {
-            nix.registry = {
-              nixpkgs.flake = inputs.nixpkgs;
-            };
-            nix.nixPath = [
-              "nixpkgs=${nixpkgs}"
-              "nixos-config=${self}"
-              "/nix/var/nix/profiles/per-user/root/channels"
-            ];
-          }
         ];
       };
 

@@ -24,7 +24,6 @@
     gnome-photos
     gnome.yelp
     gnome.geary
-
     gnome.totem
     gnome.gnome-music
     gnome.gnome-software
@@ -35,7 +34,7 @@
     notejot
     gparted
     dconf2nix
-    # fractal
+    fractal
 
     gnome.gnome-tweaks
     gnome.gnome-todo
@@ -47,7 +46,7 @@
     # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
     # gnomeExtensions.dash-to-panel
-    # gnomeExtensions.just-perfection
+    gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     # gnomeExtensions.clipboard-indicator
