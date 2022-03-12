@@ -99,7 +99,7 @@
     foliate
     ghostwriter
     tdesktop
-    kotatogram-desktop
+    # kotatogram-desktop
     meld
     deja-dup
     # rclone
