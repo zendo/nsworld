@@ -31,6 +31,7 @@
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"
       "nixos-config=${inputs.self}"
+      "home-manager=${inputs.home-manager}"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
     gc = {
