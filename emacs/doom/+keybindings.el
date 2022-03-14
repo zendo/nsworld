@@ -56,6 +56,8 @@
  "C-c <left>" #'winner-undo
  "C-c <right>" #'winner-redo
 
+ "C-x C-g" #'magit-status
+
  "C-c y" #'youdao-dictionary-search-at-point-tooltip
  )
 

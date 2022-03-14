@@ -55,6 +55,7 @@
     gnomeExtensions.kimpanel
     gnomeExtensions.logo-menu
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.pixel-saver
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
     gnomeExtensions.ddterm
