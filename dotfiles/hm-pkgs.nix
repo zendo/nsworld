@@ -90,6 +90,7 @@
     qbittorrent
     # kooha
     mpv
+    vlc
     ffmpeg
     audacious
     spotify

@@ -94,6 +94,7 @@
         ./modules/chinese.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/hardware-configuration.nix
+        ./hosts/yoga/edid.nix
 
         musnix.nixosModules.musnix
         { musnix.enable = true; }
