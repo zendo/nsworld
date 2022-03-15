@@ -28,7 +28,7 @@
       flake = false;
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/9c80561882612903edf2a31007f9be2e8fc484d6";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/d43b200ed5675bf912440975435dd7a7363f9481";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
@@ -80,9 +80,9 @@
         # Extra arguments to be passed to all modules. Merged with host's extraArgs.
         # extraArgs = { inherit utils inputs; foo = "foo"; };
         modules = [
+          ./modules/base.nix
           ./modules/network.nix
           ./modules/nixconfig.nix
-          ./modules/configuration.nix
         ];
       };
 

@@ -91,7 +91,6 @@
     micro
     gdu
     duf
-    pfetch
     neofetch
     parted
     gptfdisk
