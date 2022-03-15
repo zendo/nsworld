@@ -30,8 +30,8 @@
 
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
-(global-set-key [remap mark-sexp] 'easy-mark)
-(global-set-key [remap kill-ring-save] 'easy-kill)
+;; (global-set-key [remap mark-sexp] 'easy-mark)
+;; (global-set-key [remap kill-ring-save] 'easy-kill)
 
 (global-set-key [remap query-replace] 'anzu-query-replace)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
@@ -40,13 +40,13 @@
  "C-." #'hippie-expand
  "C-\\" #'align-regexp
  "M-s" #'avy-goto-char ;默认 isearch 被覆盖
- "C-k" #'crux-smart-kill-line
 
  "C-s" #'consult-line
  "C-x C-r" #'consult-recent-file
  "C-x C-b" #'consult-buffer
  "C-x 4 r" #'consult-buffer-other-window
  "C-c r" #'consult-ripgrep
+ "M-y" #'consult-yank-pop
  "M-m" #'consult-mark
 
  "C-}" #'mc/mark-next-like-this
@@ -63,6 +63,9 @@
 
 (map!
  :leader
+ "0" #'delete-window
+ "1" #'delete-other-windows
+ "k" #'kill-this-buffer
  :prefix ("-" . "remove-lists")
  "b" #'bookmark-delete
  "r" #'recentf-edit-list

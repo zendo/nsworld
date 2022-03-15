@@ -154,7 +154,7 @@
   };
 
   programs.nix-index = {
-    enable = true;
+    enable = false;
     # package = pkgs.nix-index-git;
     enableBashIntegration = true;
     enableZshIntegration = true;
