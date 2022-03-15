@@ -30,8 +30,8 @@
 
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
-;; (global-set-key [remap mark-sexp] 'easy-mark)
-;; (global-set-key [remap kill-ring-save] 'easy-kill)
+(global-set-key [remap mark-sexp] 'easy-mark)
+(global-set-key [remap kill-ring-save] 'easy-kill)
 
 (global-set-key [remap query-replace] 'anzu-query-replace)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
@@ -62,14 +62,23 @@
  )
 
 (map!
+ :n "C-=" #'er/expand-region
+ :i "C-=" #'er/expand-region
+ :n "C-y" #'yank
+ :i "C-y" #'yank
+ :n "C-e" #'end-of-line
  :leader
- "0" #'delete-window
- "1" #'delete-other-windows
- "k" #'kill-this-buffer
+ "=" #'er/expand-region
+ "y" #'youdao-dictionary-search-at-point-tooltip
  :prefix ("-" . "remove-lists")
  "b" #'bookmark-delete
  "r" #'recentf-edit-list
  "p" #'projectile-remove-known-project
+ :prefix ("w" . "window")
+ "0" #'delete-window
+ "1" #'delete-other-windows
+ :prefix ("z" . "zap")
+ "SPC" #'just-one-space
  )
 
 ;; Dired
