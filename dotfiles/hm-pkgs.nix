@@ -69,6 +69,7 @@
     psmisc # pstree
     cht-sh
     trash-cli
+    kalker # calculator
     imagemagick
     translate-shell
     magic-wormhole
