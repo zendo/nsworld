@@ -49,8 +49,8 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
-    # gnomeExtensions.clipboard-indicator
     gnomeExtensions.gnome-clipboard
+    # gnomeExtensions.clipboard-history
     gnomeExtensions.espresso
     gnomeExtensions.kimpanel
     gnomeExtensions.logo-menu

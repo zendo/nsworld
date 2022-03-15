@@ -153,13 +153,6 @@
     };
   };
 
-  programs.nix-index = {
-    enable = false;
-    # package = pkgs.nix-index-git;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
   programs.bash = {
     enable = true;
     # shellAliases = {
