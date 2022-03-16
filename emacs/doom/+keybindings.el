@@ -44,10 +44,10 @@
  "C-s" #'consult-line
  "C-x C-r" #'consult-recent-file
  "C-x C-b" #'consult-buffer
- "C-x 4 r" #'consult-buffer-other-window
- "C-c r" #'consult-ripgrep
  "M-y" #'consult-yank-pop
  "M-m" #'consult-mark
+ "C-x 4 r" #'consult-buffer-other-window
+ "C-x 4 x" #'ace-swap-window
 
  "C-k" #'crux-smart-kill-line
 
@@ -55,34 +55,36 @@
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
 
- "C-c <left>" #'winner-undo
- "C-c <right>" #'winner-redo
-
  "C-x C-g" #'magit-status
-
- "C-c y" #'youdao-dictionary-search-at-point-tooltip
  )
 
-(setq doom-leader-alt-key "<M-SPC>")
-(map!
- :leader
- "y" #'youdao-dictionary-search-at-point-tooltip
- "<left>" #'winner-undo
- "<right>" #'winner-redo
- "<SPC>" #'project-find-file
- "," #'consult-buffer
- "." #'find-file
- "/" #'consult-ripgrep
- :prefix ("-" . "remove-lists")
- "b" #'bookmark-delete
- "r" #'recentf-edit-list
- "p" #'projectile-remove-known-project
- :prefix ("w" . "window")
- "0" #'delete-window
- "1" #'delete-other-windows
- :prefix ("z" . "zap")
- "SPC" #'just-one-space
- )
+;; emacs keymap
+(unless (featurep! :editor evil +everywhere)
+  ;; (setq doom-leader-alt-key "<M-SPC>")
+  (map!
+   :leader
+   "y" #'youdao-dictionary-search-at-point-tooltip
+   "<left>" #'winner-undo
+   "<right>" #'winner-redo
+   "<SPC>" #'project-find-file
+   "," #'consult-buffer
+   "." #'find-file
+   "/" #'consult-ripgrep
+   ":" #'execute-extended-command
+   :prefix ("-" . "remove-lists")
+   "b" #'bookmark-delete
+   "r" #'recentf-edit-list
+   "p" #'projectile-remove-known-project
+   :prefix ("b" . "buffer")
+   "k" #'kill-current-buffer
+   "K" #'crux-kill-other-buffers
+   "s" #'projectile-save-project-buffers
+   :prefix ("f" . "file")
+   "<f2>" #'crux-rename-file-and-buffer
+   "s" #'projectile-save-project-buffers
+   :prefix ("z" . "zap")
+   "SPC" #'just-one-space
+   ))
 
 ;; evil keymap
 (when (featurep! :editor evil +everywhere)

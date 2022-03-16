@@ -61,11 +61,5 @@
     package = pkgs.firefox-wayland;
   };
 
-  # fix tiny cursor in qt-apps @gnome
-  xsession.pointerCursor = {
-    name = "Vanilla-DMZ-AA";
-    package = pkgs.vanilla-dmz;
-    size = 128;
-  };
 
 }

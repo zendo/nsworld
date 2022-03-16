@@ -109,6 +109,8 @@
               ./dotfiles/hm-pkgs.nix
               ./dotfiles/hm-cli.nix
               ./dotfiles/hm-gui.nix
+              ./dotfiles/hm-gnome.nix
+              # ./dotfiles/hm-kde.nix
             ];
           };
         }
