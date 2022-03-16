@@ -67,6 +67,7 @@
  :n "C-y" #'yank
  :i "C-y" #'yank
  :n "C-e" #'end-of-line
+ :n "C-k" #'crux-smart-kill-line
  :leader
  "=" #'er/expand-region
  "y" #'youdao-dictionary-search-at-point-tooltip

@@ -1,5 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }:
-# https://discourse.nixos.org/t/how-to-tell-kernel-to-use-a-custom-modeline/5500
+# https://github.com/edrex/nixos-config/blob/c7c5f82e18f3b7cfcfe165042f6a2e51fcb3f375/hosts/chip/edid.nix
 let
   # package for edid firmware
   chip_edid = pkgs.runCommand "chip_edid" {} ''
