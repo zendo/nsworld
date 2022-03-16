@@ -77,7 +77,6 @@
     asciinema # record the terminal
 
     # overlay
-    # ydict
     # harmonyos-sans
 
     git-cola

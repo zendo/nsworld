@@ -55,7 +55,7 @@
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
 
- "C-x C-g" #'magit-status
+ "C-x g" #'magit-status
  )
 
 ;; emacs keymap
