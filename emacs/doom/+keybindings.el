@@ -49,6 +49,8 @@
  "M-y" #'consult-yank-pop
  "M-m" #'consult-mark
 
+ "C-k" #'crux-smart-kill-line
+
  "C-}" #'mc/mark-next-like-this
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
@@ -61,16 +63,16 @@
  "C-c y" #'youdao-dictionary-search-at-point-tooltip
  )
 
+(setq doom-leader-alt-key "<M-SPC>")
 (map!
- :n "C-=" #'er/expand-region
- :i "C-=" #'er/expand-region
- :n "C-y" #'yank
- :i "C-y" #'yank
- :n "C-e" #'end-of-line
- :n "C-k" #'crux-smart-kill-line
  :leader
- "=" #'er/expand-region
  "y" #'youdao-dictionary-search-at-point-tooltip
+ "<left>" #'winner-undo
+ "<right>" #'winner-redo
+ "<SPC>" #'project-find-file
+ "," #'consult-buffer
+ "." #'find-file
+ "/" #'consult-ripgrep
  :prefix ("-" . "remove-lists")
  "b" #'bookmark-delete
  "r" #'recentf-edit-list
@@ -81,6 +83,15 @@
  :prefix ("z" . "zap")
  "SPC" #'just-one-space
  )
+
+;; evil keymap
+(when (featurep! :editor evil +everywhere)
+  (map!
+   :niv "C-=" #'er/expand-region
+   :niv "C-y" #'yank
+   :niv "C-k" #'crux-smart-kill-line
+   :niv "C-e" #'end-of-line
+ ))
 
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
