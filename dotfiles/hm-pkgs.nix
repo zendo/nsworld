@@ -107,7 +107,9 @@
     # rclone-browser
     # vorta
     yacreader
+    # qalculate-gtk # scientific calculator
     # bottles # wine manager
+    # yuzu
 
     # OFFICE
     # libreoffice-fresh

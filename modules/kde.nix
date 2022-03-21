@@ -7,12 +7,11 @@
   # services.xserver.desktopManager.plasma5.useQtScaling = true;
 
   services.xserver.displayManager = {
-    #sddm.enable = true; # wayland bug
-    #sddm.settings.Wayland.SessionDir = "${pkgs.plasma5Packages.plasma-workspace}/share/wayland-sessions";
+    # sddm.enable = true; # wayland bug
     lightdm.enable = true;
     lightdm.greeters.gtk.extraConfig = ''
-    xft-dpi=240
-    '';
+     xft-dpi=240
+      '';
     defaultSession = "plasmawayland";
     autoLogin.user = "iab";
   };
@@ -50,7 +49,6 @@
     kalendar
     gparted
     kcolorchooser
-    qalculate-gtk
     gnome.gnome-calculator
     gnome.gnome-color-manager
   ];

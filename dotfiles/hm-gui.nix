@@ -1,15 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  xdg.desktopEntries.spotify = {
-    name = "Spotify";
-    genericName = "Music Player";
-    icon = "spotify-client";
-    exec = "spotify %U --force-device-scale-factor=2";
-    terminal = false;
-    categories = [ "Application" "Music" ];
-  };
-
   programs.vscode = {
     enable = true;
   };

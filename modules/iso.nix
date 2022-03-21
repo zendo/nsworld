@@ -31,7 +31,7 @@
         clickMethod = "buttonareas";
       };
     };
-    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+    xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
 
