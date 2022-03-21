@@ -6,9 +6,9 @@ final: prev: {
   # });
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
 
-  # nix-index = prev.nix-index.overrideAttrs (oldAttrs: {
+  # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGithHub {
-  #     rev = "f09548f66790d2d7d53f07ad2af62993d7cabb08";
+  #     rev = "d19813cb03c7d71b896aead28e5285bc131500a9";
   #   };
   # });
 

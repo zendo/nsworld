@@ -35,6 +35,8 @@
     gparted
     dconf2nix
     fractal
+    audacious
+    kooha
 
     gnome.gnome-tweaks
     gnome.gnome-todo

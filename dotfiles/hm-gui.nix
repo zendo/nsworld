@@ -43,13 +43,19 @@
     };
   };
 
-  programs.chromium = {
-    enable = false;
-  };
-
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
+  };
+
+  # not work?
+  programs.chromium = {
+    enable = false;
+    package = pkgs.google-chrome;
+    commandLineArgs = [
+      "--ozone-platform=wayland"
+      "--enable-features=VaapiVideoDecoder"
+    ];
   };
 
 

@@ -5,8 +5,8 @@ shell:
 
 window:
   dimensions:
-    columns: 85
-    lines: 28
+    columns: 82
+    lines: 25
 
   # position:
   #   x: 0

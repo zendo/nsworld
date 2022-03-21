@@ -84,15 +84,17 @@
     v2ray
     qv2ray
     foot
-    # alacritty
+    alacritty
     # wezterm
-    # google-chrome
+
+    (pkgs.google-chrome.override {
+        commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+    })
+
     qbittorrent
-    # kooha
     mpv
     vlc
     ffmpeg
-    audacious
     spotify
     mousai # 听歌识曲
     # easyeffects

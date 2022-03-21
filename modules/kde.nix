@@ -18,6 +18,7 @@
 
   # services.gnome.gnome-keyring.enable = true;
   # security.pam.services.login.enableGnomeKeyring = true;
+  # programs.seahorse.enable = true;
 
   services.colord.enable = true;
 
@@ -44,9 +45,9 @@
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
 
-    # neochat
     falkon
     kalendar
+    yakuake
     gparted
     kcolorchooser
     gnome.gnome-calculator
