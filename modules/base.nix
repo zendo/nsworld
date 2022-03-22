@@ -89,7 +89,6 @@
     fd
     ripgrep
     mg
-    micro
     gdu
     duf
     neofetch

@@ -65,7 +65,6 @@
     ripgrep
     vim
     mg
-    micro
     neofetch
     parted
     gptfdisk
