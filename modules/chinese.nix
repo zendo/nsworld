@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   i18n.defaultLocale = "zh_CN.UTF-8";
 
   fonts = {
@@ -22,10 +24,10 @@
     ];
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Sarasa Mono SC" "DejaVu Sans Mono" ];
-        emoji = [ "Noto Color Emoji" ];
-        sansSerif = [ "Noto Sans CJK SC" "Source Han Sans SC"];
-        serif = [ "Noto Serif CJK SC" "Source Han Serif SC"];
+        monospace = ["Sarasa Mono SC" "DejaVu Sans Mono"];
+        emoji = ["Noto Color Emoji"];
+        sansSerif = ["Noto Sans CJK SC" "Source Han Sans SC"];
+        serif = ["Noto Serif CJK SC" "Source Han Serif SC"];
       };
     };
   };
@@ -44,6 +46,4 @@
     #   typing-booster
     # ];
   };
-
-
 }

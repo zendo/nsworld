@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 # https://github.com/edrex/nixos-config/blob/c7c5f82e18f3b7cfcfe165042f6a2e51fcb3f375/hosts/chip/edid.nix
 let
   # package for edid firmware
@@ -8,7 +14,7 @@ let
   '';
 in {
   # add pkg to firmware
-  hardware.firmware = [ chip_edid ];
+  hardware.firmware = [chip_edid];
   # add kernel param
-  boot.kernelParams = [ "drm.edid_firmware=eDP-1:edid/chipedp.bin" ];
+  boot.kernelParams = ["drm.edid_firmware=eDP-1:edid/chipedp.bin"];
 }

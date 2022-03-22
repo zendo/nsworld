@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/.emacs.d/bin"
@@ -59,7 +61,6 @@
     #   rev = "3b699870fb2806404e305fe34a3d2541d8ed5ef5";
     #   sha256 = "hOAcjgj6jDWtCGMs4Gd49sAAOsovGXm++TKU3NhZt8w=";
     # };
-
   };
 
   xdg.configFile = {
@@ -199,5 +200,4 @@
       bind -n M-w kill-pane
     '';
   };
-
 }

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   system.stateVersion = "22.05";
   time.timeZone = "Asia/Shanghai";
 
@@ -9,7 +11,7 @@
 
   boot = {
     plymouth.enable = true;
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = ["ntfs"];
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
@@ -69,7 +71,6 @@
   hardware.bluetooth.enable = true;
 
   services.xserver = {
-
     libinput = {
       # enable = true; # enabled default by desktopManager
     };
@@ -146,5 +147,4 @@
   #   };
   # };
   # programs.steam.enable = true;
-
 }

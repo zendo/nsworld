@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.vscode = {
     enable = true;
   };
@@ -57,6 +59,4 @@
       "--enable-features=VaapiVideoDecoder"
     ];
   };
-
-
 }

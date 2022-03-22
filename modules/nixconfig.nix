@@ -1,6 +1,9 @@
-{ config, lib, inputs, ... }:
-
 {
+  config,
+  lib,
+  inputs,
+  ...
+}: {
   nix.settings = {
     # keep-outputs = true
     # keep-derivations = true
@@ -15,7 +18,7 @@
       "https://nix-community.cachix.org"
     ];
 
-    trusted-users = [ "@wheel" ];
+    trusted-users = ["@wheel"];
     # List of binary cache URLs that non-root users can use
     trusted-substituters = [
     ];

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     # HARDWARE TEST
     efitools
@@ -89,7 +91,7 @@
     # wezterm
 
     (pkgs.google-chrome.override {
-        commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+      commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
     })
 
     qbittorrent
@@ -121,5 +123,4 @@
     # tela-icon-theme
     # vanilla-dmz
   ];
-
 }

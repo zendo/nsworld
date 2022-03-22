@@ -34,24 +34,21 @@
     # nixos-cn.url = "github:nixos-cn/flakes";
   };
 
-  outputs =
-    inputs@
-    { self
-    , nixpkgs
-    , nixpkgs-unstable
-    , nixos-hardware
-    , home-manager
-    , utils
-    , musnix
-    , nur
-    , emacs-overlay
-    , ...
-    }:
-
-    # let
-    #   pkgs = self.pkgs.x86_64-linux.nixpkgs;
-    # in
-
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    nixos-hardware,
+    home-manager,
+    utils,
+    musnix,
+    nur,
+    emacs-overlay,
+    ...
+  }:
+  # let
+  #   pkgs = self.pkgs.x86_64-linux.nixpkgs;
+  # in
     utils.lib.mkFlake {
       inherit self inputs;
       # supportedSystems = [ "x86_64-linux" ];
@@ -96,13 +93,13 @@
         ./hosts/yoga/hardware-configuration.nix
 
         musnix.nixosModules.musnix
-        { musnix.enable = true; }
+        {musnix.enable = true;}
 
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.iab = { ... }: {
+          home-manager.users.iab = {...}: {
             home.stateVersion = "22.05";
             programs.home-manager.enable = true;
             imports = [
@@ -123,6 +120,5 @@
         #./modules/gnome.nix
         ./modules/chinese.nix
       ];
-
     };
 }

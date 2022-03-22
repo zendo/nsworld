@@ -1,5 +1,7 @@
-{ lib, fetchzip }:
-
+{
+  lib,
+  fetchzip,
+}:
 fetchzip {
   url = "https://communityfile-drcn.op.hicloud.com/FileServer/getFile/cmtyPub/011/111/111/0000000000011111111.20211104104632.29664895974930825801937957883629:50521103025534:2800:1C62D8D976C9EAB505E2AAE22BD5B04FB5E6E311A8C39626B70F3F5BCF941EF9.zip?needInitFileName=true";
 
@@ -23,14 +25,14 @@ fetchzip {
 
     /*
      "The font binaries are released under a license that permits unlimited
-      print, desktop, and web use for commercial and non-commercial
-      applications. It may be embedded and distributed in documents and
-      applications. The source is released in the widely supported UFO format
-      and may be modified to derive new typeface branches. The full text of
-      the license is available in LICENSE.md" (From the GitHub page)
-    */
+     print, desktop, and web use for commercial and non-commercial
+     applications. It may be embedded and distributed in documents and
+     applications. The source is released in the widely supported UFO format
+     and may be modified to derive new typeface branches. The full text of
+     the license is available in LICENSE.md" (From the GitHub page)
+     */
     license = licenses.free;
-    maintainers = with maintainers; [ dywedir ];
+    maintainers = with maintainers; [dywedir];
     platforms = platforms.all;
   };
 }

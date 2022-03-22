@@ -1,5 +1,10 @@
-{ config, pkgs, modulesPath, lib, ... }:
 {
+  config,
+  pkgs,
+  modulesPath,
+  lib,
+  ...
+}: {
   imports = [
     # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
@@ -14,7 +19,7 @@
   hardware.enableAllFirmware = true;
 
   boot = {
-    supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+    supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
   };
 
@@ -34,7 +39,6 @@
     xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
-
   nix.settings = {
     substituters = lib.mkBefore [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
@@ -43,7 +47,7 @@
       "https://nix-community.cachix.org"
     ];
 
-    trusted-users = [ "@wheel" ];
+    trusted-users = ["@wheel"];
     trusted-substituters = [
     ]; # List of binary cache URLs that non-root users can use
     trusted-public-keys = [

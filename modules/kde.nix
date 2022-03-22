@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.plasma5.runUsingSystemd = true;
@@ -10,8 +12,8 @@
     # sddm.enable = true; # wayland bug
     lightdm.enable = true;
     lightdm.greeters.gtk.extraConfig = ''
-     xft-dpi=240
-      '';
+      xft-dpi=240
+    '';
     defaultSession = "plasmawayland";
     autoLogin.user = "iab";
   };
@@ -64,5 +66,4 @@
       DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
     };
   };
-
 }

@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   users.mutableUsers = false;
 
   # Don't require password for sudo
@@ -33,5 +31,4 @@
       "libvirtd"
     ];
   };
-  
 }

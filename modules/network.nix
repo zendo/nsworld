@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   networking = {
     # hostName = "";
     useDHCP = false;
@@ -20,7 +22,7 @@
         "gist.github.com"
         "github.com"
       ];
-      "140.82.114.5" = [ "api.github.com" ];
+      "140.82.114.5" = ["api.github.com"];
       "185.199.108.133" = [
         "desktop.githubusercontent.com"
         "camo.githubusercontent.com"
@@ -37,8 +39,8 @@
         "avatars.githubusercontent.com"
         "media.githubusercontent.com"
       ];
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+      # proxy.default = "http://user:password@proxy:port/";
+      # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
     };
   };
 
@@ -75,6 +77,4 @@
 
   # OpenSnitch
   # services.opensnitch.enable = true;
-
-
 }

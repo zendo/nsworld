@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # fix tiny cursor in qt-apps @gnome
   xsession.pointerCursor = {
     name = "Vanilla-DMZ-AA";
@@ -15,7 +17,7 @@
     icon = "spotify-client";
     exec = "spotify %U --force-device-scale-factor=2";
     terminal = false;
-    categories = [ "Application" "Music" ];
+    categories = ["Application" "Music"];
   };
 
   # gnome terminal
@@ -60,5 +62,4 @@
       };
     };
   };
-
 }

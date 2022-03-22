@@ -1,16 +1,18 @@
 # git clone https://github.com/nzbr/NixOS-WSL.git
 # nix build .#nixosConfigurations.mysystem.config.system.build.installer
-
 # inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 # home-manager.url = "github:nix-community/home-manager";
 # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 #
 # add home-manager modules
 # ssr ip change
-
-{ config, lib, pkgs, inputs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "22.05";
 
@@ -41,7 +43,7 @@
   nix.settings = {
     warn-dirty = false;
     auto-optimise-store = true;
-    trusted-users = [ "@wheel" ];
+    trusted-users = ["@wheel"];
     flake-registry = "https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json";
     substituters = lib.mkForce [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
