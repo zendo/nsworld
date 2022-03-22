@@ -36,7 +36,6 @@
     libsForQt5.ark
     libsForQt5.kate
     libsForQt5.kde-gtk-config
-    libsForQt5.kompare
 
     libsForQt5.krdc
     libsForQt5.kleopatra

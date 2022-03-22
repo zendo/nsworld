@@ -26,6 +26,7 @@
     nix-bash-completions
     nixpkgs-fmt
     nixfmt
+    alejandra # Nix Code Formatter
     rnix-lsp
     lorri
     comma
