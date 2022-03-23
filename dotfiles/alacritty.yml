@@ -16,7 +16,7 @@ window:
     x: 6
     y: 6
 
-window.opacity: 0.95
+  opacity: 0.95
 
 font:
   size: 11
