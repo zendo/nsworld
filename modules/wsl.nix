@@ -1,11 +1,21 @@
-# git clone https://github.com/nzbr/NixOS-WSL.git
-# nix build .#nixosConfigurations.mysystem.config.system.build.installer
-# inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-# home-manager.url = "github:nix-community/home-manager";
-# home-manager.inputs.nixpkgs.follows = "nixpkgs";
-#
-# add home-manager modules
-# ssr 192.168.2.118:10809
+/*
+
+git clone https://github.com/nix-community/NixOS-WSL.git
+
+nix build .#nixosConfigurations.mysystem.config.system.build.installer
+
+flake.nix:
+inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+home-manager.url = "github:nix-community/home-manager";
+home-manager.inputs.nixpkgs.follows = "nixpkgs";
+&&
+home-manager modules ...
+
+hm-cli.nix:
+ssr 192.168.2.118:10809
+
+*/
+
 {
   config,
   lib,
