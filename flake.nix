@@ -111,6 +111,7 @@
             ];
           };
         }
+
       ];
 
       hosts.svp.modules = [

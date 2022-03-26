@@ -63,5 +63,6 @@
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
     gnomeExtensions.ddterm
+    gnomeExtensions.ideapad-mode
   ];
 }
