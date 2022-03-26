@@ -145,9 +145,9 @@
   };
 
   programs.starship = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
-    enableZshIntegration = true;
+    # enableZshIntegration = true;
     settings = {
       add_newline = true;
       # disable "It took xxs"
@@ -173,7 +173,7 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     prezto = {
-      enable = false;
+      enable = true;
       prompt.theme = "pure";
     };
     shellAliases = {
