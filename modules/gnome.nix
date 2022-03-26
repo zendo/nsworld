@@ -34,10 +34,11 @@
   environment.systemPackages = with pkgs; [
     gthumb
     notejot
+    lollypop
+    rhythmbox
     gparted
     dconf2nix
     fractal
-    audacious
     kooha
 
     gnome.gnome-tweaks
@@ -45,6 +46,7 @@
     gnome.dconf-editor
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder
+    gnome.gnome-boxes
 
     gnomeExtensions.appindicator
     # gnomeExtensions.tray-icons-reloaded
@@ -60,6 +62,7 @@
     gnomeExtensions.logo-menu
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pixel-saver
+    gnomeExtensions.screenshot-tool
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
     gnomeExtensions.ddterm

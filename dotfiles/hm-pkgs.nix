@@ -46,6 +46,7 @@
     # gnumake
     # nodejs
     gitui
+    bit
     onefetch
     jq
     jql
@@ -105,6 +106,7 @@
     # shutter
     foliate
     ghostwriter
+    rnote  # handwritten note
     tdesktop
     # kotatogram-desktop
     meld

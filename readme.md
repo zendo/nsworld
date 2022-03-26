@@ -38,9 +38,10 @@ flatpak install Flatseal Spotify StandardNotes VideoTrimmer
 curl -O https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh
 
 # Backup Gnome Settings
-dconf dump /org/gnome/ > my_gnome_settings
-dconf load /org/gnome/ < my_gnome_settings
+dconf dump /org/gnome/ > my-dconf
+dconf load /org/gnome/ < my-dconf
 dconf reset -f /org/gnome/
+dconf dump /org/gnome/ | dconf2nix > ~/nsworld/dotfiles/hm-dconf.nix
 
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"  bash -s -- :preset

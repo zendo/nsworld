@@ -21,7 +21,6 @@
   boot = {
     supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
-    kernelParams = [ "acpi_backlight=native" ];
   };
 
   networking = {
