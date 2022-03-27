@@ -65,6 +65,7 @@
     ripgrep
     vim
     mg
+    helix
     neofetch
     parted
     gptfdisk

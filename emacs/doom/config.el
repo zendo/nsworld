@@ -5,6 +5,7 @@
 
 (load! "+keybindings")
 
+;; basic
 (setq user-full-name "zendo"
       user-mail-address "linzway@qq.com"
 

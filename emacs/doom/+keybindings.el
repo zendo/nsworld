@@ -94,6 +94,9 @@
    :niv "C-k" #'crux-smart-kill-line
    :niv "C-e" #'end-of-line
    :leader
+   "y" #'youdao-dictionary-search-at-point-tooltip
+   "<left>" #'next-buffer
+   "<right>" #'previous-buffer
    :prefix ("-" . "remove-lists")
    "b" #'bookmark-delete
    "r" #'recentf-edit-list

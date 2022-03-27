@@ -11,8 +11,7 @@ home-manager.inputs.nixpkgs.follows = "nixpkgs";
 &&
 home-manager modules ...
 
-hm-cli.nix:
-ssr 192.168.2.118:10809
+hm-pkgs.nix
 
 */
 
@@ -47,6 +46,12 @@ ssr 192.168.2.118:10809
     fira-code
     jetbrains-mono
   ];
+
+  environment.shellAliases = {
+    wsl-proxy = "export http_proxy=http://192.168.2.118:10809 ; \\
+    export https_proxy=http://192.168.2.118:10809";
+    # wsl-switch = "";
+  };
 
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
