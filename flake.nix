@@ -108,7 +108,6 @@
               ./dotfiles/hm-gui.nix
               ./dotfiles/hm-gnome.nix
               # ./dotfiles/hm-dconf.nix
-              # ./dotfiles/hm-kde.nix
             ];
           };
         }
