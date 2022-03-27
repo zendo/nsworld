@@ -29,8 +29,8 @@
 
     nse = "nix search nixpkgs";
     nix-repl-pkgs = "nix repl '<nixpkgs>'";
-    nixos-readlink = "readlink -f /nix/var/nix/profiles/system";
-    ns-pkgs-installed = "nix path-info --recursive /run/current-system";
+    nix-pkgs-installed = "nix path-info --recursive /run/current-system";
+    nix-os-readlink = "readlink -f /nix/var/nix/profiles/system";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     ns-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#$(hostname)";

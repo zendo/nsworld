@@ -105,7 +105,6 @@
     # easyeffects
     # shutter
     foliate
-    ghostwriter
     rnote # handwritten note
     tdesktop
     # kotatogram-desktop
