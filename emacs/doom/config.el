@@ -37,9 +37,9 @@
       deft-recursive t)
 
 ;; UI
-;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
-(add-to-list 'default-frame-alist '(height . 40))
-(add-to-list 'default-frame-alist '(width . 80))
+;; (add-to-list 'default-frame-alist '(height . 40))
+;; (add-to-list 'default-frame-alist '(width . 80))
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 ;; (after! centaur-tabs
 ;;   (setq centaur-tabs-style "wave"))

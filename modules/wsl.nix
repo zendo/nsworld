@@ -1,20 +1,18 @@
 /*
-
-git clone https://github.com/nix-community/NixOS-WSL.git
-
-nix build .#nixosConfigurations.mysystem.config.system.build.installer
-
-flake.nix:
-inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-home-manager.url = "github:nix-community/home-manager";
-home-manager.inputs.nixpkgs.follows = "nixpkgs";
-&&
-home-manager modules ...
-
-hm-pkgs.nix
-
-*/
-
+ 
+ git clone https://github.com/nix-community/NixOS-WSL.git
+ 
+ nix build .#nixosConfigurations.mysystem.config.system.build.installer
+ 
+ flake.nix:
+ inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+ home-manager.url = "github:nix-community/home-manager";
+ home-manager.inputs.nixpkgs.follows = "nixpkgs";
+ &&
+ home-manager modules ...
+ 
+ hm-pkgs.nix
+ */
 {
   config,
   lib,

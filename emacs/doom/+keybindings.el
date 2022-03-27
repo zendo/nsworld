@@ -56,7 +56,31 @@
  "C-|" #'mc/mark-all-like-this-dwim
 
  "C-x g" #'magit-status
+
+ "C-c y" #'youdao-dictionary-search-at-point-tooltip
  )
+
+;; evil keymap
+(when (featurep! :editor evil +everywhere)
+  (map!
+   :niv "C-=" #'er/expand-region
+   :niv "C-y" #'yank
+   :niv "C-k" #'crux-smart-kill-line
+   :niv "C-e" #'end-of-line
+   :leader
+   "y" #'youdao-dictionary-search-at-point-tooltip
+   "<left>" #'next-buffer
+   "<right>" #'previous-buffer
+   :prefix ("-" . "remove-lists")
+   "b" #'bookmark-delete
+   "r" #'recentf-edit-list
+   "p" #'projectile-remove-known-project
+   :prefix ("w" . "window")
+   "0" #'delete-window
+   "1" #'delete-other-windows
+   "2" #'split-window-vertically
+   "3" #'split-window-horizontally
+ ))
 
 ;; emacs keymap
 (unless (featurep! :editor evil +everywhere)
@@ -86,22 +110,10 @@
    "SPC" #'just-one-space
    ))
 
-;; evil keymap
-(when (featurep! :editor evil +everywhere)
-  (map!
-   :niv "C-=" #'er/expand-region
-   :niv "C-y" #'yank
-   :niv "C-k" #'crux-smart-kill-line
-   :niv "C-e" #'end-of-line
-   :leader
-   "y" #'youdao-dictionary-search-at-point-tooltip
-   "<left>" #'next-buffer
-   "<right>" #'previous-buffer
-   :prefix ("-" . "remove-lists")
-   "b" #'bookmark-delete
-   "r" #'recentf-edit-list
-   "p" #'projectile-remove-known-project
- ))
+;; meow
+;; (when (featurep! :editor meow)
+;;   (map!
+;;    ))
 
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer

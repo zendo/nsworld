@@ -106,7 +106,7 @@
     # shutter
     foliate
     ghostwriter
-    rnote  # handwritten note
+    rnote # handwritten note
     tdesktop
     # kotatogram-desktop
     meld
