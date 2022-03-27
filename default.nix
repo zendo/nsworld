@@ -1,4 +1,5 @@
-# https://github.com/lovesegfault/nix-config/blob/master/default.nix
+# nix repl nsworld
+
 (import
   (
     let

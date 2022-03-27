@@ -36,7 +36,7 @@
         clickMethod = "buttonareas";
       };
     };
-    xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
   nix.settings = {
@@ -64,7 +64,6 @@
     fd
     ripgrep
     vim
-    mg
     helix
     neofetch
     parted

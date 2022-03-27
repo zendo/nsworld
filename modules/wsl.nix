@@ -29,7 +29,6 @@
     p7zip
     fd
     ripgrep
-    mg
     helix
     neovim
     emacs
