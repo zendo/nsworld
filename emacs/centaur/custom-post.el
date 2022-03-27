@@ -3,7 +3,7 @@
 ;;; Code:
 
 (when sys/linuxp
-  (setq centaur-org-directory "~/nsworld/org/"))
+  (setq centaur-org-directory "~/Documents/org/"))
 
 (setq mouse-wheel-scroll-amount '(3 ((shift) . hscroll))
       mouse-wheel-scroll-amount-horizontal 1

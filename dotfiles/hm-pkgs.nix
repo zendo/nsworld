@@ -98,7 +98,7 @@
 
     qbittorrent
     mpv
-    vlc
+    # vlc
     ffmpeg
     spotify
     mousai # 听歌识曲

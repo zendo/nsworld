@@ -13,7 +13,7 @@ nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mir
 
 ``` shell
 # make livecd
-nixos-generate -f iso -c ~/nsworld/modules/iso.nix
+nixos-generate -f iso -c ~/.nsworld/modules/iso.nix
 
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
@@ -33,7 +33,7 @@ LC_ALL=C xdg-user-dirs-update --force
 dconf dump /org/gnome/ > my-dconf
 dconf load /org/gnome/ < my-dconf
 dconf reset -f /org/gnome/
-dconf dump /org/gnome/ | dconf2nix > ~/nsworld/dotfiles/hm-dconf.nix
+dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/dotfiles/hm-dconf.nix
 
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"  bash -s -- :preset

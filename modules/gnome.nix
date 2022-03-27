@@ -38,8 +38,8 @@
     rhythmbox
     gparted
     dconf2nix
-    fractal
     kooha
+    # fractal
 
     gnome.gnome-tweaks
     gnome.gnome-todo
