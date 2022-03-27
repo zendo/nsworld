@@ -29,19 +29,6 @@ nix shell github:oxalica/rust-overlay
 # force using en home-directorys
 LC_ALL=C xdg-user-dirs-update --force
 
-# Doom
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-git clone https://github.com/Not-Leader/doom-meow ~/.emacs.d/modules/editor/meow
-doom install
-
-# flatpak useless
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
-flatpak install Flatseal Spotify StandardNotes VideoTrimmer
-
-# Backup KDE Settings
-curl -O https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh
-
 # Backup Gnome Settings
 dconf dump /org/gnome/ > my-dconf
 dconf load /org/gnome/ < my-dconf
@@ -53,9 +40,6 @@ curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rim
 
 # Clover
 curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO
-
-~/.ssh
-~/.config/fcitx5/conf
 ```
 
 # Nix Lang

@@ -17,5 +17,9 @@
 # --include-from=FILE 不排除 FILE 指定模式匹配的文件
 ################################################################
 
-# -L = Copy Real file for symbol link
-rsync -avhpL "$HOME"/Dropbox "$HOME"/Documents/Dropbox_backups
+rsync -avhpL "$HOME"/.ssh "$HOME"/Documents/SystemBackup/
+rsync -avhpL "$HOME"/.mozilla "$HOME"/Documents/SystemBackup/
+rsync -avhpL "$HOME"/.config/fcitx5/conf "$HOME"/Documents/SystemBackup/
+
+# Gnome dconf
+dconf dump /org/gnome/ > "$HOME"/Documents/SystemBackup/my-dconf

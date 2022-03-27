@@ -92,9 +92,9 @@
     alacritty
     # wezterm
 
-    (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-    })
+    # (pkgs.google-chrome.override {
+    #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+    # })
 
     qbittorrent
     mpv

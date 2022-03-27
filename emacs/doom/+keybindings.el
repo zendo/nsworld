@@ -80,6 +80,8 @@
    "1" #'delete-other-windows
    "2" #'split-window-vertically
    "3" #'split-window-horizontally
+   "," #'winner-undo
+   "." #'winner-redo
  ))
 
 ;; emacs keymap
