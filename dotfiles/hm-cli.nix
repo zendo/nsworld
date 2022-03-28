@@ -168,12 +168,16 @@
     shellAliases = {
       history = "history 0";
     };
+    # ctrl-v show key code
     initExtra = ''
       setopt no_nomatch
       unsetopt correct
       bindkey -e
-      bindkey "\e[27;2;13~" accept-line  # shift+return
-      bindkey "\e[27;5;13~" accept-line  # ctrl+return
+      bindkey "\e[27;2;13~" accept-line  # Shift - enter
+      bindkey "\e[27;5;13~" accept-line  # Ctrl - enter
+      bindkey '^H' backward-kill-word    # Ctrl - backspace
+      bindkey "^[[1;3C" forward-word     # Alt - ->
+      bindkey "^[[1;3D" backward-word    # Alt - <-
     '';
   };
 

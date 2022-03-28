@@ -108,7 +108,7 @@
     # shutter
     foliate
     rnote # handwritten note
-    # tdesktop
+    tdesktop
     # kotatogram-desktop
     meld
     deja-dup
