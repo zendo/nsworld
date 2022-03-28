@@ -51,9 +51,9 @@
            :prefix "C-c f"
            ("0" . revert-buffer)
            ("o" . crux-open-with)
-           ("r" . crux-rename-file-and-buffer)
-           ("x" . crux-delete-file-and-buffer)
            ("s" . crux-sudo-edit)
+           ("x" . crux-delete-file-and-buffer)
+           ("<f2>" . crux-rename-file-and-buffer)
 
            :prefix-map window-map
            :prefix "C-c w"

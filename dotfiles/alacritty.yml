@@ -17,6 +17,7 @@ window:
     y: 6
 
   opacity: 0.95
+  # decorations: none
 
 font:
   size: 11

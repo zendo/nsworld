@@ -56,35 +56,7 @@
  "C-|" #'mc/mark-all-like-this-dwim
 
  "C-x g" #'magit-status
-
- "C-c y" #'youdao-dictionary-search-at-point-tooltip
  )
-
-;; evil keymap
-(when (featurep! :editor evil +everywhere)
-  (map!
-   :niv "C-=" #'er/expand-region
-   :niv "C-y" #'yank
-   :niv "C-k" #'crux-smart-kill-line
-   :niv "C-e" #'end-of-line
-   :leader
-   "y" #'youdao-dictionary-search-at-point-tooltip
-   "<left>" #'next-buffer
-   "<right>" #'previous-buffer
-   :prefix ("-" . "remove-lists")
-   "b" #'bookmark-delete
-   "r" #'recentf-edit-list
-   "p" #'projectile-remove-known-project
-   :prefix ("f" . "file")
-   "<f2>" #'crux-rename-file-and-buffer
-   :prefix ("w" . "window")
-   "0" #'delete-window
-   "1" #'delete-other-windows
-   "2" #'split-window-vertically
-   "3" #'split-window-horizontally
-   "," #'winner-undo
-   "." #'winner-redo
- ))
 
 ;; emacs keymap
 (unless (featurep! :editor evil +everywhere)
@@ -113,6 +85,33 @@
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
    ))
+
+;; evil keymap
+(when (featurep! :editor evil +everywhere)
+  (map!
+   :niv "C-=" #'er/expand-region
+   :niv "C-y" #'yank
+   :niv "C-k" #'crux-smart-kill-line
+   :niv "C-e" #'end-of-line
+   :leader
+   "y" #'youdao-dictionary-search-at-point-tooltip
+   "<left>" #'next-buffer
+   "<right>" #'previous-buffer
+   :prefix ("-" . "remove-lists")
+   "b" #'bookmark-delete
+   "r" #'recentf-edit-list
+   "p" #'projectile-remove-known-project
+   :prefix ("f" . "file")
+   "<f2>" #'crux-rename-file-and-buffer
+   :prefix ("w" . "window")
+   "0" #'delete-window
+   "1" #'delete-other-windows
+   "2" #'split-window-vertically
+   "3" #'split-window-horizontally
+   "," #'winner-undo
+   "." #'winner-redo
+ ))
+
 
 ;; meow
 ;; (when (featurep! :editor meow)
@@ -153,13 +152,13 @@
 
 
 ;; 新建 window 并直接切换至新窗口
-;; (global-set-key (kbd "C-x 2")
-;;                 (lambda()
-;;                   (interactive)
-;;                   (split-window-below)
-;;                   (select-window (next-window))))
-;; (global-set-key (kbd "C-x 3")
-;;                 (lambda()
-;;                   (interactive)
-;;                   (split-window-right)
-;;                   (select-window (next-window))))
+(global-set-key (kbd "C-x 2")
+                (lambda()
+                  (interactive)
+                  (split-window-below)
+                  (select-window (next-window))))
+(global-set-key (kbd "C-x 3")
+                (lambda()
+                  (interactive)
+                  (split-window-right)
+                  (select-window (next-window))))
