@@ -75,6 +75,8 @@
    "b" #'bookmark-delete
    "r" #'recentf-edit-list
    "p" #'projectile-remove-known-project
+   :prefix ("f" . "file")
+   "<f2>" #'crux-rename-file-and-buffer
    :prefix ("w" . "window")
    "0" #'delete-window
    "1" #'delete-other-windows

@@ -84,13 +84,15 @@
     # overlay
     # harmonyos-sans
 
-    git-cola
+    gitg
+    # git-cola
     distrobox
     v2ray
     qv2ray
     foot
-    alacritty
     # wezterm
+    alacritty
+    gotktrix
 
     # (pkgs.google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
@@ -106,7 +108,7 @@
     # shutter
     foliate
     rnote # handwritten note
-    tdesktop
+    # tdesktop
     # kotatogram-desktop
     meld
     deja-dup

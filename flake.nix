@@ -2,7 +2,7 @@
   description = "Zendo NixOS Flakes";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
@@ -89,6 +89,7 @@
         # ./modules/kde.nix
         ./modules/gnome.nix
         ./modules/chinese.nix
+        ./modules/virtual.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/hardware-configuration.nix
 

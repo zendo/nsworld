@@ -76,7 +76,7 @@
       comp = "commit --patch";
       co = "checkout";
       ci = "commit";
-      ca = "commit -a -m";
+      cc = "commit -a -m";
       lg = "log --graph --decorate --all --oneline";
     };
   };
@@ -104,10 +104,6 @@
   };
 
   programs.aria2 = {
-    enable = true;
-  };
-
-  programs.lf = {
     enable = true;
   };
 
