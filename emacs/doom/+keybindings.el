@@ -64,6 +64,7 @@
   (map!
    :leader
    "y" #'youdao-dictionary-search-at-point-tooltip
+   "g" #'magit-status
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file

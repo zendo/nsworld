@@ -45,3 +45,5 @@ key_bindings:
 
   - { key: N,        mods: Control|Shift,   action: CreateNewWindow    }
   - { key: F11,                             action: ToggleFullscreen    }
+
+
