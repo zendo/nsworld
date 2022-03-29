@@ -26,12 +26,12 @@
     export https_proxy=http://127.0.0.1:20171";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
 
-    nse = "nix search nixpkgs";
     nix-repl-pkgs = "nix repl '<nixpkgs>'";
-    nix-pkgs-installed = "nix path-info --recursive /run/current-system";
-    nix-os-ls = "ls -la /nix/var/nix/profiles";
-    nix-os-readlink = "readlink -f /nix/var/nix/profiles/system";
-    nix-os-generations = "nix profile history --profile /nix/var/nix/profiles/system";
+    nse = "nix search nixpkgs";
+    ns-ls = "ls -la /nix/var/nix/profiles";
+    ns-readlink = "readlink -f /nix/var/nix/profiles/system";
+    ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
+    ns-installed = "nix path-info --recursive /run/current-system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     ns-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#$(hostname)";
     ns-boot = "sudo -E nixos-rebuild boot --flake ~/.nsworld#$(hostname)";

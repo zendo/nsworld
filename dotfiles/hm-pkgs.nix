@@ -93,7 +93,6 @@
     foot
     # wezterm
     alacritty
-    gotktrix
 
     # (pkgs.google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
@@ -104,6 +103,7 @@
     # vlc
     ffmpeg
     spotify
+    netease-cloud-music-gtk
     mousai # 听歌识曲
     # easyeffects
     # shutter

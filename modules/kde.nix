@@ -23,9 +23,9 @@
   # programs.seahorse.enable = true;
 
   services.colord.enable = true;
+  services.geoclue2.enable = true;
 
   programs.kdeconnect.enable = true;
-
   programs.partition-manager.enable = true;
 
   programs.gnupg.agent = {
@@ -37,6 +37,7 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.ark
     libsForQt5.kate
+    libsForQt5.kweather
     libsForQt5.kde-gtk-config
 
     libsForQt5.krdc
@@ -47,6 +48,7 @@
     libsForQt5.bismuth # tiling layout
 
     falkon
+    nheko
     kalendar
     yakuake
     gparted
