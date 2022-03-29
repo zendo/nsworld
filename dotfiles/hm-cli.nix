@@ -9,7 +9,6 @@
   ];
 
   home.shellAliases = {
-    l = "ls";
     cat = "bat";
     ps = "ps -ef";
     beep = "echo -en \"\\007\"";

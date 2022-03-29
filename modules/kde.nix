@@ -66,4 +66,13 @@
       DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
     };
   };
+
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime
+      # fcitx5-chinese-addons
+    ];
+  };
+
 }

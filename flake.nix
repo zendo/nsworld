@@ -86,9 +86,9 @@
       hosts.yoga.modules = [
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
-        # ./modules/kde.nix
-        ./modules/gnome.nix
-        ./modules/chinese.nix
+        ./modules/kde.nix
+        # ./modules/gnome.nix
+        ./modules/fonts.nix
         ./modules/virtual.nix
         ./hosts/yoga/user.nix
         ./hosts/yoga/hardware-configuration.nix
@@ -107,7 +107,7 @@
               ./dotfiles/hm-pkgs.nix
               ./dotfiles/hm-cli.nix
               ./dotfiles/hm-gui.nix
-              ./dotfiles/hm-gnome.nix
+              # ./dotfiles/hm-gnome.nix
               # ./dotfiles/hm-dconf.nix
             ];
           };

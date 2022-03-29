@@ -35,6 +35,9 @@ dconf load /org/gnome/ < my-dconf
 dconf reset -f /org/gnome/
 dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/dotfiles/hm-dconf.nix
 
+# Backup KDE Settings
+curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
+
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"  bash -s -- :preset
 

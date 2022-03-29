@@ -22,6 +22,7 @@
     edid-decode
     # libinput
     wallutils # lsmon getdpi wayinfo
+    wayland-utils
     # wdisplays # wlr
 
     # NIX TOOLS
