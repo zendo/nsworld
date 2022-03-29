@@ -11,7 +11,8 @@
  &&
  home-manager modules ...
  
- hm-pkgs.nix
+ hm-pkgs.nix:
+ delete unused apps
  */
 {
   config,

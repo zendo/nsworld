@@ -21,5 +21,10 @@ rsync -avhpL "$HOME"/.ssh "$HOME"/Documents/SystemBackup/
 rsync -avhpL "$HOME"/.mozilla "$HOME"/Documents/SystemBackup/
 rsync -avhpL "$HOME"/.config/fcitx5/conf "$HOME"/Documents/SystemBackup/
 
-# Gnome dconf
-dconf dump /org/gnome/ > "$HOME"/Documents/SystemBackup/my-dconf
+if test $XDG_CURRENT_DESKTOP = "GNOME"; then
+    dconf dump /org/gnome/ > "$HOME"/Documents/SystemBackup/my-dconf
+fi
+
+if test $XDG_CURRENT_DESKTOP = "KDE"; then
+    cd "$HOME"/Documents/SystemBackup/ ; kde-backup -b $(users)
+fi

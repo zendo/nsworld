@@ -34,11 +34,13 @@
     pinentryFlavor = "qt";
   };
 
+
   environment.systemPackages = with pkgs; [
     libsForQt5.ark
     libsForQt5.kate
     libsForQt5.kweather
     libsForQt5.kde-gtk-config
+    # libsForQt5.kgamma5          # not work
 
     libsForQt5.krdc
     libsForQt5.kleopatra
