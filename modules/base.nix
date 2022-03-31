@@ -107,6 +107,8 @@
   # Can not work without channels.
   programs.command-not-found.enable = false;
 
+  programs.nix-ld.enable = true;
+
   documentation = {
     enable = false;
     nixos.enable = false;

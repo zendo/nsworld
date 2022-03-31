@@ -13,6 +13,7 @@
     };
 
     agenix.url = github:ryantm/agenix;
+    sops-nix.url = github:Mic92/sops-nix;
 
     # Real-time audio
     musnix.url = github:musnix/musnix;

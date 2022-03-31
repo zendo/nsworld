@@ -4,9 +4,12 @@
   ...
 }: {
   services.xserver.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.desktopManager.plasma5.runUsingSystemd = true;
-  # services.xserver.desktopManager.plasma5.useQtScaling = true;
+  services.xserver.desktopManager.plasma5 = {
+    enable = true;
+    supportDDC = true;
+    # useQtScaling = true;
+    runUsingSystemd = true;
+  };
 
   services.xserver.displayManager = {
     # sddm.enable = true; # wayland bug

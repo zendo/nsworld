@@ -32,7 +32,6 @@
     alejandra # Nix Code Formatter
     rnix-lsp
     lorri
-    nix-ld
     comma
     manix
     niv
@@ -86,7 +85,7 @@
     # harmonyos-sans
 
     gitg
-    # git-cola
+    git-cola
     distrobox
     v2ray
     qv2ray
