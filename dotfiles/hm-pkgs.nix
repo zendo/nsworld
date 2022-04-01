@@ -68,7 +68,6 @@
     powertop
     unp
     unrar
-    htop
     btop
     bottom # btm
     psmisc # pstree
@@ -83,6 +82,7 @@
 
     # overlay
     # harmonyos-sans
+    # zee
 
     gitg
     git-cola

@@ -27,6 +27,7 @@
     gnome.yelp
     gnome.geary
     gnome.totem
+    gnome.baobab
     gnome.gnome-music
     gnome.gnome-software
   ];
@@ -52,17 +53,18 @@
     # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
     # gnomeExtensions.dash-to-panel
-    gnomeExtensions.just-perfection
+    gnomeExtensions.dock-from-dash
+    # gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     gnomeExtensions.gnome-clipboard
     # gnomeExtensions.clipboard-history
     gnomeExtensions.espresso
-    gnomeExtensions.kimpanel
-    gnomeExtensions.logo-menu
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.pixel-saver
     gnomeExtensions.screenshot-tool
+    # gnomeExtensions.kimpanel
+    # gnomeExtensions.logo-menu
+    # gnomeExtensions.pixel-saver
     # gnomeExtensions.gesture-improvements
     # gnomeExtensions.arcmenu
     gnomeExtensions.ddterm

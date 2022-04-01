@@ -5,6 +5,7 @@ final: prev: {
   #   inherit (prev.sources.manix) pname version src;
   # });
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
+  zee = prev.callPackage ./zee {};
 
   # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGithHub {
