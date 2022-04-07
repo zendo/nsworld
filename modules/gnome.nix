@@ -8,6 +8,7 @@
 
   services.xserver.displayManager = {
     gdm.enable = true;
+    defaultSession = "gnome";
     autoLogin.user = "iab";
   };
 
@@ -53,7 +54,6 @@
     # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
     # gnomeExtensions.dash-to-panel
-    gnomeExtensions.dock-from-dash
     # gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
@@ -61,6 +61,7 @@
     # gnomeExtensions.clipboard-history
     gnomeExtensions.espresso
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.pop-shell
     gnomeExtensions.screenshot-tool
     # gnomeExtensions.kimpanel
     # gnomeExtensions.logo-menu
@@ -69,6 +70,7 @@
     # gnomeExtensions.arcmenu
     gnomeExtensions.ddterm
     gnomeExtensions.ideapad-mode
+    gnomeExtensions.mpris-indicator-button
   ];
 
   i18n.inputMethod = {

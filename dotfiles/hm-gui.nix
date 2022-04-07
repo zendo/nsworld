@@ -52,10 +52,10 @@
     };
   };
 
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox-wayland;
-  };
+  # programs.firefox = {
+  #   enable = true;
+  #   package = pkgs.firefox-wayland;
+  # };
 
   # not work?
   programs.chromium = {

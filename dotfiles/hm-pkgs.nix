@@ -37,7 +37,7 @@
     niv
     nvd
     cachix
-    nvfetcher
+    # nvfetcher
     nixos-generators
 
     # Develop
@@ -69,6 +69,7 @@
     unp
     unrar
     btop
+    ctop # containers monitor
     bottom # btm
     psmisc # pstree
     cht-sh
@@ -82,27 +83,29 @@
 
     # overlay
     # harmonyos-sans
-    # zee
+    zee
 
     gitg
     git-cola
     distrobox
     v2ray
     qv2ray
+    # nur.repos.linyinfeng.clash-for-windows
     foot
     # wezterm
     alacritty
 
-    # (pkgs.google-chrome.override {
-    #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-    # })
+    (pkgs.google-chrome.override {
+      commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+    })
+    firefox-wayland
+    # microsoft-edge
 
     qbittorrent
     mpv
     # vlc
     ffmpeg
     spotify
-    netease-cloud-music-gtk
     mousai # 听歌识曲
     # easyeffects
     # shutter
