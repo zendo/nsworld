@@ -74,6 +74,7 @@
     psmisc # pstree
     cht-sh
     trash-cli
+    difftastic
     kalker # calculator
     imagemagick
     translate-shell
@@ -83,7 +84,7 @@
 
     # overlay
     # harmonyos-sans
-    zee
+    # zee
 
     gitg
     git-cola

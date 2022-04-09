@@ -102,6 +102,9 @@
   environment.variables = {
     # wayland ozone support
     # NIXOS_OZONE_WL = "1";
+
+    # firefox temp solution
+    MOZ_DISABLE_CONTENT_SANDBOX = "1";
   };
 
   # Can not work without channels.
