@@ -136,11 +136,11 @@
   programs.starship = {
     enable = false;
     enableBashIntegration = true;
-    # enableZshIntegration = true;
+    enableZshIntegration = true;
     settings = {
       add_newline = true;
       # disable "It took xxs"
-      cmd_duration.disabled = true;
+      # cmd_duration.disabled = true;
     };
   };
 

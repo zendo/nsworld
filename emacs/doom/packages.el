@@ -13,6 +13,7 @@
 ;(package! some-package)
 (package! crux)
 (package! iedit)
+(package! rotate)
 (package! easy-kill)
 ;; (package! telega)
 (package! youdao-dictionary)

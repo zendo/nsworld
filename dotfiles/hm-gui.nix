@@ -19,6 +19,7 @@
     package = pkgs.emacsPgtk;
     extraPackages = epkgs: [
       epkgs.vterm
+      epkgs.emojify
       epkgs.emacsql-sqlite
       # epkgs.telega
     ];

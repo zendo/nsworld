@@ -19,10 +19,10 @@
 ;; Common
 (global-set-key (kbd "C-z") nil)
 
-(global-set-key (kbd "<f1>") '+treemacs/toggle)
+(global-set-key (kbd "<f2>") '+treemacs/toggle)
 (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
 
-(global-set-key (kbd "<f2>") '+doom-dashboard/open)
+(global-set-key (kbd "<f1>") '+doom-dashboard/open)
 (global-set-key (kbd "<f9>") '+vterm/toggle)
 (after! vterm
   (setq vterm-shell "zsh")
@@ -88,6 +88,8 @@
    "s" #'projectile-save-project-buffers
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
+   :prefix ("w" . "window")
+   "x" #'ace-swap-window
    ))
 
 ;; evil keymap
@@ -116,11 +118,25 @@
    "." #'winner-redo
  ))
 
-
 ;; meow
 ;; (when (featurep! :editor meow)
 ;;   (map!
 ;;    ))
+
+;; dashboard
+(defun +doom-dashboard-setup-modified-keymap ()
+  (setq +doom-dashboard-mode-map (make-sparse-keymap))
+  (map! :map +doom-dashboard-mode-map
+        :desc "Find file" "f" #'find-file
+        :desc "Bookmark" "b" #'consult-bookmark
+        :desc "Recent buffers" "," #'consult-buffer
+        :desc "Recent files" "r" #'consult-recent-file
+        :desc "Open project" "p" #'projectile-switch-project
+        :desc "Open dotfile" "." (cmd! (doom-project-find-file "~/.nsworld/"))
+        :desc "Show keybindings" "h" (cmd! (which-key-show-keymap '+doom-dashboard-mode-map))))
+(add-transient-hook! #'+doom-dashboard-mode (+doom-dashboard-setup-modified-keymap))
+(add-transient-hook! #'+doom-dashboard-mode :append (+doom-dashboard-setup-modified-keymap))
+(add-hook! 'doom-init-ui-hook :append (+doom-dashboard-setup-modified-keymap))
 
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer

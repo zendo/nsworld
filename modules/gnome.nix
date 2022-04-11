@@ -51,22 +51,22 @@
     gnome.gnome-boxes
 
     gnomeExtensions.appindicator
-    # gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
-    # gnomeExtensions.just-perfection
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     gnomeExtensions.gnome-clipboard
-    # gnomeExtensions.clipboard-history
+    gnomeExtensions.clipboard-history
     gnomeExtensions.espresso
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
-    # gnomeExtensions.kimpanel
+    # gnomeExtensions.arcmenu
     # gnomeExtensions.logo-menu
+    # gnomeExtensions.just-perfection
+    # gnomeExtensions.kimpanel
     # gnomeExtensions.pixel-saver
     # gnomeExtensions.gesture-improvements
-    # gnomeExtensions.arcmenu
     gnomeExtensions.ddterm
     gnomeExtensions.ideapad-mode
     gnomeExtensions.mpris-indicator-button

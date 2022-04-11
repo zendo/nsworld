@@ -48,6 +48,9 @@
 (+global-word-wrap-mode +1)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
+;; alejandra for Nix Code Formatter
+(set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
+
 ;;禁用 flycheck
 (setq flycheck-disabled-checkers '(sh-shellscript
                                    emacs-lisp
