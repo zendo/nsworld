@@ -65,6 +65,8 @@
    :leader
    "y" #'youdao-dictionary-search-at-point-tooltip
    "g" #'magit-status
+   "x" #'+hydra/window-nav/body
+   "=" #'+hydra/text-zoom/body
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file

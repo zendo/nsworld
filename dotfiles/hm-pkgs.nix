@@ -11,6 +11,7 @@
     lshw
     hwinfo
     cpu-x
+    cpufetch
     acpi
     usbutils
     dmidecode
@@ -87,7 +88,6 @@
     # zee
 
     gitg
-    git-cola
     distrobox
     v2ray
     qv2ray
@@ -96,9 +96,9 @@
     # wezterm
     alacritty
 
-    (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-    })
+    # (pkgs.google-chrome.override {
+    #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+    # })
     firefox-wayland
     # microsoft-edge
 
