@@ -1,5 +1,4 @@
 # nix repl nsworld
-
 (import
   (
     let

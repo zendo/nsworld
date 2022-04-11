@@ -86,5 +86,4 @@
       typing-booster
     ];
   };
-
 }

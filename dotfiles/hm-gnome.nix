@@ -19,5 +19,4 @@
     terminal = false;
     categories = ["Application" "Music"];
   };
-
 }

@@ -37,7 +37,6 @@
     pinentryFlavor = "qt";
   };
 
-
   environment.systemPackages = with pkgs; [
     libsForQt5.ark
     libsForQt5.kate
@@ -81,5 +80,4 @@
       # fcitx5-chinese-addons
     ];
   };
-
 }
