@@ -13,6 +13,8 @@
       confirm-kill-processes nil
       delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
+      ;; mouse-drag-and-drop-region-cross-program t
+      ;; mouse-drag-and-drop-region t
 
       display-line-numbers-type 't ;t nil relative
       calendar-week-start-day 1 ;Monday as first day of week
@@ -25,6 +27,7 @@
       doom-unicode-font (font-spec :family "Noto Sans Mono")
 
       x-gtk-use-native-input t          ;使用外部输入法
+      ;; word-wrap-by-category t           ;?
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       recentf-exclude
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist")
@@ -45,7 +48,7 @@
 ;;   (setq centaur-tabs-style "wave"))
 
 ;; Editor
-(+global-word-wrap-mode +1)
+;; (+global-word-wrap-mode +1)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 ;; alejandra for Nix Code Formatter

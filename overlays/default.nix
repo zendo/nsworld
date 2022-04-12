@@ -6,6 +6,7 @@ final: prev: {
   # });
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   zee = prev.callPackage ./zee {};
+  konsave = prev.callPackage ./konsave {};
 
   # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGithHub {

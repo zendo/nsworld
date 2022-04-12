@@ -55,7 +55,9 @@
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
 
- "C-x g" #'magit-status
+ "s-g" #'magit-status
+ "s-w" #'+hydra/window-nav/body
+ "s-=" #'+hydra/text-zoom/body
  )
 
 ;; emacs keymap
@@ -65,8 +67,6 @@
    :leader
    "y" #'youdao-dictionary-search-at-point-tooltip
    "g" #'magit-status
-   "x" #'+hydra/window-nav/body
-   "=" #'+hydra/text-zoom/body
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file

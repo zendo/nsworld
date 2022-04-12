@@ -55,4 +55,3 @@ curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | 
 
 [Intro Nix Family](https://web.archive.org/web/20210123223258/https://ebzzry.io/en/nix/)
 
-[Nix builtins functions](https://teu5us.github.io/nix-lib.html)

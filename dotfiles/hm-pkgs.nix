@@ -86,6 +86,7 @@
     # overlay
     # harmonyos-sans
     # zee
+    # konsave
 
     gitg
     distrobox
