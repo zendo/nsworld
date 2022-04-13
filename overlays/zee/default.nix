@@ -8,17 +8,18 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "zee";
-  version = "git-45a8cf1";
+  version = "0.2.1";
 
   src = fetchFromGitHub {
     owner = "mcobzarenco";
     repo = pname;
-    rev = "45a9cf195ca12cb5c2786a653f161599cbc156b9";
-    # fetchSubmodules = true;
-    sha256 = "sha256-A4yp0XDi6nC5ZQNWLI7LEcFuSKayEz6MgO4FGU1ueWw=";
+    # rev = "refs/tags/v${version}";
+    rev = "a8979be0819a7140648315c1e5fac052933f9b57";
+    fetchSubmodules = true;
+    sha256 = "sha256-qCslkvur8aHAveYsX9i7DGpqySbVr4uOHDh3G/VnCco=";
   };
 
-  cargoSha256 = "sha256-CS0l6YdP1i122XUr2T6YHpH+Vx07gmKaSfM+UE6zKrA=";
+  cargoSha256 = "sha256-mCNW0xsrbOBUOaa4YXpGjbQUNDnMjNNkLkH5Dm1FOI0=";
 
   nativeBuildInputs = [pkg-config];
   buildInputs = [openssl tree-sitter];

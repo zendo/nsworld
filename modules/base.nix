@@ -106,10 +106,10 @@
     # MOZ_DISABLE_CONTENT_SANDBOX = "1";
   };
 
+  # programs.nix-ld.enable = true;
+
   # Can not work without channels.
   programs.command-not-found.enable = false;
-
-  programs.nix-ld.enable = true;
 
   documentation = {
     enable = false;

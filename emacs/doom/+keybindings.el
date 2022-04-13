@@ -67,6 +67,7 @@
    :leader
    "y" #'youdao-dictionary-search-at-point-tooltip
    "g" #'magit-status
+   "x" #'+hydra/window-nav/body
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file
@@ -90,6 +91,7 @@
    "SPC" #'just-one-space
    :prefix ("w" . "window")
    "x" #'ace-swap-window
+   "v" #'rotate-layout
    ))
 
 ;; evil keymap
