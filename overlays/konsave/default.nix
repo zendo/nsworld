@@ -1,24 +1,21 @@
 {
   lib,
-  python3Packages,
-  fetchFromGitHub
+  python3,
 }:
-python3Packages.buildPythonApplication rec {
+python3.pkgs.buildPythonApplication rec {
   pname = "konsave";
   version = "2.1.1";
 
-  src = fetchFromGitHub {
-    owner = "Prayag2";
-    repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-u0cIPEfzu9OqhVK0lzEY2RDKD4sWOIbTnrXycaVANRA=";
+  src = python3.pkgs.fetchPypi {
+    inherit version;
+    pname = "Konsave";
+    sha256 = "sha256-04nlFhU8nFxcHht2SKOvRyA+6cYzqNxZlvU+pRX0ynA=";
   };
 
-  nativeBuildInputs = with python3Packages; [setuptools-scm];
-  SETUPTOOLS_SCM_PRETEND_VERSION = "v${version}";
+  nativeBuildInputs = with python3.pkgs; [setuptools-scm];
 
   # Specify runtime dependencies for the package
-  propagatedBuildInputs = with python3Packages; [pyyaml];
+  propagatedBuildInputs = with python3.pkgs; [pyyaml];
 
   postPatch = ''
     substituteInPlace requirements.txt \
@@ -28,9 +25,8 @@ python3Packages.buildPythonApplication rec {
   doCheck = false;
 
   meta = with lib; {
+    mainainers = with maintainers; [MoritzBoehme];
     homepage = "https://github.com/Prayag2/konsave";
-    description = "Konsave lets use save your Linux customization and restore them very easily!";
     license = licenses.gpl3;
-    maintainers = with maintainers; [zendo];
   };
 }

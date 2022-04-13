@@ -15,6 +15,7 @@
 (package! iedit)
 (package! rotate)
 (package! easy-kill)
+(package! dirvish)
 ;; (package! telega)
 (package! youdao-dictionary)
 
