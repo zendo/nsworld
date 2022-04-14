@@ -48,7 +48,7 @@
 ;;   (setq centaur-tabs-style "wave"))
 
 ;; Editor
-;; (+global-word-wrap-mode +1)
+(+global-word-wrap-mode +1)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 ;; alejandra for Nix Code Formatter

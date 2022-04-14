@@ -2,7 +2,7 @@
   description = "Zendo NixOS world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
@@ -29,7 +29,7 @@
       flake = false;
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/ce5ae7e90a5e1dcdabddada5ad0881c9e17c7abe";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";

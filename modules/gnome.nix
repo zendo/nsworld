@@ -23,19 +23,19 @@
     enableSSHSupport = true;
   };
 
-  # services.xserver.excludePackages = [
-  #   pkgs.xterm
-  # ];
+  services.xserver.excludePackages = [
+    pkgs.xterm
+  ];
 
-  # environment.gnome.excludePackages = with pkgs; [
-  #   gnome-photos
-  #   gnome.yelp
-  #   gnome.geary
-  #   gnome.totem
-  #   gnome.baobab
-  #   gnome.gnome-music
-  #   gnome.gnome-software
-  # ];
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-photos
+    gnome.yelp
+    gnome.geary
+    gnome.totem
+    gnome.baobab
+    gnome.gnome-music
+    gnome.gnome-software
+  ];
 
   environment.systemPackages = with pkgs; [
     gthumb
