@@ -6,6 +6,7 @@ final: prev: {
   # });
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   zee = prev.callPackage ./zee {};
+  ydict = prev.callPackage ./ydict {};
   konsave = prev.callPackage ./konsave {};
 
   # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {

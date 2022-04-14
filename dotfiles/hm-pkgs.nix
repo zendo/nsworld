@@ -86,13 +86,15 @@
     # overlay
     # harmonyos-sans
     # zee
+    ydict
     # konsave
 
     gitg
+    git-cola
     distrobox
     v2ray
     qv2ray
-    # nur.repos.linyinfeng.clash-for-windows
+    nur.repos.linyinfeng.clash-for-windows
     foot
     # wezterm
     alacritty

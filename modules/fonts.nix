@@ -12,11 +12,11 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      sarasa-gothic
       lxgw-wenkai
       # source-han-sans
       # source-han-serif
       source-code-pro
-      sarasa-gothic
       emacs-all-the-icons-fonts
       hack-font
       fira-code
