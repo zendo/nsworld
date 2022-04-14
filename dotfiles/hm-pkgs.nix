@@ -94,7 +94,7 @@
     distrobox
     v2ray
     qv2ray
-    nur.repos.linyinfeng.clash-for-windows
+    # nur.repos.linyinfeng.clash-for-windows
     foot
     # wezterm
     alacritty
@@ -113,7 +113,7 @@
     mousai # 听歌识曲
     # easyeffects
     # shutter
-    foliate
+    # foliate
     rnote # handwritten note
     tdesktop
     # kotatogram-desktop
