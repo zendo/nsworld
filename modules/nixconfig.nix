@@ -5,6 +5,9 @@
   ...
 }: {
   nix.settings = {
+    nixpkgs.config.allowUnfree = true;
+    # nixpkgs.config.allowBroken = true;
+
     # keep-outputs = true
     # keep-derivations = true
     warn-dirty = false;

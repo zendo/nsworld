@@ -12,8 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix.url = github:ryantm/agenix;
-    sops-nix.url = github:Mic92/sops-nix;
+    # agenix.url = github:ryantm/agenix;
+    # sops-nix.url = github:Mic92/sops-nix;
 
     # Real-time audio
     musnix.url = github:musnix/musnix;
@@ -54,11 +54,11 @@
       inherit self inputs;
       # supportedSystems = [ "x86_64-linux" ];
 
-      channelsConfig = {
-        allowUnfree = true;
-        # allowBroken = true;
-        # allowUnsupportedSystem = true;
-      };
+      # channelsConfig = {
+      #   allowUnfree = true;
+      #   # allowBroken = true;
+      #   # allowUnsupportedSystem = true;
+      # };
 
       overlay = import ./overlays;
 
