@@ -53,6 +53,7 @@
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder
     gnome.gnome-boxes
+    gnome-firmware-updater
 
     gnomeExtensions.appindicator
     gnomeExtensions.tray-icons-reloaded
@@ -73,6 +74,7 @@
     # gnomeExtensions.gesture-improvements
     gnomeExtensions.ddterm
     gnomeExtensions.ideapad-mode
+    gnomeExtensions.desktop-icons-ng-ding
     gnomeExtensions.mpris-indicator-button
   ];
 
