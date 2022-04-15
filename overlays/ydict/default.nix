@@ -2,7 +2,7 @@
   lib,
   libnotify,
   fetchFromGitHub,
-  buildGoModule,
+  buildGoModule
 }:
 buildGoModule rec {
   pname = "ydict";
