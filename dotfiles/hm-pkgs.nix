@@ -75,7 +75,7 @@
     psmisc # pstree
     cht-sh
     trash-cli
-    difftastic
+    # difftastic # using delta right now
     kalker # calculator
     imagemagick
     translate-shell

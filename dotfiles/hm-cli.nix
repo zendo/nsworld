@@ -20,7 +20,6 @@
     ipinfo = "curl ipinfo.io";
 
     ee = "emacs -nw";
-    yy = "ydict";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
@@ -82,8 +81,12 @@
     };
   };
 
+  programs.git.delta = {
+    enable = true;
+  };
+
   programs.gh = {
-    enable = false;
+    enable = true;
     enableGitCredentialHelper = true;
   };
 
