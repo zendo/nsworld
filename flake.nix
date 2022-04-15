@@ -54,11 +54,11 @@
       inherit self inputs;
       # supportedSystems = [ "x86_64-linux" ];
 
-      # channelsConfig = {
-      #   allowUnfree = true;
-      #   # allowBroken = true;
-      #   # allowUnsupportedSystem = true;
-      # };
+      channelsConfig = {
+        allowUnfree = true;
+        # allowBroken = true;
+        # allowUnsupportedSystem = true;
+      };
 
       overlay = import ./overlays;
 
