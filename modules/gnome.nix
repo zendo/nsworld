@@ -45,7 +45,7 @@
     gparted
     dconf2nix
     kooha
-    # fractal
+    fractal
 
     gnome.gnome-tweaks
     gnome.gnome-todo

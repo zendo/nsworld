@@ -61,6 +61,19 @@
 ;; (add-to-list 'auto-mode-alist
              ;; '("bashrc\\'" . conf-mode))
 
+;; hippie expand is dabbrev expand on steroids
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
+        try-expand-dabbrev-all-buffers     ;搜索所有 buffer
+        try-expand-dabbrev-from-kill       ;从 kill-ring 中搜索
+        try-complete-file-name-partially   ;文件名部分匹配
+        try-complete-file-name             ;文件名匹配
+        try-expand-all-abbrevs             ;匹配所有缩写词, according to all abbrev tables
+        try-expand-list                    ;补全一个列表
+        try-expand-line                    ;补全当前行
+        try-complete-lisp-symbol-partially ;部分补全 lisp symbol
+        try-complete-lisp-symbol))         ;补全 lisp symbol
+
 ;; Backup TODO
 (add-hook! 'focus-out-hook (save-some-buffers t)) ;失去窗口焦点时保存
 ;; (setq backup-directory-alist `((".*" . ,my-backup))
