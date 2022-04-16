@@ -1,3 +1,7 @@
 [ydict]
 src.github = "TimothyYe/ydict"
 fetch.github = "TimothyYe/ydict"
+
+[f2]
+src.github = "ayoisaiah/f2"
+fetch.github = "ayoisaiah/f2"

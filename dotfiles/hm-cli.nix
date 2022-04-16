@@ -74,9 +74,7 @@
       pm = "push -u origin main";
       addp = "add --patch";
       comp = "commit --patch";
-      co = "checkout";
-      ci = "commit";
-      cc = "commit -a -m";
+      ca = "commit -a -m";
       lg = "log --graph --decorate --all --oneline";
     };
   };

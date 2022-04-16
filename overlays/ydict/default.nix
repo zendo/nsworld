@@ -10,7 +10,7 @@ buildGoModule rec {
   src = fetchFromGitHub {
     owner = "TimothyYe";
     repo = "ydict";
-    rev = "refs/tags/v${version}";
+    rev = "v${version}";
     sha256 = "sha256-zhjsXZsRk0UNijjqjGjZh4TiPxAM5p+ic3JMx2wrPeY=";
   };
 
@@ -18,6 +18,7 @@ buildGoModule rec {
 
   ldflags = ["-s" "-w" "-X=main.Version=${version}"];
 
+  # has no tests
   doCheck = false;
 
   meta = with lib; {

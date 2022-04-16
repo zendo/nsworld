@@ -6,8 +6,10 @@ final: prev: {
   # });
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   zee = prev.callPackage ./zee {};
+  f2 = prev.callPackage ./f2 {};
   ydict = prev.callPackage ./ydict {};
   konsave = prev.callPackage ./konsave {};
+  night-theme-test = prev.callPackage ./night-theme-test {};
 
   # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGithHub {

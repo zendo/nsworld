@@ -38,7 +38,7 @@
     niv
     nvd
     cachix
-    # nvfetcher
+    nvfetcher
     nixos-generators
 
     # Develop
@@ -75,7 +75,7 @@
     psmisc # pstree
     cht-sh
     trash-cli
-    # difftastic # using delta right now
+    difftastic # using delta right now
     kalker # calculator
     imagemagick
     translate-shell
@@ -87,13 +87,15 @@
     # harmonyos-sans
     # zee
     ydict
+    f2
     # konsave
 
     gitg
-    git-cola
+    # git-cola
     distrobox
     v2ray
     qv2ray
+    # clash
     # nur.repos.linyinfeng.clash-for-windows
     foot
     # wezterm
