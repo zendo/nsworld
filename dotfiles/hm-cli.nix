@@ -8,6 +8,11 @@
     "$HOME/.emacs.d/bin"
   ];
 
+  home.sessionVariables = {
+    VISUAL="vi";
+    EDITOR="vi";
+  };
+
   home.shellAliases = {
     cat = "bat";
     ps = "ps -ef";

@@ -119,6 +119,10 @@
    "3" #'split-window-horizontally
    "," #'winner-undo
    "." #'winner-redo
+   "x" #'ace-swap-window
+   "v" #'rotate-layout
+   :prefix ("z" . "zap")
+   "SPC" #'just-one-space
  ))
 
 ;; meow
@@ -135,6 +139,7 @@
         :desc "Recent buffers" "," #'consult-buffer
         :desc "Recent files" "r" #'consult-recent-file
         :desc "Open project" "p" #'projectile-switch-project
+        :desc "Open project" "SPC" #'projectile-switch-project
         :desc "Open dotfile" "." (cmd! (doom-project-find-file "~/.nsworld/"))
         :desc "Show keybindings" "h" (cmd! (which-key-show-keymap '+doom-dashboard-mode-map))))
 (add-transient-hook! #'+doom-dashboard-mode (+doom-dashboard-setup-modified-keymap))
