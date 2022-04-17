@@ -9,6 +9,8 @@ final: prev: {
   f2 = prev.callPackage ./f2 {};
   ydict = prev.callPackage ./ydict {};
   konsave = prev.callPackage ./konsave {};
+  amberol = prev.callPackage ./amberol {};
+  dialect = prev.callPackage ./dialect {};
   night-theme-test = prev.callPackage ./night-theme-test {};
 
   # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {

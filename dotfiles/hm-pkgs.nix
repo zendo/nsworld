@@ -75,6 +75,7 @@
     psmisc # pstree
     cht-sh
     trash-cli
+    choose
     difftastic # using delta right now
     kalker # calculator
     imagemagick
@@ -88,6 +89,8 @@
     # zee
     ydict
     f2
+    dialect
+    # amberol
     # konsave
 
     gitg

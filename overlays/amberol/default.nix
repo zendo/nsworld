@@ -1,62 +1,75 @@
-# WIP
-{
-  lib,
-  stdenv,
-  fetchFromGitLab,
-  pkg-config,
-  meson,
-  ninja,
-  rustPlatform,
-  gtk4,
-  libadwaita,
-  gst_all_1,
-  appstream-glib,
-  wrapGAppsHook4,
+{ lib
+, stdenv
+, fetchFromGitLab
+, rustPlatform
+, desktop-file-utils
+, appstream-glib
+, meson
+, ninja
+, pkg-config
+, reuse
+, wrapGAppsHook
+, glib
+, gtk4
+, gst_all_1
+, libadwaita
+, dbus
 }:
+
 stdenv.mkDerivation rec {
   pname = "amberol";
-  version = "0.2.1";
+  version = "0.3.0";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "ebassi";
-    repo = "amberol";
-    rev = "${version}";
-    sha256 = "3a8cbaeef17498796a6eab0b3f13175ed51106ed4c11e76a0686baaf2f5e447c";
+    repo = pname;
+    rev = version;
+    sha256 = "sha256-+9lrSkjk7V+ZnIhmhw7lEiEywDp5adoAW+5PEAlhpSI=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
-    sha256 = "0qqp30s81jv3l479m3gsnb35200521pbah7mx1y6vzr9s8qdzcld";
+    name = "${pname}-${version}";
+    sha256 = "sha256-ZJiD6RshEjZ7h+/KYcY+ZjL5fHRb5+RKgIdgbD6LdkA=";
   };
 
+  postPatch = ''
+    patchShebangs build-aux
+  '';
+
   nativeBuildInputs = [
-    pkg-config
+    appstream-glib
+    desktop-file-utils
     meson
     ninja
-    appstream-glib
-    wrapGAppsHook4
+    pkg-config
+    reuse
+    wrapGAppsHook
   ] ++ (with rustPlatform; [
     cargoSetupHook
     rust.cargo
     rust.rustc
   ]);
 
-  buildInputs =
-    [
-      gtk4
-    ]
-    ++ (with gst_all_1; [
-      gstreamer
-      gst-plugins-base
-      gst-plugins-bad
-    ]);
+  buildInputs = [
+    glib
+    gtk4
+    libadwaita
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    dbus
+  ];
 
   meta = with lib; {
-    description = "A small and simple sound and music player that is well integrated with GNOME";
     homepage = "https://gitlab.gnome.org/ebassi/amberol";
-    license = licenses.gpl3;
-    maintainers = with maintainers; [ zendo ];
-    platforms = [ "x86_64-linux" ];
+    description = "A small and simple sound and music player";
+    maintainers = with maintainers; [ linsui ];
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
   };
 }
