@@ -50,11 +50,13 @@
  "C-x 4 x" #'ace-swap-window
 
  "C-k" #'crux-smart-kill-line
+ "C-x u" #'vundo
 
  "C-}" #'mc/mark-next-like-this
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
 
+ "C-x g" #'magit-status
  "s-g" #'magit-status
  "s-w" #'+hydra/window-nav/body
  "s-=" #'+hydra/text-zoom/body
