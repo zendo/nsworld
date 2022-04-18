@@ -9,8 +9,8 @@
   ];
 
   home.sessionVariables = {
-    VISUAL="vi";
-    EDITOR="vi";
+    VISUAL="emacs -nw";
+    EDITOR="emacs -nw";
   };
 
   home.shellAliases = {

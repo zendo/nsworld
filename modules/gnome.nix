@@ -47,9 +47,6 @@
     kooha
     fractal
 
-    # temp
-    night-theme-test
-
     gnome.gnome-tweaks
     gnome.gnome-todo
     gnome.dconf-editor
@@ -62,7 +59,7 @@
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
-    # gnomeExtensions.night-theme-switcher
+    gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     gnomeExtensions.gnome-clipboard
     gnomeExtensions.clipboard-history

@@ -8,9 +8,7 @@ final: prev: {
   zee = prev.callPackage ./zee {};
 
   konsave = prev.callPackage ./konsave {};
-  amberol = prev.callPackage ./amberol {};
   dialect = prev.callPackage ./dialect {};
-  night-theme-test = prev.callPackage ./night-theme-test {};
 
   # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGithHub {
