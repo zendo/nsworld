@@ -36,7 +36,7 @@
   };
 
   services = {
-    fwupd.enable = true;
+    # fwupd.enable = true;
     acpid.enable = true;
     # logind.lidSwitch = "suspend-then-hibernate";
     # logind.extraConfig = ''

@@ -52,7 +52,7 @@
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder
     gnome.gnome-boxes
-    gnome-firmware-updater
+    # gnome-firmware-updater
 
     gnomeExtensions.appindicator
     gnomeExtensions.tray-icons-reloaded

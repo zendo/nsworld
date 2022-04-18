@@ -80,7 +80,7 @@
     kalker # calculator
     imagemagick
     translate-shell
-    magic-wormhole
+    # magic-wormhole
     aspellDicts.en
     asciinema # record the terminal
 
@@ -118,7 +118,7 @@
     # shutter
     # foliate
     rnote # handwritten note
-    tdesktop
+    # tdesktop
     # kotatogram-desktop
     meld
     deja-dup
