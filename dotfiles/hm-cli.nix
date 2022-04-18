@@ -82,6 +82,9 @@
       ca = "commit -a -m";
       lg = "log --graph --decorate --all --oneline";
     };
+    extraConfig ={
+      safe.directory = "/home/iab/.nsworld";
+    };
   };
 
   programs.git.delta = {

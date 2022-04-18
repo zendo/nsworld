@@ -17,31 +17,31 @@
       "223.6.6.6"
     ];
 
-    hosts = {
-      "140.82.112.3" = [
-        "gist.github.com"
-        "github.com"
-      ];
-      "140.82.114.5" = ["api.github.com"];
-      "185.199.108.133" = [
-        "desktop.githubusercontent.com"
-        "camo.githubusercontent.com"
-        "github.map.fastly.net"
-        "raw.githubusercontent.com"
-        "user-images.githubusercontent.com"
-        "favicons.githubusercontent.com"
-        "avatars5.githubusercontent.com"
-        "avatars4.githubusercontent.com"
-        "avatars3.githubusercontent.com"
-        "avatars2.githubusercontent.com"
-        "avatars1.githubusercontent.com"
-        "avatars0.githubusercontent.com"
-        "avatars.githubusercontent.com"
-        "media.githubusercontent.com"
-      ];
-      # proxy.default = "http://user:password@proxy:port/";
-      # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    };
+    # hosts = {
+    #   "140.82.112.3" = [
+    #     "gist.github.com"
+    #     "github.com"
+    #   ];
+    #   "140.82.114.5" = ["api.github.com"];
+    #   "185.199.108.133" = [
+    #     "desktop.githubusercontent.com"
+    #     "camo.githubusercontent.com"
+    #     "github.map.fastly.net"
+    #     "raw.githubusercontent.com"
+    #     "user-images.githubusercontent.com"
+    #     "favicons.githubusercontent.com"
+    #     "avatars5.githubusercontent.com"
+    #     "avatars4.githubusercontent.com"
+    #     "avatars3.githubusercontent.com"
+    #     "avatars2.githubusercontent.com"
+    #     "avatars1.githubusercontent.com"
+    #     "avatars0.githubusercontent.com"
+    #     "avatars.githubusercontent.com"
+    #     "media.githubusercontent.com"
+    #   ];
+    #   # proxy.default = "http://user:password@proxy:port/";
+    #   # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # };
   };
 
   # Proxy
