@@ -6,8 +6,7 @@ final: prev: {
   # });
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   zee = prev.callPackage ./zee {};
-  f2 = prev.callPackage ./f2 {};
-  ydict = prev.callPackage ./ydict {};
+
   konsave = prev.callPackage ./konsave {};
   amberol = prev.callPackage ./amberol {};
   dialect = prev.callPackage ./dialect {};

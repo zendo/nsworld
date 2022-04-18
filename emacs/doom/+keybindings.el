@@ -19,14 +19,14 @@
 ;; Common
 (global-set-key (kbd "C-z") nil)
 
-(global-set-key (kbd "<f2>") '+treemacs/toggle)
 (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
 
 (global-set-key (kbd "<f1>") '+doom-dashboard/open)
-(global-set-key (kbd "<f9>") '+vterm/toggle)
+
+(global-set-key (kbd "<f8>") '+vterm/toggle)
 (after! vterm
   (setq vterm-shell "zsh")
-  (define-key vterm-mode-map (kbd "<f9>")  '+vterm/toggle))
+  (define-key vterm-mode-map (kbd "<f8>")  '+vterm/toggle))
 
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 

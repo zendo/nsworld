@@ -12,10 +12,10 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 (package! crux)
-(package! iedit)
 (package! rotate)
 (package! easy-kill)
 (package! dirvish)
+(package! iedit)
 ;; (package! telega)
 (package! youdao-dictionary)
 

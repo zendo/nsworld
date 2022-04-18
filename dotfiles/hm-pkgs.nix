@@ -87,9 +87,7 @@
     # overlay
     # harmonyos-sans
     # zee
-    ydict
-    f2
-    dialect
+    # dialect
     # amberol
     # konsave
 
