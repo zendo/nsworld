@@ -1,35 +1,29 @@
-{
-  fetchFromGitHub,
-  lib,
-  rustPlatform,
-  pkg-config,
-  openssl,
-  tree-sitter,
-}:
+{ fetchFromGitHub, lib, rustPlatform, pkg-config, openssl, tree-sitter, }:
+
 rustPlatform.buildRustPackage rec {
   pname = "zee";
-  version = "0.2.1";
+  version = "0.3.1";
 
   src = fetchFromGitHub {
     owner = "mcobzarenco";
     repo = pname;
     # rev = "refs/tags/v${version}";
-    rev = "a8979be0819a7140648315c1e5fac052933f9b57";
+    rev = "v${version}";
     fetchSubmodules = true;
-    sha256 = "sha256-qCslkvur8aHAveYsX9i7DGpqySbVr4uOHDh3G/VnCco=";
+    sha256 = "sha256-0vHvzxdtxTsGVq1iJezjHCB0NKF5bCqMIrD15gOWcvE=";
   };
 
-  cargoSha256 = "sha256-mCNW0xsrbOBUOaa4YXpGjbQUNDnMjNNkLkH5Dm1FOI0=";
+  cargoSha256 = "sha256-eXCbTM6+oLRIY4LIlrFs53V8IqYGhZyku48AgXmeYs8=";
 
-  nativeBuildInputs = [pkg-config];
-  buildInputs = [openssl tree-sitter];
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ openssl tree-sitter ];
   OPENSSL_NO_VENDOR = 1;
 
   meta = with lib; {
-    description = "A modern editor for the terminal, written in Rust.";
+    description = "Modern editor for the terminal";
     homepage = "https://github.com/mcobzarenco/zee";
-    license = [licenses.mit];
-    maintainers = with maintainers; [zendo];
+    license = [ licenses.mit ];
+    maintainers = with maintainers; [ zendo ];
     platforms = platforms.all;
   };
 }

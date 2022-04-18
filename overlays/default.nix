@@ -1,18 +1,18 @@
 final: prev: {
-  # sources = prev.callPackage (import ./_sources/generated.nix) { };
-  # helix = prev.callPackage ./helix.nix { };
-  # manix = prev.manix.overrideAttrs (o: rec{
-  #   inherit (prev.sources.manix) pname version src;
-  # });
+  /*
+   (gnomeExtensions.dash-to-dock.overrideAttrs
+   (oldAttrs: rec {
+     src = fetchFromGitHub {
+       owner = "micheleg";
+       repo = "dash-to-dock";
+       rev = "9b22c2ed13e1ec261f7b42fe7194401c7afcffb7";
+       sha256 = "sha256-p68wGek42icQ5VHPtqSY9Nr25mzmGK14Tdr6D3ePDtE=";
+     };
+   }))
+   */
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   zee = prev.callPackage ./zee {};
 
   konsave = prev.callPackage ./konsave {};
   dialect = prev.callPackage ./dialect {};
-
-  # libsForQt5.sddm = prev.sddm.overrideAttrs (oldAttrs: {
-  #   src = prev.fetchFromGithHub {
-  #     rev = "d19813cb03c7d71b896aead28e5285bc131500a9";
-  #   };
-  # });
 }

@@ -41,7 +41,6 @@
     gthumb
     notejot
     lollypop
-    rhythmbox
     gparted
     dconf2nix
     kooha
