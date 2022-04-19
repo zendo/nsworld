@@ -5,7 +5,7 @@
  nix build .#nixosConfigurations.mysystem.config.system.build.installer
  
  flake.nix:
- inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+ nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
  home-manager.url = "github:nix-community/home-manager";
  home-manager.inputs.nixpkgs.follows = "nixpkgs";
  &&
@@ -27,12 +27,10 @@
   environment.systemPackages = with pkgs; [
     binutils
     tree
+    file
     p7zip
     fd
     ripgrep
-    helix
-    neovim
-    emacs
     gdu
     duf
     pfetch
@@ -40,20 +38,22 @@
     wget
     curl
     bind
+    helix
+    neovim
+    emacs
     hack-font
     fira-code
     jetbrains-mono
   ];
 
   environment.shellAliases = {
-    wsl-proxy = "export http_proxy=http://192.168.2.118:10809 ; \\
-    export https_proxy=http://192.168.2.118:10809";
+    wsl-proxy = "export http_proxy=http://192.168.2.118:7890 ; \\
+    export https_proxy=http://192.168.2.118:7890";
     # wsl-switch = "";
   };
 
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
-    warn-dirty = false;
     auto-optimise-store = true;
     trusted-users = ["@wheel"];
     flake-registry = "https://cdn.jsdelivr.net/gh/NixOS/flake-registry/flake-registry.json";

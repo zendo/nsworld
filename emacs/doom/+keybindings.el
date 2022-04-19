@@ -40,7 +40,7 @@
 (map!
  "C-." #'hippie-expand
  "C-\\" #'align-regexp
- ;; "M-s" #'avy-goto-char ;默认 isearch 被覆盖
+ "M-s" #'avy-goto-word-1 ;默认 isearch 被覆盖
 
  "C-s" #'consult-line
  "C-x C-r" #'consult-recent-file

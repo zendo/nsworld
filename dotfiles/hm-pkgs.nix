@@ -85,6 +85,7 @@
     # magic-wormhole
     aspellDicts.en
     asciinema # record the terminal
+    distrobox
 
     # overlay
     # harmonyos-sans
@@ -95,7 +96,6 @@
 
     gitg
     # git-cola
-    distrobox
     v2ray
     qv2ray
     # clash

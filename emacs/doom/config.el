@@ -48,7 +48,8 @@
 ;;   (setq centaur-tabs-style "wave"))
 
 ;; Editor
-(+global-word-wrap-mode +1)
+(when (featurep! :editor word-wrap)
+  (+global-word-wrap-mode +1))
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 ;; alejandra for Nix Code Formatter
@@ -59,7 +60,7 @@
                                    emacs-lisp
                                    emacs-lisp-checkdoc))
 ;; (add-to-list 'auto-mode-alist
-             ;; '("bashrc\\'" . conf-mode))
+;; '("bashrc\\'" . conf-mode))
 
 ;; hippie expand is dabbrev expand on steroids
 (setq hippie-expand-try-functions-list
@@ -107,6 +108,8 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(after! vundo
+  (setq vundo-glyph-alist vundo-unicode-symbols))
 
 ;; S: hydra body
 (use-package! dired-quick-sort
@@ -181,4 +184,3 @@ Version 2017-08-19"
         (goto-char (point-min))
         (while (re-search-forward " +" nil t)
           (replace-match "\n" ))))))
-
