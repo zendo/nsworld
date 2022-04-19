@@ -14,6 +14,7 @@
     psmisc # pstree
     cht-sh
     trash-cli
+    f2
     choose
     difftastic # using delta right now
     kalker # calculator
