@@ -108,7 +108,7 @@
               ./home-manager/git.nix
               ./home-manager/cli.nix
               ./home-manager/zsh.nix
-              ./home-manager/aliases.nix
+              ./home-manager/alias.nix
               ######## wsl #########
               ./home-manager/gui.nix
               ./home-manager/editor.nix
