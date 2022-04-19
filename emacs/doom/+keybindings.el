@@ -84,7 +84,7 @@
    :prefix ("-" . "remove-lists")
    "b" #'bookmark-delete
    "r" #'recentf-edit-list
-   "p" #'projectile-remove-known-project
+   "p" #'project-forget-project
    :prefix ("b" . "buffer")
    "k" #'kill-current-buffer
    "K" #'crux-kill-other-buffers
@@ -155,7 +155,6 @@
 (map! :map dired-mode-map
       :after dired
       "f" #'ido-find-file
-      "F" #'find-name-dired
       "<RET>" #'dired-find-alternate-file
       "<SPC>" #'dired-find-alternate-file
       "." #'dired-hide-details-mode

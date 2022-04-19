@@ -56,8 +56,8 @@
 
   ;; Specify font for Chinese characters
   (cl-loop for font in '(
-                         "Sarasa Mono SC"
                          "Noto Sans CJK SC"
+                         "Sarasa Mono SC"
                          "Microsoft Yahei"
                          "WenQuanYi Micro Hei")
            when (font-installed-p font)

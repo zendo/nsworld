@@ -5,18 +5,21 @@
 (when sys/linuxp
   (setq centaur-org-directory "~/Documents/org/"))
 
-(setq mouse-wheel-scroll-amount '(3 ((shift) . hscroll))
-      mouse-wheel-scroll-amount-horizontal 1
-      mouse-wheel-progressive-speed nil)
-
 (setq system-time-locale "C"
       confirm-kill-processes 'nil)
+
+(add-to-list 'default-frame-alist '(alpha-background . 98))
+
 
 ;; Mouse
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+
+;; Scroll
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode t))
 
 ;; Keybindings
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz

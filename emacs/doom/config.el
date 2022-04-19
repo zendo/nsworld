@@ -24,13 +24,13 @@
       doom-font (font-spec :family "JetBrains Mono" :size 14)
       doom-variable-pitch-font (font-spec :family "Fira Code")
       doom-big-font-increment 2
-      doom-unicode-font (font-spec :family "Noto Sans Mono")
+      doom-unicode-font (font-spec :family "Noto Color Emoji") ;; "Noto Sans Mono"
 
       x-gtk-use-native-input t          ;使用外部输入法
       ;; word-wrap-by-category t           ;?
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       recentf-exclude
-      '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist")
+      '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist" )
       )
 
 (setq org-directory "~/Documents/org/")
@@ -50,6 +50,7 @@
 ;; Editor
 (when (featurep! :editor word-wrap)
   (+global-word-wrap-mode +1))
+(global-visual-line-mode 1)
 ;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 ;; alejandra for Nix Code Formatter
