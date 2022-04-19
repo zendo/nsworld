@@ -105,11 +105,15 @@
             home.stateVersion = "22.05";
             programs.home-manager.enable = true;
             imports = [
-              ./dotfiles/hm-pkgs.nix
-              ./dotfiles/hm-cli.nix
-              ./dotfiles/hm-gui.nix
-              ./dotfiles/hm-gnome.nix
-              # ./dotfiles/hm-dconf.nix
+              ./home-manager/git.nix
+              ./home-manager/cli.nix
+              ./home-manager/zsh.nix
+              ./home-manager/aliases.nix
+              ######## wsl #########
+              ./home-manager/gui.nix
+              ./home-manager/editor.nix
+              ./home-manager/env.nix
+              ./home-manager/gtk.nix
             ];
           };
         }

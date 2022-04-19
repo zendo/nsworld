@@ -3,14 +3,14 @@
   pkgs,
   ...
 }: {
-  # fix tiny cursor in qt-apps @gnome
+  # fix tiny cursor at qt-apps
   xsession.pointerCursor = {
     name = "Vanilla-DMZ-AA";
     package = pkgs.vanilla-dmz;
     size = 128;
   };
 
-  # fix spotify hidpi @gnome
+  # fix spotify hidpi
   xdg.desktopEntries.spotify = {
     name = "Spotify";
     genericName = "Music Player";

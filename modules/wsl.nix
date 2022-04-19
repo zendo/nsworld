@@ -38,6 +38,7 @@
     wget
     curl
     bind
+
     helix
     neovim
     emacs

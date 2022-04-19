@@ -3,13 +3,6 @@
   pkgs,
   ...
 }: {
-  xdg.configFile = {
-    "mpv".source = ./mpv;
-    "foot/foot.ini".source = ./foot.ini;
-    "wezterm/wezterm.lua".source = ./wezterm.lua;
-    "alacritty/alacritty.yml".source = ./alacritty.yml;
-  };
-
   programs.vscode = {
     enable = true;
   };
@@ -51,20 +44,5 @@
         space.q = ":q";
       };
     };
-  };
-
-  # programs.firefox = {
-  #   enable = true;
-  #   package = pkgs.firefox-wayland;
-  # };
-
-  # not work?
-  programs.chromium = {
-    enable = false;
-    package = pkgs.google-chrome;
-    commandLineArgs = [
-      "--ozone-platform=wayland"
-      "--enable-features=VaapiVideoDecoder"
-    ];
   };
 }

@@ -1,21 +1,21 @@
-{ lib
-, stdenv
-, fetchFromGitLab
-, rustPlatform
-, desktop-file-utils
-, appstream-glib
-, meson
-, ninja
-, pkg-config
-, reuse
-, wrapGAppsHook
-, glib
-, gtk4
-, gst_all_1
-, libadwaita
-, dbus
+{
+  lib,
+  stdenv,
+  fetchFromGitLab,
+  rustPlatform,
+  desktop-file-utils,
+  appstream-glib,
+  meson,
+  ninja,
+  pkg-config,
+  reuse,
+  wrapGAppsHook,
+  glib,
+  gtk4,
+  gst_all_1,
+  libadwaita,
+  dbus,
 }:
-
 stdenv.mkDerivation rec {
   pname = "amberol";
   version = "0.3.0";
@@ -38,19 +38,21 @@ stdenv.mkDerivation rec {
     patchShebangs build-aux
   '';
 
-  nativeBuildInputs = [
-    appstream-glib
-    desktop-file-utils
-    meson
-    ninja
-    pkg-config
-    reuse
-    wrapGAppsHook
-  ] ++ (with rustPlatform; [
-    cargoSetupHook
-    rust.cargo
-    rust.rustc
-  ]);
+  nativeBuildInputs =
+    [
+      appstream-glib
+      desktop-file-utils
+      meson
+      ninja
+      pkg-config
+      reuse
+      wrapGAppsHook
+    ]
+    ++ (with rustPlatform; [
+      cargoSetupHook
+      rust.cargo
+      rust.rustc
+    ]);
 
   buildInputs = [
     glib
@@ -68,7 +70,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     homepage = "https://gitlab.gnome.org/ebassi/amberol";
     description = "A small and simple sound and music player";
-    maintainers = with maintainers; [ linsui ];
+    maintainers = with maintainers; [linsui];
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };

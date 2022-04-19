@@ -1,5 +1,8 @@
-{ lib, fetchFromGitHub, buildGoModule }:
-
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+}:
 buildGoModule rec {
   pname = "f2";
   version = "1.8.0";
@@ -13,7 +16,7 @@ buildGoModule rec {
 
   vendorSha256 = "sha256-Cahqk+7jDMUtZq0zhBll1Tfryu2zSPBN7JKscV38360=";
 
-  ldflags = [ "-s" "-w" "-X=main.Version=${version}" ];
+  ldflags = ["-s" "-w" "-X=main.Version=${version}"];
 
   # has no tests
   doCheck = false;
@@ -22,6 +25,6 @@ buildGoModule rec {
     description = "Command-line batch renaming tool";
     homepage = "https://github.com/ayoisaiah/f2";
     license = licenses.mit;
-    maintainers = with maintainers; [ zendo ];
+    maintainers = with maintainers; [zendo];
   };
 }

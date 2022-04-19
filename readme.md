@@ -33,7 +33,7 @@ LC_ALL=C xdg-user-dirs-update --force
 dconf dump /org/gnome/ > my-dconf
 dconf load /org/gnome/ < my-dconf
 dconf reset -f /org/gnome/
-dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/dotfiles/hm-dconf.nix
+dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
 # Backup KDE Settings
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
