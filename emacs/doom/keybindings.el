@@ -1,6 +1,6 @@
 ;;; Package --- Summary
 ;;; Commentary:
-;;; $DOOMDIR/+keybindings.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/keybindings.el -*- lexical-binding: t; -*-
 ;;; Code:
 
 ;; Mouse
@@ -18,8 +18,6 @@
 
 ;; Common
 (global-set-key (kbd "C-z") nil)
-
-(global-set-key (kbd "<f1>") '+doom-dashboard/open)
 
 (global-set-key (kbd "<f2>") '+vterm/toggle)
 (after! vterm
@@ -133,22 +131,6 @@
 ;; (when (featurep! :editor meow)
 ;;   (map!
 ;;    ))
-
-;; dashboard
-(defun +doom-dashboard-setup-modified-keymap ()
-  (setq +doom-dashboard-mode-map (make-sparse-keymap))
-  (map! :map +doom-dashboard-mode-map
-        :desc "Find file" "f" #'find-file
-        :desc "Bookmark" "b" #'consult-bookmark
-        :desc "Recent buffers" "," #'consult-buffer
-        :desc "Recent files" "r" #'consult-recent-file
-        :desc "Open project" "p" #'projectile-switch-project
-        :desc "Open project" "SPC" #'projectile-switch-project
-        :desc "Open dotfile" "." (cmd! (doom-project-find-file "~/.nsworld/"))
-        :desc "Show keybindings" "h" (cmd! (which-key-show-keymap '+doom-dashboard-mode-map))))
-(add-transient-hook! #'+doom-dashboard-mode (+doom-dashboard-setup-modified-keymap))
-(add-transient-hook! #'+doom-dashboard-mode :append (+doom-dashboard-setup-modified-keymap))
-(add-hook! 'doom-init-ui-hook :append (+doom-dashboard-setup-modified-keymap))
 
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer

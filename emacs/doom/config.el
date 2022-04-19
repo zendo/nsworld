@@ -3,7 +3,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 ;;; Code:
 
-(load! "+keybindings")
+(load! "keybindings")
+(load! "dashboard")
 
 ;; basic
 (setq user-full-name "zendo"
@@ -42,7 +43,7 @@
 ;; UI
 ;; (add-to-list 'default-frame-alist '(height . 40))
 ;; (add-to-list 'default-frame-alist '(width . 80))
-(add-hook 'window-setup-hook #'toggle-frame-maximized)
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 ;; (after! centaur-tabs
 ;;   (setq centaur-tabs-style "wave"))
@@ -110,7 +111,8 @@
 ;; they are implemented.
 
 (after! vundo
-  (setq vundo-glyph-alist vundo-unicode-symbols))
+  (setq vundo-glyph-alist vundo-unicode-symbols)
+  (setq vundo-roll-back-on-quit nil))
 
 ;; S: hydra body
 (use-package! dired-quick-sort
