@@ -79,7 +79,9 @@
     difftastic # using delta right now
     kalker # calculator
     imagemagick
+    ydict
     translate-shell
+    croc
     # magic-wormhole
     aspellDicts.en
     asciinema # record the terminal

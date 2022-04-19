@@ -13,20 +13,21 @@
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode t))
 
-;; Doom special
+;; Doom 别在新行加注释
 (setq +default-want-RET-continue-comments nil)
 
 ;; Common
 (global-set-key (kbd "C-z") nil)
 
-(define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
-
 (global-set-key (kbd "<f1>") '+doom-dashboard/open)
 
-(global-set-key (kbd "<f8>") '+vterm/toggle)
+(global-set-key (kbd "<f2>") '+vterm/toggle)
 (after! vterm
   (setq vterm-shell "zsh")
-  (define-key vterm-mode-map (kbd "<f8>")  '+vterm/toggle))
+  (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle))
+
+(after! treemacs
+  (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
@@ -39,7 +40,7 @@
 (map!
  "C-." #'hippie-expand
  "C-\\" #'align-regexp
- "M-s" #'avy-goto-char ;默认 isearch 被覆盖
+ ;; "M-s" #'avy-goto-char ;默认 isearch 被覆盖
 
  "C-s" #'consult-line
  "C-x C-r" #'consult-recent-file
@@ -51,6 +52,7 @@
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo
+ "C-x j" #'dired-jump-other-window
 
  "C-}" #'mc/mark-next-like-this
  "C-{" #'mc/mark-previous-like-this
@@ -125,7 +127,7 @@
    "v" #'rotate-layout
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
- ))
+   ))
 
 ;; meow
 ;; (when (featurep! :editor meow)
@@ -151,16 +153,17 @@
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
 (map! :map dired-mode-map
-    :after dired
-    "f" #'ido-find-file
-    "F" #'find-name-dired
-    "<RET>" #'dired-find-alternate-file
-    "." #'dired-hide-details-mode
-    "/" #'funs/dired-filter-show-match
-    "b" #'(lambda ()
-    (interactive)
-    (find-alternate-file ".."))
-    )
+      :after dired
+      "f" #'ido-find-file
+      "F" #'find-name-dired
+      "<RET>" #'dired-find-alternate-file
+      "<SPC>" #'dired-find-alternate-file
+      "." #'dired-hide-details-mode
+      "/" #'funs/dired-filter-show-match
+      "b" #'(lambda ()
+              (interactive)
+              (find-alternate-file ".."))
+      )
 ;;;###autoload
 (defun funs/dired-filter-show-match ()
   "Only show filter file."
@@ -177,7 +180,7 @@
 ;;   (bind-key "j" 'next-line view-mode-map)
 ;;   (bind-key "k" 'previous-line view-mode-map)
 ;;   (bind-key "l" 'forward-char view-mode-map)
-  ;; (bind-key "b" 'View-scroll-page-backward view-mode-map))
+;; (bind-key "b" 'View-scroll-page-backward view-mode-map))
 
 
 

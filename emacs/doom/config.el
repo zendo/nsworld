@@ -108,6 +108,13 @@
 ;; they are implemented.
 
 
+;; S: hydra body
+(use-package! dired-quick-sort
+  :after dired
+  :when (not IS-WINDOWS)
+  :config
+  (dired-quick-sort-setup))
+
 
 (setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
 (when (file-exists-p custom-file)
