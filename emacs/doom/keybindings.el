@@ -16,7 +16,7 @@
 ;; Doom 别在新行加注释
 (setq +default-want-RET-continue-comments nil)
 
-;; Common
+
 (global-set-key (kbd "C-z") nil)
 
 (global-set-key (kbd "<f2>") '+vterm/toggle)
@@ -86,10 +86,10 @@
    :prefix ("b" . "buffer")
    "k" #'kill-current-buffer
    "K" #'crux-kill-other-buffers
-   "s" #'projectile-save-project-buffers
+   "s" #'save-some-buffers
    :prefix ("f" . "file")
    "<f2>" #'crux-rename-file-and-buffer
-   "s" #'projectile-save-project-buffers
+   "s" #'save-some-buffers
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
    :prefix ("w" . "window")
@@ -132,27 +132,6 @@
 ;;   (map!
 ;;    ))
 
-;; Dired
-(put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
-(map! :map dired-mode-map
-      :after dired
-      "f" #'ido-find-file
-      "<RET>" #'dired-find-alternate-file
-      "<SPC>" #'dired-find-alternate-file
-      "." #'dired-hide-details-mode
-      "/" #'funs/dired-filter-show-match
-      "b" #'(lambda ()
-              (interactive)
-              (find-alternate-file ".."))
-      )
-;;;###autoload
-(defun funs/dired-filter-show-match ()
-  "Only show filter file."
-  (interactive)
-  (call-interactively #'dired-mark-files-regexp)
-  (command-execute "tk"))
-
-
 ;; view-mode key
 ;; (defvar view-mode-map) ;定义变量消除 flaycheck error
 ;; (with-eval-after-load 'view
@@ -163,9 +142,7 @@
 ;;   (bind-key "l" 'forward-char view-mode-map)
 ;; (bind-key "b" 'View-scroll-page-backward view-mode-map))
 
-
-
-;; 新建 window 并直接切换至新窗口
+;; 新建 window 并切换过去
 (global-set-key (kbd "C-x 2")
                 (lambda()
                   (interactive)

@@ -5,6 +5,7 @@
 
 (load! "keybindings")
 (load! "dashboard")
+(load! "functions")
 
 ;; basic
 (setq user-full-name "zendo"
@@ -77,21 +78,11 @@
         try-complete-lisp-symbol-partially ;部分补全 lisp symbol
         try-complete-lisp-symbol))         ;补全 lisp symbol
 
-;; Backup TODO
-(add-hook! 'focus-out-hook (save-some-buffers t)) ;失去窗口焦点时保存
-;; (setq backup-directory-alist `((".*" . ,my-backup))
-;;       undo-tree-auto-save-history t
-;;       undo-tree-history-directory-alist
-;;       `((".*" . ,my-backup))
-;;       ;; create-lockfiles nil   ;stop creating .#lockfile# files 多人编辑中
-;;       make-backup-files t    ;备份文件 backup~
-;;       backup-by-copying t    ; don't clobber symlinks
-;;       kept-new-versions 10   ; keep 10 latest versions
-;;       kept-old-versions 0    ; don't bother with old versions
-;;       delete-old-versions t  ; don't ask about deleting old versions
-;;       version-control t      ; number backups
-;;       vc-make-backup-files t ; backup version controlled files
-;;       )
+;; 窗口失去焦点时保存
+(add-hook! 'focus-out-hook (save-some-buffers t))
+
+;; recentf 不要保存 dired 记录
+(define-advice doom--recentf-add-dired-directory-h (:override ()))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -102,17 +93,31 @@
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
 
+;; visual undo history
 (after! vundo
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (setq vundo-roll-back-on-quit nil))
+
+;; Dired
+(put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
+(map! :map dired-mode-map
+      :after dired
+      "f" #'ido-find-file
+      "<RET>" #'dired-find-alternate-file
+      "<SPC>" #'dired-find-alternate-file
+      "." #'dired-hide-details-mode
+      "/" #'funs/dired-filter-show-match
+      "b" #'(lambda ()
+              (interactive)
+              (find-alternate-file ".."))
+      )
+;;;###autoload
+(defun funs/dired-filter-show-match ()
+  "Only show filter file."
+  (interactive)
+  (call-interactively #'dired-mark-files-regexp)
+  (command-execute "tk"))
 
 ;; S: hydra body
 (use-package! dired-quick-sort
@@ -121,69 +126,7 @@
   :config
   (dired-quick-sort-setup))
 
-
+;; throw custom file
 (setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
 (when (file-exists-p custom-file)
   (load custom-file))
-
-
-;;----------------------------------------------------------------------------
-;; vertico
-;;----------------------------------------------------------------------------
-;; 箭头显示当前项
-;;;###autoload
-(advice-add #'vertico--format-candidate :around
-            (lambda (orig cand prefix suffix index _start)
-              (setq cand (funcall orig cand prefix suffix index _start))
-              (concat
-               (if (= vertico--index index)
-                   (propertize "» " 'face 'vertico-current)
-                 "  ")
-               cand)))
-
-;;----------------------------------------------------------------------------
-;; align
-;;----------------------------------------------------------------------------
-;;;###autoload
-(defun zendo/align-whitespace (start end)
-  "Align columns by whitespace"
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)\\s-" 1 0 t))
-
-(defun zendo/align-& (start end)
-  "Align columns by ampersand"
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)&" 1 1 t))
-
-;;----------------------------------------------------------------------------
-;; space to newline
-;;----------------------------------------------------------------------------
-;;;###autoload
-(defun zendo/space-to-newline ()
-  "Replace space sequence to a newline char.
-Works on current block or selection.
-
-URL `http://ergoemacs.org/emacs/emacs_space_to_newline.html'
-Version 2017-08-19"
-  (interactive)
-  (let* ( $p1 $p2 )
-    (if (use-region-p)
-        (progn
-          (setq $p1 (region-beginning))
-          (setq $p2 (region-end)))
-      (save-excursion
-        (if (re-search-backward "\n[ \t]*\n" nil "move")
-            (progn (re-search-forward "\n[ \t]*\n")
-                   (setq $p1 (point)))
-          (setq $p1 (point)))
-        (re-search-forward "\n[ \t]*\n" nil "move")
-        (skip-chars-backward " \t\n" )
-        (setq $p2 (point))))
-    (save-excursion
-      (save-restriction
-        (narrow-to-region $p1 $p2)
-        (goto-char (point-min))
-        (while (re-search-forward " +" nil t)
-          (replace-match "\n" ))))))
