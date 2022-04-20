@@ -61,8 +61,8 @@
  [remap kill-ring-save] #'easy-kill
  [remap mark-sexp] #'easy-mark-sexp
  [remap mark-word] #'easy-mark-word
- [remap zap-to-char] #'zzz-to-char
- "C-M-z" #'zzz-up-to-char
+ "C-z" #'zzz-to-char
+ "M-z" #'zzz-up-to-char
 
  "C-x g" #'magit-status
  "s-g" #'magit-status
@@ -92,6 +92,7 @@
    "r" #'recentf-edit-list
    "p" #'project-forget-project
    :prefix ("b" . "buffer")
+   "b" #'consult-buffer
    "k" #'kill-current-buffer
    "K" #'crux-kill-other-buffers
    "s" #'save-some-buffers
@@ -143,14 +144,14 @@
 ;;    ))
 
 ;; view-mode key
-;; (defvar view-mode-map) ;定义变量消除 flaycheck error
-;; (with-eval-after-load 'view
-;;   (bind-key "g" 'goto-line view-mode-map)
-;;   (bind-key "h" 'backward-char view-mode-map)
-;;   (bind-key "j" 'next-line view-mode-map)
-;;   (bind-key "k" 'previous-line view-mode-map)
-;;   (bind-key "l" 'forward-char view-mode-map)
-;; (bind-key "b" 'View-scroll-page-backward view-mode-map))
+(defvar view-mode-map) ;定义变量消除 flaycheck error
+(with-eval-after-load 'view
+  (bind-key "g" 'goto-line view-mode-map)
+  (bind-key "h" 'backward-char view-mode-map)
+  (bind-key "j" 'next-line view-mode-map)
+  (bind-key "k" 'previous-line view-mode-map)
+  (bind-key "l" 'forward-char view-mode-map)
+(bind-key "b" 'View-scroll-page-backward view-mode-map))
 
 ;; 新建 window 并切换过去
 (global-set-key (kbd "C-x 2")
