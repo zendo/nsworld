@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   services.xserver.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -12,7 +11,7 @@
     autoLogin.user = "iab";
   };
 
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   services.packagekit.enable = false;
   services.gnome.tracker-miners.enable = false;
@@ -47,7 +46,6 @@
     fractal
 
     gnome.gnome-tweaks
-    gnome.gnome-todo
     gnome.dconf-editor
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder

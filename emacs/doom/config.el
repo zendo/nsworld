@@ -46,19 +46,16 @@
 ;; (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
-;; (after! centaur-tabs
-;;   (setq centaur-tabs-style "wave"))
 
 ;; Editor
 (when (featurep! :editor word-wrap)
   (+global-word-wrap-mode +1))
 (global-visual-line-mode 1)
-;; (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
-;; alejandra for Nix Code Formatter
+;; alejandra for Nix Code Formatter :C-c c f
 (set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
 
-;;禁用 flycheck
+;; disable flycheck in some mode
 (setq flycheck-disabled-checkers '(sh-shellscript
                                    emacs-lisp
                                    emacs-lisp-checkdoc))
@@ -66,6 +63,7 @@
 ;; '("bashrc\\'" . conf-mode))
 
 ;; hippie expand is dabbrev expand on steroids
+;; doom 顺序似乎不对，这里覆盖自己的配置
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
         try-expand-dabbrev-all-buffers     ;搜索所有 buffer
@@ -79,7 +77,8 @@
         try-complete-lisp-symbol))         ;补全 lisp symbol
 
 ;; 窗口失去焦点时保存
-(add-hook! 'focus-out-hook (save-some-buffers t))
+;; (add-hook! 'focus-out-hook (save-some-buffers t))  ; old function
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 
 ;; recentf 不要保存 dired 记录
 (define-advice doom--recentf-add-dired-directory-h (:override ()))

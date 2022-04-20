@@ -31,7 +31,7 @@
 (global-set-key [(control shift return)] #'crux-smart-open-line-above)
 
 (bind-keys*
- ([f1] . treemacs)
+ ;; ([f1] . centaur-dashboard)
  ;; ("C-." . company-complete) ;; imenu-counsel
  ("C-." . hippie-expand)
  ("C-\\" . align-regexp)
@@ -54,31 +54,28 @@
  ("r" . recentf-edit-list)
  ("p" . projectile-remove-known-project))
 
-;; 失去焦点时保存
-(defun save-all ()
-  (interactive)
-  (save-some-buffers t))
-(add-hook 'focus-out-hook (save-some-buffers t))
+;; 窗口失去焦点时保存
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 
 
 ;; 备份
-(defconst my-backup (expand-file-name "my-backup" user-emacs-directory))
-(unless (file-exists-p my-backup)
-  (make-directory my-backup))
+;; (defconst my-backup (expand-file-name "my-backup" user-emacs-directory))
+;; (unless (file-exists-p my-backup)
+;;   (make-directory my-backup))
 
-(setq backup-directory-alist `((".*" . ,my-backup))
-      undo-tree-auto-save-history t
-      undo-tree-history-directory-alist
-      `((".*" . ,my-backup))
-      ;; create-lockfiles nil   ;stop creating .#lockfile# files 多人编辑中
-      make-backup-files t    ;备份文件 backup~
-      backup-by-copying t    ; don't clobber symlinks
-      kept-new-versions 10   ; keep 10 latest versions
-      kept-old-versions 0    ; don't bother with old versions
-      delete-old-versions t  ; don't ask about deleting old versions
-      version-control t      ; number backups
-      vc-make-backup-files t ; backup version controlled files
-      )
+;; (setq backup-directory-alist `((".*" . ,my-backup))
+;;       undo-tree-auto-save-history t
+;;       undo-tree-history-directory-alist
+;;       `((".*" . ,my-backup))
+;;       ;; create-lockfiles nil   ;stop creating .#lockfile# files 多人编辑中
+;;       make-backup-files t    ;备份文件 backup~
+;;       backup-by-copying t    ; don't clobber symlinks
+;;       kept-new-versions 10   ; keep 10 latest versions
+;;       kept-old-versions 0    ; don't bother with old versions
+;;       delete-old-versions t  ; don't ask about deleting old versions
+;;       version-control t      ; number backups
+;;       vc-make-backup-files t ; backup version controlled files
+;;       )
 
 ;; nixos
 (use-package nix-mode
@@ -88,13 +85,12 @@
 ;; vterm
 (with-eval-after-load 'vterm
   (setq vterm-shell "zsh")
-  (define-key vterm-mode-map (kbd "<f9>")  'shell-pop))
+  (define-key vterm-mode-map (kbd "<f1>")  'shell-pop))
 
 
 ;; dired key
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
 (define-key dired-mode-map "f" 'counsel-find-file)
-(define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (define-key dired-mode-map "." 'dired-hide-details-mode)
 (define-key dired-mode-map "/" 'funs/dired-filter-show-match)
@@ -120,15 +116,6 @@
   (bind-key "b" 'View-scroll-page-backward view-mode-map))
 
 
-;;----------------------------------------------------------------------------
-;; stop using mouse minibuffer
-;;----------------------------------------------------------------------------
-;;;###autoload
-(defun stop-using-minibuffer ()
-  "Kill the minibuffer."
-  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
-    (abort-recursive-edit)))
-;; (add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
 
 ;;----------------------------------------------------------------------------
 ;; align
