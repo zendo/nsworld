@@ -38,7 +38,7 @@
 
   environment.systemPackages = with pkgs; [
     gthumb
-    notejot
+    # notejot
     lollypop
     gparted
     dconf2nix

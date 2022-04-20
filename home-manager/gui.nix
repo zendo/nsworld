@@ -10,6 +10,7 @@
     # dialect
     # amberol
     # konsave
+    paper
 
     gitg
     # git-cola

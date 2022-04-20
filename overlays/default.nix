@@ -15,4 +15,6 @@ final: prev: {
 
   konsave = prev.callPackage ./konsave {};
   dialect = prev.callPackage ./dialect {};
+
+  paper = prev.callPackage ./paper {};
 }

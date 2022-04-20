@@ -34,7 +34,7 @@ mouse_bindings:
 key_bindings:
   - { key: C,        mods: Control|Shift, action: Copy                }
   - { key: V,        mods: Control|Shift, action: Paste               }
-  - { key: V,        mods: Control,       action: Paste               }
+  # - { key: V,        mods: Control,       action: Paste               }
 
   # emacs
   - { key: W,        mods: Control,       action: Copy                }
@@ -42,6 +42,8 @@ key_bindings:
   - { key: Y,        mods: Alt,           action: Paste               }
   - { key: Y,        mods: Control,       action: Paste               }
   - { key: G,        mods: Control,       chars: "\x03"               }
+  - { key: V,        mods: Control,       action: ScrollHalfPageDown  }
+  - { key: V,        mods: Alt,           action: ScrollHalfPageUp    }
 
   - { key: Q,        mods: Control,       action: Quit                }
   - { key: W,        mods: Command,       action: Quit                }
