@@ -38,12 +38,12 @@
     :defer t
     :config
     (setq vterm-shell "zsh")
-    (define-key vterm-mode-map (kbd "<f9>")  'shell-pop)))
+    (define-key vterm-mode-map (kbd "<f2>")  'shell-pop)))
 
 ;; shell-pop
 (use-package shell-pop
   :defer t
-  :bind ([f9] . shell-pop)
+  :bind ([f2] . shell-pop)
   :init
   (setq shell-pop-window-size 30
         shell-pop-shell-type

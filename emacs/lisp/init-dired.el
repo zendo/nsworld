@@ -19,7 +19,6 @@
 
 ;; key bindings
 (define-key dired-mode-map "f" 'counsel-find-file)
-(define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (define-key dired-mode-map "." 'dired-hide-details-mode)
 (define-key dired-mode-map "/" 'funs/dired-filter-show-match)

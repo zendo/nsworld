@@ -48,6 +48,7 @@
  "M-m" #'consult-mark
  "C-x 4 r" #'consult-buffer-other-window
  "C-x 4 x" #'ace-swap-window
+ [remap other-window] #'ace-window
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo
@@ -61,8 +62,7 @@
  [remap kill-ring-save] #'easy-kill
  [remap mark-sexp] #'easy-mark-sexp
  [remap mark-word] #'easy-mark-word
- "C-z" #'zzz-to-char
- "M-z" #'zzz-up-to-char
+ "M-z" #'avy-zap-to-char
 
  "C-x g" #'magit-status
  "s-g" #'magit-status
@@ -101,8 +101,7 @@
    "s" #'save-some-buffers
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
-   "f" #'zzz-to-char
-   "b" #'zzz-up-to-char
+   "z" #'avy-zap-to-char
    :prefix ("w" . "window")
    "x" #'ace-swap-window
    "v" #'rotate-layout

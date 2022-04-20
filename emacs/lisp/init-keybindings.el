@@ -58,6 +58,10 @@
            ("o" . burly-open-bookmark)
            ("x" . crux-swap-windows)
 
+           :prefix-map project
+           :prefix "C-c p"
+           ("p" . project-switch-project)
+
            :prefix-map remove-lists
            :prefix "C-c -"
            ("b" . bookmark-delete)
@@ -70,16 +74,17 @@
  ("C-h f" . helpful-callable)
  ("C-h v" . helpful-variable)
  ("C-h k" . helpful-key)
- ([f2] . open-dashboard)
 
  ("M-+" . text-scale-increase)
  ("M-_" . text-scale-decrease)
 
- ;; ("C-/" . undo-fu-only-undo)
- ;; ("C-?" . undo-fu-only-redo)
  ("C-=" . er/expand-region)
  ;; ("C-." . company-complete)
  ("C-." . hippie-expand)
+
+ ("C-c <SPC>" . project-switch-project)
+ ("C-c ." . project-find-file)
+ ("C-c ," . project-switch-to-buffer)
 
  ("C-;" . iedit-mode)
  ("C-\\" . align-regexp)
@@ -91,7 +96,7 @@
  ("C-|" . mc/mark-all-like-this-dwim)
 
  ("C-x C-d" . dired-jump)
- ("C-c C-e" . macrostep-expand)
+ ("C-x u" . vundo)
  ("C-c Y" . youdao-dictionary-search-at-point)
  ("C-c y" . youdao-dictionary-search-at-point-tooltip))
 

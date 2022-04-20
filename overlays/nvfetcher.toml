@@ -6,6 +6,10 @@ fetch.github = "TimothyYe/ydict"
 src.github = "ayoisaiah/f2"
 fetch.github = "ayoisaiah/f2"
 
+[paper]
+src.github = "posidon_software/paper"
+fetch.github = "posidon_software/paper"
+
 [dialect]
 src.github = "dialect-app/dialect"
 fetch.github = "dialect-app/dialect"

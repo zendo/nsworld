@@ -8,7 +8,6 @@
     # harmonyos-sans
     # zee
     # dialect
-    # amberol
     # konsave
     paper
 

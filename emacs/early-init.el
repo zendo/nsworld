@@ -83,10 +83,10 @@
           #'(lambda ()
               (setq inhibit-splash-screen t)
               (setq use-file-dialog nil)
-              ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
-              (setq default-frame-alist
-                    '((height . 48)
-                      (width . 83)))
+              (setq initial-frame-alist (quote ((fullscreen . maximized))))
+              ;; (setq default-frame-alist
+              ;;       '((height . 48)
+              ;;         (width . 83)))
               ))
 
 ;;; early-init.el ends here

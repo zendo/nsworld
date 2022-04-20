@@ -33,7 +33,6 @@
 (require 'init-backup)
 (require 'init-dired)
 (require 'init-shell)
-(require 'init-project)
 ;; (require 'init-ivy)
 (require 'init-vertico)
 ;; (require 'init-meow)

@@ -23,10 +23,7 @@
 ;; 自动保存 autosave
 (auto-save-visited-mode 1)
 ;; (setq auto-save-visited-interval 15) ;default is 5s
-(defun save-all ()
-  (interactive)
-  (save-some-buffers t))
-(add-hook 'focus-out-hook 'save-all)
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 
 ;; save-place 记住光标所在位置
 (setq save-place-file (expand-file-name "saveplace" my-temp))
@@ -58,23 +55,18 @@
 (recentf-mode 1)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;; Extensions ;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; undo-fu
-;; (use-package undo-fu)
+(use-package undo-fu)
+
+;; undo-fu-session
+(use-package undo-fu-session)
 
 ;; undo-tree C-x u
-(use-package undo-tree
-  :diminish undo-tree-mode
+(use-package vundo
   :config
-  (progn
-    (global-undo-tree-mode)
-    (setq undo-tree-visualizer-timestamps t)
-    ;; (setq undo-tree-visualizer-diff t)
-    (setq undo-tree-history-directory-alist
-          `((".*" . ,my-temp)))
-    (setq undo-tree-auto-save-history t)))
+  (setq vundo-glyph-alist vundo-unicode-symbols)
+  (setq vundo-roll-back-on-quit nil))
 
 
 (provide 'init-backup)

@@ -15,7 +15,7 @@
 (package! rotate)
 (package! easy-kill-extras)
 (package! smart-region)
-(package! zzz-to-char)
+(package! avy-zap)
 (package! dirvish)
 (package! iedit)
 ;; (package! telega)

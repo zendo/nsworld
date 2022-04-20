@@ -2,15 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;; Package Boostrap ;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
-(setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
-                         ("melpa" . "http://elpa.zilongshanren.com/melpa/")))
-;; (setq package-archives
-;;       '(("gnu"   . "http://elpa.gnu.org/packages/")
-;;         ("melpa" . "http://melpa.org/packages/")))
+;; (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
+;;                          ("melpa" . "http://elpa.zilongshanren.com/melpa/")))
+(setq package-archives
+      '(("gnu"   . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")))
 
 ;; Initialize packages
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
@@ -147,11 +144,13 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
-;; centaur tab
-(use-package centaur-tabs
-  :demand
+;; Magit
+(use-package magit
+  :defer t
+  :if (executable-find "git")
   :config
-  (centaur-tabs-mode t))
+  (setq magit-completing-read-function 'ivy-completing-read)
+  :bind ("C-c g" . magit-status))
 
 (provide 'init-packages)
 ;;; packages.el ends here

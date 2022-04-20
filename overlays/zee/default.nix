@@ -1,6 +1,6 @@
 {
-  fetchFromGitHub,
   lib,
+  fetchFromGitHub,
   rustPlatform,
   pkg-config,
   openssl,
@@ -13,7 +13,6 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "mcobzarenco";
     repo = pname;
-    # rev = "refs/tags/v${version}";
     rev = "v${version}";
     fetchSubmodules = true;
     sha256 = "sha256-0vHvzxdtxTsGVq1iJezjHCB0NKF5bCqMIrD15gOWcvE=";
