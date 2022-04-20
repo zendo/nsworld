@@ -28,8 +28,9 @@
       doom-big-font-increment 2
       doom-unicode-font (font-spec :family "Noto Color Emoji") ;; "Noto Sans Mono"
 
-      x-gtk-use-native-input t          ;使用外部输入法
-      ;; word-wrap-by-category t           ;?
+      x-gtk-use-native-input t          ; 使用外部输入法
+      set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops
+      ;; word-wrap-by-category t        ;?
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       recentf-exclude
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist" )

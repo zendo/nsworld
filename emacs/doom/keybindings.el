@@ -29,11 +29,12 @@
 
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
-(global-set-key [remap mark-sexp] 'easy-mark)
-(global-set-key [remap kill-ring-save] 'easy-kill)
-
 (global-set-key [remap query-replace] 'anzu-query-replace)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+
+;; set-mark multiple times to expands
+(use-package! smart-region
+  :hook (after-init . smart-region-on))
 
 (map!
  "C-." #'hippie-expand
@@ -55,6 +56,13 @@
  "C-}" #'mc/mark-next-like-this
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
+ "s-<mouse-1>" #'mc/add-cursor-on-click
+
+ [remap kill-ring-save] #'easy-kill
+ [remap mark-sexp] #'easy-mark-sexp
+ [remap mark-word] #'easy-mark-word
+ [remap zap-to-char] #'zzz-to-char
+ "C-M-z" #'zzz-up-to-char
 
  "C-x g" #'magit-status
  "s-g" #'magit-status
@@ -92,6 +100,8 @@
    "s" #'save-some-buffers
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
+   "f" #'zzz-to-char
+   "b" #'zzz-up-to-char
    :prefix ("w" . "window")
    "x" #'ace-swap-window
    "v" #'rotate-layout
