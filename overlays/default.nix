@@ -11,6 +11,8 @@ final: prev: {
    }))
    */
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
+  gs-night-switcher = prev.callPackage ./gs-night-switcher {};
+
   zee = prev.callPackage ./zee {};
 
   konsave = prev.callPackage ./konsave {};
