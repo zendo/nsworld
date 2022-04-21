@@ -6,9 +6,9 @@ fetch.github = "TimothyYe/ydict"
 src.github = "ayoisaiah/f2"
 fetch.github = "ayoisaiah/f2"
 
-[paper]
-src.github = "posidon_software/paper"
-fetch.github = "posidon_software/paper"
+[clash-verge]
+src.github = "zzzgydi/clash-verge"
+fetch.github = "zzzgydi/clash-verge"
 
 [dialect]
 src.github = "dialect-app/dialect"

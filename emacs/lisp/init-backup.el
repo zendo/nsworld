@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;save system clipboard before emacs clipboard replacing
+;save system clipboard before emacs clipboard
 (setq save-interprogram-paste-before-kill t)
 
 ;; 备份 Backup
@@ -60,7 +60,10 @@
 (use-package undo-fu)
 
 ;; undo-fu-session
-(use-package undo-fu-session)
+(use-package undo-fu-session
+  :config
+  (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'")))
+(global-undo-fu-session-mode)
 
 ;; undo-tree C-x u
 (use-package vundo
