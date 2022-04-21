@@ -3,11 +3,8 @@
 ;;; Code:
 
 (require 'package)
-;; (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
-;;                          ("melpa" . "http://elpa.zilongshanren.com/melpa/")))
-(setq package-archives
-      '(("gnu"   . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")))
+(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 ;; Initialize packages
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27

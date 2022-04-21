@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Scroll
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode t))
+
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
@@ -9,7 +13,6 @@
 
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 (global-set-key (kbd "C-z") 'nil) ;unbind C-zzzzz
-;; (global-set-key (kbd "C-SPC") 'nil)
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 
 (global-set-key (kbd "<f7>") #'compile)
