@@ -10,13 +10,19 @@ final: prev: {
      };
    }))
    */
-  harmonyos-sans = prev.callPackage ./harmonyos-sans {};
-  gs-night-switcher = prev.callPackage ./gs-night-switcher {};
 
+  # trivial
+  harmonyos-sans = prev.callPackage ./harmonyos-sans {};
+
+  # rust apps
   zee = prev.callPackage ./zee {};
 
+  # python apps
   konsave = prev.callPackage ./konsave {};
-  dialect = prev.callPackage ./dialect {};
 
+  # gtk apps
   paper = prev.callPackage ./paper {};
+  dippi = prev.callPackage ./dippi {};
+  dialect = prev.callPackage ./dialect {};
+  gs-night-switcher = prev.callPackage ./gs-night-switcher {};
 }

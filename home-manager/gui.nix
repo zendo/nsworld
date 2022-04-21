@@ -10,6 +10,7 @@
     # dialect
     # konsave
     paper
+    dippi
 
     gitg
     # git-cola
