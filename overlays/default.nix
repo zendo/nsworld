@@ -24,5 +24,4 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
   dialect = prev.callPackage ./dialect {};
-  gs-night-switcher = prev.callPackage ./gs-night-switcher {};
 }

@@ -18,7 +18,10 @@
       lg = "log --graph --decorate --all --oneline";
     };
     extraConfig = {
-      safe.directory = "/home/iab/.nsworld";
+      safe.directory = [
+        "/home/iab/.nsworld"
+        "/home/iab/devel/nixpkgs"
+      ];
     };
   };
 

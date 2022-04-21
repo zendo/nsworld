@@ -85,6 +85,21 @@
         "type": "github"
       }
     },
+    "my-nixpkgs": {
+      "locked": {
+        "lastModified": 1650543308,
+        "narHash": "sha256-WhcIu9g9UxtgfxCQySCAj0W0CmsKx8fdUCfMPOKkFNY=",
+        "ref": "gnomeExtensions.night-theme-switcher",
+        "rev": "7aed828633645235dcec46e5acb1a605e5e95469",
+        "revCount": 371632,
+        "type": "git",
+        "url": "file:///home/iab/devel/nixpkgs"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/iab/devel/nixpkgs"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1649849514,
@@ -170,6 +185,7 @@
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
         "musnix": "musnix",
+        "my-nixpkgs": "my-nixpkgs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",

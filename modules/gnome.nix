@@ -57,7 +57,7 @@
     gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
     # gnomeExtensions.night-theme-switcher
-    gs-night-switcher
+    my.gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
     gnomeExtensions.gnome-clipboard
     gnomeExtensions.clipboard-history

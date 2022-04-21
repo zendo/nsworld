@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    my-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
 
@@ -39,6 +40,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
+    my-nixpkgs,
     nixos-hardware,
     home-manager,
     utils,
@@ -67,6 +69,9 @@
         # (final: prev: {
         #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
         # })
+        (final: prev: {
+          my = my-nixpkgs.legacyPackages.${prev.system};
+        })
         self.overlay
         nur.overlay
         emacs-overlay.overlay

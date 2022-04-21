@@ -48,7 +48,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://gitlab.com/posidon_software/paper";
-    description = "A pretty note-taking app for Gnome";
+    description = "A pretty markdown note-taking app for Gnome";
     maintainers = with maintainers; [zendo];
     license = licenses.gpl3;
     platforms = platforms.linux;
