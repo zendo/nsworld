@@ -55,7 +55,7 @@
     # libsForQt5.kcontacts
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
-    latte-dock
+    # latte-dock
 
     falkon
     nheko

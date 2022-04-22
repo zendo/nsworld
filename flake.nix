@@ -92,8 +92,8 @@
       hosts.yoga.modules = [
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
-        # ./modules/kde.nix
-        ./modules/gnome.nix
+        ./modules/kde.nix
+        # ./modules/gnome.nix
         ./modules/fonts.nix
         ./modules/virtual.nix
         ./hosts/yoga/user.nix
@@ -118,7 +118,7 @@
               ./home-manager/gui.nix
               ./home-manager/editor.nix
               ./home-manager/env.nix
-              ./home-manager/gtk.nix
+              # ./home-manager/gtk.nix
             ];
           };
         }

@@ -8,4 +8,7 @@ patch:
 
   schema_list:
     - schema: "luna_pinyin_simp"
+    # https://github.com/fkxxyz/rime-cloverpinyin
     # - schema: "clover"
+    # https://github.com/BlindingDark/rime-easy-en
+    # - schema: "easy_en"

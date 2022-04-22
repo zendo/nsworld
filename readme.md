@@ -38,7 +38,9 @@ dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
 
 # RIME
-curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"  bash -s -- :preset
+curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"
+bash -s -- :preset
+bash -s -- rime-install BlindingDark/rime-easy-en:customize:schema=luna_pinyin
 
 # Clover
 curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO
