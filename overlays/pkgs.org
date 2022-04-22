@@ -1,4 +1,3 @@
-
 * buildGoModule
 ** cli
 #+begin_src nix
@@ -154,4 +153,21 @@ stdenv.mkDerivation rec {
 }
 
 #+end_src
+* buildPythonApplication
+** notes
+#+begin_src nix
+  # setup.py and pyproject.toml not found
+  format = "other";
+
+  postPatch = ''
+    chmod +x build-aux/meson/postinstall.py
+    patchShebangs build-aux/meson/postinstall.py
+  '';
+
+  # delete finnal line to stop exec postinstall.py
+  patchPhase = ''
+    sed -i '$ d' meson.build
+  '';
+#+end_src
+**
 * miscPatch

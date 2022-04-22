@@ -4,15 +4,15 @@
   fetchFromGitHub,
   meson,
   ninja,
-  vala,
   pkg-config,
+  vala,
   glib,
   gtk3,
   pantheon,
   libhandy,
-  desktop-file-utils,
-  appstream-glib,
   wrapGAppsHook,
+  appstream-glib,
+  desktop-file-utils,
 }:
 stdenv.mkDerivation rec {
   pname = "dippi";
