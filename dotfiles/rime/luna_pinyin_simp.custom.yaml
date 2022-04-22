@@ -18,3 +18,7 @@ patch:
 
     # 载入朙月拼音扩充词库
     # translator/dictionary: luna_pinyin_simp.extended
+
+  # 英文词库定制
+  # https://github.com/BlindingDark/rime-easy-en
+  "easy_en/enable_sentence": false

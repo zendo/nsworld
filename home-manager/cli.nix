@@ -22,7 +22,8 @@
     ydict
     translate-shell
     croc
-    # magic-wormhole
+    # magic-wormhole # python
+    magic-wormhole-rs
     aspellDicts.en
     asciinema # record the terminal
     distrobox

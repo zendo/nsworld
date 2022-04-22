@@ -17,6 +17,9 @@ final: prev: {
   # rust apps
   zee = prev.callPackage ./zee {};
 
+  # go apps
+  rymdport = prev.callPackage ./rymdport {};
+
   # python apps
   konsave = prev.callPackage ./konsave {};
 

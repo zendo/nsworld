@@ -13,6 +13,7 @@
     dippi
     # hotwire
     # frog
+    # rymdport
 
     gitg
     # git-cola

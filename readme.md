@@ -38,7 +38,7 @@ dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
 
 # RIME
-curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"
+curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" Plus Below
 bash -s -- :preset
 bash -s -- rime-install BlindingDark/rime-easy-en:customize:schema=luna_pinyin
 
