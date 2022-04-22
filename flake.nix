@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    my-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
+    local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
 
@@ -40,7 +40,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    my-nixpkgs,
+    local-nixpkgs,
     nixos-hardware,
     home-manager,
     utils,
@@ -70,7 +70,7 @@
         #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
         # })
         (final: prev: {
-          my = my-nixpkgs.legacyPackages.${prev.system};
+          local = local-nixpkgs.legacyPackages.${prev.system};
         })
         self.overlay
         nur.overlay
@@ -92,12 +92,13 @@
       hosts.yoga.modules = [
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
-        ./modules/kde.nix
-        # ./modules/gnome.nix
+        ./hosts/yoga/hardware-configuration.nix
+
         ./modules/fonts.nix
         ./modules/virtual.nix
-        ./hosts/yoga/user.nix
-        ./hosts/yoga/hardware-configuration.nix
+        ./modules/user.nix
+        ./modules/kde.nix
+        # ./modules/gnome.nix
 
         musnix.nixosModules.musnix
         {musnix.enable = true;}
@@ -127,9 +128,14 @@
       hosts.svp.modules = [
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-cpu-intel
+        ./hosts/svp/hardware-configuration.nix
+
+        ./modules/fonts.nix
+        ./modules/virtual.nix
+        ./modules/user.nix
         ./modules/kde.nix
-        #./modules/gnome.nix
-        ./modules/chinese.nix
+        # ./modules/gnome.nix
+
       ];
     };
 }
