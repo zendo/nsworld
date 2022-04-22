@@ -11,6 +11,8 @@
     # konsave
     paper
     dippi
+    # hotwire
+    # frog
 
     gitg
     # git-cola

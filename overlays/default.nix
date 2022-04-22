@@ -24,4 +24,6 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
   dialect = prev.callPackage ./dialect {};
+  frog = prev.callPackage ./frog {};
+  hotwire = prev.callPackage ./hotwire {};
 }
