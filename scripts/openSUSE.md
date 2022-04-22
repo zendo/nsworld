@@ -20,6 +20,7 @@ sudo zypper in x264 x265 faac faad2 lame libxine2 libxine2-codecs vlc-codecs vlc
 # Essential apps
 
 opi vscode 
+
 patterns-devel-C-C++-devel_C_C++ libopenssl-devel
 
 # Installtion
@@ -35,14 +36,14 @@ patterns-devel-C-C++-devel_C_C++ libopenssl-devel
 - add: pipewire-pulseaudio gnome-color-manager colord-kde
 
 # zypper usage
-zypper rm -u xxx 卸载软件和其依赖
-zypper mr -d 4 禁用4号源
-zypper clean -a
-zypper se -i 搜索已装软件
-zypper pa --orphaned 列出孤立软件
-zypper pa --unneeded
-zypper pt
-zypper in -t pattern lamp_server
+- zypper rm -u xxx 卸载软件和其依赖
+- zypper mr -d 4 禁用4号源
+- zypper clean -a
+- zypper se -i 搜索已装软件
+- zypper pa --orphaned 列出孤立软件
+- zypper pa --unneeded
+- zypper pt
+- zypper in -t pattern lamp_server
 
 # Links
 

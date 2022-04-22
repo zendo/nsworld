@@ -15,6 +15,7 @@
   appstream-glib,
   meson,
   ninja,
+  cmake,
   pkg-config,
   # , reuse
   wrapGAppsHook,
@@ -28,7 +29,7 @@
   glib-networking,
   # , dbus
 }:
-stdenv.mkDerivation rec {
+python3.pkgs.buildPythonApplication rec {
   pname = "dialect";
   version = "1.4.1";
 
@@ -40,6 +41,9 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-EPp6hKm+fTAUgo/SdaIeTa9WxZZkIhhr96ku1/NNo1o=";
   };
 
+  # setup.py and pyproject.toml not found
+  format = "other";
+
   postPatch = ''
     patchShebangs build-aux
   '';
@@ -49,6 +53,7 @@ stdenv.mkDerivation rec {
     desktop-file-utils
     meson
     ninja
+    cmake
     pkg-config
     # reuse
     wrapGAppsHook
@@ -61,6 +66,7 @@ stdenv.mkDerivation rec {
       gtk3
       gtk4
       libadwaita
+      gobject-introspection
       gst_all_1.gstreamer
     ]
     ++ (with python3.pkgs; [
@@ -71,14 +77,15 @@ stdenv.mkDerivation rec {
       glib-networking
     ]);
 
+
   # makeWrapperArgs = with passthru.libraries; [
   #   "--prefix GIO_EXTRA_MODULES : ${dconf}/lib/gio/modules"
   # ];
 
-  preAutoreconf = ''
-    # The check runs before glib-networking is registered
-    export GIO_EXTRA_MODULES="${glib-networking}/lib/gio/modules:$GIO_EXTRA_MODULES"
-  '';
+  # preAutoreconf = ''
+  #   # The check runs before glib-networking is registered
+  #   export GIO_EXTRA_MODULES="${glib-networking}/lib/gio/modules:$GIO_EXTRA_MODULES"
+  # '';
 
   meta = with lib; {
     homepage = "https://github.com/dialect-app/dialect";

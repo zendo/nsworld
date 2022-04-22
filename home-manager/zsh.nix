@@ -14,6 +14,7 @@
     };
     shellAliases = {
       history = "history 0";
+      nx = "f() { nix run nixpkgs#$1 };f";
     };
     # ctrl-v show key code
     initExtra = ''

@@ -36,7 +36,11 @@
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist" )
       )
 
+;; org-mode
 (setq org-directory "~/Documents/org/")
+;;content overview show2levels
+(after! org
+  (setq org-startup-folded 'show2levels))
 
 (setq deft-directory "~/Documents/org/"
       deft-extensions '("org", "md", "txt", "tex")

@@ -67,6 +67,21 @@
         "type": "github"
       }
     },
+    "local-nixpkgs": {
+      "locked": {
+        "lastModified": 1650499457,
+        "narHash": "sha256-kfmMzjbxTLi/4e2VFynVk9w9/XC/jLcLfyZfUSIfVdQ=",
+        "ref": "master",
+        "rev": "4c344da29a5b46caadb87df1d194082a190e1199",
+        "revCount": 371484,
+        "type": "git",
+        "url": "file:///home/iab/devel/nixpkgs"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/iab/devel/nixpkgs"
+      }
+    },
     "musnix": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -83,21 +98,6 @@
         "owner": "musnix",
         "repo": "musnix",
         "type": "github"
-      }
-    },
-    "my-nixpkgs": {
-      "locked": {
-        "lastModified": 1647429482,
-        "narHash": "sha256-oTukeF9PPYXMtDiE+CFV1f3GpBFrVRAfD1ZWCi+ZEsA=",
-        "ref": "mihnea-s/master",
-        "rev": "5cf6b079618f5fb891bd3efe3e1f2b58d8716756",
-        "revCount": 361458,
-        "type": "git",
-        "url": "file:///home/iab/devel/nixpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/iab/devel/nixpkgs"
       }
     },
     "nixos-hardware": {
@@ -184,8 +184,8 @@
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
+        "local-nixpkgs": "local-nixpkgs",
         "musnix": "musnix",
-        "my-nixpkgs": "my-nixpkgs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",

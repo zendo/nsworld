@@ -1,0 +1,157 @@
+
+* buildGoModule
+** cli
+#+begin_src nix
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+}:
+buildGoModule rec {
+  pname = "f2";
+  version = "1.8.0";
+
+  src = fetchFromGitHub {
+    owner = "ayoisaiah";
+    repo = "f2";
+    rev = "v${version}";
+    sha256 = "sha256-bNcPzvjVBH7x60kNjlUILiQGG3GDmqIB5T2WP3+nZ+s=";
+  };
+
+  vendorSha256 = "sha256-Cahqk+7jDMUtZq0zhBll1Tfryu2zSPBN7JKscV38360=";
+
+  ldflags = ["-s" "-w" "-X=main.Version=${version}"];
+
+  # has no tests
+  doCheck = false;
+
+  meta = with lib; {
+    description = "Command-line batch renaming tool";
+    homepage = "https://github.com/ayoisaiah/f2";
+    license = licenses.mit;
+    maintainers = with maintainers; [zendo];
+  };
+}
+#+end_src
+* buildRustPackage
+** cli
+#+begin_src nix
+{
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+  pkg-config,
+  openssl,
+  tree-sitter,
+}:
+rustPlatform.buildRustPackage rec {
+  pname = "zee";
+  version = "0.3.1";
+
+  src = fetchFromGitHub {
+    owner = "mcobzarenco";
+    repo = pname;
+    rev = "v${version}";
+    fetchSubmodules = true;
+    sha256 = "sha256-0vHvzxdtxTsGVq1iJezjHCB0NKF5bCqMIrD15gOWcvE=";
+  };
+
+  cargoSha256 = "sha256-eXCbTM6+oLRIY4LIlrFs53V8IqYGhZyku48AgXmeYs8=";
+
+  nativeBuildInputs = [pkg-config];
+  buildInputs = [openssl tree-sitter];
+  OPENSSL_NO_VENDOR = 1;
+
+  meta = with lib; {
+    description = "Modern editor for the terminal";
+    homepage = "https://github.com/mcobzarenco/zee";
+    license = [licenses.mit];
+    maintainers = with maintainers; [zendo];
+    platforms = platforms.all;
+  };
+}
+
+#+end_src
+
+** gui gtk4
+#+begin_src nix
+{
+  lib,
+  stdenv,
+  fetchFromGitLab,
+  rustPlatform,
+  desktop-file-utils,
+  appstream-glib,
+  meson,
+  ninja,
+  pkg-config,
+  reuse,
+  wrapGAppsHook,
+  glib,
+  gtk4,
+  gst_all_1,
+  libadwaita,
+  dbus,
+}:
+stdenv.mkDerivation rec {
+  pname = "amberol";
+  version = "0.3.0";
+
+  src = fetchFromGitLab {
+    domain = "gitlab.gnome.org";
+    owner = "ebassi";
+    repo = pname;
+    rev = version;
+    sha256 = "sha256-+9lrSkjk7V+ZnIhmhw7lEiEywDp5adoAW+5PEAlhpSI=";
+  };
+
+  cargoDeps = rustPlatform.fetchCargoTarball {
+    inherit src;
+    name = "${pname}-${version}";
+    sha256 = "sha256-ZJiD6RshEjZ7h+/KYcY+ZjL5fHRb5+RKgIdgbD6LdkA=";
+  };
+
+  postPatch = ''
+    patchShebangs build-aux
+  '';
+
+  nativeBuildInputs =
+    [
+      appstream-glib
+      desktop-file-utils
+      meson
+      ninja
+      pkg-config
+      reuse
+      wrapGAppsHook
+    ]
+    ++ (with rustPlatform; [
+      cargoSetupHook
+      rust.cargo
+      rust.rustc
+    ]);
+
+  buildInputs = [
+    glib
+    gtk4
+    libadwaita
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    dbus
+  ];
+
+  meta = with lib; {
+    homepage = "https://gitlab.gnome.org/ebassi/amberol";
+    description = "A small and simple sound and music player";
+    maintainers = with maintainers; [linsui];
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
+  };
+}
+
+#+end_src
+* miscPatch
