@@ -9,10 +9,9 @@
     # zee
     # dialect
     # frog
-    # rymdport
     paper
     dippi
-    motrix
+    # motrix
 
     gitg
     # git-cola
