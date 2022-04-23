@@ -1,4 +1,5 @@
 # WIP
+# gtk4.0
 {
   lib,
   stdenv,
@@ -43,9 +44,11 @@ python3.pkgs.buildPythonApplication rec {
     gtk3
   ];
 
-  propagatedBuildInputs = with python3.pkgs; [
-    pygobject3
-  ];
+  # propagatedBuildInputs = with python3.pkgs; [
+  #   pygobject3
+  # ];
+
+  pythonPath = with python3.pkgs; requiredPythonModules [ pygobject3 ];
 
   # postUnpack = ''
   # (

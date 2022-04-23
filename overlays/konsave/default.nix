@@ -1,4 +1,3 @@
-# wip
 {
   lib,
   python3,
@@ -16,7 +15,11 @@ python3.pkgs.buildPythonApplication rec {
   nativeBuildInputs = with python3.pkgs; [setuptools-scm];
 
   # Specify runtime dependencies for the package
-  propagatedBuildInputs = with python3.pkgs; [pyyaml];
+  propagatedBuildInputs = with python3.pkgs; [
+    pyyaml
+    # pkgs/development/embedded/fpga/apio/default.nix
+    setuptools # needs pkg_resources at runtime (technically not needed when tinyprog is also in this list because of the propagatedBuildInputs of tinyprog)
+  ];
 
   postPatch = ''
     substituteInPlace requirements.txt \

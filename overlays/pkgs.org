@@ -175,7 +175,26 @@ stdenv.mkDerivation rec {
     sed -i '$ d' meson.build
   '';
 
+  # fix gi.repository import Gio
+  pythonPath = with python3.pkgs; requiredPythonModules [ pygobject3 ];
+
 
 #+end_src
 **
+* mkYarnPackage
+** notes
+yarn2nix > yarn.nix
+If you have not generated a yarn.lock file before, run
+yarn install
+
+
+#+begin_src nix
+buildPhase = ''
+  yarn build --offline
+'';
+
+distPhase = "true";
+
+configurePhase = "ln -s $node_modules node_modules";
+#+end_src
 * miscPatch

@@ -21,11 +21,14 @@ final: prev: {
   rymdport = prev.callPackage ./rymdport {};
 
   # python apps
-  konsave = prev.callPackage ./konsave {};
+  # konsave = prev.callPackage ./konsave {};
+  frog = prev.callPackage ./frog {};
+  dialect = prev.callPackage ./dialect {};
+
+  # nodejs apps
+  motrix = prev.callPackage ./motrix {};
 
   # gtk apps
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
-  dialect = prev.callPackage ./dialect {};
-  frog = prev.callPackage ./frog {};
 }

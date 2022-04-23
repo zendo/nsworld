@@ -1,10 +1,6 @@
 /*
  WIP
- 
- Traceback (most recent call last):
-   File "/nix/store/lmw7jdgr5nja6qni2jsv7kyqm5xzcsg2-dialect-1.4.1/bin/.dialect-wrapped", line 33, in <module>
-     from gi.repository import Gio
- ModuleNotFoundError: No module named 'gi'
+ httpx
  */
 {
   lib,
@@ -23,7 +19,9 @@
   glib,
   gtk3,
   gtk4,
+  httpx,
   libadwaita,
+  libhandy,
   gst_all_1,
   gobject-introspection,
   glib-networking,
@@ -66,6 +64,7 @@ python3.pkgs.buildPythonApplication rec {
       gtk3
       gtk4
       libadwaita
+      libhandy
       gobject-introspection
       gst_all_1.gstreamer
     ]
@@ -76,6 +75,15 @@ python3.pkgs.buildPythonApplication rec {
       googletrans
       glib-networking
     ]);
+
+  propagatedBuildInputs = [
+    httpx
+  ];
+
+  pythonPath = with python3.pkgs; requiredPythonModules [
+    pygobject3
+    googletrans
+  ];
 
 
   # makeWrapperArgs = with passthru.libraries; [
