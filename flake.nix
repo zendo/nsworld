@@ -2,7 +2,7 @@
   description = "Zendo NixOS world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
@@ -97,8 +97,8 @@
         ./modules/fonts.nix
         ./modules/virtual.nix
         ./modules/user.nix
-        # ./modules/kde.nix
-        ./modules/gnome.nix
+        ./modules/kde.nix
+        # ./modules/gnome.nix
 
         musnix.nixosModules.musnix
         {musnix.enable = true;}
@@ -119,7 +119,7 @@
               ./home-manager/gui.nix
               ./home-manager/editor.nix
               ./home-manager/env.nix
-              ./home-manager/gtk.nix
+              # ./home-manager/gtk.nix
             ];
           };
         }

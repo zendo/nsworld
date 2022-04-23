@@ -11,7 +11,7 @@
     # frog
     paper
     dippi
-    clash-verge
+    # clash-verge
 
     gitg
     # git-cola

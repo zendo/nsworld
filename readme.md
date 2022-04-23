@@ -56,3 +56,4 @@ curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | 
 
 [Intro Nix Family](https://web.archive.org/web/20210123223258/https://ebzzry.io/en/nix/)
 
+[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
