@@ -12,7 +12,6 @@
     # frog
     paper
     dippi
-    # hotwire
     # rymdport
 
     gitg

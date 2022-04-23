@@ -159,15 +159,23 @@ stdenv.mkDerivation rec {
   # setup.py and pyproject.toml not found
   format = "other";
 
+  # Specify runtime dependencies for the package
+  propagatedBuildInputs = with python3.pkgs; [pyyaml];
+
   postPatch = ''
     chmod +x build-aux/meson/postinstall.py
     patchShebangs build-aux/meson/postinstall.py
+    ----------------------------------
+    substituteInPlace requirements.txt \
+    --replace 'PyYaml==5.4.1' 'PyYaml'
   '';
 
   # delete finnal line to stop exec postinstall.py
   patchPhase = ''
     sed -i '$ d' meson.build
   '';
+
+
 #+end_src
 **
 * miscPatch

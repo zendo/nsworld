@@ -38,8 +38,8 @@ stdenv.mkDerivation rec {
   buildInputs = [
     glib
     gtk3
-    pantheon.granite
     libhandy
+    pantheon.granite
   ];
 
   meta = with lib; {
