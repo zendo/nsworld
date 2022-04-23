@@ -11,7 +11,7 @@
     # frog
     paper
     dippi
-    # motrix
+    clash-verge
 
     gitg
     # git-cola

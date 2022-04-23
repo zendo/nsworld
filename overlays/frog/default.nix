@@ -1,5 +1,4 @@
 # WIP
-# gtk4.0
 {
   lib,
   stdenv,
@@ -11,6 +10,7 @@
   gtk3,
   glib,
   gobject-introspection,
+  libnotify,
   wrapGAppsHook,
   appstream-glib,
   desktop-file-utils,
@@ -42,13 +42,14 @@ python3.pkgs.buildPythonApplication rec {
   buildInputs = [
     glib
     gtk3
+    libnotify
   ];
 
   # propagatedBuildInputs = with python3.pkgs; [
   #   pygobject3
   # ];
 
-  pythonPath = with python3.pkgs; requiredPythonModules [ pygobject3 ];
+  pythonPath = with python3.pkgs; requiredPythonModules [  pygobject3 ];
 
   # postUnpack = ''
   # (

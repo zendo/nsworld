@@ -25,7 +25,7 @@ final: prev: {
   dialect = prev.callPackage ./dialect {};
 
   # nodejs apps
-  motrix = prev.callPackage ./motrix {};
+  clash-verge = prev.callPackage ./clash-verge {};
 
   # gtk apps
   paper = prev.callPackage ./paper {};

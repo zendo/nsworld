@@ -40,7 +40,7 @@
 (setq org-directory "~/Documents/org/")
 ;;content overview show2levels
 (after! org
-  (setq org-startup-folded 'show2levels))
+  (setq org-startup-folded 'overview))
 
 (setq deft-directory "~/Documents/org/"
       deft-extensions '("org", "md", "txt", "tex")
