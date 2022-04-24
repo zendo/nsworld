@@ -64,10 +64,13 @@
  [remap mark-word] #'easy-mark-word
  "M-z" #'avy-zap-to-char
 
- "C-x g" #'magit-status
- "s-g" #'magit-status
  "s-w" #'+hydra/window-nav/body
  "s-=" #'+hydra/text-zoom/body
+
+ "s-g" #'magit-status
+ "C-x g" #'magit-status
+ :map magit-status-mode-map
+ "p" 'magit-push
  )
 
 ;; emacs keymap
