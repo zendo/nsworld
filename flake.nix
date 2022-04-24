@@ -97,8 +97,8 @@
         ./modules/fonts.nix
         ./modules/virtual.nix
         ./modules/user.nix
-        ./modules/kde.nix
-        # ./modules/gnome.nix
+        # ./modules/kde.nix
+        ./modules/gnome.nix
 
         musnix.nixosModules.musnix
         {musnix.enable = true;}

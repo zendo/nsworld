@@ -13,7 +13,7 @@
 ;(package! some-package)
 (package! crux)
 (package! rotate)
-(package! easy-kill-extras)
+(package! easy-kill)
 (package! smart-region)
 (package! avy-zap)
 (package! dirvish)

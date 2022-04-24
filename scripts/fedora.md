@@ -17,6 +17,13 @@ sudo dnf install https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-fre
 sudo dnf install @multimedia
 ```
 
+# flatpak
+
+```shell
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
+```
+
 # copr
 
 ```shell
