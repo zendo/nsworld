@@ -9,9 +9,9 @@
     # zee
     # dialect
     # frog
-    paper
-    dippi
     # clash-verge
+    # paper
+    # dippi
 
     gitg
     # git-cola

@@ -14,7 +14,7 @@
       pm = "push -u origin main";
       addp = "add --patch";
       comp = "commit --patch";
-      ca = "commit -a -m";
+      cc = "commit -a -m";
       lg = "log --graph --decorate --all --oneline";
     };
     extraConfig = {

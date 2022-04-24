@@ -31,7 +31,6 @@ LC_ALL=C xdg-user-dirs-update --force
 # Backup Gnome Settings
 dconf dump /org/gnome/ > my-dconf
 dconf load /org/gnome/ < my-dconf
-dconf reset -f /org/gnome/
 dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
 # Backup KDE Settings
