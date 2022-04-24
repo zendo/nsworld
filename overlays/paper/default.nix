@@ -14,7 +14,7 @@
   libadwaita,
   gtksourceview5,
   appstream-glib,
-  wrapGAppsHook,
+  wrapGAppsHook4,
 }:
 stdenv.mkDerivation rec {
   pname = "paper";
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
     vala
     cmake
     pkg-config
-    wrapGAppsHook
+    wrapGAppsHook4
   ];
 
   buildInputs = [

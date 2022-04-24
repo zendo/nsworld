@@ -40,8 +40,8 @@
   ];
 
   environment.shellAliases = {
-    wsl-proxy = "export http_proxy=http://192.168.2.118:7890 ; \\
-    export https_proxy=http://192.168.2.118:7890";
+    wsl-proxy = "export http_proxy=http://192.168.2.118:10809 ; \\
+    export https_proxy=http://192.168.2.118:10809";
     # wsl-switch = "";
   };
 

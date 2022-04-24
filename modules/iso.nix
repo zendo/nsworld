@@ -36,7 +36,7 @@
         clickMethod = "buttonareas";
       };
     };
-    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+    xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
   nix.settings = {
@@ -57,20 +57,26 @@
 
   environment.systemPackages = with pkgs; [
     binutils
-    fish
     tree
+    file
     p7zip
-    unrar
     fd
     ripgrep
-    vim
+    gdu
+    duf
     neofetch
     parted
     gptfdisk
-    gparted
     wget
     curl
     bind
     git
+
+    vim
+    fish
+    btop
+    ydict
+    unp
+    unrar
   ];
 }

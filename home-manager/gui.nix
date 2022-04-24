@@ -12,6 +12,7 @@
     # clash-verge
     # paper
     # dippi
+      shortwave-update
 
     gitg
     # git-cola
