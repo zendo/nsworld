@@ -1,6 +1,11 @@
 # Installtion
 
 ``` shell
+mkfs.fat -F 32 /dev/nvme0n1p3
+mkswap swap /dev/nvme0n1p4
+swapon /dev/nvme0n1p4
+mkfs.btrfs /dev/nvme0n1p5
+nixos-generate-config --root /mnt
 nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```
 
@@ -25,8 +30,11 @@ nix shell github:oxalica/rust-overlay
 # Desktop Setup
 
 ``` shell
-# force using en home-directorys
+# force using en directorys
 LC_ALL=C xdg-user-dirs-update --force
+
+# Emacs
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 
 # Backup Gnome Settings
 dconf dump /org/gnome/ > my-dconf
