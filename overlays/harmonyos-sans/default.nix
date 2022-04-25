@@ -7,7 +7,7 @@ fetchzip {
 
   postFetch = ''
     mkdir -p $out/share/fonts
-    unzip -j $downloadedFile \*.ttf -d $out/share/fonts/hack
+    unzip -j $downloadedFile \*.ttf -d $out/share/fonts/harmonyos-sans
   '';
 
   sha256 = "sha256-9iJEsN1hcvldP0domiCn4AVttJWFSGgeg2jSuVoazls=";

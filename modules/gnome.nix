@@ -39,7 +39,8 @@
   environment.systemPackages = with pkgs; [
     gthumb
     # notejot
-    lollypop
+    # lollypop
+    rhythmbox
     gparted
     dconf2nix
     kooha

@@ -2,47 +2,47 @@
   lib,
   stdenv,
   fetchFromGitLab,
-  desktop-file-utils,
   meson,
   ninja,
-  vala,
   pkg-config,
+  vala,
   cmake,
   libgee,
   glib,
   gtk4,
-  libadwaita,
   gtksourceview5,
-  appstream-glib,
+  libadwaita,
   wrapGAppsHook4,
+  appstream-glib,
+  desktop-file-utils,
 }:
 stdenv.mkDerivation rec {
   pname = "paper";
-  version = "22.1";
+  version = "22.2";
 
   src = fetchFromGitLab {
     owner = "posidon_software";
-    repo = "paper";
-    rev = "2b472c30cabf24ad74e89a30ad309640a31d1aef";
-    sha256 = "sha256-mxBk8X02C2N8MXLcZC5EffDB5qXF/rndUNNwmLWormE=";
+    repo = pname;
+    rev = "${version}";
+    sha256 = "sha256-/yK+QHVP4gpz/9PDJaBGHHBta8hh1WLsnNtCVxlHA3g=";
   };
 
   nativeBuildInputs = [
-    appstream-glib
-    desktop-file-utils
+    vala
     meson
     ninja
-    vala
     cmake
     pkg-config
+    appstream-glib
+    desktop-file-utils
     wrapGAppsHook4
   ];
 
   buildInputs = [
     glib
     gtk4
-    libadwaita
     libgee
+    libadwaita
     gtksourceview5
   ];
 

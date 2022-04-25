@@ -10,9 +10,8 @@
     # dialect
     # frog
     # clash-verge
-    # paper
+    paper
     # dippi
-      shortwave-update
 
     gitg
     # git-cola
@@ -38,9 +37,8 @@
     mousai # 听歌识曲
     # easyeffects
     # shutter
-    # foliate
-    rnote # handwritten note
-    # tdesktop
+    # rnote # handwritten note
+    tdesktop
     # kotatogram-desktop
     meld
     deja-dup

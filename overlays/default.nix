@@ -30,5 +30,4 @@ final: prev: {
   # gtk apps
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
-  shortwave-update = prev.callPackage ./shortwave-update {};
 }

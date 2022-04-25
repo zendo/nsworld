@@ -34,7 +34,7 @@
   };
 
   programs.helix = {
-    enable = true;
+    enable = false;
     settings = {
       theme = "onedark";
       # editor.file-picker.hidden = true;

@@ -36,7 +36,7 @@
   };
 
   services = {
-    # fwupd.enable = true;
+    fwupd.enable = true;
     acpid.enable = true;
     # logind.lidSwitch = "suspend-then-hibernate";
     # logind.extraConfig = ''
@@ -69,7 +69,6 @@
 
   # Bluetooth
   hardware.bluetooth.enable = true;
-  # hardware.bluetooth.package = "pkgs.bluezFull";
 
   services.xserver = {
     libinput = {
