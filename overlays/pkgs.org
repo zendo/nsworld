@@ -197,4 +197,14 @@ distPhase = "true";
 
 configurePhase = "ln -s $node_modules node_modules";
 #+end_src
+* Desktop
+** codecs
+#+begin_src nix
+gst_all_1.gstreamer
+gst_all_1.gst-plugins-base
+gst_all_1.gst-plugins-good
+gst_all_1.gst-plugins-bad
+gst_all_1.gst-plugins-ugly
+gst_all_1.gst-libav
+#+end_src
 * miscPatch

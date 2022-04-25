@@ -127,8 +127,9 @@
 
   programs.bash = {
     enable = true;
-    # shellAliases = {
-    # };
+    shellAliases = {
+      nx = "f() { nix run nixpkgs\#\$1; }; f";
+    };
     # bashrcExtra = ''
     # '';
   };

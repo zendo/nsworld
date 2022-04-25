@@ -4,14 +4,14 @@
   ...
 }: {
   home.packages = with pkgs; [
-    # overlay
+    # Overlays
     # harmonyos-sans
     # zee
     # dialect
     # frog
     # clash-verge
-    paper
     # dippi
+    paper
     tuner
 
     gitg
@@ -36,6 +36,7 @@
     ffmpeg
     spotify
     mousai # 听歌识曲
+    local.shortwave
     # amberol
     # easyeffects
     # shutter
