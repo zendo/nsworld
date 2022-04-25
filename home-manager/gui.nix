@@ -12,6 +12,7 @@
     # clash-verge
     paper
     # dippi
+    tuner
 
     gitg
     # git-cola
@@ -35,6 +36,7 @@
     ffmpeg
     spotify
     mousai # 听歌识曲
+    # amberol
     # easyeffects
     # shutter
     # rnote # handwritten note

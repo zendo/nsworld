@@ -30,4 +30,5 @@ final: prev: {
   # gtk apps
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
+  tuner = prev.callPackage ./tuner {};
 }
