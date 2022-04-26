@@ -13,6 +13,7 @@ final: prev: {
 
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
+  misans = prev.callPackage ./misans {};
 
   # rust
   zee = prev.callPackage ./zee {};

@@ -5,7 +5,8 @@
 }: {
   home.packages = with pkgs; [
     # Overlays
-    # harmonyos-sans
+    harmonyos-sans
+    misans
     # zee
     # dialect
     # frog
