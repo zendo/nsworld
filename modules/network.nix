@@ -12,6 +12,9 @@
     #interfaces.eno1.useDHCP = true;
     #interfaces.wlp1s0.useDHCP = true;
 
+    # proxy.default = "http://127.0.0.1:20171";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
     nameservers = [
       "223.5.5.5"
       "223.6.6.6"
@@ -39,8 +42,6 @@
     #     "avatars.githubusercontent.com"
     #     "media.githubusercontent.com"
     #   ];
-    #   # proxy.default = "http://user:password@proxy:port/";
-    #   # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
     # };
   };
 

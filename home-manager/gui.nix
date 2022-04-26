@@ -10,7 +10,7 @@
     # dialect
     # frog
     # clash-verge
-    # dippi
+    dippi
     paper
     tuner
 
@@ -21,7 +21,7 @@
     # clash
     # nur.repos.linyinfeng.clash-for-windows
     foot
-    # wezterm
+    wezterm
     alacritty
 
     # (pkgs.google-chrome.override {
@@ -36,7 +36,7 @@
     ffmpeg
     spotify
     mousai # 听歌识曲
-    local.shortwave
+    # shortwave
     # amberol
     # easyeffects
     # shutter

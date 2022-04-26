@@ -58,6 +58,7 @@
     alejandra
     rnix-lsp
     lorri
+    nix-index
     comma
     manix
     niv
@@ -123,19 +124,6 @@
       # disable "It took xxs"
       # cmd_duration.disabled = true;
     };
-  };
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      nx = "f() { nix run nixpkgs\#\$1; }; f";
-    };
-    # bashrcExtra = ''
-    # '';
-  };
-
-  programs.fish = {
-    enable = false;
   };
 
   programs.tmux = {

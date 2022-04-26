@@ -3,6 +3,19 @@
   pkgs,
   ...
 }: {
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      nx = "f() { nix run nixpkgs\#\$1; }; f";
+    };
+    # bashrcExtra = ''
+    # '';
+  };
+
+  programs.fish = {
+    enable = false;
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -14,7 +27,7 @@
     };
     shellAliases = {
       history = "history 0";
-      nx = "f() { nix run nixpkgs#$1 };f";
+      nx = "f() { nix run nixpkgs#$1 }; f";
     };
     # ctrl-v show key code
     initExtra = ''
