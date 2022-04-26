@@ -14,20 +14,20 @@ final: prev: {
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
 
-  # rust apps
+  # rust
   zee = prev.callPackage ./zee {};
 
-  # go apps
+  # go
 
-  # python apps
+  # python
   konsave = prev.callPackage ./konsave {};
   frog = prev.callPackage ./frog {};
   dialect = prev.callPackage ./dialect {};
 
-  # nodejs apps
+  # nodejs
   clash-verge = prev.callPackage ./clash-verge {};
 
-  # gtk apps
+  # gtk
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
   tuner = prev.callPackage ./tuner {};
