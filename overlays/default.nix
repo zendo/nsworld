@@ -20,7 +20,6 @@ final: prev: {
   # go
 
   # python
-  konsave = prev.callPackage ./konsave {};
   frog = prev.callPackage ./frog {};
   dialect = prev.callPackage ./dialect {};
 

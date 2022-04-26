@@ -10,7 +10,6 @@
     # dialect
     # frog
     # clash-verge
-    # konsave
     dippi
     paper
     tuner

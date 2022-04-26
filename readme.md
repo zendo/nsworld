@@ -23,7 +23,7 @@ nixos-generate -f iso -c ~/.nsworld/modules/iso.nix
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
 nix shell github:oxalica/rust-overlay
 
-nix shell github:DavHau/mach-nix <!-- python -->
+nix shell github:DavHau/mach-nix
 mach-nix gen -r requirements.txt
 
 # shebangs for NixOS/BSD
