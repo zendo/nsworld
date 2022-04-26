@@ -20,7 +20,7 @@ final: prev: {
   # go apps
 
   # python apps
-  # konsave = prev.callPackage ./konsave {};
+  konsave = prev.callPackage ./konsave {};
   frog = prev.callPackage ./frog {};
   dialect = prev.callPackage ./dialect {};
 

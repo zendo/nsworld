@@ -19,9 +19,9 @@
 
     nix-repl-pkgs = "nix repl '<nixpkgs>'";
     nse = "nix search nixpkgs";
-    ns-ls = "ls -la /nix/var/nix/profiles";
-    ns-readlink = "readlink -f /nix/var/nix/profiles/system";
+    ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
+    ns-source = "readlink -f /nix/var/nix/profiles/system";
     ns-installed = "nix path-info --recursive /run/current-system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     ns-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#$(hostname)";

@@ -4,12 +4,12 @@
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "konsave";
-  version = "2.1.1";
+  version = "2.1.2";
 
   src = python3.pkgs.fetchPypi {
     inherit version;
     pname = "Konsave";
-    sha256 = "sha256-04nlFhU8nFxcHht2SKOvRyA+6cYzqNxZlvU+pRX0ynA=";
+    sha256 = "sha256-mSXkae4yq5jQBLSFSrjytRaslKhfp1D4J7aZqBJH28Y=";
   };
 
   nativeBuildInputs = with python3.pkgs; [setuptools-scm];
@@ -20,11 +20,6 @@ python3.pkgs.buildPythonApplication rec {
     # pkgs/development/embedded/fpga/apio/default.nix
     setuptools # needs pkg_resources at runtime (technically not needed when tinyprog is also in this list because of the propagatedBuildInputs of tinyprog)
   ];
-
-  postPatch = ''
-    substituteInPlace requirements.txt \
-    --replace 'PyYaml==5.4.1' 'PyYaml'
-  '';
 
   doCheck = false;
 

@@ -17,7 +17,9 @@
 (setq +default-want-RET-continue-comments nil)
 
 
-(global-set-key (kbd "C-z") nil)
+;; (global-set-key (kbd "C-z") nil)
+(global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-S-z") 'undo-redo)
 
 (global-set-key (kbd "<f2>") '+vterm/toggle)
 (after! vterm
@@ -37,9 +39,9 @@
   :hook (after-init . smart-region-on))
 
 (map!
- "C-." #'hippie-expand
  "C-\\" #'align-regexp
  "M-s" #'avy-goto-word-1 ;默认 isearch 被覆盖
+ "<f9>" #'speedbar
 
  "C-s" #'consult-line
  "C-x C-r" #'consult-recent-file
@@ -49,6 +51,10 @@
  "C-x 4 r" #'consult-buffer-other-window
  "C-x 4 x" #'ace-swap-window
  [remap other-window] #'ace-window
+
+ "C-." #'+company/dabbrev
+ "C-," #'+company/complete
+ "C-;" #'comment-line
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo
