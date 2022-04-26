@@ -13,6 +13,7 @@
     bottom # btm
     psmisc # pstree
     cht-sh
+    tealdeer
     trash-cli
     f2
     choose
