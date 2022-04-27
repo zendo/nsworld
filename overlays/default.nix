@@ -18,6 +18,7 @@ final: prev: {
   # rust
   zee = prev.callPackage ./zee {};
   oaf = prev.callPackage ./oaf {};
+  ikill = prev.callPackage ./ikill {};
 
   # go
 
