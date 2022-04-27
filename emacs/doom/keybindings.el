@@ -52,7 +52,7 @@
  "C-x 4 x" #'ace-swap-window
  [remap other-window] #'ace-window
 
- "C-." #'+company/dabbrev
+ "C-." #'hippie-expand
  "C-," #'+company/complete
  "C-;" #'comment-line
 

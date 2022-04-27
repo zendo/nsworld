@@ -15,6 +15,7 @@
     cht-sh
     tealdeer
     trash-cli
+    rage
     f2
     choose
     difftastic # using delta right now

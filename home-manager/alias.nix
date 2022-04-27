@@ -3,6 +3,7 @@
     cat = "bat";
     ps = "ps -ef";
     beep = "echo -en \"\\007\"";
+    age = "rage";
     rm = "trash-put";
     rm-list = "trash-list";
     rm-empty = "trash-empty";

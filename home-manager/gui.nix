@@ -15,7 +15,6 @@
     # clash-verge
     dippi
     paper
-    tuner
 
     gitg
     # git-cola
@@ -39,7 +38,8 @@
     ffmpeg
     spotify
     mousai # 听歌识曲
-    # shortwave
+    blanket
+    shortwave
     # amberol
     # easyeffects
     # shutter

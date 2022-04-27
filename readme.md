@@ -58,11 +58,7 @@ curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | 
 
 # Nix Lang
 
-[Learn Nix in minutes](https://learnxinyminutes.com/docs/nix/)
-
 [Nix one pager](https://github.com/tazjin/nix-1p)
-
-[Nix by example](https://medium.com/@MrJamesFisher/nix-by-example-a0063a1a4c55)
 
 [Intro Nix Family](https://web.archive.org/web/20210123223258/https://ebzzry.io/en/nix/)
 

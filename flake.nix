@@ -2,7 +2,7 @@
   description = "Zendo NixOS world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
@@ -30,7 +30,7 @@
       flake = false;
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/7f2930e4cbdea70e5c62f76911f781ea6c3d9115";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/c96b4e694a1307d805b20fc9d7ddd0fcc0c8619b";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
@@ -44,8 +44,8 @@
     nixos-hardware,
     home-manager,
     utils,
-    musnix,
     nur,
+    musnix,
     emacs-overlay,
     ...
   }:
@@ -135,7 +135,6 @@
         ./modules/user.nix
         ./modules/kde.nix
         # ./modules/gnome.nix
-
       ];
     };
 }
