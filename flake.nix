@@ -30,7 +30,7 @@
       flake = false;
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/c96b4e694a1307d805b20fc9d7ddd0fcc0c8619b";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/7f2930e4cbdea70e5c62f76911f781ea6c3d9115";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
