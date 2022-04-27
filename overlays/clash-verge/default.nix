@@ -6,22 +6,42 @@
   rustPlatform,
   pkg-config,
   openssl,
+  glib,
+  atk,
+  gtk3,
+  libappindicator-gtk3,
+  libsoup,
+  webkitgtk,
   # electron,
   makeWrapper,
 }:
-
-
+# let
 mkYarnPackage rec {
   pname = "clash-verge";
-  version = "unstable-2022-04-23";
+  version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "zzzgydi";
     repo = "clash-verge";
-    rev = "321963be832290ed83125af26fb8a550db9a8bd6";
-    sha256 = "sha256-1ykb2zj0Sn2KH4YRzsIj6hDeeGOaH2w/waDIXqEdKuo=";
+    rev = "v${version}";
+    sha256 = "sha256-TVXWPUbSYPN34y7WYK9Viy6Kkb5dK4x/jVuZpKuzYeg=";
   };
+  gui = rustPlatform.buildRustPackage {
+    inherit pname version;
+    src = "${src}/src-tauri";
 
+    cargoSha256 = "sha256-CJttSlCy38kyaUBq7NYuXVOGKQUvP/goEJ/g3Hst44E=";
+    nativeBuildInputs = [pkg-config];
+    buildInputs = [
+      openssl
+      glib
+      atk
+      gtk3
+      libappindicator-gtk3
+      libsoup
+      webkitgtk
+    ];
+  };
 
   meta = with lib; {
     homepage = "https://github.com/zzzgydi/clash-verge";

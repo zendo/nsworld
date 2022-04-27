@@ -29,6 +29,7 @@
     aspellDicts.en
     asciinema # record the terminal
     distrobox
+    pandoc
 
     # Develop
     # gcc

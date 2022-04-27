@@ -9,12 +9,15 @@
     misans
     # zee
     # oaf
-    ikill
     # dialect
     # frog
     # clash-verge
     dippi
     paper
+
+    # ikill
+    # tun2socks
+    # amberol
 
     gitg
     # git-cola

@@ -18,13 +18,12 @@ final: prev: {
   # rust
   zee = prev.callPackage ./zee {};
   oaf = prev.callPackage ./oaf {};
-  ikill = prev.callPackage ./ikill {};
 
   # go
+  v2raya = prev.callPackage ./v2raya {};
 
   # python
   frog = prev.callPackage ./frog {};
-  dialect = prev.callPackage ./dialect {};
 
   # nodejs
   clash-verge = prev.callPackage ./clash-verge {};

@@ -51,6 +51,7 @@
   # systemd.sleep.extraConfig = ''
   # HibernateDelaySec=10min
   # '';
+    services.v2raya.enable = true;
 
   #########################################################################
   # Sounds
