@@ -1,6 +1,6 @@
 {config, ...}: {
   home.shellAliases = {
-    cat = "bat";
+    cat = "bat -p";
     ps = "ps -ef";
     beep = "echo -en \"\\007\"";
     age = "rage";

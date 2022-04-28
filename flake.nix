@@ -119,7 +119,6 @@
               ######## wsl #########
               ./home-manager/gui.nix
               ./home-manager/editor.nix
-              ./home-manager/env.nix
               ./home-manager/gtk.nix
             ];
           };
