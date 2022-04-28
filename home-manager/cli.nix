@@ -36,6 +36,7 @@
     # cmake
     # gnumake
     # nodejs
+    # yarn
     gitui
     onefetch
     jq

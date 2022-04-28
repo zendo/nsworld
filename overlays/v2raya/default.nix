@@ -22,9 +22,9 @@
   web = mkYarnPackage {
     inherit pname version;
     src = "${src}/gui";
-    # yarnNix = ./yarn.nix;
-    # packageJSON = ./package.json;
-    # yarnLock = ./yarn.lock;
+    yarnNix = ./yarn.nix;
+    packageJSON = ./package.json;
+    yarnLock = ./yarn.lock;
     buildPhase = ''
       ln -s $src/postcss.config.js postcss.config.js
       OUTPUT_DIR=$out yarn --offline build
