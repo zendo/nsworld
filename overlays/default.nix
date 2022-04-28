@@ -1,14 +1,14 @@
 final: prev: {
   /*
    (gnomeExtensions.dash-to-dock.overrideAttrs
-   (oldAttrs: rec {
-     src = fetchFromGitHub {
-       owner = "micheleg";
-       repo = "dash-to-dock";
-       rev = "9b22c2ed13e1ec261f7b42fe7194401c7afcffb7";
-       sha256 = "sha256-p68wGek42icQ5VHPtqSY9Nr25mzmGK14Tdr6D3ePDtE=";
-     };
-   }))
+      (oldAttrs: rec {
+        src = fetchFromGitLab {
+          owner = "kalilinux";
+          repo = "packages/gnome-shell-extension-dashtodock";
+          rev = "cdbcaaff36162154689d3d40480e5ef20c140537";
+          sha256 = "sha256-KyzJYI1X0nd2r6Sl+W7n35hQg1TXFkyonskhTzmmvW0=";
+        };
+      }))
    */
 
   # trivial

@@ -12,6 +12,7 @@
     ctop # containers monitor
     bottom # btm
     psmisc # pstree
+    ikill
     cht-sh
     tealdeer
     trash-cli

@@ -57,7 +57,16 @@
 
     gnomeExtensions.appindicator
     gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.dash-to-dock
+    # gnomeExtensions.dash-to-dock
+    (gnomeExtensions.dash-to-dock.overrideAttrs
+      (oldAttrs: rec {
+        src = fetchFromGitLab {
+          owner = "kalilinux";
+          repo = "packages/gnome-shell-extension-dashtodock";
+          rev = "cdbcaaff36162154689d3d40480e5ef20c140537";
+          sha256 = "sha256-KyzJYI1X0nd2r6Sl+W7n35hQg1TXFkyonskhTzmmvW0=";
+        };
+      }))
     gnomeExtensions.dash-to-panel
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher

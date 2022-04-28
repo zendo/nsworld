@@ -15,14 +15,11 @@
     dippi
     paper
 
-    # ikill
-    # tun2socks
-    # amberol
-
     gitg
     # git-cola
     v2ray
     qv2ray
+    # tun2socks
     # clash
     # nur.repos.linyinfeng.clash-for-windows
     foot
