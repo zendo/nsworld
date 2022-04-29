@@ -23,7 +23,7 @@
     loader.systemd-boot = {
       enable = true;
       consoleMode = "max"; # resolution max for hidpi
-      configurationLimit = 3; # bootmenu items
+      configurationLimit = 5; # bootmenu items
     };
     # loader.grub = {
     #   enable = true;

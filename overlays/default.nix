@@ -32,4 +32,5 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
   tuner = prev.callPackage ./tuner {};
+  notes = prev.callPackage ./notes {};
 }
