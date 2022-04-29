@@ -71,6 +71,7 @@
     curl
     bind
     git
+    nix-bash-completions
 
     vim
     fish

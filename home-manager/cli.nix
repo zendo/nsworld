@@ -57,7 +57,6 @@
     speedtest-cli
 
     # NIX TOOLS
-    nix-bash-completions
     nixpkgs-fmt
     nixfmt
     alejandra

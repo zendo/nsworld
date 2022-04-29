@@ -3,11 +3,11 @@
   pkgs,
   ...
 }: {
-  system.stateVersion = "22.05";
   time.timeZone = "Asia/Shanghai";
 
-  zramSwap.enable = true;
   hardware.enableAllFirmware = true;
+
+  zramSwap.enable = true;
 
   boot = {
     plymouth.enable = true;
@@ -17,15 +17,17 @@
     # initrd.extraFiles = {  };
     tmpOnTmpfs = true;
     cleanTmpDir = true;
+  };
 
-    loader.efi.canTouchEfiVariables = true;
-    # boot.loader.efi.efiSysMountPoint = "/boot/efi"; # default /boot
-    loader.systemd-boot = {
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
+    systemd-boot = {
       enable = true;
       consoleMode = "max"; # resolution max for hidpi
       configurationLimit = 5; # bootmenu items
     };
-    # loader.grub = {
+    # grub = {
     #   enable = true;
     #   device = "nodev";
     #   default = "2";
@@ -97,6 +99,7 @@
     curl
     bind
     git
+    nix-bash-completions
   ];
 
   environment.variables = {
@@ -113,4 +116,6 @@
     enable = false;
     nixos.enable = false;
   };
+
+  system.stateVersion = "22.05";
 }

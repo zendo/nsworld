@@ -30,6 +30,7 @@
     wget
     curl
     bind
+    nix-bash-completions
 
     helix
     neovim

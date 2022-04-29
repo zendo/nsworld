@@ -1,4 +1,5 @@
 {config, ...}: {
+  # refuse using useradd add new
   users.mutableUsers = false;
 
   # Don't require password for sudo
