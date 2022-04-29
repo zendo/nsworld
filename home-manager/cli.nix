@@ -71,6 +71,7 @@
     cachix
     nvfetcher
     nixos-generators
+    nix-template
   ];
 
   home.sessionPath = [
