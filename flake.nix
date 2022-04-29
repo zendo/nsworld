@@ -49,9 +49,6 @@
     emacs-overlay,
     ...
   }:
-  # let
-  #   pkgs = self.pkgs.x86_64-linux.nixpkgs;
-  # in
     utils.lib.mkFlake {
       inherit self inputs;
       # supportedSystems = [ "x86_64-linux" ];

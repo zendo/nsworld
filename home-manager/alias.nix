@@ -4,6 +4,8 @@
     ps = "ps -ef";
     beep = "echo -en \"\\007\"";
     age = "rage";
+    cp = "rsync -ahv --progress";
+    dirsize = "du -sh";
     rm = "trash-put";
     rm-list = "trash-list";
     rm-empty = "trash-empty";

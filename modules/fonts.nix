@@ -17,6 +17,7 @@
       # source-han-sans
       # source-han-serif
       source-code-pro
+      comic-relief
       emacs-all-the-icons-fonts
       hack-font
       fira-code

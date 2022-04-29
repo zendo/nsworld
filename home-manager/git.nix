@@ -29,6 +29,11 @@
     enable = true;
   };
 
+  # Git Large File Storage
+  programs.git.lfs = {
+    enable = true;
+  };
+
   programs.gh = {
     enable = true;
     enableGitCredentialHelper = true;
