@@ -5,9 +5,8 @@
 }: {
   programs.bash = {
     enable = true;
-    shellAliases = {
-      nx = "f() { nix run nixpkgs\#\$1; }; f";
-    };
+    # shellAliases = {
+    # };
     # bashrcExtra = ''
     # '';
   };
@@ -26,10 +25,8 @@
       prompt.theme = "pure";
     };
     shellAliases = {
-      history = "history 0";
-      nx = "f() { nix run nixpkgs#$1 }; f";
+      history = "history 0";    # show whole history
     };
-    # ctrl-v show key code
     initExtra = ''
       echo -n "\e[?45l"                 # Fix foot terminal dynamic spinner
       setopt no_nomatch                 # bash wildcard

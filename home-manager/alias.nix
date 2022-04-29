@@ -20,8 +20,9 @@
     export https_proxy=http://127.0.0.1:20171";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
 
-    nix-repl-pkgs = "nix repl '<nixpkgs>'";
     nse = "nix search nixpkgs";
+    nx = "f() { nix run nixpkgs\#\$1; }; f";
+    nix-repl-pkgs = "nix repl '<nixpkgs>'";
     ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-source = "readlink -f /nix/var/nix/profiles/system";
