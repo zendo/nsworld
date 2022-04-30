@@ -39,6 +39,7 @@
 
   environment.systemPackages = with pkgs; [
     gthumb
+    wl-color-picker
     # notejot
     # lollypop
     rhythmbox
