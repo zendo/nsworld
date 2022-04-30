@@ -1,8 +1,8 @@
 { lib, stdenv, fetchFromGitHub, gtk3, gnome-icon-theme, hicolor-icon-theme }:
 
 stdenv.mkDerivation rec {
-  pname = "newaita";
-  version = "unstable-07-22";
+  pname = "newaita-icon-theme";
+  version = "unstable-2021-07-22";
 
   src = fetchFromGitHub {
     owner = "cbrnix";
@@ -26,10 +26,10 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "Gnome icon pack based upon Faenza";
+    description = "A icon theme combining old style and color of material design";
     homepage = "https://github.com/cbrnix/Newaita";
     license = licenses.cc-by-nc-sa-30;
     platforms = platforms.linux;
-    maintainers = [ maintainers.zendo ];
+    maintainers = with maintainers; [zendo];
   };
 }

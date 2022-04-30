@@ -59,7 +59,7 @@
     gnome.gnome-boxes
     # gnome-builder
     # gnome-firmware-updater
-    newaita
+    newaita-icon-theme
 
     gnomeExtensions.appindicator
     gnomeExtensions.tray-icons-reloaded

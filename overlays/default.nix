@@ -21,7 +21,7 @@ final: prev: {
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   misans = prev.callPackage ./misans {};
-  newaita = prev.callPackage ./newaita {};
+  newaita-icon-theme = prev.callPackage ./newaita-icon-theme {};
 
   # rust
   zee = prev.callPackage ./zee {};
