@@ -7,6 +7,23 @@
 (load! "dashboard")
 (load! "functions")
 
+;; environment
+(when IS-WINDOWS
+  (setq doom-font (font-spec :family "JetBrains Mono" :size 25)
+      doom-unicode-font (font-spec :family "Segoe UI Emoji")
+
+      default-directory "~/Desktop/"
+      org-directory "~/Documents/org/"))
+
+(when IS-LINUX
+  (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
+      doom-variable-pitch-font (font-spec :family "Fira Code")
+      doom-big-font-increment 2
+      doom-unicode-font (font-spec :family "Noto Color Emoji")
+
+      org-directory "~/Documents/org/"
+      ))
+
 ;; basic
 (setq user-full-name "zendo"
       user-mail-address "linzway@qq.com"
@@ -23,10 +40,6 @@
 
       doom-theme 'doom-tomorrow-night
       ;; doom-theme 'doom-vibrant
-      doom-font (font-spec :family "JetBrains Mono" :size 14)
-      doom-variable-pitch-font (font-spec :family "Fira Code")
-      doom-big-font-increment 2
-      doom-unicode-font (font-spec :family "Noto Color Emoji") ;; "Noto Sans Mono"
 
       x-gtk-use-native-input t          ; 使用外部输入法
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops
@@ -36,8 +49,6 @@
       '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist" )
       )
 
-;; org-mode
-(setq org-directory "~/Documents/org/")
 ;;content overview show2levels
 (after! org
   (setq org-startup-folded t))

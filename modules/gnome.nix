@@ -39,7 +39,11 @@
 
   environment.systemPackages = with pkgs; [
     gthumb
-    wl-color-picker
+    (wl-color-picker.overrideAttrs # lack .desktop
+      (oldAttrs: {
+        postFixup = ''
+        cp -r $out/usr/share $out/share '';
+        }))
     # notejot
     # lollypop
     rhythmbox

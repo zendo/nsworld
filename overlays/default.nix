@@ -9,6 +9,13 @@ final: prev: {
           sha256 = "sha256-KyzJYI1X0nd2r6Sl+W7n35hQg1TXFkyonskhTzmmvW0=";
         };
       }))
+
+       (git-cola.overrideAttrs #
+      (oldAttrs: {
+        postFixup = ''
+        mkdir -p $out/share/icons/hicolor
+        cp -r $out/share/git-cola/icons/* $out/share/icons/hicolor/ '';
+        }))
    */
 
   # trivial

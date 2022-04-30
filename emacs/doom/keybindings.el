@@ -21,10 +21,14 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-z") 'undo-redo)
 
-(global-set-key (kbd "<f2>") '+vterm/toggle)
-(after! vterm
-  (setq vterm-shell "zsh")
-  (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle))
+(when IS-WINDOWS
+  (global-set-key (kbd "<f2>") '+eshell/toggle))
+
+(when IS-LINUX
+  (global-set-key (kbd "<f2>") '+vterm/toggle)
+  (after! vterm
+    (setq vterm-shell "zsh")
+    (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
 
 (after! treemacs
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
@@ -159,7 +163,7 @@
   (bind-key "j" 'next-line view-mode-map)
   (bind-key "k" 'previous-line view-mode-map)
   (bind-key "l" 'forward-char view-mode-map)
-(bind-key "b" 'View-scroll-page-backward view-mode-map))
+  (bind-key "b" 'View-scroll-page-backward view-mode-map))
 
 ;; 新建 window 并切换过去
 (global-set-key (kbd "C-x 2")

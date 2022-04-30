@@ -1,3 +1,5 @@
+# wip
+# https://gitlab.gnome.org/World/design/app-icon-preview
 {
   lib,
   stdenv,
@@ -55,8 +57,8 @@ stdenv.mkDerivation rec {
   ];
 
   meta = with lib; {
-    description = "A modern text editor for the terminal written in Rust";
-    homepage = "https://github.com/zee-editor/zee";
+    description = "Tool for designing applications icons";
+    homepage = "https://gitlab.gnome.org/World/design/app-icon-preview";
     license = licenses.gpl3;
     maintainers = with maintainers; [ zendo ];
   };

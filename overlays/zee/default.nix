@@ -23,9 +23,9 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-mbqI1csnU95VWgax4GjIxB+nhMtmpaeJ8QQ3qb0hY4c=";
 
-  buildPhase = ''
-    ZEE_DISABLE_GRAMMAR_BUILD=t cargo run -- zee/src/main.rs
-  '';
+  # buildPhase = ''
+  #   ZEE_DISABLE_GRAMMAR_BUILD=t cargo run -- zee/src/main.rs
+  # '';
   # postPatch = ''
   #   patchShebangs scripts/build
   # '';
