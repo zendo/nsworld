@@ -33,4 +33,5 @@ final: prev: {
   dippi = prev.callPackage ./dippi {};
   tuner = prev.callPackage ./tuner {};
   notes = prev.callPackage ./notes {};
+  app-icon-preview = prev.callPackage ./app-icon-preview {};
 }

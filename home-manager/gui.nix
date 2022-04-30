@@ -12,6 +12,7 @@
     # dialect
     # frog
     # clash-verge
+    # app-icon-preview
     dippi
     paper
 
