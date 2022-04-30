@@ -3,6 +3,7 @@
     cat = "bat -p";
     ps = "ps -ef";
     "ls." = "ls -d .*";
+    "la." = "ls -d .*";
     dirsize = "du -sh";
     cp = "rsync -ahv --progress";
     rm = "trash-put";
@@ -23,10 +24,12 @@
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
+    gedit = "gnome-text-editor";
 
     nse = "nix search nixpkgs";
     nx = "f() { nix run nixpkgs\#\$1; }; f";
     nix-repl-pkgs = "nix repl '<nixpkgs>'";
+    nix-sri = "nix hash to-sri --type sha256";
     ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-source = "readlink -f /nix/var/nix/profiles/system";

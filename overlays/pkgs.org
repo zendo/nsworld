@@ -1,3 +1,5 @@
+nix-template go -n --from-url github.com/s0md3v/Smap
+
 * buildGoModule
 ** cli
 #+begin_src nix
@@ -203,6 +205,28 @@ buildPhase = ''
 distPhase = "true";
 
 configurePhase = "ln -s $node_modules node_modules";
+#+end_src
+* appimageTool
+#+begin_src nix
+{ lib, fetchurl, appimageTools }:
+
+appimageTools.wrapType2 rec {
+  name = "clash-verge";
+  version = "1.0.0";
+
+  src = fetchurl {
+    url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.AppImage";
+    sha256 = "sha256-I9ZbFFPgG7ipPxu02H8W8NqrtfomeNIntBYdDGxyyg4=";
+  };
+
+  meta = with lib; {
+    homepage = "https://github.com/zzzgydi/clash-verge";
+    description = "A Clash GUI based on tauri";
+    maintainers = with maintainers; [zendo];
+    platforms = platforms.linux;
+    license = licenses.gpl3;
+  };
+}
 #+end_src
 * Desktop
 ** codecs
