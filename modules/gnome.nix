@@ -59,9 +59,11 @@
     gnome.gnome-boxes
     # gnome-builder
     # gnome-firmware-updater
+    newaita
 
     gnomeExtensions.appindicator
     gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.app-icons-taskbar
     # gnomeExtensions.dash-to-dock
     (gnomeExtensions.dash-to-dock.overrideAttrs
       (oldAttrs: rec {

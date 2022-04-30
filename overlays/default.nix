@@ -21,6 +21,7 @@ final: prev: {
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   misans = prev.callPackage ./misans {};
+  newaita = prev.callPackage ./newaita {};
 
   # rust
   zee = prev.callPackage ./zee {};
