@@ -5,26 +5,27 @@
 }: {
   home.packages = with pkgs; [
     # CLI
-    powertop
     unp
     unrar
     btop
-    ctop # containers monitor
+    ctop   # containers monitor
+    powertop
     bottom # btm
     psmisc # pstree
+    hstr   # hh: history
     ikill
     cht-sh
     tealdeer
     trash-cli
-    rage
+    rage  # age encrypt RIIR
     f2
     choose
+    croc
     difftastic # using delta right now
     kalker # calculator
     imagemagick
     ydict
     translate-shell
-    croc
     # magic-wormhole # python
     magic-wormhole-rs
     aspellDicts.en
@@ -135,13 +136,6 @@
 
   # z: autojump
   programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
-  # C-r: history search
-  programs.mcfly = {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;

@@ -10,7 +10,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   time.timeZone = "Asia/Shanghai";
@@ -32,7 +31,7 @@
     bind
     nix-bash-completions
 
-    helix
+    # helix
     neovim
     emacs
     hack-font

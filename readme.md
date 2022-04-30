@@ -58,9 +58,12 @@ curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | 
 
 # Nix Lang
 
+[Nix Builtins](https://devdocs.io/nix/)
+
 [Nix one pager](https://github.com/tazjin/nix-1p)
 
 [Intro Nix Family](https://web.archive.org/web/20210123223258/https://ebzzry.io/en/nix/)
+
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 

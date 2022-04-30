@@ -2,20 +2,24 @@
   home.shellAliases = {
     cat = "bat -p";
     ps = "ps -ef";
-    beep = "echo -en \"\\007\"";
-    age = "rage";
-    cp = "rsync -ahv --progress";
+    "ls." = "ls -d .*";
     dirsize = "du -sh";
+    cp = "rsync -ahv --progress";
     rm = "trash-put";
     rm-list = "trash-list";
     rm-empty = "trash-empty";
+    mount-ls = "mount | column -t";
+    age = "rage";
+    beep = "echo -en \"\\007\"";
     ip = "ip --color=auto";
     ipsb = "curl ip.sb";
     ipinfo = "curl ipinfo.io";
+    netlog = "lsof -P -i -n";
 
     ee = "emacs -nw";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
+    wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
     ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
     export https_proxy=http://127.0.0.1:20171";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
