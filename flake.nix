@@ -105,20 +105,16 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.iab = {...}: {
-            home.stateVersion = "22.05";
-            programs.home-manager.enable = true;
-            imports = [
-              ./home-manager/git.nix
-              ./home-manager/cli.nix
-              ./home-manager/zsh.nix
-              ./home-manager/alias.nix
-              ######## wsl #########
-              ./home-manager/gui.nix
-              ./home-manager/editor.nix
-              ./home-manager/gtk.nix
-            ];
-          };
+          home-manager.users.iab.imports = [
+            ./home-manager/git.nix
+            ./home-manager/cli.nix
+            ./home-manager/zsh.nix
+            ./home-manager/alias.nix
+            ######## wsl #########
+            ./home-manager/gui.nix
+            ./home-manager/editor.nix
+            ./home-manager/gtk.nix
+          ];
         }
       ];
 

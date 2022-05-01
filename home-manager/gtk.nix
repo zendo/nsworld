@@ -1,7 +1,7 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   # fix tiny cursor at qt-apps
   xsession.pointerCursor = {
@@ -11,12 +11,12 @@
   };
 
   # fix spotify hidpi
-  xdg.desktopEntries.spotify = lib.mkIf config.services.xserver.desktopManager.gnomeplasma5.enable {
+  xdg.desktopEntries.spotify = {
     name = "Spotify";
     genericName = "Music Player";
     icon = "spotify-client";
     exec = "spotify %U --force-device-scale-factor=2";
     terminal = false;
-    categories = [ "Application" "Music" ];
+    categories = ["Application" "Music"];
   };
 }

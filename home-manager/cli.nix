@@ -180,4 +180,8 @@
       bind -n M-w kill-pane
     '';
   };
+
+  programs.home-manager.enable = true;
+
+  home.stateVersion = "22.05";
 }

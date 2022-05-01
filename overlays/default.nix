@@ -39,6 +39,7 @@ final: prev: {
 
   # nodejs
   clash-verge = prev.callPackage ./clash-verge {};
+  netease-cloud-music = prev.callPackage ./netease-cloud-music {};
 
   # gtk
   paper = prev.callPackage ./paper {};
