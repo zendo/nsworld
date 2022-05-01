@@ -12,6 +12,7 @@
     autoLogin.user = "iab";
   };
 
+  # For systray icons
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
   services.packagekit.enable = false;

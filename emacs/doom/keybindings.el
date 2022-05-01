@@ -90,7 +90,6 @@
    :leader
    "y" #'youdao-dictionary-search-at-point-tooltip
    "g" #'magit-status
-   "C-g" #'magit-status
    "x" #'+hydra/window-nav/body
    "<left>" #'winner-undo
    "<right>" #'winner-redo

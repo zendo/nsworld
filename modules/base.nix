@@ -1,13 +1,22 @@
 {
   config,
   pkgs,
+  lib,
   ...
-}: {
+}:
+with config.boot;
+with lib; let
+  btrfsInInitrd = any (fs: fs == "btrfs") initrd.supportedFilesystems;
+  btrfsInSystem = any (fs: fs == "btrfs") supportedFilesystems;
+  enableBtrfs = btrfsInInitrd && btrfsInSystem;
+in {
   time.timeZone = "Asia/Shanghai";
 
   hardware.enableAllFirmware = true;
 
   zramSwap.enable = true;
+
+  services.btrfs.autoScrub.enable = mkIf enableBtrfs true;
 
   boot = {
     plymouth.enable = true;
