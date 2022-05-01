@@ -18,6 +18,10 @@ final: prev: {
         }))
    */
 
+  # self tools
+  # https://github.com/thiagokokada/nix-configs
+  nix-whereis = prev.callPackage ./nix-whereis {};
+
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   misans = prev.callPackage ./misans {};
