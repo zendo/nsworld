@@ -1,4 +1,5 @@
 [![NixOS Logo](https://img.shields.io/badge/NixOS-white?style=plat-square&logo=nixos&logoColor=5277C3)](https://shields.io/)
+[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
 [![Lock Updated](https://img.shields.io/badge/dynamic/json?color=yellow&label=lock%20updated&query=%24[0].commit.author.date&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fj0hax%2Fnixos-configurations%2Fcommits%3Fper_page%3D1%26path%3D%2Fflake.lock)](/flake.lock)
 
 # Installtion
@@ -71,6 +72,3 @@ curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | 
 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-
-[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
-

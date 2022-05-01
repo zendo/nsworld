@@ -66,7 +66,6 @@
     alejandra
     rnix-lsp
     lorri
-    nix-index
     comma
     manix
     niv
@@ -165,6 +164,12 @@
       # disable "It took xxs"
       # cmd_duration.disabled = true;
     };
+  };
+
+  programs.nix-index = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.tmux = {
