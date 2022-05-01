@@ -70,6 +70,7 @@
 
 ;; alejandra for Nix Code Formatter :C-c c f
 (set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
+;; (add-hook! nix-mode #'lsp!)
 
 ;; disable flycheck in some mode
 (setq flycheck-disabled-checkers '(sh-shellscript

@@ -1,15 +1,15 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with config.boot;
 with lib; let
   btrfsInInitrd = any (fs: fs == "btrfs") initrd.supportedFilesystems;
   btrfsInSystem = any (fs: fs == "btrfs") supportedFilesystems;
   enableBtrfs = btrfsInInitrd && btrfsInSystem;
-in {
+in
+{
   time.timeZone = "Asia/Shanghai";
 
   hardware.enableAllFirmware = true;
@@ -20,7 +20,7 @@ in {
 
   boot = {
     plymouth.enable = true;
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" ];
     kernelPackages = pkgs.linuxPackages_xanmod_latest; # latest zen xanmod_latest
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
