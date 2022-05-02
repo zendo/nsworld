@@ -28,9 +28,12 @@
   };
 
   nix = {
+    # nix registry list
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
+      p.flake = inputs.nixpkgs;
     };
+    # nix show-config | rg nix-path ## Needs reboot
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"
       "nixos-config=${inputs.self}"

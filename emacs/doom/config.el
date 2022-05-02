@@ -42,6 +42,7 @@
       ;; doom-theme 'doom-vibrant
 
       x-gtk-use-native-input t          ; 使用外部输入法
+      undo-in-region t
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops
       ;; word-wrap-by-category t        ;?
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号

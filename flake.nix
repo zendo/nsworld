@@ -105,6 +105,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          # home-manager.extraSpecialArgs = { inherit self inputs; };
           home-manager.users.iab.imports = [
             ./home-manager/git.nix
             ./home-manager/cli.nix
