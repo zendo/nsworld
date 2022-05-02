@@ -40,11 +40,7 @@
 
   environment.systemPackages = with pkgs; [
     gthumb
-    (wl-color-picker.overrideAttrs # lack .desktop
-      (oldAttrs: {
-        postFixup = ''
-        cp -r $out/usr/share $out/share '';
-        }))
+    wl-color-picker
     # notejot
     # lollypop
     rhythmbox
@@ -96,17 +92,17 @@
   ];
 
   i18n.inputMethod = {
-    # enabled = "fcitx5";
-    # fcitx5.addons = with pkgs; [
-    #   fcitx5-rime
-    #   # fcitx5-chinese-addons
-    # ];
-
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      rime
-      libpinyin
-      typing-booster
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime
+      # fcitx5-chinese-addons
     ];
+
+    # enabled = "ibus";
+    # ibus.engines = with pkgs.ibus-engines; [
+    #   rime
+    #   libpinyin
+    #   typing-booster
+    # ];
   };
 }

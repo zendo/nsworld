@@ -51,6 +51,7 @@ dconf load /org/gnome/ < my-dconf
 dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
 # Backup KDE Settings
+MMcK Launcher
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
 
 # RIME

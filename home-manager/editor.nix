@@ -9,12 +9,17 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtk;
-    extraPackages = epkgs: [
-      epkgs.vterm
-      epkgs.emojify
-      epkgs.emacsql-sqlite
-      # epkgs.telega
+    package = (pkgs.emacsPgtk.overrideAttrs
+      (oldAttrs: {
+        postFixup = ''
+        rm $out/share/applications/emacsclient.desktop  '';
+      }));
+    extraPackages = epkgs: with epkgs; [
+      vterm
+      emojify
+      emacsql-sqlite
+      # pdf-tools
+      # telega
     ];
   };
   # home.file.".doom.d".source = ../emacs/doom;

@@ -35,7 +35,6 @@
       inhibit-default-init t
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
-      x-gtk-use-native-input t
       confirm-kill-processes nil
       visible-bell 1                ;关闭错误警示
       system-time-locale "C"        ;使用英文时间格式

@@ -56,6 +56,7 @@
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
     # latte-dock
+    newaita-icon-theme
 
     falkon
     nheko

@@ -41,7 +41,6 @@
       doom-theme 'doom-tomorrow-night
       ;; doom-theme 'doom-vibrant
 
-      x-gtk-use-native-input t          ; 使用外部输入法
       undo-in-region t
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops
       ;; word-wrap-by-category t        ;?
@@ -61,7 +60,7 @@
 ;; UI
 ;; (add-to-list 'default-frame-alist '(height . 40))
 ;; (add-to-list 'default-frame-alist '(width . 80))
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 
 ;; Editor

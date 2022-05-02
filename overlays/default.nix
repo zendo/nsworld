@@ -47,4 +47,11 @@ final: prev: {
   tuner = prev.callPackage ./tuner {};
   notes = prev.callPackage ./notes {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
+
+  # override
+  wl-color-picker = prev.wl-color-picker.overrideAttrs # lack .desktop
+      (oldAttrs: {
+        postFixup = ''
+        cp -r $out/usr/share $out/share '';
+      });
 }

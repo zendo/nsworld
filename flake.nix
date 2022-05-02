@@ -30,7 +30,7 @@
       flake = false;
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/2d7a5e16c6af228c7f83977e19b7fe4050dc62a1";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/2191e9676590a1220683cceabaf9bf07da145a0c";
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
@@ -95,8 +95,8 @@
         ./modules/fonts.nix
         ./modules/virtual.nix
         ./modules/user.nix
-        # ./modules/kde.nix
-        ./modules/gnome.nix
+        # ./modules/gnome.nix
+        ./modules/kde.nix
 
         musnix.nixosModules.musnix
         {musnix.enable = true;}
@@ -105,6 +105,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
           # home-manager.extraSpecialArgs = { inherit self inputs; };
           home-manager.users.iab.imports = [
             ./home-manager/git.nix
@@ -114,7 +115,7 @@
             ######## wsl #########
             ./home-manager/gui.nix
             ./home-manager/editor.nix
-            ./home-manager/gtk.nix
+            # ./home-manager/gtk.nix
           ];
         }
       ];
