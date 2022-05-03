@@ -14,6 +14,7 @@
     ip = "ip --color=auto";
     ipsb = "curl ip.sb";
     ipinfo = "curl ipinfo.io";
+    ipdig = "dig +short myip.opendns.com @208.67.222.222";
     netlog = "lsof -P -i -n";
 
     ee = "emacs -nw";

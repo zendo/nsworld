@@ -26,6 +26,8 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 
+;; (package! telega)
+
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/raxod502/straight.el#the-recipe-format

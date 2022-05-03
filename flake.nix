@@ -105,12 +105,12 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "backup";
           # home-manager.extraSpecialArgs = { inherit self inputs; };
           home-manager.users.iab.imports = [
             ./home-manager/git.nix
             ./home-manager/cli.nix
             ./home-manager/zsh.nix
+            ./home-manager/xdg.nix
             ./home-manager/alias.nix
             ######## wsl #########
             ./home-manager/gui.nix

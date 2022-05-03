@@ -16,7 +16,7 @@
     paper
 
     gitg
-    # git-cola
+    git-cola
     v2ray
     qv2ray
     # tun2socks
