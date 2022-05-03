@@ -16,11 +16,18 @@ patch:
       states: [ 漢字, 汉字 ]
     - name: ascii_punct
       states: [ 。，, ．，]
+    - options: [gb2312+emoji, gbk+emoji, utf8]
+      states:
+        - GB2312
+        - GBK
+        - UTF-8
+      reset: 1
 
 
   "engine/filters":
     - simplifier
     - uniquifier
+    - charset_filter@gb2312+emoji
     - charset_filter@gbk+emoji # GBK过滤
 
   # # 载入朙月拼音扩充词库
