@@ -33,6 +33,7 @@ final: prev: {
 
   # go
   v2raya = prev.callPackage ./v2raya {};
+  go-translation = prev.callPackage ./go-translation {};
 
   # python
   frog = prev.callPackage ./frog {};

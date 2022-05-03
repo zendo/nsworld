@@ -13,6 +13,7 @@
     # frog
     # clash-verge
     # app-icon-preview
+    # go-translation
     dippi
     paper
 
