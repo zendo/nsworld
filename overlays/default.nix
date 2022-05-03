@@ -78,5 +78,5 @@ final: prev: {
   #   });
   # });
 
-  sddm = prev.callPackage ./sddm {};
+  # sddm = prev.callPackage ./sddm {};
 }

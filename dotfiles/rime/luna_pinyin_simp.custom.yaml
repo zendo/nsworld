@@ -18,6 +18,11 @@ patch:
       states: [ 。，, ．，]
 
 
+  "engine/filters":
+    - simplifier
+    - uniquifier
+    - charset_filter@gbk+emoji # GBK过滤
+
   # # 载入朙月拼音扩充词库
   # translator/dictionary: luna_pinyin_simp.extended
 

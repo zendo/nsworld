@@ -21,7 +21,7 @@ in {
   boot = {
     plymouth.enable = true;
     supportedFilesystems = ["ntfs"];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # latest zen xanmod_latest
+    kernelPackages = pkgs.linuxPackages_zen; # latest zen xanmod_latest
     # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
     # initrd.extraFiles = {  };
     tmpOnTmpfs = true;

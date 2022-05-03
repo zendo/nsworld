@@ -45,6 +45,7 @@
     # shutter
     # rnote # handwritten note
     tdesktop
+    fractal
     # kotatogram-desktop
     meld
     deja-dup

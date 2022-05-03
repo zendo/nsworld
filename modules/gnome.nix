@@ -47,7 +47,6 @@
     gparted
     dconf2nix
     kooha
-    # fractal
 
     gnome.gnome-tweaks
     gnome.dconf-editor
@@ -56,7 +55,6 @@
     gnome.gnome-boxes
     # gnome-builder
     # gnome-firmware-updater
-    newaita-icon-theme
 
     gnomeExtensions.appindicator
     gnomeExtensions.tray-icons-reloaded
