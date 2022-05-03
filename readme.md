@@ -51,8 +51,8 @@ dconf load /org/gnome/ < my-dconf
 dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
 # Backup KDE Settings
-MMcK Launcher
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
+MMcK Launcher
 
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" Plus Below

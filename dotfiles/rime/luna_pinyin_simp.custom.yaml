@@ -12,12 +12,13 @@ patch:
     - name: full_shape
       states: [ 半角, 全角 ]
     - name: zh_simp
-      reset: 1
+      reset: 1     # 增加這一行：默認啓用「繁→簡」轉換。
       states: [ 漢字, 汉字 ]
     - name: ascii_punct
       states: [ 。，, ．，]
 
-  # 载入朙月拼音扩充词库
+
+  # # 载入朙月拼音扩充词库
   # translator/dictionary: luna_pinyin_simp.extended
 
   # 英文词库定制
