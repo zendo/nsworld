@@ -25,7 +25,7 @@
       prompt.theme = "pure";
     };
     shellAliases = {
-      history = "history 0";    # show whole history
+      history = "history 0"; # show whole history
     };
     initExtra = ''
       echo -n "\e[?45l"                 # Fix foot terminal dynamic spinner
@@ -37,6 +37,31 @@
       bindkey '^H' backward-kill-word   # Ctrl - backspace
       bindkey "^[[1;3C" forward-word    # Alt - ->
       bindkey "^[[1;3D" backward-word   # Alt - <-
+    '';
+  };
+
+  programs.starship = {
+    enable = false;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = true;
+      # disable "It took xxs"
+      # cmd_duration.disabled = true;
+    };
+  };
+
+  programs.tmux = {
+    enable = false;
+    extraConfig = ''
+      # Set the prefix.
+      # set -g prefix M-a
+
+      # Close the current session.
+      bind -n M-q kill-session
+
+      # Close the current pane.
+      bind -n M-w kill-pane
     '';
   };
 }

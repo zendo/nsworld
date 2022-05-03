@@ -11,16 +11,16 @@
     unp
     unrar
     btop
-    ctop   # containers monitor
+    ctop # containers monitor
     powertop
     bottom # btm
     psmisc # pstree
-    hstr   # hh: history
+    hstr # hh: history
     ikill
     cht-sh
     tealdeer
     trash-cli
-    rage  # age encrypt RIIR
+    rage # age encrypt RIIR
     f2
     choose
     croc
@@ -116,34 +116,9 @@
     enableZshIntegration = true;
   };
 
-  programs.starship = {
-    enable = false;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    settings = {
-      add_newline = true;
-      # disable "It took xxs"
-      # cmd_duration.disabled = true;
-    };
-  };
-
   programs.nix-index = {
     enable = false;
     enableBashIntegration = true;
     enableZshIntegration = true;
-  };
-
-  programs.tmux = {
-    enable = false;
-    extraConfig = ''
-      # Set the prefix.
-      # set -g prefix M-a
-
-      # Close the current session.
-      bind -n M-q kill-session
-
-      # Close the current pane.
-      bind -n M-w kill-pane
-    '';
   };
 }

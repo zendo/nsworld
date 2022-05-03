@@ -25,6 +25,29 @@
     # };
   };
 
+  xdg.configFile = {
+    "qv2ray/plugin_settings/builtin_v2ray_support.json".source = (pkgs.formats.json {}).generate "v2ray.json" {
+      AssetsPath = "${pkgs.symlinkJoin {
+        name = "assets";
+        paths = [pkgs.v2ray-geoip pkgs.v2ray-domain-list-community];
+      }}/share/v2ray";
+      CorePath = "${pkgs.v2ray.core}/bin/v2ray";
+    };
+
+    "autostart/qv2ray.desktop".text = ''
+      [Desktop Entry]
+      Name=qv2ray
+      GenericName=V2Ray Frontend
+      Exec=bash -c "sleep 5; qv2ray"
+      Terminal=false
+      Icon=qv2ray
+      Categories=Network
+      Type=Application
+      StartupNotify=false
+      X-GNOME-Autostart-enabled=true
+    '';
+  };
+
   # ~/.inputrc
   programs.readline = {
     enable = true;
