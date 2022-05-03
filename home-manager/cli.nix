@@ -167,7 +167,7 @@
   };
 
   programs.nix-index = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
     enableZshIntegration = true;
   };

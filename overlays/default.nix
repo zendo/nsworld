@@ -55,4 +55,28 @@ final: prev: {
         postFixup = ''
         cp -r $out/usr/share $out/share '';
       });
+
+  # sddm = prev.sddm.overrideAttrs
+  #   (oldAttrs: {
+  #     src = prev.fetchFromGitHub {
+  #       owner = "sddm";
+  #       repo = "sddm";
+  #       rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
+  #       sha256 = "1s6icb5r1n6grfs137gdzfrcvwsb3hvl7ib2zh6931x8pkl1qvxa";
+  #     };
+  #   });
+
+  #   plasma5Packages = prev.plasma5Packages.overrideScope' (prev: final: {
+  #     libsForQt5.sddm = prev.libsForQt5.sddm.overrideAttrs
+  #   (oldAttrs: {
+  #     src = prev.fetchFromGitHub {
+  #       owner = "sddm";
+  #       repo = "sddm";
+  #       rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
+  #       sha256 = "1s6icb5r1n6grfs137gdzfrcvwsb3hvl7ib2zh6931x8pkl1qvxa";
+  #     };
+  #   });
+  # });
+
+  sddm = prev.callPackage ./sddm {};
 }

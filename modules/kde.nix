@@ -14,9 +14,6 @@
   services.xserver.displayManager = {
     # sddm.enable = true; # wayland bug
     lightdm.enable = true;
-    lightdm.greeters.gtk.extraConfig = ''
-      xft-dpi=240
-    '';
     defaultSession = "plasmawayland";
     autoLogin.user = "iab";
   };
