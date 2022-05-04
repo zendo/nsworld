@@ -33,6 +33,12 @@ buildGoModule rec {
     maintainers = with maintainers; [zendo];
   };
 }
+#+end_#+begin_src
+
+#+end_src
+** notes
+#+begin_src nix
+subPackages = ["."];
 #+end_src
 * buildRustPackage
 ** cli

@@ -58,6 +58,7 @@
     efibootmgr
     # efitools
     inxi
+    lm_sensors
     lshw
     hwinfo
     cpufetch

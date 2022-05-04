@@ -45,14 +45,15 @@ LC_ALL=C xdg-user-dirs-update --force
 # Emacs
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 
-# Backup Gnome Settings
+# Gnome
 dconf dump /org/gnome/ > my-dconf
 dconf load /org/gnome/ < my-dconf
 dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
-# Backup KDE Settings
+# KDE
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
-MMcK Launcher
+curl -s https://api.github.com/repos/snoutbug/mmcklauncher/releases/latest | grep "com.github.SnoutBug.mmckLauncher.tar.gz" | cut -d : -f 2,3 | tr -d \" | wget -qi -
+plasmapkg2 --install com.github.SnoutBug.mmckLauncher.tar.gz
 
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" Plus Below
