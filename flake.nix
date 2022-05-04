@@ -88,7 +88,7 @@
       };
 
       hosts.yoga.modules = [
-        nixos-hardware.nixosModules.common-pc-laptop-ssd
+        nixos-hardware.nixosModules.common-pc-laptop-ssd # fstrim
         nixos-hardware.nixosModules.common-gpu-amd
         ./hosts/yoga/hardware-configuration.nix
 

@@ -1,5 +1,5 @@
 { pkgs, ... }:
-
+# https://github.com/thiagokokada/nix-configs
 pkgs.stdenv.mkDerivation {
   name = "nix-whereis";
 

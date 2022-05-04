@@ -11,8 +11,9 @@
     # frog
     # clash-verge
     # app-icon-preview
+    # newaita-icon-theme
     # go-translation
-    dippi
+    # dippi
     paper
 
     gitg

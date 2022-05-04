@@ -22,8 +22,7 @@ final: prev: {
     })
    */
 
-  # self tools
-  # https://github.com/thiagokokada/nix-configs
+  # scripts
   nix-whereis = prev.callPackage ./nix-whereis {};
 
   # trivial
