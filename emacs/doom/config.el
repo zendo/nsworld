@@ -68,9 +68,11 @@
   (+global-word-wrap-mode +1))
 (global-visual-line-mode 1)
 
+;; Nix Mode
+(add-hook 'nix-mode-hook #'rainbow-delimiters-mode)
+;; (add-hook! nix-mode #'lsp!)
 ;; alejandra for Nix Code Formatter :C-c c f
 (set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
-;; (add-hook! nix-mode #'lsp!)
 
 ;; disable flycheck in some mode
 (setq flycheck-disabled-checkers '(sh-shellscript
