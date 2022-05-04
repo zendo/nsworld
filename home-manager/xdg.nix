@@ -26,6 +26,7 @@
   };
 
   xdg.configFile = {
+    # https://github.com/NickCao/flakes/commit/e019b7e498d495d1b0cfa7bd7b26d0615647a9de
     "qv2ray/plugin_settings/builtin_v2ray_support.json".source = (pkgs.formats.json {}).generate "v2ray.json" {
       AssetsPath = "${pkgs.symlinkJoin {
         name = "assets";

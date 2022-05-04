@@ -2,6 +2,7 @@
   home.shellAliases = {
     cat = "bat -p";
     ps = "ps -ef";
+    l = "exa -l --icons";
     "ls." = "ls -d .*";
     "la." = "ls -d .*";
     cp = "rsync -ahv --progress";
