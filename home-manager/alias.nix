@@ -17,6 +17,7 @@
     ipinfo = "curl ipinfo.io";
     ipdig = "dig +short myip.opendns.com @208.67.222.222";
     netlog = "lsof -P -i -n";
+    inxi = "inxi -Fz";
 
     ee = "emacs -nw";
     nctb = "nc termbin.com 9999";

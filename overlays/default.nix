@@ -16,6 +16,10 @@ final: prev: {
         mkdir -p $out/share/icons/hicolor
         cp -r $out/share/git-cola/icons/* $out/share/icons/hicolor/ '';
         }))
+
+    (pkgs.google-chrome.override {
+       commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+    })
    */
 
   # self tools

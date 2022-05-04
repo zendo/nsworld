@@ -18,18 +18,14 @@
     gitg
     v2ray
     qv2ray
-    # tun2socks
     # clash
     # nur.repos.linyinfeng.clash-for-windows
     foot
-    # kitty
-    # wezterm
     alacritty
 
     # (pkgs.google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
     # })
-    # firefox-wayland
     # microsoft-edge
 
     qbittorrent
@@ -40,13 +36,10 @@
     mousai # 听歌识曲
     blanket
     shortwave
-    # amberol
     # easyeffects
     # shutter
-    # rnote # handwritten note
     tdesktop
     fractal
-    # kotatogram-desktop
     meld
     deja-dup
     # rclone
@@ -59,20 +52,15 @@
 
     # OFFICE
     # libreoffice-fresh
-
-    # Themes
-    # tela-icon-theme
-    # vanilla-dmz
+    # rnote # handwritten note
 
     # HARDWARE TEST
-    efitools
     efibootmgr
+    # efitools
     inxi
     lshw
     hwinfo
-    cpu-x
     cpufetch
-    acpi
     usbutils
     dmidecode
     glxinfo

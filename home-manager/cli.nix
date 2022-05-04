@@ -74,6 +74,7 @@
     nvfetcher
     nixos-generators
     nix-template
+    nix-index
   ];
 
   programs.direnv = {
