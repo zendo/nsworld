@@ -10,7 +10,7 @@ mkDerivation {
     owner = "sddm";
     repo = "sddm";
     rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
-    sha256 = "1s6icb5r1n6grfs137gdzfrcvasb3hvlhib2zh6931x8pkl1qvxa";
+    sha256 = "1s6icb5r1n6grfs137gdzfraaasb3hvlhib2zh6931x8pkl1qvxa";
   };
 
   patches = [

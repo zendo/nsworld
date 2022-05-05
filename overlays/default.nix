@@ -51,13 +51,16 @@ final: prev: {
   app-icon-preview = prev.callPackage ./app-icon-preview {};
 
   # override
-  wl-color-picker = prev.wl-color-picker.overrideAttrs # lack .desktop
-      (oldAttrs: {
-        postFixup = ''
-        cp -r $out/usr/share $out/share '';
-      });
+  wl-color-picker =
+    prev.wl-color-picker.overrideAttrs # lack .desktop
 
-  # sddm = prev.sddm.overrideAttrs
+    (oldAttrs: {
+      postFixup = ''
+        cp -r $out/usr/share $out/share '';
+    });
+
+  # sddm =
+  #   prev.sddm.overrideAttrs
   #   (oldAttrs: {
   #     src = prev.fetchFromGitHub {
   #       owner = "sddm";
@@ -80,4 +83,29 @@ final: prev: {
   # });
 
   # sddm = prev.callPackage ./sddm {};
+
+  # plasma5Packages = prev.plasma5Packages.overrideScope' (
+  #   finalx: prevx: {
+  #     plasma5 = prevx.plasma5.overrideScope' (
+  #       finaly: prevy: {
+  #         sddm =
+  #           prevy.sddm.overrideAttrs
+  #           (oldAttrs: {
+  #             src = prev.fetchFromGitHub {
+  #               owner = "sddm";
+  #               repo = "sddm";
+  #               rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
+  #               sha256 = "1s6icb5r1n6grfs137gdzfrcvwsb3hvl7ib2zh6931x8pkl1qvxa";
+  #             };
+  #           });
+  #       }
+  #     );
+  #   }
+  # );
+
+  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+  #   mutter = gprev.mutter.overrideAttrs (attrs: {
+  #     separateDebugInfo = true;
+  #   });
+  # });
 }

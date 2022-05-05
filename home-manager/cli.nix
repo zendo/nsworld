@@ -118,6 +118,10 @@
     enableZshIntegration = true;
   };
 
+  programs.tealdeer = {
+    enable = true;
+  };
+
   programs.nix-index = {
     enable = false;
     enableBashIntegration = true;

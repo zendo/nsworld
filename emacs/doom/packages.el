@@ -20,7 +20,6 @@
 (package! iedit)
 ;; (package! telega)
 (package! youdao-dictionary)
-(package! tldr)
 (package! vundo)
 (package! dired-quick-sort)
 
