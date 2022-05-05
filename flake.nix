@@ -48,46 +48,21 @@
     musnix,
     emacs-overlay,
     ...
-  }:
-    utils.lib.mkFlake {
-      inherit self inputs;
-      # supportedSystems = [ "x86_64-linux" ];
+  }: let
+    system = "x86_64-linux";
+    username = "iab";
+  in {
+    overlay = import ./overlays;
 
-      channelsConfig = {
-        allowUnfree = true;
-        # allowBroken = true;
-        # allowUnsupportedSystem = true;
-      };
+    nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      inherit system;
+      modules = [
+        ./modules/base.nix
+        ./modules/network.nix
+        ./modules/nixconfig.nix
+        ./overlays/v2raya/v2raya.nix
 
-      overlay = import ./overlays;
-
-      # Overlays which are applied to all channels.
-      sharedOverlays = [
-        # (final: prev: {
-        #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-        # })
-        (final: prev: {
-          local = local-nixpkgs.legacyPackages.${prev.system};
-        })
-        self.overlay
-        nur.overlay
-        emacs-overlay.overlay
-      ];
-
-      hostDefaults = {
-        system = "x86_64-linux";
-        # channelName = "nixpkgs-unstable";
-        # Extra arguments to be passed to all modules. Merged with host's extraArgs.
-        # extraArgs = { inherit utils inputs; foo = "foo"; };
-        modules = [
-          ./modules/base.nix
-          ./modules/network.nix
-          ./modules/nixconfig.nix
-          ./overlays/v2raya/v2raya.nix
-        ];
-      };
-
-      hosts.yoga.modules = [
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
         ./hosts/yoga/hardware-configuration.nix
@@ -98,6 +73,17 @@
         # ./modules/gnome.nix
         ./modules/kde.nix
 
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              local = local-nixpkgs.legacyPackages.${prev.system};
+            })
+            self.overlay
+            nur.overlay
+            emacs-overlay.overlay
+          ];
+        }
+
         musnix.nixosModules.musnix
         {musnix.enable = true;}
 
@@ -106,7 +92,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           # home-manager.extraSpecialArgs = { inherit self inputs; };
-          home-manager.users.iab.imports = [
+          home-manager.users.${username}.imports = [
             ./home-manager/git.nix
             ./home-manager/cli.nix
             ./home-manager/zsh.nix
@@ -119,17 +105,6 @@
           ];
         }
       ];
-
-      hosts.svp.modules = [
-        nixos-hardware.nixosModules.common-pc-laptop-ssd
-        nixos-hardware.nixosModules.common-cpu-intel
-        ./hosts/svp/hardware-configuration.nix
-
-        ./modules/fonts.nix
-        ./modules/virtual.nix
-        ./modules/user.nix
-        ./modules/kde.nix
-        # ./modules/gnome.nix
-      ];
     };
+  };
 }

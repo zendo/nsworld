@@ -25,6 +25,10 @@
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   nix = {
@@ -46,5 +50,11 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    # allowUnsupportedSystem = true;
+    # allowBroken = true;
   };
 }
