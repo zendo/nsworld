@@ -47,10 +47,10 @@
     hosts-2 = "svp";
     username = "iab";
   in {
-    overlay = import ./overlays;
+    overlays.default = import ./overlays;
 
     nixosConfigurations.${hosts} = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs username hosts;};
+      specialArgs = {inherit inputs username;};
       system = "x86_64-linux";
       modules = [
         {networking.hostName = "${hosts}";}
@@ -74,7 +74,7 @@
             (final: prev: {
               local = local-nixpkgs.legacyPackages.${prev.system};
             })
-            self.overlay
+            self.overlays.default
             nur.overlay
             emacs-overlay.overlay
           ];
@@ -104,8 +104,41 @@
       ];
     };
 
-    nixosConfigurations.${hosts-2} = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs username hosts-2;};
+    # nixosConfigurations.${hosts-2} = nixpkgs.lib.nixosSystem {
+    #   specialArgs = {inherit inputs username hosts-2;};
+    #   system = "x86_64-linux";
+    #   modules = [];
+    # };
+
+    # nix build nixosConfigurations.vm.config.system.build.vm
+    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      system = "x86_64-linux";
+      modules = [
+        ({pkgs, ...}: {
+          # disabledModules = ["services/desktops/pipewire/pipewire.nix"];
+          imports = [
+            "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+            # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+          ];
+
+          virtualisation = {
+            memorySize = 1024 * 3;
+            diskSize = 1024 * 8;
+            cores = 4;
+            msize = 104857600;
+          };
+
+          users.users.root = {
+            password = "root";
+          };
+          users.users.user = {
+            password = "user";
+            isNormalUser = true;
+            extraGroups = ["wheel"];
+          };
+        })
+      ];
     };
   };
 }

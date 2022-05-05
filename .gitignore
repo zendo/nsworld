@@ -1,4 +1,5 @@
 /result
+/nixos.qcow2
 /modules/result
 /.direnv/
 /overlays/_sources
