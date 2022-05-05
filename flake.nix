@@ -2,7 +2,7 @@
   description = "Hello world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
@@ -14,12 +14,8 @@
 
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
-
-    # Real-time audio
-    musnix.url = github:musnix/musnix;
-
-    # Easy access to development environments.
     # devshell.url = "github:numtide/devshell";
+    musnix.url = github:musnix/musnix;
 
     flake-compat = {
       url = github:edolstra/flake-compat;
@@ -27,7 +23,6 @@
     };
 
     emacs-overlay.url = "github:nix-community/emacs-overlay/2191e9676590a1220683cceabaf9bf07da145a0c";
-
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
   };
@@ -54,15 +49,14 @@
       system = "x86_64-linux";
       modules = [
         {networking.hostName = "${hosts}";}
+        ./hosts/yoga/hardware-configuration.nix
+        nixos-hardware.nixosModules.common-pc-laptop-ssd
+        nixos-hardware.nixosModules.common-gpu-amd
 
         ./modules/base.nix
         ./modules/network.nix
         ./modules/nixconfig.nix
-
-        nixos-hardware.nixosModules.common-pc-laptop-ssd
-        nixos-hardware.nixosModules.common-gpu-amd
-        ./hosts/yoga/hardware-configuration.nix
-
+        # =====================
         ./modules/fonts.nix
         ./modules/virtual.nix
         ./modules/user.nix

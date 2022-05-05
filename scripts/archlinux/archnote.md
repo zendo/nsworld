@@ -1,12 +1,13 @@
 # Network
 
-dhcpcd  有线
+- dhcpcd  有线
 
 ping www.baidu.com
 
-无线  iwctl
+- 无线  iwctl
 
 station wlan0 get-networks
+
 station wlan0 connect SSID
 
 # Installtion
