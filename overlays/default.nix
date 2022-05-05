@@ -59,54 +59,20 @@ final: prev: {
         cp -r $out/usr/share $out/share '';
     });
 
-  # sddm =
-  #   prev.sddm.overrideAttrs
-  #   (oldAttrs: {
-  #     src = prev.fetchFromGitHub {
-  #       owner = "sddm";
-  #       repo = "sddm";
-  #       rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
-  #       sha256 = "1s6icb5r1n6grfs137gdzfrcvwsb3hvl7ib2zh6931x8pkl1qvxa";
-  #     };
-  #   });
-
-  #   plasma5Packages = prev.plasma5Packages.overrideScope' (prev: final: {
-  #     libsForQt5.sddm = prev.libsForQt5.sddm.overrideAttrs
-  #   (oldAttrs: {
-  #     src = prev.fetchFromGitHub {
-  #       owner = "sddm";
-  #       repo = "sddm";
-  #       rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
-  #       sha256 = "1s6icb5r1n6grfs137gdzfrcvwsb3hvl7ib2zh6931x8pkl1qvxa";
-  #     };
-  #   });
-  # });
-
-  # sddm = prev.callPackage ./sddm {};
-
-  # plasma5Packages = prev.plasma5Packages.overrideScope' (
-  #   finalx: prevx: {
-  #     plasma5 = prevx.plasma5.overrideScope' (
-  #       finaly: prevy: {
-  #         sddm =
-  #           prevy.sddm.overrideAttrs
-  #           (oldAttrs: {
-  #             src = prev.fetchFromGitHub {
-  #               owner = "sddm";
-  #               repo = "sddm";
-  #               rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
-  #               sha256 = "1s6icb5r1n6grfs137gdzfrcvwsb3hvl7ib2zh6931x8pkl1qvxa";
-  #             };
-  #           });
-  #       }
-  #     );
-  #   }
-  # );
-
-  # need test
-  # plasma5Packages = super.plasma5Packages.overrideScope' (self: super: {
-  #   ...
-  # });
+  # sddm-git
+  libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
+    sddm =
+      prevy.sddm.overrideAttrs
+      (oldAttrs: {
+        src = prev.fetchFromGitHub {
+          owner = "sddm";
+          repo = "sddm";
+          rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
+          sha256 = "sha256-FfbYQrHndU7rtI8CKK7wtn3pdufBSiXUgefozCja4Do=";
+        };
+        patches = [];
+      });
+  });
 
   # mutter hover bug
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {

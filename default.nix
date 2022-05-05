@@ -22,3 +22,25 @@ in {
   lib = flake.inputs.nixpkgs.lib;
   pkgs = flake.inputs.nixpkgs.legacyPackages.${system};
 }
+
+/*
+    # Executed by `nix flake check`
+    checks."<system>"."<attr>" = derivation;
+
+    # Executed by `nix build .#<name>`
+    packages."<system>"."<attr>" = derivation;
+
+    # Executed by `nix build .`
+    defaultPackage."<system>" = derivation;
+
+    # the derivation that is prepared when running `nix develop`
+    # defaults to defaultPackage."<system>"
+    devShell."<system>" = derivation;
+
+    # Executed by `nix run .#<name>
+    apps."<system>"."<attr>" = {
+      type = "app";
+      program = "<store-path>";
+    };
+    defaultApp."<system>" = { type = "app"; program = "..."; };
+*/

@@ -5,7 +5,6 @@
     l = "exa -l --icons";
     "ls." = "ls -d .*";
     "la." = "ls -d .*";
-    cp = "rsync -ahv --progress";
     rm = "trash-put";
     rm-list = "trash-list";
     rm-empty = "trash-empty";

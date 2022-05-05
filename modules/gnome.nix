@@ -67,6 +67,7 @@
           sha256 = "sha256-KyzJYI1X0nd2r6Sl+W7n35hQg1TXFkyonskhTzmmvW0=";
         };
       }))
+    gnomeExtensions.dash2dock-lite
     gnomeExtensions.dash-to-panel
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.proxy-switcher
