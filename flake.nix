@@ -1,9 +1,8 @@
 {
-  description = "Zendo NixOS world";
+  description = "Hello world";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
@@ -22,9 +21,6 @@
     # Easy access to development environments.
     # devshell.url = "github:numtide/devshell";
 
-    # flake-utils.url = "github:numtide/flake-utils";
-    # utils.url = github:gytis-ivaskevicius/flake-utils-plus;
-
     flake-compat = {
       url = github:edolstra/flake-compat;
       flake = false;
@@ -39,30 +35,29 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     local-nixpkgs,
     nixos-hardware,
     home-manager,
-    # utils,
     nur,
     musnix,
     emacs-overlay,
     ...
   }: let
+    hosts = "yoga";
+    hosts-2 = "svp";
     username = "iab";
-    system = "x86_64-linux";
   in {
     overlay = import ./overlays;
-    # overlay = final: prev: {import ./overlays};
 
-    nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs username;};
-      inherit system;
+    nixosConfigurations.${hosts} = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs username hosts;};
+      system = "x86_64-linux";
       modules = [
+        {networking.hostName = "${hosts}";}
+
         ./modules/base.nix
         ./modules/network.nix
         ./modules/nixconfig.nix
-        ./overlays/v2raya/v2raya.nix
 
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
@@ -84,6 +79,7 @@
             emacs-overlay.overlay
           ];
         }
+        ./overlays/v2raya/v2raya.nix
 
         musnix.nixosModules.musnix
         {musnix.enable = true;}
@@ -106,6 +102,10 @@
           ];
         }
       ];
+    };
+
+    nixosConfigurations.${hosts-2} = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs username hosts-2;};
     };
   };
 }

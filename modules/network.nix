@@ -4,7 +4,6 @@
   ...
 }: {
   networking = {
-    hostName = "yoga";
     useDHCP = false;
     networkmanager.enable = true;
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.

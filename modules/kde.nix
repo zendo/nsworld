@@ -15,7 +15,6 @@
     # sddm.enable = true; # wayland bug
     lightdm.enable = true;
     defaultSession = "plasmawayland";
-    autoLogin.user = "iab";
   };
 
   services.xserver.excludePackages = [

@@ -9,7 +9,6 @@
   services.xserver.displayManager = {
     gdm.enable = true;
     defaultSession = "gnome";
-    autoLogin.user = "iab";
   };
 
   # For systray icons
