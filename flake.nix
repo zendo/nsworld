@@ -60,8 +60,8 @@
         ./modules/fonts.nix
         ./modules/virtual.nix
         ./modules/user.nix
-        # ./modules/gnome.nix
-        ./modules/kde.nix
+        ./modules/gnome.nix
+        # ./modules/kde.nix
 
         {
           nixpkgs.overlays = [
@@ -92,7 +92,7 @@
             ######## wsl #########
             ./home-manager/gui.nix
             ./home-manager/editor.nix
-            # ./home-manager/gtk.nix
+            ./home-manager/gtk.nix
           ];
         }
       ];

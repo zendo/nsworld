@@ -4,7 +4,7 @@
   ...
 }: {
   # fix tiny cursor at qt-apps
-  xsession.pointerCursor = {
+  home.pointerCursor = {
     name = "Vanilla-DMZ-AA";
     package = pkgs.vanilla-dmz;
     size = 128;

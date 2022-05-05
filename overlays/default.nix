@@ -103,9 +103,18 @@ final: prev: {
   #   }
   # );
 
-  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-  #   mutter = gprev.mutter.overrideAttrs (attrs: {
-  #     separateDebugInfo = true;
-  #   });
+  # need test
+  # plasma5Packages = super.plasma5Packages.overrideScope' (self: super: {
+  #   ...
   # });
+
+  # mutter hover bug
+  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+    mutter = gprev.mutter.overrideAttrs (oldAttrs: {
+      src = prev.fetchurl {
+        url = "https://gitlab.gnome.org/GNOME/mutter/-/archive/main/mutter-main.tar.gz";
+        sha256 = "sha256-4YUpCQn+B7qeUOY9PF+asIfv7orGlbbFmLfZcbphap8=";
+      };
+    });
+  });
 }
