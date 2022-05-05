@@ -49,13 +49,14 @@
     emacs-overlay,
     ...
   }: let
-    system = "x86_64-linux";
     username = "iab";
+    system = "x86_64-linux";
   in {
     overlay = import ./overlays;
+    # overlay = final: prev: {import ./overlays};
 
     nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs username;};
       inherit system;
       modules = [
         ./modules/base.nix
