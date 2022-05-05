@@ -23,7 +23,7 @@
     # devshell.url = "github:numtide/devshell";
 
     # flake-utils.url = "github:numtide/flake-utils";
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    # utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
     flake-compat = {
       url = github:edolstra/flake-compat;
@@ -43,7 +43,7 @@
     local-nixpkgs,
     nixos-hardware,
     home-manager,
-    utils,
+    # utils,
     nur,
     musnix,
     emacs-overlay,
@@ -64,40 +64,7 @@
         ./modules/nixconfig.nix
         ./overlays/v2raya/v2raya.nix
 
-<<<<<<< HEAD
-      overlay = import ./overlays;
-
-      # Overlays which are applied to all channels.
-      sharedOverlays = [
-        # (final: prev: {
-        #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-        # })
-        (final: prev: {
-          local = local-nixpkgs.legacyPackages.${prev.system};
-        })
-        self.overlay
-        nur.overlay
-        emacs-overlay.overlay
-      ];
-
-      hostDefaults = {
-        system = "x86_64-linux";
-        # channelName = "nixpkgs-unstable";
-        # Extra arguments to be passed to all modules. Merged with host's extraArgs.
-        # extraArgs = { inherit utils inputs; foo = "foo"; };
-        modules = [
-          ./modules/base.nix
-          ./modules/network.nix
-          ./modules/nixconfig.nix
-          ./overlays/v2raya/v2raya.nix
-        ];
-      };
-
-      hosts.yoga.modules = [
-        nixos-hardware.nixosModules.common-pc-laptop-ssd # fstrim
-=======
         nixos-hardware.nixosModules.common-pc-laptop-ssd
->>>>>>> 603923e (switch to bare flake)
         nixos-hardware.nixosModules.common-gpu-amd
         ./hosts/yoga/hardware-configuration.nix
 
