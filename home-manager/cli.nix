@@ -9,6 +9,7 @@
 
     # CLI
     unp
+    unzip
     unrar
     btop
     ctop # containers monitor
