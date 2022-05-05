@@ -14,7 +14,6 @@
     # newaita-icon-theme
     # go-translation
     # dippi
-    paper
 
     gitg
     v2ray

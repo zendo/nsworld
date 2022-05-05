@@ -46,10 +46,8 @@ final: prev: {
   netease-cloud-music = prev.callPackage ./netease-cloud-music {};
 
   # gtk
-  paper = prev.callPackage ./paper {};
   dippi = prev.callPackage ./dippi {};
   tuner = prev.callPackage ./tuner {};
-  notes = prev.callPackage ./notes {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
 
   # override
