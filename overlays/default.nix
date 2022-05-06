@@ -1,25 +1,8 @@
 final: prev: {
   /*
-   (gnomeExtensions.dash-to-dock.overrideAttrs
-      (oldAttrs: rec {
-        src = fetchFromGitLab {
-          owner = "kalilinux";
-          repo = "packages/gnome-shell-extension-dashtodock";
-          rev = "cdbcaaff36162154689d3d40480e5ef20c140537";
-          sha256 = "sha256-KyzJYI1X0nd2r6Sl+W7n35hQg1TXFkyonskhTzmmvW0=";
-        };
-      }))
-
-       (git-cola.overrideAttrs #
-      (oldAttrs: {
-        postFixup = ''
-        mkdir -p $out/share/icons/hicolor
-        cp -r $out/share/git-cola/icons/* $out/share/icons/hicolor/ '';
-        }))
-
-    (pkgs.google-chrome.override {
-       commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-    })
+   (pkgs.google-chrome.override {
+      commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+   })
    */
 
   # scripts
@@ -50,29 +33,14 @@ final: prev: {
   tuner = prev.callPackage ./tuner {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
 
-  # override
+  # Override
+  # fix .desktop missing
   wl-color-picker =
-    prev.wl-color-picker.overrideAttrs # lack .desktop
-
+    prev.wl-color-picker.overrideAttrs
     (oldAttrs: {
       postFixup = ''
         cp -r $out/usr/share $out/share '';
     });
-
-  # sddm-git
-  libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
-    sddm =
-      prevy.sddm.overrideAttrs
-      (oldAttrs: {
-        src = prev.fetchFromGitHub {
-          owner = "sddm";
-          repo = "sddm";
-          rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
-          sha256 = "sha256-FfbYQrHndU7rtI8CKK7wtn3pdufBSiXUgefozCja4Do=";
-        };
-        patches = [];
-      });
-  });
 
   # mutter hover bug
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {
@@ -83,4 +51,19 @@ final: prev: {
       };
     });
   });
+
+  # sddm-git
+  # libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
+  #   sddm =
+  #     prevy.sddm.overrideAttrs
+  #     (oldAttrs: {
+  #       src = prev.fetchFromGitHub {
+  #         owner = "sddm";
+  #         repo = "sddm";
+  #         rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
+  #         sha256 = "sha256-FfbYQrHndU7rtI8CKK7wtn3pdufBSiXUgefozCja4Do=";
+  #       };
+  #       patches = [];
+  #     });
+  # });
 }

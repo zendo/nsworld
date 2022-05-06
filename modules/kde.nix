@@ -12,7 +12,7 @@
   };
 
   services.xserver.displayManager = {
-    # sddm.enable = true; # wayland bug
+    # sddm.enable = true; # wayland autologin bug
     lightdm.enable = true;
     defaultSession = "plasmawayland";
   };
