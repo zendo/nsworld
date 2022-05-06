@@ -38,7 +38,7 @@
     shortwave
     # easyeffects
     # shutter
-    tdesktop
+    # tdesktop
     fractal
     meld
     deja-dup

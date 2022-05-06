@@ -95,6 +95,7 @@
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file
    "C-<SPC>" #'project-find-file
+   "C-j" #'dired-jump
    "," #'consult-buffer
    "." #'find-file
    "/" #'consult-ripgrep

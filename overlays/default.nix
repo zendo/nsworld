@@ -47,7 +47,7 @@ final: prev: {
     mutter = gprev.mutter.overrideAttrs (oldAttrs: {
       src = prev.fetchurl {
         url = "https://gitlab.gnome.org/GNOME/mutter/-/archive/main/mutter-main.tar.gz";
-        sha256 = "sha256-4YUpCQn+B7qeUOY9PF+asIfv7orGlbbFmLfZcbphap8=";
+        sha256 = "sha256-ssETPYPsCcvPxqGU0UrI6t4uvam7zmFi/qV63N7TS5c=";
       };
     });
   });

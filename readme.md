@@ -56,7 +56,7 @@ curl -s https://api.github.com/repos/snoutbug/mmcklauncher/releases/latest | gre
 plasmapkg2 --install com.github.SnoutBug.mmckLauncher.tar.gz
 
 # RIME
-curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" Plus Below
+curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" ⤵
 bash -s -- :preset
 bash -s -- rime-install BlindingDark/rime-easy-en:customize:schema=luna_pinyin
 
