@@ -1,0 +1,3 @@
+[submodule "emacs/doom/modules/editor/meow"]
+	path = emacs/doom/modules/editor/meow
+	url = https://github.com/meow-edit/doom-meow

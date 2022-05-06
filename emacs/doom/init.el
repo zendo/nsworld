@@ -46,7 +46,7 @@
 
        :editor
        ;; (evil +everywhere); come to the dark side, we have cookies
-       ;; (meow +qwerty +override +keypad)
+       (meow +qwerty +override +keypad)
        ;; file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        (format +onsave)  ; automated prettiness
