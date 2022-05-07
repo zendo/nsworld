@@ -52,13 +52,13 @@
         "type": "github"
       }
     },
-    "local-nixpkgs": {
+    "local": {
       "locked": {
-        "lastModified": 1651799769,
-        "narHash": "sha256-TUl/3Mf7z6YgBcqEytPK6xe9HerQZYHJdXUtVT/3ckc=",
+        "lastModified": 1651923921,
+        "narHash": "sha256-ai4x2TeHKMJYM3i2ldn0v57TbcK4GDwXeaMNPQhn09U=",
         "ref": "master",
-        "rev": "e6b94ad07e8244685d85ff3b2a8e23435f577daa",
-        "revCount": 375347,
+        "rev": "38be21ac6e8400c2fba00cd63af8c5d2b89eb5fd",
+        "revCount": 375676,
         "type": "git",
         "url": "file:///home/iab/devel/nixpkgs"
       },
@@ -135,11 +135,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1651887110,
-        "narHash": "sha256-AMQ0A5Osq647zEHWb+GZEIYZeNrZm55kY24uVOqSTzg=",
+        "lastModified": 1651915527,
+        "narHash": "sha256-hsbk0qcI/3/VwTV+G/ffAfg0YGZoPZwViM2TSHK4UKc=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c7a43bc69e52a636e76ba3d378695c1bd4f0bbbd",
+        "rev": "c8debd303e1e770ae9082f9beb0d039f7e989c8f",
         "type": "github"
       },
       "original": {
@@ -153,7 +153,7 @@
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
-        "local-nixpkgs": "local-nixpkgs",
+        "local": "local",
         "musnix": "musnix",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",

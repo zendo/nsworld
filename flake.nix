@@ -4,52 +4,49 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
-    local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
-
-    nixos-hardware.url = github:NixOS/nixos-hardware/master;
+    local.url = "git+file:///home/iab/devel/nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # agenix.url = github:ryantm/agenix;
-    # sops-nix.url = github:Mic92/sops-nix;
-    # devshell.url = "github:numtide/devshell";
-    musnix.url = github:musnix/musnix;
-
     flake-compat = {
       url = github:edolstra/flake-compat;
       flake = false;
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/2191e9676590a1220683cceabaf9bf07da145a0c";
+    # agenix.url = github:ryantm/agenix;
+    # sops-nix.url = github:Mic92/sops-nix;
+    # devshell.url = "github:numtide/devshell";
+    musnix.url = github:musnix/musnix;
+    nixos-hardware.url = github:NixOS/nixos-hardware/master;
+
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/2191e9676590a1220683cceabaf9bf07da145a0c";
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
-    local-nixpkgs,
-    nixos-hardware,
+    local,
     home-manager,
+    nixos-hardware,
     nur,
     musnix,
     emacs-overlay,
     ...
   }: let
-    hosts = "yoga";
-    hosts-2 = "svp";
     username = "iab";
   in {
     overlays.default = import ./overlays;
 
-    nixosConfigurations.${hosts} = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs username;};
       system = "x86_64-linux";
       modules = [
-        {networking.hostName = "${hosts}";}
+        {networking.hostName = "yoga";}
         ./hosts/yoga/hardware-configuration.nix
         nixos-hardware.nixosModules.common-pc-laptop-ssd
         nixos-hardware.nixosModules.common-gpu-amd
@@ -67,7 +64,7 @@
         {
           nixpkgs.overlays = [
             (final: prev: {
-              local = local-nixpkgs.legacyPackages.${prev.system};
+              local = local.legacyPackages.${prev.system};
             })
             self.overlays.default
             nur.overlay
@@ -99,8 +96,8 @@
       ];
     };
 
-    # nixosConfigurations.${hosts-2} = nixpkgs.lib.nixosSystem {
-    #   specialArgs = {inherit inputs username hosts-2;};
+    # nixosConfigurations.svp = nixpkgs.lib.nixosSystem {
+    #   specialArgs = {inherit inputs username;};
     #   system = "x86_64-linux";
     #   modules = [];
     # };
