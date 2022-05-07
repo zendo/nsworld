@@ -39,7 +39,7 @@
     # easyeffects
     # shutter
     # tdesktop
-    fractal
+    # fractal
     meld
     deja-dup
     # rclone

@@ -23,24 +23,17 @@ in {
   pkgs = flake.inputs.nixpkgs.legacyPackages.${system};
 }
 
-/*
-    # Executed by `nix flake check`
-    checks."<system>"."<attr>" = derivation;
+# {
+#   name ? (with builtins; head (split "\n" (readFile /etc/hostname))),
+#   pwd ? builtins.getEnv "PWD",
+#   flake ? builtins.getFlake pwd,
+#   self ? flake.outputs.nixosConfigurations."${name}",
+#   ...
+# }@args:
 
-    # Executed by `nix build .#<name>`
-    packages."<system>"."<attr>" = derivation;
-
-    # Executed by `nix build .`
-    defaultPackage."<system>" = derivation;
-
-    # the derivation that is prepared when running `nix develop`
-    # defaults to defaultPackage."<system>"
-    devShell."<system>" = derivation;
-
-    # Executed by `nix run .#<name>
-    apps."<system>"."<attr>" = {
-      type = "app";
-      program = "<store-path>";
-    };
-    defaultApp."<system>" = { type = "app"; program = "..."; };
-*/
+# (args // {
+#   inherit self args flake;
+#   inherit (flake) inputs outputs;
+#   inherit (self) config options pkgs;
+#   inherit (self.pkgs) lib;
+# })

@@ -2,7 +2,7 @@
   description = "Hello world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
     local-nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
