@@ -72,8 +72,6 @@
   services.tor.tsocks.enable = true;
   services.tor.tsocks.server = "127.0.0.1:20170";
 
-  # services.v2raya.enable = true;
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 

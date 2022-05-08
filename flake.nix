@@ -39,61 +39,71 @@
     ...
   }: let
     username = "iab";
+
+    commonFeatures = [
+      ./modules/base.nix
+      ./modules/network.nix
+      ./modules/nixconfig.nix
+    ];
+
+    overlayFeatures = [
+      {
+        nixpkgs.overlays = [
+          (final: prev: {
+            local = local.legacyPackages.${prev.system};
+          })
+          self.overlays.default
+          nur.overlay
+          emacs-overlay.overlay
+        ];
+      }
+    ];
   in {
     overlays.default = import ./overlays;
 
     nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs username;};
       system = "x86_64-linux";
-      modules = [
-        {networking.hostName = "yoga";}
-        ./hosts/yoga/hardware-configuration.nix
-        nixos-hardware.nixosModules.common-pc-laptop-ssd
-        nixos-hardware.nixosModules.common-gpu-amd
+      modules =
+        commonFeatures
+        ++ overlayFeatures
+        ++ [
+          {networking.hostName = "yoga";}
 
-        ./modules/base.nix
-        ./modules/network.nix
-        ./modules/nixconfig.nix
-        # =====================
-        ./modules/fonts.nix
-        ./modules/virtual.nix
-        ./modules/user.nix
-        ./modules/gnome.nix
-        # ./modules/kde.nix
+          nixos-hardware.nixosModules.common-pc-laptop-ssd
+          nixos-hardware.nixosModules.common-gpu-amd
+          ./hosts/yoga/hardware-configuration.nix
 
-        {
-          nixpkgs.overlays = [
-            (final: prev: {
-              local = local.legacyPackages.${prev.system};
-            })
-            self.overlays.default
-            nur.overlay
-            emacs-overlay.overlay
-          ];
-        }
-        ./overlays/v2raya/v2raya.nix
+          ./modules/fonts.nix
+          ./modules/user.nix
+          ./modules/gnome.nix
+          # ./modules/kde.nix
+          ./modules/virtual.nix
 
-        musnix.nixosModules.musnix
-        {musnix.enable = true;}
+          ./overlays/v2raya/v2raya.nix
+          # {services.v2raya.enable = true;}
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          # home-manager.extraSpecialArgs = { inherit self inputs; };
-          home-manager.users.${username}.imports = [
-            ./home-manager/git.nix
-            ./home-manager/cli.nix
-            ./home-manager/zsh.nix
-            ./home-manager/xdg.nix
-            ./home-manager/alias.nix
-            ######## wsl #########
-            ./home-manager/gui.nix
-            ./home-manager/editor.nix
-            ./home-manager/gtk.nix
-          ];
-        }
-      ];
+          musnix.nixosModules.musnix
+          {musnix.enable = true;}
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            # home-manager.extraSpecialArgs = { inherit self inputs; };
+            home-manager.users.${username}.imports = [
+              ./home-manager/git.nix
+              ./home-manager/cli.nix
+              ./home-manager/zsh.nix
+              ./home-manager/xdg.nix
+              ./home-manager/alias.nix
+              ######## wsl #########
+              ./home-manager/gui.nix
+              ./home-manager/editor.nix
+              ./home-manager/gtk.nix
+            ];
+          }
+        ];
     };
 
     # nixosConfigurations.svp = nixpkgs.lib.nixosSystem {
