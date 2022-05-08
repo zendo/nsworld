@@ -74,3 +74,4 @@ curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | 
 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+![Size](https://img.shields.io/github/repo-size/zendo/nsworld?color=red&label=size&style=flat-square)
