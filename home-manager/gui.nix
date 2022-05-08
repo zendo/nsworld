@@ -40,6 +40,7 @@
     # shutter
     # tdesktop
     # fractal
+    # discord
     meld
     deja-dup
     # rclone
