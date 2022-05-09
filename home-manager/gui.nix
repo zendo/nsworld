@@ -77,13 +77,6 @@
     # wdisplays # wlr
   ];
 
-  xdg.configFile = {
-      "mpv".source = ../dotfiles/mpv;
-      "foot/foot.ini".source = ../dotfiles/foot.ini;
-      "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
-      "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
-  };
-
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;

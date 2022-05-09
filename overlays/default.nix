@@ -11,26 +11,21 @@ final: prev: {
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
   misans = prev.callPackage ./misans {};
-  newaita-icon-theme = prev.callPackage ./newaita-icon-theme {};
 
   # rust
   zee = prev.callPackage ./zee {};
-  oaf = prev.callPackage ./oaf {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};
-  go-translation = prev.callPackage ./go-translation {};
 
   # python
   frog = prev.callPackage ./frog {};
 
   # nodejs
   clash-verge = prev.callPackage ./clash-verge {};
-  netease-cloud-music = prev.callPackage ./netease-cloud-music {};
 
   # gtk
   dippi = prev.callPackage ./dippi {};
-  tuner = prev.callPackage ./tuner {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
 
   # Override
