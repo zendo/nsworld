@@ -15,6 +15,6 @@ this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 if [[ ! -e "$HOME/.emacs.d" ]]; then
     mkdir "$HOME/.emacs.d"
 fi
-ln -sfTv "$this_dir"/lisp "$HOME"/.emacs.d/lisp
+ln -sfTv "$this_dir"/elisp "$HOME"/.emacs.d/elisp
 ln -sfv "$this_dir"/init.el "$HOME"/.emacs.d/init.el
 ln -sfv "$this_dir"/early-init.el "$HOME"/.emacs.d/early-init.el

@@ -6,9 +6,9 @@
 (setq auto-mode-case-fold nil)
 
 ;; Load Path
-;; (defvar my-dir (concat user-emacs-directory "lisp"))
+;; (defvar my-dir (concat user-emacs-directory "elisp"))
 ;; (add-to-list 'load-path my-dir)
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
 ;; Backup files
 (defconst my-backup (expand-file-name "my-backup" user-emacs-directory))
