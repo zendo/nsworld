@@ -23,9 +23,6 @@
     ];
   };
   # home.file.".doom.d".source = ../emacs/doom;
-  # centaur
-  # home.file.".emacs.d/custom.el".source = ../emacs/centaur/custom.el;
-  # home.file.".emacs.d/custom-post.el".source = ../emacs/centaur/custom-post.el;
 
   programs.neovim = {
     enable = true;

@@ -3,7 +3,6 @@
     cat = "bat -p";
     ps = "ps -ef";
     l = "exa -l --icons";
-    "ls." = "ls -d .*";
     "la." = "ls -d .*";
     rm = "trash-put";
     rm-list = "trash-list";

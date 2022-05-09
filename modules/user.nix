@@ -5,7 +5,7 @@
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
-  services.xserver.displayManager.autoLogin.user = "${username}";
+  # services.xserver.displayManager.autoLogin.user = "${username}";
 
   users.users.${username} = {
     isNormalUser = true;
