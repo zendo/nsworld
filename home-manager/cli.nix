@@ -76,6 +76,7 @@
     nixos-generators
     nix-template
     nix-index
+    nix-tree
   ];
 
   programs.direnv = {
