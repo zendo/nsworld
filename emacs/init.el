@@ -33,9 +33,7 @@
 (require 'init-backup)
 (require 'init-dired)
 (require 'init-shell)
-;; (require 'init-ivy)
 (require 'init-vertico)
-;; (require 'init-meow)
 (require 'init-keybindings)
 
 (require 'lang-main)

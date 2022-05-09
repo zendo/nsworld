@@ -22,7 +22,6 @@ final: prev: {
   frog = prev.callPackage ./frog {};
 
   # nodejs
-  clash-verge = prev.callPackage ./clash-verge {};
 
   # gtk
   dippi = prev.callPackage ./dippi {};

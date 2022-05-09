@@ -11,6 +11,10 @@
 
 this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 
+if [[ ! -e "$HOME/.config/ibus/rime" ]]; then
+    mkdir "$HOME/.config/ibus/rime"
+fi
+
 ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom.yaml
 
 ln -sfv "$this_dir"/ibus_rime.yaml "$HOME"/.config/ibus/rime/ibus_rime.yaml

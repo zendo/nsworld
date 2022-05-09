@@ -11,7 +11,10 @@
 
 this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 
-# ln -sfv "$this_dir"/ibus_rime.yaml "$HOME"/.local/share/fcitx5/rime/fcitx_rime.yaml
+if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
+    mkdir "$HOME/.local/share/fcitx5/rime"
+fi
+
 ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.local/share/fcitx5/rime/default.custom.yaml
 ln -sfv "$this_dir"/luna_pinyin_simp.custom.yaml "$HOME"/.local/share/fcitx5/rime/luna_pinyin_simp.custom.yaml
 ln -sfv "$this_dir"/luna_pinyin_simp.extended.dict.yaml "$HOME"/.local/share/fcitx5/rime/luna_pinyin_simp.extended.dict.yaml
