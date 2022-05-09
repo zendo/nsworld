@@ -76,6 +76,7 @@
             nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/yoga/hardware-configuration.nix
 
+            ./modules/sound.nix
             ./modules/fonts.nix
             ./modules/gnome.nix
             # ./modules/kde.nix

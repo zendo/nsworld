@@ -16,8 +16,6 @@ in {
 
   zramSwap.enable = true;
 
-  services.btrfs.autoScrub.enable = mkIf enableBtrfs true;
-
   boot = {
     plymouth.enable = true;
     supportedFilesystems = ["ntfs"];
@@ -57,29 +55,13 @@ in {
     journald.extraConfig = ''
       SystemMaxUse=500M
     '';
+
+    btrfs.autoScrub.enable = mkIf enableBtrfs true;
   };
 
   # systemd.sleep.extraConfig = ''
   # HibernateDelaySec=10min
   # '';
-
-  #########################################################################
-  # Sounds
-  #########################################################################
-  # Pipewire
-  hardware.pulseaudio.enable = false; # false in pipewire
-  # This allows PipeWire to run with realtime privileges (i.e: less cracks)
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  # Bluetooth
-  hardware.bluetooth.enable = true;
 
   services.xserver = {
     libinput = {
