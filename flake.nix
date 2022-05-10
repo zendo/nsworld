@@ -60,6 +60,7 @@
   in {
     overlays.default = import ./overlays;
 
+    #############################################
     nixosConfigurations.yoga = let
       username = "iab";
     in
@@ -108,12 +109,32 @@
           ];
       };
 
-    # nixosConfigurations.svp = nixpkgs.lib.nixosSystem {
-    #   specialArgs = {inherit inputs username;};
-    #   system = "x86_64-linux";
-    #   modules = [];
-    # };
+    #############################################
+    nixosConfigurations.svp = let
+      username = "zendo";
+    in
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs username;};
+        system = "x86_64-linux";
+        modules =
+          commonFeatures
+          ++ overlayFeatures
+          ++ [
+            {networking.hostName = "svp";}
 
+            nixos-hardware.nixosModules.common-pc-laptop-ssd
+            nixos-hardware.nixosModules.common-cpu-intel
+            ./hosts/svp/hardware-configuration.nix
+
+            ./modules/sound.nix
+            ./modules/fonts.nix
+            ./modules/gnome.nix
+            # ./modules/kde.nix
+            ./modules/virtual.nix
+          ];
+      };
+
+    #############################################
     # nix build nixosConfigurations.vm.config.system.build.vm
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
