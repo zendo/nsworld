@@ -135,7 +135,7 @@
       };
 
     #############################################
-    # nix build nixosConfigurations.vm.config.system.build.vm
+    # nix build .#nixosConfigurations.vm.config.system.build.vm
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       system = "x86_64-linux";
@@ -145,7 +145,14 @@
           imports = [
             "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
             # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+            ./modules/base.nix
+            ./modules/network.nix
+            ./modules/nixconfig.nix
+            ./modules/sound.nix
+            ./modules/gnome.nix
           ];
+
+          services.xserver.displayManager.autoLogin.user = "user";
 
           virtualisation = {
             memorySize = 1024 * 3;

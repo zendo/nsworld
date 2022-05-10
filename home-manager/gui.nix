@@ -9,10 +9,7 @@
     misans
     # zee
     # frog
-    # clash-verge
     # app-icon-preview
-    # newaita-icon-theme
-    # go-translation
     # dippi
 
     gitg
