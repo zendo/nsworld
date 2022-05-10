@@ -52,8 +52,6 @@ dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
 # KDE
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
-curl -s https://api.github.com/repos/snoutbug/mmcklauncher/releases/latest | grep "com.github.SnoutBug.mmckLauncher.tar.gz" | cut -d : -f 2,3 | tr -d \" | wget -qi -
-plasmapkg2 --install com.github.SnoutBug.mmckLauncher.tar.gz
 
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" ⤵

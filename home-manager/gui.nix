@@ -37,7 +37,7 @@
     # shutter
     tdesktop
     # fractal
-    # discord
+    discord
     meld
     deja-dup
     # rclone
@@ -47,6 +47,7 @@
     # qalculate-gtk # scientific calculator
     # bottles # wine manager
     # yuzu
+    gnome.gnome-boxes
 
     # OFFICE
     # libreoffice-fresh

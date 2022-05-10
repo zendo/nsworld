@@ -53,7 +53,6 @@
     gnome.dconf-editor
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder
-    gnome.gnome-boxes
     # gnome-builder
     # gnome-firmware-updater
 

@@ -42,6 +42,7 @@
     libsForQt5.kate
     libsForQt5.kcalc
     libsForQt5.kde-gtk-config
+    libsForQt5.kmousetool
     # libsForQt5.kweather
     # libsForQt5.kgamma5          # not work
 

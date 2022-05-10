@@ -79,8 +79,8 @@
 
             ./modules/sound.nix
             ./modules/fonts.nix
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+            # ./modules/gnome.nix
+            ./modules/kde.nix
             ./modules/virtual.nix
 
             ./overlays/v2raya/v2raya.nix
@@ -103,7 +103,7 @@
                 ######## wsl #########
                 ./home-manager/gui.nix
                 ./home-manager/editor.nix
-                ./home-manager/gtk.nix
+                # ./home-manager/gtk.nix
               ];
             }
           ];
