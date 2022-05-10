@@ -38,7 +38,7 @@
     shortwave
     # easyeffects
     # shutter
-    # tdesktop
+    tdesktop
     # fractal
     # discord
     meld
@@ -71,6 +71,7 @@
     cpufrequtils
     pciutils
     edid-decode
+
     # libinput
     wallutils # lsmon getdpi wayinfo
     wayland-utils
