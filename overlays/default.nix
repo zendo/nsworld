@@ -25,6 +25,7 @@ final: prev: {
 
   # gtk
   dippi = prev.callPackage ./dippi {};
+  paper = prev.callPackage ./paper {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
 
   # Override

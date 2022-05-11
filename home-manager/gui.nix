@@ -11,6 +11,7 @@
     # frog
     # app-icon-preview
     # dippi
+    # paper
 
     gitg
     v2ray
