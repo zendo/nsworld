@@ -77,9 +77,9 @@
 
             ./modules/sound.nix
             ./modules/fonts.nix
+            ./modules/virtual.nix
             # ./modules/gnome.nix
             ./modules/kde.nix
-            ./modules/virtual.nix
 
             ./overlays/v2raya/v2raya.nix
             # {services.v2raya.enable = true;}
