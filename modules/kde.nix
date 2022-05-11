@@ -37,6 +37,11 @@
     pinentryFlavor = "qt";
   };
 
+  environment.variables = {
+    # wayland ozone support
+    NIXOS_OZONE_WL = "1";
+  };
+
   environment.systemPackages = with pkgs; [
     libsForQt5.ark
     libsForQt5.kate

@@ -48,18 +48,16 @@
     overlayFeatures = [
       {
         nixpkgs.overlays = [
+          nur.overlay
+          emacs-overlay.overlay
+          (import ./overlays)
           (final: prev: {
             local = local.legacyPackages.${prev.system};
           })
-          self.overlays.default
-          nur.overlay
-          emacs-overlay.overlay
         ];
       }
     ];
   in {
-    overlays.default = import ./overlays;
-
     #############################################
     nixosConfigurations.yoga = let
       username = "iab";

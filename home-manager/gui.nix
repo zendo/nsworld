@@ -38,7 +38,7 @@
     # shutter
     tdesktop
     # fractal
-    discord
+    # discord
     meld
     deja-dup
     # rclone

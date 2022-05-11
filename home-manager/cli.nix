@@ -35,6 +35,7 @@
     aspellDicts.en
     asciinema # record the terminal
     distrobox
+    graphviz
     pandoc
 
     # Develop

@@ -20,8 +20,6 @@ in {
     plymouth.enable = true;
     supportedFilesystems = ["ntfs"];
     kernelPackages = pkgs.linuxPackages_xanmod_latest; # latest zen xanmod_latest
-    # kernelParams = [ "mem_sleep_default=deep" ]; # s3 sleep
-    # initrd.extraFiles = {  };
     tmpOnTmpfs = true;
     cleanTmpDir = true;
   };
@@ -47,10 +45,6 @@ in {
   services = {
     fwupd.enable = true;
     acpid.enable = true;
-    # logind.lidSwitch = "suspend-then-hibernate";
-    # logind.extraConfig = ''
-    # HandlePowerKey=ignore
-    # '';
 
     journald.extraConfig = ''
       SystemMaxUse=500M
@@ -59,17 +53,6 @@ in {
     btrfs.autoScrub.enable = mkIf enableBtrfs true;
   };
 
-  # systemd.sleep.extraConfig = ''
-  # HibernateDelaySec=10min
-  # '';
-
-  services.xserver = {
-    libinput = {
-      # enable = true; # enabled default by desktopManager
-    };
-
-    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
-  };
 
   #########################################################################
   # Essential Apps
@@ -94,8 +77,6 @@ in {
   ];
 
   environment.variables = {
-    # wayland ozone support
-    # NIXOS_OZONE_WL = "1";
   };
 
   # programs.nix-ld.enable = true;
