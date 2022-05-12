@@ -4,6 +4,12 @@
   inputs,
   ...
 }: {
+  nixpkgs.config = {
+    allowUnfree = true;
+    # allowUnsupportedSystem = true;
+    # allowBroken = true;
+  };
+
   nix.settings = {
     # keep-outputs = true
     # keep-derivations = true
@@ -50,11 +56,5 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
-  };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    # allowUnsupportedSystem = true;
-    # allowBroken = true;
   };
 }

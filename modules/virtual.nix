@@ -26,11 +26,11 @@
 
   # services.flatpak.enable = true;
 
+  # programs.steam.enable = true;
   # use NixOS libraries instead of Steam-provided
   # nixpkgs.config.packageOverrides = pkgs: {
   #   steam = pkgs.steam.override {
   #     nativeOnly = true;
   #   };
   # };
-  # programs.steam.enable = true;
 }
