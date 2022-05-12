@@ -3,29 +3,31 @@
   pkgs,
   ...
 }: {
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver = {
+    enable = true;
+    excludePackages = [
+      pkgs.xterm
+    ];
 
-  services.xserver.displayManager = {
-    gdm.enable = true;
-    defaultSession = "gnome";
+    desktopManager.gnome.enable = true;
+    displayManager = {
+      gdm.enable = true;
+      defaultSession = "gnome";
+    };
   };
 
-  # For systray icons
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
-
-  services.packagekit.enable = false;
-  services.gnome.tracker-miners.enable = false;
-  services.gnome.tracker.enable = false;
+  services = {
+    packagekit.enable = false;
+    gnome.tracker.enable = false;
+    gnome.tracker-miners.enable = false;
+    # For systray icons
+    udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  };
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
-
-  services.xserver.excludePackages = [
-    pkgs.xterm
-  ];
 
   environment.gnome.excludePackages = with pkgs; [
     gnome-photos

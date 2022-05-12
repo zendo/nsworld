@@ -3,39 +3,56 @@
   pkgs,
   ...
 }: {
-  services.xserver.enable = true;
-  services.xserver.desktopManager.plasma5 = {
+  services.xserver = {
     enable = true;
-    supportDDC = true;
-    # useQtScaling = true;
-    runUsingSystemd = true;
+    excludePackages = [
+      pkgs.xterm
+    ];
+
+    desktopManager.plasma5 = {
+      enable = true;
+      supportDDC = true;
+      # useQtScaling = true;
+      runUsingSystemd = true;
+    };
+    displayManager = {
+      # sddm.enable = true; # wayland autologin bug
+      lightdm.enable = true;
+      defaultSession = "plasmawayland";
+    };
   };
 
-  services.xserver.displayManager = {
-    # sddm.enable = true; # wayland autologin bug
-    lightdm.enable = true;
-    defaultSession = "plasmawayland";
+  services = {
+    colord.enable = true;
+    geoclue2.enable = true;
+
+    tlp = {
+      enable = true;
+      settings = {
+        cpu_scaling_governor_on_ac = "performance";
+        cpu_scaling_governor_on_bat = "powersave";
+        cpu_energy_perf_policy_on_ac = "balance_performance";
+        cpu_energy_perf_policy_on_bat = "power";
+
+        DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
+      };
+    };
   };
 
-  services.xserver.excludePackages = [
-    pkgs.xterm
-  ];
+  programs = {
+    kdeconnect.enable = true;
+    partition-manager.enable = true;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "qt";
+    };
+  };
 
   # services.gnome.gnome-keyring.enable = true;
   # security.pam.services.login.enableGnomeKeyring = true;
   # programs.seahorse.enable = true;
-
-  services.colord.enable = true;
-  services.geoclue2.enable = true;
-
-  programs.kdeconnect.enable = true;
-  programs.partition-manager.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "qt";
-  };
 
   environment.variables = {
     # wayland ozone support
@@ -65,18 +82,6 @@
     gparted
     kcolorchooser
   ];
-
-  services.tlp = {
-    enable = true;
-    settings = {
-      cpu_scaling_governor_on_ac = "performance";
-      cpu_scaling_governor_on_bat = "powersave";
-      cpu_energy_perf_policy_on_ac = "balance_performance";
-      cpu_energy_perf_policy_on_bat = "power";
-
-      DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
-    };
-  };
 
   i18n.inputMethod = {
     enabled = "fcitx5";
