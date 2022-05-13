@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  username,
   ...
 }: {
   services.xserver = {
@@ -9,13 +10,16 @@
       pkgs.xterm
     ];
 
-    desktopManager.gnome.enable = true;
     displayManager = {
       gdm.enable = true;
       defaultSession = "gnome";
+      autoLogin.user = "${username}";
     };
+
+    desktopManager.gnome.enable = true;
   };
 
+  #############################################
   services = {
     packagekit.enable = false;
     gnome.tracker.enable = false;

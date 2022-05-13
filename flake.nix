@@ -65,17 +65,16 @@
       username = "iab";
     in
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs username;};
         system = "x86_64-linux";
+        specialArgs = {inherit inputs username;};
         modules =
           commonFeatures
           ++ overlayFeatures
           ++ [
-            {networking.hostName = "yoga";}
-
             nixos-hardware.nixosModules.common-pc-laptop-ssd
             nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/yoga/hardware-configuration.nix
+            {networking.hostName = "yoga";}
 
             ./modules/sound.nix
             ./modules/fonts.nix
@@ -114,17 +113,16 @@
       username = "zendo";
     in
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs username;};
         system = "x86_64-linux";
+        specialArgs = {inherit inputs username;};
         modules =
           commonFeatures
           ++ overlayFeatures
           ++ [
-            {networking.hostName = "svp";}
-
             nixos-hardware.nixosModules.common-pc-laptop-ssd
             nixos-hardware.nixosModules.common-cpu-intel
             ./hosts/svp/hardware-configuration.nix
+            {networking.hostName = "svp";}
 
             ./modules/sound.nix
             ./modules/fonts.nix
@@ -137,8 +135,8 @@
     #############################################
     # nix build .#nixosConfigurations.vm.config.system.build.vm
     nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
       system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
       modules = [
         ({pkgs, ...}: {
           # disabledModules = ["services/desktops/pipewire/pipewire.nix"];

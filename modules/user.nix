@@ -5,8 +5,6 @@
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
-  services.xserver.displayManager.autoLogin.user = "${username}";
-
   users.users.${username} = {
     isNormalUser = true;
     # mkpasswd -m sha-512
