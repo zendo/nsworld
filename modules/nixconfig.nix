@@ -39,10 +39,17 @@
 
   nix = {
     # nix registry list
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-      p.flake = inputs.nixpkgs;
-    };
+    # registry = {
+    #   nixpkgs.flake = inputs.nixpkgs;
+    #   p.flake = inputs.nixpkgs;
+    # };
+    registry =
+      lib.mapAttrs' (
+        n: v:
+          lib.nameValuePair n {flake = v;}
+      )
+      inputs;
+
     # nix show-config | rg nix-path ## Needs reboot
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"
@@ -50,6 +57,7 @@
       "home-manager=${inputs.home-manager}"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
+
     gc = {
       automatic = true;
       # options = "--max-freed 10G";

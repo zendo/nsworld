@@ -37,6 +37,7 @@
     # easyeffects
     # shutter
     tdesktop
+    # nheko
     # fractal
     # discord
     meld
