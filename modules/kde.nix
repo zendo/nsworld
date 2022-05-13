@@ -9,16 +9,17 @@
       pkgs.xterm
     ];
 
+    displayManager = {
+      # sddm.enable = true; # wayland autologin bug
+      lightdm.enable = true;
+      defaultSession = "plasmawayland";
+    };
+
     desktopManager.plasma5 = {
       enable = true;
       supportDDC = true;
       # useQtScaling = true;
       runUsingSystemd = true;
-    };
-    displayManager = {
-      # sddm.enable = true; # wayland autologin bug
-      lightdm.enable = true;
-      defaultSession = "plasmawayland";
     };
   };
 

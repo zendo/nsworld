@@ -39,10 +39,6 @@
 
   nix = {
     # nix registry list
-    # registry = {
-    #   nixpkgs.flake = inputs.nixpkgs;
-    #   p.flake = inputs.nixpkgs;
-    # };
     registry =
       lib.mapAttrs' (
         n: v:

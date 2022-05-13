@@ -21,6 +21,7 @@
     # devshell.url = "github:numtide/devshell";
     musnix.url = github:musnix/musnix;
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
+    templates.url = github:NixOS/templates;
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
@@ -33,6 +34,7 @@
     local,
     home-manager,
     nixos-hardware,
+    templates,
     nur,
     musnix,
     emacs-overlay,
