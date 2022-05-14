@@ -2,7 +2,7 @@
   description = "Hello world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
     local.url = "git+file:///home/iab/devel/nixpkgs";
 
@@ -79,8 +79,8 @@
             ./modules/sound.nix
             ./modules/fonts.nix
             ./modules/virtual.nix
-            # ./modules/gnome.nix
-            ./modules/kde.nix
+            ./modules/gnome.nix
+            # ./modules/kde.nix
 
             ./overlays/v2raya/v2raya.nix
             # {services.v2raya.enable = true;}
@@ -102,7 +102,7 @@
                 ######## wsl #########
                 ./home-manager/gui.nix
                 ./home-manager/editor.nix
-                # ./home-manager/gtk.nix
+                ./home-manager/gtk.nix
               ];
             }
           ];

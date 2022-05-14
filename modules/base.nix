@@ -3,11 +3,9 @@
   pkgs,
   lib,
   ...
-}:
-with config.boot;
-with lib; let
-  btrfsInInitrd = any (fs: fs == "btrfs") initrd.supportedFilesystems;
-  btrfsInSystem = any (fs: fs == "btrfs") supportedFilesystems;
+}: let
+  btrfsInInitrd = lib.any (fs: fs == "btrfs") config.boot.initrd.supportedFilesystems;
+  btrfsInSystem = lib.any (fs: fs == "btrfs") config.boot.supportedFilesystems;
   enableBtrfs = btrfsInInitrd && btrfsInSystem;
 in {
   time.timeZone = "Asia/Shanghai";
@@ -50,9 +48,8 @@ in {
       SystemMaxUse=500M
     '';
 
-    btrfs.autoScrub.enable = mkIf enableBtrfs true;
+    btrfs.autoScrub.enable = lib.mkIf enableBtrfs true;
   };
-
 
   #########################################################################
   # Essential Apps

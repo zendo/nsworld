@@ -78,12 +78,13 @@
     gnomeExtensions.dash2dock-lite
     gnomeExtensions.dash-to-panel
     gnomeExtensions.night-theme-switcher
-    gnomeExtensions.proxy-switcher
     gnomeExtensions.gnome-clipboard
     gnomeExtensions.clipboard-history
     gnomeExtensions.espresso
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
+    gnomeExtensions.proxy-switcher
+    gnomeExtensions.gsconnect
     # gnomeExtensions.arcmenu
     # gnomeExtensions.logo-menu
     # gnomeExtensions.just-perfection
