@@ -49,7 +49,7 @@
     # qalculate-gtk # scientific calculator
     # bottles # wine manager
     # yuzu
-    gnome.gnome-boxes
+    # gnome.gnome-boxes
 
     # OFFICE
     # libreoffice-fresh
