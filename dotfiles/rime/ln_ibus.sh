@@ -11,14 +11,12 @@
 
 this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 
+# -e exists
 if [[ ! -e "$HOME/.config/ibus/rime" ]]; then
     mkdir "$HOME/.config/ibus/rime"
 fi
 
 ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom.yaml
-
 ln -sfv "$this_dir"/ibus_rime.yaml "$HOME"/.config/ibus/rime/ibus_rime.yaml
-
 ln -sfv "$this_dir"/luna_pinyin_simp.custom.yaml "$HOME"/.config/ibus/rime/luna_pinyin_simp.custom.yaml
-
 ln -sfv "$this_dir"/luna_pinyin_simp.extended.dict.yaml "$HOME"/.config/ibus/rime/luna_pinyin_simp.extended.dict.yaml

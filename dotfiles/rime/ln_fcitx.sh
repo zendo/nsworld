@@ -11,6 +11,7 @@
 
 this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 
+# -e exists
 if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
     mkdir "$HOME/.local/share/fcitx5/rime"
 fi

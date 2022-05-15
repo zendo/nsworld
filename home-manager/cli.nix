@@ -30,8 +30,7 @@
     imagemagick
     ydict
     translate-shell
-    # magic-wormhole # python
-    magic-wormhole-rs
+    magic-wormhole # python
     aspellDicts.en
     asciinema # record the terminal
     distrobox

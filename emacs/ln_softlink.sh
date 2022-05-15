@@ -11,7 +11,7 @@
 
 this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 
-# Emacs
+# -e exists
 if [[ ! -e "$HOME/.emacs.d" ]]; then
     mkdir "$HOME/.emacs.d"
 fi
