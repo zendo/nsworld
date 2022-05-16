@@ -23,6 +23,7 @@
       fira-code
       jetbrains-mono
     ];
+
     fontconfig = {
       defaultFonts = {
         monospace = ["Sarasa Mono SC" "DejaVu Sans Mono"];

@@ -57,6 +57,7 @@
 
     gnome.gnome-tweaks
     gnome.dconf-editor
+    gnome.gnome-nettool
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder
     # gnome-builder
@@ -68,11 +69,11 @@
     # gnomeExtensions.dash-to-dock
     (gnomeExtensions.dash-to-dock.overrideAttrs
       (oldAttrs: rec {
-        src = fetchFromGitLab {
-          owner = "kalilinux";
-          repo = "packages/gnome-shell-extension-dashtodock";
-          rev = "cdbcaaff36162154689d3d40480e5ef20c140537";
-          sha256 = "sha256-KyzJYI1X0nd2r6Sl+W7n35hQg1TXFkyonskhTzmmvW0=";
+        src = fetchFromGitHub {
+          owner = "micheleg";
+          repo = "dash-to-dock";
+          rev = "fc795c52b7f973eee065547c4d3eb92a6cbada4a";
+          sha256 = "sha256-Cds5Fc+rnvoy01GTZBS7qPh8UC9ekrNBOs+IEkDNkJw=";
         };
       }))
     gnomeExtensions.dash2dock-lite
