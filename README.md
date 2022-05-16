@@ -58,6 +58,8 @@ bash -s -- rime-install BlindingDark/rime-easy-en:customize:schema=luna_pinyin
 
 # Clover
 curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO
+curl -s https://api.github.com/repos/Mic92/nix-index-database/releases/latest | grep "browser_download_url.*linux" | cut -d '"' -f 4 | xargs -n 1 curl -LJO 
+mv ./index-x86_64-linux ~/.cache/nix-index/files
 ```
 
 # Nix Lang

@@ -36,6 +36,7 @@
     distrobox
     graphviz
     pandoc
+    paperoni # save html
 
     # Develop
     # gcc

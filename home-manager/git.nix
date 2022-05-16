@@ -19,8 +19,8 @@
     };
     extraConfig = {
       safe.directory = [
-        "/home/iab/.nsworld"
-        "/home/iab/devel/nixpkgs"
+        # "/home/iab/.nsworld"
+        # "/home/iab/devel/nixpkgs"
       ];
     };
   };

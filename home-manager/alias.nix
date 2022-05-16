@@ -25,6 +25,7 @@
     export https_proxy=http://127.0.0.1:20171";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
     gedit = "gnome-text-editor";
+    paperoni-single-html = "paperoni --export html --inline-images";
 
     nse = "nix search nixpkgs";
     nss = "f() { nix shell nixpkgs\#\$1 }; f";

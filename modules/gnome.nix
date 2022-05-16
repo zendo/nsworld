@@ -64,7 +64,7 @@
     # gnome-firmware-updater
 
     gnomeExtensions.appindicator
-    gnomeExtensions.tray-icons-reloaded
+    # gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.app-icons-taskbar
     # gnomeExtensions.dash-to-dock
     (gnomeExtensions.dash-to-dock.overrideAttrs
@@ -76,14 +76,13 @@
           sha256 = "sha256-Cds5Fc+rnvoy01GTZBS7qPh8UC9ekrNBOs+IEkDNkJw=";
         };
       }))
-    gnomeExtensions.dash2dock-lite
     gnomeExtensions.dash-to-panel
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.gnome-clipboard
     gnomeExtensions.clipboard-history
     gnomeExtensions.espresso
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.pop-shell
+    # gnomeExtensions.pop-shell
     gnomeExtensions.proxy-switcher
     gnomeExtensions.gsconnect
     # gnomeExtensions.arcmenu
