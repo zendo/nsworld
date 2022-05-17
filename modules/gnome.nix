@@ -24,7 +24,6 @@
     packagekit.enable = false;
     gnome.tracker.enable = false;
     gnome.tracker-miners.enable = false;
-    # For systray icons
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 

@@ -14,6 +14,7 @@ final: prev: {
 
   # rust
   zee = prev.callPackage ./zee {};
+  mprober = prev.callPackage ./mprober {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};

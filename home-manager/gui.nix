@@ -8,6 +8,7 @@
     harmonyos-sans
     misans
     # zee
+    # mprober
     # frog
     # app-icon-preview
     # dippi
@@ -38,7 +39,7 @@
     # shutter
     tdesktop
     # nheko
-    # fractal
+    fractal
     # discord
     meld
     deja-dup
