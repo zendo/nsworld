@@ -16,7 +16,6 @@
 (package! easy-kill)
 (package! smart-region)
 (package! avy-zap)
-(package! dirvish)
 (package! iedit)
 ;; (package! telega)
 (package! youdao-dictionary)

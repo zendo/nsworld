@@ -25,7 +25,7 @@
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
-    emacs-overlay.url = "github:nix-community/emacs-overlay/334ba8c610cf5e41dfe130507030e5587e3551b4";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/dcbb707a85372909622b094eb193c4fb7a83a3a1";
   };
 
   outputs = inputs @ {
