@@ -2,7 +2,7 @@
 [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
 ![Size](https://img.shields.io/github/repo-size/zendo/nsworld?color=red&label=size&style=plat-square)
 
-# Installtion
+# Installation
 
 ``` shell
 mkfs.fat -F 32 /dev/nvme0n1p3
@@ -37,7 +37,7 @@ mach-nix gen -r requirements.txt
 # Desktop Setup
 
 ``` shell
-# force using en directorys
+# force using en directories
 LC_ALL=C xdg-user-dirs-update --force
 
 # Emacs

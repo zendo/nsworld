@@ -22,6 +22,7 @@
     tealdeer
     trash-cli
     rage # age encrypt RIIR
+    lf
     f2
     choose
     croc
@@ -29,6 +30,7 @@
     kalker # calculator
     imagemagick
     ydict
+    typos
     translate-shell
     magic-wormhole # python
     aspellDicts.en
