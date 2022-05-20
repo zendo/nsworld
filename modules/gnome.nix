@@ -32,6 +32,11 @@
     enableSSHSupport = true;
   };
 
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
   environment.gnome.excludePackages = with pkgs; [
     gnome-photos
     gnome.yelp
@@ -73,7 +78,6 @@
     gnomeExtensions.espresso
     gnomeExtensions.blur-my-shell
     gnomeExtensions.proxy-switcher
-    gnomeExtensions.gsconnect
     # gnomeExtensions.pop-shell
     # gnomeExtensions.arcmenu
     # gnomeExtensions.logo-menu
