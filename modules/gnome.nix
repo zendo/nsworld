@@ -19,22 +19,11 @@
     desktopManager.gnome.enable = true;
   };
 
-  #############################################
   services = {
     packagekit.enable = false;
     gnome.tracker.enable = false;
     gnome.tracker-miners.enable = false;
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -104,5 +93,15 @@
       # libpinyin
       # typing-booster
     ];
+  };
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
   };
 }
