@@ -21,7 +21,7 @@
     packagekit.enable = false;
     gnome.tracker.enable = false;
     gnome.tracker-miners.enable = false;
-    udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+    udev.packages = [pkgs.gnome.gnome-settings-daemon];
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -120,6 +120,9 @@
       [org.gnome.desktop.peripherals.touchpad]
       tap-to-click=true
       click-method='areas'
+
+      [org.gnome.desktop.input-sources]
+      xkb-options=['ctrl:swapcaps']
     '';
   };
 }

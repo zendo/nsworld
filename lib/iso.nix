@@ -15,38 +15,24 @@
   system.stateVersion = "22.05";
   time.timeZone = "Asia/Shanghai";
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
-
-  hardware.enableAllFirmware = true;
-
   boot = {
-    supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
-    kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
-  };
-
-  networking = {
-    useDHCP = false;
-    networkmanager.enable = true;
+    supportedFilesystems = lib.mkForce ["btrfs" "bcachefs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
+    # kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
   };
 
   services.xserver = {
-    libinput = {
-      # enable = true; # enabled default by desktopManager
-      touchpad = {
-        tapping = true;
-        clickMethod = "buttonareas";
-      };
-    };
     xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
+
+  hardware.enableAllFirmware = true;
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
 
   nix.settings = {
     substituters = lib.mkBefore [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://nix-community.cachix.org"
     ];
-
     trusted-users = ["@wheel"];
     trusted-substituters = [
     ]; # List of binary cache URLs that non-root users can use
@@ -72,6 +58,7 @@
     bind
     git
     nix-bash-completions
+    bcachefs-tools
 
     vim
     fish
