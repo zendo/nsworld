@@ -14,8 +14,11 @@
   services.xserver.displayManager = {
     gdm.enable = true;
     defaultSession = "gnome";
-    # autoLogin.user = "${username}";
+    autoLogin.user = "${username}";
   };
+  # autologin bug https://github.com/NixOS/nixpkgs/issues/103746
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   services = {
     packagekit.enable = false;

@@ -7,13 +7,10 @@
 }: {
   imports = [
     # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+    # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
     # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-plasma5.nix"
-    # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
+    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
   ];
-
-  system.stateVersion = "22.05";
-  time.timeZone = "Asia/Shanghai";
 
   boot = {
     supportedFilesystems = lib.mkForce ["btrfs" "bcachefs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
@@ -24,6 +21,9 @@
     xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
+  services.xserver.displayManager.autoLogin.enable = lib.mkForce false;
+
+  time.timeZone = "Asia/Shanghai";
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
