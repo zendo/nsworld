@@ -9,8 +9,10 @@ mkfs.fat -F 32 /dev/nvme0n1p3
 mkswap -L swap /dev/nvme0n1p4
 swapon /dev/nvme0n1p4
 mkfs.btrfs /dev/nvme0n1p5
-bcachefs format /dev/nvme0n1p5
-mount -t bcachefs /dev/nvme0n1p5 /mnt
+
+bcachefs format /dev/nvme0n1p5m
+mount.bcachefs.sh /dev/nvme0n1p5 /mnt
+
 nixos-generate-config --root /mnt
 nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
 ```

@@ -72,6 +72,7 @@
     cpufrequtils
     pciutils
     edid-decode
+    read-edid
 
     # libinput
     wallutils # lsmon getdpi wayinfo

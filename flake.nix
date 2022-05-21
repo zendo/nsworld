@@ -74,6 +74,7 @@
             nixos-hardware.nixosModules.common-pc-laptop-ssd
             nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/yoga/hardware-configuration.nix
+            ./hosts/yoga/edid.nix
             {networking.hostName = "yoga";}
 
             ./modules/sound.nix

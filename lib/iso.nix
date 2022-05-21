@@ -13,8 +13,8 @@
   ];
 
   boot = {
-    supportedFilesystems = lib.mkForce ["btrfs" "bcachefs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
-    # kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
+    supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
+    kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod
   };
 
   services.xserver = {
