@@ -9,14 +9,12 @@
     excludePackages = [
       pkgs.xterm
     ];
+  };
 
-    displayManager = {
-      gdm.enable = true;
-      defaultSession = "gnome";
-      # autoLogin.user = "${username}";
-    };
-
-    desktopManager.gnome.enable = true;
+  services.xserver.displayManager = {
+    gdm.enable = true;
+    defaultSession = "gnome";
+    # autoLogin.user = "${username}";
   };
 
   services = {
@@ -103,5 +101,25 @@
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
+  };
+
+  services.xserver.desktopManager.gnome = {
+    enable = true;
+    extraGSettingsOverridePackages = [pkgs.gnome.gnome-settings-daemon];
+
+    favoriteAppsOverride = ''
+      [org.gnome.shell]
+      favorite-apps=[ 'foot.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
+    '';
+
+    # Override GNOME defaults
+    extraGSettingsOverrides = ''
+      [org.gnome.shell]
+      welcome-dialog-last-shown-version='9999999999'
+
+      [org.gnome.desktop.peripherals.touchpad]
+      tap-to-click=true
+      click-method='areas'
+    '';
   };
 }
