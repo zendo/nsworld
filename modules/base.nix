@@ -18,6 +18,7 @@ in {
     plymouth.enable = true;
     supportedFilesystems = ["ntfs"];
     kernelPackages = pkgs.linuxPackages_xanmod_latest; # latest zen xanmod_latest
+    # kernelParams = ["quite"];
     tmpOnTmpfs = true;
     cleanTmpDir = true;
   };

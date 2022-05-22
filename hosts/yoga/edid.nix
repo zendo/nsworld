@@ -4,15 +4,18 @@
   config,
   pkgs,
   ...
-}: {
-  hardware.firmware = [
-    (pkgs.runCommand "foo" {} "mkdir -pv $out/lib/firmware/edid; cp ${./chipedp.bin} $out/lib/firmware/edid/chipedp.bin")
-  ];
+}: let
+  chip_edid = pkgs.runCommand "foo" {} ''
+    mkdir -p $out/lib/firmware/edid
+    cp ${./dspinfo.bin} $out/lib/firmware/edid/dspinfo.bin
+  '';
+in {
+  hardware.firmware = [chip_edid];
 
   boot.kernelParams = [
-    "drm.edid_firmware=card0-eDP-1:edid/chipedp.bin"
-    # "video=card0-eDP-1:e"
+    "drm.edid_firmware=card0-eDP-1:edid/dspinfo.bin"
+    # "video=card0-eDP-1:2880x1800@60"
   ];
 
-  # boot.initrd.extraFiles."sys/module/drm/parameters/edid_firmware".source = pkgs.runCommand "bar" {} "mkdir -pv $out/lib/firmware/edid; cp ${./chipedp.bin} $out/lib/firmware/edid/chipedp.bin";
+  boot.initrd.extraFiles."lib/firmware/edid/dspinfo.bin".source = pkgs.runCommandLocal "sys/module/drm/parameters/edid_firmware" {} "cp ${./dspinfo.bin} $out";
 }
