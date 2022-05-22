@@ -17,5 +17,5 @@ in {
     # "video=card0-eDP-1:2880x1800@60"
   ];
 
-  boot.initrd.extraFiles."lib/firmware/edid/dspinfo.bin".source = pkgs.runCommandLocal "sys/module/drm/parameters/edid_firmware" {} "cp ${./dspinfo.bin} $out";
+  boot.initrd.extraFiles."lib/firmware/edid/dspinfo.bin".source = pkgs.runCommandLocal "dsp" {} "cp ${./dspinfo.bin} $out";
 }

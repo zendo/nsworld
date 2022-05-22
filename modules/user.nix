@@ -16,6 +16,8 @@
       "audio"
       "docker"
       "libvirtd"
+      "vboxusers"
+      "adbusers"
     ];
   };
 

@@ -21,10 +21,16 @@
     #   qemu.runAsRoot = false;
     # };
 
+    # virtualbox = {
+    #   host.enable = true;
+    # };
+
     # waydroid.enable = true;
   };
 
   # services.flatpak.enable = true;
+
+  # programs.adb.enable = true;
 
   # programs.steam.enable = true;
   # use NixOS libraries instead of Steam-provided
