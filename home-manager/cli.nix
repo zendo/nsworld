@@ -11,6 +11,7 @@
     unp
     unzip
     unrar
+    patool
     btop
     ctop # containers monitor
     powertop

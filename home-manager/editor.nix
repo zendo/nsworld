@@ -9,6 +9,7 @@
 
   programs.emacs = {
     enable = true;
+    # fix kde two desktop shortcut
     package = (pkgs.emacsPgtk.overrideAttrs
       (oldAttrs: {
         postFixup = ''
@@ -36,7 +37,7 @@
   };
 
   programs.helix = {
-    enable = false;
+    enable = true;
     settings = {
       theme = "onedark";
       # editor.file-picker.hidden = true;
