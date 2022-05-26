@@ -2,7 +2,7 @@
   description = "Hello world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
     local.url = "git+file:///home/iab/devel/nixpkgs";
 
@@ -25,7 +25,7 @@
 
     nur.url = "github:nix-community/NUR";
     # nixos-cn.url = "github:nixos-cn/flakes";
-    emacs-overlay.url = "github:nix-community/emacs-overlay/dcbb707a85372909622b094eb193c4fb7a83a3a1";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/157f8649d4fee3fd092421d20bdd24f6c0f35f04";
   };
 
   outputs = inputs @ {

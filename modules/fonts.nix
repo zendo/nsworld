@@ -14,8 +14,8 @@
       noto-fonts-cjk-serif
       sarasa-gothic
       lxgw-wenkai
-      source-han-sans
-      source-han-serif
+      # source-han-sans
+      # source-han-serif
       source-code-pro
       comic-relief
       emacs-all-the-icons-fonts
@@ -29,12 +29,12 @@
         monospace = ["Sarasa Mono SC" "DejaVu Sans Mono"];
         emoji = ["Noto Color Emoji"];
         sansSerif = [
-          "Source Han Sans SC"
           "Noto Sans CJK SC"
+          "Source Han Sans SC"
         ];
         serif = [
-          "Source Han Serif SC"
           "Noto Serif CJK SC"
+          "Source Han Serif SC"
         ];
       };
     };

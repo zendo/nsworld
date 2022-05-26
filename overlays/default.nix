@@ -39,14 +39,14 @@ final: prev: {
     });
 
   # ibus bug
-  ibus = prev.ibus.overrideAttrs (oldAttrs: {
-    src = prev.pkgs.fetchFromGitHub {
-      owner = "ibus";
-      repo = "ibus";
-      rev = "3e5fab4991f4e2e22b56cf57d4dfb779a1d1977c";
-      sha256 = "sha256-edd3m8CVSlhCdj+TprSsgkN0V0FxOeeMRf4wpCl+KYQ=";
-    };
-  });
+  # ibus = prev.ibus.overrideAttrs (oldAttrs: {
+  #   src = prev.pkgs.fetchFromGitHub {
+  #     owner = "ibus";
+  #     repo = "ibus";
+  #     rev = "3e5fab4991f4e2e22b56cf57d4dfb779a1d1977c";
+  #     sha256 = "sha256-edd3m8CVSlhCdj+TprSsgkN0V0FxOeeMRf4wpCl+KYQ=";
+  #   };
+  # });
 
   # mutter hover bug
   # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
