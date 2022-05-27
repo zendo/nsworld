@@ -34,6 +34,7 @@
     typos
     translate-shell
     magic-wormhole # python
+    magic-wormhole-rs
     aspellDicts.en
     asciinema # record the terminal
     distrobox

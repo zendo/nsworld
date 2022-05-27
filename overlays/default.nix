@@ -49,14 +49,14 @@ final: prev: {
   # });
 
   # mutter hover bug
-  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-  #   mutter = gprev.mutter.overrideAttrs (oldAttrs: {
-  #     src = prev.fetchurl {
-  #       url = "https://gitlab.gnome.org/GNOME/mutter/-/archive/42.1/mutter-42.1.tar.gz";
-  #       sha256 = "sha256-tInOmRrdt1CPWhZZlwqEwb3Iqb/xiJGzIEHmoKQxflk=";
-  #     };
-  #   });
-  # });
+  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+    gdm = gprev.gdm.overrideAttrs (oldAttrs: {
+      src = prev.fetchurl {
+        url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
+        sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
+      };
+    });
+  });
 
   # sddm-git
   # libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {

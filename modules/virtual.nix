@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  username,
   ...
 }: {
   virtualisation = {
@@ -23,6 +24,13 @@
 
     # virtualbox = {
     #   host.enable = true;
+    # };
+
+    # needs channel
+    # https://github.com/jollheef/appvm
+    # appvm = {
+    #   enable = true;
+    #   user = "${username}";
     # };
 
     # waydroid.enable = true;
