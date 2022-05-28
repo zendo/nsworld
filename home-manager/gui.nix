@@ -34,8 +34,7 @@
     ffmpeg
     spotify
     mousai # 听歌识曲
-    blanket
-    shortwave
+    # shortwave
     # easyeffects
     # shutter
     tdesktop
@@ -79,6 +78,11 @@
     wallutils # lsmon getdpi wayinfo
     wayland-utils
     # wdisplays # wlr
+
+    # Override
+    # (pkgs.google-chrome.override {
+    #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
+    # })
   ];
 
   programs.firefox = {

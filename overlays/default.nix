@@ -1,10 +1,4 @@
 final: prev: {
-  /*
-   (pkgs.google-chrome.override {
-      commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-   })
-   */
-
   # scripts
   nix-whereis = prev.callPackage ./nix-whereis {};
 
@@ -29,6 +23,8 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
 
+  #############################################
+
   # Override
   # fix .desktop missing
   wl-color-picker =
@@ -48,7 +44,7 @@ final: prev: {
   #   };
   # });
 
-  # mutter hover bug
+  # gdm bug
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {
     gdm = gprev.gdm.overrideAttrs (oldAttrs: {
       src = prev.fetchurl {
