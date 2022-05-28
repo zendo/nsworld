@@ -30,6 +30,7 @@
     nse = "nix search nixpkgs";
     nss = "f() { nix shell nixpkgs\#\$1 }; f";
     nx = "f() { nix run nixpkgs\#\$1 -- $2; }; f";
+    nix-which = "f() { readlink -f $(which $1) }; f";
     nix-sri = "nix hash to-sri --type sha256";
     ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";

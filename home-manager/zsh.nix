@@ -29,11 +29,6 @@
     };
     plugins = [
       # {
-      #   name = "fast-syntax-highlighting";
-      #   file = "fast-syntax-highlighting.plugin.zsh";
-      #   src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
-      # }
-      # {
       #   name = "zsh-nix-shell";
       #   file = "nix-shell.plugin.zsh";
       #   src = "${pkgs.zsh-nix-shell}/share/zsh-nix-shell";
