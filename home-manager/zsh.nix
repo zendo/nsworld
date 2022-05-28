@@ -27,6 +27,23 @@
     shellAliases = {
       history = "history 0"; # show whole history
     };
+    plugins = [
+      # {
+      #   name = "fast-syntax-highlighting";
+      #   file = "fast-syntax-highlighting.plugin.zsh";
+      #   src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+      # }
+      # {
+      #   name = "zsh-nix-shell";
+      #   file = "nix-shell.plugin.zsh";
+      #   src = "${pkgs.zsh-nix-shell}/share/zsh-nix-shell";
+      # }
+      {
+        name = "forgit";
+        file = "forgit.plugin.zsh";
+        src = "${pkgs.forgit}/share/forgit";
+      }
+    ];
     initExtra = ''
       echo -n "\e[?45l"                 # Fix foot terminal dynamic spinner
       setopt no_nomatch                 # bash wildcard

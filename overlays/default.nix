@@ -1,6 +1,7 @@
 final: prev: {
   # scripts
   nix-whereis = prev.callPackage ./nix-whereis {};
+  forgit = prev.callPackage ./forgit {};
 
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
@@ -45,14 +46,14 @@ final: prev: {
   # });
 
   # gdm bug
-  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-    gdm = gprev.gdm.overrideAttrs (oldAttrs: {
-      src = prev.fetchurl {
-        url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
-        sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
-      };
-    });
-  });
+  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+  #   gdm = gprev.gdm.overrideAttrs (oldAttrs: {
+  #     src = prev.fetchurl {
+  #       url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
+  #       sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
+  #     };
+  #   });
+  # });
 
   # sddm-git
   # libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {

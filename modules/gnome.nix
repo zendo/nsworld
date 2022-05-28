@@ -68,10 +68,10 @@
     gnomeExtensions.espresso
     gnomeExtensions.blur-my-shell
     gnomeExtensions.proxy-switcher
+    gnomeExtensions.just-perfection
     # gnomeExtensions.pop-shell
     # gnomeExtensions.arcmenu
     # gnomeExtensions.logo-menu
-    # gnomeExtensions.just-perfection
     # gnomeExtensions.kimpanel
     # gnomeExtensions.pixel-saver
     # gnomeExtensions.gesture-improvements
