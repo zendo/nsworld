@@ -1,6 +1,5 @@
 final: prev: {
   # scripts
-  nix-whereis = prev.callPackage ./nix-whereis {};
   forgit = prev.callPackage ./forgit {};
 
   # trivial

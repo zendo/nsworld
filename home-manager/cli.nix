@@ -4,10 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    # self
-    nix-whereis
-
-    # CLI
     unp
     unzip
     unrar
