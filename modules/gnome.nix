@@ -9,12 +9,35 @@
     excludePackages = [
       pkgs.xterm
     ];
-  };
 
-  services.xserver.displayManager = {
-    gdm.enable = true;
-    defaultSession = "gnome";
-    autoLogin.user = "${username}";
+    displayManager = {
+      gdm.enable = true;
+      defaultSession = "gnome";
+      autoLogin.user = "${username}";
+    };
+
+    desktopManager.gnome = {
+      enable = true;
+      extraGSettingsOverridePackages = [pkgs.gnome.gnome-settings-daemon];
+
+      favoriteAppsOverride = ''
+        [org.gnome.shell]
+        favorite-apps=[ 'foot.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
+      '';
+
+      # Override GNOME defaults
+      extraGSettingsOverrides = ''
+        [org.gnome.shell]
+        welcome-dialog-last-shown-version='9999999999'
+
+        [org.gnome.desktop.peripherals.touchpad]
+        tap-to-click=true
+        click-method='areas'
+
+        [org.gnome.desktop.input-sources]
+        xkb-options=['ctrl:swapcaps']
+      '';
+    };
   };
   # autologin bug https://github.com/NixOS/nixpkgs/issues/103746
   # systemd.services."getty@tty1".enable = false;
@@ -58,7 +81,7 @@
     # gnome-firmware-updater
 
     gnomeExtensions.appindicator
-    # gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.app-icons-taskbar
     gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
@@ -81,6 +104,16 @@
     gnomeExtensions.mpris-indicator-button
   ];
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
   i18n.inputMethod = {
     # enabled = "fcitx5";
     # fcitx5.addons = with pkgs; [
@@ -94,38 +127,5 @@
       # libpinyin
       # typing-booster
     ];
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
-  };
-
-  services.xserver.desktopManager.gnome = {
-    enable = true;
-    extraGSettingsOverridePackages = [pkgs.gnome.gnome-settings-daemon];
-
-    favoriteAppsOverride = ''
-      [org.gnome.shell]
-      favorite-apps=[ 'foot.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
-    '';
-
-    # Override GNOME defaults
-    extraGSettingsOverrides = ''
-      [org.gnome.shell]
-      welcome-dialog-last-shown-version='9999999999'
-
-      [org.gnome.desktop.peripherals.touchpad]
-      tap-to-click=true
-      click-method='areas'
-
-      [org.gnome.desktop.input-sources]
-      xkb-options=['ctrl:swapcaps']
-    '';
   };
 }

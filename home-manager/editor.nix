@@ -23,7 +23,7 @@
       # telega
     ];
   };
-  # home.file.".doom.d".source = ../emacs/doom;
+  home.file.".doom.d".source = ../emacs/doom;
 
   programs.neovim = {
     enable = true;
@@ -37,7 +37,7 @@
   };
 
   programs.helix = {
-    enable = true;
+    enable = false;
     settings = {
       theme = "onedark";
       # editor.file-picker.hidden = true;

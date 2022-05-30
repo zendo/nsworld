@@ -1,3 +1,4 @@
+# WIP
 # https://github.com/edrex/nixos-config
 # https://wiki.archlinux.org/title/Kernel_mode_setting
 {
