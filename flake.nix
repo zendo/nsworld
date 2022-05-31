@@ -23,7 +23,7 @@
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
     templates.url = github:NixOS/templates;
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/157f8649d4fee3fd092421d20bdd24f6c0f35f04";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/00cbfa093fc1a9769271f0a9ea019b1ccc569482";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     nur.url = "github:nix-community/NUR";

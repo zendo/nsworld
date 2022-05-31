@@ -6,8 +6,8 @@
 }: {
   nixpkgs.config = {
     allowUnfree = true;
-    # allowUnsupportedSystem = true;
     # allowBroken = true;
+    # allowUnsupportedSystem = true;
   };
 
   nix.settings = {
