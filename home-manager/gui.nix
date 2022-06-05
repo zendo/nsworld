@@ -40,7 +40,7 @@
     fractal
     # discord
     meld
-    deja-dup
+    # deja-dup
     # rclone
     # rclone-browser
     # vorta

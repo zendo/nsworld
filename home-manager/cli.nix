@@ -37,6 +37,7 @@
     graphviz
     pandoc
     paperoni # save html
+    # airgeddon # wifi crack
 
     # Develop
     # gcc
