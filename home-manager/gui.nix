@@ -9,7 +9,6 @@
     misans
     # zee
     # mprober
-    # frog
     # dippi
 
     gitg

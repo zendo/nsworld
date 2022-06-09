@@ -14,7 +14,6 @@ final: prev: {
   v2raya = prev.callPackage ./v2raya {};
 
   # python
-  frog = prev.callPackage ./frog {};
 
   # nodejs
 
