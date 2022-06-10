@@ -24,6 +24,9 @@
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
     # })
     # microsoft-edge
+    # vivaldi
+    # vivaldi-ffmpeg-codecs
+    # vivaldi-widevine
 
     qbittorrent
     mpv

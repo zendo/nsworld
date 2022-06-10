@@ -26,8 +26,11 @@
 
     fontconfig = {
       defaultFonts = {
-        monospace = ["Sarasa Mono SC" "DejaVu Sans Mono"];
         emoji = ["Noto Color Emoji"];
+        monospace = [
+          "Sarasa Mono SC"
+          "DejaVu Sans Mono"
+        ];
         sansSerif = [
           "Noto Sans CJK SC"
           "Source Han Sans SC"
