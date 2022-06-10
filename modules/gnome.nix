@@ -39,9 +39,6 @@
       '';
     };
   };
-  # autologin bug https://github.com/NixOS/nixpkgs/issues/103746
-  # systemd.services."getty@tty1".enable = false;
-  # systemd.services."autovt@tty1".enable = false;
 
   services = {
     packagekit.enable = false;
@@ -60,49 +57,51 @@
     gnome.gnome-software
   ];
 
-  environment.systemPackages = with pkgs; [
-    gthumb
-    gcolor3
-    # authenticator
-    # wl-color-picker
-    # notejot
-    # lollypop
-    rhythmbox
-    gparted
-    dconf2nix
-    kooha
+  environment.systemPackages = with pkgs;
+    [
+      gthumb
+      gcolor3
+      # authenticator
+      # wl-color-picker
+      # notejot
+      # lollypop
+      rhythmbox
+      gparted
+      dconf2nix
+      kooha
 
-    gnome.gnome-tweaks
-    gnome.dconf-editor
-    gnome.gnome-nettool
-    gnome.gnome-power-manager
-    gnome.gnome-sound-recorder
-    # gnome-builder
-    # gnome-firmware-updater
-
-    gnomeExtensions.appindicator
-    gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.app-icons-taskbar
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.night-theme-switcher
-    gnomeExtensions.clipboard-history
-    # gnomeExtensions.gnome-clipboard
-    gnomeExtensions.espresso
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.proxy-switcher
-    gnomeExtensions.just-perfection
-    # gnomeExtensions.pop-shell
-    # gnomeExtensions.arcmenu
-    # gnomeExtensions.logo-menu
-    # gnomeExtensions.kimpanel
-    # gnomeExtensions.pixel-saver
-    # gnomeExtensions.gesture-improvements
-    gnomeExtensions.ddterm
-    gnomeExtensions.ideapad-mode
-    gnomeExtensions.desktop-icons-ng-ding
-    gnomeExtensions.mpris-indicator-button
-  ];
+      gnome.gnome-tweaks
+      gnome.dconf-editor
+      gnome.gnome-nettool
+      gnome.gnome-power-manager
+      gnome.gnome-sound-recorder
+      # gnome-builder
+      # gnome-firmware-updater
+    ]
+    ++ (with gnomeExtensions; [
+      appindicator
+      tray-icons-reloaded
+      app-icons-taskbar
+      dash-to-dock
+      dash-to-panel
+      night-theme-switcher
+      clipboard-history
+      espresso
+      blur-my-shell
+      proxy-switcher
+      just-perfection
+      # gnome-clipboard
+      # pop-shell
+      # arcmenu
+      # logo-menu
+      # kimpanel
+      # pixel-saver
+      # gesture-improvements
+      desktop-icons-ng-ding
+      ddterm
+      ideapad-mode
+      mpris-indicator-button
+    ]);
 
   programs.gnupg.agent = {
     enable = true;
