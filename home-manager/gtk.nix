@@ -23,4 +23,10 @@
     terminal = false;
     categories = ["Application" "Music"];
   };
+
+  # home.packages = with pkgs; [
+  #   (spotify.override {
+  #     deviceScaleFactor = 2;
+  #   })
+  # ];
 }

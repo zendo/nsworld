@@ -20,7 +20,7 @@
     alacritty
     qdirstat
 
-    # (pkgs.google-chrome.override {
+    # (google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
     # })
     # microsoft-edge

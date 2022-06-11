@@ -30,6 +30,9 @@
         [org.gnome.shell]
         welcome-dialog-last-shown-version='9999999999'
 
+        [org.gnome.system.location]
+        enabled=true
+
         [org.gnome.desktop.peripherals.touchpad]
         tap-to-click=true
         click-method='areas'
