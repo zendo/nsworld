@@ -19,6 +19,8 @@ nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mir
 
 [Config Example](https://github.com/thiagokokada/nix-configs)
 
+[More Example](https://github.com/foo-dogsquared/nixos-config)
+
 [FUP Example](https://github.com/jakehamilton/config)
 
 # Nix Commands

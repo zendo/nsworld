@@ -18,7 +18,6 @@
     # nur.repos.linyinfeng.clash-for-windows
     foot
     alacritty
-    qdirstat
 
     # (google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
@@ -78,11 +77,6 @@
     wallutils # lsmon getdpi wayinfo
     wayland-utils
     # wdisplays # wlr
-
-    # Override
-    # (pkgs.google-chrome.override {
-    #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-    # })
   ];
 
   programs.firefox = {
