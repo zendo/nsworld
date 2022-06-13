@@ -93,21 +93,6 @@
         "type": "github"
       }
     },
-    "local": {
-      "locked": {
-        "lastModified": 1654678471,
-        "narHash": "sha256-akeIOa31cwH3Ct6qZyt+UjjJWeIqf/Kk8K0pREDADQg=",
-        "ref": "refs/heads/master",
-        "rev": "30ac7a885494a2d306586c1e7fa0d09e2df4f97d",
-        "revCount": 384115,
-        "type": "git",
-        "url": "file:///home/iab/devel/nixpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/iab/devel/nixpkgs"
-      }
-    },
     "musnix": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -226,7 +211,6 @@
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
-        "local": "local",
         "musnix": "musnix",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",

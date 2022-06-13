@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
-    local.url = "git+file:///home/iab/devel/nixpkgs";
+    # local.url = "git+file:///home/iab/devel/nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -35,7 +35,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    local,
+    # local,
     home-manager,
     nixos-hardware,
     templates,
@@ -57,9 +57,9 @@
           nur.overlay
           emacs-overlay.overlay
           (import ./overlays)
-          (final: prev: {
-            local = local.legacyPackages.${prev.system};
-          })
+          # (final: prev: {
+          #   local = local.legacyPackages.${prev.system};
+          # })
         ];
       }
     ];
@@ -90,8 +90,8 @@
             ./overlays/v2raya/v2raya.nix
             # {services.v2raya.enable = true;}
 
-            # musnix.nixosModules.musnix
-            # {musnix.enable = true;}
+            musnix.nixosModules.musnix
+            {musnix.enable = true;}
 
             home-manager.nixosModules.home-manager
             {
