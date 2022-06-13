@@ -35,7 +35,6 @@
     asciinema # record the terminal
     distrobox
     graphviz
-    pandoc
     paperoni # save html
     # airgeddon # wifi crack
 
@@ -129,5 +128,9 @@
     enable = false;
     enableBashIntegration = true;
     enableZshIntegration = true;
+  };
+
+  programs.pandoc = {
+    enable = true;
   };
 }

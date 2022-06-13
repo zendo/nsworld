@@ -31,15 +31,6 @@
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
-    # https://github.com/NickCao/flakes/commit/e019b7e498d495d1b0cfa7bd7b26d0615647a9de
-    "qv2ray/plugin_settings/builtin_v2ray_support.json".source = (pkgs.formats.json {}).generate "v2ray.json" {
-      AssetsPath = "${pkgs.symlinkJoin {
-        name = "assets";
-        paths = [pkgs.v2ray-geoip pkgs.v2ray-domain-list-community];
-      }}/share/v2ray";
-      CorePath = "${pkgs.v2ray.core}/bin/v2ray";
-    };
-
     "autostart/qv2ray.desktop".text = ''
       [Desktop Entry]
       Name=qv2ray
