@@ -17,6 +17,8 @@
   };
 
   home.file = {
+    ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
+
     # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
     #   owner = "icy-thought";
     #   repo = "fcitx5-catppuccin";

@@ -14,6 +14,7 @@
     gitg
     v2ray
     qv2ray
+    proxychains-ng
     # clash
     # nur.repos.linyinfeng.clash-for-windows
     foot

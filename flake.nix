@@ -90,8 +90,8 @@
             ./overlays/v2raya/v2raya.nix
             # {services.v2raya.enable = true;}
 
-            musnix.nixosModules.musnix
-            {musnix.enable = true;}
+            # musnix.nixosModules.musnix
+            # {musnix.enable = true;}
 
             home-manager.nixosModules.home-manager
             {
