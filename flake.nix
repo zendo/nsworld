@@ -2,12 +2,12 @@
   description = "Hello world";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
     # local.url = "git+file:///home/iab/devel/nixpkgs";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/70824bb5c790b820b189f62f643f795b1d2ade2e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -61,6 +61,12 @@
           #   local = local.legacyPackages.${prev.system};
           # })
         ];
+
+        nixpkgs.config = {
+          allowUnfree = true;
+          # allowBroken = true;
+          # allowUnsupportedSystem = true;
+        };
       }
     ];
   in {
