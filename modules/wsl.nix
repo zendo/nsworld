@@ -3,13 +3,8 @@
   lib,
   pkgs,
   inputs,
-  modulesPath,
   ...
 }: {
-  imports = [
-    "${modulesPath}/profiles/minimal.nix"
-  ];
-
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "22.05";
 

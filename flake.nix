@@ -156,6 +156,8 @@
       modules = [
         ./modules/wsl.nix
 
+        "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+
         nixos-wsl.nixosModules.wsl
         {
           wsl = {
