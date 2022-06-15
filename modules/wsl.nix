@@ -1,8 +1,6 @@
 {
   config,
-  lib,
   pkgs,
-  inputs,
   ...
 }: {
   time.timeZone = "Asia/Shanghai";
@@ -36,41 +34,5 @@
     wsl-proxy = "export http_proxy=http://192.168.2.118:10809 ; \\
     export https_proxy=http://192.168.2.118:10809";
     # wsl-switch = "";
-  };
-
-  nix.settings = {
-    auto-optimise-store = true;
-    trusted-users = ["@wheel"];
-    flake-registry = /etc/nix/registry.json;
-    substituters = lib.mkForce [
-      "https://mirror.sjtu.edu.cn/nix-channels/store"
-      "https://nix-community.cachix.org"
-    ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    # allowBroken = true;
-    # allowUnsupportedSystem = true;
-  };
-
-  nix = {
-    # nix registry list
-    registry =
-      lib.mapAttrs' (
-        n: v:
-          lib.nameValuePair n {flake = v;}
-      )
-      inputs;
-
-    nixPath = [
-      "nixpkgs=${inputs.nixpkgs}"
-      "nixos-config=${inputs.self}"
-      "home-manager=${inputs.home-manager}"
-      "/nix/var/nix/profiles/per-user/root/channels"
-    ];
   };
 }

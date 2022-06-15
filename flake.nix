@@ -54,6 +54,16 @@
       ./modules/nixconfig.nix
     ];
 
+    pkgsFeatures = [
+      {
+        nixpkgs.config = {
+          allowUnfree = true;
+          # allowBroken = true;
+          # allowUnsupportedSystem = true;
+        };
+      }
+    ];
+
     overlayFeatures = [
       {
         nixpkgs.overlays = [
@@ -64,12 +74,6 @@
           #   local = local.legacyPackages.${prev.system};
           # })
         ];
-
-        nixpkgs.config = {
-          allowUnfree = true;
-          # allowBroken = true;
-          # allowUnsupportedSystem = true;
-        };
       }
     ];
   in {
@@ -82,6 +86,7 @@
         specialArgs = {inherit inputs username;};
         modules =
           commonFeatures
+          ++ pkgsFeatures
           ++ overlayFeatures
           ++ [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -130,6 +135,7 @@
         specialArgs = {inherit inputs username;};
         modules =
           commonFeatures
+          ++ pkgsFeatures
           ++ overlayFeatures
           ++ [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -151,43 +157,46 @@
       username = "win";
     in
       nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./modules/wsl.nix
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules =
+          pkgsFeatures
+          ++ [
+            ./modules/wsl.nix
+            ./modules/nixconfig.nix
 
-        "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+            "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
 
-        nixos-wsl.nixosModules.wsl
-        {
-          wsl = {
-            enable = true;
-            automountPath = "/mnt";
-            defaultUser = "${username}";
-            startMenuLaunchers = true;
+            nixos-wsl.nixosModules.wsl
+            {
+              wsl = {
+                enable = true;
+                automountPath = "/mnt";
+                defaultUser = "${username}";
+                startMenuLaunchers = true;
 
-            # Enable native Docker support
-            # docker-native.enable = true;
+                # Enable native Docker support
+                # docker-native.enable = true;
 
-            # Enable integration with Docker Desktop (needs to be installed)
-            # docker-desktop.enable = true;
-          };
-        }
+                # Enable integration with Docker Desktop (needs to be installed)
+                # docker-desktop.enable = true;
+              };
+            }
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          # home-manager.extraSpecialArgs = { inherit self inputs; };
-          home-manager.users.${username}.imports = [
-            ./home-manager/git.nix
-            ./home-manager/cli.nix
-            ./home-manager/zsh.nix
-            ./home-manager/alias.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              # home-manager.extraSpecialArgs = { inherit self inputs; };
+              home-manager.users.${username}.imports = [
+                ./home-manager/git.nix
+                ./home-manager/cli.nix
+                ./home-manager/zsh.nix
+                ./home-manager/alias.nix
+              ];
+            }
           ];
-        }
-      ];
-    };
+      };
 
     #############################################
     homeConfigurations = {
