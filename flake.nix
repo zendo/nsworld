@@ -153,50 +153,31 @@
 
     #############################################
     # nix build .#nixosConfigurations.wsl.config.system.build.installer
-    nixosConfigurations.wsl = let
-      username = "win";
-    in
-      nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules =
-          pkgsFeatures
-          ++ [
-            ./modules/wsl.nix
-            ./modules/nixconfig.nix
+    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules =
+        pkgsFeatures
+        ++ [
+          "${inputs.nixos-wsl}/configuration.nix"
 
-            "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+          ./modules/wsl.nix
+          ./modules/nixconfig.nix
 
-            nixos-wsl.nixosModules.wsl
-            {
-              wsl = {
-                enable = true;
-                automountPath = "/mnt";
-                defaultUser = "${username}";
-                startMenuLaunchers = true;
-
-                # Enable native Docker support
-                # docker-native.enable = true;
-
-                # Enable integration with Docker Desktop (needs to be installed)
-                # docker-desktop.enable = true;
-              };
-            }
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              # home-manager.extraSpecialArgs = { inherit self inputs; };
-              home-manager.users.${username}.imports = [
-                ./home-manager/git.nix
-                ./home-manager/cli.nix
-                ./home-manager/zsh.nix
-                ./home-manager/alias.nix
-              ];
-            }
-          ];
-      };
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            # home-manager.extraSpecialArgs = { inherit self inputs; };
+            home-manager.users.nixos.imports = [
+              ./home-manager/git.nix
+              ./home-manager/cli.nix
+              ./home-manager/zsh.nix
+              ./home-manager/alias.nix
+            ];
+          }
+        ];
+    };
 
     #############################################
     homeConfigurations = {
@@ -205,12 +186,14 @@
         stateVersion = "22.05";
         username = "nixos";
         homeDirectory = "/home/nixos";
-        configuration.imports = [
-          ./home-manager/git.nix
-          ./home-manager/cli.nix
-          ./home-manager/zsh.nix
-          ./home-manager/alias.nix
-        ];
+        configuration = {
+          imports = [
+            ./home-manager/git.nix
+            ./home-manager/cli.nix
+            ./home-manager/zsh.nix
+            ./home-manager/alias.nix
+          ];
+        };
       };
     };
 

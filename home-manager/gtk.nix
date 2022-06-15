@@ -4,11 +4,6 @@
   ...
 }: {
   # fix tiny cursor at qt-apps
-  # home.pointerCursor = {
-  #   name = "Vanilla-DMZ-AA";
-  #   package = pkgs.vanilla-dmz;
-  #   size = 128;
-  # };
   home.file.".icons/default/index.theme".text = ''
     [icon theme]
     Inherits=Adwaita
