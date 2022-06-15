@@ -11,7 +11,6 @@
     # mprober
     # dippi
 
-    unrar
     gitg
     v2ray
     qv2ray

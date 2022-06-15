@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     unp
     unzip
+    unrar
     patool
     btop
     ctop # containers monitor
@@ -72,11 +73,11 @@
     niv
     nvd
     cachix
-    nvfetcher
     nixos-generators
     nix-template
     nix-index
     nix-tree
+    # nvfetcher
   ];
 
   programs.home-manager.enable = true;

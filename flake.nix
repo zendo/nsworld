@@ -115,8 +115,9 @@
               home-manager.users.${username}.imports = [
                 ./home-manager/git.nix
                 ./home-manager/cli.nix
-                ./home-manager/zsh.nix
                 ./home-manager/alias.nix
+                ./home-manager/zsh.nix
+                ./home-manager/bash.nix
                 ./home-manager/xdg.nix
                 ./home-manager/gui.nix
                 ./home-manager/editor.nix
@@ -182,12 +183,17 @@
     #############################################
     homeConfigurations = let
       username = "nixos";
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
       ${username} = home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        stateVersion = "22.05";
+        inherit pkgs system;
         username = "${username}";
         homeDirectory = "/home/${username}";
+        stateVersion = "22.05";
         configuration = {
           imports = [
             ./home-manager/git.nix
