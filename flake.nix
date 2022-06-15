@@ -7,7 +7,7 @@
     # local.url = "git+file:///home/iab/devel/nixpkgs";
 
     home-manager = {
-      url = "github:nix-community/home-manager/70824bb5c790b820b189f62f643f795b1d2ade2e";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -108,9 +108,9 @@
                 ./home-manager/git.nix
                 ./home-manager/cli.nix
                 ./home-manager/zsh.nix
-                ./home-manager/xdg.nix
                 ./home-manager/alias.nix
                 ######## wsl #########
+                ./home-manager/xdg.nix
                 ./home-manager/gui.nix
                 ./home-manager/editor.nix
                 ./home-manager/gtk.nix
@@ -142,6 +142,19 @@
             ./modules/virtual.nix
           ];
       };
+
+    #############################################
+    homeConfigurations.nixos = home-manager.lib.homeManagerConfiguration {
+      system = "x86_64-linux";
+      stateVersion = "22.05";
+      homeDirectory = "/home/nixos";
+      configuration.imports = [
+        ./home-manager/git.nix
+        ./home-manager/cli.nix
+        ./home-manager/zsh.nix
+        ./home-manager/alias.nix
+      ];
+    };
 
     #############################################
     # nix build .#nixosConfigurations.vm.config.system.build.vm

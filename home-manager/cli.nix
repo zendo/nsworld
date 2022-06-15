@@ -80,6 +80,8 @@
     nix-tree
   ];
 
+  programs.home-manager.enable = true;
+
   programs.direnv = {
     enable = true;
     nix-direnv = {
@@ -133,4 +135,6 @@
   programs.pandoc = {
     enable = true;
   };
+
+  home.stateVersion = "22.05";
 }
