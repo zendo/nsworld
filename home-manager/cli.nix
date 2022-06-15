@@ -4,7 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    unp
     unzip
     unrar
     patool
@@ -19,7 +18,7 @@
     tealdeer
     trash-cli
     rage # age encrypt RIIR
-    lf
+    mc
     f2
     choose
     croc
@@ -77,6 +76,7 @@
     nix-template
     nix-index
     nix-tree
+    home-manager
     # nvfetcher
   ];
 
