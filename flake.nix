@@ -180,12 +180,14 @@
     };
 
     #############################################
-    homeConfigurations = {
-      nixos = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations = let
+      username = "nixos";
+    in {
+      ${username} = home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
         stateVersion = "22.05";
-        username = "nixos";
-        homeDirectory = "/home/nixos";
+        username = "${username}";
+        homeDirectory = "/home/${username}";
         configuration = {
           imports = [
             ./home-manager/git.nix

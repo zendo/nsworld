@@ -6,7 +6,6 @@
   home.packages = with pkgs; [
     unp
     unzip
-    unrar
     patool
     btop
     ctop # containers monitor
