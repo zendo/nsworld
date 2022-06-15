@@ -1,18 +1,15 @@
-/*
- git clone https://github.com/nix-community/NixOS-WSL.git
- 
- nix build .#nixosConfigurations.mysystem.config.system.build.installer
- 
- add inputs: nixpkgs hm
- add modules: home-manager
- */
 {
   config,
   lib,
   pkgs,
   inputs,
+  modulesPath,
   ...
 }: {
+  imports = [
+    "${modulesPath}/profiles/minimal.nix"
+  ];
+
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "22.05";
 

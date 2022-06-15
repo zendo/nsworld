@@ -29,6 +29,8 @@
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+
     # nixos-cn.url = "github:nixos-cn/flakes";
   };
 
@@ -42,6 +44,7 @@
     nur,
     musnix,
     emacs-overlay,
+    nixos-wsl,
     ...
   }: let
     commonFeatures = [
@@ -109,7 +112,6 @@
                 ./home-manager/cli.nix
                 ./home-manager/zsh.nix
                 ./home-manager/alias.nix
-                ######## wsl #########
                 ./home-manager/xdg.nix
                 ./home-manager/gui.nix
                 ./home-manager/editor.nix
@@ -144,16 +146,61 @@
       };
 
     #############################################
-    homeConfigurations.nixos = home-manager.lib.homeManagerConfiguration {
+    # nix build .#nixosConfigurations.wsl.config.system.build.installer
+    nixosConfigurations.wsl = let
+      username = "win";
+    in
+      nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      stateVersion = "22.05";
-      homeDirectory = "/home/nixos";
-      configuration.imports = [
-        ./home-manager/git.nix
-        ./home-manager/cli.nix
-        ./home-manager/zsh.nix
-        ./home-manager/alias.nix
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./modules/wsl.nix
+
+        nixos-wsl.nixosModules.wsl
+        {
+          wsl = {
+            enable = true;
+            automountPath = "/mnt";
+            defaultUser = "${username}";
+            startMenuLaunchers = true;
+
+            # Enable native Docker support
+            # docker-native.enable = true;
+
+            # Enable integration with Docker Desktop (needs to be installed)
+            # docker-desktop.enable = true;
+          };
+        }
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          # home-manager.extraSpecialArgs = { inherit self inputs; };
+          home-manager.users.${username}.imports = [
+            ./home-manager/git.nix
+            ./home-manager/cli.nix
+            ./home-manager/zsh.nix
+            ./home-manager/alias.nix
+          ];
+        }
       ];
+    };
+
+    #############################################
+    homeConfigurations = {
+      nixos = home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+        stateVersion = "22.05";
+        username = "nixos";
+        homeDirectory = "/home/nixos";
+        configuration.imports = [
+          ./home-manager/git.nix
+          ./home-manager/cli.nix
+          ./home-manager/zsh.nix
+          ./home-manager/alias.nix
+        ];
+      };
     };
 
     #############################################
