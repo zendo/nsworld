@@ -54,7 +54,7 @@
       ./modules/nixconfig.nix
     ];
 
-    pkgsFeatures = [
+    pkgsConfig = [
       {
         nixpkgs.config = {
           allowUnfree = true;
@@ -64,7 +64,7 @@
       }
     ];
 
-    overlayFeatures = [
+    pkgsOverlay = [
       {
         nixpkgs.overlays = [
           nur.overlay
@@ -87,8 +87,8 @@
         specialArgs = {inherit inputs username;};
         modules =
           commonFeatures
-          ++ pkgsFeatures
-          ++ overlayFeatures
+          ++ pkgsConfig
+          ++ pkgsOverlay
           ++ [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
             nixos-hardware.nixosModules.common-gpu-amd
@@ -113,7 +113,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit self inputs hostname; };
-              home-manager.users.${username} = import ./home-manager/default.nix;
+              home-manager.users.${username} = import ./home-manager;
             }
           ];
       };
@@ -127,8 +127,8 @@
         specialArgs = {inherit inputs username;};
         modules =
           commonFeatures
-          ++ pkgsFeatures
-          ++ overlayFeatures
+          ++ pkgsConfig
+          ++ pkgsOverlay
           ++ [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
             nixos-hardware.nixosModules.common-cpu-intel
@@ -149,7 +149,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules =
-        pkgsFeatures
+        pkgsConfig
         ++ [
           "${inputs.nixos-wsl}/configuration.nix"
 
