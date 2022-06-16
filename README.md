@@ -56,6 +56,7 @@ dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
 
 # KDE
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
+OnzeMenu11 
 
 # RIME easy-en
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" bash -s -- rime-install BlindingDark/rime-easy-en:customize:schema=luna_pinyin

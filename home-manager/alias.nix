@@ -1,7 +1,8 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   home.shellAliases = {
     cat = "bat -p";
-    ps = "ps -ef";
+    # ps = "ps -ef";
+    ps = "${pkgs.procs}/bin/procs";
     l = "exa -l --icons";
     "la." = "ls -d .*";
     rm = "trash-put";
@@ -9,6 +10,7 @@
     rm-empty = "trash-empty";
     mount-ls = "mount | column -t";
     age = "rage";
+    bc = "${pkgs.kalker}/bin/kalker";
     beep = "echo -en \"\\007\"";
     ip = "ip --color=auto";
     ipsb = "curl ip.sb";

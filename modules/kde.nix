@@ -78,6 +78,7 @@
     # libsForQt5.kcontacts
     # libsForQt5.korganizer
     libsForQt5.bismuth # tiling layout
+    # libsForQt5.lightly # theme
     # latte-dock
 
     falkon
