@@ -1,8 +1,13 @@
 {
   config,
   pkgs,
+  lib,
+  self,
+  hostname,
   ...
-}: {
+}: let
+  gnomeEnable = self.nixosConfigurations.${hostname}.config.services.xserver.desktopManager.gnome.enable;
+in {
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/.emacs.d/bin"
@@ -15,6 +20,12 @@
 
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
+
+    # fix tiny cursor at qt-apps
+    ".icons/default/index.theme".text = lib.optionalString (gnomeEnable) ''
+      [icon theme]
+      Inherits=Adwaita
+    '';
 
     # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
     #   owner = "icy-thought";
@@ -42,5 +53,14 @@
       StartupNotify=false
       X-GNOME-Autostart-enabled=true
     '';
+  };
+
+  xdg.desktopEntries.spotify = lib.mkIf gnomeEnable {
+    name = "Spotify";
+    genericName = "Music Player";
+    icon = "spotify-client";
+    exec = "spotify %U --force-device-scale-factor=2";
+    terminal = false;
+    categories = ["Application" "Music"];
   };
 }

@@ -80,6 +80,7 @@
     #############################################
     nixosConfigurations.yoga = let
       username = "iab";
+      hostname = "yoga";
     in
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -93,7 +94,7 @@
             nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/yoga/hardware-configuration.nix
             # ./hosts/yoga/edid.nix
-            {networking.hostName = "yoga";}
+            {networking.hostName = "${hostname}";}
 
             ./modules/sound.nix
             ./modules/fonts.nix
@@ -111,18 +112,8 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              # home-manager.extraSpecialArgs = { inherit self inputs; };
-              home-manager.users.${username}.imports = [
-                ./home-manager/git.nix
-                ./home-manager/cli.nix
-                ./home-manager/alias.nix
-                ./home-manager/zsh.nix
-                ./home-manager/bash.nix
-                ./home-manager/xdg.nix
-                ./home-manager/gui.nix
-                ./home-manager/editor.nix
-                ./home-manager/gtk.nix
-              ];
+              home-manager.extraSpecialArgs = { inherit self inputs hostname; };
+              home-manager.users.${username} = import ./home-manager/default.nix;
             }
           ];
       };

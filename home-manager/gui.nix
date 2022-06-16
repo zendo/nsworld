@@ -33,6 +33,9 @@
     # vlc
     ffmpeg
     spotify
+    # (spotify.override {
+    #   deviceScaleFactor = 2;
+    # })
     mousai # 听歌识曲
     # shortwave
     # easyeffects
