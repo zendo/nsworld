@@ -22,7 +22,7 @@ in {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
 
     # fix tiny cursor at qt-apps
-    ".icons/default/index.theme".text = lib.optionalString (gnomeEnable) ''
+    ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
       [icon theme]
       Inherits=Adwaita
     '';
@@ -55,12 +55,23 @@ in {
     '';
   };
 
-  xdg.desktopEntries.spotify = lib.mkIf gnomeEnable {
-    name = "Spotify";
-    genericName = "Music Player";
-    icon = "spotify-client";
-    exec = "spotify %U --force-device-scale-factor=2";
-    terminal = false;
-    categories = ["Application" "Music"];
-  };
+  # xdg.desktopEntries.spotify = lib.mkIf gnomeEnable {
+  #   name = "Spotify";
+  #   genericName = "Music Player";
+  #   icon = "spotify-client";
+  #   exec = "spotify %U --force-device-scale-factor=2";
+  #   terminal = false;
+  #   categories = ["Application" "Music"];
+  # };
+
+  home.packages = with pkgs; [
+    (
+      if gnomeEnable
+      then
+        (spotify.override {
+          deviceScaleFactor = 2;
+        })
+      else spotify
+    )
+  ];
 }

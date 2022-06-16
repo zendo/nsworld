@@ -32,7 +32,7 @@
     mpv
     # vlc
     ffmpeg
-    spotify
+    # spotify
     # (spotify.override {
     #   deviceScaleFactor = 2;
     # })
