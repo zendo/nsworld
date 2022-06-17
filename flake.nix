@@ -1,5 +1,5 @@
 {
-  description = "Hello world";
+  description = "Hello World";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
@@ -23,7 +23,7 @@
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
     templates.url = github:NixOS/templates;
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/a73125db1db85e79b3c89cfd11e2c59195b6be95";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/e8aa04eaa4cb8664a72191547fc2395dddd3c112";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     nur.url = "github:nix-community/NUR";
@@ -99,8 +99,8 @@
             ./modules/sound.nix
             ./modules/fonts.nix
             ./modules/virtual.nix
-            # ./modules/gnome.nix
-            ./modules/kde.nix
+            ./modules/gnome.nix
+            # ./modules/kde.nix
 
             ./overlays/v2raya/v2raya.nix
             # {services.v2raya.enable = true;}
