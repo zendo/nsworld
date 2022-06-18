@@ -4,6 +4,12 @@
   inputs,
   ...
 }: {
+  nixpkgs.config = {
+    allowUnfree = true;
+    # allowBroken = true;
+    # allowUnsupportedSystem = true;
+  };
+
   nix.settings = {
     # keep-outputs = true
     # keep-derivations = true

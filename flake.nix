@@ -11,6 +11,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     flake-compat = {
       url = github:edolstra/flake-compat;
       flake = false;
@@ -38,6 +40,7 @@
     self,
     nixpkgs,
     # local,
+    flake-utils,
     home-manager,
     nixos-hardware,
     templates,
@@ -47,21 +50,16 @@
     nixos-wsl,
     ...
   }: let
+    system = "x86_64-linux";
+
     commonFeatures = [
       ./modules/base.nix
       ./modules/user.nix
       ./modules/network.nix
       ./modules/nixconfig.nix
-    ];
-
-    pkgsConfig = [
-      {
-        nixpkgs.config = {
-          allowUnfree = true;
-          # allowBroken = true;
-          # allowUnsupportedSystem = true;
-        };
-      }
+      ./modules/sound.nix
+      ./modules/fonts.nix
+      ./modules/virtual.nix
     ];
 
     pkgsOverlay = [
@@ -76,163 +74,123 @@
         ];
       }
     ];
-  in {
-    #############################################
-    nixosConfigurations.yoga = let
-      username = "iab";
-      hostname = "yoga";
-    in
-      nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs username;};
-        modules =
-          commonFeatures
-          ++ pkgsConfig
-          ++ pkgsOverlay
-          ++ [
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-gpu-amd
-            ./hosts/yoga/hardware-configuration.nix
-            # ./hosts/yoga/edid.nix
-            {networking.hostName = "${hostname}";}
+  in
+    {
+      #############################################
+      nixosConfigurations.yoga = let
+        username = "iab";
+        hostname = "yoga";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit inputs username;};
+          modules =
+            commonFeatures
+            ++ pkgsOverlay
+            ++ [
+              nixos-hardware.nixosModules.common-pc-laptop-ssd
+              nixos-hardware.nixosModules.common-gpu-amd
+              ./hosts/yoga/hardware-configuration.nix
+              # ./hosts/yoga/edid.nix
+              {networking.hostName = "${hostname}";}
 
-            ./modules/sound.nix
-            ./modules/fonts.nix
-            ./modules/virtual.nix
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+              ./modules/gnome.nix
+              # ./modules/kde.nix
 
-            ./overlays/v2raya/v2raya.nix
-            # {services.v2raya.enable = true;}
+              ./overlays/v2raya/v2raya.nix
+              # {services.v2raya.enable = true;}
 
-            musnix.nixosModules.musnix
-            {musnix.enable = true;}
+              musnix.nixosModules.musnix
+              {musnix.enable = true;}
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit self inputs hostname; };
-              home-manager.users.${username} = import ./home-manager;
-            }
-          ];
-      };
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {inherit self inputs hostname;};
+                home-manager.users.${username} = import ./home-manager;
+              }
+            ];
+        };
 
-    #############################################
-    nixosConfigurations.svp = let
-      username = "zendo";
-    in
-      nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs username;};
-        modules =
-          commonFeatures
-          ++ pkgsConfig
-          ++ pkgsOverlay
-          ++ [
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-cpu-intel
-            ./hosts/svp/hardware-configuration.nix
-            {networking.hostName = "svp";}
+      #############################################
+      nixosConfigurations.svp = let
+        username = "zendo";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit inputs username;};
+          modules =
+            commonFeatures
+            ++ pkgsOverlay
+            ++ [
+              nixos-hardware.nixosModules.common-pc-laptop-ssd
+              nixos-hardware.nixosModules.common-cpu-intel
+              ./hosts/svp/hardware-configuration.nix
+              {networking.hostName = "svp";}
 
-            ./modules/sound.nix
-            ./modules/fonts.nix
-            ./modules/gnome.nix
-            # ./modules/kde.nix
-            ./modules/virtual.nix
-          ];
-      };
+              ./modules/gnome.nix
+              # ./modules/kde.nix
+            ];
+        };
 
-    #############################################
-    # nix build .#nixosConfigurations.wsl.config.system.build.installer
-    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules =
-        pkgsConfig
-        ++ [
+      #############################################
+      # nix build .#nixosConfigurations.wsl.config.system.build.installer
+      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs;};
+        modules = [
           "${inputs.nixos-wsl}/configuration.nix"
-
-          ./modules/wsl.nix
           ./modules/nixconfig.nix
+          ./hosts/wsl.nix
+        ];
+      };
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            # home-manager.extraSpecialArgs = { inherit self inputs; };
-            home-manager.users.nixos.imports = [
+      #############################################
+      # home-manager build switch .#nixos --flake
+      homeConfigurations = let
+        username = "nixos";
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in {
+        ${username} = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs system;
+          username = "${username}";
+          homeDirectory = "/home/${username}";
+          stateVersion = "22.05";
+          configuration = {
+            imports = [
               ./home-manager/git.nix
               ./home-manager/cli.nix
               ./home-manager/zsh.nix
               ./home-manager/alias.nix
             ];
-          }
-        ];
-    };
-
-    #############################################
-    homeConfigurations = let
-      username = "nixos";
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    in {
-      ${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs system;
-        username = "${username}";
-        homeDirectory = "/home/${username}";
-        stateVersion = "22.05";
-        configuration = {
-          imports = [
-            ./home-manager/git.nix
-            ./home-manager/cli.nix
-            ./home-manager/zsh.nix
-            ./home-manager/alias.nix
-          ];
+          };
         };
       };
-    };
 
-    #############################################
-    # nix build .#nixosConfigurations.vm.config.system.build.vm
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        ({pkgs, ...}: {
-          # disabledModules = ["services/desktops/pipewire/pipewire.nix"];
-          imports = [
-            "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-            # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
-            ./modules/base.nix
-            ./modules/network.nix
-            ./modules/nixconfig.nix
-            ./modules/sound.nix
-            ./modules/gnome.nix
+      #############################################
+      # nix build .#nixosConfigurations.vmtest.config.system.build.vmtest
+      nixosConfigurations.vmtest = let
+        username = "test";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit inputs username;};
+          modules = [
+            ./hosts/vmtest.nix
           ];
-
-          services.xserver.displayManager.autoLogin.user = "user";
-
-          virtualisation = {
-            memorySize = 1024 * 3;
-            diskSize = 1024 * 8;
-            cores = 4;
-            msize = 104857600;
-          };
-
-          users.users.root = {
-            password = "root";
-          };
-          users.users.user = {
-            password = "user";
-            isNormalUser = true;
-            extraGroups = ["wheel"];
-          };
-        })
-      ];
-    };
-  };
+        };
+    }
+    // flake-utils.lib.eachDefaultSystem
+    (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        devShell = import ./shell.nix {inherit pkgs;};
+      }
+    );
 }
