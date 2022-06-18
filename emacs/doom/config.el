@@ -117,13 +117,6 @@
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (setq vundo-roll-back-on-quit nil))
 
-;; tree-sitter
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer
 (map! :map dired-mode-map
