@@ -1,27 +1,36 @@
+let
+  flake = builtins.getFlake (toString ./.);
+  nixpkgs = import <nixpkgs> { };
+in
+{ inherit flake; }
+// flake
+// builtins
+// nixpkgs
+// nixpkgs.lib
+// flake.nixosConfigurations
+
+
 # (import
 #   (
-#     let
-#       lock = builtins.fromJSON (builtins.readFile ./flake.lock);
-#     in
-#       fetchTarball {
-#         url = "https://github.com/edolstra/flake-compat/archive/${lock.nodes.flake-compat.locked.rev}.tar.gz";
-#         sha256 = lock.nodes.flake-compat.locked.narHash;
-#       }
+#     let lock = builtins.fromJSON (builtins.readFile ./flake.lock); in
+#     fetchTarball {
+#       url = "https://github.com/edolstra/flake-compat/archive/${lock.nodes.flake-compat.locked.rev}.tar.gz";
+#       sha256 = lock.nodes.flake-compat.locked.narHash;
+#     }
 #   )
-#   {
-#     src = ./.;
-#   })
-# .defaultNix
+#   { src = ./.; }
+# ).defaultNix
 
 
-{pkgs ? import <nixpkgs> {}}: let
-  system = pkgs.system;
-  flake = builtins.getFlake (toString ./.);
-in {
-  inherit flake builtins;
-  lib = flake.inputs.nixpkgs.lib;
-  pkgs = flake.inputs.nixpkgs.legacyPackages.${system};
-}
+# {pkgs ? import <nixpkgs> {}}: let
+#   system = pkgs.system;
+#   flake = builtins.getFlake (toString ./.);
+# in {
+#   inherit flake builtins;
+#   lib = flake.inputs.nixpkgs.lib;
+#   pkgs = flake.inputs.nixpkgs.legacyPackages.${system};
+# }
+
 
 # {
 #   name ? (with builtins; head (split "\n" (readFile /etc/hostname))),

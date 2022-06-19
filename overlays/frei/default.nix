@@ -19,7 +19,7 @@ buildGoModule rec {
   ldflags = ["-s" "-w" "-X=main.Version=${version}"];
 
   meta = with lib; {
-    description = "Modern replacement for free";
+    description = "Modern replacement command free";
     homepage = "https://github.com/alexcoder04/frei";
     license = licenses.gpl3;
     maintainers = with maintainers; [zendo];
