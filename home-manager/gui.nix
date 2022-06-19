@@ -10,6 +10,7 @@
     # zee
     # mprober
     # dippi
+    # frei
 
     gitg
     v2ray

@@ -12,6 +12,7 @@ final: prev: {
 
   # go
   v2raya = prev.callPackage ./v2raya {};
+  frei = prev.callPackage ./frei {};
 
   # python
 
