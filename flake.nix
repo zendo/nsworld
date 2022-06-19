@@ -188,9 +188,18 @@
     // flake-utils.lib.eachDefaultSystem
     (
       system: let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {inherit system;};
       in {
-        devShell = import ./shell.nix {inherit pkgs;};
+        # devShell = import ./shell.nix {inherit pkgs;};
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            git
+            jq
+            gnumake
+            alejandra
+            nixUnstable
+          ];
+        };
       }
     );
 }
