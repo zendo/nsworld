@@ -77,9 +77,7 @@ in {
   environment.variables = {
   };
 
-  # programs.nix-ld.enable = true;
-
-  # Can not work without channels.
+  # Need channels
   programs.command-not-found.enable = false;
 
   documentation = {

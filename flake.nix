@@ -12,41 +12,46 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
-
     flake-compat = {
-      url = github:edolstra/flake-compat;
+      url = "github:edolstra/flake-compat";
       flake = false;
     };
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay/e8aa04eaa4cb8664a72191547fc2395dddd3c112";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nixos-cn = {
+    #   url = "github:nixos-cn/flakes";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     # devshell.url = "github:numtide/devshell";
-    musnix.url = github:musnix/musnix;
+    nixos-wsl.url = github:nix-community/NixOS-WSL;
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
+    musnix.url = github:musnix/musnix;
     templates.url = github:NixOS/templates;
-
-    emacs-overlay.url = "github:nix-community/emacs-overlay/e8aa04eaa4cb8664a72191547fc2395dddd3c112";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    nur.url = "github:nix-community/NUR";
-    nur.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-
-    # nixos-cn.url = "github:nixos-cn/flakes";
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
     # local,
-    flake-utils,
     home-manager,
+    flake-utils,
+    emacs-overlay,
     nixos-hardware,
     templates,
     nur,
     musnix,
-    emacs-overlay,
     nixos-wsl,
     ...
   }: let
@@ -188,7 +193,12 @@
     // flake-utils.lib.eachDefaultSystem
     (
       system: let
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {
+          inherit system;
+          allowUnfree = true;
+          # allowBroken = true;
+          # allowUnsupportedSystem = true;
+        };
       in {
         # devShell = import ./shell.nix {inherit pkgs;};
         devShells.default = pkgs.mkShell {
