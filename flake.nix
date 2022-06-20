@@ -121,6 +121,7 @@
       #############################################
       nixosConfigurations.svp = let
         username = "zendo";
+        hostname = "svp";
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -132,10 +133,18 @@
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               nixos-hardware.nixosModules.common-cpu-intel
               ./hosts/svp/hardware-configuration.nix
-              {networking.hostName = "svp";}
+              {networking.hostName = "${hostname}";}
 
               ./modules/gnome.nix
               # ./modules/kde.nix
+
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {inherit self inputs hostname;};
+                home-manager.users.${username} = import ./home-manager;
+              }
             ];
         };
 
@@ -147,15 +156,11 @@
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = {inherit inputs;};
+          specialArgs = {inherit inputs hostname username;};
           modules = [
             "${inputs.nixos-wsl}/configuration.nix"
             ./modules/nixconfig.nix
             ./hosts/wsl.nix
-            ({config, lib, ...}: {
-              wsl.defaultUser = lib.mkForce "${username}";
-              networking.hostName = "${hostname}";
-            })
 
             home-manager.nixosModules.home-manager
             {
@@ -165,6 +170,7 @@
               home-manager.users.${username}.imports = [
                 ./home-manager/git.nix
                 ./home-manager/cli.nix
+                ./home-manager/bash.nix
                 ./home-manager/zsh.nix
                 ./home-manager/alias.nix
               ];
