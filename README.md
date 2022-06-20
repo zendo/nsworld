@@ -27,7 +27,7 @@ nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mir
 
 ``` shell
 # make livecd
-nixos-generate -f iso -c ~/.nsworld/lib/iso.nix
+nixos-generate -f iso -c ~/.nsworld/hosts/iso.nix
 
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt

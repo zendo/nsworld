@@ -57,7 +57,7 @@
   }: let
     system = "x86_64-linux";
 
-    commonFeatures = [
+    coreModules = [
       ./modules/base.nix
       ./modules/user.nix
       ./modules/network.nix
@@ -67,7 +67,7 @@
       ./modules/virtual.nix
     ];
 
-    pkgsOverlay = [
+    pkgOverlays = [
       {
         nixpkgs.overlays = [
           nur.overlay
@@ -90,8 +90,8 @@
           inherit system;
           specialArgs = {inherit inputs username;};
           modules =
-            commonFeatures
-            ++ pkgsOverlay
+            coreModules
+            ++ pkgOverlays
             ++ [
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               nixos-hardware.nixosModules.common-gpu-amd
@@ -127,8 +127,8 @@
           inherit system;
           specialArgs = {inherit inputs username;};
           modules =
-            commonFeatures
-            ++ pkgsOverlay
+            coreModules
+            ++ pkgOverlays
             ++ [
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               nixos-hardware.nixosModules.common-cpu-intel
