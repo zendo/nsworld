@@ -56,31 +56,46 @@
     ...
   }: let
     mkHost = import ./lib/mkHost.nix inputs;
+
+    pkgOverlays = [
+      {
+        nixpkgs.overlays = [
+          nur.overlay
+          emacs-overlay.overlay
+          (import ./overlays)
+          # (final: prev: {
+          #   local = local.legacyPackages.${prev.system};
+          # })
+        ];
+      }
+    ];
   in
     {
       nixosConfigurations = {
         yoga = mkHost {
           username = "iab";
           hostname = "yoga";
-          extra-modules = [
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-gpu-amd
+          extraModules =
+            pkgOverlays
+            ++ [
+              nixos-hardware.nixosModules.common-pc-laptop-ssd
+              nixos-hardware.nixosModules.common-gpu-amd
 
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+              ./modules/gnome.nix
+              # ./modules/kde.nix
 
-            ./overlays/v2raya/v2raya.nix
-            # {services.v2raya.enable = true;}
+              ./overlays/v2raya/v2raya.nix
+              # {services.v2raya.enable = true;}
 
-            musnix.nixosModules.musnix
-            {musnix.enable = true;}
-          ];
+              musnix.nixosModules.musnix
+              {musnix.enable = true;}
+            ];
         };
 
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
-          extra-modules = [
+          extraModules = [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
             nixos-hardware.nixosModules.common-cpu-intel
 

@@ -11,6 +11,7 @@
     # mprober
     # dippi
     # frei
+    nix-index-updatedb
 
     gitg
     v2ray

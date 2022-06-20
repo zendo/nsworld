@@ -1,6 +1,7 @@
 final: prev: {
   # scripts
   forgit = prev.callPackage ./forgit {};
+  nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
 
   # trivial
   harmonyos-sans = prev.callPackage ./harmonyos-sans {};
