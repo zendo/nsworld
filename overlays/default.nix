@@ -16,6 +16,7 @@ final: prev: {
   frei = prev.callPackage ./frei {};
 
   # python
+  dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
 
   # nodejs
 

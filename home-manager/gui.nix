@@ -11,6 +11,7 @@
     # mprober
     # dippi
     # frei
+    dynamic-wallpaper
 
     gitg
     v2ray
