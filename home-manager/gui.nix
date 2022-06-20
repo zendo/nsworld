@@ -11,7 +11,6 @@
     # mprober
     # dippi
     # frei
-    nix-index-updatedb
 
     gitg
     v2ray
@@ -92,6 +91,10 @@
     wayland-utils
     # wdisplays # wlr
   ];
+
+  programs.pandoc = {
+    enable = true;
+  };
 
   programs.firefox = {
     enable = true;

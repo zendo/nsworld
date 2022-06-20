@@ -2,11 +2,9 @@
   config,
   pkgs,
   lib,
-  hostname,
   username,
   ...
 }: {
-  networking.hostName = "${hostname}";
   wsl.defaultUser = lib.mkForce "${username}";
 
   time.timeZone = "Asia/Shanghai";
@@ -37,8 +35,8 @@
   ];
 
   environment.shellAliases = {
-    wsl-proxy = "export http_proxy=http://192.168.2.118:10809 ; \\
-    export https_proxy=http://192.168.2.118:10809";
-    # wsl-switch = "";
+    wsl-proxy = "export http_proxy=http://192.168.2.118:10811 ; \\
+    export https_proxy=http://192.168.2.118:10811";
+    wsl-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#wsl";
   };
 }

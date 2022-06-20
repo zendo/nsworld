@@ -95,13 +95,15 @@
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
-          extraModules = [
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-cpu-intel
+          extraModules =
+            pkgOverlays
+            ++ [
+              nixos-hardware.nixosModules.common-pc-laptop-ssd
+              nixos-hardware.nixosModules.common-cpu-intel
 
-            ./modules/gnome.nix
-            # ./modules/kde.nix
-          ];
+              ./modules/gnome.nix
+              # ./modules/kde.nix
+            ];
         };
       };
 
@@ -109,31 +111,31 @@
       # nix build .#nixosConfigurations.wsl.config.system.build.installer
       nixosConfigurations.wsl = let
         username = "iab";
-        hostname = "wsl";
-        system = "x86_64-linux";
       in
         nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {inherit inputs hostname username;};
-          modules = [
-            "${inputs.nixos-wsl}/configuration.nix"
-            ./modules/nixconfig.nix
-            ./hosts/wsl.nix
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs username;};
+          modules =
+            pkgOverlays
+            ++ [
+              "${inputs.nixos-wsl}/configuration.nix"
+              ./modules/nixconfig.nix
+              ./hosts/wsl.nix
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {inherit inputs;};
-              home-manager.users.${username}.imports = [
-                ./home-manager/git.nix
-                ./home-manager/cli.nix
-                ./home-manager/bash.nix
-                ./home-manager/zsh.nix
-                ./home-manager/alias.nix
-              ];
-            }
-          ];
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {inherit inputs;};
+                home-manager.users.${username}.imports = [
+                  ./home-manager/git.nix
+                  ./home-manager/cli.nix
+                  ./home-manager/bash.nix
+                  ./home-manager/zsh.nix
+                  ./home-manager/alias.nix
+                ];
+              }
+            ];
         };
 
       #############################################

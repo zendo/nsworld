@@ -83,6 +83,7 @@
     nix-tree
     home-manager
     # nvfetcher
+    nix-index-updatedb
   ];
 
   programs.home-manager.enable = true;
@@ -135,10 +136,6 @@
     enable = false;
     enableBashIntegration = true;
     enableZshIntegration = true;
-  };
-
-  programs.pandoc = {
-    enable = true;
   };
 
   home.stateVersion = "22.05";
