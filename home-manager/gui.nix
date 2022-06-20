@@ -21,6 +21,7 @@
     foot
     alacritty
 
+    # Browsers
     # (google-chrome.override {
     #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
     # })
@@ -29,6 +30,13 @@
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
 
+    # Social media
+    tdesktop
+    # nheko
+    fractal
+    # discord
+
+    # Multi-media
     qbittorrent
     mpv
     # vlc
@@ -41,17 +49,16 @@
     mousai # 听歌识曲
     # shortwave
     # easyeffects
+
+    # Image manipulation
     # shutter
-    tdesktop
-    # nheko
-    fractal
-    # discord
+    yacreader
+
     meld
     # deja-dup
     # rclone
     # rclone-browser
     # vorta
-    yacreader
     # qalculate-gtk # scientific calculator
     # bottles # wine manager
     # yuzu

@@ -141,32 +141,41 @@
 
       #############################################
       # nix build .#nixosConfigurations.wsl.config.system.build.installer
-      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit inputs;};
-        modules = [
-          "${inputs.nixos-wsl}/configuration.nix"
-          ./modules/nixconfig.nix
-          ./hosts/wsl.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit self inputs;};
-            home-manager.users.nixos.imports = [
-              ./home-manager/git.nix
-              ./home-manager/cli.nix
-              ./home-manager/zsh.nix
-              ./home-manager/alias.nix
-            ];
-          }
-        ];
-      };
+      nixosConfigurations.wsl = let
+        username = "iab";
+        hostname = "wsl";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit inputs;};
+          modules = [
+            "${inputs.nixos-wsl}/configuration.nix"
+            ./modules/nixconfig.nix
+            ./hosts/wsl.nix
+            ({config, lib, ...}: {
+              wsl.defaultUser = lib.mkForce "${username}";
+              networking.hostName = "${hostname}";
+            })
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit inputs;};
+              home-manager.users.${username}.imports = [
+                ./home-manager/git.nix
+                ./home-manager/cli.nix
+                ./home-manager/zsh.nix
+                ./home-manager/alias.nix
+              ];
+            }
+          ];
+        };
 
       #############################################
       # home-manager build switch .#nixos --flake
       homeConfigurations = let
-        username = "nixos";
+        username = "iab";
         system = "x86_64-linux";
         pkgs = import nixpkgs {
           inherit system;
