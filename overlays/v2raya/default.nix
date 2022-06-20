@@ -10,13 +10,13 @@
   symlinkJoin,
 }: let
   pname = "v2raya";
-  version = "1.5.7";
+  version = "1.5.8.1";
 
   src = fetchFromGitHub {
     owner = "v2rayA";
     repo = "v2rayA";
     rev = "v${version}";
-    sha256 = "sha256-nKUVcrSi69DOrvxqXsYYDWCtkORGyGWlbvLL9ABedUg=";
+    sha256 = "sha256-zx+AI7AB/Y/E943lAX06NqOd4CrS+YGSmVoYzJO6iHw=";
   };
 
   web = mkYarnPackage {
@@ -37,7 +37,7 @@ in
   buildGoModule {
     inherit pname version;
     src = "${src}/service";
-    vendorSha256 = "sha256-ZTqYZ57PUTKauVnqGPIKWg2qsFeDIc3Z2/4mgc8M0Ww=";
+    vendorSha256 = "sha256-88tHCnx6qEsRHm5xNyroRL+fh+nsVeWTEqCPEZM9zX0=";
     subPackages = ["."];
     nativeBuildInputs = [makeWrapper];
     preBuild = ''

@@ -148,6 +148,18 @@
           "${inputs.nixos-wsl}/configuration.nix"
           ./modules/nixconfig.nix
           ./hosts/wsl.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {inherit self inputs;};
+            home-manager.users.nixos.imports = [
+              ./home-manager/git.nix
+              ./home-manager/cli.nix
+              ./home-manager/zsh.nix
+              ./home-manager/alias.nix
+            ];
+          }
         ];
       };
 

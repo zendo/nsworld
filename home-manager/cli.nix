@@ -4,16 +4,21 @@
   ...
 }: {
   home.packages = with pkgs; [
+    # compressor / archiver packages
     unzip
     unrar
     patool
+
+    # system monitor
     btop
     ctop # containers monitor
     powertop
     bottom # btm
     psmisc # pstree
-    hstr # hh: history
     ikill
+
+    # tui utils
+    hstr # hh: history
     cht-sh
     tealdeer
     trash-cli

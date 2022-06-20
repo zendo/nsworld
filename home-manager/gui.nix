@@ -33,6 +33,7 @@
     mpv
     # vlc
     ffmpeg
+    amberol
     # spotify
     # (spotify.override {
     #   deviceScaleFactor = 2;

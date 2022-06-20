@@ -68,7 +68,7 @@
       # wl-color-picker
       # notejot
       # lollypop
-      rhythmbox
+      # rhythmbox
       gparted
       dconf2nix
       kooha
