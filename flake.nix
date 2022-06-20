@@ -94,9 +94,9 @@
             ++ pkgOverlays
             ++ [
               ./hosts/yoga
+              {networking.hostName = "${hostname}";}
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               nixos-hardware.nixosModules.common-gpu-amd
-              {networking.hostName = "${hostname}";}
 
               ./modules/gnome.nix
               # ./modules/kde.nix
@@ -129,10 +129,10 @@
             coreModules
             ++ pkgOverlays
             ++ [
+              ./hosts/svp
+              {networking.hostName = "${hostname}";}
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               nixos-hardware.nixosModules.common-cpu-intel
-              ./hosts/svp/hardware-configuration.nix
-              {networking.hostName = "${hostname}";}
 
               ./modules/gnome.nix
               # ./modules/kde.nix
