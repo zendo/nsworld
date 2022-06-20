@@ -26,6 +26,11 @@
     server = "127.0.0.1:20170";
   };
 
+  # systemd.services.nix-daemon.environment = {
+  #   http_proxy = "http://127.0.0.1:20171";
+  #   https_proxy = "http://127.0.0.1:20171";
+  # };
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 

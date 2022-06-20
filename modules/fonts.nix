@@ -12,7 +12,7 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      sarasa-gothic
+      # sarasa-gothic
       # lxgw-wenkai
       # source-han-sans
       # source-han-serif
@@ -28,8 +28,8 @@
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
         monospace = [
-          "Sarasa Mono SC"
           "DejaVu Sans Mono"
+          "Sarasa Mono SC"
         ];
         sansSerif = [
           "Noto Sans CJK SC"

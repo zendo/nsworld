@@ -88,15 +88,14 @@
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = {inherit inputs username;};
+          specialArgs = {inherit inputs hostname username;};
           modules =
             coreModules
             ++ pkgOverlays
             ++ [
+              ./hosts/yoga
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               nixos-hardware.nixosModules.common-gpu-amd
-              ./hosts/yoga/hardware-configuration.nix
-              # ./hosts/yoga/edid.nix
               {networking.hostName = "${hostname}";}
 
               ./modules/gnome.nix
@@ -125,7 +124,7 @@
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = {inherit inputs username;};
+          specialArgs = {inherit inputs hostname username;};
           modules =
             coreModules
             ++ pkgOverlays
