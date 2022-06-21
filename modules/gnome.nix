@@ -100,7 +100,6 @@
       # kimpanel
       # pixel-saver
       # gesture-improvements
-      desktop-icons-ng-ding
       ddterm
       ideapad-mode
       mpris-indicator-button

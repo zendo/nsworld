@@ -133,7 +133,7 @@
   };
 
   programs.nix-index = {
-    enable = false;
+    enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
   };
