@@ -6,6 +6,7 @@ in
     hostname,
     username,
     system ? "x86_64-linux",
+    overlays ? [],
     extraModules ? [],
   }:
     nixpkgs.lib.nixosSystem {
@@ -23,6 +24,8 @@ in
           ../modules/virtual.nix
           ../hosts/${hostname}
           {networking.hostName = "${hostname}";}
+
+          {nixpkgs.overlays = overlays;}
 
           home-manager.nixosModules.home-manager
           {

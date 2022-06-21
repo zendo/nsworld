@@ -57,17 +57,13 @@
   }: let
     mkHost = import ./lib/mkHost.nix inputs;
 
-    pkgOverlays = [
-      {
-        nixpkgs.overlays = [
-          nur.overlay
-          emacs-overlay.overlay
-          (import ./overlays)
-          # (final: prev: {
-          #   local = local.legacyPackages.${prev.system};
-          # })
-        ];
-      }
+    overlays = [
+      nur.overlay
+      emacs-overlay.overlay
+      (import ./overlays)
+      # (final: prev: {
+      #   local = local.legacyPackages.${prev.system};
+      # })
     ];
   in
     {
@@ -75,35 +71,33 @@
         yoga = mkHost {
           username = "iab";
           hostname = "yoga";
-          extraModules =
-            pkgOverlays
-            ++ [
-              nixos-hardware.nixosModules.common-pc-laptop-ssd
-              nixos-hardware.nixosModules.common-gpu-amd
+          inherit overlays;
+          extraModules = [
+            nixos-hardware.nixosModules.common-pc-laptop-ssd
+            nixos-hardware.nixosModules.common-gpu-amd
 
-              ./modules/gnome.nix
-              # ./modules/kde.nix
+            ./modules/gnome.nix
+            # ./modules/kde.nix
 
-              ./overlays/v2raya/v2raya.nix
-              # {services.v2raya.enable = true;}
+            ./overlays/v2raya/v2raya.nix
+            # {services.v2raya.enable = true;}
 
-              musnix.nixosModules.musnix
-              {musnix.enable = true;}
-            ];
+            musnix.nixosModules.musnix
+            {musnix.enable = true;}
+          ];
         };
 
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
-          extraModules =
-            pkgOverlays
-            ++ [
-              nixos-hardware.nixosModules.common-pc-laptop-ssd
-              nixos-hardware.nixosModules.common-cpu-intel
+          inherit overlays;
+          extraModules = [
+            nixos-hardware.nixosModules.common-pc-laptop-ssd
+            nixos-hardware.nixosModules.common-cpu-intel
 
-              ./modules/gnome.nix
-              # ./modules/kde.nix
-            ];
+            ./modules/gnome.nix
+            # ./modules/kde.nix
+          ];
         };
       };
 
@@ -115,27 +109,32 @@
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {inherit inputs username;};
-          modules =
-            pkgOverlays
-            ++ [
-              "${inputs.nixos-wsl}/configuration.nix"
-              ./modules/nixconfig.nix
-              ./hosts/wsl.nix
+          modules = [
+            "${inputs.nixos-wsl}/configuration.nix"
+            ./modules/nixconfig.nix
+            ./hosts/wsl.nix
 
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = {inherit inputs;};
-                home-manager.users.${username}.imports = [
-                  ./home-manager/git.nix
-                  ./home-manager/cli.nix
-                  ./home-manager/bash.nix
-                  ./home-manager/zsh.nix
-                  ./home-manager/alias.nix
-                ];
-              }
-            ];
+            {
+              nixpkgs.overlays = [
+                nur.overlay
+                emacs-overlay.overlay
+                (import ./overlays)
+              ];
+            }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit inputs;};
+              home-manager.users.${username}.imports = [
+                ./home-manager/git.nix
+                ./home-manager/cli.nix
+                ./home-manager/bash.nix
+                ./home-manager/zsh.nix
+                ./home-manager/alias.nix
+              ];
+            }
+          ];
         };
 
       #############################################
