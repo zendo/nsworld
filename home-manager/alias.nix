@@ -1,4 +1,12 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: let
+  dotConfig = "~/.nsworld";
+  httpProxy = "http://127.0.0.1:20171";
+  socksProxy = "socks5://127.0.0.1:20170";
+in {
   home.shellAliases = {
     cat = "bat -p";
     # ps = "ps -ef";
@@ -20,13 +28,13 @@
     inxi = "inxi -Fz";
 
     ee = "emacs -nw";
+    gedit = "gnome-text-editor";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
     wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
-    ssr = "export http_proxy=http://127.0.0.1:20171 ; \\
-    export https_proxy=http://127.0.0.1:20171";
+    ssr = "export http_proxy=${httpProxy} ;export https_proxy=${httpProxy}";
+    chrome-proxy = "google-chrome-stable --proxy-server=\"${socksProxy}\"";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
-    gedit = "gnome-text-editor";
     paperoni-single-html = "paperoni --export html --inline-images";
 
     nse = "nix search nixpkgs";
@@ -39,11 +47,11 @@
     ns-source = "readlink -f /nix/var/nix/profiles/system";
     ns-installed = "nix path-info --recursive /run/current-system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
-    ns-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#$(hostname)";
-    ns-boot = "sudo -E nixos-rebuild boot --flake ~/.nsworld#$(hostname)";
-    ns-upgrade-boot = "sudo -E nixos-rebuild boot --flake ~/.nsworld#$(hostname) \\
+    ns-switch = "sudo -E nixos-rebuild switch --flake ${dotConfig}#$(hostname)";
+    ns-boot = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname)";
+    ns-upgrade-boot = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname) \\
     --recreate-lock-file";
-    ns-upgrade-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#$(hostname) \\
+    ns-upgrade-switch = "sudo -E nixos-rebuild switch --flake ${dotConfig}#$(hostname) \\
     --recreate-lock-file";
   };
 }
