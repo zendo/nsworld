@@ -10,7 +10,7 @@ in
     extraModules ? [],
   }:
     nixpkgs.lib.nixosSystem {
-      system = system;
+      inherit system;
       specialArgs = {inherit inputs hostname username;};
       modules =
         extraModules
