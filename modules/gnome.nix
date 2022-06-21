@@ -33,6 +33,9 @@
         [org.gnome.system.location]
         enabled=true
 
+        [org.gnome.settings-daemon.plugins.color]
+        night-light-enabled=true
+
         [org.gnome.desktop.peripherals.touchpad]
         tap-to-click=true
         click-method='areas'
@@ -75,10 +78,10 @@
 
       gnome.gnome-tweaks
       gnome.dconf-editor
-      gnome.gnome-nettool
       gnome.gnome-power-manager
       gnome.gnome-sound-recorder
       # gnome-builder
+      # gnome.gnome-nettool
       # gnome-firmware-updater
     ]
     ++ (with gnomeExtensions; [

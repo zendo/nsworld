@@ -49,11 +49,6 @@ LC_ALL=C xdg-user-dirs-update --force
 # Emacs
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 
-# Gnome
-dconf dump /org/gnome/ > my-dconf
-dconf load /org/gnome/ < my-dconf
-dconf dump /org/gnome/ | dconf2nix > ~/.nsworld/home-manager/dconf.nix
-
 # KDE
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
 OnzeMenu11 

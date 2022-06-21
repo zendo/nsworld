@@ -21,7 +21,7 @@ in {
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
 
-    # fix tiny cursor at qt-apps
+    # fix tiny cursor qt apps in gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
       [icon theme]
       Inherits=Adwaita
