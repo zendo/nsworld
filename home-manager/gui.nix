@@ -5,8 +5,6 @@
 }: {
   home.packages = with pkgs; [
     # Overlays
-    harmonyos-sans
-    misans
     # zee
     # mprober
     # dippi

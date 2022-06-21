@@ -3,10 +3,6 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
 
-  # trivial
-  harmonyos-sans = prev.callPackage ./harmonyos-sans {};
-  misans = prev.callPackage ./misans {};
-
   # rust
   zee = prev.callPackage ./zee {};
   mprober = prev.callPackage ./mprober {};
