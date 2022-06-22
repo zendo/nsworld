@@ -2,11 +2,10 @@
   config,
   pkgs,
   lib,
-  self,
-  hostname,
+  nixosConfig,
   ...
 }: let
-  gnomeEnable = self.nixosConfigurations.${hostname}.config.services.xserver.desktopManager.gnome.enable;
+  gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
   home.sessionPath = [
     "$HOME/.local/bin"

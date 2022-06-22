@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  nixosConfig,
   ...
 }: {
   home.packages = with pkgs; [
@@ -136,5 +137,5 @@
     enableZshIntegration = true;
   };
 
-  home.stateVersion = "22.05";
+  home.stateVersion = nixosConfig.system.stateVersion;
 }
