@@ -28,8 +28,8 @@
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
         monospace = [
-          "DejaVu Sans Mono"
           "Sarasa Mono SC"
+          "DejaVu Sans Mono"
         ];
         sansSerif = [
           "Noto Sans CJK SC"
