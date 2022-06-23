@@ -14,7 +14,7 @@ bcachefs format /dev/nvme0n1p5m
 mount.bcachefs.sh /dev/nvme0n1p5 /mnt
 
 nixos-generate-config --root /mnt
-nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store https://cache.nixos.org"
+nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
 ```
 
 [Config Example](https://github.com/thiagokokada/nix-configs)

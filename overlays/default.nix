@@ -30,15 +30,15 @@ final: prev: {
         cp -r $out/usr/share $out/share '';
     });
 
-  # add librime-charcode plugin
-  librime = prev.librime.overrideAttrs (oldAttrs: {
-    plug = prev.pkgs.fetchFromGitHub {
-      owner = "rime";
-      repo = "librime-charcode";
-      rev = "e20e3993c42fc86c8209e808ed0762aea24261e0";
-      sha256 = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
-    };
-  });
+  # WIP: add librime-charcode plugin
+  # librime = prev.librime.overrideAttrs (oldAttrs: {
+  #   plug = prev.pkgs.fetchFromGitHub {
+  #     owner = "rime";
+  #     repo = "librime-charcode";
+  #     rev = "e20e3993c42fc86c8209e808ed0762aea24261e0";
+  #     sha256 = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
+  #   };
+  # });
 
   # gdm bug
   # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
