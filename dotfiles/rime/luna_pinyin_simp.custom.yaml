@@ -23,12 +23,12 @@ patch:
     #     - UTF-8
 
 
-  # "engine/filters":
-  #   - simplifier
-  #   - uniquifier
-  #   - charset_filter@gbk+emoji # GBK过滤
-    # - charset_filter@gbk
-    # - charset_filter@gb2312+emoji
+  "engine/filters":
+    - simplifier
+    - uniquifier
+    - charset_filter@gbk+emoji # GBK过滤
+    - charset_filter@gbk
+    - charset_filter@gb2312+emoji
 
 
 

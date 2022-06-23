@@ -40,6 +40,7 @@
     graphviz
     paperoni # save html
     # airgeddon # wifi crack
+    helix
 
     # Develop
     # gcc

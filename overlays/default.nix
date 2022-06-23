@@ -30,15 +30,15 @@ final: prev: {
         cp -r $out/usr/share $out/share '';
     });
 
-  # ibus bug
-  # ibus = prev.ibus.overrideAttrs (oldAttrs: {
-  #   src = prev.pkgs.fetchFromGitHub {
-  #     owner = "ibus";
-  #     repo = "ibus";
-  #     rev = "3e5fab4991f4e2e22b56cf57d4dfb779a1d1977c";
-  #     sha256 = "sha256-edd3m8CVSlhCdj+TprSsgkN0V0FxOeeMRf4wpCl+KYQ=";
-  #   };
-  # });
+  # add librime-charcode plugin
+  librime = prev.librime.overrideAttrs (oldAttrs: {
+    plug = prev.pkgs.fetchFromGitHub {
+      owner = "rime";
+      repo = "librime-charcode";
+      rev = "e20e3993c42fc86c8209e808ed0762aea24261e0";
+      sha256 = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
+    };
+  });
 
   # gdm bug
   # gnome = prev.gnome.overrideScope' (gfinal: gprev: {

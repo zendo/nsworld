@@ -15,13 +15,13 @@
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "dynamic-wallpaper";
-  version = "0.99";
+  version = "0.0.3";
 
   src = fetchFromGitHub {
     owner = "dusansimic";
     repo = "dynamic-wallpaper";
-    rev = "f090a7219a929802a022a604390532781c19c548";
-    sha256 = "sha256-6ce5aqipPS0W5Blc87Ca9aj4lMKef3+0sprpB1izl+Y=";
+    rev = "${version}";
+    sha256 = "sha256-y6BgOK4Evz/SZeLKwNZuv9+uG/FHxK4Wd+RrMlGYQb8=";
   };
 
   # setup.py and pyproject.toml not found

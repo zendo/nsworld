@@ -35,17 +35,4 @@
       vim-markdown
     ];
   };
-
-  programs.helix = {
-    enable = false;
-    settings = {
-      theme = "onedark";
-      # editor.file-picker.hidden = true;
-      # lsp.display-messages = true;
-      keys.normal = {
-        space.space = "file_picker";
-        space.q = ":q";
-      };
-    };
-  };
 }

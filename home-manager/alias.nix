@@ -16,6 +16,7 @@ in {
     rm = "trash-put";
     rm-list = "trash-list";
     rm-empty = "trash-empty";
+    mkcd = "mkdir -p $1 && cd $1";
     mount-ls = "mount | column -t";
     age = "rage";
     bc = "${pkgs.kalker}/bin/kalker";

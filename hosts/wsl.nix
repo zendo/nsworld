@@ -26,7 +26,7 @@
     bind
     nix-bash-completions
 
-    # helix
+    helix
     neovim
     emacs
     hack-font

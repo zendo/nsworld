@@ -23,7 +23,7 @@
       "https://nix-community.cachix.org"
     ];
 
-    trusted-users = ["@wheel"];
+    trusted-users = ["root" "@wheel"];
     # List of binary cache URLs that non-root users can use
     trusted-substituters = [
     ];
