@@ -20,7 +20,7 @@ in {
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
 
-    # fix tiny cursor qt apps in gnome
+    # fix tiny cursor in qt apps at gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
       [icon theme]
       Inherits=Adwaita
@@ -63,15 +63,4 @@ in {
   #   terminal = false;
   #   categories = ["Application" "Music"];
   # };
-
-  home.packages = with pkgs; [
-    (
-      if gnomeEnable
-      then
-        (spotify.override {
-          deviceScaleFactor = 2;
-        })
-      else spotify
-    )
-  ];
 }

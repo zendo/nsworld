@@ -19,7 +19,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/e8aa04eaa4cb8664a72191547fc2395dddd3c112";
+      url = "github:nix-community/emacs-overlay/8a7cd0f271457701b1f06a83261fb1953e679b58";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -121,13 +121,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {inherit inputs;};
-              home-manager.users.${username}.imports = [
-                ./home-manager/git.nix
-                ./home-manager/cli.nix
-                ./home-manager/bash.nix
-                ./home-manager/zsh.nix
-                ./home-manager/alias.nix
-              ];
+              home-manager.users.${username} = import ./home-manager;
             }
           ];
         };

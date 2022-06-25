@@ -1,8 +1,12 @@
 {
   config,
   pkgs,
+  lib,
+  nixosConfig,
   ...
-}: {
+}: let
+  gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
+in {
   home.packages = with pkgs; [
     # Overlays
     # zee
@@ -36,6 +40,7 @@
     # vivaldi
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
+    vscode
 
     # Social media
     tdesktop
@@ -44,15 +49,18 @@
     # discord
 
     # Multi-media
-    qbittorrent
+    (
+      if gnomeEnable
+      then
+        (spotify.override {
+          deviceScaleFactor = 2;
+        })
+      else spotify
+    )
     mpv
     # vlc
     ffmpeg
     amberol
-    # spotify
-    # (spotify.override {
-    #   deviceScaleFactor = 2;
-    # })
     mousai # 听歌识曲
     # shortwave
     # easyeffects
@@ -61,6 +69,7 @@
     # shutter
     yacreader
 
+    qbittorrent
     meld
     # deja-dup
     # rclone
