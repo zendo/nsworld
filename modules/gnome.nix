@@ -88,6 +88,7 @@
       appindicator
       tray-icons-reloaded
       app-icons-taskbar
+      replace-activities-text
       dash-to-dock
       dash-to-panel
       night-theme-switcher

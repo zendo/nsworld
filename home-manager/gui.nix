@@ -24,9 +24,14 @@
     warp
 
     # Browsers
-    # (google-chrome.override {
-    #   commandLineArgs = "--ozone-platform-hint=auto --enable-features=VaapiVideoDecoder --use-gl=egl";
-    # })
+    # google-chrome
+    (google-chrome.override {
+      commandLineArgs = [
+        "--ozone-platform=wayland"
+        "--enable-features=VaapiVideoDecoder"
+        "--use-gl=egl"
+      ];
+    })
     # microsoft-edge
     # vivaldi
     # vivaldi-ffmpeg-codecs
@@ -101,15 +106,5 @@
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
-  };
-
-  # not work?
-  programs.chromium = {
-    enable = true;
-    package = pkgs.google-chrome;
-    commandLineArgs = [
-    #   "--ozone-platform=wayland"
-      "--enable-features=VaapiVideoDecoder"
-    ];
   };
 }

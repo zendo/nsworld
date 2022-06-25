@@ -46,14 +46,14 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    home-manager,
-    flake-utils,
-    emacs-overlay,
     nixos-hardware,
-    templates,
+    home-manager,
+    emacs-overlay,
     nur,
     musnix,
     nixos-wsl,
+    templates,
+    flake-utils,
     ...
   }: let
     mkHost = import ./lib/mkHost.nix inputs;
@@ -92,7 +92,7 @@
           inherit overlays;
           extraModules = [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-cpu-intel
+            nixos-hardware.nixosModules.common-gpu-intel
 
             ./modules/gnome.nix
             # ./modules/kde.nix
@@ -114,13 +114,7 @@
             ./modules/nixconfig.nix
             ./hosts/wsl.nix
 
-            {
-              nixpkgs.overlays = [
-                nur.overlay
-                emacs-overlay.overlay
-                (import ./overlays)
-              ];
-            }
+            {nixpkgs.overlays = overlays;}
 
             home-manager.nixosModules.home-manager
             {
