@@ -107,9 +107,9 @@
   programs.chromium = {
     enable = true;
     package = pkgs.google-chrome;
-    # commandLineArgs = [
+    commandLineArgs = [
     #   "--ozone-platform=wayland"
-    #   "--enable-features=VaapiVideoDecoder"
-    # ];
+      "--enable-features=VaapiVideoDecoder"
+    ];
   };
 }

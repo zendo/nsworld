@@ -1,10 +1,11 @@
 # https://github.com/fersilva16/nix-config
 inputs: let
-  inherit (inputs) self nixpkgs home-manager;
+  inherit (inputs) self nixpkgs nixpkgs-stable home-manager;
 in
   {
     hostname,
     username,
+    nixpkgs ? inputs.nixpkgs,
     system ? "x86_64-linux",
     overlays ? [],
     extraModules ? [],

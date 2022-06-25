@@ -34,10 +34,12 @@
         sansSerif = [
           "Noto Sans CJK SC"
           "Source Han Sans SC"
+          "DejaVu Sans"
         ];
         serif = [
           "Noto Serif CJK SC"
           "Source Han Serif SC"
+          "DejaVu Serif"
         ];
       };
     };

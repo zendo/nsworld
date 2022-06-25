@@ -3,8 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
-    # local.url = "git+file:///home/iab/devel/nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -44,7 +45,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    # local,
+    nixpkgs-stable,
     home-manager,
     flake-utils,
     emacs-overlay,
@@ -61,9 +62,6 @@
       nur.overlay
       emacs-overlay.overlay
       (import ./overlays)
-      # (final: prev: {
-      #   local = local.legacyPackages.${prev.system};
-      # })
     ];
   in
     {
@@ -90,6 +88,7 @@
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
+          # nixpkgs = inputs.nixpkgs-stable;
           inherit overlays;
           extraModules = [
             nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -105,6 +104,7 @@
       # nix build .#nixosConfigurations.wsl.config.system.build.installer
       nixosConfigurations.wsl = let
         username = "iab";
+        nixpkgs = inputs.nixpkgs-stable;
       in
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
