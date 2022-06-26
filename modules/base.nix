@@ -1,13 +1,8 @@
 {
   config,
   pkgs,
-  lib,
   ...
-}: let
-  btrfsInInitrd = lib.any (fs: fs == "btrfs") config.boot.initrd.supportedFilesystems;
-  btrfsInSystem = lib.any (fs: fs == "btrfs") config.boot.supportedFilesystems;
-  btrfsEnable = btrfsInInitrd && btrfsInSystem;
-in {
+}: {
   time.timeZone = "Asia/Shanghai";
 
   hardware.enableAllFirmware = true;
@@ -29,8 +24,6 @@ in {
     journald.extraConfig = ''
       SystemMaxUse=500M
     '';
-
-    btrfs.autoScrub.enable = lib.mkIf btrfsEnable true;
   };
 
   #########################################################################

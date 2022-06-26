@@ -33,4 +33,8 @@
   #     gfxmodeEfi = "1024x768";
   #   };
   # };
+
+  # btrfs
+  services.btrfs.autoScrub.enable = true;
+  fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
 }
