@@ -15,8 +15,7 @@ in
       inherit system;
       specialArgs = {inherit inputs username;};
       modules =
-        extraModules
-        ++ [
+        [
           ../modules/base.nix
           ../modules/user.nix
           ../modules/network.nix
@@ -37,5 +36,6 @@ in
             home-manager.extraSpecialArgs = {inherit hostname;};
             home-manager.users.${username} = import ../home-manager;
           }
-        ];
+        ]
+        ++ extraModules;
     }

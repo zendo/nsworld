@@ -45,7 +45,7 @@
       )
       inputs;
 
-    # nix show-config | rg nix-path ## Needs reboot
+    # echo $NIX_PATH | tr ":" "\n" # reboot needs
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"
       "nixos-config=${inputs.self}"

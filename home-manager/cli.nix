@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  nixosConfig,
   ...
 }: {
   home.packages = with pkgs; [
@@ -40,7 +39,8 @@
     graphviz
     paperoni # save html
     # airgeddon # wifi crack
-    helix
+    # magic-wormhole # python
+    magic-wormhole-rs
 
     # Develop
     # gcc
@@ -137,6 +137,4 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
   };
-
-  home.stateVersion = nixosConfig.system.stateVersion;
 }

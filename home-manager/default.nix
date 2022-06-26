@@ -4,17 +4,21 @@
   nixosConfig,
   ...
 }: let
-  needsGui = nixosConfig.services.xserver.enable;
+  desktopEnable = nixosConfig.services.xserver.enable;
 in {
   imports =
     [
       ./git.nix
       ./cli.nix
-      ./alias.nix
-      ./zsh.nix
       ./bash.nix
-      ./xdg.nix
+      ./zsh.nix
+      ./alias.nix
       ./editor.nix
     ]
-    ++ lib.optionals needsGui [./gui.nix];
+    ++ lib.optionals desktopEnable [
+      ./xdg.nix
+      ./gui.nix
+    ];
+
+  home.stateVersion = nixosConfig.system.stateVersion;
 }

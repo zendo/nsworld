@@ -3,27 +3,30 @@
   pkgs,
   ...
 }: {
-  programs.vscode = {
-    enable = false;
-  };
-
   programs.emacs = {
     enable = true;
     # fix kde two desktop shortcut
-    package = (pkgs.emacsPgtk.overrideAttrs
+    package =
+      pkgs.emacsPgtk.overrideAttrs
       (oldAttrs: {
         postFixup = ''
-        rm $out/share/applications/emacsclient.desktop  '';
-      }));
-    extraPackages = epkgs: with epkgs; [
-      vterm
-      emojify
-      emacsql-sqlite
-      # pdf-tools
-      # telega
-    ];
+          rm $out/share/applications/emacsclient.desktop  '';
+      });
+    extraPackages = epkgs:
+      with epkgs; [
+        vterm
+        emojify
+        emacsql-sqlite
+        # pdf-tools
+        # telega
+      ];
   };
   home.file.".doom.d".source = ../emacs/doom;
+
+  programs.helix = {
+    enable = true;
+  };
+  xdg.configFile."helix".source = ../dotfiles/helix;
 
   programs.neovim = {
     enable = true;
@@ -34,5 +37,9 @@
       vim-lsp
       vim-markdown
     ];
+  };
+
+  programs.vscode = {
+    enable = false;
   };
 }

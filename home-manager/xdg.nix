@@ -36,7 +36,6 @@ in {
 
   xdg.configFile = {
     "mpv".source = ../dotfiles/mpv;
-    "helix".source = ../dotfiles/helix;
     "foot/foot.ini".source = ../dotfiles/foot.ini;
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;

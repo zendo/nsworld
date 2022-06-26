@@ -23,8 +23,6 @@ in {
     # nur.repos.linyinfeng.clash-for-windows
     foot
     alacritty
-    # magic-wormhole # python
-    magic-wormhole-rs
     warp
 
     # Browsers
