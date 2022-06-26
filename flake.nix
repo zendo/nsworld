@@ -71,9 +71,6 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-gpu-amd
-
             ./modules/gnome.nix
             # ./modules/kde.nix
 
@@ -92,9 +89,6 @@
           # nixpkgs = inputs.nixpkgs-stable;
           inherit overlays;
           extraModules = [
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
-            nixos-hardware.nixosModules.common-gpu-intel
-
             ./modules/gnome.nix
             # ./modules/kde.nix
           ];

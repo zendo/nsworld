@@ -6,7 +6,7 @@
 }: let
   btrfsInInitrd = lib.any (fs: fs == "btrfs") config.boot.initrd.supportedFilesystems;
   btrfsInSystem = lib.any (fs: fs == "btrfs") config.boot.supportedFilesystems;
-  enableBtrfs = btrfsInInitrd && btrfsInSystem;
+  btrfsEnable = btrfsInInitrd && btrfsInSystem;
 in {
   time.timeZone = "Asia/Shanghai";
 
@@ -28,16 +28,12 @@ in {
     # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
     systemd-boot = {
       enable = true;
-      consoleMode = "max"; # resolution max for hidpi
       configurationLimit = 5; # bootmenu items
     };
     # grub = {
     #   enable = true;
     #   device = "nodev";
-    #   default = "2";
     #   efiSupport = true;
-    #   useOSProber = true;
-    #   gfxmodeEfi = "1024x768";
     # };
   };
 
@@ -49,7 +45,7 @@ in {
       SystemMaxUse=500M
     '';
 
-    btrfs.autoScrub.enable = lib.mkIf enableBtrfs true;
+    btrfs.autoScrub.enable = lib.mkIf btrfsEnable true;
   };
 
   #########################################################################
