@@ -17,24 +17,9 @@ in {
   boot = {
     plymouth.enable = true;
     supportedFilesystems = ["ntfs"];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # latest zen xanmod_latest
     # kernelParams = ["quite"];
     tmpOnTmpfs = true;
     cleanTmpDir = true;
-  };
-
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 5; # bootmenu items
-    };
-    # grub = {
-    #   enable = true;
-    #   device = "nodev";
-    #   efiSupport = true;
-    # };
   };
 
   services = {
