@@ -42,7 +42,7 @@ python3.pkgs.buildPythonApplication rec {
     libadwaita
   ];
 
-  pythonPath = with python3.pkgs; requiredPythonModules [  pygobject3 ];
+  pythonPath = with python3.pkgs; requiredPythonModules [pygobject3];
 
   meta = with lib; {
     homepage = "https://github.com/dusansimic/dynamic-wallpaper";

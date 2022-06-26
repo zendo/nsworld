@@ -1,4 +1,8 @@
-{config, username, ...}: {
+{
+  config,
+  username,
+  ...
+}: {
   # refuse using useradd
   users.mutableUsers = false;
 

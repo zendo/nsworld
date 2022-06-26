@@ -1,15 +1,13 @@
 let
   flake = builtins.getFlake (toString ./.);
-  nixpkgs = import <nixpkgs> { };
+  nixpkgs = import <nixpkgs> {};
 in
-{ inherit flake; }
-// flake
-// builtins
-// nixpkgs
-// nixpkgs.lib
-// flake.nixosConfigurations
-
-
+  {inherit flake;}
+  // flake
+  // builtins
+  // nixpkgs
+  // nixpkgs.lib
+  // flake.nixosConfigurations
 # (import
 #   (
 #     let lock = builtins.fromJSON (builtins.readFile ./flake.lock); in
@@ -20,8 +18,6 @@ in
 #   )
 #   { src = ./.; }
 # ).defaultNix
-
-
 # {pkgs ? import <nixpkgs> {}}: let
 #   system = pkgs.system;
 #   flake = builtins.getFlake (toString ./.);
@@ -30,8 +26,6 @@ in
 #   lib = flake.inputs.nixpkgs.lib;
 #   pkgs = flake.inputs.nixpkgs.legacyPackages.${system};
 # }
-
-
 # {
 #   name ? (with builtins; head (split "\n" (readFile /etc/hostname))),
 #   pwd ? builtins.getEnv "PWD",
@@ -39,10 +33,10 @@ in
 #   self ? flake.outputs.nixosConfigurations."${name}",
 #   ...
 # }@args:
-
 # (args // {
 #   inherit self args flake;
 #   inherit (flake) inputs outputs;
 #   inherit (self) config options pkgs;
 #   inherit (self.pkgs) lib;
 # })
+

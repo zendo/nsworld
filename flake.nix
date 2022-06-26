@@ -177,16 +177,10 @@
           # allowUnsupportedSystem = true;
         };
       in {
-        # devShell = import ./shell.nix {inherit pkgs;};
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            git
-            jq
-            gnumake
-            alejandra
-            nixUnstable
-          ];
-        };
+        # nix fmt  :Formatter all files in this repo.
+        formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
+        # nix develop  :.#rust
+        devShells = import ./devshells.nix {inherit pkgs;};
       }
     );
 }

@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   options = {
     services.v2raya = {
       enable = lib.options.mkEnableOption "the v2rayA service";
@@ -12,8 +15,8 @@
       unitConfig = {
         Description = "v2rayA service";
         Documentation = "https://github.com/v2rayA/v2rayA/wiki";
-        After = [ "network.target" "nss-lookup.target" "iptables.service" "ip6tables.service" ];
-        Wants = [ "network.target" ];
+        After = ["network.target" "nss-lookup.target" "iptables.service" "ip6tables.service"];
+        Wants = ["network.target"];
       };
 
       serviceConfig = {
@@ -25,8 +28,8 @@
         Type = "simple";
       };
 
-      wantedBy = [ "multi-user.target" ];
-      path = with pkgs; [ iptables bash iproute2 ]; # required by v2rayA TProxy functionality
+      wantedBy = ["multi-user.target"];
+      path = with pkgs; [iptables bash iproute2]; # required by v2rayA TProxy functionality
     };
   };
 }
