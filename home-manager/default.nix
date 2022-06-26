@@ -4,7 +4,7 @@
   nixosConfig,
   ...
 }: let
-  needsGui = !nixosConfig.boot.isContainer;
+  needsGui = nixosConfig.services.xserver.enable;
 in {
   imports =
     [

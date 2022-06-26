@@ -26,9 +26,6 @@
     bind
     nix-bash-completions
 
-    helix
-    neovim
-    emacs
     hack-font
     fira-code
     jetbrains-mono
