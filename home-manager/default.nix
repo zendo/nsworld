@@ -3,9 +3,7 @@
   lib,
   nixosConfig,
   ...
-}: let
-  desktopEnable = nixosConfig.services.xserver.enable;
-in {
+}: {
   imports =
     [
       ./git.nix
@@ -15,7 +13,7 @@ in {
       ./alias.nix
       ./editor.nix
     ]
-    ++ lib.optionals desktopEnable [
+    ++ lib.optionals nixosConfig.services.xserver.enable [
       ./xdg.nix
       ./gui.nix
     ];
