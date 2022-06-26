@@ -57,30 +57,28 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  environment.systemPackages = with pkgs; [
-    libsForQt5.ark
-    libsForQt5.kate
-    libsForQt5.kcalc
-    libsForQt5.kde-gtk-config
-    libsForQt5.kmousetool
-    # libsForQt5.kweather
-    # libsForQt5.kgamma5          # not work
+  environment.systemPackages = with pkgs;
+    [
+      falkon
+      kalendar
+      yakuake
+      gparted
+      kcolorchooser
+    ]
+    ++ (with libsForQt5; [
+      ark
+      kate
+      kcalc
+      kmousetool
+      # kweather
 
-    libsForQt5.krdc
-    libsForQt5.kleopatra
-    # libsForQt5.konqueror
-    # libsForQt5.kcontacts
-    # libsForQt5.korganizer
-    libsForQt5.bismuth # tiling layout
-    # libsForQt5.lightly # theme
-    # latte-dock
-
-    falkon
-    kalendar
-    yakuake
-    gparted
-    kcolorchooser
-  ];
+      krdc
+      # kleopatra
+      # konqueror
+      # kcontacts
+      # korganizer
+      bismuth # tiling layout
+    ]);
 
   i18n.inputMethod = {
     enabled = "fcitx5";

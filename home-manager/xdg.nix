@@ -54,7 +54,7 @@ in {
     '';
   };
 
-  # xdg.desktopEntries.spotify = lib.mkIf gnomeEnable {
+  # xdg.desktopEntries.spotify = lib.options gnomeEnable {
   #   name = "Spotify";
   #   genericName = "Music Player";
   #   icon = "spotify-client";

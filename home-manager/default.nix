@@ -18,5 +18,7 @@
       ./gui.nix
     ];
 
+  manual.manpages.enable = false;
+
   home.stateVersion = nixosConfig.system.stateVersion;
 }

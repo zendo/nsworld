@@ -62,6 +62,7 @@ in {
     mousai # 听歌识曲
     # shortwave
     # easyeffects
+    # gnome-network-displays
 
     # Image manipulation
     # shutter
