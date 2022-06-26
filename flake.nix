@@ -179,7 +179,7 @@
       in {
         # nix fmt  :Formatter all files in this repo.
         formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
-        # nix develop  :.#rust
+        # nix develop  :or .#rust
         devShells = import ./devshells.nix {inherit pkgs;};
       }
     );

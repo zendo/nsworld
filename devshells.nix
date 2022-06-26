@@ -2,10 +2,13 @@ inputs @ {pkgs}: {
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
       git
+      fd
+      ripgrep
       jq
       gnumake
       alejandra
       nixUnstable
+      nix-direnv
     ];
   };
 
