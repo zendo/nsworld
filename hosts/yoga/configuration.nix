@@ -12,6 +12,8 @@
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
+  # boot.kernelParams = ["quite"];
+
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader = {
     # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
@@ -33,6 +35,11 @@
   #     gfxmodeEfi = "1024x768";
   #   };
   # };
+
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
 
   # btrfs
   services.btrfs.autoScrub.enable = true;

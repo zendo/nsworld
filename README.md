@@ -5,10 +5,10 @@
 # Installation
 
 ``` shell
-mkfs.fat -F 32 /dev/nvme0n1p3
+mkfs.fat -F 32 -n boot /dev/nvme0n1p3
 mkswap -L swap /dev/nvme0n1p4
 swapon /dev/nvme0n1p4
-mkfs.btrfs /dev/nvme0n1p5
+mkfs.btrfs -L nixos /dev/nvme0n1p5
 
 bcachefs format /dev/nvme0n1p5m
 mount.bcachefs.sh /dev/nvme0n1p5 /mnt

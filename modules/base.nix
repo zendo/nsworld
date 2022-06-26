@@ -10,11 +10,10 @@
   zramSwap.enable = true;
 
   boot = {
-    plymouth.enable = true;
-    supportedFilesystems = ["ntfs"];
-    # kernelParams = ["quite"];
     tmpOnTmpfs = true;
     cleanTmpDir = true;
+    plymouth.enable = true;
+    supportedFilesystems = ["ntfs"];
   };
 
   services = {

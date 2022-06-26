@@ -67,11 +67,12 @@
     [
       gthumb
       gcolor3
-      # authenticator
+      authenticator
       # wl-color-picker
       # notejot
+      # amberol
       # lollypop
-      # rhythmbox
+      rhythmbox
       gparted
       dconf2nix
       kooha
@@ -80,6 +81,7 @@
       gnome.dconf-editor
       gnome.gnome-power-manager
       gnome.gnome-sound-recorder
+      # gnome-network-displays  # miracast
       # gnome-builder
       # gnome.gnome-nettool
       # gnome-firmware-updater

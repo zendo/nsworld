@@ -58,11 +58,9 @@ in {
     mpv
     # vlc
     ffmpeg
-    amberol
     mousai # 听歌识曲
     # shortwave
     # easyeffects
-    # gnome-network-displays
 
     # Image manipulation
     # shutter

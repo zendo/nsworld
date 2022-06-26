@@ -20,4 +20,7 @@
       configurationLimit = 5; # bootmenu items
     };
   };
+
+  # ext4
+  fileSystems."/".options = ["noatime" "nodiratime"];
 }
