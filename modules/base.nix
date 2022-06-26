@@ -77,6 +77,11 @@ in {
   environment.variables = {
   };
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   # Need channels
   programs.command-not-found.enable = false;
 

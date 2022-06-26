@@ -46,12 +46,6 @@
   programs = {
     kdeconnect.enable = true;
     partition-manager.enable = true;
-
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-      pinentryFlavor = "qt";
-    };
   };
 
   # services.gnome.gnome-keyring.enable = true;

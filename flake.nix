@@ -105,7 +105,7 @@
       # nix build .#nixosConfigurations.wsl.config.system.build.installer
       nixosConfigurations.wsl = let
         username = "iab";
-        nixpkgs = inputs.nixpkgs-stable;
+        # nixpkgs = inputs.nixpkgs-stable;
       in
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

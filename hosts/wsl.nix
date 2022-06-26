@@ -29,6 +29,7 @@
     hack-font
     fira-code
     jetbrains-mono
+    emacs-all-the-icons-fonts
   ];
 
   environment.shellAliases = {

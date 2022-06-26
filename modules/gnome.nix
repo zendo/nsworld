@@ -109,11 +109,6 @@
       mpris-indicator-button
     ]);
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
