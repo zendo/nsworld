@@ -14,9 +14,9 @@
 
   # boot.kernelParams = ["quite"];
 
-  boot.loader.efi.canTouchEfiVariables = true;
   # boot.loader = {
-  #   # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
+  #   efi.canTouchEfiVariables = true;
+  #   # efi.efiSysMountPoint = "/boot/efi"; # default /boot
   #   systemd-boot = {
   #     enable = true;
   #     configurationLimit = 5; # bootmenu items
@@ -25,7 +25,8 @@
   # };
 
   boot.loader = {
-    # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi"; # default /boot
     grub = {
       enable = true;
       device = "nodev";

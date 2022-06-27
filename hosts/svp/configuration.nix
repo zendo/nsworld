@@ -12,12 +12,31 @@
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader = {
+  #   efi.canTouchEfiVariables = true;
+  #   # efi.efiSysMountPoint = "/boot/efi"; # default /boot
+  #   systemd-boot = {
+  #     enable = true;
+  #     configurationLimit = 5; # bootmenu items
+  #   };
+  # };
+
   boot.loader = {
-    # boot.efi.efiSysMountPoint = "/boot/efi"; # default /boot
-    systemd-boot = {
+    efi.canTouchEfiVariables = true;
+    # efi.efiSysMountPoint = "/boot/efi"; # default /boot
+    grub = {
       enable = true;
-      configurationLimit = 5; # bootmenu items
+      device = "nodev";
+      efiSupport = true;
+      # default = "1";
+      # gfxmodeEfi = "1024x768";
+      # extraEntriesBeforeNixOS = true;
+      # extraEntries = ''
+      #   menuentry "Windows" {
+      #     search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+      #     chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+      #   }
+      # '';
     };
   };
 
