@@ -90,6 +90,7 @@
       appindicator
       tray-icons-reloaded
       app-icons-taskbar
+      shell-configurator
       replace-activities-text
       dash-to-dock
       dash-to-panel

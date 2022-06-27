@@ -39,6 +39,14 @@
     ];
   };
 
+  programs.micro = {
+    enable = true;
+    settings = {
+      autosu = true;
+      cursorline = true;
+    };
+  };
+
   programs.vscode = {
     enable = false;
   };

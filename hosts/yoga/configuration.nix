@@ -30,16 +30,13 @@
       enable = true;
       device = "nodev";
       efiSupport = true;
-      # default = "1";
+      default = "1";
       gfxmodeEfi = "1024x768";
-      extraEntriesBeforeNixOS = true;
+      # extraEntriesBeforeNixOS = true;
       extraEntries = ''
         menuentry "Windows" {
-          insmod part_gpt
-          insmod fat
-          insmod chain
-          set root=(hd0,gpt1)
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+	        chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
         }
       '';
     };
