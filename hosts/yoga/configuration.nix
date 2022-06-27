@@ -31,8 +31,8 @@
       enable = true;
       device = "nodev";
       efiSupport = true;
-      default = "1";
       gfxmodeEfi = "1024x768";
+      default = "1";
       # extraEntriesBeforeNixOS = true;
       extraEntries = ''
         menuentry "Windows" {
