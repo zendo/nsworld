@@ -22,7 +22,7 @@
     fsType = "ext4";
   };
 
-  fileSystems."/boot" = {
+  fileSystems."/boot/efi" = {
     device = "/dev/sda1";
     fsType = "vfat";
   };
