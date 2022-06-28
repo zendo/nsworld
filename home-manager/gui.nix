@@ -10,10 +10,11 @@ in {
   home.packages = with pkgs; [
     # Overlays
     # zee
-    # mprober
     # dippi
     # frei
-    dynamic-wallpaper
+    # mprober
+    # dynamic-wallpaper
+    # netease-cloud-music-gtk
 
     gitg
     v2ray
@@ -27,13 +28,13 @@ in {
 
     # Browsers
     # google-chrome
-    (google-chrome.override {
-      commandLineArgs = [
-        "--ozone-platform=wayland"
-        "--enable-features=VaapiVideoDecoder"
-        "--use-gl=egl"
-      ];
-    })
+    # (google-chrome.override {
+    #   commandLineArgs = [
+    #     "--ozone-platform=wayland"
+    #     "--enable-features=VaapiVideoDecoder"
+    #     "--use-gl=egl"
+    #   ];
+    # })
     # microsoft-edge
     # vivaldi
     # vivaldi-ffmpeg-codecs

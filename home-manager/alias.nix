@@ -45,6 +45,8 @@ in {
     nix-references = "f() { nix-store -q --references $(nix-which $1) }; f";
     nix-depends = "f() { nix path-info -rsSh $(nix-which $1) }; f";
     nix-sri = "nix hash to-sri --type sha256";
+    nix-pr-branch = "gh pr checkout -R NixOS/nixpkgs";
+    nix-pr-run = "f() { nix run github:NixOS/nixpkgs/pull/$1/merge#$2 }; f";
 
     ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";

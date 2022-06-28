@@ -6,6 +6,7 @@ final: prev: {
   # rust
   zee = prev.callPackage ./zee {};
   mprober = prev.callPackage ./mprober {};
+  netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};
@@ -29,6 +30,21 @@ final: prev: {
       postFixup = ''
         cp -r $out/usr/share $out/share '';
     });
+
+  # rust override
+  # shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {
+  #   version = "2022-06-27";
+  #   src = prev.fetchFromGitHub {
+  #     owner = "shadowsocks";
+  #     repo = "shadowsocks-rust";
+  #     rev = "a4955a198bdf6ab12e647b04180679dfef53fb0b";
+  #     sha256 = "sha256-sJKuGQH5PBOcFOpks8sUaAWJlfg7aCv6YS9DWaEF3K4=";
+  #   };
+  #   cargoDeps = oldAttrs.cargoDeps.overrideAttrs (_: {
+  #       inherit src;
+  #       outputHash = "sha256-YJ4Qva4keOk9aBPFwztkTpvS7uv7zl6TOHqYZzZEGAs=";
+  #     });
+  # });
 
   # gdm bug
   # gnome = prev.gnome.overrideScope' (gfinal: gprev: {

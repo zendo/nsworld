@@ -8,16 +8,18 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "mprober";
-  version = "0.11.0-beta.11";
+  version = "0.11.0-beta.12";
 
   src = fetchFromGitHub {
     owner = "magiclen";
     repo = "m-prober";
     rev = "v${version}";
-    sha256 = "sha256-+Qz6U72THRBXZk2HQxE2Cjp6CcjrNY3Qik2AIYrlM+M=";
+    sha256 = "sha256-XFhgPwsmhBw7akeY1EFVeKNtS9KlnXmbCDhQgOIVydw=";
   };
 
-  cargoSha256 = "sha256-mbqI1csnU95VWgax4GjIxB+nhMsspaeJ8QQ3qb0hY4c=";
+  cargoPatches = [ ./cargo-lock.patch ];
+
+  cargoSha256 = "sha256-rAyUPwhur2+gmSSje590+UwmO91RoML5pj00SvyL7yY=";
 
   # nativeBuildInputs = [pkg-config];
   # buildInputs = [openssl];
