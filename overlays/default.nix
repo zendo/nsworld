@@ -6,6 +6,7 @@ final: prev: {
   # rust
   zee = prev.callPackage ./zee {};
   mprober = prev.callPackage ./mprober {};
+  app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
 
   # go
@@ -20,6 +21,7 @@ final: prev: {
 
   # gtk
   dippi = prev.callPackage ./dippi {};
+  paper = prev.callPackage ./paper {};
 
   #############################################
 

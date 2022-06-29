@@ -20,6 +20,8 @@ in {
     dynamic-wallpaper
     clash-verge
     # netease-cloud-music-gtk
+    # app-icon-preview
+    paper
 
     gitg
     v2ray

@@ -15,13 +15,16 @@ inputs @ {pkgs}: {
   # nix develop .#node
   node = pkgs.mkShell {
     buildInputs = with pkgs; [
-      nodejs
       yarn
+      nodejs
     ];
   };
 
   rust = pkgs.mkShell {
-    buildInputs = with pkgs; [cargo];
+    buildInputs = with pkgs; [
+      cargo
+      rustc
+    ];
   };
 
   haskell = pkgs.mkShell {
