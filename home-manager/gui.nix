@@ -22,7 +22,7 @@ in {
     # netease-cloud-music-gtk
     # app-icon-preview
     # paper
-    librime-charcode
+    # librime-charcode
 
     gitg
     v2ray

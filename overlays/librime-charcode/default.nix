@@ -19,9 +19,16 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
   };
 
-  dontInstall = true;
+  # dontInstall = true;
 
   # nativeBuildInputs = [cmake];
 
   # buildInputs = [boost icu librime];
+
+  meta = with lib; {
+    description = "librime-charcode";
+    homepage = "https://github.com/rime/librime-charcode";
+    license = licenses.gpl3Plus;
+    maintainers = with maintainers; [ zendo ];
+  };
 }
