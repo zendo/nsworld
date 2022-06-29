@@ -22,6 +22,7 @@ final: prev: {
   # gtk
   dippi = prev.callPackage ./dippi {};
   paper = prev.callPackage ./paper {};
+  blueprint-compiler = prev.callPackage ./blueprint-compiler {};
 
   #############################################
 

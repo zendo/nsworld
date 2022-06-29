@@ -18,13 +18,14 @@
 }:
 stdenv.mkDerivation rec {
   pname = "paper";
-  version = "22.6";
+  version = "999";
 
   src = fetchFromGitLab {
     owner = "posidon_software";
     repo = pname;
-    rev = "${version}";
-    sha256 = "sha256-rutN91CFpGyRufG8VIhGjK5704D5mQ5Sn+jfm6BG0po=";
+    # rev = "${version}";
+    rev = "0e7f1aac9d42b95c0d1648035eb3098f98525589";
+    sha256 = "sha256-YyrT/xZNHIx4cqC2oKpt9R1pbEe6HzH6LyhB2VZm7Bg=";
   };
 
   nativeBuildInputs = [
@@ -45,6 +46,14 @@ stdenv.mkDerivation rec {
     libadwaita
     gtksourceview5
   ];
+
+  # WIP: desktop seems wrong
+  postFixup = ''
+    cd $out/share/applications/
+    mv io.posidon.Paper.desktop temp
+    mv io.posidon.Paper-editor.desktop io.posidon.Paper.desktop
+    mv temp io.posidon.Paper-editor.desktop
+  '';
 
   meta = with lib; {
     homepage = "https://posidon.io/paper";

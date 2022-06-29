@@ -10,18 +10,18 @@ in {
   home.packages = with pkgs; [
     # Overlays
     # steam-run
-    (appimage-run.override {
-      extraPkgs = pkgs: [ pkgs.libthai ];
-    })
+    # (appimage-run.override {
+    #   extraPkgs = pkgs: [ pkgs.libthai ];
+    # })
     # zee
     # dippi
     # frei
-    mprober
-    dynamic-wallpaper
-    clash-verge
+    # mprober
+    # dynamic-wallpaper
+    # clash-verge
     # netease-cloud-music-gtk
     # app-icon-preview
-    paper
+    # paper
 
     gitg
     v2ray
