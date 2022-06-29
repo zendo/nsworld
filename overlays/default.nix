@@ -22,7 +22,10 @@ final: prev: {
   # gtk
   dippi = prev.callPackage ./dippi {};
   paper = prev.callPackage ./paper {};
+
+  # libraries
   blueprint-compiler = prev.callPackage ./blueprint-compiler {};
+  librime-charcode = prev.callPackage ./librime-charcode {};
 
   #############################################
 
@@ -34,6 +37,11 @@ final: prev: {
       postFixup = ''
         cp -r $out/usr/share $out/share '';
     });
+
+  # librime = prev.librime.override {
+  #   plugins = [librime-charcode];
+  # };
+
 
   # rust override
   # shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {

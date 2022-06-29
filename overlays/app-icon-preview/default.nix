@@ -17,7 +17,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "app-icon-preview";
-  version = "2022-06-29";
+  version = "2022-05-30";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
