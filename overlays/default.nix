@@ -16,6 +16,7 @@ final: prev: {
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
 
   # nodejs
+  clash-verge = prev.callPackage ./clash-verge {};
 
   # gtk
   dippi = prev.callPackage ./dippi {};

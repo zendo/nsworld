@@ -9,11 +9,16 @@
 in {
   home.packages = with pkgs; [
     # Overlays
+    # steam-run
+    (appimage-run.override {
+      extraPkgs = pkgs: [ pkgs.libthai ];
+    })
     # zee
     # dippi
     # frei
-    # mprober
-    # dynamic-wallpaper
+    mprober
+    dynamic-wallpaper
+    clash-verge
     # netease-cloud-music-gtk
 
     gitg
@@ -28,13 +33,13 @@ in {
 
     # Browsers
     # google-chrome
-    # (google-chrome.override {
-    #   commandLineArgs = [
-    #     "--ozone-platform=wayland"
-    #     "--enable-features=VaapiVideoDecoder"
-    #     "--use-gl=egl"
-    #   ];
-    # })
+    (google-chrome.override {
+      commandLineArgs = [
+        "--ozone-platform=wayland"
+        "--enable-features=VaapiVideoDecoder"
+        "--use-gl=egl"
+      ];
+    })
     # microsoft-edge
     # vivaldi
     # vivaldi-ffmpeg-codecs
@@ -74,9 +79,6 @@ in {
     # rclone-browser
     # vorta
     # qalculate-gtk # scientific calculator
-    # bottles # wine manager
-    # yuzu
-    # gnome.gnome-boxes
 
     # OFFICE
     # libreoffice-fresh
@@ -107,7 +109,7 @@ in {
   ];
 
   programs.pandoc = {
-    enable = true;
+    enable = false;
   };
 
   programs.firefox = {

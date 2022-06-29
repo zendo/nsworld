@@ -4,6 +4,12 @@
   username,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    # bottles # wine manager
+    # yuzu
+    # gnome.gnome-boxes
+  ];
+
   virtualisation = {
     # docker = {
     #   enable = true;
@@ -22,9 +28,13 @@
     #   qemu.runAsRoot = false;
     # };
 
-    # virtualbox = {
-    #   host.enable = true;
-    # };
+    virtualbox = {
+      host.enable = true;
+    };
+
+    # lxd = {
+    #   enable = true;
+    # }
 
     # needs channel
     # https://github.com/jollheef/appvm
