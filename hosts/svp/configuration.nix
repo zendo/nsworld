@@ -9,9 +9,15 @@
     inputs.nixos-hardware.nixosModules.common-gpu-intel
   ];
 
+  #########################################################################
+  # Kernel
+  #########################################################################
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  #########################################################################
+  # Bootloader
+  #########################################################################
   # boot.loader = {
   #   efi.canTouchEfiVariables = true;
   #   efi.efiSysMountPoint = "/boot/efi"; # default /boot
@@ -26,11 +32,13 @@
       device = "nodev";
       efiSupport = true;
       # Because efivars can't touch
-      # grubx64.efi -> Boot/bootx64.efi
+      # It just move grubx64.efi -> Boot/bootx64.efi
       efiInstallAsRemovable = true;
     };
   };
 
-  # ext4
+  #########################################################################
+  # FileSystem
+  #########################################################################
   fileSystems."/".options = ["noatime" "nodiratime"];
 }

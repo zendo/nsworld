@@ -9,11 +9,17 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
 
+  #########################################################################
+  # Kernel
+  #########################################################################
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # boot.kernelParams = ["quite"];
 
+  #########################################################################
+  # Bootloader
+  #########################################################################
   # boot.loader = {
   #   efi.canTouchEfiVariables = true;
   #   # efi.efiSysMountPoint = "/boot/efi"; # default /boot
@@ -37,13 +43,15 @@
       extraEntries = ''
         menuentry "Windows" {
           search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-	        chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+         chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
         }
       '';
     };
   };
 
-  # btrfs
+  #########################################################################
+  # FileSystem
+  #########################################################################
   services.btrfs.autoScrub.enable = true;
   fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
 }
