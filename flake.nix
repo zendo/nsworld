@@ -122,28 +122,29 @@
         };
 
       #############################################
-      # home-manager build switch .#nixos --flake
+      # nix run nixpkgs#home-manager build switch -- --flake .#users
       homeConfigurations = let
         username = "iab";
         system = "x86_64-linux";
+        inherit overlays;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = overlays;
         };
       in {
         ${username} = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs system;
-          username = "${username}";
-          homeDirectory = "/home/${username}";
-          stateVersion = "22.05";
-          configuration = {
-            imports = [
-              ./home-manager/git.nix
-              ./home-manager/cli.nix
-              ./home-manager/zsh.nix
-              ./home-manager/alias.nix
-            ];
-          };
+          inherit pkgs;
+          modules = [
+            ./home-manager/cli.nix
+            ./home-manager/zsh.nix
+            ./home-manager/alias.nix
+            {
+              home.stateVersion = "22.05";
+              home.username = "${username}";
+              home.homeDirectory = "/home/${username}";
+            }
+          ];
         };
       };
 

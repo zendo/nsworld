@@ -5,6 +5,7 @@
 }: {
   home.packages = with pkgs; [
     # compressor / archiver packages
+    p7zip
     unzip
     unrar
     patool
@@ -16,8 +17,13 @@
     bottom # btm
     psmisc # pstree
     ikill
+    gdu
+    duf
+    neofetch
 
     # tui utils
+    fd
+    ripgrep
     hstr # hh: history
     cht-sh
     tealdeer
@@ -27,7 +33,7 @@
     f2
     choose
     croc
-    difftastic # using delta right now
+    # difftastic # too big
     kalker # calculator
     imagemagick
     ydict
@@ -87,6 +93,8 @@
     # nvfetcher
     nix-index-updatedb
   ];
+
+  manual.manpages.enable = false;
 
   programs.home-manager.enable = true;
 

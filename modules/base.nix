@@ -32,17 +32,10 @@
     binutils
     tree
     file
-    p7zip
-    fd
-    ripgrep
-    gdu
-    duf
-    neofetch
     parted
     gptfdisk
     wget
     curl
-    bind
     git
     nix-bash-completions
   ];
