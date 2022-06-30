@@ -57,6 +57,6 @@ in {
     ns-boot = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname)";
     ns-upgrade = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname) \\
     --recreate-lock-file";
-    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake .#$(users)";
+    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake ${dotConfig}#$(users)";
   };
 }
