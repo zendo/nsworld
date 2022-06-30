@@ -1,10 +1,7 @@
-# lack cargo.lock
 {
   lib,
   fetchFromGitHub,
   rustPlatform,
-  # pkg-config,
-  # openssl,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "mprober";
@@ -20,10 +17,6 @@ rustPlatform.buildRustPackage rec {
   cargoPatches = [ ./cargo-lock.patch ];
 
   cargoSha256 = "sha256-rAyUPwhur2+gmSSje590+UwmO91RoML5pj00SvyL7yY=";
-
-  # nativeBuildInputs = [pkg-config];
-  # buildInputs = [openssl];
-  # OPENSSL_NO_VENDOR = 1;
 
   meta = with lib; {
     description = "Collect Linux system information";

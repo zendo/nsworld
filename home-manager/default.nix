@@ -11,11 +11,11 @@
       ./bash.nix
       ./zsh.nix
       ./alias.nix
-      ./editor.nix
     ]
     ++ lib.optionals nixosConfig.services.xserver.enable [
       ./xdg.nix
       ./gui.nix
+      ./editor.nix
     ];
 
   manual.manpages.enable = false;

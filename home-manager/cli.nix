@@ -59,6 +59,8 @@
 
     # Network
     lsof
+    dog
+    nali
     mtr
     elinks
     dnspeep
