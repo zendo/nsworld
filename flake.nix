@@ -122,7 +122,7 @@
         };
 
       #############################################
-      # home-manager build switch --flake .#users
+      # nix run nixpkgs#home-manager build switch -- --flake .#users
       homeConfigurations = let
         username = "iab";
         system = "x86_64-linux";

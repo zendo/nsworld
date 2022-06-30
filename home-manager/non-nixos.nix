@@ -4,9 +4,8 @@
   lib,
   ...
 }: {
-  home.shellAliases = {
-    nix = "nix --option substituters " https://mirror.sjtu.edu.cn/nix-channels/store "";
-  };
+  # home.shellAliases = {
+  # };
 
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;

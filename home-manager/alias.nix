@@ -29,7 +29,6 @@ in {
     inxi = "inxi -Fz";
 
     ee = "emacs -nw";
-    gedit = "gnome-text-editor";
     nctb = "nc termbin.com 9999";
     ixio = "curl -F 'f:1=<-' ix.io";
     wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
@@ -57,6 +56,6 @@ in {
     ns-boot = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname)";
     ns-upgrade = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname) \\
     --recreate-lock-file";
-    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake ${dotConfig}#$(users)";
+    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake ${dotConfig}#iab";
   };
 }
