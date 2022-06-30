@@ -59,7 +59,7 @@
 
     # Network
     lsof
-    dog
+    dogdns
     nali
     mtr
     elinks
