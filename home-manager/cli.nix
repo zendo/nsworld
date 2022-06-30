@@ -89,7 +89,6 @@
     nix-template
     nix-index
     nix-tree
-    home-manager
     # nvfetcher
     nix-index-updatedb
   ];
