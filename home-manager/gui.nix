@@ -23,6 +23,7 @@ in {
     # app-icon-preview
     # paper
     # librime-charcode
+      video-trimmer
 
     gitg
     v2ray

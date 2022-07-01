@@ -8,6 +8,7 @@ final: prev: {
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
+  video-trimmer = prev.callPackage ./video-trimmer {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};
@@ -26,6 +27,8 @@ final: prev: {
   # libraries
   blueprint-compiler = prev.callPackage ./blueprint-compiler {};
   librime-charcode = prev.callPackage ./librime-charcode {};
+
+  collision = prev.callPackage ./collision {};
 
   #############################################
 

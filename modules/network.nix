@@ -4,7 +4,7 @@
   ...
 }: {
   networking = {
-    networkmanager.enable = true;
+    networkmanager.enable = true; # conflict with networking.wireless
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # defaultGateway = "192.168.2.1";
     #interfaces.eno1.useDHCP = true;

@@ -8,6 +8,7 @@
     # bottles # wine manager
     # yuzu
     # gnome.gnome-boxes
+    # virt-manager
   ];
 
   virtualisation = {
@@ -23,10 +24,22 @@
       dockerCompat = true;
     };
 
-    # libvirtd = {
-    #   enable = true;
-    #   qemu.runAsRoot = false;
-    # };
+    # https://adamsimpson.net/writing/windows-11-as-kvm-guest
+    libvirtd = {
+      enable = false;
+      qemu = {
+        package = pkgs.qemu_kvm; # emulate only host architectures
+        swtpm.enable = true; # emulated TPM
+        ovmf.packages = [
+          (pkgs.OVMFFull.override
+            {
+              secureBoot = true;
+              tpmSupport = true;
+            })
+        ];
+      };
+    };
+    # boot.initrd.kernelModules = ["virtio" "virtio_pci" "virtio_net" "virtio_rng" "virtio_blk" "virtio_console"];
 
     virtualbox = {
       host.enable = true;
