@@ -95,33 +95,9 @@
         };
       };
 
-      #############################################
-      # nix build .#nixosConfigurations.wsl.config.system.build.installer
-      nixosConfigurations.wsl = let
-        username = "iab";
-        # nixpkgs = inputs.nixpkgs-stable;
-      in
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {inherit inputs username;};
-          modules = [
-            "${inputs.nixos-wsl}/configuration.nix"
-            ./modules/nixconfig.nix
-            ./hosts/wsl.nix
-
-            {nixpkgs.overlays = overlays;}
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {inherit inputs;};
-              home-manager.users.${username} = import ./home-manager;
-            }
-          ];
-        };
-
-      #############################################
+      #######################################################################
+      ## HM Standalone
+      #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#users
       homeConfigurations = let
         username = "iab";
@@ -153,7 +129,37 @@
         };
       };
 
-      #############################################
+      #######################################################################
+      ## WSL
+      #######################################################################
+      # nix build .#nixosConfigurations.wsl.config.system.build.installer
+      nixosConfigurations.wsl = let
+        username = "iab";
+        # nixpkgs = inputs.nixpkgs-stable;
+      in
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs username;};
+          modules = [
+            "${inputs.nixos-wsl}/configuration.nix"
+            ./modules/nixconfig.nix
+            ./hosts/wsl.nix
+
+            {nixpkgs.overlays = overlays;}
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit inputs;};
+              home-manager.users.${username} = import ./home-manager;
+            }
+          ];
+        };
+
+      #######################################################################
+      ## VM
+      #######################################################################
       # nix build .#nixosConfigurations.vmtest.config.system.build.vmtest
       nixosConfigurations.vmtest = let
         username = "test";
