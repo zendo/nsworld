@@ -6,7 +6,7 @@
   i18n.defaultLocale = "zh_CN.UTF-8";
 
   fonts = {
-    # /run/current-system/sw/share/X11/fonts
+    # create /run/current-system/sw/share/X11/fonts
     fontDir.enable = true;
     fonts = with pkgs; [
       noto-fonts
@@ -17,7 +17,7 @@
       # source-han-sans
       # source-han-serif
       source-code-pro
-      comic-relief
+      # comic-relief
       emacs-all-the-icons-fonts
       hack-font
       fira-code
@@ -28,6 +28,7 @@
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
         monospace = [
+          "Noto Sans Mono CJK SC"
           "Sarasa Mono SC"
           "DejaVu Sans Mono"
         ];

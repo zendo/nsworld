@@ -3,7 +3,7 @@
   username,
   ...
 }: {
-  # refuse using useradd
+  # Refuse using `useradd`
   users.mutableUsers = false;
 
   # Don't require password for sudo

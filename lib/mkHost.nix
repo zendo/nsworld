@@ -24,9 +24,12 @@ in
           ../modules/fonts.nix
           ../modules/virtual.nix
           ../hosts/${hostname}
-          {networking.hostName = "${hostname}";}
 
-          {nixpkgs.overlays = overlays;}
+          {
+            networking.hostName = "${hostname}";
+            hardware.enableAllFirmware = true;
+            nixpkgs.overlays = overlays;
+          }
         ]
         ++ nixpkgs.lib.optionals hmEnable [
           home-manager.nixosModules.home-manager

@@ -3,11 +3,6 @@
   pkgs,
   ...
 }: {
-  time.timeZone = "Asia/Shanghai";
-
-  # unfree
-  hardware.enableAllFirmware = true;
-
   zramSwap.enable = true;
 
   boot = {
@@ -26,9 +21,6 @@
     '';
   };
 
-  #######################################################################
-  ## Essential Apps
-  #######################################################################
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -48,13 +40,15 @@
     enableSSHSupport = true;
   };
 
-  # Need channels
+  # Need channels to work
   programs.command-not-found.enable = false;
 
   documentation = {
     enable = false;
     nixos.enable = false;
   };
+
+  time.timeZone = "Asia/Shanghai";
 
   system.stateVersion = "22.05";
 }
