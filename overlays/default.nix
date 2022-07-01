@@ -9,6 +9,7 @@ final: prev: {
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
   video-trimmer = prev.callPackage ./video-trimmer {};
+  decoder = prev.callPackage ./decoder {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};

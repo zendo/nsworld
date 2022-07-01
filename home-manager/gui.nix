@@ -21,9 +21,10 @@ in {
     # clash-verge
     # netease-cloud-music-gtk
     # app-icon-preview
-    # paper
     # librime-charcode
-      video-trimmer
+    # decoder
+    paper
+    video-trimmer
 
     gitg
     v2ray

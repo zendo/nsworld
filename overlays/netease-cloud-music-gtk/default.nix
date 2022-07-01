@@ -1,5 +1,6 @@
 { lib
 , stdenv
+, fetchFromGitHub
 , glib
 , gtk4
 , libadwaita
@@ -15,7 +16,6 @@
 , wrapGAppsHook4
 , appstream-glib
 , desktop-file-utils
-, fetchFromGitHub
 }:
 stdenv.mkDerivation rec {
   pname = "netease-cloud-music-gtk";

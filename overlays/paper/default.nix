@@ -48,12 +48,12 @@ stdenv.mkDerivation rec {
   ];
 
   # WIP: desktop seems wrong
-  postFixup = ''
-    cd $out/share/applications/
-    mv io.posidon.Paper.desktop temp
-    mv io.posidon.Paper-editor.desktop io.posidon.Paper.desktop
-    mv temp io.posidon.Paper-editor.desktop
-  '';
+  # postFixup = ''
+  #   cd $out/share/applications/
+  #   mv io.posidon.Paper.desktop temp
+  #   mv io.posidon.Paper-editor.desktop io.posidon.Paper.desktop
+  #   mv temp io.posidon.Paper-editor.desktop
+  # '';
 
   meta = with lib; {
     homepage = "https://posidon.io/paper";

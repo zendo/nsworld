@@ -25,7 +25,6 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     meson
     ninja
-    python3.pkgs.wrapPython
   ];
 
   buildInputs = [
@@ -36,10 +35,6 @@ stdenv.mkDerivation rec {
     # So that the compiler can find GIR and .ui files
     gobject-introspection
   ];
-
-  postFixup = ''
-    wrapPythonPrograms
-  '';
 
   meta = with lib; {
     description = "A markup language for GTK user interface files";

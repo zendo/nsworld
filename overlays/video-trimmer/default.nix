@@ -1,7 +1,7 @@
-# WIP
 {
   lib,
   stdenv,
+  fetchFromGitLab,
   meson,
   ninja,
   pkg-config,
@@ -9,12 +9,12 @@
   glib,
   gtk4,
   libadwaita,
+  blueprint-compiler,
+  gst_all_1,
+  ffmpeg-full,
   wrapGAppsHook4,
   appstream-glib,
   desktop-file-utils,
-  fetchFromGitLab,
-  blueprint-compiler,
-  ffmpeg-full,
 }:
 stdenv.mkDerivation rec {
   pname = "video-trimmer";
@@ -55,11 +55,17 @@ stdenv.mkDerivation rec {
     gtk4
     libadwaita
     ffmpeg-full
-  ];
+  ]++ (with gst_all_1; [
+    gstreamer
+    gst-editing-services
+    gst-plugins-base
+    gst-plugins-good
+    gst-plugins-bad
+    gst-plugins-ugly
+    gst-libav
+  ]);
 
-  runtimeDeps = [ffmpeg-full];
-
-  # delete unused postinstall.py
+  # delete unused postinstall.py line
   patchPhase = ''
     sed -i '/postinstall.py/d' meson.build
   '';
