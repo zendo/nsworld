@@ -36,7 +36,6 @@
     gptfdisk
     wget
     curl
-    git
     nix-bash-completions
   ];
 

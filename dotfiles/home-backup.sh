@@ -17,14 +17,14 @@
 # --include-from=FILE 不排除 FILE 指定模式匹配的文件
 ################################################################
 
-rsync -avhpL "$HOME"/.ssh "$HOME"/Documents/HomeFilesBackup/
-rsync -avhpL "$HOME"/.mozilla "$HOME"/Documents/HomeFilesBackup/
-rsync -avhpL "$HOME"/.config/fcitx5/conf "$HOME"/Documents/HomeFilesBackup/
+rsync -avhpL "$HOME"/.ssh "$HOME"/Documents/homeBackups/
+rsync -avhpL "$HOME"/.mozilla "$HOME"/Documents/homeBackups/
+rsync -avhpL "$HOME"/.config/fcitx5/conf "$HOME"/Documents/homeBackups/
 
 if test $XDG_CURRENT_DESKTOP = "GNOME"; then
-    dconf dump /org/gnome/ > "$HOME"/Documents/HomeFilesBackup/my-dconf
+    dconf dump /org/gnome/ > "$HOME"/Documents/homeBackups/my-dconf
 fi
 
 if test $XDG_CURRENT_DESKTOP = "KDE"; then
-    cd "$HOME"/Documents/HomeFilesBackup/ ; kde-backup -b $(users)
+    cd "$HOME"/Documents/homeBackups/ ; kde-backup -b $(users)
 fi
