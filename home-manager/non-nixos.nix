@@ -3,14 +3,6 @@
   pkgs,
   ...
 }: {
-  /*
-   sudo vi /etc/nix/nix.conf
-   substituters = https://mirror.sjtu.edu.cn/nix-channels/store
-
-   sudo vi /etc/nix/registry.json
-   { "flakes":[], "version":2 }
-   */
-
   # home.shellAliases = {
   # };
 
@@ -27,6 +19,7 @@
     # "nix/nix.conf".text = ''
     #   warn-dirty = false
     #   experimental-features = nix-command flakes
+    #   substituters = https://mirror.sjtu.edu.cn/nix-channels/store
     # '';
 
     # "nix/registry.json".text = ''
