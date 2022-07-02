@@ -14,9 +14,10 @@ final: prev: {
 
   # go
   v2raya = prev.callPackage ./v2raya {};
-  frei = prev.callPackage ./frei {};
+  frei = prev.callPackage ./python {};
+  radioboat = prev.callPackage ./radioboat {};
 
-  # python
+  # frei
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
 
   # nodejs
@@ -48,7 +49,6 @@ final: prev: {
   #   plugins = [librime-charcode];
   # };
 
-
   # rust override
   # shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {
   #   version = "2022-06-27";
@@ -71,6 +71,16 @@ final: prev: {
   #       url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
   #       sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
   #     };
+  #   });
+  # });
+
+  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+  #   mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
+  #     dynamic-buffering = prev.fetchurl {
+  #       url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
+  #       sha256 = "sha256-KVerFwEgLaEpp5lFofX7VnbBPP4dIVm3+odVUZ8clYA=";
+  #     };
+  #     patches = dynamic-buffering;
   #   });
   # });
 

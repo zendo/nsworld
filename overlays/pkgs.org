@@ -42,6 +42,13 @@ buildGoModule rec {
 #+begin_src nix
 subPackages = ["."];
 #+end_src
+
+**
+* stdenv
+#+begin_src nix
+# auto-update bot
+passthru.updateScript = nix-update-script { attrPath = pname; };
+#+end_src
 * buildRustPackage
 ** cli
 #+begin_src nix

@@ -23,8 +23,10 @@ in {
     # app-icon-preview
     # librime-charcode
     # decoder
-      artem
-      media-downloader
+    # artem
+    radioboat
+    shadowsocks-gtk-rs
+    media-downloader
     paper
     video-trimmer
 

@@ -34,6 +34,8 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [pkg-config];
   buildInputs = [openssl tree-sitter];
+
+  # Get openssl-sys to use pkg-config
   OPENSSL_NO_VENDOR = 1;
 
   meta = with lib; {
