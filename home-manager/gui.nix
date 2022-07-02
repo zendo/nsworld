@@ -23,6 +23,8 @@ in {
     # app-icon-preview
     # librime-charcode
     # decoder
+      artem
+      media-downloader
     paper
     video-trimmer
 

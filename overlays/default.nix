@@ -5,6 +5,7 @@ final: prev: {
 
   # rust
   zee = prev.callPackage ./zee {};
+  artem = prev.callPackage ./artem {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
@@ -30,6 +31,7 @@ final: prev: {
   librime-charcode = prev.callPackage ./librime-charcode {};
 
   collision = prev.callPackage ./collision {};
+  media-downloader = prev.callPackage ./media-downloader {};
 
   #############################################
 

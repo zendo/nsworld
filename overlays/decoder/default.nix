@@ -1,3 +1,5 @@
+# wip
+# pkgs/applications/misc/authenticator/
 {
   lib,
   stdenv,
@@ -84,7 +86,7 @@ stdenv.mkDerivation rec {
     description = "Scan and Generate QR Codes";
     homepage = "https://apps.gnome.org/en/app/com.belmoussaoui.Decoder/";
     license = licenses.gpl3Plus;
-    maintainers = with maintainers; [mihnea-s zendo];
+    maintainers = with maintainers; [zendo];
     platforms = platforms.linux;
   };
 }
