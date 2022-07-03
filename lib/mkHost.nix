@@ -26,9 +26,10 @@ in
           ../hosts/${hostname}
 
           {
-            networking.hostName = "${hostname}";
-            hardware.enableAllFirmware = true;
             nixpkgs.overlays = overlays;
+            hardware.enableAllFirmware = true;
+            networking.hostName = "${hostname}";
+            services.xserver.displayManager.autoLogin.user = "${username}";
           }
         ]
         ++ nixpkgs.lib.optionals hmEnable [

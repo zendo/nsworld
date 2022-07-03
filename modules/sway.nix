@@ -2,7 +2,6 @@
 {
   pkgs,
   lib,
-  username,
   ...
 }: {
   services.xserver = {
@@ -14,7 +13,6 @@
     displayManager = {
       gdm.enable = true;
       # defaultSession = "plasmawayland";
-      # autoLogin.user = "${username}";
     };
   };
 

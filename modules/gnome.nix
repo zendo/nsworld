@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  username,
   ...
 }: {
   services.xserver = {
@@ -13,7 +12,6 @@
     displayManager = {
       gdm.enable = true;
       defaultSession = "gnome";
-      autoLogin.user = "${username}";
     };
 
     desktopManager.gnome = {

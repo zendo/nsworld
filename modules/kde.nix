@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  username,
   ...
 }: {
   services.xserver = {
@@ -14,7 +13,6 @@
       # sddm.enable = true; # wayland autologin bug
       lightdm.enable = true;
       defaultSession = "plasmawayland";
-      autoLogin.user = "${username}";
     };
 
     desktopManager.plasma5 = {
