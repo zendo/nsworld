@@ -1,14 +1,14 @@
 # WIP
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchFromGitHub,
   cmake,
   boost,
   icu,
   librime,
 }:
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "librime-charcode";
   version = "2022-02-04";
 
@@ -19,7 +19,11 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
   };
 
-  # dontInstall = true;
+  # There is a Makefile, but we don’t need it, and it prints errors
+  dontBuild = true;
+
+  dontInstall = true;
+
 
   # nativeBuildInputs = [cmake];
 

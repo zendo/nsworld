@@ -28,7 +28,6 @@ final: prev: {
   paper = prev.callPackage ./paper {};
 
   # libraries
-  blueprint-compiler = prev.callPackage ./blueprint-compiler {};
   librime-charcode = prev.callPackage ./librime-charcode {};
 
   collision = prev.callPackage ./collision {};

@@ -25,7 +25,6 @@ in {
     # decoder
     # artem
     radioboat
-    shadowsocks-gtk-rs
     media-downloader
     paper
     video-trimmer

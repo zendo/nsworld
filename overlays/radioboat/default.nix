@@ -13,7 +13,7 @@ buildGoModule rec {
 
   vendorSha256 = "sha256-fttql4Z8mzhrYyoGmIwCDJSf4iMKHG7mtXObhjH5p2Q=";
 
-  ldflags = [ "-s" "-w" "-X=main.Version=${version}" ];
+  ldflags = [ "-s" "-w" ];
 
   passthru.updateScript = nix-update-script { attrPath = pname; };
 

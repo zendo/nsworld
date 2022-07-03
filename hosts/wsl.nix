@@ -34,8 +34,8 @@
   };
 
   environment.shellAliases = {
-    wsl-proxy = "export http_proxy=http://192.168.2.118:7890 ; \\
-    export https_proxy=http://192.168.2.118:7890";
+    wsl-proxy = "export http_proxy=http://192.168.2.118:10808 ; \\
+    export https_proxy=http://192.168.2.118:10808";
     wsl-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#wsl";
   };
 }
