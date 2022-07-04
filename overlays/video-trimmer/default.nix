@@ -6,6 +6,7 @@
   ninja,
   pkg-config,
   rustPlatform,
+  python3,
   glib,
   gtk4,
   libadwaita,
@@ -39,6 +40,7 @@ stdenv.mkDerivation rec {
       meson
       ninja
       pkg-config
+      python3
       blueprint-compiler
       wrapGAppsHook4
       appstream-glib
@@ -65,10 +67,19 @@ stdenv.mkDerivation rec {
     gst-libav
   ]);
 
-  # delete unused postinstall.py line
-  patchPhase = ''
+  # postPatch = ''
+  #   sed -i 's/\/usr\/local/\$out/' build-aux/meson/postinstall.py
+  #   patchShebangs build-aux/meson/meson_post_install.py
+  # '';
+
+  postPatch = ''
     sed -i '/postinstall.py/d' meson.build
   '';
+
+  # postInstall = ''
+  #   substituteInPlace build-aux/meson/postinstall.py \
+  #     --replace "/usr/local" "$out"
+  # '';
 
   meta = with lib; {
     description = "Trim videos quickly";

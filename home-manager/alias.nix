@@ -38,8 +38,8 @@ in {
     paperoni-single-html = "paperoni --export html --inline-images";
 
     nse = "nix search nixpkgs";
-    nss = "f() { nix shell nixpkgs\#\$1 }; f";
     nx = "f() { nix run nixpkgs\#\$1 -- $2; }; f";
+    ns-shell = "f() { nix shell nixpkgs\#\$1 }; f";
     nix-which = "f() { readlink -f $(which $1) }; f";
     nix-references = "f() { nix-store -q --references $(nix-which $1) }; f";
     nix-depends = "f() { nix path-info -rsSh $(nix-which $1) }; f";
@@ -50,6 +50,7 @@ in {
     ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
     ns-source = "readlink -f /nix/var/nix/profiles/system";
+    hm-source = "readlink -f /nix/var/nix/profiles/per-user/$(users)/home-manager";
     ns-installed = "nix path-info --recursive /run/current-system";
     ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
     ns-switch = "sudo -E nixos-rebuild switch --flake ${dotConfig}#$(hostname)";
