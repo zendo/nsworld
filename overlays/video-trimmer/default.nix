@@ -8,6 +8,7 @@
   rustPlatform,
   python3,
   glib,
+  gtk3,
   gtk4,
   libadwaita,
   blueprint-compiler,
@@ -45,6 +46,10 @@ stdenv.mkDerivation rec {
       wrapGAppsHook4
       appstream-glib
       desktop-file-utils
+      # For postinstall script
+      python3
+      gtk3
+      glib
     ]
     ++ (with rustPlatform; [
       rust.cargo
@@ -57,7 +62,7 @@ stdenv.mkDerivation rec {
       glib
       gtk4
       libadwaita
-      ffmpeg-full
+#      ffmpeg-full
     ]
     ++ (with gst_all_1; [
       gstreamer
@@ -75,18 +80,15 @@ stdenv.mkDerivation rec {
     )
   '';
 
+  postPatch = ''
+    chmod +x build-aux/meson/postinstall.py
+    patchShebangs build-aux/meson/postinstall.py
+  '';
+
   # postPatch = ''
   #   sed -i 's/\/usr\/local/\$out/' build-aux/meson/postinstall.py
   #   patchShebangs build-aux/meson/meson_post_install.py
   # '';
-
-  postPatch = ''
-    sed -i '/postinstall.py/d' meson.build
-  '';
-
-  postInstall = ''
-    glib-compile-schemas $out/share/glib-2.0/schemas
-  '';
 
   # postInstall = ''
   #   substituteInPlace build-aux/meson/postinstall.py \
