@@ -254,3 +254,22 @@ gst_all_1.gst-plugins-ugly
 gst_all_1.gst-libav
 #+end_src
 * miscPatch
+* wrapper
+#+begin_src nix
+  nativeBuildInputs = [makeWrapper];
+  preFixup = ''
+    wrapProgram $out/bin/radioboat --prefix PATH ":" "${lib.makeBinPath [mpv]}";
+  '';
+
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
+    )
+  '';
+
+  preFixup = ''
+    qtWrapperArgs+=(
+       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
+    )
+  '';
+#+end_src

@@ -4,6 +4,7 @@
   fetchFromGitHub,
   cmake,
   qt5,
+  ffmpeg-full,
 }:
 stdenv.mkDerivation rec {
   pname = "media-downloader";
@@ -20,6 +21,12 @@ stdenv.mkDerivation rec {
     cmake
     qt5.wrapQtAppsHook
   ];
+
+  preFixup = ''
+    qtWrapperArgs+=(
+       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
+    )
+  '';
 
   meta = with lib; {
     description = "A Qt/C++ GUI front end to youtube-dl";

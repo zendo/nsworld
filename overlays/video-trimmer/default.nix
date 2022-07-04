@@ -52,20 +52,28 @@ stdenv.mkDerivation rec {
       cargoSetupHook
     ]);
 
-  buildInputs = [
-    glib
-    gtk4
-    libadwaita
-    ffmpeg-full
-  ]++ (with gst_all_1; [
-    gstreamer
-    gst-editing-services
-    gst-plugins-base
-    gst-plugins-good
-    gst-plugins-bad
-    gst-plugins-ugly
-    gst-libav
-  ]);
+  buildInputs =
+    [
+      glib
+      gtk4
+      libadwaita
+      ffmpeg-full
+    ]
+    ++ (with gst_all_1; [
+      gstreamer
+      gst-editing-services
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      gst-libav
+    ]);
+
+  preFixup = ''
+    gappsWrapperArgs+=(
+       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
+    )
+  '';
 
   # postPatch = ''
   #   sed -i 's/\/usr\/local/\$out/' build-aux/meson/postinstall.py
@@ -74,6 +82,10 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     sed -i '/postinstall.py/d' meson.build
+  '';
+
+  postInstall = ''
+    glib-compile-schemas $out/share/glib-2.0/schemas
   '';
 
   # postInstall = ''

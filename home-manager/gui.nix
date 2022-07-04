@@ -69,9 +69,9 @@ in {
         })
       else spotify
     )
-    mpv
+    # mpv
     # vlc
-    ffmpeg
+    # ffmpeg
     mousai # 听歌识曲
     # shortwave
     # easyeffects
