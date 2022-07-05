@@ -259,6 +259,12 @@ gst_all_1.gst-libav
   nativeBuildInputs = [makeWrapper];
   preFixup = ''
     wrapProgram $out/bin/radioboat --prefix PATH ":" "${lib.makeBinPath [mpv]}";
+
+    wrapProgram $out/bin/espanso \
+      --prefix PATH : ${lib.makeBinPath [ libnotify xclip ]}
+
+    wrapProgram $out/bin/code-radio --prefix LD_LIBRARY_PATH : "${alsa-lib}/lib"
+
   '';
 
   preFixup = ''

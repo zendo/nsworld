@@ -4,6 +4,7 @@
   fetchFromGitHub,
   cmake,
   qt5,
+  aria2,
   ffmpeg-full,
 }:
 stdenv.mkDerivation rec {
@@ -24,7 +25,7 @@ stdenv.mkDerivation rec {
 
   preFixup = ''
     qtWrapperArgs+=(
-       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
+       --prefix PATH : "${lib.makeBinPath [ffmpeg-full aria2]}"
     )
   '';
 
