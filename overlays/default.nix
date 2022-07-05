@@ -64,14 +64,14 @@ final: prev: {
   # });
 
   # gdm bug
-  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-  #   gdm = gprev.gdm.overrideAttrs (oldAttrs: {
-  #     src = prev.fetchurl {
-  #       url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
-  #       sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
-  #     };
-  #   });
-  # });
+  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+    gdm = gprev.gdm.overrideAttrs (oldAttrs: {
+      src = prev.fetchurl {
+        url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
+        sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
+      };
+    });
+  });
 
   # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
   #   mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {

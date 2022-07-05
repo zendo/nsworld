@@ -10,23 +10,21 @@ in {
   home.packages = with pkgs; [
     # Overlays
     # steam-run
-    # (appimage-run.override {
-    #   extraPkgs = pkgs: [ pkgs.libthai ];
-    # })
+    # appimage-run
     # zee
     # dippi
     # frei
     # mprober
     # dynamic-wallpaper
     # clash-verge
-    # netease-cloud-music-gtk
     # app-icon-preview
     # librime-charcode
     # decoder
     # artem
+    # paper
+    # netease-cloud-music-gtk
     radioboat
     media-downloader
-    paper
     video-trimmer
 
     gitg
@@ -69,11 +67,10 @@ in {
         })
       else spotify
     )
-    # mpv
+    mpv
     # vlc
     # ffmpeg
     mousai # 听歌识曲
-    # shortwave
     # easyeffects
 
     # Image manipulation

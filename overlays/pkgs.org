@@ -272,4 +272,10 @@ gst_all_1.gst-libav
        --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
     )
   '';
+
+  postInstall = ''
+    install -Dm444 src/resources/com.github.weclaw1.ImageRoll.desktop -t $out/share/applications/
+    install -Dm444 src/resources/com.github.weclaw1.ImageRoll.svg -t $out/share/icons/hicolor/scalable/apps/
+    install -Dm444 src/resources/com.github.weclaw1.ImageRoll.metainfo.xml -t $out/share/metainfo/
+  '';
 #+end_src
