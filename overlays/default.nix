@@ -11,6 +11,7 @@ final: prev: {
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
   video-trimmer = prev.callPackage ./video-trimmer {};
   decoder = prev.callPackage ./decoder {};
+  code-radio-cli = prev.callPackage ./code-radio-cli {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};

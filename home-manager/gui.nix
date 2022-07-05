@@ -23,6 +23,7 @@ in {
     # artem
     # paper
     # netease-cloud-music-gtk
+    code-radio-cli
     radioboat
     media-downloader
     video-trimmer
@@ -35,6 +36,7 @@ in {
     # nur.repos.linyinfeng.clash-for-windows
     foot
     alacritty
+    wezterm
     warp
 
     # Browsers

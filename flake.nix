@@ -160,7 +160,7 @@
       #######################################################################
       ## VM
       #######################################################################
-      # nix build .#nixosConfigurations.vmtest.config.system.build.vmtest
+      # nix build .#nixosConfigurations.vmtest.config.system.build.vm
       nixosConfigurations.vmtest = let
         username = "test";
         system = "x86_64-linux";

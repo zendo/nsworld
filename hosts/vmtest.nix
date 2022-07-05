@@ -13,10 +13,28 @@
     ../modules/network.nix
     ../modules/nixconfig.nix
     ../modules/sound.nix
-    ../modules/gnome.nix
+    # ../modules/gnome.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    code-radio-cli
+    ydict
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    inputs.nur.overlay
+    inputs.emacs-overlay.overlay
+    (import ../overlays)
+  ];
+
+  services.xserver = {
+    libinput = {
+      # enable = true; # enabled default by desktopManager
+    };
+
+    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+  };
 
   virtualisation = {
     memorySize = 1024 * 3;

@@ -26,7 +26,7 @@
 
     # https://adamsimpson.net/writing/windows-11-as-kvm-guest
     libvirtd = {
-      enable = false;
+      # enable = true;
       qemu = {
         package = pkgs.qemu_kvm; # emulate only host architectures
         swtpm.enable = true; # emulated TPM
@@ -48,13 +48,6 @@
     # lxd = {
     #   enable = true;
     # }
-
-    # needs channel
-    # https://github.com/jollheef/appvm
-    # appvm = {
-    #   enable = true;
-    #   user = "${username}";
-    # };
 
     # waydroid.enable = true;
   };
