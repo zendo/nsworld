@@ -19,6 +19,7 @@
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
-    "nix".source = ../dotfiles/nix;
+    "nix/nix.conf".source = ../dotfiles/nix/nix.conf;
+    "nix/flake-registry.json".source = ../dotfiles/flake-registry.json;
   };
 }
