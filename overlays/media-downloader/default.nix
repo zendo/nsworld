@@ -5,7 +5,9 @@
   cmake,
   qt5,
   aria2,
+  yt-dlp,
   ffmpeg-full,
+  python3,
 }:
 stdenv.mkDerivation rec {
   pname = "media-downloader";
@@ -25,7 +27,7 @@ stdenv.mkDerivation rec {
 
   preFixup = ''
     qtWrapperArgs+=(
-       --prefix PATH : "${lib.makeBinPath [ffmpeg-full aria2]}"
+       --prefix PATH : "${lib.makeBinPath [ffmpeg-full aria2 yt-dlp python3]}"
     )
   '';
 

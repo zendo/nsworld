@@ -61,7 +61,7 @@
     cloc # count code lines
     sqlite
     openssl
-    python3
+    # python3
 
     # Network
     lsof
