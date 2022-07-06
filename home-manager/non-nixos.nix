@@ -19,15 +19,7 @@
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
-    "nix/nix.conf".text = ''
-      warn-dirty = false
-      experimental-features = nix-command flakes
-      substituters = https://mirror.sjtu.edu.cn/nix-channels/store
-      flake-registry = https://jihulab.com/bobby285271/flake-registry/-/raw/master/flake-registry.json
-    '';
-
-    # "nix/registry.json".text = ''
-    # { "flakes":[], "version":2 }
-    # '';
+    "nix/nix.conf".source = ../dotfiles/nix/nix.conf;
+    "nix/flake-registry.json".source = ../dotfiles/nix/flake-registry.json;
   };
 }
