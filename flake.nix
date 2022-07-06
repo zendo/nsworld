@@ -99,6 +99,7 @@
       ## HM Standalone
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#users
+      # --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
       homeConfigurations = let
         username = "iab";
         system = "x86_64-linux";

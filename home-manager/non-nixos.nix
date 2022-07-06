@@ -1,6 +1,3 @@
-/*
-
-*/
 {
   config,
   pkgs,
@@ -19,7 +16,11 @@
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
-    "nix/nix.conf".source = ../dotfiles/nix/nix.conf;
-    "nix/flake-registry.json".source = ../dotfiles/flake-registry.json;
+    "nix/nix.conf".text = ''
+      warn-dirty = false
+      experimental-features = nix-command flakes
+      substituters = https://mirror.sjtu.edu.cn/nix-channels/store
+      flake-registry = ${../dotfiles/nix/flake-registry.json}
+    '';
   };
 }
