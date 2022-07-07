@@ -25,9 +25,6 @@
 
       # Override GNOME defaults
       extraGSettingsOverrides = ''
-        [org.gnome.shell]
-        welcome-dialog-last-shown-version='9999999999'
-
         [org.gnome.system.location]
         enabled=true
 
@@ -52,10 +49,11 @@
   };
 
   environment.gnome.excludePackages = with pkgs; [
-    gnome-photos
+    gnome-tour
     gnome.yelp
     gnome.geary
     gnome.totem
+    gnome-photos
     gnome.baobab
     gnome.gnome-music
     gnome.gnome-software

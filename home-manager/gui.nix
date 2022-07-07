@@ -59,7 +59,7 @@ in {
     vscode
 
     # Social media
-    # tdesktop
+    tdesktop
     fractal
     # nheko
     # discord
