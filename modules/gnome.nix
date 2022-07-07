@@ -64,9 +64,7 @@
   environment.systemPackages = with pkgs;
     [
       gthumb
-      gcolor3
       authenticator
-      # wl-color-picker
       # notejot
       # amberol
       # lollypop

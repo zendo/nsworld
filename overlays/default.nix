@@ -19,9 +19,12 @@ final: prev: {
   v2raya = prev.callPackage ./v2raya {};
   frei = prev.callPackage ./python {};
   radioboat = prev.callPackage ./radioboat {};
+  hysteria = prev.callPackage ./hysteria {};
 
-  # frei
+  # python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
+  gpu-viewer = prev.callPackage ./gpu-viewer {};
+  frog = prev.callPackage ./frog {};
 
   # nodejs
   clash-verge = prev.callPackage ./clash-verge {};

@@ -15,7 +15,7 @@ in {
     # dippi
     # frei
     # mprober
-    # dynamic-wallpaper
+    dynamic-wallpaper
     # clash-verge
     # app-icon-preview
     # librime-charcode
@@ -24,6 +24,8 @@ in {
     # paper
     # netease-cloud-music-gtk
     # g4music
+    # gpu-viewer
+    # frog
     code-radio-cli
     radioboat
     media-downloader
@@ -80,6 +82,9 @@ in {
     # Image manipulation
     # shutter
     yacreader
+    contrast
+    # gcolor3
+    # wl-color-picker
 
     qbittorrent
     meld
@@ -103,9 +108,9 @@ in {
     cpufetch
     usbutils
     dmidecode
-    glxinfo
-    libva-utils #vainfo
-    vulkan-tools
+    # glxinfo
+    # libva-utils #vainfo
+    # vulkan-tools
     cpufrequtils
     pciutils
     edid-decode
