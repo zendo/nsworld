@@ -4,14 +4,16 @@ final: prev: {
   nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
 
   # rust
-  zee = prev.callPackage ./zee {};
+  battop = prev.callPackage ./battop {}; # wip
+  zee = prev.callPackage ./zee {};       # wip
+  decoder = prev.callPackage ./decoder {}; # wip
   artem = prev.callPackage ./artem {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
   video-trimmer = prev.callPackage ./video-trimmer {};
-  decoder = prev.callPackage ./decoder {};
   code-radio-cli = prev.callPackage ./code-radio-cli {};
+  image-roll = prev.callPackage ./image-roll {};
 
   # go
   v2raya = prev.callPackage ./v2raya {};

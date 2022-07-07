@@ -8,16 +8,16 @@
 }:
 buildGoModule rec {
   pname = "radioboat";
-  version = "0.1.2";
+  version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "slashformotion";
     repo = "radioboat";
     rev = "v${version}";
-    sha256 = "sha256-Qsv5jeyvlsQNGz1/kizLKI9Q5WnNGcacx/iOrArqbZ8=";
+    sha256 = "sha256-63O2nqT4HIK3Xo8VbNxVs0fwCmh/FUbok4P+nhpe3wI=";
   };
 
-  vendorSha256 = "sha256-fttql4Z8mzhrYyoGmIwCDJSf4iMKHG7mtXObhjH5p2Q=";
+  vendorSha256 = "sha256-X3KiqaiOQYQBfVckh50C+4oxIVN6gXyNuQtBwGvjdFQ=";
 
   ldflags = ["-s" "-w"];
 
@@ -25,6 +25,10 @@ buildGoModule rec {
 
   preFixup = ''
     wrapProgram $out/bin/radioboat --prefix PATH ":" "${lib.makeBinPath [mpv]}";
+  '';
+
+  postPatch = ''
+    substituteInPlace cmd/root.go --replace "v0.0.1" "v${version}"
   '';
 
   passthru.updateScript = nix-update-script {attrPath = pname;};

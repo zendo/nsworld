@@ -1,3 +1,4 @@
+# https://github.com/selfuryon/nixos-config/blob/634289c150da79a3d9eda0007247721fc90ad4f7/users/syakovlev/features/sway-desktop/sway.nix
 # wip
 {
   pkgs,

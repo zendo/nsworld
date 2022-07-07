@@ -28,6 +28,7 @@ in {
     radioboat
     media-downloader
     video-trimmer
+    image-roll
 
     gitg
     v2ray

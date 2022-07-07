@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
 
@@ -45,7 +45,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    nixpkgs-stable,
+    # nixpkgs-stable,
     nixos-hardware,
     home-manager,
     emacs-overlay,
