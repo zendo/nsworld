@@ -27,8 +27,8 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "neithern";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-vP6I19JdlD7WM/hlR7T/hvyhQx0X4WYi+bY6GNNovp4=";
+    rev = "ef13f16b75e001721262324d355b7b7d3f5e2b77";
+    hash = "sha256-Uuq3zzCPbxeG+1hORbRFBCSaGFlItohHYW4W+3yRxMQ=";
   };
 
   nativeBuildInputs = [

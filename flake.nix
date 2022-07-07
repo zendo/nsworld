@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs";
+    # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs/?ref=gnomeExtensions-update";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -46,6 +46,7 @@
     self,
     nixpkgs,
     # nixpkgs-stable,
+    # nixpkgs-unstable,
     nixos-hardware,
     home-manager,
     emacs-overlay,

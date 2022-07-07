@@ -46,6 +46,7 @@ in {
     nix-sri = "nix hash to-sri --type sha256";
     nix-pr-branch = "gh pr checkout -R NixOS/nixpkgs";
     nix-pr-run = "f() { nix run github:NixOS/nixpkgs/pull/$1/merge#$2 }; f";
+    nix-fetch-merge = "git fetch upstream master && git merge $(nixos-version --revision)";
 
     ns-profiles = "ls -la /nix/var/nix/profiles";
     ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";

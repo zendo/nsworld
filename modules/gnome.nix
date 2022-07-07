@@ -97,9 +97,10 @@
       blur-my-shell
       proxy-switcher
       just-perfection
+      # rocketbar
+      # arcmenu
       # gnome-clipboard
       # pop-shell
-      # arcmenu
       # logo-menu
       # kimpanel
       # pixel-saver
