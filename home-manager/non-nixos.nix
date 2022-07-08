@@ -1,10 +1,12 @@
 {
   config,
   pkgs,
+  username,
   ...
 }: {
-  # home.shellAliases = {
-  # };
+  home.shellAliases = {
+    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake ~/.nsworld/#${username}";
+  };
 
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;

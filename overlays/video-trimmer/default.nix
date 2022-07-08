@@ -62,7 +62,7 @@ stdenv.mkDerivation rec {
       glib
       gtk4
       libadwaita
-#      ffmpeg-full
+      # ffmpeg-full
     ]
     ++ (with gst_all_1; [
       gstreamer
@@ -80,10 +80,24 @@ stdenv.mkDerivation rec {
     )
   '';
 
-  postPatch = ''
-    chmod +x build-aux/meson/postinstall.py
-    patchShebangs build-aux/meson/postinstall.py
-  '';
+  patches = [
+    ./meson.patch
+  ];
+
+  # postPatch = ''
+  #   chmod +x build-aux/meson/postinstall.py
+  #   patchShebangs build-aux/meson/postinstall.py
+  #   substituteInPlace build-aux/meson/postinstall.py \
+  #     --replace "/usr/local" "$out"
+  # '';
+
+  # postPatch = ''
+  #   sed -i '/postinstall.py/d' meson.build
+  # '';
+
+  # postinstall = ''
+  #   glib-compile-schemas $out/share/glib-2.0/schemas
+  # '';
 
   # postPatch = ''
   #   sed -i 's/\/usr\/local/\$out/' build-aux/meson/postinstall.py
@@ -98,7 +112,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Trim videos quickly";
     homepage = "https://gitlab.gnome.org/YaLTeR/video-trimmer";
-    license = licenses.gpl3;
+    license = licenses.gpl3Plus;
     maintainers = with maintainers; [zendo];
   };
 }
