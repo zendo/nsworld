@@ -285,3 +285,17 @@ gst_all_1.gst-libav
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.metainfo.xml -t $out/share/metainfo/
   '';
 #+end_src
+* meta
+#+begin_src nix
+  meta = with lib; {
+    description = "";
+    longDescription = ''
+    '';
+    homepage = "";
+    license = licenses.mit;
+    platforms = platforms.unix;
+    maintainers = with maintainers; [
+      somebody
+    ];
+  };
+#+end_src

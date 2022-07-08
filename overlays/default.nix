@@ -4,6 +4,7 @@ final: prev: {
   getip = prev.callPackage ./getip {};
   tfetch = prev.callPackage ./tfetch {};
   nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
+  ns = prev.callPackage ./nixos-scripts {};
 
   # rust
   battop = prev.callPackage ./battop {}; # wip

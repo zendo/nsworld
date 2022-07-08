@@ -31,6 +31,7 @@ in {
     media-downloader
     video-trimmer
     image-roll
+    ns
 
     gitg
     v2ray
@@ -129,5 +130,15 @@ in {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
+    # profiles."default".extraConfig = ''
+    #   # drm
+    #   "media.eme.enabled" = true;
+
+    #   # Hide bookmarks
+    #   "browser.toolbars.bookmarks.visibility" = "never";
+
+    #   # Dont show warning when accessing about:config
+    #   "browser.aboutConfig.showWarning" = false;
+    # '';
   };
 }
