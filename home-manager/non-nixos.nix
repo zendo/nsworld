@@ -1,11 +1,10 @@
 {
   config,
   pkgs,
-  username,
   ...
 }: {
   home.shellAliases = {
-    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake ~/.nsworld/#${username}";
+
   };
 
   home.file = {
