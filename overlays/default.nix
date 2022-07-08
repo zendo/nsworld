@@ -2,6 +2,7 @@ final: prev: {
   # scripts
   forgit = prev.callPackage ./forgit {};
   getip = prev.callPackage ./getip {};
+  tfetch = prev.callPackage ./tfetch {};
   nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
 
   # rust
@@ -21,6 +22,8 @@ final: prev: {
   frei = prev.callPackage ./python {};
   radioboat = prev.callPackage ./radioboat {};
   hysteria = prev.callPackage ./hysteria {};
+  dict = prev.callPackage ./dict {};
+  gls = prev.callPackage ./gls {};
 
   # python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};

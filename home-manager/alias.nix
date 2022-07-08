@@ -38,8 +38,8 @@ in {
     paperoni-single-html = "paperoni --export html --inline-images";
 
     nse = "nix search nixpkgs";
+    nss = "f() { nix shell nixpkgs\#\$1 }; f";
     nx = "f() { nix run nixpkgs\#\$1 -- $2; }; f";
-    ns-shell = "f() { nix shell nixpkgs\#\$1 }; f";
     nix-which = "f() { readlink -f $(which $1) }; f";
     nix-references = "f() { nix-store -q --references $(nix-which $1) }; f";
     nix-depends = "f() { nix path-info -rsSh $(nix-which $1) }; f";
