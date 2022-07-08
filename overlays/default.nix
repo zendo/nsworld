@@ -1,6 +1,7 @@
 final: prev: {
   # scripts
   forgit = prev.callPackage ./forgit {};
+  getip = prev.callPackage ./getip {};
   nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
 
   # rust

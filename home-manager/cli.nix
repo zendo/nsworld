@@ -91,6 +91,7 @@
     nix-tree
     # nvfetcher
     nix-index-updatedb
+    getip
   ];
 
   manual.manpages.enable = false;
