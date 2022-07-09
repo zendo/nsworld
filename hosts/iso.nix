@@ -57,7 +57,6 @@
     parted
     gptfdisk
     wget
-    curl
     bind
     git
     nix-bash-completions

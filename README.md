@@ -27,7 +27,7 @@ nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mir
 
 ``` shell
 # make livecd
-nixos-generate -f iso -c ~/.nsworld/hosts/iso.nix
+nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
 
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
@@ -35,9 +35,6 @@ nix shell github:oxalica/rust-overlay
 
 nix shell github:DavHau/mach-nix
 mach-nix gen -r requirements.txt
-
-# shebangs for NixOS/BSD
-#!/usr/bin/env bash
 ```
 
 # Desktop Setup

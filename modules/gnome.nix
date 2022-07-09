@@ -95,7 +95,7 @@
       blur-my-shell
       proxy-switcher
       just-perfection
-      # rocketbar
+      rocketbar
       # arcmenu
       # gnome-clipboard
       # pop-shell

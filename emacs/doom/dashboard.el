@@ -14,7 +14,7 @@
         :desc "Recent files" "r" #'consult-recent-file
         :desc "Open project" "p" #'project-switch-project
         :desc "Reload last session" "l" #'doom/load-session
-        :desc "Open dotfile" "." (cmd! (doom-project-find-file "~/.nsworld/"))
+        :desc "Open dotfile" "." (cmd! (doom-project-find-file "~/nsworld/"))
         :desc "Show keybindings" "h" (cmd! (which-key-show-keymap '+doom-dashboard-mode-map))))
 (add-transient-hook! #'+doom-dashboard-mode (+doom-dashboard-setup-modified-keymap))
 (add-transient-hook! #'+doom-dashboard-mode :append (+doom-dashboard-setup-modified-keymap))

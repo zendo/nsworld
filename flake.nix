@@ -2,7 +2,8 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/181424/merge";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs/?ref=gnomeExtensions-update";
@@ -19,7 +20,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/8772891c73e2809df5e5469d14535ea77e123d3e";
+      url = "github:nix-community/emacs-overlay/e575199132c3c975f718ada1b0b8a744b0fb5186";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -45,6 +46,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    # nixpkgs-pr,
     # nixpkgs-stable,
     # nixpkgs-unstable,
     nixos-hardware,
@@ -63,6 +65,9 @@
       nur.overlay
       emacs-overlay.overlay
       (import ./overlays)
+      # (final: prev: {
+      #   pr = nixpkgs-pr.legacyPackages.${prev.system};
+      # })
     ];
   in
     {
@@ -80,6 +85,12 @@
 
             musnix.nixosModules.musnix
             {musnix.enable = true;}
+
+            ({config, pkgs, ...}: {
+              environment.systemPackages = with pkgs; [
+                # nixpkgs-pr.legacyPackages.${system}.dialect
+              ];
+            })
           ];
         };
 
@@ -99,8 +110,7 @@
       #######################################################################
       ## HM Standalone
       #######################################################################
-      # nix run nixpkgs#home-manager build switch -- --flake .#users
-      # --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
+      # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
       homeConfigurations = let
         username = "iab";
         system = "x86_64-linux";
@@ -121,6 +131,7 @@
             ./home-manager/cli.nix
             ./home-manager/zsh.nix
             ./home-manager/alias.nix
+            ./home-manager/xdg.nix
             ./home-manager/non-nixos.nix
             {
               home.stateVersion = "22.05";

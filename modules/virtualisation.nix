@@ -9,6 +9,8 @@
     # yuzu
     # gnome.gnome-boxes
     # virt-manager
+    # steam-run
+    # appimage-run
   ];
 
   virtualisation = {
@@ -43,6 +45,7 @@
 
     virtualbox = {
       host.enable = true;
+      # host.enableExtensionPack = true;
     };
 
     # lxd = {

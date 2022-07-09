@@ -7,32 +7,35 @@
   glib,
   libadwaita,
   gettext,
+  gnome,
   jq,
   bash,
 }:
 crystal.buildCrystalPackage rec {
   pname = "collision";
-  version = "3.0.3";
+  version = "3.0.4";
 
   src = fetchFromGitHub {
     owner = "GeopJr";
     repo = "Collision";
     rev = "v${version}";
-    hash = "sha256-KGgpR/s9kFA//o2GgFNY1te/V490CTiH7fccBEhdum0=";
+    hash = "sha256-YLCwbp9ynlo0XnLH7GZy2aY3F9uJLPh4SJHI5NKcOaM=";
   };
 
   # buildInputs = [ bash ];
   # propagatedUserEnvPkgs = [ jq ];
 
-  # format = "shards";
+  format = "shards";
   shardsFile = ./shards.nix;
   # lockFile = ./shard.lock;
 
   crystalBinaries.collision.src = "src/collision.cr";
 
-   nativeBuildInputs = [
+  nativeBuildInputs = [
     gettext
-   ];
+    glib
+    libadwaita
+  ];
 
   buildInputs = [
     glib

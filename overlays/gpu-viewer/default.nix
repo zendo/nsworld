@@ -43,6 +43,7 @@ python3.pkgs.buildPythonApplication rec {
     meson
     ninja
     pkg-config
+    gobject-introspection
     wrapGAppsHook
     appstream-glib
     desktop-file-utils
@@ -51,27 +52,29 @@ python3.pkgs.buildPythonApplication rec {
   buildInputs = [
     glib
     gtk3
+    gobject-introspection
     # gdk-pixbuf
     # libadwaita
   ];
 
-  # pythonPath = with python3.pkgs; requiredPythonModules [pygobject3];
+  pythonPath = with python3.pkgs; requiredPythonModules [pygobject3];
 
   # doCheck = false;
 
-  propagatedBuildInputs = [
-    python3.pkgs.pygobject3
-  ];
+  # propagatedBuildInputs = [
+  #   python3
+  #   python3.pkgs.pygobject3
+  # ];
 
-  postPatch = ''
-    patchShebangs Files/GPUViewer.py
-  '';
-
-  # preFixup = ''
-  #   gappsWrapperArgs+=(
-  #      --prefix PATH : "${lib.makeBinPath [python3]}"
-  #   )
+  # postPatch = ''
+  #   patchShebangs Files/GPUViewer.py
   # '';
+
+  preFixup = ''
+    gappsWrapperArgs+=(
+       --prefix PATH : "${lib.makeBinPath [python3]}"
+    )
+  '';
 
   meta = with lib; {
     homepage = "https://github.com/arunsivaramanneo/GPU-Viewer";

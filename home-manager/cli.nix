@@ -26,8 +26,6 @@
     ripgrep
     hstr # hh: history
     cht-sh
-    tealdeer
-    trash-cli
     rage # age encrypt RIIR
     mc
     f2
@@ -36,6 +34,7 @@
     # difftastic # too big
     kalker # calculator
     imagemagick
+    dict
     ydict
     typos
     translate-shell
@@ -45,23 +44,16 @@
     graphviz
     paperoni # save html
     # airgeddon # wifi crack
-    # magic-wormhole # python
     magic-wormhole-rs
 
     # Develop
-    # gcc
-    # cmake
-    # gnumake
-    # nodejs
-    # yarn
-    gitui
-    onefetch
     jq
     jql
     cloc # count code lines
     sqlite
     openssl
-    # python3
+    gitui
+    onefetch
 
     # Network
     lsof
@@ -90,8 +82,10 @@
     nix-index
     nix-tree
     # nvfetcher
-    nix-index-updatedb
+    shellcheck
+
     getip
+    nixos-helper
   ];
 
   manual.manpages.enable = false;
@@ -119,6 +113,10 @@
     enable = true;
   };
 
+  programs.tealdeer = {
+    enable = true;
+  };
+
   # z: autojump
   programs.zoxide = {
     enable = true;
@@ -136,10 +134,6 @@
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-  };
-
-  programs.tealdeer = {
-    enable = true;
   };
 
   programs.nix-index = {

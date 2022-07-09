@@ -25,10 +25,9 @@
     binutils
     tree
     file
+    wget
     parted
     gptfdisk
-    wget
-    curl
     nix-bash-completions
   ];
 

@@ -10,7 +10,7 @@
     aliases = {
       st = "status -sb";
       unstage = "reset HEAD --";
-      pr = "pull --rebase";
+      # pr = "pull --rebase";
       pm = "push -u origin main";
       addp = "add --patch";
       comp = "commit --patch";
@@ -19,7 +19,7 @@
     };
     extraConfig = {
       safe.directory = [
-        # "/home/iab/.nsworld"
+        # "/home/iab/nsworld"
         # "/home/iab/devel/nixpkgs"
       ];
     };

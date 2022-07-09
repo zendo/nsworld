@@ -1,16 +1,14 @@
 final: prev: {
   # scripts
-  forgit = prev.callPackage ./forgit {};
+  nixos-helper = prev.callPackage ./nixos-helper {};
   getip = prev.callPackage ./getip {};
-  tfetch = prev.callPackage ./tfetch {};
-  nix-index-updatedb = prev.callPackage ./nix-index-updatedb {};
-  ns = prev.callPackage ./nixos-scripts {};
+  forgit = prev.callPackage ./forgit {};
+  wifi-qr = prev.callPackage ./wifi-qr {};
 
   # rust
-  battop = prev.callPackage ./battop {}; # wip
-  zee = prev.callPackage ./zee {};       # wip
-  decoder = prev.callPackage ./decoder {}; # wip
+  gnome-decoder = prev.callPackage ./gnome-decoder {};
   artem = prev.callPackage ./artem {};
+  qr-rs = prev.callPackage ./qr-rs {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
@@ -20,16 +18,12 @@ final: prev: {
 
   # go
   v2raya = prev.callPackage ./v2raya {};
-  frei = prev.callPackage ./python {};
-  radioboat = prev.callPackage ./radioboat {};
   hysteria = prev.callPackage ./hysteria {};
-  dict = prev.callPackage ./dict {};
-  gls = prev.callPackage ./gls {};
+  eget = prev.callPackage ./eget {};
 
   # python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
   gpu-viewer = prev.callPackage ./gpu-viewer {};
-  frog = prev.callPackage ./frog {};
 
   # nodejs
   clash-verge = prev.callPackage ./clash-verge {};
@@ -39,11 +33,15 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   g4music = prev.callPackage ./g4music {};
 
+  # qt
+  mangareader = prev.libsForQt5.callPackage ./mangareader {};
+  opentodolist = prev.libsForQt5.callPackage ./opentodolist {};
+  voicegen = prev.libsForQt5.callPackage ./voicegen {};
+  downzemall = prev.callPackage ./downzemall {};
+
   # libraries
   librime-charcode = prev.callPackage ./librime-charcode {};
-
   collision = prev.callPackage ./collision {};
-  media-downloader = prev.callPackage ./media-downloader {};
 
   #############################################
 
@@ -55,6 +53,16 @@ final: prev: {
       postFixup = ''
         cp -r $out/usr/share $out/share '';
     });
+
+  # libadwaita-git = prev.libadwaita.overrideAttrs (oldAttrs: {
+  #   src = prev.fetchFromGitLab {
+  #     domain = "gitlab.gnome.org";
+  #     owner = "GNOME";
+  #     repo = "libadwaita";
+  #     rev = "0475afa54ee12fc1f691102c8186c7fc06fcd357";
+  #     hash = "sha256-3ESu34HhsycVV2QNtcxfP7YffCGddKqLTtIkzeJc+GE=";
+  #   };
+  # });
 
   # librime = prev.librime.override {
   #   plugins = [librime-charcode];

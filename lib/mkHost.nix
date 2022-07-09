@@ -22,7 +22,7 @@ in
           ../modules/nixconfig.nix
           ../modules/sound.nix
           ../modules/fonts.nix
-          ../modules/virtual.nix
+          ../modules/virtualisation.nix
           ../hosts/${hostname}
 
           {

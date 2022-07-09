@@ -1,4 +1,18 @@
-# wip
+/*
+../src/async-task.vala:11.21-11.24: warning: copying delegates is not supported
+   11 |             _task = task;
+      |                     ^~~~
+../src/async-task.vala:12.25-12.32: warning: copying delegates is not supported
+   12 |             _callback = callback;
+      |                         ^~~~~~~~
+Compilation succeeded - 2 warning(s)
+[15/33] Compiling C object src/g4music.p/meson-generated_portal.c.o
+FAILED: src/g4music.p/meson-generated_portal.c.o
+gcc -Isrc/g4music.p -Isrc -I../src -I/nix/store/0a9b4bv93s2b94q0fa2h4r0m55qy92fx-glib-2.72.3-dev/include -I/nix/store/0a9b4bv93s2b94q0fa2h4r0m55qy92fx-glib-2.72.3-dev>
+src/g4music.p/portal.c:11:10: fatal error: gio/gunixfdlist.h: No such file or directory
+   11 | #include <gio/gunixfdlist.h>
+
+*/
 {
   lib,
   stdenv,
@@ -21,14 +35,14 @@
 }:
 stdenv.mkDerivation rec {
   pname = "g4music";
-  version = "1.2";
+  version = "1.3";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "neithern";
     repo = pname;
-    rev = "ef13f16b75e001721262324d355b7b7d3f5e2b77";
-    hash = "sha256-Uuq3zzCPbxeG+1hORbRFBCSaGFlItohHYW4W+3yRxMQ=";
+    rev = "v${version}";
+    hash = "sha256-0XEReDkKpbJQQ2kdO7/DGrGlnoSfPd9ZOC/W5kZ876w=";
   };
 
   nativeBuildInputs = [
@@ -57,6 +71,12 @@ stdenv.mkDerivation rec {
       gst-plugins-ugly
       # gst-libav
     ]);
+
+  # postPatch = ''
+  #   # GLib 2.72 moved the file from gio-unix-2.0 to gio-2.0
+  #   substituteInPlace cmake/find-modules/FindGLIB.cmake \
+  #     --replace gio/gunixconnection.h gio/gunixfdlist.h
+  # '';
 
   meta = with lib; {
     homepage = "https://gitlab.gnome.org/World/amberol";

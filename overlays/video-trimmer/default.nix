@@ -76,9 +76,10 @@ stdenv.mkDerivation rec {
 
   preFixup = ''
     gappsWrapperArgs+=(
-       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
+       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}" \
     )
   '';
+       # --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}:$XDG_DATA_DIRS"
 
   patches = [
     ./meson.patch
@@ -91,9 +92,10 @@ stdenv.mkDerivation rec {
   #     --replace "/usr/local" "$out"
   # '';
 
-  # postPatch = ''
-  #   sed -i '/postinstall.py/d' meson.build
-  # '';
+#   postPatch = ''
+#     # sed -i '/postinstall.py/d' meson.build
+#     sed -i '42d;44d;45d;46d;47d;48d' meson.build
+# '';
 
   # postinstall = ''
   #   glib-compile-schemas $out/share/glib-2.0/schemas

@@ -3,8 +3,9 @@ inputs @ {pkgs}: {
     buildInputs = with pkgs; [
       git
       fd
-      ripgrep
       jq
+      ripgrep
+      gcc
       gnumake
       alejandra
       nixUnstable
@@ -24,6 +25,12 @@ inputs @ {pkgs}: {
     buildInputs = with pkgs; [
       cargo
       rustc
+    ];
+  };
+
+  python = pkgs.mkShell {
+    buildInputs = with pkgs; [
+      python3
     ];
   };
 

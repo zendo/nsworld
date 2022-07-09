@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  dotConfig = "~/.nsworld";
+  dotConfig = "~/nsworld";
   httpProxy = "http://127.0.0.1:20171";
   socksProxy = "socks5://127.0.0.1:20170";
 in {
@@ -13,17 +13,17 @@ in {
     ps = "${pkgs.procs}/bin/procs";
     l = "exa -l --icons";
     "la." = "ls -d .*";
-    rm = "trash-put";
-    rm-list = "trash-list";
-    rm-empty = "trash-empty";
+    rm = "${pkgs.trash-cli}/bin/trash-put";
+    rm-list = "${pkgs.trash-cli}/bin/trash-list";
+    rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
     mkcd = "mkdir -p $1 && cd $1";
     mount-ls = "mount | column -t";
-    age = "rage";
-    bc = "${pkgs.kalker}/bin/kalker";
+    bc = "${pkgs.libqalculate}/bin/qalc";
     beep = "echo -en \"\\007\"";
     ip = "ip --color=auto";
     ipsb = "curl ip.sb";
     ipinfo = "curl ipinfo.io";
+    iptoys = "dog ip @dns.toys";
     ipdig = "dig +short myip.opendns.com @208.67.222.222";
     netlog = "lsof -P -i -n";
     inxi = "inxi -Fz";
@@ -36,28 +36,8 @@ in {
     chrome-proxy = "google-chrome-stable --proxy-server=\"${socksProxy}\"";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
     paperoni-single-html = "paperoni --export html --inline-images";
+    dict-en = "dict -c ${../dotfiles/dict.conf}";
 
     nse = "nix search nixpkgs";
-    nss = "f() { nix shell nixpkgs\#\$1 }; f";
-    nx = "f() { nix run nixpkgs\#\$1 -- $2; }; f";
-    nix-which = "f() { readlink -f $(which $1) }; f";
-    nix-references = "f() { nix-store -q --references $(nix-which $1) }; f";
-    nix-depends = "f() { nix path-info -rsSh $(nix-which $1) }; f";
-    nix-sri = "nix hash to-sri --type sha256";
-    nix-pr-branch = "gh pr checkout -R NixOS/nixpkgs";
-    nix-pr-run = "f() { nix run github:NixOS/nixpkgs/pull/$1/merge#$2 }; f";
-    nix-fetch-merge = "git fetch upstream master && git merge $(nixos-version --revision)";
-
-    ns-profiles = "ls -la /nix/var/nix/profiles";
-    ns-generations = "nix profile history --profile /nix/var/nix/profiles/system";
-    ns-source = "readlink -f /nix/var/nix/profiles/system";
-    hm-source = "readlink -f /nix/var/nix/profiles/per-user/$(users)/home-manager";
-    ns-installed = "nix path-info --recursive /run/current-system";
-    ns-diff = "nix profile diff-closures --profile /nix/var/nix/profiles/system";
-    ns-switch = "sudo -E nixos-rebuild switch --flake ${dotConfig}#$(hostname)";
-    ns-boot = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname)";
-    ns-upgrade = "sudo -E nixos-rebuild boot --flake ${dotConfig}#$(hostname) \\
-    --recreate-lock-file";
-    hm-switch = "nix run nixpkgs#home-manager build switch -- --flake ${dotConfig}#$(users)";
   };
 }

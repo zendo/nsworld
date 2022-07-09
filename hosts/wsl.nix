@@ -4,7 +4,9 @@
   lib,
   username,
   ...
-}: {
+}: let
+  winProxy = "http://192.168.2.118:10811";
+in {
   /*
    export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
    */
@@ -21,8 +23,12 @@
     parted
     gptfdisk
     wget
-    curl
     nix-bash-completions
+
+    vim
+    micro
+    helix
+    emacs
 
     hack-font
     fira-code
@@ -34,8 +40,12 @@
   };
 
   environment.shellAliases = {
-    wsl-proxy = "export http_proxy=http://192.168.2.118:10811 ; \\
-    export https_proxy=http://192.168.2.118:10811";
-    wsl-switch = "sudo -E nixos-rebuild switch --flake ~/.nsworld#wsl";
+    wsl-proxy = "export http_proxy=${winProxy} ; \\
+    export https_proxy=${winProxy}";
+  };
+
+  systemd.services.nix-daemon.environment = {
+    http_proxy = "${winProxy}";
+    https_proxy = "${winProxy}";
   };
 }

@@ -7,16 +7,21 @@ return {
    initial_rows = 25,
    window_background_opacity = 0.95,
    -- window_padding = { top = 0, right = 0, bottom = 0, left = 0 },
-   default_cursor_style = "SteadyBar",
+   default_cursor_style = "BlinkingUnderline",
+
+   -- tab_bar_at_bottom = true,
+   -- enable_scroll_bar = true,
 
    font_size = 11.0,
+   font = wezterm.font("JetBrains Mono"),
    font = wezterm.font_with_fallback({
-    "JetBrains Mono",
+    "Noto Color Emoji",
     "Hack",
   }),
 
-   color_scheme = "Afterglow",
-   -- color_scheme = "Batman",
+   color_scheme = "Operator Mono Dark",
+   -- color_scheme = "Afterglow",
+   -- color_scheme = "Bright Lights",
 
    enable_wayland = true,
 

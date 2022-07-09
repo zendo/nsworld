@@ -14,20 +14,20 @@
   gi-crystal = {
     owner = "hugopl";
     repo = "gi-crystal";
-    rev = "v0.11.0";
-    sha256 = "1p11p2psm31p3qc59di68yikq9n8rdsxnnd9cvp58n97bhdia5ni";
+    rev = "v0.13.1";
+    sha256 = "1yv5nmcixj6gpikh78j3fklkcdg2zahxkc9bvly84p4rhx6ljxhq";
   };
   gtk4 = {
     owner = "hugopl";
     repo = "gtk4.cr";
-    rev = "v0.9.0";
-    sha256 = "1calp9id5aqfdaphg17vvjk36l43bkwyvi9iff1gf1z8rkrzhs8r";
+    rev = "v0.11.1";
+    sha256 = "02j88wm4a61j0vh75vi5zhz0pyap4d6p7qzpq39rfqxxip026yy9";
   };
   libadwaita = {
     owner = "geopjr";
     repo = "libadwaita.cr";
-    rev = "ebf5b221d3dbcc5852dc1433b440f99a8b7f094b";
-    sha256 = "18rq74aikyw3jnsj6rgv7y98m4dz5s2fzsqnbjbn21xswiy0m1im";
+    rev = "b427ad9172450095087ea1a456d554fe528624e0";
+    sha256 = "1zh5i083m35qmwrd88nza3qhgjr4zy5j8rcnj206qhvw1fph3fyd";
   };
   non-blocking-spawn = {
     owner = "geopjr";

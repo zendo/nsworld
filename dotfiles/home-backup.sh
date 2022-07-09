@@ -15,16 +15,19 @@
 # --include=PATTERN   指定不排除而需要传输的文件模式
 # --exclude-from=FILE 排除 FILE 中指定模式的文件
 # --include-from=FILE 不排除 FILE 指定模式匹配的文件
+
+#  --numeric-ids 文件的所有者信息使用数字而不要解析成用户名/组名 避免在跨系统使用时出差错
+# --acls --xattrs 保留文件 ACL 和扩展属性
 ################################################################
 
 rsync -avhpL "$HOME"/.ssh "$HOME"/Documents/homeBackups/
 rsync -avhpL "$HOME"/.mozilla "$HOME"/Documents/homeBackups/
 rsync -avhpL "$HOME"/.config/fcitx5/conf "$HOME"/Documents/homeBackups/
 
-if test $XDG_CURRENT_DESKTOP = "GNOME"; then
+if test "$XDG_CURRENT_DESKTOP" = "GNOME"; then
     dconf dump /org/gnome/ > "$HOME"/Documents/homeBackups/my-dconf
 fi
 
-if test $XDG_CURRENT_DESKTOP = "KDE"; then
-    cd "$HOME"/Documents/homeBackups/ ; kde-backup -b $(users)
+if test "$XDG_CURRENT_DESKTOP" = "KDE"; then
+    cd "$HOME"/Documents/homeBackups/ || exit ; kde-backup -b "$(whoami)"
 fi
