@@ -31,8 +31,8 @@ nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
 
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
-nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=ruby-on-rails'
-nix shell github:oxalica/rust-overlay
+nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=rust'
+go/rust/python/java/node/php/ruby-on-rails
 
 nix shell github:DavHau/mach-nix
 mach-nix gen -r requirements.txt

@@ -16,6 +16,7 @@ in {
     # dynamic-wallpaper
     # app-icon-preview
     eget
+    pbcli
     # paper
     mangareader
     # netease-cloud-music-gtk

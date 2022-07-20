@@ -8,6 +8,8 @@ final: prev: {
   # rust
   gnome-decoder = prev.callPackage ./gnome-decoder {};
   artem = prev.callPackage ./artem {};
+  pbcli = prev.callPackage ./pbcli {};
+  clitrans = prev.callPackage ./clitrans {};
   pidif = prev.callPackage ./pidif {};
   qr-rs = prev.callPackage ./qr-rs {};
   mprober = prev.callPackage ./mprober {};

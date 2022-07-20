@@ -39,5 +39,6 @@ in {
     dict-en = "dict -c ${../dotfiles/dict.conf}";
 
     nse = "nix search nixpkgs";
+    pbcli = "pbcli https://privatebin.net/";
   };
 }
