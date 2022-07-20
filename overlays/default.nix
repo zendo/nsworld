@@ -8,6 +8,7 @@ final: prev: {
   # rust
   gnome-decoder = prev.callPackage ./gnome-decoder {};
   artem = prev.callPackage ./artem {};
+  pidif = prev.callPackage ./pidif {};
   qr-rs = prev.callPackage ./qr-rs {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
@@ -18,7 +19,6 @@ final: prev: {
 
   # go
   v2raya = prev.callPackage ./v2raya {};
-  hysteria = prev.callPackage ./hysteria {};
   eget = prev.callPackage ./eget {};
 
   # python
@@ -31,7 +31,6 @@ final: prev: {
   # gtk
   dippi = prev.callPackage ./dippi {};
   paper = prev.callPackage ./paper {};
-  g4music = prev.callPackage ./g4music {};
 
   # qt
   mangareader = prev.libsForQt5.callPackage ./mangareader {};

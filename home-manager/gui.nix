@@ -14,13 +14,11 @@ in {
     # mprober
     # video-trimmer
     # dynamic-wallpaper
-    # collision
     # app-icon-preview
-    paper
+    eget
+    # paper
     mangareader
-    # voicegen
     # netease-cloud-music-gtk
-    # g4music
     # gpu-viewer
     gnome-decoder
     code-radio-cli

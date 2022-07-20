@@ -99,6 +99,9 @@ while [ $# -gt 0 ]; do
         pr-pull)
             gh pr checkout -R NixOS/nixpkgs "$2" ;;
 
+        to-sri)
+            nix hash to-sri --type sha256 "$2" ;;
+
         index-update)
             filename="index-x86_64-$(uname | tr '[:upper:]' '[:lower:]')"
             mkdir -p ~/.cache/nix-index

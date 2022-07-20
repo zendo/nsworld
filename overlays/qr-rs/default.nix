@@ -19,19 +19,9 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-DoTsmWofnYtAHRv2I8+dKUX9mj0xoBiCNiFghh45+qs=";
 
-  # https://nixpk.gs/pr-tracker.html?pr=179782
-
-  # nativeBuildInputs = [pkg-config];
-
-  # buildInputs = [openssl];
-
-  # OPENSSL_NO_VENDOR = 1;
-
-  # doCheck = false;
-
-  # passthru.updateScript = nix-update-script {
-  #   attrPath = pname;
-  # };
+  passthru.updateScript = nix-update-script {
+    attrPath = pname;
+  };
 
   meta = with lib; {
     description = "Encode URLs or text into QR codes";
