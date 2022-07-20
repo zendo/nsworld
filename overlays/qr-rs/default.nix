@@ -8,16 +8,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "qr-rs";
-  version = "0.1.0";
+  version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "marcoradocchia";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-cjMuY17zJ2AamX2Clkiazdj1H5RM6XUk2MPLOyfAeQg=";
+    sha256 = "sha256-qifIxP1tpE+JOlTPUi1Kf62M6VNbXIW5cWj2uvmVz+c==";
   };
 
-  cargoSha256 = "sha256-d0rH9nTKyljoWi47Bl+d1AA0vrxphkOs5rljD9mC8JQ=";
+  cargoSha256 = "sha256-DoTsmWofnYtAHRv2I8+dKUX9mj0xoBiCNiFghh45+qs=";
 
   # https://nixpk.gs/pr-tracker.html?pr=179782
 

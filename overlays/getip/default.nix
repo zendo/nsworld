@@ -14,4 +14,12 @@ stdenv.mkDerivation {
   installPhase = ''
     install -Dm755 $name "$out/bin/getip"
   '';
+
+  meta = with lib; {
+    description = "Get Private/Public IP/IP's Geolocation";
+    homepage = "https://git.mahdi.pw/getip";
+    license = licenses.mit;
+    platforms = platforms.all;
+    maintainers = with maintainers; [zendo];
+  };
 }

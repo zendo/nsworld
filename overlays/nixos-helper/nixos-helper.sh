@@ -5,14 +5,14 @@ set -euo pipefail
 # variables
 dotConfig=~/nsworld
 
-function usage() {
-    echo "Usage:
-     which/log/references/depends
-     boot/switch/upgrade/diff
-     run/search/shell/index-up
-     profiles/generations/source/installed
-     pr-run/pr-shell/pr-pull/gitfm
-     hmswitch/hmsource/hmdiff/wslswitch
+usage() {
+    printf "\n Usage:
+     \t which/log/references/depends
+     \t boot/switch/upgrade/diff
+     \t run/search/shell/index-up
+     \t profiles/generations/source/installed
+     \t pr-run/pr-shell/pr-pull/gitfm
+     \t hmswitch/hmsource/hmdiff/wslswitch
      "
 }
 

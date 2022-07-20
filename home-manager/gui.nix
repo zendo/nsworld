@@ -11,15 +11,11 @@ in {
     # wifi-qr
     # qr-rs
     # dippi
-    # artem
     # mprober
-    # image-roll
     # video-trimmer
     # dynamic-wallpaper
     # collision
     # app-icon-preview
-    # librime-charcode
-    eget
     paper
     mangareader
     # voicegen
@@ -55,7 +51,7 @@ in {
     # vivaldi-widevine
     vscode
     # standardnotes
-    # poedit
+    # poedit    # translate .po file
 
     # Social media
     tdesktop

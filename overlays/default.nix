@@ -36,11 +36,9 @@ final: prev: {
   # qt
   mangareader = prev.libsForQt5.callPackage ./mangareader {};
   opentodolist = prev.libsForQt5.callPackage ./opentodolist {};
-  voicegen = prev.libsForQt5.callPackage ./voicegen {};
   downzemall = prev.callPackage ./downzemall {};
 
   # libraries
-  librime-charcode = prev.callPackage ./librime-charcode {};
   collision = prev.callPackage ./collision {};
 
   #############################################
@@ -63,10 +61,6 @@ final: prev: {
   #     hash = "sha256-3ESu34HhsycVV2QNtcxfP7YffCGddKqLTtIkzeJc+GE=";
   #   };
   # });
-
-  # librime = prev.librime.override {
-  #   plugins = [librime-charcode];
-  # };
 
   # rust override
   # shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {

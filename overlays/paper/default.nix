@@ -20,13 +20,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "paper";
-  version = "22.7";
+  version = "22.8";
 
   src = fetchFromGitLab {
     owner = "posidon_software";
     repo = pname;
     rev = "${version}";
-    sha256 = "sha256-1479xlPjET1x5y/6eah+IzKWgIdabUd42SfLqEHbqlE=";
+    sha256 = "sha256-GtW2T0eDm8sF1hTXz3U3mC7R2Z7lZMfigI0DZ/FUwsc=";
   };
 
   nativeBuildInputs = [
@@ -50,11 +50,11 @@ stdenv.mkDerivation rec {
   ];
 
   # https://gitlab.com/posidon_software/paper/-/issues/35
-  postInstall = ''
-    # substituteInPlace $out/share/applications/io.posidon.Paper.desktop \
-    #     --replace 'Exec=io.posidon.Paper' 'Exec=bash -c "cd /home/iab; io.posidon.Paper"'
-    # sed -i '/DBusActivatable=true/d' $out/share/applications/io.posidon.Paper.desktop
-  '';
+  # postInstall = ''
+  #   # substituteInPlace $out/share/applications/io.posidon.Paper.desktop \
+  #   #     --replace 'Exec=io.posidon.Paper' 'Exec=bash -c "cd /home/iab; io.posidon.Paper"'
+  #   # sed -i '/DBusActivatable=true/d' $out/share/applications/io.posidon.Paper.desktop
+  # '';
 
   meta = with lib; {
     homepage = "https://posidon.io/paper";
