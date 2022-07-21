@@ -36,6 +36,7 @@ final: prev: {
 
   # qt
   mangareader = prev.libsForQt5.callPackage ./mangareader {};
+  converseen = prev.libsForQt5.callPackage ./converseen {};
   opentodolist = prev.libsForQt5.callPackage ./opentodolist {};
   downzemall = prev.callPackage ./downzemall {};
 

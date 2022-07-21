@@ -33,7 +33,7 @@
     croc
     # difftastic # too big
     kalker # calculator
-    imagemagick
+    # imagemagick
     dict
     ydict
     typos

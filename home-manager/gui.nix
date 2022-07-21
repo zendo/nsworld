@@ -18,6 +18,7 @@ in {
     eget
     pbcli
     # paper
+    converseen
     mangareader
     # netease-cloud-music-gtk
     # gpu-viewer
