@@ -19,7 +19,6 @@
       enable = true;
       supportDDC = true;
       # useQtScaling = true;
-      runUsingSystemd = true;
     };
   };
 

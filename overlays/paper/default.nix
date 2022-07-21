@@ -1,4 +1,3 @@
-# bug
 {
   lib,
   stdenv,
@@ -25,8 +24,9 @@ stdenv.mkDerivation rec {
   src = fetchFromGitLab {
     owner = "posidon_software";
     repo = pname;
-    rev = "${version}";
-    sha256 = "sha256-GtW2T0eDm8sF1hTXz3U3mC7R2Z7lZMfigI0DZ/FUwsc=";
+    # rev = version;
+    rev = "a95850b04caee2e747b546e4e34e297321bd3532";
+    sha256 = "sha256-6HVGQSjZAiYzt7GLtwnmU+T1xdCSp5nIu164mccT+ck=";
   };
 
   nativeBuildInputs = [
@@ -57,10 +57,10 @@ stdenv.mkDerivation rec {
   # '';
 
   meta = with lib; {
-    homepage = "https://posidon.io/paper";
     description = "A pretty markdown note-taking app for Gnome";
-    maintainers = with maintainers; [zendo];
-    license = licenses.gpl3;
+    homepage = "https://posidon.io/paper";
+    license = licenses.gpl3Plus;
     platforms = platforms.linux;
+    maintainers = with maintainers; [zendo];
   };
 }

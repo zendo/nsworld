@@ -109,6 +109,7 @@
    "k" #'kill-current-buffer
    "K" #'crux-kill-other-buffers
    "s" #'save-some-buffers
+   "l" #'+ibuffer/open-for-current-workspace
    :prefix ("f" . "file")
    "<f2>" #'crux-rename-file-and-buffer
    "s" #'save-some-buffers

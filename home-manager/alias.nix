@@ -29,8 +29,9 @@ in {
     inxi = "inxi -Fz";
 
     ee = "emacs -nw";
-    nctb = "nc termbin.com 9999";
-    ixio = "curl -F 'f:1=<-' ix.io";
+    paste-ixio = "curl -F 'f:1=<-' ix.io";
+    paste-termbin = "nc termbin.com 9999";
+    paste-rs = "curl --data-binary @- https://paste.rs/";
     wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
     ssr = "export http_proxy=${httpProxy} ;export https_proxy=${httpProxy}";
     chrome-proxy = "google-chrome-stable --proxy-server=\"${socksProxy}\"";

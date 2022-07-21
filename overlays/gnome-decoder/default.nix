@@ -13,7 +13,9 @@
 , zbar
 , sqlite
 , pipewire
-, gst_all_1
+, gstreamer
+, gst-plugins-base
+, gst-plugins-bad
 , wrapGAppsHook4
 , appstream-glib
 , desktop-file-utils
@@ -40,7 +42,7 @@ stdenv.mkDerivation rec {
     domain = "gitlab.gnome.org";
     owner = "World";
     repo = "decoder";
-    rev = "${version}";
+    rev = version;
     sha256 = "sha256-WJIOaYSesvLmOzF1Q6o6aLr4KJanXVaNa+r+2LlpKHQ=";
   };
 
@@ -71,11 +73,10 @@ stdenv.mkDerivation rec {
     zbar
     sqlite
     pipewire
-  ] ++ (with gst_all_1; [
     gstreamer
     gst-plugins-base
-    (gst-plugins-bad.override { enableZbar = true; })
-  ]);
+    gst-plugins-bad
+  ];
 
   LIBCLANG_PATH = "${libclang.lib}/lib";
 

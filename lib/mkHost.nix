@@ -29,7 +29,7 @@ in
             nixpkgs.overlays = overlays;
             hardware.enableAllFirmware = true;
             networking.hostName = "${hostname}";
-            services.xserver.displayManager.autoLogin.user = "${username}";
+            # services.xserver.displayManager.autoLogin.user = "${username}";
           }
         ]
         ++ nixpkgs.lib.optionals hmEnable [

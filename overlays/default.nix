@@ -1,17 +1,17 @@
 final: prev: {
-  # scripts
+  # Trivial
   nixos-helper = prev.callPackage ./nixos-helper {};
   getip = prev.callPackage ./getip {};
   forgit = prev.callPackage ./forgit {};
   wifi-qr = prev.callPackage ./wifi-qr {};
 
-  # rust
-  gnome-decoder = prev.callPackage ./gnome-decoder {};
-  artem = prev.callPackage ./artem {};
-  pbcli = prev.callPackage ./pbcli {};
-  clitrans = prev.callPackage ./clitrans {};
+  # Rust
+  gnome-decoder = prev.callPackage ./gnome-decoder {
+    inherit (prev.gst_all_1) gstreamer gst-plugins-base;
+    gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
+  };
+  git-hist = prev.callPackage ./git-hist {};
   pidif = prev.callPackage ./pidif {};
-  qr-rs = prev.callPackage ./qr-rs {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
@@ -19,28 +19,27 @@ final: prev: {
   code-radio-cli = prev.callPackage ./code-radio-cli {};
   image-roll = prev.callPackage ./image-roll {};
 
-  # go
+  # Go
   v2raya = prev.callPackage ./v2raya {};
-  eget = prev.callPackage ./eget {};
 
-  # python
+  # Python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
   gpu-viewer = prev.callPackage ./gpu-viewer {};
 
-  # nodejs
+  # Nodejs
   clash-verge = prev.callPackage ./clash-verge {};
 
-  # gtk
+  # Gtk
   dippi = prev.callPackage ./dippi {};
   paper = prev.callPackage ./paper {};
 
-  # qt
+  # Qt
   mangareader = prev.libsForQt5.callPackage ./mangareader {};
-  converseen = prev.libsForQt5.callPackage ./converseen {};
+  converseen = prev.callPackage ./converseen {};
   opentodolist = prev.libsForQt5.callPackage ./opentodolist {};
   downzemall = prev.callPackage ./downzemall {};
 
-  # libraries
+  # Libraries
   collision = prev.callPackage ./collision {};
 
   #############################################

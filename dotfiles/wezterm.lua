@@ -4,7 +4,7 @@ return {
    default_prog = { 'zsh' },
 
    initial_cols = 80,
-   initial_rows = 25,
+   initial_rows = 28,
    window_background_opacity = 0.95,
    -- window_padding = { top = 0, right = 0, bottom = 0, left = 0 },
    default_cursor_style = "BlinkingUnderline",

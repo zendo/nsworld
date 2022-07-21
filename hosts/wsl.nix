@@ -30,6 +30,7 @@ in {
     helix
     emacs
 
+    wsl-open
     hack-font
     fira-code
     jetbrains-mono

@@ -1,8 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, qttools
-, wrapQtAppsHook
+, qt5
 , cmake
 , pkg-config
 , imagemagick
@@ -23,8 +22,8 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     cmake
     pkg-config
-    qttools
-    wrapQtAppsHook
+    qt5.qttools
+    qt5.wrapQtAppsHook
   ];
 
   buildInputs = [
@@ -32,7 +31,7 @@ stdenv.mkDerivation rec {
   ];
 
   # postPatch = ''
-  #   substituteInPlace converseen.pro \
+  #   substituteInPlace src/whereiam.cpp \
   #     --replace "/usr" "Sout"
   # '';
 

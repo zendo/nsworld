@@ -8,18 +8,16 @@
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
   home.packages = with pkgs; [
-    # wifi-qr
-    # qr-rs
+    wifi-qr
     # dippi
     # mprober
     # video-trimmer
-    # dynamic-wallpaper
+    dynamic-wallpaper
     # app-icon-preview
-    eget
-    pbcli
+    git-hist
     # paper
     converseen
-    mangareader
+    # mangareader
     # netease-cloud-music-gtk
     # gpu-viewer
     gnome-decoder
@@ -52,6 +50,7 @@ in {
     vscode
     # standardnotes
     # poedit    # translate .po file
+    sniffglue
 
     # Social media
     tdesktop

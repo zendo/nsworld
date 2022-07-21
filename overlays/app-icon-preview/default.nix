@@ -17,7 +17,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "app-icon-preview";
-  version = "2022-05-30";
+  version = "unstable-2022-05-30";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
@@ -30,27 +30,29 @@ stdenv.mkDerivation rec {
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    hash = "sha256-2FTu44EXbJPmzBGVB9DNDkvoQdcf0nyE3+wz+Pn2Z0s=";
+    hash = "sha256-ljLJCHeNueIPMZ+EVLZWbUHQqI/GXrRM0lxANWJNA04=";
   };
 
-   postPatch = ''
+  postPatch = ''
     patchShebangs build-aux
   '';
 
-  nativeBuildInputs = [
-    glib
-    meson
-    ninja
-    cmake
-    pkg-config
-    wrapGAppsHook4
-    appstream-glib
-    desktop-file-utils
-  ] ++ (with rustPlatform; [
-    rust.cargo
-    rust.rustc
-    cargoSetupHook
-  ]);
+  nativeBuildInputs =
+    [
+      glib
+      meson
+      ninja
+      cmake
+      pkg-config
+      wrapGAppsHook4
+      appstream-glib
+      desktop-file-utils
+    ]
+    ++ (with rustPlatform; [
+      rust.cargo
+      rust.rustc
+      cargoSetupHook
+    ]);
 
   buildInputs = [
     glib
@@ -62,7 +64,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Tool for designing applications icons";
     homepage = "https://gitlab.gnome.org/World/design/app-icon-preview";
-    license = licenses.gpl3;
+    platforms = platforms.linux;
+    license = licenses.gpl3Plus;
     maintainers = with maintainers; [zendo];
   };
 }
