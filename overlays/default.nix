@@ -10,6 +10,7 @@ final: prev: {
     inherit (prev.gst_all_1) gstreamer gst-plugins-base;
     gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
   };
+  done = prev.callPackage ./done {};
   git-hist = prev.callPackage ./git-hist {};
   pidif = prev.callPackage ./pidif {};
   mprober = prev.callPackage ./mprober {};
