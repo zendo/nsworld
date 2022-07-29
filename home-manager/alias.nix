@@ -2,11 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  dotConfig = "~/nsworld";
-  httpProxy = "http://127.0.0.1:20171";
-  socksProxy = "socks5://127.0.0.1:20170";
-in {
+}: {
   home.shellAliases = {
     cat = "bat -p";
     # ps = "ps -ef";
@@ -33,13 +29,12 @@ in {
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
     wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
-    ssr = "export http_proxy=${httpProxy} ;export https_proxy=${httpProxy}";
-    chrome-proxy = "google-chrome-stable --proxy-server=\"${socksProxy}\"";
+    dict-en = "dict -c ${../dotfiles/dict.conf}";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
     paperoni-single-html = "paperoni --export html --inline-images";
-    dict-en = "dict -c ${../dotfiles/dict.conf}";
+    chrome-proxy = "google-chrome-stable --proxy-server=\"socks5://127.0.0.1:20170\"";
+    ssr = "export {http,https,ftp}_proxy=127.0.0.1:20171 ;export {HTTP,HTTPS,FTP}_PROXY=127.0.0.1:20171";
 
     nse = "nix search nixpkgs";
-    pbcli = "pbcli https://privatebin.net/";
   };
 }
