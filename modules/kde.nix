@@ -28,7 +28,7 @@
     geoclue2.enable = true;
 
     tlp = {
-      enable = true;
+      enable = false;
       settings = {
         cpu_scaling_governor_on_ac = "performance";
         cpu_scaling_governor_on_bat = "powersave";

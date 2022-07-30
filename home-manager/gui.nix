@@ -23,6 +23,7 @@ in {
     # netease-cloud-music-gtk
     gnome-decoder
     done
+    snake-asm
 
     gitg
     v2ray

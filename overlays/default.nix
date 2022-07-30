@@ -42,6 +42,7 @@ final: prev: {
 
   # Libraries
   collision = prev.callPackage ./collision {};
+  snake-asm = prev.callPackage ./snake-asm {};
 
   #############################################
 
