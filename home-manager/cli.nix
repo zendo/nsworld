@@ -81,6 +81,7 @@
     nix-template
     nix-index
     nix-tree
+    nix-top
     # nvfetcher
     shellcheck
 

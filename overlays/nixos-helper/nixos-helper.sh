@@ -112,28 +112,3 @@ case "$1" in
        exit ;;
 
 esac
-
-
-
-
-# https://github.com/thiagokokada/nix-configs
-
-# readonly program_name="${1:-}"
-
-# if [[ -z "$program_name" ]]; then
-#    cat <<EOF
-# usage: $(basename "$0") <name>
-# Get where in /nix/store a program is located.
-# EOF
-#     exit 1
-# fi
-
-# readlink -f "$(which "$program_name")"
-
-
-# MISC
-# if [ "$UID" -gt 0 ]; then
-#      echo "Sorry, this script must be run as ROOT!"
-#      exit 1
-# fi
-# echo "continue script"
