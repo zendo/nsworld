@@ -9,9 +9,8 @@
 in {
   home.packages = with pkgs; [
     # wifi-qr
-    # dippi
+    dippi
     # mprober
-    # code-radio-cli
     # gpu-viewer
     # video-trimmer
     # dynamic-wallpaper

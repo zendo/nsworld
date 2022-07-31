@@ -17,8 +17,6 @@ final: prev: {
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
   video-trimmer = prev.callPackage ./video-trimmer {};
-  code-radio-cli = prev.callPackage ./code-radio-cli {};
-  image-roll = prev.callPackage ./image-roll {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
