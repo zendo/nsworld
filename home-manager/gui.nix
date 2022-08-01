@@ -16,8 +16,9 @@ in {
     # dynamic-wallpaper
     # app-icon-preview
     git-hist
+    # meowfetch
     # paper
-    converseen
+    # converseen
     # mangareader
     # netease-cloud-music-gtk
     gnome-decoder

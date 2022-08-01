@@ -40,17 +40,17 @@ case "$1" in
         nix search nixpkgs "$2" ;;
 
     boot)
-        sudo nixos-rebuild boot --flake $dotConfig#"$(hostname)" ;;
+        nixos-rebuild boot --use-remote-sudo --flake $dotConfig#"$(hostname)" ;;
 
     switch)
-        sudo nixos-rebuild switch --flake $dotConfig#"$(hostname)" ;;
+        nixos-rebuild switch --use-remote-sudo --flake $dotConfig#"$(hostname)" ;;
 
     upgrade)
-        sudo nixos-rebuild boot --flake $dotConfig#"$(hostname)" \
+        nixos-rebuild boot --use-remote-sudo --flake $dotConfig#"$(hostname)" \
             --recreate-lock-file ;;
 
     wslswitch)
-        sudo nixos-rebuild switch --flake $dotConfig#wsl ;;
+        nixos-rebuild switch --use-remote-sudo --flake $dotConfig#wsl ;;
 
     hmswitch)
         nix run nixpkgs#home-manager build switch -- \

@@ -20,6 +20,7 @@ final: prev: {
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
+  meowfetch = prev.callPackage ./meowfetch {};
 
   # Python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
