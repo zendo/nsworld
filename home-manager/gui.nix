@@ -24,6 +24,7 @@ in {
     gnome-decoder
     done
     snake-asm
+    nur.repos.yes.lx-music-desktop
 
     gitg
     v2ray

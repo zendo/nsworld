@@ -27,7 +27,6 @@ final: prev: {
   gpu-viewer = prev.callPackage ./gpu-viewer {};
 
   # Nodejs
-  clash-verge = prev.callPackage ./clash-verge {};
 
   # Gtk
   dippi = prev.callPackage ./dippi {};

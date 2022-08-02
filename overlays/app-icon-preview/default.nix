@@ -33,10 +33,6 @@ stdenv.mkDerivation rec {
     hash = "sha256-ljLJCHeNueIPMZ+EVLZWbUHQqI/GXrRM0lxANWJNA04=";
   };
 
-  postPatch = ''
-    patchShebangs build-aux
-  '';
-
   nativeBuildInputs =
     [
       glib
@@ -60,6 +56,10 @@ stdenv.mkDerivation rec {
     libxml2
     libadwaita
   ];
+
+  postPatch = ''
+    patchShebangs build-aux
+  '';
 
   meta = with lib; {
     description = "Tool for designing applications icons";

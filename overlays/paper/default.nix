@@ -19,14 +19,14 @@
 }:
 stdenv.mkDerivation rec {
   pname = "paper";
-  version = "22.8";
+  version = "22.9";
 
   src = fetchFromGitLab {
     owner = "posidon_software";
     repo = pname;
-    # rev = version;
-    rev = "a95850b04caee2e747b546e4e34e297321bd3532";
-    sha256 = "sha256-6HVGQSjZAiYzt7GLtwnmU+T1xdCSp5nIu164mccT+ck=";
+    rev = version;
+    # rev = "a95850b04caee2e747b546e4e34e297321bd3532";
+    sha256 = "sha256-IU/5RKRX6QxKnq7lUC8z73su1s54MLQdUTXxb3GePWg=";
   };
 
   nativeBuildInputs = [
