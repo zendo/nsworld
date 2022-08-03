@@ -16,6 +16,7 @@ in {
     # dynamic-wallpaper
     # app-icon-preview
     git-hist
+    gnome-crosswords
     # meowfetch
     # paper
     # converseen

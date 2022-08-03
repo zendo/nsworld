@@ -31,6 +31,8 @@ final: prev: {
   # Gtk
   dippi = prev.callPackage ./dippi {};
   paper = prev.callPackage ./paper {};
+  gnome-crosswords = prev.callPackage ./gnome-crosswords {};
+  libipuz = prev.callPackage ./libipuz {};
 
   # Qt
   mangareader = prev.libsForQt5.callPackage ./mangareader {};
