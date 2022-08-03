@@ -11,7 +11,6 @@ in {
     # wifi-qr
     dippi
     # mprober
-    # gpu-viewer
     # video-trimmer
     # dynamic-wallpaper
     # app-icon-preview

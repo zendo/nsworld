@@ -24,7 +24,6 @@ final: prev: {
 
   # Python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
-  gpu-viewer = prev.callPackage ./gpu-viewer {};
 
   # Nodejs
 
