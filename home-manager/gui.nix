@@ -15,16 +15,15 @@ in {
     # dynamic-wallpaper
     # app-icon-preview
     git-hist
-    gnome-crosswords
     # meowfetch
     # paper
     # converseen
     # mangareader
     # netease-cloud-music-gtk
     gnome-decoder
-    done
+    # done
     snake-asm
-    nur.repos.yes.lx-music-desktop
+    # gnome-crosswords
 
     gitg
     v2ray
