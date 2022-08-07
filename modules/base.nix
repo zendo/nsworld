@@ -9,7 +9,7 @@
     tmpOnTmpfs = true;
     cleanTmpDir = true;
     plymouth.enable = true;
-    initrd.systemd.enable = true;
+    # initrd.systemd.enable = true;
     supportedFilesystems = ["ntfs"];
   };
 

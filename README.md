@@ -55,8 +55,9 @@ wsl --unregister nixos
 
 # RIME
 curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" 
-bash -s -- rime-install hosxy/rime-aurora-pinyin
+bash -s -- rime-install 
 BlindingDark/rime-easy-en:customize:schema=luna_pinyin
+hosxy/rime-aurora-pinyin
 ```
 
 # Nix Lang

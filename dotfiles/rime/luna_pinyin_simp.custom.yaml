@@ -26,7 +26,8 @@ patch:
 
   # 载入朙月拼音扩充词库
   # translator/dictionary: luna_pinyin_simp.extended
-  translator/dictionary: aurora_pinyin
+  # translator/dictionary: aurora_pinyin
+  # translator/dictionary: clover
 
   # 英文词库定制
   # https://github.com/BlindingDark/rime-easy-en

@@ -19,7 +19,6 @@ in {
     # paper
     # converseen
     # mangareader
-    # netease-cloud-music-gtk
     gnome-decoder
     # done
     snake-asm
