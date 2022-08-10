@@ -11,11 +11,9 @@ final: prev: {
     gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
   };
   done = prev.callPackage ./done {};
-  git-hist = prev.callPackage ./git-hist {};
   pidif = prev.callPackage ./pidif {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
-  netease-cloud-music-gtk = prev.callPackage ./netease-cloud-music-gtk {};
   video-trimmer = prev.callPackage ./video-trimmer {};
 
   # Go

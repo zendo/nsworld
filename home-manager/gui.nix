@@ -14,7 +14,6 @@ in {
     # video-trimmer
     # dynamic-wallpaper
     # app-icon-preview
-    git-hist
     # meowfetch
     # paper
     # converseen
