@@ -226,6 +226,11 @@ stdenv.mkDerivation rec {
   # fix gi.repository import Gio
   pythonPath = with python3.pkgs; requiredPythonModules [ pygobject3 ];
 
+  # propagate gi for pygobject
+  propagatedNativeBuildInputs = [
+    gobject-introspection
+  ];
+
   # homeless-shelter: permission denied
   preConfigure = ''
     export HOME=$(mktemp -d)

@@ -11,14 +11,12 @@ final: prev: {
     gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
   };
   done = prev.callPackage ./done {};
-  pidif = prev.callPackage ./pidif {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   video-trimmer = prev.callPackage ./video-trimmer {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
-  meowfetch = prev.callPackage ./meowfetch {};
 
   # Python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
@@ -34,12 +32,9 @@ final: prev: {
   # Qt
   mangareader = prev.libsForQt5.callPackage ./mangareader {};
   converseen = prev.callPackage ./converseen {};
-  opentodolist = prev.libsForQt5.callPackage ./opentodolist {};
-  downzemall = prev.callPackage ./downzemall {};
 
   # Libraries
   collision = prev.callPackage ./collision {};
-  snake-asm = prev.callPackage ./snake-asm {};
 
   #############################################
 

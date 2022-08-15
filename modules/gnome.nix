@@ -44,8 +44,8 @@
   services = {
     packagekit.enable = false;
     gnome.sushi.enable = true;
-    # gnome.tracker.enable = false;
-    # gnome.tracker-miners.enable = false;
+    gnome.tracker.enable = false;
+    gnome.tracker-miners.enable = false;
     udev.packages = [pkgs.gnome.gnome-settings-daemon];
   };
 

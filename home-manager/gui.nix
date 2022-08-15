@@ -18,9 +18,8 @@ in {
     # paper
     # converseen
     # mangareader
-    gnome-decoder
+    # gnome-decoder
     # done
-    snake-asm
     # gnome-crosswords
 
     gitg
