@@ -6,7 +6,7 @@
   zramSwap.enable = true;
 
   boot = {
-    tmpOnTmpfs = true;
+    # tmpOnTmpfs = true;
     cleanTmpDir = true;
     plymouth.enable = true;
     # initrd.systemd.enable = true;
