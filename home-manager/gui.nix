@@ -14,13 +14,11 @@ in {
     # video-trimmer
     # dynamic-wallpaper
     # app-icon-preview
-    # meowfetch
     # paper
     # converseen
     # mangareader
     # gnome-decoder
     # done
-    # gnome-crosswords
 
     gitg
     v2ray

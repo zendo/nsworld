@@ -17,26 +17,26 @@
 
 stdenv.mkDerivation rec {
   pname = "done";
-  version = "0.1.1";
+  version = "0.1.2";
 
   src = fetchFromGitHub {
     owner = "edfloreshz";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-6hXBgH9eTcanW+AnuOdLqSQBS/0m0T06dU4rzaVUx7M=";
+    hash = "sha256-zja1a2tQFRuaVwNilgRsnNxbHOzhkX7FnUXg5HGjEPo=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    sha256 = "sha256-rs7RUKQ+JF5i338bTQERhSMsPntMb7M7jWf+hu+KsYc=";
+    hash = "sha256-KBjM7JOt4ZKbwnfITXdXVSKhVZ+wJIeTyuEB6z+HILM=";
   };
 
   nativeBuildInputs = [
     meson
     ninja
     pkg-config
-    libxml2 # for xmllint
+    libxml2
     wrapGAppsHook4
     appstream-glib
     desktop-file-utils
@@ -49,8 +49,8 @@ stdenv.mkDerivation rec {
   buildInputs = [
     glib
     gtk4
-    libadwaita
     sqlite
+    libadwaita
   ];
 
   meta = with lib; {

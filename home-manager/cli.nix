@@ -8,6 +8,7 @@
     p7zip
     unzip
     unrar
+    ouch
     patool
 
     # system monitor
