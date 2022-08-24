@@ -50,5 +50,12 @@
 
   time.timeZone = "Asia/Shanghai";
 
+  # location.provider = "geoclue2";
+  # getip j
+  # location = {
+  #   latitude = 23.12911;
+  #   longitude = 113.264385;
+  # };
+
   system.stateVersion = "22.05";
 }

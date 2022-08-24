@@ -116,6 +116,8 @@
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
    "z" #'avy-zap-to-char
+   :prefix ("m" . "multiple-cursors")
+   "SPC" #'er/mark-inside-quotes
    :prefix ("w" . "window")
    "x" #'ace-swap-window
    "v" #'rotate-layout

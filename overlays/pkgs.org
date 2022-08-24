@@ -204,6 +204,9 @@ stdenv.mkDerivation rec {
 * buildPythonApplication
 ** notes
 #+begin_src nix
+
+  # dialect / gnome-frog
+
   # setup.py and pyproject.toml not found
   format = "other";
 

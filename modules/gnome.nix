@@ -37,6 +37,9 @@
 
         [org.gnome.desktop.input-sources]
         xkb-options=['ctrl:swapcaps']
+
+        [org.gnome.desktop.wm.keybindings]
+        activate-window-menu=[]
       '';
     };
   };
@@ -65,9 +68,7 @@
       gthumb
       authenticator
       # notejot
-      # amberol
-      # lollypop
-      rhythmbox
+      # rhythmbox
       gparted
       dconf2nix
       kooha

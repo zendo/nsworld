@@ -6,12 +6,12 @@
   programs.emacs = {
     enable = true;
     # fix duplicate desktop shortcut in kde
-    package =
-      pkgs.emacsPgtk.overrideAttrs
-      (oldAttrs: {
-        postFixup = ''
-          rm $out/share/applications/emacsclient.desktop  '';
-      });
+    package = pkgs.emacsPgtk;
+    # pkgs.emacsPgtk.overrideAttrs
+    # (oldAttrs: {
+    #   postFixup = ''
+    #     rm $out/share/applications/emacsclient.desktop  '';
+    # });
     extraPackages = epkgs:
       with epkgs; [
         vterm
@@ -24,7 +24,7 @@
   home.file.".doom.d".source = ../emacs/doom;
 
   programs.helix = {
-    enable = true;
+    enable = false;
   };
   xdg.configFile."helix".source = ../dotfiles/helix;
 

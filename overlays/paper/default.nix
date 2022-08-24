@@ -56,6 +56,10 @@ stdenv.mkDerivation rec {
   #   # sed -i '/DBusActivatable=true/d' $out/share/applications/io.posidon.Paper.desktop
   # '';
 
+  # postInstall = ''
+  #   ln -s $out/bin/com.github.cassidyjames.dippi $out/bin/dippi
+  # '';
+
   meta = with lib; {
     description = "A pretty markdown note-taking app for Gnome";
     homepage = "https://posidon.io/paper";

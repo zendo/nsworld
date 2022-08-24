@@ -3,44 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/181424/merge";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "git+file:///home/iab/devel/nixpkgs/?ref=gnomeExtensions-update";
+    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/181424/merge";
+    # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=cyan";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/720a9722d3fb67ef37a0b1e8394047298b7b9b1c";
+      url = "github:nix-community/emacs-overlay/12f87fb10e5a256c5cd361d7f0fb183c84c21cb8";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # nixos-cn = {
-    #   url = "github:nixos-cn/flakes";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     # devshell.url = "github:numtide/devshell";
-    nixos-wsl.url = github:nix-community/NixOS-WSL;
-    nixos-hardware.url = github:NixOS/nixos-hardware/master;
-    musnix.url = github:musnix/musnix;
-    templates.url = github:NixOS/templates;
+    nur.url = "github:nix-community/NUR";
+    musnix.url = "github:musnix/musnix";
+    templates.url = "github:NixOS/templates";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs @ {
@@ -86,7 +72,11 @@
             musnix.nixosModules.musnix
             {musnix.enable = true;}
 
-            ({config, pkgs, ...}: {
+            ({
+              config,
+              pkgs,
+              ...
+            }: {
               environment.systemPackages = with pkgs; [
                 # nixpkgs-pr.legacyPackages.${system}.dialect
               ];
@@ -190,16 +180,18 @@
     (
       system: let
         pkgs = import nixpkgs {
-          inherit system;
+          inherit system overlays;
           allowUnfree = true;
           # allowBroken = true;
           # allowUnsupportedSystem = true;
         };
       in {
-        # nix fmt  :Formatter all files in this repo.
+        # nix fmt :Formatter all files in this repo.
         formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
-        # nix develop  :or .#rust
+        # nix develop .#rust
         devShells = import ./devshells.nix {inherit pkgs;};
+        # nix build .#apps or self#apps / nix run self#apps
+        packages = pkgs;
       }
     );
 }

@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "converseen";
-  version = "0.9.9.6";
+  version = "0.9.9.7";
 
   src = fetchFromGitHub {
     owner = "Faster3ck";
     repo = "Converseen";
     rev = "v${version}";
-    sha256 = "sha256-mpzIZc8a8SX6DL4ZJSuGOAPrFQdFpbcWqBNmzdrDGaM=";
+    hash = "sha256-DZuyAKeSndsPd796t9KqYMo+g7tOp64PQ+mJFBaZMao=";
   };
 
   nativeBuildInputs = [

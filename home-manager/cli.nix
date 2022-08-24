@@ -4,11 +4,13 @@
   ...
 }: {
   home.packages = with pkgs; [
+    getip
+    nixos-helper
+
     # compressor / archiver packages
     p7zip
     unzip
     unrar
-    ouch
     patool
 
     # system monitor
@@ -85,9 +87,6 @@
     nix-top
     # nvfetcher
     shellcheck
-
-    getip
-    nixos-helper
   ];
 
   manual.manpages.enable = false;

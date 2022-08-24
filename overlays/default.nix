@@ -1,34 +1,33 @@
 final: prev: {
   # Trivial
-  nixos-helper = prev.callPackage ./nixos-helper {};
   getip = prev.callPackage ./getip {};
   forgit = prev.callPackage ./forgit {};
   wifi-qr = prev.callPackage ./wifi-qr {};
+  nixos-helper = prev.callPackage ./nixos-helper {};
 
   # Rust
+  done = prev.callPackage ./done {};
+  mprober = prev.callPackage ./mprober {};
+  app-icon-preview = prev.callPackage ./app-icon-preview {};
   gnome-decoder = prev.callPackage ./gnome-decoder {
     inherit (prev.gst_all_1) gstreamer gst-plugins-base;
     gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
   };
-  done = prev.callPackage ./done {};
-  mprober = prev.callPackage ./mprober {};
-  app-icon-preview = prev.callPackage ./app-icon-preview {};
-  video-trimmer = prev.callPackage ./video-trimmer {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
+  mabel = prev.callPackage ./mabel {};
 
   # Python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
+  whatip = prev.callPackage ./whatip {};
 
   # Nodejs
 
   # Gtk
-  dippi = prev.callPackage ./dippi {};
   paper = prev.callPackage ./paper {};
 
   # Qt
-  mangareader = prev.libsForQt5.callPackage ./mangareader {};
   converseen = prev.callPackage ./converseen {};
 
   # Libraries

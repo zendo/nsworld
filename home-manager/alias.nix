@@ -34,7 +34,7 @@
 
     nse = "nix search nixpkgs";
     dict-en = "dict -c ${../dotfiles/dict.conf}";
-    radioboat = "radioboat --volume 100";
+    # radioboat = "radioboat --volume 100";
     paperoni-single-html = "paperoni --export html --inline-images";
   };
 }

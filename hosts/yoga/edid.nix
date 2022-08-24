@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  chip_edid = pkgs.runCommand "foo" {} ''
+  chip_edid = pkgs.runCommandNoCC "foo" {} ''
     mkdir -p $out/lib/firmware/edid
     cp ${./dspinfo.bin} $out/lib/firmware/edid/dspinfo.bin
   '';

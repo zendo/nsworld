@@ -9,18 +9,16 @@
 in {
   home.packages = with pkgs; [
     # wifi-qr
-    dippi
     # mprober
-    # video-trimmer
     # dynamic-wallpaper
     # app-icon-preview
     # paper
     # converseen
-    # mangareader
     # gnome-decoder
     # done
+    # mabel
+    whatip
 
-    gitg
     v2ray
     qv2ray
     proxychains-ng
@@ -29,6 +27,7 @@ in {
     foot
     # alacritty
     # wezterm
+    gitg
     warp
 
     # Browsers
@@ -66,6 +65,7 @@ in {
     mpv
     # vlc
     # ffmpeg
+    audacious
     radioboat
     mousai # 听歌识曲
     # easyeffects
@@ -134,11 +134,17 @@ in {
   };
 
   home.file = {
-    # fix tiny cursor in qt apps at gnome
+    # Fix tiny cursor in qt apps at gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
       [icon theme]
       Inherits=Adwaita
     '';
+
+    # Fix flatpak font
+    # ".local/share/flatpak/overrides/global".text = ''
+    #   [Context]
+    #   filesystems=/run/current-system/sw/share/X11/fonts:ro;/nix/store:ro
+    # '';
 
     # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
     #   owner = "icy-thought";
