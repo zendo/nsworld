@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
     repo = pname;
     rev = version;
     # rev = "a95850b04caee2e747b546e4e34e297321bd3532";
-    sha256 = "sha256-IU/5RKRX6QxKnq7lUC8z73su1s54MLQdUTXxb3GePWg=";
+    hash = "sha256-IU/5RKRX6QxKnq7lUC8z73su1s54MLQdUTXxb3GePWg=";
   };
 
   nativeBuildInputs = [
@@ -63,6 +63,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A pretty markdown note-taking app for Gnome";
     homepage = "https://posidon.io/paper";
+    mainProgram = "io.posidon.Paper";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
     maintainers = with maintainers; [zendo];

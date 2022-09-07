@@ -21,6 +21,7 @@ final: prev: {
   # Python
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
   whatip = prev.callPackage ./whatip {};
+  eartag = prev.callPackage ./eartag {};
 
   # Nodejs
 
@@ -31,7 +32,6 @@ final: prev: {
   converseen = prev.callPackage ./converseen {};
 
   # Libraries
-  collision = prev.callPackage ./collision {};
 
   #############################################
 

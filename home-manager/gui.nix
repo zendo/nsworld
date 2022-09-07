@@ -17,7 +17,8 @@ in {
     # gnome-decoder
     # done
     # mabel
-    whatip
+    # whatip
+    # eartag
 
     v2ray
     qv2ray

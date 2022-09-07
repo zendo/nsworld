@@ -21,7 +21,7 @@ python3.pkgs.buildPythonApplication rec {
     owner = "dusansimic";
     repo = "dynamic-wallpaper";
     rev = "${version}";
-    sha256 = "sha256-y6BgOK4Evz/SZeLKwNZuv9+uG/FHxK4Wd+RrMlGYQb8=";
+    hash = "sha256-y6BgOK4Evz/SZeLKwNZuv9+uG/FHxK4Wd+RrMlGYQb8=";
   };
 
   # setup.py and pyproject.toml not found
@@ -47,8 +47,8 @@ python3.pkgs.buildPythonApplication rec {
   meta = with lib; {
     homepage = "https://github.com/dusansimic/dynamic-wallpaper";
     description = "Dynamic wallpaper maker for Gnome";
-    maintainers = with maintainers; [zendo];
     license = licenses.gpl2;
     platforms = platforms.linux;
+    maintainers = with maintainers; [zendo];
   };
 }
