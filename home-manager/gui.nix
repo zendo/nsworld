@@ -19,6 +19,7 @@ in {
     # mabel
     # whatip
     # eartag
+    eyedropper
 
     v2ray
     qv2ray

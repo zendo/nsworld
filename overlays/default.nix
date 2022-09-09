@@ -8,6 +8,7 @@ final: prev: {
   # Rust
   done = prev.callPackage ./done {};
   mprober = prev.callPackage ./mprober {};
+  eyedropper = prev.callPackage ./eyedropper {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   gnome-decoder = prev.callPackage ./gnome-decoder {
     inherit (prev.gst_all_1) gstreamer gst-plugins-base;
