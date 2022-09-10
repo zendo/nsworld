@@ -44,9 +44,4 @@ in {
     wsl-proxy = "export http_proxy=${winProxy} ; \\
     export https_proxy=${winProxy}";
   };
-
-  systemd.services.nix-daemon.environment = {
-    http_proxy = "${winProxy}";
-    https_proxy = "${winProxy}";
-  };
 }

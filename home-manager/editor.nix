@@ -5,8 +5,8 @@
 }: {
   programs.emacs = {
     enable = true;
-    # fix duplicate desktop shortcut in kde
     package = pkgs.emacsPgtk;
+    # fix duplicate desktop shortcut in kde
     # pkgs.emacsPgtk.overrideAttrs
     # (oldAttrs: {
     #   postFixup = ''

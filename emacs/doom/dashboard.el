@@ -3,7 +3,7 @@
 ;;; $DOOMDIR/dashboard.el -*- lexical-binding: t; -*-
 ;;; Code:
 
-(global-set-key (kbd "<f1>") '+doom-dashboard/open)
+;; (global-set-key (kbd "<f1>") '+doom-dashboard/open)
 
 (defun +doom-dashboard-setup-modified-keymap ()
   (setq +doom-dashboard-mode-map (make-sparse-keymap))

@@ -31,6 +31,9 @@ case "$1" in
         nix log "$(ns which "$2")" ;;
 
     run)
+        nix run nixpkgs#"$2" ;;
+    
+    run-with)
         nix run nixpkgs#"$2" -- "$@" ;;
 
     shell)

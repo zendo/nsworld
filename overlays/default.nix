@@ -20,7 +20,6 @@ final: prev: {
   mabel = prev.callPackage ./mabel {};
 
   # Python
-  dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
   whatip = prev.callPackage ./whatip {};
   eartag = prev.callPackage ./eartag {};
 

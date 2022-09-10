@@ -10,7 +10,6 @@ in {
   home.packages = with pkgs; [
     # wifi-qr
     # mprober
-    # dynamic-wallpaper
     # app-icon-preview
     # paper
     # converseen
