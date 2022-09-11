@@ -20,7 +20,6 @@ final: prev: {
 
   # Python
   whatip = prev.callPackage ./whatip {};
-  eartag = prev.callPackage ./eartag {};
 
   # Nodejs
 
@@ -28,7 +27,7 @@ final: prev: {
   paper = prev.callPackage ./paper {};
 
   # Qt
-  converseen = prev.callPackage ./converseen {};
+  converseen = prev.libsForQt5.callPackage ./converseen {};
 
   # Libraries
 

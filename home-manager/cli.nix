@@ -63,6 +63,7 @@
     dogdns
     nali
     mtr
+    ipinfo
     elinks
     dnspeep
     bandwhich
@@ -81,7 +82,7 @@
     nvd
     cachix
     nixos-generators
-    nix-template
+    # nix-template
     nix-index
     nix-tree
     nix-top

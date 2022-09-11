@@ -1,9 +1,10 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, qt5
 , cmake
 , pkg-config
+, qttools
+, wrapQtAppsHook
 , imagemagick
 , nix-update-script
 }:
@@ -22,13 +23,19 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     cmake
     pkg-config
-    qt5.qttools
-    qt5.wrapQtAppsHook
+    qttools
+    wrapQtAppsHook
   ];
 
   buildInputs = [
     imagemagick
   ];
+
+  # makeWrapperArgs = [ "--set LOCALE_ARCHIVE ${glibcLocales}/lib/locale/locale-archive" ];
+
+  # cmakeFlags = [
+  #   "QT5_ADD_TRANSLATION=${placeholder "out"}/share/onverseen/loc"
+  # ];
 
   # postPatch = ''
   #   substituteInPlace src/whereiam.cpp \

@@ -9,15 +9,15 @@
 in {
   home.packages = with pkgs; [
     # wifi-qr
+    # mabel
     # mprober
-    # app-icon-preview
     # paper
     # converseen
+
     # gnome-decoder
+    # app-icon-preview
     # done
-    # mabel
-    # whatip
-    # eartag
+    whatip
 
     v2ray
     qv2ray
@@ -68,6 +68,7 @@ in {
     audacious
     radioboat
     mousai # 听歌识曲
+    # eartag
     # easyeffects
     # media-downloader
 

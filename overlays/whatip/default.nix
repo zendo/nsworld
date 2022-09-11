@@ -1,5 +1,4 @@
 { lib
-, stdenv
 , fetchFromGitLab
 , python3
 , meson
@@ -10,6 +9,7 @@
 , libadwaita
 , blueprint-compiler
 , gobject-introspection
+, librsvg
 , wrapGAppsHook4
 , appstream-glib
 , desktop-file-utils
@@ -18,6 +18,8 @@
 python3.pkgs.buildPythonApplication rec {
   pname = "whatip";
   version = "1.1";
+
+  format = "other";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
@@ -28,7 +30,6 @@ python3.pkgs.buildPythonApplication rec {
   };
 
   nativeBuildInputs = [
-    python3
     meson
     ninja
     pkg-config
@@ -41,6 +42,7 @@ python3.pkgs.buildPythonApplication rec {
   buildInputs = [
     glib
     gtk4
+    librsvg
     libadwaita
     gobject-introspection
   ];
@@ -51,19 +53,12 @@ python3.pkgs.buildPythonApplication rec {
     pygobject3
   ];
 
-  format = "other";
-
   # Prevent double wrapping, let the Python wrapper use the args in preFixup.
   # dontWrapGApps = true;
 
   # preFixup = ''
   #   makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
   # '';
-
-  # doCheck = false;
-
-  # handle setup hooks better
-  # strictDeps = false;
 
   meta = with lib; {
     description = "Info on your IP";
