@@ -219,6 +219,8 @@ stdenv.mkDerivation rec {
     ----------------------------------
     substituteInPlace requirements.txt \
     --replace 'PyYaml==5.4.1' 'PyYaml'
+    substituteInPlace ./build-aux/meson/postinstall.py \
+      --replace "gtk-update-icon-cache" "gtk4-update-icon-cache"
   '';
 
   # delete finnal line to stop exec postinstall.py

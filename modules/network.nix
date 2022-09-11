@@ -39,13 +39,13 @@
   # Publish this server and its address on the network
   services.avahi = {
     enable = true;
-  #   nssmdns = true;
-  #   publish = {
-  #     enable = true;
-  #     domain = true;
-  #     addresses = true;
-  #     workstation = true;
-  #   };
+    nssmdns = true;
+    #   publish = {
+    #     enable = true;
+    #     domain = true;
+    #     addresses = true;
+    #     workstation = true;
+    #   };
   };
 
   # Open ports for avahi zeroconf

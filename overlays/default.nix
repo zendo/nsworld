@@ -20,6 +20,7 @@ final: prev: {
 
   # Python
   whatip = prev.callPackage ./whatip {};
+  textpieces = prev.callPackage ./textpieces {};
 
   # Nodejs
 

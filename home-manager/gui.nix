@@ -13,10 +13,10 @@ in {
     # mprober
     # paper
     # converseen
-
     # gnome-decoder
     # app-icon-preview
     # done
+    textpieces
     whatip
 
     v2ray
