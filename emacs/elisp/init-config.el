@@ -16,7 +16,7 @@
 ;; Consolas, Hack, Source Code Pro,
 ;; Microsoft Yahei, NotoSansSC,
 ;; (set-face-attribute 'default nil :font "等距更纱黑体 SC-12")
-(setq default-frame-alist '((font . "等距更纱黑体 SC-12")))
+(setq default-frame-alist '((font . "JetBrains Mono-10")))
 ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
 ;;   (set-fontset-font (frame-parameter nil 'font)
 ;;                     charset
@@ -24,7 +24,7 @@
 
 ;; Org-table font
 (custom-set-faces
- '(org-table ((t (:family "等距更纱黑体 SC")))))
+ '(org-table ((t (:family "JetBrains Mono")))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

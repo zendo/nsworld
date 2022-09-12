@@ -6,7 +6,7 @@
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/190151/merge";
-    # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=cyan";
+    # nixpkgs-pr.url = "git+file:///home/iab/devs/nixpkgs/?ref=gnome-shell";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -14,7 +14,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/82704788ffcbf4d1b417b7ce62b9f1ef7d98f442";
+      url = "github:nix-community/emacs-overlay/bee7e3986183f05242a0c40d246baf66439aae9e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -78,7 +78,7 @@
               ...
             }: {
               environment.systemPackages = with pkgs; [
-                # nixpkgs-pr.legacyPackages.${system}.dialect
+                # nixpkgs-pr.legacyPackages.${system}.gnomeExtensions.pano
               ];
             })
           ];

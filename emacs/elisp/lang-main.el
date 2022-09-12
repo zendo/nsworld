@@ -59,43 +59,43 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; corfu
-(use-package corfu
-  :custom
-  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  :hook (prog-mode . corfu-mode)
-  :bind (:map corfu-map
-              ("<escape>" . corfu-quit))
-  :init
-  (corfu-global-mode))
+;; (use-package corfu
+;;   :custom
+;;   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+;;   (corfu-auto t)                 ;; Enable auto completion
+;;   ;; (corfu-separator ?\s)          ;; Orderless field separator
+;;   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+;;   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+;;   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+;;   ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
+;;   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+;;   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+;;   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+;;   :hook (prog-mode . corfu-mode)
+;;   :bind (:map corfu-map
+;;               ("<escape>" . corfu-quit))
+;;   :init
+;;   (corfu-global-mode))
 
 ;; company
-;; (use-package company
-;;   :defer t
-;;   :diminish company-mode
-;;   :hook (prog-mode . company-mode)
-;;   :config (setq company-tooltip-align-annotations t)
-;;   (setq company-minimum-prefix-length 1)
-;;   ;; Trigger completion immediately.
-;;   (setq company-idle-delay 0)
-;;   ;; Number the candidates (use M-1, M-2 etc to select completions).
-;;   (setq company-show-numbers t))
+(use-package company
+  :defer t
+  :diminish company-mode
+  :hook (prog-mode . company-mode)
+  :config (setq company-tooltip-align-annotations t)
+  (setq company-minimum-prefix-length 1)
+  ;; Trigger completion immediately.
+  (setq company-idle-delay 0)
+  ;; Number the candidates (use M-1, M-2 etc to select completions).
+  (setq company-show-numbers t))
 
-;; (with-eval-after-load 'company
-;;     (setq-default company-dabbrev-other-buffers 'all
-;;                   company-tooltip-align-annotations t)
-;;     (define-key company-mode-map (kbd "C-.") 'company-complete)
-;;     (define-key company-mode-map [remap completion-at-point] 'company-complete)
-;;     (define-key company-mode-map [remap indent-for-tab-command] 'company-indent-or-complete-common)
-;;     (define-key company-active-map (kbd "C-.") 'company-other-backend))
+(with-eval-after-load 'company
+    (setq-default company-dabbrev-other-buffers 'all
+                  company-tooltip-align-annotations t)
+    (define-key company-mode-map (kbd "C-.") 'company-complete)
+    (define-key company-mode-map [remap completion-at-point] 'company-complete)
+    (define-key company-mode-map [remap indent-for-tab-command] 'company-indent-or-complete-common)
+    (define-key company-active-map (kbd "C-.") 'company-other-backend))
 
 ;; tabnine
 ;; ;; M-x company-tabnine-install-binary

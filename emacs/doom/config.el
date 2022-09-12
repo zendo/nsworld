@@ -9,7 +9,7 @@
 
 ;; environment
 (when IS-WINDOWS
-  (setq doom-font (font-spec :family "JetBrains Mono" :size 25)
+  (setq doom-font (font-spec :family "JetBrains Mono" :size 26)
       doom-unicode-font (font-spec :family "Segoe UI Emoji")
 
       default-directory "~/Desktop/"
