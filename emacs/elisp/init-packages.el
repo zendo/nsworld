@@ -67,6 +67,13 @@
 ;; expand-region
 (use-package expand-region)
 
+;; mwim ;moving to the beginning/end code
+(use-package mwim)
+
+;; move-text M-up/M-down
+(use-package move-text
+  :init (move-text-default-bindings))
+
 ;; iedit
 (use-package iedit
   :defer t)
@@ -81,8 +88,6 @@
 
 ;; anzu
 (use-package anzu)
-(global-set-key [remap query-replace] 'anzu-query-replace)
-(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
 ;; wgrep
 (use-package wgrep
@@ -116,19 +121,15 @@
 
 ;; ace-window
 (use-package ace-window)
-(global-set-key [remap other-window] 'ace-window)
+
+;; rotate
+(use-package rotate)
 
 ;; burly save buffers windows
 (use-package burly)
 
-;; Youdao Dictionay
-(use-package youdao-dictionary
-  :defer t
-  :config
-  ;; Cache documents
-  (setq url-automatic-caching t)
-  ;; Enable Chinese word segmentation support (支持中文分词)
-  (setq youdao-dictionary-use-chinese-word-segmentation t))
+;; fanyi
+(use-package fanyi)
 
 ;; olivetti 文档居中
 (use-package olivetti
@@ -139,7 +140,25 @@
 
 ;; doom-modeline
 (use-package doom-modeline
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-buffer-file-name-style 'relative-to-project))
+
+;; dashboard
+;; (use-package dashboard
+;;   :diminish (dashboard-mode page-break-lines-mode)
+;;   :custom
+;;   (dashboard-startup-banner 2)
+;;   (dashboard-set-heading-icons t)
+;;   (dashboard-set-file-icons t)
+;;   (dashboard-set-footer nil)
+;;   (dashboard-center-content t)
+
+;;   (dashboard-items '((recents  . 12)
+;;                      (bookmarks . 5)
+;;                      (projects . 5)))
+;;   :config
+;;   (dashboard-setup-startup-hook))
 
 ;; Magit
 (use-package magit
@@ -147,7 +166,9 @@
   :if (executable-find "git")
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
-  :bind ("C-c g" . magit-status))
+  :bind (("C-c g" . magit-status)
+         :map magit-status-mode-map
+         ("p" . magit-push)))
 
 (provide 'init-packages)
 ;;; packages.el ends here

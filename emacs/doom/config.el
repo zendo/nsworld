@@ -68,6 +68,8 @@
   (+global-word-wrap-mode +1))
 (global-visual-line-mode 1)
 
+(delete-selection-mode t) ;overwrite selected text
+
 ;; Nix Mode
 (add-hook 'nix-mode-hook #'rainbow-delimiters-mode)
 ;; (add-hook! nix-mode #'lsp!)

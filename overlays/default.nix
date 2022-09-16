@@ -21,6 +21,7 @@ final: prev: {
   # Python
   whatip = prev.callPackage ./whatip {};
   textpieces = prev.callPackage ./textpieces {};
+  geobug = prev.callPackage ./geobug {};
 
   # Nodejs
 

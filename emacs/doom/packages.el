@@ -18,7 +18,7 @@
 (package! avy-zap)
 (package! iedit)
 ;; (package! telega)
-(package! youdao-dictionary)
+(package! fanyi)
 (package! vundo)
 (package! dired-quick-sort)
 

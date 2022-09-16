@@ -83,6 +83,7 @@
     cachix
     nixos-generators
     # nix-template
+    nixpkgs-review
     nix-index
     nix-tree
     nix-top

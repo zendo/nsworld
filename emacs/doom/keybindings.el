@@ -16,7 +16,6 @@
 ;; Doom 别在新行加注释
 (setq +default-want-RET-continue-comments nil)
 
-
 ;; (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-z") 'undo-redo)
@@ -34,7 +33,6 @@
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
-
 (global-set-key [remap query-replace] 'anzu-query-replace)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
@@ -84,11 +82,11 @@
  )
 
 ;; emacs keymap
-(unless (featurep! :editor evil +everywhere)
-  ;; (setq doom-leader-alt-key "<M-SPC>")
+(unless (modulep! :editor evil +everywhere)
+  (setq doom-leader-alt-key "C-c")
   (map!
    :leader
-   "y" #'youdao-dictionary-search-at-point-tooltip
+   "y" #'fanyi-dwim2
    "g" #'magit-status
    "x" #'+hydra/window-nav/body
    "<left>" #'winner-undo
@@ -125,14 +123,14 @@
    ))
 
 ;; evil keymap
-(when (featurep! :editor evil +everywhere)
+(when (modulep! :editor evil +everywhere)
   (map!
    :niv "C-=" #'er/expand-region
    :niv "C-y" #'yank
    :niv "C-k" #'crux-smart-kill-line
    :niv "C-e" #'end-of-line
    :leader
-   "y" #'youdao-dictionary-search-at-point-tooltip
+   "y" #'fanyi-dwim2
    "<left>" #'next-buffer
    "<right>" #'previous-buffer
    :prefix ("-" . "remove-lists")

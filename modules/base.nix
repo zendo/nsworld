@@ -14,7 +14,7 @@
   };
 
   services = {
-    fwupd.enable = true;
+    # fwupd.enable = true;
     acpid.enable = true;
 
     journald.extraConfig = ''

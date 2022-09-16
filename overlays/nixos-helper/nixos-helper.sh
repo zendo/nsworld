@@ -32,7 +32,7 @@ case "$1" in
 
     run)
         nix run nixpkgs#"$2" ;;
-    
+
     run-with)
         nix run nixpkgs#"$2" -- "$@" ;;
 

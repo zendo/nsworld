@@ -18,6 +18,7 @@ in {
     # done
     textpieces
     whatip
+    # geobug
 
     v2ray
     qv2ray
