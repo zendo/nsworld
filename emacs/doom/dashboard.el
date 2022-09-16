@@ -27,7 +27,7 @@
 ;; (add-to-list '+doom-dashboard-menu-sections
 ;;              '("Add journal entry"
 ;;                :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
-;;                :when (featurep! :lang org +journal)
+;;                :when (modulep! :lang org +journal)
 ;;                :face (:inherit (doom-dashboard-menu-title bold))
 ;;                :action org-journal-new-entry))
 

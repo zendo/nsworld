@@ -83,7 +83,8 @@
 
 ;; emacs keymap
 (unless (modulep! :editor evil +everywhere)
-  (setq doom-leader-alt-key "C-c")
+  ;; (setq doom-leader-alt-key "C-c")
+  ;; (setq doom-leader-alt-key "<M-SPC>")
   (map!
    :leader
    "y" #'fanyi-dwim2
@@ -92,7 +93,6 @@
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file
-   "C-<SPC>" #'project-find-file
    "C-j" #'dired-jump
    "," #'consult-buffer
    "." #'find-file
@@ -153,7 +153,7 @@
    ))
 
 ;; meow
-;; (when (featurep! :editor meow)
+;; (when (modulep! :editor meow)
 ;;   (map!
 ;;    ))
 
@@ -170,11 +170,13 @@
 ;; 新建 window 并切换过去
 (global-set-key (kbd "C-x 2")
                 (lambda()
+                  "split windows and switch"
                   (interactive)
                   (split-window-below)
                   (select-window (next-window))))
 (global-set-key (kbd "C-x 3")
                 (lambda()
+                  "split windows and switch"
                   (interactive)
                   (split-window-right)
                   (select-window (next-window))))

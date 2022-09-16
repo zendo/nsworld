@@ -64,11 +64,9 @@
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 
 ;; Editor
-(when (featurep! :editor word-wrap)
+(when (modulep! :editor word-wrap)
   (+global-word-wrap-mode +1))
 (global-visual-line-mode 1)
-
-(delete-selection-mode t) ;overwrite selected text
 
 ;; Nix Mode
 (add-hook 'nix-mode-hook #'rainbow-delimiters-mode)
@@ -84,7 +82,6 @@
 ;; '("bashrc\\'" . conf-mode))
 
 ;; 窗口失去焦点时保存
-;; (add-hook! 'focus-out-hook (save-some-buffers t))  ; old function
 (add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 
 ;; recentf 不要保存 dired 记录
@@ -134,7 +131,7 @@
       )
 ;;;###autoload
 (defun funs/dired-filter-show-match ()
-  "Only show filter file."
+  "Only show filter file"
   (interactive)
   (call-interactively #'dired-mark-files-regexp)
   (command-execute "tk"))

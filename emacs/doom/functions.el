@@ -6,7 +6,7 @@
 ;;----------------------------------------------------------------------------
 ;; vertico
 ;;----------------------------------------------------------------------------
-(when (featurep! :completion vertico)
+(when (modulep! :completion vertico)
 ;; 箭头显示当前项
 ;;;###autoload
 (advice-add #'vertico--format-candidate :around
@@ -40,11 +40,7 @@
 ;;----------------------------------------------------------------------------
 ;;;###autoload
 (defun zendo/space-to-newline ()
-  "Replace space sequence to a newline char.
-Works on current block or selection.
-
-URL `http://ergoemacs.org/emacs/emacs_space_to_newline.html'
-Version 2017-08-19"
+  "Replace space sequence to a newline char"
   (interactive)
   (let* ( $p1 $p2 )
     (if (use-region-p)

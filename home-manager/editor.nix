@@ -21,7 +21,7 @@
         # telega
       ];
   };
-  home.file.".doom.d".source = ../emacs/doom;
+  # home.file.".doom.d".source = ../emacs/doom;
 
   programs.helix = {
     enable = false;
