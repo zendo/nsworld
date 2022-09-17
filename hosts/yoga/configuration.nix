@@ -7,13 +7,17 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
+    # inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+    # cpupower frequency-info
+    # cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver
+    # ls /sys/devices/system/cpu/cpu0/   :show CPPCCPPC
   ];
 
   #######################################################################
   ## Kernel
   #######################################################################
   # latest or zen or xanmod_latest
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # boot.kernelParams = ["quite"];
 

@@ -3,6 +3,16 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 ;;; Code:
 
+;; Here are some additional functions/macros that could help you configure Doom:
+;;
+;; - `load!' for loading external *.el files relative to this one
+;; - `use-package!' for configuring packages
+;; - `after!' for running code after a package has loaded
+;; - `add-load-path!' for adding directories to the `load-path', relative to
+;;   this file. Emacs searches the `load-path' when you load packages with
+;;   `require' or `use-package'.
+;; - `map!' for binding new keys
+
 (load! "keybindings")
 (load! "dashboard")
 (load! "functions")
@@ -90,16 +100,6 @@
 ;; recentf 不要保存 dired 记录
 (define-advice doom--recentf-add-dired-directory-h (:override ()))
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-
 ;; hippie expand is dabbrev expand on steroids
 ;; doom 顺序似乎不对，这里覆盖自己的配置
 (setq hippie-expand-try-functions-list
@@ -147,6 +147,6 @@
   (dired-quick-sort-setup))
 
 ;; throw custom file
-(setq-default custom-file (expand-file-name ".custom.el" doom-emacs-dir))
+(setq-default custom-file (expand-file-name ".custom.el" doom-local-dir))
 (when (file-exists-p custom-file)
   (load custom-file))
