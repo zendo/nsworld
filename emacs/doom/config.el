@@ -81,6 +81,9 @@
 ;; (add-to-list 'auto-mode-alist
 ;; '("bashrc\\'" . conf-mode))
 
+;; Doom 别在新行加注释
+(setq +default-want-RET-continue-comments nil)
+
 ;; 窗口失去焦点时保存
 (add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 

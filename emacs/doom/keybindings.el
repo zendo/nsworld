@@ -13,13 +13,11 @@
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode t))
 
-;; Doom 别在新行加注释
-(setq +default-want-RET-continue-comments nil)
+(global-set-key (kbd "C-z") nil)
+;; (global-set-key (kbd "C-z") 'undo)
+;; (global-set-key (kbd "C-S-z") 'undo-redo)
 
-;; (global-set-key (kbd "C-z") nil)
-(global-set-key (kbd "C-z") 'undo)
-(global-set-key (kbd "C-S-z") 'undo-redo)
-
+;; vterm or eshell
 (when IS-WINDOWS
   (global-set-key (kbd "<f2>") '+eshell/toggle))
 
@@ -29,12 +27,9 @@
     (setq vterm-shell "zsh")
     (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
 
+;; treemacs
 (after! treemacs
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
-
-(global-set-key [remap kill-buffer] #'kill-this-buffer)
-(global-set-key [remap query-replace] 'anzu-query-replace)
-(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
 ;; set-mark multiple times to expands
 (use-package! smart-region
@@ -53,6 +48,7 @@
  "C-x 4 r" #'consult-buffer-other-window
  "C-x 4 x" #'ace-swap-window
  [remap other-window] #'ace-window
+ [remap kill-buffer] #'kill-this-buffer
 
  "C-." #'hippie-expand
  "C-," #'+company/complete
@@ -67,16 +63,17 @@
  "C-|" #'mc/mark-all-like-this-dwim
  "s-<mouse-1>" #'mc/add-cursor-on-click
 
+ "M-z" #'avy-zap-to-char
  [remap kill-ring-save] #'easy-kill
  [remap mark-sexp] #'easy-mark-sexp
  [remap mark-word] #'easy-mark-word
- "M-z" #'avy-zap-to-char
+ [remap query-replace] 'anzu-query-replace
+ [remap query-replace-regexp] 'anzu-query-replace-regexp
 
  "s-w" #'+hydra/window-nav/body
  "s-=" #'+hydra/text-zoom/body
 
  "s-g" #'magit-status
- "C-x g" #'magit-status
  :map magit-status-mode-map
  "p" 'magit-push
  )
@@ -89,15 +86,12 @@
    :leader
    "y" #'fanyi-dwim2
    "g" #'magit-status
-   "x" #'+hydra/window-nav/body
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file
-   "C-j" #'dired-jump
    "," #'consult-buffer
    "." #'find-file
    "/" #'consult-ripgrep
-   ":" #'execute-extended-command
    :prefix ("-" . "remove-lists")
    "b" #'bookmark-delete
    "r" #'recentf-edit-list
