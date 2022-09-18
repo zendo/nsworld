@@ -77,6 +77,14 @@ subPackages = ["."];
 #+begin_src nix
 # auto-update bot
 passthru.updateScript = nix-update-script { attrPath = pname; };
+
+# fonts
+installPhase = ''
+  runHook preInstall
+  mkdir -p $out/share/fonts/truetype
+  install -D *.{ttf,TTF} $out/share/fonts/truetype/
+  runHook postInstall
+'';
 #+end_src
 * buildRustPackage
 ** cli
@@ -299,6 +307,8 @@ distPhase = "true";
 configurePhase = "ln -s $node_modules node_modules";
 #+end_src
 * appimageTool
+https://github.com/wineee/nur-packages/blob/main/packages/lx-music-desktop/default.nix
+
 #+begin_src nix
 { lib, fetchurl, appimageTools }:
 
@@ -320,6 +330,8 @@ appimageTools.wrapType2 rec {
   };
 }
 #+end_src
+* qt
+qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default.nix
 * Desktop
 ** codecs
 #+begin_src nix
