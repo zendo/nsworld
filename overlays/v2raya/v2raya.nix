@@ -26,6 +26,7 @@
         LimitNOFILE = 1000000;
         Restart = "on-failure";
         Type = "simple";
+        Environment = ["V2RAYA_LOG_FILE=/var/log/v2raya/v2raya.log"];
       };
 
       wantedBy = ["multi-user.target"];

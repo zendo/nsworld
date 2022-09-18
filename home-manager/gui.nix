@@ -21,7 +21,7 @@ in {
     # geobug
 
     v2ray
-    qv2ray
+    # qv2ray
     proxychains-ng
     # clash
     # nur.repos.linyinfeng.clash-for-windows
@@ -156,20 +156,20 @@ in {
     # };
   };
 
-  xdg.configFile = {
-    "autostart/qv2ray.desktop".text = ''
-      [Desktop Entry]
-      Name=qv2ray
-      GenericName=V2Ray Frontend
-      Exec=bash -c "sleep 5; qv2ray"
-      Terminal=false
-      Icon=qv2ray
-      Categories=Network
-      Type=Application
-      StartupNotify=false
-      X-GNOME-Autostart-enabled=true
-    '';
-  };
+  # xdg.configFile = {
+  #   "autostart/qv2ray.desktop".text = ''
+  #     [Desktop Entry]
+  #     Name=qv2ray
+  #     GenericName=V2Ray Frontend
+  #     Exec=bash -c "sleep 5; qv2ray"
+  #     Terminal=false
+  #     Icon=qv2ray
+  #     Categories=Network
+  #     Type=Application
+  #     StartupNotify=false
+  #     X-GNOME-Autostart-enabled=true
+  #   '';
+  # };
 
   # xdg.desktopEntries.spotify = lib.options gnomeEnable {
   #   name = "Spotify";
