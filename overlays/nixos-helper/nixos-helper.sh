@@ -56,7 +56,7 @@ case "$1" in
         nixos-rebuild switch --use-remote-sudo --flake $dotConfig#wsl ;;
 
     hmswitch)
-        nix run nixpkgs#home-manager build switch -- \
+        nix run nixpkgs#home-manager switch -- \
             --flake $dotConfig#"$(id -u -n)" ;;
 
     hmsource)

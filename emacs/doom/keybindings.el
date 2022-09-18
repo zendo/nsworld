@@ -89,6 +89,7 @@
    "<left>" #'winner-undo
    "<right>" #'winner-redo
    "<SPC>" #'project-find-file
+   "C-<SPC>" #'project-find-file
    "," #'consult-buffer
    "." #'find-file
    "/" #'consult-ripgrep

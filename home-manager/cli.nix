@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    getip
+    # getip
     nixos-helper
 
     # compressor / archiver packages

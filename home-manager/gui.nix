@@ -20,7 +20,7 @@ in {
     whatip
     # geobug
 
-    v2ray
+    # v2ray
     # qv2ray
     proxychains-ng
     # clash
