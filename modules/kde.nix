@@ -10,7 +10,7 @@
     ];
 
     displayManager = {
-      # sddm.enable = true; # wayland autologin bug
+      # sddm.enable = true;
       lightdm.enable = true;
       defaultSession = "plasmawayland";
     };

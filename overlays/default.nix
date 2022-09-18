@@ -97,8 +97,8 @@ final: prev: {
   #       src = prev.fetchFromGitHub {
   #         owner = "sddm";
   #         repo = "sddm";
-  #         rev = "e67307e4103a8606d57a0c2fd48a378e40fcef06";
-  #         sha256 = "sha256-FfbYQrHndU7rtI8CKK7wtn3pdufBSiXUgefozCja4Do=";
+  #         rev = "02801666f7c9e82b57fe8198e2084d8fdcff6b91";
+  #         hash = "sha256-KNj1l4jW7moFOC1JkgRqQR0uPcSCMUuVnyKmkL0sDZw=";
   #       };
   #       patches = [];
   #     });

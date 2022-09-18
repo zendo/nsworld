@@ -65,5 +65,5 @@ hosxy/rime-aurora-pinyin
 
 [Nix one pager](https://github.com/tazjin/nix-1p)
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+<!-- [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) -->
 

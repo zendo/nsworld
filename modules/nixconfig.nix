@@ -59,5 +59,12 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
+
+    # switch --option extra-substituters ssh:iab@192.168.2.118
+    # sshServe = {
+    #   enable = true;
+    #   # protocol = "ssh-ng";
+    #   keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcHW8HtjtK65Ed95nj5utdBbeuY2ozRI9x6BpUXE4B linzway@qq.com"];
+    # };
   };
 }

@@ -16,7 +16,7 @@ in {
     # gnome-decoder
     # app-icon-preview
     # done
-    textpieces
+    # textpieces
     whatip
     # geobug
 
@@ -49,7 +49,7 @@ in {
     sniffglue
 
     # Social media
-    tdesktop
+    # tdesktop
     # fractal
     # nheko
     # discord
