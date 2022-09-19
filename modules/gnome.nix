@@ -77,7 +77,7 @@
       gnome.dconf-editor
       gnome.gnome-power-manager
       gnome.gnome-sound-recorder
-      gnome-solanum
+      # gnome-solanum
       # gnome-network-displays  # miracast
       # gnome-builder
       # gnome.gnome-nettool

@@ -64,7 +64,7 @@
     # sshServe = {
     #   enable = true;
     #   # protocol = "ssh-ng";
-    #   keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcHW8HtjtK65Ed95nj5utdBbeuY2ozRI9x6BpUXE4B linzway@qq.com"];
+    #   keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGV.com"];
     # };
   };
 }

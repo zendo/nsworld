@@ -8,8 +8,8 @@
   winProxy = "http://192.168.2.118:10811";
 in {
   /*
-   export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-   */
+  export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+  */
 
   wsl.defaultUser = lib.mkForce "${username}";
 
@@ -36,6 +36,11 @@ in {
     jetbrains-mono
     emacs-all-the-icons-fonts
   ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   environment.variables = {
   };

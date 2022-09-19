@@ -49,7 +49,7 @@ in {
     sniffglue
 
     # Social media
-    # tdesktop
+    tdesktop
     # fractal
     # nheko
     # discord

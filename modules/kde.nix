@@ -56,7 +56,7 @@
 
   environment.systemPackages = with pkgs;
     [
-      falkon
+      # falkon
       kalendar
       yakuake
       gparted
