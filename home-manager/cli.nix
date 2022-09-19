@@ -37,7 +37,6 @@
     # difftastic # too big
     kalker # calculator
     # imagemagick
-    dict
     ydict
     typos
     translate-shell
