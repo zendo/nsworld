@@ -1,6 +1,5 @@
 final: prev: {
   # Trivial
-  getip = prev.callPackage ./getip {};
   forgit = prev.callPackage ./forgit {};
   wifi-qr = prev.callPackage ./wifi-qr {};
   nixos-helper = prev.callPackage ./nixos-helper {};

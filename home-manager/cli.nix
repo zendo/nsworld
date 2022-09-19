@@ -4,16 +4,16 @@
   ...
 }: {
   home.packages = with pkgs; [
-    # getip
+    # Overlays
     nixos-helper
 
-    # compressor / archiver packages
+    # Compressor / Archiver
     p7zip
     unzip
     unrar
     patool
 
-    # system monitor
+    # System Monitor
     btop
     ctop # containers monitor
     powertop
@@ -24,7 +24,7 @@
     duf
     neofetch
 
-    # tui utils
+    # Utils
     fd
     ripgrep
     hstr # hh: history
@@ -48,7 +48,7 @@
     # airgeddon # wifi crack
     magic-wormhole-rs
 
-    # Develop
+    # Developing
     jq
     jql
     cloc # count code lines
@@ -57,7 +57,7 @@
     gitui
     onefetch
 
-    # Network
+    # Networking
     lsof
     dogdns
     nali
@@ -69,7 +69,7 @@
     traceroute
     speedtest-cli
 
-    # NIX TOOLS
+    # Nix-tools
     nixpkgs-fmt
     nixfmt
     alejandra
@@ -119,7 +119,7 @@
     enable = true;
   };
 
-  # z: autojump
+  # z: autojump directory
   programs.zoxide = {
     enable = true;
     enableBashIntegration = true;
