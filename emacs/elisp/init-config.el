@@ -34,7 +34,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 界面 interface
 (setq inhibit-startup-message t     ;关闭欢迎界面
-      ;; inhibit-default-init t
+      ;; inhibit-default-init t        ;default.el
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
       confirm-kill-processes nil

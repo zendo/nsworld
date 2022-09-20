@@ -43,13 +43,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package doom-themes)
-(use-package atom-one-dark-theme)
-(use-package leuven-theme)
+(use-package tangonov-theme)
 ;; (use-package monokai-theme)
 ;; (use-package vscode-dark-plus-theme)
 ;; (use-package zenburn)
 ;; (use-package eclipse-theme)
-;; (load-theme 'atom-one-dark t)
 (load-theme 'doom-tomorrow-night t)
 
 (use-package all-the-icons)
@@ -63,15 +61,6 @@
 ;; Helpful
 (use-package helpful
   :defer t)
-
-;; Garbage Collector Magic Hack
-(use-package gcmh
-  :diminish
-  :hook (emacs-startup . gcmh-mode)
-  :init
-  (setq gcmh-idle-delay 'auto
-        gcmh-auto-idle-delay-factor 10
-        gcmh-high-cons-threshold #x1000000)) ; 16MB
 
 ;; expand-region
 (use-package expand-region)
@@ -134,9 +123,6 @@
 ;; rotate
 (use-package rotate)
 
-;; burly save buffers windows
-(use-package burly)
-
 ;; fanyi
 (use-package fanyi)
 
@@ -153,6 +139,14 @@
   :config
   (setq doom-modeline-buffer-file-name-style 'relative-to-project))
 
+;; Garbage Collector Magic Hack
+(use-package gcmh
+  :diminish
+  :hook (emacs-startup . gcmh-mode)
+  :init
+  (setq gcmh-idle-delay 'auto
+        gcmh-auto-idle-delay-factor 10
+        gcmh-high-cons-threshold #x1000000)) ; 16MB
 
 (provide 'init-packages)
 ;;; init-packages.el ends here

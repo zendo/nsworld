@@ -43,7 +43,6 @@ LC_ALL=C xdg-user-dirs-update --force
 
 # KDE
 curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
-OnzeMenu11 
 
 # WSL
 wsl --import nixos .\nixos\ nixos-wsl-installer.tar.gz --version 2
@@ -51,8 +50,8 @@ wsl -d nixos
 wsl --unregister nixos
 
 # RIME
-curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime" 
-bash -s -- rime-install 
+curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"
+bash -s -- rime-install
 BlindingDark/rime-easy-en:customize:schema=luna_pinyin
 hosxy/rime-aurora-pinyin
 ```

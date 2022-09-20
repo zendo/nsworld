@@ -65,6 +65,11 @@
            :prefix "C-c c"
            ("f" . nix-mode-format)
 
+           :prefix-map multiple-cursors
+           :prefix "C-c m"
+           ("-" . er/mark-inside-quotes)
+           ("=" . er/mark-inside-pairs)
+
            :prefix-map remove-lists
            :prefix "C-c -"
            ("b" . bookmark-delete)

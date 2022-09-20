@@ -26,6 +26,7 @@
     '';
   };
   # home.file.".doom.d".source = ../emacs/doom;
+  # home.file.".emacs.d".source = ../emacs;
 
   programs.helix = {
     enable = false;

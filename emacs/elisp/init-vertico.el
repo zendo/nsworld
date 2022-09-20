@@ -64,6 +64,7 @@
   :after vertico
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  (marginalia-align 'center)
   :init
   (marginalia-mode))
 
