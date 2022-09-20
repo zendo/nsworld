@@ -22,6 +22,7 @@
       hack-font
       fira-code
       jetbrains-mono
+      zhudou-sans
     ];
 
     fontconfig = {

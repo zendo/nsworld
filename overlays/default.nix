@@ -3,6 +3,7 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   wifi-qr = prev.callPackage ./wifi-qr {};
   nixos-helper = prev.callPackage ./nixos-helper {};
+  zhudou-sans = prev.callPackage ./zhudou-sans {};
 
   # Rust
   done = prev.callPackage ./done {};

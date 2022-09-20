@@ -88,8 +88,9 @@
  ("C-e" . mwim-end-of-code-or-line)
 
  ("C-c <SPC>" . project-find-file)
+ ("C-c C-<SPC>" . project-find-file)
  ("C-c ." . find-file)
- ("C-c /" . project-find-regexp)
+ ("C-c /" . consult-ripgrep)
  ("C-c ," . project-switch-to-buffer)
  ("s-d" . dired-jump)
 

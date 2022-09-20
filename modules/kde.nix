@@ -77,6 +77,14 @@
       bismuth # tiling layout
     ]);
 
+  services.xserver.desktopManager.plasma5.excludePackages = with pkgs.libsForQt5; [
+    # elisa
+    # oxygen
+    # khelpcenter
+    # print-manager
+    plasma-browser-integration
+  ];
+
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.enableRimeData = true;

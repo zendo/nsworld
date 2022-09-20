@@ -39,6 +39,7 @@
 (setq user-full-name "zendo"
       user-mail-address "linzway@qq.com"
 
+      ;; inhibit-default-init nil
       confirm-kill-emacs nil
       confirm-kill-processes nil
       delete-by-moving-to-trash t
