@@ -153,39 +153,6 @@
   :config
   (setq doom-modeline-buffer-file-name-style 'relative-to-project))
 
-;; dashboard
-;; (use-package dashboard
-;;   :diminish (dashboard-mode page-break-lines-mode)
-;;   :custom
-;;   (dashboard-startup-banner 2)
-;;   (dashboard-set-heading-icons t)
-;;   (dashboard-set-file-icons t)
-;;   (dashboard-set-footer nil)
-;;   (dashboard-center-content t)
-
-;;   (dashboard-items '((recents  . 12)
-;;                      (bookmarks . 5)
-;;                      (projects . 5)))
-;;   :config
-;;   (dashboard-setup-startup-hook))
-
-;; treemacs
-(use-package treemacs
-  :defer t
-  :bind (("<f1>" . treemacs)
-         :map treemacs-mode-map
-         ([mouse-1] . treemacs-single-click-expand-action)))
-
-;; Magit
-(use-package magit
-  :defer t
-  :if (executable-find "git")
-  :config
-  (setq magit-completing-read-function 'ivy-completing-read)
-  :bind (("C-c g" . magit-status)
-         ("s-g" . magit-status)
-         :map magit-status-mode-map
-         ("p" . magit-push)))
 
 (provide 'init-packages)
-;;; packages.el ends here
+;;; init-packages.el ends here

@@ -57,9 +57,9 @@
            ("x" . crux-swap-windows)
            ("v" . rotate-layout)
 
-           :prefix-map project
-           :prefix "C-c p"
-           ("p" . project-switch-project)
+           ;; :prefix-map project
+           ;; :prefix "C-c p"
+           ;; ("p" . project-switch-project)
 
            :prefix-map code
            :prefix "C-c c"
@@ -69,7 +69,7 @@
            :prefix "C-c -"
            ("b" . bookmark-delete)
            ("r" . recentf-edit-list)
-           ("p" . projectile-remove-known-project)
+           ("p" . project-forget-project)
            )
 
 
@@ -93,6 +93,7 @@
  ("C-c /" . consult-ripgrep)
  ("C-c ," . project-switch-to-buffer)
  ("s-d" . dired-jump)
+ ("s-p" . project-switch-project)
 
  ("C-;" . comment-line)
  ("C-\\" . align-regexp)

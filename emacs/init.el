@@ -34,9 +34,10 @@
 (require 'init-dired)
 (require 'init-shell)
 (require 'init-vertico)
+(require 'init-project)
 (require 'init-keybindings)
 
-(require 'lang-main)
+(require 'lang-prog)
 (require 'lang-org)
 ;; (require 'lang-c-cpp-java)
 ;; (require 'lang-web)

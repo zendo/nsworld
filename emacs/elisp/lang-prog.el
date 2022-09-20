@@ -1,4 +1,4 @@
-;;; lang-main.el --- Main Development languages -*- lexical-binding: t; -*-
+;;; lang-prog.el --- Main Development languages -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -21,11 +21,12 @@
       )
 
 ;; tree-sitter
-;; (use-package tree-sitter
-;;     :ensure tree-sitter-langs
-;;     :diminish
-;;     :hook ((after-init . global-tree-sitter-mode)
-;;            (tree-sitter-after-on . tree-sitter-hl-mode)))
+;; need github connect download
+(use-package tree-sitter
+    :ensure tree-sitter-langs
+    :diminish
+    :hook ((after-init . global-tree-sitter-mode)
+           (tree-sitter-after-on . tree-sitter-hl-mode)))
 
 ;; Markdown
 (use-package markdown-mode
@@ -203,5 +204,5 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ξ "))) ;hook for shortname
 
 
-(provide 'lang-main)
-;;; lang-main.el ends here
+(provide 'lang-prog)
+;;; lang-prog.el ends here

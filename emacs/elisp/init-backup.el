@@ -50,7 +50,7 @@
       recentf-save-file (expand-file-name "recentf" my-temp)
       recentf-exclude
       '("COMMIT" "autoloads" "archive-contents" "eld" "elpa" "bookmarks" "session"
-        "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "/TAGS$" ".cache"
+        "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "/TAGS$" ".cache" "persp-auto-save"
         ".recentf" "emacs_backup" "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\)$"))
 (recentf-mode 1)
 
