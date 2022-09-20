@@ -64,6 +64,15 @@
 (use-package helpful
   :defer t)
 
+;; Garbage Collector Magic Hack
+(use-package gcmh
+  :diminish
+  :hook (emacs-startup . gcmh-mode)
+  :init
+  (setq gcmh-idle-delay 'auto
+        gcmh-auto-idle-delay-factor 10
+        gcmh-high-cons-threshold #x1000000)) ; 16MB
+
 ;; expand-region
 (use-package expand-region)
 
@@ -160,6 +169,13 @@
 ;;   :config
 ;;   (dashboard-setup-startup-hook))
 
+;; treemacs
+(use-package treemacs
+  :defer t
+  :bind (("<f1>" . treemacs)
+         :map treemacs-mode-map
+         ([mouse-1] . treemacs-single-click-expand-action)))
+
 ;; Magit
 (use-package magit
   :defer t
@@ -167,6 +183,7 @@
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   :bind (("C-c g" . magit-status)
+         ("s-g" . magit-status)
          :map magit-status-mode-map
          ("p" . magit-push)))
 

@@ -72,6 +72,7 @@
 
  "s-w" #'+hydra/window-nav/body
  "s-=" #'+hydra/text-zoom/body
+ "s-d" #'dired-jump
 
  "s-g" #'magit-status
  :map magit-status-mode-map

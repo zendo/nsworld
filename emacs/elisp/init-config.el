@@ -5,12 +5,14 @@
 ;; Environment 环境设定
 (when (eq system-type 'gnu/linux)
   ;; (set-fontset-font t 'han (font-spec :family "NotoSansSC" :size 17))
-  (setq org-directory "~/Documents/org/"))
+  ;; (setq org-directory "~/Documents/org/")
+  )
 
 (when (eq system-type 'windows-nt)
 ;; (set-fontset-font t 'han (font-spec :family "Microsoft Yahei" :size 17))
-  (setq default-directory "C:/Users/gecko/Desktop/" ;主目录
-        org-directory "c:/Users/gecko/Documents/org/"))
+  (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
+        ;; org-directory "c:/Users/zendo/Documents/org/"
+        ))
 
 ;; 字体 fonts
 ;; Consolas, Hack, Source Code Pro,
@@ -32,7 +34,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 界面 interface
 (setq inhibit-startup-message t     ;关闭欢迎界面
-      inhibit-default-init t
+      ;; inhibit-default-init t
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
       confirm-kill-processes nil

@@ -91,6 +91,7 @@
  ("C-c ." . find-file)
  ("C-c /" . project-find-regexp)
  ("C-c ," . project-switch-to-buffer)
+ ("s-d" . dired-jump)
 
  ("C-;" . comment-line)
  ("C-\\" . align-regexp)

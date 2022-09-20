@@ -23,7 +23,8 @@
       doom-unicode-font (font-spec :family "Segoe UI Emoji")
 
       default-directory "~/Desktop/"
-      org-directory "~/Documents/org/"))
+      org-directory "~/Documents/org/"
+      ))
 
 (when IS-LINUX
   (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
@@ -31,7 +32,7 @@
       doom-big-font-increment 2
       doom-unicode-font (font-spec :family "Noto Color Emoji")
 
-      org-directory "~/Documents/org/"
+      ;; org-directory "~/Documents/org/"
       ))
 
 ;; basic
@@ -63,9 +64,9 @@
 (after! org
   (setq org-startup-folded t))
 
-(setq deft-directory "~/Documents/org/"
-      deft-extensions '("org", "md", "txt", "tex")
-      deft-recursive t)
+;; (setq deft-directory "~/Documents/org/"
+;;       deft-extensions '("org", "md", "txt", "tex")
+;;       deft-recursive t)
 
 ;; UI
 ;; (add-to-list 'default-frame-alist '(height . 40))

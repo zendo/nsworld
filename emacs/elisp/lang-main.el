@@ -20,6 +20,13 @@
       compilation-scroll-output 'first-error ; Automatically scroll to first error
       )
 
+;; tree-sitter
+;; (use-package tree-sitter
+;;     :ensure tree-sitter-langs
+;;     :diminish
+;;     :hook ((after-init . global-tree-sitter-mode)
+;;            (tree-sitter-after-on . tree-sitter-hl-mode)))
+
 ;; Markdown
 (use-package markdown-mode
   :mode (("\\.md\\'" . gfm-mode)

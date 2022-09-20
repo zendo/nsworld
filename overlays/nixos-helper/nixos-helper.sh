@@ -12,7 +12,7 @@ usage() {
      \t run/search/shell/index-up
      \t profiles/generations/source/installed
      \t pr-run/pr-shell/pr-pull/gitfm
-     \t hmswitch/hmsource/hmdiff/wslswitch
+     \t hmswitch/hmsource/hmprofiles/hmdiff/wslswitch
      "
 }
 
@@ -61,6 +61,9 @@ case "$1" in
 
     hmsource)
         readlink -f /nix/var/nix/profiles/per-user/"$(id -u -n)"/home-manager ;;
+
+    hmprofiles)
+        ls -la /nix/var/nix/profiles/per-user/"$(id -u -n)" ;;
 
     hmdiff)
         nix profile diff-closures --profile \

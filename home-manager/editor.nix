@@ -17,11 +17,15 @@
         vterm
         emojify
         emacsql-sqlite
+        tree-sitter
         # pdf-tools
         # telega
       ];
+    extraConfig = ''
+      (setq treemacs-python-executable "${pkgs.python3}/bin/python")
+    '';
   };
-  home.file.".doom.d".source = ../emacs/doom;
+  # home.file.".doom.d".source = ../emacs/doom;
 
   programs.helix = {
     enable = false;
