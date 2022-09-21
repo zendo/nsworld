@@ -26,6 +26,7 @@ final: prev: {
   geobug = prev.callPackage ./geobug {};
 
   # Nodejs
+  koodo-reader = prev.callPackage ./koodo-reader {};
 
   # Gtk
   paper = prev.callPackage ./paper {};

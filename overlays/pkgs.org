@@ -120,9 +120,8 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "Modern editor for the terminal";
     homepage = "https://github.com/mcobzarenco/zee";
-    license = [licenses.mit];
+    license = licenses.mit;
     maintainers = with maintainers; [zendo];
-    platforms = platforms.all;
   };
 }
 

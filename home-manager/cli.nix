@@ -42,11 +42,13 @@
     translate-shell
     aspellDicts.en
     asciinema # record the terminal
-    distrobox
+    # distrobox
+    viu # image viewer
     graphviz
     paperoni # save html
     # airgeddon # wifi crack
     magic-wormhole-rs
+    zssh
 
     # Developing
     jq

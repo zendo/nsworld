@@ -31,6 +31,7 @@ in {
     # wezterm
     gitg
     warp
+    remmina
 
     # Browsers
     # google-chrome
@@ -136,7 +137,7 @@ in {
     # '';
   };
 
-  # For Desktop Environment
+  # Desktop Environment Hack
   home.file = {
     # Fix tiny cursor in qt apps at gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''

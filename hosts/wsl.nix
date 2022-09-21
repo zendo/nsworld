@@ -7,7 +7,6 @@
 }: let
   winProxy = "http://192.168.2.118:10811";
 in {
-
   wsl.defaultUser = lib.mkForce "${username}";
 
   time.timeZone = "Asia/Shanghai";
@@ -29,11 +28,20 @@ in {
     kitty
 
     wsl-open
-    hack-font
-    fira-code
-    jetbrains-mono
-    emacs-all-the-icons-fonts
   ];
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      # noto-fonts-cjk-sans
+      # noto-fonts-cjk-serif
+      hack-font
+      fira-code
+      jetbrains-mono
+      source-code-pro
+      emacs-all-the-icons-fonts
+    ];
+  };
 
   programs.gnupg.agent = {
     enable = true;

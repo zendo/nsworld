@@ -14,6 +14,7 @@
     rm-list = "${pkgs.trash-cli}/bin/trash-list";
     rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
     rm-restore = "${pkgs.trash-cli}/bin/trash-restore";
+    free = "free -h";
     mkcd = "mkdir -p $1 && cd $1";
     mount-ls = "mount | column -t";
     beep = "echo -en \"\\007\"";

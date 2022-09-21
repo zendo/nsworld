@@ -3,6 +3,23 @@
   pkgs,
   ...
 }: {
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = false;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = true;
+      command_timeout = 1000;
+      # disable "It took xxs"
+      # cmd_duration.disabled = true;
+
+      # nix-shell use bash
+      # nix_shell = {
+      #   format = " [$symbol$state]($style) ";
+      # };
+    };
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -10,7 +27,8 @@
     enableSyntaxHighlighting = true;
     prezto = {
       enable = true;
-      prompt.theme = "pure";
+      # pure
+      prompt.theme = "off";
     };
     # oh-my-zsh = {
     #   enable = true;

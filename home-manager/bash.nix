@@ -15,17 +15,6 @@
     enable = false;
   };
 
-  programs.starship = {
-    enable = false;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    settings = {
-      add_newline = true;
-      # disable "It took xxs"
-      # cmd_duration.disabled = true;
-    };
-  };
-
   programs.tmux = {
     enable = false;
     extraConfig = ''
