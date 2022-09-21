@@ -7,9 +7,6 @@
 }: let
   winProxy = "http://192.168.2.118:10811";
 in {
-  /*
-  export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
-  */
 
   wsl.defaultUser = lib.mkForce "${username}";
 
@@ -27,8 +24,9 @@ in {
 
     vim
     micro
-    helix
+    # helix
     emacs
+    kitty
 
     wsl-open
     hack-font

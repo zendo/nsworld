@@ -8,12 +8,12 @@
     [
       ./git.nix
       ./cli.nix
-      ./bash.nix
       ./zsh.nix
+      ./bash.nix
       ./alias.nix
+      ./xdg.nix
     ]
     ++ lib.optionals nixosConfig.services.xserver.enable [
-      ./xdg.nix
       ./gui.nix
       ./editor.nix
     ];

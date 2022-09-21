@@ -25,7 +25,7 @@ in {
     proxychains-ng
     # clash
     # nur.repos.linyinfeng.clash-for-windows
-    foot
+    # foot
     kitty
     # alacritty
     # wezterm
@@ -136,6 +136,7 @@ in {
     # '';
   };
 
+  # For Desktop Environment
   home.file = {
     # Fix tiny cursor in qt apps at gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''

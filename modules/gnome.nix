@@ -20,7 +20,7 @@
 
       favoriteAppsOverride = ''
         [org.gnome.shell]
-        favorite-apps=[ 'foot.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
+        favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
       '';
 
       # Override GNOME defaults
