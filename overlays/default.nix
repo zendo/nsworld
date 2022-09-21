@@ -3,6 +3,8 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   wifi-qr = prev.callPackage ./wifi-qr {};
   nixos-helper = prev.callPackage ./nixos-helper {};
+
+  # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
 
   # Rust
@@ -53,6 +55,9 @@ final: prev: {
   #     hash = "sha256-3ESu34HhsycVV2QNtcxfP7YffCGddKqLTtIkzeJc+GE=";
   #   };
   # });
+
+  # node override
+  # nodePackages = nodePackages.extend (final: prev: { })
 
   # rust override
   # shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {

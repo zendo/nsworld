@@ -26,6 +26,7 @@ in {
     # clash
     # nur.repos.linyinfeng.clash-for-windows
     foot
+    kitty
     # alacritty
     # wezterm
     gitg

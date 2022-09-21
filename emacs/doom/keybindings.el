@@ -13,6 +13,7 @@
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode t))
 
+(ffap-bindings)
 (global-set-key (kbd "C-z") nil)
 ;; (global-set-key (kbd "C-z") 'undo)
 ;; (global-set-key (kbd "C-S-z") 'undo-redo)

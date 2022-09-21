@@ -21,6 +21,7 @@
   xdg.configFile = {
     "mpv".source = ../dotfiles/mpv;
     "radioboat".source = ../dotfiles/radioboat;
+    # "kitty".source = ../dotfiles/kitty;
     "foot/foot.ini".source = ../dotfiles/foot.ini;
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
