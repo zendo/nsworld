@@ -21,9 +21,9 @@
         # pdf-tools
         # telega
       ];
-    extraConfig = ''
-      (setq treemacs-python-executable "${pkgs.python3}/bin/python")
-    '';
+    # extraConfig = ''
+    #   (setq treemacs-python-executable "${pkgs.python3}/bin/python")
+    # '';
   };
   # home.file.".doom.d".source = ../emacs/doom;
   # home.file.".emacs.d".source = ../emacs;

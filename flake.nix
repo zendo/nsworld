@@ -69,9 +69,6 @@
             ./overlays/v2raya/v2raya.nix
             {services.v2raya.enable = true;}
 
-            musnix.nixosModules.musnix
-            {musnix.enable = true;}
-
             ({
               config,
               pkgs,
@@ -113,10 +110,11 @@
           inherit pkgs;
           # extraSpecialArgs = {inherit inputs;};
           modules = [
-            ./home-manager/cli.nix
+            ./home-manager/git.nix
+            ./home-manager/xdg.nix
             ./home-manager/zsh.nix
             ./home-manager/alias.nix
-            ./home-manager/xdg.nix
+            ./home-manager/cli.nix
             ./home-manager/non-nixos.nix
             {
               home.stateVersion = "22.05";
@@ -141,6 +139,7 @@
           modules = [
             "${inputs.nixos-wsl}/configuration.nix"
             ./modules/nixconfig.nix
+            ./modules/fonts.nix
             ./hosts/wsl.nix
 
             {nixpkgs.overlays = overlays;}

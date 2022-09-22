@@ -5,8 +5,8 @@
   ...
 }: {
   home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/.emacs.d/bin"
+    "${config.home.homeDirectory}/.local/bin"
+    "${config.home.homeDirectory}/.emacs.d/bin"
   ];
 
   home.sessionVariables = {

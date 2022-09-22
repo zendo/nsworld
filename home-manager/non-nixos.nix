@@ -14,4 +14,7 @@ sudo sed -i '$aexport XDG_DATA_DIRS=$HOME/.nix-profile/share:$HOME/.share:"${XDG
   home.shellAliases = {
   };
 
+  home.packages = with pkgs; [
+    radioboat
+  ];
 }

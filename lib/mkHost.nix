@@ -31,6 +31,9 @@ in
             networking.hostName = "${hostname}";
             services.xserver.displayManager.autoLogin.user = "${username}";
           }
+
+          inputs.musnix.nixosModules.musnix
+          {musnix.enable = true;}
         ]
         ++ nixpkgs.lib.optionals hmEnable [
           home-manager.nixosModules.home-manager

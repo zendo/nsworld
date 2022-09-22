@@ -49,6 +49,7 @@
     # airgeddon # wifi crack
     magic-wormhole-rs
     zssh
+    pure-prompt
 
     # Developing
     jq
@@ -64,6 +65,7 @@
     dogdns
     nali
     mtr
+    nload
     ipinfo
     elinks
     dnspeep

@@ -8,9 +8,10 @@
   winProxy = "http://192.168.2.118:10811";
 in {
   wsl.defaultUser = lib.mkForce "${username}";
+  # users.defaultUserShell = pkgs.zsh;
 
-  time.timeZone = "Asia/Shanghai";
   system.stateVersion = "22.05";
+  time.timeZone = "Asia/Shanghai";
 
   environment.systemPackages = with pkgs; [
     binutils
@@ -25,23 +26,11 @@ in {
     micro
     # helix
     emacs
+
     kitty
-
     wsl-open
+    radioboat
   ];
-
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
-      # noto-fonts-cjk-sans
-      # noto-fonts-cjk-serif
-      hack-font
-      fira-code
-      jetbrains-mono
-      source-code-pro
-      emacs-all-the-icons-fonts
-    ];
-  };
 
   programs.gnupg.agent = {
     enable = true;
@@ -51,8 +40,11 @@ in {
   environment.variables = {
   };
 
+  # for zsh completion in home-manager
+  environment.pathsToLink = [ "/share/zsh" ];
+
   environment.shellAliases = {
-    wsl-proxy = "export http_proxy=${winProxy} ; \\
-    export https_proxy=${winProxy}";
+    wsl-proxy = "export {http,https,ftp}_proxy=${winProxy} ; \\
+    export {HTTP,HTTPS,FTP}_PROXY=${winProxy}";
   };
 }

@@ -1,10 +1,12 @@
 {
   config,
   username,
+  pkgs,
   ...
 }: {
   # Refuse using `useradd`
   users.mutableUsers = false;
+  # users.defaultUserShell = pkgs.zsh;
 
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;

@@ -1,34 +1,85 @@
-#compdef ns
+# _ns_cmds() {
+#   local -a builtin_cmds=(
+#   'init[create a west workspace]'
+#   'update[update projects described in west manifest]'
+#   'list[print information about projects]'
+#   'manifest[manage the west manifest]'
+#   'diff["git diff" for one or more projects]'
+#   'status["git status" for one or more projects]'
+#   'forall[run a command in one or more local projects]'
+#   'config[get or set config file values]'
+#   'topdir[print the top level directory of the workspace]'
+#   'help[get help for west or a command]'
+#   )
 
-local curcontext="$curcontext" state line  ret=1
+#   local -a zephyr_ext_cmds=(
+#   'completion[display shell completion scripts]'
+#   'boards[display information about supported boards]'
+#   'build[compile a Zephyr application]'
+#   'sign[sign a Zephyr binary for bootloader chain-loading]'
+#   'flash[flash and run a binary on a board]'
+#   'debug[flash and interactively debug a Zephyr application]'
+#   'debugserver[connect to board and launch a debug server]'
+#   'attach[interactively debug a board]'
+#   'zephyr-export[export Zephyr installation as a CMake config package]'
+#   'spdx[create SPDX bill of materials]'
+#   'blobs[work with binary blobs]'
+#   )
 
-typeset -A opt_args
+#   local -a all_cmds=(${builtin_cmds} ${zephyr_ext_cmds})
 
-# local -a _1st_arguments
-# _1st_arguments=(
-#     'wslswitch' 'hmswitch' 'hmsource'
-#     # which run shell search boot switch upgrade 'wslswitcch' 'hmswitch' 'hmsource' hmdiff diff source installed profiles 'generations' references depends fetch-merge pr-run pr-pull index-update
-# )
+#   if [[ -v NS_COMP_CHECK_WORKSPACE ]]; then
+#     west topdir &>/dev/null
+#     if [ $? -eq 0 ]; then
+#       _values "west command" $all_cmds
+#     else
+#       _values "west command" $builtin_cmds
+#     fi
+#   else
+#       _values "west command" $all_cmds
+#   fi
+# }
 
 
-_arguments -C \
-    'wslswitch' 'hmswitch' 'hmsource' && ret=0
+# Completion script for Zephyr's meta-tool, west
+# _west() {
 
-# _arguments -C \
-#     '(-h --help)'{-h,--help}'[output usage information]'\
-#     '(-V --version)'{-V,--version}'[output the version number]'\
-#     '(-o --out)'{-o,--out}'[where to output the rendered directory or files]:path:_files'\
-#     '(-c --config)'{-c,--config}'[a custom configuration file to load in]:path:_files'\
-#     '(-e --env)'{-e,--env}'[the environment name to use for this instance, multiple names can be separated with a comma]'\
-#     '(-d --debug)'{-d,--debug}'+[the level of debug messages you would like to display, if specified defaults to 7, otherwise 6]:number'\
-#     '(-f --force)'{-f,--force}'[force a re-install of all modules]'\
-#     '1: :->cmds'\
-#     '*: :_files'&& ret=0
 
-# case $state in
-#     subcmds)
-#         _describe -t commands "ns" _1st_arguments && ret=0
-#         ;;
-# esac
+#   # Global options for all commands
+#   local -a global_opts=(
+#   # (: * -) as exclusion list means exclude everything else
+#   '(: * -)'{-h,--help}'[show help]'
+#   # An exclusion list with the very option means only allow once
+#   {-v,--verbose}'[enable verbosity]'
+#   '(: * -)'{-V,--version}'[print version]'
+#   '(-z --zephyr-base)'{-z,--zephyr-base}'[zephyr base folder]:zephyr base folder:_directories'
+#   )
 
-return ret
+#   typeset -A opt_args
+#   local curcontext="$curcontext" context state state_descr line
+#   local -a orig_words
+
+#   orig_words=( ${words[@]} )
+
+#   _arguments -S -C \
+#     $global_opts \
+#           "1: :->cmds" \
+#           "*::arg:->args" \
+
+#   case "$state" in
+#   cmds)
+#     _west_cmds
+#     ;;
+
+#   args)
+#     _opt_args=( ${(@kv)opt_args} )
+#     _call_function ret _west_$line[1]
+#     ;;
+#   esac
+# }
+
+
+# don't run the completion function when being source-ed or eval-ed
+# if [ "$funcstack[1]" = "_ns" ]; then
+#     _ns
+# fi
