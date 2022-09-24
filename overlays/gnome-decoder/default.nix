@@ -34,6 +34,7 @@ let
     };
   });
 in
+# clangStdenv
 stdenv.mkDerivation rec {
   pname = "gnome-decoder";
   version = "0.3.1";
