@@ -110,12 +110,12 @@
           inherit pkgs;
           # extraSpecialArgs = {inherit inputs;};
           modules = [
-            ./home-manager/git.nix
-            ./home-manager/xdg.nix
-            ./home-manager/zsh.nix
             ./home-manager/alias.nix
             ./home-manager/cli.nix
+            ./home-manager/git.nix
             ./home-manager/non-nixos.nix
+            ./home-manager/xdg.nix
+            ./home-manager/zsh.nix
             {
               home.stateVersion = "22.05";
               home.username = "${username}";
@@ -138,7 +138,7 @@
           specialArgs = {inherit inputs username;};
           modules = [
             "${inputs.nixos-wsl}/configuration.nix"
-            ./modules/nixconfig.nix
+            ./modules/nix.nix
             ./modules/fonts.nix
             ./hosts/wsl.nix
 

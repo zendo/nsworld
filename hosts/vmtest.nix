@@ -11,7 +11,7 @@
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
     ../modules/base.nix
     ../modules/network.nix
-    ../modules/nixconfig.nix
+    ../modules/nix.nix
     ../modules/sound.nix
     # ../modules/gnome.nix
   ];

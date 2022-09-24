@@ -14,6 +14,7 @@
 
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 (global-set-key (kbd "C-z") 'nil) ;unbind C-z
+(define-key global-map (kbd "C-c p") project-prefix-map)
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 (global-set-key [remap other-window] 'ace-window)
 (global-set-key [remap query-replace] 'anzu-query-replace)
@@ -49,18 +50,6 @@
            ("x" . crux-delete-file-and-buffer)
            ("<f2>" . crux-rename-file-and-buffer)
 
-           :prefix-map window-map
-           :prefix "C-c w"
-           ("w" . burly-bookmark-windows)
-           ("f" . burly-bookmark-frames)
-           ("o" . burly-open-bookmark)
-           ("x" . crux-swap-windows)
-           ("v" . rotate-layout)
-
-           ;; :prefix-map project
-           ;; :prefix "C-c p"
-           ;; ("p" . project-switch-project)
-
            :prefix-map code
            :prefix "C-c c"
            ("f" . nix-mode-format)
@@ -85,6 +74,9 @@
 
  ("M-+" . text-scale-increase)
  ("M-_" . text-scale-decrease)
+
+ ("C-c w x" . ace-swap-window)
+ ("C-c w v" . rotate-layout)
 
  ("C-=" . er/expand-region)
  ("C-." . company-complete)

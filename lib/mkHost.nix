@@ -19,7 +19,7 @@ in
           ../modules/base.nix
           ../modules/user.nix
           ../modules/network.nix
-          ../modules/nixconfig.nix
+          ../modules/nix.nix
           ../modules/sound.nix
           ../modules/fonts.nix
           ../modules/virtualisation.nix

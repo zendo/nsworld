@@ -18,6 +18,8 @@
 ;; (global-set-key (kbd "C-z") 'undo)
 ;; (global-set-key (kbd "C-S-z") 'undo-redo)
 
+(global-set-key [remap projectile-switch-project] 'project-switch-project)
+
 ;; vterm or eshell
 (when IS-WINDOWS
   (global-set-key (kbd "<f2>") '+eshell/toggle))

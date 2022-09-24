@@ -39,6 +39,7 @@
 
 ;; Persp-mode
 (use-package persp-mode
+  :init (setq persp-keymap-prefix (kbd "C-c w"))
   :config
   ;; (setq wg-morph-on nil) ;; switch off animation
   (setq persp-auto-resume-time 0)

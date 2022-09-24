@@ -44,7 +44,7 @@
       history = "history 0"; # show whole history
     };
     profileExtra = ''
-      # echo -n "\e[?45l"                        # Fix foot terminal dynamic spinner
+      echo -n "\e[?45l"                        # Fix foot terminal dynamic spinner
       setopt no_nomatch                        # bash wildcard
       unsetopt correct                         # Disable AutoCorrect
 
