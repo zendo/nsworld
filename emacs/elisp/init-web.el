@@ -1,99 +1,101 @@
 ;;; -*- lexical-binding: t; -*-
 
-;; copy from https://github.com/rakanalh/emacs-bootstrap
-(use-package web-mode
-  :bind (("C-c ]" . emmet-next-edit-point)
-         ("C-c [" . emmet-prev-edit-point)
-         ("C-c o b" . browse-url-of-file))
+(leaf add-node-modules-path :ensure t)
+
+(leaf prettier-js
+  :ensure t
+  :defun add-node-modules-path
+  :init
+  (defun prettier-js-mode-toggle-setup ()
+    "prettier-js-modeの有効無効キーバインドをprettier-js-modeが有効に出来るモードで使えるようにします。"
+    (interactive)
+    (add-node-modules-path)
+    ;; 全体フォーマットをEmacsではなくprettierが行うように
+    (local-set-key [remap indent-whole-buffer] 'prettier-js)
+    ;; M-iでprettierの一時的無効化が出来るように
+    (local-set-key (kbd "M-i") 'prettier-js-mode)
+    ;; prettierを有効化
+    (prettier-js-mode t)))
+
+(leaf web-mode
+  :ensure t
+  :defvar lsp-enabled-clients web-mode-comment-formats
+  :defun sp-local-pair
   :mode
-  (("\\.js\\'" . web-mode)
-   ("\\.html?\\'" . web-mode)
-   ("\\.phtml?\\'" . web-mode)
-   ("\\.tpl\\.php\\'" . web-mode)
-   ("\\.[agj]sp\\'" . web-mode)
-   ("\\.as[cp]x\\'" . web-mode)
-   ("\\.erb\\'" . web-mode)
-   ("\\.mustache\\'" . web-mode)
-   ("\\.djhtml\\'" . web-mode)
-   ("\\.jsx$" . web-mode))
+  "\\.[agj]sp\\'"
+  "\\.as[cp]x\\'"
+  "\\.djhtml\\'"
+  "\\.ejs\\'"
+  "\\.erb\\'"
+  "\\.html?\\'"
+  "\\.jsx?\\'"
+  "\\.mjsx?\\'"
+  "\\.mustache\\'"
+  "\\.php\\'"
+  "\\.phtml\\'"
+  "\\.tpl\\'"
+  "\\.tsx?\\'"
+  "\\.vue\\'"
+  ;; js-modeが指定されているインタプリタにおいてweb-modeが指定されるようにします。
+  :interpreter
+  `,(seq-filter 'stringp (seq-map (lambda (regex-mode) (pcase regex-mode (`(,regex . js-mode) regex))) interpreter-mode-alist))
+  :init
+  (defun web-mode-setup ()
+    (setq-local lsp-enabled-clients '(ts-ls eslint))
+    (lsp)
+    (prettier-js-mode-toggle-setup))
+  :hook (web-mode-hook . web-mode-setup)
+  :custom
+  (web-mode-code-indent-offset . 2)
+  (web-mode-css-indent-offset . 2)
+  (web-mode-enable-auto-indentation . nil)
+  (web-mode-enable-auto-quoting . nil)
+  (web-mode-enable-current-column-highlight . t)
+  (web-mode-enable-current-element-highlight . t)
+  (web-mode-markup-indent-offset . 2)
+  :custom-face
+  (web-mode-jsx-depth-1-face . '((t (:background "#073844"))))
+  (web-mode-jsx-depth-2-face . '((t (:background "#083C49"))))
+  (web-mode-jsx-depth-3-face . '((t (:background "#08404F"))))
+  (web-mode-jsx-depth-4-face . '((t (:background "#094554"))))
+  (web-mode-jsx-depth-5-face . '((t (:background "#0A4D5E"))))
+  :bind
+  (:web-mode-map
+   ([remap comment-indent-new-line] . web-mode-comment-indent-new-line)
+   ("C-c C-f" . lsp-eslint-apply-all-fixes))
   :config
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2)
+  ;; コメントを`/*'式から`//'形式にする。
+  (add-to-list 'web-mode-comment-formats '("javascript" . "//"))
+  (add-to-list 'web-mode-comment-formats '("jsx" . "//"))
+  (sp-local-pair 'web-mode "<" ">" :actions nil))
 
-  (add-hook 'web-mode-hook 'jsx-flycheck)
+(leaf yarn-mode :ensure t)
 
-  ;; highlight enclosing tags of the element under cursor
-  (setq web-mode-enable-current-element-highlight t)
+(leaf js :custom (js-indent-level . 2))
 
-  (defadvice web-mode-highlight-part (around tweak-jsx activate)
-    (if (equal web-mode-content-type "jsx")
-        (let ((web-mode-enable-part-face nil))
-          ad-do-it)
-      ad-do-it))
+(leaf ts-comint :ensure t)
 
-  (defun jsx-flycheck ()
-    (when (equal web-mode-content-type "jsx")
-      ;; enable flycheck
-      (flycheck-select-checker 'jsxhint-checker)
-      (flycheck-mode)))
-
-  ;; editing enhancements for web-mode
-  ;; https://github.com/jtkDvlp/web-mode-edit-element
-  (use-package web-mode-edit-element
-    :config (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
-
-  ;; snippets for HTML
-  ;; https://github.com/smihica/emmet-mode
-  (use-package emmet-mode
-    :init (setq emmet-move-cursor-between-quotes t) ;; default nil
-    :diminish (emmet-mode . " e"))
-  (add-hook 'web-mode-hook 'emmet-mode)
-
-  (defun my-web-mode-hook ()
-    "Hook for `web-mode' config for company-backends."
-    (set (make-local-variable 'company-backends)
-         '((company-tern company-css company-web-html company-files))))
-  (add-hook 'web-mode-hook 'my-web-mode-hook)
-
-  ;; Enable JavaScript completion between <script>...</script> etc.
-  (defadvice company-tern (before web-mode-set-up-ac-sources activate)
-    "Set `tern-mode' based on current language before running company-tern."
-    (message "advice")
-    (if (equal major-mode 'web-mode)
-    (let ((web-mode-cur-language
-           (web-mode-language-at-pos)))
-      (if (or (string= web-mode-cur-language "javascript")
-          (string= web-mode-cur-language "jsx"))
-          (unless tern-mode (tern-mode))
-        (if tern-mode (tern-mode -1))))))
-  (add-hook 'web-mode-hook 'company-mode)
-
-  ;; to get completion data for angularJS
-  (use-package ac-html-angular :defer t)
-  ;; to get completion for twitter bootstrap
-  (use-package ac-html-bootstrap :defer t)
-
-  ;; to get completion for HTML stuff
-  ;; https://github.com/osv/company-web
-  (use-package company-web)
-
-  (add-hook 'web-mode-hook 'company-mode))
+(leaf json-mode :ensure t :hook (json-mode-local-vars-hook . lsp) (json-mode-hook . prettier-js-mode-toggle-setup))
+(leaf yaml-mode :ensure t :hook (yaml-mode-local-vars-hook . lsp) (yaml-mode-hook . prettier-js-mode-toggle-setup))
 
 ;; configure CSS mode company backends
-(use-package css-mode
-  :config
-  (defun my-css-mode-hook ()
-    (set (make-local-variable 'company-backends)
-         '((company-css company-dabbrev-code company-files))))
-  (add-hook 'css-mode-hook 'my-css-mode-hook)
-  (add-hook 'css-mode-hook 'company-mode))
+(leaf css-mode
+  :custom (css-indent-offset . 2)
+  :hook (css-mode-hook . lsp) ((css-mode-hook scss-mode-hook) . prettier-js-mode-toggle-setup))
+(leaf less-css-mode :hook (less-css-mode-hook . prettier-js-mode-toggle-setup))
 
-;; impatient mode - Live refresh of web pages
-;; https://github.com/skeeto/impatient-mode
-(use-package impatient-mode
-  :diminish (impatient-mode . " i")
-  :commands (impatient-mode))
+;; nxml
+(leaf nxml-mode
+  :mode "\\.fxml\\'"
+  :defvar nxml-mode-map
+  :custom (nxml-slash-auto-complete-flag . t)
+  :bind (:nxml-mode-map
+         ("M-h" . nil)
+         ("C-M-t" . nil)
+         ("C-M-p" . nxml-backward-element))
+  :config
+  (leaf smartparens :config (sp-local-pair 'nxml-mode "<" ">" :actions nil))
+  (dvorak-set-key-prog nxml-mode-map))
 
 (provide 'init-web)
 ;;; init-web.el ends here

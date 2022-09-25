@@ -43,29 +43,17 @@
 (when (eq system-type 'gnu/linux)
   (leaf vterm
     :ensure t
-    :config
-    (with-eval-after-load 'vterm
-      (setq vterm-shell "zsh")
-      (define-key vterm-mode-map
-                  (kbd "<f2>")
-                  'shell-pop))))
+    :setq ((vterm-shell . "zsh"))
+    :bind (:vterm-mode-map
+           ("<f2>" . shell-pop))))
 
 ;; shell-pop
 (leaf shell-pop
   :ensure t
-  :bind (([f2]
-          . shell-pop))
-  :setq ((shell-pop-window-size . 30))
-  :config
-  (setq shell-pop-shell-type (cond
-                              ((fboundp 'vterm)
-                               '("vterm" "*vterm*" #'vterm))
-                              ((eq system-type 'windows-nt)
-                               '("eshell" "*eshell*" #'eshell))
-                              (t
-                               '("terminal" "*terminal*"
-                                 (lambda nil
-                                   (term shell-pop-term-shell)))))))
+  :bind (([f2] . shell-pop))
+  :setq ((shell-pop-window-size . 30)
+         (shell-pop-shell-type . "vterm")
+         ))
 
 (provide 'init-shell)
 ;;; init-shell.el ends here

@@ -17,8 +17,6 @@
 (define-key global-map (kbd "C-c p") project-prefix-map)
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 (global-set-key [remap other-window] 'ace-window)
-(global-set-key [remap query-replace] 'anzu-query-replace)
-(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
 (global-set-key (kbd "<f7>") #'compile)
 (global-set-key (kbd "<C-f7>")
@@ -39,36 +37,32 @@
 (leaf crux
   :ensure t
   :bind (("C-k" . crux-smart-kill-line)
-         ("C-x 4 x" . crux-swap-windows)))
-(global-set-key [(control return)] #'crux-smart-open-line)
-(global-set-key [(control shift return)] #'crux-smart-open-line-above)
+         ("C-x 4 x" . crux-swap-windows)
+         ("C-<return>" . crux-smart-open-line)
+         ("C-S-<return>" . crux-smart-open-line-above)))
 
 ;; prefix map
-(leaf leaf-convert
-  :config
-  (bind-keys :prefix-map file-map :prefix "C-c f"
-             ("0" . revert-buffer)
-             ("o" . crux-open-with)
-             ("s" . save-some-buffers)
-             ("S" . crux-sudo-edit)
-             ("x" . crux-delete-file-and-buffer)
-             ("<f2>" . crux-rename-file-and-buffer)
-             :prefix-map code :prefix "C-c c"
-             ("f" . nix-mode-format)
-             :prefix-map multiple-cursors :prefix "C-c m"
-             ("-" . er/mark-inside-quotes)
-             ("=" . er/mark-inside-pairs)
-             :prefix-map remove-lists :prefix "C-c -"
-             ("b" . bookmark-delete)
-             ("r" . recentf-edit-list)
-             ("p" . project-forget-project)))
+;; (leaf leaf-convert
+;;   :config
+;;   (bind-keys :prefix-map file-map :prefix "C-c f"
+;;              ("0" . revert-buffer)
+;;              ("o" . crux-open-with)
+;;              ("s" . save-some-buffers)
+;;              ("S" . crux-sudo-edit)
+;;              ("x" . crux-delete-file-and-buffer)
+;;              ("<f2>" . crux-rename-file-and-buffer)
+;;              :prefix-map code :prefix "C-c c"
+;;              ("f" . nix-mode-format)
+;;              :prefix-map multiple-cursors :prefix "C-c m"
+;;              ("-" . er/mark-inside-quotes)
+;;              ("=" . er/mark-inside-pairs)
+;;              :prefix-map remove-lists :prefix "C-c -"
+;;              ("b" . bookmark-delete)
+;;              ("r" . recentf-edit-list)
+;;              ("p" . project-forget-project)))
 
 
-(leaf-keys (("C-h f" . helpful-callable)
-            ("C-h v" . helpful-variable)
-            ("C-h k" . helpful-key)
-
-            ("M-+" . text-scale-increase)
+(leaf-keys (("M-+" . text-scale-increase)
             ("M-_" . text-scale-decrease)
             ("C-c w x" . ace-swap-window)
             ("C-c w v" . rotate-layout)
@@ -76,8 +70,6 @@
             ("C-=" . er/expand-region)
             ("C-." . company-complete)
             ("C-." . hippie-expand)
-            ("C-a" . mwim-beginning-of-code-or-line)
-            ("C-e" . mwim-end-of-code-or-line)
 
             ("C-c <SPC>" . project-find-file)
             ("C-c C-<SPC>" . project-find-file)
@@ -91,12 +83,9 @@
             ("C-x \\" . toggle-input-method)
             ("M-s" . avy-goto-char)
             ("M-z" . avy-zap-up-to-char-dwim)
-            ("C-}" . mc/mark-next-like-this)
-            ("C-{" . mc/mark-previous-like-this)
-            ("C-|" . mc/mark-all-like-this-dwim)
+
             ("C-x C-d" . dired-jump)
-            ("C-x u" . vundo)
-            ("C-c y" . fanyi-dwim2)))
+            ))
 
 
 ;; view-mode key

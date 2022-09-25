@@ -35,11 +35,12 @@
 ;; Markdown
 (leaf markdown-mode
   :ensure t
+  :after t
+  :custom
+  (markdown-hide-urls . nil)
+  (markdown-fontify-code-blocks-natively . t)
   :mode (("\\.md\\'" . gfm-mode)
-         ("README\\'" . gfm-mode))
-  :config
-  (with-eval-after-load 'markdown-mode
-    (setq markdown-fontify-code-blocks-natively t)))
+         ("README\\'" . gfm-mode)))
 
 ;; SQL
 (leaf sql-indent
@@ -150,37 +151,37 @@
     (yasnippet-snippets-initialize)))
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/
-;; (leaf lsp-mode
-;;   :ensure t
-;;   :commands lsp-deferred lsp
-;;   :hook ((python-mode-hook . lsp-deferred)
-;;          (rust-mode-hook . lsp-deferred)))
+(leaf lsp-mode
+  :ensure t
+  :commands lsp-deferred lsp
+  :hook ((python-mode-hook . lsp-deferred)
+         (rust-mode-hook . lsp-deferred)))
 
-;; (leaf lsp-ui
-;;   :ensure t
-;;   :commands lsp-ui-mode)
-;; (leaf lsp-ivy
-;;   :ensure t
-;;   :commands lsp-ivy-workspace-symbol)
+(leaf lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+(leaf lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
 
 
 ;; eglot
-(leaf eglot
-  :ensure t
-  :bind
-  (:eglot-mode-map
-   ("C-c e f" . eglot-format)
-   ("C-c e n" . eglot-rename))
-  :hook
-  ((prog-mode-hook       . eglot-ensure)
-   ;; (TeX-LaTeX-mode-hook . eglot-ensure)
-   )
-  :config
-  ;; (delete (assoc '(tex-mode context-mode texinfo-mode bibtex-mode)
-  ;;                eglot-server-programs) eglot-server-programs)\
-  ;; (add-to-list 'eglot-server-programs
-  ;;              '(tex-mode . ("texlab"))) ; digestif
-  )
+;; (leaf eglot
+;;   :ensure t
+;;   :bind
+;;   (:eglot-mode-map
+;;    ("C-c e f" . eglot-format)
+;;    ("C-c e n" . eglot-rename))
+;;   :hook
+;;   ((prog-mode-hook       . eglot-ensure)
+;;    ;; (TeX-LaTeX-mode-hook . eglot-ensure)
+;;    )
+;;   :config
+;;   ;; (delete (assoc '(tex-mode context-mode texinfo-mode bibtex-mode)
+;;   ;;                eglot-server-programs) eglot-server-programs)\
+;;   ;; (add-to-list 'eglot-server-programs
+;;   ;;              '(tex-mode . ("texlab"))) ; digestif
+;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;
@@ -188,7 +189,15 @@
 
 ;; rustic https://github.com/brotzeit/rustic
 (leaf rustic
-  :ensure t)
+  :ensure t
+  :mode "\\.rs$"
+  :custom
+  (rustic-format-display-method . 'ignore) ; Rustfmtのメッセージをポップアップしない
+  (rustic-format-trigger . 'on-save)
+  :after flycheck
+  :defvar flycheck-checkers
+  :config
+  (push 'rustic-clippy flycheck-checkers))
 
 ;; (use-package rust-mode
 ;;   :mode "\\.rs\\'"
@@ -229,7 +238,16 @@
 ;;                           (lsp))))
                                         ; or lsp-deferred
 
-
+;;; Ruby
+;; (leaf ruby-mode
+;;   :defvar ruby-mode-map
+;;   :custom (ruby-insert-encoding-magic-comment . nil)
+;;   :hook (ruby-mode-hook . lsp)
+;;   :config
+;;   (dvorak-set-key-prog ruby-mode-map)
+;;   (leaf inf-ruby
+;;     :ensure t
+;;     :hook (ruby-mode-hook . inf-ruby-minor-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;; Common lisp ;;;;;;;;;;;;;;;;

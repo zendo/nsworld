@@ -76,6 +76,7 @@
 (leaf vundo
   :ensure t
   :require t
+  :bind (("C-x u" . vundo))
   :setq ((vundo-glyph-alist . vundo-unicode-symbols)
          (vundo-roll-back-on-quit)))
 

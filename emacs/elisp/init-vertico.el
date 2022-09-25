@@ -16,19 +16,8 @@
   :hook (emacs-startup-hook . vertico-mode))
 
 ;; Completion style for matching regexps in any order
-<<<<<<< HEAD
-(use-package orderless
-  :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
-=======
 (leaf orderless
   :ensure t
-  ;; :init (leaf flx :ensure t)
   :custom
   `((completion-styles . '(orderless))
     (orderless-matching-styles
@@ -39,14 +28,13 @@
          orderless-literal))
     )
   )
->>>>>>> leaf
 
 ;; Enrich existing commands with completion annotations
 (leaf marginalia
+  :ensure t
   :after vertico
-  :require t
-  :config
-  (marginalia-mode))
+  :init
+  (marginalia-mode +1))
 
 ;; all-the-icons-completion
 (leaf all-the-icons-completion
@@ -63,16 +51,15 @@
 ;; Consulting completing-read
 (leaf consult
   :ensure t
-  :bind (("C-x b" . consult-buffer)
-         ("C-x C-b" . consult-buffer)
-         ("C-h a" . consult-apropos)
+  :bind (([remap switch-to-buffer] . consult-buffer)              ; C-x b
+         ([remap apropos-command] . consult-apropos)             ; C-h a
+         ([remap find-file-read-only-other-window] . consult-buffer-other-window)
+         ([remap yank-pop] . consult-yank-pop) ; M-y
          ("C-s" . consult-line)
-         ("M-y" . consult-yank-pop)
          ("C-x C-r" . consult-recent-file)
          ("C-c r" . consult-ripgrep)
          ("C-c b" . consult-bookmark)
          ("M-m" . consult-mark)))
-(global-set-key [remap find-file-read-only-other-window] 'consult-buffer-other-window)
 
 ;; Mini-Buffer Actions Rooted in Keymaps
 (leaf embark
@@ -89,23 +76,11 @@
                     (mode-line-format . none))))))
 
 ;; Consult users will also want the embark-consult package.
-;; (leaf embark-consult
-;;   :config
-;;   (use-package-ensure-elpa 'embark-consult
-;;                            '(t)
-;;                            '(:demand t))
-;;   (with-eval-after-load 'consult
-;;     (eval-after-load 'embark
-;;       '(progn
-;;          (require 'embark-consult nil nil)
-;;          (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)))))
-
 (leaf embark-consult
   :ensure t
-  :config
-  (with-eval-after-load 'consult
-    (eval-after-load 'embark
-      '(require 'embark-consult nil nil))))
+  :after (embark consult)
+  :hook
+  (embark-collect-mode-hook . consult-preview-at-point-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Functions

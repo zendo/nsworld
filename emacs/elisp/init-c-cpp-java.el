@@ -2,20 +2,39 @@
 ;;; Commentary:
 ;;; Code:
 
+(leaf cc-mode
+  :defvar c-mode-base-map
+  :hook
+  ((c-mode-hook . lsp)
+   (c++-mode-hook . lsp))
+  :config
+  (leaf ccls :ensure t)
+  (leaf clang-format
+    :ensure t
+    :init
+    (defun set-hook-after-save-clang-format ()
+      (add-hook 'after-save-hook 'clang-format-buffer t t))
+    :hook ((c-mode-hook . set-hook-after-save-clang-format)
+           (c++-mode-hook . set-hook-after-save-clang-format))
+    :bind ((:c-mode-map ([remap indent-whole-buffer] . clang-format-buffer))
+           (:c++-mode-map ([remap indent-whole-buffer] . clang-format-buffer))))
+  (dvorak-set-key-prog c-mode-base-map))
+
+
 ;; Modern C++ syntax highlighting
-(leaf modern-cpp-font-lock
-  :commands modern-c++-font-lock-mode
-  :hook ((c++-mode-hook . modern-c++-font-lock-mode)))
+;; (leaf modern-cpp-font-lock
+;;   :commands modern-c++-font-lock-mode
+;;   :hook ((c++-mode-hook . modern-c++-font-lock-mode)))
 
 ;; Major mode for working with CMake files
-(leaf cmake-mode
-  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
+;; (leaf cmake-mode
+;;   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
 
 ;; Syntax highlighting for CMake files
-(leaf cmake-font-lock
-  :after cmake-mode
-  :commands cmake-font-lock-activate
-  :hook ((cmake-mode-hook . cmake-font-lock-activate)))
+;; (leaf cmake-font-lock
+;;   :after cmake-mode
+;;   :commands cmake-font-lock-activate
+;;   :hook ((cmake-mode-hook . cmake-font-lock-activate)))
 
 ;; Package made for enabling IDE-like features for CMake projects
 ;; (use-package cmake-ide
@@ -52,10 +71,10 @@
 ;;            projectile-project-root-files-top-down-recurring))
 ;;   :config (add-to-list 'projectile-globally-ignored-directories ".ccls-cache"))
 
-(leaf lsp-java
-  :after lsp
-  :require t)
+;;; JAVA
+;; (leaf lsp-java :ensure t :hook (java-mode-hook . lsp))
 
+;; (leaf groovy-mode :ensure t)
 
 (provide 'init-c-cpp-java)
 ;;; init-c-cpp-java.el ends here

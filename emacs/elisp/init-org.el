@@ -27,12 +27,12 @@
 
 
 
-(bind-keys :prefix-map org-map
-           :prefix "C-c o"
-           ("l" . org-store-link)
-           ("a" . org-agenda)
-           ("c" . org-capture)
-           ("b" . org-switchb))
+;; (bind-keys :prefix-map org-map
+;;            :prefix "C-c o"
+;;            ("l" . org-store-link)
+;;            ("a" . org-agenda)
+;;            ("c" . org-capture)
+;;            ("b" . org-switchb))
 
 ;; org-babel-map
 (with-eval-after-load 'org

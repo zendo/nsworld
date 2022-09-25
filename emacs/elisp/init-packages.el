@@ -36,15 +36,18 @@
 (eval-when-compile (require 'cl-lib nil t))
 
 ;; string manipulation
-(leaf s
-  :require t)
+;; (leaf s
+;;   :ensure t
+;;   :require t)
 
-;; file manipulation
-(leaf f
-  :require t)
+;; ;; file manipulation
+;; (leaf f
+;;   :ensure t
+;;   :require t)
 
 ;; (use-package bind-key)
 (leaf diminish
+  :ensure t
   :require t)
 
 (diminish 'visual-line-mode)
@@ -59,8 +62,6 @@
 ;;;;;;;;;;;;;;; Extensions ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-(load-theme 'doom-tomorrow-night t)
-
 (leaf doom-themes
   :ensure t
   :require t)
@@ -75,6 +76,7 @@
 ;;   :require t)
 ;; (leaf eclipse-theme
 ;;   :require t)
+(load-theme 'doom-tomorrow-night t)
 
 (leaf all-the-icons
   :ensure t
@@ -82,13 +84,14 @@
 
 (leaf which-key
   :ensure t
-  :require t
   :diminish which-key-mode
-  :config
-  (which-key-mode))
+  :hook (after-init-hook . which-key-mode))
 
 (leaf helpful
-  :ensure t)
+  :ensure t
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)))
 
 (leaf expand-region
   :ensure t
@@ -97,7 +100,9 @@
 ;; mwim ;moving to the beginning/end code
 (leaf mwim
   :ensure t
-  :require t)
+  :require t
+  :bind (("C-a" . mwim-beginning-of-code-or-line)
+         ("C-e" . mwim-end-of-code-or-line)))
 
 ;; move-text M-up/M-down
 (leaf move-text
@@ -110,7 +115,10 @@
   :ensure t)
 
 (leaf multiple-cursors
-  :ensure t)
+  :ensure t
+  :bind (("C-}" . mc/mark-next-like-this)
+         ("C-{" . mc/mark-previous-like-this)
+         ("C-|" . mc/mark-all-like-this-dwim)))
 
 ;; Smartly select region, rectangle, multi cursors
 (leaf smart-region
@@ -120,20 +128,20 @@
 
 (leaf anzu
   :ensure t
-  :require t)
+  :bind (([remap query-replace] . anzu-query-replace)
+         ([remap query-replace-regexp] . anzu-query-replace-regexp)))
 
 (leaf wgrep
   :ensure t)
 
 (leaf hl-todo
   :ensure t
-  :require t
   :config
   (global-hl-todo-mode))
 
 (leaf macrostep
   :ensure t
-  :require t)
+  :bind (("C-c e" . macrostep-expand)))
 
 ;; rainbow 颜色代码显色 #00FF00
 (leaf rainbow-mode
@@ -148,11 +156,9 @@
 ;; Narrow/Widen
 (leaf fancy-narrow
   :ensure t
-  :hook (after-init-hook)
-  :config
-  (with-eval-after-load 'fancy-narrow
-    (if (fboundp 'diminish)
-        (diminish 'fancy-narrow-mode))))
+  :diminish fancy-narrow-mode
+  :init
+  (fancy-narrow-mode 1))
 
 ;; avy
 (leaf avy
@@ -177,7 +183,8 @@
 ;; fanyi
 (leaf fanyi
   :ensure t
-  :require t)
+  :require t
+  :bind (("C-c y" . fanyi-dwim2)))
 
 ;; doom-modeline
 (leaf doom-modeline
@@ -190,14 +197,11 @@
 ;; Garbage Collector Magic Hack
 (leaf gcmh
   :ensure t
+  :diminish gcmh-mode
   :hook (emacs-startup-hook)
   :setq ((gcmh-idle-delay quote auto)
          (gcmh-auto-idle-delay-factor . 10)
-         (gcmh-high-cons-threshold . 16777216))
-  :config
-  (with-eval-after-load 'gcmh
-    (if (fboundp 'diminish)
-        (diminish 'gcmh-mode))))
+         (gcmh-high-cons-threshold . 16777216)))
 
 (provide 'init-packages)
 ;;; init-packages.el ends here
