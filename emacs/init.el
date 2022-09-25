@@ -22,8 +22,8 @@
 
 ;; Split emacs auto customizations
 (setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
-;; (when (file-exists-p custom-file)
-;;   (load custom-file 'noerror))
+(when (file-exists-p custom-file)
+  (load custom-file 'noerror))
 
 
 (require 'init-config)
@@ -37,10 +37,10 @@
 (require 'init-project)
 (require 'init-keybindings)
 
-(require 'lang-prog)
-(require 'lang-org)
-;; (require 'lang-c-cpp-java)
-;; (require 'lang-web)
+(require 'init-prog)
+(require 'init-org)
+;; (require 'init-c-cpp-java)
+;; (require 'init-web)
 
 
 ;;; init.el ends here

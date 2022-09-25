@@ -1,4 +1,4 @@
-;;; lang-prog.el --- Main Development languages -*- lexical-binding: t; -*-
+;;; init-prog.el --- Main Development languages -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -204,5 +204,5 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ξ "))) ;hook for shortname
 
 
-(provide 'lang-prog)
-;;; lang-prog.el ends here
+(provide 'init-prog)
+;;; init-prog.el ends here

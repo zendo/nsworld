@@ -95,5 +95,5 @@
   :diminish (impatient-mode . " i")
   :commands (impatient-mode))
 
-(provide 'lang-web)
-;;; lang-web.el ends here
+(provide 'init-web)
+;;; init-web.el ends here

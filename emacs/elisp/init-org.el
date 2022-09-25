@@ -1,4 +1,4 @@
-;;; lang-org.el --- main core settings -*- lexical-binding: t; -*-
+;;; init-org.el --- main core settings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -84,5 +84,5 @@
 ;;   ;; If using org-roam-protocol
 ;;   (require 'org-roam-protocol))
 
-(provide 'lang-org)
-;;; lang-org.el ends here
+(provide 'init-org)
+;;; init-org.el ends here

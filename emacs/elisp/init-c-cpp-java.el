@@ -1,4 +1,4 @@
-;;; lang-c-cpp-java.el --- Main Development languages -*- lexical-binding: t; -*-
+;;; init-c-cpp-java.el --- Main Development languages -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -56,5 +56,5 @@
 
 
 
-(provide 'lang-c-cpp-java)
-;;; lang-c-cpp-java.el ends here
+(provide 'init-c-cpp-java)
+;;; init-c-cpp-java.el ends here
