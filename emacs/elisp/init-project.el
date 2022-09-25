@@ -82,7 +82,6 @@
   :ensure t
   :init
   (setq persp-keymap-prefix (kbd "C-c w"))
-  :require t
   :setq ((persp-auto-resume-time . 0))
   :config
   (add-hook 'after-init-hook

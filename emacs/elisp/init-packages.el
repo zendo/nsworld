@@ -63,8 +63,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (leaf doom-themes
-  :ensure t
-  :require t)
+  :ensure t)
 ;; (leaf tangonov-theme
 ;;   :ensure t
 ;;   :require t)
@@ -79,8 +78,7 @@
 (load-theme 'doom-tomorrow-night t)
 
 (leaf all-the-icons
-  :ensure t
-  :require t)
+  :ensure t)
 
 (leaf which-key
   :ensure t
@@ -101,7 +99,6 @@
 ;; mwim ;moving to the beginning/end code
 (leaf mwim
   :ensure t
-  :require t
   :bind (("C-a" . mwim-beginning-of-code-or-line)
          ("C-e" . mwim-end-of-code-or-line)))
 
@@ -109,8 +106,7 @@
 (leaf move-text
   :ensure t
   :init
-  (move-text-default-bindings)
-  :require t)
+  (move-text-default-bindings))
 
 (leaf iedit
   :ensure t)
@@ -168,28 +164,23 @@
 
 ;; avy
 (leaf avy
-  :ensure t
-  :require t)
+  :ensure t)
 
 ;; avy-zap
 (leaf avy-zap
-  :ensure t
-  :require t)
+  :ensure t)
 
 ;; ace-window
 (leaf ace-window
-  :ensure t
-  :require t)
+  :ensure t)
 
 ;; rotate
 (leaf rotate
-  :ensure t
-  :require t)
+  :ensure t)
 
 ;; fanyi
 (leaf fanyi
   :ensure t
-  :require t
   :bind (("C-c y" . fanyi-dwim2)))
 
 ;; doom-modeline
@@ -197,7 +188,6 @@
   :ensure t
   :init
   (doom-modeline-mode 1)
-  :require t
   :setq ((doom-modeline-buffer-file-name-style quote relative-to-project)))
 
 ;; Garbage Collector Magic Hack

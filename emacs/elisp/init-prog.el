@@ -66,8 +66,7 @@
   :mode ("\\.nix'"))
 
 (leaf nixpkgs-fmt
-  :ensure t
-  :require t)
+  :ensure t)
 
 ;; lua
 (leaf lua-mode

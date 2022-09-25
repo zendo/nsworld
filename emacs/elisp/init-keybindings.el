@@ -27,11 +27,8 @@
 ;; easy-kill
 (leaf easy-kill
   :ensure t
-  :bind (([remap mark-sexp]
-          . easy-mark)
-         ([remap kill-ring-save]
-          . easy-kill))
-  :require t)
+  :bind (([remap mark-sexp] . easy-mark)
+         ([remap kill-ring-save] . easy-kill)))
 
 ;; crux
 (leaf crux
