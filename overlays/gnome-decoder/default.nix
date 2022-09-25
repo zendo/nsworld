@@ -24,13 +24,13 @@
 let
   # require 'libadwaita-1', version: '>= 1.2.alpha'
   libadwaita-git = libadwaita.overrideAttrs (oldAttrs: rec {
-    version = "1.2.alpha";
+    version = "1.2.0";
     src = fetchFromGitLab {
       domain = "gitlab.gnome.org";
       owner = "GNOME";
       repo = "libadwaita";
       rev = version;
-      hash = "sha256-JMxUeIOUPp9k5pImQqWLVkQ2GHaKvopvg6ol9pvA+Bk=";
+      hash = "sha256-3lH7Vi9M8k+GSrCpvruRpLrIpMoOakKbcJlaAc/FK+U=";
     };
   });
 in

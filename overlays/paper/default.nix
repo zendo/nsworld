@@ -17,16 +17,29 @@
   appstream-glib,
   desktop-file-utils,
 }:
+let
+  # require 'libadwaita-1', version: '>= 1.2.alpha'
+  libadwaita-git = libadwaita.overrideAttrs (oldAttrs: rec {
+    version = "1.2.0";
+    src = fetchFromGitLab {
+      domain = "gitlab.gnome.org";
+      owner = "GNOME";
+      repo = "libadwaita";
+      rev = version;
+      hash = "sha256-3lH7Vi9M8k+GSrCpvruRpLrIpMoOakKbcJlaAc/FK+U=";
+    };
+  });
+in
 stdenv.mkDerivation rec {
   pname = "paper";
-  version = "22.10";
+  version = "22.999";
 
   src = fetchFromGitLab {
     owner = "posidon_software";
     repo = pname;
-    rev = version;
-    # rev = "a95850b04caee2e747b546e4e34e297321bd3532";
-    hash = "sha256-XvRLsHszV834x4RpC4p+eb0cLkb+BNv9iXseXhvIQjY=";
+    # rev = version;
+    rev = "c9756467ad9c56ea7714c89ebd1f1a884ea7d837";
+    hash = "sha256-T7jF9bpOgZqZlp2jWaj//3QpEpaAsJP4a9zjgpevHjU=";
   };
 
   nativeBuildInputs = [
@@ -45,7 +58,7 @@ stdenv.mkDerivation rec {
     gtk4
     dbus
     libgee
-    libadwaita
+    libadwaita-git
     gtksourceview5
   ];
 

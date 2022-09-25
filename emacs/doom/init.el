@@ -184,8 +184,3 @@
        :config
        ;;literate
        (default +bindings +smartparens))
-
-;; temp fix keybing missing
-(defadvice! fixed-doom-module-list (fn &rest args)
-  :around #'doom-module-list
-  (nreverse (apply fn args)))

@@ -14,7 +14,6 @@
 ;; - `map!' for binding new keys
 
 (load! "keybindings")
-(load! "dashboard")
 (load! "functions")
 
 ;; environment
