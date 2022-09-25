@@ -46,7 +46,7 @@
       require-final-newline t)
 
 (defun display-startup-echo-area-message ()
-  "删除启动讯息"
+  "Delete starup message"
   (message ""))
 
 ;; kill emacsclient message
