@@ -150,22 +150,37 @@
     (yasnippet-snippets-initialize)))
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/
-(leaf lsp-mode
-  :ensure t
-  :commands lsp-deferred lsp
-  :hook ((python-mode-hook . lsp-deferred)
-         (rust-mode-hook . lsp-deferred)))
+;; (leaf lsp-mode
+;;   :ensure t
+;;   :commands lsp-deferred lsp
+;;   :hook ((python-mode-hook . lsp-deferred)
+;;          (rust-mode-hook . lsp-deferred)))
 
-(leaf lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
-(leaf lsp-ivy
-  :ensure t
-  :commands lsp-ivy-workspace-symbol)
+;; (leaf lsp-ui
+;;   :ensure t
+;;   :commands lsp-ui-mode)
+;; (leaf lsp-ivy
+;;   :ensure t
+;;   :commands lsp-ivy-workspace-symbol)
 
 
 ;; eglot
-;; (use-package eglot)
+(leaf eglot
+  :ensure t
+  :bind
+  (:eglot-mode-map
+   ("C-c e f" . eglot-format)
+   ("C-c e n" . eglot-rename))
+  :hook
+  ((prog-mode-hook       . eglot-ensure)
+   ;; (TeX-LaTeX-mode-hook . eglot-ensure)
+   )
+  :config
+  ;; (delete (assoc '(tex-mode context-mode texinfo-mode bibtex-mode)
+  ;;                eglot-server-programs) eglot-server-programs)\
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(tex-mode . ("texlab"))) ; digestif
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;

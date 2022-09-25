@@ -33,14 +33,20 @@
 ;;   :config (feather-mode))
 
 
-(require 'cl-lib)
+(eval-when-compile (require 'cl-lib nil t))
 
-;; (use-package dash)
-(use-package s) ;string manipulation
-(use-package f) ;file manipulation
+;; string manipulation
+(leaf s
+  :require t)
 
-(use-package bind-key)
-(use-package diminish)
+;; file manipulation
+(leaf f
+  :require t)
+
+;; (use-package bind-key)
+(leaf diminish
+  :require t)
+
 (diminish 'visual-line-mode)
 (diminish 'eldoc-mode) ;echo area 显示函数的参数列表
 
@@ -53,25 +59,27 @@
 ;;;;;;;;;;;;;;; Extensions ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
+(load-theme 'doom-tomorrow-night t)
+
 (leaf doom-themes
   :ensure t
   :require t)
-
-(leaf tangonov-theme
-  :ensure t
-  :require t)
-
-;; (use-package monokai-theme)
-;; (use-package vscode-dark-plus-theme)
-;; (use-package zenburn)
-;; (use-package eclipse-theme)
-(load-theme 'doom-tomorrow-night t)
+;; (leaf tangonov-theme
+;;   :ensure t
+;;   :require t)
+;; (leaf monokai-theme
+;;   :require t)
+;; (leaf vscode-dark-plus-theme
+;;   :require t)
+;; (leaf zenburn
+;;   :require t)
+;; (leaf eclipse-theme
+;;   :require t)
 
 (leaf all-the-icons
   :ensure t
   :require t)
 
-;; Which-Key
 (leaf which-key
   :ensure t
   :require t
@@ -79,11 +87,9 @@
   :config
   (which-key-mode))
 
-;; Helpful
 (leaf helpful
   :ensure t)
 
-;; expand-region
 (leaf expand-region
   :ensure t
   :require t)
@@ -93,7 +99,6 @@
   :ensure t
   :require t)
 
-
 ;; move-text M-up/M-down
 (leaf move-text
   :ensure t
@@ -101,11 +106,9 @@
   (move-text-default-bindings)
   :require t)
 
-;; iedit
 (leaf iedit
   :ensure t)
 
-;; multiple-cursors
 (leaf multiple-cursors
   :ensure t)
 
@@ -115,23 +118,19 @@
   :commands smart-region-on
   :hook ((after-init-hook . smart-region-on)))
 
-;; anzu
 (leaf anzu
   :ensure t
   :require t)
 
-;; wgrep
 (leaf wgrep
   :ensure t)
 
-;; hl-todo
 (leaf hl-todo
   :ensure t
   :require t
   :config
   (global-hl-todo-mode))
 
-;; macrostep
 (leaf macrostep
   :ensure t
   :require t)
@@ -179,15 +178,6 @@
 (leaf fanyi
   :ensure t
   :require t)
-
-;; olivetti 文档居中
-(leaf olivetti
-  :ensure t
-  :commands olivetti-mode
-  :config
-  (with-eval-after-load 'olivetti
-    (setq olivetti-body-width 100)
-    (setq olivetti-hide-mode-line t)))
 
 ;; doom-modeline
 (leaf doom-modeline

@@ -21,23 +21,23 @@
 ;; exec-path-from-shell
 (when (eq system-type 'gnu/linux)
   (leaf exec-path-from-shell
-    :ensure t
-    :init
-    (let ((custom--inhibit-theme-enable nil))
-      (unless (memq 'use-package custom-known-themes)
-        (deftheme use-package)
-        (enable-theme 'use-package)
-        (setq custom-enabled-themes (remq 'use-package custom-enabled-themes)))
-      (custom-theme-set-variables 'use-package
-                                  '(exec-path-from-shell-check-startup-files nil nil nil "Customized with use-package exec-path-from-shell")
-                                  '(exec-path-from-shell-variables
-                                    '("PATH" "MANPATH" "PYTHONPATH" "GOPATH")
-                                    nil nil "Customized with use-package exec-path-from-shell")
-                                  '(exec-path-from-shell-arguments
-                                    '("-l")
-                                    nil nil "Customized with use-package exec-path-from-shell")))
-    (exec-path-from-shell-initialize)
-    :require t))
+  :ensure t
+  :config
+  (setq exec-path-from-shell-check-startup-files nil
+        exec-path-from-shell-arguments nil
+        exec-path-from-shell-variables '("DEBEMAIL"
+                                         "DEBFULLNAME"
+                                         "GPG_AGENT_INFO"
+                                         "GPG_KEY_ID"
+                                         "PASSWORD_STORE_DIR"
+                                         "PATH"
+                                         "SHELL"
+                                         "SKKSERVER"
+                                         "TEXMFHOME"
+                                         "GOPATH"
+                                         "PYTHONPATH"
+                                         "WSL_DISTRO_NAME"
+                                         "http_proxy"))))
 
 ;; vterm
 (when (eq system-type 'gnu/linux)

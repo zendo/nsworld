@@ -12,37 +12,23 @@
           ("DEL" . vertico-directory-delete-char)))
   :config
   (vertico-mode)
-  (vertico-mouse-mode 1))
+  (vertico-mouse-mode 1)
+  :hook (emacs-startup-hook . vertico-mode))
 
 ;; Completion style for matching regexps in any order
 (leaf orderless
   :ensure t
-  :pre-setq ((completion-styles quote
-                                (orderless))
-             (completion-category-defaults)
-             (completion-category-overrides quote
-                                            ((file
-                                              (styles partial-completion)))))
-  :require t)
-
-;; A few more useful configurations...
-(leaf emacs
-  :preface
-  (defun crm-indicator (args)
-    (cons
-     (concat "[CRM] "
-             (car args))
-     (cdr args)))
-
-  :ensure t
-  :hook ((minibuffer-setup-hook . cursor-intangible-mode))
-  :pre-setq ((minibuffer-prompt-properties quote
-                                           (read-only t cursor-intangible t face minibuffer-prompt))
-             (enable-recursive-minibuffers . t))
-  :init
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-  :require t)
-
+  ;; :init (leaf flx :ensure t)
+  :custom
+  `((completion-styles . '(orderless))
+    (orderless-matching-styles
+     . '(orderless-prefixes
+         orderless-flex
+         orderless-regexp
+         orderless-initialism
+         orderless-literal))
+    )
+  )
 
 ;; Enrich existing commands with completion annotations
 (leaf marginalia

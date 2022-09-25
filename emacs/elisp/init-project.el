@@ -13,26 +13,27 @@
 ;; Magit
 (leaf magit
   :ensure t
-  :config
-  (when (executable-find "git")
-    (unless (fboundp 'magit-status)
-      (autoload #'magit-status "magit" nil t))
-    (unless (fboundp 'magit-push)
-      (autoload #'magit-push "magit" nil t))
-    (eval-after-load 'magit
-      '(progn
-         (setq magit-completing-read-function 'ivy-completing-read)
-         t))
+  :bind
+  (("C-c g" . magit-status)
+   ("s-g" . magit-status)
+   (:magit-status-mode-map
+   ("p" . magit-push))))
 
-    (bind-keys :package magit
-               ("C-c g" . magit-status)
-               ("s-g" . magit-status)
-               :map magit-status-mode-map
-               ("p" . magit-push))))
+;; git-gutter
+(leaf git-gutter+
+  :ensure t
+  :blackout
+  `((git-gutter+-mode . ,(format "%s" (all-the-icons-octicon "git-merge"))))
+  :bind ("C-x G" . global-git-gutter+-mode)
+  )
+
+(leaf forge
+  :disabled t
+  :after magit
+  )
 
 ;; Dashboard
 (leaf dashboard
-  :ensure t
   :init
   (let ((custom--inhibit-theme-enable nil))
     (unless (memq 'use-package custom-known-themes)
@@ -55,6 +56,23 @@
   :diminish dashboard-mode page-break-lines-mode
   :config
   (dashboard-setup-startup-hook))
+;; (use-package dashboard
+;;   :diminish (dashboard-mode page-break-lines-mode)
+;;   :custom
+;;   (dashboard-startup-banner 2)
+;;   (dashboard-set-heading-icons t)
+;;   (dashboard-set-file-icons t)
+;;   (dashboard-set-footer nil)
+;;   (dashboard-center-content t)
+;;   (dashboard-projects-backend 'project-el)
+
+;;   (dashboard-items '((recents  . 12)
+;;                      (bookmarks . 5)
+;;                      (projects . 5)))
+;;   :config
+;;   (dashboard-setup-startup-hook))
+
+
 
 ;; Persp-mode
 (leaf persp-mode

@@ -34,6 +34,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 界面 interface
 (setq inhibit-startup-message t     ;关闭欢迎界面
+      inhibit-startup-echo-area-message t ; 关闭 mminibuffer 欢迎消息
       ;; inhibit-default-init t        ;default.el
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
@@ -44,10 +45,6 @@
       sentence-end-double-space nil ;Sentences should end in one space
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       require-final-newline t)
-
-(defun display-startup-echo-area-message ()
-  "删除启动讯息"
-  (message ""))
 
 ;; kill emacsclient message
 (add-hook 'server-after-make-frame-hook
