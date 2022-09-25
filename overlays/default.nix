@@ -19,11 +19,13 @@ final: prev: {
   # Go
   v2raya = prev.callPackage ./v2raya {};
   mabel = prev.callPackage ./mabel {};
+  go-musicfox = prev.callPackage ./go-musicfox {};
 
   # Python
   whatip = prev.callPackage ./whatip {};
   textpieces = prev.callPackage ./textpieces {};
   geobug = prev.callPackage ./geobug {};
+  gpu-viewer = prev.callPackage ./gpu-viewer {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};

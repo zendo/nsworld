@@ -95,7 +95,8 @@
 
 (leaf expand-region
   :ensure t
-  :require t)
+  :bind (("C-=" . er/expand-region)
+         ("C--" . er/contract-region)))
 
 ;; mwim ;moving to the beginning/end code
 (leaf mwim
@@ -138,6 +139,11 @@
   :ensure t
   :config
   (global-hl-todo-mode))
+
+;; 高亮删除插入操作
+;; (leaf volatile-highlights
+;;   :ensure t
+;;   :config (volatile-highlights-mode t))
 
 (leaf macrostep
   :ensure t

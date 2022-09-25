@@ -24,13 +24,10 @@
 ;; need github connect download
 (leaf tree-sitter
   :ensure tree-sitter-langs
+  :diminish tree-sitter-mode
   :commands global-tree-sitter-mode tree-sitter-hl-mode
   :hook ((after-init-hook . global-tree-sitter-mode)
-         (tree-sitter-after-on-hook . tree-sitter-hl-mode))
-  :config
-  (with-eval-after-load 'tree-sitter
-    (if (fboundp 'diminish)
-        (diminish 'tree-sitter-mode))))
+         (tree-sitter-after-on-hook . tree-sitter-hl-mode)))
 
 ;; Markdown
 (leaf markdown-mode
@@ -151,37 +148,39 @@
     (yasnippet-snippets-initialize)))
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/
-(leaf lsp-mode
-  :ensure t
-  :commands lsp-deferred lsp
-  :hook ((python-mode-hook . lsp-deferred)
-         (rust-mode-hook . lsp-deferred)))
+;; (leaf lsp-mode
+;;   :ensure t
+;;   :commands lsp-deferred lsp
+;;   :hook ((python-mode-hook . lsp-deferred)
+;;          (rust-mode-hook . lsp-deferred)))
 
-(leaf lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
-(leaf lsp-ivy
-  :ensure t
-  :commands lsp-ivy-workspace-symbol)
+;; (leaf lsp-ui
+;;   :ensure t
+;;   :commands lsp-ui-mode)
+;; (leaf lsp-ivy
+;;   :ensure t
+;;   :commands lsp-ivy-workspace-symbol)
 
 
 ;; eglot
-;; (leaf eglot
-;;   :ensure t
-;;   :bind
-;;   (:eglot-mode-map
-;;    ("C-c e f" . eglot-format)
-;;    ("C-c e n" . eglot-rename))
-;;   :hook
-;;   ((prog-mode-hook       . eglot-ensure)
-;;    ;; (TeX-LaTeX-mode-hook . eglot-ensure)
-;;    )
-;;   :config
-;;   ;; (delete (assoc '(tex-mode context-mode texinfo-mode bibtex-mode)
-;;   ;;                eglot-server-programs) eglot-server-programs)\
-;;   ;; (add-to-list 'eglot-server-programs
-;;   ;;              '(tex-mode . ("texlab"))) ; digestif
-;;   )
+(leaf eglot
+  :ensure t
+  :require t
+  :config
+  (add-hook 'python-mode-hook 'eglot-ensure)
+  (add-hook 'c-mode-hook 'eglot-ensure)
+  (add-hook 'ruby-mode-hook 'eglot-ensure)
+  (add-hook 'markdown-mode-hook 'eglot-ensure)
+  (add-hook 'go-mode-hook 'eglot-ensure))
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               `(markdown-mode . ("efm-langserver"))))
+
+(leaf consult-lsp
+  :ensure t
+  :package t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;
@@ -216,6 +215,13 @@
 ;;   )
 ;; (with-eval-after-load 'rust-mode
 ;;   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;; (leaf go-mode
+;;   :ensure t
+;;   :commands go-mode
+;;   :config
+;;   (setq gofmt-command "goimports")
+;;   (add-hook 'before-save-hook 'gofmt-before-save))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

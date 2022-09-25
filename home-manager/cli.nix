@@ -59,6 +59,7 @@
     openssl
     gitui
     onefetch
+    efm-langserver
 
     # Networking
     lsof

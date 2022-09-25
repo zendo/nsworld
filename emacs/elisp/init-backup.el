@@ -62,14 +62,12 @@
   :require t)
 
 ;; undo-fu-session
-(leaf leaf-convert
-  :config
-  (leaf undo-fu-session
-    :ensure t
-    :require t
-    :setq ((undo-fu-session-incompatible-files quote
-                                               ("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'"))))
-
+(leaf undo-fu-session
+  :ensure t
+  :require t
+  :setq ((undo-fu-session-incompatible-files quote
+                                             ("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'")))
+  :init
   (global-undo-fu-session-mode))
 
 ;; undo-tree C-x u

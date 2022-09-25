@@ -4,11 +4,34 @@
 
 ;; TODO: 单击键失效
 ;; Treemacs
-(leaf treemacs
+;; (leaf treemacs
+;;   :ensure t
+;;   :bind (("<f1>" . treemacs)
+;;          (:treemacs-mode-map
+;;           ([<mouse-1>] . treemacs-single-click-expand-action))))
+
+;; (leaf neotree
+;;   :ensure t
+;;   :commands
+;;   (neotree-show neotree-hide neotree-dir neotree-find)
+;;   :custom (neo-theme . 'nerd2)
+;;   :bind
+;;   ("<f1>" . neotree-projectile-toggle)
+
+(leaf sr-speedbar
   :ensure t
-  :bind (("<f1>" . treemacs)
-         (:treemacs-mode-map
-          ("<mouse-1>" . treemacs-single-click-expand-action))))
+  :bind (("<f1>" . sr-speedbar-toggle))
+  :config
+  (setq speedbar-hide-button-brackets-flag t
+        speedbar-show-unknown-files t
+        speedbar-smart-directory-expand-flag t
+        ;; speedbar-indentation-width 1
+        speedbar-update-flag t
+        ;; sr-speedbar-width 20
+        ;; sr-speedbar-width-x 20
+        sr-speedbar-auto-refresh t
+        sr-speedbar-right-side nil
+        sr-speedbar-skip-other-window-p t))
 
 ;; Magit
 (leaf magit
@@ -29,6 +52,14 @@
   :disabled t
   :after magit
   )
+
+(leaf editorconfig
+  :ensure t
+  :diminish editorconfig-mode
+  :custom
+  (editorconfig-get-properties-function . 'editorconfig-core-get-properties-hash)
+  :init
+  (editorconfig-mode t))
 
 ;; Dashboard
 (leaf dashboard

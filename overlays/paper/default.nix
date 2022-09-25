@@ -17,19 +17,7 @@
   appstream-glib,
   desktop-file-utils,
 }:
-let
-  # require 'libadwaita-1', version: '>= 1.2.alpha'
-  libadwaita-git = libadwaita.overrideAttrs (oldAttrs: rec {
-    version = "1.2.0";
-    src = fetchFromGitLab {
-      domain = "gitlab.gnome.org";
-      owner = "GNOME";
-      repo = "libadwaita";
-      rev = version;
-      hash = "sha256-3lH7Vi9M8k+GSrCpvruRpLrIpMoOakKbcJlaAc/FK+U=";
-    };
-  });
-in
+
 stdenv.mkDerivation rec {
   pname = "paper";
   version = "22.999";
@@ -58,7 +46,7 @@ stdenv.mkDerivation rec {
     gtk4
     dbus
     libgee
-    libadwaita-git
+    libadwaita
     gtksourceview5
   ];
 

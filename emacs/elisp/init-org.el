@@ -63,6 +63,7 @@
 
 
 (leaf org-modern
+  :ensure t
   :after org
   :hook (org-mode-hook)
   :require t)

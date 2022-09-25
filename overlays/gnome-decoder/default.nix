@@ -1,5 +1,6 @@
 { lib
 , stdenv
+ , clangStdenv
 , fetchFromGitLab
 , clang
 , libclang
@@ -20,22 +21,8 @@
 , appstream-glib
 , desktop-file-utils
 }:
-
-let
-  # require 'libadwaita-1', version: '>= 1.2.alpha'
-  libadwaita-git = libadwaita.overrideAttrs (oldAttrs: rec {
-    version = "1.2.0";
-    src = fetchFromGitLab {
-      domain = "gitlab.gnome.org";
-      owner = "GNOME";
-      repo = "libadwaita";
-      rev = version;
-      hash = "sha256-3lH7Vi9M8k+GSrCpvruRpLrIpMoOakKbcJlaAc/FK+U=";
-    };
-  });
-in
 # clangStdenv
-stdenv.mkDerivation rec {
+clangStdenv.mkDerivation rec {
   pname = "gnome-decoder";
   version = "0.3.1";
 
@@ -54,7 +41,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    clang
     meson
     ninja
     pkg-config
@@ -70,7 +56,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     glib
     gtk4
-    libadwaita-git
+    libadwaita
     zbar
     sqlite
     pipewire

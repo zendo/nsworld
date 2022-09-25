@@ -41,32 +41,15 @@
          ("C-<return>" . crux-smart-open-line)
          ("C-S-<return>" . crux-smart-open-line-above)))
 
-;; prefix map
-;; (bind-keys :prefix-map file-map :prefix "C-c f"
-;;            ("o" . crux-open-with)
-;;            ("s" . save-some-buffers)
-;;            ("S" . crux-sudo-edit)
-;;            ("x" . crux-delete-file-and-buffer)
-;;            ("<f2>" . crux-rename-file-and-buffer)
-;;            :prefix-map code :prefix "C-c c"
-;;            ("f" . nix-mode-format)
-;;            :prefix-map multiple-cursors :prefix "C-c m"
-;;            ("-" . er/mark-inside-quotes)
-;;            ("=" . er/mark-inside-pairs)
-;;            :prefix-map remove-lists :prefix "C-c -"
-;;            ("b" . bookmark-delete)
-;;            ("r" . recentf-edit-list)
-;;            ("p" . project-forget-project))
-
-(leaf cus-start
+(leaf *global-set-key
+  :leaf-autoload nil
   :bind
   (("M-+" . text-scale-increase)
    ("M-_" . text-scale-decrease)
    ("C-c w x" . ace-swap-window)
    ("C-c w v" . rotate-layout)
 
-   ("C-=" . er/expand-region)
-   ("C-." . company-complete)
+   ;; ("C-." . company-complete)
    ("C-." . hippie-expand)
 
    ("C-c <SPC>" . project-find-file)
@@ -74,8 +57,8 @@
    ("C-c ." . find-file)
    ("C-c /" . consult-ripgrep)
    ("C-c ," . project-switch-to-buffer)
+
    ("s-d" . dired-jump)
-   ("s-p" . project-switch-project)
    ("C-;" . comment-line)
    ("C-\\" . align-regexp)
    ("C-x \\" . toggle-input-method)
@@ -83,8 +66,24 @@
    ("M-z" . avy-zap-up-to-char-dwim)
 
    ("C-x C-d" . dired-jump)
-   ))
 
+   ;; file-map
+   ("C-c f o" . crux-open-with)
+   ("C-c f s" . save-some-buffers)
+   ("C-c f S" . crux-sudo-edit)
+   ("C-c f x" . crux-delete-file-and-buffer)
+   ("C-c f <f2>" . crux-rename-file-and-buffer)
+   ;; code-map
+   ("C-c c f" . nix-mode-format)
+   ("C-c c ." . consult-lsp-diagnostics)
+   ;; multiple-cursors-map
+   ("C-c m -" . er/mark-inside-quotes)
+   ("C-c m =" . er/mark-inside-pairs)
+   ;; remove-items
+   ("C-c - b" . bookmark-delete)
+   ("C-c - r" . recentf-edit-list)
+   ("C-c - p" . project-forget-project)
+   ))
 
 ;; view-mode key
 (defvar view-mode-map) ;定义变量消除 flaycheck error

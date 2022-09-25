@@ -19,25 +19,11 @@
     :hook ((shell-dynamic-complete-functions . bash-completion-dynamic-complete))))
 
 ;; exec-path-from-shell
-(when (eq system-type 'gnu/linux)
-  (leaf exec-path-from-shell
+(leaf exec-path-from-shell
   :ensure t
-  :config
-  (setq exec-path-from-shell-check-startup-files nil
-        exec-path-from-shell-arguments nil
-        exec-path-from-shell-variables '("DEBEMAIL"
-                                         "DEBFULLNAME"
-                                         "GPG_AGENT_INFO"
-                                         "GPG_KEY_ID"
-                                         "PASSWORD_STORE_DIR"
-                                         "PATH"
-                                         "SHELL"
-                                         "SKKSERVER"
-                                         "TEXMFHOME"
-                                         "GOPATH"
-                                         "PYTHONPATH"
-                                         "WSL_DISTRO_NAME"
-                                         "http_proxy"))))
+  :when (and window-system (not (eq system-type 'gnu/linux)))
+  :defun exec-path-from-shell-initialize
+  :config (exec-path-from-shell-initialize))
 
 ;; vterm
 (when (eq system-type 'gnu/linux)

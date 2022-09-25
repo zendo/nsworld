@@ -25,9 +25,7 @@
          orderless-flex
          orderless-regexp
          orderless-initialism
-         orderless-literal))
-    )
-  )
+         orderless-literal))))
 
 ;; Enrich existing commands with completion annotations
 (leaf marginalia
@@ -67,13 +65,7 @@
   :bind (("C-c C-c" . embark-act)
          ("C-c C-o" . embark-export)
          ("C-h b" . embark-bindings))
-  :setq ((prefix-help-command function embark-prefix-help-command))
-  :config
-  (with-eval-after-load 'embark
-    (add-to-list 'display-buffer-alist
-                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*" nil
-                   (window-parameters
-                    (mode-line-format . none))))))
+  :setq ((prefix-help-command function embark-prefix-help-command)))
 
 ;; Consult users will also want the embark-consult package.
 (leaf embark-consult
