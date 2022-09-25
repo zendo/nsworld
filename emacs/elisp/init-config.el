@@ -34,6 +34,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 界面 interface
 (setq inhibit-startup-message t     ;关闭欢迎界面
+      inhibit-startup-echo-area-message t ; 关闭 mminibuffer 欢迎消息
       ;; inhibit-default-init t        ;default.el
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode

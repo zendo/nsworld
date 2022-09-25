@@ -39,4 +39,8 @@
               ;;         (width . 83)))
               ))
 
+(when (featurep 'native-compile)
+  (setq native-comp-async-report-warnings-errors nil
+        native-comp-deferred-compilation t)
+  )
 ;;; early-init.el ends here

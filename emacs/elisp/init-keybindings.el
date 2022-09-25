@@ -27,83 +27,76 @@
                   (recompile)))
 
 ;; easy-kill
-(use-package easy-kill
-             :config
-             (global-set-key [remap mark-sexp] 'easy-mark)
-             (global-set-key [remap kill-ring-save] 'easy-kill))
+(leaf easy-kill
+  :ensure t
+  :bind (([remap mark-sexp]
+          . easy-mark)
+         ([remap kill-ring-save]
+          . easy-kill))
+  :require t)
 
 ;; crux
-(use-package crux
-  :bind (;("C-a" . crux-move-beginning-of-line)
-         ("C-k" . crux-smart-kill-line)
+(leaf crux
+  :ensure t
+  :bind (("C-k" . crux-smart-kill-line)
          ("C-x 4 x" . crux-swap-windows)))
 (global-set-key [(control return)] #'crux-smart-open-line)
 (global-set-key [(control shift return)] #'crux-smart-open-line-above)
 
 ;; prefix map
-(bind-keys :prefix-map file-map
-           :prefix "C-c f"
-           ("0" . revert-buffer)
-           ("o" . crux-open-with)
-           ("s" . save-some-buffers)
-           ("S" . crux-sudo-edit)
-           ("x" . crux-delete-file-and-buffer)
-           ("<f2>" . crux-rename-file-and-buffer)
-
-           :prefix-map code
-           :prefix "C-c c"
-           ("f" . nix-mode-format)
-
-           :prefix-map multiple-cursors
-           :prefix "C-c m"
-           ("-" . er/mark-inside-quotes)
-           ("=" . er/mark-inside-pairs)
-
-           :prefix-map remove-lists
-           :prefix "C-c -"
-           ("b" . bookmark-delete)
-           ("r" . recentf-edit-list)
-           ("p" . project-forget-project)
-           )
+(leaf leaf-convert
+  :config
+  (bind-keys :prefix-map file-map :prefix "C-c f"
+             ("0" . revert-buffer)
+             ("o" . crux-open-with)
+             ("s" . save-some-buffers)
+             ("S" . crux-sudo-edit)
+             ("x" . crux-delete-file-and-buffer)
+             ("<f2>" . crux-rename-file-and-buffer)
+             :prefix-map code :prefix "C-c c"
+             ("f" . nix-mode-format)
+             :prefix-map multiple-cursors :prefix "C-c m"
+             ("-" . er/mark-inside-quotes)
+             ("=" . er/mark-inside-pairs)
+             :prefix-map remove-lists :prefix "C-c -"
+             ("b" . bookmark-delete)
+             ("r" . recentf-edit-list)
+             ("p" . project-forget-project)))
 
 
-(bind-keys*
- ("C-h f" . helpful-callable)
- ("C-h v" . helpful-variable)
- ("C-h k" . helpful-key)
+(leaf-keys (("C-h f" . helpful-callable)
+            ("C-h v" . helpful-variable)
+            ("C-h k" . helpful-key)
 
- ("M-+" . text-scale-increase)
- ("M-_" . text-scale-decrease)
+            ("M-+" . text-scale-increase)
+            ("M-_" . text-scale-decrease)
+            ("C-c w x" . ace-swap-window)
+            ("C-c w v" . rotate-layout)
 
- ("C-c w x" . ace-swap-window)
- ("C-c w v" . rotate-layout)
+            ("C-=" . er/expand-region)
+            ("C-." . company-complete)
+            ("C-." . hippie-expand)
+            ("C-a" . mwim-beginning-of-code-or-line)
+            ("C-e" . mwim-end-of-code-or-line)
 
- ("C-=" . er/expand-region)
- ("C-." . company-complete)
- ("C-." . hippie-expand)
- ("C-a" . mwim-beginning-of-code-or-line)
- ("C-e" . mwim-end-of-code-or-line)
-
- ("C-c <SPC>" . project-find-file)
- ("C-c C-<SPC>" . project-find-file)
- ("C-c ." . find-file)
- ("C-c /" . consult-ripgrep)
- ("C-c ," . project-switch-to-buffer)
- ("s-d" . dired-jump)
- ("s-p" . project-switch-project)
-
- ("C-;" . comment-line)
- ("C-\\" . align-regexp)
- ("C-x \\" . toggle-input-method)
- ("M-s" . avy-goto-char)
- ("M-z" . avy-zap-up-to-char-dwim)
- ("C-}" . mc/mark-next-like-this)
- ("C-{" . mc/mark-previous-like-this)
- ("C-|" . mc/mark-all-like-this-dwim)
-
- ("C-x C-d" . dired-jump)
- ("C-x u" . vundo)
- ("C-c y" . fanyi-dwim2))
+            ("C-c <SPC>" . project-find-file)
+            ("C-c C-<SPC>" . project-find-file)
+            ("C-c ." . find-file)
+            ("C-c /" . consult-ripgrep)
+            ("C-c ," . project-switch-to-buffer)
+            ("s-d" . dired-jump)
+            ("s-p" . project-switch-project)
+            ("C-;" . comment-line)
+            ("C-\\" . align-regexp)
+            ("C-x \\" . toggle-input-method)
+            ("M-s" . avy-goto-char)
+            ("M-z" . avy-zap-up-to-char-dwim)
+            ("C-}" . mc/mark-next-like-this)
+            ("C-{" . mc/mark-previous-like-this)
+            ("C-|" . mc/mark-all-like-this-dwim)
+            ("C-x C-d" . dired-jump)
+            ("C-x u" . vundo)
+            ("C-c y" . fanyi-dwim2)))
 
 
 ;; view-mode key

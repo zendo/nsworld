@@ -2,34 +2,51 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'package)
-(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+(eval-and-compile
+  (customize-set-variable
+   'package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+  (package-initialize)
+  (unless (package-installed-p 'leaf)
+    (package-refresh-contents)
+    (package-install 'leaf))
 
-;; Initialize packages
-(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
-  (setq package-enable-at-startup nil)          ; To prevent initializing twice
-  (package-initialize))
+  (leaf leaf-keywords
+    :ensure t
+    :init
+    ;; optional packages if you want to use :hydra, :el-get, :blackout,,,
+    (leaf hydra :ensure t)
+    (leaf el-get :ensure t)
+    (leaf blackout :ensure t)
 
-;; Bootstrap `use-package`
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-;; use-package setting
-(setq use-package-always-ensure t
-      ;; use-package-always-defer t
-      ;; use-package-verbose t
-      use-package-enable-imenu-support t)
-(require 'use-package)
+    :config
+    ;; initialize leaf-keywords.el
+    (leaf-keywords-init)))
+;; </leaf-install-code>
 
-(require 'cl-lib)
+;; Now you can use leaf!
+(leaf leaf-tree :ensure t)
+(leaf leaf-convert :ensure t)
 
-;; (use-package dash)
-(use-package s) ;string manipulation
-(use-package f) ;file manipulation
+;; (leaf feather
+;;   :el-get conao3/feather.el
+;;   :config (feather-mode))
 
-(use-package bind-key)
-(use-package diminish)
+
+(eval-when-compile (require 'cl-lib nil t))
+
+;; string manipulation
+(leaf s
+  :require t)
+
+;; file manipulation
+(leaf f
+  :require t)
+
+;; (use-package bind-key)
+(leaf diminish
+  :require t)
+
 (diminish 'visual-line-mode)
 (diminish 'eldoc-mode) ;echo area 显示函数的参数列表
 
@@ -42,111 +59,145 @@
 ;;;;;;;;;;;;;;; Extensions ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-(use-package doom-themes)
-(use-package tangonov-theme)
-;; (use-package monokai-theme)
-;; (use-package vscode-dark-plus-theme)
-;; (use-package zenburn)
-;; (use-package eclipse-theme)
 (load-theme 'doom-tomorrow-night t)
 
-(use-package all-the-icons)
+(leaf doom-themes
+  :ensure t
+  :require t)
+;; (leaf tangonov-theme
+;;   :ensure t
+;;   :require t)
+;; (leaf monokai-theme
+;;   :require t)
+;; (leaf vscode-dark-plus-theme
+;;   :require t)
+;; (leaf zenburn
+;;   :require t)
+;; (leaf eclipse-theme
+;;   :require t)
 
-;; Which-Key
-(use-package which-key
+(leaf all-the-icons
+  :ensure t
+  :require t)
+
+(leaf which-key
+  :ensure t
+  :require t
   :diminish which-key-mode
   :config
   (which-key-mode))
 
-;; Helpful
-(use-package helpful
-  :defer t)
+(leaf helpful
+  :ensure t)
 
-;; expand-region
-(use-package expand-region)
+(leaf expand-region
+  :ensure t
+  :require t)
 
 ;; mwim ;moving to the beginning/end code
-(use-package mwim)
+(leaf mwim
+  :ensure t
+  :require t)
 
 ;; move-text M-up/M-down
-(use-package move-text
-  :init (move-text-default-bindings))
+(leaf move-text
+  :ensure t
+  :init
+  (move-text-default-bindings)
+  :require t)
 
-;; iedit
-(use-package iedit
-  :defer t)
+(leaf iedit
+  :ensure t)
 
-;; multiple-cursors
-(use-package multiple-cursors
-  :defer t)
+(leaf multiple-cursors
+  :ensure t)
 
 ;; Smartly select region, rectangle, multi cursors
-(use-package smart-region
-  :hook (after-init . smart-region-on))
+(leaf smart-region
+  :ensure t
+  :commands smart-region-on
+  :hook ((after-init-hook . smart-region-on)))
 
-;; anzu
-(use-package anzu)
+(leaf anzu
+  :ensure t
+  :require t)
 
-;; wgrep
-(use-package wgrep
-  :defer t)
+(leaf wgrep
+  :ensure t)
 
-;; hl-todo
-(use-package hl-todo
-  :config (global-hl-todo-mode))
+(leaf hl-todo
+  :ensure t
+  :require t
+  :config
+  (global-hl-todo-mode))
 
-;; macrostep
-(use-package macrostep)
+(leaf macrostep
+  :ensure t
+  :require t)
 
 ;; rainbow 颜色代码显色 #00FF00
-(use-package rainbow-mode
+(leaf rainbow-mode
+  :ensure t
   :commands rainbow-mode)
 
 ;; rainbow-delimiters  彩虹括号
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+(leaf rainbow-delimiters
+  :ensure t
+  :hook (prog-mode-hook))
 
 ;; Narrow/Widen
-(use-package fancy-narrow
-  :diminish
-  :hook (after-init . fancy-narrow-mode))
+(leaf fancy-narrow
+  :ensure t
+  :hook (after-init-hook)
+  :config
+  (with-eval-after-load 'fancy-narrow
+    (if (fboundp 'diminish)
+        (diminish 'fancy-narrow-mode))))
 
 ;; avy
-(use-package avy)
+(leaf avy
+  :ensure t
+  :require t)
 
 ;; avy-zap
-(use-package avy-zap)
+(leaf avy-zap
+  :ensure t
+  :require t)
 
 ;; ace-window
-(use-package ace-window)
+(leaf ace-window
+  :ensure t
+  :require t)
 
 ;; rotate
-(use-package rotate)
+(leaf rotate
+  :ensure t
+  :require t)
 
 ;; fanyi
-(use-package fanyi)
-
-;; olivetti 文档居中
-(use-package olivetti
-  :commands olivetti-mode
-  :config
-  (setq olivetti-body-width 100)
-  (setq olivetti-hide-mode-line t))
+(leaf fanyi
+  :ensure t
+  :require t)
 
 ;; doom-modeline
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-buffer-file-name-style 'relative-to-project))
+(leaf doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1)
+  :require t
+  :setq ((doom-modeline-buffer-file-name-style quote relative-to-project)))
 
 ;; Garbage Collector Magic Hack
-(use-package gcmh
-  :diminish
-  :hook (emacs-startup . gcmh-mode)
-  :init
-  (setq gcmh-idle-delay 'auto
-        gcmh-auto-idle-delay-factor 10
-        gcmh-high-cons-threshold #x1000000)) ; 16MB
+(leaf gcmh
+  :ensure t
+  :hook (emacs-startup-hook)
+  :setq ((gcmh-idle-delay quote auto)
+         (gcmh-auto-idle-delay-factor . 10)
+         (gcmh-high-cons-threshold . 16777216))
+  :config
+  (with-eval-after-load 'gcmh
+    (if (fboundp 'diminish)
+        (diminish 'gcmh-mode))))
 
 (provide 'init-packages)
 ;;; init-packages.el ends here
