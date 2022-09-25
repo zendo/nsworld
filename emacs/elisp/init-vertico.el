@@ -5,121 +5,111 @@
 ;; TODO: ivy-resume  ivy-occur
 
 ;; VERTical Interactive COmpletion
-(use-package vertico
-  :init
+(leaf vertico
+  :ensure t
+  :bind ((vertico-map
+          ("RET" . vertico-directory-enter)
+          ("DEL" . vertico-directory-delete-char)))
+  :config
   (vertico-mode)
-  (vertico-mouse-mode +1)
-
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
-
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
-
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
-
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  ;; (setq vertico-cycle t)
-
-  :bind (:map vertico-map
-              ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-char)))
+  (vertico-mouse-mode 1))
 
 ;; Completion style for matching regexps in any order
-(use-package orderless
-  :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+(leaf orderless
+  :ensure t
+  :pre-setq ((completion-styles quote
+                                (orderless))
+             (completion-category-defaults)
+             (completion-category-overrides quote
+                                            ((file
+                                              (styles partial-completion)))))
+  :require t)
 
 ;; A few more useful configurations...
-(use-package emacs
-  :init
-  ;; Add prompt indicator to `completing-read-multiple'.
-  ;; Alternatively try `consult-completing-read-multiple'.
+(leaf emacs
+  :preface
   (defun crm-indicator (args)
-    (cons (concat "[CRM] " (car args)) (cdr args)))
+    (cons
+     (concat "[CRM] "
+             (car args))
+     (cdr args)))
+
+  :ensure t
+  :hook ((minibuffer-setup-hook . cursor-intangible-mode))
+  :pre-setq ((minibuffer-prompt-properties quote
+                                           (read-only t cursor-intangible t face minibuffer-prompt))
+             (enable-recursive-minibuffers . t))
+  :init
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
-
-  ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t))
+  :require t)
 
 
 ;; Enrich existing commands with completion annotations
-(use-package marginalia
+(leaf marginalia
   :after vertico
-  :custom
-  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-  (marginalia-align 'center)
-  :init
+  :require t
+  :config
   (marginalia-mode))
 
 ;; all-the-icons-completion
-(use-package all-the-icons-completion
-  :after (marginalia all-the-icons)
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  :init
-  (all-the-icons-completion-mode))
+(leaf all-the-icons-completion
+  :ensure t
+  :config
+  (with-eval-after-load 'all-the-icons
+    (eval-after-load 'marginalia
+      '(progn
+         (unless (fboundp 'all-the-icons-completion-marginalia-setup)
+           (autoload #'all-the-icons-completion-marginalia-setup "all-the-icons-completion" nil t))
+         (all-the-icons-completion-mode)
+         (add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)))))
 
 
 ;; Consulting completing-read
-(use-package consult
+(leaf consult
+  :ensure t
   :bind (("C-x b" . consult-buffer)
          ("C-x C-b" . consult-buffer)
          ("C-h a" . consult-apropos)
          ("C-s" . consult-line)
          ("M-y" . consult-yank-pop)
-
          ("C-x C-r" . consult-recent-file)
          ("C-c r" . consult-ripgrep)
          ("C-c b" . consult-bookmark)
-         ("M-m" . consult-mark)
-         ))
+         ("M-m" . consult-mark)))
 (global-set-key [remap find-file-read-only-other-window] 'consult-buffer-other-window)
 
 ;; Mini-Buffer Actions Rooted in Keymaps
-(use-package embark
-  :bind
-  (("C-c C-c" . embark-act)
-   ("C-c C-o" . embark-export)
-   ;; ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h b" . embark-bindings)) ;; alternative for `describe-bindings'
-
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
-
+(leaf embark
+  :ensure t
+  :bind (("C-c C-c" . embark-act)
+         ("C-c C-o" . embark-export)
+         ("C-h b" . embark-bindings))
+  :setq ((prefix-help-command function embark-prefix-help-command))
   :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
+  (with-eval-after-load 'embark
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*" nil
+                   (window-parameters
+                    (mode-line-format . none))))))
 
 ;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :after (embark consult)
-  :demand t ; only necessary if you have the hook below
-  ;; if you want to have consult previews as you move around an
-  ;; auto-updating embark collect buffer
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+;; (leaf embark-consult
+;;   :config
+;;   (use-package-ensure-elpa 'embark-consult
+;;                            '(t)
+;;                            '(:demand t))
+;;   (with-eval-after-load 'consult
+;;     (eval-after-load 'embark
+;;       '(progn
+;;          (require 'embark-consult nil nil)
+;;          (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)))))
 
-
+(leaf embark-consult
+  :ensure t
+  :config
+  (with-eval-after-load 'consult
+    (eval-after-load 'embark
+      '(require 'embark-consult nil nil))))
 
 ;;----------------------------------------------------------------------------
 ;; Functions

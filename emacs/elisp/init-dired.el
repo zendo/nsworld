@@ -3,9 +3,10 @@
 ;;; Code:
 
 ;; all-the-icons-dired
-(use-package all-the-icons-dired
-  :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+(leaf all-the-icons-dired
+  :ensure t
+  :hook (dired-mode-hook)
+  :require t)
 
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer

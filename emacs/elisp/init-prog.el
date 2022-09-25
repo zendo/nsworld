@@ -22,45 +22,59 @@
 
 ;; tree-sitter
 ;; need github connect download
-(use-package tree-sitter
-    :ensure tree-sitter-langs
-    :diminish
-    :hook ((after-init . global-tree-sitter-mode)
-           (tree-sitter-after-on . tree-sitter-hl-mode)))
+(leaf tree-sitter
+  :ensure tree-sitter-langs
+  :commands global-tree-sitter-mode tree-sitter-hl-mode
+  :hook ((after-init-hook . global-tree-sitter-mode)
+         (tree-sitter-after-on-hook . tree-sitter-hl-mode))
+  :config
+  (with-eval-after-load 'tree-sitter
+    (if (fboundp 'diminish)
+        (diminish 'tree-sitter-mode))))
 
 ;; Markdown
-(use-package markdown-mode
+(leaf markdown-mode
+  :ensure t
   :mode (("\\.md\\'" . gfm-mode)
          ("README\\'" . gfm-mode))
   :config
-  (setq markdown-fontify-code-blocks-natively t))
+  (with-eval-after-load 'markdown-mode
+    (setq markdown-fontify-code-blocks-natively t)))
 
 ;; SQL
-(use-package sql-indent
-  :mode "\\.sql\\'"
-  :interpreter ("sql" . sql-mode))
+(leaf sql-indent
+  :ensure t
+  :mode ("\\.sql\\'")
+  :interpreter (("sql" . sql-mode)))
 
 ;; docker
-(use-package dockerfile-mode
-  :mode "Dockerfile\\'")
+(leaf dockerfile-mode
+  :ensure t
+  :mode ("Dockerfile\\'"))
 
 ;; toml
-(use-package toml-mode
-  :mode "\\.toml'")
+(leaf toml-mode
+  :ensure t
+  :mode ("\\.toml'"))
 
 ;; yaml
-(use-package yaml-mode
-  :mode "\\.yml'")
+(leaf yaml-mode
+  :ensure t
+  :mode ("\\.yml'"))
 
 ;; nixos
-(use-package nix-mode
-  :mode "\\.nix'")
+(leaf nix-mode
+  :ensure t
+  :mode ("\\.nix'"))
 
-(use-package nixpkgs-fmt)
+(leaf nixpkgs-fmt
+  :ensure t
+  :require t)
 
 ;; lua
-(use-package lua-mode
-  :mode "\\.lua'")
+(leaf lua-mode
+  :ensure t
+  :mode ("\\.lua'"))
 
 
 
@@ -69,22 +83,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; corfu
-(use-package corfu
-  :custom
-  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  :hook (prog-mode . corfu-mode)
-  :bind (:map corfu-map
-              ("<escape>" . corfu-quit))
-  :init
+(leaf corfu
+  :ensure t
+  :bind ((corfu-map
+          ("<escape>" . corfu-quit)))
+  :hook (prog-mode-hook)
+  :config
+  (let ((custom--inhibit-theme-enable nil))
+    (unless (memq 'use-package custom-known-themes)
+      (deftheme use-package)
+      (enable-theme 'use-package)
+      (setq custom-enabled-themes (remq 'use-package custom-enabled-themes)))
+    (custom-theme-set-variables 'use-package
+                                '(corfu-auto t nil nil "Customized with use-package corfu")))
   (global-corfu-mode))
 
 ;; company
@@ -113,31 +124,44 @@
 ;; (add-to-list 'company-backends #'company-tabnine)
 
 ;; flycheck
-(use-package flycheck
-  :defer t
-  :diminish flycheck-mode
-  :hook (prog-mode . flycheck-mode)
-  :config (setq flycheck-emacs-lisp-load-path 'inherit) ;identified my load-path
-  )
+(leaf flycheck
+  :ensure t
+  :hook (prog-mode-hook)
+  :config
+  (with-eval-after-load 'flycheck
+    (setq flycheck-emacs-lisp-load-path 'inherit)
+    (if (fboundp 'diminish)
+        (diminish 'flycheck-mode))))
 
 ;; yasnippet
-(use-package yasnippet
-  :defer t
-  :diminish yas-minor-mode
-  :init (add-hook 'prog-mode-hook #'yas-minor-mode)
-  :config (yas-reload-all))
-(use-package yasnippet-snippets
-  :after yasnippet
-  :config (yasnippet-snippets-initialize))
+(leaf yasnippet
+  :ensure t
+  :hook ((prog-mode-hook . yas-minor-mode))
+  :config
+  (with-eval-after-load 'yasnippet
+    (yas-reload-all)
+    (if (fboundp 'diminish)
+        (diminish 'yas-minor-mode))))
+(leaf yasnippet-snippets
+  :ensure t
+  :config
+  (with-eval-after-load 'yasnippet
+    (require 'yasnippet-snippets nil nil)
+    (yasnippet-snippets-initialize)))
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/
-(use-package lsp-mode
-  :hook ((python-mode . lsp-deferred)
-         (rust-mode . lsp-deferred))
-  :commands (lsp lsp-deferred))
+(leaf lsp-mode
+  :ensure t
+  :commands lsp-deferred lsp
+  :hook ((python-mode-hook . lsp-deferred)
+         (rust-mode-hook . lsp-deferred)))
 
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(leaf lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+(leaf lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
 
 
 ;; eglot
@@ -148,8 +172,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; rustic https://github.com/brotzeit/rustic
-(use-package rustic
-  :defer t)
+(leaf rustic
+  :ensure t)
 
 ;; (use-package rust-mode
 ;;   :mode "\\.rs\\'"
@@ -173,15 +197,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;; Python ;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package python-mode
-  :mode "\\.py\\'"
-  ;; :hook (python-mode . lsp)
+(leaf python-mode
+  :ensure t
+  :mode ("\\.py\\'")
   :config
-  (setq python-indent-offset 4
-        python-indent 4
-        indent-tabs-mode nil
-        default-tab-width 4
-        python-shell-interpreter "python3"))
+  (with-eval-after-load 'python-mode
+    (setq python-indent-offset 4
+          python-indent 4
+          indent-tabs-mode nil
+          default-tab-width 4
+          python-shell-interpreter "python3")))
 
 ;; (use-package lsp-python-ms
 ;;   :hook (python-mode . (lambda ()
