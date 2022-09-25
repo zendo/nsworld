@@ -2,12 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+;; TODO: 单击键失效
 ;; Treemacs
 (leaf treemacs
   :ensure t
   :bind (("<f1>" . treemacs)
-         (treemacs-mode-map
-          ([mouse-1] . treemacs-single-click-expand-action))))
+         (:treemacs-mode-map
+          ("<mouse-1>" . treemacs-single-click-expand-action))))
 
 ;; Magit
 (leaf magit

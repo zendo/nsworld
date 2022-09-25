@@ -140,13 +140,6 @@
   (call-interactively #'dired-mark-files-regexp)
   (command-execute "tk"))
 
-;; S: hydra body
-(use-package! dired-quick-sort
-  :after dired
-  :when (not IS-WINDOWS)
-  :config
-  (dired-quick-sort-setup))
-
 ;; throw custom file
 (setq-default custom-file (expand-file-name ".custom.el" doom-local-dir))
 (when (file-exists-p custom-file)

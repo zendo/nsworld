@@ -42,50 +42,48 @@
          ("C-S-<return>" . crux-smart-open-line-above)))
 
 ;; prefix map
-;; (leaf leaf-convert
-;;   :config
-;;   (bind-keys :prefix-map file-map :prefix "C-c f"
-;;              ("0" . revert-buffer)
-;;              ("o" . crux-open-with)
-;;              ("s" . save-some-buffers)
-;;              ("S" . crux-sudo-edit)
-;;              ("x" . crux-delete-file-and-buffer)
-;;              ("<f2>" . crux-rename-file-and-buffer)
-;;              :prefix-map code :prefix "C-c c"
-;;              ("f" . nix-mode-format)
-;;              :prefix-map multiple-cursors :prefix "C-c m"
-;;              ("-" . er/mark-inside-quotes)
-;;              ("=" . er/mark-inside-pairs)
-;;              :prefix-map remove-lists :prefix "C-c -"
-;;              ("b" . bookmark-delete)
-;;              ("r" . recentf-edit-list)
-;;              ("p" . project-forget-project)))
+;; (bind-keys :prefix-map file-map :prefix "C-c f"
+;;            ("o" . crux-open-with)
+;;            ("s" . save-some-buffers)
+;;            ("S" . crux-sudo-edit)
+;;            ("x" . crux-delete-file-and-buffer)
+;;            ("<f2>" . crux-rename-file-and-buffer)
+;;            :prefix-map code :prefix "C-c c"
+;;            ("f" . nix-mode-format)
+;;            :prefix-map multiple-cursors :prefix "C-c m"
+;;            ("-" . er/mark-inside-quotes)
+;;            ("=" . er/mark-inside-pairs)
+;;            :prefix-map remove-lists :prefix "C-c -"
+;;            ("b" . bookmark-delete)
+;;            ("r" . recentf-edit-list)
+;;            ("p" . project-forget-project))
 
+(leaf cus-start
+  :bind
+  (("M-+" . text-scale-increase)
+   ("M-_" . text-scale-decrease)
+   ("C-c w x" . ace-swap-window)
+   ("C-c w v" . rotate-layout)
 
-(leaf-keys (("M-+" . text-scale-increase)
-            ("M-_" . text-scale-decrease)
-            ("C-c w x" . ace-swap-window)
-            ("C-c w v" . rotate-layout)
+   ("C-=" . er/expand-region)
+   ("C-." . company-complete)
+   ("C-." . hippie-expand)
 
-            ("C-=" . er/expand-region)
-            ("C-." . company-complete)
-            ("C-." . hippie-expand)
+   ("C-c <SPC>" . project-find-file)
+   ("C-c C-<SPC>" . project-find-file)
+   ("C-c ." . find-file)
+   ("C-c /" . consult-ripgrep)
+   ("C-c ," . project-switch-to-buffer)
+   ("s-d" . dired-jump)
+   ("s-p" . project-switch-project)
+   ("C-;" . comment-line)
+   ("C-\\" . align-regexp)
+   ("C-x \\" . toggle-input-method)
+   ("M-s" . avy-goto-char)
+   ("M-z" . avy-zap-up-to-char-dwim)
 
-            ("C-c <SPC>" . project-find-file)
-            ("C-c C-<SPC>" . project-find-file)
-            ("C-c ." . find-file)
-            ("C-c /" . consult-ripgrep)
-            ("C-c ," . project-switch-to-buffer)
-            ("s-d" . dired-jump)
-            ("s-p" . project-switch-project)
-            ("C-;" . comment-line)
-            ("C-\\" . align-regexp)
-            ("C-x \\" . toggle-input-method)
-            ("M-s" . avy-goto-char)
-            ("M-z" . avy-zap-up-to-char-dwim)
-
-            ("C-x C-d" . dired-jump)
-            ))
+   ("C-x C-d" . dired-jump)
+   ))
 
 
 ;; view-mode key
