@@ -178,17 +178,24 @@
 (leaf rotate
   :ensure t)
 
-;; fanyi
 (leaf fanyi
   :ensure t
   :bind (("C-c y" . fanyi-dwim2)))
 
-;; doom-modeline
 (leaf doom-modeline
   :ensure t
   :init
   (doom-modeline-mode 1)
   :setq ((doom-modeline-buffer-file-name-style quote relative-to-project)))
+
+
+;; (leaf centaur-tabs
+;;   :ensure t
+;;   :init
+;;   (setq centaur-tabs-set-icons nil
+;;         centaur-tabs-style "wave"
+;;         centaur-tabs-set-modified-marker t
+;;         centaur-tabs-modified-marker "*"))
 
 ;; Garbage Collector Magic Hack
 (leaf gcmh

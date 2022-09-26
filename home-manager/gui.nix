@@ -13,7 +13,7 @@ in {
     # mprober
     # paper
     # converseen
-    gnome-decoder
+    # gnome-decoder
     # app-icon-preview
     # done
     # textpieces

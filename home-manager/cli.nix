@@ -50,6 +50,7 @@
     # airgeddon # wifi crack
     magic-wormhole-rs
     zssh
+    calcurse
     pure-prompt
 
     # Developing

@@ -1,8 +1,6 @@
 { lib
-, stdenv
- , clangStdenv
+, clangStdenv
 , fetchFromGitLab
-, clang
 , libclang
 , rustPlatform
 , meson
@@ -21,7 +19,7 @@
 , appstream-glib
 , desktop-file-utils
 }:
-# clangStdenv
+
 clangStdenv.mkDerivation rec {
   pname = "gnome-decoder";
   version = "0.3.1";

@@ -98,9 +98,11 @@
       proxy-switcher
       just-perfection
       rocketbar
+      space-bar
+      gtile
+      pop-shell
       # arcmenu
       # gnome-clipboard
-      # pop-shell
       # logo-menu
       # kimpanel
       # pixel-saver

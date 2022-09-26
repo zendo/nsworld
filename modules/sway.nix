@@ -1,8 +1,8 @@
-# https://github.com/selfuryon/nixos-config/blob/634289c150da79a3d9eda0007247721fc90ad4f7/users/syakovlev/features/sway-desktop/sway.nix
-# wip
 {
+  config,
   pkgs,
   lib,
+  username,
   ...
 }: {
   services.xserver = {
@@ -10,81 +10,102 @@
     excludePackages = [
       pkgs.xterm
     ];
-
-    displayManager = {
-      gdm.enable = true;
-      # defaultSession = "plasmawayland";
-    };
   };
 
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true; # so that gtk works properly
+    # extraSessionCommands = ''
+    # '';
     extraPackages = with pkgs; [
-      swappy
+      swappy # screenshot annotation editor
       swaybg # wallpaper tool
+      libnotify # notify-send
       swayidle
       swaylock
       swaylock-effects
       waybar # status bar
-      kanshi # autorandr
-      dunst # notification daemon
-      autotiling # https://github.com/nwg-piotr/autotiling
-      wlsunset
+      wofi # quick run
+      wofi-emoji
+      wlogout
+      wlsunset # nightlight
       wl-clipboard
       wf-recorder
-      wdisplays
+      wl-gammactl
+      cliphist
+      swaynotificationcenter
+      mako  # , notify-send "sth"
       grim # grab image
-      wofi
-      mako
-      dex
-      viewnior
+      slurp # select region
       pavucontrol
+      playerctl # media player control
+      pamixer # volume control
       networkmanagerapplet
-      eww
+      kanshi # autorandr
+      autotiling # https://github.com/nwg-piotr/autotiling
+      wdisplays
+      brightnessctl
+      # cinnamon.nemo
+      gnome.nautilus
+      gnome.file-roller
+      gnome-text-editor
+      # gnome.eog
+      # gthumb
+      libsForQt5.gwenview
+      evince
+      gparted
     ];
   };
 
-  xdg.portal = {
-    enable = true;
-    # gtkUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
+  services = {
+    gvfs.enable = true;
+    upower.enable = true;
+    geoclue2.enable = true;
+    gnome.gnome-keyring.enable = true;
   };
-  # xdg.portal.enable = true;
-  # xdg.portal.wlr.enable = true;
+
+  qt5 = {
+    enable =  true;
+    platformTheme = "gnome";
+    style = "adwaita";
+  };
 
   # programs.qt5ct.enable = true;
 
-  environment.sessionVariables = {
-    XDG_SESSION_TYPE = "wayland";
-    XDG_CURRENT_DESKTOP = "sway";
-    SDL_VIDEODRIVER = "wayland";
-    QT_QPA_PLATFORM = "wayland";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-  };
-
   environment.systemPackages = with pkgs; [
-    xdg_utils
-    # polkit agent
-    polkit_gnome
-    # screen brightness
-    brightnessctl
+  ];
+
+  environment.pathsToLink = [
+    "/share/zsh" # for zsh completion with hm
   ];
 
   i18n.inputMethod = {
-    # enabled = "fcitx5";
-    # fcitx5.enableRimeData= true;
-    # fcitx5.addons = with pkgs; [
-    #   fcitx5-rime
-    #   # fcitx5-chinese-addons
-    # ];
-
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      rime
-      # libpinyin
-      # typing-booster
+    enabled = "fcitx5";
+    fcitx5.enableRimeData= true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime
+      # fcitx5-chinese-addons
     ];
+  };
+
+  home-manager.users.${username} = {pkgs, config, ...}: {
+  #   # xdg.configFile."hypr/hyprland.conf".source = ../dotfiles/hyprland.conf;
+  #   # home.sessionVariables = {
+  #   #   MOZ_ENABLE_WAYLAND = "1";
+  #   #   XDG_SESSION_TYPE = "wayland";
+  #   #   XDG_CURRENT_DESKTOP = "sway";
+  #   # };
+
+  #   # fix tiny cursor
+    home.pointerCursor = {
+      name = "Vanilla-DMZ-AA";
+      package = pkgs.vanilla-dmz;
+      size = 128;
+    };
+
+  #   home.packages = with pkgs; [
+  #     yafetch
+  #     freshfetch
+  #   ];
   };
 }

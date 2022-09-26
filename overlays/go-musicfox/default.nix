@@ -1,12 +1,8 @@
 { lib
 , fetchFromGitHub
 , buildGoModule
-, mpv
 , makeWrapper
 , installShellFiles
-, nix-update-script
-, testers
-, go-musicfox
 }:
 
 buildGoModule rec {
@@ -16,26 +12,22 @@ buildGoModule rec {
   src = fetchFromGitHub {
     owner = "anhoder";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-uXCzUxDod6HpE2cQBTBs9+maSjNxxX2uBrbxCo+eBbA=";
+    # rev = "v${version}";
+    rev = "709f2bf1d1cef1e24f528dacf565b17a5fd00072";
+    hash = "sha256-eQ9UlxZo51I1+jnafHbfXd4YS220Uq4hvEfZB1j0mQg=";
   };
 
   # subPackages = [ "cmd" ];
 
   # proxyVendor = true;
 
-  vendorHash = "sha256-3qW14KTASk15utv6pNQUyaYRvI3XMq0ob28r684jjw8=";
+  deleteVendor = true;
 
-  # preBuild = ''
-  #   export CGO_ENABLED=1
-  # '';
+  vendorHash = "sha256-P9pj4ez+fgC0H75C6kZBPfnLpfrz8XPfF/pNjZkySlc=";
+
   CGO_ENABLED = 0;
 
-  # doCheck = false;
-
-  # prePhases = ''
-  #   rm -fr vendor
-  # '';
+  doCheck = false;
 
   ldflags = [
     "-s"
@@ -55,15 +47,6 @@ buildGoModule rec {
   #     --fish <($out/bin/radioboat completion fish) \
   #     --zsh <($out/bin/radioboat completion zsh)
   # '';
-
-  # passthru = {
-  #   updateScript = nix-update-script { attrPath = pname; };
-  #   tests.version = testers.testVersion {
-  #     package = radioboat;
-  #     command = "radioboat version";
-  #     version = version;
-  #   };
-  # };
 
   meta = with lib; {
     description = "A terminal web radio client";

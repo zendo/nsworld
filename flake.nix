@@ -69,16 +69,14 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
+             ./modules/gnome.nix
+            # ./modules/hyprland.nix
             # ./modules/kde.nix
             # ./modules/sway.nix
-
-            # ./modules/hyprland.nix
-            # hyprland.nixosModules.default
-            # {programs.hyprland.enable = true;}
+            # ./modules/wayfire.nix
 
             ./overlays/v2raya/v2raya.nix
-            {services.v2raya.enable = true;}
+            # {services.v2raya.enable = true;}
 
             ({
               config,

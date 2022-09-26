@@ -13,6 +13,7 @@
 ;; conf-mode
 (add-to-list 'auto-mode-alist
              '("bashrc\\'" . conf-mode))
+(global-set-key [remap conf-space-keywords] #'project-find-file)
 
 ;; compilation
 (setq compilation-ask-about-save nil  ;Just save before compiling

@@ -31,6 +31,8 @@ nix-template go -n --from-url github.com/s0md3v/Smap
 
     proxyVendor = true;
 
+    deleteVendor = true;
+
     vendorSha256 = "sha256-X3KiqaiOQYQBfVckh50C+4oxIVN6gXyNuQtBwGvjdFQ=";
 
     ldflags = [

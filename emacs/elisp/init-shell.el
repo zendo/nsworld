@@ -19,11 +19,11 @@
     :hook ((shell-dynamic-complete-functions . bash-completion-dynamic-complete))))
 
 ;; exec-path-from-shell
-(leaf exec-path-from-shell
-  :ensure t
-  :when (and window-system (not (eq system-type 'gnu/linux)))
-  :defun exec-path-from-shell-initialize
-  :config (exec-path-from-shell-initialize))
+;; (leaf exec-path-from-shell
+;;   :ensure t
+;;   :when (and window-system (not (eq system-type 'gnu/linux)))
+;;   :defun exec-path-from-shell-initialize
+;;   :config (exec-path-from-shell-initialize))
 
 ;; vterm
 (when (eq system-type 'gnu/linux)
@@ -36,10 +36,11 @@
 ;; shell-pop
 (leaf shell-pop
   :ensure t
+  :init (setq shell-pop-window-size 30
+        shell-pop-last-shell-buffer-index 0
+        shell-pop-shell-type '("shell" "*shell: <>*" (lambda () (vterm))))
   :bind (([f2] . shell-pop))
-  :setq ((shell-pop-window-size . 30)
-         (shell-pop-shell-type . "vterm")
-         ))
+  )
 
 (provide 'init-shell)
 ;;; init-shell.el ends here

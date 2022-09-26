@@ -12,6 +12,7 @@
 , libgee
 , libadwaita
 , json-glib
+, blueprint-compiler
 , gtksourceview5
 , gobject-introspection
 , wrapGAppsHook4
@@ -24,13 +25,13 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "textpieces";
-  version = "3.1.0";
+  version = "3.2.0";
 
   src = fetchFromGitHub {
     owner = "liferooter";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-pc/pJ103N+ohExHeU17B5boNbQnEy09sbnG67PqZqLY=";
+    hash = "sha256-zolhKsSPJI34EeAv+xE1ievy/RyrXY4wIxUgLQ8T+JM=";
   };
 
   nativeBuildInputs = [
@@ -39,6 +40,7 @@ stdenv.mkDerivation rec {
     pkg-config
     pythonEnv
     vala
+    blueprint-compiler
     wrapGAppsHook4
     appstream-glib
     desktop-file-utils

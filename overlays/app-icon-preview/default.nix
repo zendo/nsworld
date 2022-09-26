@@ -66,6 +66,6 @@ stdenv.mkDerivation rec {
     homepage = "https://gitlab.gnome.org/World/design/app-icon-preview";
     platforms = platforms.linux;
     license = licenses.gpl3Plus;
-    maintainers = with maintainers; [zendo];
+    maintainers = with maintainers; [ zendo ];
   };
 }

@@ -28,7 +28,7 @@
   };
   # home.file.".doom.d".source = ../emacs/doom;
   # home.file = {
-  #   ".emacs.d/elisp".source = ../emacs/elsip;
+  #   ".emacs.d/elisp".source = ../emacs/elisp;
   #   ".emacs.d/init.el".source = ../emacs/init.el;
   #   ".emacs.d/early-init.el".source = ../emacs/early-init.el;
   # };

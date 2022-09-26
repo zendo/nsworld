@@ -11,6 +11,7 @@ final: prev: {
   done = prev.callPackage ./done {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
+  wpaperd = prev.callPackage ./wpaperd {};
   gnome-decoder = prev.callPackage ./gnome-decoder {
     inherit (prev.gst_all_1) gstreamer gst-plugins-base;
     gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
@@ -48,6 +49,10 @@ final: prev: {
       postFixup = ''
         cp -r $out/usr/share $out/share '';
     });
+
+  waybar-hyprland = prev.waybar.overrideAttrs (oldAttrs: {
+    mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+  });
 
   # libadwaita-git = prev.libadwaita.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGitLab {
