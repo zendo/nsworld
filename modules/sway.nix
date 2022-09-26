@@ -21,27 +21,33 @@
     enable = true;
     wrapperFeatures.gtk = true; # so that gtk works properly
     extraPackages = with pkgs; [
-      swaylock
-      swayidle
       swappy
-      swaylock-effects # lockscreen
+      swaybg # wallpaper tool
+      swayidle
+      swaylock
+      swaylock-effects
       waybar # status bar
       kanshi # autorandr
       dunst # notification daemon
       autotiling # https://github.com/nwg-piotr/autotiling
+      wlsunset
       wl-clipboard
+      wf-recorder
       wdisplays
+      grim # grab image
       wofi
       mako
       dex
+      viewnior
       pavucontrol
       networkmanagerapplet
+      eww
     ];
   };
 
   xdg.portal = {
     enable = true;
-    gtkUsePortal = true;
+    # gtkUsePortal = true;
     extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
   };
   # xdg.portal.enable = true;

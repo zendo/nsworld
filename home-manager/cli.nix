@@ -43,6 +43,7 @@
     aspellDicts.en
     asciinema # record the terminal
     # distrobox
+    light
     viu # image viewer
     graphviz
     paperoni # save html

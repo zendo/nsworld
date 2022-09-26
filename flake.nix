@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     # devshell.url = "github:numtide/devshell";
@@ -38,6 +43,7 @@
     nixos-hardware,
     home-manager,
     emacs-overlay,
+    hyprland,
     nur,
     musnix,
     nixos-wsl,
@@ -65,6 +71,11 @@
           extraModules = [
             ./modules/gnome.nix
             # ./modules/kde.nix
+            # ./modules/sway.nix
+
+            # ./modules/hyprland.nix
+            # hyprland.nixosModules.default
+            # {programs.hyprland.enable = true;}
 
             ./overlays/v2raya/v2raya.nix
             {services.v2raya.enable = true;}
