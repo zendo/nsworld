@@ -59,6 +59,7 @@ tooltip {
 #custom-logout,
 #custom-weather,
 #custom-caffeine,
+#custom-playerctl,
 #clock,
 #battery,
 #pulseaudio,
@@ -94,6 +95,11 @@ tooltip {
   color: #f38ba8;
 }
 
+#custom-playerctl {
+  border-radius: 10px;
+  margin-left: 4px;
+}
+
 #custom-logout {
   color: #f5c2e7;
   border-radius: 10px;
@@ -104,6 +110,7 @@ tooltip {
 #custom-weather {
   background-color: #1e1e2e;
   margin-left: 4px;
+  margin-right: 4px;
   border-radius: 10px 10px 10px 10px;
 }
 

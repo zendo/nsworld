@@ -16,6 +16,7 @@
     # System Monitor
     btop
     ctop # containers monitor
+    htop
     powertop
     bottom # btm
     psmisc # pstree

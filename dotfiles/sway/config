@@ -16,23 +16,23 @@ output eDP-1 resolution 2880x18000@90Hz position 0,0 scale 2.0
 
 # swaymsg -t get_inputs
 input "*" {
-      # xkb_layout "us,cn"
-      # xkb_variant "colemak,,typewriter"
-      xkb_options "ctrl:swapcaps"
-      # repeat_rate 30
-      # repeat_delay 300
+  # xkb_layout "us,cn"
+  # xkb_variant "colemak,,typewriter"
+  xkb_options "ctrl:swapcaps"
+  # repeat_rate 30
+  # repeat_delay 300
 }
 
 input "type:touchpad" {
-      tap enabled
-      natural_scroll enabled
-      # accel_profile "flat"      #default
-      # pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
+  tap enabled
+  natural_scroll enabled
+  # accel_profile "flat"      #default
+  # pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 }
 
 # Status bar
 bar {
-    swaybar_command waybar
+  swaybar_command waybar
 }
 
 # Wallpaper
@@ -161,12 +161,12 @@ bindsym $mod+g output eDP-1 disable
 bindsym $mod+y output eDP-1 enable
 
 mode "resize" {
-    bindsym $left resize shrink width 30px
-    bindsym $down resize grow height 30px
-    bindsym $up resize shrink height 30px
-    bindsym $right resize grow width 30px
+  bindsym $left resize shrink width 30px
+  bindsym $down resize grow height 30px
+  bindsym $up resize shrink height 30px
+  bindsym $right resize grow width 30px
 
-    bindsym Ctrl+c mode "default"
+  bindsym Ctrl+c mode "default"
 }
 bindsym $mod+r mode "resize"
 

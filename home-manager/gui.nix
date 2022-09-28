@@ -25,7 +25,7 @@ in {
     proxychains-ng
     # clash
     # nur.repos.linyinfeng.clash-for-windows
-    # foot
+    foot
     kitty
     # alacritty
     # wezterm

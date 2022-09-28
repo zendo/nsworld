@@ -20,40 +20,42 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Hypr
     waybar-hyprland
+    # hyprpaper # wallpaper
+    # hyprpicker # color picker
+
+    # Sway
     swappy # screenshot annotation editor
     swaybg # wallpaper tool
-    libnotify # notify-send
     swayidle
     # gtklock # still in pr
     swaylock
     swaylock-effects
+    swaynotificationcenter
+    # mako  # , notify-send "sth"
+    wlogout
+
+    # waybar
     wofi # quick run
     wofi-emoji
-    wlogout
-    wlsunset # nightlight
     wl-clipboard
     wf-recorder
-    wl-gammactl
-    # clipman
     cliphist
-    swaynotificationcenter
-    mako  # , notify-send "sth"
-    grim # grab image
-    slurp # select region
-    pavucontrol
-    playerctl # media player control
-    pamixer # volume control
+    libnotify # notify-send
+
     networkmanagerapplet
     kanshi # autorandr
     autotiling # https://github.com/nwg-piotr/autotiling
-    wdisplays
-    wev # wayland event view
-    wlr-randr
-    light
-    brightnessctl # same like light
     bluetuith
     blueberry
+
+    # Display
+    light
+    brightnessctl # same like light
+    wlsunset # nightlight
+    wl-gammactl
+    wdisplays
 
     # cinnamon.nemo
     gnome.nautilus
@@ -64,10 +66,17 @@
     libsForQt5.gwenview
     evince
     gparted
-    # polkit_gnome
 
-    hyprpaper
-    # hyprpicker # color picker
+    # Media
+    grim # grab image
+    slurp # select region
+    pavucontrol
+    playerctl # media player control
+    pamixer # volume control
+
+    # wlr tools
+    wev # wayland event view
+    wlr-randr
   ];
 
   services = {
@@ -86,18 +95,16 @@
 
   environment.pathsToLink = [
     "/share/zsh" # for zsh completion with hm
-    # "/libexec"  # for polkit
   ];
-
-  # environment.etc."polkit-gnome-authentication-agent-1".source = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-
-  # CLUTTER_BACKEND = "wayland";
-  # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-  # MOZ_ENABLE_WAYLAND = "1";
-  # QT_QPA_PLATFORM = "wayland;xcb";
 
   security.polkit.enable = true;
   security.pam.services.swaylock = {};
+
+  # Required for flatpak with windowmanagers
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -108,11 +115,6 @@
     ];
   };
 
-  # xdg.portal = { # Required for flatpak with windowmanagers
-  #   enable = true;
-  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
-
   home-manager.users.${username} = {pkgs, config, ...}: {
     # xdg.configFile."hypr/hyprland.conf".source = ../dotfiles/hyprland.conf;
     # home.sessionVariables = {
@@ -121,7 +123,7 @@
     #   XDG_CURRENT_DESKTOP = "sway";
     # };
 
-    # fix tiny cursor
+    # Fix tiny cursor
     home.pointerCursor = {
       name = "Vanilla-DMZ-AA";
       package = pkgs.vanilla-dmz;
@@ -134,19 +136,19 @@
     ];
 
     # systemd.user.services.polkit-gnome = {
-	  #   Unit = {
-	  #     Description = "PolicyKit Authentication Agent";
-	  #     After = [ "graphical-session-pre.target" ];
-	  #     PartOf = [ "graphical-session.target" ];
-	  #   };
+  #   Unit = {
+  #     Description = "PolicyKit Authentication Agent";
+  #     After = [ "graphical-session-pre.target" ];
+  #     PartOf = [ "graphical-session.target" ];
+  #   };
 
-	  #   Service = {
-	  #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-	  #   };
+  #   Service = {
+  #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #   };
 
-	  #   Install = {
-	  #     WantedBy = [ "graphical-session.target" ];
-	  #   };
-	  # };
+  #   Install = {
+  #     WantedBy = [ "graphical-session.target" ];
+  #   };
+  # };
   };
 }

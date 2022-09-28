@@ -28,7 +28,7 @@ window {
 }
 
 #outer-box {
-  padding: 2em;
+  padding: 1em;
 }
 
 #scroll {
@@ -37,7 +37,7 @@ window {
 
 #entry {
   padding: 1em;
-  margin: .25rem;
+  margin: .1rem;
   border-radius: 0px;
   border: none;
   box-shadow: inset 0rem 0px rgba(0, 0, 0, 0);

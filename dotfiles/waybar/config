@@ -1,11 +1,17 @@
 {
   "layer": "top",
-  "position": "top", 
-  "height": 28,
+  "output": "eDP-1",
+
+  "height": 30,
+  "position": "top",
   
-  "modules-left":   ["wlr/workspaces", "sway/workspaces","sway/mode","hyprland/window"],
+  "modules-left":   ["wlr/workspaces"],
   "modules-center": ["clock", "custom/playerctl"],
-  "modules-right":  ["tray", "pulseaudio", "backlight", "battery", "custom/logout"],
+  "modules-right":  ["tray",
+                     "pulseaudio",
+                     "backlight",
+                     "battery",
+                     "custom/logout"],
 
   "wlr/workspaces": {
     "disable-scroll": true,
@@ -37,12 +43,12 @@
       "10": "",
       "default": "",
       "active": ""
-    }*/
+      }*/
   },
 
   "sway/mode": {
-  "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-  "tooltip": false
+    "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
+    "tooltip": false
   },
 
   "sway/window": {
@@ -55,22 +61,63 @@
     "disable-scroll": true,
     "format": "{icon} {name}",
     "format-icons": {
-    "1:www": "龜", // Icon: firefox-browser
-    "2:mail": "", // Icon: mail
-    "3:editor": "", // Icon: code
-    "4:terminals": "", // Icon: terminal
-    "5:portal": "", // Icon: terminal
-    "urgent": "",
-    "focused": "",
-    "default": ""
+      "1:www": "龜", // Icon: firefox-browser
+      "2:mail": "", // Icon: mail
+      "3:editor": "", // Icon: code
+      "4:terminals": "", // Icon: terminal
+      "5:portal": "", // Icon: terminal
+      "urgent": "",
+      "focused": "",
+      "default": ""
     }
-},
+  },
+
+  "hyprland/window": {
+    "format": "👉 {}"
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "﬙ {usage}%",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "on-click": "swaymsg exec \\$term_float htop"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": " {}%",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "on-click": "swaymsg exec \\$term_float htop"
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "零",
+      "deactivated": "鈴"
+    }
+  },
+
+  "temperature": {
+    "critical-threshold": 90,
+    "interval": 5,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": ["", "", ""],
+    "tooltip": false,
+    "on-click": "swaymsg exec \"\\$term_float watch sensors\""
+  },
 
   "custom/caffeine": {
     "exec": "~/.config/waybar/scripts/caffeine.sh",
     "return-type": "json",
     "interval": 3,
-    "format-icons": ["❄️", ""],
+    "format-icons": ["❄️", "", "",  "", ""],
     "format": "{icon}"
   },
 
@@ -86,10 +133,16 @@
     "exec": "sh $HOME/.config/waybar/scripts/weather.sh",
   },
 
-  "hyprland/window": {
-    "format": "👉 {}"
+  "custom/playerctl": {
+    "format": "  {}",
+    "max-length": 60,
+    "interval": 5, // Remove this if your script is endless and write in loop
+    "exec": "$HOME/.config/waybar/scripts/playerctl.sh 2> /dev/null",
+    "tooltip": false,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next"
   },
-
 
   "custom/language": {
     "exec": "cat /tmp/kb_layout",
@@ -108,7 +161,8 @@
     "format-icons": ["🔅","🔆"],
     "on-scroll-up": "brightnessctl set 1%+",
     "on-scroll-down": "brightnessctl set 1%-",
-    "min-length": 6
+    "min-length": 6,
+    "on-click": "sh $HOME/.config/waybar/scripts/sunset.sh"
   },
 
   "battery": {
@@ -121,15 +175,16 @@
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
-    "tooltip-format": "{capacity}%",
+    //"tooltip-format": "{capacity}%",
+    "tooltip": true,
     "format-icons": ["", "", "", "", ""]
   },
 
   "clock": {
-   "timezone": "Asia/Shanghai",
-   "on-click": "calcurse",
-   "format": "{: %R   %m/%d}",
-   "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "timezone": "Asia/Shanghai",
+    "on-click": "calcurse",
+    "format": "{: %R   %m/%d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
 
   "network": {
