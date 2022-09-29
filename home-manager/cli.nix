@@ -99,7 +99,6 @@
 
     # Game for fun
     cava # Music Visualizer
-    # confetty
     # pipes-rs
     # cbonsai
     # hollywood

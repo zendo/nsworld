@@ -17,7 +17,6 @@ final: prev: {
   v2raya = prev.callPackage ./v2raya {};
   mabel = prev.callPackage ./mabel {};
   go-musicfox = prev.callPackage ./go-musicfox {};
-  confetty = prev.callPackage ./confetty {};
 
   # Python
   whatip = prev.callPackage ./whatip {};
