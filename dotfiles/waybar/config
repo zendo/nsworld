@@ -5,7 +5,7 @@
   "height": 30,
   "position": "top",
   
-  "modules-left":   ["wlr/workspaces"],
+  "modules-left":   ["wlr/workspaces", "sway/workspaces"],
   "modules-center": ["clock", "custom/playerctl"],
   "modules-right":  ["tray",
                      "pulseaudio",
@@ -61,11 +61,11 @@
     "disable-scroll": true,
     "format": "{icon} {name}",
     "format-icons": {
-      "1:www": "龜", // Icon: firefox-browser
-      "2:mail": "", // Icon: mail
-      "3:editor": "", // Icon: code
-      "4:terminals": "", // Icon: terminal
-      "5:portal": "", // Icon: terminal
+      "1:www": "",
+      "2:mail": "",
+      "3:editor": "",
+      "4:terminals": "",
+      "5:portal": "",
       "urgent": "",
       "focused": "",
       "default": ""
@@ -74,6 +74,13 @@
 
   "hyprland/window": {
     "format": "👉 {}"
+  },
+
+  "clock": {
+    "timezone": "Asia/Shanghai",
+    "on-click": "calcurse",
+    "format": "{: %R   %m/%d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>"
   },
 
   "cpu": {
@@ -178,13 +185,6 @@
     //"tooltip-format": "{capacity}%",
     "tooltip": true,
     "format-icons": ["", "", "", "", ""]
-  },
-
-  "clock": {
-    "timezone": "Asia/Shanghai",
-    "on-click": "calcurse",
-    "format": "{: %R   %m/%d}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
 
   "network": {

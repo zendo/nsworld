@@ -47,9 +47,9 @@ final: prev: {
         cp -r $out/usr/share $out/share '';
     });
 
-  waybar-hyprland = prev.waybar.overrideAttrs (oldAttrs: {
-    mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-  });
+  # waybar-hyprland = prev.waybar.overrideAttrs (oldAttrs: {
+  #   mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+  # });
 
   # libadwaita-git = prev.libadwaita.overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGitLab {

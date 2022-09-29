@@ -1,4 +1,12 @@
-# Configure keyboard input
+## Variable
+set $term kitty
+set $float_term foot
+set $editor emacs
+set $browser firefox
+set $filemanager nautilus
+set $note paper
+set $calendar qalculate-gtk
+set $wallpaper ~/Pictures/Wallpaper/night_tower.jpg
 
 # Monitors
 set $Mon1 eDP-1
@@ -30,28 +38,22 @@ input "type:touchpad" {
   # pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 }
 
+# Wallpaper
+output "*" bg $wallpaper fill
+
 # Status bar
 bar {
   swaybar_command waybar
 }
 
-# Wallpaper
-output "*" bg ~/Pictures/Wallpaper/night_tower.jpg fill
-
-# exec systemctl --user import-environment
-# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-# exec autotiling
-exec fcitx5 -rd
+# -------===[ Autostart ]===-------
+exec autotiling
 exec swaync
 exec nm-applet --indicator
+exec blueman-applet
+exec fcitx5 -rd
 exec wlsunset -l 22 -L 114
 exec wl-paste --watch cliphist store
-# exec --no-starup-id /run/current-system/sw/lib/polkit-1/polkit-agent-helper-1
-# exec ck-launch-session dbus-launch --sh-syntax --exit-with-session sway
-# exec --no-startup-id systemctl --user import-environment XDG_SESSION_PATH WAYLAND_DISPLAY
-# exec --no-startup-id /run/current-system/sw/libexec/xdg-desktop-portal -r
-# exec --no-startup-id /run/current-system/sw/libexec/xdg-desktop-portal-wlr -r
-
 exec swayidle -w \
   timeout 200 'brightnessctl -s s 10%' \
      resume 'brightnessctl -r' \
@@ -61,33 +63,19 @@ exec swayidle -w \
      resume 'swaymsg "output * dpms on" && brightnessctl -r' \
   before-sleep 'swaylock -f -c 000000'
 
+exec --no-startup-id  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec --no-startup-id systemctl --user import-environment XDG_SESSION_PATH WAYLAND_DISPLAY
+
+# Polkit daemon
+# exec mate-polkit
+exec --no-startup-id /etc/polkit-gnome-authentication-agent-1
+
 
 # Daemons
 # exec_always
 
-### Variables
+# -------===[ Keybindings ]===-------
 set $mod Mod4
-set $left h
-set $down j
-set $up k
-set $right l
-set $term kitty
-set $browser firefox
-
-# Media keys
-# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
-# bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-
-bindsym XF86AudioRaiseVolume exec pamixer -i 5
-bindsym XF86AudioLowerVolume exec pamixer -d 5
-bindsym XF86AudioMute exec pamixer -t
-bindsym XF86AudioMicMute exec pamixer --source 63 -t
-
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-
-bindsym XF86Search exec wofi
 
 # Application Shortcuts
 bindsym $mod+Return exec $term
@@ -109,23 +97,23 @@ bindsym $mod+Shift+r reload
 
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 bindsym $mod+b workspace prev
 bindsym $mod+n workspace next
 
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
-bindsym $mod+Ctrl+$left move workspace to output left
-bindsym $mod+Ctrl+$down move workspace to output down
-bindsym $mod+Ctrl+$up move workspace to output up
-bindsym $mod+Ctrl+$right move workspace to output right
+# bindsym $mod+Ctrl+Left move workspace to output left
+# bindsym $mod+Ctrl+Down move workspace to output down
+# bindsym $mod+Ctrl+Up move workspace to output up
+# bindsym $mod+Ctrl+Right move workspace to output right
 
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -161,15 +149,37 @@ bindsym $mod+g output eDP-1 disable
 bindsym $mod+y output eDP-1 enable
 
 mode "resize" {
-  bindsym $left resize shrink width 30px
-  bindsym $down resize grow height 30px
-  bindsym $up resize shrink height 30px
-  bindsym $right resize grow width 30px
+  # bindsym $left resize shrink width 30px
+  # bindsym $down resize grow height 30px
+  # bindsym $up resize shrink height 30px
+  # bindsym $right resize grow width 30px
 
   bindsym Ctrl+c mode "default"
 }
 bindsym $mod+r mode "resize"
 
+# bindm=SUPER,mouse:272,movewindow
+# bindm=SUPER,mouse:273,resizewindow
+
+# Swaylock
+bindsym $mod+l exec swaylock -i $wallpaper --indicator-idle-visible --indicator-radius 160 --indicator-thickness 10
+
+# Screenshots
+bindsym Print exec grim ~/Pictures/screenshot_$(date +'%F-%T.png') && notify-send Screenshot "Full Screen Captured"
+bindsym $mod+Shift+s exec grim -g "$(slurp)" ~/Pictures/screenshot_region_$(date +'%F-%T.png') && notify-send Screenshot "Region Screen Captured"
+
+# Brightness
+bindsym XF86MonBrightnessDown exec light -U 5%
+bindsym XF86MonBrightnessUp exec light -A 5%
+
+# Volume
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioMute exec pamixer -t
+bindsym XF86AudioMicMute exec pamixer --source 63 -t
+
+# MISC
+bindsym XF86Search exec wofi
 
 # Cosmetics
 default_border pixel 2
@@ -177,8 +187,10 @@ default_border pixel 2
 gaps inner 4
 gaps outer 4
 
-# class               border    background   text        indicator   child_border
-client.focused          #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
-client.focused_inactive #80a0ff     #303030     #c6c6c6     #80a0ff     #80a0ff
-client.unfocused        #80a0ff     #080808     #c6c6c6     #80a0ff     #303030
-client.urgent           #80a0ff     #80a0ff     #080808     #80a0ff     #80a0ff
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2

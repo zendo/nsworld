@@ -13,6 +13,8 @@
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
 
+;; https://github.com/VitalyAnkh/config/blob/master/doom/config.org
+
 (load! "keybindings")
 (load! "functions")
 
