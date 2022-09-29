@@ -12,15 +12,12 @@ final: prev: {
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   wpaperd = prev.callPackage ./wpaperd {};
-  gnome-decoder = prev.callPackage ./gnome-decoder {
-    inherit (prev.gst_all_1) gstreamer gst-plugins-base;
-    gst-plugins-bad = prev.gst_all_1.gst-plugins-bad.override {enableZbar = true;};
-  };
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
   mabel = prev.callPackage ./mabel {};
   go-musicfox = prev.callPackage ./go-musicfox {};
+  confetty = prev.callPackage ./confetty {};
 
   # Python
   whatip = prev.callPackage ./whatip {};

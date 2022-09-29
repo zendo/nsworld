@@ -13,7 +13,6 @@ in {
     # mprober
     # paper
     # converseen
-    # gnome-decoder
     # app-icon-preview
     # done
     # textpieces
@@ -82,6 +81,7 @@ in {
     # gcolor3
     # wl-color-picker
 
+    # gnome-decoder
     qbittorrent
     meld
     # deja-dup

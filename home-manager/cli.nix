@@ -96,6 +96,12 @@
     nix-top
     # nvfetcher
     shellcheck
+
+    # Game for fun
+    # confetty
+    # pipes-rs
+    # cbonsai
+    # hollywood
   ];
 
   manual.manpages.enable = false;
