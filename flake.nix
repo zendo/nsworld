@@ -69,8 +69,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-             ./modules/gnome.nix
-            # ./modules/wm-hyprland.nix
+             # ./modules/gnome.nix
+            ./modules/wm-hyprland.nix
             # ./modules/kde.nix
             # ./modules/wm-sway.nix
 
@@ -145,10 +145,8 @@
           system = "x86_64-linux";
           specialArgs = {inherit inputs username;};
           modules = [
-            "${inputs.nixos-wsl}/configuration.nix"
-            ./modules/nix.nix
-            ./modules/fonts.nix
             ./hosts/wsl.nix
+            inputs.nixos-wsl.nixosModules.wsl
 
             {nixpkgs.overlays = overlays;}
 

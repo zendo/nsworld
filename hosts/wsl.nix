@@ -1,17 +1,33 @@
 {
   config,
   pkgs,
-  lib,
   username,
+  modulesPath,
   ...
 }: let
   winProxy = "http://192.168.2.118:10811";
 in {
-  wsl.defaultUser = lib.mkForce "${username}";
-  # users.defaultUserShell = pkgs.zsh;
+  imports = [
+    ../modules/nix.nix
+    ../modules/fonts.nix
+    "${modulesPath}/profiles/minimal.nix"
+  ];
 
-  system.stateVersion = "22.05";
-  time.timeZone = "Asia/Shanghai";
+  wsl = {
+    enable = true;
+    automountPath = "/mnt";
+    defaultUser = "${username}";
+    startMenuLaunchers = true;
+
+    # Enable native Docker support
+    # docker-native.enable = true;
+
+    # Enable integration with Docker Desktop (needs to be installed)
+    # docker-desktop.enable = true;
+
+  };
+
+  # users.defaultUserShell = pkgs.zsh;
 
   environment.systemPackages = with pkgs; [
     binutils
@@ -47,4 +63,8 @@ in {
     wsl-proxy = "export {http,https,ftp}_proxy=${winProxy} ; \\
     export {HTTP,HTTPS,FTP}_PROXY=${winProxy}";
   };
+
+  time.timeZone = "Asia/Shanghai";
+
+  system.stateVersion = "22.05";
 }

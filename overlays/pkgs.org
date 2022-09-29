@@ -1,6 +1,5 @@
 #+STARTUP: show2levels indent hidestars
 
-nix-template go -n --from-url github.com/s0md3v/Smap
 
 * buildGoModule
 ** cli
@@ -396,4 +395,8 @@ gst_all_1.gst-libav
       somebody
     ];
   };
+#+end_src
+* emoji
+#+begin_src config
+• ‥ ⁖ ⁘
 #+end_src
