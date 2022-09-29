@@ -29,6 +29,7 @@ final: prev: {
 
   # Gtk
   paper = prev.callPackage ./paper {};
+  gtklock = prev.callPackage ./gtklock {};
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};

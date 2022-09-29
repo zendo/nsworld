@@ -26,7 +26,6 @@
       ;; (cl-pushnew (expand-file-name "~/.tree-sitter") tree-sitter-load-path)
     '';
   };
-  # home.file.".doom.d".source = ../emacs/doom;
   # home.file = {
   #   ".emacs.d/elisp".source = ../emacs/elisp;
   #   ".emacs.d/init.el".source = ../emacs/init.el;

@@ -146,8 +146,7 @@
           specialArgs = {inherit inputs username;};
           modules = [
             ./hosts/wsl.nix
-            inputs.nixos-wsl.nixosModules.wsl
-
+            nixos-wsl.nixosModules.wsl
             {nixpkgs.overlays = overlays;}
 
             home-manager.nixosModules.home-manager

@@ -24,7 +24,6 @@ in {
 
     # Enable integration with Docker Desktop (needs to be installed)
     # docker-desktop.enable = true;
-
   };
 
   # users.defaultUserShell = pkgs.zsh;

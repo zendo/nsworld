@@ -13,6 +13,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    gtklock
     # Sway apps
     swappy # screenshot annotation editor
     swaybg # wallpaper tool
@@ -79,6 +80,7 @@
 
   security.polkit.enable = true;
   security.pam.services.swaylock = {};
+  security.pam.services.gtklock = {};
 
   environment.pathsToLink = [
     "/share/zsh" # for zsh completion with hm
