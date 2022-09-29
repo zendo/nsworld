@@ -3,47 +3,6 @@
   pkgs,
   ...
 }: {
-  services.xserver = {
-    enable = true;
-    excludePackages = [
-      pkgs.xterm
-    ];
-
-    displayManager = {
-      gdm.enable = true;
-      defaultSession = "gnome";
-    };
-
-    desktopManager.gnome = {
-      enable = true;
-      extraGSettingsOverridePackages = [pkgs.gnome.gnome-settings-daemon];
-
-      favoriteAppsOverride = ''
-        [org.gnome.shell]
-        favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
-      '';
-
-      # Override GNOME defaults
-      extraGSettingsOverrides = ''
-        [org.gnome.system.location]
-        enabled=true
-
-        [org.gnome.settings-daemon.plugins.color]
-        night-light-enabled=true
-
-        [org.gnome.desktop.peripherals.touchpad]
-        tap-to-click=true
-        click-method='areas'
-
-        [org.gnome.desktop.input-sources]
-        xkb-options=['ctrl:swapcaps']
-
-        [org.gnome.desktop.wm.keybindings]
-        activate-window-menu=[]
-      '';
-    };
-  };
-
   services = {
     packagekit.enable = false;
     gnome.sushi.enable = true;
@@ -131,5 +90,61 @@
       # libpinyin
       # typing-booster
     ];
+  };
+
+  services.xserver = {
+    enable = true;
+    excludePackages = [
+      pkgs.xterm
+    ];
+
+    displayManager = {
+      gdm.enable = true;
+      defaultSession = "gnome";
+    };
+
+    desktopManager.gnome = {
+      enable = true;
+      extraGSettingsOverridePackages = [pkgs.gnome.gnome-settings-daemon];
+
+      favoriteAppsOverride = ''
+        [org.gnome.shell]
+        favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
+      '';
+
+      # Override GNOME defaults
+      extraGSettingsOverrides = ''
+        [org.gnome.system.location]
+        enabled=true
+
+        [org.gnome.settings-daemon.plugins.color]
+        night-light-enabled=true
+
+        [org.gnome.desktop.peripherals.touchpad]
+        tap-to-click=true
+        click-method='areas'
+
+        [org.gnome.desktop.input-sources]
+        xkb-options=['ctrl:swapcaps']
+
+        [org.gnome.shell.keybindings]
+        switch-to-application-1=[]
+        switch-to-application-2=[]
+        switch-to-application-3=[]
+        switch-to-application-4=[]
+
+        [org.gnome.desktop.wm.keybindings]
+        activate-window-menu=[]
+        close=['<Super>q']
+        switch-to-workspace-1=['<Super>1']
+        switch-to-workspace-2=['<Super>2']
+        switch-to-workspace-3=['<Super>3']
+        switch-to-workspace-4=['<Super>4']
+        move-to-workspace-1=['<Alt>1']
+        move-to-workspace-2=['<Alt>2']
+        move-to-workspace-3=['<Alt>3']
+        move-to-workspace-4=['<Alt>4']
+      '';
+    };
   };
 }

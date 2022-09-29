@@ -18,3 +18,4 @@ ln -sfv "$this_dir"/waybar "$HOME"/.config
 ln -sfv "$this_dir"/mako "$HOME"/.config
 ln -sfv "$this_dir"/sway "$HOME"/.config
 ln -sfv "$this_dir"/swaylock "$HOME"/.config
+ln -sfv "$this_dir"/cava "$HOME"/.config

@@ -38,6 +38,10 @@ input "type:touchpad" {
   # pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 }
 
+# set $my_cursor Adwaita
+# set $my_cursor_size 32
+# seat seat0 xcursor_theme $my_cursor $my_cursor_size
+
 # Wallpaper
 output "*" bg $wallpaper fill
 
