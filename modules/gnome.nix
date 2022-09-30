@@ -8,7 +8,8 @@
     gnome.sushi.enable = true;
     gnome.tracker.enable = false;
     gnome.tracker-miners.enable = false;
-    udev.packages = [pkgs.gnome.gnome-settings-daemon];
+    # needed for GNOME services outside of GNOME Desktop
+    # udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
   environment.gnome.excludePackages = with pkgs; [

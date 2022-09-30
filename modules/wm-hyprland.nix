@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./wm.nix
+    ../dotfiles/eww
     inputs.hyprland.nixosModules.default
   ];
 

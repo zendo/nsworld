@@ -1,0 +1,9 @@
+(defwidget mem []
+  (circular-progress
+    :value {memory.percentage}
+    :class "membar module"
+    :thickness 3
+    (button
+      :tooltip "using ${round(memory.percentage,0)}% ram"
+      :onclick "./scripts/pop system"
+      (label :class "icon-text" :text ""))))

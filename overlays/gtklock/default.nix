@@ -8,6 +8,7 @@
 , pkg-config
 , gtk-layer-shell
 , wayland
+, wayland-scanner
 }:
 
 stdenv.mkDerivation rec {
@@ -21,19 +22,21 @@ stdenv.mkDerivation rec {
     hash = "sha256-MR/yaqiWmR5m2riSRx4t/ODMJcR7Q7zYSW+7iOoXn28=";
   };
 
+  strictDeps = true;
+
   nativeBuildInputs = [
-    wayland
-    gtk3
+    scdoc
     pkg-config
-    pam
-    gtk-layer-shell
+    wayland-scanner
   ];
 
   buildInputs = [
-    scdoc
-    # gtk3
-    # gtk-layer-shell
-    # pam
+    pam
+    gtk3
+    wayland
+    # wayland-protocols
+    # libxkbcommon
+    gtk-layer-shell
   ];
 
   # installPhase = ''

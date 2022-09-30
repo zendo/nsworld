@@ -22,7 +22,8 @@
       hack-font
       fira-code
       jetbrains-mono
-      zhudou-sans
+      # zhudou-sans
+      # (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
     ];
 
     fontconfig = {

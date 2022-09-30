@@ -1,0 +1,39 @@
+.vol-icon { color: $teal; }
+.volbar highlight {
+  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+  border-radius: 10px;
+}
+
+.volume-window {
+  @include wshadow;
+  background-color: $bg;
+  border-radius: 16px;
+  padding-right: 1rem;
+}
+
+.volume-text {
+  color: $teal;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.volume-icon {
+  color: $teal;
+  font-size: 5rem;
+  margin: 1rem;
+}
+
+.volume-info {
+  margin: 1rem 0;
+}
+
+.volume-bar {
+  trough {
+    min-width: 120px;
+  }
+
+  highlight {
+    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+    border-radius: 16px;
+  }
+}

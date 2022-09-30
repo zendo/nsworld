@@ -1,11 +1,11 @@
-# { pkgs, home-manager, system, lib, overlays, ... }:
-# rec {
-#   user = import ./meta.nix { inherit pkgs home-manager lib system overlays; };
-#   host = import ./mkHost.nix { inherit system pkgs home-manager lib user; };
-#
+inputs:
+# personal lib
+let
+  inherit (inputs.nixpkgs) lib;
 
-{ pkgs, lib, ... }:
-
-import ./attrsets.nix { inherit lib; }
-# //
-# import ./shell.nix { inherit pkgs; }
+  colors = import ./colors.nix lib;
+  system = import ./system.nix inputs;
+  home = import ./home.nix inputs;
+in
+  lib // colors // home // system
+# adding lib is ugly but easier to keep track of things

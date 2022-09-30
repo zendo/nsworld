@@ -25,6 +25,8 @@
     # mako  # , notify-send "sth"
     wlogout
 
+    eww-wayland
+
     # wlr apps
     wofi # quick run
     wofi-emoji
@@ -37,8 +39,6 @@
     blueberry
     wev # wayland event view
     wvkbd # on-screen keyboard
-
-    # autotiling # https://github.com/nwg-piotr/autotiling
 
     # Display
     brightnessctl # same like light
@@ -68,6 +68,7 @@
 
   programs = {
     light.enable = true;
+    # dconf.enable = true;
   };
 
   services = {
@@ -131,12 +132,20 @@
       name = "Vanilla-DMZ-AA";
       package = pkgs.vanilla-dmz;
       size = 128;
+      # name = "Bibata-Modern-Classic";
+      # package = pkgs.bibata-cursors;
+      # size = 128;
     };
 
     home.packages = with pkgs; [
       yafetch
       freshfetch
     ];
+
+    # services = {
+    #   playerctld.enable = true;
+    #   easyeffects.enable = true;
+    # };
 
     #   systemd.user.services.polkit-gnome = {
     #   Unit = {

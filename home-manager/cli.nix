@@ -50,9 +50,9 @@
     paperoni # save html
     # airgeddon # wifi crack
     magic-wormhole-rs
+    joshuto
     zssh
     calcurse
-    pure-prompt
 
     # Developing
     jq

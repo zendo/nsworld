@@ -81,8 +81,8 @@ in {
     # gcolor3
     # wl-color-picker
 
-    # gnome-decoder
     qbittorrent
+    gnome-decoder
     meld
     # deja-dup
     # rclone

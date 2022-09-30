@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  home.packages = with pkgs; [
+    pure-prompt
+  ];
+
   programs.starship = {
     enable = false;
     enableBashIntegration = false;
@@ -50,12 +54,21 @@
 
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
       zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"       # Colored completion (different colors for dirs/files/etc)
+      zstyle ':completion:*' completer _complete _ignored _approximate
+      zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+      zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' verbose true
+      _comp_options+=(globdots)
     '';
     initExtra = ''
       # Promt pure-promt
       autoload -U promptinit; promptinit
-      prompt pure
+      PURE_PROMPT_SYMBOL=›
+      PURE_PROMPT_VICMD_SYMBOL=‹
+      zstyle :prompt:pure:git:stash show yes
       zstyle :prompt:pure:prompt:success color green
+      prompt pure
 
       # Compatibility bash completion
       autoload -U bashcompinit && bashcompinit
