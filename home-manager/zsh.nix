@@ -12,7 +12,6 @@
     enableBashIntegration = false;
     enableZshIntegration = true;
   };
-  xdg.configFile."starship.toml".source = ../dotfiles/starship.toml;
 
   programs.zsh = {
     enable = true;

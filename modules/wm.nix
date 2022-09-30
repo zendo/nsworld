@@ -13,7 +13,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gtklock
     # Sway apps
     swappy # screenshot annotation editor
     swaybg # wallpaper tool
@@ -68,6 +67,7 @@
 
   programs = {
     light.enable = true;
+    gtklock.enable = true;
     # dconf.enable = true;
   };
 
@@ -78,10 +78,6 @@
     geoclue2.enable = true;
     gnome.gnome-keyring.enable = true;
   };
-
-  security.polkit.enable = true;
-  security.pam.services.swaylock = {};
-  security.pam.services.gtklock = {};
 
   environment.pathsToLink = [
     "/share/zsh" # for zsh completion with hm

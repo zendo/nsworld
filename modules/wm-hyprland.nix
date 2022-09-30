@@ -8,11 +8,12 @@
 }: {
   imports = [
     ./wm.nix
-    ../dotfiles/eww
     inputs.hyprland.nixosModules.default
   ];
 
   programs.hyprland.enable = true;
+
+  security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
     # hyprpaper # wallpaper

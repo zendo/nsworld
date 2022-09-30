@@ -23,6 +23,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gtklock ];
     # services.udev.packages = [ pkgs.light ];
+    security.polkit.enable = true;
     security.pam.services.gtklock = {};
   };
 }

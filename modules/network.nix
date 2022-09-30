@@ -25,6 +25,9 @@
     server = "127.0.0.1:20170";
   };
 
+  # v2rayA
+  # services.v2raya.enable = true;
+
   # systemd.services.nix-daemon.environment = {
   #   http_proxy = "http://127.0.0.1:20171";
   #   https_proxy = "http://127.0.0.1:20171";

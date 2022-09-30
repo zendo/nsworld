@@ -3,6 +3,9 @@
   pkgs,
   ...
 }: {
+  # Musnix enhence
+  musnix.enable = true;
+
   # Bluetooth
   hardware.bluetooth.enable = true;
 

@@ -26,16 +26,10 @@
       ;; (cl-pushnew (expand-file-name "~/.tree-sitter") tree-sitter-load-path)
     '';
   };
-  # home.file = {
-  #   ".emacs.d/elisp".source = ../emacs/elisp;
-  #   ".emacs.d/init.el".source = ../emacs/init.el;
-  #   ".emacs.d/early-init.el".source = ../emacs/early-init.el;
-  # };
 
   programs.helix = {
     enable = false;
   };
-  xdg.configFile."helix".source = ../dotfiles/helix;
 
   programs.neovim = {
     enable = true;
