@@ -57,6 +57,7 @@
       blur-my-shell
       proxy-switcher
       just-perfection
+      gradient-top-bar
       rocketbar
       space-bar
       gtile

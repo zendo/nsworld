@@ -73,6 +73,7 @@
             ./modules/wm-hyprland.nix
             # ./modules/kde.nix
             # ./modules/wm-sway.nix
+            # ./modules/wm-wayfire.nix
 
             ({
               config,

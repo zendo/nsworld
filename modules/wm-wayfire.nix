@@ -9,12 +9,6 @@
     ./wm.nix
   ];
 
-  services.xserver.displayManager = {
-    # sddm.enable = true;
-    # lightdm.enable = true;
-    # defaultSession = "wayfire";
-  };
-
   environment.systemPackages = with pkgs; [
     wayfire
     waybar

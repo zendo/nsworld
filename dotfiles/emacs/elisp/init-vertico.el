@@ -19,13 +19,14 @@
 (leaf orderless
   :ensure t
   :custom
-  `((completion-styles . '(orderless))
-    (orderless-matching-styles
-     . '(orderless-prefixes
-         orderless-flex
-         orderless-regexp
-         orderless-initialism
-         orderless-literal))))
+  `((completion-styles . '(orderless basic))
+    ;; (orderless-matching-styles
+    ;;  . '(orderless-prefixes
+    ;;      orderless-flex
+    ;;      orderless-regexp
+    ;;      orderless-initialism
+    ;;      orderless-literal))
+    ))
 
 ;; Enrich existing commands with completion annotations
 (leaf marginalia
