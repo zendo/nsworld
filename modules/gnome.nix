@@ -4,12 +4,11 @@
   ...
 }: {
   services = {
-    packagekit.enable = false;
     gnome.sushi.enable = true;
+    # False
+    packagekit.enable = false;
     gnome.tracker.enable = false;
     gnome.tracker-miners.enable = false;
-    # needed for GNOME services outside of GNOME Desktop
-    # udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -32,6 +31,7 @@
       gparted
       dconf2nix
       kooha
+      gnome-randr
 
       gnome.gnome-tweaks
       gnome.dconf-editor
@@ -112,6 +112,8 @@
       favoriteAppsOverride = ''
         [org.gnome.shell]
         favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
+
+        enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gsconnect@andyholmes.github.io', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'clipboard-history@alexsaveau.dev', 'space-bar@luchrioh', 'nightthemeswitcher@romainvigier.fr']
       '';
 
       # Override GNOME defaults

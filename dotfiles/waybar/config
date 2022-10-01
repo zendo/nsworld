@@ -4,13 +4,14 @@
 
   "height": 30,
   "position": "top",
-  
-  "modules-left":   ["wlr/workspaces", "sway/workspaces"],
+
+  "modules-left":   ["wlr/workspaces", "sway/workspaces", "wlr/taskbar",],
   "modules-center": ["clock", "custom/playerctl"],
   "modules-right":  ["tray",
                      "pulseaudio",
                      "backlight",
                      "battery",
+                     //"custom/sysmenu",
                      "custom/logout"],
 
   "wlr/workspaces": {
@@ -46,6 +47,15 @@
       }*/
   },
 
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    // "icon-theme": "Papirus-Dark",
+    "tooltip-format": "{app_id}: {title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+  },
+
   "sway/mode": {
     "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
     "tooltip": false
@@ -72,8 +82,10 @@
     }
   },
 
-  "hyprland/window": {
-    "format": "👉 {}"
+  "custom/sysmenu": {
+    "format": "󰤆",
+    "on-click": "sh $HOME/.config/waybar/scripts/sysmenu.sh",
+    "tooltip": false
   },
 
   "clock": {
@@ -184,6 +196,7 @@
     "format-alt": "{time} {icon}",
     //"tooltip-format": "{capacity}%",
     "tooltip": true,
+    "on-click": "exec gnome-power-statistics",
     "format-icons": ["", "", "", "", ""]
   },
 

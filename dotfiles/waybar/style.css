@@ -61,6 +61,7 @@ tooltip {
 #custom-caffeine,
 #custom-playerctl,
 #clock,
+#taskbar,
 #battery,
 #pulseaudio,
 #network,
@@ -106,6 +107,21 @@ tooltip {
   margin-right: 4px;
 }
 
+#taskbar {
+  border-radius: 10px;
+  margin-left: 4px;
+}
+#taskbar button {
+  color: @background;
+  border-radius: 12px;
+  padding: 0px 9px 0px 9px;
+}
+/* #taskbar button.active { */
+/*     background-color: #89b4fa; */
+/*     border-color: rgba(16,17,16,.3); */
+/*     border-width: 1px; */
+/*     border-radius: 10px; */
+/* } */
 
 #custom-weather {
   background-color: #1e1e2e;

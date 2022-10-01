@@ -7,9 +7,24 @@
 }: {
   services.xserver = {
     enable = true;
+    libinput.enable = true;
+    displayManager.gdm.enable = true;
     excludePackages = [
       pkgs.xterm
     ];
+  };
+
+  services.greetd = {
+    enable = false;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+      };
+      # initial_session = {
+      #   command = "Hyprland";
+      #   user = "${username}";
+      # };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -17,11 +32,11 @@
     swappy # screenshot annotation editor
     swaybg # wallpaper tool
     swayidle
-    # gtklock # still in pr
     swaylock
     swaylock-effects
     swaynotificationcenter
     # mako  # , notify-send "sth"
+    libnotify # notify-send
     wlogout
 
     eww-wayland
@@ -32,7 +47,6 @@
     wl-clipboard
     wf-recorder
     cliphist
-    libnotify # notify-send
     networkmanagerapplet
     bluetuith
     blueberry
@@ -50,24 +64,29 @@
     # Media
     grim # grab image
     slurp # select region
+    wayshot
     pavucontrol
     playerctl # media player control
     pamixer # volume control
 
-    # cinnamon.nemo
+    # Using other DM need this.
+    # gnome.adwaita-icon-theme
+    # gnome.adwaita-icon-theme
     gnome.nautilus
-    gnome.file-roller
     gnome-text-editor
+    gnome.gnome-power-manager
+
     # gnome.eog
     # gthumb
     libsForQt5.gwenview
-    evince
     gparted
   ];
 
   programs = {
     light.enable = true;
     gtklock.enable = true;
+    evince.enable = true;
+    file-roller.enable = true;
     # dconf.enable = true;
   };
 
@@ -118,45 +137,45 @@
   }: {
     # xdg.configFile."hypr".source = ../dotfiles/hypr;
     # home.sessionVariables = {
-    #   MOZ_ENABLE_WAYLAND = "1";
-    #   XDG_SESSION_TYPE = "wayland";
-    #   XDG_CURRENT_DESKTOP = "sway";
-    # };
+      #   MOZ_ENABLE_WAYLAND = "1";
+      #   XDG_SESSION_TYPE = "wayland";
+      #   XDG_CURRENT_DESKTOP = "sway";
+      # };
 
-    # Fix tiny cursor
-    home.pointerCursor = {
-      name = "Vanilla-DMZ-AA";
-      package = pkgs.vanilla-dmz;
-      size = 128;
-      # name = "Bibata-Modern-Classic";
-      # package = pkgs.bibata-cursors;
-      # size = 128;
-    };
+      # Fix tiny cursor
+      home.pointerCursor = {
+        name = "Vanilla-DMZ-AA";
+        package = pkgs.vanilla-dmz;
+        size = 128;
+        # name = "Bibata-Modern-Classic";
+        # package = pkgs.bibata-cursors;
+        # size = 128;
+      };
 
-    home.packages = with pkgs; [
-      yafetch
-      freshfetch
-    ];
+      home.packages = with pkgs; [
+        yafetch
+        freshfetch
+      ];
 
-    # services = {
-    #   playerctld.enable = true;
-    #   easyeffects.enable = true;
-    # };
+      # services = {
+        #   playerctld.enable = true;
+        #   easyeffects.enable = true;
+        # };
 
-    #   systemd.user.services.polkit-gnome = {
-    #   Unit = {
-    #     Description = "PolicyKit Authentication Agent";
-    #     After = [ "graphical-session-pre.target" ];
-    #     PartOf = [ "graphical-session.target" ];
-    #   };
+        #   systemd.user.services.polkit-gnome = {
+          #   Unit = {
+            #     Description = "PolicyKit Authentication Agent";
+            #     After = [ "graphical-session-pre.target" ];
+            #     PartOf = [ "graphical-session.target" ];
+            #   };
 
-    #   Service = {
-    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    #   };
+            #   Service = {
+              #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+              #   };
 
-    #   Install = {
-    #     WantedBy = [ "graphical-session.target" ];
-    #   };
-    # };
+              #   Install = {
+                #     WantedBy = [ "graphical-session.target" ];
+                #   };
+                # };
   };
 }

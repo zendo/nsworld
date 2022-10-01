@@ -6,6 +6,7 @@ set $browser firefox
 set $filemanager nautilus
 set $note paper
 set $calendar qalculate-gtk
+set $menu wofi --show=drun
 set $wallpaper ~/Pictures/Wallpapers/night_tower.jpg
 set $wallpapers_path ~/Pictures/Wallpapers
 
@@ -65,10 +66,10 @@ exec wl-paste --watch cliphist store
 exec swayidle -w \
   timeout 200 'brightnessctl -s s 10%' \
      resume 'brightnessctl -r' \
-  timeout 300 'gtklock' \
+  timeout 300 'swaylock -f -c 000000' \
   timeout 360 'swaymsg "output * dpms off"' \
      resume 'swaymsg "output * dpms on" && brightnessctl -r' \
-  before-sleep 'gtklock'
+  before-sleep 'swaylock -f -c 000000'
 
 exec --no-startup-id  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec --no-startup-id systemctl --user import-environment XDG_SESSION_PATH WAYLAND_DISPLAY
@@ -90,10 +91,11 @@ bindsym $mod+t exec $float_term
 bindsym $mod+w exec $browser
 bindsym $mod+e exec emacs
 bindsym $mod+f exec nautilus
+bindsym $mod+l exec swaylock
 bindsym $mod+Escape exec wlogout
 bindsym Ctrl+alt+Delete exec wlogout
-bindsym $mod+space exec wofi
-bindsym $mod+x exec wofi
+bindsym $mod+space exec $menu
+bindsym $mod+x exec $menu
 bindsym $mod+apostrophe exec wofi-emoji
 bindsym $mod+v exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
 
@@ -160,9 +162,6 @@ bindsym $mod+r mode "resize"
 
 # bindsym --whole-window $mod+button1 move window
 
-# Swaylock
-bindsym $mod+l exec swaylock -i $wallpaper --indicator-idle-visible --indicator-radius 160 --indicator-thickness 10
-
 # Screenshots
 bindsym Print exec grim ~/Pictures/screenshot_$(date +'%F-%T.png') && notify-send Screenshot "Full Screen Captured"
 bindsym $mod+Shift+s exec grim -g "$(slurp)" ~/Pictures/screenshot_region_$(date +'%F-%T.png') && notify-send Screenshot "Region Screen Captured"
@@ -178,10 +177,10 @@ bindsym XF86AudioMute exec pamixer -t
 bindsym XF86AudioMicMute exec pamixer --source 63 -t
 
 # MISC
-bindsym XF86Search exec wofi
+bindsym XF86Search exec $menu
 
 # Cosmetics
-default_border pixel 2
+default_border pixel 3
 
 
 
@@ -202,7 +201,10 @@ gaps outer 4
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="alacritty"] opacity 0.90
 for_window [title="foot"] floating enable
+for_window [title="qBittorrent"] floating enable, resize set 960 540
 for_window [class="vlc"] inhibit_idle fullscreen
+# 标签组窗口
+for_window [workspace="5"] layout tabbed
 
 # Drag floating windows by $mod + left mouse
 # Resize by $mod + right mouse

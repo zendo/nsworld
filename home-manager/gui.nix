@@ -51,7 +51,7 @@ in {
 
     # Social media
     tdesktop
-    # fractal
+    # fractal-next
     # nheko
     # discord
 

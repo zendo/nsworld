@@ -70,10 +70,10 @@
           inherit overlays;
           extraModules = [
             # ./modules/gnome.nix
-            ./modules/wm-hyprland.nix
-            # ./modules/kde.nix
+             ./modules/wm-hyprland.nix
             # ./modules/wm-sway.nix
-            # ./modules/wm-wayfire.nix
+            #./modules/wm-wayfire.nix
+            # ./modules/kde.nix
 
             ({
               config,
