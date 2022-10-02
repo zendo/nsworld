@@ -60,6 +60,7 @@
     home.packages = with pkgs; [
       waybar
       autotiling
+      autotiling-rs
     ];
   };
 }

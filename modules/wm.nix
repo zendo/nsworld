@@ -15,9 +15,6 @@
     displayManager.lightdm.greeters.gtk.extraConfig = ''
       xft-dpi=196
     '';
-    excludePackages = [
-      pkgs.xterm
-    ];
   };
 
   services.greetd.enable = true;
@@ -40,9 +37,17 @@
     "/share/zsh" # for zsh completion with hm
   ];
 
+  environment.sessionVariables = {
+    GTK_USE_PORTAL = "1";
+    # GDK_BACKEND = "wayland";
+    # WLR_DRM_NO_ATOMIC = "1";
+    # WLR_NO_HARDWARE_CURSORS = "1";
+  };
+
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
+    wlr.enable = true;
+    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   };
 
   i18n.inputMethod = {
@@ -117,7 +122,6 @@
 
     services = {
       udiskie.enable = true;
-      poweralertd.enable = true;
       gnome-keyring.enable = true;
       # playerctld.enable = true;
       # easyeffects.enable = true;
