@@ -18,6 +18,7 @@
       # source-han-serif
       source-code-pro
       # comic-relief
+      font-awesome
       emacs-all-the-icons-fonts
       hack-font
       fira-code

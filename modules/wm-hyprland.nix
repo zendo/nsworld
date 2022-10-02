@@ -11,6 +11,14 @@
     inputs.hyprland.nixosModules.default
   ];
 
+  services.greetd.settings = {
+    default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+    # initial_session = {
+    #   command = "Hyprland";
+    #   user = "${username}";
+    # };
+  };
+
   programs.hyprland.enable = true;
 
   security.pam.services.swaylock = {};

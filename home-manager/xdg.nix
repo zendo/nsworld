@@ -41,12 +41,24 @@ in
     "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
-    # soft symbolic links
+    # Soft Symbolic Links
     # "eww".source = mkOOSL hmDots + "/eww";
     "mako".source = mkOOSL hmDots + "/mako";
     "hypr".source = mkOOSL hmDots + "/hypr";
-    "sway".source = mkOOSL hmDots + "/sway";
     "waybar".source = mkOOSL hmDots + "/waybar";
     "wayfire.ini".source = mkOOSL hmDots + "/wayfire.ini";
+
+    # Rime for ibus
+    "ibus/rime/ibus_rime.yaml".source = ../dotfiles/rime/ibus_rime.yaml;
+    "ibus/rime/default.custom.yaml".source = ../dotfiles/rime/default.custom.yaml;
+    "ibus/rime/luna_pinyin_simp.custom.yaml".source = ../dotfiles/rime/luna_pinyin_simp.custom.yaml;
+    "ibus/rime/luna_pinyin_simp.extended.dict.yaml".source = ../dotfiles/rime/luna_pinyin_simp.extended.dict.yaml;
+  };
+
+  xdg.dataFile = {
+    # Rime for fcitx
+    "fcitx5/rime/default.custom.yaml".source = ../dotfiles/rime/default.custom.yaml;
+    "fcitx5/rime/luna_pinyin_simp.custom.yaml".source = ../dotfiles/rime/luna_pinyin_simp.custom.yaml;
+    "fcitx5/rime/luna_pinyin_simp.extended.dict.yaml".source = ../dotfiles/rime/luna_pinyin_simp.extended.dict.yaml;
   };
 }

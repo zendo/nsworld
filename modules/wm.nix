@@ -6,26 +6,21 @@
   ...
 }: {
   services.xserver = {
+    # for X11
     enable = true;
     libinput.enable = true;
-    displayManager.gdm.enable = true;
+    xkbOptions = "ctrl:swapcaps";
+    # use greetd
+    displayManager.lightdm.enable = false;
+    displayManager.lightdm.greeters.gtk.extraConfig = ''
+      xft-dpi=196
+    '';
     excludePackages = [
       pkgs.xterm
     ];
   };
 
-  services.greetd = {
-    enable = false;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-      };
-      # initial_session = {
-      #   command = "Hyprland";
-      #   user = "${username}";
-      # };
-    };
-  };
+  services.greetd.enable = true;
 
   environment.systemPackages = with pkgs; [
     # Sway apps
@@ -52,6 +47,8 @@
     blueberry
     wev # wayland event view
     wvkbd # on-screen keyboard
+    # waypipe # proxy ?
+    # wtype # xdotool
 
     # Display
     brightnessctl # same like light
@@ -69,13 +66,13 @@
     playerctl # media player control
     pamixer # volume control
 
-    # Using other DM need this.
-    # gnome.adwaita-icon-theme
-    # gnome.adwaita-icon-theme
+    # Needs when use other DM
+    gnome.adwaita-icon-theme
+    gnome.gnome-themes-extra
+
     gnome.nautilus
     gnome-text-editor
     gnome.gnome-power-manager
-
     # gnome.eog
     # gthumb
     libsForQt5.gwenview
@@ -107,10 +104,9 @@
     "polkit-gnome-authentication-agent-1".source = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 
-  # Required for flatpak and gtk apps in WM
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [xdg-desktop-portal-wlr xdg-desktop-portal-gtk];
   };
 
   # programs.qt5ct.enable = true;
@@ -137,45 +133,29 @@
   }: {
     # xdg.configFile."hypr".source = ../dotfiles/hypr;
     # home.sessionVariables = {
-      #   MOZ_ENABLE_WAYLAND = "1";
-      #   XDG_SESSION_TYPE = "wayland";
-      #   XDG_CURRENT_DESKTOP = "sway";
-      # };
+    #   MOZ_ENABLE_WAYLAND = "1";
+    #   XDG_SESSION_TYPE = "wayland";
+    #   XDG_CURRENT_DESKTOP = "sway";
+    # };
 
-      # Fix tiny cursor
-      home.pointerCursor = {
-        name = "Vanilla-DMZ-AA";
-        package = pkgs.vanilla-dmz;
-        size = 128;
-        # name = "Bibata-Modern-Classic";
-        # package = pkgs.bibata-cursors;
-        # size = 128;
-      };
+    # Fix tiny cursor
+    home.pointerCursor = {
+      name = "Vanilla-DMZ-AA";
+      package = pkgs.vanilla-dmz;
+      size = 128;
+      # name = "Bibata-Modern-Classic";
+      # package = pkgs.bibata-cursors;
+      # size = 128;
+    };
 
-      home.packages = with pkgs; [
-        yafetch
-        freshfetch
-      ];
+    home.packages = with pkgs; [
+    ];
 
-      # services = {
-        #   playerctld.enable = true;
-        #   easyeffects.enable = true;
-        # };
-
-        #   systemd.user.services.polkit-gnome = {
-          #   Unit = {
-            #     Description = "PolicyKit Authentication Agent";
-            #     After = [ "graphical-session-pre.target" ];
-            #     PartOf = [ "graphical-session.target" ];
-            #   };
-
-            #   Service = {
-              #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-              #   };
-
-              #   Install = {
-                #     WantedBy = [ "graphical-session.target" ];
-                #   };
-                # };
+    services = {
+      udiskie.enable = true;
+      poweralertd.enable = true;
+      #   playerctld.enable = true;
+      #   easyeffects.enable = true;
+    };
   };
 }

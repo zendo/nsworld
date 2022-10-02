@@ -76,6 +76,7 @@ in {
 
     # Image manipulation
     # shutter
+    pinta
     yacreader
     contrast
     # gcolor3
