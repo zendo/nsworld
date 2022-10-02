@@ -54,6 +54,7 @@
    ("C-c ." . find-file)
    ("C-c /" . consult-ripgrep)
    ("C-c ," . project-switch-to-buffer)
+   ("C-x b" . project-switch-to-buffer)
 
    ("s-d" . dired-jump)
    ("C-;" . comment-line)

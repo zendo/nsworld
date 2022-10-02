@@ -50,7 +50,7 @@
 ;; Consulting completing-read
 (leaf consult
   :ensure t
-  :bind (([remap switch-to-buffer] . consult-buffer)              ; C-x b
+  :bind (([remap list-buffers] . consult-buffer)              ; C-x b
          ([remap apropos-command] . consult-apropos)             ; C-h a
          ([remap find-file-read-only-other-window] . consult-buffer-other-window)
          ([remap yank-pop] . consult-yank-pop) ; M-y

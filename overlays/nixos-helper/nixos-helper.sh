@@ -39,9 +39,6 @@ case "$1" in
     shell)
         nix shell nixpkgs#"$2" ;;
 
-    search)
-        nix search nixpkgs "$2" ;;
-
     boot)
         nixos-rebuild boot --use-remote-sudo --flake $dotConfig#"$(hostname)" ;;
 
