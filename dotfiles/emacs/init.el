@@ -39,8 +39,8 @@
 
 (require 'init-prog)
 (require 'init-org)
+(require 'init-web)
 ;; (require 'init-c-cpp-java)
-;; (require 'init-web)
 
 
 ;;; init.el ends here

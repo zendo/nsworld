@@ -3,9 +3,9 @@
 , python3
 , glib
 , gtk3
-, libadwaita
 , gobject-introspection
 , libhandy
+, librsvg
 , geoclue2
 , wrapGAppsHook
 , appstream-glib
@@ -37,7 +37,11 @@ python3.pkgs.buildPythonApplication rec {
     gtk3
     geoclue2
     libhandy
-    # libadwaita
+    librsvg
+    gobject-introspection
+  ];
+
+  propagatedNativeBuildInputs = [
     gobject-introspection
   ];
 
@@ -45,19 +49,6 @@ python3.pkgs.buildPythonApplication rec {
     gpxpy
     pygobject3
   ];
-
-  # pythonImportsCheck = [
-  #   "GeobugApp"
-  # ];
-
-  # doCheck = false;
-
-  # Prevent double wrapping, let the Python wrapper use the args in preFixup.
-  # dontWrapGApps = true;
-
-  # preFixup = ''
-  #   makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
-  # '';
 
   meta = with lib; {
     description = "An adaptive client for GeoClue";

@@ -13,8 +13,8 @@ buildGoModule rec {
     owner = "anhoder";
     repo = pname;
     # rev = "v${version}";
-    rev = "709f2bf1d1cef1e24f528dacf565b17a5fd00072";
-    hash = "sha256-eQ9UlxZo51I1+jnafHbfXd4YS220Uq4hvEfZB1j0mQg=";
+    rev = "353e310b705f5d1a5d8c8a3591c1ec3f1cc43878";
+    hash = "sha256-XKxLXJs89ZWmfVTeO7hvuLieURj4R07Lq6KxsEgCfAs=";
   };
 
   # subPackages = [ "cmd" ];
@@ -23,7 +23,7 @@ buildGoModule rec {
 
   deleteVendor = true;
 
-  vendorHash = "sha256-P9pj4ez+fgC0H75C6kZBPfnLpfrz8XPfF/pNjZkySlc=";
+  vendorHash = "sha256-wt7HSpua9l5B2DncDdj+BoBJkr8dAeGWYTwR/ACEeoc=";
 
   CGO_ENABLED = 0;
 
