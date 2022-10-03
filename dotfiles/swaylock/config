@@ -12,7 +12,7 @@ indicator-thickness=20
 indicator-caps-lock
 
 screenshots
-effect-blur=7x5
+effect-blur=12x5
 effect-vignette=0.5:0.5
 grace=2
 fade-in=0.9

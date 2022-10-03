@@ -10,7 +10,7 @@
   ];
 
   services.greetd.settings = {
-    default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+    default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd sway";
     # Autologin
     initial_session = {
       command = "sway";
@@ -25,13 +25,6 @@
   #   # '';
   # };
 
-  # Needs when use sway@hm
-  security.pam.services.swaylock = {};
-  programs = {
-    dconf.enable = true;
-    xwayland.enable = true;
-  };
-
   home-manager.users.${username} = {
     pkgs,
     config,
@@ -40,11 +33,14 @@
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      config = null;
       extraConfig = ''
         include ${../dotfiles/sway/custom.conf}
         exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       '';
-      config = null;
+      # extraSessionCommands = ''
+      #   export XDG_CURRENT_DESKTOP="sway"
+      # '';
       # config = {
       #   modifier = "Mod4";
       #   terminal = "systemd-run-app foot";

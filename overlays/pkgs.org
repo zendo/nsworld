@@ -119,10 +119,10 @@ rustPlatform.buildRustPackage rec {
     repo = pname;
     rev = "v${version}";
     fetchSubmodules = true;
-    sha256 = "sha256-0vHvzxdtxTsGVq1iJezjHCB0NKF5bCqMIrD15gOWcvE=";
+    hash = "sha256-0vHvzxdtxTsGVq1iJezjHCB0NKF5bCqMIrD15gOWcvE=";
   };
 
-  cargoSha256 = "sha256-eXCbTM6+oLRIY4LIlrFs53V8IqYGhZyku48AgXmeYs8=";
+  cargoHash = "sha256-eXCbTM6+oLRIY4LIlrFs53V8IqYGhZyku48AgXmeYs8=";
 
   nativeBuildInputs = [pkg-config];
   buildInputs = [openssl tree-sitter];

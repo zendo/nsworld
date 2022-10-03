@@ -26,8 +26,8 @@ stdenv.mkDerivation rec {
     owner = "posidon_software";
     repo = pname;
     # rev = version;
-    rev = "c9756467ad9c56ea7714c89ebd1f1a884ea7d837";
-    hash = "sha256-T7jF9bpOgZqZlp2jWaj//3QpEpaAsJP4a9zjgpevHjU=";
+    rev = "a15ffe2ff3c6ff5223a00e89106b5d1ae08d5702";
+    hash = "sha256-7WoF8obmSQvElzKA80eoL+X2bdEnrV8151jgjNi1dt0=";
   };
 
   nativeBuildInputs = [
@@ -50,15 +50,9 @@ stdenv.mkDerivation rec {
     gtksourceview5
   ];
 
-  # https://gitlab.com/posidon_software/paper/-/issues/35
   # postInstall = ''
-  #   # substituteInPlace $out/share/applications/io.posidon.Paper.desktop \
-  #   #     --replace 'Exec=io.posidon.Paper' 'Exec=bash -c "cd /home/iab; io.posidon.Paper"'
-  #   # sed -i '/DBusActivatable=true/d' $out/share/applications/io.posidon.Paper.desktop
-  # '';
-
-  # postInstall = ''
-  #   ln -s $out/bin/com.github.cassidyjames.dippi $out/bin/dippi
+  #   substituteInPlace $out/share/dbus-1/services/io.posidon.Paper.SearchProvider.service \
+  #       --replace 'io.posidon.Paper.SearchProvider' $out/bin/paper-search-provider
   # '';
 
   meta = with lib; {

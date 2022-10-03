@@ -13,8 +13,8 @@ buildGoModule rec {
     owner = "anhoder";
     repo = pname;
     # rev = "v${version}";
-    rev = "353e310b705f5d1a5d8c8a3591c1ec3f1cc43878";
-    hash = "sha256-XKxLXJs89ZWmfVTeO7hvuLieURj4R07Lq6KxsEgCfAs=";
+    rev = "16a61e176971a74f2a744e9f156b0acd22d02da7";
+    hash = "sha256-3soa0xmVTQUocFFulsZU+dtyZJTM997ufTho1A7TPbU=";
   };
 
   # subPackages = [ "cmd" ];
@@ -23,7 +23,7 @@ buildGoModule rec {
 
   deleteVendor = true;
 
-  vendorHash = "sha256-wt7HSpua9l5B2DncDdj+BoBJkr8dAeGWYTwR/ACEeoc=";
+  vendorHash = "sha256-Tm0Uo9nkgiaUlKOXLvyxlP1PSuG3JCWIBCGdVqFAbL0=";
 
   CGO_ENABLED = 0;
 
@@ -32,21 +32,22 @@ buildGoModule rec {
   ldflags = [
     "-s"
     "-w"
-    # "-X github.com/slashformotion/radioboat/internal/buildinfo.Version=${version}"
+    # "-X github.com/slashformotion/go-musicfox/internal/buildinfo.Version=${version}"
   ];
 
-  # nativeBuildInputs = [ makeWrapper installShellFiles ];
+  nativeBuildInputs = [ makeWrapper installShellFiles ];
 
   # preFixup = ''
-  #   wrapProgram $out/bin/radioboat --prefix PATH ":" "${lib.makeBinPath [ mpv ]}";
+  #   wrapProgram $out/bin/go-musicfox --prefix PATH ":" "${lib.makeBinPath [ mpv ]}";
   # '';
 
-  # postInstall = ''
-  #   installShellCompletion --cmd radioboat \
-  #     --bash <($out/bin/radioboat completion bash) \
-  #     --fish <($out/bin/radioboat completion fish) \
-  #     --zsh <($out/bin/radioboat completion zsh)
-  # '';
+  postInstall = ''
+    cp -r * $out
+    # installShellCompletion --cmd go-musicfox \
+    #   --bash <($out/bin/go-musicfox completion bash) \
+    #   --fish <($out/bin/go-musicfox completion fish) \
+    #   --zsh <($out/bin/go-musicfox completion zsh)
+  '';
 
   meta = with lib; {
     description = "A terminal web radio client";

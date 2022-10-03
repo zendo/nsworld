@@ -31,6 +31,7 @@
     hstr # hh: history
     cht-sh
     rage # age encrypt RIIR
+    sd
     mc
     f2
     choose

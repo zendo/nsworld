@@ -39,6 +39,7 @@
       initial-scratch-message nil
       initial-major-mode 'fundamental-mode
       confirm-kill-processes nil
+      mouse-autoselect-window t
       visible-bell 1                ;关闭错误警示
       system-time-locale "C"        ;使用英文时间格式
       ispell-dictionary "en"        ;使用英文词典

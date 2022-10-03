@@ -1,20 +1,20 @@
-{ lib
-, fetchFromGitHub
-, python3
-, meson
-, ninja
-, pkg-config
-, glib
-, gtk3
-, libadwaita
-, blueprint-compiler
-, gobject-introspection
-, librsvg
-, wrapGAppsHook
-, appstream-glib
-, desktop-file-utils
+{
+  lib,
+  fetchFromGitHub,
+  python3,
+  meson,
+  ninja,
+  pkg-config,
+  glib,
+  gtk3,
+  libadwaita,
+  blueprint-compiler,
+  gobject-introspection,
+  librsvg,
+  wrapGAppsHook,
+  appstream-glib,
+  desktop-file-utils,
 }:
-
 python3.pkgs.buildPythonApplication rec {
   pname = "gpu-viewer";
   version = "1.42";
@@ -45,6 +45,10 @@ python3.pkgs.buildPythonApplication rec {
     gobject-introspection
   ];
 
+  propagatedNativeBuildInputs = [
+    gobject-introspection
+  ];
+
   propagatedBuildInputs = with python3.pkgs; [
     # netaddr
     # requests
@@ -52,21 +56,21 @@ python3.pkgs.buildPythonApplication rec {
   ];
 
   postPatch = ''
-    patchShebangs Files
+    patchShebangs .
   '';
 
   # Prevent double wrapping, let the Python wrapper use the args in preFixup.
-  dontWrapGApps = true;
+  # dontWrapGApps = true;
 
-  preFixup = ''
-    makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
-  '';
+  # preFixup = ''
+  #   makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+  # '';
 
   meta = with lib; {
     description = "Info on your IP";
     homepage = "https://gitlab.gnome.org/GabMus/whatip";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ zendo ];
+    maintainers = with maintainers; [zendo];
   };
 }

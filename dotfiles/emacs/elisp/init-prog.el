@@ -82,19 +82,25 @@
 
 ;; corfu
 (leaf corfu
-  :ensure t
-  :bind ((corfu-map
-          ("<escape>" . corfu-quit)))
-  :hook (prog-mode-hook)
+  :init
+  (setq corfu-auto t
+        corfu-quit-no-match t
+        corfu-quit-at-boundary 'separator)
+  (global-corfu-mode)
   :config
-  (let ((custom--inhibit-theme-enable nil))
-    (unless (memq 'use-package custom-known-themes)
-      (deftheme use-package)
-      (enable-theme 'use-package)
-      (setq custom-enabled-themes (remq 'use-package custom-enabled-themes)))
-    (custom-theme-set-variables 'use-package
-                                '(corfu-auto t nil nil "Customized with use-package corfu")))
-  (global-corfu-mode))
+  (define-key corfu-map
+    (kbd "SPC") #'corfu-insert-separator)
+  (setq completion-cycle-threshold 3)
+  ;; Use Corfu in `eval-expression' and other commands that bind
+  ;; `completion-at-point' in the minibuffer.
+  ;;
+  ;; WHY IS THIS NOT AVAILABLE IN AN OPTION IF IT'S ALREADY LISTED IN
+  ;; THE README
+  (add-hook 'minibuffer-setup-hook (lambda ()
+                                     (when (memq #'completion-at-point
+                                                 (flatten-tree
+                                                  (current-local-map)))
+                                       (corfu-mode)))))
 
 ;; company
 ;; (use-package company

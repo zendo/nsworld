@@ -14,7 +14,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/1799a8c458576ce347eed6372aceee1b5969adfb";
+      url = "github:nix-community/emacs-overlay/be61e5636f4c7478c0093ace59bc7512e320feaa";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -58,140 +58,140 @@
       emacs-overlay.overlay
       (import ./overlays)
       # (final: prev: {
-      #   pr = nixpkgs-pr.legacyPackages.${prev.system};
-      # })
+        #   pr = nixpkgs-pr.legacyPackages.${prev.system};
+        # })
     ];
   in
-    {
-      nixosConfigurations = {
-        yoga = mkHost {
-          username = "iab";
-          hostname = "yoga";
-          inherit overlays;
-          extraModules = [
-            # ./modules/gnome.nix
-             # ./modules/wm-hyprland.nix
-            ./modules/wm-sway.nix
-            # ./modules/wm-wayfire.nix
-            # ./modules/kde.nix
+  {
+    nixosConfigurations = {
+      yoga = mkHost {
+        username = "iab";
+        hostname = "yoga";
+        inherit overlays;
+        extraModules = [
+          ./modules/gnome.nix
+          # ./modules/wm-hyprland.nix
+          # ./modules/wm-sway.nix
+          # ./modules/wm-wayfire.nix
+          # ./modules/kde.nix
 
-            ({
-              config,
-              pkgs,
-              ...
-            }: {
-              environment.systemPackages = with pkgs; [
-                # nixpkgs-pr.legacyPackages.${system}.gnomeExtensions.pano
-              ];
-            })
-          ];
-        };
-
-        svp = mkHost {
-          username = "zendo";
-          hostname = "svp";
-          # hmEnable = false;
-          # nixpkgs = inputs.nixpkgs-stable;
-          inherit overlays;
-          extraModules = [
-            # ./modules/gnome.nix
-            # ./modules/kde.nix
-            ./modules/wm-sway.nix
-          ];
-        };
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
+            environment.systemPackages = with pkgs; [
+              # nixpkgs-pr.legacyPackages.${system}.gnomeExtensions.pano
+            ];
+          })
+        ];
       };
 
-      #######################################################################
-      ## HM Standalone
-      #######################################################################
-      # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
-      homeConfigurations = let
-        username = "iab";
-        system = "x86_64-linux";
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          config.allowUnfree = true;
-        };
-      in {
-        ${username} = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          # extraSpecialArgs = {inherit inputs;};
-          modules = [
-            ./home-manager/alias.nix
-            ./home-manager/cli.nix
-            ./home-manager/git.nix
-            ./home-manager/non-nixos.nix
-            ./home-manager/xdg.nix
-            ./home-manager/zsh.nix
-            {
-              home.stateVersion = "22.05";
-              home.username = "${username}";
-              home.homeDirectory = "/home/${username}";
-            }
-          ];
-        };
-      };
-
-      #######################################################################
-      ## WSL
-      #######################################################################
-      # nix build .#nixosConfigurations.wsl.config.system.build.installer
-      nixosConfigurations.wsl = let
-        username = "iab";
+      svp = mkHost {
+        username = "zendo";
+        hostname = "svp";
+        # hmEnable = false;
         # nixpkgs = inputs.nixpkgs-stable;
-      in
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {inherit inputs username;};
-          modules = [
-            ./hosts/wsl.nix
-            nixos-wsl.nixosModules.wsl
-            {nixpkgs.overlays = overlays;}
+        inherit overlays;
+        extraModules = [
+          # ./modules/gnome.nix
+          # ./modules/kde.nix
+          ./modules/wm-sway.nix
+        ];
+      };
+    };
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {inherit inputs;};
-              home-manager.users.${username} = import ./home-manager;
-            }
-          ];
-        };
+    #######################################################################
+    ## HM Standalone
+    #######################################################################
+    # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
+    homeConfigurations = let
+      username = "iab";
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system overlays;
+        config.allowUnfree = true;
+      };
+    in {
+      ${username} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        # extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home-manager/alias.nix
+          ./home-manager/cli.nix
+          ./home-manager/git.nix
+          ./home-manager/non-nixos.nix
+          ./home-manager/xdg.nix
+          ./home-manager/zsh.nix
+          {
+            home.stateVersion = "22.05";
+            home.username = "${username}";
+            home.homeDirectory = "/home/${username}";
+          }
+        ];
+      };
+    };
 
-      #######################################################################
-      ## VM
-      #######################################################################
-      # nix build .#nixosConfigurations.vmtest.config.system.build.vm
-      nixosConfigurations.vmtest = let
-        username = "test";
-        system = "x86_64-linux";
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {inherit inputs username;};
-          modules = [
-            ./hosts/vmtest.nix
-          ];
-        };
+    #######################################################################
+    ## WSL
+    #######################################################################
+    # nix build .#nixosConfigurations.wsl.config.system.build.installer
+    nixosConfigurations.wsl = let
+      username = "iab";
+      # nixpkgs = inputs.nixpkgs-stable;
+    in
+    nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs username;};
+      modules = [
+        ./hosts/wsl.nix
+        nixos-wsl.nixosModules.wsl
+        {nixpkgs.overlays = overlays;}
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.users.${username} = import ./home-manager;
+        }
+      ];
+    };
+
+    #######################################################################
+    ## VM
+    #######################################################################
+    # nix build .#nixosConfigurations.vmtest.config.system.build.vm
+    nixosConfigurations.vmtest = let
+      username = "test";
+      system = "x86_64-linux";
+    in
+    nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit inputs username;};
+      modules = [
+        ./hosts/vmtest.nix
+      ];
+    };
+  }
+  // flake-utils.lib.eachDefaultSystem
+  (
+    system: let
+      pkgs = import nixpkgs {
+        inherit system overlays;
+        allowUnfree = true;
+        # allowBroken = true;
+        # allowUnsupportedSystem = true;
+      };
+    in {
+      # nix fmt :Formatter all files in this repo.
+      formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
+      # nix develop .#rust
+      devShells = import ./devshells.nix {inherit pkgs;};
+      # nix build .#apps or self#apps / nix run self#apps
+      packages = pkgs;
     }
-    // flake-utils.lib.eachDefaultSystem
-    (
-      system: let
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          allowUnfree = true;
-          # allowBroken = true;
-          # allowUnsupportedSystem = true;
-        };
-      in {
-        # nix fmt :Formatter all files in this repo.
-        formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
-        # nix develop .#rust
-        devShells = import ./devshells.nix {inherit pkgs;};
-        # nix build .#apps or self#apps / nix run self#apps
-        packages = pkgs;
-      }
-    );
+  );
 
   # auto-fetch deps when `nix run/shell/develop`
   nixConfig = {

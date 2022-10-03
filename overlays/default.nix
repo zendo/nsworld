@@ -12,6 +12,7 @@ final: prev: {
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   wpaperd = prev.callPackage ./wpaperd {};
+  salut = prev.callPackage ./salut {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};

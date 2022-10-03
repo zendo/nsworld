@@ -11,7 +11,7 @@ in {
     # wifi-qr
     # mabel
     # mprober
-    # paper
+    paper
     # converseen
     # app-icon-preview
     # done

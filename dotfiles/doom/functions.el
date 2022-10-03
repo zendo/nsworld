@@ -7,7 +7,6 @@
 ;; vertico
 ;;----------------------------------------------------------------------------
 (when (modulep! :completion vertico)
-;; 箭头显示当前项
 ;;;###autoload
 (advice-add #'vertico--format-candidate :around
             (lambda (orig cand prefix suffix index _start)

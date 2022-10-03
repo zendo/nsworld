@@ -1,15 +1,16 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   home.shellAliases = {
     cat = "bat -p";
     # ps = "ps -ef";
-    ps = "${pkgs.procs}/bin/procs";
+    ps = "${lib.getExe pkgs.procs}";
     l = "exa -l --icons";
     "la." = "ls -d .*";
-    bc = "${pkgs.libqalculate}/bin/qalc";
+    bc = "${lib.getExe pkgs.libqalculate}";
     rm = "${pkgs.trash-cli}/bin/trash-put";
     rm-list = "${pkgs.trash-cli}/bin/trash-list";
     rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
@@ -28,6 +29,7 @@
     ee = "emacs -nw";
     wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
     paste-ixio = "curl -F 'f:1=<-' ix.io";
+    paste-gcg = ''curl -F "file=@-" gcg.sh'';
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
     journalctl-1h = "journalctl -p err..alert --since \"60 min ago\"";
