@@ -14,6 +14,7 @@ final: prev: {
   wpaperd = prev.callPackage ./wpaperd {};
   salut = prev.callPackage ./salut {};
   shotman = prev.callPackage ./shotman {};
+  mousai = prev.callPackage ./mousai {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
@@ -26,9 +27,6 @@ final: prev: {
   gpu-viewer = prev.callPackage ./gpu-viewer {};
   dool = prev.callPackage ./dool {};
 
-  # Nodejs
-  koodo-reader = prev.callPackage ./koodo-reader {};
-
   # Gtk
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
@@ -36,6 +34,11 @@ final: prev: {
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
+
+  # Nodejs
+  koodo-reader = prev.callPackage ./koodo-reader {};
+  collision = prev.callPackage ./collision {};
+  gi-crystal = prev.callPackage ./gi-crystal {};
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:

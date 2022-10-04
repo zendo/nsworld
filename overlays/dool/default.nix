@@ -38,6 +38,6 @@ python3.pkgs.buildPythonApplication rec {
     homepage = "https://github.com/scottchiefbaker/dool";
     license = licenses.gpl2Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [zendo];
+    maintainers = with maintainers; [ zendo ];
   };
 }

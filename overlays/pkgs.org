@@ -319,6 +319,13 @@ distPhase = "true";
 
 configurePhase = "ln -s $node_modules node_modules";
 #+end_src
+* buildCrystalPackage
+#+begin_src shell
+git checkout version
+nix shell nixpkgs#shards nixpkgs#crystal2nix
+shards lock
+crystal2nix
+#+end_src
 * appimageTool
 https://github.com/wineee/nur-packages/blob/main/packages/lx-music-desktop/default.nix
 
