@@ -13,6 +13,7 @@ final: prev: {
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   wpaperd = prev.callPackage ./wpaperd {};
   salut = prev.callPackage ./salut {};
+  shotman = prev.callPackage ./shotman {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
@@ -23,6 +24,7 @@ final: prev: {
   whatip = prev.callPackage ./whatip {};
   textpieces = prev.callPackage ./textpieces {};
   gpu-viewer = prev.callPackage ./gpu-viewer {};
+  dool = prev.callPackage ./dool {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};

@@ -16,6 +16,7 @@ in {
     # app-icon-preview
     # done
     # textpieces
+    dool
     whatip
 
     # v2ray

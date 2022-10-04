@@ -35,7 +35,7 @@
       wrapperFeatures.gtk = true;
       config = null;
       extraConfig = ''
-        include ${../dotfiles/sway/custom.conf}
+        include ./custom.conf
         exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       '';
       # extraSessionCommands = ''

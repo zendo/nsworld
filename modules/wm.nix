@@ -107,9 +107,10 @@
       kanshi # autorandr
 
       # Media
-      grim # grab image
-      slurp # select region
-      wayshot
+      # grim # grab image
+      # slurp # select region
+      # wayshot
+      shotman
       pavucontrol
       playerctl # media player control
       pamixer # volume control

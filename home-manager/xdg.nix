@@ -46,6 +46,7 @@ in
     "mako".source = mkOOSL hmDots + "/mako";
     "waybar".source = mkOOSL hmDots + "/waybar";
     "wayfire.ini".source = mkOOSL hmDots + "/wayfire.ini";
+    "sway/custom.conf".source = mkOOSL hmDots + "/sway/custom.conf";
     "hypr/custom.conf".source = mkOOSL hmDots + "/hypr/custom.conf";
   };
 
