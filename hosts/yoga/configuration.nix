@@ -53,6 +53,7 @@
       enable = true;
       device = "nodev";
       efiSupport = true;
+      # theme = pkgs.mygrub-theme;
       gfxmodeEfi = "1024x768";
       default = "1";
       # extraEntriesBeforeNixOS = true;

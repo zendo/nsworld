@@ -3,6 +3,7 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   wifi-qr = prev.callPackage ./wifi-qr {};
   nixos-helper = prev.callPackage ./nixos-helper {};
+  mygrub-theme = prev.callPackage ./mygrub-theme {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
