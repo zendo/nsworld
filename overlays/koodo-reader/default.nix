@@ -19,9 +19,12 @@ mkYarnPackage rec {
 
   buildPhase = ''
     runHook preBuild
-    yarn --offline build
+    yarn dev
     runHook postbuild
   '';
+  distPhase = "true";
+  dontInstall = true;
+  dontFixup = true;
 
   # # The spectron dependency has to be removed manually from package.json,
   # # because it requires electron-chromedriver, which wants to download stuff.

@@ -25,6 +25,8 @@ inputs @ {pkgs}: {
     buildInputs = with pkgs; [
       cargo
       rustc
+      clang
+      xorg.libxcb
     ];
   };
 

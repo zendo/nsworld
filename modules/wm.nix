@@ -12,9 +12,6 @@
     xkbOptions = "ctrl:swapcaps";
     # use greetd
     displayManager.lightdm.enable = false;
-    displayManager.lightdm.greeters.gtk.extraConfig = ''
-      xft-dpi=196
-    '';
   };
 
   services.greetd.enable = true;
@@ -82,6 +79,7 @@
       wlogout
 
       eww-wayland
+      hyprpicker
 
       # wlr apps
       wofi # quick run

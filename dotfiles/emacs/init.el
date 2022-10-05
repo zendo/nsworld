@@ -36,6 +36,7 @@
 (require 'init-vertico)
 (require 'init-project)
 (require 'init-keybindings)
+;; (require 'init-meow)
 
 (require 'init-prog)
 (require 'init-org)

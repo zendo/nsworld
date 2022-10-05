@@ -45,6 +45,8 @@ final: prev: {
   # (import ../lib { inherit (prev) lib; })
   # );
 
+  hyprpicker = prev.callPackage ./hyprpicker {};
+
   ############# Override ###################
   # fix .desktop missing
   wl-color-picker =

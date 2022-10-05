@@ -40,7 +40,6 @@
 
     home.packages = with pkgs; [
       # hyprpaper # wallpaper
-      # hyprpicker # color picker
       (waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       }))
