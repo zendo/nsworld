@@ -4,9 +4,15 @@
 
 ;; all-the-icons-dired
 (leaf all-the-icons-dired
+  :require t
   :ensure t
-  :hook (dired-mode-hook)
-  :require t)
+  :hook (dired-mode-hook))
+
+(leaf diredfl
+  :require t
+  :ensure t
+  :config
+  (diredfl-global-mode 1))
 
 ;; Dired
 (put 'dired-find-alternate-file 'disabled nil) ;a键进入目录时只用一个buffer

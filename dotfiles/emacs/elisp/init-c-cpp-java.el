@@ -20,6 +20,27 @@
            (:c++-mode-map ([remap indent-whole-buffer] . clang-format-buffer))))
   (dvorak-set-key-prog c-mode-base-map))
 
+;; (leaf c-mode
+
+;;   :config
+;;   (leaf google-c-style
+;;     :ensure t
+;;     :commands google-set-c-style)
+
+;;   (leaf clang-format
+;;     :ensure t
+;;     :commands clang-format clang-format-buffer)
+
+;;   (leaf ccls
+;;     :ensure t
+;;     :custom ((indent-tabs-mode . t)
+;;              (tab-width . 2)
+;;              (c-basic-offset . 2))
+;;     :hook ((c-mode-hook c++-mode-hook)
+;;            .
+;;            (lambda ()
+;;              (lsp)))))
+
 
 ;; Modern C++ syntax highlighting
 ;; (leaf modern-cpp-font-lock

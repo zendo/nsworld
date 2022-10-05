@@ -45,8 +45,14 @@
 ;; git-gutter
 (leaf git-gutter
   :ensure t
-  :diminish "GITGU"
-  :custom (global-git-gutter-mode . t))
+  :custom ((git-gutter:modified-sign . "~")
+           (git-gutter:added-sign . "+")
+           (git-gutter:deleted-sign . "-"))
+  :custom-face ((git-gutter:modified . '((t (:background "#f1fa8c"))))
+                (git-gutter:added . '((t (:background "#50fa7b"))))
+                (git-gutter:deleted . '((t (:background "#ff79c6")))))
+  :config
+  (global-git-gutter-mode 1))
 
 (leaf forge
   :disabled t
@@ -64,7 +70,7 @@
 ;; Dashboard
 (leaf dashboard
   :ensure t
-  :diminish (dashboard-mode page-break-lines-mode)
+  :blackout t
   :setq ((dashboard-startup-banner . 2)
          (dashboard-set-heading-icons . t)
          (dashboard-set-file-icons . t)

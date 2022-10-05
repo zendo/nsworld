@@ -8,15 +8,30 @@
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
 
-(package! crux)
-(package! rotate)
-(package! easy-kill)
-(package! smart-region)
-(package! avy-zap)
-(package! iedit)
-;; (package! telega)
-(package! fanyi)
-(package! vundo)
+(package! crux
+          :recipe (:host github :repo "bbatsov/crux"))
+
+(package! rotate
+          :recipe (:host github :repo "daichirata/emacs-rotate"))
+
+(package! easy-kill
+          :recipe (:host github :repo "leoliu/easy-kill"))
+
+(package! smart-region
+          :recipe (:host github :repo "uk-ar/smart-region"))
+
+(package! avy-zap
+          :recipe (:host github :repo "cute-jumper/avy-zap"))
+
+(package! iedit
+          :recipe (:host github :repo "victorhge/iedit"))
+
+(package! fanyi
+          :recipe (:host github :repo "condy0919/fanyi.el"))
+
+(package! vundo
+          :recipe (:host github :repo "casouri/vundo"))
+
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

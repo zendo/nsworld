@@ -136,6 +136,10 @@
   :config
   (global-hl-todo-mode))
 
+;; 显示截断竖线
+(leaf fill-column-indicator
+  :commands fci-mode)
+
 ;; 高亮删除插入操作
 ;; (leaf volatile-highlights
 ;;   :ensure t
@@ -153,7 +157,17 @@
 ;; rainbow-delimiters  彩虹括号
 (leaf rainbow-delimiters
   :ensure t
+  :blackout t
   :hook (prog-mode-hook))
+
+
+;; (leaf beacon
+;;   :ensure t
+;;   :blackout t
+;;   :hook (prog-mode-hook)
+;;   :custom ((beacon-color . "#77fffa")
+;;            (beacon-blink-duration . 0.7)
+;;            (beacon-size . 100)))
 
 ;; Narrow/Widen
 (leaf fancy-narrow
@@ -182,20 +196,32 @@
   :ensure t
   :bind (("C-c y" . fanyi-dwim2)))
 
-(leaf doom-modeline
-  :ensure t
-  :init
-  (doom-modeline-mode 1)
-  :setq ((doom-modeline-buffer-file-name-style quote relative-to-project)))
+;; (leaf auto-sudoedit
+;;   :ensure t
+;;   :blackout t
+;;   :hook (after-init-hook))
 
+(leaf doom-modeline
+    :ensure t
+    :hook (after-init-hook)
+    :custom ((doom-modeline-buffer-file-name-style quote relative-to-project)
+             (doom-modeline-icon . t)
+             (doom-modeline-major-mode-icon . t)
+             (doom-modeline-major-mode-color-icon . t)
+             (line-number-mode . 1)
+             (column-number-mode . 1)))
 
 ;; (leaf centaur-tabs
 ;;   :ensure t
-;;   :init
-;;   (setq centaur-tabs-set-icons nil
-;;         centaur-tabs-style "wave"
-;;         centaur-tabs-set-modified-marker t
-;;         centaur-tabs-modified-marker "*"))
+;;   :custom ((centaur-tabs-height . 28)
+;;            (centaur-tabs-style . "wave")
+;;            (centaur-tabs-set-icons . t)
+;;            (centaur-tabs-set-bar . 'over)
+;;            (centaur-tabs-set-close-button . nil)
+;;            (centaur-tabs-set-modified-marker . t)
+;;            (centaur-tabs-modified-marker . "●"))
+;;   :config
+;;   (centaur-tabs-mode t))
 
 ;; Garbage Collector Magic Hack
 (leaf gcmh

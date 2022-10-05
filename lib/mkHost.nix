@@ -16,9 +16,9 @@ nixpkgs.lib.nixosSystem {
   inherit system;
   specialArgs = {inherit inputs username;};
   modules = [
-    inputs.musnix.nixosModules.musnix
-    ../overlays/gtklock/gtklock.nix
     ../overlays/v2raya/v2raya.nix
+    ../overlays/gtklock/gtklock.nix
+    inputs.musnix.nixosModules.musnix
   ]
   ++ [
     ../modules/base.nix

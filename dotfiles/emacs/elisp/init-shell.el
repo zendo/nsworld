@@ -31,16 +31,19 @@
     :ensure t
     :setq ((vterm-shell . "zsh"))
     :bind (:vterm-mode-map
-           ("<f2>" . shell-pop))))
+           ("<f2>" . shell-pop))
+    ))
 
 ;; shell-pop
 (leaf shell-pop
   :ensure t
-  :init (setq shell-pop-window-size 30
-        shell-pop-last-shell-buffer-index 0
-        shell-pop-shell-type '("shell" "*shell: <>*" (lambda () (vterm))))
-  :bind (([f2] . shell-pop))
-  )
+  :blackout t
+  :bind (("<f2>" . shell-pop))
+  :custom ((shell-pop-shell-type . '("shell" "*shell*" (lambda () (vterm))))
+           ;; (shell-pop-universal-key . "<f2>")
+           (shell-pop-window-size . 30)
+           (shell-pop-full-span . t)
+           (shell-pop-window-position . "bottom")))
 
 (provide 'init-shell)
 ;;; init-shell.el ends here

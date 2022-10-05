@@ -17,6 +17,8 @@
     btop
     ctop # containers monitor
     htop
+    iotop-c
+    dstat
     powertop
     bottom # btm
     psmisc # pstree

@@ -21,6 +21,9 @@
       compilation-scroll-output 'first-error ; Automatically scroll to first error
       )
 
+(leaf quickrun
+  :ensure t)
+
 ;; tree-sitter
 ;; need github connect download
 (leaf tree-sitter
@@ -130,12 +133,7 @@
 ;; flycheck
 (leaf flycheck
   :ensure t
-  :hook (prog-mode-hook)
-  :config
-  (with-eval-after-load 'flycheck
-    (setq flycheck-emacs-lisp-load-path 'inherit)
-    (if (fboundp 'diminish)
-        (diminish 'flycheck-mode))))
+  :hook (prog-mode-hook))
 
 ;; yasnippet
 (leaf yasnippet

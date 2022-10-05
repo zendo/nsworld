@@ -120,6 +120,7 @@
       gnome.nautilus
       gnome-text-editor
       gnome.gnome-power-manager
+      gnome.gnome-characters
       # gnome.eog
       # gthumb
       libsForQt5.gwenview

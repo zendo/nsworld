@@ -12,7 +12,6 @@ final: prev: {
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   wpaperd = prev.callPackage ./wpaperd {};
-  salut = prev.callPackage ./salut {};
   shotman = prev.callPackage ./shotman {};
   mousai = prev.callPackage ./mousai {};
 
@@ -55,6 +54,16 @@ final: prev: {
       postFixup = ''
         cp -r $out/usr/share $out/share '';
     });
+
+  # librime-charcode = prev.callPackage ./librime-charcode {};
+  # librime = prev.librime.override {
+  #   plugins = prev.fetchFromGitHub {
+  #     owner = "rime";
+  #     repo = "librime";
+  #     rev = "e20e3993c42fc86c8209e808ed0762aea24261e0";
+  #     hash = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
+  #   };
+  # };
 
   /*
   libadwaita-git = prev.libadwaita.overrideAttrs (oldAttrs: {
@@ -119,6 +128,5 @@ final: prev: {
         patches = [];
       });
   });
-*/
-
+  */
 }

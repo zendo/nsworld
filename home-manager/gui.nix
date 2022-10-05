@@ -16,7 +16,6 @@ in {
     # app-icon-preview
     # done
     # textpieces
-    dool
     whatip
 
     # v2ray
@@ -28,7 +27,6 @@ in {
     kitty
     # alacritty
     # wezterm
-    gitg
     warp
     remmina
 

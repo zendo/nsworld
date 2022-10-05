@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     owner = "kokoye2007";
     repo = pname;
     rev = "${version}";
-    sha256 = "sha256-4cegDpF//6GrExUR+1xPz+idMPjiX/54wP89LRHFZyk=";
+    hash = "sha256-4cegDpF//6GrExUR+1xPz+idMPjiX/54wP89LRHFZyk=";
   };
 
   nativeBuildInputs = [makeWrapper installShellFiles];

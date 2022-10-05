@@ -53,6 +53,7 @@
 
       doom-theme 'doom-tomorrow-night
       ;; doom-theme 'doom-vibrant
+      warning-minimum-level :emergency ; temp disable
 
       undo-in-region t
       mouse-autoselect-window t
