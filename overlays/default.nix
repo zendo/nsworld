@@ -4,6 +4,8 @@ final: prev: {
   wifi-qr = prev.callPackage ./wifi-qr {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   mygrub-theme = prev.callPackage ./mygrub-theme {};
+  hyprpicker = prev.callPackage ./hyprpicker {};
+  jamesdsp = prev.libsForQt5.callPackage ./jamesdsp {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
@@ -17,6 +19,7 @@ final: prev: {
   shotman = prev.callPackage ./shotman {};
   mousai = prev.callPackage ./mousai {};
   lockbook = prev.callPackage ./lockbook {};
+  game-of-life = prev.callPackage ./game-of-life {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
@@ -24,9 +27,7 @@ final: prev: {
   go-musicfox = prev.callPackage ./go-musicfox {};
 
   # Python
-  whatip = prev.callPackage ./whatip {};
   textpieces = prev.callPackage ./textpieces {};
-  gpu-viewer = prev.callPackage ./gpu-viewer {};
   dool = prev.callPackage ./dool {};
 
   # Gtk
@@ -36,6 +37,7 @@ final: prev: {
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
+  qv2ray = prev.libsForQt5.callPackage ./qv2ray {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};
@@ -46,8 +48,6 @@ final: prev: {
   # lib = prev.lib.extend (finalLib: prevLib:
   # (import ../lib { inherit (prev) lib; })
   # );
-
-  hyprpicker = prev.callPackage ./hyprpicker {};
 
   ############# Override ###################
   # fix .desktop missing

@@ -35,8 +35,17 @@ inputs @ {pkgs}: {
     buildInputs = with pkgs; [
       cargo
       rustc
+      meson
+      ninja
       clang
       pkg-config
+      gtk4
+      glib
+      libadwaita
+      wrapGAppsHook4
+      appstream-glib
+      desktop-file-utils
+      libxml2
       xorg.libxcb
     ];
   };

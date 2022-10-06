@@ -16,14 +16,15 @@ in {
     # app-icon-preview
     # done
     # textpieces
-    whatip
 
     foot
     kitty
-    alacritty
+    # alacritty
     # wezterm
     warp
     remmina
+    v2ray
+    qv2ray
     # clash
     proxychains-ng
     # nur.repos.linyinfeng.clash-for-windows
@@ -41,6 +42,7 @@ in {
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
     # poedit    # translate .po file
+    # whatip
     sniffglue
 
     # Social media
@@ -89,6 +91,9 @@ in {
     # OFFICE
     # libreoffice-fresh
     # rnote # handwritten note
+
+    # Common devtools
+    gnumake
 
     # HARDWARE TEST
     efibootmgr

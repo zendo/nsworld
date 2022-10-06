@@ -238,6 +238,7 @@ rustPlatform.buildRustPackage rec {
     chmod +x build-aux/meson/postinstall.py
     patchShebangs build-aux/meson/postinstall.py
     ----------------------------------
+    sed -i '21,41d' meson.build # 删除 21-41 行
     substituteInPlace requirements.txt \
     --replace 'PyYaml==5.4.1' 'PyYaml'
     substituteInPlace ./build-aux/meson/postinstall.py \
