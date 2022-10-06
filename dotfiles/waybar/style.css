@@ -60,6 +60,7 @@ tooltip {
 #custom-weather,
 #custom-caffeine,
 #custom-playerctl,
+#custom-notification,
 #clock,
 #taskbar,
 #battery,
@@ -128,6 +129,11 @@ tooltip {
   margin-left: 4px;
   margin-right: 4px;
   border-radius: 10px 10px 10px 10px;
+}
+
+#custom-notification {
+  border-radius: 10px;
+  margin-right: 4px;
 }
 
 #clock {

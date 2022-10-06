@@ -36,7 +36,6 @@
       config = null;
       extraConfig = ''
         include ./custom.conf
-        exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       '';
       # extraSessionCommands = ''
       #   export XDG_CURRENT_DESKTOP="sway"

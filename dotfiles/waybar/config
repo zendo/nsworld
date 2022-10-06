@@ -5,14 +5,26 @@
   "height": 30,
   "position": "top",
 
-  "modules-left":   ["wlr/workspaces", "sway/workspaces", "wlr/taskbar",],
-  "modules-center": ["clock", "custom/playerctl"],
-  "modules-right":  ["tray",
-                     "pulseaudio",
-                     "backlight",
-                     "battery",
-                     //"custom/sysmenu",
-                     "custom/logout"],
+  "modules-left":   [
+                    "wlr/workspaces",
+                    "sway/workspaces",
+                    "wlr/taskbar"
+                    ],
+
+  "modules-center": [
+                    // "custom/notification",
+                    "clock",
+                    "custom/playerctl"
+                    ],
+
+  "modules-right":  [
+                    "tray",
+                    "pulseaudio",
+                    "backlight",
+                    "battery",
+                    //"custom/sysmenu",
+                    "custom/logout"
+                    ],
 
   "wlr/workspaces": {
     "disable-scroll": true,
@@ -167,6 +179,23 @@
     "exec": "cat /tmp/kb_layout",
     "interval": 3,
     "format": " {}"
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "none": " ",
+      "dnd-notification": "",
+      "dnd-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
 
   "tray": {

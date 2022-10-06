@@ -10,11 +10,13 @@ final: prev: {
 
   # Rust
   done = prev.callPackage ./done {};
+  moji-rs = prev.callPackage ./moji-rs {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   wpaperd = prev.callPackage ./wpaperd {};
   shotman = prev.callPackage ./shotman {};
   mousai = prev.callPackage ./mousai {};
+  lockbook = prev.callPackage ./lockbook {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};

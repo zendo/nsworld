@@ -21,11 +21,22 @@ inputs @ {pkgs}: {
     ];
   };
 
+  go = pkgs.mkShell {
+    buildInputs = with pkgs; [
+      go
+      gccgo
+      pkg-config
+      alsa-lib
+      flac
+    ];
+  };
+
   rust = pkgs.mkShell {
     buildInputs = with pkgs; [
       cargo
       rustc
       clang
+      pkg-config
       xorg.libxcb
     ];
   };

@@ -69,6 +69,7 @@ in {
     radioboat
     mousai # 听歌识曲
     # eartag
+    jamesdsp
     # easyeffects
     # media-downloader
 
