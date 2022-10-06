@@ -86,16 +86,7 @@
 
 ;; nxml
 (leaf nxml-mode
-  :mode "\\.fxml\\'"
-  :defvar nxml-mode-map
-  :custom (nxml-slash-auto-complete-flag . t)
-  :bind (:nxml-mode-map
-         ("M-h" . nil)
-         ("C-M-t" . nil)
-         ("C-M-p" . nxml-backward-element))
-  :config
-  (leaf smartparens :config (sp-local-pair 'nxml-mode "<" ">" :actions nil))
-  (dvorak-set-key-prog nxml-mode-map))
+  :mode "\\.fxml\\'")
 
 (provide 'lang-web)
 ;;; init-web.el ends here

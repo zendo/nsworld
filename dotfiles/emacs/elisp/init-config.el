@@ -143,6 +143,11 @@
       (when win (delete-window win)))
     ))
 
+(leaf server
+  :require t
+  :defun server-running-p
+  :config (unless (server-running-p) (server-start)))
+
 ;; kill emacsclient message
 (add-hook 'server-after-make-frame-hook
           (lambda ()

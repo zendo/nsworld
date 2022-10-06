@@ -87,6 +87,7 @@
 
 ;; corfu
 (leaf corfu
+  :ensure t
   :init
   (setq corfu-auto t
         corfu-quit-no-match t

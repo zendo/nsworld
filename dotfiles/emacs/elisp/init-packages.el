@@ -108,8 +108,10 @@
 
 (leaf anzu
   :ensure t
-  :bind (([remap query-replace] . anzu-query-replace)
-         ([remap query-replace-regexp] . anzu-query-replace-regexp)))
+  :custom (global-anzu-mode . t)
+  :bind
+  ([remap query-replace] . anzu-query-replace)
+  ([remap query-replace-regexp] . anzu-query-replace-regexp))
 
 (leaf wgrep
   :ensure t)
