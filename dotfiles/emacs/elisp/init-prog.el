@@ -42,6 +42,8 @@
   (markdown-fontify-code-blocks-natively . t)
   :mode (("\\.md\\'" . gfm-mode)
          ("README\\'" . gfm-mode)))
+(leaf markdown-preview-mode
+  :ensure t)
 
 ;; SQL
 (leaf sql-indent
@@ -133,23 +135,18 @@
 ;; flycheck
 (leaf flycheck
   :ensure t
-  :hook (prog-mode-hook))
+  :leaf-defer t
+  :hook (prog-mode-hook . flycheck-mode))
 
 ;; yasnippet
 (leaf yasnippet
   :ensure t
-  :hook ((prog-mode-hook . yas-minor-mode))
+  :diminish yas-minor-mode
+  :require t
+  :defun yas-global-mode
   :config
-  (with-eval-after-load 'yasnippet
-    (yas-reload-all)
-    (if (fboundp 'diminish)
-        (diminish 'yas-minor-mode))))
-(leaf yasnippet-snippets
-  :ensure t
-  :config
-  (with-eval-after-load 'yasnippet
-    (require 'yasnippet-snippets nil nil)
-    (yasnippet-snippets-initialize)))
+  (yas-global-mode 1))
+
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/
 ;; (leaf lsp-mode
@@ -270,6 +267,56 @@
 ;; (add-hook 'emacs-lisp-mode-hook 'no-fly-yas)
 (add-hook 'emacs-lisp-mode-hook (lambda () (flycheck-mode -1)) t) ;only flycheck
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ξ "))) ;hook for shortname
+
+
+;; (leaf lsp-mode
+;;   :ensure t
+;;   :require t
+;;   :commands lsp
+;;   :hook
+;;   (go-mode-hook . lsp)
+;;   (web-mode-hook . lsp)
+;;   (elixir-mode-hook . lsp)
+;;   (typescript-mode-hook . lsp)
+;;   :config
+;;   (leaf lsp-ui
+;;     :ensure t
+;;     :require t
+;;     :hook
+;;     (lsp-mode-hook . lsp-ui-mode)
+;;     :custom
+;;     (lsp-ui-sideline-enable . nil)
+;;     (lsp-prefer-flymake . nil)
+;;     (lsp-print-performance . t)
+;;     :config
+;;     (define-key lsp-ui-mode-map [remap xref-find-definitions] 'lsp-ui-peek-find-definitions)
+;;     (define-key lsp-ui-mode-map [remap xref-find-references] 'lsp-ui-peek-find-references)
+;;     (define-key lsp-ui-mode-map (kbd "C-c i") 'lsp-ui-imenu)
+;;     (define-key lsp-ui-mode-map (kbd "s-l") 'hydra-lsp/body)
+;;     (setq lsp-ui-doc-position 'bottom)
+;;     :hydra (hydra-lsp (:exit t :hint nil)
+;;                       "
+;;  Buffer^^               Server^^                   Symbol
+;; -------------------------------------------------------------------------------------
+;;  [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
+;;  [_m_] imenu            [_S_]   shutdown           [_D_] definition   [_t_] type            [_r_] rename
+;;  [_x_] execute action   [_M-s_] describe session   [_R_] references   [_s_] signature"
+;;                       ("d" lsp-find-declaration)
+;;                       ("D" lsp-ui-peek-find-definitions)
+;;                       ("R" lsp-ui-peek-find-references)
+;;                       ("i" lsp-ui-peek-find-implementation)
+;;                       ("t" lsp-find-type-definition)
+;;                       ("s" lsp-signature-help)
+;;                       ("o" lsp-describe-thing-at-point)
+;;                       ("r" lsp-rename)
+
+;;                       ("f" lsp-format-buffer)
+;;                       ("m" lsp-ui-imenu)
+;;                       ("x" lsp-execute-code-action)
+
+;;                       ("M-s" lsp-describe-session)
+;;                       ("M-r" lsp-restart-workspace)
+;;                       ("S" lsp-shutdown-workspace))))
 
 
 (provide 'init-prog)

@@ -85,5 +85,87 @@
 ;;   ;; If using org-roam-protocol
 ;;   (require 'org-roam-protocol))
 
+
+;; (leaf org
+;;   :leaf-defer t
+;;   :bind (("C-c c" . org-capture)
+;;          ("C-c a" . org-agenda)
+;;          (:org-mode-map
+;;           ("C-c C-;" . org-edit-special))
+;;          (:org-src-mode-map
+;;           ("C-c C-;" . org-edit-src-exit)))
+;;   :mode ("\\.org$'" . org-mode)
+;;   ;; :hook  (org-mode . (lambda ()
+;;   ;;                      (set (make-local-variable 'system-time-locale) "C")))
+;;   :config
+;;   (setq org-directory "~/src/github.com/grugrut/PersonalProject/")
+;;   :custom
+;;   ;; TODO状態の設定
+;;   (org-todo-keywords . '((sequence "TODO(t)" "IN PROGRESS(i)" "|" "DONE(d)")
+;;                          (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "MEETING")))
+;;   (org-todo-keyword-faces . '(("TODO" :foreground "red" :weight bold)
+;;                               ("STARTED" :foreground "cornflower blue" :weight bold)
+;;                               ("DONE" :foreground "green" :weight bold)
+;;                               ("WAITING" :foreground "orange" :weight bold)
+;;                               ("HOLD" :foreground "magenta" :weight bold)
+;;                               ("CANCELLED" :foreground "green" :weight bold)
+;;                               ("MEETING" :foreground "gren" :weight bold)))
+;;   (org-log-done . 'time)
+;;   (org-clock-persist . t)
+;;   (org-clock-out-when-done . t)
+;;   )
+;; (leaf org-capture
+;;   :leaf-defer t
+;;   :after org
+;;   :commands (org-capture)
+;;   :config
+;;   (defvar grugrut/org-inbox-file (concat org-directory "inbox.org"))
+;;   (defvar grugrut/org-journal-file (concat org-directory "journal.org"))
+;;   (setq org-capture-templates `(
+;;                                 ("t" " Tasks" entry (file ,grugrut/org-inbox-file)
+;;                                  "* TODO %? %^G\n:PROPERTIES:\n:DEADLINE: %^{Deadline}T\n:EFFORT: %^{effort|1:00|0:05|0:15|0:30|2:00|4:00}\n:END:\n")
+;;                                 ("e" " Event" entry (file ,grugrut/org-inbox-file)
+;;                                  "* TODO %? %^G\n:PROPERTIES:\n:SCHEDULED: %^{Scheduled}T\n:EFFORT:%^{effort|1:00|0:05|0:15|0:30|2:00|4:00}\n:END:\n")
+;;                                 ("j" " Journal" entry (file+olp+datetree ,grugrut/org-journal-file)
+;;                                  "* %<%H:%M> %?")
+;;                                 ("b" " blog" entry
+;;                                  (file+headline "~/src/github.com/grugrut/blog/draft/blog.org" ,(format-time-string "%Y"))
+;;                                  "** TODO %?\n:PROPERTIES:\n:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :archives '(\\\"%(format-time-string \"%Y\")\\\" \\\"%(format-time-string \"%Y-%m\")\\\")\n:EXPORT_FILE_NAME: %(format-time-string \"%Y%m%d%H%M\")\n:END:\n\n")
+;;                                 )))
+
+;; (leaf org-superstar
+;;   :ensure t
+;;   :custom
+;;   (org-superstar-headline-bullets-list . '("󿕸" "󿖀" "󿕾" "󿕼" "󿕺" "󿖍"))
+;;   :hook
+;;   (org-mode-hook (lambda () (org-superstar-mode 1)))
+;;   )
+
+;; (leaf ox-hugo
+;;   :ensure t
+;;   :after ox
+;;   :mode ("\\.org$'" . org-hugo-auto-export-mode))
+
+;; (leaf ob
+;;   :leaf-defer t
+;;   :after org
+;;   :defun org-babel-do-load-languages
+;;   :config
+;;   (setq org-plantuml-jar-path "~/bin/plantuml.jar")
+;;   (leaf ob-elixir
+;;     :ensure t)
+;;   (leaf ob-go
+;;     :ensure t)
+;;   (leaf ob-rust
+;;     :ensure t)
+;;   (org-babel-do-load-languages
+;;    'org-babel-load-languages
+;;    '((emacs-lisp . t)
+;;      (elixir . t)
+;;      (go . t)
+;;      (rust . t)
+;;      (plantuml . t))))
+
+
 (provide 'init-org)
 ;;; init-org.el ends here

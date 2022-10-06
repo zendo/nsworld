@@ -160,7 +160,6 @@
   :blackout t
   :hook (prog-mode-hook))
 
-
 ;; (leaf beacon
 ;;   :ensure t
 ;;   :blackout t
@@ -175,6 +174,16 @@
   :diminish fancy-narrow-mode
   :init
   (fancy-narrow-mode 1))
+
+;; Bookmark
+(leaf bm
+  :ensure t
+  :leaf-defer t
+  :bind
+  (("C-c m m" . bm-toggle)
+   ("C-c m p" . bm-previous)
+   ("C-c m n" . bm-next)
+   ("C-c m 0" . bm-remove-all-current-buffer)))
 
 ;; avy
 (leaf avy

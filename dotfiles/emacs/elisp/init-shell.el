@@ -4,11 +4,9 @@
 
 ;; Tramp
 (setq tramp-default-method "ssh"
-      password-cache-expiry 36000 ;config for caching password for 36000s
-      )
+      password-cache-expiry 36000)
 
 ;; eshell
-
 
 
 ;; bash-completion
@@ -19,11 +17,6 @@
     :hook ((shell-dynamic-complete-functions . bash-completion-dynamic-complete))))
 
 ;; exec-path-from-shell
-;; (leaf exec-path-from-shell
-;;   :ensure t
-;;   :when (and window-system (not (eq system-type 'gnu/linux)))
-;;   :defun exec-path-from-shell-initialize
-;;   :config (exec-path-from-shell-initialize))
 
 ;; vterm
 (when (eq system-type 'gnu/linux)

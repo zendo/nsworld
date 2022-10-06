@@ -83,15 +83,19 @@
    ("C-c - p" . project-forget-project)
    ))
 
-;; view-mode key
-(defvar view-mode-map) ;定义变量消除 flaycheck error
-(with-eval-after-load 'view
-  (bind-key "g" 'goto-line view-mode-map)
-  (bind-key "h" 'backward-char view-mode-map)
-  (bind-key "j" 'next-line view-mode-map)
-  (bind-key "k" 'previous-line view-mode-map)
-  (bind-key "l" 'forward-char view-mode-map)
-  (bind-key "b" 'View-scroll-page-backward view-mode-map))
+;; view-mode
+(leaf view
+  :require t
+  ;; :chord (("fj" . view-mode))
+  :bind  (:view-mode-map
+          ("j" . next-line)
+          ("k" . previous-line)
+          ("h" . backward-char)
+          ("l" . forward-char)
+          ("g" . goto-line)
+          ("b" . View-scroll-page-backward))
+  :config
+  (setq view-read-only t))
 
 
 ;; 新建 window 并直接切换至新窗口
