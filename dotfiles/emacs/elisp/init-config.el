@@ -2,23 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Environment 环境设定
+;; Environment
 (when (eq system-type 'gnu/linux)
-  ;; (set-fontset-font t 'han (font-spec :family "NotoSansSC" :size 17))
+  (set-face-font 'default "JetBrains Mono-10")
   ;; (setq org-directory "~/Documents/org/")
   )
 
 (when (eq system-type 'windows-nt)
-;; (set-fontset-font t 'han (font-spec :family "Microsoft Yahei" :size 17))
+  (set-face-font 'default "JetBrains Mono-10")
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
         ))
 
-;; 字体 fonts
+;; fonts
 ;; Consolas, Hack, Source Code Pro,
 ;; Microsoft Yahei, NotoSansSC,
 ;; (set-face-attribute 'default nil :font "等距更纱黑体 SC-12")
-(setq default-frame-alist '((font . "JetBrains Mono-10")))
+;; (setq default-frame-alist '((font . "JetBrains Mono-10")))
 ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
 ;;   (set-fontset-font (frame-parameter nil 'font)
 ;;                     charset
@@ -32,13 +32,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;; Editor ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 界面 interface
-(setq inhibit-startup-message t     ;关闭欢迎界面
-      inhibit-startup-echo-area-message t ; 关闭 mminibuffer 欢迎消息
-      ;; inhibit-default-init t        ;default.el
-      initial-scratch-message nil
-      initial-major-mode 'fundamental-mode
-      confirm-kill-processes nil
+;; interface
+(setq confirm-kill-processes nil
       mouse-autoselect-window t
       visible-bell 1                ;关闭错误警示
       system-time-locale "C"        ;使用英文时间格式
@@ -46,16 +41,6 @@
       sentence-end-double-space nil ;Sentences should end in one space
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       require-final-newline t)
-
-(defun display-startup-echo-area-message ()
-  "Delete starup message"
-  (message ""))
-
-;; kill emacsclient message
-(add-hook 'server-after-make-frame-hook
-          (lambda ()
-            (setq inhibit-message t)
-            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
 
 ;; Modeline
 (column-number-mode t)      ;显示列数
@@ -103,17 +88,6 @@
                          indentation empty space-after-tab))
 (whitespace-mode 1)
 
-
-;; narrow 命令跳过初始化提醒
-(put 'narrow-to-region 'disabled nil)
-(put 'narrow-to-page 'disabled nil)
-(put 'narrow-to-defun 'disabled nil)
-;; enabled change region case commands
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-;; enable erase-buffer command
-(put 'erase-buffer 'disabled nil)
-
 ;; hippie expand is dabbrev expand on steroids
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
@@ -132,6 +106,48 @@
 (setq ispell-program-name "aspell" ; use aspell instead of ispell
       ispell-extra-args '("--sug-mode=ultra"))
 
+
+
+(leaf startup
+  :custom
+  ((inhibit-startup-screen            . t)
+   (inhibit-startup-message           . t) ;关闭欢迎界面
+   (inhibit-startup-echo-area-message . t) ;关闭 mminibuffer 欢迎消息
+   (initial-scratch-message           . nil)
+   (initial-major-mode   . 'fundamental-mode)
+   ;; (inhibit-default-init . t) ;default.el
+   ))
+(defun display-startup-echo-area-message ()
+  "Delete starup message"
+  (message ""))
+
+(leaf cus-edit
+  :custom `((custom-file . ,(locate-user-emacs-file ".custom.el"))))
+
+(eval-and-compile
+  (leaf bytecomp
+    :custom
+    ((byte-compile-warnings . '(not
+                                obsolete
+                                free-vars
+                                unresolved
+                                callargs
+                                redefine
+                                noruntime
+                                cl-functions
+                                interactive-only
+                                make-local))
+     (debug-on-error        . nil))
+    :config
+    (let ((win (get-buffer-window "*Compile-Log*")))
+      (when win (delete-window win)))
+    ))
+
+;; kill emacsclient message
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (setq inhibit-message t)
+            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
 
 (provide 'init-config)
 ;;; config.el ends here

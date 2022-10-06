@@ -22,11 +22,13 @@
 (setq frame-inhibit-implied-resize t)
 
 ;; Faster to disable these here (before they've been initialized)
-(menu-bar-mode -1)
-;; (push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
-(push '(alpha-background . 98) default-frame-alist)
+(push '(vertical-scroll-bars . nil) default-frame-alist)
+(push '(menu-bar-lines       . nil) default-frame-alist)
+(push '(tool-bar-lines       . nil) default-frame-alist)
+(push '(alpha-background     . 98 ) default-frame-alist)
+;; (push '(scroll-bar-mode      . nil) default-frame-alist)
+;; (push '(blink-cursor-mode    . nil) default-frame-alist)
+;; (push '(column-number-mode   . nil) default-frame-alist)
 
 ;; Disable GUI elements
 (add-hook 'before-make-frame-hook
@@ -39,8 +41,12 @@
               ;;         (width . 83)))
               ))
 
+(setq frame-inhibit-implied-resize t)
+(setq site-run-file nil)
+
 (when (featurep 'native-compile)
   (setq native-comp-async-report-warnings-errors nil
-        native-comp-deferred-compilation t)
-  )
+        native-comp-deferred-compilation t))
+
+(provide 'early-init)
 ;;; early-init.el ends here

@@ -97,5 +97,5 @@
   (leaf smartparens :config (sp-local-pair 'nxml-mode "<" ">" :actions nil))
   (dvorak-set-key-prog nxml-mode-map))
 
-(provide 'init-web)
+(provide 'lang-web)
 ;;; init-web.el ends here

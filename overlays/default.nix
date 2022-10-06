@@ -12,7 +12,6 @@ final: prev: {
 
   # Rust
   done = prev.callPackage ./done {};
-  moji-rs = prev.callPackage ./moji-rs {};
   mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   wpaperd = prev.callPackage ./wpaperd {};

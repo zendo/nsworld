@@ -8,7 +8,6 @@
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
   home.packages = with pkgs; [
-    # wifi-qr
     # mabel
     # mprober
     paper
@@ -63,7 +62,8 @@ in {
     mpv
     # vlc
     # ffmpeg
-    audacious
+    # audacious
+    rhythmbox
     radioboat
     mousai # 听歌识曲
     # eartag

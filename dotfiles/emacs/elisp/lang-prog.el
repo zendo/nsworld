@@ -1,4 +1,4 @@
-;;; init-prog.el --- Main Development languages -*- lexical-binding: t; -*-
+;;; lang-prog.el --- Main Development languages -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -319,5 +319,5 @@
 ;;                       ("S" lsp-shutdown-workspace))))
 
 
-(provide 'init-prog)
+(provide 'lang-prog)
 ;;; init-prog.el ends here

@@ -2,38 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-and-compile
-  (customize-set-variable
-   'package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-  (package-initialize)
-  (unless (package-installed-p 'leaf)
-    (package-refresh-contents)
-    (package-install 'leaf))
-
-  (leaf leaf-keywords
-    :ensure t
-    :init
-    ;; optional packages if you want to use :hydra, :el-get, :blackout,,,
-    (leaf hydra :ensure t)
-    (leaf el-get :ensure t)
-    (leaf blackout :ensure t)
-
-    :config
-    ;; initialize leaf-keywords.el
-    (leaf-keywords-init)))
-;; </leaf-install-code>
-
-;; Now you can use leaf!
-(leaf leaf-tree :ensure t)
-(leaf leaf-convert :ensure t)
-
 ;; (leaf feather
 ;;   :el-get conao3/feather.el
 ;;   :config (feather-mode))
 
+(leaf leaf
+  :config
+  ;; (leaf leaf-convert :ensure t)
+  (leaf leaf-tree
+    :ensure t
+    :custom ((imenu-list-size . 30)
+             (imenu-list-position . 'left))))
 
-(eval-when-compile (require 'cl-lib nil t))
+(leaf macrostep
+  :ensure t
+  :bind (("C-c e" . macrostep-expand)))
 
 ;; string manipulation
 ;; (leaf s
@@ -144,10 +127,6 @@
 ;; (leaf volatile-highlights
 ;;   :ensure t
 ;;   :config (volatile-highlights-mode t))
-
-(leaf macrostep
-  :ensure t
-  :bind (("C-c e" . macrostep-expand)))
 
 ;; rainbow 颜色代码显色 #00FF00
 (leaf rainbow-mode

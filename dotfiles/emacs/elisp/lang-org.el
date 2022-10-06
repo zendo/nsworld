@@ -1,4 +1,4 @@
-;;; init-org.el --- main core settings -*- lexical-binding: t; -*-
+;;; lang-org.el --- main core settings -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -167,5 +167,5 @@
 ;;      (plantuml . t))))
 
 
-(provide 'init-org)
+(provide 'lang-org)
 ;;; init-org.el ends here

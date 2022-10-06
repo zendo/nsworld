@@ -18,12 +18,6 @@
 (global-set-key [remap kill-buffer] #'kill-this-buffer)
 (global-set-key [remap other-window] 'ace-window)
 
-(global-set-key (kbd "<f7>") #'compile)
-(global-set-key (kbd "<C-f7>")
-                (lambda () (interactive)
-                  (save-buffer)
-                  (recompile)))
-
 ;; easy-kill
 (leaf easy-kill
   :ensure t
@@ -81,6 +75,20 @@
    ("C-c - b" . bookmark-delete)
    ("C-c - r" . recentf-edit-list)
    ("C-c - p" . project-forget-project)
+
+   ("C-x 2" .  (lambda()
+                  (interactive)
+                  (split-window-below)
+                  (select-window (next-window))))
+   ("C-x 3" . (lambda()
+                  (interactive)
+                  (split-window-right)
+                  (select-window (next-window))))
+
+   ("<f7>" . compile)
+   ("<C-f7>" . (lambda () (interactive)
+                 (save-buffer)
+                 (recompile)))
    ))
 
 ;; view-mode
@@ -97,18 +105,15 @@
   :config
   (setq view-read-only t))
 
-
-;; 新建 window 并直接切换至新窗口
-(global-set-key (kbd "C-x 2")
-                (lambda()
-                  (interactive)
-                  (split-window-below)
-                  (select-window (next-window))))
-(global-set-key (kbd "C-x 3")
-                (lambda()
-                  (interactive)
-                  (split-window-right)
-                  (select-window (next-window))))
+;; narrow 命令跳过初始化提醒
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-defun 'disabled nil)
+;; enabled change region case commands
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+;; enable erase-buffer command
+(put 'erase-buffer 'disabled nil)
 
 
 (provide 'init-keybindings)

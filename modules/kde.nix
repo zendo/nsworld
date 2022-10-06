@@ -50,7 +50,6 @@
   # programs.seahorse.enable = true;
 
   environment.variables = {
-    # wayland ozone support
     NIXOS_OZONE_WL = "1";
   };
 
