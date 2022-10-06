@@ -5,7 +5,6 @@
 }: {
   services = {
     gnome.sushi.enable = true;
-    # False
     packagekit.enable = false;
     gnome.tracker.enable = false;
     gnome.tracker-miners.enable = false;
@@ -26,7 +25,6 @@
     [
       gthumb
       authenticator
-      # notejot
       # rhythmbox
       gparted
       dconf2nix
@@ -40,7 +38,6 @@
       # gnome-solanum
       # gnome-network-displays  # miracast
       # gnome-builder
-      # gnome.gnome-nettool
       # gnome-firmware-updater
     ]
     ++ (with gnomeExtensions; [
@@ -62,12 +59,6 @@
       space-bar
       gtile
       pop-shell
-      # arcmenu
-      # gnome-clipboard
-      # logo-menu
-      # kimpanel
-      # pixel-saver
-      # gesture-improvements
       ddterm
       ideapad-mode
       mpris-indicator-button

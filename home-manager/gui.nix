@@ -18,20 +18,17 @@ in {
     # textpieces
     whatip
 
-    # v2ray
-    # qv2ray
-    proxychains-ng
-    # clash
-    # nur.repos.linyinfeng.clash-for-windows
     foot
     kitty
-    # alacritty
+    alacritty
     # wezterm
     warp
     remmina
+    # clash
+    proxychains-ng
+    # nur.repos.linyinfeng.clash-for-windows
 
     # Browsers
-    # google-chrome
     (google-chrome.override {
       commandLineArgs = [
         "--ozone-platform=wayland"
@@ -43,7 +40,6 @@ in {
     # vivaldi
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
-    # standardnotes
     # poedit    # translate .po file
     sniffglue
 

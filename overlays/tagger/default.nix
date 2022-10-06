@@ -23,8 +23,9 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "nlogozzo";
     repo = "NickvisionTagger";
-    rev = version;
-    hash = "sha256-0ak+ORRxXqe8iPNnbhkdLVHYFqAIS1OjfVMJYvDMFaA=";
+    # rev = version;
+    rev = "7b9ebea010134fca81c645c26f5cff4a90cb6c5f";
+    hash = "sha256-78WN4sUsmvekHTuTChdoXSaaj07PrkrJZhxEsvmEcLs=";
   };
 
   nativeBuildInputs = [

@@ -34,7 +34,6 @@
       enable = true;
       extraConfig = ''
         source=./custom.conf
-        exec-once=${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       '';
     };
 

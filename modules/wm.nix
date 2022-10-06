@@ -68,7 +68,6 @@
     ...
   }: {
     home.packages = with pkgs; [
-      # Sway apps
       swappy # screenshot annotation editor
       swaybg # wallpaper tool
       swayidle
@@ -81,7 +80,6 @@
       eww-wayland
       hyprpicker
 
-      # wlr apps
       wofi # quick run
       wofi-emoji
       wl-clipboard
@@ -107,7 +105,6 @@
       # Media
       # grim # grab image
       # slurp # select region
-      # wayshot
       shotman
       pavucontrol
       playerctl # media player control
