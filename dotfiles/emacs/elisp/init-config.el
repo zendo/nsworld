@@ -4,25 +4,26 @@
 
 ;; Environment
 (when (eq system-type 'gnu/linux)
-  (set-face-font 'default "JetBrains Mono-10")
   ;; (setq org-directory "~/Documents/org/")
+  (set-face-font 'default "JetBrains Mono-10")
   )
 
 (when (eq system-type 'windows-nt)
-  (set-face-font 'default "JetBrains Mono-10")
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
-        ))
+        )
+  (set-face-attribute 'default nil :font
+                      (format "JetBrains Mono-10"))
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font)
+                      charset
+                      (font-spec :family "Microsoft Yahei" :size 24))))
 
 ;; fonts
 ;; Consolas, Hack, Source Code Pro,
 ;; Microsoft Yahei, NotoSansSC,
 ;; (set-face-attribute 'default nil :font "等距更纱黑体 SC-12")
 ;; (setq default-frame-alist '((font . "JetBrains Mono-10")))
-;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;   (set-fontset-font (frame-parameter nil 'font)
-;;                     charset
-;;                     (font-spec :family "NotoSansSC" :size 16)))
 
 ;; Org-table font
 (custom-set-faces
