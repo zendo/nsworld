@@ -18,15 +18,11 @@
 ;; Completion style for matching regexps in any order
 (leaf orderless
   :ensure t
-  :custom
-  `((completion-styles . '(orderless basic))
-    ;; (orderless-matching-styles
-    ;;  . '(orderless-prefixes
-    ;;      orderless-flex
-    ;;      orderless-regexp
-    ;;      orderless-initialism
-    ;;      orderless-literal))
-    ))
+  :setq ((completion-styles . '(orderless))
+         (orderless-smart-case . t)
+         (orderless-matching-styles . '(orderless-prefixes
+                                        orderless-initialism
+                                        orderless-regexp))))
 
 ;; Enrich existing commands with completion annotations
 (leaf marginalia

@@ -14,6 +14,11 @@
   :config
   (diredfl-global-mode 1))
 
+(leaf dired-git-info
+  :ensure t
+  :setq (dgi-auto-hide-details-p . nil)
+  :hook (dired-after-readin-hook . dired-git-info-auto-enable))
+
 (leaf dired-x)
 
 (leaf dired

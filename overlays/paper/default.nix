@@ -1,21 +1,21 @@
-{
-  lib,
-  stdenv,
-  fetchFromGitLab,
-  vala,
-  meson,
-  ninja,
-  pkg-config,
-  glib,
-  gtk4,
-  dbus,
-  libgee,
-  libadwaita,
-  gtksourceview5,
-  blueprint-compiler,
-  wrapGAppsHook4,
-  appstream-glib,
-  desktop-file-utils,
+{ lib
+, stdenv
+, fetchFromGitLab
+, vala
+, meson
+, ninja
+, pkg-config
+, glib
+, gtk4
+, dbus
+, libgee
+, librsvg
+, libadwaita
+, gtksourceview5
+, blueprint-compiler
+, wrapGAppsHook4
+, appstream-glib
+, desktop-file-utils
 }:
 
 stdenv.mkDerivation rec {
@@ -46,6 +46,7 @@ stdenv.mkDerivation rec {
     gtk4
     dbus
     libgee
+    librsvg
     libadwaita
     gtksourceview5
   ];

@@ -109,6 +109,23 @@
                                        (corfu-mode)))))
 
 ;; company
+;; (leaf company
+;;   :ensure t
+;;   :leaf-defer nil
+;;   :setq ((company-idle-delay . 0)
+;;          (company-minimum-prefix-length . 1)
+;;          (company-backends . '((company-dabbrev-code :separate company-capf company-keywords)
+;;                                company-capf
+;;                                company-files
+;;                                company-keywords
+;;                                company-yasnippet
+;;                                company-abbrev))
+;;          (company-echo-truncate-lines . t)
+;;          (company-tooltip-align-annotations . t)
+;;          (company-tng-auto-configure . t)
+;;          (company-abort-on-unique-match . nil))
+;;   :config (progn (global-company-mode t)))
+
 ;; (use-package company
 ;;   :defer t
 ;;   :diminish company-mode
@@ -142,11 +159,8 @@
 ;; yasnippet
 (leaf yasnippet
   :ensure t
-  :diminish yas-minor-mode
-  :require t
-  :defun yas-global-mode
-  :config
-  (yas-global-mode 1))
+  :hook (((prog-mode-hook org-mode-hook) . yas-minor-mode-on)
+         (yas-minor-mode-hook . yas-reload-all)))
 
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/
