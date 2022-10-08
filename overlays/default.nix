@@ -5,7 +5,6 @@ final: prev: {
   nixos-helper = prev.callPackage ./nixos-helper {};
   mygrub-theme = prev.callPackage ./mygrub-theme {};
   hyprpicker = prev.callPackage ./hyprpicker {};
-  jamesdsp = prev.libsForQt5.callPackage ./jamesdsp {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};

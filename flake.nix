@@ -25,7 +25,6 @@
 
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
-    # devshell.url = "github:numtide/devshell";
     nur.url = "github:nix-community/NUR";
     musnix.url = "github:musnix/musnix";
     templates.url = "github:NixOS/templates";

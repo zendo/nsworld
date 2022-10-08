@@ -13,7 +13,6 @@ inputs @ {pkgs}: {
     ];
   };
 
-  # nix develop .#node
   node = pkgs.mkShell {
     buildInputs = with pkgs; [
       yarn

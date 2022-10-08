@@ -22,11 +22,13 @@ in {
     # wezterm
     warp
     remmina
-    v2ray
-    qv2ray
+    # v2ray
+    # qv2ray
     # clash
     proxychains-ng
     # nur.repos.linyinfeng.clash-for-windows
+    whatip
+    sniffglue
 
     # Browsers
     (google-chrome.override {
@@ -41,8 +43,6 @@ in {
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
     # poedit    # translate .po file
-    # whatip
-    sniffglue
 
     # Social media
     tdesktop
@@ -54,9 +54,9 @@ in {
     (
       if gnomeEnable
       then
-        (spotify.override {
-          deviceScaleFactor = 2;
-        })
+      (spotify.override {
+        deviceScaleFactor = 2;
+      })
       else spotify
     )
     mpv
@@ -153,34 +153,34 @@ in {
     # '';
 
     # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
-    #   owner = "icy-thought";
-    #   repo = "fcitx5-catppuccin";
-    #   rev = "3b699870fb2806404e305fe34a3d2541d8ed5ef5";
-    #   sha256 = "hOAcjgj6jDWtCGMs4Gd49sAAOsovGXm++TKU3NhZt8w=";
-    # };
+      #   owner = "icy-thought";
+      #   repo = "fcitx5-catppuccin";
+      #   rev = "3b699870fb2806404e305fe34a3d2541d8ed5ef5";
+      #   sha256 = "hOAcjgj6jDWtCGMs4Gd49sAAOsovGXm++TKU3NhZt8w=";
+      # };
   };
 
   # xdg.configFile = {
-  #   "autostart/qv2ray.desktop".text = ''
-  #     [Desktop Entry]
-  #     Name=qv2ray
-  #     GenericName=V2Ray Frontend
-  #     Exec=bash -c "sleep 5; qv2ray"
-  #     Terminal=false
-  #     Icon=qv2ray
-  #     Categories=Network
-  #     Type=Application
-  #     StartupNotify=false
-  #     X-GNOME-Autostart-enabled=true
-  #   '';
-  # };
+    #   "autostart/qv2ray.desktop".text = ''
+    #     [Desktop Entry]
+    #     Name=qv2ray
+    #     GenericName=V2Ray Frontend
+    #     Exec=bash -c "sleep 5; qv2ray"
+    #     Terminal=false
+    #     Icon=qv2ray
+    #     Categories=Network
+    #     Type=Application
+    #     StartupNotify=false
+    #     X-GNOME-Autostart-enabled=true
+    #   '';
+    # };
 
-  # xdg.desktopEntries.spotify = lib.options gnomeEnable {
-  #   name = "Spotify";
-  #   genericName = "Music Player";
-  #   icon = "spotify-client";
-  #   exec = "spotify %U --force-device-scale-factor=2";
-  #   terminal = false;
-  #   categories = ["Application" "Music"];
-  # };
+    # xdg.desktopEntries.spotify = lib.options gnomeEnable {
+      #   name = "Spotify";
+      #   genericName = "Music Player";
+      #   icon = "spotify-client";
+      #   exec = "spotify %U --force-device-scale-factor=2";
+      #   terminal = false;
+      #   categories = ["Application" "Music"];
+      # };
 }
