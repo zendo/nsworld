@@ -42,6 +42,7 @@
     history = {
       extended = true; # Save timestamp
       expireDuplicatesFirst = true;
+      path = "${config.xdg.configHome}/zsh/.zsh_history";
     };
     shellAliases = {
       history = "history 0"; # show whole history

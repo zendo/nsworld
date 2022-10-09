@@ -157,10 +157,10 @@
   :hook (prog-mode-hook . flycheck-mode))
 
 ;; yasnippet
-(leaf yasnippet
-  :ensure t
-  :hook (((prog-mode-hook org-mode-hook) . yas-minor-mode-on)
-         (yas-minor-mode-hook . yas-reload-all)))
+;; (leaf yasnippet
+;;   :ensure t
+;;   :hook (((prog-mode-hook org-mode-hook) . yas-minor-mode-on)
+;;          (yas-minor-mode-hook . yas-reload-all)))
 
 
 ;; LSP https://emacs-lsp.github.io/lsp-mode/

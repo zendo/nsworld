@@ -12,9 +12,10 @@
 this_dir=$(cd "$(dirname "$0")";pwd) #current dir
 
 # -e exists
-if [[ ! -e "$HOME/.emacs.d" ]]; then
-    mkdir "$HOME/.emacs.d"
+if [[ ! -e "$HOME/.config/emacs" ]]; then
+    mkdir "$HOME/.config/emacs"
 fi
-ln -sfTv "$this_dir"/elisp "$HOME"/.emacs.d/elisp
-ln -sfv "$this_dir"/init.el "$HOME"/.emacs.d/init.el
-ln -sfv "$this_dir"/early-init.el "$HOME"/.emacs.d/early-init.el
+
+ln -sfTv "$this_dir"/elisp "$HOME"/.config/emacs/elisp
+ln -sfv "$this_dir"/init.el "$HOME"/.config/emacs/init.el
+ln -sfv "$this_dir"/early-init.el "$HOME"/.config/emacs/early-init.el

@@ -11,7 +11,7 @@ in
 {
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
-    "${config.home.homeDirectory}/.emacs.d/bin"
+    "${config.xdg.configHome}/emacs/bin"
   ];
 
   home.sessionVariables = {
