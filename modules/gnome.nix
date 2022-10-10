@@ -54,6 +54,7 @@
       proxy-switcher
       just-perfection
       gradient-top-bar
+      app-icons-taskbar
       rocketbar
       space-bar
       gtile

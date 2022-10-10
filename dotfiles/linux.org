@@ -1,0 +1,107 @@
+* Hardware
+inxi -Fz / lshw / hwinfo / dmidecode
+xrandr / wlr-randr / gnome-randr 
+edid-decode < /sys/class/drm/card0-eDP-1/edid  色彩数据
+xrdb -q 字体鼠标dpi
+locale 系统语言
+cpufreq-info
+
+** fwupdmgr
+fwupdmgr get-devices
+fwupdmgr refresh
+fwupdmgr get-updates
+fwupdmgr update
+
+** GPU
+glxgears
+glxinfo | rg rendering
+glxinfo | rg OpenGL
+vainfo
+
+* Hard disk
+sudo badblocks -sv /dev/nvme0n1  
+sudo fsck /dev
+fdisk / parted
+lsblk / blkid / findmnt
+
+* Security
+sudo lynis audit system #安全漏洞审查
+
+* Networking
+ip link
+iwd or nmtui or
+wpa_supplicant -B -i wlp2s0 -c <(wpa_passphrase "ssid" "passwd")
+wpa_passphrase $SSID $PASSPHRASE > /etc/wpa_supplicant.conf
+systemctl restart wpa_supplicant.service
+nmcli d wifi list
+
+mtr -c 20 -w -r cache.nixos.org
+
+* Systemd
+systemctl list-units --type=service
+systemctl --type=service  //等同以上命令
+systemd-delta  //配置状态
+systemd-analyze blame
+systemd-analyze plot > filename.svg
+journalctl -b
+journalctl -p3
+
+* Systemd-boot & Grub
+bootctl / efibootmgr
+sudo efibootmgr -b 0002 -B 删除启动项
+sudo efibootmgr -c -w -L "opensuse-secure" -d /dev/nvme1n1 -p 5 -l "/EFI/opensue/shim.efi"
+sudo efibootmgr -c -w -L "opensuse" -d /dev/nvme1n1 -p 5 -l "/EFI/opensuse/grubx64.efi"
+
+
+chroot:
+mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+
+** sd-boot
+#+begin_src bash
+  sudo vi /boot/loader/entries/windows.conf
+  title Windows11
+  efi /EFI/Microsoft/Boot/bootmgfw.efi
+  sudo echo -e "title Windows11\nefi /EFI/Microsoft/Boot/bootmgfw.efi" > /boot/loader/entries/windows.conf
+#+end_src
+
+** grub2
+#+begin_src bash
+  grub2-install or
+  grub2-install --boot-directory=/mnt/boot  --target=x86_64-efi --efi-directory=/mnt/boot/efi
+  sudo grub2-mkconfig -o /boot/grub2/grub.cfg  //bios
+  sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg  //uefi
+  shim-install --config-file=/boot/grub2/grub.cfg
+#+end_src
+
+#+begin_src conf
+  大概无需显式 insmod
+  insmod part_gpt
+  insmod fat
+  insmod chain
+  insmod search_fs_uuid
+
+  set root=(hd0,gpt1)
+  chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+
+  search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+  chainloader (${root})/EFI/Microsoft/Boot/bootmgfw.efi
+
+  search --no-floppy --fs-uuid --set=root BCBB-ACC5
+  chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+#+end_src
+
+* tar
+** 备份系统
+#+begin_src bash
+  tar -cvpzf backup.tar.gz --exclude=/backup.tar.gz --exclude=/proc --exclude=/tmp --exclude=/mnt --exclude=/dev --exclude=/sys --exclude=/run --exclude=/boot/efi --exclude=/home/*/.cache --exclude=/home/*/.local/share/Trash /
+  sudo tar -xvpzf /path/to/backup.tar.gz -C /mnt --numeric-owner
+#+end_src
+https://www.fsarchiver.org/quickstart/
+
+* sed
+sed 's/origin/fininal/g' xxx.txt    # s替换 g全局 原本/修改后
+sudo sed -i 's/$/ fedora/' /etc/hosts  // 每行末尾添加
+https://github.com/adrianscheff/useful-sed
+

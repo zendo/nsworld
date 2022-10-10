@@ -60,7 +60,6 @@ in {
       else spotify
     )
     mpv
-    celluloid
     # vlc
     # ffmpeg
     # audacious
@@ -82,6 +81,7 @@ in {
 
     qbittorrent
     gnome-decoder
+    ghostwriter
     meld
     # deja-dup
     # rclone

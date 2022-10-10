@@ -38,7 +38,7 @@
 (with-eval-after-load 'org
   (define-key org-babel-map (kbd "C-=") 'org-babel-mark-block))
 
-;; <s TAB: The old way, C-c C-: New way.
+;; <s TAB: The old way, C-c C-, New way.
 ;; (require 'org-tempo)
 
 ;; babel
