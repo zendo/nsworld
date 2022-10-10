@@ -57,7 +57,7 @@
       warning-minimum-level :emergency ; temp disable
 
       undo-in-region t
-      mouse-autoselect-window t
+      ;; mouse-autoselect-window t
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops
       ;; word-wrap-by-category t        ;?
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号

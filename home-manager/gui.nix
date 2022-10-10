@@ -15,6 +15,7 @@ in {
     # app-icon-preview
     # done
     # textpieces
+    # textsnatcher
 
     foot
     kitty
@@ -22,8 +23,7 @@ in {
     # wezterm
     warp
     remmina
-    # v2ray
-    # qv2ray
+    qv2ray
     # clash
     proxychains-ng
     # nur.repos.linyinfeng.clash-for-windows
@@ -60,6 +60,7 @@ in {
       else spotify
     )
     mpv
+    celluloid
     # vlc
     # ffmpeg
     # audacious

@@ -7,7 +7,6 @@
 , pkg-config
 , vala
 , glib
-, gtk3
 , gtk4
 , libgee
 , libadwaita

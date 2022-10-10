@@ -5,26 +5,24 @@
   "height": 30,
   "position": "top",
 
-  "modules-left":   [
-                    "wlr/workspaces",
-                    "sway/workspaces",
-                    "wlr/taskbar"
-                    ],
-
+  "modules-left": [
+    "wlr/workspaces",
+    "sway/workspaces",
+    "wlr/taskbar"
+  ],
   "modules-center": [
-                    // "custom/notification",
-                    "clock",
-                    "custom/playerctl"
-                    ],
-
-  "modules-right":  [
-                    "tray",
-                    "pulseaudio",
-                    "backlight",
-                    "battery",
-                    //"custom/sysmenu",
-                    "custom/logout"
-                    ],
+    // "custom/notification",
+    "clock",
+    "custom/playerctl"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    // "custom/sysmenu",
+    "custom/logout"
+  ],
 
   "wlr/workspaces": {
     "disable-scroll": true,

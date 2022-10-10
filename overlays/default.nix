@@ -27,6 +27,7 @@ final: prev: {
   # Python
   textpieces = prev.callPackage ./textpieces {};
   dool = prev.callPackage ./dool {};
+  textsnatcher = prev.callPackage ./textsnatcher {};
 
   # Gtk
   paper = prev.callPackage ./paper {};
