@@ -42,6 +42,7 @@ in
     "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
     # Soft Symbolic Links
+    "lf".source = mkOOSL hmDots + "/lf";
     # "eww".source = mkOOSL hmDots + "/eww";
     "mako".source = mkOOSL hmDots + "/mako";
     "waybar".source = mkOOSL hmDots + "/waybar";

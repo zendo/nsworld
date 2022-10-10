@@ -12,6 +12,8 @@
     unzip
     unrar
     patool
+    atool
+    trash-cli
 
     # System Monitor
     btop
@@ -48,14 +50,20 @@
     asciinema # record the terminal
     # distrobox
     light
-    viu # image viewer
     graphviz
     paperoni # save html
     # airgeddon # wifi crack
     magic-wormhole-rs
-    joshuto
     zssh
     calcurse
+
+    # FileManager
+    lf
+    ctpv
+    stpv
+    viu # image viewer
+    exiftool
+    ffmpegthumbnailer
 
     # Developing
     jq

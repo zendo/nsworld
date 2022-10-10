@@ -11,8 +11,9 @@
 (add-hook 'prog-mode-hook 'my-prog-settings)
 
 ;; conf-mode
-(add-to-list 'auto-mode-alist
-             '("bashrc\\'" . conf-mode))
+(leaf conf-mode
+  :ensure t
+  :mode "/credentials$" "\\.accept_keywords$" "\\lfrc$" "\\.keywords$" "\\.license$" "\\.mask$" "\\.unmask$" "\\.use$")
 (global-set-key [remap conf-space-keywords] #'project-find-file)
 
 ;; compilation

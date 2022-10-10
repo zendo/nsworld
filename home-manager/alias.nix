@@ -11,10 +11,10 @@
     l = "exa -l --icons";
     "la." = "ls -d .*";
     bc = "${lib.getExe pkgs.libqalculate}";
-    rm = "${pkgs.trash-cli}/bin/trash-put";
-    rm-list = "${pkgs.trash-cli}/bin/trash-list";
-    rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
-    rm-restore = "${pkgs.trash-cli}/bin/trash-restore";
+    rm = "trash-put";
+    rm-list = "trash-list";
+    rm-empty = "trash-empty";
+    rm-restore = "trash-restore";
     free = "free -h";
     mkcd = "mkdir -p $1 && cd $1";
     mount-ls = "mount | column -t";

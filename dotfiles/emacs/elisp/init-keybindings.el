@@ -47,6 +47,7 @@
    ("C-c C-<SPC>" . project-find-file)
    ("C-c ." . find-file)
    ("C-c /" . consult-ripgrep)
+   ("C-c s" . consult-ripgrep)
    ("C-c ," . project-switch-to-buffer)
    ("C-x b" . project-switch-to-buffer)
 
@@ -69,8 +70,8 @@
    ("C-c c f" . nix-mode-format)
    ("C-c c ." . consult-lsp-diagnostics)
    ;; multiple-cursors-map
-   ("C-c m -" . er/mark-inside-quotes)
-   ("C-c m =" . er/mark-inside-pairs)
+   ("C-c m '" . er/mark-inside-quotes)
+   ("C-c m [" . er/mark-inside-pairs)
    ;; remove-items
    ("C-c - b" . bookmark-delete)
    ("C-c - r" . recentf-edit-list)

@@ -162,8 +162,8 @@
   :leaf-defer t
   :bind
   (("C-c m m" . bm-toggle)
-   ("C-c m p" . bm-previous)
-   ("C-c m n" . bm-next)
+   ;; ("C-c m p" . bm-previous)
+   ;; ("C-c m n" . bm-next)
    ("C-c m 0" . bm-remove-all-current-buffer)))
 
 ;; avy
