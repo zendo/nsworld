@@ -20,6 +20,7 @@ final: prev: {
   mousai = prev.callPackage ./mousai {};
   lockbook = prev.callPackage ./lockbook {};
   game-of-life = prev.callPackage ./game-of-life {};
+  git-graph = prev.callPackage ./git-graph {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};

@@ -114,8 +114,8 @@
    "SPC" #'just-one-space
    "z" #'avy-zap-to-char
    :prefix ("m" . "multiple-cursors")
-   "-" #'er/mark-inside-quotes
-   "=" #'er/mark-inside-pairs
+   "'" #'er/mark-inside-quotes
+   "[" #'er/mark-inside-pairs
    :prefix ("w" . "window")
    "x" #'ace-swap-window
    "v" #'rotate-layout
