@@ -1,7 +1,6 @@
 final: prev: {
   # Trivial
   forgit = prev.callPackage ./forgit {};
-  wifi-qr = prev.callPackage ./wifi-qr {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   mygrub-theme = prev.callPackage ./mygrub-theme {};
   hyprpicker = prev.callPackage ./hyprpicker {};
@@ -13,18 +12,12 @@ final: prev: {
 
   # Rust
   done = prev.callPackage ./done {};
-  mprober = prev.callPackage ./mprober {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
-  wpaperd = prev.callPackage ./wpaperd {};
-  shotman = prev.callPackage ./shotman {};
   mousai = prev.callPackage ./mousai {};
-  lockbook = prev.callPackage ./lockbook {};
   game-of-life = prev.callPackage ./game-of-life {};
-  git-graph = prev.callPackage ./git-graph {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
-  mabel = prev.callPackage ./mabel {};
   go-musicfox = prev.callPackage ./go-musicfox {};
 
   # Python
