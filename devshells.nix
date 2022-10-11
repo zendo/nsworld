@@ -24,6 +24,7 @@ inputs @ {pkgs}: {
     buildInputs = with pkgs; [
       go
       gccgo
+      delve
       pkg-config
       alsa-lib
       flac

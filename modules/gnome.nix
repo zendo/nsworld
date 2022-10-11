@@ -59,6 +59,7 @@
       space-bar
       runcat
       gtile
+      forge
       pop-shell
       ddterm
       ideapad-mode

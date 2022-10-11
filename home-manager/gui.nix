@@ -8,14 +8,12 @@
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
   home.packages = with pkgs; [
-    # mabel
-    # mprober
-    paper
-    # converseen
     # app-icon-preview
+    # converseen
     # done
     # textpieces
     # textsnatcher
+    paper
 
     foot
     kitty

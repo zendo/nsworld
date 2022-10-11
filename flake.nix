@@ -2,10 +2,10 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194594/merge";
+    nixpkgs.url = "github:NixOS/nixpkgs/pull/191357/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=gnome-shell";
 
     home-manager = {
@@ -14,7 +14,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/db1c01c5faeea34547fff2017324f8a2d2253402";
+      url = "github:nix-community/emacs-overlay/e6c5abf9ff42495cd8a3845fc32a17baa7c54790";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
