@@ -34,6 +34,14 @@
   :hook ((after-init-hook . global-tree-sitter-mode)
          (tree-sitter-after-on-hook . tree-sitter-hl-mode)))
 
+(leaf editorconfig
+  :ensure t
+  :diminish editorconfig-mode
+  :custom
+  (editorconfig-get-properties-function . 'editorconfig-core-get-properties-hash)
+  :init
+  (editorconfig-mode t))
+
 ;; Markdown
 (leaf markdown-mode
   :ensure t
@@ -96,7 +104,7 @@
   (global-corfu-mode)
   :config
   (define-key corfu-map
-    (kbd "SPC") #'corfu-insert-separator)
+              (kbd "SPC") #'corfu-insert-separator)
   (setq completion-cycle-threshold 3)
   ;; Use Corfu in `eval-expression' and other commands that bind
   ;; `completion-at-point' in the minibuffer.
@@ -108,6 +116,11 @@
                                                  (flatten-tree
                                                   (current-local-map)))
                                        (corfu-mode)))))
+
+(leaf corfu-doc
+  :ensure t
+  :after corfu
+  :hook (corfu-mode . corfu-doc-mode))
 
 ;; company
 ;; (leaf company
@@ -178,6 +191,10 @@
 ;;   :ensure t
 ;;   :commands lsp-ivy-workspace-symbol)
 
+;; (leaf consult-lsp
+;;   :ensure t
+;;   :package t)
+
 
 ;; eglot
 (leaf eglot
@@ -187,16 +204,18 @@
   (add-hook 'python-mode-hook 'eglot-ensure)
   (add-hook 'c-mode-hook 'eglot-ensure)
   (add-hook 'ruby-mode-hook 'eglot-ensure)
+
+  (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
+  (add-hook 'rust-mode-hook 'eglot-ensure)
+
+  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
+  (add-hook 'nix-mode-hook 'eglot-ensure)
+
+  (add-to-list 'eglot-server-programs `(markdown-mode . ("efm-langserver")))
   (add-hook 'markdown-mode-hook 'eglot-ensure)
+
+  (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
   (add-hook 'go-mode-hook 'eglot-ensure))
-
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               `(markdown-mode . ("efm-langserver"))))
-
-(leaf consult-lsp
-  :ensure t
-  :package t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

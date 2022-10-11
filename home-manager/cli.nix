@@ -15,6 +15,24 @@
     atool
     trash-cli
 
+    # FileManager
+    fd
+    ripgrep
+    f2
+    sd
+    choose
+    rage # age encrypt RIIR
+    lf
+    ctpv
+    viu # image viewer
+    graphviz
+    # imagemagick
+    exiftool
+    ffmpegthumbnailer
+    zssh # SSH and Telnet client
+    croc
+    magic-wormhole-rs
+
     # System Monitor
     btop
     ctop # containers monitor
@@ -30,40 +48,18 @@
     neofetch
 
     # Utils
-    fd
-    ripgrep
     hstr # hh: history
     cht-sh
-    rage # age encrypt RIIR
-    sd
-    mc
-    f2
-    choose
-    croc
     # difftastic # too big
     kalker # calculator
-    # imagemagick
     ydict
     typos
     translate-shell
     aspellDicts.en
     asciinema # record the terminal
     # distrobox
-    light
-    graphviz
     paperoni # save html
-    # airgeddon # wifi crack
-    magic-wormhole-rs
-    zssh
     calcurse
-
-    # FileManager
-    lf
-    ctpv
-    stpv
-    viu # image viewer
-    exiftool
-    ffmpegthumbnailer
 
     # Developing
     jq
@@ -87,11 +83,13 @@
     bandwhich
     traceroute
     speedtest-cli
+    # airgeddon # wifi crack
 
     # Nix-tools
     nixpkgs-fmt
     nixfmt
     alejandra
+    nil
     rnix-lsp
     lorri
     comma

@@ -19,6 +19,9 @@
 (leaf orderless
   :ensure t
   :setq ((completion-styles . '(orderless))
+         (completion-ignore-case . t)
+         (read-buffer-completion-ignore-case . t)
+         (read-file-name-completion-ignore-case . t)
          (orderless-smart-case . t)
          (orderless-matching-styles . '(orderless-prefixes
                                         orderless-initialism
