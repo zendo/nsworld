@@ -5,7 +5,6 @@ final: prev: {
   mygrub-theme = prev.callPackage ./mygrub-theme {};
   hyprpicker = prev.callPackage ./hyprpicker {};
   ctpv = prev.callPackage ./ctpv {};
-  stpv = prev.callPackage ./stpv {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
@@ -14,7 +13,6 @@ final: prev: {
   done = prev.callPackage ./done {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   mousai = prev.callPackage ./mousai {};
-  game-of-life = prev.callPackage ./game-of-life {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
@@ -32,7 +30,6 @@ final: prev: {
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
-  qv2ray = prev.libsForQt5.callPackage ./qv2ray {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};

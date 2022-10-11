@@ -48,8 +48,7 @@ stdenv.mkDerivation rec {
   ];
 
   # postPatch = ''
-  #   substituteInPlace src/ui/application.hpp \
-  #   --replace "G_APPLICATION_DEFAULT_FLAGS" "G_APPLICATION_GET_CLASS"
+  #   chmod +x fpcalc
   # '';
 
   meta = with lib; {

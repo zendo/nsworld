@@ -17,7 +17,7 @@
   ## Kernel
   #######################################################################
   # latest or zen or xanmod_latest
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # boot.kernelParams = ["quite"];
 
@@ -29,7 +29,7 @@
       IdleActionSec=2m
     '';
   };
-  systemd.sleep.extraConfig = "HibernateDelaySec=2h";
+  systemd.sleep.extraConfig = "HibernateDelaySec=1h";
 
   #######################################################################
   ## Bootloader

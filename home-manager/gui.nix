@@ -139,6 +139,13 @@ in {
     # '';
   };
 
+  # xdg.mimeApps = {
+  #   enable = true;
+  #   defaultApplications = {
+  #     "text/html" = "re.sonny.Junction.desktop";
+  #   };
+  # };
+
   # Desktop Environment Hack
   home.file = {
     # Fix tiny cursor in qt apps at gnome

@@ -19,17 +19,6 @@
 , wrapGAppsHook4
 }:
 
-/*
-Traceback (most recent call last):
-  File "/nix/store/zsp76p8q18yq4g6aw6k314a32zy65gkk-mousai-0.6.6/bin/..mousai-wrapped-wrapped", line 31, in <module>
-    from mousai import main
-  File "/nix/store/zsp76p8q18yq4g6aw6k314a32zy65gkk-mousai-0.6.6/share/mousai/mousai/main.py", line 7, in <module>
-    gi.require_version('Gtk', '4.0')
-  File "/nix/store/igg5prr1rxwlpm151mima8j1rj45ix6k-python3.10-pygobject-3.42.2/lib/python3.10/site-packages/gi/init.py", line 126, in require_version
-    raise ValueError('Namespace %s not available' % namespace)
-ValueError: Namespace Gtk not available
-*/
-
 stdenv.mkDerivation rec {
   pname = "mousai";
   version = "unstable-2022-09-30";

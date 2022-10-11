@@ -122,6 +122,25 @@
   :after corfu
   :hook (corfu-mode . corfu-doc-mode))
 
+(leaf cape
+  :ensure t
+  ;; Available: cape-file cape-dabbrev cape-history cape-keyword
+  ;; cape-tex cape-sgml cape-rfc1345 cape-abbrev cape-ispell
+  ;; cape-dict cape-symbol cape-line
+  :init
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-dabbrev 90)
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (add-hook 'completion-at-point-functions
+                        #'cape-keyword nil t)))
+  ;; :config
+  ;; (require 'company)
+  ;; (cl-loop for backend in '(company-glsl company-shell company-ledger)
+  ;;          do (add-hook 'completion-at-point-functions
+  ;;                       (cape-company-to-capf backend)))
+  )
+
 ;; company
 ;; (leaf company
 ;;   :ensure t

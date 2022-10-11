@@ -57,6 +57,7 @@
       app-icons-taskbar
       rocketbar
       space-bar
+      runcat
       gtile
       pop-shell
       ddterm
