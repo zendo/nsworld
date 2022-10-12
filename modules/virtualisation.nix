@@ -61,5 +61,7 @@
 
   # programs.steam.enable = true;
 
+  # programs.java.enable = true;
+
   # programs.nix-ld.enable = true;
 }

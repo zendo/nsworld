@@ -230,6 +230,10 @@ installPhase = ''
   # setup.py and pyproject.toml not found
   format = "other";
 
+  buildPhase = "./build.py";
+
+  installPhase = "./install.py";
+
   # Specify runtime dependencies for the package
   propagatedBuildInputs = with python3.pkgs; [pyyaml];
 

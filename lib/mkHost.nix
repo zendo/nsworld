@@ -36,6 +36,9 @@ nixpkgs.lib.nixosSystem {
       networking.hostName = "${hostname}";
       services.xserver.displayManager.autoLogin.user = "${username}";
     }
+
+    # nix build .#nixosConfigurations.$(hostname).config.system.build.isoImage
+    # (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
   ]
   ++ nixpkgs.lib.optionals hmEnable [
     home-manager.nixosModules.home-manager

@@ -5,6 +5,7 @@ final: prev: {
   mygrub-theme = prev.callPackage ./mygrub-theme {};
   hyprpicker = prev.callPackage ./hyprpicker {};
   ctpv = prev.callPackage ./ctpv {};
+  wcp = prev.callPackage ./wcp {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};

@@ -2,11 +2,11 @@
   description = "Hello World";
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/pull/191357/merge";
-    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=gnome-shell";
+    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/191357/merge";
+    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=plasma-beta";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -69,8 +69,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
-            # ./modules/wm-sway.nix
+            # ./modules/gnome.nix
+            ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
             # ./modules/wm-wayfire.nix
             # ./modules/kde.nix
