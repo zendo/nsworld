@@ -11,6 +11,8 @@
 , wrapGAppsHook4
 , appstream-glib
 , desktop-file-utils
+, yt-dlp
+, ffmpeg-full
 }:
 
 stdenv.mkDerivation rec {
@@ -21,7 +23,6 @@ stdenv.mkDerivation rec {
     owner = "nlogozzo";
     repo = "NickvisionTubeConverter";
     rev = version;
-    # rev = "0ce7c8a94b9b44f5f17b9396eb573cbc3e066d8f";
     hash = "sha256-OnW14PuZfNUDtsykD02TuANrZqR4sleNP0UnxWe0IbU=";
   };
 
@@ -41,15 +42,22 @@ stdenv.mkDerivation rec {
     jsoncpp
   ];
 
-  # postPatch = ''
-  #   substituteInPlace meson.build \
-  #     --replace fpcalc "${chromaprint}/bin/fpcalc"
-  # '';
+  # Don't install compiled binary
+  postPatch = ''
+    sed -i '13,14d' meson.build
+  '';
+
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --prefix PATH : "${lib.makeBinPath [ ffmpeg-full yt-dlp ]}"
+    )
+  '';
 
   meta = with lib; {
-    description = "A simple todo app written in GTK and Rust";
-    homepage = "https://github.com/nlogozzo/NickvisionTagger";
-    license = licenses.gpl2Plus;
+    description = "An easy-to-use YouTube video downloader";
+    homepage = "https://github.com/nlogozzo/NickvisionTubeConverter";
+    mainProgram = "org.nickvision.tubeconverter";
+    license = licenses.gpl3Plus;
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };

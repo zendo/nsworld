@@ -1,32 +1,31 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, meson
-, ninja
-, pkg-config
-, jsoncpp
-, taglib
-, curl
-, curlpp
-  , chromaprint
-, glib
-, gtk4
-, libadwaita
-, wrapGAppsHook4
-, appstream-glib
-, desktop-file-utils
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  jsoncpp,
+  taglib,
+  curl,
+  curlpp,
+  glib,
+  gtk4,
+  libadwaita,
+  wrapGAppsHook4,
+  appstream-glib,
+  desktop-file-utils,
+  chromaprint,
 }:
-
 stdenv.mkDerivation rec {
   pname = "tagger";
-  version = "2022.10.1";
+  version = "2022.10.3";
 
   src = fetchFromGitHub {
     owner = "nlogozzo";
     repo = "NickvisionTagger";
     rev = version;
-    # rev = "0ce7c8a94b9b44f5f17b9396eb573cbc3e066d8f";
-    hash = "sha256-QV18j00cV5uyqiioydYFB+WXB9GirSYcSbpSLM16QFo=";
+    hash = "sha256-dyp2XzTnDs08tTTbCnjWh061UXnH4Q0Gnt0jofgVm2U=";
   };
 
   nativeBuildInputs = [
@@ -46,19 +45,25 @@ stdenv.mkDerivation rec {
     taglib
     curl
     curlpp
-    chromaprint
   ];
 
-  # postPatch = ''
-  #   substituteInPlace meson.build \
-  #     --replace fpcalc "${chromaprint}/bin/fpcalc"
-  # '';
+  # Don't install compiled binary
+  postPatch = ''
+    sed -i '/fpcalc/d' meson.build
+  '';
+
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --prefix PATH : "${lib.makeBinPath [chromaprint]}"
+    )
+  '';
 
   meta = with lib; {
-    description = "A simple todo app written in GTK and Rust";
+    description = "An easy-to-use music tag (metadata) editor";
     homepage = "https://github.com/nlogozzo/NickvisionTagger";
-    license = licenses.gpl2Plus;
+    mainProgram = "org.nickvision.tagger";
+    license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ zendo ];
+    maintainers = with maintainers; [zendo];
   };
 }
