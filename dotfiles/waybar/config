@@ -221,7 +221,7 @@
     "format-charging": " {capacity}%",
     "format-plugged": " {capacity}%",
     "format-alt": "{time} {icon}",
-    //"tooltip-format": "{capacity}%",
+    "tooltip-format": "{capacity}%",
     "tooltip": true,
     "on-click": "exec gnome-power-statistics",
     "format-icons": ["", "", "", "", ""]

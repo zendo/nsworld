@@ -24,6 +24,7 @@
     ip = "ip --color=auto";
     ip-sb = "curl ip.sb";
     ip-info = "curl ipinfo.io";
+    nload = "nload devices wlp1s0";
     netlog = "lsof -P -i -n";
 
     ee = "emacs -nw";

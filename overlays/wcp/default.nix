@@ -4,9 +4,12 @@
 , meson
 , ninja
 , pkg-config
-  , freetype
-    , libpng
-      , wayland
+, boost
+, freetype
+, libpng
+, libpng12
+, pngpp
+, wayland
 , wayland-protocols
 }:
 
@@ -21,10 +24,15 @@ stdenv.mkDerivation rec {
     hash = "sha256-VScD38Jip3Ns9C87c/as4MFOMStKz6qyPmifKr5VxRE=";
   };
 
+  # dontAddStaticConfigureFlags = true;
+
+  # dontDisableStatic = false;
+
   nativeBuildInputs = [
     meson
     ninja
-    # pkg-config
+    pkg-config
+    libpng
   ];
 
   buildInputs = [
@@ -34,11 +42,16 @@ stdenv.mkDerivation rec {
     wayland-protocols
   ];
 
+  # postPatch = ''
+  #   substituteInPlace meson.build \
+  #     --replace "png = cc.find_library('png',static:false)" " "
+  # '';
+
   meta = with lib; {
-    description = "Previews for lf file manager";
+    description = "Panel/system menu for wayland";
     homepage = "https://github.com/milgra/wcp";
-    license = licenses.mit;
-    platforms = platforms.unix;
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 }

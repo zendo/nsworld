@@ -5,10 +5,6 @@
 , ninja
 , pkg-config
 , jsoncpp
-, taglib
-, curl
-, curlpp
-  , chromaprint
 , glib
 , gtk4
 , libadwaita
@@ -18,15 +14,15 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "tagger";
+  pname = "tubeconverter";
   version = "2022.10.1";
 
   src = fetchFromGitHub {
     owner = "nlogozzo";
-    repo = "NickvisionTagger";
+    repo = "NickvisionTubeConverter";
     rev = version;
     # rev = "0ce7c8a94b9b44f5f17b9396eb573cbc3e066d8f";
-    hash = "sha256-QV18j00cV5uyqiioydYFB+WXB9GirSYcSbpSLM16QFo=";
+    hash = "sha256-OnW14PuZfNUDtsykD02TuANrZqR4sleNP0UnxWe0IbU=";
   };
 
   nativeBuildInputs = [
@@ -43,10 +39,6 @@ stdenv.mkDerivation rec {
     gtk4
     libadwaita
     jsoncpp
-    taglib
-    curl
-    curlpp
-    chromaprint
   ];
 
   # postPatch = ''

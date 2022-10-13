@@ -6,6 +6,7 @@ final: prev: {
   hyprpicker = prev.callPackage ./hyprpicker {};
   ctpv = prev.callPackage ./ctpv {};
   wcp = prev.callPackage ./wcp {};
+  hybridbar = prev.callPackage ./hybridbar {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
@@ -28,6 +29,7 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
   tagger = prev.callPackage ./tagger {};
+  tubeconverter = prev.callPackage ./tubeconverter {};
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};

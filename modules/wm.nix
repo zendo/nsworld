@@ -34,6 +34,7 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
+    gnome.sushi.enable = true;
   };
 
   environment.pathsToLink = [

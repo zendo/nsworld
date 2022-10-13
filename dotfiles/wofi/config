@@ -1,6 +1,6 @@
 allow_images=false
 width=40%
-height=40%
+height=50%
 dynamic_lines=true
 # line_wrap=word
 term=kitty
