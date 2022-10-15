@@ -12,8 +12,8 @@ final: prev: {
   zhudou-sans = prev.callPackage ./zhudou-sans {};
 
   # Rust
-  done = prev.callPackage ./done {};
   app-icon-preview = prev.callPackage ./app-icon-preview {};
+  done = prev.callPackage ./done {};
   mousai = prev.callPackage ./mousai {};
 
   # Go
@@ -22,7 +22,6 @@ final: prev: {
 
   # Python
   textpieces = prev.callPackage ./textpieces {};
-  dool = prev.callPackage ./dool {};
   textsnatcher = prev.callPackage ./textsnatcher {};
 
   # Gtk
@@ -36,8 +35,6 @@ final: prev: {
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};
-  collision = prev.callPackage ./collision {};
-  gi-crystal = prev.callPackage ./gi-crystal {};
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:

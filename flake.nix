@@ -13,11 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/e6c5abf9ff42495cd8a3845fc32a17baa7c54790";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +26,7 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/e6c5abf9ff42495cd8a3845fc32a17baa7c54790";
   };
 
   outputs = inputs @ {
@@ -101,6 +97,17 @@
             # ./modules/gnome.nix
             # ./modules/kde.nix
             ./modules/wm-sway.nix
+          ];
+        };
+
+        # nix build .#nixosConfigurations.live.config.system.build.isoImage
+        live = mkHost {
+          username = "live";
+          hostname = "live";
+          inherit overlays;
+          extraModules = [
+            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix")
+            ./modules/gnome.nix
           ];
         };
       };

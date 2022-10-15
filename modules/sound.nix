@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   # Musnix enhence
@@ -10,7 +11,7 @@
   hardware.bluetooth.enable = true;
 
   # Pipewire
-  hardware.pulseaudio.enable = false; # false in pipewire
+  hardware.pulseaudio.enable = lib.mkForce false; # false in pipewire
   # This allows PipeWire to run with realtime privileges (i.e: less cracks)
   security.rtkit.enable = true;
   services.pipewire = {
