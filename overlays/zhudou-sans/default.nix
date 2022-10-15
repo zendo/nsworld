@@ -1,11 +1,10 @@
 { lib, fetchzip }:
 
 # https://github.com/NixOS/nixpkgs/pull/175381
-let
+fetchzip rec {
+  pname = "zhudou-sans";
   version = "1.000";
-in
-fetchzip {
-  name = "zhudou-sans-${version}";
+
   url = "https://github.com/Buernia/Zhudou-Sans/archive/refs/tags/v${version}.tar.gz";
 
   postFetch = ''

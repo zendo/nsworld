@@ -34,6 +34,7 @@
       gnome.dconf-editor
       gnome.gnome-power-manager
       gnome.gnome-sound-recorder
+      # gnome.gnome-boxes
       # gnome-solanum
       # gnome-network-displays  # miracast
       # gnome-builder

@@ -14,6 +14,7 @@ in {
     # textpieces
     # textsnatcher
     paper
+    retext
 
     foot
     kitty

@@ -23,9 +23,6 @@ nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mir
 # Nix Commands
 
 ``` shell
-# make livecd
-nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
-
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
 nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=rust'

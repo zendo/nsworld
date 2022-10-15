@@ -101,13 +101,15 @@
         };
 
         # nix build .#nixosConfigurations.live.config.system.build.isoImage
+        # nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
         live = mkHost {
           username = "live";
           hostname = "live";
           inherit overlays;
           extraModules = [
             (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix")
-            ./modules/gnome.nix
+            # ./modules/gnome.nix
+            ./modules/wm-sway.nix
           ];
         };
       };
@@ -117,7 +119,7 @@
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
       homeConfigurations = let
-        username = "iab";
+        username = "zendo";
         system = "x86_64-linux";
         pkgs = import nixpkgs {
           inherit system overlays;

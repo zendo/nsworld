@@ -8,6 +8,8 @@ final: prev: {
   wcp = prev.callPackage ./wcp {};
   hybridbar = prev.callPackage ./hybridbar {};
 
+  retext = prev.libsForQt5.callPackage ./retext {};
+
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
 
