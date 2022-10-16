@@ -29,12 +29,19 @@
     xwayland.enable = true;
   };
 
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
   services = {
     gvfs.enable = true;
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
-    gnome.sushi.enable = true;
   };
 
   environment.pathsToLink = [
@@ -115,10 +122,9 @@
       gnome.adwaita-icon-theme
       gnome.gnome-themes-extra
 
-      gnome.nautilus
-      gnome-text-editor
-      gnome.gnome-power-manager
-      gnome.gnome-characters
+      xfce.mousepad
+      # gnome.gnome-power-manager
+      # gnome.gnome-characters
       # gnome.eog
       # gthumb
       libsForQt5.gwenview

@@ -38,6 +38,7 @@ in {
     nix-bash-completions
 
     vim
+    zee
     micro
     # helix
     emacs

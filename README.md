@@ -11,7 +11,9 @@ swapon /dev/nvme0n1p4
 mkfs.btrfs -L nixos /dev/nvme0n1p5
 
 nixos-generate-config --root /mnt
-nixos-install --flake .#yoga --no-root-passwd --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
+nixos-install --flake .#yoga --no-root-passwd 
+--option substituters "https://cache.nixos.org"
+--option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
 ```
 
 [Config Example](https://github.com/thiagokokada/nix-configs)

@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay/e6c5abf9ff42495cd8a3845fc32a17baa7c54790";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     nur.url = "github:nix-community/NUR";
@@ -26,7 +31,6 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    emacs-overlay.url = "github:nix-community/emacs-overlay/e6c5abf9ff42495cd8a3845fc32a17baa7c54790";
   };
 
   outputs = inputs @ {
@@ -65,8 +69,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
-            # ./modules/wm-sway.nix
+            # ./modules/gnome.nix
+            ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
             # ./modules/wm-wayfire.nix
             # ./modules/kde.nix
