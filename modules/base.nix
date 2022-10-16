@@ -41,7 +41,6 @@
     enableSSHSupport = true;
   };
 
-  # Need channels to work
   programs.command-not-found.enable = false;
 
   documentation = {
@@ -50,13 +49,6 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-
-  # location.provider = "geoclue2";
-  # ipinfo myip
-  # location = {
-  #   latitude = 23.12911;
-  #   longitude = 113.264385;
-  # };
 
   system.stateVersion = "22.05";
 }

@@ -30,6 +30,7 @@
     exiftool
     ffmpegthumbnailer
     zssh # SSH and Telnet client
+    termscp
     croc
     magic-wormhole-rs
 

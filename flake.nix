@@ -107,9 +107,8 @@
           hostname = "live";
           inherit overlays;
           extraModules = [
+            ./modules/gnome.nix
             (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix")
-            # ./modules/gnome.nix
-            ./modules/wm-sway.nix
           ];
         };
       };

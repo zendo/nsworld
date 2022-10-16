@@ -78,8 +78,8 @@
       libnotify # notify-send
       wlogout
 
-      eww-wayland
-      hyprpicker
+      # eww-wayland
+      # hyprpicker
 
       wofi # quick run
       wofi-emoji

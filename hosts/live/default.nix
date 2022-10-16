@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  username,
   ...
 }: {
   boot = {
@@ -15,4 +16,8 @@
   };
 
   # services.xserver.displayManager.autoLogin.enable = lib.mkForce false;
+
+  # password: live
+  users.users.${username}.hashedPassword = lib.mkForce
+    "$6$gOfs.mtl.D9QhwQv$oc7IFrbVSJl2IL7ECRrxoiFEZNu9O1xGT3cn5mo2eyFFQ9awYwvp855yYcsaCG/qqMALiYK3Xv5ycGmer1c0A0";
 }

@@ -40,5 +40,7 @@
   #######################################################################
   ## FileSystem
   #######################################################################
-  fileSystems."/".options = ["noatime" "nodiratime"];
+  # fileSystems."/".options = ["noatime" "nodiratime"];
+  services.btrfs.autoScrub.enable = true;
+  fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
 }
