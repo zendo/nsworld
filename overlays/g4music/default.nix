@@ -55,6 +55,11 @@ stdenv.mkDerivation rec {
     gst-plugins-ugly
   ]);
 
+  # postPatch = ''
+  #   substituteInPlace meson.build \
+  #     --replace "gtk-update-icon-cache" "gtk4-update-icon-cache"
+  # '';
+
   meta = with lib; {
     description = "A beautiful, fast, fluent, light weight music player";
     homepage = "https://gitlab.gnome.org/neithern/g4music";
