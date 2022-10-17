@@ -91,13 +91,13 @@
     nixpkgs-fmt
     nixfmt
     alejandra
-    nil
-    rnix-lsp
+    # nil
+    # rnix-lsp
     lorri
     comma
     manix
     niv
-    nvd
+    # nvd # nix profile diff
     cachix
     nixos-generators
     # nix-template

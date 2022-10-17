@@ -69,8 +69,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            # ./modules/gnome.nix
-            ./modules/wm-sway.nix
+            ./modules/gnome.nix
+            # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
             # ./modules/wm-wayfire.nix
             # ./modules/kde.nix
@@ -122,7 +122,7 @@
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
       homeConfigurations = let
-        username = "zendo";
+        username = "iab";
         system = "x86_64-linux";
         pkgs = import nixpkgs {
           inherit system overlays;

@@ -135,7 +135,6 @@
       udiskie.enable = true;
       gnome-keyring.enable = true;
       # playerctld.enable = true;
-      # easyeffects.enable = true;
 
       wlsunset = {
         enable = true;

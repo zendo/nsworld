@@ -15,6 +15,7 @@ in {
     # textsnatcher
     paper
     retext
+    g4music
 
     foot
     kitty
@@ -68,7 +69,6 @@ in {
     # eartag
     # tagger
     # jamesdsp
-    easyeffects
     # media-downloader
 
     # Image manipulation
@@ -119,6 +119,10 @@ in {
     wayland-utils
     # wdisplays # wlr
   ];
+
+  services = {
+    easyeffects.enable = true;
+  };
 
   programs.pandoc = {
     enable = false;
