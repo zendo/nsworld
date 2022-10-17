@@ -25,6 +25,13 @@ in
     # ".emacs.d/elisp".source = mkOOSL hmDots + "/emacs/elisp";
     ".doom.d".source = mkOOSL hmDots + "/doom";
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
+
+    # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
+    #   owner = "icy-thought";
+    #   repo = "fcitx5-catppuccin";
+    #   rev = "3b699870fb2806404e305fe34a3d2541d8ed5ef5";
+    #   sha256 = "hOAcjgj6jDWtCGMs4Gd49sAAOsovGXm++TKU3NhZt8w=";
+    # };
   };
 
   xdg.configFile = {

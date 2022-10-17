@@ -143,16 +143,11 @@ in {
     # '';
   };
 
-  # xdg.mimeApps = {
-  #   enable = true;
-  #   defaultApplications = {
-  #     "text/html" = "re.sonny.Junction.desktop";
-  #   };
-  # };
-
-  # Desktop Environment Hack
+  #######################################################################
+  ##  Desktop Environment
+  #######################################################################
   home.file = {
-    # Fix tiny cursor in qt apps at gnome
+    # Fix tiny cursor in qt-apps at gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
       [icon theme]
       Inherits=Adwaita
@@ -163,14 +158,19 @@ in {
     #   [Context]
     #   filesystems=/run/current-system/sw/share/X11/fonts:ro;/nix/store:ro
     # '';
-
-    # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
-    #   owner = "icy-thought";
-    #   repo = "fcitx5-catppuccin";
-    #   rev = "3b699870fb2806404e305fe34a3d2541d8ed5ef5";
-    #   sha256 = "hOAcjgj6jDWtCGMs4Gd49sAAOsovGXm++TKU3NhZt8w=";
-    # };
   };
+
+  xdg.userDirs = lib.mkIf (!gnomeEnable) {
+    enable = true;
+    createDirectories = true;
+  };
+
+  # xdg.mimeApps = {
+  #   enable = true;
+  #   defaultApplications = {
+  #     "text/html" = "re.sonny.Junction.desktop";
+  #   };
+  # };
 
   # xdg.configFile = {
   #   "autostart/qv2ray.desktop".text = ''
