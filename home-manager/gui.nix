@@ -11,11 +11,11 @@ in {
     # app-icon-preview
     # converseen
     # done
-    # textpieces
+    textpieces
     # textsnatcher
     paper
-    retext
-    g4music
+    # retext
+    # g4music
 
     foot
     kitty

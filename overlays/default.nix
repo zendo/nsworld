@@ -16,7 +16,7 @@ final: prev: {
   # Rust
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   done = prev.callPackage ./done {};
-  mousai = prev.callPackage ./mousai {};
+  # mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
 
   # Go
@@ -30,7 +30,6 @@ final: prev: {
   # Gtk
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
-  tagger = prev.callPackage ./tagger {};
   tubeconverter = prev.callPackage ./tubeconverter {};
 
   # Qt

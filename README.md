@@ -5,13 +5,14 @@
 # Installation
 
 ``` shell
-mkfs.fat -F 32 -n boot /dev/nvme0n1p3
-mkswap -L swap /dev/nvme0n1p4
+mkfs.fat -F32 /dev/nvme0n1p3
+mkswap /dev/nvme0n1p4
 swapon /dev/nvme0n1p4
-mkfs.btrfs -L nixos /dev/nvme0n1p5
+mkfs.btrfs /dev/nvme0n1p5
+mkdir -p /mnt/boot/efi
 
 nixos-generate-config --root /mnt
-nixos-install --flake .#yoga --no-root-passwd 
+nixos-install --flake .#yoga --no-root-passwd
 --option substituters "https://cache.nixos.org"
 --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
 ```
