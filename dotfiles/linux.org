@@ -119,6 +119,7 @@ bootctl / efibootmgr
 >> 追加写入
 \ 转义
 # 注释
+$(!!) 使用上个命令的输出
 
 tee 读取标准输入，传送标准输出
 xargs

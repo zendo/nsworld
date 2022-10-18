@@ -10,7 +10,7 @@ in {
   imports = [
     ../modules/nix.nix
     ../modules/fonts.nix
-    "${modulesPath}/profiles/minimal.nix"
+    # "${modulesPath}/profiles/minimal.nix"
   ];
 
   wsl = {
@@ -38,14 +38,13 @@ in {
     nix-bash-completions
 
     vim
-    zee
     micro
     # helix
     emacs
 
     kitty
     wsl-open
-    radioboat
+    # radioboat
   ];
 
   programs.gnupg.agent = {
@@ -64,7 +63,10 @@ in {
     export {HTTP,HTTPS,FTP}_PROXY=${winProxy}";
   };
 
-  time.timeZone = "Asia/Shanghai";
+  documentation.enable = false;
+  documentation.nixos.enable = false;
+  programs.command-not-found.enable = false;
 
+  time.timeZone = "Asia/Shanghai";
   system.stateVersion = "22.05";
 }
