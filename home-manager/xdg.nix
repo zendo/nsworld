@@ -15,8 +15,8 @@ in
   ];
 
   home.sessionVariables = {
-    VISUAL = "zee";
-    EDITOR = "zee";
+    VISUAL = "emacs -nw";
+    EDITOR = "emacs -nw";
   };
 
   home.file = {

@@ -65,7 +65,6 @@
     # Developing
     jq
     jql
-    zee
     cloc # count code lines
     sqlite
     openssl

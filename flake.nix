@@ -152,7 +152,7 @@
       ## WSL
       #######################################################################
       # nix build .#nixosConfigurations.wsl.config.system.build.installer
-      nixosConfigurations.wsl = let
+      nixosConfigurations.Yoga14s = let
         username = "iab";
         # nixpkgs = inputs.nixpkgs-stable;
       in
