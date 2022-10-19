@@ -35,12 +35,6 @@ go/rust/python/java/node/php/ruby-on-rails
 # Desktop Setup
 
 ``` shell
-# force using en directories
-LC_ALL=C xdg-user-dirs-update --force
-
-# KDE
-curl https://gitlab.com/cscs/transfuse/-/raw/master/transfuse.sh -o ~/.local/bin/kde-backup ; chmod +x $_
-
 # WSL
 wsl --import nixos .\nixos\ nixos-wsl-installer.tar.gz --version 2
 wsl -d nixos

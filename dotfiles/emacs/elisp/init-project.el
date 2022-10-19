@@ -45,8 +45,9 @@
   :bind
   (("C-c g" . magit-status)
    ("s-g" . magit-status)
-   (:magit-status-mode-map
-   ("p" . magit-push))))
+   ;; (:magit-status-mode-map
+   ;;  ("p" . magit-push))
+   ))
 
 ;; git-gutter
 (leaf git-gutter
