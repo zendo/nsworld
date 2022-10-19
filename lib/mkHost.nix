@@ -32,7 +32,8 @@ nixpkgs.lib.nixosSystem {
 
     {
       nixpkgs.overlays = overlays;
-      hardware.enableAllFirmware = true;
+      # hardware.enableAllFirmware = true;
+      hardware.enableRedistributableFirmware = true;
       networking.hostName = "${hostname}";
       services.xserver.displayManager.autoLogin.user = "${username}";
     }

@@ -74,7 +74,7 @@ in {
     # Image manipulation
     # shutter
     pinta
-    yacreader
+    # yacreader
     contrast
     # gcolor3
     # wl-color-picker
