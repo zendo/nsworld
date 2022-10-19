@@ -1,11 +1,11 @@
 {
   "layer": "top",
   "output": "eDP-1",
-
   "height": 30,
   "position": "top",
 
   "modules-left": [
+    "custom/launcher",
     "wlr/workspaces",
     "sway/workspaces",
     "wlr/taskbar"
@@ -19,10 +19,13 @@
     "tray",
     "pulseaudio",
     "backlight",
+    // "idle_inhibitor",
     "battery",
     // "custom/sysmenu",
     "custom/logout"
   ],
+
+// Modules configuration
 
   "wlr/workspaces": {
     "disable-scroll": true,
@@ -128,8 +131,8 @@
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "零",
-      "deactivated": "鈴"
+      "activated": "",
+      "deactivated": ""
     }
   },
 
@@ -152,7 +155,7 @@
 
   "custom/logout": {
     "on-click": "wlogout",
-    "format-icons": ["◨"],
+    "format-icons": ["⏻"],
     "format": "{icon}"
   },
 
@@ -196,6 +199,12 @@
     "escape": true
   },
 
+  "custom/launcher": {
+    "format":" ",
+    "on-click": "exec nwg-drawer -c 7 -is 70 -spacing 23",
+    "tooltip": false,
+  },
+
   "tray": {
     "icon-size": 13,
     "spacing": 10
@@ -207,7 +216,7 @@
     "format-icons": ["🔅","🔆"],
     "on-scroll-up": "brightnessctl set 1%+",
     "on-scroll-down": "brightnessctl set 1%-",
-    "min-length": 6,
+    // "min-length": 6,
     "on-click": "sh $HOME/.config/waybar/scripts/sunset.sh"
   },
 

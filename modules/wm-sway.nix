@@ -37,6 +37,7 @@
 
     home.packages = with pkgs; [
       waybar
+      swayr
       # autotiling
       autotiling-rs
     ];

@@ -61,9 +61,11 @@ tooltip {
 #custom-caffeine,
 #custom-playerctl,
 #custom-notification,
+#custom-launcher,
 #clock,
 #taskbar,
 #battery,
+#idle_inhibitor,
 #pulseaudio,
 #network,
 #workspaces,
@@ -77,6 +79,10 @@ tooltip {
 #tray {
   border-radius: 10px;
   margin-right: 4px;
+}
+
+#custom-launcher {
+  border-radius: 10px;
 }
 
 #workspaces {

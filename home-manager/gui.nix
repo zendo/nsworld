@@ -160,10 +160,11 @@ in {
     # '';
   };
 
-  xdg.userDirs = lib.mkIf (!gnomeEnable) {
-    enable = true;
-    createDirectories = true;
-  };
+  # Not working!!
+  # xdg.userDirs = lib.mkIf (!gnomeEnable) {
+  #   enable = true;
+  #   createDirectories = true;
+  # };
 
   # xdg.mimeApps = {
   #   enable = true;

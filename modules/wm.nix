@@ -75,6 +75,10 @@
     config,
     ...
   }: {
+    imports = [
+      ../overlays/wob.nix
+    ];
+
     home.packages = with pkgs; [
       swappy # screenshot annotation editor
       swaybg # wallpaper tool
@@ -88,6 +92,9 @@
       # eww-wayland
       # hyprpicker
 
+      nwg-drawer
+      nwg-panel
+
       wofi # quick run
       wofi-emoji
       wl-clipboard
@@ -97,6 +104,7 @@
       bluetuith
       blueberry
       wlopm
+      wob
       wev # wayland event view
       wvkbd # on-screen keyboard
       # waypipe # proxy ?
@@ -179,6 +187,7 @@
       };
     };
 
+    # polkit
     systemd.user.services.polkit = {
       Unit = {
         Description = "A dbus session bus service that is used to bring up authentication dialogs";
