@@ -75,10 +75,6 @@
     config,
     ...
   }: {
-    imports = [
-      ../overlays/wob.nix
-    ];
-
     home.packages = with pkgs; [
       swappy # screenshot annotation editor
       swaybg # wallpaper tool

@@ -31,6 +31,9 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
   tubeconverter = prev.callPackage ./tubeconverter {};
+  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+    pomodoro = prev.callPackage ./pomodoro {};
+  });
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};

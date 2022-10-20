@@ -19,14 +19,14 @@
 
 stdenv.mkDerivation rec {
   pname = "g4music";
-  version = "1.8.1";
+  version = "1.8.2";
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
     owner = "neithern";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-G/rVYQBegRoRVxkF3jPUQa+Nu3511j278K9e5HkDOw8=";
+    hash = "sha256-jLgahCG71I8jxryFR91/t7f3xcmek95I1NCPMikiWIU=";
   };
 
   nativeBuildInputs = [
@@ -56,8 +56,11 @@ stdenv.mkDerivation rec {
   ]);
 
   # postPatch = ''
-  #   substituteInPlace meson.build \
-  #     --replace "gtk-update-icon-cache" "gtk4-update-icon-cache"
+  #   substituteInPlace data/meson.build \
+  #     --replace "get_option('datadir') / 'glib-2.0' / 'schemas'" "gschema_dir"
+  # '';
+  # postInstall = ''
+  #   cp -r ./* $out/share/glib-2.0
   # '';
 
   meta = with lib; {

@@ -98,9 +98,9 @@
           # nixpkgs = inputs.nixpkgs-stable;
           inherit overlays;
           extraModules = [
-            # ./modules/gnome.nix
+            ./modules/gnome.nix
             # ./modules/kde.nix
-            ./modules/wm-sway.nix
+            # ./modules/wm-sway.nix
           ];
         };
 

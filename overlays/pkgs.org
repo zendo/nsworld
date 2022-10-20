@@ -133,7 +133,7 @@ installPhase = ''
       description = "Modern editor for the terminal";
       homepage = "https://github.com/mcobzarenco/zee";
       license = licenses.mit;
-      maintainers = with maintainers; [zendo];
+      maintainers = with maintainers; [ zendo ];
     };
   }
 
