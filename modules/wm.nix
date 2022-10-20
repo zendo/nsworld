@@ -5,6 +5,10 @@
   username,
   ...
 }: {
+  imports = [
+    ../overlays/gtklock/gtklock.nix
+  ];
+
   services.xserver = {
     # for X11
     enable = true;
@@ -18,15 +22,14 @@
 
   # if use hm module
   security.pam.services.swaylock = {};
+  programs.dconf.enable = true;
+  programs.xwayland.enable = true;
 
   programs = {
     light.enable = true;
     # gtklock.enable = true;
     evince.enable = true;
     file-roller.enable = true;
-    # if use hm module
-    dconf.enable = true;
-    xwayland.enable = true;
   };
 
   programs.thunar = {
@@ -152,41 +155,6 @@
         # gama = "2.0";
         latitude = "22.2783";
         longitude = "114.1747";
-      };
-
-      swayidle = {
-        enable = false;
-        systemdTarget = "graphical-session.target";
-        events = [
-          {
-            event = "before-sleep";
-            command = "${lib.getExe pkgs.swaylock-effects} -f";
-          }
-          {
-            event = "lock";
-            command = "${lib.getExe pkgs.swaylock-effects} -f";
-          }
-        ];
-        timeouts = [
-          {
-            timeout = 200;
-            command = "${lib.getExe pkgs.brightnessctl} -s s 10%";
-            resumeCommand = "${lib.getExe pkgs.brightnessctl} -r";
-          }
-          {
-            timeout = 230;
-            command = ''${lib.getExe pkgs.libnotify} -t 30000 -- "Screen will lock in 60 seconds"'';
-          }
-          {
-            timeout = 300;
-            command = "${lib.getExe pkgs.swaylock-effects} -f";
-          }
-          {
-            timeout = 360;
-            command = ''${lib.getExe pkgs.wlopm} --toggle \*'';
-            resumeCommand = ''${lib.getExe pkgs.wlopm} --toggle \* && brightnessctl -r'';
-          }
-        ];
       };
     };
 

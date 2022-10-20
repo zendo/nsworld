@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ../overlays/v2raya/v2raya.nix
+  ];
+
   networking = {
     networkmanager.enable = true; # conflict with networking.wireless
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.

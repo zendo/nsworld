@@ -2,27 +2,20 @@
 
 with lib;
 
-let cfg = config.services.wob;
-
-in {
+let
+  cfg = config.services.wob;
+in
+{
   meta.maintainers = [ hm.maintainers.zendo ];
 
-  options.services.wob = {
-    enable = mkEnableOption "wob";
-
-    package = mkOption {
-      type = types.package;
-      default = pkgs.wob;
-      defaultText = "pkgs.wob";
-      description = ''
-        wob derivation to use.
-      '';
-    };
+  options = {
+    services.wob.enable = mkEnableOption "Wayland overlay bar";
   };
 
   config = mkIf cfg.enable {
 
     systemd.user.services.wob = {
+
       Unit = {
         Description = "A lightweight overlay volume/backlight/progress/anything bar for Wayland";
         PartOf = [ "graphical-session.target" ];

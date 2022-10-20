@@ -2,18 +2,20 @@
 
 with lib;
 
-let cfg = config.services.polkit;
-
-in {
+let
+  cfg = config.services.polkit;
+in
+{
   meta.maintainers = [ hm.maintainers.zendo ];
 
-  options.services.polkit = {
-    enable = mkEnableOption "polkit";
+  options = {
+    services.polkit.enable = mkEnableOption "Polkiy sgent";
   };
 
   config = mkIf cfg.enable {
 
-      systemd.user.services.polkit-agent-gnome = {
+    systemd.user.services.polkit-agent-gnome = {
+
       Unit = {
         Description = "A dbus session bus service that is used to bring up authentication dialogs";
         Documentation = ["man:polkit(8)"];
