@@ -3,19 +3,23 @@
 with lib;
 
 let
+
   cfg = config.services.wob;
-in
-{
+
+in {
   meta.maintainers = [ hm.maintainers.zendo ];
 
-  options = {
-    services.wob.enable = mkEnableOption "Wayland overlay bar";
+  options.services.wob = {
+    enable = mkEnableOption "Wayland overlay bar";
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      (lib.hm.assertions.assertPlatform "services.playerctld" pkgs
+      lib.platforms.linux)
+    ];
 
     systemd.user.services.wob = {
-
       Unit = {
         Description = "A lightweight overlay volume/backlight/progress/anything bar for Wayland";
         PartOf = [ "graphical-session.target" ];

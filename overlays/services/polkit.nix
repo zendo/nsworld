@@ -3,19 +3,23 @@
 with lib;
 
 let
+
   cfg = config.services.polkit;
-in
-{
+
+in {
   meta.maintainers = [ hm.maintainers.zendo ];
 
-  options = {
-    services.polkit.enable = mkEnableOption "Polkiy sgent";
+  options.services.polkit = {
+    enable = mkEnableOption "Polkiy sgent";
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      (lib.hm.assertions.assertPlatform "services.polkit" pkgs
+      lib.platforms.linux)
+    ];
 
     systemd.user.services.polkit-agent-gnome = {
-
       Unit = {
         Description = "A dbus session bus service that is used to bring up authentication dialogs";
         Documentation = ["man:polkit(8)"];
@@ -24,6 +28,8 @@ in
         # ConditionEnvironment = [ "XDG_CURRENT_DESKTOP=sway" ];
       };
 
+      Install.WantedBy = [ "graphical-session.target" ];
+
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -31,8 +37,6 @@ in
         # RestartSec = 5;
         # Restart = "always";
       };
-
-      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }
