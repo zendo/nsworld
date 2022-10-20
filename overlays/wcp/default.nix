@@ -15,18 +15,22 @@
 
 stdenv.mkDerivation rec {
   pname = "wcp";
-  version = "0.5";
+  version = "0.52";
 
   src = fetchFromGitHub {
     owner = "milgra";
     repo = pname;
     rev = version;
-    hash = "sha256-VScD38Jip3Ns9C87c/as4MFOMStKz6qyPmifKr5VxRE=";
+    hash = "sha256-m2pPxqD1c0HX7jg1q6PspO/897tYK+479M7Lp3OTO/o=";
   };
 
   # dontAddStaticConfigureFlags = true;
 
   # dontDisableStatic = false;
+  # strictDeps = true;
+  # depsBuildBuild = [
+  #   pkg-config
+  # ];
 
   nativeBuildInputs = [
     meson

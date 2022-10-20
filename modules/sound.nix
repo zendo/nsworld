@@ -2,8 +2,13 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.musnix.nixosModules.musnix
+  ];
+
   # Musnix enhence
   musnix.enable = true;
 

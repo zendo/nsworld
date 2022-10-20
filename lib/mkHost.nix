@@ -25,8 +25,6 @@ nixpkgs.lib.nixosSystem {
     ../modules/virtualisation.nix
     ../hosts/${hostname}
 
-    inputs.musnix.nixosModules.musnix
-
     {
       nixpkgs.overlays = overlays;
       # hardware.enableAllFirmware = true;

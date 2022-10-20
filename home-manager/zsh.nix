@@ -7,6 +7,24 @@
     pure-prompt
   ];
 
+  programs.fish = {
+    enable = false;
+  };
+
+  programs.tmux = {
+    enable = false;
+    extraConfig = ''
+      # Set the prefix.
+      # set -g prefix M-a
+
+      # Close the current session.
+      bind -n M-q kill-session
+
+      # Close the current pane.
+      bind -n M-w kill-pane
+    '';
+  };
+
   programs.starship = {
     enable = false;
     enableBashIntegration = false;

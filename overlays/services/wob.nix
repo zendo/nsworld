@@ -7,10 +7,10 @@ let
   cfg = config.services.wob;
 
 in {
-  meta.maintainers = [ hm.maintainers.zendo ];
+  meta.maintainers = [ maintainers.zendo ];
 
   options.services.wob = {
-    enable = mkEnableOption "Wayland overlay bar";
+    enable = mkEnableOption "Wayland Overlay Bar";
   };
 
   config = mkIf cfg.enable {
@@ -22,9 +22,11 @@ in {
     systemd.user.services.wob = {
       Unit = {
         Description = "A lightweight overlay volume/backlight/progress/anything bar for Wayland";
+        Documentation = "man:wob(1)";
         PartOf = [ "graphical-session.target" ];
         After = ["graphical-session-pre.target"];
-        ConditionPathExistsGlob = ["%t/wayland-*"];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+        # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
       Install.WantedBy = ["graphical-session.target"];
@@ -41,10 +43,10 @@ in {
       Socket = {
         ListenFIFO = "%t/wob.sock";
         SocketMode = 0600;
-        ConditionPathExistsGlob = ["%t/wayland-*"];
+        # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["sockets.target" "graphical-session.target"];
+      Install.WantedBy = ["sockets.target"];
     };
   };
 }
