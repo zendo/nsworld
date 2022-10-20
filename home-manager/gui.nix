@@ -13,7 +13,7 @@ in {
     # done
     textpieces
     # textsnatcher
-    paper
+    # paper
     # retext
     # g4music
 

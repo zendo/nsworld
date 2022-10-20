@@ -75,6 +75,11 @@
     config,
     ...
   }: {
+    imports = [
+      ../overlays/services/wob.nix
+      ../overlays/services/polkit.nix
+    ];
+
     home.packages = with pkgs; [
       swappy # screenshot annotation editor
       swaybg # wallpaper tool
@@ -100,7 +105,7 @@
       bluetuith
       blueberry
       wlopm
-      wob
+      # wob
       wev # wayland event view
       wvkbd # on-screen keyboard
       # waypipe # proxy ?
@@ -131,7 +136,7 @@
       # gnome.gnome-characters
       # gnome.eog
       # gthumb
-      libsForQt5.gwenview
+      # libsForQt5.gwenview
       gparted
     ];
 
@@ -139,6 +144,8 @@
       udiskie.enable = true;
       gnome-keyring.enable = true;
       # playerctld.enable = true;
+      wob.enable = true;
+      polkit.enable = true;
 
       wlsunset = {
         enable = true;
@@ -180,24 +187,6 @@
             resumeCommand = ''${lib.getExe pkgs.wlopm} --toggle \* && brightnessctl -r'';
           }
         ];
-      };
-    };
-
-    # polkit
-    systemd.user.services.polkit = {
-      Unit = {
-        Description = "A dbus session bus service that is used to bring up authentication dialogs";
-        Documentation = ["man:polkit(8)"];
-        PartOf = ["graphical-session.target"];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        RestartSec = 5;
-        Restart = "always";
-      };
-      Install = {
-        WantedBy = ["graphical-session.target"];
       };
     };
 
