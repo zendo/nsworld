@@ -271,6 +271,7 @@ installPhase = ''
   # This is to prevent double-wrapping the package. We'll let
   # Python do it by adding certain arguments inside of the
   # wrapper instead.
+  # prevent double wrapping
   dontWrapGApps = true;
   preFixup = ''
     makeWrapperArgs+=("''${gappsWrapperArgs[@]}")

@@ -9,8 +9,11 @@ sudo sed -i '$aexport XDG_DATA_DIRS=$HOME/.nix-profile/share:$HOME/.share:"${XDG
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
+  programs.home-manager.enable = lib.mkForce false;
+
   home.shellAliases = {
   };
 

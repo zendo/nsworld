@@ -26,6 +26,7 @@ final: prev: {
   # Python
   textpieces = prev.callPackage ./textpieces {};
   textsnatcher = prev.callPackage ./textsnatcher {};
+  smile = prev.callPackage ./smile {};
 
   # Gtk
   paper = prev.callPackage ./paper {};

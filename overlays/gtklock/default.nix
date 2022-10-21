@@ -5,6 +5,8 @@
 , pam
 , scdoc
 , gtk3
+, glib
+
 , pkg-config
 , gtk-layer-shell
 , wayland
@@ -13,18 +15,19 @@
 
 stdenv.mkDerivation rec {
   pname = "gtklock";
-  version = "1.4.0";
+  version = "2.0.0";
 
   src = fetchFromGitHub {
     owner = "jovanlanik";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-MR/yaqiWmR5m2riSRx4t/ODMJcR7Q7zYSW+7iOoXn28=";
+    hash = "sha256-VX+KSq2Xg8UsJWjJSNhtbCOwvc1SjxdlgN5tc+XQcr4=";
   };
 
   strictDeps = true;
 
   nativeBuildInputs = [
+    glib
     scdoc
     pkg-config
     wayland-scanner

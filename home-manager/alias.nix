@@ -7,7 +7,7 @@
   home.shellAliases = {
     cat = "bat -p";
     # ps = "ps -ef";
-    ps = "${lib.getExe pkgs.procs}";
+    psp = "${lib.getExe pkgs.procs}";
     l = "exa -l --icons";
     "la." = "ls -d .*";
     bc = "${lib.getExe pkgs.libqalculate}";
