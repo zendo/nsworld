@@ -5,6 +5,19 @@
 #+begin_src config
 · ‥ ⁖ ⁘
 #+end_src
+* stdenv
+#+begin_src nix
+# auto-update bot
+passthru.updateScript = nix-update-script { attrPath = pname; };
+
+# fonts
+installPhase = ''
+  runHook preInstall
+  mkdir -p $out/share/fonts/truetype
+  install -D *.{ttf,TTF} $out/share/fonts/truetype/
+  runHook postInstall
+'';
+#+end_src
 * buildGoModule
 ** templates
 #+begin_src nix
@@ -27,7 +40,7 @@
       owner = "slashformotion";
       repo = "radioboat";
       rev = "v${version}";
-      sha256 = "sha256-ZAKTWmK3hCJxm/578cjtdgMA2ZRhCFtzfGdta0gmuFY=";
+      hash = "sha256-ZAKTWmK3hCJxm/578cjtdgMA2ZRhCFtzfGdta0gmuFY=";
     };
 
     subPackages = ["."];
@@ -36,7 +49,7 @@
 
     deleteVendor = true;
 
-    vendorSha256 = "sha256-X3KiqaiOQYQBfVckh50C+4oxIVN6gXyNuQtBwGvjdFQ=";
+    vendorHash = "sha256-X3KiqaiOQYQBfVckh50C+4oxIVN6gXyNuQtBwGvjdFQ=";
 
     ldflags = [
       "-s"
@@ -86,19 +99,6 @@
 #+end_src
 
 **
-* stdenv
-#+begin_src nix
-# auto-update bot
-passthru.updateScript = nix-update-script { attrPath = pname; };
-
-# fonts
-installPhase = ''
-  runHook preInstall
-  mkdir -p $out/share/fonts/truetype
-  install -D *.{ttf,TTF} $out/share/fonts/truetype/
-  runHook postInstall
-'';
-#+end_src
 * buildRustPackage
 ** templates
 #+begin_src nix
@@ -168,13 +168,13 @@ installPhase = ''
       owner = "ebassi";
       repo = pname;
       rev = version;
-      sha256 = "sha256-+9lrSkjk7V+ZnIhmhw7lEiEywDp5adoAW+5PEAlhpSI=";
+      hash = "sha256-+9lrSkjk7V+ZnIhmhw7lEiEywDp5adoAW+5PEAlhpSI=";
     };
 
     cargoDeps = rustPlatform.fetchCargoTarball {
       inherit src;
       name = "${pname}-${version}";
-      sha256 = "sha256-ZJiD6RshEjZ7h+/KYcY+ZjL5fHRb5+RKgIdgbD6LdkA=";
+      hash = "sha256-ZJiD6RshEjZ7h+/KYcY+ZjL5fHRb5+RKgIdgbD6LdkA=";
     };
 
     postPatch = ''
@@ -182,41 +182,41 @@ installPhase = ''
       hebangs build-aux
     '';
 
-    nativeBuildInputs =
-      [
-        appstream-glib
-        desktop-file-utils
-        meson
-        ninja
-        pkg-config
-        reuse
-        wrapGAppsHook
-      ]
-      ++ (with rustPlatform; [
-        cargoSetupHook
-        rust.cargo
-        rust.rustc
-      ]);
+    nativeBuildInputs = [
+      appstream-glib
+      desktop-file-utils
+      meson
+      ninja
+      pkg-config
+      reuse
+      wrapGAppsHook
+    ]
+    ++ (with rustPlatform; [
+      cargoSetupHook
+      rust.cargo
+      rust.rustc
+    ]);
 
     buildInputs = [
       glib
       gtk4
       libadwaita
-      gst_all_1.gstreamer
-      gst_all_1.gst-plugins-base
-      gst_all_1.gst-plugins-good
-      gst_all_1.gst-plugins-bad
-      gst_all_1.gst-plugins-ugly
-      gst_all_1.gst-libav
       dbus
-    ];
+    ]  ++ (with gst_all_1; [
+      gstreamer
+      gst-libav
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+    ]);
 
     meta = with lib; {
       homepage = "https://gitlab.gnome.org/ebassi/amberol";
       description = "A small and simple sound and music player";
-      maintainers = with maintainers; [linsui];
       license = licenses.gpl3Plus;
       platforms = platforms.linux;
+      maintainers = with maintainers; [ linsui ];
     };
   }
 
@@ -364,7 +364,7 @@ nimPackages.buildNimPackage rec {
     owner = "unxsh";
     repo = "nitch";
     rev = version;
-    sha256 = "sha256-m4UG5oVZ+/7jk1f7rOe8wP97Jt0yIFcAPU+doeMe2Hw=";
+    hash = "sha256-m4UG5oVZ+/7jk1f7rOe8wP97Jt0yIFcAPU+doeMe2Hw=";
   };
 
   # buildInputs = [ termbox pcre ]
@@ -414,7 +414,7 @@ appimageTools.wrapType2 rec {
 
   src = fetchurl {
     url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.AppImage";
-    sha256 = "sha256-I9ZbFFPgG7ipPxu02H8W8NqrtfomeNIntBYdDGxyyg4=";
+    hash = "sha256-I9ZbFFPgG7ipPxu02H8W8NqrtfomeNIntBYdDGxyyg4=";
   };
 
   meta = with lib; {
@@ -428,16 +428,38 @@ appimageTools.wrapType2 rec {
 #+end_src
 * qt
 qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default.nix
-* Desktop
-** codecs
+* font-templates
 #+begin_src nix
-gst_all_1.gstreamer
-gst_all_1.gst-plugins-base
-gst_all_1.gst-plugins-good
-gst_all_1.gst-plugins-bad
-gst_all_1.gst-plugins-ugly
-gst_all_1.gst-libav
-#+end_src
+{ lib, fetchzip }:
+
+# https://github.com/NixOS/nixpkgs/pull/175381
+fetchzip rec {
+  pname = "zhudou-sans";
+  version = "1.000";
+
+  url = "https://github.com/Buernia/Zhudou-Sans/archive/refs/tags/v${version}.tar.gz";
+
+  postFetch = ''
+    mkdir -p $out/share/fonts/truetype
+    install -Dm644 "$out/fonts/variable ttf/Zhudou Sans-VF.ttf" $out/share/fonts/truetype
+    install -Dm644 $out/fonts/ttf/*.ttf  $out/share/fonts/truetype
+
+    shopt -s extglob dotglob
+    rm -rf $out/!(share)
+    shopt -u extglob dotglob
+  '';
+
+  hash = "sha256-DFTK+eKhfRCbOrgTBlJeLD5Mdi0VYwullbo2poaLIKw=";
+
+  meta = with lib; {
+    description = "A font family for CJK symbols and punctuation, derived from Noto Sans";
+    homepage = "https://github.com/Buernia/Zhudou-Sans";
+    license = licenses.ofl;
+    platforms = platforms.all;
+    maintainers = with maintainers; [ zendo ];
+  };
+}
+#+end_src>
 * miscPatch
 * wrapper
 #+begin_src nix
@@ -479,8 +501,6 @@ gst_all_1.gst-libav
     homepage = "";
     license = licenses.mit;
     platforms = platforms.unix;
-    maintainers = with maintainers; [
-      somebody
-    ];
+    maintainers = with maintainers; [ zendo ];
   };
 #+end_src

@@ -2,7 +2,6 @@ final: prev: {
   # Trivial
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
-  mygrub-theme = prev.callPackage ./mygrub-theme {};
   hyprpicker = prev.callPackage ./hyprpicker {};
   ctpv = prev.callPackage ./ctpv {};
   wcp = prev.callPackage ./wcp {};
@@ -32,9 +31,6 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
   tubeconverter = prev.callPackage ./tubeconverter {};
-  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-    pomodoro = prev.callPackage ./pomodoro {};
-  });
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
@@ -67,16 +63,6 @@ final: prev: {
   # };
 
   /*
-  libadwaita-git = prev.libadwaita.overrideAttrs (oldAttrs: {
-    src = prev.fetchFromGitLab {
-      domain = "gitlab.gnome.org";
-      owner = "GNOME";
-      repo = "libadwaita";
-      rev = "0475afa54ee12fc1f691102c8186c7fc06fcd357";
-      hash = "sha256-3ESu34HhsycVV2QNtcxfP7YffCGddKqLTtIkzeJc+GE=";
-    };
-  });
-
   # node override
   nodePackages = nodePackages.extend (final: prev: { })
 
@@ -95,7 +81,11 @@ final: prev: {
     });
   });
 
-  # gdm bug
+  # gnome override
+  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+  #   pomodoro = prev.callPackage ./pomodoro {};
+  # });
+
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {
     gdm = gprev.gdm.overrideAttrs (oldAttrs: {
       src = prev.fetchurl {
@@ -115,7 +105,7 @@ final: prev: {
     });
   });
 
-  # sddm-git
+  # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
     sddm =
       prevy.sddm.overrideAttrs

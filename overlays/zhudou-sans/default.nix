@@ -24,6 +24,6 @@ fetchzip rec {
     homepage = "https://github.com/Buernia/Zhudou-Sans";
     license = licenses.ofl;
     platforms = platforms.all;
-    maintainers = with maintainers; [zendo];
+    maintainers = with maintainers; [ zendo ];
   };
 }

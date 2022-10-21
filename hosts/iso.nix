@@ -59,6 +59,7 @@
     bcachefs-tools
 
     vim
+    micro
     fish
     btop
     ydict
