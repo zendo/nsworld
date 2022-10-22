@@ -69,6 +69,6 @@ stdenv.mkDerivation rec {
     mainProgram = "com.github.rajsolai.textsnatcher";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [zendo];
+    maintainers = with maintainers; [ zendo ];
   };
 }

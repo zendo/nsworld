@@ -4,8 +4,7 @@ final: prev: {
   nixos-helper = prev.callPackage ./nixos-helper {};
   hyprpicker = prev.callPackage ./hyprpicker {};
   ctpv = prev.callPackage ./ctpv {};
-  wcp = prev.callPackage ./wcp {};
-  hybridbar = prev.callPackage ./hybridbar {};
+  hybrid-bar = prev.callPackage ./hybrid-bar {};
 
   retext = prev.libsForQt5.callPackage ./retext {};
 
