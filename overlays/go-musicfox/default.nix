@@ -18,7 +18,7 @@ buildGoModule rec {
     hash = "sha256-/3FStiXK0FXa9Lz0tie3EZOQixKfV35y02rckJ7hag8=";
   };
 
-  # subPackages = [ "cmd" ];
+  subPackages = [ "cmd" ];
 
   # proxyVendor = true;
 
@@ -27,16 +27,17 @@ buildGoModule rec {
   vendorHash = "sha256-McfVcXf1I1fSB+PnsLSrbPV7qGnL01P8tJAs8OiXodk=";
 
   CGO_ENABLED = 0;
-  GOFLAGS = [ "-trimpath" ];
+
+  # GOFLAGS = [ "-trimpath" ];
 
   doCheck = false;
 
   ldflags = [
     "-s"
     "-w"
-    "-X go-musicfox/pkg/constants.AppVersion={{.Tag}}"
-    "-X go-musicfox/pkg/constants.LastfmKey={{.Env.LASTFM_KEY}}"
-    "-X go-musicfox/pkg/constants.LastfmSecret={{.Env.LASTFM_SECRET}}"
+    # "-X go-musicfox/pkg/constants.AppVersion={{.Tag}}"
+    # "-X go-musicfox/pkg/constants.LastfmKey={{.Env.LASTFM_KEY}}"
+    # "-X go-musicfox/pkg/constants.LastfmSecret={{.Env.LASTFM_SECRET}}"
   ];
 
   # nativeBuildInputs = [ makeWrapper installShellFiles ];

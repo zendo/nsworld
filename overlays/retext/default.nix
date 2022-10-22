@@ -49,6 +49,7 @@ python3.pkgs.buildPythonApplication rec {
   # ];
 
   propagatedBuildInputs = with python3.pkgs; [
+    requests
     chardet
     docutils
     markdown
@@ -79,7 +80,7 @@ python3.pkgs.buildPythonApplication rec {
     )
 
     # mkdir -p $out/share/retext/icons
-    install -Dm444 ${toolbarIcons}/* -t $out/share/retext/icons
+    # install -Dm444 ${toolbarIcons}/* -t $out/share/retext
 
     substituteInPlace $out/share/applications/me.mitya57.ReText.desktop \
       --replace "Exec=ReText-${version}.data/scripts/retext %F" "Exec=$out/bin/retext %F" \
