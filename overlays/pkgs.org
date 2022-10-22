@@ -273,8 +273,10 @@ installPhase = ''
   # wrapper instead.
   # prevent double wrapping
   dontWrapGApps = true;
+  dontWrapQtApps = true;
   preFixup = ''
     makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+    makeWrapperArgs+=("''${qtWrapperArgs[@]}")
   '';
 
 #+end_src

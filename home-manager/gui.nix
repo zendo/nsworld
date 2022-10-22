@@ -7,6 +7,10 @@
 }: let
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
+  services = {
+    easyeffects.enable = true;
+  };
+
   home.packages = with pkgs; [
     # app-icon-preview
     # converseen
@@ -119,10 +123,6 @@ in {
     wayland-utils
     # wdisplays # wlr
   ];
-
-  services = {
-    easyeffects.enable = true;
-  };
 
   programs.pandoc = {
     enable = false;
