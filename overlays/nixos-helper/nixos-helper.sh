@@ -12,7 +12,7 @@ usage() {
      \t run/search/shell/index-up
      \t profiles/generations/source/installed
      \t pr-run/pr-shell/pr-pull/gitfm
-     \t hmswitch/hmsource/hmprofiles/hmdiff/wslswitch
+     \t hmswitch/hmsource/hmprofiles/hmdiff
      "
 }
 
@@ -48,9 +48,6 @@ case "$1" in
     upgrade)
         nixos-rebuild boot --use-remote-sudo --flake $dotConfig#"$(hostname)" \
             --recreate-lock-file ;;
-
-    wslswitch)
-        nixos-rebuild switch --use-remote-sudo --flake $dotConfig#wsl ;;
 
     hmswitch)
         nix run nixpkgs#home-manager switch -- \

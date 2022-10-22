@@ -61,9 +61,12 @@
          search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
          chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
         }
+        menuentry 'Firmware Setup' --class settings {
+          fwsetup
+        }
       '';
-      # theme = pkgs.mygrub-theme;
       # theme = pkgs.fetchzip {
+      # https://github.com/AdisonCavani/distro-grub-themes
       #   url = "https://raw.githubusercontent.com/AdisonCavani/distro-grub-themes/master/themes/freeBSD.tar";
       #   hash = "sha256-oTrh+5g73y/AXSR+MPz6a25KyCKCPLL8mZCDup/ENZc=";
       #   stripRoot=false;
