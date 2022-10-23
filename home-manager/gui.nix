@@ -85,6 +85,7 @@ in {
 
     qbittorrent
     gnome-decoder
+    endeavour
     ghostwriter
     meld
     # deja-dup

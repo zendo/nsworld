@@ -38,15 +38,15 @@ in
     "mpv".source = ../dotfiles/mpv;
     "cava".source = ../dotfiles/cava;
     "wofi".source = ../dotfiles/wofi;
+    "foot".source = ../dotfiles/foot;
     "kitty".source = ../dotfiles/kitty;
     "helix".source = ../dotfiles/helix;
+    "wezterm".source = ../dotfiles/wezterm;
     "gtklock".source = ../dotfiles/gtklock;
     "swaylock".source = ../dotfiles/swaylock;
     "radioboat".source = ../dotfiles/radioboat;
-    "foot/foot.ini".source = ../dotfiles/foot.ini;
+    "alacritty".source = ../dotfiles/alacritty;
     "starship.toml".source = ../dotfiles/starship.toml;
-    "wezterm/wezterm.lua".source = ../dotfiles/wezterm.lua;
-    "alacritty/alacritty.yml".source = ../dotfiles/alacritty.yml;
 
     # Soft Symbolic Links
     "lf".source = mkOOSL hmDots + "/lf";

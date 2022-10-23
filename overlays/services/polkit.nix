@@ -7,10 +7,10 @@ let
   cfg = config.services.polkit;
 
 in {
-  meta.maintainers = [ hm.maintainers.zendo ];
+  meta.maintainers = [ maintainers.zendo ];
 
   options.services.polkit = {
-    enable = mkEnableOption "Polkiy sgent";
+    enable = mkEnableOption "Polkiy agent";
   };
 
   config = mkIf cfg.enable {

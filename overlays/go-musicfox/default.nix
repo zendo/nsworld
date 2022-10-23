@@ -3,6 +3,7 @@
 , buildGoModule
 , makeWrapper
 , installShellFiles
+, flac
 }:
 
 # WIP!!
@@ -19,7 +20,7 @@ buildGoModule rec {
   };
 
   # subPackages = [ "cmd/musicfox.go" ];
-  subPackages = [ "." ];
+  # subPackages = [ "." ];
 
   # proxyVendor = true;
 
@@ -33,7 +34,7 @@ buildGoModule rec {
 
   # GOFLAGS = [ "-trimpath" ];
 
-  # doCheck = false;
+  doCheck = false;
 
   ldflags = [
     "-s"
@@ -46,6 +47,8 @@ buildGoModule rec {
   ];
 
   # nativeBuildInputs = [ makeWrapper installShellFiles ];
+
+  buildInputs = [ flac ];
 
   # preFixup = ''
   #   wrapProgram $out/bin/go-musicfox --prefix PATH ":" "${lib.makeBinPath [ mpv ]}";
