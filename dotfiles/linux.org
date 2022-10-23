@@ -187,6 +187,10 @@ find ~ | wc -l 主目录并计数
 find ~ -type d | wc -l 查找目录并计数
 find ~ -type f -name "*.jpg" -size +1M 查找名字和查找容量大于1M
 
+find . -name '*.plymouth' -exec sed -i -e 's/usr\/share/etc/g' {} \;
+find . -name '*.plymouth' -print0 | xargs -0 sed -i 's/usr\/share/etc/g'
+find . -type f  -name '*.plymouth' | xargs sed -i "s@usr/share@etc@g"
+
 * Bash OneLiner
 https://github.com/onceupon/Bash-Oneliner
 

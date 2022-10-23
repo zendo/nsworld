@@ -8,10 +8,15 @@
   boot = {
     # tmpOnTmpfs = true;
     cleanTmpDir = true;
-    plymouth.enable = true;
+    # plymouth.enable = true;
     # https://github.com/NixOS/nixpkgs/pull/185116
     # initrd.systemd.enable = true;
     supportedFilesystems = ["ntfs"];
+    plymouth = {
+      enable = true;
+      theme = "double";
+      themePackages = [pkgs.adi1090x-plymouth-themes];
+    };
   };
 
   services = {

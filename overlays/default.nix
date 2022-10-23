@@ -5,6 +5,7 @@ final: prev: {
   hyprpicker = prev.callPackage ./hyprpicker {};
   ctpv = prev.callPackage ./ctpv {};
   hybrid-bar = prev.callPackage ./hybrid-bar {};
+  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   retext = prev.libsForQt5.callPackage ./retext {};
 

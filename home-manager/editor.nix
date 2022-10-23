@@ -36,6 +36,7 @@
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
+      neogit
       vim-nix
       vim-lsp
       vim-markdown
