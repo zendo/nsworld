@@ -18,7 +18,8 @@ buildGoModule rec {
     hash = "sha256-/3FStiXK0FXa9Lz0tie3EZOQixKfV35y02rckJ7hag8=";
   };
 
-  subPackages = [ "cmd" ];
+  # subPackages = [ "cmd/musicfox.go" ];
+  subPackages = [ "." ];
 
   # proxyVendor = true;
 
@@ -28,13 +29,17 @@ buildGoModule rec {
 
   CGO_ENABLED = 0;
 
+  # allowGoReference = true;
+
   # GOFLAGS = [ "-trimpath" ];
 
-  doCheck = false;
+  # doCheck = false;
 
   ldflags = [
     "-s"
     "-w"
+    "-X"
+    "-linkmode external"
     # "-X go-musicfox/pkg/constants.AppVersion={{.Tag}}"
     # "-X go-musicfox/pkg/constants.LastfmKey={{.Env.LASTFM_KEY}}"
     # "-X go-musicfox/pkg/constants.LastfmSecret={{.Env.LASTFM_SECRET}}"
@@ -46,13 +51,13 @@ buildGoModule rec {
   #   wrapProgram $out/bin/go-musicfox --prefix PATH ":" "${lib.makeBinPath [ mpv ]}";
   # '';
 
-  # postInstall = ''
-  #   cp -r * $out
-  #   # installShellCompletion --cmd go-musicfox \
-  #   #   --bash <($out/bin/go-musicfox completion bash) \
-  #   #   --fish <($out/bin/go-musicfox completion fish) \
-  #   #   --zsh <($out/bin/go-musicfox completion zsh)
-  # '';
+  postInstall = ''
+    cp -r * $out
+    # installShellCompletion --cmd go-musicfox \
+    #   --bash <($out/bin/go-musicfox completion bash) \
+    #   --fish <($out/bin/go-musicfox completion fish) \
+    #   --zsh <($out/bin/go-musicfox completion zsh)
+  '';
 
   meta = with lib; {
     description = "A terminal web radio client";

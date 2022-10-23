@@ -8,8 +8,6 @@ inputs @ {pkgs}: {
       gcc
       gnumake
       alejandra
-      nixUnstable
-      nix-direnv
     ];
   };
 

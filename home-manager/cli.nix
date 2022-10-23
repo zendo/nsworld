@@ -100,6 +100,7 @@
     cachix
     nixos-generators
     # nix-template
+    nix-update
     nixpkgs-review
     nix-index
     nix-tree
