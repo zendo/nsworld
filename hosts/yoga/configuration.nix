@@ -21,6 +21,11 @@
 
   # boot.kernelParams = ["quite"];
 
+  boot.plymouth = {
+    theme = "double";
+    themePackages = [pkgs.adi1090x-plymouth-themes];
+  };
+
   services.logind = {
     lidSwitch = "suspend-then-hibernate";
     extraConfig = ''
