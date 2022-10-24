@@ -24,13 +24,13 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "textpieces";
-  version = "3.2.0";
+  version = "3.3.0";
 
   src = fetchFromGitHub {
     owner = "liferooter";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-zolhKsSPJI34EeAv+xE1ievy/RyrXY4wIxUgLQ8T+JM=";
+    hash = "sha256-QLPvK2kiOGf8XN2aors6cZtl9d9uqsxcho2A1kISO5Y=";
   };
 
   nativeBuildInputs = [

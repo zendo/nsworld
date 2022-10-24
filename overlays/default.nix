@@ -18,6 +18,7 @@ final: prev: {
   # mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
   rustplayer = prev.callPackage ./rustplayer {};
+  kestrel = prev.callPackage ./kestrel {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};

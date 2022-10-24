@@ -20,6 +20,7 @@ in {
     # paper
     # retext
     # g4music
+    kestrel
 
     foot
     kitty
