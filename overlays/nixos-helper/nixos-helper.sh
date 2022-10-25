@@ -11,7 +11,7 @@ usage() {
      \t boot/switch/upgrade/diff
      \t run/search/shell/index-up
      \t profiles/generations/source/installed
-     \t pr-run/pr-shell/pr-pull/gitfm
+     \t pr-run/pr-shell/pr-pull/git-fm
      \t hmswitch/hmsource/hmprofiles/hmdiff
      "
 }
@@ -85,7 +85,7 @@ case "$1" in
     depends)
         nix path-info -rsSh "$(readlink -f "$(which "$2")")" ;;
 
-    gitfm)
+    git-fm)
         git fetch upstream master && git merge "$(nixos-version --revision)" ;;
 
     pr-run)

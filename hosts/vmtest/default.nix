@@ -9,6 +9,8 @@
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+    ../../modules/gnome.nix
+    # ../../modules/kde.nix
   ];
 
   disabledModules = [
@@ -16,11 +18,16 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    wordbook
   ];
 
-
   services.xserver = {
+    enable = true;
+    # desktopManager.xfce.enable = true;
+    # desktopManager.cinnamon.enable = true;
+    # desktopManager.pantheon.enable = true;
+    # desktopManager.enlightenment.enable = true;
+    # desktopManager.mate.enable = true;
+    # desktopManager.lxqt.enable = true;
     # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 

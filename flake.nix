@@ -111,11 +111,8 @@
           # system = "x86_64-linux";
           hmEnable = false;
           virtEnable = false;
-          nixpkgs = inputs.nixpkgs-local;
+          # nixpkgs = inputs.nixpkgs-local;
           extraModules = [
-            # ./hosts/vmtest.nix
-            # ./modules/gnome.nix
-            ./modules/kde.nix
           ];
         };
 
