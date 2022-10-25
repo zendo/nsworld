@@ -23,6 +23,7 @@ final: prev: {
   # Go
   v2raya = prev.callPackage ./v2raya {};
   go-musicfox = prev.callPackage ./go-musicfox {};
+  gtt-go = prev.callPackage ./gtt-go {};
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher {};

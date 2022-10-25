@@ -8,6 +8,7 @@ in
   nixpkgs ? inputs.nixpkgs,
   system ? "x86_64-linux",
   hmEnable ? true,
+  virtEnable ? true,
   overlays ? [],
   extraModules ? [],
 }:
@@ -22,7 +23,6 @@ nixpkgs.lib.nixosSystem {
     ../modules/nix.nix
     ../modules/sound.nix
     ../modules/fonts.nix
-    ../modules/virtualisation.nix
     ../hosts/${hostname}
 
     {
@@ -32,6 +32,9 @@ nixpkgs.lib.nixosSystem {
       networking.hostName = "${hostname}";
       services.xserver.displayManager.autoLogin.user = "${username}";
     }
+  ]
+  ++ nixpkgs.lib.optionals virtEnable [
+    ../modules/virtualisation.nix
   ]
   ++ nixpkgs.lib.optionals hmEnable [
     home-manager.nixosModules.home-manager

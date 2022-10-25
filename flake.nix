@@ -5,8 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/191357/merge";
-    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=plasma-beta";
+    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194581/merge";
+    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wb-test";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -104,11 +104,27 @@
           ];
         };
 
+        #nix build .#nixosConfigurations.vmtest.config.system.build.vm
+        vmtest = mkHost {
+          username = "test";
+          hostname = "vmtest";
+          # system = "x86_64-linux";
+          hmEnable = false;
+          virtEnable = false;
+          nixpkgs = inputs.nixpkgs-local;
+          extraModules = [
+            # ./hosts/vmtest.nix
+            # ./modules/gnome.nix
+            ./modules/kde.nix
+          ];
+        };
+
         # nix build .#nixosConfigurations.live.config.system.build.isoImage
         # nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
         live = mkHost {
           username = "live";
           hostname = "live";
+          virtEnable = false;
           inherit overlays;
           extraModules = [
             ./modules/gnome.nix
@@ -171,22 +187,6 @@
               home-manager.extraSpecialArgs = {inherit inputs;};
               home-manager.users.${username} = import ./home-manager;
             }
-          ];
-        };
-
-      #######################################################################
-      ## VM
-      #######################################################################
-      # nix build .#nixosConfigurations.vmtest.config.system.build.vm
-      nixosConfigurations.vmtest = let
-        username = "test";
-        system = "x86_64-linux";
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {inherit inputs username;};
-          modules = [
-            ./hosts/vmtest.nix
           ];
         };
     }
