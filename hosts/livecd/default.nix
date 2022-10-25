@@ -3,8 +3,17 @@
   pkgs,
   config,
   username,
+  modulesPath,
   ...
 }: {
+  imports = [
+    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
+    ../../modules/gnome.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+  ];
+
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod_latest
     # kernelParams = ["quite"];
@@ -17,7 +26,7 @@
 
   # services.xserver.displayManager.autoLogin.enable = lib.mkForce false;
 
-  # password: live
+  # password: livecd
   users.users.${username}.hashedPassword = lib.mkForce
-    "$6$gOfs.mtl.D9QhwQv$oc7IFrbVSJl2IL7ECRrxoiFEZNu9O1xGT3cn5mo2eyFFQ9awYwvp855yYcsaCG/qqMALiYK3Xv5ycGmer1c0A0";
+    "$6$UYQgz/DrPc.MozSy$iU1FVbSqDfSH9ppUo66RPMvX6qBR6yHJfdS/wgFxSBb5Evgf0VPLgXbhGEgoYWbEWkFyms3ahTmQqTCOy.4o/.";
 }

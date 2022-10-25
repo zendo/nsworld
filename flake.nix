@@ -72,7 +72,6 @@
             ./modules/gnome.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
-            # ./modules/wm-wayfire.nix
             # ./modules/kde.nix
 
             ({
@@ -111,23 +110,20 @@
           # system = "x86_64-linux";
           hmEnable = false;
           virtEnable = false;
+          inherit overlays;
           # nixpkgs = inputs.nixpkgs-local;
-          extraModules = [
-          ];
         };
 
-        # nix build .#nixosConfigurations.live.config.system.build.isoImage
-        # nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
-        live = mkHost {
-          username = "live";
-          hostname = "live";
+        # nix build .#nixosConfigurations.livecd.config.system.build.isoImage
+        livecd = mkHost {
+          username = "livecd";
+          hostname = "livecd";
           virtEnable = false;
           inherit overlays;
-          extraModules = [
-            ./modules/gnome.nix
-            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix")
-          ];
         };
+
+        # or
+        # nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
       };
 
       #######################################################################
@@ -173,7 +169,10 @@
           system = "x86_64-linux";
           specialArgs = {inherit inputs username;};
           modules = [
+            ./modules/nix.nix
+            ./modules/fonts.nix
             ./hosts/wsl.nix
+
             nixos-wsl.nixosModules.wsl
             {nixpkgs.overlays = overlays;}
 

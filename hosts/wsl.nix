@@ -2,17 +2,10 @@
   config,
   pkgs,
   username,
-  modulesPath,
   ...
 }: let
   winProxy = "http://192.168.2.118:10811";
 in {
-  imports = [
-    ../modules/nix.nix
-    ../modules/fonts.nix
-    # "${modulesPath}/profiles/minimal.nix"
-  ];
-
   wsl = {
     enable = true;
     automountPath = "/mnt";
