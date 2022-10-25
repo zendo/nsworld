@@ -104,7 +104,8 @@
   "clock": {
     "timezone": "Asia/Shanghai",
     "on-click": "calcurse",
-    "format": "{: %m/%d   %R}",
+    //"format": "{: %m/%d   %R}",
+    "format": "{: %R}",
     "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>"
   },
 

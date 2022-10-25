@@ -76,8 +76,8 @@
  "s-d" #'dired-jump
 
  "s-g" #'magit-status
- :map magit-status-mode-map
- "p" 'magit-push
+ ;; :map magit-status-mode-map
+ ;; "p" 'magit-push
  )
 
 ;; emacs keymap

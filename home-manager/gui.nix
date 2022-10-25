@@ -15,7 +15,6 @@ in {
     # app-icon-preview
     # converseen
     # done
-    textpieces
     # textsnatcher
     # paper
     # retext
@@ -89,6 +88,7 @@ in {
     endeavour
     ghostwriter
     meld
+    textpieces
     # deja-dup
     # rclone
     # rclone-browser

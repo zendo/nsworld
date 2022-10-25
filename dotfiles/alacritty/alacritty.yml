@@ -1,3 +1,6 @@
+import:
+  - ~/.config/alacritty/tomorrow_night_bright.yaml
+
 env:
   TERM: xterm-256color
 
@@ -19,7 +22,7 @@ window:
     x: 6
     y: 6
 
-  opacity: 0.95
+  opacity: 0.9
   # decorations: none
 
 font:
@@ -49,6 +52,4 @@ key_bindings:
   - { key: W,        mods: Command,       action: Quit                }
 
   - { key: N,        mods: Control|Shift,   action: CreateNewWindow    }
-  - { key: F11,                             action: ToggleFullscreen    }
-
-
+  - { key: F11,                             action: ToggleFullscreen   }

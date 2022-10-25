@@ -25,7 +25,6 @@ final: prev: {
   go-musicfox = prev.callPackage ./go-musicfox {};
 
   # Python
-  textpieces = prev.callPackage ./textpieces {};
   textsnatcher = prev.callPackage ./textsnatcher {};
   smile = prev.callPackage ./smile {};
 

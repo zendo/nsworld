@@ -42,29 +42,31 @@
     ]
     ++ (with gnomeExtensions; [
       appindicator
-      tray-icons-reloaded
+      # tray-icons-reloaded
       app-icons-taskbar
       shell-configurator
-      replace-activities-text
       dash-to-dock
       dash-to-panel
       night-theme-switcher
       clipboard-history
       espresso
+      inhibit-suspend
       blur-my-shell
-      proxy-switcher
+      # proxy-switcher
       just-perfection
       gradient-top-bar
       app-icons-taskbar
       rocketbar
       space-bar
+      dotspaces
       runcat
-      gtile
       forge
-      pop-shell
+      # gtile
+      # pop-shell
       ddterm
       ideapad-mode
       mpris-indicator-button
+      # replace-activities-text
     ]);
 
   programs.kdeconnect = {
@@ -107,7 +109,7 @@
         [org.gnome.shell]
         favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
 
-        enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gsconnect@andyholmes.github.io', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'clipboard-history@alexsaveau.dev', 'space-bar@luchrioh', 'nightthemeswitcher@romainvigier.fr']
+        enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gsconnect@andyholmes.github.io', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'clipboard-history@alexsaveau.dev', 'space-bar@luchrioh', 'nightthemeswitcher@romainvigier.fr' , 'inhibit-suspend@charlieqle']
       '';
 
       # Override GNOME defaults
