@@ -14,6 +14,9 @@
   environment.systemPackages = with pkgs; [
   ];
 
+  # faster but bigger size
+  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod_latest
     # kernelParams = ["quite"];

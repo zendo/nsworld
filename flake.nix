@@ -103,11 +103,10 @@
           ];
         };
 
-        #nix build .#nixosConfigurations.vmtest.config.system.build.vm
+        # nixos-rebuild build-vm --flake .#vmtest
         vmtest = mkHost {
           username = "test";
           hostname = "vmtest";
-          # system = "x86_64-linux";
           hmEnable = false;
           virtEnable = false;
           inherit overlays;
@@ -115,6 +114,7 @@
         };
 
         # nix build .#nixosConfigurations.livecd.config.system.build.isoImage
+        # qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
         livecd = mkHost {
           username = "livecd";
           hostname = "livecd";

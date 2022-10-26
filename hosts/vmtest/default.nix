@@ -9,7 +9,7 @@
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
-    ../../modules/gnome.nix
+    # ../../modules/gnome.nix
     # ../../modules/kde.nix
   ];
 
@@ -22,12 +22,16 @@
 
   services.xserver = {
     enable = true;
-    # desktopManager.xfce.enable = true;
-    # desktopManager.cinnamon.enable = true;
-    # desktopManager.pantheon.enable = true;
-    # desktopManager.enlightenment.enable = true;
-    # desktopManager.mate.enable = true;
-    # desktopManager.lxqt.enable = true;
+    desktopManager = {
+      # plasma5.enable = true;
+      gnome.enable = true;
+      # xfce.enable = true;
+      # cinnamon.enable = true;
+      # pantheon.enable = true;
+      # enlightenment.enable = true;
+      # mate.enable = true;
+      # lxqt.enable = true;
+    };
     # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
@@ -38,7 +42,7 @@
     memorySize = 1024 * 3;
     diskSize = 1024 * 8;
     cores = 4;
-    msize = 104857600;
+    msize = 104857600;  # 100M
   };
 
   users.users.root = {

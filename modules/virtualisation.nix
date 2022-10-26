@@ -11,6 +11,7 @@
     # virt-manager
     # steam-run
     # appimage-run
+    qemu
   ];
 
   virtualisation = {
