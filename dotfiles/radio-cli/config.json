@@ -1,0 +1,63 @@
+{
+  "config_version": "2.1.1",
+  "max_lines": 10,
+  "country": "CN",
+  "data": [
+    {
+      "station": "80后音悦台",
+      "url": "http://lhttp.qingting.fm/live/20207761/64k.mp3"
+    },
+    {
+      "station": "怀集音乐之声",
+      "url": "http://lhttp.qingting.fm/live/4804/64k.mp3"
+    },
+    {
+      "station": "动听音乐网络电台",
+      "url": "http://lhttp.qingting.fm/live/5022107/64k.mp3"
+    },
+    {
+      "station": "AsiaFM 高清音乐台",
+      "url": "https://lhttp.qingting.fm/live/5022405/64k.mp3"
+    },
+    {
+      "station": "华语金曲500首",
+      "url": "http://ls.qingting.fm/live/3412131.m3u8?bitrate=64"
+    },
+    {
+      "station": "500首华语经典",
+      "url": "https://lhttp.qtfm.cn/live/5022308/64k.mp3"
+    },
+    {
+      "station": "中廣音樂網",
+      "url": "https://stream.rcs.revma.com/ks4vsmg3qtzuv"
+    },
+    {
+      "station": "臺北電台",
+      "url": "https://stream.ginnet.cloud/live0130lo-yfyo/_definst_/fm/playlist.m3u8"
+    },
+    {
+      "station": "栗子的輕音樂",
+      "url": "http://lizeradio.com:8080/;&type=mp3"
+    },
+    {
+      "station": "Radio Paradise",
+      "url": "http://stream-uk1.radioparadise.com/aac-320"
+    },
+    {
+      "station": "Rockabilly",
+      "url": "http://lin3.ash.fast-serv.com:6026/stream_96"
+    },
+    {
+      "station": "MangoRadio",
+      "url": "http://stream.mangoradio.de"
+    },
+    {
+      "station": "deep",
+      "url": "http://channels.dinamo.fm/deep-mp3"
+    },
+    {
+      "station": "lofi",
+      "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+    }
+  ]
+}

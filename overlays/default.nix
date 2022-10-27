@@ -14,11 +14,13 @@ final: prev: {
 
   # Rust
   app-icon-preview = prev.callPackage ./app-icon-preview {};
+  gnome-metronome = prev.callPackage ./gnome-metronome {};
   done = prev.callPackage ./done {};
   # mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
   rustplayer = prev.callPackage ./rustplayer {};
   kestrel = prev.callPackage ./kestrel {};
+  radio-cli = prev.callPackage ./radio-cli {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};

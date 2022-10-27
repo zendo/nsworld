@@ -38,7 +38,7 @@
     ssr = "export {http,https,ftp}_proxy=127.0.0.1:20171 ;export {HTTP,HTTPS,FTP}_PROXY=127.0.0.1:20171";
 
     nse = "nix search nixpkgs";
-    # radioboat = "radioboat --volume 100";
+    radioboat = "radioboat --volume 100";
     paperoni-single-html = "paperoni --export html --inline-images";
   };
 }

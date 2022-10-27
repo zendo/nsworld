@@ -11,6 +11,7 @@
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
     # ../../modules/gnome.nix
     # ../../modules/kde.nix
+    # ../../modules/wm-sway.nix # -vga qxl
   ];
 
   disabledModules = [

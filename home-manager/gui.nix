@@ -19,7 +19,8 @@ in {
     # paper
     # retext
     # g4music
-    kestrel
+    # kestrel
+    # radio-cli
 
     foot
     kitty
@@ -53,6 +54,7 @@ in {
     # fractal-next
     # nheko
     # discord
+    handlr
 
     # Multi-media
     (

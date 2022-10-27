@@ -11,7 +11,6 @@
     # virt-manager
     # steam-run
     # appimage-run
-    qemu
   ];
 
   virtualisation = {
@@ -27,19 +26,19 @@
       dockerCompat = true;
     };
 
-    # https://adamsimpson.net/writing/windows-11-as-kvm-guest
     libvirtd = {
-      # enable = true;
+      enable = true;
       qemu = {
-        package = pkgs.qemu_kvm; # emulate only host architectures
-        swtpm.enable = true; # emulated TPM
-        ovmf.packages = [
-          (pkgs.OVMFFull.override
-            {
-              secureBoot = true;
-              tpmSupport = true;
-            })
-        ];
+        # https://adamsimpson.net/writing/windows-11-as-kvm-guest
+        # package = pkgs.qemu_kvm; # emulate only host architectures
+        # swtpm.enable = true; # emulated TPM
+        # ovmf.packages = [
+        #   (pkgs.OVMFFull.override
+        #     {
+        #       secureBoot = true;
+        #       tpmSupport = true;
+        #     })
+        # ];
       };
     };
     # boot.initrd.kernelModules = ["virtio" "virtio_pci" "virtio_net" "virtio_rng" "virtio_blk" "virtio_console"];

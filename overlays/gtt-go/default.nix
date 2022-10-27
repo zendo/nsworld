@@ -42,7 +42,7 @@ buildGoModule rec {
 
   meta = with lib; {
     description = "A terminal web radio client";
-    homepage = "https://github.com/anhoder/go-musicfox";
+    homepage = "https://github.com/eeeXun/GTT";
     license = licenses.asl20;
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];

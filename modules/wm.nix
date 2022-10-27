@@ -97,8 +97,6 @@
       # hyprpicker
 
       nwg-drawer
-      nwg-panel
-
       wofi # quick run
       wofi-emoji
       wl-clipboard

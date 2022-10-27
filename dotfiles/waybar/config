@@ -250,6 +250,8 @@
     "format-muted": "🔇 {format_source}",
     "format-source": "",
     "format-source-muted": "",
+    //"format-bluetooth" : "{volume}% {icon}  {format_source}";
+    //"format-bluetooth-muted" : " {icon}  {format_source}";
     "scroll-step": 1,
     "on-click": "pavucontrol",
     "format-icons": {

@@ -45,6 +45,7 @@ in
     "gtklock".source = ../dotfiles/gtklock;
     "swaylock".source = ../dotfiles/swaylock;
     "radioboat".source = ../dotfiles/radioboat;
+    "radio-cli".source = ../dotfiles/radio-cli;
     "alacritty".source = ../dotfiles/alacritty;
     "starship.toml".source = ../dotfiles/starship.toml;
 
