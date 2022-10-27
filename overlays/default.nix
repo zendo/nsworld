@@ -6,7 +6,6 @@ final: prev: {
   ctpv = prev.callPackage ./ctpv {};
   hybrid-bar = prev.callPackage ./hybrid-bar {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
-
   retext = prev.libsForQt5.callPackage ./retext {};
 
   # Fonts
@@ -35,6 +34,7 @@ final: prev: {
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
   tubeconverter = prev.callPackage ./tubeconverter {};
+  goodvibes = prev.callPackage ./goodvibes {};
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};

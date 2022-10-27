@@ -59,6 +59,7 @@ in
     "hypr/custom.conf".source = mkOOSL hmDots + "/hypr/custom.conf";
   };
 
-  # xdg.dataFile = {
-  # };
+  xdg.dataFile = {
+    "goodvibes".source = ../dotfiles/goodvibes;
+  };
 }

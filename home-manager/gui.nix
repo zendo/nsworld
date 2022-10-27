@@ -21,6 +21,7 @@ in {
     # g4music
     # kestrel
     # radio-cli
+    goodvibes
 
     foot
     kitty
