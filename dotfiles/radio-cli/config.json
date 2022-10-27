@@ -56,8 +56,12 @@
       "url": "http://channels.dinamo.fm/deep-mp3"
     },
     {
-      "station": "lofi",
+      "station": "lofi relax/study",
       "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk"
+    },
+    {
+      "station": "lofi sleep/chill",
+      "url": "https://www.youtube.com/watch?v=rUxyKA_-grg"
     }
   ]
 }

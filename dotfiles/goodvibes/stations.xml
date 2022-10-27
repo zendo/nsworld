@@ -1,5 +1,9 @@
 <Stations>
   <Station>
+    <uri>https://lhttp.qingting.fm/live/5022405/64k.mp3</uri>
+    <name>AsiaFM 高清音乐台</name>
+  </Station>
+  <Station>
     <uri>http://lhttp.qingting.fm/live/20207761/64k.mp3</uri>
     <name>80后音悦台</name>
   </Station>
@@ -10,10 +14,6 @@
   <Station>
     <uri>http://lhttp.qingting.fm/live/5022107/64k.mp3</uri>
     <name>动听音乐网络电台</name>
-  </Station>
-  <Station>
-    <uri>https://lhttp.qingting.fm/live/5022405/64k.mp3</uri>
-    <name>AsiaFM 高清音乐台</name>
   </Station>
   <Station>
     <uri>http://ls.qingting.fm/live/3412131.m3u8?bitrate=64</uri>

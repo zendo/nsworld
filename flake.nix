@@ -19,7 +19,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/858214991200eccc2f0a4f929f4baa0ffd8281c6";
+      url = "github:nix-community/emacs-overlay/b3f81bcbda84bf2ef957cfff6cf89aedbdfa2be9";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -114,7 +114,6 @@
         };
 
         # nix build .#nixosConfigurations.livecd.config.system.build.isoImage
-        # qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
         livecd = mkHost {
           username = "livecd";
           hostname = "livecd";

@@ -1,3 +1,7 @@
+/*
+qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
+
+*/
 {
   config,
   pkgs,
@@ -11,7 +15,7 @@
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
     # ../../modules/gnome.nix
     # ../../modules/kde.nix
-    # ../../modules/wm-sway.nix # -vga qxl
+    # ../../modules/wm-sway.nix
   ];
 
   disabledModules = [
@@ -19,7 +23,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # goodvibes
+    goodvibes
   ];
 
   services.xserver = {
@@ -37,14 +41,30 @@
     # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
   };
 
+  # boot.initrd.kernelModules = ["virtio" "virtio_pci" "virtio_net" "virtio_rng" "virtio_blk" "virtio_console"];
+
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # ??
+  # services.spice-vdagentd.enable = true;
+  # services.qemuGuest.enable = true;
 
   virtualisation = {
     memorySize = 1024 * 3;
     diskSize = 1024 * 8;
     cores = 4;
     msize = 104857600;  # 100M
+    qemu = {
+      options = [
+        # Sounds
+        "-audiodev pa,id=snd0"
+        "-device ich9-intel-hda"
+        "-device hda-duplex,audiodev=snd0"
+        # Graphical for sway
+        # "-vga qxl"
+      ];
+    };
   };
 
   users.users.root = {

@@ -21,7 +21,6 @@ in {
     # g4music
     # kestrel
     # radio-cli
-    goodvibes
 
     foot
     kitty
@@ -49,13 +48,13 @@ in {
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
     # poedit    # translate .po file
+    handlr
 
     # Social media
-    tdesktop
+    # tdesktop
     # fractal-next
     # nheko
     # discord
-    handlr
 
     # Multi-media
     (
@@ -71,7 +70,8 @@ in {
     # ffmpeg
     audacious
     # rhythmbox
-    radioboat
+    # radioboat
+    goodvibes
     mousai # 听歌识曲
     # eartag
     # tagger
