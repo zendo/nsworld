@@ -51,7 +51,7 @@ in {
     handlr
 
     # Social media
-    # tdesktop
+    tdesktop
     # fractal-next
     # nheko
     # discord

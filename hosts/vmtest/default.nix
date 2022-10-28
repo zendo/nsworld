@@ -1,5 +1,4 @@
 /*
-qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
 
 */
 {
@@ -46,9 +45,9 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # ??
-  # services.spice-vdagentd.enable = true;
-  # services.qemuGuest.enable = true;
+  # Clipboard shared not working?
+  services.spice-vdagentd.enable = true;
+  services.qemuGuest.enable = true;
 
   virtualisation = {
     memorySize = 1024 * 3;

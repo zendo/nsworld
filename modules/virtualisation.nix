@@ -1,6 +1,15 @@
+/*
+sudo virsh net-start default
+
+Guest:
+install spice-vdagent  # for clipboard share
+
+qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
+*/
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -13,21 +22,11 @@
   ];
 
   virtualisation = {
-    # docker = {
-    #   enable = true;
-    #   autoPrune.enable = true;
-    #   enableOnBoot = true;
-    # };
-
-    # podman = {
-    #   enable = true;
-    #   # Create a `docker` alias for podman, to use it as a drop-in replacement
-    #   dockerCompat = true;
-    # };
-
     libvirtd = {
       enable = true;
+      # allowedBridges = ["virbr0"];
       qemu = {
+        ovmf.enable = true;     # UEFI
         # https://adamsimpson.net/writing/windows-11-as-kvm-guest
         # package = pkgs.qemu_kvm; # emulate only host architectures
         # swtpm.enable = true; # emulated TPM
@@ -50,8 +49,25 @@
     #   enable = true;
     # }
 
+    # docker = {
+    #   enable = true;
+    #   autoPrune.enable = true;
+    #   enableOnBoot = true;
+    # };
+
+    # podman = {
+    #   enable = true;
+    #   # Create a `docker` alias for podman, to use it as a drop-in replacement
+    #   dockerCompat = true;
+    # };
+
     # waydroid.enable = true;
   };
+
+  # dmesg | grep IOMMU
+  # boot.kernelParams =
+  #   (lib.optionals config.hardware.cpu.intel.updateMicrocode [ "intel_iommu=on" "iommu=pt" ])
+  #   ++ (lib.optionals config.hardware.cpu.amd.updateMicrocode [ "amd_iommu=on" ]);
 
   # services.flatpak.enable = true;
 
