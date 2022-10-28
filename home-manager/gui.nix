@@ -16,7 +16,7 @@ in {
     # converseen
     # done
     # textsnatcher
-    # paper
+    paper
     # retext
     # g4music
     # kestrel
@@ -72,6 +72,7 @@ in {
     # rhythmbox
     # radioboat
     goodvibes
+    # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
     # tagger
@@ -104,6 +105,7 @@ in {
 
     # Common devtools
     gnumake
+    # python3
 
     # HARDWARE TEST
     efibootmgr

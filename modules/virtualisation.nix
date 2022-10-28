@@ -1,4 +1,7 @@
 /*
+LC_ALL=C lscpu | grep Virtualization
+dmesg | grep IOMMU
+
 sudo virsh net-start default
 
 Guest:
@@ -10,6 +13,7 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
   config,
   pkgs,
   lib,
+  username,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -28,7 +32,7 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
       qemu = {
         ovmf.enable = true;     # UEFI
         # https://adamsimpson.net/writing/windows-11-as-kvm-guest
-        # package = pkgs.qemu_kvm; # emulate only host architectures
+        package = pkgs.qemu_kvm; # emulate only host architectures
         # swtpm.enable = true; # emulated TPM
         # ovmf.packages = [
         #   (pkgs.OVMFFull.override
@@ -64,10 +68,17 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
     # waydroid.enable = true;
   };
 
-  # dmesg | grep IOMMU
   # boot.kernelParams =
-  #   (lib.optionals config.hardware.cpu.intel.updateMicrocode [ "intel_iommu=on" "iommu=pt" ])
-  #   ++ (lib.optionals config.hardware.cpu.amd.updateMicrocode [ "amd_iommu=on" ]);
+  #   (lib.optionals config.hardware.cpu.intel.updateMicrocode [ "intel_iommu=on" "iommu=pt" ]);
+
+  users.users.${username}.extraGroups = [
+    "lxd"
+    "docker"
+    "libvirtd"
+    "qemu-libvirtd"
+    "vboxusers"
+    "adbusers"
+  ];
 
   # services.flatpak.enable = true;
 

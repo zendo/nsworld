@@ -20,13 +20,13 @@
 
 stdenv.mkDerivation rec {
   pname = "paper";
-  version = "22.999";
+  version = "22.11";
 
   src = fetchFromGitLab {
     owner = "posidon_software";
     repo = pname;
-    rev = "a15ffe2ff3c6ff5223a00e89106b5d1ae08d5702";
-    hash = "sha256-7WoF8obmSQvElzKA80eoL+X2bdEnrV8151jgjNi1dt0=";
+    rev = version;
+    hash = "sha256-o5MYagflHE8Aup8CbqauRBrdt3TrSlffs35psYT7hyE=";
   };
 
   nativeBuildInputs = [
@@ -56,6 +56,6 @@ stdenv.mkDerivation rec {
     mainProgram = "io.posidon.Paper";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [zendo];
+    maintainers = with maintainers; [ zendo ];
   };
 }

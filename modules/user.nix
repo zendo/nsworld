@@ -20,11 +20,6 @@
       "networkmanager"
       "video"
       "audio"
-      "lxd"
-      "docker"
-      "libvirtd"
-      "vboxusers"
-      "adbusers"
     ];
   };
 
