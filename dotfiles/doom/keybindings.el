@@ -57,6 +57,7 @@
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo
+ "C-x l" #'ialign
  "C-x j" #'dired-jump-other-window
 
  "C-}" #'mc/mark-next-like-this

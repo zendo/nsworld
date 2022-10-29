@@ -16,7 +16,6 @@ in {
     # converseen
     # done
     # textsnatcher
-    paper
     # retext
     # g4music
     # kestrel
@@ -89,10 +88,11 @@ in {
 
     qbittorrent
     gnome-decoder
+    # paper-note
     endeavour
     ghostwriter
-    meld
     textpieces
+    meld
     # deja-dup
     # rclone
     # rclone-browser

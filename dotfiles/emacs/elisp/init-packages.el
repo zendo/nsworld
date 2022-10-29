@@ -85,6 +85,12 @@
   :bind (("C-a" . mwim-beginning-of-code-or-line)
          ("C-e" . mwim-end-of-code-or-line)))
 
+;; (leaf mosey
+;;   :ensure t
+;;   :bind (("C-a" . mosey-backward-bounce)
+;;          ("C-e" . mosey-forward-bounce)))
+
+
 ;; move-text M-up/M-down
 (leaf move-text
   :ensure t
@@ -141,6 +147,15 @@
   :blackout t
   :hook (prog-mode-hook))
 
+(leaf scrollkeeper
+  :ensure t
+  :bind
+  (([remap scroll-up-command] . scrollkeeper-contents-up)
+   ([remap scroll-down-command] . scrollkeeper-contents-down)))
+
+;; (leaf goto-last-change
+;;   :ensure t)
+
 ;; (leaf beacon
 ;;   :ensure t
 ;;   :blackout t
@@ -181,6 +196,10 @@
 ;; rotate
 (leaf rotate
   :ensure t)
+
+(leaf ialign
+  :ensure t
+  :bind (("C-x l" . ialign)))
 
 (leaf fanyi
   :ensure t

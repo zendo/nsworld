@@ -9,28 +9,31 @@
 ;; use 'M-x doom/reload'.
 
 (package! crux
-          :recipe (:host github :repo "bbatsov/crux"))
+  :recipe (:host github :repo "bbatsov/crux"))
 
 (package! rotate
-          :recipe (:host github :repo "daichirata/emacs-rotate"))
+  :recipe (:host github :repo "daichirata/emacs-rotate"))
 
 (package! easy-kill
-          :recipe (:host github :repo "leoliu/easy-kill"))
+  :recipe (:host github :repo "leoliu/easy-kill"))
 
 (package! smart-region
-          :recipe (:host github :repo "uk-ar/smart-region"))
+  :recipe (:host github :repo "uk-ar/smart-region"))
 
 (package! avy-zap
-          :recipe (:host github :repo "cute-jumper/avy-zap"))
+  :recipe (:host github :repo "cute-jumper/avy-zap"))
 
 (package! iedit
-          :recipe (:host github :repo "victorhge/iedit"))
+  :recipe (:host github :repo "victorhge/iedit"))
 
 (package! fanyi
-          :recipe (:host github :repo "condy0919/fanyi.el"))
+  :recipe (:host github :repo "condy0919/fanyi.el"))
 
 (package! vundo
-          :recipe (:host github :repo "casouri/vundo"))
+  :recipe (:host github :repo "casouri/vundo"))
+
+(package! ialign
+  :recipe (:host github :repo "mkcms/interactive-align"))
 
 
 ;; To install a package directly from a remote git repo, you must specify a

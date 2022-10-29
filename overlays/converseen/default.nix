@@ -49,9 +49,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Batch image converter and resizer";
     homepage = "https://github.com/Faster3ck/Converseen";
-    changelog = "https://github.com/Faster3ck/Converseen/releases/tag/${src.rev}";
-    platforms = platforms.linux;
     license = licenses.gpl3Plus;
+    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 }
