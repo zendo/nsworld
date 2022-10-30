@@ -7,6 +7,19 @@
     # Overlays
     nixos-helper
 
+    # Developing
+    jq
+    jql
+    cloc # count code lines
+    sqlite
+    openssl
+    gitui
+    onefetch
+    efm-langserver
+    # distrobox
+    gnumake
+    # python3
+
     # Compressor / Archiver
     p7zip
     unzip
@@ -58,19 +71,8 @@
     translate-shell
     aspellDicts.en
     asciinema # record the terminal
-    # distrobox
     paperoni # save html
     calcurse
-
-    # Developing
-    jq
-    jql
-    cloc # count code lines
-    sqlite
-    openssl
-    gitui
-    onefetch
-    efm-langserver
 
     # Networking
     lsof
@@ -109,7 +111,7 @@
     # nvfetcher
     shellcheck
 
-    # Game for fun
+    # Game & fun
     cava # Music Visualizer
     # pipes-rs
     # cbonsai

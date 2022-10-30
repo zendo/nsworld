@@ -3,13 +3,16 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   hyprpicker = prev.callPackage ./hyprpicker {};
-  ctpv = prev.callPackage ./ctpv {};
   hybrid-bar = prev.callPackage ./hybrid-bar {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
   retext = prev.libsForQt5.callPackage ./retext {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
+
+  # C
+  ctpv = prev.callPackage ./ctpv {};
+  hashrat = prev.callPackage ./hashrat {};
 
   # Rust
   app-icon-preview = prev.callPackage ./app-icon-preview {};
@@ -21,6 +24,7 @@ final: prev: {
   kestrel = prev.callPackage ./kestrel {};
   radio-cli = prev.callPackage ./radio-cli {};
   clitrans = prev.callPackage ./clitrans {};
+  garbage = prev.callPackage ./garbage {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};

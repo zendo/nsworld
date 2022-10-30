@@ -13,10 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay/b3f81bcbda84bf2ef957cfff6cf89aedbdfa2be9";
@@ -43,7 +43,7 @@
     nixos-hardware,
     home-manager,
     emacs-overlay,
-    hyprland,
+    # hyprland,
     nur,
     musnix,
     nixos-wsl,
@@ -130,6 +130,7 @@
       ## HM Standalone
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
+      # sudo rm /nix/var/nix/profiles/per-user/iab/profile-*-link
       homeConfigurations = let
         username = "iab";
         system = "x86_64-linux";

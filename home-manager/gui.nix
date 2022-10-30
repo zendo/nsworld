@@ -23,10 +23,6 @@ in {
     # radio-cli
     gitnuro
 
-    # Devtools
-    gnumake
-    # python3
-
     foot
     kitty
     # alacritty

@@ -104,27 +104,6 @@
         "type": "github"
       }
     },
-    "hyprland": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "wlroots": "wlroots"
-      },
-      "locked": {
-        "lastModified": 1667079901,
-        "narHash": "sha256-879I6CQqd7zdRSCD6/pyBsl3dAd3XWHYxlepQOeYLbA=",
-        "owner": "hyprwm",
-        "repo": "Hyprland",
-        "rev": "2e32e202e98e491c9b6a2e09f0713a586fc2c93e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hyprwm",
-        "repo": "Hyprland",
-        "type": "github"
-      }
-    },
     "musnix": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -166,11 +145,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1666720338,
-        "narHash": "sha256-7V91ZtTz7zDXb6hivktQ9RlBglP+WEkYFSciPJHwMJw=",
+        "lastModified": 1667148117,
+        "narHash": "sha256-oKgBvHH/vOnzeaitxGmAizxjBzue7gE1G1siKED9teQ=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "7bfb8f5aa91fee30a189eae32cda8ddc465076df",
+        "rev": "27679db0469bc51ce4d0b334c74c4b0642d62009",
         "type": "github"
       },
       "original": {
@@ -212,11 +191,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1667097850,
-        "narHash": "sha256-Foimh7Op+bZPIxO2TofBJs/2VH0MxobjSnVkFmRvuwU=",
+        "lastModified": 1667156603,
+        "narHash": "sha256-0eeyqMo8lX0yFJLMhYkv4usz3yFMot1iLwrfeZmMYoc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2f74bf9ce86149f3094c86ee93d695864bad1b90",
+        "rev": "eb7b3043ff6a0e400468e4078325dfdf9d2f10aa",
         "type": "github"
       },
       "original": {
@@ -228,11 +207,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1667104565,
-        "narHash": "sha256-0xuyzZRoqsIzbjaPRUSXKjkJV2Uc0TQxNnRDjbruzhY=",
+        "lastModified": 1667168329,
+        "narHash": "sha256-eUQL7nuvJR6aG9EjYzHYh4i6rEi0jRx9VgfJUADNvV8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4e1cbe612e169c835c627517439892eb4e692103",
+        "rev": "a5fd942b0f83c2c1fcd21e73bc8acc67e0629801",
         "type": "github"
       },
       "original": {
@@ -246,7 +225,6 @@
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
-        "hyprland": "hyprland",
         "musnix": "musnix",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
@@ -283,24 +261,6 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
-      }
-    },
-    "wlroots": {
-      "flake": false,
-      "locked": {
-        "host": "gitlab.freedesktop.org",
-        "lastModified": 1666466001,
-        "narHash": "sha256-ZjxAnqtcGmHQHKL1Z9sIraDnzIqrJleWcJXfPtzAm74=",
-        "owner": "wlroots",
-        "repo": "wlroots",
-        "rev": "c2d2773df57750081b16d56da13b5015d752cbd7",
-        "type": "gitlab"
-      },
-      "original": {
-        "host": "gitlab.freedesktop.org",
-        "owner": "wlroots",
-        "repo": "wlroots",
-        "type": "gitlab"
       }
     }
   },

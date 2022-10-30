@@ -22,14 +22,20 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    goodvibes
+    gitnuro
   ];
+
+  environment.variables = {
+    # java hidpi
+    # GDK_SCALE = "2";
+    # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  };
 
   services.xserver = {
     enable = true;
     desktopManager = {
-      # plasma5.enable = true;
-      gnome.enable = true;
+      plasma5.enable = true;
+      # gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
       # pantheon.enable = true;
