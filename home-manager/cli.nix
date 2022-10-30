@@ -105,6 +105,7 @@
     nix-index
     nix-tree
     nix-top
+    # nix-output-monitor
     # nvfetcher
     shellcheck
 

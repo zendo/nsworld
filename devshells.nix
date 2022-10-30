@@ -45,12 +45,21 @@ inputs @ {pkgs}: {
       desktop-file-utils
       libxml2
       xorg.libxcb
+      alsa-lib
     ];
   };
 
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
       python3
+    ];
+  };
+
+  java = pkgs.mkShell {
+    buildInputs = with pkgs; [
+      jdk
+      gradle
+      xorg.libXrender
     ];
   };
 

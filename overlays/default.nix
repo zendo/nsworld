@@ -20,11 +20,11 @@ final: prev: {
   rustplayer = prev.callPackage ./rustplayer {};
   kestrel = prev.callPackage ./kestrel {};
   radio-cli = prev.callPackage ./radio-cli {};
+  clitrans = prev.callPackage ./clitrans {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
   go-musicfox = prev.callPackage ./go-musicfox {};
-  gtt-go = prev.callPackage ./gtt-go {};
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher {};
@@ -35,6 +35,9 @@ final: prev: {
   gtklock = prev.callPackage ./gtklock {};
   tubeconverter = prev.callPackage ./tubeconverter {};
   goodvibes = prev.callPackage ./goodvibes {};
+
+  # Java
+  gitnuro = prev.callPackage ./gitnuro {};
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};

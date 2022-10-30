@@ -38,6 +38,7 @@ in {
     kitty
     wsl-open
     # radioboat
+    goodvibes
   ];
 
   programs.gnupg.agent = {

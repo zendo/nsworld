@@ -31,7 +31,7 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
       enable = true;
       # allowedBridges = ["virbr0"];
       qemu = {
-        runAsRoot = false;
+        # runAsRoot = false;
         ovmf.enable = true;      # UEFI
         # https://adamsimpson.net/writing/windows-11-as-kvm-guest
         package = pkgs.qemu_kvm; # emulate only host architectures

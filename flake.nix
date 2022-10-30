@@ -90,6 +90,7 @@
           ];
         };
 
+        # nixos-rebuild --target-host zendo@192.168.2.197 switch --use-remote-sudo --flake .#svp
         svp = mkHost {
           username = "zendo";
           hostname = "svp";

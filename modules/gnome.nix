@@ -44,19 +44,18 @@
       appindicator
       # tray-icons-reloaded
       app-icons-taskbar
-      shell-configurator
+      rocketbar
       dash-to-dock
       dash-to-panel
       night-theme-switcher
       clipboard-history
-      espresso
       inhibit-suspend
       blur-my-shell
+      gradient-top-bar
       # proxy-switcher
       just-perfection
-      gradient-top-bar
+      shell-configurator
       app-icons-taskbar
-      rocketbar
       space-bar
       dotspaces
       runcat

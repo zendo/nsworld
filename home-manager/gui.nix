@@ -6,6 +6,7 @@
   ...
 }: let
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
+  hidpiEnable = nixosConfig.hardware.video.hidpi.enable;
 in {
   services = {
     easyeffects.enable = true;
@@ -20,6 +21,11 @@ in {
     # g4music
     # kestrel
     # radio-cli
+    gitnuro
+
+    # Devtools
+    gnumake
+    # python3
 
     foot
     kitty
@@ -88,7 +94,7 @@ in {
 
     qbittorrent
     gnome-decoder
-    # paper-note
+    paper-note
     endeavour
     ghostwriter
     textpieces
@@ -102,10 +108,6 @@ in {
     # OFFICE
     # libreoffice-fresh
     # rnote # handwritten note
-
-    # Common devtools
-    gnumake
-    # python3
 
     # HARDWARE TEST
     efibootmgr
@@ -153,6 +155,11 @@ in {
   #######################################################################
   ##  Desktop Environment
   #######################################################################
+  home.sessionVariables = {
+    GDK_SCALE = lib.optionalString hidpiEnable "2";
+    _JAVA_OPTIONS = lib.optionalString hidpiEnable "-Dsun.java2d.uiScale=2";
+  };
+
   home.file = {
     # Fix tiny cursor in qt-apps at gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
