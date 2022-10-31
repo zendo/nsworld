@@ -2,33 +2,45 @@
 , stdenv
 , fetchFromGitHub
 , cmake
+, extra-cmake-modules
 , pkg-config
-, qttools
 , wrapQtAppsHook
-, imagemagick
-, nix-update-script
+, qtgraphicaleffects
+, qtquickcontrols2
+, qtx11extras
+, qtwayland
+, wayland
+, mpv
+, ffmpeg-full
 }:
 
 stdenv.mkDerivation rec {
-  pname = "converseen";
-  version = "0.9.9.8";
+  pname = "bitwave";
+  version = "0.2.4dev";
 
   src = fetchFromGitHub {
-    owner = "Faster3ck";
-    repo = "Converseen";
+    owner = "Reverier-Xu";
+    repo = "BitWave";
     rev = "v${version}";
-    hash = "sha256-gmr05g755Z8/h752FHLDdMRvAjPW5oLPqBmX72MYev0=";
+    fetchSubmodules = true;
+    hash = "sha256-Mex6RSZLSBmWess5XR2jJ3TBfr/ZWNOsuKikTI/l0/g=";
   };
 
   nativeBuildInputs = [
     cmake
-    pkg-config
-    qttools
+    extra-cmake-modules
+    # pkg-config
     wrapQtAppsHook
   ];
 
   buildInputs = [
-    imagemagick
+    qtgraphicaleffects
+    qtquickcontrols2
+    qtx11extras
+    qtwayland
+    wayland
+    mpv
+    ffmpeg-full
   ];
 
   # makeWrapperArgs = [ "--set LOCALE_ARCHIVE ${glibcLocales}/lib/locale/locale-archive" ];

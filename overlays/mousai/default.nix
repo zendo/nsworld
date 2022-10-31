@@ -27,14 +27,14 @@ stdenv.mkDerivation rec {
     owner = "SeaDve";
     repo = "Mousai";
     # rev = "v${version}";
-    rev = "4f8e0f819e79160e6b729f9f89fef6b1819d2cf6";
-    hash = "sha256-VPkEBrJZJm3MmEmDNJTq2WVNykzY3ShhUXhvXmbVBxc=";
+    rev = "1fe05c12cb73bea7c793a06bf84d3747491ea9b7";
+    hash = "sha256-eftIMdCePBYPS1uS9J9rDYsIQotZ5h8KWoScYAcCpd0=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit src;
     name = "${pname}-${version}";
-    hash = "sha256-/YEToPHuLv2DWmDutc6/QlOREa0rZaoNiyTe7Vstabs=";
+    hash = "sha256-Dz/IJ8Gnd6lj2b5EnDm9xHZRCSBNvSRdXmyu2gWVUuM=";
   };
 
   nativeBuildInputs = [

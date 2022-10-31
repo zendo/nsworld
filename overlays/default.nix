@@ -18,7 +18,7 @@ final: prev: {
   app-icon-preview = prev.callPackage ./app-icon-preview {};
   gnome-metronome = prev.callPackage ./gnome-metronome {};
   done = prev.callPackage ./done {};
-  # mousai = prev.callPackage ./mousai {};
+  mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
   rustplayer = prev.callPackage ./rustplayer {};
   kestrel = prev.callPackage ./kestrel {};
@@ -29,10 +29,12 @@ final: prev: {
   # Go
   v2raya = prev.callPackage ./v2raya {};
   go-musicfox = prev.callPackage ./go-musicfox {};
+  sauce = prev.callPackage ./sauce {};
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher {};
   smile = prev.callPackage ./smile {};
+  novelwriter = prev.callPackage ./novelwriter {};
 
   # Gtk
   paper = prev.callPackage ./paper {};
@@ -42,9 +44,11 @@ final: prev: {
 
   # Java
   gitnuro = prev.callPackage ./gitnuro {};
+  spotiflyer = prev.callPackage ./spotiflyer {};
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
+  bitwave = prev.libsForQt5.callPackage ./bitwave {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};

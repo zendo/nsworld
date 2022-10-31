@@ -22,6 +22,9 @@ in {
     # kestrel
     # radio-cli
     gitnuro
+    spotiflyer
+    garbage
+    sauce
 
     foot
     kitty

@@ -133,6 +133,7 @@
       gnome.gnome-themes-extra
 
       xfce.mousepad
+      nomacs
       # gnome.gnome-power-manager
       # gnome.gnome-characters
       # gnome.eog
