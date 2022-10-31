@@ -22,7 +22,6 @@ in {
     # kestrel
     # radio-cli
     gitnuro
-    spotiflyer
     garbage
     sauce
 
@@ -82,6 +81,8 @@ in {
     # tagger
     # jamesdsp
     # media-downloader
+    # spotdl
+    spotiflyer
 
     # Image manipulation
     # shutter

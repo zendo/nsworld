@@ -19,11 +19,11 @@ python3.pkgs.buildPythonApplication rec {
     hash = "sha256-KsFTA8nTGOqviobY7a8Cw5Ib/VSfo2mqrG7Byit8p0Q=";
   };
 
-  nativeBuildInputs = [
-    # qt5.qttools
-    # qt5.wrapQtAppsHook
-    python3.pkgs.setuptools
-  ];
+  # nativeBuildInputs = [
+  #   # qt5.qttools
+  #   # qt5.wrapQtAppsHook
+  #   python3.pkgs.setuptools
+  # ];
 
   buildInputs = [
     # opencv
@@ -36,6 +36,7 @@ python3.pkgs.buildPythonApplication rec {
     pyqt5
     pyenchant
     lxml
+    setuptools
   ];
 
   # checkInputs = with python3.pkgs; [

@@ -23,6 +23,11 @@
 
   environment.systemPackages = with pkgs; [
     gitnuro
+    spotiflyer
+    screenkey
+
+    firefox
+    # gnomeExtensions.appindicator
   ];
 
   environment.variables = {
