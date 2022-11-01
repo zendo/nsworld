@@ -24,7 +24,6 @@ final: prev: {
   kestrel = prev.callPackage ./kestrel {};
   radio-cli = prev.callPackage ./radio-cli {};
   clitrans = prev.callPackage ./clitrans {};
-  garbage = prev.callPackage ./garbage {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
@@ -35,6 +34,7 @@ final: prev: {
   textsnatcher = prev.callPackage ./textsnatcher {};
   smile = prev.callPackage ./smile {};
   novelwriter = prev.callPackage ./novelwriter {};
+  bt-dualboot = prev.callPackage ./bt-dualboot {};
 
   # Gtk
   paper = prev.callPackage ./paper {};

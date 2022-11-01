@@ -38,6 +38,7 @@ python3.pkgs.buildPythonApplication rec {
   nativeBuildInputs = [
     wrapQtAppsHook
     # desktop-file-utils
+    # gobject-introspection
   ];
 
   # buildInputs = [
@@ -45,7 +46,6 @@ python3.pkgs.buildPythonApplication rec {
   #   # hicolor-icon-theme
   #   # # glib
   #   # gtk3
-  #   # gobject-introspection
   # ];
 
   propagatedBuildInputs = with python3.pkgs; [

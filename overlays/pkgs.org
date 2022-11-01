@@ -291,9 +291,7 @@ stdenv.mkDerivation rec {
   # fix gi.repository import Gio
   pythonPath = with python3.pkgs; requiredPythonModules [ pygobject3 ];
 
-  # propagate gi for pygobject
   propagatedNativeBuildInputs = [
-    gobject-introspection
   ];
 
   # homeless-shelter: permission denied
@@ -309,6 +307,7 @@ stdenv.mkDerivation rec {
   # prevent double wrapping
   dontWrapGApps = true;
   dontWrapQtApps = true;
+  dontWrapPythonPrograms = true;
   preFixup = ''
     makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
     makeWrapperArgs+=("''${qtWrapperArgs[@]}")
@@ -353,6 +352,7 @@ python3.pkgs.buildPythonApplication rec {
     meson
     ninja
     pkg-config
+    gobject-introspection
     wrapGAppsHook4
     appstream-glib
     desktop-file-utils
@@ -363,7 +363,6 @@ python3.pkgs.buildPythonApplication rec {
     gtk4
     librsvg
     libadwaita
-    gobject-introspection
   ];
 
   propagatedBuildInputs = with python3.pkgs; [

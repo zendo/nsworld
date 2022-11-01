@@ -27,6 +27,7 @@ python3.pkgs.buildPythonApplication rec {
   nativeBuildInputs = [
     meson
     ninja
+    gobject-introspection
     wrapGAppsHook
     appstream-glib
     desktop-file-utils
@@ -37,9 +38,9 @@ python3.pkgs.buildPythonApplication rec {
     librsvg
   ];
 
-  propagatedNativeBuildInputs = [
-    gobject-introspection
-  ];
+  # propagatedNativeBuildInputs = [
+  #   gobject-introspection
+  # ];
 
   propagatedBuildInputs = with python3.pkgs; [
     pygobject3

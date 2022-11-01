@@ -21,8 +21,6 @@ in {
     # g4music
     # kestrel
     # radio-cli
-    gitnuro
-    garbage
     sauce
 
     foot
@@ -92,13 +90,9 @@ in {
     # gcolor3
     # wl-color-picker
 
+    gitnuro
     qbittorrent
     gnome-decoder
-    paper-note
-    endeavour
-    ghostwriter
-    textpieces
-    meld
     # deja-dup
     # rclone
     # rclone-browser
@@ -108,6 +102,11 @@ in {
     # OFFICE
     # libreoffice-fresh
     # rnote # handwritten note
+    paper-note
+    endeavour
+    ghostwriter
+    textpieces
+    meld
 
     # HARDWARE TEST
     efibootmgr
