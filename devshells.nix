@@ -2,12 +2,13 @@ inputs @ {pkgs}: {
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
       git
-      fd
-      jq
-      ripgrep
       gcc
       gnumake
-      alejandra
+      cmake
+      meson
+      ninja
+      pkg-config
+      qt5.qtbase
     ];
   };
 
@@ -37,15 +38,15 @@ inputs @ {pkgs}: {
       ninja
       clang
       pkg-config
-      gtk4
-      glib
-      libadwaita
-      wrapGAppsHook4
-      appstream-glib
-      desktop-file-utils
-      libxml2
-      xorg.libxcb
-      alsa-lib
+      # gtk4
+      # glib
+      # libadwaita
+      # wrapGAppsHook4
+      # appstream-glib
+      # desktop-file-utils
+      # libxml2
+      # xorg.libxcb
+      # alsa-lib
     ];
   };
 

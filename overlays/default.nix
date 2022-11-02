@@ -13,6 +13,7 @@ final: prev: {
   # C
   ctpv = prev.callPackage ./ctpv {};
   hashrat = prev.callPackage ./hashrat {};
+  xclicker = prev.callPackage ./xclicker {};
 
   # Rust
   app-icon-preview = prev.callPackage ./app-icon-preview {};
@@ -35,6 +36,9 @@ final: prev: {
   smile = prev.callPackage ./smile {};
   novelwriter = prev.callPackage ./novelwriter {};
   bt-dualboot = prev.callPackage ./bt-dualboot {};
+  konsave = prev.callPackage ./konsave {};
+  tiptop-py = prev.callPackage ./tiptop-py {};
+  iotas = prev.callPackage ./iotas {};
 
   # Gtk
   paper = prev.callPackage ./paper {};

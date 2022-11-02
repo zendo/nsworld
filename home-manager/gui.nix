@@ -16,7 +16,6 @@ in {
     # app-icon-preview
     # converseen
     # done
-    # textsnatcher
     # retext
     # g4music
     # kestrel

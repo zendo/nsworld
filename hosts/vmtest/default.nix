@@ -22,9 +22,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    gitnuro
-    spotiflyer
-    screenkey
 
     firefox
     gnomeExtensions.appindicator
@@ -39,8 +36,8 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      # plasma5.enable = true;
-      gnome.enable = true;
+      plasma5.enable = true;
+      # gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
       # pantheon.enable = true;

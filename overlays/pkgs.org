@@ -377,6 +377,10 @@ python3.pkgs.buildPythonApplication rec {
       "${lib.makeBinPath [ espeak-ng ]}" "''${gappsWrapperArgs[@]}")
   '';
 
+  pythonImportsCheck = [
+    "wordbook"
+  ];
+
   meta = with lib; {
     description = "Offline English-English dictionary application built for GNOME";
     homepage = "https://github.com/fushinari/Wordbook";
@@ -527,6 +531,10 @@ fetchzip rec {
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.desktop -t $out/share/applications/
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.svg -t $out/share/icons/hicolor/scalable/apps/
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.metainfo.xml -t $out/share/metainfo/
+  '';
+
+  postInstall = ''
+    ln -s $out/bin/com.github.cassidyjames.dippi $out/bin/dippi
   '';
 #+end_src
 * meta
