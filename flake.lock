@@ -174,6 +174,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-pr": {
+      "locked": {
+        "lastModified": 1667451227,
+        "narHash": "sha256-pIrGygaCpWuemUY4jRnPJiyULGw5Ftm74ofIrrQTHRs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "577fe564a6009ddfddac9371e753a3d3338d27c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/194581/merge",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1660318005,
@@ -229,6 +245,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-pr": "nixpkgs-pr",
         "nur": "nur",
         "templates": "templates"
       }

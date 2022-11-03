@@ -22,6 +22,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    wordbook
+
 
     firefox
     gnomeExtensions.appindicator

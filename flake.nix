@@ -6,7 +6,7 @@
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194581/merge";
-    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=update-screenkey";
+    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -111,7 +111,7 @@
           hmEnable = false;
           virtEnable = false;
           inherit overlays;
-          # nixpkgs = inputs.nixpkgs-local;
+          # nixpkgs = inputs.nixpkgs-pr;
         };
 
         # nix build .#nixosConfigurations.livecd.config.system.build.isoImage

@@ -40,6 +40,22 @@ final: prev: {
   tiptop-py = prev.callPackage ./tiptop-py {};
   iotas = prev.callPackage ./iotas {};
 
+  # wordbook = prev.callPackage ./wordbook { };
+  # Python Module Overlays
+  # pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+  #   (python-final: python-prev: {
+  #     wn = python-final.callPackage ./wn {};
+  #   })
+  # ];
+  # python3 =
+  #   let
+  #     self = prev.python3.override {
+  #       inherit self;
+  #       packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+  #     }; in
+  #     self;
+  # python3Packages = final.python3.pkgs;
+
   # Gtk
   paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};

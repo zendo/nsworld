@@ -24,6 +24,13 @@ python3.pkgs.buildPythonApplication rec {
     textual
   ];
 
+  checkInputs = [ python3.pkgs.pytest ];
+
+  checkPhase = ''
+    export HOME=$(mktemp -d)
+    pytest
+  '';
+
   pythonImportsCheck = [
     "tiptop"
   ];
