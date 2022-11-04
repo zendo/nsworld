@@ -91,11 +91,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1667410913,
-        "narHash": "sha256-5+S65dpXaIyMDeoPy823BzNH5HYY1wvZ6G+rzTnO8kY=",
+        "lastModified": 1667468181,
+        "narHash": "sha256-806/nrDW6e7bl4/oJEdAykYz/NaBuTUi7EUYArw2oic=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f520832a47dbc24d1e2c4e4b9a3dbe910777d1a2",
+        "rev": "93335810751f0404fe424e61ad58bc8e94bf8e9d",
         "type": "github"
       },
       "original": {
@@ -174,22 +174,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-pr": {
-      "locked": {
-        "lastModified": 1667451227,
-        "narHash": "sha256-pIrGygaCpWuemUY4jRnPJiyULGw5Ftm74ofIrrQTHRs=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "577fe564a6009ddfddac9371e753a3d3338d27c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "pull/194581/merge",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1660318005,
@@ -207,11 +191,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1667410462,
-        "narHash": "sha256-GWZh1/ENadYdyhz07ppJzUuF9Xf3nDhSJ3psZKJ6/+U=",
+        "lastModified": 1667467338,
+        "narHash": "sha256-4A5kVur+Il9gAFwFpfOQq8xF9ot8eOSVs+Y+UqnsJY4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9d28889ac87433e34a8085c08eb2909369a971ec",
+        "rev": "950e2db322d7f12a8bf1a7620f84bf432f6c6b94",
         "type": "github"
       },
       "original": {
@@ -223,11 +207,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1667420160,
-        "narHash": "sha256-BPLVsaObEKIuRfJpYtWUlVFERbc4MtCYWGBryWVxMaQ=",
+        "lastModified": 1667511785,
+        "narHash": "sha256-fYh7THWQjBaOlXmrcw02wBEkUYKpd8JQd0BlJebir7A=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "bc46a2db034bdfc31d9620fcb0738ccef6bdcaef",
+        "rev": "99b36707cc34c9702fc101e0e760df69d1f08bca",
         "type": "github"
       },
       "original": {
@@ -245,7 +229,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-pr": "nixpkgs-pr",
         "nur": "nur",
         "templates": "templates"
       }

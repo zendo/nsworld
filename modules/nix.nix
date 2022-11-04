@@ -36,6 +36,7 @@
 
   nix = {
     # nix registry list
+    # nix new cli
     registry =
       lib.mapAttrs' (
         n: v:
@@ -44,6 +45,7 @@
       inputs;
 
       # echo $NIX_PATH | tr ":" "\n" # reboot needs
+      # nix old cli
       nixPath = [
         "nixpkgs=${inputs.nixpkgs}"
         "nixos-config=${inputs.self}"

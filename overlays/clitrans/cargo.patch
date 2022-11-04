@@ -1,0 +1,16 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index eb32ab9..9c94f6e 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1098,9 +1098,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "openssl-sys"
+-version = "0.9.61"
++version = "0.9.72"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "313752393519e876837e09e1fa183ddef0be7735868dced3196f4472d536277f"
++checksum = "7e46109c383602735fa0a2e48dd2b7c892b048e1bf69e5c3b1d804b7d9c203cb"
+ dependencies = [
+  "autocfg",
+  "cc",

@@ -6,6 +6,7 @@ final: prev: {
   hybrid-bar = prev.callPackage ./hybrid-bar {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
   retext = prev.libsForQt5.callPackage ./retext {};
+  wcp = prev.callPackage ./wcp {};
 
   # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
@@ -30,6 +31,7 @@ final: prev: {
   v2raya = prev.callPackage ./v2raya {};
   go-musicfox = prev.callPackage ./go-musicfox {};
   sauce = prev.callPackage ./sauce {};
+  sing-box = prev.callPackage ./sing-box {};
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher {};
@@ -39,12 +41,13 @@ final: prev: {
   konsave = prev.callPackage ./konsave {};
   tiptop-py = prev.callPackage ./tiptop-py {};
   iotas = prev.callPackage ./iotas {};
+  auto-editor = prev.callPackage ./auto-editor {};
 
   # wordbook = prev.callPackage ./wordbook { };
   # Python Module Overlays
   # pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
   #   (python-final: python-prev: {
-  #     wn = python-final.callPackage ./wn {};
+  #     av = python-final.callPackage ./av {};
   #   })
   # ];
   # python3 =
@@ -69,6 +72,7 @@ final: prev: {
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
   bitwave = prev.libsForQt5.callPackage ./bitwave {};
+  nekoray = prev.libsForQt5.callPackage ./nekoray {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};

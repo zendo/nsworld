@@ -6,6 +6,7 @@
 , alsa-lib
 , makeWrapper
 , curl
+, rustfmt
 }:
 # WIP!!
 rustPlatform.buildRustPackage rec {
@@ -20,11 +21,14 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-Ufl5DjEICf8GnGfdh/wOHO+l5ZZkA6tK0IzoxlyKnyQ=";
   };
 
-  cargoHash = "sha256-0m0ZrCP5PPdVgljRLOWL1q3jgTu0/CEW9UhDnykYXho=";
+  cargoPatches = [ ./cargo.patch ];
+
+  cargoSha256 = "sha256-MQ3UmYx5a0ME44Udqbbo0Z6kiuiqx+vw4acW42P8430=";
 
   nativeBuildInputs = [
     pkg-config
     makeWrapper
+    rustfmt
   ];
 
   buildInputs = [
@@ -34,17 +38,28 @@ rustPlatform.buildRustPackage rec {
 
   # Needed to get openssl-sys to use pkg-config.
   OPENSSL_NO_VENDOR = 1;
-  OPENSSL_DIR="${lib.getDev openssl}";
+  # OPENSSL_DIR="${lib.getDev openssl}";
   # OPENSSL_LIB_DIR = "${lib.getLib openssl}/lib";
   # OPENSSL_INCLUDE_DIR = "${openssl.dev}/include";
 
-  # cargoBuildFlags = [ "--features" "audio" ];
+  # preBuild = ''
+  #   export OPENSSL_DIR=${lib.getDev openssl}
+  #   export OPENSSL_LIB_DIR=${lib.getLib openssl}/lib
+  # '';
 
-  # doCheck = false;
+  # doInstallCheck = stdenv.hostPlatform.libc == "glibc";
+
+  doCheck = false;
 
   # preFixup = ''
   #   wrapProgram $out/bin/radio-cli \
   #     --prefix PATH ":" "${lib.makeBinPath [ mpv yt-dlp ]}";
+  # '';
+
+  # postPatch = ''
+  #   substituteInPlace Cargo.lock \
+  #     --replace "0.9.61" "0.9.72" \
+  #     --replace "313752393519e876837e09e1fa183ddef0be7735868dced3196f4472d536277f" "7e46109c383602735fa0a2e48dd2b7c892b048e1bf69e5c3b1d804b7d9c203cb"
   # '';
 
   meta = with lib; {

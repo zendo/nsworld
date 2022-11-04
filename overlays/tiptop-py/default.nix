@@ -43,7 +43,6 @@ python3.pkgs.buildPythonApplication rec {
     description = "Command-line system monitoring tool in the spirit of top";
     homepage = "https://github.com/nschloe/tiptop";
     license = licenses.mit;
-    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 }

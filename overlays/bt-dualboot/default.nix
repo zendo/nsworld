@@ -24,6 +24,13 @@ python3.pkgs.buildPythonApplication rec {
     makeWrapper
   ];
 
+  # checkInputs = [ python3.pkgs.pytest ];
+
+  # # test failed
+  # checkPhase = ''
+  #   pytest
+  # '';
+
   # propagatedBuildInputs = with python3.pkgs; [
   #   wheel
   # ];

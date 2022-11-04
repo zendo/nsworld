@@ -31,13 +31,16 @@ inputs @ {pkgs}: {
   };
 
   rust = pkgs.mkShell {
+    OPENSSL_NO_VENDOR = 1;
     buildInputs = with pkgs; [
       cargo
       rustc
       meson
       ninja
       clang
+      openssl
       pkg-config
+      curl
       # gtk4
       # glib
       # libadwaita
@@ -46,7 +49,7 @@ inputs @ {pkgs}: {
       # desktop-file-utils
       # libxml2
       # xorg.libxcb
-      # alsa-lib
+      alsa-lib
     ];
   };
 

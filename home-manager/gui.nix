@@ -20,7 +20,9 @@ in {
     # g4music
     # kestrel
     # radio-cli
-    sauce
+    # sauce
+    iotas
+    tiptop-py
 
     foot
     kitty

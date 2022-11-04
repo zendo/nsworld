@@ -29,6 +29,8 @@ stdenv.mkDerivation rec {
     hash = "sha256-jLgahCG71I8jxryFR91/t7f3xcmek95I1NCPMikiWIU=";
   };
 
+  # patches = [ ./meson-build.patch ];
+
   nativeBuildInputs = [
     vala
     meson

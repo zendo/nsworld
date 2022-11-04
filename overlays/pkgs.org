@@ -294,6 +294,13 @@ stdenv.mkDerivation rec {
   propagatedNativeBuildInputs = [
   ];
 
+  checkInputs = [ pytest ];
+
+  checkPhase = ''
+    export HOME=$(mktemp -d)
+    pytest
+  '';
+
   # homeless-shelter: permission denied
   preConfigure = ''
     export HOME=$(mktemp -d)
