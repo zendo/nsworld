@@ -18,7 +18,6 @@ in {
     # done
     # retext
     # g4music
-    # kestrel
     # radio-cli
     # sauce
     iotas
@@ -73,7 +72,7 @@ in {
     audacious
     # rhythmbox
     # radioboat
-    goodvibes
+    # goodvibes
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
@@ -91,7 +90,7 @@ in {
     # gcolor3
     # wl-color-picker
 
-    gitnuro
+    # gitnuro
     qbittorrent
     gnome-decoder
     # deja-dup

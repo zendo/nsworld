@@ -27,7 +27,6 @@ python3.pkgs.buildPythonApplication rec {
   checkInputs = [ python3.pkgs.pytest ];
 
   checkPhase = ''
-    export HOME=$(mktemp -d)
     pytest
   '';
 
@@ -36,7 +35,7 @@ python3.pkgs.buildPythonApplication rec {
   ];
 
   postInstall = ''
-    ln -s $out/bin/tiptop $out/bin/tiptop-py
+    mv $out/bin/tiptop $out/bin/tiptop-py
   '';
 
   meta = with lib; {

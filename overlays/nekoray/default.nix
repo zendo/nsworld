@@ -9,6 +9,7 @@
 , qtbase
 , qtx11extras
 , qttools
+, qtsvg
 }:
 # WIP!!!
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=nekoray
@@ -33,6 +34,7 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
+    qtsvg
     protobuf
     libyamlcpp
     zxing-cpp
