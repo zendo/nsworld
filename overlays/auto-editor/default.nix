@@ -28,7 +28,7 @@ python3.pkgs.buildPythonApplication rec {
   meta = with lib; {
     description = "A command line application for automatically editing video and audio";
     homepage = "https://github.com/WyattBlue/auto-editor";
-    license = licenses.unlic;
+    # license = licenses.unlic;
     maintainers = with maintainers; [ zendo ];
   };
 }

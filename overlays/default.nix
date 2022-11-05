@@ -27,7 +27,6 @@ final: prev: {
   v2raya = prev.callPackage ./v2raya {};
   go-musicfox = prev.callPackage ./go-musicfox {};
   sauce = prev.callPackage ./sauce {};
-  sing-box = prev.callPackage ./sing-box {};
 
   # Python
   # python setup.py install --root=/home/iab/devs/

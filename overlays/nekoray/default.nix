@@ -20,9 +20,10 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "MatsuriDayo";
     repo = pname;
-    rev = version;
+    # rev = version;
+    rev = "b4fe36137f74d95a62bbfeca49431c0d50899d58";
     fetchSubmodules = true;
-    hash = "sha256-9yPFn7zqYX+fVGqDJsdeVxZfw7bTT8Ve1VLmq/Rrsk4=";
+    hash = "sha256-37E5zkdjHpBj5y4RT6wZZ2JmzeQfzCn/OpavM5vKwj8=";
   };
 
   nativeBuildInputs = [
@@ -39,6 +40,10 @@ stdenv.mkDerivation rec {
     libyamlcpp
     zxing-cpp
   ];
+
+  # cmakeFlags = [
+  #   "-Wno-dev"
+  # ];
 
   meta = with lib; {
     description = "Qt based cross-platform GUI proxy configuration manager (backend: v2ray / sing-box)";

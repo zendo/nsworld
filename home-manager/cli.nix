@@ -15,7 +15,7 @@
     openssl
     gitui
     onefetch
-    efm-langserver
+    efm-langserver # markdown lsp
     # distrobox
     gnumake
     # python3
@@ -68,6 +68,7 @@
     kalker # calculator
     ydict
     typos
+    shellcheck
     translate-shell
     aspellDicts.en
     asciinema # record the terminal
@@ -92,12 +93,10 @@
     nixpkgs-fmt
     nixfmt
     alejandra
-    # nil
+    # nil # lsp
     # rnix-lsp
     lorri
-    comma
-    manix
-    niv
+    # comma # , app
     # nvd # nix profile diff
     cachix
     nixos-generators
@@ -109,7 +108,6 @@
     nix-top
     # nix-output-monitor
     # nvfetcher
-    shellcheck
 
     # Game & fun
     cava # Music Visualizer
