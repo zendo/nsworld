@@ -1,14 +1,11 @@
 { lib
 , python3
 , fetchzip
-, fetchurl
 , fetchFromGitHub
 , wrapQtAppsHook
-, glib
-, gtk3
-,  gobject-introspection
-  , hicolor-icon-theme
-, desktop-file-utils
+, qtbase
+, qttools
+, qtsvg
 , buildEnv
 , aspellDicts
   # Use `lib.collect lib.isDerivation aspellDicts;` to make all dictionaries
@@ -16,13 +13,6 @@
 , enchantAspellDicts ? with aspellDicts; [ en en-computers en-science ]
 }:
 
-let
-  toolbarIcons = fetchzip {
-    url = "https://github.com/retext-project/retext/archive/icons.zip";
-    hash = "sha256-LQtSFCGWcKvXis9pFDmPqAMd1m6QieHQiz2yykeTdnI=";
-    # stripRoot=false;
-  };
-in
 python3.pkgs.buildPythonApplication rec {
   pname = "retext";
   version = "8.0.0";
@@ -35,21 +25,23 @@ python3.pkgs.buildPythonApplication rec {
     hash = "sha256-22yqNwIehgTfeElqhN5Jzye7LbcAiseTeoMgenpmsL0=";
   };
 
+  toolbarIcons = fetchzip {
+    url = "https://github.com/retext-project/retext/archive/icons.zip";
+    hash = "sha256-LQtSFCGWcKvXis9pFDmPqAMd1m6QieHQiz2yykeTdnI=";
+    # stripRoot=false;
+  };
+
   nativeBuildInputs = [
     wrapQtAppsHook
-    # desktop-file-utils
-    # gobject-introspection
+    qttools.dev
   ];
 
-  # buildInputs = [
-  #   # gtk3
-  #   # hicolor-icon-theme
-  #   # # glib
-  #   # gtk3
-  # ];
+  buildInputs = [
+    qtbase
+    qtsvg
+  ];
 
   propagatedBuildInputs = with python3.pkgs; [
-    requests
     chardet
     docutils
     markdown
@@ -57,15 +49,14 @@ python3.pkgs.buildPythonApplication rec {
     pyenchant
     pygments
     pyqt6
+    pyqt6-webengine
   ];
 
   patches = [ ./remove-wheel-check.patch ];
 
-  # postPatch = ''
-  #   substituteInPlace setup.py \
-  #     --replace "icons_tgz = 'https://github.com/retext-project/retext/archive/icons.tar.gz'" \
-  #       "icons_tgz = '${toolbarIcons}'"
-  # '';
+  preConfigure = ''
+    lrelease ReText/locale/*.ts
+  '';
 
   # prevent double wrapping
   dontWrapQtApps = true;
@@ -79,8 +70,7 @@ python3.pkgs.buildPythonApplication rec {
       }}"
     )
 
-    # mkdir -p $out/share/retext/icons
-    # install -Dm444 ${toolbarIcons}/* -t $out/share/retext
+    cp ${toolbarIcons}/* $out/${python3.pkgs.python.sitePackages}/ReText/icons
 
     substituteInPlace $out/share/applications/me.mitya57.ReText.desktop \
       --replace "Exec=ReText-${version}.data/scripts/retext %F" "Exec=$out/bin/retext %F" \

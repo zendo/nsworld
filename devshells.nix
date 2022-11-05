@@ -41,6 +41,7 @@ inputs @ {pkgs}: {
       openssl
       pkg-config
       curl
+      cmake
       # gtk4
       # glib
       # libadwaita
@@ -48,14 +49,33 @@ inputs @ {pkgs}: {
       # appstream-glib
       # desktop-file-utils
       # libxml2
-      # xorg.libxcb
       alsa-lib
+      # libxkbcommon
+      # xorg.libX11
+      # xorg.libxcb
+      # xorg.xcbutil
+      # xorg.xcbutilwm
+      # xorg.xcbutilimage
+      # xorg.xcbutilkeysyms
+      # freetype
+      # fontconfig
     ];
   };
 
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
       python3
+    ];
+    propagatedBuildInputs = with pkgs.python3.pkgs; [
+      requests
+      chardet
+      docutils
+      markdown
+      markups
+      pyenchant
+      pygments
+      # pyqt5
+      # pyqt6
     ];
   };
 

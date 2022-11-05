@@ -6,11 +6,12 @@
 , qt5
 , opencv
 }:
-# wip
+# WIP!!!
 python3.pkgs.buildPythonApplication rec {
   pname = "novelwriter";
   version = "1.6.6";
-  format = "setuptools";
+  # format = "setuptools";
+  format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "vkbo";
@@ -39,6 +40,17 @@ python3.pkgs.buildPythonApplication rec {
     setuptools
   ];
 
+  checkInputs = [ python3.pkgs.pytest ];
+
+  checkPhase = ''
+    # export HOME=$(mktemp -d)
+    pytest
+  '';
+
+    pythonImportsCheck = [
+    "novelwriter"
+  ];
+
   # checkInputs = with python3.pkgs; [
   #   vcrpy
   #   pytestCheckHook
@@ -61,7 +73,7 @@ python3.pkgs.buildPythonApplication rec {
   # ];
 
   meta = with lib; {
-    description = "Mopidy extension for playing music from YouTube";
+    description = "A markdown-like text editor designed for writing novels and larger projects";
     homepage = "https://novelwriter.io/";
     license = licenses.asl20;
     maintainers = with maintainers; [ spwhitt ];

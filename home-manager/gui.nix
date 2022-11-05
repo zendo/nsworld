@@ -16,12 +16,12 @@ in {
     # app-icon-preview
     # converseen
     # done
-    # retext
     # g4music
     # radio-cli
     # sauce
     iotas
     tiptop-py
+    retext
 
     foot
     kitty
@@ -72,15 +72,16 @@ in {
     audacious
     # rhythmbox
     # radioboat
-    # goodvibes
+    goodvibes
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
     # tagger
     # jamesdsp
+    # ciano
     # media-downloader
     # spotdl
-    spotiflyer
+    # spotiflyer
 
     # Image manipulation
     # shutter
@@ -90,7 +91,7 @@ in {
     # gcolor3
     # wl-color-picker
 
-    # gitnuro
+    gitnuro
     qbittorrent
     gnome-decoder
     # deja-dup

@@ -22,7 +22,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    wordbook
+    retext
 
 
     firefox
@@ -38,8 +38,8 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      plasma5.enable = true;
-      # gnome.enable = true;
+      # plasma5.enable = true;
+      gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
       # pantheon.enable = true;

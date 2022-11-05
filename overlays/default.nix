@@ -2,14 +2,10 @@ final: prev: {
   # Trivial
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
-  hyprpicker = prev.callPackage ./hyprpicker {};
-  hybrid-bar = prev.callPackage ./hybrid-bar {};
-  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
-  retext = prev.libsForQt5.callPackage ./retext {};
-  wcp = prev.callPackage ./wcp {};
-
-  # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
+  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
+
+  retext = prev.qt6Packages.callPackage ./retext {};
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -25,6 +21,7 @@ final: prev: {
   rustplayer = prev.callPackage ./rustplayer {};
   radio-cli = prev.callPackage ./radio-cli {};
   clitrans = prev.callPackage ./clitrans {};
+  tiny-games = prev.callPackage ./tiny-games {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
@@ -33,6 +30,7 @@ final: prev: {
   sing-box = prev.callPackage ./sing-box {};
 
   # Python
+  # python setup.py install --root=/home/iab/devs/
   textsnatcher = prev.callPackage ./textsnatcher {};
   smile = prev.callPackage ./smile {};
   novelwriter = prev.callPackage ./novelwriter {};
@@ -70,6 +68,11 @@ final: prev: {
   converseen = prev.libsForQt5.callPackage ./converseen {};
   bitwave = prev.libsForQt5.callPackage ./bitwave {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
+
+  # wayland
+  hyprpicker = prev.callPackage ./hyprpicker {};
+  hybrid-bar = prev.callPackage ./hybrid-bar {};
+  wcp = prev.callPackage ./wcp {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};
