@@ -56,20 +56,16 @@ final: prev: {
   # python3Packages = final.python3.pkgs;
 
   # Gtk
-  paper = prev.callPackage ./paper {};
   gtklock = prev.callPackage ./gtklock {};
-  tubeconverter = prev.callPackage ./tubeconverter {};
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer {};
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
-  bitwave = prev.libsForQt5.callPackage ./bitwave {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
 
   # wayland
-  hyprpicker = prev.callPackage ./hyprpicker {};
   hybrid-bar = prev.callPackage ./hybrid-bar {};
   wcp = prev.callPackage ./wcp {};
 

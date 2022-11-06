@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
     qtbase
     qttools
     qtx11extras
-    wrapQtAppsHook
+    # wrapQtAppsHook
   ];
 
   buildInputs = [
@@ -43,9 +43,18 @@ stdenv.mkDerivation rec {
     zxing
   ];
 
-  # cmakeFlags = [
-  # #   "-Wno-dev"
-  # ];
+  cmakeFlags = [
+    "-DNKR_NO_EXTERNAL=zxing"   # need zxing-cpp 1.3.0
+  ];
+
+  # still need a lot of work
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/nekoray
+    cp -r * $out/share/nekoray
+    install -Dm755 nekoray $out/bin/$pname
+    runHook postInstall
+  '';
 
   meta = with lib; {
     description = "Qt based cross-platform GUI proxy configuration manager (backend: v2ray / sing-box)";
