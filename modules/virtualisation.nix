@@ -16,6 +16,17 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
   username,
   ...
 }: {
+
+  # services.flatpak.enable = true;
+
+  # programs.adb.enable = true;
+
+  # programs.steam.enable = true;
+
+  # programs.java.enable = true;
+
+  programs.nix-ld.enable = true;
+
   environment.systemPackages = with pkgs; [
     virt-manager
     bridge-utils
@@ -67,6 +78,15 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
     #   dockerCompat = true;
     # };
 
+    # containers = {
+    #   enable = true;
+    #   registries.search = [
+    #     "docker.io"
+    #     "quay.io"
+    #     "registry.opensuse.org"
+    #   ];
+    # };
+
     # waydroid.enable = true;
   };
 
@@ -81,14 +101,4 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
     "vboxusers"
     "adbusers"
   ];
-
-  # services.flatpak.enable = true;
-
-  # programs.adb.enable = true;
-
-  # programs.steam.enable = true;
-
-  # programs.java.enable = true;
-
-  # programs.nix-ld.enable = true;
 }

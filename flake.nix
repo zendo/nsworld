@@ -23,6 +23,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     nur.url = "github:nix-community/NUR";
@@ -46,6 +51,7 @@
     # hyprland,
     nur,
     musnix,
+    nix-alien,
     nixos-wsl,
     templates,
     flake-utils,
@@ -55,6 +61,7 @@
 
     overlays = [
       nur.overlay
+      nix-alien.overlay
       emacs-overlay.overlay
       (import ./overlays)
       # (final: prev: {

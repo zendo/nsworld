@@ -7,6 +7,28 @@
     # Overlays
     nixos-helper
 
+    # Nix-tools
+    nixpkgs-fmt
+    nixfmt
+    alejandra
+    # nil # lsp
+    # rnix-lsp
+    lorri
+    # nvd # nix profile diff
+    cachix
+    nixos-generators
+    # nix-template
+    nix-update
+    nixpkgs-review
+    nix-index
+    nix-tree
+    nix-top
+    comma # , app
+    nix-alien
+    nix-index-update
+    # nix-output-monitor
+    # nvfetcher
+
     # Developing
     jq
     jql
@@ -42,6 +64,7 @@
     # imagemagick
     exiftool
     ffmpegthumbnailer
+    eget
     zssh # SSH and Telnet client
     termscp
     croc
@@ -88,26 +111,6 @@
     traceroute
     speedtest-cli
     # airgeddon # wifi crack
-
-    # Nix-tools
-    nixpkgs-fmt
-    nixfmt
-    alejandra
-    # nil # lsp
-    # rnix-lsp
-    lorri
-    # comma # , app
-    # nvd # nix profile diff
-    cachix
-    nixos-generators
-    # nix-template
-    nix-update
-    nixpkgs-review
-    nix-index
-    nix-tree
-    nix-top
-    # nix-output-monitor
-    # nvfetcher
 
     # Game & fun
     cava # Music Visualizer
