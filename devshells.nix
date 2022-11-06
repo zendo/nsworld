@@ -9,6 +9,19 @@ inputs @ {pkgs}: {
       ninja
       pkg-config
       qt5.qtbase
+
+      # qt5.qtbase
+      # qt5.qttools
+      # qt5.qtx11extras
+      # qt5.wrapQtAppsHook
+      # qt5.qtsvg
+      # protobuf
+      # libyamlcpp
+      # zxing-cpp
+      # zxing
+      # xorg.libX11
+      # xorg.libXi
+      # xorg.libXinerama
     ];
   };
 
@@ -17,6 +30,7 @@ inputs @ {pkgs}: {
       yarn
       nodejs
     ];
+    # ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron_20}/bin";
   };
 
   go = pkgs.mkShell {

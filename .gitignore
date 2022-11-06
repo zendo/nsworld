@@ -1,4 +1,5 @@
 /result
+/result-bin
 *.qcow2
 /modules/result
 /.direnv/

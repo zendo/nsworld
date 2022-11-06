@@ -9,6 +9,7 @@
 , rustfmt
 }:
 # WIP!!
+# openssl-sys v0.9.61 failed
 rustPlatform.buildRustPackage rec {
   pname = "clitrans";
   version = "999";

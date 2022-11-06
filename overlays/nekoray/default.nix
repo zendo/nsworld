@@ -5,6 +5,7 @@
 , protobuf
 , libyamlcpp
 , zxing-cpp
+, zxing
 , wrapQtAppsHook
 , qtbase
 , qtx11extras
@@ -39,10 +40,11 @@ stdenv.mkDerivation rec {
     protobuf
     libyamlcpp
     zxing-cpp
+    zxing
   ];
 
   # cmakeFlags = [
-  #   "-Wno-dev"
+  # #   "-Wno-dev"
   # ];
 
   meta = with lib; {

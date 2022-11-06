@@ -6,6 +6,7 @@ final: prev: {
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   retext = prev.qt6Packages.callPackage ./retext {};
+  qownnotes = prev.libsForQt5.callPackage ./qownnotes {};
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -25,7 +26,6 @@ final: prev: {
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
-  go-musicfox = prev.callPackage ./go-musicfox {};
   sauce = prev.callPackage ./sauce {};
 
   # Python
