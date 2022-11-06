@@ -43,25 +43,7 @@ rustPlatform.buildRustPackage rec {
   # OPENSSL_LIB_DIR = "${lib.getLib openssl}/lib";
   # OPENSSL_INCLUDE_DIR = "${openssl.dev}/include";
 
-  # preBuild = ''
-  #   export OPENSSL_DIR=${lib.getDev openssl}
-  #   export OPENSSL_LIB_DIR=${lib.getLib openssl}/lib
-  # '';
-
-  # doInstallCheck = stdenv.hostPlatform.libc == "glibc";
-
   doCheck = false;
-
-  # preFixup = ''
-  #   wrapProgram $out/bin/radio-cli \
-  #     --prefix PATH ":" "${lib.makeBinPath [ mpv yt-dlp ]}";
-  # '';
-
-  # postPatch = ''
-  #   substituteInPlace Cargo.lock \
-  #     --replace "0.9.61" "0.9.72" \
-  #     --replace "313752393519e876837e09e1fa183ddef0be7735868dced3196f4472d536277f" "7e46109c383602735fa0a2e48dd2b7c892b048e1bf69e5c3b1d804b7d9c203cb"
-  # '';
 
   meta = with lib; {
     description = "Yet another command-line translator (Chinese <=> English)";

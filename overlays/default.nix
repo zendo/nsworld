@@ -29,7 +29,6 @@ final: prev: {
   sauce = prev.callPackage ./sauce {};
 
   # Python
-  # python setup.py install --root=/home/iab/devs/
   textsnatcher = prev.callPackage ./textsnatcher {};
   smile = prev.callPackage ./smile {};
   novelwriter = prev.callPackage ./novelwriter {};
@@ -39,21 +38,24 @@ final: prev: {
   iotas = prev.callPackage ./iotas {};
   auto-editor = prev.callPackage ./auto-editor {};
 
+
   # wordbook = prev.callPackage ./wordbook { };
   # Python Module Overlays
-  # pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-  #   (python-final: python-prev: {
-  #     av = python-final.callPackage ./av {};
-  #   })
-  # ];
-  # python3 =
-  #   let
-  #     self = prev.python3.override {
-  #       inherit self;
-  #       packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-  #     }; in
-  #     self;
-  # python3Packages = final.python3.pkgs;
+  pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+    (python-final: python-prev: {
+      # av = python-final.callPackage ./python-modules/av {};
+      pyjokes = python-final.callPackage ./python-modules/pyjokes {};
+      zdict = python-final.callPackage ./python-modules/zdict {};
+    })
+  ];
+  python3 =
+    let
+      self = prev.python3.override {
+        inherit self;
+        packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+      }; in
+      self;
+  python3Packages = final.python3.pkgs;
 
   # Gtk
   gtklock = prev.callPackage ./gtklock {};

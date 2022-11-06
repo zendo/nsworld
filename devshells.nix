@@ -76,6 +76,7 @@ inputs @ {pkgs}: {
     ];
   };
 
+  # python setup.py install --root=/home/iab/devs/
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
       python3

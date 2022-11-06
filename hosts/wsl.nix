@@ -6,12 +6,13 @@
 }: let
   winProxy = "http://192.168.2.118:10811";
 in {
+  networking.hostName = "nwsl";
+
   wsl = {
     enable = true;
-    automountPath = "/mnt";
     defaultUser = "${username}";
     startMenuLaunchers = true;
-    # ??
+    # Not working!!
     # nativeSystemd = true;
 
     # Enable native Docker support
@@ -37,6 +38,7 @@ in {
     # helix
     emacs
 
+    mpg123 # for ydict
     kitty
     wsl-open
     # radioboat

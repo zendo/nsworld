@@ -4,10 +4,8 @@
   ...
 }: {
   home.packages = with pkgs; [
-    # Overlays
+    # Nix Tools
     nixos-helper
-
-    # Nix-tools
     nixpkgs-fmt
     nixfmt
     alejandra
@@ -23,8 +21,8 @@
     nix-index
     nix-tree
     nix-top
-    comma # , app
-    nix-alien
+    comma # ,
+    nix-alien # Run binaries
     nix-index-update
     # nix-output-monitor
     # nvfetcher
