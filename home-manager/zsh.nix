@@ -54,7 +54,7 @@
       # {
       #   name = "forgit";
       #   file = "forgit.plugin.zsh";
-      #   src = "${pkgs.forgit}/share/forgit";
+      #   src = "${pkgs.forgit}/share/zsh/plugins/forgit";
       # }
     ];
     history = {

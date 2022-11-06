@@ -1,33 +1,32 @@
-{
-  lib,
-  fetchFromGitHub,
-  stdenv,
+{ lib
+, stdenv
+, fetchFromGitHub
 }:
+
 stdenv.mkDerivation rec {
   pname = "forgit";
-  version = "unstable-2022-05-29";
+  version = "unstable-2022-10-14";
 
   src = fetchFromGitHub {
     owner = "wfxr";
-    repo = "forgit";
-    rev = "6385f85360b6fe0a1ac19cd5ce595b4f3921a2a7";
-    sha256 = "sha256-sWWv9UJR1K8Q5ZTcU7xjJtk8hTRXywVjSL2gQ5Kqj0M=";
+    repo = pname;
+    rev = "2872548075e63bc83a0b960e2813b16571998563";
+    sha256 = "sha256-NKL4c4k9Nath8NQ3sWUTGUzp517jRX4v0qVaKMJSMrw=";
   };
 
-  dontConfigure = true;
+  strictDeps = true;
+
   dontBuild = true;
 
   installPhase = ''
-    plugindir="$out/share/forgit"
-    mkdir -p "$plugindir"
-    cp -r * "$plugindir"/
+    install -Dm0644 forgit.plugin.zsh $out/share/zsh/plugins/forgit/forgit.plugin.zsh
   '';
 
   meta = with lib; {
     description = "Using git interactively with fzf";
     homepage = "https://github.com/wfxr/forgit";
     license = licenses.mit;
+    platforms = platforms.unix;
     maintainers = with maintainers; [zendo];
-    platforms = platforms.all;
   };
 }

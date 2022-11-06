@@ -6,7 +6,7 @@
 }: let
   winProxy = "http://192.168.2.118:10811";
 in {
-  networking.hostName = "nwsl";
+  networking.hostName = "wsl";
 
   wsl = {
     enable = true;

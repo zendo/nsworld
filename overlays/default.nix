@@ -21,7 +21,6 @@ final: prev: {
   g4music = prev.callPackage ./g4music {};
   rustplayer = prev.callPackage ./rustplayer {};
   radio-cli = prev.callPackage ./radio-cli {};
-  clitrans = prev.callPackage ./clitrans {};
   tiny-games = prev.callPackage ./tiny-games {};
 
   # Go
