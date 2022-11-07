@@ -47,7 +47,7 @@ python3.pkgs.buildPythonApplication rec {
     pytest
   '';
 
-    pythonImportsCheck = [
+  pythonImportsCheck = [
     "novelwriter"
   ];
 

@@ -7,6 +7,7 @@ final: prev: {
 
   retext = prev.qt6Packages.callPackage ./retext {};
   qownnotes = prev.libsForQt5.callPackage ./qownnotes {};
+  novelwriter = prev.callPackage ./novelwriter {};
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -19,24 +20,20 @@ final: prev: {
   done = prev.callPackage ./done {};
   mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
-  rustplayer = prev.callPackage ./rustplayer {};
-  radio-cli = prev.callPackage ./radio-cli {};
   tiny-games = prev.callPackage ./tiny-games {};
 
   # Go
   v2raya = prev.callPackage ./v2raya {};
-  sauce = prev.callPackage ./sauce {};
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher {};
   smile = prev.callPackage ./smile {};
-  novelwriter = prev.callPackage ./novelwriter {};
   bt-dualboot = prev.callPackage ./bt-dualboot {};
   konsave = prev.callPackage ./konsave {};
   tiptop-py = prev.callPackage ./tiptop-py {};
   iotas = prev.callPackage ./iotas {};
   auto-editor = prev.callPackage ./auto-editor {};
-
+  zdict = prev.callPackage ./zdict {};
 
   # wordbook = prev.callPackage ./wordbook { };
   # Python Module Overlays
@@ -44,7 +41,6 @@ final: prev: {
     (python-final: python-prev: {
       # av = python-final.callPackage ./python-modules/av {};
       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
-      zdict = python-final.callPackage ./python-modules/zdict {};
     })
   ];
   python3 =

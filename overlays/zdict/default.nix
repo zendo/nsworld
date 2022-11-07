@@ -1,26 +1,12 @@
 { lib
-, fetchPypi
 , fetchFromGitHub
-, buildPythonPackage
-, pythonOlder
-, peewee
-, requests
-, pyjokes
-, gnureadline
-, beautifulsoup4
-, flake8
-, pytest
-, pytest-cov
-, pytest-flake8
-, coverage
+, python3
 }:
 
-buildPythonPackage rec {
+python3.pkgs.buildPythonApplication rec {
   pname = "zdict";
   version = "5.0.1";
   format = "setuptools";
-
-  disabled = pythonOlder "3.7";
 
   src = fetchFromGitHub {
     owner = pname;
@@ -30,7 +16,7 @@ buildPythonPackage rec {
     hash = "sha256-DHOO4GzHa9lz6RHFc9v4dB55k8uDcvkJduQpKxee3sA=";
   };
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with python3.pkgs; [
     peewee
     requests
     pyjokes
@@ -38,7 +24,7 @@ buildPythonPackage rec {
     beautifulsoup4
   ];
 
-  checkInputs = [
+  checkInputs = with python3.pkgs;[
     flake8
     pytest
     pytest-cov
@@ -70,7 +56,6 @@ buildPythonPackage rec {
     description = "The last online dictionary CLI framework you need";
     homepage = "https://github.com/zdict/zdict";
     license = licenses.gpl3Plus;
-    platforms = platforms.unix;
     maintainers = with maintainers; [ zendo ];
   };
 }

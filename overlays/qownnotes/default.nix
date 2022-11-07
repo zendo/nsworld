@@ -5,21 +5,30 @@
 
 stdenv.mkDerivation rec {
   pname = "qownnotes";
-  version = "22.11.3";
+  version = "22.11.4";
 
   src = fetchFromGitHub {
     owner = "pbek";
     repo = "QOwnNotes";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-uCObuEnEeiys+66UAueBeR5pB1LkBaaeWYl0MBNz988=";
+    hash = "sha256-hZtkG8y5lzrS6KQxKzEIgKWA2xCHVvQcZxdrbujne+U=";
   };
 
   nativeBuildInputs = [ cmake #qttools
                       ];
 
-  buildInputs = [ qtbase qtsvg qtdeclarative qtxmlpatterns qtwebsockets qtx11extras qttranslations ]
-    ++ lib.optionals stdenv.isLinux [ qtwayland ];
+  buildInputs = [
+    qtbase
+    qtsvg
+    qtdeclarative
+    qtxmlpatterns
+    qtwebsockets
+    qtx11extras
+    qttranslations
+  ] ++ lib.optionals stdenv.isLinux [
+    qtwayland
+  ];
 
   dontWrapQtApps = true;
 
