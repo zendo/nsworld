@@ -7,7 +7,6 @@ final: prev: {
 
   retext = prev.qt6Packages.callPackage ./retext {};
   qownnotes = prev.libsForQt5.callPackage ./qownnotes {};
-  novelwriter = prev.callPackage ./novelwriter {};
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -40,6 +39,7 @@ final: prev: {
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
     (python-final: python-prev: {
       # av = python-final.callPackage ./python-modules/av {};
+      wn = python-final.callPackage ./python-modules/wn {};
       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
     })
   ];
@@ -64,7 +64,6 @@ final: prev: {
 
   # wayland
   hybrid-bar = prev.callPackage ./hybrid-bar {};
-  wcp = prev.callPackage ./wcp {};
 
   # Nodejs
   koodo-reader = prev.callPackage ./koodo-reader {};

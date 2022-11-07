@@ -46,7 +46,6 @@ python3.pkgs.buildPythonApplication rec {
     description = "Sync Bluetooth for dualboot Linux and Windows";
     homepage = "https://github.com/x2es/bt-dualboot";
     license = licenses.mit;
-    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 }

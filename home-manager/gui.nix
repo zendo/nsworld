@@ -13,12 +13,7 @@ in {
   };
 
   home.packages = with pkgs; [
-    # app-icon-preview
-    # converseen
-    # done
     # g4music
-    # radio-cli
-    # sauce
     iotas
     tiptop-py
     retext

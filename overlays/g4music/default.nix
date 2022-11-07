@@ -9,7 +9,7 @@
 , gtk4
 , libadwaita
 , dbus
-  , tracker
+, tracker
 , taglib
 , gst_all_1
 , wrapGAppsHook4
