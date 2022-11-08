@@ -1,30 +1,76 @@
-{ lib, mkYarnPackage, fetchYarnDeps, fetchFromGitHub, electron, makeWrapper }:
+{ lib
+, stdenv
+, fetchurl
+, electron
+, appimageTools
+, makeWrapper
+}:
 
-mkYarnPackage rec {
+stdenv.mkDerivation rec {
   pname = "koodo-reader";
-  version = "1.4.8";
+  version = "1.4.9";
 
-  src = fetchFromGitHub {
-    owner = "troyeguo";
-    repo = pname;
-    rev = "v${version}";
-    hash = "sha256-xlEjhTcto7YCj03OofG1zFzqQBOh+J6xHzy75T5+QlI=";
+  src = fetchurl {
+    url = "https://github.com/troyeguo/koodo-reader/releases/download/v${version}/Koodo-Reader-${version}.AppImage";
+    hash = "sha256-ShjaslhU7WFQyl/xUzgsI7/bawvvC2VdTdS2UNmuvn0=";
   };
 
-  offlineCache = fetchYarnDeps {
-    yarnLock = src + "/yarn.lock";
-    hash = "sha256-2n9qD9AsMPplyhguVFUss7TQYpOpsrw6XXjptbOaYF8=";
-  };
-  packageJSON = ./package.json;
+  nativeBuildInputs = [ makeWrapper ];
 
-  buildPhase = ''
-    runHook preBuild
-    yarn dev
-    runHook postbuild
+  appimageContents = appimageTools.extractType2 {
+    name = "${pname}-${version}";
+    inherit src;
+  };
+
+  dontUnpack = true;
+  dontConfigure = true;
+  dontBuild = true;
+
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/bin $out/share $out/share/applications
+    cp -a ${appimageContents}/{locales,resources} $out/share/
+    cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
+    cp -a ${appimageContents}/usr/share/icons $out/share/
+    substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Exec=AppRun' 'Exec=${pname}'
+    runHook postInstall
   '';
-  distPhase = "true";
-  dontInstall = true;
-  dontFixup = true;
+
+  postFixup = ''
+    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
+      --add-flags $out/share/resources/app.asar \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
+  '';
+
+# { lib, mkYarnPackage, fetchYarnDeps, fetchFromGitHub, electron, makeWrapper }:
+
+# mkYarnPackage rec {
+#   pname = "koodo-reader";
+#   version = "1.4.9";
+
+#   src = fetchFromGitHub {
+#     owner = "troyeguo";
+#     repo = pname;
+#     rev = "v${version}";
+#     hash = "sha256-qLd1UKY5vL3yK07QLR5MOWzoALPC8vkJVpsuzVHLYOU=";
+#   };
+
+#   offlineCache = fetchYarnDeps {
+#     yarnLock = src + "/yarn.lock";
+#     hash = "sha256-2n9qD9AsMPplyhguVFUss7TQYpOpsrw6XXjptbOaYF8=";
+#   };
+#   packageJSON = ./package.json;
+
+#   buildPhase = ''
+#     runHook preBuild
+#     yarn dev
+#     runHook postbuild
+#   '';
+#   distPhase = "true";
+#   dontInstall = true;
+#   dontFixup = true;
 
   # # The spectron dependency has to be removed manually from package.json,
   # # because it requires electron-chromedriver, which wants to download stuff.
@@ -76,11 +122,11 @@ mkYarnPackage rec {
 
     # distPhase = ":"; # disable useless $out/tarballs directory
 
-    meta = with lib; {
-      homepage = "https://github.com/smolck/uivonim";
-      description = "Cross-platform GUI for neovim based on electron";
-      maintainers = with maintainers; [ gebner ];
-      platforms = platforms.unix;
-      license = licenses.agpl3Only;
-    };
+  meta = with lib; {
+    description = "An open-source (FOSS) todo manager based on the todo.txt syntax";
+    homepage = "https://github.com/troyeguo/koodo-reader";
+    license = licenses.mit;
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ zendo ];
+  };
 }

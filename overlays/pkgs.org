@@ -294,12 +294,14 @@ stdenv.mkDerivation rec {
   propagatedNativeBuildInputs = [
   ];
 
-  checkInputs = [ python3.pkgs.pytest ];
+  checkInputs = [ python3.pkgs.pytestCheckHook ];
 
-  checkPhase = ''
-    export HOME=$(mktemp -d)
-    pytest
-  '';
+  # checkInputs = [ python3.pkgs.pytest ];
+
+  # checkPhase = ''
+  #   export HOME=$(mktemp -d)
+  #   pytest
+  # '';
 
   pythonImportsCheck = [
     "wordbook"
@@ -453,30 +455,130 @@ nix shell nixpkgs#shards nixpkgs#crystal2nix
 shards lock
 crystal2nix
 #+end_src
-* appimageTool
-https://github.com/wineee/nur-packages/blob/main/packages/lx-music-desktop/default.nix
+* electron & appimageTool
+https://github.com/X01A/nixos/tree/master/packages/build-electron-appimage
+
+# may fix fonts
+ln -s /run/current-system/sw/share/X11/fonts ~/.local/share/fonts
 
 #+begin_src nix
-{ lib, fetchurl, appimageTools }:
+    makeWrapper ${appimage-run}/bin/appimage-run $out/bin/${pname} \
+      --add-flags "$src"
+#+end_src
 
-appimageTools.wrapType2 rec {
-  name = "clash-verge";
-  version = "1.0.0";
+#+begin_src nix
+{ electron, makeWrapper, appimageTools, stdenv, lib }:
 
-  src = fetchurl {
-    url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.AppImage";
-    hash = "sha256-I9ZbFFPgG7ipPxu02H8W8NqrtfomeNIntBYdDGxyyg4=";
+{ icon
+, source
+, desktopIcon
+, postInstall ? null
+}:
+let
+  appImage = appimageTools.extractType2 {
+    inherit (source) src;
+    name = "${source.pname}-${source.version}";
   };
+in
+stdenv.mkDerivation rec {
+  inherit (source) pname version;
+
+  src = appImage;
+  nativeBuildInputs = [ makeWrapper ];
+
+
+  installPhase = ''
+    # Asar
+    mkdir -p "$out/share/${source.pname}"
+    cp -r resources/app.asar $out/share/${source.pname}
+    # Icon
+    mkdir -p $out/share/icons/hicolor/128x128/apps/
+    cp ${icon} $out/share/icons/hicolor/128x128/apps/
+    install -Dm644 "${desktopIcon}/share/applications/"* \
+      -t $out/share/applications/
+    ${lib.optionalString (postInstall != null) postInstall}
+  '';
+
+  postFixup = ''
+    makeWrapper ${electron}/bin/electron "$out/bin/${source.pname}" \
+      --add-flags "$out/share/${source.pname}/app.asar" \
+      --set ELECTRON_IS_DEV 0 \
+      --set NODE_ENV production
+  '';
+
+  distPhase = ":";
+}
+#+end_src
+
+** templates
+#+begin_src nix
+{ lib
+, stdenv
+, fetchurl
+, makeDesktopItem
+, copyDesktopItems
+, electron
+, makeWrapper
+}:
+let
+  pname = "electron-netease-cloud-music";
+  version = "0.9.36";
+  srcs = {
+    asar = fetchurl {
+      url = "https://github.com/Rocket1184/${pname}/releases/download/v${version}/${pname}_v${version}.asar";
+      sha256 = "sha256-ElJKdI+yuvvjUtqEulyFHz3VvMKXgAbX9QXwRk1oQkg=";
+    };
+    icon = fetchurl {
+      url = "https://raw.githubusercontents.com/Rocket1184/electron-netease-cloud-music/master/assets/icons/icon.svg";
+      sha256 = "sha256-o4YeDsiNsqbGYO1VcvGzYKuZIMpvPSKvG5JkeSzFxUw=";
+    };
+  };
+in
+stdenv.mkDerivation rec {
+  inherit pname version;
+
+  src = srcs.asar;
+
+  desktopItems = [
+    (makeDesktopItem rec {
+      name = "ElectronNCM";
+      exec = pname;
+      icon = pname;
+      comment = meta.description;
+      desktopName = name;
+      genericName = pname;
+      categories = [ "AudioVideo" ];
+    })
+  ];
+
+  nativeBuildInputs = [
+    makeWrapper
+    copyDesktopItems
+  ];
+
+  dontUnpack = true;
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/opt
+    mkdir -p $out/share/pixmaps
+    cp $src $out/opt/${pname}_v${version}.asar
+    cp ${srcs.icon} $out/share/pixmaps/${pname}.svg
+    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
+      --add-flags $out/opt/${pname}_v${version}.asar
+    runHook postInstall
+  '';
 
   meta = with lib; {
-    homepage = "https://github.com/zzzgydi/clash-verge";
-    description = "A Clash GUI based on tauri";
-    maintainers = with maintainers; [zendo];
+    description = "UNOFFICIAL client for music.163.com. Powered by Electron and Vue
+";
+    homepage = "https://ncm-releases.herokuapp.com";
+    license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    license = licenses.gpl3;
   };
 }
 #+end_src
+
 * qt
 qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default.nix
 * font-templates

@@ -15,8 +15,17 @@ in {
   home.packages = with pkgs; [
     # g4music
     iotas
+    # tiptop
     tiptop-py
     retext
+    yesplaymusic
+    # motrix
+
+    # nur
+    # nur.repos.linyinfeng.clash-for-windows
+    # nur.repos.rewine.aliyunpan
+    # nur.repos.rewine.lx-music-desktop
+    nur.repos.rewine.electron-netease-cloud-music
 
     foot
     kitty
@@ -61,6 +70,7 @@ in {
       })
       else spotify
     )
+    # spot # Premium accounts!
     mpv
     # vlc
     # ffmpeg
@@ -99,6 +109,7 @@ in {
     # OFFICE
     # libreoffice-fresh
     # rnote # handwritten note
+    foliate
     paper-note
     endeavour
     ghostwriter
@@ -152,8 +163,8 @@ in {
   ##  Desktop Environment
   #######################################################################
   home.sessionVariables = {
-    GDK_SCALE = lib.optionalString hidpiEnable "2";
-    _JAVA_OPTIONS = lib.optionalString hidpiEnable "-Dsun.java2d.uiScale=2";
+    # GDK_SCALE = lib.optionalString hidpiEnable "2";
+    # _JAVA_OPTIONS = lib.optionalString hidpiEnable "-Dsun.java2d.uiScale=2";
   };
 
   home.file = {

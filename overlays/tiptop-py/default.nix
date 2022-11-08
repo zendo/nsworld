@@ -24,15 +24,9 @@ python3.pkgs.buildPythonApplication rec {
     textual
   ];
 
-  checkInputs = [ python3.pkgs.pytest ];
+  checkInputs = [ python3.pkgs.pytestCheckHook ];
 
-  checkPhase = ''
-    pytest
-  '';
-
-  pythonImportsCheck = [
-    "tiptop"
-  ];
+  pythonImportsCheck = [ "tiptop" ];
 
   # postInstall = ''
   #   mv $out/bin/tiptop $out/bin/tiptop-py
@@ -43,7 +37,7 @@ python3.pkgs.buildPythonApplication rec {
     homepage = "https://github.com/nschloe/tiptop";
     license = licenses.mit;
     # Use a lower priority to shadow `tiptop` package.
-    priority = 1;
+    priority = 5;
     mainProgram = "tiptop";
     maintainers = with maintainers; [ zendo ];
   };

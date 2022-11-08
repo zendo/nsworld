@@ -7,6 +7,7 @@ final: prev: {
 
   retext = prev.qt6Packages.callPackage ./retext {};
   qownnotes = prev.libsForQt5.callPackage ./qownnotes {};
+  smartgit = prev.callPackage ./smartgit {};
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -42,7 +43,6 @@ final: prev: {
       # av = python-final.callPackage ./python-modules/av {};
       wn = python-final.callPackage ./python-modules/wn {};
       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
-      pyspellchecker = python-final.callPackage ./python-modules/pyspellchecker {};
     })
   ];
   python3 =
@@ -67,8 +67,15 @@ final: prev: {
   # wayland
   hybrid-bar = prev.callPackage ./hybrid-bar {};
 
-  # Nodejs
+  # electron / appimage
   koodo-reader = prev.callPackage ./koodo-reader {};
+  fluent-reader = prev.callPackage ./fluent-reader {};
+  yesplaymusic = prev.callPackage ./yesplaymusic {};
+  notesnook = prev.callPackage ./notesnook {};
+  moosync = prev.callPackage ./moosync {};
+  spotube = prev.callPackage ./spotube {}; # failed
+  motrix = prev.callPackage ./motrix {};
+  sleek = prev.callPackage ./sleek {};
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:

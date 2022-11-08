@@ -1,7 +1,7 @@
 { lib
 , buildPythonPackage
 , fetchPypi
-, pytest
+, pytestCheckHook
 , flit-core
 , requests
 , tomli
@@ -21,11 +21,10 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [ requests tomli ];
 
-  checkInputs = [ pytest ];
+  checkInputs = [ pytestCheckHook ];
 
-  checkPhase = ''
+  preCheck = ''
     export HOME=$(mktemp -d)
-    pytest
   '';
 
   pythonImportsCheck = [ "wn" ];
