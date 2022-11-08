@@ -34,14 +34,17 @@ python3.pkgs.buildPythonApplication rec {
     "tiptop"
   ];
 
-  postInstall = ''
-    mv $out/bin/tiptop $out/bin/tiptop-py
-  '';
+  # postInstall = ''
+  #   mv $out/bin/tiptop $out/bin/tiptop-py
+  # '';
 
   meta = with lib; {
     description = "Command-line system monitoring tool in the spirit of top";
     homepage = "https://github.com/nschloe/tiptop";
     license = licenses.mit;
+    # Use a lower priority to shadow `tiptop` package.
+    priority = 1;
+    mainProgram = "tiptop";
     maintainers = with maintainers; [ zendo ];
   };
 }

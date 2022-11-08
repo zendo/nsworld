@@ -24,7 +24,7 @@ in {
     # wezterm
     warp
     remmina
-    qv2ray
+    # qv2ray
     # clash
     proxychains-ng
     # nur.repos.linyinfeng.clash-for-windows
@@ -74,6 +74,7 @@ in {
     # tagger
     # jamesdsp
     # ciano
+    lux
     # media-downloader
     # spotdl
     # spotiflyer

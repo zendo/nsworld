@@ -33,6 +33,7 @@ final: prev: {
   iotas = prev.callPackage ./iotas {};
   auto-editor = prev.callPackage ./auto-editor {};
   zdict = prev.callPackage ./zdict {};
+  wordle-aid = prev.callPackage ./wordle-aid {};
 
   # wordbook = prev.callPackage ./wordbook { };
   # Python Module Overlays
@@ -41,6 +42,7 @@ final: prev: {
       # av = python-final.callPackage ./python-modules/av {};
       wn = python-final.callPackage ./python-modules/wn {};
       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
+      pyspellchecker = python-final.callPackage ./python-modules/pyspellchecker {};
     })
   ];
   python3 =

@@ -33,13 +33,23 @@
 ;; Disable GUI elements
 (add-hook 'before-make-frame-hook
           #'(lambda ()
-              (setq inhibit-splash-screen t)
-              (setq use-file-dialog nil)
-              (setq initial-frame-alist (quote ((fullscreen . maximized))))
-              ;; (setq default-frame-alist
-              ;;       '((height . 48)
-              ;;         (width . 83)))
-              ))
+              (setq inhibit-splash-screen t
+                    inhibit-startup-screen t
+                    inhibit-startup-message t ;关闭欢迎界面
+                    inhibit-startup-echo-area-message t ;关闭 mminibuffer 欢迎消息
+                    initial-scratch-message  nil
+                    initial-major-mode 'fundamental-mode
+                    ;; inhibit-default-init t ;default.el
+                    use-file-dialog nil
+                    initial-frame-alist (quote ((fullscreen . maximized)))
+                    ;; (setq default-frame-alist
+                    ;;       '((height . 48)
+                    ;;         (width . 83)))
+                    )))
+
+(defun display-startup-echo-area-message ()
+  "Delete starup message"
+  (message ""))
 
 (setq frame-inhibit-implied-resize t)
 (setq site-run-file nil)
