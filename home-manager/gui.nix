@@ -19,7 +19,8 @@ in {
     tiptop-py
     retext
     yesplaymusic
-    # motrix
+    motrix
+    museeks
 
     # nur
     # nur.repos.linyinfeng.clash-for-windows
@@ -74,8 +75,8 @@ in {
     mpv
     # vlc
     # ffmpeg
-    audacious
-    # rhythmbox
+    # audacious
+    rhythmbox
     # radioboat
     goodvibes
     # netease-cloud-music-gtk
@@ -164,7 +165,7 @@ in {
   #######################################################################
   home.sessionVariables = {
     # GDK_SCALE = lib.optionalString hidpiEnable "2";
-    # _JAVA_OPTIONS = lib.optionalString hidpiEnable "-Dsun.java2d.uiScale=2";
+    _JAVA_OPTIONS = lib.optionalString hidpiEnable "-Dsun.java2d.uiScale=2";
   };
 
   home.file = {

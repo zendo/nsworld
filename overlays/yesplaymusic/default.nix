@@ -1,12 +1,6 @@
-{ lib
-, stdenv
-, fetchurl
-, electron
-, appimageTools
-, makeWrapper
-}:
+{ lib, fetchurl, appimageTools }:
 
-stdenv.mkDerivation rec {
+let
   pname = "yesplaymusic";
   version = "0.4.5";
 
@@ -15,33 +9,25 @@ stdenv.mkDerivation rec {
     hash = "sha256-9Jj4VqrEIsx2oFUoQaPEKaEcyKDR5SQF9tJ2r2w62CM=";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  appimageContents = appimageTools.extractType2 { inherit pname version src; };
+in
+appimageTools.wrapType2 {
+  inherit pname version src;
 
-  appimageContents = appimageTools.extractType2 {
-    name = "${pname}-${version}";
-    inherit src;
-  };
+  # extraPkgs = pkgs: with pkgs; [
+  #   libsecret
+  # ];
 
-  dontUnpack = true;
-  dontConfigure = true;
-  dontBuild = true;
+  extraInstallCommands = ''
+    mv $out/bin/${pname}-${version} $out/bin/${pname}
 
-  installPhase = ''
-    runHook preInstall
-
-    mkdir -p $out/bin $out/share $out/share/applications
-    cp -a ${appimageContents}/{locales,resources} $out/share/
-    cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
+    mkdir -p $out/share/${pname}
+    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
     cp -a ${appimageContents}/usr/share/icons $out/share/
+    install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+
     substituteInPlace $out/share/applications/${pname}.desktop \
       --replace 'Exec=AppRun' 'Exec=${pname}'
-    runHook postInstall
-  '';
-
-  postFixup = ''
-    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/share/resources/app.asar \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
   '';
 
     meta = with lib; {

@@ -7,7 +7,22 @@ final: prev: {
 
   retext = prev.qt6Packages.callPackage ./retext {};
   qownnotes = prev.libsForQt5.callPackage ./qownnotes {};
-  smartgit = prev.callPackage ./smartgit {};
+
+  # electron / appimage
+  koodo-reader = prev.callPackage ./koodo-reader {};
+  fluent-reader = prev.callPackage ./fluent-reader {};
+  yesplaymusic = prev.callPackage ./yesplaymusic {};
+  notesnook = prev.callPackage ./notesnook {};
+  listen1 = prev.callPackage ./listen1 {};
+  moosync = prev.callPackage ./moosync {};
+  museeks = prev.callPackage ./museeks {};
+  motrix = prev.callPackage ./motrix {};
+  linked = prev.callPackage ./linked {};
+  sleek = prev.callPackage ./sleek {};
+  clash-verge = prev.callPackage ./clash-verge {}; # WIP!!!
+
+  # deb / rpm
+  abricotine = prev.callPackage ./abricotine {}; # bug
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -35,8 +50,8 @@ final: prev: {
   auto-editor = prev.callPackage ./auto-editor {};
   zdict = prev.callPackage ./zdict {};
   wordle-aid = prev.callPackage ./wordle-aid {};
+  wordbook = prev.callPackage ./wordbook { };
 
-  # wordbook = prev.callPackage ./wordbook { };
   # Python Module Overlays
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
     (python-final: python-prev: {
@@ -67,15 +82,8 @@ final: prev: {
   # wayland
   hybrid-bar = prev.callPackage ./hybrid-bar {};
 
-  # electron / appimage
-  koodo-reader = prev.callPackage ./koodo-reader {};
-  fluent-reader = prev.callPackage ./fluent-reader {};
-  yesplaymusic = prev.callPackage ./yesplaymusic {};
-  notesnook = prev.callPackage ./notesnook {};
-  moosync = prev.callPackage ./moosync {};
-  spotube = prev.callPackage ./spotube {}; # failed
-  motrix = prev.callPackage ./motrix {};
-  sleek = prev.callPackage ./sleek {};
+  # flutter
+  spotube = prev.callPackage ./spotube {}; # WIP!!!
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:

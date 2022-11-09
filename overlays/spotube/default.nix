@@ -1,59 +1,57 @@
 { lib
 , stdenv
-, fetchurl
-, electron
-, appimageTools
-, appimage-run
-, makeWrapper
+, fetchFromGitHub
+, flutter
+, cmake
+, pkg-config
 , gtk3
 , glib
+, makeWrapper
 }:
-# dart failed!!!
-stdenv.mkDerivation rec {
+
+flutter.mkFlutterApp rec {
   pname = "spotube";
   version = "2.5.0";
 
-  src = fetchurl {
-    url = "https://github.com/KRTirtho/${pname}/releases/download/v${version}/Spotube-linux-x86_64.AppImage";
-    hash = "sha256-B9oWApN+Exuf3FbbeRQA8D7iD+N04V9mbIOeXExKkr4=";
+  src = fetchFromGitHub {
+    owner = "KRTirtho";
+    repo = pname;
+    rev = "v${version}";
+    hash = "sha256-gLDTGKpdmLQOnpsUqd5H1LwqZ2+255gdRMi4rfp8fOI=";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  vendorHash = "sha256-1PDX023WXRmRe/b1L+6Du91BvGwYNp3YATqYSQdPrRY=";
 
-  appimageContents = appimageTools.extractType2 {
-    name = "${pname}-${version}";
-    inherit src;
-  };
+  # sourceRoot = "source/linux";
 
-  dontUnpack = true;
-  dontConfigure = true;
-  dontBuild = true;
-
-  installPhase = ''
-    runHook preInstall
-
-    mkdir -p $out/bin $out/share $out/share/applications
-    # cp -a ${appimageContents}/{locales,resources} $out/share/
-    # cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
-    cp -a ${appimageContents}/usr/share/icons $out/share/
-    # substituteInPlace $out/share/applications/${pname}.desktop \
-      # --replace 'Exec=AppRun' 'Exec=${pname}'
-    runHook postInstall
-  '';
-
-  # postFixup = ''
-  #   makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-  #     --add-flags $out/share/resources/app.asar \
-  #     --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
-  #       # "${lib.strings.makeLibraryPath [gtk3 glib]}"
+  # preBuild = ''
+  #   export HOME=$(mktemp -d)
   # '';
-  # # postFixup = ''
-  # #   makeWrapper ${appimage-run}/bin/appimage-run $out/bin/${pname} \
-  # #     --add-flags "$src" \
-  # #     --prefix LD_LIBRARY_PATH : "${lib.strings.makeLibraryPath [gtk3 glib]}"
-  # # '';
 
-    meta = with lib; {
+  nativeBuildInputs = [
+    cmake
+    pkg-config
+    makeWrapper
+  ];
+
+  buildInputs = [
+    glib
+    gtk3
+  ];
+
+#   flutterExtraFetchCommands = ''
+#     M=$(echo $TMP/.pub-cache/hosted/pub.dartlang.org/matrix-*)
+#     sed -i $M/scripts/prepare.sh \
+#       -e "s|/usr/lib/x86_64-linux-gnu/libolm.so.3|/bin/sh|g"  \
+#       -e "s|if which flutter >/dev/null; then|exit; if which flutter >/dev/null; the
+# n|g"
+
+#     pushd $M
+#     bash scripts/prepare.sh
+#     popd
+#   '';
+
+  meta = with lib; {
     description = "A lightweight free Spotify crossplatform-client desktop_computer";
     homepage = "https://github.com/KRTirtho/spotube";
     license = licenses.bsd3;

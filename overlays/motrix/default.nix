@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin $out/share $out/share/applications
-    cp -a ${appimageContents}/{locales,resources} $out/share/
+    cp -a ${appimageContents}/resources $out/share/${pname}
     cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
     cp -a ${appimageContents}/usr/share/icons $out/share/
     substituteInPlace $out/share/applications/${pname}.desktop \
@@ -39,13 +39,15 @@ stdenv.mkDerivation rec {
   '';
 
   postFixup = ''
-    makeWrapper ${appimage-run}/bin/appimage-run $out/bin/${pname} \
-      --add-flags "$src"
+    makeWrapper ${electron}/bin/electron "$out/bin/${pname}" \
+      --add-flags "$out/share/${pname}/app.asar" \
+      --set ELECTRON_IS_DEV 0 \
+      --set NODE_ENV production
   '';
 
     meta = with lib; {
-    description = "A simple music player capable of playing local audio or from Youtube or Spotify";
-    homepage = "https://github.com/qier222/YesPlayMusic";
+    description = "A full-featured download manager";
+    homepage = "https://motrix.app";
     license = licenses.mit;
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];

@@ -28,9 +28,8 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-
-    mkdir -p $out/bin $out/share $out/share/applications
-    cp -a ${appimageContents}/{locales,resources} $out/share/
+    mkdir -p $out/bin $out/share/${pname} $out/share/applications
+    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
     cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
     cp -a ${appimageContents}/usr/share/icons $out/share/
     substituteInPlace $out/share/applications/${pname}.desktop \
@@ -40,7 +39,7 @@ stdenv.mkDerivation rec {
 
   postFixup = ''
     makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/share/resources/app.asar \
+      --add-flags $out/share/${pname}/resources/app.asar \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
   '';
 

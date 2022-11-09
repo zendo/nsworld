@@ -456,126 +456,146 @@ shards lock
 crystal2nix
 #+end_src
 * electron & appimageTool
-https://github.com/X01A/nixos/tree/master/packages/build-electron-appimage
+https://github.com/nix-community/nur-combined/blob/master/repos/yes/electronAppImage/default.nix
 
-# may fix fonts
+# maybe fix fonts
 ln -s /run/current-system/sw/share/X11/fonts ~/.local/share/fonts
 
 #+begin_src nix
     makeWrapper ${appimage-run}/bin/appimage-run $out/bin/${pname} \
       --add-flags "$src"
-#+end_src
 
-#+begin_src nix
-{ electron, makeWrapper, appimageTools, stdenv, lib }:
+    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
+      --add-flags $out/opt/${pname}_v${version}.asar
 
-{ icon
-, source
-, desktopIcon
-, postInstall ? null
-}:
-let
-  appImage = appimageTools.extractType2 {
-    inherit (source) src;
-    name = "${source.pname}-${source.version}";
-  };
-in
-stdenv.mkDerivation rec {
-  inherit (source) pname version;
-
-  src = appImage;
-  nativeBuildInputs = [ makeWrapper ];
-
-
-  installPhase = ''
-    # Asar
-    mkdir -p "$out/share/${source.pname}"
-    cp -r resources/app.asar $out/share/${source.pname}
-    # Icon
-    mkdir -p $out/share/icons/hicolor/128x128/apps/
-    cp ${icon} $out/share/icons/hicolor/128x128/apps/
-    install -Dm644 "${desktopIcon}/share/applications/"* \
-      -t $out/share/applications/
-    ${lib.optionalString (postInstall != null) postInstall}
-  '';
-
-  postFixup = ''
     makeWrapper ${electron}/bin/electron "$out/bin/${source.pname}" \
       --add-flags "$out/share/${source.pname}/app.asar" \
       --set ELECTRON_IS_DEV 0 \
       --set NODE_ENV production
-  '';
-
-  distPhase = ":";
-}
 #+end_src
 
-** templates
+** templates - wrapType2
+#+begin_src nix
+{ lib, fetchurl, appimageTools }:
+
+let
+  pname = "museeks";
+  version = "0.13.1";
+
+  src = fetchurl {
+    url = "https://github.com/martpie/museeks/releases/download/${version}/museeks-x86_64.AppImage";
+    hash = "sha256-LvunhCFmpv00TnXzWjp3kQUAhoKpmp6pqKgcaUqZV+o=";
+  };
+
+  appimageContents = appimageTools.extractType2 { inherit pname version src; };
+in
+appimageTools.wrapType2 {
+  inherit pname version src;
+
+  extraInstallCommands = ''
+    mv $out/bin/${pname}-${version} $out/bin/${pname}
+
+    mkdir -p $out/share/${pname}
+    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
+    cp -a ${appimageContents}/usr/share/icons $out/share/
+    install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+
+    substituteInPlace $out/share/applications/${pname}.desktop \
+    --replace 'Exec=AppRun' 'Exec=${pname}'
+  '';
+
+  meta = with lib; {
+    description = "A simple, clean and cross-platform music player";
+    homepage = "https://github.com/martpie/museeks";
+    license = licenses.mit;
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ zendo ];
+  };
+}
+#+end_src
+** templates - stdenv
 #+begin_src nix
 { lib
 , stdenv
 , fetchurl
-, makeDesktopItem
-, copyDesktopItems
 , electron
+, appimageTools
 , makeWrapper
 }:
-let
-  pname = "electron-netease-cloud-music";
-  version = "0.9.36";
-  srcs = {
-    asar = fetchurl {
-      url = "https://github.com/Rocket1184/${pname}/releases/download/v${version}/${pname}_v${version}.asar";
-      sha256 = "sha256-ElJKdI+yuvvjUtqEulyFHz3VvMKXgAbX9QXwRk1oQkg=";
-    };
-    icon = fetchurl {
-      url = "https://raw.githubusercontents.com/Rocket1184/electron-netease-cloud-music/master/assets/icons/icon.svg";
-      sha256 = "sha256-o4YeDsiNsqbGYO1VcvGzYKuZIMpvPSKvG5JkeSzFxUw=";
-    };
-  };
-in
+
 stdenv.mkDerivation rec {
-  inherit pname version;
+  pname = "moosync";
+  version = "6.0.0";
 
-  src = srcs.asar;
+  src = fetchurl {
+    url = "https://github.com/Moosync/Moosync/releases/download/v${version}/Moosync-${version}-linux-x86_64.AppImage";
+    hash = "sha256-mnrAKqNgiDvaAvOvPILvbAue3olgNfLyyFZovUl7ou8=";
+  };
 
-  desktopItems = [
-    (makeDesktopItem rec {
-      name = "ElectronNCM";
-      exec = pname;
-      icon = pname;
-      comment = meta.description;
-      desktopName = name;
-      genericName = pname;
-      categories = [ "AudioVideo" ];
-    })
-  ];
+  nativeBuildInputs = [ makeWrapper ];
 
-  nativeBuildInputs = [
-    makeWrapper
-    copyDesktopItems
-  ];
+  appimageContents = appimageTools.extractType2 {
+    name = "${pname}-${version}";
+    inherit src;
+  };
 
   dontUnpack = true;
+  dontConfigure = true;
+  dontBuild = true;
 
   installPhase = ''
     runHook preInstall
-    mkdir -p $out/opt
-    mkdir -p $out/share/pixmaps
-    cp $src $out/opt/${pname}_v${version}.asar
-    cp ${srcs.icon} $out/share/pixmaps/${pname}.svg
-    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/opt/${pname}_v${version}.asar
+    mkdir -p $out/bin $out/share/${pname} $out/share/applications
+    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
+    cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
+    cp -a ${appimageContents}/usr/share/icons $out/share/
+    substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Exec=AppRun' 'Exec=${pname}'
     runHook postInstall
   '';
 
-  meta = with lib; {
-    description = "UNOFFICIAL client for music.163.com. Powered by Electron and Vue
-";
-    homepage = "https://ncm-releases.herokuapp.com";
-    license = licenses.gpl3Plus;
+  postFixup = ''
+    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
+      --add-flags $out/share/${pname}/resources/app.asar \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
+  '';
+
+    meta = with lib; {
+    description = "A simple music player capable of playing local audio or from Youtube or Spotify";
+    homepage = "https://moosync.app/";
+    license = licenses.bsd3;
     platforms = platforms.linux;
+    maintainers = with maintainers; [ zendo ];
   };
+}
+
+#+end_src
+** deb templates
+#+begin_src nix
+  # 解压 DEB 包
+  unpackPhase = ''
+    ar x ${src}
+    tar xf data.tar.xz
+  '';
+
+  # makeWrapper 可以自动生成一个调用其它命令的命令（也就是 wrapper），并且可以在原命令上修改参数、环境变量等
+  buildInputs = [ makeWrapper ];
+
+  installPhase = ''
+    mkdir -p $out/bin
+
+    # 替换菜单项目（desktop 文件）中的路径
+    cp -r usr/share $out/share
+    sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
+
+    # 复制出客户端的 Javascript 部分，其它的不要了
+    cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
+
+    # 生成 bilibili 命令，运行这个命令时会调用 electron 加载客户端的 Javascript 包（$out/opt/app.asar）
+    makeWrapper ${electron}/bin/electron $out/bin/bilibili \
+      --argv0 "bilibili" \
+      --add-flags "$out/opt/app.asar"
+  '';
 }
 #+end_src
 
