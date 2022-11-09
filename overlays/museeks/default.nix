@@ -10,8 +10,7 @@ let
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
-in
-appimageTools.wrapType2 {
+in appimageTools.wrapType2 {
   inherit pname version src;
 
   extraInstallCommands = ''
@@ -23,14 +22,14 @@ appimageTools.wrapType2 {
     install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
 
     substituteInPlace $out/share/applications/${pname}.desktop \
-    --replace 'Exec=AppRun' 'Exec=${pname}'
+      --replace 'Exec=AppRun' 'Exec=${pname}'
   '';
 
   meta = with lib; {
     description = "A simple, clean and cross-platform music player";
     homepage = "https://github.com/martpie/museeks";
     license = licenses.mit;
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };
 }

@@ -30,7 +30,7 @@ appimageTools.wrapType2 {
     description = "Modern desktop RSS reader built with Electron, React, and Fluent UI";
     homepage = "https://hyliu.me/fluent-reader/";
     license = licenses.bsd3;
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };
 }

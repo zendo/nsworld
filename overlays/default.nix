@@ -13,6 +13,7 @@ final: prev: {
   fluent-reader = prev.callPackage ./fluent-reader {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
   notesnook = prev.callPackage ./notesnook {};
+  leafview = prev.callPackage ./leafview {};
   listen1 = prev.callPackage ./listen1 {};
   moosync = prev.callPackage ./moosync {};
   museeks = prev.callPackage ./museeks {};

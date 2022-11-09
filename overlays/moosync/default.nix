@@ -1,12 +1,6 @@
-{ lib
-, stdenv
-, fetchurl
-, electron
-, appimageTools
-, makeWrapper
-}:
+{ lib, fetchurl, appimageTools }:
 
-stdenv.mkDerivation rec {
+let
   pname = "moosync";
   version = "6.0.0";
 
@@ -15,39 +9,27 @@ stdenv.mkDerivation rec {
     hash = "sha256-mnrAKqNgiDvaAvOvPILvbAue3olgNfLyyFZovUl7ou8=";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  appimageContents = appimageTools.extractType2 { inherit pname version src; };
+in appimageTools.wrapType2 {
+  inherit pname version src;
 
-  appimageContents = appimageTools.extractType2 {
-    name = "${pname}-${version}";
-    inherit src;
-  };
+  extraInstallCommands = ''
+    mv $out/bin/${pname}-${version} $out/bin/${pname}
 
-  dontUnpack = true;
-  dontConfigure = true;
-  dontBuild = true;
-
-  installPhase = ''
-    runHook preInstall
-    mkdir -p $out/bin $out/share/${pname} $out/share/applications
+    mkdir -p $out/share/${pname}
     cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
-    cp -a ${appimageContents}/${pname}.desktop $out/share/applications/
     cp -a ${appimageContents}/usr/share/icons $out/share/
+    install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+
     substituteInPlace $out/share/applications/${pname}.desktop \
       --replace 'Exec=AppRun' 'Exec=${pname}'
-    runHook postInstall
   '';
 
-  postFixup = ''
-    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/share/${pname}/resources/app.asar \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
-  '';
-
-    meta = with lib; {
+  meta = with lib; {
     description = "A simple music player capable of playing local audio or from Youtube or Spotify";
-    homepage = "https://moosync.app/";
+    homepage = "https://moosync.app";
     license = licenses.bsd3;
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };
 }

@@ -19,6 +19,8 @@ in {
     tiptop-py
     retext
     yesplaymusic
+    fluent-reader
+    raven-reader
     motrix
     museeks
 

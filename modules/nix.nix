@@ -6,6 +6,7 @@
 }: {
   nixpkgs.config = {
     allowUnfree = true;
+    allowInsecure = true;
     # allowBroken = true;
     # allowUnsupportedSystem = true;
   };

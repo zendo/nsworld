@@ -8,7 +8,6 @@ inputs @ {pkgs}: {
       meson
       ninja
       pkg-config
-      qt5.qtbase
 
       # qt5.qtbase
       # qt5.qttools
@@ -23,6 +22,9 @@ inputs @ {pkgs}: {
       # xorg.libXi
       # xorg.libXinerama
     ];
+    shellHook = ''
+      zsh && exit
+    '';
   };
 
   node = pkgs.mkShell {

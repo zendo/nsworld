@@ -30,7 +30,7 @@ appimageTools.wrapType2 {
     description = "A simple, clean and cross-platform music player";
     homepage = "https://github.com/listen1/listen1_desktop";
     license = licenses.mit;
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };
 }

@@ -30,11 +30,11 @@ appimageTools.wrapType2 {
       --replace 'Exec=AppRun' 'Exec=${pname}'
   '';
 
-    meta = with lib; {
+  meta = with lib; {
     description = "A simple music player capable of playing local audio or from Youtube or Spotify";
     homepage = "https://github.com/qier222/YesPlayMusic";
     license = licenses.mit;
-    platforms = platforms.linux;
+    platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };
 }

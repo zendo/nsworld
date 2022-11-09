@@ -1,16 +1,17 @@
 { lib, fetchurl, appimageTools }:
 
 let
-  pname = "motrix";
-  version = "1.6.11";
+  pname = "leafview";
+  version = "2.2.12";
 
   src = fetchurl {
-    url = "https://github.com/agalwood/Motrix/releases/download/v${version}/Motrix-${version}.AppImage";
-    hash = "sha256-tE2Q7NM+cQOg+vyqyfRwg05EOMQWhhggTA6S+VT+SkM=";
+    url = "https://github.com/sprout2000/leafview/releases/download/v${version}/LeafView-${version}-linux-x86_64.AppImage";
+    hash = "sha256-u1lbGu0haPIbBD+VPBMAdi1CYE36mvE1bAh8nW/RSxo=";
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
-in appimageTools.wrapType2 {
+in
+appimageTools.wrapType2 {
   inherit pname version src;
 
   extraInstallCommands = ''
@@ -22,14 +23,14 @@ in appimageTools.wrapType2 {
     install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
 
     substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace 'Exec=AppRun' 'Exec=${pname}'
+    --replace 'Exec=AppRun' 'Exec=${pname}'
   '';
 
   meta = with lib; {
-    description = "A full-featured download manager";
-    homepage = "https://motrix.app";
+    description = "A minimalist image viewer based on Leaflet.js and Electron";
+    homepage = "https://github.com/sprout2000/leafview";
     license = licenses.mit;
-    platforms = [ "x86_64-linux" ];
-    maintainers = with maintainers; [ zendo ];
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ nobody ];
   };
 }

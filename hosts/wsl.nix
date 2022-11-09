@@ -12,6 +12,7 @@ in {
     enable = true;
     defaultUser = "${username}";
     startMenuLaunchers = true;
+    # wslConf.automount.root = "/mnt"; # defult
     # Not working!!
     # nativeSystemd = true;
 

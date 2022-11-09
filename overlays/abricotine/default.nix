@@ -61,7 +61,7 @@ stdenv.mkDerivation rec {
   ];
 
   postFixup = ''
-    makeWrapper $out/opt/Abricotine/abricotine $out/bin/abricotine \
+    makeWrapper $out/opt/Abricotine/${pname} $out/bin/${pname} \
     --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ] }" \
     "''${gappsWrapperArgs[@]}"
   '';
