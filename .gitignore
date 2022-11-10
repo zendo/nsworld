@@ -1,7 +1,6 @@
 /result
 /result-bin
 /result-man
-*.qcow2
-/modules/result
-/.direnv/
 /overlays/_sources
+/.direnv
+*.qcow2

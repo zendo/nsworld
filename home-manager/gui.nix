@@ -14,21 +14,19 @@ in {
 
   home.packages = with pkgs; [
     # g4music
-    iotas
+    # iotas
     # tiptop
     tiptop-py
     retext
     yesplaymusic
     fluent-reader
-    raven-reader
     motrix
     museeks
 
-    # nur
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
     # nur.repos.rewine.lx-music-desktop
-    nur.repos.rewine.electron-netease-cloud-music
+    # nur.repos.rewine.electron-netease-cloud-music
 
     foot
     kitty

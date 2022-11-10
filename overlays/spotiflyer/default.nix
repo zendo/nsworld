@@ -31,13 +31,13 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    makeWrapper ${jre}/bin/java $out/bin/spotiflyer --add-flags "-jar $src"
+    makeWrapper ${jre}/bin/java $out/bin/${pname} --add-flags "-jar $src"
     install -Dm444 $icon $out/share/icons/hicolor/scalable/apps/SpotiFlyer.svg
     runHook postInstall
   '';
 
   postInstall = ''
-    wrapProgram $out/bin/spotiflyer --prefix PATH : ${lib.makeBinPath [  ffmpeg-full ]}
+    wrapProgram $out/bin/${pname} --prefix PATH : ${lib.makeBinPath [  ffmpeg-full ]}
   '';
 
   desktopItems = [

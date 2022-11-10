@@ -6,6 +6,7 @@ fetchzip rec {
   version = "1.000";
 
   url = "https://github.com/Buernia/Zhudou-Sans/archive/refs/tags/v${version}.tar.gz";
+  hash = "sha256-DFTK+eKhfRCbOrgTBlJeLD5Mdi0VYwullbo2poaLIKw=";
 
   postFetch = ''
     mkdir -p $out/share/fonts/truetype
@@ -17,7 +18,6 @@ fetchzip rec {
     shopt -u extglob dotglob
   '';
 
-  hash = "sha256-DFTK+eKhfRCbOrgTBlJeLD5Mdi0VYwullbo2poaLIKw=";
 
   meta = with lib; {
     description = "A font family for CJK symbols and punctuation, derived from Noto Sans";

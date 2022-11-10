@@ -6,7 +6,6 @@ final: prev: {
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   retext = prev.qt6Packages.callPackage ./retext {};
-  qownnotes = prev.libsForQt5.callPackage ./qownnotes {};
 
   # electron / appimage
   koodo-reader = prev.callPackage ./koodo-reader {};
@@ -23,6 +22,7 @@ final: prev: {
   clash-verge = prev.callPackage ./clash-verge {}; # WIP!!!
 
   # deb / rpm
+  xmind = prev.callPackage ./xmind {};
   abricotine = prev.callPackage ./abricotine {}; # bug
 
   # C
@@ -75,6 +75,7 @@ final: prev: {
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer {};
+  mindustry = prev.callPackage ./mindustry {}; # game
 
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
@@ -85,6 +86,7 @@ final: prev: {
 
   # flutter
   spotube = prev.callPackage ./spotube {}; # WIP!!!
+
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:
