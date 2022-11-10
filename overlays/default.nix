@@ -3,7 +3,7 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   zhudou-sans = prev.callPackage ./zhudou-sans {};
-  rime-zhwiki = prev.callPackage ./rime-zhwiki {};
+  rime-easy-en = prev.callPackage ./rime-easy-en {};
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
   fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};

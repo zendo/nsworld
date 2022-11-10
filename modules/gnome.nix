@@ -78,8 +78,9 @@
     fcitx5.enableRimeData= true;
     fcitx5.addons = with pkgs; [
       fcitx5-rime
-      rime-aurora-pinyin
       fcitx5-breeze
+      rime-easy-en
+      rime-aurora-pinyin
       # fcitx5-chinese-addons
     ];
 

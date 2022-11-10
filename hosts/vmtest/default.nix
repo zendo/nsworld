@@ -12,7 +12,7 @@
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
-    # ../../modules/gnome.nix
+    ../../modules/gnome.nix
     # ../../modules/kde.nix
     # ../../modules/wm-sway.nix
   ];
@@ -24,6 +24,7 @@
   environment.systemPackages = with pkgs; [
     fluent-reader
 
+    git
     firefox
     gnomeExtensions.appindicator
   ];
@@ -37,7 +38,7 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      plasma5.enable = true;
+      # plasma5.enable = true;
       # gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;

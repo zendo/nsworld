@@ -20,4 +20,9 @@ patch:
   # 英文词库定制
   # https://github.com/BlindingDark/rime-easy-en
   "easy_en/enable_sentence": false
+
 __patch:
+# Rx: BlindingDark/rime-easy-en:customize:schema=aurora_pinyin {
+  - patch/+:
+      __include: easy_en:/patch
+# }
