@@ -17,7 +17,8 @@ if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
 fi
 
 ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.local/share/fcitx5/rime/default.custom.yaml
-ln -sfv "$this_dir"/luna_pinyin_simp.custom.yaml "$HOME"/.local/share/fcitx5/rime/luna_pinyin_simp.custom.yaml
-ln -sfv "$this_dir"/luna_pinyin_simp.extended.dict.yaml "$HOME"/.local/share/fcitx5/rime/luna_pinyin_simp.extended.dict.yaml
+
+# ln -sfv "$this_dir"/luna_pinyin_simp.custom.yaml "$HOME"/.local/share/fcitx5/rime/luna_pinyin_simp.custom.yaml
+# ln -sfv "$this_dir"/luna_pinyin_simp.extended.dict.yaml "$HOME"/.local/share/fcitx5/rime/luna_pinyin_simp.extended.dict.yaml
 
 ln -sfv "$this_dir"/aurora_pinyin.custom.yaml "$HOME"/.local/share/fcitx5/rime/aurora_pinyin.custom.yaml

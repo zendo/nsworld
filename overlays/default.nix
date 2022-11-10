@@ -3,22 +3,23 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   zhudou-sans = prev.callPackage ./zhudou-sans {};
+  fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
   rime-easy-en = prev.callPackage ./rime-easy-en {};
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
-  fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   retext = prev.qt6Packages.callPackage ./retext {};
 
   # electron / appimage
-  koodo-reader = prev.callPackage ./koodo-reader {};
   fluent-reader = prev.callPackage ./fluent-reader {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
+  koodo-reader = prev.callPackage ./koodo-reader {};
   notesnook = prev.callPackage ./notesnook {};
   leafview = prev.callPackage ./leafview {};
   listen1 = prev.callPackage ./listen1 {};
   moosync = prev.callPackage ./moosync {};
   museeks = prev.callPackage ./museeks {};
+  upscayl = prev.callPackage ./upscayl {};
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
   sleek = prev.callPackage ./sleek {};
@@ -26,6 +27,7 @@ final: prev: {
 
   # deb / rpm
   xmind = prev.callPackage ./xmind {};
+  v2raya = prev.callPackage ./v2raya {};
   abricotine = prev.callPackage ./abricotine {}; # bug
 
   # C
@@ -42,7 +44,6 @@ final: prev: {
   tiny-games = prev.callPackage ./tiny-games {};
 
   # Go
-  v2raya = prev.callPackage ./v2raya {};
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher {};

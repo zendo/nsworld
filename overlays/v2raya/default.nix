@@ -1,71 +1,84 @@
-{ lib
-, fetchFromGitHub
-, mkYarnPackage
-, fetchYarnDeps
-, buildGoModule
+{ atomEnv
+, autoPatchelfHook
+, dpkg
+, fetchurl
+, makeDesktopItem
 , makeWrapper
+, lib
+, stdenv
+, udev
+, wrapGAppsHook
 , v2ray
 , v2ray-geoip
 , v2ray-domain-list-community
 , symlinkJoin
 }:
-let
+
+stdenv.mkDerivation rec {
   pname = "v2raya";
-  version = "unstable-2022-10-04";
-  src = fetchFromGitHub {
-    owner = "v2rayA";
-    repo = "v2rayA";
-    rev = "00b62cfdd46e00cfb625758bd58bc595e9331ead";
-    sha256 = "sha256-+++jXjSEf+WBm5S1efLMTO+/+1Lx0zjZ2fRR44FNdz8=";
+  version = "1.5.9.1698.1";
+
+  src = fetchurl {
+    url = "https://github.com/v2rayA/v2rayA/releases/download/v${version}/installer_debian_amd64_${version}.deb";
+    hash = "sha256-iQax3ROf281D8LVXzZ1QgWLjiky+pQ3kWyRFUzjRHlE=";
   };
-  web = mkYarnPackage {
-    inherit pname version;
-    src = "${src}/gui";
 
-    postPatch = ''
-      substituteInPlace gui/yarn.lock \
-        --replace "sha512-DJ8vmYyRdq8oX2l1/sGNmJjAD1KGaVvhtNUtHPJLbXpe5GoZut5UFQLM4FoFK9eyoZA1Y7chJEmEkNfs9Bdjrw==" "60678ac22711bb7af8adc2efc449443885b81ee1463fd160e22dc99249e997bad3cdb7b60284026f4a3f0267ace874fa0876e09d4f15052a75859ef672fd6670"
-    '';
-
-    offlineCache = fetchYarnDeps {
-      yarnLock = src + "/gui/yarn.lock";
-      sha256 = "";
-    };
-    packageJSON = ./package.json;
-
-    # https://github.com/webpack/webpack/issues/14532
-    buildPhase = ''
-      export NODE_OPTIONS=--openssl-legacy-provider
-      ln -s $src/postcss.config.js postcss.config.js
-      OUTPUT_DIR=$out yarn --offline build
-    '';
-    distPhase = "true";
-    dontInstall = true;
-    dontFixup = true;
+  desktopItem = makeDesktopItem {
+    name = "v2rayA";
+    icon = "v2rayA";
+    exec = "v2raya %U";
+    categories = [ "Office" ];
+    comment = "Abricotine Markdown Editor";
+    desktopName = "v2rayA";
+    startupNotify = true;
   };
-in
-buildGoModule {
-  inherit pname version;
-  src = "${src}/service";
-  vendorSha256 = "sha256-RqpXfZH0OvoG0vU17oAHn1dGLQunlUJEW89xuCSGEoE=";
-  subPackages = [ "." ];
-  nativeBuildInputs = [ makeWrapper ];
-  preBuild = ''
-    cp -a ${web} server/router/web
+
+  dontBuild = true;
+  dontConfigure = true;
+  dontPatchELF = true;
+  dontWrapGApps = true;
+
+  nativeBuildInputs = [
+    autoPatchelfHook
+    dpkg
+    makeWrapper
+    # wrapGAppsHook
+  ];
+
+  buildInputs = atomEnv.packages;
+
+  unpackPhase = "dpkg-deb -x $src .";
+
+  installPhase = ''
+    mkdir -p "$out/bin"
+    cp -R "usr" "$out"
+    cp -R "usr/share" "$out/share"
+    chmod -R g-w "$out"
+
+    mkdir -p "$out/share/applications"
+    # cp -r ./* "$out/share/applications" # for test
+    cp "${desktopItem}/share/applications/"* "$out/share/applications"
   '';
-  postInstall = ''
-    wrapProgram $out/bin/v2rayA \
+
+  runtimeDependencies = [
+    (lib.getLib udev)
+  ];
+
+  postFixup = ''
+    makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ] }" \
       --prefix PATH ":" "${lib.makeBinPath [ v2ray ]}" \
       --prefix XDG_DATA_DIRS ":" ${symlinkJoin {
         name = "assets";
         paths = [ v2ray-geoip v2ray-domain-list-community ];
       }}/share
   '';
+
   meta = with lib; {
-    description = "A Linux web GUI client of Project V which supports V2Ray, Xray, SS, SSR, Trojan and Pingtunnel";
-    homepage = "https://github.com/v2rayA/v2rayA";
-    mainProgram = "v2rayA";
-    license = licenses.agpl3Only;
-    # maintainers = with lib.maintainers; [ shanoaice ];
+    description = "Markdown editor with inline preview";
+    homepage = "https://github.com/brrd/Abricotine";
+    license = licenses.bsd3;
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ zendo ];
   };
 }

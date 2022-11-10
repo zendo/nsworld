@@ -18,6 +18,11 @@
       lg = "log --graph --decorate --all --oneline";
     };
     extraConfig = {
+      init.defaultBranch = "main";
+      # pull.rebase = true;
+      # merge.ff = "only";
+      # core.editor = "vim";
+      # credential.helper = "store";
       safe.directory = [
         # "/home/iab/nsworld"
         # "/home/iab/devel/nixpkgs"

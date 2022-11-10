@@ -11,7 +11,6 @@ stdenvNoCC.mkDerivation {
   };
 
   installPhase = ''
-    # mkdir $out
     ./install.sh $out
   '';
 

@@ -21,7 +21,7 @@
 
       serviceConfig = {
         User = "root";
-        ExecStart = "${pkgs.v2raya}/bin/v2rayA --log-disable-timestamp";
+        ExecStart = "${pkgs.v2raya}/bin/v2raya --log-disable-timestamp";
         LimitNPROC = 500;
         LimitNOFILE = 1000000;
         Restart = "on-failure";

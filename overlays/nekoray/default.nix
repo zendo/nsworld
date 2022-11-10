@@ -16,15 +16,15 @@
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=nekoray
 stdenv.mkDerivation rec {
   pname = "nekoray";
-  version = "2.2";
+  version = "2.3";
 
   src = fetchFromGitHub {
     owner = "MatsuriDayo";
     repo = pname;
-    # rev = version;
-    rev = "b4fe36137f74d95a62bbfeca49431c0d50899d58";
+    rev = version;
+    # rev = "27502477b9fa636a0d029fb528afcf66a7ca4ffd";
     fetchSubmodules = true;
-    hash = "sha256-37E5zkdjHpBj5y4RT6wZZ2JmzeQfzCn/OpavM5vKwj8=";
+    hash = "sha256-2zvDkACA2T86RlEsL5hKAvg8Ihqj0yUJl8+KlGUrW0Y=";
   };
 
   nativeBuildInputs = [
@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
     qtbase
     qttools
     qtx11extras
-    # wrapQtAppsHook
+    wrapQtAppsHook
   ];
 
   buildInputs = [
@@ -45,6 +45,7 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DNKR_NO_EXTERNAL=zxing"   # need zxing-cpp 1.3.0
+    # "-DNKR_PACKAGE=true" # ?
   ];
 
   # still need a lot of work
