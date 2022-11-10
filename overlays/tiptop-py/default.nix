@@ -36,7 +36,7 @@ python3.pkgs.buildPythonApplication rec {
     description = "Command-line system monitoring tool in the spirit of top";
     homepage = "https://github.com/nschloe/tiptop";
     license = licenses.mit;
-    # Use a lower priority to shadow `tiptop` package.
+    # Use a higher priority to shadow `tiptop` package.
     priority = 5;
     mainProgram = "tiptop";
     maintainers = with maintainers; [ zendo ];

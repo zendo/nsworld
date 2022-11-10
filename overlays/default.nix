@@ -3,6 +3,9 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   zhudou-sans = prev.callPackage ./zhudou-sans {};
+  rime-zhwiki = prev.callPackage ./rime-zhwiki {};
+  rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
+  fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   retext = prev.qt6Packages.callPackage ./retext {};
@@ -82,7 +85,6 @@ final: prev: {
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
 
   # wayland
-  hybrid-bar = prev.callPackage ./hybrid-bar {};
 
   # flutter
   spotube = prev.callPackage ./spotube {}; # WIP!!!

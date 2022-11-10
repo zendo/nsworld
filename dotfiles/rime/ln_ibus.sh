@@ -20,3 +20,5 @@ ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom
 ln -sfv "$this_dir"/ibus_rime.yaml "$HOME"/.config/ibus/rime/ibus_rime.yaml
 ln -sfv "$this_dir"/luna_pinyin_simp.custom.yaml "$HOME"/.config/ibus/rime/luna_pinyin_simp.custom.yaml
 ln -sfv "$this_dir"/luna_pinyin_simp.extended.dict.yaml "$HOME"/.config/ibus/rime/luna_pinyin_simp.extended.dict.yaml
+
+ln -sfv "$this_dir"/aurora_pinyin.custom.yaml "$HOME"/.config/ibus/rime/aurora_pinyin.custom.yaml

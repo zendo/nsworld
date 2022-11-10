@@ -1,0 +1,23 @@
+patch:
+
+  "punctuator/symbols":
+    "/emo": [😂️, 😅️, 😱️, 😭️, 😇️, 🙃️, 🤔️, 💊️, 💯️, 👍, 🙈️, 💩️, 😈️ ]
+    "/git": [⚡, 🔥, 🐛, ✨, 📝, 🚀, ✈️, 🚑, 🎉, ✅, 🔒, 🔖, ⬆, ♻, 🔨, 🚩, 🩹, 🗑️, 🏷️, 📦️  ]
+    "/os": [❄, ]
+
+  "switches":
+    - name: ascii_mode # 0 中文，1 英文
+      reset: 1
+      states: [ 中文, 西文 ]
+    - name: full_shape
+      states: [ 半角, 全角 ]
+    - name: ascii_punct
+      states: [ 。，, ．， ]
+    - options: ["gb2312","gbk","utf8"]                # 字符集
+      reset: 1                                        # 默认为 GBK 字符集(常用字)
+      states: [GB2312, 常用字(GBK), 生僻字(UTF-8)]
+
+  # 英文词库定制
+  # https://github.com/BlindingDark/rime-easy-en
+  "easy_en/enable_sentence": false
+__patch:

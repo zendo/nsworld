@@ -1,23 +1,16 @@
-{ lib
-, buildPythonApplication
-, fetchPypi
-, pythonOlder
-, pyspellchecker
-}:
+{ lib, python3 }:
 
-buildPythonApplication rec {
+python3.pkgs.buildPythonApplication rec {
   pname = "wordle-aid";
   version = "2.0";
   format = "setuptools";
 
-  disabled = pythonOlder "3.6";
-
-  src = fetchPypi {
+  src = python3.pkgs.fetchPypi {
     inherit pname version;
     hash = "sha256-ZknQC7TU3kVfx2tlfNPkHWiyFR2i3dFzfuXrRuA65UQ=";
   };
 
-  propagatedBuildInputs = [ pyspellchecker ];
+  propagatedBuildInputs = with python3.pkgs; [ pyspellchecker ];
 
   meta = with lib; {
     description = "CLI program to filter word choices to aid solving Wordle game problems";
