@@ -5,7 +5,7 @@
   "position": "top",
 
   "modules-left": [
-    "custom/launcher",
+    // "custom/launcher",
     "wlr/workspaces",
     "sway/workspaces",
     "wlr/taskbar"

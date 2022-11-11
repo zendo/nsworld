@@ -5,22 +5,21 @@
 }: {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtkNativeComp; # emacsPgtkNativeComp
-    # fix duplicate desktop shortcut in kde
-    # pkgs.emacsPgtk.overrideAttrs
-    # (oldAttrs: {
-    #   postFixup = ''
-    #     rm $out/share/applications/emacsclient.desktop  '';
-    # });
+    package =
+      # pkgs.emacsPgtkNativeComp; # emacsPgtkNativeComp
+      # fix duplicate desktop shortcut in kde
+      pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
+        postFixup = ''rm $out/share/applications/emacsclient.desktop '';
+      });
     extraPackages = epkgs:
-    with epkgs; [
-      vterm
-      emojify
-      emacsql-sqlite
-      tree-sitter
-      # pdf-tools
-      # telega
-    ];
+      with epkgs; [
+        vterm
+        emojify
+        emacsql-sqlite
+        tree-sitter
+        # pdf-tools
+        # telega
+      ];
     extraConfig = ''
       (setq treemacs-python-executable "${pkgs.python3}/bin/python")
       ;; (cl-pushnew (expand-file-name "~/.tree-sitter") tree-sitter-load-path)
@@ -53,7 +52,7 @@
 
   programs.vscode = {
     enable = true;
-    extensions =  with pkgs.vscode-extensions; [
+    extensions = with pkgs.vscode-extensions; [
       ms-ceintl.vscode-language-pack-zh-hans
       jnoortheen.nix-ide
       kamadorueda.alejandra
@@ -72,5 +71,12 @@
       # "workbench.editor.enablePreviewFromCodeNavigation" = true;
       # "workbench.iconTheme" = "vscode-icons";
     };
+    # keybindings = [
+    #   {
+    #     key = "ctrl+m";
+    #     command = "editor.action.clipboardCopyAction";
+    #     when = "textInputFocus";
+    #   }
+    # ];
   };
 }

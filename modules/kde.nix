@@ -22,7 +22,6 @@
     };
   };
 
-  #############################################
   services = {
     colord.enable = true;
     geoclue2.enable = true;
@@ -86,7 +85,7 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.enableRimeData= true;
+    fcitx5.enableRimeData = true;
     fcitx5.addons = with pkgs; [
       fcitx5-rime
       fcitx5-breeze

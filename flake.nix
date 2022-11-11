@@ -28,6 +28,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     nur.url = "github:nix-community/NUR";
@@ -47,6 +53,7 @@
     # nixpkgs-unstable,
     nixos-hardware,
     home-manager,
+    plasma-manager,
     emacs-overlay,
     # hyprland,
     nur,
@@ -76,10 +83,10 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
+            # ./modules/gnome.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
-            # ./modules/kde.nix
+            ./modules/kde.nix
 
             ({
               config,
@@ -101,12 +108,12 @@
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
-          # hmEnable = false;
+          hmEnable = false;
           # nixpkgs = inputs.nixpkgs-stable;
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+            # ./modules/gnome.nix
+            ./modules/kde.nix
             # ./modules/wm-sway.nix
           ];
         };
@@ -115,7 +122,7 @@
         vmtest = mkHost {
           username = "test";
           hostname = "vmtest";
-          hmEnable = false;
+          # hmEnable = false;
           virtEnable = false;
           inherit overlays;
           # nixpkgs = inputs.nixpkgs-pr;

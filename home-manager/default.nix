@@ -16,6 +16,9 @@
     ++ lib.optionals nixosConfig.services.xserver.enable [
       ./gui.nix
       ./editor.nix
+    ]
+    ++ lib.optionals nixosConfig.services.xserver.desktopManager.plasma5.enable [
+      ./kderc.nix
     ];
 
   programs.home-manager.enable = true;
