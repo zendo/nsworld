@@ -23,7 +23,6 @@ final: prev: {
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
   sleek = prev.callPackage ./sleek {};
-  clash-verge = prev.callPackage ./clash-verge {}; # WIP!!!
 
   # deb / rpm
   xmind = prev.callPackage ./xmind {};
@@ -36,7 +35,6 @@ final: prev: {
   xclicker = prev.callPackage ./xclicker {};
 
   # Rust
-  app-icon-preview = prev.callPackage ./app-icon-preview {};
   gnome-metronome = prev.callPackage ./gnome-metronome {};
   done = prev.callPackage ./done {};
   mousai = prev.callPackage ./mousai {};

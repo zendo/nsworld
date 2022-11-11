@@ -38,6 +38,9 @@
 (package! goto-last-change)
   ;; :recipe (:host github :repo "camdez/goto-last-change"))
 
+(package! nixpkgs-fmt
+  :recipe (:host github :repo "purcell/emacs-nixpkgs-fmt"))
+
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

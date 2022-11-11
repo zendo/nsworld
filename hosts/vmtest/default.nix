@@ -12,7 +12,7 @@
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
-    ../../modules/gnome.nix
+    # ../../modules/gnome.nix
     # ../../modules/kde.nix
     # ../../modules/wm-sway.nix
   ];
@@ -22,7 +22,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    fluent-reader
+    app-icon-preview
 
     git
     firefox
@@ -39,7 +39,7 @@
     enable = true;
     desktopManager = {
       # plasma5.enable = true;
-      # gnome.enable = true;
+      gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
       # pantheon.enable = true;

@@ -153,8 +153,8 @@
   (([remap scroll-up-command] . scrollkeeper-contents-up)
    ([remap scroll-down-command] . scrollkeeper-contents-down)))
 
-;; (leaf goto-last-change
-;;   :ensure t)
+(leaf goto-last-change
+  :ensure t)
 
 ;; (leaf beacon
 ;;   :ensure t
