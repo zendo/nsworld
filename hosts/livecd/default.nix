@@ -14,6 +14,8 @@
   environment.systemPackages = with pkgs; [
   ];
 
+  programs.partition-manager.enable = true;
+
   # faster but bigger size
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 

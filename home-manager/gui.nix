@@ -22,6 +22,7 @@ in {
     fluent-reader
     motrix
     museeks
+    gabutdm
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -63,14 +64,9 @@ in {
     # discord
 
     # Multi-media
-    (
-      if gnomeEnable
-      then
-      (spotify.override {
-        deviceScaleFactor = 2;
-      })
-      else spotify
-    )
+    (spotify.override {
+      deviceScaleFactor = 2;
+    })
     # spot # Premium accounts!
     mpv
     # vlc

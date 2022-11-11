@@ -261,4 +261,29 @@ fd -H  #搜索隐藏文件
 fd -e md  #文件扩展名
 fd '^foo' #foo起始名的文件
 #+end_src>
+* HomeManager samples
 
+#+begin_src nix
+home.activation = {
+    doom-clone = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [ ! -d ${emacsDir} ]; then
+        git clone https://github.com/hlissner/doom-emacs.git ${emacsDir}
+      fi
+    '';
+  };
+
+  xdg.dataFile."dotfiles/mypalette.el".text = ''
+    ${lib.strings.concatStrings (lib.attrsets.mapAttrsToList (name: value: ''
+      (defconst palette${name} "${value}")
+    '') my.palette)}
+    (provide 'mypalette)
+  '';
+
+#+end_src
+
+* KDE config
+
+https://github.com/shalva97/kde-configuration-files
+
+examplles
+https://github.com/corytertel/nix-configuration/blob/main/config/kde/shared.nix
