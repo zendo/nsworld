@@ -39,12 +39,6 @@ go/rust/python/java/node/php/ruby-on-rails
 wsl --import nixos .\nixos\ nixos-wsl-installer.tar.gz --version 2
 wsl -d nixos
 wsl --unregister nixos
-
-# RIME
-curl -fsSL https://git.io/rime-install | rime_dir="$HOME/.local/share/fcitx5/rime"
-bash -s -- rime-install
-hosxy/rime-aurora-pinyin
-BlindingDark/rime-easy-en:customize:schema=aurora_pinyin
 ```
 
 # Nix Lang

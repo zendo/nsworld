@@ -1,13 +1,13 @@
-{ atomEnv
-, autoPatchelfHook
-, dpkg
-, fetchurl
-, makeDesktopItem
-, makeWrapper
-, lib
+{ lib
 , stdenv
-, udev
+, fetchurl
+, dpkg
+, atomEnv
+, autoPatchelfHook
+, makeWrapper
+, makeDesktopItem
 , wrapGAppsHook
+, udev
 }:
 
 stdenv.mkDerivation rec {

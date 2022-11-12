@@ -22,8 +22,8 @@ in {
     fluent-reader
     motrix
     museeks
-    gabutdm
     qmmp
+    freedownloadmanager
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

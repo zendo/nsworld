@@ -28,6 +28,7 @@ final: prev: {
   xmind = prev.callPackage ./xmind {};
   v2raya = prev.callPackage ./v2raya {};
   abricotine = prev.callPackage ./abricotine {}; # bug
+  freedownloadmanager = prev.callPackage ./freedownloadmanager {};
 
   # C
   ctpv = prev.callPackage ./ctpv {};
@@ -53,7 +54,7 @@ final: prev: {
   auto-editor = prev.callPackage ./auto-editor {};
   zdict = prev.callPackage ./zdict {};
   wordle-aid = prev.callPackage ./wordle-aid {};
-  wordbook = prev.callPackage ./wordbook { };
+  wordbook = prev.callPackage ./wordbook {};
 
   # Python Module Overlays
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
@@ -74,7 +75,7 @@ final: prev: {
 
   # Gtk
   gtklock = prev.callPackage ./gtklock {};
-  gabutdm = prev.callPackage ./gabutdm {};
+  gabutdm = prev.callPackage ./gabutdm {}; # useless
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer {};
@@ -105,16 +106,6 @@ final: prev: {
         cp -r $out/usr/share $out/share '';
     });
 
-  # librime-charcode = prev.callPackage ./librime-charcode {};
-  # librime = prev.librime.override {
-  #   plugins = prev.fetchFromGitHub {
-  #     owner = "rime";
-  #     repo = "librime";
-  #     rev = "e20e3993c42fc86c8209e808ed0762aea24261e0";
-  #     hash = "sha256-MHDirPoApNfXpc01M+Xq7p+MiS+pJaxuDo3aROc80e0=";
-  #   };
-  # };
-
   /*
   # node override
   nodePackages = nodePackages.extend (final: prev: { })
@@ -135,19 +126,6 @@ final: prev: {
   });
 
   # gnome override
-  # gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-  #   pomodoro = prev.callPackage ./pomodoro {};
-  # });
-
-  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-    gdm = gprev.gdm.overrideAttrs (oldAttrs: {
-      src = prev.fetchurl {
-        url = "https://gitlab.gnome.org/GNOME/gdm/-/archive/main/gdm-main.tar.gz";
-        sha256 = "sha256-4Lsfg65HlHDyh0JQKmvFkRSFseYIv1QfEvTp3USLJi0=";
-      };
-    });
-  });
-
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {
     mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
       dynamic-buffering = prev.fetchurl {

@@ -1,13 +1,13 @@
-{ atomEnv
-, autoPatchelfHook
-, dpkg
-, fetchurl
-, makeDesktopItem
-, makeWrapper
-, lib
+{ lib
 , stdenv
-, udev
+, fetchurl
+, dpkg
+, atomEnv
+, autoPatchelfHook
+, makeWrapper
+, makeDesktopItem
 , wrapGAppsHook
+, udev
 , v2ray
 , v2ray-geoip
 , v2ray-domain-list-community
@@ -27,8 +27,8 @@ stdenv.mkDerivation rec {
     name = "v2rayA";
     icon = "v2rayA";
     exec = "v2raya %U";
-    categories = [ "Office" ];
-    comment = "Abricotine Markdown Editor";
+    categories = [ "Network" ];
+    comment = "v2rayA";
     desktopName = "v2rayA";
     startupNotify = true;
   };
@@ -75,9 +75,9 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "Markdown editor with inline preview";
-    homepage = "https://github.com/brrd/Abricotine";
-    license = licenses.bsd3;
+    description = "A web GUI client of Project V which supports V2Ray, Xray, SS, SSR, Trojan and Pingtunnel";
+    homepage = "https://github.com/v2rayA/v2rayA";
+    license = licenses.agpl3;
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };

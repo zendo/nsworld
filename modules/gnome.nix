@@ -73,6 +73,15 @@
     package = pkgs.gnomeExtensions.gsconnect;
   };
 
+  # Nautilus is too big in HIDPI
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.enableRimeData= true;
