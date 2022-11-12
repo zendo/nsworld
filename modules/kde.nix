@@ -25,18 +25,6 @@
   services = {
     colord.enable = true;
     geoclue2.enable = true;
-
-    tlp = {
-      enable = false;
-      settings = {
-        cpu_scaling_governor_on_ac = "performance";
-        cpu_scaling_governor_on_bat = "powersave";
-        cpu_energy_perf_policy_on_ac = "balance_performance";
-        cpu_energy_perf_policy_on_bat = "power";
-
-        DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
-      };
-    };
   };
 
   programs = {

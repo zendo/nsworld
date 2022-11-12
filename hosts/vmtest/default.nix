@@ -1,6 +1,4 @@
-/*
-
-*/
+/**/
 {
   config,
   pkgs,
@@ -13,7 +11,7 @@
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
     # ../../modules/gnome.nix
-    ../../modules/kde.nix
+    # ../../modules/kde.nix
     # ../../modules/wm-sway.nix
   ];
 
@@ -22,6 +20,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    qmmp
 
     git
     firefox
@@ -38,7 +37,7 @@
     enable = true;
     desktopManager = {
       # plasma5.enable = true;
-      # gnome.enable = true;
+      gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
       # pantheon.enable = true;
@@ -62,7 +61,7 @@
     memorySize = 1024 * 3;
     diskSize = 1024 * 8;
     cores = 4;
-    msize = 104857600;  # 100M
+    msize = 104857600; # 100M
     qemu = {
       options = [
         # Sounds

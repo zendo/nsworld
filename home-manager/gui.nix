@@ -23,6 +23,7 @@ in {
     motrix
     museeks
     gabutdm
+    qmmp
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

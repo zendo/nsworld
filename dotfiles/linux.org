@@ -261,7 +261,14 @@ fd -H  #搜索隐藏文件
 fd -e md  #文件扩展名
 fd '^foo' #foo起始名的文件
 #+end_src>
-* HomeManager samples
+* KDE Config
+
+https://github.com/shalva97/kde-configuration-files
+
+examplles
+https://github.com/corytertel/nix-configuration/blob/main/config/kde/shared.nix
+
+* HM Codes
 
 #+begin_src nix
 home.activation = {
@@ -281,9 +288,17 @@ home.activation = {
 
 #+end_src
 
-* KDE config
+* Nix Codes
+#+begin_src nix
+    tlp = {
+      enable = false;
+      settings = {
+        cpu_scaling_governor_on_ac = "performance";
+        cpu_scaling_governor_on_bat = "powersave";
+        cpu_energy_perf_policy_on_ac = "balance_performance";
+        cpu_energy_perf_policy_on_bat = "power";
 
-https://github.com/shalva97/kde-configuration-files
-
-examplles
-https://github.com/corytertel/nix-configuration/blob/main/config/kde/shared.nix
+        DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
+      };
+    };
+#+end_src
