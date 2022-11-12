@@ -144,7 +144,6 @@
       ## HM Standalone
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
-      # sudo rm /nix/var/nix/profiles/per-user/iab/profile-*-link
       homeConfigurations = let
         username = "iab";
         system = "x86_64-linux";

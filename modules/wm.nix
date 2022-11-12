@@ -96,7 +96,6 @@
       libnotify # notify-send
       wlogout
 
-      # eww-wayland
       # hyprpicker
 
       nwg-drawer
