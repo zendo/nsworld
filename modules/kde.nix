@@ -3,25 +3,6 @@
   pkgs,
   ...
 }: {
-  services.xserver = {
-    enable = true;
-    excludePackages = [
-      pkgs.xterm
-    ];
-
-    displayManager = {
-      # sddm.enable = true;
-      lightdm.enable = true;
-      defaultSession = "plasmawayland";
-    };
-
-    desktopManager.plasma5 = {
-      enable = true;
-      supportDDC = true;
-      # useQtScaling = true;
-    };
-  };
-
   services = {
     colord.enable = true;
     geoclue2.enable = true;
@@ -40,36 +21,26 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  environment.systemPackages = with pkgs;
-    [
-      # falkon
-      kalendar
-      yakuake
-      gparted
-      kcolorchooser
-    ]
-    ++ (with libsForQt5; [
-      ark
-      kate
-      kcalc
-      kmousetool
-      # kweather
+  environment.systemPackages = with pkgs; [
+    # falkon
+    kalendar
+    yakuake
+    gparted
+    kcolorchooser
+  ] ++ (with libsForQt5; [
+    ark
+    kate
+    kcalc
+    kmousetool
+    # kweather
 
-      krdc
-      # kleopatra
-      # konqueror
-      # kcontacts
-      # korganizer
-      bismuth # tiling layout
-    ]);
-
-  services.xserver.desktopManager.plasma5.excludePackages = with pkgs.libsForQt5; [
-    # elisa
-    # oxygen
-    # khelpcenter
-    # print-manager
-    plasma-browser-integration
-  ];
+    krdc
+    # kleopatra
+    # konqueror
+    # kcontacts
+    # korganizer
+    bismuth # tiling layout
+  ]);
 
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -79,7 +50,32 @@
       fcitx5-breeze
       rime-easy-en
       rime-aurora-pinyin
-      # fcitx5-chinese-addons
     ];
+  };
+
+  services.xserver = {
+    enable = true;
+    excludePackages = [
+      pkgs.xterm
+    ];
+
+    displayManager = {
+      # sddm.enable = true;
+      lightdm.enable = true;
+      defaultSession = "plasmawayland";
+    };
+
+    desktopManager.plasma5 = {
+      enable = true;
+      supportDDC = true;
+      # useQtScaling = true;
+      excludePackages = with pkgs.libsForQt5; [
+        # elisa
+        # oxygen
+        # khelpcenter
+        # print-manager
+        plasma-browser-integration
+      ];
+    };
   };
 }

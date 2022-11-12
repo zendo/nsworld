@@ -8,8 +8,6 @@ final: prev: {
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
-  retext = prev.qt6Packages.callPackage ./retext {};
-
   # electron / appimage
   fluent-reader = prev.callPackage ./fluent-reader {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
@@ -22,6 +20,7 @@ final: prev: {
   upscayl = prev.callPackage ./upscayl {};
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
+  siyuan = prev.callPackage ./siyuan {};
   sleek = prev.callPackage ./sleek {};
 
   # deb / rpm
@@ -36,11 +35,11 @@ final: prev: {
   xclicker = prev.callPackage ./xclicker {};
 
   # Rust
-  gnome-metronome = prev.callPackage ./gnome-metronome {};
   done = prev.callPackage ./done {};
   mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
   tiny-games = prev.callPackage ./tiny-games {};
+  gnome-metronome = prev.callPackage ./gnome-metronome {};
 
   # Go
 
@@ -51,7 +50,6 @@ final: prev: {
   konsave = prev.callPackage ./konsave {};
   tiptop-py = prev.callPackage ./tiptop-py {};
   iotas = prev.callPackage ./iotas {};
-  auto-editor = prev.callPackage ./auto-editor {};
   zdict = prev.callPackage ./zdict {};
   wordle-aid = prev.callPackage ./wordle-aid {};
   wordbook = prev.callPackage ./wordbook {};
@@ -85,6 +83,7 @@ final: prev: {
   converseen = prev.libsForQt5.callPackage ./converseen {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
   qmmp = prev.qt6Packages.callPackage ./qmmp {};
+  retext = prev.qt6Packages.callPackage ./retext {};
 
   # wayland
 

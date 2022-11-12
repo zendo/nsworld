@@ -21,52 +21,50 @@
     gnome.gnome-software
   ];
 
-  environment.systemPackages = with pkgs;
-    [
-      gthumb
-      authenticator
-      gparted
-      dconf2nix
-      kooha
-      gnome-randr
+  environment.systemPackages = with pkgs; [
+    gthumb
+    authenticator
+    gparted
+    dconf2nix
+    kooha
+    gnome-randr
 
-      gnome.gnome-tweaks
-      gnome.dconf-editor
-      gnome.gnome-power-manager
-      gnome.gnome-sound-recorder
-      gnome.pomodoro
-      # gnome.gnome-boxes
-      # gnome-network-displays  # miracast
-      # gnome-builder
-      # gnome-firmware-updater
-    ]
-    ++ (with gnomeExtensions; [
-      appindicator
-      # tray-icons-reloaded
-      app-icons-taskbar
-      rocketbar
-      dash-to-dock
-      dash-to-panel
-      night-theme-switcher
-      clipboard-history
-      inhibit-suspend
-      blur-my-shell
-      gradient-top-bar
-      # proxy-switcher
-      just-perfection
-      shell-configurator
-      app-icons-taskbar
-      space-bar
-      dotspaces
-      runcat
-      forge
-      # gtile
-      # pop-shell
-      ddterm
-      ideapad-mode
-      mpris-indicator-button
-      # replace-activities-text
-    ]);
+    gnome.gnome-tweaks
+    gnome.dconf-editor
+    gnome.gnome-power-manager
+    gnome.gnome-sound-recorder
+    gnome.pomodoro
+    # gnome.gnome-boxes
+    # gnome-network-displays  # miracast
+    # gnome-builder
+    # gnome-firmware-updater
+  ] ++ (with gnomeExtensions; [
+    appindicator
+    # tray-icons-reloaded
+    app-icons-taskbar
+    rocketbar
+    dash-to-dock
+    dash-to-panel
+    night-theme-switcher
+    clipboard-history
+    inhibit-suspend
+    blur-my-shell
+    gradient-top-bar
+    # proxy-switcher
+    just-perfection
+    shell-configurator
+    app-icons-taskbar
+    space-bar
+    dotspaces
+    runcat
+    forge
+    # gtile
+    # pop-shell
+    ddterm
+    ideapad-mode
+    mpris-indicator-button
+    # replace-activities-text
+  ]);
 
   programs.kdeconnect = {
     enable = true;

@@ -161,7 +161,6 @@ in {
   ##  Desktop Environment
   #######################################################################
   home.sessionVariables = {
-    # GDK_SCALE = lib.optionalString hidpiEnable "2";
     _JAVA_OPTIONS = lib.optionalString hidpiEnable "-Dsun.java2d.uiScale=2";
   };
 

@@ -28,8 +28,6 @@
   ];
 
   environment.variables = {
-    # java hidpi
-    # GDK_SCALE = "2";
     # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
 
