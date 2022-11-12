@@ -166,4 +166,35 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
   };
+
+  #######################################################################
+  ##  CLI EDITOR
+  #######################################################################
+  programs.micro = {
+    enable = true;
+    settings = {
+      autosu = true;
+      softwrap = true;
+      hlsearch = true;
+      saveundo = true;
+      scrollbar = true;
+      diffgutter = true;
+    };
+  };
+
+  programs.helix = {
+    enable = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    plugins = with pkgs.vimPlugins; [
+      neogit
+      vim-nix
+      vim-lsp
+      vim-markdown
+    ];
+  };
 }

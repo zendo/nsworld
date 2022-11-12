@@ -138,10 +138,6 @@ in {
     # wdisplays # wlr
   ];
 
-  programs.pandoc = {
-    enable = false;
-  };
-
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;

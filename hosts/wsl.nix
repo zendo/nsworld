@@ -34,9 +34,6 @@ in {
     wget
     nix-bash-completions
 
-    vim
-    micro
-    # helix
     emacs
 
     mpg123 # for ydict

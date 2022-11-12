@@ -18,7 +18,7 @@
   };
 
   services.xserver = {
-    xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+    xkbOptions = "ctrl:swapcaps"; # Xorg Layout
   };
 
   # services.xserver.displayManager.autoLogin.enable = lib.mkForce false;

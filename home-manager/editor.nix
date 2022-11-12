@@ -11,7 +11,7 @@
       pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
         postFixup = ''rm $out/share/applications/emacsclient.desktop '';
       });
-    extraPackages = epkgs:
+      extraPackages = epkgs:
       with epkgs; [
         vterm
         emojify
@@ -20,34 +20,10 @@
         # pdf-tools
         # telega
       ];
-    extraConfig = ''
-      (setq treemacs-python-executable "${pkgs.python3}/bin/python")
-      ;; (cl-pushnew (expand-file-name "~/.tree-sitter") tree-sitter-load-path)
-    '';
-  };
-
-  programs.helix = {
-    enable = false;
-  };
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      neogit
-      vim-nix
-      vim-lsp
-      vim-markdown
-    ];
-  };
-
-  programs.micro = {
-    enable = true;
-    settings = {
-      autosu = true;
-      cursorline = true;
-    };
+      extraConfig = ''
+        (setq treemacs-python-executable "${pkgs.python3}/bin/python")
+        ;; (cl-pushnew (expand-file-name "~/.tree-sitter") tree-sitter-load-path)
+      '';
   };
 
   programs.vscode = {
@@ -78,5 +54,9 @@
     #     when = "textInputFocus";
     #   }
     # ];
+  };
+
+  programs.pandoc = {
+    enable = false;
   };
 }

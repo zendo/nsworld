@@ -10,11 +10,7 @@
     aliases = {
       st = "status -sb";
       unstage = "reset HEAD --";
-      # pr = "pull --rebase";
       pm = "push -u origin main";
-      addp = "add --patch";
-      comp = "commit --patch";
-      cc = "commit -a -m";
       lg = "log --graph --decorate --all --oneline";
     };
     extraConfig = {

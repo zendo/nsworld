@@ -43,7 +43,7 @@
       # mate.enable = true;
       # lxqt.enable = true;
     };
-    # xkbOptions = "ctrl:swapcaps"; # emacser habit on Xorg
+    xkbOptions = "ctrl:swapcaps"; # Xorg Layout
   };
 
   # boot.initrd.kernelModules = ["virtio" "virtio_pci" "virtio_net" "virtio_rng" "virtio_blk" "virtio_console"];
