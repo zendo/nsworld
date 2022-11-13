@@ -74,6 +74,7 @@ final: prev: {
   # Gtk
   gtklock = prev.callPackage ./gtklock {};
   gabutdm = prev.callPackage ./gabutdm {}; # useless
+  hackgregator = prev.callPackage ./hackgregator {};
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer {};
