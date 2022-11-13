@@ -108,7 +108,7 @@
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
-          hmEnable = false;
+          # hmEnable = false;
           # nixpkgs = inputs.nixpkgs-stable;
           inherit overlays;
           extraModules = [

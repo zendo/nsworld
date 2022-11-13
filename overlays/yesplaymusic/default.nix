@@ -21,8 +21,7 @@ appimageTools.wrapType2 {
   extraInstallCommands = ''
     mv $out/bin/${pname}-${version} $out/bin/${pname}
 
-    mkdir -p $out/share/${pname}
-    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
+    mkdir $out/share
     cp -a ${appimageContents}/usr/share/icons $out/share/
     install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
 

@@ -1,58 +1,5 @@
 #+STARTUP: show2levels indent hidestars
 
-
-* emoji
-#+begin_src config
-· ‥ ⁖ ⁘
-#+end_src
-* stdenv
-#+begin_src nix
-# auto-update bot
-passthru.updateScript = nix-update-script { attrPath = pname; };
-
-# fonts
-installPhase = ''
-  runHook preInstall
-  mkdir -p $out/share/fonts/truetype
-  install -D *.{ttf,TTF} $out/share/fonts/truetype/
-  runHook postInstall
-'';
-#+end_src
-** templates
-#+begin_src nix
-{ lib
-, stdenv
-, fetchFromGitHub
-}:
-
-stdenv.mkDerivation rec {
-  pname = "hashrat";
-  version = "1.15";
-
-  src = fetchFromGitHub {
-    owner = "ColumPaget";
-    repo = "Hashrat";
-    rev = "v${version}";
-    hash = "sha256-+3IPCJS++7CE0ZrJb62LCRrAn2J4uCF3a1oOzDoOW0w=";
-  };
-
-  configureFlags = [ "--enable-xattr" ];
-
-  makeFlags = [ "PREFIX=$(out)" ];
-
-  meta = with lib; {
-    description = "Command-line hash-generation utility";
-    longDescription = ''
-      Hashing tool supporting md5,sha1,sha256,sha512,whirlpool,jh and hmac versions of these.
-      Includes recursive file hashing and other features.
-    '';
-    homepage = "http://www.cjpaget.co.uk/Code/Hashrat";
-    license = licenses.gpl3Plus;
-    platforms = platforms.unix;
-    maintainers = with maintainers; [ zendo ];
-  };
-}
-#+end_src
 * buildGoModule
 ** templates
 #+begin_src nix
@@ -126,16 +73,10 @@ stdenv.mkDerivation rec {
       maintainers = with maintainers; [ zendo ];
     };
   }
-
-#+end_src
-** notes
-#+begin_src nix
-
 #+end_src
 
-**
 * buildRustPackage
-** templates
+** cli 
 #+begin_src nix
   { lib
   , fetchFromGitHub
@@ -254,8 +195,8 @@ stdenv.mkDerivation rec {
       maintainers = with maintainers; [ linsui ];
     };
   }
-
 #+end_src
+
 * buildPythonApplication
 ** notes
 #+begin_src nix
@@ -403,6 +344,24 @@ python3.pkgs.buildPythonApplication rec {
   };
 }
 #+end_src
+
+* mkYarnPackage
+** notes
+yarn2nix > yarn.nix
+If you have not generated a yarn.lock file before, run
+yarn install
+
+
+#+begin_src nix
+buildPhase = ''
+  yarn build --offline
+'';
+
+distPhase = "true";
+
+configurePhase = "ln -s $node_modules node_modules";
+#+end_src
+
 * buildNimPackage
 #+begin_src nix
 { lib, nimPackages, fetchFromGitHub, }:
@@ -432,22 +391,7 @@ nimPackages.buildNimPackage rec {
   };
 }
 #+end_src
-* mkYarnPackage
-** notes
-yarn2nix > yarn.nix
-If you have not generated a yarn.lock file before, run
-yarn install
 
-
-#+begin_src nix
-buildPhase = ''
-  yarn build --offline
-'';
-
-distPhase = "true";
-
-configurePhase = "ln -s $node_modules node_modules";
-#+end_src
 * buildCrystalPackage
 #+begin_src shell
 git checkout version
@@ -455,6 +399,39 @@ nix shell nixpkgs#shards nixpkgs#crystal2nix
 shards lock
 crystal2nix
 #+end_src
+
+* autoPatchelfHook binary
+
+
+#+begin_src nix
+stdenv.mkDerivation rec {
+  name = "studio-link-${version}";
+
+  version = "21.07.0";
+
+  src = fetchurl {
+    url = "https://download.studio.link/releases/v${version}-stable/linux/studio-link-standalone-v${version}.tar.gz";
+    sha256 = "sha256-4CkijAlenhht8tyk3nBULaBPE0GBf6DVII699/RmmWI=";
+  };
+
+  nativeBuildInputs = [
+    autoPatchelfHook
+  ];
+
+  buildInputs = [
+    alsaLib
+    openssl
+    zlib
+    pulseaudio
+  ];
+
+  sourceRoot = ".";
+
+  installPhase = ''
+    install -m755 -D studio-link-standalone-v${version} $out/bin/studio-link
+  '';
+#+end_src>
+
 * electron & appimageTool
 https://github.com/nix-community/nur-combined/blob/master/repos/yes/electronAppImage/default.nix
 
@@ -513,6 +490,7 @@ appimageTools.wrapType2 {
   };
 }
 #+end_src
+
 ** templates - stdenv
 #+begin_src nix
 { lib
@@ -568,72 +546,57 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ zendo ];
   };
 }
-
 #+end_src
+
 ** deb templates
 #+begin_src nix
-  # 解压 DEB 包
-  unpackPhase = ''
-    ar x ${src}
-    tar xf data.tar.xz
-  '';
+    # 解压 DEB 包
+    unpackPhase = ''
+      ar x ${src}
+      tar xf data.tar.xz
+    '';
 
-  # makeWrapper 可以自动生成一个调用其它命令的命令（也就是 wrapper），并且可以在原命令上修改参数、环境变量等
-  buildInputs = [ makeWrapper ];
+    # makeWrapper 可以自动生成一个调用其它命令的命令（也就是 wrapper），并且可以在原命令上修改参数、环境变量等
+    buildInputs = [ makeWrapper ];
 
-  installPhase = ''
-    mkdir -p $out/bin
+    installPhase = ''
+      mkdir -p $out/bin
 
-    # 替换菜单项目（desktop 文件）中的路径
-    cp -r usr/share $out/share
-    sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
+      # 替换菜单项目（desktop 文件）中的路径
+      cp -r usr/share $out/share
+      sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
 
-    # 复制出客户端的 Javascript 部分，其它的不要了
-    cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
+      # 复制出客户端的 Javascript 部分，其它的不要了
+      cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
 
-    # 生成 bilibili 命令，运行这个命令时会调用 electron 加载客户端的 Javascript 包（$out/opt/app.asar）
-    makeWrapper ${electron}/bin/electron $out/bin/bilibili \
-      --argv0 "bilibili" \
-      --add-flags "$out/opt/app.asar"
-  '';
-}
+      # 生成 bilibili 命令，运行这个命令时会调用 electron 加载客户端的 Javascript 包（$out/opt/app.asar）
+      makeWrapper ${electron}/bin/electron $out/bin/bilibili \
+        --argv0 "bilibili" \
+        --add-flags "$out/opt/app.asar"
+    '';
+
+  # others template 
+  nativeBuildInputs = [
+    autoPatchelfHook
+    dpkg
+  ];
+
+  buildInputs = [
+    glib-networking
+    openssl
+    webkitgtk
+    wrapGAppsHook
+  ];
+
+  unpackCmd = "dpkg-deb -x $curSrc source";
+
+  installPhase = "mv usr $out";
+  }
 #+end_src
 
 * qt
 qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default.nix
-* font-templates
-#+begin_src nix
-{ lib, fetchzip }:
 
-# https://github.com/NixOS/nixpkgs/pull/175381
-fetchzip rec {
-  pname = "zhudou-sans";
-  version = "1.000";
-
-  url = "https://github.com/Buernia/Zhudou-Sans/archive/refs/tags/v${version}.tar.gz";
-
-  postFetch = ''
-    mkdir -p $out/share/fonts/truetype
-    install -Dm644 "$out/fonts/variable ttf/Zhudou Sans-VF.ttf" $out/share/fonts/truetype
-    install -Dm644 $out/fonts/ttf/*.ttf  $out/share/fonts/truetype
-
-    shopt -s extglob dotglob
-    rm -rf $out/!(share)
-    shopt -u extglob dotglob
-  '';
-
-  hash = "sha256-DFTK+eKhfRCbOrgTBlJeLD5Mdi0VYwullbo2poaLIKw=";
-
-  meta = with lib; {
-    description = "A font family for CJK symbols and punctuation, derived from Noto Sans";
-    homepage = "https://github.com/Buernia/Zhudou-Sans";
-    license = licenses.ofl;
-    platforms = platforms.all;
-    maintainers = with maintainers; [ zendo ];
-  };
-}
-#+end_src>
-* miscPatch
 * wrapper
 #+begin_src nix
   nativeBuildInputs = [makeWrapper];
@@ -670,6 +633,7 @@ fetchzip rec {
     ln -s $out/bin/com.github.cassidyjames.dippi $out/bin/dippi
   '';
 #+end_src
+
 * meta
 #+begin_src nix
   meta = with lib; {

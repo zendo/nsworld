@@ -261,6 +261,7 @@ fd -H  #搜索隐藏文件
 fd -e md  #文件扩展名
 fd '^foo' #foo起始名的文件
 #+end_src>
+
 * KDE Config
 
 https://github.com/shalva97/kde-configuration-files
