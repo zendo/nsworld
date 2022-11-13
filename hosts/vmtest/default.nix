@@ -21,6 +21,7 @@
 
   environment.systemPackages = with pkgs; [
     qmmp
+    fluent-reader
 
     git
     firefox

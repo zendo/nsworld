@@ -81,4 +81,13 @@
   #######################################################################
   services.btrfs.autoScrub.enable = true;
   fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
+
+
+  # Swapfile
+  # findmnt -no UUID -T /swap/swapfile
+  # sudo filefrag -v /swap/swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'
+  swapDevices = [{ device = "/swapfile"; }];
+  # boot.resumeDevice = "/dev/disk/by-uuid/a0e48512-1e47-409d-9c91-7bbca721dbfc";
+  # boot.kernelParams = [ # "mem_sleep_default=deep"
+  #                       "resume_offset=42166446" ];
 }

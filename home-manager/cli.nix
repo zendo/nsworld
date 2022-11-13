@@ -7,8 +7,8 @@
     # Nix Tools
     nixos-helper
     nixpkgs-fmt
-    nixfmt
     alejandra
+    # nixfmt
     # nil # lsp
     # rnix-lsp
     lorri
@@ -81,6 +81,7 @@
     gdu
     duf
     neofetch
+    tokei # count code
 
     # Utils
     hstr # hh: history

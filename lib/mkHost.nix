@@ -32,11 +32,11 @@ nixpkgs.lib.nixosSystem {
       networking.hostName = "${hostname}";
       services.xserver.displayManager.autoLogin.user = "${username}";
     }
-  ]
-  ++ nixpkgs.lib.optionals virtEnable [
+
+  ] ++ nixpkgs.lib.optionals virtEnable [
     ../modules/virtualisation.nix
-  ]
-  ++ nixpkgs.lib.optionals hmEnable [
+
+  ] ++ nixpkgs.lib.optionals hmEnable [
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
@@ -44,6 +44,6 @@ nixpkgs.lib.nixosSystem {
       home-manager.extraSpecialArgs = {inherit hostname inputs;};
       home-manager.users.${username} = import ../home-manager;
     }
-  ]
-  ++ extraModules;
+
+  ] ++ extraModules;
 }
