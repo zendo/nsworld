@@ -22,7 +22,7 @@ in {
     fluent-reader
     motrix
     museeks
-    qmmp
+    listen1
     freedownloadmanager
 
     # nur.repos.linyinfeng.clash-for-windows
@@ -59,7 +59,7 @@ in {
     handlr
 
     # Social media
-    tdesktop
+    # tdesktop
     # fractal-next
     # nheko
     # discord
@@ -72,8 +72,9 @@ in {
     mpv
     # vlc
     # ffmpeg
+    qmmp
     # audacious
-    rhythmbox
+    # rhythmbox
     # radioboat
     goodvibes
     # netease-cloud-music-gtk

@@ -10,15 +10,15 @@ let
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
+
 in appimageTools.wrapType2 {
   inherit pname version src;
 
   extraInstallCommands = ''
     mv $out/bin/${pname}-${version} $out/bin/${pname}
 
-    mkdir $out/share/
-    cp -a ${appimageContents}/usr/share/icons $out/share/
     install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+    cp -a ${appimageContents}/usr/share/icons $out/share/
 
     substituteInPlace $out/share/applications/${pname}.desktop \
       --replace 'Exec=AppRun' 'Exec=${pname}'

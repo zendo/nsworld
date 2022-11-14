@@ -402,6 +402,7 @@ crystal2nix
 
 * autoPatchelfHook binary
 
+cat pkgs/applications/audio/spotify/default.nix 
 
 #+begin_src nix
 stdenv.mkDerivation rec {

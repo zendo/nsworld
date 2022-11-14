@@ -57,7 +57,6 @@ final: prev: {
   # Python Module Overlays
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
     (python-final: python-prev: {
-      # av = python-final.callPackage ./python-modules/av {};
       wn = python-final.callPackage ./python-modules/wn {};
       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
     })

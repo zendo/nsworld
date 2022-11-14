@@ -17,10 +17,8 @@ appimageTools.wrapType2 {
   extraInstallCommands = ''
     mv $out/bin/${pname}-${version} $out/bin/${pname}
 
-    mkdir -p $out/share/${pname}
-    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
-    cp -a ${appimageContents}/usr/share/icons $out/share/
     install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+    cp -a ${appimageContents}/usr/share/icons $out/share/
 
     substituteInPlace $out/share/applications/${pname}.desktop \
     --replace 'Exec=AppRun' 'Exec=${pname}'

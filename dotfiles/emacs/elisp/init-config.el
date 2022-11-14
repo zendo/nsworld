@@ -112,6 +112,10 @@
         try-complete-lisp-symbol-partially ;部分补全 lisp symbol
         try-complete-lisp-symbol))         ;补全 lisp symbol
 
+(leaf fancy-dabbrev
+  :ensure t
+  :config (global-fancy-dabbrev-mode))
+
 ;; flyspell
 (require 'flyspell)
 (setq ispell-program-name "aspell" ; use aspell instead of ispell
