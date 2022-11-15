@@ -11,11 +11,6 @@ swapon /dev/nvme0n1p4
 mkfs.btrfs /dev/nvme0n1p5
 mkdir -p /mnt/boot/efi
 
-chattr +C /mnt/swap/swapfile  # lsattr swapfile
-dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=16384 status=progress
-chmod 600 /swapfile
-mkswap /mnt/swap/swapfile
-
 nixos-generate-config --root /mnt
 nixos-install --flake .#yoga --no-root-passwd
 --option substituters "https://cache.nixos.org"

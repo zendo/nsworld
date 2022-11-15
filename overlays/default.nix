@@ -9,6 +9,7 @@ final: prev: {
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   # electron / appimage
+  thorium-reader = prev.callPackage ./thorium-reader {};
   fluent-reader = prev.callPackage ./fluent-reader {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
   koodo-reader = prev.callPackage ./koodo-reader {};

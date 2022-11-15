@@ -402,7 +402,10 @@ crystal2nix
 
 * autoPatchelfHook binary
 
-cat pkgs/applications/audio/spotify/default.nix 
+cat pkgs/applications/audio/spotify/default.nix
+
+patchelf --set-interpreter $(nix eval --impure --raw --expr "with import <nixpkgs> {}; stdenv.cc.bintools.dynamicLinker") app
+
 
 #+begin_src nix
 stdenv.mkDerivation rec {

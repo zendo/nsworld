@@ -197,6 +197,8 @@ https://github.com/onceupon/Bash-Oneliner
 #+begin_src bash
   echo $PATH | tr ':' '\n'  #格式化PATH输出
   mount | column -t
+  shopt -s extglob && rm -i !(*.mkv)   # rm all except :bash
+  setopt extended_glob && rm -- ^*.mkv # rm all except :zsh
 #+end_src
 
 ** curl

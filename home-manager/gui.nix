@@ -59,7 +59,7 @@ in {
     handlr
 
     # Social media
-    # tdesktop
+    tdesktop
     # fractal-next
     # nheko
     # discord
@@ -69,7 +69,6 @@ in {
       deviceScaleFactor = 2;
     })
     # spot # Premium accounts!
-    mpv
     # vlc
     # ffmpeg
     qmmp
@@ -138,6 +137,10 @@ in {
     wayland-utils
     # wdisplays # wlr
   ];
+
+  programs.mpv = {
+    enable = true;
+  };
 
   programs.firefox = {
     enable = true;
