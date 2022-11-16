@@ -39,7 +39,6 @@ in {
     mpg123 # for ydict
     kitty
     wsl-open
-    # radioboat
     goodvibes
   ];
 

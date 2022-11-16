@@ -20,6 +20,5 @@ sudo rm /nix/var/nix/profiles/per-user/iab/profile-*-link
   };
 
   home.packages = with pkgs; [
-    # radioboat
   ];
 }

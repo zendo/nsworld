@@ -21,8 +21,8 @@ in {
     yesplaymusic
     fluent-reader
     motrix
-    museeks
-    freedownloadmanager
+    # museeks
+    # freedownloadmanager
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

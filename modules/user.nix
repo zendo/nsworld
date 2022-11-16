@@ -1,14 +1,12 @@
 {
   config,
   username,
-  pkgs,
   ...
 }: {
-  # Refuse using `useradd`
+  # Disable `useradd`
   users.mutableUsers = false;
   # users.defaultUserShell = pkgs.zsh;
 
-  # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
   users.users.${username} = {
@@ -17,9 +15,9 @@
     hashedPassword = "$6$7LRbX.zmB4lDy/AS$Hi8rzhlSgCTpKsUS/TtdYKNq4ZQfLMMOYmc7jqyD86qK0sL5BWb1FnvzDzMfbzlXg41I76c7/C/g8aBBakSIL0";
     extraGroups = [
       "wheel"
-      "networkmanager"
-      "video"
       "audio"
+      "video"
+      "networkmanager"
     ];
   };
 
@@ -29,11 +27,9 @@
   #   hashedPassword = "$6$7LRbX.zmB4lDy/AS$Hi8rzhlSgCTpKsUS/TtdYKNq4ZQfLMMOYmc7jqyD86qK0sL5BWb1FnvzDzMfbzlXg41I76c7/C/g8aBBakSIL0";
   #   extraGroups = [
   #     "wheel"
-  #     "networkmanager"
-  #     "video"
   #     "audio"
-  #     "docker"
-  #     "libvirtd"
+  #     "video"
+  #     "networkmanager"
   #   ];
   # };
 }
