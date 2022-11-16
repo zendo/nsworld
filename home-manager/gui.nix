@@ -22,7 +22,6 @@ in {
     fluent-reader
     motrix
     museeks
-    listen1
     freedownloadmanager
 
     # nur.repos.linyinfeng.clash-for-windows
@@ -74,7 +73,6 @@ in {
     qmmp
     # audacious
     # rhythmbox
-    # radioboat
     goodvibes
     # netease-cloud-music-gtk
     mousai # 听歌识曲

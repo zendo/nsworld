@@ -1,13 +1,18 @@
 /*
+
+# check hardwave virtual supports
 LC_ALL=C lscpu | grep Virtualization
 dmesg | grep IOMMU
 
+# fix network `default` inactive
 sudo virsh net-start default
+sudo virsh net-autostart default
 
 Guest:
-install spice-vdagent  # for clipboard share
+spice-vdagent  # for clipboard share
 
 qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
+
 */
 {
   config,

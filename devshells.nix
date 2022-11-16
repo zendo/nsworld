@@ -31,6 +31,7 @@ inputs @ {pkgs}: {
     buildInputs = with pkgs; [
       yarn
       nodejs
+      electron
     ];
     # ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron_20}/bin";
   };
