@@ -54,6 +54,7 @@ final: prev: {
   zdict = prev.callPackage ./zdict {};
   wordle-aid = prev.callPackage ./wordle-aid {};
   wordbook = prev.callPackage ./wordbook {};
+  gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
 
   # Python Module Overlays
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [

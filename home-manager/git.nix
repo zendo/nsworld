@@ -9,8 +9,9 @@
     userEmail = "linzway@qq.com";
     aliases = {
       st = "status -sb";
-      unstage = "reset HEAD --";
       pm = "push -u origin main";
+      undo = "reset --hard HEAD~1";
+      patch = "format-patch --stdout HEAD~1";
       lg = "log --graph --decorate --all --oneline";
     };
     extraConfig = {

@@ -70,8 +70,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Mind Mapping & Brainstorming";
     homepage = "https://xmind.app";
-    # license = licenses.bsd3;
-    license = licenses.unfree;
+    license = licenses.bsd3;
+    # license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };

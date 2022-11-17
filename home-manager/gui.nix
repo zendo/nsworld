@@ -70,6 +70,7 @@ in {
     # spot # Premium accounts!
     # vlc
     # ffmpeg
+    kooha
     qmmp
     # audacious
     # rhythmbox

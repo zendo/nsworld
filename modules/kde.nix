@@ -9,6 +9,7 @@
   };
 
   programs = {
+    dconf.enable = true;
     kdeconnect.enable = true;
     partition-manager.enable = true;
   };
@@ -30,7 +31,7 @@
   ] ++ (with libsForQt5; [
     ark
     kate
-    kcalc
+    kalk
     kmousetool
     # kweather
 

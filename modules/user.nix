@@ -18,6 +18,13 @@
       "audio"
       "video"
       "networkmanager"
+
+      "lxd"
+      "docker"
+      "libvirtd"
+      "qemu-libvirtd"
+      "vboxusers"
+      "adbusers"
     ];
   };
 
@@ -30,6 +37,13 @@
   #     "audio"
   #     "video"
   #     "networkmanager"
+
+  #     "lxd"
+  #     "docker"
+  #     "libvirtd"
+  #     "qemu-libvirtd"
+  #     "vboxusers"
+  #     "adbusers"
   #   ];
   # };
 }

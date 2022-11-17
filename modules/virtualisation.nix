@@ -11,6 +11,12 @@ sudo virsh net-autostart default
 Guest:
 spice-vdagent  # for clipboard share
 
+# share file
+sudo mkdir /mnt/vfs_share
+sudo chown iab /mnt/vfs_share
+mkdir share #guest
+sudo mount -t 9p -o trans=virtio share ~/share #guest
+
 qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
 
 */
@@ -18,7 +24,6 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
   config,
   pkgs,
   lib,
-  username,
   ...
 }: {
 
@@ -95,13 +100,4 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
 
   # boot.kernelParams =
   #   (lib.optionals config.hardware.cpu.intel.updateMicrocode [ "intel_iommu=on" "iommu=pt" ]);
-
-  users.users.${username}.extraGroups = [
-    "lxd"
-    "docker"
-    "libvirtd"
-    "qemu-libvirtd"
-    "vboxusers"
-    "adbusers"
-  ];
 }

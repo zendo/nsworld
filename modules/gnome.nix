@@ -26,7 +26,6 @@
     authenticator
     gparted
     dconf2nix
-    kooha
     gnome-randr
 
     gnome.gnome-tweaks
