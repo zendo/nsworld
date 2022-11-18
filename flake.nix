@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194581/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
 
@@ -50,7 +49,6 @@
     # nixpkgs-pr,
     # nixpkgs-local,
     # nixpkgs-stable,
-    # nixpkgs-unstable,
     nixos-hardware,
     home-manager,
     plasma-manager,

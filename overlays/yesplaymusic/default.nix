@@ -14,10 +14,6 @@ in
 appimageTools.wrapType2 {
   inherit pname version src;
 
-  # extraPkgs = pkgs: with pkgs; [
-  #   libsecret
-  # ];
-
   extraInstallCommands = ''
     mv $out/bin/${pname}-${version} $out/bin/${pname}
 
@@ -29,7 +25,7 @@ appimageTools.wrapType2 {
   '';
 
   meta = with lib; {
-    description = "A simple music player capable of playing local audio or from Youtube or Spotify";
+    description = "A third party music application for Netease Music";
     homepage = "https://github.com/qier222/YesPlayMusic";
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];

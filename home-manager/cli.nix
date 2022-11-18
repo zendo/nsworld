@@ -188,6 +188,9 @@
     enable = true;
   };
 
+  # AstroNvim
+  # git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  # nvim +PackerSync
   programs.neovim = {
     enable = true;
     viAlias = true;

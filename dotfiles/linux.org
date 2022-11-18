@@ -1,3 +1,5 @@
+#+STARTUP: show2levels indent hidestars
+
 * Hardware
 inxi -Fz / lshw / hwinfo / dmidecode
 xrandr / wlr-randr / gnome-randr 

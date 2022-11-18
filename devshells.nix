@@ -1,4 +1,8 @@
 inputs @ {pkgs}: {
+
+  #######################################################################
+  ##  Stdenv
+  #######################################################################
   default = pkgs.mkShell {
     buildInputs = with pkgs; [
       git
@@ -27,6 +31,9 @@ inputs @ {pkgs}: {
     '';
   };
 
+  #######################################################################
+  ##  NodeJS
+  #######################################################################
   node = pkgs.mkShell {
     buildInputs = with pkgs; [
       yarn
@@ -36,6 +43,9 @@ inputs @ {pkgs}: {
     # ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron_20}/bin";
   };
 
+  #######################################################################
+  ##  Golang
+  #######################################################################
   go = pkgs.mkShell {
     buildInputs = with pkgs; [
       go
@@ -47,8 +57,13 @@ inputs @ {pkgs}: {
     ];
   };
 
+  #######################################################################
+  ##  Rust
+  #######################################################################
   rust = pkgs.mkShell {
-    OPENSSL_NO_VENDOR = 1;
+    doCheck = false;
+    buildType = "debug";
+    # OPENSSL_NO_VENDOR = 1;
     buildInputs = with pkgs; [
       cargo
       rustc
@@ -67,6 +82,7 @@ inputs @ {pkgs}: {
       # desktop-file-utils
       # libxml2
       alsa-lib
+      lame
       # libxkbcommon
       # xorg.libX11
       # xorg.libxcb
@@ -79,6 +95,9 @@ inputs @ {pkgs}: {
     ];
   };
 
+  #######################################################################
+  ##  Python
+  #######################################################################
   # python setup.py install --root=/home/iab/devs/
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
@@ -97,6 +116,9 @@ inputs @ {pkgs}: {
     ];
   };
 
+  #######################################################################
+  ##  Java
+  #######################################################################
   java = pkgs.mkShell {
     buildInputs = with pkgs; [
       jdk
@@ -105,6 +127,9 @@ inputs @ {pkgs}: {
     ];
   };
 
+  #######################################################################
+  ##  Haskell
+  #######################################################################
   haskell = pkgs.mkShell {
     buildInputs = with pkgs; [
       ghc
