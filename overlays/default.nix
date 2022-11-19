@@ -40,6 +40,7 @@ final: prev: {
   mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
   tiny-games = prev.callPackage ./tiny-games {};
+  noteworthy = prev.callPackage ./noteworthy {};
   gnome-metronome = prev.callPackage ./gnome-metronome {};
 
   # Go
@@ -55,6 +56,8 @@ final: prev: {
   wordle-aid = prev.callPackage ./wordle-aid {};
   wordbook = prev.callPackage ./wordbook {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
+  upscaler = prev.callPackage ./upscaler {};
+  dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
 
   # Python Module Overlays
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [

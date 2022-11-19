@@ -8,12 +8,14 @@
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
+  # WIP!!!
   programs.plasma = {
     enable = true;
     files = {
       "kwalletrc"."Wallet"."First Use" = false;
       "dolphinrc"."General"."ShowFullPath" = true;
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
+      "plasmarc"."Theme"."name" = "breeze-dark"; # TODO
 
       kxkbrc = {
         "Layout"."Use" = true;
@@ -42,6 +44,13 @@
 
         Windows = {
 
+        };
+
+        # TODO
+        "org.kde.kdecoration2" = {
+          ShowToolTips = false;
+          ButtonsOnLeft = "M";
+          ButtonsOnRight = "IAX";
         };
       };
     };

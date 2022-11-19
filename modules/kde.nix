@@ -28,19 +28,21 @@
     yakuake
     gparted
     kcolorchooser
+    gnome.gnome-color-manager # broken?
   ] ++ (with libsForQt5; [
     ark
     kate
     kalk
-    kmousetool
-    # kweather
-
+    krfb
     krdc
+    kgamma5 # broken?
+    kweather
+    kmousetool
     # kleopatra
     # konqueror
     # kcontacts
     # korganizer
-    bismuth # tiling layout
+    # bismuth # tiling layout
   ]);
 
   i18n.inputMethod = {

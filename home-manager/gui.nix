@@ -19,7 +19,7 @@ in {
     tiptop-py
     retext
     yesplaymusic
-    fluent-reader
+    # fluent-reader
     motrix
     # museeks
     # freedownloadmanager
@@ -59,8 +59,8 @@ in {
 
     # Social media
     tdesktop
-    # fractal-next
     # nheko
+    # fractal-next
     # discord
 
     # Multi-media
@@ -75,6 +75,7 @@ in {
     # audacious
     # rhythmbox
     goodvibes
+    netease-music-tui
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
@@ -143,7 +144,6 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
     # profiles."default".extraConfig = ''
     #   # drm
     #   "media.eme.enabled" = true;

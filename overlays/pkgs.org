@@ -197,6 +197,32 @@
   }
 #+end_src
 
+** cargo.lock script
+pkgs/applications/audio/netease-music-tui/update-cargo-lock.sh
+
+#+begin_src nix
+#!nix-shell
+#!nix-shell -i bash -p coreutils gnugrep git cargo
+
+# This updates cargo-lock.patch for the netease-music-tui version listed in
+# default.nix.
+
+set -eu -o verbose
+
+here=$PWD
+version=$(cat default.nix | grep '^  version = "' | cut -d '"' -f 2)
+checkout=$(mktemp -d)
+git clone -b "$version" --depth=1 https://github.com/betta-cyber/netease-music-tui "$checkout"
+cd "$checkout"
+
+cargo generate-lockfile
+git add -f Cargo.lock
+git diff HEAD -- Cargo.lock > "$here"/cargo-lock.patch
+
+cd "$here"
+rm -rf "$checkout"
+#+end_src>
+
 * buildPythonApplication
 ** notes
 #+begin_src nix
@@ -560,16 +586,16 @@ stdenv.mkDerivation rec {
 
 ** deb templates
 #+begin_src nix
-    # 解压 DEB 包
-    unpackPhase = ''
+  # 解压 DEB 包
+  unpackPhase = ''
       ar x ${src}
       tar xf data.tar.xz
     '';
 
-    # makeWrapper 可以自动生成一个调用其它命令的命令（也就是 wrapper），并且可以在原命令上修改参数、环境变量等
-    buildInputs = [ makeWrapper ];
+  # makeWrapper 可以自动生成一个调用其它命令的命令（也就是 wrapper），并且可以在原命令上修改参数、环境变量等
+  buildInputs = [ makeWrapper ];
 
-    installPhase = ''
+  installPhase = ''
       mkdir -p $out/bin
 
       # 替换菜单项目（desktop 文件）中的路径
@@ -592,9 +618,11 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    glib-networking
+    gcc-unwrapped
+    zlib
     openssl
     webkitgtk
+    glib-networking
     wrapGAppsHook
   ];
 
@@ -602,6 +630,16 @@ stdenv.mkDerivation rec {
 
   installPhase = "mv usr $out";
   }
+
+  # or
+  unpackPhase = "true";
+
+  installPhase = ''
+    mkdir -p $out
+    dpkg -x $src $out
+    mv $out/usr/* $out
+    rm -rf $out/usr
+  '';
 #+end_src
 
 * qt
