@@ -20,7 +20,7 @@
 
   services.greetd.enable = true;
 
-  # if use hm module
+  # Needs when using wm@hm
   security.pam.services.swaylock = {};
   programs.dconf.enable = true;
   programs.xwayland.enable = true;
@@ -98,7 +98,6 @@
 
       # hyprpicker
 
-      nwg-drawer
       wofi # quick run
       wofi-emoji
       wl-clipboard

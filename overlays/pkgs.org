@@ -610,36 +610,6 @@ stdenv.mkDerivation rec {
         --argv0 "bilibili" \
         --add-flags "$out/opt/app.asar"
     '';
-
-  # others template 
-  nativeBuildInputs = [
-    autoPatchelfHook
-    dpkg
-  ];
-
-  buildInputs = [
-    gcc-unwrapped
-    zlib
-    openssl
-    webkitgtk
-    glib-networking
-    wrapGAppsHook
-  ];
-
-  unpackCmd = "dpkg-deb -x $curSrc source";
-
-  installPhase = "mv usr $out";
-  }
-
-  # or
-  unpackPhase = "true";
-
-  installPhase = ''
-    mkdir -p $out
-    dpkg -x $src $out
-    mv $out/usr/* $out
-    rm -rf $out/usr
-  '';
 #+end_src
 
 * qt

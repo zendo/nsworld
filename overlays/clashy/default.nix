@@ -1,12 +1,12 @@
 { lib, fetchurl, appimageTools }:
 
 let
-  pname = "notesnook";
-  version = "2.2.3";
+  pname = "clashy";
+  version = "0.2.7";
 
   src = fetchurl {
-    url = "https://github.com/streetwriters/${pname}/releases/download/v${version}/notesnook_linux_x86_64.AppImage";
-    hash = "sha256-1m3Xl7oGYorJnc4ZQ7TQKlP8itkyoqf9ILU0iFAFJ14=";
+    url = "https://github.com/SpongeNobody/Clashy/releases/download/v${version}/Clashy-${version}.AppImage";
+    hash = "sha256-Cm5MbARIBeDigeuqXlfBrL8pqauR+HGMdcDhtGe39Ck=";
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
@@ -23,11 +23,11 @@ in appimageTools.wrapType2 {
       --replace 'Exec=AppRun' 'Exec=${pname}'
   '';
 
-    meta = with lib; {
-    description = "A simple music player capable of playing local audio or from Youtube or Spotify";
-    homepage = "https://notesnook.com/";
-    license = licenses.gpl3Plus;
-    platforms = platforms.linux;
+  meta = with lib; {
+    description = "A GUI proxy client based on Clash and Electron.";
+    homepage = "https://github.com/SpongeNobody/Clashy";
+    license = licenses.mit;
+    platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };
 }

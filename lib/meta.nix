@@ -1,3 +1,4 @@
+# https://github.com/tejing1/nixos-config/tree/master/lib
 inputs: let
   inherit (inputs.nixpkgs) lib;
 in rec {
@@ -9,4 +10,9 @@ in rec {
     import inputs.nixpkgs {
       inherit system overlays;
     });
+
+  # TODO
+  btrfsInInitrd = lib.any (fs: fs == "btrfs") builtins.config.boot.initrd.supportedFilesystems;
+  btrfsInSystem = lib.any (fs: fs == "btrfs") builtins.config.boot.supportedFilesystems;
+  btrfsEnable = btrfsInInitrd && btrfsInSystem;
 }

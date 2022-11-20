@@ -23,6 +23,8 @@ in {
     motrix
     # museeks
     # freedownloadmanager
+    notesnook
+    dynamic-wallpaper
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -75,7 +77,6 @@ in {
     # audacious
     # rhythmbox
     goodvibes
-    netease-music-tui
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
@@ -106,6 +107,7 @@ in {
 
     # OFFICE
     # libreoffice-fresh
+    # drawio
     # rnote # handwritten note
     foliate
     paper-note

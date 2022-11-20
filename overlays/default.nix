@@ -3,6 +3,7 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
   zhudou-sans = prev.callPackage ./zhudou-sans {};
+  smiley-sans = prev.callPackage ./smiley-sans {};
   fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
   rime-easy-en = prev.callPackage ./rime-easy-en {};
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
@@ -15,6 +16,7 @@ final: prev: {
   koodo-reader = prev.callPackage ./koodo-reader {};
   notesnook = prev.callPackage ./notesnook {};
   leafview = prev.callPackage ./leafview {};
+  houdoku = prev.callPackage ./houdoku {};
   listen1 = prev.callPackage ./listen1 {};
   moosync = prev.callPackage ./moosync {};
   museeks = prev.callPackage ./museeks {};
@@ -22,12 +24,12 @@ final: prev: {
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
   siyuan = prev.callPackage ./siyuan {};
+  clashy = prev.callPackage ./clashy {}; # failed
   sleek = prev.callPackage ./sleek {};
 
   # deb / rpm
   xmind = prev.callPackage ./xmind {};
   v2raya = prev.callPackage ./v2raya {};
-  abricotine = prev.callPackage ./abricotine {}; # bug
   freedownloadmanager = prev.callPackage ./freedownloadmanager {};
 
   # C

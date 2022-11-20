@@ -173,6 +173,7 @@
     "exec": "$HOME/.config/waybar/scripts/playerctl.sh 2> /dev/null",
     "tooltip": false,
     "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next"
   },

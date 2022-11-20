@@ -2,7 +2,7 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194581/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
@@ -81,8 +81,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            # ./modules/gnome.nix
-            ./modules/kde.nix
+            ./modules/gnome.nix
+            # ./modules/kde.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
 
