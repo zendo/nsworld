@@ -426,6 +426,69 @@ shards lock
 crystal2nix
 #+end_src
 
+* JAVA
+
+#+begin_src nix
+{ stdenv
+, lib
+, fetchurl
+, copyDesktopItems
+, makeDesktopItem
+, makeWrapper
+, jre
+, libpulseaudio
+, libXxf86vm
+}:
+let
+  desktopItem = makeDesktopItem {
+    name = "unciv";
+    exec = "unciv";
+    comment = "An open-source Android/Desktop remake of Civ V";
+    desktopName = "Unciv";
+    categories = [ "Game" ];
+  };
+
+  envLibPath = lib.makeLibraryPath [
+    libpulseaudio
+    libXxf86vm
+  ];
+
+in
+stdenv.mkDerivation rec {
+  pname = "unciv";
+  version = "4.2.20";
+
+  src = fetchurl {
+    url = "https://github.com/yairm210/Unciv/releases/download/${version}/Unciv.jar";
+    sha256 = "sha256-SsEOewFbJqad8OCRiE1VHOx7kVFtF4DEInE3ETCGxDM=";
+  };
+
+  dontUnpack = true;
+
+  nativeBuildInputs = [ copyDesktopItems makeWrapper ];
+
+  installPhase = ''
+    runHook preInstall
+    makeWrapper ${jre}/bin/java $out/bin/unciv \
+      --prefix LD_LIBRARY_PATH : ${envLibPath} \
+      --prefix PATH : ${lib.makeBinPath [ jre ]} \
+      --add-flags "-jar ${src}"
+    runHook postInstall
+  '';
+
+  desktopItems = [ desktopItem ];
+
+  meta = with lib; {
+    description = "An open-source Android/Desktop remake of Civ V";
+    homepage = "https://github.com/yairm210/Unciv";
+    maintainers = with maintainers; [ tex ];
+    sourceProvenance = with sourceTypes; [ binaryBytecode ];
+    license = licenses.mpl20;
+    platforms = [ "x86_64-linux" ];
+  };
+}
+#+end_src
+
 * autoPatchelfHook binary
 
 cat pkgs/applications/audio/spotify/default.nix
@@ -489,42 +552,44 @@ yarn build or yarn dev
 
 ** templates - wrapType2
 #+begin_src nix
-{ lib, fetchurl, appimageTools }:
+  { lib, fetchurl, appimageTools }:
 
-let
-  pname = "museeks";
-  version = "0.13.1";
+  let
+    pname = "museeks";
+    version = "0.13.1";
 
-  src = fetchurl {
-    url = "https://github.com/martpie/museeks/releases/download/${version}/museeks-x86_64.AppImage";
-    hash = "sha256-LvunhCFmpv00TnXzWjp3kQUAhoKpmp6pqKgcaUqZV+o=";
-  };
+    src = fetchurl {
+      url = "https://github.com/martpie/museeks/releases/download/${version}/museeks-x86_64.AppImage";
+      hash = "sha256-LvunhCFmpv00TnXzWjp3kQUAhoKpmp6pqKgcaUqZV+o=";
+    };
 
-  appimageContents = appimageTools.extractType2 { inherit pname version src; };
-in
-appimageTools.wrapType2 {
-  inherit pname version src;
+    appimageContents = appimageTools.extractType2 { inherit pname version src; };
+  in
+  appimageTools.wrapType2 {
+    inherit pname version src;
 
-  extraInstallCommands = ''
-    mv $out/bin/${pname}-${version} $out/bin/${pname}
+    extraPkgs = pkgs: appimageTools.defaultFhsEnvArgs.multiPkgs pkgs ++ [ pkgs.bash ];
 
-    mkdir -p $out/share/${pname}
-    cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
-    cp -a ${appimageContents}/usr/share/icons $out/share/
-    install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
+    extraInstallCommands = ''
+      mv $out/bin/${pname}-${version} $out/bin/${pname}
 
-    substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace 'Exec=AppRun' 'Exec=${pname}'
-  '';
+      mkdir -p $out/share/${pname}
+      cp -a ${appimageContents}/{locales,resources} $out/share/${pname}
+      cp -a ${appimageContents}/usr/share/icons $out/share/
+      install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
 
-  meta = with lib; {
-    description = "A simple, clean and cross-platform music player";
-    homepage = "https://github.com/martpie/museeks";
-    license = licenses.mit;
-    platforms = [ "x86_64-linux" ];
-    maintainers = with maintainers; [ zendo ];
-  };
-}
+      substituteInPlace $out/share/applications/${pname}.desktop \
+        --replace 'Exec=AppRun' 'Exec=${pname}'
+    '';
+
+    meta = with lib; {
+      description = "A simple, clean and cross-platform music player";
+      homepage = "https://github.com/martpie/museeks";
+      license = licenses.mit;
+      platforms = [ "x86_64-linux" ];
+      maintainers = with maintainers; [ zendo ];
+    };
+  }
 #+end_src
 
 ** templates - stdenv

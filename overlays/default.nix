@@ -2,7 +2,8 @@ final: prev: {
   # Trivial
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
-  sddm-swish = prev.callPackage ./sddm-swish {};
+  sddm-theme-swish = prev.callPackage ./sddm-theme-swish {};
+  sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   # Fonts
@@ -28,7 +29,6 @@ final: prev: {
   upscayl = prev.callPackage ./upscayl {};
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
-  siyuan = prev.callPackage ./siyuan {};
   clashy = prev.callPackage ./clashy {}; # failed
   sleek = prev.callPackage ./sleek {};
 
@@ -147,19 +147,18 @@ final: prev: {
     });
   });
 
+  */
+
   # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
-    sddm =
-      prevy.sddm.overrideAttrs
-      (oldAttrs: {
+    sddm = prevy.sddm.overrideAttrs (oldAttrs: {
         src = prev.fetchFromGitHub {
           owner = "sddm";
           repo = "sddm";
-          rev = "02801666f7c9e82b57fe8198e2084d8fdcff6b91";
-          hash = "sha256-KNj1l4jW7moFOC1JkgRqQR0uPcSCMUuVnyKmkL0sDZw=";
+          rev = "ebe6110bd2bb5047ca09d4446fe739da468086e1";
+          hash = "sha256-GxfqB+SMjgh+be+EK93NNe4gOemVtZTADiDpuuUkjtQ=";
         };
         patches = [];
       });
   });
-  */
 }

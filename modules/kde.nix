@@ -29,7 +29,7 @@
     gparted
     kcolorchooser
     gnome.gnome-color-manager # broken?
-    # sddm-swish
+    sddm-theme-astronaut
   ] ++ (with libsForQt5; [
     ark
     kate
@@ -59,16 +59,19 @@
 
   services.xserver = {
     enable = true;
-    excludePackages = [
-      pkgs.xterm
-    ];
+    excludePackages = [pkgs.xterm];
 
     displayManager = {
       defaultSession = "plasmawayland";
-      # sddm.enable = true;
-      # sddm.theme = "Swish";
+      sddm.enable = true;
+      sddm.theme = "astronaut";
+      sddm.settings = {
+        General.InputMethod = ""; # fix giant virtual keyboard
+        X11.ServerArguments = "-dpi 144";
+      };
+
       lightdm = {
-        enable = true;
+        enable = false;
         greeters.gtk = {
           cursorTheme.size = 48;
           extraConfig = ''

@@ -12,8 +12,8 @@ stdenvNoCC.mkDerivation rec {
   };
 
   installPhase = ''
-    mkdir -p $out/share/sddm/themes/Swish
-    cp -r ./* $_
+    mkdir -p $out/share/sddm/themes/swish
+    cp -a $src/* $_
   '';
 
   meta = with lib; {

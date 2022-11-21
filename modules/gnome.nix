@@ -91,9 +91,7 @@
 
   services.xserver = {
     enable = true;
-    excludePackages = [
-      pkgs.xterm
-    ];
+    excludePackages = [pkgs.xterm];
 
     displayManager = {
       gdm.enable = true;
