@@ -29,6 +29,7 @@
     gparted
     kcolorchooser
     gnome.gnome-color-manager # broken?
+    # sddm-swish
   ] ++ (with libsForQt5; [
     ark
     kate
@@ -63,9 +64,28 @@
     ];
 
     displayManager = {
-      # sddm.enable = true;
-      lightdm.enable = true;
       defaultSession = "plasmawayland";
+      # sddm.enable = true;
+      # sddm.theme = "Swish";
+      lightdm = {
+        enable = true;
+        greeters.gtk = {
+          cursorTheme.size = 48;
+          extraConfig = ''
+            xft-dpi=261
+            clock-format=%H:%M
+          '';
+          indicators = [
+            "~spacer"
+            "~clock"
+            "~spacer"
+            "~session"
+            # "~language"
+            # "~a11y"
+            "~power"
+          ];
+        };
+      };
     };
 
     desktopManager.plasma5 = {

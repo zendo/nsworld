@@ -23,16 +23,6 @@ stdenv.mkDerivation rec {
     hash = "sha256-iQax3ROf281D8LVXzZ1QgWLjiky+pQ3kWyRFUzjRHlE=";
   };
 
-  desktopItem = makeDesktopItem {
-    name = "v2rayA";
-    icon = "v2rayA";
-    exec = "v2raya %U";
-    categories = [ "Network" ];
-    comment = "v2rayA";
-    desktopName = "v2rayA";
-    startupNotify = true;
-  };
-
   dontBuild = true;
   dontConfigure = true;
   dontPatchELF = true;
@@ -42,7 +32,6 @@ stdenv.mkDerivation rec {
     autoPatchelfHook
     dpkg
     makeWrapper
-    # wrapGAppsHook
   ];
 
   buildInputs = atomEnv.packages;
@@ -57,7 +46,7 @@ stdenv.mkDerivation rec {
 
     mkdir -p "$out/share/applications"
     # cp -r ./* "$out/share/applications" # for test
-    cp "${desktopItem}/share/applications/"* "$out/share/applications"
+    cp "usr/share/applications/v2raya.desktop" "$out/share/applications"
   '';
 
   runtimeDependencies = [

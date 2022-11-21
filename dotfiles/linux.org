@@ -193,6 +193,31 @@ find . -name '*.plymouth' -exec sed -i -e 's/usr\/share/etc/g' {} \;
 find . -name '*.plymouth' -print0 | xargs -0 sed -i 's/usr\/share/etc/g'
 find . -type f  -name '*.plymouth' | xargs sed -i "s@usr/share@etc@g"
 
+** time format
+#+begin_src config
+%a . . . . Abbreviated weekday name (Mon, Tue, etc.)
+%A . . . . Full weekday name (Monday, Tuesday, etc.)
+%b . . . . Abbreviated month name (Jan, Feb, etc.)
+%B . . . . Full month name (January, February, etc.)
+%d. . . . . Day of month
+%j . . . . . Julian day of year
+%m . . . . Month number (01-12)
+%y. . . . . Year in century
+%Y . . . . Year with 4 digits
+-------------------------------------------------------------------------------
+%H . . . . Hour (00-23)
+%I . . . . . Hour (00-12)
+%M . . . . Minutes (00-59)
+%S . . . . . Seconds(00-59)
+%p . . . . . PM or AM
+-------------------------------------------------------------------------------
+%D . . . . Date as %m/%d/%y
+%r. . . . . Time as %I:%M:%S %p
+%R . . . . Time as %H:%M
+%T . . . . Time as %H:%M:%S
+%Z . . . . Time Zone Name 
+#+end_src
+
 * Bash OneLiner
 https://github.com/onceupon/Bash-Oneliner
 

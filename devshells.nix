@@ -34,11 +34,20 @@ inputs @ {pkgs}: {
   #######################################################################
   ##  NodeJS
   #######################################################################
-  node = pkgs.mkShell {
+  nodejs = pkgs.mkShell {
     buildInputs = with pkgs; [
       yarn
       nodejs
       electron
+
+      # cargo-tauri
+      # cargo
+      # rustc
+      # openssl
+      # pkg-config
+      # glib
+      # libsoup
+      # webkitgtk
     ];
     # ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron_20}/bin";
   };

@@ -108,7 +108,7 @@
         [org.gnome.shell]
         favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
 
-        enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gsconnect@andyholmes.github.io', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'clipboard-history@alexsaveau.dev', 'space-bar@luchrioh', 'nightthemeswitcher@romainvigier.fr' , 'inhibit-suspend@charlieqle']
+        enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gsconnect@andyholmes.github.io', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'clipboard-history@alexsaveau.dev', 'space-bar@luchrioh', 'nightthemeswitcher@romainvigier.fr', 'inhibit-suspend@charlieqle']
       '';
 
       # Override GNOME defaults

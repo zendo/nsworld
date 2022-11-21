@@ -2,12 +2,17 @@ final: prev: {
   # Trivial
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
+  sddm-swish = prev.callPackage ./sddm-swish {};
+  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
+
+  # Fonts
   zhudou-sans = prev.callPackage ./zhudou-sans {};
   smiley-sans = prev.callPackage ./smiley-sans {};
+
+  # RIME
   fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
   rime-easy-en = prev.callPackage ./rime-easy-en {};
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
-  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   # electron / appimage
   thorium-reader = prev.callPackage ./thorium-reader {};
