@@ -2,6 +2,8 @@ final: prev: {
   # Trivial
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
+
+  # Themes
   sddm-theme-swish = prev.callPackage ./sddm-theme-swish {};
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut {};
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
@@ -73,13 +75,10 @@ final: prev: {
       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
     })
   ];
-  python3 =
-    let
-      self = prev.python3.override {
-        inherit self;
-        packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-      }; in
-      self;
+  python3 = let self = prev.python3.override {
+    inherit self;
+    packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+  }; in self;
   python3Packages = final.python3.pkgs;
 
   # Gtk
@@ -105,17 +104,29 @@ final: prev: {
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:
-  # (import ../lib { inherit (prev) lib; })
+  #   (import ../lib { inherit (prev) lib; })
   # );
 
   ############# Override ###################
   # fix .desktop missing
-  wl-color-picker =
-    prev.wl-color-picker.overrideAttrs
-    (oldAttrs: {
-      postFixup = ''
-        cp -r $out/usr/share $out/share '';
+  wl-color-picker = prev.wl-color-picker.overrideAttrs
+  (oldAttrs: {
+    postFixup = ''
+      cp -r $out/usr/share $out/share '';
+  });
+
+  # libsForQt5 override
+  libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
+    sddm = prevy.sddm.overrideAttrs (oldAttrs: {
+      src = prev.fetchFromGitHub {
+        owner = "sddm";
+        repo = "sddm";
+        rev = "ebe6110bd2bb5047ca09d4446fe739da468086e1";
+        hash = "sha256-GxfqB+SMjgh+be+EK93NNe4gOemVtZTADiDpuuUkjtQ=";
+      };
+      patches = [];
     });
+  });
 
   /*
   # node override
@@ -123,42 +134,29 @@ final: prev: {
 
   # rust override
   shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {
-    version = "2022-06-27";
-    src = prev.fetchFromGitHub {
-      owner = "shadowsocks";
-      repo = "shadowsocks-rust";
-      rev = "a4955a198bdf6ab12e647b04180679dfef53fb0b";
-      sha256 = "sha256-sJKuGQH5PBOcFOpks8sUaAWJlfg7aCv6YS9DWaEF3K4=";
-    };
-    cargoDeps = oldAttrs.cargoDeps.overrideAttrs (_: {
-      inherit src;
-      outputHash = "sha256-YJ4Qva4keOk9aBPFwztkTpvS7uv7zl6TOHqYZzZEGAs=";
-    });
+  version = "2022-06-27";
+  src = prev.fetchFromGitHub {
+  owner = "shadowsocks";
+  repo = "shadowsocks-rust";
+  rev = "a4955a198bdf6ab12e647b04180679dfef53fb0b";
+  sha256 = "sha256-sJKuGQH5PBOcFOpks8sUaAWJlfg7aCv6YS9DWaEF3K4=";
+  };
+  cargoDeps = oldAttrs.cargoDeps.overrideAttrs (_: {
+  inherit src;
+  outputHash = "sha256-YJ4Qva4keOk9aBPFwztkTpvS7uv7zl6TOHqYZzZEGAs=";
+  });
   });
 
   # gnome override
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-    mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
-      dynamic-buffering = prev.fetchurl {
-        url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
-        sha256 = "sha256-KVerFwEgLaEpp5lFofX7VnbBPP4dIVm3+odVUZ8clYA=";
-      };
-      patches = dynamic-buffering;
-    });
+  mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
+  dynamic-buffering = prev.fetchurl {
+  url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
+  sha256 = "sha256-KVerFwEgLaEpp5lFofX7VnbBPP4dIVm3+odVUZ8clYA=";
+  };
+  patches = dynamic-buffering;
+  });
   });
 
   */
-
-  # libsForQt5 override
-  libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
-    sddm = prevy.sddm.overrideAttrs (oldAttrs: {
-        src = prev.fetchFromGitHub {
-          owner = "sddm";
-          repo = "sddm";
-          rev = "ebe6110bd2bb5047ca09d4446fe739da468086e1";
-          hash = "sha256-GxfqB+SMjgh+be+EK93NNe4gOemVtZTADiDpuuUkjtQ=";
-        };
-        patches = [];
-      });
-  });
 }

@@ -1,4 +1,3 @@
-# https://github.com/fersilva16/nix-config
 inputs: let
   inherit (inputs) self nixpkgs nixpkgs-stable home-manager;
 in

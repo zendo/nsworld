@@ -24,7 +24,6 @@ in {
     # museeks
     # freedownloadmanager
     notesnook
-    dynamic-wallpaper
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -143,6 +142,10 @@ in {
   programs.mpv = {
     enable = true;
   };
+
+  # programs.obs-studio = {
+  #   enable = true;
+  # };
 
   programs.firefox = {
     enable = true;
