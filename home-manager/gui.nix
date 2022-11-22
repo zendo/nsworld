@@ -82,20 +82,18 @@ in {
     # tagger
     # jamesdsp
     # ciano
-    lux
     # media-downloader
     # spotdl
     # spotiflyer
 
     # Image manipulation
     # shutter
-    pinta
+    # pinta
     # yacreader
     contrast
     # gcolor3
     # wl-color-picker
 
-    gitnuro
     qbittorrent
     gnome-decoder
     # deja-dup
@@ -109,8 +107,8 @@ in {
     # drawio
     # rnote # handwritten note
     foliate
-    paper-note
-    endeavour
+    # paper-note
+    # endeavour
     ghostwriter
     textpieces
     meld

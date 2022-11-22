@@ -40,6 +40,7 @@
  "C-\\" #'align-regexp
  "M-s" #'avy-goto-word-1 ;默认 isearch 被覆盖
  "<f1>" #'+treemacs/toggle
+ "<f8>" #'deft
 
  "C-s" #'consult-line
  "C-x C-r" #'consult-recent-file

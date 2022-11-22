@@ -426,7 +426,7 @@ shards lock
 crystal2nix
 #+end_src
 
-* JAVA
+* java
 
 #+begin_src nix
 { stdenv
@@ -716,6 +716,13 @@ qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default
     ln -s $out/bin/com.github.cassidyjames.dippi $out/bin/dippi
   '';
 #+end_src
+
+* shell-fu
+
+#+begin_src bash
+mkdir -p $out/share/fonts/{opentype,truetype}
+unzip -j $downloadedFile -d $out/share/fonts/mononoki
+#+end_src>
 
 * meta
 #+begin_src nix

@@ -24,11 +24,9 @@ final: prev: {
   koodo-reader = prev.callPackage ./koodo-reader {};
   notesnook = prev.callPackage ./notesnook {};
   leafview = prev.callPackage ./leafview {};
-  houdoku = prev.callPackage ./houdoku {};
   listen1 = prev.callPackage ./listen1 {};
   moosync = prev.callPackage ./moosync {};
   museeks = prev.callPackage ./museeks {};
-  upscayl = prev.callPackage ./upscayl {};
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
   clashy = prev.callPackage ./clashy {}; # failed
@@ -46,7 +44,7 @@ final: prev: {
 
   # Rust
   done = prev.callPackage ./done {};
-  mousai = prev.callPackage ./mousai {};
+  # mousai = prev.callPackage ./mousai {};
   g4music = prev.callPackage ./g4music {};
   tiny-games = prev.callPackage ./tiny-games {};
   noteworthy = prev.callPackage ./noteworthy {};
@@ -62,6 +60,7 @@ final: prev: {
   tiptop-py = prev.callPackage ./tiptop-py {};
   iotas = prev.callPackage ./iotas {};
   zdict = prev.callPackage ./zdict {};
+  calcure = prev.callPackage ./calcure {};
   wordle-aid = prev.callPackage ./wordle-aid {};
   wordbook = prev.callPackage ./wordbook {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
