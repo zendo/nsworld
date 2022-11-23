@@ -8,14 +8,15 @@
   ];
 
   services = {
-    v2raya.enable = true;
+    # v2raya.enable = true;
     openssh.enable = true;
     # opensnitch.enable = true;
 
-    tor.tsocks = {
-      enable = true;
-      server = "127.0.0.1:20170";
-    };
+    # Proxy
+    # tor.tsocks = {
+    #   enable = true;
+    #   server = "127.0.0.1:7890";
+    # };
 
     # Enable CUPS to print documents.
     # printing.enable = true;
@@ -40,7 +41,7 @@
     #interfaces.eno1.useDHCP = true;
     #interfaces.wlp1s0.useDHCP = true;
 
-    # proxy.default = "http://127.0.0.1:20171";
+    # proxy.default = "http://127.0.0.1:7890";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     nameservers = [
@@ -55,8 +56,8 @@
     # };
   };
 
-  # systemd.services.nix-daemon.environment = {
-  #   http_proxy = "http://127.0.0.1:20171";
-  #   https_proxy = "http://127.0.0.1:20171";
-  # };
+  systemd.services.nix-daemon.environment = {
+    http_proxy = "http://127.0.0.1:7890";
+    https_proxy = "http://127.0.0.1:7890";
+  };
 }

@@ -24,6 +24,7 @@ in {
     # museeks
     # freedownloadmanager
     notesnook
+    clash-verge
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

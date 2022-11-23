@@ -18,7 +18,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../modules/base.nix
     ../modules/user.nix
-    ../modules/network.nix
+    ../modules/networking.nix
     ../modules/nix.nix
     ../modules/sound.nix
     ../modules/fonts.nix

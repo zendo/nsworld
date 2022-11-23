@@ -44,7 +44,7 @@
   # programs.ssh = {
   #   enable = true;
   #   # extraConfig = ''
-  #   #   ProxyCommand nc -X 5 -x 127.0.0.1:20170 %h %p
+  #   #   ProxyCommand nc -X 5 -x 127.0.0.1:7890 %h %p
   #   # '';
   # };
 }

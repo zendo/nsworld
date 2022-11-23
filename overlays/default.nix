@@ -28,12 +28,14 @@ final: prev: {
   museeks = prev.callPackage ./museeks {};
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};
-  clashy = prev.callPackage ./clashy {}; # failed
   sleek = prev.callPackage ./sleek {};
 
-  # deb / rpm
+  # deb / autoPatchelf
   xmind = prev.callPackage ./xmind {};
   v2raya = prev.callPackage ./v2raya {};
+  clash-verge = prev.callPackage ./clash-verge {
+    openssl = prev.openssl_1_1;
+  };
   freedownloadmanager = prev.callPackage ./freedownloadmanager {};
 
   # C
@@ -89,10 +91,11 @@ final: prev: {
   mindustry = prev.callPackage ./mindustry {}; # game
 
   # Qt
+  v2ray-desktop = prev.qt6Packages.callPackage ./v2ray-desktop {};
   converseen = prev.libsForQt5.callPackage ./converseen {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
-  qmmp = prev.qt6Packages.callPackage ./qmmp {};
   retext = prev.qt6Packages.callPackage ./retext {};
+  qmmp = prev.qt6Packages.callPackage ./qmmp {};
 
   # wayland
 

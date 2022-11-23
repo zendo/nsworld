@@ -86,11 +86,7 @@
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
 
-            ({
-              config,
-              pkgs,
-              ...
-            }: {
+            ({ config, pkgs, ... }: {
               # disabledModules = ["hardware/video/hidpi.nix"];
               # imports = [
               #   "${inputs.nixpkgs-pr}/nixos/modules/hardware/video/hidpi.nix"

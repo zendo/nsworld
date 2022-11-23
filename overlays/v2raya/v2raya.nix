@@ -1,16 +1,24 @@
+{ config, lib, pkgs, ... }:
+
+with lib;
+
+let
+  cfg = config.services.v2raya;
+in
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
   options = {
     services.v2raya = {
-      enable = lib.options.mkEnableOption "the v2rayA service";
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = ''
+          Whether to enable the v2rayA service.
+        '';
+      };
     };
   };
 
-  config = lib.mkIf config.services.v2raya.enable {
+  config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.v2raya ];
 
     systemd.services.v2raya = {
@@ -23,7 +31,7 @@
 
       serviceConfig = {
         User = "root";
-        ExecStart = "${lib.getExe pkgs.v2raya} --log-disable-timestamp";
+        ExecStart = "${getExe pkgs.v2raya} --log-disable-timestamp";
         LimitNPROC = 500;
         LimitNOFILE = 1000000;
         Restart = "on-failure";
