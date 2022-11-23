@@ -91,7 +91,6 @@ final: prev: {
   mindustry = prev.callPackage ./mindustry {}; # game
 
   # Qt
-  v2ray-desktop = prev.qt6Packages.callPackage ./v2ray-desktop {};
   converseen = prev.libsForQt5.callPackage ./converseen {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
   retext = prev.qt6Packages.callPackage ./retext {};
