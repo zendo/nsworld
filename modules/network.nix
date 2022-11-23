@@ -7,6 +7,32 @@
     ../overlays/v2raya/v2raya.nix
   ];
 
+  services = {
+    v2raya.enable = true;
+    openssh.enable = true;
+    # opensnitch.enable = true;
+
+    tor.tsocks = {
+      enable = true;
+      server = "127.0.0.1:20170";
+    };
+
+    # Enable CUPS to print documents.
+    # printing.enable = true;
+
+    # Publish this server and its address on the network
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      # publish = {
+      #   enable = true;
+      #   domain = true;
+      #   addresses = true;
+      #   workstation = true;
+      # };
+    };
+  };
+
   networking = {
     networkmanager.enable = true; # conflict with networking.wireless
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -21,49 +47,16 @@
       "223.5.5.5"
       "223.6.6.6"
     ];
-  };
 
-  # Proxy
-  services.tor.tsocks = {
-    enable = true;
-    server = "127.0.0.1:20170";
+    # firewall = {
+    #   enable = false;
+    #   allowedUDPPorts = [5353];
+    #   allowedTCPPorts = [];
+    # };
   };
-
-  # v2rayA
-  # services.v2raya.enable = true;
 
   # systemd.services.nix-daemon.environment = {
   #   http_proxy = "http://127.0.0.1:20171";
   #   https_proxy = "http://127.0.0.1:20171";
   # };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Publish this server and its address on the network
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    #   publish = {
-    #     enable = true;
-    #     domain = true;
-    #     addresses = true;
-    #     workstation = true;
-    #   };
-  };
-
-  # Open ports for avahi zeroconf
-  # networking.firewall.allowedUDPPorts = [ 5353 ];
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # OpenSnitch
-  # services.opensnitch.enable = true;
 }

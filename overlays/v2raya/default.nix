@@ -5,15 +5,18 @@
 , atomEnv
 , autoPatchelfHook
 , makeWrapper
-, makeDesktopItem
-, wrapGAppsHook
 , udev
-, v2ray
-, v2ray-geoip
-, v2ray-domain-list-community
+# , v2ray
+# , v2ray-geoip
+# , v2ray-domain-list-community
 , symlinkJoin
 }:
-
+let
+  inherit ((builtins.getFlake
+    "github:NixOS/nixpkgs/8de8b98839d1f20089582cfe1a81207258fcc1f1").legacyPackages.${stdenv.system})
+    # v2ray 4
+    v2ray v2ray-geoip v2ray-domain-list-community;
+in
 stdenv.mkDerivation rec {
   pname = "v2raya";
   version = "1.5.9.1698.1";
@@ -26,17 +29,20 @@ stdenv.mkDerivation rec {
   dontBuild = true;
   dontConfigure = true;
   dontPatchELF = true;
-  dontWrapGApps = true;
+
+  unpackPhase = "dpkg-deb -x $src .";
 
   nativeBuildInputs = [
-    autoPatchelfHook
     dpkg
     makeWrapper
+    autoPatchelfHook
   ];
 
   buildInputs = atomEnv.packages;
 
-  unpackPhase = "dpkg-deb -x $src .";
+  runtimeDependencies = [
+    (lib.getLib udev)
+  ];
 
   installPhase = ''
     mkdir -p "$out/bin"
@@ -44,14 +50,11 @@ stdenv.mkDerivation rec {
     cp -R "usr/share" "$out/share"
     chmod -R g-w "$out"
 
-    mkdir -p "$out/share/applications"
-    # cp -r ./* "$out/share/applications" # for test
-    cp "usr/share/applications/v2raya.desktop" "$out/share/applications"
+    install -Dm 444 usr/share/applications/v2raya.desktop -t $out/share/applications
+    cp -a usr/share/icons $out/share/
+    substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Icon=/usr/share/icons/hicolor/512x512/apps/v2raya.png' 'Icon=${pname}'
   '';
-
-  runtimeDependencies = [
-    (lib.getLib udev)
-  ];
 
   postFixup = ''
     makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \

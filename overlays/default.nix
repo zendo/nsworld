@@ -25,7 +25,6 @@ final: prev: {
   notesnook = prev.callPackage ./notesnook {};
   leafview = prev.callPackage ./leafview {};
   listen1 = prev.callPackage ./listen1 {};
-  moosync = prev.callPackage ./moosync {};
   museeks = prev.callPackage ./museeks {};
   motrix = prev.callPackage ./motrix {};
   linked = prev.callPackage ./linked {};

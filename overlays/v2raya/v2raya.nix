@@ -11,6 +11,8 @@
   };
 
   config = lib.mkIf config.services.v2raya.enable {
+    environment.systemPackages = [ pkgs.v2raya ];
+
     systemd.services.v2raya = {
       unitConfig = {
         Description = "v2rayA service";
@@ -21,7 +23,7 @@
 
       serviceConfig = {
         User = "root";
-        ExecStart = "${pkgs.v2raya}/bin/v2raya --log-disable-timestamp";
+        ExecStart = "${lib.getExe pkgs.v2raya} --log-disable-timestamp";
         LimitNPROC = 500;
         LimitNOFILE = 1000000;
         Restart = "on-failure";
@@ -30,7 +32,9 @@
       };
 
       wantedBy = ["multi-user.target"];
-      path = with pkgs; [iptables bash iproute2]; # required by v2rayA TProxy functionality
+
+      # required by v2rayA TProxy functionality
+      path = with pkgs; [iptables bash iproute2];
     };
   };
 }
