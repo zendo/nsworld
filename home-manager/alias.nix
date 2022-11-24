@@ -8,14 +8,14 @@
     cat = "bat -p";
     l = "exa -l --icons";
     "la." = "ls -d .*";
-    bc = "${lib.getExe pkgs.libqalculate}";
-    psp = "${lib.getExe pkgs.procs}";
     rm = "trash-put";
     free = "free -h";
+    bc = "${lib.getExe pkgs.libqalculate}";
+    psp = "${lib.getExe pkgs.procs}";
     mount-ls = "mount | column -t";
     beep = "echo -en \"\\007\"";
-    inxi = "inxi -Fz";
 
+    inxi = "inxi -Fz";
     ip = "ip --color=auto";
     nload = "nload devices wlp1s0";
 

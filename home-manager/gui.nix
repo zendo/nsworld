@@ -45,13 +45,12 @@ in {
     sniffglue
 
     # Browsers
-    # (google-chrome.override {
-    #   commandLineArgs = [
-    #     "--ozone-platform=wayland"
-    #     "--enable-features=VaapiVideoDecoder"
-    #     "--use-gl=egl"
-    #   ];
-    # })
+    (google-chrome.override {
+      commandLineArgs = [
+        "--enable-features=VaapiVideoDecoder"
+        "--use-gl=egl"
+      ];
+    })
     # microsoft-edge
     # vivaldi
     # vivaldi-ffmpeg-codecs

@@ -91,6 +91,7 @@
          (dashboard-set-footer . nil)
          (dashboard-center-content . t)
          (dashboard-projects-backend . 'project-el)
+         (dashboard-banner-logo-title . nil) ; "Welcome to Emacs!"
          (dashboard-items . '((recents  . 12)
                               (bookmarks . 5)
                               (projects . 5))))

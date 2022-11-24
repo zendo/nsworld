@@ -21,10 +21,6 @@ in {
   # security.pam.services.login.enableGnomeKeyring = true;
   # programs.seahorse.enable = true;
 
-  environment.variables = {
-    NIXOS_OZONE_WL = "1";
-  };
-
   environment.systemPackages = with pkgs; [
     # falkon
     kalendar
