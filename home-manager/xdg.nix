@@ -26,11 +26,9 @@ in
     ".doom.d".source = mkOOSL hmDots + "/doom";
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
 
-    # ".local/share/fcitx5/themes".source = pkgs.fetchFromGitHub {
-    #   owner = "icy-thought";
-    #   repo = "fcitx5-catppuccin";
-    #   rev = "3b699870fb2806404e305fe34a3d2541d8ed5ef5";
-    #   sha256 = "hOAcjgj6jDWtCGMs4Gd49sAAOsovGXm++TKU3NhZt8w=";
+    # ".local/share/fcitx5/themes".source = pkgs.fetchurl {
+    #   url = "https://github.com/scratch-er/fcitx5-breeze/releases/download/v2.0.0/fcitx5-breeze-prebuilt-2.0.0.tar.gz";
+    #   sha256 = "0wwwvq90dcb21avdgcqq5w192ndr2m5fmswxblm3l2vcrh36h3jz";
     # };
   };
 

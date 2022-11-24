@@ -77,8 +77,8 @@
   };
 
   home-manager.users.${username} = {
-    pkgs,
     config,
+    pkgs,
     ...
   }: {
     imports = [

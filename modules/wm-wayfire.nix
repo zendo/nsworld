@@ -15,8 +15,8 @@
   ];
 
   home-manager.users.${username} = {
-    pkgs,
     config,
+    pkgs,
     ...
   }: {
     home.packages = with pkgs; [

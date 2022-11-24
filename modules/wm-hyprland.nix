@@ -23,9 +23,9 @@
   # programs.hyprland.enable = true;
 
   home-manager.users.${username} = {
-    pkgs,
-    config,
     inputs,
+    config,
+    pkgs,
     ...
   }: {
     imports = [inputs.hyprland.homeManagerModules.default];

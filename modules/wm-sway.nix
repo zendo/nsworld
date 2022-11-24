@@ -19,8 +19,8 @@
   };
 
   home-manager.users.${username} = {
-    pkgs,
     config,
+    pkgs,
     ...
   }: {
     wayland.windowManager.sway = {

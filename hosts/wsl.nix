@@ -3,11 +3,8 @@
   pkgs,
   username,
   ...
-}: let
-  winProxy = "http://192.168.2.118:10811";
-in {
-  networking.hostName = "wsl";
-
+}: {
+  ## WSL
   wsl = {
     enable = true;
     defaultUser = "${username}";
@@ -23,8 +20,30 @@ in {
     # docker-desktop.enable = true;
   };
 
+  networking.hostName = "wsl";
   # users.defaultUserShell = pkgs.zsh;
 
+  ## Home Manager
+  home-manager.users.${username} = {
+    config,
+    pkgs,
+    ...
+  }: {
+    home.packages = with pkgs; [
+      mpg123 # for ydict
+      wsl-open
+      kitty
+      goodvibes
+      emacs
+    ];
+
+    home.shellAliases = {
+      wsl-proxy = "export {http,https,ftp}_proxy=192.168.2.118:10811 ; \\
+        export {HTTP,HTTPS,FTP}_PROXY=192.168.2.118:10811";
+    };
+  };
+
+  ## basic settings
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -33,13 +52,6 @@ in {
     gptfdisk
     wget
     nix-bash-completions
-
-    emacs
-
-    mpg123 # for ydict
-    kitty
-    wsl-open
-    goodvibes
   ];
 
   programs.gnupg.agent = {
@@ -47,16 +59,8 @@ in {
     enableSSHSupport = true;
   };
 
-  environment.variables = {
-  };
-
   # for zsh completion in home-manager
   environment.pathsToLink = [ "/share/zsh" ];
-
-  environment.shellAliases = {
-    wsl-proxy = "export {http,https,ftp}_proxy=${winProxy} ; \\
-    export {HTTP,HTTPS,FTP}_PROXY=${winProxy}";
-  };
 
   documentation.enable = false;
   documentation.nixos.enable = false;
