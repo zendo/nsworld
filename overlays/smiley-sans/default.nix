@@ -10,8 +10,7 @@ fetchzip rec {
 
   postFetch = ''
     mkdir -p $out/share/fonts/{truetype,woff2}
-    cp $out/*.ttf $out/share/fonts/truetype
-    cp $out/*.otf $out/share/fonts/truetype
+    cp $out/*{.ttf,.otf} $out/share/fonts/truetype
     cp $out/*.woff2 $out/share/fonts/woff2
 
     shopt -s extglob dotglob

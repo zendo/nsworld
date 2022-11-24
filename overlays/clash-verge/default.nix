@@ -6,24 +6,20 @@
 , autoPatchelfHook
 , makeWrapper
 , udev
-, webkitgtk
 , openssl
+, webkitgtk
 , libappindicator-gtk3
 , libayatana-appindicator
 }:
 
 stdenv.mkDerivation rec {
   pname = "clash-verge";
-  version = "1.1.2";
+  version = "1.2.0";
 
   src = fetchurl {
     url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
-    hash = "sha256-7Btnf+/jW3KbaVHzAp/jb6TVs9NNuQEfDF+uZ985Le0=";
+    hash = "sha256-5150LH4A30Bbs91NbKV0GinOR+j2r+I+Xuj9q0Ga0IQ=";
   };
-
-  dontBuild = true;
-  dontConfigure = true;
-  dontPatchELF = true;
 
   unpackPhase = "dpkg-deb -x $src .";
 
@@ -34,8 +30,8 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = atomEnv.packages ++ [
-    webkitgtk
     openssl
+    webkitgtk
   ];
 
   runtimeDependencies = [
@@ -45,13 +41,10 @@ stdenv.mkDerivation rec {
   ];
 
   installPhase = ''
-    mkdir -p "$out/bin"
-    cp -R "usr" "$out"
-    cp -R "usr/share" "$out/share"
-    chmod -R g-w "$out"
-  '';
+    mkdir -p $out/bin
+    cp -r usr $out
+    cp -r usr/share $out/share
 
-  postFixup = ''
     makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ] }"
   '';

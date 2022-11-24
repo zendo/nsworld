@@ -22,6 +22,7 @@
       emacs-all-the-icons-fonts
       hack-font
       fira-code
+      mononoki
       jetbrains-mono
       # zhudou-sans
       # (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})

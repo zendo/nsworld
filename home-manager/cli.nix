@@ -44,6 +44,7 @@
     p7zip
     unzip
     unrar
+    ouch
     patool
     atool
     trash-cli

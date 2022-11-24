@@ -18,7 +18,7 @@ in appimageTools.wrapType2 {
     mv $out/bin/${pname}-${version} $out/bin/${pname}
 
     install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
-    cp -a ${appimageContents}/usr/share/icons $out/share/
+    cp -a ${appimageContents}/usr/share/icons $out/share
 
     substituteInPlace $out/share/applications/${pname}.desktop \
       --replace 'Exec=AppRun' 'Exec=${pname}'

@@ -651,21 +651,8 @@ stdenv.mkDerivation rec {
 
 ** deb templates
 #+begin_src nix
-  # 解压 DEB 包
-  unpackPhase = ''
-      ar x ${src}
-      tar xf data.tar.xz
-    '';
-
-  # makeWrapper 可以自动生成一个调用其它命令的命令（也就是 wrapper），并且可以在原命令上修改参数、环境变量等
-  buildInputs = [ makeWrapper ];
-
   installPhase = ''
       mkdir -p $out/bin
-
-      # 替换菜单项目（desktop 文件）中的路径
-      cp -r usr/share $out/share
-      sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
 
       # 复制出客户端的 Javascript 部分，其它的不要了
       cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt

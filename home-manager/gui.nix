@@ -24,7 +24,6 @@ in {
     # museeks
     # freedownloadmanager
     notesnook
-    clash-verge
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -37,6 +36,7 @@ in {
     # wezterm
     warp
     remmina
+    clash-verge
     # qv2ray
     # clash
     proxychains-ng
@@ -193,7 +193,17 @@ in {
   #   };
   # };
 
-  # xdg.configFile = {
+  xdg.configFile = {
+    "autostart/clash-verge.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Version=1.0
+      Name=clash-verge
+      Comment=clash-vergestartup script
+      Exec=clash-verge
+      StartupNotify=false
+      Terminal=false
+    '';
   #   "autostart/qv2ray.desktop".text = ''
   #     [Desktop Entry]
   #     Name=qv2ray
@@ -206,7 +216,7 @@ in {
   #     StartupNotify=false
   #     X-GNOME-Autostart-enabled=true
   #   '';
-  # };
+  };
 
   # xdg.desktopEntries.spotify = lib.options gnomeEnable {
   #   name = "Spotify";
