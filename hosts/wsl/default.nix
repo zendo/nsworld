@@ -4,7 +4,6 @@
   username,
   ...
 }: {
-  ## WSL
   wsl = {
     enable = true;
     defaultUser = "${username}";
@@ -23,7 +22,9 @@
   networking.hostName = "wsl";
   # users.defaultUserShell = pkgs.zsh;
 
-  ## Home Manager
+  #######################################################################
+  ##  Home Manager
+  #######################################################################
   home-manager.users.${username} = {
     config,
     pkgs,
@@ -43,7 +44,9 @@
     };
   };
 
-  ## basic settings
+  #######################################################################
+  ##  Basic settings
+  #######################################################################
   environment.systemPackages = with pkgs; [
     binutils
     tree

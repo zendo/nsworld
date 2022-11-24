@@ -177,9 +177,9 @@
           system = "x86_64-linux";
           specialArgs = {inherit inputs username;};
           modules = [
+            ./hosts/wsl
             ./modules/nix.nix
             ./modules/fonts.nix
-            ./hosts/wsl.nix
 
             nixos-wsl.nixosModules.wsl
             {nixpkgs.overlays = overlays;}

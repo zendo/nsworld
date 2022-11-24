@@ -23,7 +23,6 @@ in {
     motrix
     # museeks
     # freedownloadmanager
-    notesnook
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

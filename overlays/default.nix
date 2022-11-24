@@ -22,13 +22,10 @@ final: prev: {
   fluent-reader = prev.callPackage ./fluent-reader {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
   koodo-reader = prev.callPackage ./koodo-reader {};
-  notesnook = prev.callPackage ./notesnook {};
   leafview = prev.callPackage ./leafview {};
   listen1 = prev.callPackage ./listen1 {};
   museeks = prev.callPackage ./museeks {};
   motrix = prev.callPackage ./motrix {};
-  linked = prev.callPackage ./linked {};
-  sleek = prev.callPackage ./sleek {};
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind {};
@@ -46,9 +43,6 @@ final: prev: {
   # Rust
   done = prev.callPackage ./done {};
   # mousai = prev.callPackage ./mousai {};
-  g4music = prev.callPackage ./g4music {};
-  tiny-games = prev.callPackage ./tiny-games {};
-  noteworthy = prev.callPackage ./noteworthy {};
   gnome-metronome = prev.callPackage ./gnome-metronome {};
 
   # Go
@@ -61,8 +55,6 @@ final: prev: {
   tiptop-py = prev.callPackage ./tiptop-py {};
   iotas = prev.callPackage ./iotas {};
   zdict = prev.callPackage ./zdict {};
-  calcure = prev.callPackage ./calcure {};
-  wordle-aid = prev.callPackage ./wordle-aid {};
   wordbook = prev.callPackage ./wordbook {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
   upscaler = prev.callPackage ./upscaler {};

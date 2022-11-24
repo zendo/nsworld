@@ -13,12 +13,6 @@ buildPythonPackage rec {
     sha256 = "sha256-CIYO7beMv6RhgkPI2wiPIcOYI+zh/a8BM+UtnFbpgaU=";
   };
 
-  # checkInputs = [ pytest ];
-
-  # checkPhase = ''
-  #   pytest
-  # '';
-
   pythonImportsCheck = [ "pyjokes" ];
 
   meta = with lib; {

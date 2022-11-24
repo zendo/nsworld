@@ -53,6 +53,7 @@
     just-perfection
     shell-configurator
     app-icons-taskbar
+    user-avatar-in-quick-settings
     space-bar
     dotspaces
     runcat
