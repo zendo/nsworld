@@ -111,6 +111,7 @@ inputs @ {pkgs}: {
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
       python3
+      python3Packages.pip
     ];
     propagatedBuildInputs = with pkgs.python3.pkgs; [
       requests

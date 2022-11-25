@@ -5,8 +5,8 @@ let
   version = "2.1.1";
 
   src = fetchurl {
-    url = "https://github.com/edrlab/thorium-reader/releases/download/latest-linux/Thorium-${version}-alpha.0.3347001418.AppImage";
-    hash = "sha256-iT6I8x9RLLEmJcehsFb9IgtoOt4JpHvgbQ2rsxsbkLs=";
+    url = "https://github.com/edrlab/thorium-reader/releases/download/latest-linux/Thorium-${version}-alpha.0.3537141800.AppImage";
+    hash = "sha256-rGt2Ofs9h5SO+5gAqI4BlS2Vn0MAinZlNTI+Pv2Z8q0=";
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };

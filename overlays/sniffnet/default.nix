@@ -1,22 +1,17 @@
 { lib
+, stdenv
 , fetchFromGitHub
 , rustPlatform
 , pkg-config
 , libpcap
+, freetype
 , fontconfig
 , wayland
 , xorg
-
-, glib
-, gtk4
-, libadwaita
-, wrapGAppsHook4
-, appstream-glib
-, desktop-file-utils
-,  xorg_sys_opengl
-
+, libGL
+, vulkan-loader
 }:
-# WIP!!!
+
 rustPlatform.buildRustPackage rec {
   pname = "sniffnet";
   version = "1.0.0";
@@ -34,31 +29,36 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [
     pkg-config
-    # wrapGAppsHook4
-    # appstream-glib
-    # desktop-file-utils
   ];
 
   buildInputs = [
-    # glib
-    # gtk4
-    # openssl
     libpcap
     fontconfig
-    # wayland
     xorg.libXi
     xorg.libX11
     xorg.libXrandr
     xorg.libXcursor
-    xorg_sys_opengl
   ];
 
-  # Needed to get openssl-sys to use pkg-config.
-  # OPENSSL_NO_VENDOR = 1;
+  postFixup = let
+    libPath = lib.makeLibraryPath [
+      libGL
+      libpcap
+      stdenv.cc.cc.lib
+      freetype
+      fontconfig
+      xorg.libXi
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXcursor
+    ];
+  in ''
+    patchelf --set-rpath "${libPath}" "$out/bin/$pname"
+  '';
 
   meta = with lib; {
-    description = "Command-line batch renaming tool";
-    homepage = "https://github.com/ayoisaiah/f2";
+    description = "Cross-platform application to monitor your network traffic with ease";
+    homepage = "https://github.com/GyulyVGC/sniffnet";
     license = licenses.mit;
     maintainers = with maintainers; [ zendo ];
   };

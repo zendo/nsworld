@@ -116,7 +116,7 @@
         vmtest = mkHost {
           username = "test";
           hostname = "vmtest";
-          # hmEnable = false;
+          hmEnable = false;
           virtEnable = false;
           inherit overlays;
           # nixpkgs = inputs.nixpkgs-pr;

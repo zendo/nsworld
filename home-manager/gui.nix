@@ -5,15 +5,14 @@
   nixosConfig,
   ...
 }: let
-  gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
   hidpiEnable = nixosConfig.hardware.video.hidpi.enable;
+  gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
   services = {
     easyeffects.enable = true;
   };
 
   home.packages = with pkgs; [
-    # g4music
     # iotas
     # tiptop
     tiptop-py
