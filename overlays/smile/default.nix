@@ -38,10 +38,6 @@ python3.pkgs.buildPythonApplication rec {
     librsvg
   ];
 
-  # propagatedNativeBuildInputs = [
-  #   gobject-introspection
-  # ];
-
   propagatedBuildInputs = with python3.pkgs; [
     pygobject3
     manimpango

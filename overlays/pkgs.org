@@ -198,19 +198,19 @@
 #+end_src
 
 ** cargo.lock script
-pkgs/applications/audio/netease-music-tui/update-cargo-lock.sh
+
+cargoPatches = [ ./cargo-lock.patch ];
 
 #+begin_src nix
 #!nix-shell
 #!nix-shell -i bash -p coreutils gnugrep git cargo
 
-# This updates cargo-lock.patch for the netease-music-tui version listed in
-# default.nix.
+# Copy from pkgs/applications/audio/netease-music-tui/update-cargo-lock.sh
 
 set -eu -o verbose
 
 here=$PWD
-version=$(cat default.nix | grep '^  version = "' | cut -d '"' -f 2)
+version=$(cat < default.nix | grep '^  version = "' | cut -d '"' -f 2)
 checkout=$(mktemp -d)
 git clone -b "$version" --depth=1 https://github.com/betta-cyber/netease-music-tui "$checkout"
 cd "$checkout"

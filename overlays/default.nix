@@ -43,6 +43,7 @@ final: prev: {
   # Rust
   done = prev.callPackage ./done {};
   # mousai = prev.callPackage ./mousai {};
+  sniffnet = prev.callPackage ./sniffnet {};
   gnome-metronome = prev.callPackage ./gnome-metronome {};
 
   # Go
