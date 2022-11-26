@@ -8,30 +8,49 @@
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
-  # WIP!!!
+  # rm ~/.config/k*
   programs.plasma = {
     enable = true;
     files = {
       "kwalletrc"."Wallet"."First Use" = false;
       "dolphinrc"."General"."ShowFullPath" = true;
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
-      "plasmarc"."Theme"."name" = "breeze-dark"; # TODO
+      "plasmarc"."Theme"."name" = "breeze-dark";
+
+      kdeglobals = {
+        "KDE"."SingleClick" = false;
+      };
 
       kxkbrc = {
         "Layout"."Use" = true;
+        "Layout"."ResetOldOptions" = true;
         "Layout"."SwitchMode" = "Global";
         "Layout"."LayoutList" = "cn";
         "Layout"."Options" = "ctrl:swapcaps";
       };
 
+      klipperrc = {
+        "General"."MaxClipItems" = 300;
+        "General"."SyncClipboards" = true;
+      };
+
+      # TODO
+      kcminputrc = {
+        "Libinput.1739.52804.MSFT0001:00 06CB:CE44 Touchpad"."NaturalScroll" = true;
+        "Libinput.1739.52804.MSFT0001:00 06CB:CE44 Touchpad"."TapToClick" = true;
+      };
+
       kwinrc = {
         "Desktops"."Rows" = 2;
-        "Desktops"."Number" = 2;
-        "Desktops"."Name_1" = "main";
-        "Desktops"."Name_2" = "temp";
+        "Desktops"."Number" = 4;
+        "Desktops"."Name_1" = "one";
+        "Desktops"."Name_2" = "two";
+        "Desktops"."Name_3" = "three";
+        "Desktops"."Name_4" = "four";
 
         "NightColor"."Active" = true;
         # "NightColor"."Mode" = "Location";
+        "NightColor"."NightTemperature" = 3600;
 
         Plugins = {
           wobblywindowsEnabled = true;
@@ -42,16 +61,22 @@
           # zoomEnabled = false;
         };
 
-        Windows = {
-
+        TabBox = {
+          LayoutName = "big_icons";
+          # HighlightWindows = false;
         };
 
-        # TODO
-        "org.kde.kdecoration2" = {
-          ShowToolTips = false;
-          ButtonsOnLeft = "M";
-          ButtonsOnRight = "IAX";
-        };
+
+        # Windows = {
+
+        # };
+
+        # https://github.com/pjones/plasma-manager/issues/8
+        # "org.kde.kdecoration2" = {
+        #   ButtonsOnLeft = "M";
+        #   ButtonsOnRight = "IAX";
+        #   ShowToolTips = false;
+        # };
       };
     };
 

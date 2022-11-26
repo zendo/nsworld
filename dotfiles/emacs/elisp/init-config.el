@@ -4,8 +4,7 @@
 
 ;; Environment
 (when (eq system-type 'gnu/linux)
-  (setq org-directory "~/Documents/Notes"
-        deft-directory "~/Documents/Notes")
+  (setq org-directory "~/Documents/Notes")
   (set-face-font 'default "JetBrains Mono-10")
   )
 

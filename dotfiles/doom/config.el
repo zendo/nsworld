@@ -34,7 +34,6 @@
       doom-unicode-font (font-spec :family "Noto Color Emoji")
 
       ;; org-directory "~/Documents/Notes/"
-      deft-directory "~/Documents/Notes"
       ))
 
 ;; basic
@@ -69,9 +68,6 @@
 ;;content overview show2levels
 (after! org
   (setq org-startup-folded t))
-
-(setq deft-recursive t
-      deft-use-filename-as-title t)
 
 ;; UI
 ;; (add-to-list 'default-frame-alist '(height . 40))

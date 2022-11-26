@@ -3,11 +3,11 @@
 ;;; Code:
 
 ;; deft
-(leaf deft
-  :bind (("<f8>" . deft))
-  :config (setq deft-extensions '("md" "org" "txt")
-                deft-recursive t
-                deft-use-filename-as-title t))
+;; (leaf deft
+;;   :bind (("<f8>" . deft))
+;;   :config (setq deft-extensions '("md" "org" "txt")
+;;                 deft-recursive t
+;;                 deft-use-filename-as-title t))
 
 ;; Treemacs
 (leaf treemacs

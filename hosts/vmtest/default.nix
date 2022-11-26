@@ -11,7 +11,7 @@
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
     # ../../modules/gnome.nix
-    # ../../modules/kde.nix
+    ../../modules/kde.nix
     # ../../modules/wm-sway.nix
   ];
 
@@ -20,7 +20,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    tauon
+
 
     git
     firefox
@@ -33,7 +33,7 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      plasma5.enable = true;
+      # plasma5.enable = true;
       # gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
@@ -77,4 +77,6 @@
 
   # Password: test
   users.users.${username}.hashedPassword = lib.mkForce "$6$HFoXsNJNYZ.lVv0r$vxau6GLUcGMmPctb135ZFYzRO7p0Y0JXDeqSASudCbSSa917.7I4Vi1A/AOjWAWkT2DguOB0VMf0.HW4cy5zp0";
+
+  services.xserver.displayManager.autoLogin.user = lib.mkForce "${username}";
 }

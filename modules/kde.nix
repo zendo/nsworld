@@ -28,9 +28,9 @@ in {
     gparted
     kcolorchooser
     gnome.gnome-color-manager # broken?
-    sddm-theme-astronaut
   ] ++ (with libsForQt5; [
     ark
+    juk
     kate
     kalk
     krfb
@@ -65,7 +65,6 @@ in {
 
       sddm = {
         enable = true;
-        theme = "astronaut";
         settings = {
           General.InputMethod = ""; # fix giant virtual keyboard
           X11.ServerArguments = lib.optionalString hidpiEnable "-dpi 144";

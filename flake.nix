@@ -81,8 +81,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+            # ./modules/gnome.nix
+            ./modules/kde.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
 
@@ -116,7 +116,7 @@
         vmtest = mkHost {
           username = "test";
           hostname = "vmtest";
-          hmEnable = false;
+          # hmEnable = false;
           virtEnable = false;
           inherit overlays;
           # nixpkgs = inputs.nixpkgs-pr;

@@ -65,7 +65,7 @@ enable_mouse = False
 #
 # Valid values: 5 - 60, 0 disables check
 # Default value: 10
-connection_timeout = 10
+connection_timeout = 30
 
 # Force http connections
 # Most radio stations use plain old http protocol to broadcast, but

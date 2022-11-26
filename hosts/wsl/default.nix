@@ -39,8 +39,8 @@
     ];
 
     home.shellAliases = {
-      wsl-proxy = "export {http,https,ftp}_proxy=192.168.2.118:10811 ; \\
-        export {HTTP,HTTPS,FTP}_PROXY=192.168.2.118:10811";
+      wsl-proxy = "export {http,https,ftp}_proxy=192.168.2.118:7890 ; \\
+        export {HTTP,HTTPS,FTP}_PROXY=192.168.2.118:7890";
     };
   };
 

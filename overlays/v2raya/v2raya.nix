@@ -25,24 +25,24 @@ in
       unitConfig = {
         Description = "v2rayA service";
         Documentation = "https://github.com/v2rayA/v2rayA/wiki";
-        After = ["network.target" "nss-lookup.target" "iptables.service" "ip6tables.service"];
+        After = ["network.target" "nss-lookup.target" "iptables.service" "ip6tables.service" "nftables.service"];
         Wants = ["network.target"];
       };
 
       serviceConfig = {
+        Type = "simple";
         User = "root";
-        ExecStart = "${getExe pkgs.v2raya} --log-disable-timestamp";
         LimitNPROC = 500;
         LimitNOFILE = 1000000;
-        Restart = "on-failure";
-        Type = "simple";
+        ExecStart = "${getExe pkgs.v2raya} --log-disable-timestamp";
         Environment = ["V2RAYA_LOG_FILE=/var/log/v2raya/v2raya.log"];
+        Restart = "on-failure";
       };
 
       wantedBy = ["multi-user.target"];
 
       # required by v2rayA TProxy functionality
-      path = with pkgs; [iptables bash iproute2];
+      path = with pkgs; [iptables bash iproute2 nftables];
     };
   };
 }

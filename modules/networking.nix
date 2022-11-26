@@ -8,7 +8,7 @@
   ];
 
   services = {
-    # v2raya.enable = true;
+    v2raya.enable = true;
     openssh.enable = true;
     # opensnitch.enable = true;
 
@@ -56,8 +56,8 @@
     # };
   };
 
-  systemd.services.nix-daemon.environment = {
-    http_proxy = "http://127.0.0.1:7890";
-    https_proxy = "http://127.0.0.1:7890";
-  };
+  # systemd.services.nix-daemon.environment = {
+  #   http_proxy = "http://127.0.0.1:7890";
+  #   https_proxy = "http://127.0.0.1:7890";
+  # };
 }

@@ -18,7 +18,6 @@ in {
     tiptop-py
     retext
     yesplaymusic
-    # fluent-reader
     motrix
     # museeks
     # freedownloadmanager
@@ -34,7 +33,7 @@ in {
     # wezterm
     warp
     remmina
-    clash-verge
+    # clash-verge
     # qv2ray
     # clash
     proxychains-ng
