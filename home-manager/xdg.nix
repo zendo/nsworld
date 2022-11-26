@@ -42,9 +42,11 @@ in
     "wezterm".source = ../dotfiles/wezterm;
     "gtklock".source = ../dotfiles/gtklock;
     "swaylock".source = ../dotfiles/swaylock;
-    "radioboat".source = ../dotfiles/radioboat;
     "alacritty".source = ../dotfiles/alacritty;
     "starship.toml".source = ../dotfiles/starship.toml;
+    "radioboat".source = ../dotfiles/radioboat;
+    "pyradio/config".source = ../dotfiles/pyradio/config;
+    "pyradio/stations.csv".source = ../dotfiles/pyradio/stations.csv;
 
     # Soft Symbolic Links
     "lf".source = mkOOSL hmDots + "/lf";

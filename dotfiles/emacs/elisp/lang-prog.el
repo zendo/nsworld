@@ -227,8 +227,8 @@
   (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   (add-hook 'rust-mode-hook 'eglot-ensure)
 
-  ;; (add-to-list 'eglot-server-programs '(nix-mode . ("rnix-lsp")))
-  ;; (add-hook 'nix-mode-hook 'eglot-ensure)
+  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
+  (add-hook 'nix-mode-hook 'eglot-ensure)
 
   (add-to-list 'eglot-server-programs `(markdown-mode . ("efm-langserver")))
   (add-hook 'markdown-mode-hook 'eglot-ensure)

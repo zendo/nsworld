@@ -10,7 +10,7 @@
     startMenuLaunchers = true;
     # wslConf.automount.root = "/mnt"; # defult
     # Not working!!
-    # nativeSystemd = true;
+    nativeSystemd = true;
 
     # Enable native Docker support
     # docker-native.enable = true;
@@ -34,6 +34,7 @@
       mpg123 # for ydict
       wsl-open
       kitty
+      pyradio
       goodvibes
       emacs
     ];

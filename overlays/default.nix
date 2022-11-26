@@ -24,7 +24,6 @@ final: prev: {
   koodo-reader = prev.callPackage ./koodo-reader {};
   leafview = prev.callPackage ./leafview {};
   listen1 = prev.callPackage ./listen1 {};
-  museeks = prev.callPackage ./museeks {};
   motrix = prev.callPackage ./motrix {};
 
   # deb / autoPatchelf
@@ -43,7 +42,7 @@ final: prev: {
   # Rust
   done = prev.callPackage ./done {};
   # mousai = prev.callPackage ./mousai {};
-  sniffnet = prev.callPackage ./sniffnet {};
+  sniffnet = prev.callPackage ./sniffnet {}; # iced
   gnome-metronome = prev.callPackage ./gnome-metronome {};
 
   # Go

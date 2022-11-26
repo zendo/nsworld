@@ -9,7 +9,7 @@
     nixpkgs-fmt
     alejandra
     # nixfmt
-    # nil # lsp
+    nil # lsp
     # rnix-lsp
     lorri
     # nvd # nix profile diff

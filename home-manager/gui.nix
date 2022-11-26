@@ -73,6 +73,7 @@ in {
     qmmp
     # audacious
     # rhythmbox
+    pyradio
     goodvibes
     # netease-cloud-music-gtk
     mousai # 听歌识曲
