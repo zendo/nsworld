@@ -709,6 +709,7 @@ qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default
 #+begin_src bash
 mkdir -p $out/share/fonts/{opentype,truetype}
 unzip -j $downloadedFile -d $out/share/fonts/mononoki
+${placeholder "out"}
 #+end_src>
 
 * meta

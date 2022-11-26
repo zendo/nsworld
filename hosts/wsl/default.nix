@@ -9,8 +9,7 @@
     defaultUser = "${username}";
     startMenuLaunchers = true;
     # wslConf.automount.root = "/mnt"; # defult
-    # Not working!!
-    nativeSystemd = true;
+    # nativeSystemd = true; # Not working!!
 
     # Enable native Docker support
     # docker-native.enable = true;

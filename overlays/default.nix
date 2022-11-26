@@ -59,6 +59,7 @@ final: prev: {
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
   upscaler = prev.callPackage ./upscaler {};
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
+  pyradio = prev.callPackage ./pyradio {};
 
   # Python Module Overlays
   pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
