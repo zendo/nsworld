@@ -60,5 +60,6 @@ in
 
   xdg.dataFile = {
     "goodvibes".source = ../dotfiles/goodvibes;
+    "color-schemes/Genshin.colors".source = ../dotfiles/misc/kde-color-Genshin.colors;
   };
 }

@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   inputs,
   ...
@@ -19,6 +18,8 @@
 
       kdeglobals = {
         "KDE"."SingleClick" = false;
+        # "Icons"."Theme" = "Breeze-Nord-Dark-Icons";
+        # "General"."ColorScheme" = "Genshin";
       };
 
       kxkbrc = {
@@ -39,6 +40,13 @@
         "Libinput.1739.52804.MSFT0001:00 06CB:CE44 Touchpad"."NaturalScroll" = true;
         "Libinput.1739.52804.MSFT0001:00 06CB:CE44 Touchpad"."TapToClick" = true;
       };
+
+      kscreenlockerrc = {
+        "Daemon"."Timeout" = 8;
+      };
+
+      # powermanagementprofilesrc = {
+      # };
 
       kwinrc = {
         "Desktops"."Rows" = 2;
@@ -81,7 +89,7 @@
     };
 
     shortcuts = {
-      "emacs.desktops"."_launch" = "Meta+E";
+      "emacs.desktop"."_launch" = "Meta+E";
       "firefox.desktop"."_launch" = "Meta+W";
       "kitty.desktop"."_launch" = "Meta+Return";
       "org.kde.dolphin.desktop"."_launch" = "Meta+F";
