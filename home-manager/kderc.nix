@@ -18,7 +18,7 @@
 
       kdeglobals = {
         "KDE"."SingleClick" = false;
-        # "Icons"."Theme" = "Breeze-Nord-Dark-Icons";
+        # "Icons"."Theme" = "Newaita";
         # "General"."ColorScheme" = "Genshin";
       };
 
@@ -58,7 +58,7 @@
 
         "NightColor"."Active" = true;
         # "NightColor"."Mode" = "Location";
-        "NightColor"."NightTemperature" = 3600;
+        "NightColor"."NightTemperature" = 3800;
 
         Plugins = {
           wobblywindowsEnabled = true;

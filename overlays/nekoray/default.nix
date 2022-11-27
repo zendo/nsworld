@@ -17,21 +17,20 @@
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=nekoray
 stdenv.mkDerivation rec {
   pname = "nekoray";
-  version = "2.4";
+  version = "2.6";
 
   src = fetchFromGitHub {
     owner = "MatsuriDayo";
     repo = pname;
     rev = version;
-    # rev = "27502477b9fa636a0d029fb528afcf66a7ca4ffd";
     fetchSubmodules = true;
-    hash = "sha256-G+6ANSI+Vlc+cgcONrid9aFi+qX2JQI57jwVHb0ugtY=";
+    hash = "sha256-xdg9pJQqwdXn6biZ9UrFyfCtgFM6jZii5q69k1s8/3s=";
   };
 
-  binTarball = fetchurl {
-    url = "https://github.com/MatsuriDayo/nekoray/releases/download/${version}/nekoray-${version}-2022-11-15-linux64.zip";
-    hash = "sha256-9GLOSowvAMS2+e3/5yowQw3GyYgId6+3sVYRhXroEYQ=";
-  };
+  # binTarball = fetchurl {
+  #   url = "https://github.com/MatsuriDayo/nekoray/releases/download/${version}/nekoray-${version}-2022-11-15-linux64.zip";
+  #   hash = "sha256-9GLOSowvAMS2+e3/5yowQw3GyYgId6+3sVYRhXroEYQ=";
+  # };
 
   nativeBuildInputs = [
     cmake

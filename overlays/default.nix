@@ -3,14 +3,11 @@ final: prev: {
   forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
 
-  # Themes
-  sddm-theme-swish = prev.callPackage ./sddm-theme-swish {};
-  sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut {};
-  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
-
-  # Fonts
+  # Data
   zhudou-sans = prev.callPackage ./zhudou-sans {};
   smiley-sans = prev.callPackage ./smiley-sans {};
+  sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut {};
+  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
 
   # RIME
   fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
@@ -18,13 +15,11 @@ final: prev: {
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
 
   # electron / appimage
-  thorium-reader = prev.callPackage ./thorium-reader {};
-  fluent-reader = prev.callPackage ./fluent-reader {};
+  motrix = prev.callPackage ./motrix {};
+  listen1 = prev.callPackage ./listen1 {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
   koodo-reader = prev.callPackage ./koodo-reader {};
-  leafview = prev.callPackage ./leafview {};
-  listen1 = prev.callPackage ./listen1 {};
-  motrix = prev.callPackage ./motrix {};
+  thorium-reader = prev.callPackage ./thorium-reader {};
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind {};
@@ -57,7 +52,6 @@ final: prev: {
   zdict = prev.callPackage ./zdict {};
   wordbook = prev.callPackage ./wordbook {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
-  upscaler = prev.callPackage ./upscaler {};
   dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
   pyradio = prev.callPackage ./pyradio {};
 
@@ -76,8 +70,6 @@ final: prev: {
 
   # Gtk
   gtklock = prev.callPackage ./gtklock {};
-  gabutdm = prev.callPackage ./gabutdm {}; # useless
-  hackgregator = prev.callPackage ./hackgregator {};
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer {};
