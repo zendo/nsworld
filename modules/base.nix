@@ -9,8 +9,11 @@
     # tmpOnTmpfs = true;
     cleanTmpDir = true;
     plymouth.enable = true;
-    initrd.systemd.enable = true;
     supportedFilesystems = ["ntfs"];
+
+    # Silent boot in initrd.systemd
+    kernelParams = ["systemd.show_status=false"];
+    initrd.systemd.enable = true;
   };
 
   services = {

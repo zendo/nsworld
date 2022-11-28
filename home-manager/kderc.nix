@@ -7,7 +7,7 @@
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
-  # rm ~/.config/k*
+  # rm .config/k* .config/plasma* .config/power*
   programs.plasma = {
     enable = true;
     files = {
@@ -80,11 +80,11 @@
         # };
 
         # https://github.com/pjones/plasma-manager/issues/8
-        # "org.kde.kdecoration2" = {
-        #   ButtonsOnLeft = "M";
-        #   ButtonsOnRight = "IAX";
-        #   ShowToolTips = false;
-        # };
+        "org.kde.kdecoration2" = {
+          ButtonsOnLeft = "M";
+          ButtonsOnRight = "IAX";
+          ShowToolTips = false;
+        };
       };
     };
 
@@ -92,9 +92,12 @@
       "emacs.desktop"."_launch" = "Meta+E";
       "firefox.desktop"."_launch" = "Meta+W";
       "kitty.desktop"."_launch" = "Meta+Return";
+
       "org.kde.dolphin.desktop"."_launch" = "Meta+F";
       "org.kde.plasma.emojier.desktop"."_launch" = "Meta+.";
       "org.kde.krunner.desktop"."_launch" = ["Search" "Alt+F2" "Meta+X"];
+
+      "ksmserver"."Log Out" = ["Meta+Esc" "Ctrl+Alt+Del"];
 
       kwin = {
         "Window Close" = ["Alt+F4" "Meta+Q"];

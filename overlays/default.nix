@@ -79,7 +79,6 @@ final: prev: {
   converseen = prev.libsForQt5.callPackage ./converseen {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
   retext = prev.qt6Packages.callPackage ./retext {};
-  qmmp = prev.qt6Packages.callPackage ./qmmp {};
 
   # wayland
 

@@ -12,7 +12,9 @@
       pm = "push -u origin main";
       undo = "reset --hard HEAD~1";
       patch = "format-patch --stdout HEAD~1";
-      lg = "log --graph --decorate --all --oneline";
+      ll = "log --oneline";
+      lgg = "log --graph --decorate --all --oneline";
+      lgl = "log --pretty=format:'%Cgreen%h%Creset %Cred%cd%Creset %Cblue%ae%Creset %s %d'";
     };
     extraConfig = {
       init.defaultBranch = "main";

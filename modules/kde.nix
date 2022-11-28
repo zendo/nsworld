@@ -64,7 +64,7 @@ in {
       defaultSession = "plasmawayland";
 
       sddm = {
-        enable = true;
+        enable = false;
         settings = {
           General.InputMethod = ""; # fix giant virtual keyboard
           X11.ServerArguments = lib.optionalString hidpiEnable "-dpi 144";
@@ -72,7 +72,7 @@ in {
       };
 
       lightdm = {
-        enable = false;
+        enable = true;
         greeters.gtk = lib.optionalAttrs hidpiEnable {
           cursorTheme.size = 48;
           extraConfig = ''
