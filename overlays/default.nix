@@ -15,7 +15,6 @@ final: prev: {
   rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
 
   # electron / appimage
-  motrix = prev.callPackage ./motrix {};
   listen1 = prev.callPackage ./listen1 {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
   koodo-reader = prev.callPackage ./koodo-reader {};
@@ -56,20 +55,24 @@ final: prev: {
   pyradio = prev.callPackage ./pyradio {};
 
   # Python Module Overlays
-  pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-    (python-final: python-prev: {
-      wn = python-final.callPackage ./python-modules/wn {};
-      pyjokes = python-final.callPackage ./python-modules/pyjokes {};
-    })
-  ];
-  python3 = let self = prev.python3.override {
-    inherit self;
-    packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-  }; in self;
+  pythonPackagesOverlays =
+    (prev.pythonPackagesOverlays or [])
+    ++ [
+      (python-final: python-prev: {
+        wn = python-final.callPackage ./python-modules/wn {};
+        pyjokes = python-final.callPackage ./python-modules/pyjokes {};
+      })
+    ];
+  python3 = let
+    self = prev.python3.override {
+      inherit self;
+      packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+    };
+  in
+    self;
   python3Packages = final.python3.pkgs;
 
   # Gtk
-  gtklock = prev.callPackage ./gtklock {};
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer {};
@@ -85,7 +88,6 @@ final: prev: {
   # flutter
   spotube = prev.callPackage ./spotube {}; # WIP!!!
 
-
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:
   #   (import ../lib { inherit (prev) lib; })
@@ -93,11 +95,12 @@ final: prev: {
 
   ############# Override ###################
   # fix .desktop missing
-  wl-color-picker = prev.wl-color-picker.overrideAttrs
-  (oldAttrs: {
-    postFixup = ''
-      cp -r $out/usr/share $out/share '';
-  });
+  wl-color-picker =
+    prev.wl-color-picker.overrideAttrs
+    (oldAttrs: {
+      postFixup = ''
+        cp -r $out/usr/share $out/share '';
+    });
 
   # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {

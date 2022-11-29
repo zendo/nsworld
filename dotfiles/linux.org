@@ -319,6 +319,11 @@ home.activation = {
 #+end_src
 
 * Nix Codes
+
+#+begin_src bash 
+nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+#+end_src>
+
 #+begin_src nix
     tlp = {
       enable = false;

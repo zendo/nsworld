@@ -11,7 +11,9 @@
   programs.plasma = {
     enable = true;
     files = {
+      # "kwalletrc"."Wallet"."Enabled" = false;
       "kwalletrc"."Wallet"."First Use" = false;
+
       "dolphinrc"."General"."ShowFullPath" = true;
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
       "plasmarc"."Theme"."name" = "breeze-dark";

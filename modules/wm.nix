@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ../overlays/gtklock/gtklock.nix
+    # ../overlays/services/gtklock.nix
   ];
 
   services.xserver = {
@@ -132,6 +132,8 @@
       # Needs when use other DM
       gnome.adwaita-icon-theme
       gnome.gnome-themes-extra
+      gnome.dconf-editor
+      gnome.gnome-tweaks
 
       xfce.mousepad
       nomacs

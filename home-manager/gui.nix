@@ -18,8 +18,7 @@ in {
     tiptop-py
     retext
     yesplaymusic
-    motrix
-    # museeks
+    # motrix
     # freedownloadmanager
 
     # nur.repos.linyinfeng.clash-for-windows
@@ -72,7 +71,6 @@ in {
     qmmp
     # audacious
     # rhythmbox
-    pyradio
     goodvibes
     # netease-cloud-music-gtk
     mousai # 听歌识曲
@@ -201,18 +199,18 @@ in {
       StartupNotify=false
       Terminal=false
     '';
-  #   "autostart/qv2ray.desktop".text = ''
-  #     [Desktop Entry]
-  #     Name=qv2ray
-  #     GenericName=V2Ray Frontend
-  #     Exec=bash -c "sleep 5; qv2ray"
-  #     Terminal=false
-  #     Icon=qv2ray
-  #     Categories=Network
-  #     Type=Application
-  #     StartupNotify=false
-  #     X-GNOME-Autostart-enabled=true
-  #   '';
+    #   "autostart/qv2ray.desktop".text = ''
+    #     [Desktop Entry]
+    #     Name=qv2ray
+    #     GenericName=V2Ray Frontend
+    #     Exec=bash -c "sleep 5; qv2ray"
+    #     Terminal=false
+    #     Icon=qv2ray
+    #     Categories=Network
+    #     Type=Application
+    #     StartupNotify=false
+    #     X-GNOME-Autostart-enabled=true
+    #   '';
   };
 
   # xdg.desktopEntries.spotify = lib.options gnomeEnable {

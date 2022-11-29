@@ -25,6 +25,7 @@
     git
     firefox
     gnomeExtensions.appindicator
+    spice-vdagent
   ];
 
   environment.variables = {

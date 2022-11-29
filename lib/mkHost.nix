@@ -19,7 +19,7 @@ nixpkgs.lib.nixosSystem {
     ../modules/base.nix
     ../modules/user.nix
     ../modules/networking.nix
-    ../modules/nix.nix
+    ../modules/nixconfig.nix
     ../modules/sound.nix
     ../modules/fonts.nix
     ../hosts/${hostname}
@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem {
       # hardware.enableAllFirmware = true;
       hardware.enableRedistributableFirmware = true;
       networking.hostName = "${hostname}";
-      services.xserver.displayManager.autoLogin.user = "${username}";
+      # services.xserver.displayManager.autoLogin.user = "${username}";
     }
 
   ] ++ nixpkgs.lib.optionals virtEnable [
