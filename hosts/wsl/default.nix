@@ -33,9 +33,8 @@
       mpg123 # for ydict
       wsl-open
       kitty
-      pyradio
-      goodvibes
       emacs
+      goodvibes
     ];
 
     home.shellAliases = {

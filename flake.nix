@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194581/merge";
+    nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194343/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
 
     home-manager = {
@@ -18,7 +18,7 @@
     # };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/2882452693f3abf29ef583519618519e25f9fdad";
+      url = "github:nix-community/emacs-overlay/b152560f00867f85c441a2b2981f7ab4b787194e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,7 +46,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    # nixpkgs-pr,
+    nixpkgs-pr,
     # nixpkgs-local,
     # nixpkgs-stable,
     nixos-hardware,
@@ -87,10 +87,10 @@
             # ./modules/wm-hyprland.nix
 
             ({ config, pkgs, ... }: {
-              # disabledModules = ["hardware/video/hidpi.nix"];
-              # imports = [
-              #   "${inputs.nixpkgs-pr}/nixos/modules/hardware/video/hidpi.nix"
-              # ];
+              disabledModules = ["config/swap.nix"];
+              imports = [
+                "${inputs.nixpkgs-pr}/nixos/modules/config/swap.nix"
+              ];
               environment.systemPackages = with pkgs; [
                 # nixpkgs-pr.legacyPackages.${system}.gnomeExtensions.pano
               ];
@@ -122,17 +122,16 @@
           # nixpkgs = inputs.nixpkgs-pr;
         };
 
-        # nix build .#nixosConfigurations.livecd.config.system.build.isoImage
         livecd = mkHost {
           username = "livecd";
           hostname = "livecd";
           virtEnable = false;
           inherit overlays;
         };
-
-        # or
-        # nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
       };
+
+      # or: nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
+      livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
 
       #######################################################################
       ## HM Standalone
@@ -168,7 +167,8 @@
       #######################################################################
       ## WSL
       #######################################################################
-      # nix build .#nixosConfigurations.wsl.config.system.build.installer
+      wsl-tar = self.nixosConfigurations.wsl.config.system.build.installer;
+
       nixosConfigurations.wsl = let
         username = "iab";
         # nixpkgs = inputs.nixpkgs-stable;

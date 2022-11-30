@@ -16,15 +16,13 @@ in {
     # iotas
     # tiptop
     tiptop-py
-    retext
     yesplaymusic
-    # motrix
     # freedownloadmanager
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
     # nur.repos.rewine.lx-music-desktop
-    # nur.repos.rewine.electron-netease-cloud-music
+    nur.repos.rewine.electron-netease-cloud-music
 
     foot
     kitty
@@ -90,6 +88,7 @@ in {
     # gcolor3
     # wl-color-picker
 
+    # motrix
     qbittorrent
     gnome-decoder
     # deja-dup

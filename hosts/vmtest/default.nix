@@ -10,8 +10,8 @@
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
-    # ../../modules/gnome.nix
-    ../../modules/kde.nix
+    ../../modules/gnome.nix
+    # ../../modules/kde.nix
     # ../../modules/wm-sway.nix
   ];
 
@@ -25,7 +25,6 @@
     git
     firefox
     gnomeExtensions.appindicator
-    spice-vdagent
   ];
 
   environment.variables = {
@@ -51,7 +50,7 @@
   # latest or zen or xanmod_latest
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Clipboard shared not working?
+  # Clipboard shared for NixOS@Guest
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
 

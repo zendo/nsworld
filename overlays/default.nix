@@ -51,8 +51,6 @@ final: prev: {
   zdict = prev.callPackage ./zdict {};
   wordbook = prev.callPackage ./wordbook {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
-  dynamic-wallpaper = prev.callPackage ./dynamic-wallpaper {};
-  pyradio = prev.callPackage ./pyradio {};
 
   # Python Module Overlays
   pythonPackagesOverlays =
@@ -81,7 +79,6 @@ final: prev: {
   # Qt
   converseen = prev.libsForQt5.callPackage ./converseen {};
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
-  retext = prev.qt6Packages.callPackage ./retext {};
 
   # wayland
 

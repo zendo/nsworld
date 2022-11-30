@@ -47,7 +47,6 @@ in
     "radioboat".source = ../dotfiles/radioboat;
 
     "lf".source = mkOOSL hmDots + "/lf";
-    # "eww".source = mkOOSL hmDots + "/eww";
     "mako".source = mkOOSL hmDots + "/mako";
     "waybar".source = mkOOSL hmDots + "/waybar";
     "wayfire.ini".source = mkOOSL hmDots + "/wayfire.ini";
