@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194343/merge";
+    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194343/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
 
     home-manager = {
@@ -46,7 +46,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    nixpkgs-pr,
+    # nixpkgs-pr,
     # nixpkgs-local,
     # nixpkgs-stable,
     nixos-hardware,
@@ -81,16 +81,16 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+            # ./modules/gnome.nix
+            ./modules/kde.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
 
             ({ config, pkgs, ... }: {
-              disabledModules = ["config/swap.nix"];
-              imports = [
-                "${inputs.nixpkgs-pr}/nixos/modules/config/swap.nix"
-              ];
+              # disabledModules = ["config/swap.nix"];
+              # imports = [
+              #   "${inputs.nixpkgs-pr}/nixos/modules/config/swap.nix"
+              # ];
               environment.systemPackages = with pkgs; [
                 # nixpkgs-pr.legacyPackages.${system}.gnomeExtensions.pano
               ];

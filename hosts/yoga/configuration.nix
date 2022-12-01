@@ -84,10 +84,10 @@
 
   # Swapfile
   # https://github.com/NixOS/nixpkgs/pull/194343
-  swapDevices = [{
-    device = "/swapfile";
-    size = (1024 * 8);
-  }];
+  # swapDevices = [{
+  #   device = "/var/swapfile";
+  #   size = (1024 * 8);
+  # }];
   # findmnt -no UUID -T /swap/swapfile
   # sudo filefrag -v /swap/swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'
   # boot.resumeDevice = "/dev/disk/by-uuid/a0e48512-1e47-409d-9c91-7bbca721dbfc";

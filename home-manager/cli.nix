@@ -9,11 +9,11 @@
     nixpkgs-fmt
     alejandra
     # nixfmt
-    nil # lsp
+    # nil # lsp
     # rnix-lsp
     lorri
     # nvd # nix profile diff
-    cachix
+    # cachix
     nixos-generators
     # nix-template
     nix-update

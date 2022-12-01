@@ -11,7 +11,7 @@
   programs.plasma = {
     enable = true;
     files = {
-      # "kwalletrc"."Wallet"."Enabled" = false;
+      "kwalletrc"."Wallet"."Enabled" = false;
       "kwalletrc"."Wallet"."First Use" = false;
 
       "dolphinrc"."General"."ShowFullPath" = true;
