@@ -25,15 +25,6 @@
 (leaf quickrun
   :ensure t)
 
-;; tree-sitter
-;; need github connect download
-(leaf tree-sitter
-  :ensure tree-sitter-langs
-  :diminish tree-sitter-mode
-  :commands global-tree-sitter-mode tree-sitter-hl-mode
-  :hook ((after-init-hook . global-tree-sitter-mode)
-         (tree-sitter-after-on-hook . tree-sitter-hl-mode)))
-
 (leaf editorconfig
   :ensure t
   :diminish editorconfig-mode

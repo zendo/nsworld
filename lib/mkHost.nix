@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem {
       # hardware.enableAllFirmware = true;
       hardware.enableRedistributableFirmware = true;
       networking.hostName = "${hostname}";
-      services.xserver.displayManager.autoLogin.user = "${username}";
+      # services.xserver.displayManager.autoLogin.user = "${username}";
     }
 
   ] ++ nixpkgs.lib.optionals virtEnable [

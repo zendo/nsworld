@@ -9,17 +9,17 @@
   programs.emacs = {
     enable = true;
     package =
-      # pkgs.emacsPgtkNativeComp; # emacsPgtkNativeComp
+      pkgs.emacsPgtk;
       # fix duplicate desktop shortcut in kde
-      pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
-        postFixup = ''rm $out/share/applications/emacsclient.desktop '';
-      });
+      # pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
+      #   postFixup = ''rm $out/share/applications/emacsclient.desktop '';
+      # });
       extraPackages = epkgs:
       with epkgs; [
         vterm
         emojify
         emacsql-sqlite
-        tree-sitter
+        # tree-sitter
         # pdf-tools
         # telega
       ];
