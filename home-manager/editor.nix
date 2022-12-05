@@ -12,7 +12,7 @@
       pkgs.emacsPgtk;
       # fix duplicate desktop shortcut in kde
       # pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
-      #   postFixup = ''rm $out/share/applications/emacsclient.desktop '';
+      #   postFixup = ''rm $out/share/applications/emacsclient.desktop'';
       # });
       extraPackages = epkgs:
       with epkgs; [
@@ -25,7 +25,6 @@
       ];
       extraConfig = ''
         (setq treemacs-python-executable "${pkgs.python3}/bin/python")
-        ;; (cl-pushnew (expand-file-name "~/.tree-sitter") tree-sitter-load-path)
       '';
   };
 

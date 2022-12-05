@@ -42,7 +42,6 @@ in {
     # konqueror
     # kcontacts
     # korganizer
-    # bismuth # tiling layout
   ]);
 
   i18n.inputMethod = {
@@ -64,7 +63,7 @@ in {
       defaultSession = "plasmawayland";
 
       sddm = {
-        enable = false;
+        enable = true;
         settings = {
           General.InputMethod = ""; # fix giant virtual keyboard
           X11.ServerArguments = lib.optionalString hidpiEnable "-dpi 144";
@@ -72,7 +71,7 @@ in {
       };
 
       lightdm = {
-        enable = true;
+        enable = false;
         greeters.gtk = lib.optionalAttrs hidpiEnable {
           cursorTheme.size = 48;
           extraConfig = ''

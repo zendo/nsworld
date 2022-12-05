@@ -46,6 +46,7 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
   ];
 
   virtualisation = {
+    spiceUSBRedirection.enable = true; # USB passthrough
     libvirtd = {
       enable = true;
       # allowedBridges = ["virbr0"];

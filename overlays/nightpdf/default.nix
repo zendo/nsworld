@@ -1,11 +1,11 @@
 { lib, fetchurl, appimageTools }:
 let
-  pname = "listen1";
-  version = "2.27.0";
+  pname = "nightpdf";
+  version = "0.4.4";
 
   src = fetchurl {
-    url = "https://github.com/listen1/listen1_desktop/releases/download/v${version}/listen1_${version}_linux_x86_64.AppImage";
-    hash = "sha256-tVtaTWn7dF+Swxo2c18Fw0/ne5EF02tJE+JBD+yOK2M=";
+    url = "https://github.com/Lunarequest/NightPDF/releases/download/v${version}/NightPDF-${version}.AppImage";
+    hash = "sha256-7iy+vEcqPL+YlIToViqcEbrKGoqZaSLDZMEBHWzJZWA=";
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
@@ -24,9 +24,9 @@ appimageTools.wrapType2 {
   '';
 
   meta = with lib; {
-    description = "A simple, clean and cross-platform music player";
-    homepage = "https://github.com/listen1/listen1_desktop";
-    license = licenses.mit;
+    description = "Dark Mode PDF Reader built using Electron and PDF.js";
+    homepage = "https://github.com/Lunarequest/NightPDF";
+    license = licenses.gpl2Only;
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ zendo ];
   };

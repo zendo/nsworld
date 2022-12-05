@@ -17,6 +17,7 @@ final: prev: {
   # electron / appimage
   listen1 = prev.callPackage ./listen1 {};
   yesplaymusic = prev.callPackage ./yesplaymusic {};
+  nightpdf = prev.callPackage ./nightpdf {};
   koodo-reader = prev.callPackage ./koodo-reader {};
   thorium-reader = prev.callPackage ./thorium-reader {};
 
@@ -106,8 +107,8 @@ final: prev: {
       src = prev.fetchFromGitHub {
         owner = "sddm";
         repo = "sddm";
-        rev = "ebe6110bd2bb5047ca09d4446fe739da468086e1";
-        hash = "sha256-GxfqB+SMjgh+be+EK93NNe4gOemVtZTADiDpuuUkjtQ=";
+        rev = "3e486499b9300ce8f9c62bd102e5119b27a2fad1";
+        hash = "sha256-Y9WPm0MLWl/s0e0aoKKk0SSojqBrI/RdyxkgOz2Tk38==";
       };
       patches = [];
     });
