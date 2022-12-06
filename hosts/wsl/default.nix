@@ -33,6 +33,7 @@
       mpg123 # for ydict
       wsl-open
       kitty
+      foot
       emacs
       goodvibes
     ];

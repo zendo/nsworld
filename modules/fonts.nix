@@ -10,12 +10,12 @@
     fontDir.enable = true;
     fonts = with pkgs; [
       noto-fonts
-      # noto-fonts-cjk-sans
-      # noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       # sarasa-gothic
       # lxgw-wenkai
-      source-han-sans
-      source-han-serif
+      # source-han-sans
+      # source-han-serif
       source-code-pro
       # comic-relief
       font-awesome

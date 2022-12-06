@@ -245,6 +245,8 @@ https://github.com/onceupon/Bash-Oneliner
 
 * Regex 正则表达式
 
+https://deerchao.cn/tutorials/regex/regex.htm
+
 . 匹配一个字符
 ? 匹配一个字符
 :* 匹配多个字符
@@ -355,3 +357,6 @@ nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
       };
     };
 #+end_src
+
+tree-sitter
+https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/
