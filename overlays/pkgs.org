@@ -568,7 +568,10 @@ yarn build or yarn dev
   appimageTools.wrapType2 {
     inherit pname version src;
 
-    extraPkgs = pkgs: appimageTools.defaultFhsEnvArgs.multiPkgs pkgs ++ [ pkgs.bash ];
+    extraPkgs = pkgs: with pkgs; [
+      libsecret
+      libappindicator-gtk3
+    ];
 
     extraInstallCommands = ''
       mv $out/bin/${pname}-${version} $out/bin/${pname}

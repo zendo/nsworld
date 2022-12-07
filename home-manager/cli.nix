@@ -97,7 +97,7 @@
     asciinema # record the terminal
     paperoni # save html
     calcurse
-    zee
+    # zee
 
     # Networking
     lsof

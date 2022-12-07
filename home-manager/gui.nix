@@ -18,7 +18,7 @@ in {
     tiptop-py
     # yesplaymusic
     # freedownloadmanager
-    nightpdf
+    # nightpdf
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -54,7 +54,7 @@ in {
     handlr
 
     # Social media
-    tdesktop
+    # tdesktop
     # nheko
     # fractal-next
     # discord

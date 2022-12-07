@@ -41,6 +41,7 @@
       file-icons.file-icons
       golang.go
       mattn.lisp
+      eamodio.gitlens
     ];
     userSettings = {
       "files.autoSave" = "onFocusChange";
