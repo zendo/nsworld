@@ -54,7 +54,7 @@ in {
     handlr
 
     # Social media
-    # tdesktop
+    tdesktop
     # nheko
     # fractal-next
     # discord
@@ -84,7 +84,7 @@ in {
     # Image manipulation
     # shutter
     # pinta
-    # yacreader
+    yacreader
     contrast
     # gcolor3
     # wl-color-picker
@@ -110,6 +110,7 @@ in {
     meld
 
     # HARDWARE TEST
+    nvtop-amd
     efibootmgr
     # efitools
     inxi

@@ -26,8 +26,16 @@ nixpkgs.lib.nixosSystem {
 
     {
       nixpkgs.overlays = overlays;
+      nixpkgs.config = {
+        allowUnfree = true;
+        # allowBroken = true;
+        # allowInsecure = true;
+        # allowUnsupportedSystem = true;
+      };
+
       # hardware.enableAllFirmware = true;
       hardware.enableRedistributableFirmware = true;
+
       networking.hostName = "${hostname}";
       # services.xserver.displayManager.autoLogin.user = "${username}";
     }

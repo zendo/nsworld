@@ -32,7 +32,7 @@
     gnome.dconf-editor
     gnome.gnome-power-manager
     gnome.gnome-sound-recorder
-    gnome.pomodoro
+    # gnome.pomodoro
     # gnome.gnome-boxes
     # gnome-network-displays  # miracast
     # gnome-builder

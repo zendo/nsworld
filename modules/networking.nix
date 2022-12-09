@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../overlays/v2raya/v2raya.nix
+    # ../overlays/v2raya/v2raya.nix
   ];
 
   services = {

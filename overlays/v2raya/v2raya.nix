@@ -1,20 +1,13 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.services.v2raya;
 in
 {
   options = {
     services.v2raya = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = ''
-          Whether to enable the v2rayA service.
-        '';
-      };
+      enable = mkEnableOption (lib.mdDoc "the v2rayA service.");
     };
   };
 
@@ -45,4 +38,6 @@ in
       path = with pkgs; [iptables bash iproute2 nftables];
     };
   };
+
+  meta.maintainers = with maintainers; [ zendo ];
 }

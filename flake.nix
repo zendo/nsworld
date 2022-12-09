@@ -2,9 +2,9 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    # nixpkgs-pr.url = "github:NixOS/nixpkgs/pull/194343/merge";
+    nixpkgs.url = "github:NixOS/nixpkgs/pull/204807/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
 
     home-manager = {
@@ -132,6 +132,9 @@
 
       # or: nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
       livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
+
+      # for repl
+      lib = nixpkgs.lib;
 
       #######################################################################
       ## HM Standalone
