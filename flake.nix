@@ -170,7 +170,7 @@
       #######################################################################
       ## WSL
       #######################################################################
-      wsl-tar = self.nixosConfigurations.wsl.config.system.build.installer;
+      wsl-installer = self.nixosConfigurations.wsl.config.system.build.installer;
 
       nixosConfigurations.wsl = let
         username = "iab";
@@ -185,7 +185,10 @@
             ./modules/fonts.nix
 
             nixos-wsl.nixosModules.wsl
-            {nixpkgs.overlays = overlays;}
+            {
+              nixpkgs.overlays = overlays;
+              nixpkgs.config.allowUnfree = true;
+            }
 
             home-manager.nixosModules.home-manager
             {

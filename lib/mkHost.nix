@@ -33,7 +33,6 @@ nixpkgs.lib.nixosSystem {
         # allowUnsupportedSystem = true;
       };
 
-      # hardware.enableAllFirmware = true;
       hardware.enableRedistributableFirmware = true;
 
       networking.hostName = "${hostname}";

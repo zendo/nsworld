@@ -340,23 +340,35 @@ system.userActivationScripts = {               # Installation script every time 
 
 * Nix Codes
 
-#+begin_src bash 
-nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
-#+end_src>
+#+begin_src bash
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {}
+}:
+
+ nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+ #+end_src>
+
+ #+begin_src nix
+  tlp = {
+    enable = false;
+    settings = {
+      cpu_scaling_governor_on_ac = "performance";
+      cpu_scaling_governor_on_bat = "powersave";
+      cpu_energy_perf_policy_on_ac = "balance_performance";
+      cpu_energy_perf_policy_on_bat = "power";
+
+      DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
+    };
+  };
+#+end_src
 
 #+begin_src nix
-    tlp = {
-      enable = false;
-      settings = {
-        cpu_scaling_governor_on_ac = "performance";
-        cpu_scaling_governor_on_bat = "powersave";
-        cpu_energy_perf_policy_on_ac = "balance_performance";
-        cpu_energy_perf_policy_on_bat = "power";
+  # nix registry list
+  registry = lib.mapAttrs' (
+    n: v: lib.nameValuePair n {flake = v;}
+  ) inputs;
 
-        DEVICES_TO_ENABLE_ON_STARTUP = "wifi bluetooth";
-      };
-    };
-#+end_src
+  nix.settings.flake-registry = /etc/nix/registry.json;
+#+end_src>
 
 tree-sitter
 https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/
