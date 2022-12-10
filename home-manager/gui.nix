@@ -5,10 +5,6 @@ let
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in
 {
-  services = {
-    easyeffects.enable = true;
-  };
-
   home.packages = with pkgs; [
     # iotas
     # tiptop
@@ -16,6 +12,7 @@ in
     # yesplaymusic
     # freedownloadmanager
     # nightpdf
+    cavalier
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -63,6 +60,7 @@ in
     # spot # Premium accounts!
     # vlc
     # ffmpeg
+    # FIXME https://github.com/SeaDve/Kooha/pull/209
     kooha
     qmmp
     # audacious
@@ -130,6 +128,10 @@ in
     wayland-utils
     # wdisplays # wlr
   ];
+
+  services = {
+    easyeffects.enable = true;
+  };
 
   programs.mpv = {
     enable = true;

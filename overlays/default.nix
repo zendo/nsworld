@@ -1,6 +1,5 @@
 final: prev: {
   # Trivial
-  forgit = prev.callPackage ./forgit {};
   nixos-helper = prev.callPackage ./nixos-helper {};
 
   # Data
@@ -23,7 +22,8 @@ final: prev: {
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind {};
-  v2raya = prev.callPackage ./v2raya {};
+  # v2raya = prev.callPackage ./v2raya {};
+  v2raya = prev.callPackage ./v2raya-pr {};
   clash-verge = prev.callPackage ./clash-verge {
     openssl = prev.openssl_1_1;
   };
@@ -52,6 +52,7 @@ final: prev: {
   iotas = prev.callPackage ./iotas {};
   zdict = prev.callPackage ./zdict {};
   wordbook = prev.callPackage ./wordbook {};
+  cavalier = prev.callPackage ./cavalier {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
 
   # Python Module Overlays
