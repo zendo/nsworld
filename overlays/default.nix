@@ -23,7 +23,7 @@ final: prev: {
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind {};
-  # v2raya = prev.callPackage ./v2raya {};
+  v2raya = prev.callPackage ./v2raya {};
   clash-verge = prev.callPackage ./clash-verge {
     openssl = prev.openssl_1_1;
   };

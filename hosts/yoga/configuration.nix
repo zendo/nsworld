@@ -1,9 +1,5 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{ config, pkgs, inputs, ... }: {
+
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
@@ -80,7 +76,7 @@
   ## FileSystem
   #######################################################################
   services.btrfs.autoScrub.enable = true;
-  fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
+  fileSystems."/".options = [ "compress=zstd" "autodefrag" "noatime" ];
 
   # Swapfile
   # https://github.com/NixOS/nixpkgs/pull/194343
