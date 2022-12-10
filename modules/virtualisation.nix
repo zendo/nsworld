@@ -1,31 +1,26 @@
 /*
 
-# check hardwave virtual supports
-LC_ALL=C lscpu | grep Virtualization
-dmesg | grep IOMMU
+  # check hardwave virtual supports
+  LC_ALL=C lscpu | grep Virtualization
+  dmesg | grep IOMMU
 
-# fix network `default` inactive
-sudo virsh net-start default
-sudo virsh net-autostart default
+  # fix network `default` inactive
+  sudo virsh net-start default
+  sudo virsh net-autostart default
 
-Guest:
-spice-vdagent  # for clipboard share
+  Guest:
+  spice-vdagent  # for clipboard share
 
-# share file
-sudo mkdir /mnt/vfs_share
-sudo chown iab /mnt/vfs_share
-mkdir share #guest
-sudo mount -t 9p -o trans=virtio share ~/share #guest
+  # share file
+  sudo mkdir /mnt/vfs_share
+  sudo chown iab /mnt/vfs_share
+  mkdir share #guest
+  sudo mount -t 9p -o trans=virtio share ~/share #guest
 
-qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
+  qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
 
 */
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
 
   # services.flatpak.enable = true;
 
@@ -54,7 +49,7 @@ qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
       # allowedBridges = ["virbr0"];
       qemu = {
         # runAsRoot = false;
-        ovmf.enable = true;      # UEFI
+        ovmf.enable = true; # UEFI
         # https://adamsimpson.net/writing/windows-11-as-kvm-guest
         package = pkgs.qemu_kvm; # emulate only host architectures
         # swtpm.enable = true;   # emulated TPM

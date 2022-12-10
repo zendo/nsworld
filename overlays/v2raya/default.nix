@@ -6,24 +6,19 @@
 , autoPatchelfHook
 , makeWrapper
 , udev
-# , v2ray
-# , v2ray-geoip
-# , v2ray-domain-list-community
+, v2ray
+, v2ray-geoip
+, v2ray-domain-list-community
 , symlinkJoin
 }:
-let
-  inherit ((builtins.getFlake
-    "github:NixOS/nixpkgs/8de8b98839d1f20089582cfe1a81207258fcc1f1").legacyPackages.${stdenv.system})
-    # v2ray 4
-    v2ray v2ray-geoip v2ray-domain-list-community;
-in
+
 stdenv.mkDerivation rec {
   pname = "v2raya";
-  version = "1.5.9.1698.1";
+  version = "2.0.0";
 
   src = fetchurl {
     url = "https://github.com/v2rayA/v2rayA/releases/download/v${version}/installer_debian_amd64_${version}.deb";
-    hash = "sha256-iQax3ROf281D8LVXzZ1QgWLjiky+pQ3kWyRFUzjRHlE=";
+    hash = "sha256-bRsAxbnssaqSifzzErGg8vYwBp/6HIZE/XX18LzVm0c=";
   };
 
   dontBuild = true;

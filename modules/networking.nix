@@ -1,8 +1,5 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
+
   imports = [
     # ../overlays/v2raya/v2raya.nix
   ];

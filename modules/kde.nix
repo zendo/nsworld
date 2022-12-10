@@ -1,11 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config, pkgs, lib, ... }:
+
+let
   hidpiEnable = config.hardware.video.hidpi.enable;
-in {
+in
+{
   services = {
     colord.enable = true;
     geoclue2.enable = true;
@@ -57,7 +55,7 @@ in {
 
   services.xserver = {
     enable = true;
-    excludePackages = [pkgs.xterm];
+    excludePackages = [ pkgs.xterm ];
 
     displayManager = {
       defaultSession = "plasmawayland";

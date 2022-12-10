@@ -211,7 +211,7 @@
         };
       in {
         # nix fmt :Formatter all files in this repo.
-        formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
+        formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
         # nix develop .#rust
         devShells = import ./devshells.nix {inherit pkgs;};
         # nix build .#apps or self#apps / nix run self#apps

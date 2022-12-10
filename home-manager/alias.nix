@@ -1,9 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
+
   home.shellAliases = {
     cat = "bat -p";
     l = "exa -l --icons";

@@ -1,18 +1,15 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
+
   zramSwap.enable = true;
 
   boot = {
     # tmpOnTmpfs = true;
     cleanTmpDir = true;
     plymouth.enable = true;
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" ];
 
     # Silent boot in initrd.systemd
-    kernelParams = ["systemd.show_status=false"];
+    kernelParams = [ "systemd.show_status=false" ];
     initrd.systemd.enable = true;
   };
 
@@ -35,8 +32,7 @@
     nix-bash-completions
   ];
 
-  environment.variables = {
-  };
+  environment.variables = { };
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # Electron wayland support

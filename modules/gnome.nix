@@ -1,8 +1,5 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
+
   services = {
     gnome.sushi.enable = true;
     packagekit.enable = false;
@@ -73,7 +70,7 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.enableRimeData= true;
+    fcitx5.enableRimeData = true;
     fcitx5.addons = with pkgs; [
       fcitx5-rime
       fcitx5-breeze
@@ -92,7 +89,7 @@
 
   services.xserver = {
     enable = true;
-    excludePackages = [pkgs.xterm];
+    excludePackages = [ pkgs.xterm ];
 
     displayManager = {
       gdm.enable = true;
@@ -101,7 +98,7 @@
 
     desktopManager.gnome = {
       enable = true;
-      extraGSettingsOverridePackages = [pkgs.gnome.gnome-settings-daemon];
+      extraGSettingsOverridePackages = [ pkgs.gnome.gnome-settings-daemon ];
 
       favoriteAppsOverride = ''
         [org.gnome.shell]

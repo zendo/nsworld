@@ -1,10 +1,13 @@
-{
-  lib,
-  config,
-  inputs,
-  ...
-}: {
+{ lib, config, inputs, ... }: {
+
   nix = {
+    # nix registry list
+    registry = lib.mapAttrs'
+      (
+        n: v: lib.nameValuePair n { flake = v; }
+      )
+      inputs;
+
     # echo $NIX_PATH | tr ":" "\n"
     # compatible for old nix
     nixPath = [
@@ -26,6 +29,7 @@
       # keep-derivations = true
       warn-dirty = false;
       auto-optimise-store = true;
+      flake-registry = /etc/nix/registry.json;
 
       substituters = lib.mkForce [
         "https://mirror.sjtu.edu.cn/nix-channels/store"
@@ -35,7 +39,7 @@
         "https://r.zhullyb.top/https://cache.nixos.org"
       ];
 
-      trusted-users = ["root" "@wheel"];
+      trusted-users = [ "root" "@wheel" ];
       # List of binary cache URLs that non-root users can use
       trusted-substituters = [
       ];

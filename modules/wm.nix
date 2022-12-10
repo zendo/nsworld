@@ -1,10 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  username,
-  ...
-}: {
+{ config, pkgs, lib, username, ... }: {
+
   imports = [
     # ../overlays/services/gtklock.nix
   ];
@@ -21,7 +16,7 @@
   services.greetd.enable = true;
 
   # Needs when using wm@hm
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
   programs.dconf.enable = true;
   programs.xwayland.enable = true;
 
@@ -61,12 +56,12 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.enableRimeData= true;
+    fcitx5.enableRimeData = true;
     fcitx5.addons = with pkgs; [
       fcitx5-rime
       fcitx5-breeze
@@ -76,105 +71,103 @@
     ];
   };
 
-  home-manager.users.${username} = {
-    config,
-    pkgs,
-    ...
-  }: {
-    imports = [
-      ../overlays/services/wob.nix
-      ../overlays/services/polkit.nix
-    ];
+  home-manager.users.${username} =
+    { config, pkgs, ... }: {
 
-    home.packages = with pkgs; [
-      swappy # screenshot annotation editor
-      swaybg # wallpaper tool
-      swayidle
-      swaylock-effects
-      swaynotificationcenter
-      # mako  # , notify-send "sth"
-      libnotify # notify-send
-      wlogout
+      imports = [
+        ../overlays/services/wob.nix
+        ../overlays/services/polkit.nix
+      ];
 
-      # hyprpicker
+      home.packages = with pkgs; [
+        swappy # screenshot annotation editor
+        swaybg # wallpaper tool
+        swayidle
+        swaylock-effects
+        swaynotificationcenter
+        # mako  # , notify-send "sth"
+        libnotify # notify-send
+        wlogout
 
-      wofi # quick run
-      wofi-emoji
-      wl-clipboard
-      wf-recorder
-      cliphist
-      networkmanagerapplet
-      bluetuith
-      blueberry
-      wlopm
-      # wob
-      wev # wayland event view
-      wvkbd # on-screen keyboard
-      # waypipe # proxy ?
-      # wtype # xdotool
+        # hyprpicker
 
-      # Display
-      brightnessctl # same like light
-      wlsunset # nightlight
-      wl-gammactl
-      wdisplays
-      wlr-randr
-      kanshi # autorandr
+        wofi # quick run
+        wofi-emoji
+        wl-clipboard
+        wf-recorder
+        cliphist
+        networkmanagerapplet
+        bluetuith
+        blueberry
+        wlopm
+        # wob
+        wev # wayland event view
+        wvkbd # on-screen keyboard
+        # waypipe # proxy ?
+        # wtype # xdotool
 
-      # Media
-      # grim # grab image
-      # slurp # select region
-      shotman
-      pavucontrol
-      playerctl # media player control
-      pamixer # volume control
+        # Display
+        brightnessctl # same like light
+        wlsunset # nightlight
+        wl-gammactl
+        wdisplays
+        wlr-randr
+        kanshi # autorandr
 
-      # Needs when use other DM
-      gnome.adwaita-icon-theme
-      gnome.gnome-themes-extra
-      gnome.dconf-editor
-      gnome.gnome-tweaks
+        # Media
+        # grim # grab image
+        # slurp # select region
+        shotman
+        pavucontrol
+        playerctl # media player control
+        pamixer # volume control
 
-      xfce.mousepad
-      nomacs
-      # gnome.gnome-power-manager
-      # gnome.gnome-characters
-      # gnome.eog
-      # gthumb
-      # libsForQt5.gwenview
-      gparted
-    ];
+        # Needs when use other DM
+        gnome.adwaita-icon-theme
+        gnome.gnome-themes-extra
+        gnome.dconf-editor
+        gnome.gnome-tweaks
 
-    services = {
-      udiskie.enable = true;
-      gnome-keyring.enable = true;
-      # playerctld.enable = true;
-      wob.enable = true;
-      polkit.enable = true;
+        xfce.mousepad
+        nomacs
+        # gnome.gnome-power-manager
+        # gnome.gnome-characters
+        # gnome.eog
+        # gthumb
+        # libsForQt5.gwenview
+        gparted
+      ];
 
-      wlsunset = {
+      services = {
+        udiskie.enable = true;
+        gnome-keyring.enable = true;
+        # playerctld.enable = true;
+        wob.enable = true;
+        polkit.enable = true;
+
+        wlsunset = {
+          enable = true;
+          # gama = "2.0";
+          latitude = "22.2783";
+          longitude = "114.1747";
+        };
+      };
+
+      qt = {
         enable = true;
-        # gama = "2.0";
-        latitude = "22.2783";
-        longitude = "114.1747";
+        platformTheme = "gnome";
+        style.package = pkgs.adwaita-qt;
+        style.name = "adwaita";
+      };
+
+      # Fix tiny cursor
+      home.pointerCursor = {
+        name = "Vanilla-DMZ-AA";
+        package = pkgs.vanilla-dmz;
+        size = 128;
+        # name = "Bibata-Modern-Classic";
+        # package = pkgs.bibata-cursors;
+        # size = 128;
       };
     };
-
-    qt = {
-      enable = true;
-      platformTheme = "gnome";
-      style.package = pkgs.adwaita-qt;
-      style.name = "adwaita";
-    };
-
-    # Fix tiny cursor
-    home.pointerCursor = {
-      name = "Vanilla-DMZ-AA";
-      package = pkgs.vanilla-dmz;
-      size = 128;
-      # name = "Bibata-Modern-Classic";
-      # package = pkgs.bibata-cursors;
-      # size = 128;
-    };
-  };
 }

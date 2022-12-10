@@ -1,13 +1,10 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
+
   home.packages = with pkgs; [
     # Nix Tools
     nixos-helper
     nixpkgs-fmt
-    alejandra
+    # alejandra
     # nixfmt
     # nil # lsp
     # rnix-lsp

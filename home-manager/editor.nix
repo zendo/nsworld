@@ -1,8 +1,5 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
+
   #######################################################################
   ##  EMACS
   #######################################################################
@@ -10,11 +7,11 @@
     enable = true;
     package =
       pkgs.emacsPgtk;
-      # fix duplicate desktop shortcut in kde
-      # pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
-      #   postFixup = ''rm $out/share/applications/emacsclient.desktop'';
-      # });
-      extraPackages = epkgs:
+    # fix duplicate desktop shortcut in kde
+    # pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
+    #   postFixup = ''rm $out/share/applications/emacsclient.desktop'';
+    # });
+    extraPackages = epkgs:
       with epkgs; [
         vterm
         emojify
@@ -23,9 +20,9 @@
         # pdf-tools
         # telega
       ];
-      extraConfig = ''
-        (setq treemacs-python-executable "${pkgs.python3}/bin/python")
-      '';
+    extraConfig = ''
+      (setq treemacs-python-executable "${pkgs.python3}/bin/python")
+    '';
   };
 
   #######################################################################

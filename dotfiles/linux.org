@@ -340,14 +340,21 @@ system.userActivationScripts = {               # Installation script every time 
 
 * Nix Codes
 
-#+begin_src bash
+#+begin_src nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {}
 }:
 
- nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
- #+end_src>
+let
+  inherit ((builtins.getFlake
+    "github:NixOS/nixpkgs/8de8b98839d1f20089582cfe1a81207258fcc1f1").legacyPackages.${stdenv.system})
+    # v2ray 4
+    v2ray v2ray-geoip v2ray-domain-list-community;
+in
 
- #+begin_src nix
+nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+#+end_src
+
+#+begin_src nix
   tlp = {
     enable = false;
     settings = {
@@ -360,15 +367,6 @@ system.userActivationScripts = {               # Installation script every time 
     };
   };
 #+end_src
-
-#+begin_src nix
-  # nix registry list
-  registry = lib.mapAttrs' (
-    n: v: lib.nameValuePair n {flake = v;}
-  ) inputs;
-
-  nix.settings.flake-registry = /etc/nix/registry.json;
-#+end_src>
 
 tree-sitter
 https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/

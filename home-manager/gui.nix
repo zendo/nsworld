@@ -1,13 +1,10 @@
-{
-  config,
-  pkgs,
-  lib,
-  nixosConfig,
-  ...
-}: let
+{ config, pkgs, lib, nixosConfig, ... }:
+
+let
   hidpiEnable = nixosConfig.hardware.video.hidpi.enable;
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
-in {
+in
+{
   services = {
     easyeffects.enable = true;
   };

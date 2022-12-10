@@ -1,9 +1,5 @@
-{
-  config,
-  lib,
-  nixosConfig,
-  ...
-}: {
+{ config, lib, nixosConfig, ... }: {
+
   imports = [
     ./git.nix
     ./cli.nix
