@@ -46,11 +46,11 @@
       "223.6.6.6"
     ];
 
-    # firewall = {
-    #   enable = false;
-    #   allowedUDPPorts = [5353];
-    #   allowedTCPPorts = [];
-    # };
+    firewall = {
+      # enable = false; # true by default
+      # allowedUDPPorts = [ 32345 ];
+      # allowedTCPPorts = [ 32345 ];
+    };
   };
 
   # systemd.services.nix-daemon.environment = {

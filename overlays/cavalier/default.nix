@@ -5,6 +5,8 @@
 , ninja
 , pkg-config
 , python3
+, cava
+, gobject-introspection
 , glib
 , gtk4
 , librsvg
@@ -30,6 +32,7 @@ python3.pkgs.buildPythonApplication rec {
     meson
     ninja
     pkg-config
+    gobject-introspection
     wrapGAppsHook4
     appstream-glib
     desktop-file-utils
@@ -38,7 +41,7 @@ python3.pkgs.buildPythonApplication rec {
   buildInputs = [
     glib
     gtk4
-    # librsvg
+    librsvg
     libadwaita
   ];
 
@@ -46,11 +49,14 @@ python3.pkgs.buildPythonApplication rec {
     pygobject3
   ];
 
-  # prevent double wrapping
+  # Prevent double wrapping
   dontWrapGApps = true;
 
   preFixup = ''
-    makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+    makeWrapperArgs+=(
+      "''${gappsWrapperArgs[@]}"
+      --prefix PATH ":" "${lib.makeBinPath [ cava ]}"
+    )
   '';
 
   meta = with lib; {

@@ -10,12 +10,12 @@
 }:
 let
   pname = "v2raya";
-  version = "unstable-2022-11-26";
+  version = "2.0.0";
   src = fetchFromGitHub {
     owner = "v2rayA";
     repo = "v2rayA";
-    rev = "e205ebdadf26905b80303d1d608b87cd4124cf8b";
-    sha256 = "sha256-JUOtzGAwNHfzMXGyZSqdCjQZSSux6AjNCJwS8WEDtDc";
+    rev = "v${version}";
+    sha256 = "sha256-1fWcrMd+TSrlS1H0z7XwVCQzZAa8DAFtlekEZNRMAPA=";
   };
   web = mkYarnPackage {
     inherit pname version;
@@ -42,6 +42,11 @@ buildGoModule {
   preBuild = ''
     cp -a ${web} server/router/web
   '';
+  ldflags = [
+    "-s"
+    "-w"
+    "-X github.com/v2rayA/v2rayA/conf.Version=${version}"
+  ];
   postInstall = ''
     install -Dm 444 ${src}/install/universal/v2raya.desktop -t $out/share/applications
     install -Dm 444 ${src}/install/universal/v2raya.png -t $out/share/icons/hicolor/512x512/apps

@@ -11,7 +11,7 @@ in
     tiptop-py
     # yesplaymusic
     # freedownloadmanager
-    # nightpdf
+    nightpdf
     cavalier
 
     # nur.repos.linyinfeng.clash-for-windows
