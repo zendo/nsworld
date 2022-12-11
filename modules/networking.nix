@@ -1,9 +1,5 @@
 { config, pkgs, ... }: {
 
-  imports = [
-    ../overlays/v2raya/v2raya.nix
-  ];
-
   services = {
     v2raya.enable = true;
     openssh.enable = true;

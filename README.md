@@ -35,10 +35,7 @@ go/rust/python/java/node/php/ruby-on-rails
 # Desktop Setup
 
 ``` shell
-# WSL
-wsl --import nixos .\nixos\ nixos-wsl-installer.tar.gz --version 2
-wsl -d nixos
-wsl --unregister nixos
+...
 ```
 
 # Nix Lang
