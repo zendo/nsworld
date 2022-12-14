@@ -1,90 +1,95 @@
 final: prev: {
   # Trivial
-  nixos-helper = prev.callPackage ./nixos-helper {};
+  nixos-helper = prev.callPackage ./nixos-helper { };
 
   # Data
-  zhudou-sans = prev.callPackage ./zhudou-sans {};
-  smiley-sans = prev.callPackage ./smiley-sans {};
-  sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut {};
-  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes {};
+  zhudou-sans = prev.callPackage ./zhudou-sans { };
+  smiley-sans = prev.callPackage ./smiley-sans { };
+  sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
+  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes { };
 
   # RIME
-  fcitx5-breeze = prev.callPackage ./fcitx5-breeze {};
-  rime-easy-en = prev.callPackage ./rime-easy-en {};
-  rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin {};
+  fcitx5-breeze = prev.callPackage ./fcitx5-breeze { };
+  rime-easy-en = prev.callPackage ./rime-easy-en { };
+  rime-aurora-pinyin = prev.callPackage ./rime-aurora-pinyin { };
 
   # electron / appimage
-  listen1 = prev.callPackage ./listen1 {};
-  yesplaymusic = prev.callPackage ./yesplaymusic {};
-  nightpdf = prev.callPackage ./nightpdf {};
-  koodo-reader = prev.callPackage ./koodo-reader {};
-  thorium-reader = prev.callPackage ./thorium-reader {};
+  listen1 = prev.callPackage ./listen1 { };
+  yesplaymusic = prev.callPackage ./yesplaymusic { };
+  nightpdf = prev.callPackage ./nightpdf { };
+  # WIP
+  # nightpdf = prev.callPackage ./nightpdf-source {
+  #   # electron = prev.electron_21;
+  # };
+  koodo-reader = prev.callPackage ./koodo-reader { };
+  thorium-reader = prev.callPackage ./thorium-reader { };
 
   # deb / autoPatchelf
-  xmind = prev.callPackage ./xmind {};
+  xmind = prev.callPackage ./xmind { };
   clash-verge = prev.callPackage ./clash-verge {
     openssl = prev.openssl_1_1;
   };
-  freedownloadmanager = prev.callPackage ./freedownloadmanager {};
+  freedownloadmanager = prev.callPackage ./freedownloadmanager { };
 
   # C
-  ctpv = prev.callPackage ./ctpv {};
-  hashrat = prev.callPackage ./hashrat {};
-  xclicker = prev.callPackage ./xclicker {};
+  ctpv = prev.callPackage ./ctpv { };
+  hashrat = prev.callPackage ./hashrat { };
+  xclicker = prev.callPackage ./xclicker { };
 
   # Rust
-  done = prev.callPackage ./done {};
+  done = prev.callPackage ./done { };
   # mousai = prev.callPackage ./mousai {};
-  sniffnet = prev.callPackage ./sniffnet {}; # iced
-  gnome-metronome = prev.callPackage ./gnome-metronome {};
+  sniffnet = prev.callPackage ./sniffnet { }; # iced
+  gnome-metronome = prev.callPackage ./gnome-metronome { };
 
   # Go
-  sing-box = prev.callPackage ./sing-box {};
+  sing-box = prev.callPackage ./sing-box { };
 
   # Python
-  textsnatcher = prev.callPackage ./textsnatcher {};
-  smile = prev.callPackage ./smile {};
-  bt-dualboot = prev.callPackage ./bt-dualboot {};
-  konsave = prev.callPackage ./konsave {};
-  tiptop-py = prev.callPackage ./tiptop-py {};
-  iotas = prev.callPackage ./iotas {};
-  zdict = prev.callPackage ./zdict {};
-  wordbook = prev.callPackage ./wordbook {};
-  cavalier = prev.callPackage ./cavalier {};
-  gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
+  textsnatcher = prev.callPackage ./textsnatcher { };
+  smile = prev.callPackage ./smile { };
+  bt-dualboot = prev.callPackage ./bt-dualboot { };
+  konsave = prev.callPackage ./konsave { };
+  tiptop-py = prev.callPackage ./tiptop-py { };
+  iotas = prev.callPackage ./iotas { };
+  zdict = prev.callPackage ./zdict { };
+  wordbook = prev.callPackage ./wordbook { };
+  cavalier = prev.callPackage ./cavalier { };
+  gestures-gtk = prev.callPackage ./gestures-gtk { }; #WIP!!
 
   # Python Module Overlays
   pythonPackagesOverlays =
-    (prev.pythonPackagesOverlays or [])
+    (prev.pythonPackagesOverlays or [ ])
     ++ [
       (python-final: python-prev: {
-        wn = python-final.callPackage ./python-modules/wn {};
-        pyjokes = python-final.callPackage ./python-modules/pyjokes {};
+        wn = python-final.callPackage ./python-modules/wn { };
+        pyjokes = python-final.callPackage ./python-modules/pyjokes { };
       })
     ];
-  python3 = let
-    self = prev.python3.override {
-      inherit self;
-      packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-    };
-  in
+  python3 =
+    let
+      self = prev.python3.override {
+        inherit self;
+        packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+      };
+    in
     self;
   python3Packages = final.python3.pkgs;
 
   # Gtk
 
   # Java
-  spotiflyer = prev.callPackage ./spotiflyer {};
-  mindustry = prev.callPackage ./mindustry {}; # game
+  spotiflyer = prev.callPackage ./spotiflyer { };
+  mindustry = prev.callPackage ./mindustry { }; # game
 
   # Qt
-  converseen = prev.libsForQt5.callPackage ./converseen {};
-  nekoray = prev.libsForQt5.callPackage ./nekoray {};
+  converseen = prev.libsForQt5.callPackage ./converseen { };
+  nekoray = prev.libsForQt5.callPackage ./nekoray { };
 
   # wayland
 
   # flutter
-  spotube = prev.callPackage ./spotube {}; # WIP!!!
+  spotube = prev.callPackage ./spotube { }; # WIP!!!
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:
@@ -95,10 +100,10 @@ final: prev: {
   # fix .desktop missing
   wl-color-picker =
     prev.wl-color-picker.overrideAttrs
-    (oldAttrs: {
-      postFixup = ''
-        cp -r $out/usr/share $out/share '';
-    });
+      (oldAttrs: {
+        postFixup = ''
+          cp -r $out/usr/share $out/share '';
+      });
 
   # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
@@ -109,39 +114,40 @@ final: prev: {
         rev = "3e486499b9300ce8f9c62bd102e5119b27a2fad1";
         hash = "sha256-Y9WPm0MLWl/s0e0aoKKk0SSojqBrI/RdyxkgOz2Tk38==";
       };
-      patches = [];
+      patches = [ ];
     });
   });
 
+
   /*
   # node override
-  nodePackages = nodePackages.extend (final: prev: { })
+  nodePackages = nodePackages.extend (final: prev: { });
 
   # rust override
   shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {
-  version = "2022-06-27";
-  src = prev.fetchFromGitHub {
-  owner = "shadowsocks";
-  repo = "shadowsocks-rust";
-  rev = "a4955a198bdf6ab12e647b04180679dfef53fb0b";
-  sha256 = "sha256-sJKuGQH5PBOcFOpks8sUaAWJlfg7aCv6YS9DWaEF3K4=";
-  };
-  cargoDeps = oldAttrs.cargoDeps.overrideAttrs (_: {
-  inherit src;
-  outputHash = "sha256-YJ4Qva4keOk9aBPFwztkTpvS7uv7zl6TOHqYZzZEGAs=";
-  });
+    version = "2022-06-27";
+    src = prev.fetchFromGitHub {
+      owner = "shadowsocks";
+      repo = "shadowsocks-rust";
+      rev = "a4955a198bdf6ab12e647b04180679dfef53fb0b";
+      sha256 = "sha256-sJKuGQH5PBOcFOpks8sUaAWJlfg7aCv6YS9DWaEF3K4=";
+    };
+    cargoDeps = oldAttrs.cargoDeps.overrideAttrs (_: {
+      inherit src;
+      outputHash = "sha256-YJ4Qva4keOk9aBPFwztkTpvS7uv7zl6TOHqYZzZEGAs=";
+    });
   });
 
   # gnome override
   gnome = prev.gnome.overrideScope' (gfinal: gprev: {
-  mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
-  dynamic-buffering = prev.fetchurl {
-  url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
-  sha256 = "sha256-KVerFwEgLaEpp5lFofX7VnbBPP4dIVm3+odVUZ8clYA=";
-  };
-  patches = dynamic-buffering;
+    mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
+      dynamic-buffering = prev.fetchurl {
+        url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
+        sha256 = "sha256-KVerFwEgLaEpp5lFofX7VnbBPP4dIVm3+odVUZ8clYA=";
+      };
+      patches = dynamic-buffering;
+    });
   });
-  });
-
   */
+
 }
