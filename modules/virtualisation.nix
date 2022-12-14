@@ -30,8 +30,6 @@
 
   # programs.java.enable = true;
 
-  programs.nix-ld.enable = true;
-
   environment.systemPackages = with pkgs; [
     virt-manager
     bridge-utils

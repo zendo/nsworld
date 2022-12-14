@@ -1,5 +1,7 @@
 { lib, config, inputs, ... }: {
 
+  programs.nix-ld.enable = true;
+
   nix = {
     # nix registry list
     registry = lib.mapAttrs'

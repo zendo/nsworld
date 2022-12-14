@@ -8,6 +8,7 @@
 , udev
 , openssl
 , webkitgtk
+, libcap
 , libappindicator-gtk3
 , libayatana-appindicator
 }:
@@ -46,7 +47,8 @@ stdenv.mkDerivation rec {
     cp -r usr/share $out/share
 
     makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ] }"
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ] }" \
+      --prefix PATH : "${lib.makeBinPath [ libcap ]}"
   '';
 
   meta = with lib; {
