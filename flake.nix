@@ -33,47 +33,52 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
     nur.url = "github:nix-community/NUR";
     musnix.url = "github:musnix/musnix";
     templates.url = "github:NixOS/templates";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    # nixpkgs-pr,
-    # nixpkgs-local,
-    # nixpkgs-stable,
-    nixos-hardware,
-    home-manager,
-    plasma-manager,
-    emacs-overlay,
-    # hyprland,
-    nur,
-    musnix,
-    nix-alien,
-    nixos-wsl,
-    templates,
-    flake-utils,
-    ...
-  }: let
-    mkHost = import ./lib/mkHost.nix inputs;
+  outputs =
+    inputs @ { self
+    , nixpkgs
+      # , nixpkgs-pr
+      # , nixpkgs-local
+      # , nixpkgs-stable
+    , nixos-hardware
+    , home-manager
+    , plasma-manager
+    , emacs-overlay
+      # , hyprland
+    , nur
+    , musnix
+    , nix-alien
+    , nixos-wsl
+    , templates
+    , flake-utils
+    , ...
+    }:
+    let
+      mkHost = import ./lib/mkHost.nix inputs;
 
-    overlays = [
-      nur.overlay
-      nix-alien.overlay
-      emacs-overlay.overlay
-      (import ./overlays)
-      # (final: prev: {
-      #   pr = nixpkgs-pr.legacyPackages.${prev.system};
-      # })
-    ];
-  in
+      overlays = [
+        nur.overlay
+        nix-alien.overlay
+        emacs-overlay.overlay
+        (import ./overlays)
+        # (final: prev: {
+        #   pr = nixpkgs-pr.legacyPackages.${prev.system};
+        # })
+      ];
+    in
     {
       nixosConfigurations = {
         yoga = mkHost {
@@ -140,45 +145,48 @@
       ## HM Standalone
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
-      homeConfigurations = let
-        username = "iab";
-        system = "x86_64-linux";
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          config.allowUnfree = true;
+      homeConfigurations =
+        let
+          username = "iab";
+          system = "x86_64-linux";
+          pkgs = import nixpkgs {
+            inherit system overlays;
+            config.allowUnfree = true;
+          };
+        in
+        {
+          ${username} = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            # extraSpecialArgs = {inherit inputs;};
+            modules = [
+              ./home-manager/alias.nix
+              ./home-manager/cli.nix
+              ./home-manager/git.nix
+              ./home-manager/non-nixos.nix
+              ./home-manager/xdg.nix
+              ./home-manager/zsh.nix
+              {
+                home.stateVersion = "22.05";
+                home.username = "${username}";
+                home.homeDirectory = "/home/${username}";
+              }
+            ];
+          };
         };
-      in {
-        ${username} = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          # extraSpecialArgs = {inherit inputs;};
-          modules = [
-            ./home-manager/alias.nix
-            ./home-manager/cli.nix
-            ./home-manager/git.nix
-            ./home-manager/non-nixos.nix
-            ./home-manager/xdg.nix
-            ./home-manager/zsh.nix
-            {
-              home.stateVersion = "22.05";
-              home.username = "${username}";
-              home.homeDirectory = "/home/${username}";
-            }
-          ];
-        };
-      };
 
       #######################################################################
       ## WSL
       #######################################################################
       wsl-installer = self.nixosConfigurations.wsl.config.system.build.installer;
 
-      nixosConfigurations.wsl = let
-        username = "iab";
-        # nixpkgs = inputs.nixpkgs-stable;
-      in
+      nixosConfigurations.wsl =
+        let
+          username = "iab";
+          # nixpkgs = inputs.nixpkgs-stable;
+        in
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {inherit inputs username;};
+          specialArgs = { inherit inputs username; };
           modules = [
             ./hosts/wsl
             ./modules/nixconfig.nix
@@ -194,30 +202,32 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {inherit inputs;};
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.${username} = import ./home-manager;
             }
           ];
         };
     }
     // flake-utils.lib.eachDefaultSystem
-    (
-      system: let
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          allowUnfree = true;
-          # allowBroken = true;
-          # allowUnsupportedSystem = true;
-        };
-      in {
-        # nix fmt :Formatter all files in this repo.
-        formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-        # nix develop .#rust
-        devShells = import ./devshells.nix {inherit pkgs;};
-        # nix build .#apps or self#apps / nix run self#apps
-        packages = pkgs;
-      }
-    );
+      (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system overlays;
+            allowUnfree = true;
+            # allowBroken = true;
+            # allowUnsupportedSystem = true;
+          };
+        in
+        {
+          # nix fmt :Formatter all files in this repo.
+          formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+          # nix develop .#rust
+          devShells = import ./devshells.nix { inherit pkgs; };
+          # nix build .#apps or self#apps / nix run self#apps
+          packages = pkgs;
+        }
+      );
 
   # auto-fetch deps when `nix run/shell/develop`
   nixConfig = {

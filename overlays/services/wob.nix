@@ -6,7 +6,8 @@ let
 
   cfg = config.services.wob;
 
-in {
+in
+{
   meta.maintainers = [ maintainers.zendo ];
 
   options.services.wob = {
@@ -16,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     assertions = [
       (lib.hm.assertions.assertPlatform "services.playerctld" pkgs
-      lib.platforms.linux)
+        lib.platforms.linux)
     ];
 
     systemd.user.services.wob = {
@@ -24,12 +25,12 @@ in {
         Description = "A lightweight overlay volume/backlight/progress/anything bar for Wayland";
         Documentation = "man:wob(1)";
         PartOf = [ "graphical-session.target" ];
-        After = ["graphical-session-pre.target"];
+        After = [ "graphical-session-pre.target" ];
         ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
 
       Service = {
         ExecStart = "${pkgs.wob}/bin/wob";
@@ -46,7 +47,7 @@ in {
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["sockets.target"];
+      Install.WantedBy = [ "sockets.target" ];
     };
   };
 }

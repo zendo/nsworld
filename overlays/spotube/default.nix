@@ -39,17 +39,17 @@ flutter.mkFlutterApp rec {
     gtk3
   ];
 
-#   flutterExtraFetchCommands = ''
-#     M=$(echo $TMP/.pub-cache/hosted/pub.dartlang.org/matrix-*)
-#     sed -i $M/scripts/prepare.sh \
-#       -e "s|/usr/lib/x86_64-linux-gnu/libolm.so.3|/bin/sh|g"  \
-#       -e "s|if which flutter >/dev/null; then|exit; if which flutter >/dev/null; the
-# n|g"
+  #   flutterExtraFetchCommands = ''
+  #     M=$(echo $TMP/.pub-cache/hosted/pub.dartlang.org/matrix-*)
+  #     sed -i $M/scripts/prepare.sh \
+  #       -e "s|/usr/lib/x86_64-linux-gnu/libolm.so.3|/bin/sh|g"  \
+  #       -e "s|if which flutter >/dev/null; then|exit; if which flutter >/dev/null; the
+  # n|g"
 
-#     pushd $M
-#     bash scripts/prepare.sh
-#     popd
-#   '';
+  #     pushd $M
+  #     bash scripts/prepare.sh
+  #     popd
+  #   '';
 
   meta = with lib; {
     description = "A lightweight free Spotify crossplatform-client desktop_computer";

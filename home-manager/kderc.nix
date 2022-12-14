@@ -1,8 +1,5 @@
-{
-  config,
-  inputs,
-  ...
-}: {
+{ config, inputs, ... }: {
+
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
@@ -97,22 +94,22 @@
 
       "org.kde.dolphin.desktop"."_launch" = "Meta+F";
       "org.kde.plasma.emojier.desktop"."_launch" = "Meta+.";
-      "org.kde.krunner.desktop"."_launch" = ["Search" "Alt+F2" "Meta+X"];
+      "org.kde.krunner.desktop"."_launch" = [ "Search" "Alt+F2" "Meta+X" ];
 
-      "ksmserver"."Log Out" = ["Meta+Esc" "Ctrl+Alt+Del"];
+      "ksmserver"."Log Out" = [ "Meta+Esc" "Ctrl+Alt+Del" ];
 
       kwin = {
-        "Window Close" = ["Alt+F4" "Meta+Q"];
+        "Window Close" = [ "Alt+F4" "Meta+Q" ];
 
         "Window to Desktop 1" = "Alt+1";
         "Window to Desktop 2" = "Alt+2";
         "Window to Desktop 3" = "Alt+3";
         "Window to Desktop 4" = "Alt+4";
 
-        "Switch to Desktop 1" = ["Meta+1" "Ctrl+F1"];
-        "Switch to Desktop 2" = ["Meta+2" "Ctrl+F2"];
-        "Switch to Desktop 3" = ["Meta+3" "Ctrl+F3"];
-        "Switch to Desktop 4" = ["Meta+4" "Ctrl+F4"];
+        "Switch to Desktop 1" = [ "Meta+1" "Ctrl+F1" ];
+        "Switch to Desktop 2" = [ "Meta+2" "Ctrl+F2" ];
+        "Switch to Desktop 3" = [ "Meta+3" "Ctrl+F3" ];
+        "Switch to Desktop 4" = [ "Meta+4" "Ctrl+F4" ];
       };
     };
   };

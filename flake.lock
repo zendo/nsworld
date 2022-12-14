@@ -178,14 +178,16 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1670986095,
-        "narHash": "sha256-f2NWd+UffxpeBg988sWMxhEMoRF7FqnA9PGPZPnNb6I=",
+        "lastModified": 1671048525,
+        "narHash": "sha256-CMYl8JDkliGp3OLQYaPi65/AY91v+ogx8rK3R7IL590=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "9bde770148c091133794fc5748d67330b19ada4b",
+        "rev": "76286bf034c6bcef68c7f76126e9b9671ab1ae7a",
         "type": "github"
       },
       "original": {
@@ -212,22 +214,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1670856834,
-        "narHash": "sha256-GitzxDZo7385SBoMpHRA9NBAhBh/5TBK8ptpQFAoMYc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "06278c77b5d162e62df170fec307e83f1812d94b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-22.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1671005503,
         "narHash": "sha256-L5pMUoEAxmqwyAivNKvTcNhxL3xY58Zjh3XYtVO2LaQ=",
         "owner": "NixOS",
@@ -244,11 +230,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1670992231,
-        "narHash": "sha256-0Cs0Uc4jQ1jbmOoJspClBWy+ymcBgXKFVgvvU/9kteo=",
+        "lastModified": 1671035267,
+        "narHash": "sha256-Fm1V/rfGr2rCw8drF9VjsWibfd6KXbe52Iqur8vfw6s=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "1e49f8831d05b422616f9af9163b6b933c07d370",
+        "rev": "7ac448653e67ac3e6d316400613fab642ede010b",
         "type": "github"
       },
       "original": {
@@ -289,7 +275,7 @@
         "nix-alien": "nix-alien",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
         "templates": "templates"

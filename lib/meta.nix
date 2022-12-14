@@ -1,8 +1,10 @@
 # https://github.com/tejing1/nixos-config/tree/master/lib
-inputs: let
+inputs:
+let
   inherit (inputs.nixpkgs) lib;
-in rec {
-  supportedSystems = ["aarch64-linux" "x86_64-linux"];
+in
+rec {
+  supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
 
   genSystems = lib.genAttrs supportedSystems;
 

@@ -1,6 +1,6 @@
 { lib
 , stdenv
-  , fetchurl
+, fetchurl
 , fetchFromGitHub
 , cmake
 , protobuf
@@ -49,7 +49,7 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [
-    "-DNKR_NO_EXTERNAL=zxing"   # need zxing-cpp 1.3.0
+    "-DNKR_NO_EXTERNAL=zxing" # need zxing-cpp 1.3.0
     # "-DNKR_PACKAGE=true" # ?
   ];
 

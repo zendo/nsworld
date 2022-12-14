@@ -43,33 +43,33 @@ stdenv.mkDerivation rec {
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
   '';
 
-# { lib, mkYarnPackage, fetchYarnDeps, fetchFromGitHub, electron, makeWrapper }:
+  # { lib, mkYarnPackage, fetchYarnDeps, fetchFromGitHub, electron, makeWrapper }:
 
-# mkYarnPackage rec {
-#   pname = "koodo-reader";
-#   version = "1.4.9";
+  # mkYarnPackage rec {
+  #   pname = "koodo-reader";
+  #   version = "1.4.9";
 
-#   src = fetchFromGitHub {
-#     owner = "troyeguo";
-#     repo = pname;
-#     rev = "v${version}";
-#     hash = "sha256-qLd1UKY5vL3yK07QLR5MOWzoALPC8vkJVpsuzVHLYOU=";
-#   };
+  #   src = fetchFromGitHub {
+  #     owner = "troyeguo";
+  #     repo = pname;
+  #     rev = "v${version}";
+  #     hash = "sha256-qLd1UKY5vL3yK07QLR5MOWzoALPC8vkJVpsuzVHLYOU=";
+  #   };
 
-#   offlineCache = fetchYarnDeps {
-#     yarnLock = src + "/yarn.lock";
-#     hash = "sha256-2n9qD9AsMPplyhguVFUss7TQYpOpsrw6XXjptbOaYF8=";
-#   };
-#   packageJSON = ./package.json;
+  #   offlineCache = fetchYarnDeps {
+  #     yarnLock = src + "/yarn.lock";
+  #     hash = "sha256-2n9qD9AsMPplyhguVFUss7TQYpOpsrw6XXjptbOaYF8=";
+  #   };
+  #   packageJSON = ./package.json;
 
-#   buildPhase = ''
-#     runHook preBuild
-#     yarn dev
-#     runHook postbuild
-#   '';
-#   distPhase = "true";
-#   dontInstall = true;
-#   dontFixup = true;
+  #   buildPhase = ''
+  #     runHook preBuild
+  #     yarn dev
+  #     runHook postbuild
+  #   '';
+  #   distPhase = "true";
+  #   dontInstall = true;
+  #   dontFixup = true;
 
   # # The spectron dependency has to be removed manually from package.json,
   # # because it requires electron-chromedriver, which wants to download stuff.
@@ -92,34 +92,34 @@ stdenv.mkDerivation rec {
   # # because this requires devDependencies that we do not
   # # wish to bundle (because they add 250M to the closure size).
   # build = mkYarnPackage {
-    #   name = "uivonim-build-${version}";
-    #   inherit version src packageJSON yarnLock yarnNix yarnPreBuild distPhase;
+  #   name = "uivonim-build-${version}";
+  #   inherit version src packageJSON yarnLock yarnNix yarnPreBuild distPhase;
 
-    #   buildPhase = ''
-    #     yarn build:prod
-    #   '';
+  #   buildPhase = ''
+  #     yarn build:prod
+  #   '';
 
-    #   installPhase = ''
-    #     mv deps/uivonim/build $out
-    #   '';
-    # };
+  #   installPhase = ''
+  #     mv deps/uivonim/build $out
+  #   '';
+  # };
 
-    # # The --production flag disables the devDependencies.
-    # yarnFlags = [ "--production" ];
+  # # The --production flag disables the devDependencies.
+  # yarnFlags = [ "--production" ];
 
-    # nativeBuildInputs = [ makeWrapper ];
+  # nativeBuildInputs = [ makeWrapper ];
 
-    # postInstall = ''
-    #   dir=$out/libexec/uivonim/node_modules/uivonim/
-    #   # need to copy instead of symlink because
-    #   # otherwise electron won't find the node_modules
-    #   cp -ra ${build} $dir/build
-    #   makeWrapper ${electron}/bin/electron $out/bin/uivonim \
-    #     --set NODE_ENV production \
-    #     --add-flags $dir/build/main/main.js
-    # '';
+  # postInstall = ''
+  #   dir=$out/libexec/uivonim/node_modules/uivonim/
+  #   # need to copy instead of symlink because
+  #   # otherwise electron won't find the node_modules
+  #   cp -ra ${build} $dir/build
+  #   makeWrapper ${electron}/bin/electron $out/bin/uivonim \
+  #     --set NODE_ENV production \
+  #     --add-flags $dir/build/main/main.js
+  # '';
 
-    # distPhase = ":"; # disable useless $out/tarballs directory
+  # distPhase = ":"; # disable useless $out/tarballs directory
 
   meta = with lib; {
     description = "An open-source (FOSS) todo manager based on the todo.txt syntax";

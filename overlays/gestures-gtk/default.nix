@@ -8,14 +8,14 @@
 , gtk3
 , gettext
 , xdotool
-  , libinput-gestures
+, libinput-gestures
 , gobject-introspection
 , wrapGAppsHook
 , appstream-glib
 , desktop-file-utils
 }:
-       # > Executing pipInstallPhase
-       # > /nix/store/vpxfszmnknllapd7c3vfb637r8z5yhpl-pip-install-hook/nix-support/setup-hook: line 13: pushd: dist: No such file or directory
+# > Executing pipInstallPhase
+# > /nix/store/vpxfszmnknllapd7c3vfb637r8z5yhpl-pip-install-hook/nix-support/setup-hook: line 13: pushd: dist: No such file or directory
 
 python3.pkgs.buildPythonApplication rec {
   pname = "gestures-gtk";

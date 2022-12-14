@@ -10,10 +10,12 @@
 #   lib // colors // home // system
 # # adding lib is ugly but easier to keep track of things
 
-inputs: let
+inputs:
+let
   inherit (inputs.nixpkgs) lib;
-in rec {
-  supportedSystems = ["aarch64-linux" "x86_64-linux"];
+in
+rec {
+  supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
 
   genSystems = lib.genAttrs supportedSystems;
 

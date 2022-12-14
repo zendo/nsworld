@@ -40,21 +40,23 @@ rustPlatform.buildRustPackage rec {
     xorg.libXcursor
   ];
 
-  postFixup = let
-    libPath = lib.makeLibraryPath [
-      libGL
-      libpcap
-      stdenv.cc.cc.lib
-      freetype
-      fontconfig
-      xorg.libXi
-      xorg.libX11
-      xorg.libXrandr
-      xorg.libXcursor
-    ];
-  in ''
-    patchelf --set-rpath "${libPath}" "$out/bin/$pname"
-  '';
+  postFixup =
+    let
+      libPath = lib.makeLibraryPath [
+        libGL
+        libpcap
+        stdenv.cc.cc.lib
+        freetype
+        fontconfig
+        xorg.libXi
+        xorg.libX11
+        xorg.libXrandr
+        xorg.libXcursor
+      ];
+    in
+    ''
+      patchelf --set-rpath "${libPath}" "$out/bin/$pname"
+    '';
 
   meta = with lib; {
     description = "Cross-platform application to monitor your network traffic with ease";

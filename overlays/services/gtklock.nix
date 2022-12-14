@@ -24,6 +24,6 @@ in
     environment.systemPackages = [ pkgs.gtklock ];
     # services.udev.packages = [ pkgs.light ];
     security.polkit.enable = true;
-    security.pam.services.gtklock = {};
+    security.pam.services.gtklock = { };
   };
 }

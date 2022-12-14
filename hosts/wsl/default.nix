@@ -17,38 +17,10 @@
   networking.hostName = "wsl";
   # users.defaultUserShell = pkgs.zsh;
 
-  # FIXME: remove it after wsl fix https://github.com/microsoft/WSL/issues/8996
-  # from https://github.com/microsoft/WSL/issues/8996#issuecomment-1295953046
-  systemd.services.fixshm = {
-    enable = true;
-    description = "Fix the /dev/shm symlink to be a mount";
-    unitConfig = {
-      DefaultDependencies = "no";
-      Before = [ "sysinit.target" "systemd-tmpfiles-setup-dev.service" "systemd-tmpfiles-setup.service" "systemd-sysctl.service" ];
-      ConditionPathExists = "/dev/shm";
-      ConditionPathIsSymbolicLink = "/dev/shm";
-      ConditionPathIsMountPoint = "/run/shm";
-    };
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = [
-        "${pkgs.coreutils}/bin/rm /dev/shm"
-        "${pkgs.coreutils}/bin/mkdir /dev/shm"
-        "/run/wrappers/bin/umount /run/shm"
-        "${pkgs.coreutils}/bin/rmdir /run/shm"
-        "/run/wrappers/bin/mount -t tmpfs -o mode=1777,nosuid,nodev,strictatime tmpfs /dev/shm"
-        "${pkgs.coreutils}/bin/ln -s /dev/shm /run/shm"
-      ];
-    };
-    wantedBy = [ "sysinit.target" ];
-  };
-  systemd.oomd.enable = false;
-
   #######################################################################
   ##  Home Manager
   #######################################################################
   home-manager.users.${username} = { config, pkgs, ... }: {
-
     home.packages = with pkgs; [
       mpg123 # for ydict
       wsl-open

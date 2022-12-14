@@ -38,14 +38,14 @@ mkYarnPackage rec {
   ];
 
   installPhase = ''
-    runHook preInstall
+        runHook preInstall
 
-    # executable wrapper
-    makeWrapper '${electron}/bin/electron' "$out/bin/${pname}" \
-      # --add-flags "$out/share/micropad" \
-      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hin
-t=to --enable-features=WaylandWindowDecorations}}"
-    runHook postInstall
+        # executable wrapper
+        makeWrapper '${electron}/bin/electron' "$out/bin/${pname}" \
+          # --add-flags "$out/share/micropad" \
+          --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hin
+    t=to --enable-features=WaylandWindowDecorations}}"
+        runHook postInstall
   '';
 
   meta = with lib; {

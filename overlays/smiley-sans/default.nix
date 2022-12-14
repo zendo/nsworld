@@ -6,7 +6,7 @@ fetchzip rec {
 
   url = "https://github.com/atelier-anchor/smiley-sans/releases/download/v${version}/smiley-sans-v${version}.zip";
 
-  stripRoot=false;
+  stripRoot = false;
 
   postFetch = ''
     mkdir -p $out/share/fonts/{truetype,woff2}

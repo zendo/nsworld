@@ -1,11 +1,11 @@
-{
-  lib,
-  pkgs,
-  config,
-  username,
-  modulesPath,
-  ...
+{ lib
+, pkgs
+, config
+, username
+, modulesPath
+, ...
 }: {
+
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
     ../../modules/gnome.nix
@@ -22,7 +22,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod_latest
     # kernelParams = ["quite"];
-    supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
+    supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
   };
 
   services.xserver = {
