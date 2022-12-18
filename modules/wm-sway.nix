@@ -1,10 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  username,
-  ...
-}: {
+{ config, pkgs, lib, username, ... }: {
+
   imports = [
     ./wm.nix
   ];
@@ -18,11 +13,8 @@
     };
   };
 
-  home-manager.users.${username} = {
-    config,
-    pkgs,
-    ...
-  }: {
+  home-manager.users.${username} = { config, pkgs, ... }: {
+
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
