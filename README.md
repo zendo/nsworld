@@ -35,7 +35,7 @@ go/rust/python/java/node/php/ruby-on-rails
 # Desktop Setup
 
 ``` shell
-...
+....
 ```
 
 # Nix Lang

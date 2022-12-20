@@ -1,5 +1,4 @@
 { lib
-, stdenv
 , fetchFromGitHub
 , meson
 , ninja
@@ -18,14 +17,14 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "cavalier";
-  version = "0.1.0";
+  version = "2022.12.18";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "fsobolev";
     repo = pname;
-    rev = "0d940af86dae0925209f2b488416f0446a97de21";
-    hash = "sha256-pNVt6rPJd/IG2fNcFJEZav0Ohkm+WDzuj6DSiZacxlY=";
+    rev = version;
+    hash = "sha256-yf3n9RYLaGuiKnvjX+4uSp9yaioCMch2Hn1JQ2tofBg=";
   };
 
   nativeBuildInputs = [

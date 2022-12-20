@@ -37,10 +37,6 @@ while [[ $# -gt 0 ]]; do
             nix run nixpkgs#"$2"
             shift ;;
 
-        run-with)
-            nix run nixpkgs#"$2" -- "$@"
-            shift ;;
-
         shell)
             nix shell nixpkgs#"$2"
             shift ;;

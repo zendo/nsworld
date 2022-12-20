@@ -22,6 +22,7 @@ mkYarnPackage rec {
   buildPhase = ''
     runHook preBuild
     export HOME=$(mktemp -d)
+    export npm_config_cache=$PWD/.npm
     # export NODE_OPTIONS=--openssl-legacy-provider
     # ln -s $src/postcss.config.js postcss.config.js
     OUTPUT_DIR=$out yarn --offline dist
@@ -38,14 +39,14 @@ mkYarnPackage rec {
   ];
 
   installPhase = ''
-        runHook preInstall
+    runHook preInstall
 
-        # executable wrapper
-        makeWrapper '${electron}/bin/electron' "$out/bin/${pname}" \
-          # --add-flags "$out/share/micropad" \
-          --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hin
-    t=to --enable-features=WaylandWindowDecorations}}"
-        runHook postInstall
+    # executable wrapper
+    makeWrapper '${electron}/bin/electron' "$out/bin/${pname}" \
+      # --add-flags "$out/share/micropad" \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hin
+t=to --enable-features=WaylandWindowDecorations}}"
+    runHook postInstall
   '';
 
   meta = with lib; {
