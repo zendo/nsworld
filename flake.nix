@@ -2,7 +2,7 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs.url = "github:NixOS/nixpkgs/pull/204807/merge";
     # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
@@ -18,7 +18,7 @@
     # };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/0e1a47eadd23dc5669f056f28de606c9d00a1c29";
+      url = "github:nix-community/emacs-overlay/bc9ad2cd35760953c145107dc75a413081c38fd3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

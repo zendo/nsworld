@@ -33,7 +33,6 @@ final: prev: {
 
   # C
   ctpv = prev.callPackage ./ctpv { };
-  hashrat = prev.callPackage ./hashrat { };
   xclicker = prev.callPackage ./xclicker { };
 
   # Rust
@@ -53,7 +52,6 @@ final: prev: {
   tiptop-py = prev.callPackage ./tiptop-py { };
   iotas = prev.callPackage ./iotas { };
   zdict = prev.callPackage ./zdict { };
-  wordbook = prev.callPackage ./wordbook { };
   cavalier = prev.callPackage ./cavalier { };
   gestures-gtk = prev.callPackage ./gestures-gtk { }; #WIP!!
 
@@ -62,7 +60,6 @@ final: prev: {
     (prev.pythonPackagesOverlays or [ ])
     ++ [
       (python-final: python-prev: {
-        wn = python-final.callPackage ./python-modules/wn { };
         pyjokes = python-final.callPackage ./python-modules/pyjokes { };
       })
     ];
