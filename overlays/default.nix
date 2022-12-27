@@ -46,7 +46,6 @@ final: prev: {
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher { };
-  smile = prev.callPackage ./smile { };
   bt-dualboot = prev.callPackage ./bt-dualboot { };
   konsave = prev.callPackage ./konsave { };
   tiptop-py = prev.callPackage ./tiptop-py { };

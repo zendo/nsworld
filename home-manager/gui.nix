@@ -60,7 +60,6 @@ in
     # spot # Premium accounts!
     # vlc
     # ffmpeg
-    # FIXME https://github.com/SeaDve/Kooha/pull/209
     kooha
     qmmp
     # audacious
