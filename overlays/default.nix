@@ -42,7 +42,6 @@ final: prev: {
   gnome-metronome = prev.callPackage ./gnome-metronome { };
 
   # Go
-  sing-box = prev.callPackage ./sing-box { };
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher { };
