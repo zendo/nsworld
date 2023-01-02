@@ -100,7 +100,7 @@ in
     # paper-note
     # endeavour
     ghostwriter
-    textpieces
+    # textpieces
     meld
 
     # HARDWARE TEST

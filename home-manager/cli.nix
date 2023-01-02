@@ -18,6 +18,7 @@
     nix-index
     nix-tree
     nix-top
+    nurl
     comma # ,
     nix-alien # Run binaries
     nix-index-update
