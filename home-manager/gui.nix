@@ -8,7 +8,7 @@ in
   home.packages = with pkgs; [
     # iotas
     # tiptop
-    tiptop-py
+    # tiptop-py
     # yesplaymusic
     # freedownloadmanager
     # nightpdf
@@ -107,6 +107,7 @@ in
     nvtop-amd
     efibootmgr
     # efitools
+    sbctl
     inxi
     lm_sensors
     lshw
