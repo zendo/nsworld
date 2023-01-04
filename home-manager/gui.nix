@@ -16,7 +16,7 @@ in
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
-    # nur.repos.rewine.lx-music-desktop
+    # nur.repos.yes.lx-music-desktop
     nur.repos.rewine.electron-netease-cloud-music
 
     foot
