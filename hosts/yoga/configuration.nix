@@ -1,6 +1,8 @@
 { config, pkgs, inputs, ... }: {
 
   imports = [
+    inputs.lanzaboote.nixosModules.lanzaboote # Secure Boot
+
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     # inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -35,23 +37,31 @@
   #######################################################################
   ## Bootloader
   #######################################################################
-  # boot.loader = {
-  #   efi.canTouchEfiVariables = true;
-  #   # efi.efiSysMountPoint = "/boot/efi"; # default /boot
-  #   systemd-boot = {
-  #     enable = true;
-  #     configurationLimit = 5; # bootmenu items
-  #     consoleMode = "max";
-  #   };
-  # };
+  /*
+    Disable Secure Boot & reset to Setup Mode
+    sudo -i
+    sbctl create-keys
+    sbctl enroll-keys --microsoft
+  */
+  boot.lanzaboote = {
+    enable = true;
+    configurationLimit = 5;
+    publicKeyFile = "/etc/secureboot/keys/db/db.pem"; # DB public key
+    privateKeyFile = "/etc/secureboot/keys/db/db.key"; # DB private key
+  };
 
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot/efi"; # default /boot
     };
+    # systemd-boot = {
+    #   enable = true;
+    #   configurationLimit = 5; # bootmenu items
+    #   consoleMode = "max";
+    # };
     grub = {
-      enable = true;
+      enable = false;
       device = "nodev";
       efiSupport = true;
       gfxmodeEfi = "1024x768";

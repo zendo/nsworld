@@ -105,9 +105,6 @@ in
 
     # HARDWARE TEST
     nvtop-amd
-    efibootmgr
-    # efitools
-    sbctl
     inxi
     lm_sensors
     lshw

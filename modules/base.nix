@@ -30,6 +30,9 @@
     parted
     gptfdisk
     nix-bash-completions
+    sbctl
+    efibootmgr
+    # efitools
   ];
 
   environment.variables = { };
