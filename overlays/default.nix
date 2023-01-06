@@ -5,6 +5,8 @@ final: prev: {
   # Data
   zhudou-sans = prev.callPackage ./zhudou-sans { };
   smiley-sans = prev.callPackage ./smiley-sans { };
+  lxgw-neoxihei = prev.callPackage ./lxgw-neoxihei {};
+  lxgw-neoxihei-screen = prev.callPackage ./lxgw-neoxihei-screen{};
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes { };
 
