@@ -32,7 +32,6 @@ final: prev: {
   freedownloadmanager = prev.callPackage ./freedownloadmanager { };
 
   # C
-  ctpv = prev.callPackage ./ctpv { };
   xclicker = prev.callPackage ./xclicker { };
 
   # Rust

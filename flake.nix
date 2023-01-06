@@ -59,13 +59,10 @@
       # , nixpkgs-pr
       # , nixpkgs-local
       # , nixpkgs-stable
-    , nixos-hardware
     , home-manager
-    , plasma-manager
     , emacs-overlay
       # , hyprland
     , nur
-    , musnix
     , nix-alien
     , nixos-wsl
     , templates
@@ -92,8 +89,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            ./modules/gnome.nix
-            # ./modules/kde.nix
+            # ./modules/gnome.nix
+            ./modules/kde.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
 

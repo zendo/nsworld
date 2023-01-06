@@ -55,7 +55,7 @@
     choose
     rage # age encrypt RIIR
     lf
-    ctpv
+    # ctpv
     viu # image viewer
     graphviz
     # imagemagick

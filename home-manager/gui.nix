@@ -21,7 +21,7 @@ in
 
     foot
     kitty
-    # alacritty
+    alacritty
     # wezterm
     warp
     remmina
