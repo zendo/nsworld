@@ -18,7 +18,7 @@ fetchurl rec {
   meta = with lib; {
     description = "LXGW Neo XiHei for Screen Reading";
     homepage = "https://github.com/lxgw/LxgwNeoXiHei-Screen";
-    license = licenses.ofl;
+    license = licenses.ipa;
     platforms = platforms.all;
     maintainers = with maintainers; [ zendo ];
   };

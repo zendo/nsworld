@@ -18,7 +18,7 @@ fetchurl rec {
   meta = with lib; {
     description = "A Simplified Chinese sans-serif font derived from IPAex Gothic";
     homepage = "https://github.com/lxgw/LxgwNeoXiHei";
-    license = licenses.ofl;
+    license = licenses.ipa;
     platforms = platforms.all;
     maintainers = with maintainers; [ zendo ];
   };

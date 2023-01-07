@@ -80,6 +80,7 @@ in
     # pinta
     yacreader
     contrast
+    font-manager
     # gcolor3
     # wl-color-picker
 
