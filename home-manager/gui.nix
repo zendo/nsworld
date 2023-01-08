@@ -34,18 +34,18 @@ in
     sniffglue
 
     # Browsers
-    (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=VaapiVideoDecoder"
-        "--use-gl=egl"
-      ];
-    })
-    # microsoft-edge
+    # (google-chrome.override {
+    #   commandLineArgs = [
+    #     "--enable-features=VaapiVideoDecoder"
+    #     "--use-gl=egl"
+    #   ];
+    # })
+    # microsoft-edge-beta
     # vivaldi
     # vivaldi-ffmpeg-codecs
     # vivaldi-widevine
     # poedit    # translate .po file
-    handlr
+    handlr # mime
 
     # Social media
     tdesktop
@@ -141,6 +141,7 @@ in
 
   programs.firefox = {
     enable = true;
+    # package = pkgs.firefox-bin;
     # profiles."default".extraConfig = ''
     #   # drm
     #   "media.eme.enabled" = true;

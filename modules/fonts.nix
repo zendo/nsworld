@@ -23,7 +23,6 @@
       jetbrains-mono
       lxgw-neoxihei
       lxgw-neoxihei-screen
-      # smiley-sans
       # zhudou-sans
       # (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
     ];

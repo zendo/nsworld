@@ -67,7 +67,7 @@
   :require t
   :setq ((undo-fu-session-incompatible-files quote
                                              ("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'")))
-  :init
+  :config
   (global-undo-fu-session-mode))
 
 ;; undo-tree C-x u
