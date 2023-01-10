@@ -121,6 +121,7 @@ in
     pciutils
     edid-decode
     read-edid
+    xorg.xeyes
 
     # libinput
     wallutils # lsmon getdpi wayinfo

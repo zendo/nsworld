@@ -121,7 +121,7 @@ bootctl / efibootmgr
 >> 追加写入
 \ 转义
 # 注释
-$(!!) 使用上个命令的输出
+=$(!!) 使用上个命令的输出=
 
 tee 读取标准输入，传送标准输出
 xargs
@@ -158,8 +158,8 @@ file1 -nt file2  is 1 newer than 2
 -ne not equal
 
 ** 权限
-install -Dm644 file
-install -Dm755 folder
+~install -Dm644 file~
+~install -Dm755 folder~
 
 -/rwx/rw-/r--
 第一个字符 文件类型
@@ -370,3 +370,7 @@ nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
 
 tree-sitter
 https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/
+* Links
+
+emacs theme
+https://github.com/nasyxx/emacs-nasy-theme

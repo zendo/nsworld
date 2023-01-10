@@ -1,4 +1,6 @@
 final: prev: {
+  opera = prev.callPackage ./opera { };
+
   # Trivial
   nixos-helper = prev.callPackage ./nixos-helper { };
 

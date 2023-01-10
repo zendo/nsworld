@@ -37,8 +37,16 @@ while [[ $# -gt 0 ]]; do
             nix run nixpkgs#"$2"
             shift ;;
 
+        run-impure)
+            NIXPKGS_ALLOW_UNFREE=1 nix run nixpkgs#"$2" --impure
+            shift ;;
+
         shell)
             nix shell nixpkgs#"$2"
+            shift ;;
+
+        shell-impure)
+            NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs#"$2" --impure
             shift ;;
 
         boot)
