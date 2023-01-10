@@ -13,6 +13,7 @@ in
     # freedownloadmanager
     # nightpdf
     cavalier
+    justfortest
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

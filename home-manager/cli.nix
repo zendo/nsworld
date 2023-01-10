@@ -53,6 +53,7 @@
     f2
     sd
     choose
+    sops
     rage # age encrypt RIIR
     lf
     # ctpv

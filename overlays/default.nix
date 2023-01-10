@@ -30,6 +30,7 @@ final: prev: {
   clash-verge = prev.callPackage ./clash-verge {
     openssl = prev.openssl_1_1;
   };
+  zoho-notebook = prev.callPackage ./zoho-notebook { };
   freedownloadmanager = prev.callPackage ./freedownloadmanager { };
 
   # C
@@ -91,6 +92,8 @@ final: prev: {
   # lib = prev.lib.extend (finalLib: prevLib:
   #   (import ../lib { inherit (prev) lib; })
   # );
+
+  justfortest = prev.callPackage ./justfortest { };
 
   ############# Override ###################
   # fix .desktop missing

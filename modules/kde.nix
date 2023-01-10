@@ -35,6 +35,7 @@ in
     krdc
     kgamma5 # broken?
     kweather
+    ksystemlog
     kmousetool
     # kleopatra
     # konqueror
