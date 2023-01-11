@@ -47,6 +47,8 @@
 , wayland
 , libglvnd
 , vivaldi-ffmpeg-codecs
+, libGLU
+, libGL
 }:
 
 let
@@ -67,7 +69,7 @@ stdenv.mkDerivation rec {
     dpkg
     makeWrapper
     autoPatchelfHook
-    # wrapGAppsHook
+    wrapGAppsHook
     qt5.wrapQtAppsHook
   ];
 
@@ -108,6 +110,9 @@ stdenv.mkDerivation rec {
     pango
     pipewire
     wayland
+    libGLU
+    libGL
+    libglvnd
   ];
 
   runtimeDependencies = [
@@ -127,14 +132,22 @@ stdenv.mkDerivation rec {
     gtk4
   ];
 
+  dontWrapQtApps = true;
+
+  # SharedImageBackingFactory error:
+  # --disable-gpu-memory-buffer-video-frames
+
+  # Wayland
+  # --enable-features=UseOzonePlatform --ozone-platform=wayland
+
   installPhase = ''
     mkdir -p $out/bin
     cp -r usr $out
     cp -r usr/share $out/share
 
     makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc vivaldi-ffmpeg-codecs ] }" \
-      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-features=UseOzonePlatform}}"
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc vivaldi-ffmpeg-codecs ] }"
+      # --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-features=UseOzonePlatform}}"
   '';
 
   meta = with lib; {

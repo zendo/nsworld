@@ -72,6 +72,7 @@ in
     # tagger
     # jamesdsp
     # ciano
+    # video-trimmer
     # media-downloader
     # spotdl
     # spotiflyer
