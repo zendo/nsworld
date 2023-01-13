@@ -43,10 +43,11 @@
 , autoPatchelfHook
 , wrapGAppsHook
 , qt5
+, proprietaryCodecs ? false
+, vivaldi-ffmpeg-codecs
 , pipewire
 , wayland
 , libglvnd
-, vivaldi-ffmpeg-codecs
 , libGLU
 , libGL
 }:
@@ -108,11 +109,12 @@ stdenv.mkDerivation rec {
     nspr
     nss
     pango
-    pipewire
-    wayland
-    libGLU
-    libGL
-    libglvnd
+    # pipewire
+    stdenv.cc.cc.lib
+    # wayland
+    # libGLU
+    # libGL
+    # libglvnd
   ];
 
   runtimeDependencies = [
@@ -130,6 +132,8 @@ stdenv.mkDerivation rec {
     # "Illegal instruction (core dumped)"
     gtk3
     gtk4
+  ] ++ lib.optional proprietaryCodecs [
+    vivaldi-ffmpeg-codecs
   ];
 
   dontWrapQtApps = true;
@@ -140,15 +144,23 @@ stdenv.mkDerivation rec {
   # Wayland
   # --enable-features=UseOzonePlatform --ozone-platform=wayland
 
+
   installPhase = ''
     mkdir -p $out/bin
     cp -r usr $out
     cp -r usr/share $out/share
+    ln -s $out/usr/bin/opera $out/bin/opera
 
-    makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc vivaldi-ffmpeg-codecs ] }"
-      # --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-features=UseOzonePlatform}}"
+    # makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
+    #   --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc  ] }"
+    #   # --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-features=UseOzonePlatform}}"
   '';
+
+  # preFixup = ''
+  #   gappsWrapperArgs+=(
+  #     --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-features=UseOzonePlatform}}"
+  #   )
+  # '';
 
   meta = with lib; {
     homepage = "https://www.opera.com";

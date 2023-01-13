@@ -13,8 +13,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    cavalier
-    textpieces
+    # opera
+    ydict
 
     git
     firefox
@@ -25,9 +25,9 @@
   environment.variables = { };
 
   services.xserver = {
-    enable = true;
+    # enable = true;
     desktopManager = {
-      plasma5.enable = true;
+      # plasma5.enable = true;
       # gnome.enable = true;
       # xfce.enable = true;
       # cinnamon.enable = true;
@@ -36,6 +36,7 @@
       # mate.enable = true;
       # lxqt.enable = true;
     };
+    displayManager.autoLogin.user = lib.mkForce "${username}";
     xkbOptions = "ctrl:swapcaps"; # Xorg Layout
   };
 
@@ -71,6 +72,4 @@
 
   # Password: test
   users.users.${username}.hashedPassword = lib.mkForce "$6$HFoXsNJNYZ.lVv0r$vxau6GLUcGMmPctb135ZFYzRO7p0Y0JXDeqSASudCbSSa917.7I4Vi1A/AOjWAWkT2DguOB0VMf0.HW4cy5zp0";
-
-  services.xserver.displayManager.autoLogin.user = lib.mkForce "${username}";
 }

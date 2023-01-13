@@ -180,6 +180,8 @@
   :leaf-defer t
   :hook (prog-mode-hook . flycheck-mode))
 
+;; tempel
+
 ;; yasnippet
 ;; (leaf yasnippet
 ;;   :ensure t

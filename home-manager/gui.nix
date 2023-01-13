@@ -14,6 +14,7 @@ in
     # nightpdf
     cavalier
     justfortest
+    (opera.override { proprietaryCodecs = true; })
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

@@ -2,7 +2,7 @@
 
 fetchurl rec {
   pname = "lxgw-neoxihei";
-  version = "1.0";
+  version = "1.002";
 
   url = "https://github.com/lxgw/LxgwNeoXiHei/releases/download/v${version}/LXGWNeoXiHei.ttf";
 
@@ -13,7 +13,7 @@ fetchurl rec {
     install -D $downloadedFile $out/share/fonts/truetype/LXGWNeoXiHei.ttf
   '';
 
-  hash = "sha256-XPYYL/uhVEyB9EEoHh4VPCKDeKB8e5m2jAO8EdZmILs=";
+  hash = "sha256-opcNwW1Dl6I9N6oeItIpCFBp+m8RzZWJan3FFdsa+w8=";
 
   meta = with lib; {
     description = "A Simplified Chinese sans-serif font derived from IPAex Gothic";

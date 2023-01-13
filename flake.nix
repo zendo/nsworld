@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs.url = "github:NixOS/nixpkgs/pull/204807/merge";
-    # nixpkgs-local.url = "git+file:///home/iab/devs/nixpkgs/?ref=wordbook";
+    # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=update/opera";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -60,10 +60,6 @@
       # , nixpkgs-local
       # , nixpkgs-stable
     , home-manager
-    , emacs-overlay
-      # , hyprland
-    , nur
-    , nix-alien
     , nixos-wsl
     , templates
     , flake-utils
@@ -73,9 +69,9 @@
       mkHost = import ./lib/mkHost.nix inputs;
 
       overlays = [
-        nur.overlay
-        nix-alien.overlay
-        emacs-overlay.overlay
+        inputs.nur.overlay
+        inputs.nix-alien.overlay
+        inputs.emacs-overlay.overlay
         (import ./overlays)
         # (final: prev: {
         #   pr = nixpkgs-pr.legacyPackages.${prev.system};
