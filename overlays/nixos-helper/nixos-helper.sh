@@ -121,6 +121,10 @@ while [[ $# -gt 0 ]]; do
             nix shell github:NixOS/nixpkgs/pull/"$2"/merge#"$3"
             shift ;;
 
+        pr-build)
+            nix build github:NixOS/nixpkgs/pull/"$2"/merge#"$3"
+            shift ;;
+
         pr-pull)
             gh pr checkout -R NixOS/nixpkgs "$2"
             shift ;;

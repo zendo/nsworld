@@ -15,11 +15,11 @@
 
 stdenv.mkDerivation rec {
   pname = "clash-verge";
-  version = "1.2.0";
+  version = "1.2.1";
 
   src = fetchurl {
     url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
-    hash = "sha256-5150LH4A30Bbs91NbKV0GinOR+j2r+I+Xuj9q0Ga0IQ=";
+    hash = "sha256-41kdkg/GvIZ0cLQ9brojh/VZYwvjnf6LCV90hjILkhg=";
   };
 
   unpackPhase = "dpkg-deb -x $src .";
@@ -30,9 +30,10 @@ stdenv.mkDerivation rec {
     autoPatchelfHook
   ];
 
-  buildInputs = atomEnv.packages ++ [
+  buildInputs = [
     openssl
     webkitgtk
+    stdenv.cc.cc
   ];
 
   runtimeDependencies = [
@@ -47,7 +48,6 @@ stdenv.mkDerivation rec {
     cp -r usr/share $out/share
 
     makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ stdenv.cc.cc ] }" \
       --prefix PATH : "${lib.makeBinPath [ libcap ]}"
   '';
 

@@ -11,7 +11,7 @@ _ns_completions()
   # local suggestions=($(compgen -W "$(fc -l -50 | sed 's/\t/ /')" -- "${COMP_WORDS[1]}"))
 
   # suggestions words
-  local suggestions=($(compgen -W "which log run run-impure shell shell-impure boot switch upgrade hmswitch hmsource hmprofiles hmdiff diff source installed profiles generations references depends git-fm pr-run pr-shell pr-pull to-sri index-update" -- "${COMP_WORDS[1]}"))
+  local suggestions=($(compgen -W "which log run run-impure shell shell-impure boot switch upgrade hmswitch hmsource hmprofiles hmdiff diff source installed profiles generations references depends git-fm pr-run pr-shell pr-pull pr-build to-sri index-update" -- "${COMP_WORDS[1]}"))
 
   if [ "${#suggestions[@]}" == "1" ]; then
     # if there's only one match, we remove the command literal

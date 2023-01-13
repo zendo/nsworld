@@ -17,28 +17,22 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-nx6+jnQJL/DgTXV71AJJw1GtnFrhE9bFQscrz7e4TH4=";
 
-  NODE_OPTIONS = "--openssl-legacy-provider";
+  # dontNpmBuild = true;
+
+  # NODE_OPTIONS = "--openssl-legacy-provider";
 
   makeCacheWritable = true;
-
   npmFlags = [ "--legacy-peer-deps" ];
 
-  nativeBuildInputs = [
-  ];
+  npmBuild = ''
+    npm run electron:build
+  '';
 
-  buildInputs = [
-  ];
+  # nativeBuildInputs = [
+  # ];
 
-#   installPhase = ''
-#     runHook preInstall
-
-#     # executable wrapper
-#     makeWrapper '${electron}/bin/electron' "$out/bin/${pname}" \
-#       # --add-flags "$out/share/micropad" \
-#       --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hin
-# t=to --enable-features=WaylandWindowDecorations}}"
-#     runHook postInstall
-#   '';
+  # buildInputs = [
+  # ];
 
   meta = with lib; {
     description = "一个美观简约的Material Design 3 (Material You) 风格网易云音乐播放器pc客户端";

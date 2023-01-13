@@ -30,9 +30,7 @@ final: prev: {
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
-  clash-verge = prev.callPackage ./clash-verge {
-    openssl = prev.openssl_1_1;
-  };
+  clash-verge = prev.callPackage ./clash-verge { };
   freedownloadmanager = prev.callPackage ./freedownloadmanager { };
 
   # C

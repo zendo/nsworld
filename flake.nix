@@ -55,16 +55,13 @@
 
   outputs =
     inputs @ { self
-    , nixpkgs
-      # , nixpkgs-pr
-      # , nixpkgs-local
-      # , nixpkgs-stable
-    , home-manager
-    , nixos-wsl
-    , templates
-    , flake-utils
-    , ...
-    }:
+             , nixpkgs
+             # , nixpkgs-stable
+             , home-manager
+             , nixos-wsl
+             , flake-utils
+             , ...
+             }:
     let
       mkHost = import ./lib/mkHost.nix inputs;
 
