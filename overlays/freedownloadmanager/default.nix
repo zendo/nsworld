@@ -73,6 +73,7 @@ stdenv.mkDerivation rec {
     homepage = "https://www.freedownloadmanager.org";
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }

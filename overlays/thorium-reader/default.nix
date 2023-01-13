@@ -30,6 +30,7 @@ appimageTools.wrapType2 {
     homepage = "https://github.com/edrlab/thorium-reader";
     license = licenses.bsd3;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }

@@ -29,6 +29,7 @@ appimageTools.wrapType2 {
     homepage = "https://github.com/qier222/YesPlayMusic";
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }

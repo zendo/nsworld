@@ -1,14 +1,13 @@
 final: prev: {
   opera = prev.callPackage ./opera { };
-  ydict = prev.callPackage ./ydict { };
 
   # Trivial
   nixos-helper = prev.callPackage ./nixos-helper { };
 
   # Data
   zhudou-sans = prev.callPackage ./zhudou-sans { };
-  lxgw-neoxihei = prev.callPackage ./lxgw-neoxihei {};
-  lxgw-neoxihei-screen = prev.callPackage ./lxgw-neoxihei-screen{};
+  lxgw-neoxihei = prev.callPackage ./lxgw-neoxihei { };
+  lxgw-neoxihei-screen = prev.callPackage ./lxgw-neoxihei-screen { };
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes { };
 
@@ -27,6 +26,7 @@ final: prev: {
   # };
   koodo-reader = prev.callPackage ./koodo-reader { };
   thorium-reader = prev.callPackage ./thorium-reader { };
+  music-you = prev.callPackage ./music-you { };
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
@@ -82,7 +82,6 @@ final: prev: {
   mindustry = prev.callPackage ./mindustry { }; # game
 
   # Qt
-  converseen = prev.libsForQt5.callPackage ./converseen { };
   nekoray = prev.libsForQt5.callPackage ./nekoray { };
 
   # wayland
@@ -121,11 +120,11 @@ final: prev: {
 
 
   /*
-  # node override
-  nodePackages = nodePackages.extend (final: prev: { });
+    # node override
+    nodePackages = nodePackages.extend (final: prev: { });
 
-  # rust override
-  shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {
+    # rust override
+    shadowsocks-rust = prev.shadowsocks-rust.overrideAttrs (oldAttrs: rec {
     version = "2022-06-27";
     src = prev.fetchFromGitHub {
       owner = "shadowsocks";
@@ -137,10 +136,10 @@ final: prev: {
       inherit src;
       outputHash = "sha256-YJ4Qva4keOk9aBPFwztkTpvS7uv7zl6TOHqYZzZEGAs=";
     });
-  });
+    });
 
-  # gnome override
-  gnome = prev.gnome.overrideScope' (gfinal: gprev: {
+    # gnome override
+    gnome = prev.gnome.overrideScope' (gfinal: gprev: {
     mutter = gprev.mutter.overrideAttrs (oldAttrs: rec {
       dynamic-buffering = prev.fetchurl {
         url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
@@ -148,7 +147,7 @@ final: prev: {
       };
       patches = dynamic-buffering;
     });
-  });
+    });
   */
 
 }

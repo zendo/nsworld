@@ -41,13 +41,13 @@
     Disable Secure Boot & reset to Setup Mode
     sudo -i
     sbctl create-keys
+    After nixos bootup:
     sbctl enroll-keys --microsoft
   */
   boot.lanzaboote = {
     enable = true;
     configurationLimit = 5;
-    publicKeyFile = "/etc/secureboot/keys/db/db.pem"; # DB public key
-    privateKeyFile = "/etc/secureboot/keys/db/db.key"; # DB private key
+    pkiBundle = "/etc/secureboot";
   };
 
   boot.loader = {

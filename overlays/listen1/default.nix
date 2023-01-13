@@ -28,6 +28,7 @@ appimageTools.wrapType2 {
     homepage = "https://github.com/listen1/listen1_desktop";
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }

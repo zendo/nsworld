@@ -56,6 +56,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/zzzgydi/clash-verge";
     license = licenses.gpl3Plus;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }

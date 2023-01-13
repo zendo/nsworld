@@ -28,6 +28,7 @@ appimageTools.wrapType2 {
     homepage = "https://github.com/Lunarequest/NightPDF";
     license = licenses.gpl2Only;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }

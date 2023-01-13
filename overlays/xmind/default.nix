@@ -73,6 +73,7 @@ stdenv.mkDerivation rec {
     license = licenses.bsd3;
     # license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
   };
 }
