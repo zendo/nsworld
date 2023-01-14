@@ -15,6 +15,8 @@ in
     cavalier
     justfortest
     (opera.override { proprietaryCodecs = true; })
+    # clash-verge
+    # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
@@ -190,31 +192,6 @@ in
   #     "text/html" = "re.sonny.Junction.desktop";
   #   };
   # };
-
-  xdg.configFile = {
-    "autostart/clash-verge.desktop".text = ''
-      [Desktop Entry]
-      Type=Application
-      Version=1.0
-      Name=clash-verge
-      Comment=clash-vergestartup script
-      Exec=clash-verge
-      StartupNotify=false
-      Terminal=false
-    '';
-    #   "autostart/qv2ray.desktop".text = ''
-    #     [Desktop Entry]
-    #     Name=qv2ray
-    #     GenericName=V2Ray Frontend
-    #     Exec=bash -c "sleep 5; qv2ray"
-    #     Terminal=false
-    #     Icon=qv2ray
-    #     Categories=Network
-    #     Type=Application
-    #     StartupNotify=false
-    #     X-GNOME-Autostart-enabled=true
-    #   '';
-  };
 
   # xdg.desktopEntries.spotify = lib.options gnomeEnable {
   #   name = "Spotify";

@@ -19,18 +19,19 @@ final: prev: {
   # electron / appimage
   listen1 = prev.callPackage ./listen1 { };
   yesplaymusic = prev.callPackage ./yesplaymusic { };
+  koodo-reader = prev.callPackage ./koodo-reader { };
+  thorium-reader = prev.callPackage ./thorium-reader { };
   nightpdf = prev.callPackage ./nightpdf { };
   # WIP
   # nightpdf = prev.callPackage ./nightpdf-source {
   #   # electron = prev.electron_21;
   # };
-  koodo-reader = prev.callPackage ./koodo-reader { };
-  thorium-reader = prev.callPackage ./thorium-reader { };
   music-you = prev.callPackage ./music-you { };
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
   clash-verge = prev.callPackage ./clash-verge { };
+  # clash-verge-source = prev.callPackage ./clash-verge-source { };
   freedownloadmanager = prev.callPackage ./freedownloadmanager { };
 
   # C

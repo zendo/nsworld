@@ -3,8 +3,8 @@
   services = {
     gnome.sushi.enable = true;
     packagekit.enable = false;
-    gnome.tracker.enable = false;
-    gnome.tracker-miners.enable = false;
+    # gnome.tracker.enable = false;
+    # gnome.tracker-miners.enable = false;
   };
 
   environment.gnome.excludePackages = with pkgs; [

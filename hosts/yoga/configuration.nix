@@ -24,15 +24,15 @@
   #   themePackages = [pkgs.adi1090x-plymouth-themes];
   # };
 
-  services.logind = {
-    lidSwitch = "suspend-then-hibernate";
-    extraConfig = ''
-      HandlePowerKey=suspend-then-hibernate
-      IdleAction=suspend-then-hibernate
-      IdleActionSec=2m
-    '';
-  };
-  systemd.sleep.extraConfig = "HibernateDelaySec=1h";
+  # services.logind = {
+  #   lidSwitch = "suspend-then-hibernate";
+  #   extraConfig = ''
+  #     HandlePowerKey=suspend-then-hibernate
+  #     IdleAction=suspend-then-hibernate
+  #     IdleActionSec=2m
+  #   '';
+  # };
+  # systemd.sleep.extraConfig = "HibernateDelaySec=1h";
 
   #######################################################################
   ## Bootloader
