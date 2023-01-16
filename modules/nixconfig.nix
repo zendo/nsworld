@@ -10,12 +10,9 @@
       )
       inputs;
 
-    # echo $NIX_PATH | tr ":" "\n"
     # compatible for old nix
-    nixPath = [
-      "nixpkgs=${inputs.nixpkgs}"
-      "nixos-config=${inputs.self}"
-      "home-manager=${inputs.home-manager}"
+    # echo $NIX_PATH | tr ":" "\n"
+    nixPath = lib.mapAttrsToList (name: path: "${name}=${path}") inputs ++ [
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
 
