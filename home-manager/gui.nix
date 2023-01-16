@@ -24,7 +24,7 @@ in
     nur.repos.rewine.electron-netease-cloud-music
 
     foot
-    kitty
+    # kitty
     alacritty
     # wezterm
     warp
@@ -52,7 +52,7 @@ in
     handlr # mime
 
     # Social media
-    tdesktop
+    # tdesktop
     # nheko
     # fractal-next
     # discord
@@ -91,7 +91,7 @@ in
 
     # motrix
     qbittorrent
-    gnome-decoder
+    # gnome-decoder
     # deja-dup
     # rclone
     # rclone-browser

@@ -2,7 +2,7 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/b59b0465de3dbed35b0a41733766066216f55584";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs.url = "github:NixOS/nixpkgs/pull/204807/merge";
     # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=update/opera";
@@ -18,7 +18,7 @@
     # };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/a8d8372eb02914ebb42e727f3ffa3765b4de0f4f";
+      url = "github:nix-community/emacs-overlay/64730859c8decadbbc7f9b133af438306c441c3f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -99,7 +99,7 @@
           ];
         };
 
-        # nixos-rebuild --target-host zendo@192.168.2.197 switch --use-remote-sudo --flake .#svp
+        # nixos-rebuild --target-host zendo@192.168.2.197 --use-remote-sudo --flake .#svp switch
         svp = mkHost {
           username = "zendo";
           hostname = "svp";
@@ -131,7 +131,7 @@
         };
       };
 
-      # or: nixos-generate -f iso -c ~/nsworld/hosts/iso.nix
+      # or: nixos-generate -f iso -c ~/nsworld/hosts/bare-iso.nix
       livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
 
       # for repl

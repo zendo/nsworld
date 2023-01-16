@@ -20,7 +20,7 @@
     nix-top
     nurl
     comma # ,
-    nix-alien # Run binaries
+    # nix-alien # Run binaries
     nix-index-update
     # nix-output-monitor
     # nvfetcher
@@ -32,7 +32,7 @@
     sqlite
     openssl
     gitui
-    onefetch
+    # onefetch
     efm-langserver # markdown lsp
     # distrobox
     gnumake
@@ -100,7 +100,7 @@
 
     # Networking
     lsof
-    dogdns
+    # dogdns
     nali
     mtr
     nload

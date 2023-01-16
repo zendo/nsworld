@@ -2,7 +2,7 @@
 
   services = {
     gnome.sushi.enable = true;
-    packagekit.enable = false;
+    # packagekit.enable = false;
     # gnome.tracker.enable = false;
     # gnome.tracker-miners.enable = false;
   };
