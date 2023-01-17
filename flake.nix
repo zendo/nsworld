@@ -2,7 +2,7 @@
   description = "Hello World";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/b59b0465de3dbed35b0a41733766066216f55584";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs.url = "github:NixOS/nixpkgs/pull/204807/merge";
     # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=update/opera";

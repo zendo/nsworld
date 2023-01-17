@@ -18,7 +18,6 @@
 
     gc = {
       automatic = true;
-      # options = "--max-freed 10G";
       dates = "weekly";
       options = "--delete-older-than 5d";
     };

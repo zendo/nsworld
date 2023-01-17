@@ -17,7 +17,7 @@
   mkdir share #guest
   sudo mount -t 9p -o trans=virtio share ~/share #guest
 
-  qemu-system-x86_64 -enable-kvm -m 4096 -cdrom result/iso
+  qemu-system-x86_64 -enable-kvm -m 8192 -cdrom result/iso
 
 */
 { config, pkgs, lib, ... }: {
