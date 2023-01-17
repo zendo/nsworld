@@ -1,5 +1,5 @@
 { lib
-, fetchFromGitHub
+, fetchCrate
 , rustPlatform
 , pkg-config
 , openssl
@@ -7,17 +7,15 @@
 }:
 
 rustPlatform.buildRustPackage rec {
-  pname = "charcoal";
+  pname = "charcoal-dict";
   version = "0.2.6";
 
-  src = fetchFromGitHub {
-    owner = "LighghtEeloo";
-    repo = "Charcoal";
-    rev = "v${version}";
-    hash = "sha256-xkUhQM+ZXGZffGXA/xVheJdZfLBFGJBT1T5FU9zaV44=";
+  src = fetchCrate {
+    inherit pname version;
+    hash = "sha256-FfrhCxz9wRFY6BGgpTcncXOsYtRBpc0PTnUOuYSWPtQ=";
   };
 
-  cargoHash = "sha256-BuOb0Lj2FDe3ZlYy364kGu6fx+dFrKJqAfLXiMaYhxM=";
+  cargoHash = "sha256-QT04tvgx/e3e3V2jvB9cyWarXZ5t8nhLjmbSoPtx5s8=";
 
   nativeBuildInputs = [
     pkg-config
@@ -29,9 +27,10 @@ rustPlatform.buildRustPackage rec {
   ];
 
   meta = with lib; {
-    description = "An online dictionary using youdao dict api";
+    description = "An online dictionary using Youdao dict api";
     homepage = "https://github.com/LighghtEeloo/Charcoal";
     license = licenses.mit;
+    mainProgram = "charcoal";
     maintainers = with maintainers; [ zendo ];
   };
 }

@@ -18,7 +18,6 @@ final: prev: {
 
   # electron / appimage
   listen1 = prev.callPackage ./listen1 { };
-  yesplaymusic = prev.callPackage ./yesplaymusic { };
   koodo-reader = prev.callPackage ./koodo-reader { };
   thorium-reader = prev.callPackage ./thorium-reader { };
   nightpdf = prev.callPackage ./nightpdf { };
@@ -36,13 +35,14 @@ final: prev: {
 
   # C
   xclicker = prev.callPackage ./xclicker { };
+  implay = prev.callPackage ./implay { };
 
   # Rust
   done = prev.callPackage ./done { };
   # mousai = prev.callPackage ./mousai {};
   sniffnet = prev.callPackage ./sniffnet { }; # iced
   gnome-metronome = prev.callPackage ./gnome-metronome { };
-  charcoal = prev.callPackage ./charcoal { };
+  charcoal-dict = prev.callPackage ./charcoal-dict { };
 
   # Go
 
