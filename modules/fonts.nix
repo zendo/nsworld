@@ -21,8 +21,8 @@
       fira-code
       mononoki
       jetbrains-mono
-      lxgw-neoxihei
-      lxgw-neoxihei-screen
+      # lxgw-neoxihei
+      # lxgw-neoxihei-screen
       # zhudou-sans
       # (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
     ];

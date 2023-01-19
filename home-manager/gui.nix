@@ -52,7 +52,7 @@ in
     handlr # mime
 
     # Social media
-    # tdesktop
+    tdesktop
     # nheko
     # fractal-next
     # discord

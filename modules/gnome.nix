@@ -46,6 +46,7 @@
     inhibit-suspend
     blur-my-shell
     gradient-top-bar
+    weather-oclock
     # proxy-switcher
     just-perfection
     shell-configurator

@@ -1,18 +1,20 @@
-{ lib, fetchzip, stdenvNoCC }:
+{ lib, fetchurl, stdenvNoCC }:
 
 stdenvNoCC.mkDerivation rec {
   pname = "zhudou-sans";
   version = "1.000";
 
-  src = fetchzip {
+  src = fetchurl {
     url = "https://github.com/Buernia/Zhudou-Sans/archive/refs/tags/v${version}.tar.gz";
-    hash = "sha256-GmKnxpsAWN2AQg+17vcdyo1h/GaNNW5Tk+d9KRZfQ/U=";
+    hash = "sha256-AQ3yl2X+2Rtx0ocgfqfBZR6aw9eApWhKnK00/1zNdbQ=";
   };
 
+  dontBuild = true;
+
   installPhase = ''
-    # mkdir -p $out/share/fonts/truetype
-    install -D "$src/fonts/variable ttf/Zhudou Sans-VF.ttf" -t $out/share/fonts/truetype
-    install -D $src/fonts/ttf/*.ttf -t $out/share/fonts/truetype
+    runHook preInstall
+    find . -name '*.ttf' -exec install -m444 -Dt $out/share/fonts/truetype {} \;
+    runHook postInstall
   '';
 
   meta = with lib; {

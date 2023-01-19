@@ -49,6 +49,7 @@
   home-manager.users.${username} = { config, pkgs, ... }: {
     home.packages = with pkgs; [
       # mpg123 # for ydict
+      wslu
       wsl-open
       kitty
       foot

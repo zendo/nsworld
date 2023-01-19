@@ -27,7 +27,7 @@ rustPlatform.buildRustPackage rec {
   ];
 
   meta = with lib; {
-    description = "An online dictionary using Youdao dict api";
+    description = "An online Chinese dictionary using Youdao dict api";
     homepage = "https://github.com/LighghtEeloo/Charcoal";
     license = licenses.mit;
     mainProgram = "charcoal";
