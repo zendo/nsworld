@@ -9,9 +9,8 @@ in
     # iotas
     # tiptop
     # tiptop-py
-    # yesplaymusic
-    # freedownloadmanager
     # nightpdf
+    aphototoollibre
     cavalier
     justfortest
     (opera.override { proprietaryCodecs = true; })
@@ -24,7 +23,7 @@ in
     nur.repos.rewine.electron-netease-cloud-music
 
     foot
-    # kitty
+    kitty
     alacritty
     # wezterm
     warp

@@ -82,6 +82,7 @@ final: prev: {
 
   # Qt
   nekoray = prev.libsForQt5.callPackage ./nekoray { };
+  aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre {};
 
   # wayland
 

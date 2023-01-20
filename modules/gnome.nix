@@ -2,9 +2,9 @@
 
   services = {
     gnome.sushi.enable = true;
-    # packagekit.enable = false;
-    # gnome.tracker.enable = false;
-    # gnome.tracker-miners.enable = false;
+    packagekit.enable = false;
+    gnome.tracker.enable = false;
+    gnome.tracker-miners.enable = false;
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -20,7 +20,7 @@
 
   environment.systemPackages = with pkgs; [
     gthumb
-    authenticator
+    # authenticator
     gparted
     dconf2nix
     gnome-randr
