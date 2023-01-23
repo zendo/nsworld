@@ -100,7 +100,7 @@
 
     # Networking
     lsof
-    # dogdns
+    dogdns
     nali
     mtr
     nload

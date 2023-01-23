@@ -75,6 +75,7 @@ final: prev: {
   python3Packages = final.python3.pkgs;
 
   # Gtk
+  damask = prev.callPackage ./damask { };
 
   # Java
   spotiflyer = prev.callPackage ./spotiflyer { };

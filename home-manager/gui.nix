@@ -10,6 +10,7 @@ in
     # tiptop
     # tiptop-py
     # nightpdf
+    damask
     aphototoollibre
     cavalier
     justfortest
