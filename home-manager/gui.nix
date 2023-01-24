@@ -10,7 +10,6 @@ in
     # tiptop
     # tiptop-py
     # nightpdf
-    damask
     aphototoollibre
     cavalier
     justfortest
@@ -28,7 +27,7 @@ in
     alacritty
     # wezterm
     warp
-    remmina
+    # remmina # (webkitgtk)
     # clash-verge
     # qv2ray
     # clash
@@ -52,7 +51,7 @@ in
     handlr # mime
 
     # Social media
-    tdesktop
+    # tdesktop # (webkitgtk)
     # nheko
     # fractal-next
     # discord
@@ -85,7 +84,7 @@ in
     # pinta
     yacreader
     contrast
-    font-manager
+    # font-manager # (webkitgtk)
     # gcolor3
     # wl-color-picker
 
@@ -102,7 +101,7 @@ in
     # libreoffice-fresh
     # drawio
     # rnote # handwritten note
-    foliate
+    # foliate # (webkitgtk)
     # paper-note
     # endeavour
     ghostwriter
@@ -147,7 +146,7 @@ in
 
   programs.firefox = {
     enable = true;
-    # package = pkgs.firefox-bin;
+    package = pkgs.firefox-bin;
     # profiles."default".extraConfig = ''
     #   # drm
     #   "media.eme.enabled" = true;

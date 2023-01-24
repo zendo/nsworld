@@ -12,6 +12,7 @@ inputs @ { pkgs }: {
       meson
       ninja
       pkg-config
+      boost
 
       # qt5.qtbase
       # qt5.qttools
@@ -58,6 +59,7 @@ inputs @ { pkgs }: {
   go = pkgs.mkShell {
     buildInputs = with pkgs; [
       go
+      gotools
       gccgo
       delve
       pkg-config
@@ -120,6 +122,7 @@ inputs @ { pkgs }: {
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
       python3
+      virtualenv
       python3Packages.pip
     ];
     propagatedBuildInputs = with pkgs.python3.pkgs; [
@@ -152,6 +155,7 @@ inputs @ { pkgs }: {
   haskell = pkgs.mkShell {
     buildInputs = with pkgs; [
       ghc
+      stack
       cabal-install
       haskell-language-server
     ];
