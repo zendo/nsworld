@@ -36,7 +36,7 @@
   };
 
   services = {
-    gvfs.enable = true;
+    gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
@@ -126,7 +126,7 @@
         gnome.adwaita-icon-theme
         gnome.gnome-themes-extra
         gnome.dconf-editor
-        gnome.gnome-tweaks
+        gnome.gnome-tweaks # (webkitgtk)
 
         xfce.mousepad
         nomacs

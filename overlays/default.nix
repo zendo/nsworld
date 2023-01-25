@@ -38,7 +38,6 @@ final: prev: {
   implay = prev.callPackage ./implay { };
 
   # Rust
-  done = prev.callPackage ./done { };
   # mousai = prev.callPackage ./mousai {};
   sniffnet = prev.callPackage ./sniffnet { }; # iced
   gnome-metronome = prev.callPackage ./gnome-metronome { };
