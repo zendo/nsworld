@@ -55,11 +55,11 @@
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot/efi"; # default /boot
     };
-    # systemd-boot = {
-    #   enable = true;
-    #   configurationLimit = 5; # bootmenu items
-    #   consoleMode = "max";
-    # };
+    systemd-boot = {
+      enable = false;
+      configurationLimit = 5; # bootmenu items
+      consoleMode = "max";
+    };
     grub = {
       enable = false;
       device = "nodev";

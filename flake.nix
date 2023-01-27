@@ -18,7 +18,7 @@
     # };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/64730859c8decadbbc7f9b133af438306c441c3f";
+      url = "github:nix-community/emacs-overlay/acff9f41c4962704acb8008e5ff5b90a43cf7758";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -82,8 +82,8 @@
           hostname = "yoga";
           inherit overlays;
           extraModules = [
-            # ./modules/gnome.nix
-            ./modules/kde.nix
+            ./modules/gnome.nix
+            # ./modules/kde.nix
             # ./modules/wm-sway.nix
             # ./modules/wm-hyprland.nix
 

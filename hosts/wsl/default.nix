@@ -17,29 +17,6 @@
   networking.hostName = "wsl";
   # users.defaultUserShell = pkgs.zsh;
 
-  #######################################################################
-  ##  Home Manager
-  #######################################################################
-  home-manager.users.${username} = { config, pkgs, ... }: {
-    home.packages = with pkgs; [
-      # mpg123 # for ydict
-      wslu
-      wsl-open
-      kitty
-      foot
-      emacs
-      goodvibes
-    ];
-
-    home.shellAliases = {
-      wsl-proxy = "export {http,https,ftp}_proxy=192.168.2.118:10811 ; \\
-        export {HTTP,HTTPS,FTP}_PROXY=192.168.2.118:10811";
-    };
-  };
-
-  #######################################################################
-  ##  Basic settings
-  #######################################################################
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -64,4 +41,24 @@
 
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "22.05";
+
+  #######################################################################
+  ##  Home Manager
+  #######################################################################
+  home-manager.users.${username} = { config, pkgs, ... }: {
+    home.packages = with pkgs; [
+      # mpg123 # for ydict
+      wslu
+      wsl-open
+      kitty
+      foot
+      emacs
+      goodvibes
+    ];
+
+    home.shellAliases = {
+      wsl-proxy = "export {http,https,ftp}_proxy=192.168.2.118:10811 ; \\
+        export {HTTP,HTTPS,FTP}_PROXY=192.168.2.118:10811";
+    };
+  };
 }
