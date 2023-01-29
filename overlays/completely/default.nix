@@ -15,6 +15,7 @@ bundlerApp {
     description = "Generate bash completion scripts using a simple configuration file";
     homepage = "https://github.com/DannyBen/completely";
     license = licenses.mit;
+    platforms = platforms.unix;
     maintainers = with maintainers; [ zendo ];
   };
 }

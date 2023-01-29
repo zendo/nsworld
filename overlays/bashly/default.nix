@@ -15,6 +15,7 @@ bundlerApp {
     description = "Bash command line framework and CLI generator";
     homepage = "https://github.com/DannyBen/bashly";
     license = licenses.mit;
+    platforms   = platforms.unix;
     maintainers = with maintainers; [ zendo ];
   };
 }

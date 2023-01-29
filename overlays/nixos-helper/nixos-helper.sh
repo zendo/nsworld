@@ -2,17 +2,16 @@
 
 set -euo pipefail
 
-# variables
 dotConfig=~/nsworld
 
 usage() {
     printf "\n Usage:
-     \t which/log/references/depends
-     \t boot/switch/upgrade/diff
-     \t run/search/shell/index-up
-     \t profiles/generations/source/installed
-     \t pr-run/pr-shell/pr-pull/git-fm
-     \t hmswitch/hmsource/hmprofiles/hmdiff
+     \t which log references depends
+     \t boot switch upgrade diff
+     \t run search shell index-up
+     \t profiles generations source installed
+     \t pr-run pr-shell pr-pull git-fm
+     \t hmswitch hmsource hmprofiles hmdiff
      "
 }
 

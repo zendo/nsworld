@@ -18,10 +18,10 @@
     nix-index
     nix-tree
     nix-top
-    nurl
+    # nurl
+    # nix-init
     comma # ,
     # nix-alien # Run binaries
-    nix-index-update
     # nix-output-monitor
     # nvfetcher
 
@@ -91,6 +91,7 @@
     ydict
     typos
     shellcheck
+    completely
     translate-shell
     aspellDicts.en
     asciinema # record the terminal
