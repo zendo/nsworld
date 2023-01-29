@@ -1,0 +1,27 @@
+# completely generate ns.yaml
+ns:
+- which
+- log
+- run
+- run-impure
+- shell
+- shell-impure
+- boot
+- switch
+- upgrade
+- hmswitch
+- hmsource
+- hmprofiles
+- hmdiff
+- diff
+- source
+- installed
+- profiles
+- generations
+- references
+- depends
+- git-fetch-merge
+- pr-run
+- pr-shell
+- hash2sri
+- indexdb-update

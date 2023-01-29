@@ -1,7 +1,6 @@
 final: prev: {
   opera = prev.callPackage ./opera { };
-
-  # Trivial
+  justfortest = prev.callPackage ./justfortest { };
   nixos-helper = prev.callPackage ./nixos-helper { };
 
   # Data
@@ -45,6 +44,13 @@ final: prev: {
 
   # Go
 
+  # Gtk
+  damask = prev.callPackage ./damask { };
+
+  # Qt
+  nekoray = prev.libsForQt5.callPackage ./nekoray { };
+  aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre {};
+
   # Python
   textsnatcher = prev.callPackage ./textsnatcher { };
   bt-dualboot = prev.callPackage ./bt-dualboot { };
@@ -73,18 +79,13 @@ final: prev: {
     self;
   python3Packages = final.python3.pkgs;
 
-  # Gtk
-  damask = prev.callPackage ./damask { };
-
   # Java
   spotiflyer = prev.callPackage ./spotiflyer { };
   mindustry = prev.callPackage ./mindustry { }; # game
 
-  # Qt
-  nekoray = prev.libsForQt5.callPackage ./nekoray { };
-  aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre {};
-
-  # wayland
+  # Ruby
+  completely = prev.callPackage ./completely { };
+  bashly = prev.callPackage ./bashly { };
 
   # flutter
   spotube = prev.callPackage ./spotube { }; # WIP!!!
@@ -93,8 +94,6 @@ final: prev: {
   # lib = prev.lib.extend (finalLib: prevLib:
   #   (import ../lib { inherit (prev) lib; })
   # );
-
-  justfortest = prev.callPackage ./justfortest { };
 
   ############# Override ###################
   # fix .desktop missing

@@ -87,7 +87,7 @@
 
       # Compatibility bash completion
       autoload -U bashcompinit && bashcompinit
-      source ${../overlays/nixos-helper/bCompletions.sh}
+      source ${../overlays/nixos-helper/ns.bash}
 
       # Compatibility bash word-style
       autoload -U select-word-style

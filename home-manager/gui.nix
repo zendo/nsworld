@@ -16,6 +16,8 @@ in
     (opera.override { proprietaryCodecs = true; })
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
+    bashly
+    completely
 
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan

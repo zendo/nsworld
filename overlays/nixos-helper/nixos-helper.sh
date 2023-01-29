@@ -109,7 +109,7 @@ while [[ $# -gt 0 ]]; do
             nix path-info -rsSh "$(readlink -f "$(which "$2")")"
             shift ;;
 
-        git-fm)
+        git-fetch-merge)
             git fetch upstream master && git merge "$(nixos-version --revision)"
             shift ;;
 
@@ -129,11 +129,11 @@ while [[ $# -gt 0 ]]; do
             gh pr checkout -R NixOS/nixpkgs "$2"
             shift ;;
 
-        to-sri)
+        hash2sri)
             nix hash to-sri --type sha256 "$2"
             shift ;;
 
-        index-update)
+        indexdb-update)
             filename="index-x86_64-$(uname | tr '[:upper:]' '[:lower:]')"
             mkdir -p ~/.cache/nix-index
             pushd ~/.cache/nix-index > /dev/null

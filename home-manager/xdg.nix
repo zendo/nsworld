@@ -42,6 +42,7 @@ in
     "alacritty".source = ../dotfiles/alacritty;
     "starship.toml".source = ../dotfiles/starship.toml;
     "radioboat".source = ../dotfiles/radioboat;
+    "nix-init".source = ../dotfiles/nix-init;
 
     "lf".source = mkOOSL hmDots + "/lf";
     "mako".source = mkOOSL hmDots + "/mako";
