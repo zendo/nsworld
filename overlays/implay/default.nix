@@ -24,13 +24,13 @@
 # Cannot load libcuda.so.1
 stdenv.mkDerivation rec {
   pname = "implay";
-  version = "1.0.2";
+  version = "1.1.1";
 
   src = fetchFromGitHub {
     owner = "tsl0922";
     repo = "ImPlay";
     rev = version;
-    hash = "sha256-XAh3dSSJWgJ9Z6TX/qtUW9UtRB0/p5r2kdaLZAgVhwk=";
+    hash = "sha256-D5g3prIAl8PRYQZ85vvVYuNQE0GhgG8DUWdVvNAgAD0=";
   };
 
   nativeBuildInputs = [

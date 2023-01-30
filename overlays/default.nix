@@ -5,7 +5,6 @@ final: prev: {
 
   # Data
   zhudou-sans = prev.callPackage ./zhudou-sans { };
-  lxgw-neoxihei = prev.callPackage ./lxgw-neoxihei { };
   lxgw-neoxihei-screen = prev.callPackage ./lxgw-neoxihei-screen { };
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
   adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes { };
@@ -55,7 +54,6 @@ final: prev: {
   textsnatcher = prev.callPackage ./textsnatcher { };
   bt-dualboot = prev.callPackage ./bt-dualboot { };
   konsave = prev.callPackage ./konsave { };
-  tiptop-py = prev.callPackage ./tiptop-py { };
   iotas = prev.callPackage ./iotas { };
   zdict = prev.callPackage ./zdict { };
   cavalier = prev.callPackage ./cavalier { };

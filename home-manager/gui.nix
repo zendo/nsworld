@@ -7,13 +7,10 @@ in
 {
   home.packages = with pkgs; [
     # iotas
-    # tiptop
-    # tiptop-py
     # nightpdf
-    aphototoollibre
-    cavalier
+    # cavalier
     justfortest
-    (opera.override { proprietaryCodecs = true; })
+    # (opera.override { proprietaryCodecs = true; })
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
 
@@ -27,7 +24,7 @@ in
     alacritty
     # wezterm
     warp
-    remmina # (webkitgtk)
+    # remmina # (webkitgtk)
     # clash-verge
     # qv2ray
     # clash
@@ -51,7 +48,7 @@ in
     handlr # mime
 
     # Social media
-    tdesktop # (webkitgtk)
+    # tdesktop # (webkitgtk)
     # nheko
     # fractal-next
     # discord
@@ -146,7 +143,7 @@ in
 
   programs.firefox = {
     enable = true;
-    # package = pkgs.firefox-bin;
+    package = pkgs.firefox-bin;
     # profiles."default".extraConfig = ''
     #   # drm
     #   "media.eme.enabled" = true;

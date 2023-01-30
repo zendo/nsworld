@@ -18,8 +18,8 @@
     nix-index
     nix-tree
     nix-top
-    # nurl
-    # nix-init
+    nix-init
+    nurl
     comma # ,
     # nix-alien # Run binaries
     # nix-output-monitor
@@ -191,7 +191,6 @@
 
   # AstroNvim
   # git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-  # nvim +PackerSync
   programs.neovim = {
     enable = true;
     viAlias = true;
