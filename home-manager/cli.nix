@@ -91,7 +91,7 @@
     ydict
     typos
     shellcheck
-    completely
+    # completely
     translate-shell
     aspellDicts.en
     asciinema # record the terminal

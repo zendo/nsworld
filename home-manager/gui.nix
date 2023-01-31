@@ -65,7 +65,7 @@ in
     # audacious
     # rhythmbox
     goodvibes
-    # go-musicfox
+    go-musicfox
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag

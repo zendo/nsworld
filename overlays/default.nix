@@ -1,5 +1,4 @@
 final: prev: {
-  opera = prev.callPackage ./opera { };
   justfortest = prev.callPackage ./justfortest { };
   nixos-helper = prev.callPackage ./nixos-helper { };
 
@@ -35,6 +34,7 @@ final: prev: {
   # C
   xclicker = prev.callPackage ./xclicker { };
   implay = prev.callPackage ./implay { };
+  azcomicv = prev.callPackage ./azcomicv { };
 
   # Rust
   # mousai = prev.callPackage ./mousai {};
@@ -57,7 +57,6 @@ final: prev: {
   konsave = prev.callPackage ./konsave { };
   iotas = prev.callPackage ./iotas { };
   zdict = prev.callPackage ./zdict { };
-  cavalier = prev.callPackage ./cavalier { };
   gestures-gtk = prev.callPackage ./gestures-gtk { }; #WIP!!
 
   # Python Module Overlays
@@ -83,7 +82,6 @@ final: prev: {
   mindustry = prev.callPackage ./mindustry { }; # game
 
   # Ruby
-  completely = prev.callPackage ./completely { };
   bashly = prev.callPackage ./bashly { };
 
   # flutter
