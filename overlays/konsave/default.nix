@@ -2,13 +2,13 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "konsave";
-  version = "2.1.2";
+  version = "2.2.0";
   format = "setuptools";
 
   src = python3.pkgs.fetchPypi {
     inherit version;
     pname = "Konsave";
-    hash = "sha256-mSXkae4yq5jQBLSFSrjytRaslKhfp1D4J7aZqBJH28Y=";
+    hash = "sha256-tWarqT2jFgCuSsa2NwMHRaR3/wj0khiRHidvRNMwM8M=";
   };
 
   nativeBuildInputs = with python3.pkgs; [

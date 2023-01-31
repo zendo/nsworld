@@ -18,18 +18,18 @@ in
     # nur.repos.rewine.aliyunpan
     # nur.repos.yes.lx-music-desktop
     nur.repos.rewine.electron-netease-cloud-music
+    yesplaymusic
 
     foot
     kitty
     alacritty
     # wezterm
     warp
-    # remmina # (webkitgtk)
+    remmina # (webkitgtk)
     # clash-verge
     # qv2ray
     # clash
     proxychains-ng
-    # nur.repos.linyinfeng.clash-for-windows
     whatip
     sniffglue
 
@@ -48,7 +48,7 @@ in
     handlr # mime
 
     # Social media
-    # tdesktop # (webkitgtk)
+    tdesktop # (webkitgtk)
     # nheko
     # fractal-next
     # discord
@@ -65,6 +65,7 @@ in
     # audacious
     # rhythmbox
     goodvibes
+    # go-musicfox
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
@@ -73,7 +74,6 @@ in
     # ciano
     # video-trimmer
     # media-downloader
-    # spotdl
     # spotiflyer
 
     # Image manipulation
@@ -143,7 +143,7 @@ in
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-bin;
+    # package = pkgs.firefox-bin;
     # profiles."default".extraConfig = ''
     #   # drm
     #   "media.eme.enabled" = true;

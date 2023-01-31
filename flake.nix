@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    # nixpkgs.url = "github:NixOS/nixpkgs/pull/204807/merge";
+    # nixpkgs.url = "github:NixOS/nixpkgs/pull/213619/merge";
     # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=update/opera";
 
     home-manager = {
@@ -158,9 +158,9 @@
               ./home-manager/alias.nix
               ./home-manager/cli.nix
               ./home-manager/git.nix
-              ./home-manager/non-nixos.nix
-              ./home-manager/xdg.nix
               ./home-manager/zsh.nix
+              ./home-manager/xdg.nix
+              ./home-manager/non-nixos.nix
               {
                 home.stateVersion = "22.05";
                 home.username = "${username}";

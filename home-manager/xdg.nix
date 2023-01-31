@@ -2,7 +2,6 @@
 
 let
   mkOOSL = config.lib.file.mkOutOfStoreSymlink;
-  hmHome = config.home.homeDirectory;
   hmDots = config.home.homeDirectory + "/nsworld/dotfiles";
 in
 {

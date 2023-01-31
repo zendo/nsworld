@@ -24,6 +24,7 @@ final: prev: {
   #   # electron = prev.electron_21;
   # };
   music-you = prev.callPackage ./music-you { };
+  yesplaymusic = prev.callPackage ./yesplaymusic { };
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
@@ -48,7 +49,7 @@ final: prev: {
 
   # Qt
   nekoray = prev.libsForQt5.callPackage ./nekoray { };
-  aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre {};
+  aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre { };
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher { };

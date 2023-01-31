@@ -37,7 +37,8 @@ stdenv.mkDerivation rec {
   '';
 
   postInstall = ''
-    wrapProgram $out/bin/${pname} --prefix PATH : ${lib.makeBinPath [  ffmpeg-full ]}
+    wrapProgram $out/bin/${pname} \
+      --prefix PATH : ${lib.makeBinPath [ ffmpeg-full ]}
   '';
 
   desktopItems = [

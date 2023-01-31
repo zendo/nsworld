@@ -24,6 +24,7 @@ in
     kalendar
     yakuake
     gparted
+    # latte-dock
     kcolorchooser
     gnome.gnome-color-manager # broken?
   ] ++ (with libsForQt5; [

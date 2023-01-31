@@ -21,7 +21,7 @@
     nix-init
     nurl
     comma # ,
-    # nix-alien # Run binaries
+    nix-alien # Run binaries
     # nix-output-monitor
     # nvfetcher
 
