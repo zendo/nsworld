@@ -17,12 +17,11 @@ in
     # nur.repos.linyinfeng.clash-for-windows
     # nur.repos.rewine.aliyunpan
     # nur.repos.yes.lx-music-desktop
-    nur.repos.rewine.electron-netease-cloud-music
-    yesplaymusic
+    # nur.repos.rewine.electron-netease-cloud-music
 
-    foot
+    # foot
     kitty
-    alacritty
+    # alacritty
     # wezterm
     warp
     remmina # (webkitgtk)
@@ -66,6 +65,7 @@ in
     # rhythmbox
     goodvibes
     go-musicfox
+    yesplaymusic
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
