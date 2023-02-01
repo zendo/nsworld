@@ -52,7 +52,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "A simple comic reader";
-    homepage = "https://gitlab.com/azelpg/azcomicv";
+    homepage = "http://azsky2.html.xdomain.jp/soft/index.html";
     # changelog = "https://gitlab.com/azelpg/azcomicv/-/blob/${src.rev}/ChangeLog";
     license = licenses.mit;
     platforms = platforms.linux;

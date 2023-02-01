@@ -13,8 +13,9 @@
     # cachix
     nixos-generators
     # nix-template
-    nix-update
     nixpkgs-review
+    nix-update
+    nix-prefetch
     nix-index
     nix-tree
     nix-top
@@ -91,7 +92,7 @@
     ydict
     typos
     shellcheck
-    # completely
+    completely
     translate-shell
     aspellDicts.en
     asciinema # record the terminal

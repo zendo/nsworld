@@ -94,6 +94,12 @@
     # waydroid.enable = true;
   };
 
+  # Cross compile
+  # nix build .#legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform.hello
+  # boot.binfmt.emulatedSystems = [
+  #   "aarch64-linux" # nix build .#legacyPackages.aarch64-linux.hello
+  # ];
+
   # boot.kernelParams =
   #   (lib.optionals config.hardware.cpu.intel.updateMicrocode [ "intel_iommu=on" "iommu=pt" ]);
 
