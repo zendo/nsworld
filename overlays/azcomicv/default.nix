@@ -1,14 +1,12 @@
 { lib
 , stdenv
 , fetchFromGitLab
-, meson
 , ninja
 , pkg-config
-
+, wrapGAppsHook
 , libX11
 , libXext
 , libXcursor
-
 , libpng
 , libwebp
 , libheif
@@ -16,7 +14,7 @@
 , freetype
 , fontconfig
 }:
-# WIP!!!
+
 stdenv.mkDerivation rec {
   pname = "azcomicv";
   version = "2.0.5";
@@ -29,9 +27,9 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    # meson
     ninja
     pkg-config
+    wrapGAppsHook
   ];
 
   buildInputs = [
@@ -46,11 +44,18 @@ stdenv.mkDerivation rec {
     fontconfig
   ];
 
+  buildPhase = ''
+    cd build
+    ninja
+    ninja install
+  '';
+
   meta = with lib; {
-    description = "Linux 用漫画ビューア";
+    description = "A simple comic reader";
     homepage = "https://gitlab.com/azelpg/azcomicv";
-    changelog = "https://gitlab.com/azelpg/azcomicv/-/blob/${src.rev}/ChangeLog";
+    # changelog = "https://gitlab.com/azelpg/azcomicv/-/blob/${src.rev}/ChangeLog";
     license = licenses.mit;
+    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 }

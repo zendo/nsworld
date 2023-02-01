@@ -8,8 +8,8 @@ in
   home.packages = with pkgs; [
     # iotas
     # nightpdf
-    # cavalier
-    justfortest
+    azcomicv
+    # justfortest
     # (opera.override { proprietaryCodecs = true; })
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
