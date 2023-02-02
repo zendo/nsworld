@@ -2,7 +2,6 @@
 , stdenv
 , fetchurl
 , dpkg
-# , atomEnv
 , autoPatchelfHook
 , makeWrapper
 , udev
@@ -15,11 +14,11 @@
 
 stdenv.mkDerivation rec {
   pname = "clash-verge";
-  version = "1.2.2";
+  version = "1.2.3";
 
   src = fetchurl {
     url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
-    hash = "sha256-ZUjd1aK4PLZm3ieQnYNulgVdAB1d6GchKOy6iQWgzz0=";
+    hash = "sha256-uiw9kcXJ4ZEu+naUbUrgN/zBYE2bSWVPmMQ+HiAP4D4=";
   };
 
   unpackPhase = "dpkg-deb -x $src .";
@@ -47,6 +46,7 @@ stdenv.mkDerivation rec {
     cp -r usr $out
     cp -r usr/share $out/share
 
+    # works?
     makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
       --prefix PATH : "${lib.makeBinPath [ libcap ]}"
   '';

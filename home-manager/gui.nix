@@ -65,7 +65,7 @@ in
     # rhythmbox
     goodvibes
     go-musicfox
-    yesplaymusic
+    # yesplaymusic
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
