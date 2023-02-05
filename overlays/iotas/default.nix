@@ -1,25 +1,25 @@
 { lib
-, stdenv
+, python3
 , fetchFromGitLab
 , meson
 , ninja
 , pkg-config
-, python3
 , gobject-introspection
-, gtksourceview5
-, webkitgtk_5_0
-, glib
-, gtk4
-, librsvg
-, libadwaita
 , wrapGAppsHook4
 , appstream-glib
 , desktop-file-utils
+, glib
+, gtk4
+, librsvg
+, libsecret
+, libadwaita
+, gtksourceview5
+, webkitgtk_5_0
 }:
 
 python3.pkgs.buildPythonApplication rec {
   pname = "iotas";
-  version = "0.1.6";
+  version = "0.1.8";
   format = "other";
 
   src = fetchFromGitLab {
@@ -27,7 +27,7 @@ python3.pkgs.buildPythonApplication rec {
     owner = "cheywood";
     repo = pname;
     rev = version;
-    hash = "sha256-B2EnpvexrTzmaYuVgEqQF+U45VxYz3lkvhoSc4q01og=";
+    hash = "sha256-nhoJMMLFpi5QykftCnV4XRSGA5LcprPcrxm0oyDZpVY=";
   };
 
   nativeBuildInputs = [
@@ -44,8 +44,8 @@ python3.pkgs.buildPythonApplication rec {
     glib
     gtk4
     librsvg
+    libsecret
     libadwaita
-    gobject-introspection
     gtksourceview5
     webkitgtk_5_0
   ];
@@ -55,11 +55,13 @@ python3.pkgs.buildPythonApplication rec {
     pygtkspellcheck
     requests
     markdown-it-py
+    linkify-it-py
     mdit-py-plugins
   ];
 
   # prevent double wrapping
   dontWrapGApps = true;
+
   preFixup = ''
     makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
   '';

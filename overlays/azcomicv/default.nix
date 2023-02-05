@@ -50,10 +50,13 @@ stdenv.mkDerivation rec {
     ninja install
   '';
 
+  postInstall = ''
+    rm $out/share/icons/hicolor/icon-theme.cache
+  '';
+
   meta = with lib; {
     description = "A simple comic reader";
     homepage = "http://azsky2.html.xdomain.jp/soft/index.html";
-    # changelog = "https://gitlab.com/azelpg/azcomicv/-/blob/${src.rev}/ChangeLog";
     license = licenses.mit;
     platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];

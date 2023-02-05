@@ -14,6 +14,7 @@
 , makeWrapper
 }:
 
+# https://nixos.wiki/wiki/Flutter
 flutter.mkFlutterApp rec {
   pname = "spotube";
   version = "2.6.0";

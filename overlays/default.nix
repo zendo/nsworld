@@ -1,5 +1,4 @@
 final: prev: {
-  justfortest = prev.callPackage ./justfortest { };
   nixos-helper = prev.callPackage ./nixos-helper { };
 
   # Data
@@ -23,7 +22,6 @@ final: prev: {
   #   # electron = prev.electron_21;
   # };
   music-you = prev.callPackage ./music-you { };
-  yesplaymusic = prev.callPackage ./yesplaymusic { };
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
@@ -45,7 +43,6 @@ final: prev: {
   # Go
 
   # Gtk
-  damask = prev.callPackage ./damask { };
 
   # Qt
   nekoray = prev.libsForQt5.callPackage ./nekoray { };

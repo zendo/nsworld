@@ -707,7 +707,7 @@ qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default
   '';
 #+end_src
 
-* shell-fu
+* common
 
 #+begin_src bash
 mkdir -p $out/share/fonts/{opentype,truetype}

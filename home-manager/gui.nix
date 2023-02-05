@@ -6,10 +6,9 @@ let
 in
 {
   home.packages = with pkgs; [
-    # iotas
+    iotas
     # nightpdf
     azcomicv
-    # justfortest
     # (opera.override { proprietaryCodecs = true; })
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
