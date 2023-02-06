@@ -89,7 +89,7 @@ while [[ $# -gt 0 ]]; do
             shift ;;
 
         installed)
-            nix path-info --recursive /run/current-system
+            nix path-info --recursive /run/current-system | cut -b 45- | sort
             shift ;;
 
         profiles)

@@ -1,4 +1,5 @@
 final: prev: {
+  # nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
   nixos-helper = prev.callPackage ./nixos-helper { };
 
   # Data
@@ -43,6 +44,7 @@ final: prev: {
   # Go
 
   # Gtk
+  paleta = prev.callPackage ./paleta { };
 
   # Qt
   nekoray = prev.libsForQt5.callPackage ./nekoray { };

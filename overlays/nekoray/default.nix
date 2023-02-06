@@ -12,19 +12,20 @@
 , qtx11extras
 , qttools
 , qtsvg
+, xorg
 }:
 # WIP!!!
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=nekoray
 stdenv.mkDerivation rec {
   pname = "nekoray";
-  version = "2.6";
+  version = "2.14";
 
   src = fetchFromGitHub {
     owner = "MatsuriDayo";
     repo = pname;
     rev = version;
     fetchSubmodules = true;
-    hash = "sha256-xdg9pJQqwdXn6biZ9UrFyfCtgFM6jZii5q69k1s8/3s=";
+    hash = "sha256-vZyOsG8M/ZMRgk5gTpMZlerJp1+vvZP3N3QjtOAWLLk=";
   };
 
   # binTarball = fetchurl {
@@ -46,6 +47,7 @@ stdenv.mkDerivation rec {
     libyamlcpp
     zxing-cpp
     zxing
+    xorg.libXinerama
   ];
 
   cmakeFlags = [
