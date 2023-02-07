@@ -36,31 +36,26 @@
     # gnome-firmware-updater
   ] ++ (with gnomeExtensions; [
     appindicator
-    # tray-icons-reloaded
     app-icons-taskbar
-    rocketbar
+    # rocketbar
     dash-to-dock
     dash-to-panel
     night-theme-switcher
     clipboard-history
-    inhibit-suspend
-    blur-my-shell
+    # blur-my-shell
     gradient-top-bar
-    weather-oclock
+    # weather-oclock
     # proxy-switcher
-    just-perfection
-    shell-configurator
-    app-icons-taskbar
-    user-avatar-in-quick-settings
+    # just-perfection
+    # user-avatar-in-quick-settings
     space-bar
     dotspaces
     runcat
-    forge
+    # forge
+    caffeine
     # gtile
     # pop-shell
     ddterm
-    ideapad-mode
-    mpris-indicator-button
     # replace-activities-text
   ]);
 
@@ -92,55 +87,7 @@
     enable = true;
     excludePackages = [ pkgs.xterm ];
 
-    displayManager = {
-      gdm.enable = true;
-      defaultSession = "gnome";
-    };
-
-    desktopManager.gnome = {
-      enable = true;
-      extraGSettingsOverridePackages = [ pkgs.gnome.gnome-settings-daemon ];
-
-      favoriteAppsOverride = ''
-        [org.gnome.shell]
-        favorite-apps=[ 'kitty.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'firefox.desktop']
-
-        enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gsconnect@andyholmes.github.io', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'clipboard-history@alexsaveau.dev', 'space-bar@luchrioh', 'nightthemeswitcher@romainvigier.fr', 'inhibit-suspend@charlieqle']
-      '';
-
-      # Override GNOME defaults
-      extraGSettingsOverrides = ''
-        [org.gnome.system.location]
-        enabled=true
-
-        [org.gnome.settings-daemon.plugins.color]
-        night-light-enabled=true
-
-        [org.gnome.desktop.peripherals.touchpad]
-        tap-to-click=true
-        click-method='areas'
-
-        [org.gnome.desktop.input-sources]
-        xkb-options=['ctrl:swapcaps']
-
-        [org.gnome.shell.keybindings]
-        switch-to-application-1=[]
-        switch-to-application-2=[]
-        switch-to-application-3=[]
-        switch-to-application-4=[]
-
-        [org.gnome.desktop.wm.keybindings]
-        activate-window-menu=[]
-        close=['<Super>q']
-        switch-to-workspace-1=['<Super>1']
-        switch-to-workspace-2=['<Super>2']
-        switch-to-workspace-3=['<Super>3']
-        switch-to-workspace-4=['<Super>4']
-        move-to-workspace-1=['<Alt>1']
-        move-to-workspace-2=['<Alt>2']
-        move-to-workspace-3=['<Alt>3']
-        move-to-workspace-4=['<Alt>4']
-      '';
-    };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
   };
 }

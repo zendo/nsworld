@@ -1,6 +1,9 @@
 { config, pkgs, ... }: {
 
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    swapDevices = 1;
+  };
 
   boot = {
     # tmpOnTmpfs = true;
@@ -29,6 +32,7 @@
     wget
     parted
     gptfdisk
+    sniffglue
     nix-bash-completions
     sbctl
     efibootmgr

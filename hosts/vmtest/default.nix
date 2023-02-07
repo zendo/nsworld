@@ -3,7 +3,7 @@
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
-    # ../../modules/gnome.nix
+    ../../modules/gnome.nix
     # ../../modules/kde.nix
     # ../../modules/wm-sway.nix
   ];
@@ -13,8 +13,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # opera
-    ydict
+    lollypop
 
     git
     firefox
@@ -25,7 +24,7 @@
   environment.variables = { };
 
   services.xserver = {
-    # enable = true;
+    enable = true;
     desktopManager = {
       # plasma5.enable = true;
       # gnome.enable = true;

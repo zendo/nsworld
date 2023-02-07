@@ -6,6 +6,7 @@
     "la." = "ls -d .*";
     rm = "trash-put";
     free = "free -h";
+    tree = "${lib.getExe pkgs.erdtree}";
     bc = "${lib.getExe pkgs.libqalculate}";
     psp = "${lib.getExe pkgs.procs}";
     mount-ls = "mount | column -t";

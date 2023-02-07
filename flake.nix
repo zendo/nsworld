@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     # nixpkgs.url = "github:NixOS/nixpkgs/pull/213619/merge";
-    # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=update/opera";
+    # nixpkgs.url = "git+file:///home/iab/devs/nixpkgs/?ref=gnomeExtensions";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -117,7 +117,7 @@
         vmtest = mkHost {
           username = "test";
           hostname = "vmtest";
-          hmEnable = false;
+          # hmEnable = false;
           virtEnable = false;
           inherit overlays;
           # nixpkgs = inputs.nixpkgs-pr;

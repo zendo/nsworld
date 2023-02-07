@@ -1,8 +1,15 @@
 final: prev: {
-  # nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
-  nixos-helper = prev.callPackage ./nixos-helper { };
+  /*
+  nix build --impure --expr 'with import <nixpkgs> {}; callPackage ./default.nix {}' -L
+  nix build --impure --expr 'with import <nixpkgs> {}; callPackage ./default.nix {}' -L \
+    -I $HOME/nsworld # ???
+    -I nixpkgs=flake:github:NixOS/nixpkgs/nixos-22.05
+    -I nixpkgs=flake:github:NixOS/nixpkgs/$(nixos-version --revision)
+  */
+
 
   # Data
+  nixos-helper = prev.callPackage ./nixos-helper { };
   zhudou-sans = prev.callPackage ./zhudou-sans { };
   lxgw-neoxihei-screen = prev.callPackage ./lxgw-neoxihei-screen { };
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
