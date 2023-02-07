@@ -21,11 +21,6 @@ in
     # ".emacs.d/elisp".source = mkOOSL hmDots + "/emacs/elisp";
     ".doom.d".source = mkOOSL hmDots + "/doom";
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
-
-    # ".local/share/fcitx5/themes".source = pkgs.fetchurl {
-    #   url = "https://github.com/scratch-er/fcitx5-breeze/releases/download/v2.0.0/fcitx5-breeze-prebuilt-2.0.0.tar.gz";
-    #   sha256 = "0wwwvq90dcb21avdgcqq5w192ndr2m5fmswxblm3l2vcrh36h3jz";
-    # };
   };
 
   xdg.configFile = {

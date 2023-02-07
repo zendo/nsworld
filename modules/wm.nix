@@ -4,46 +4,45 @@
     # ../overlays/services/gtklock.nix
   ];
 
-  services.xserver = {
-    # for X11
-    enable = true;
-    libinput.enable = true;
-    xkbOptions = "ctrl:swapcaps";
-    # use greetd
-    displayManager.lightdm.enable = false;
-  };
-
-  services.greetd.enable = true;
-
-  # Needs when using wm@hm
-  security.pam.services.swaylock = { };
-  programs.dconf.enable = true;
-  programs.xwayland.enable = true;
-
-  programs = {
-    light.enable = true;
-    # gtklock.enable = true;
-    evince.enable = true;
-    file-roller.enable = true;
-  };
-
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
-
   services = {
+    xserver = {
+      # for X11
+      enable = true;
+      libinput.enable = true;
+      xkbOptions = "ctrl:swapcaps";
+      # use greetd
+      displayManager.lightdm.enable = false;
+    };
+    greetd.enable = true; # displayManager
+
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
   };
 
+  programs = {
+    light.enable = true;
+    # gtklock.enable = true;
+    evince.enable = true;
+    file-roller.enable = true;
+
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
+  };
+
+  # If using wm@hm
+  security.pam.services.swaylock = { };
+  programs.dconf.enable = true;
+  programs.xwayland.enable = true;
+
   environment.pathsToLink = [
-    "/share/zsh"    # for zsh completion with hm
+    "/share/zsh" # for zsh completion with hm
     "/share/fcitx5" # for fxitx skins
   ];
 

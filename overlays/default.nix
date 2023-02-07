@@ -25,10 +25,6 @@ final: prev: {
   koodo-reader = prev.callPackage ./koodo-reader { };
   thorium-reader = prev.callPackage ./thorium-reader { };
   nightpdf = prev.callPackage ./nightpdf { };
-  # WIP
-  # nightpdf = prev.callPackage ./nightpdf-source {
-  #   # electron = prev.electron_21;
-  # };
   music-you = prev.callPackage ./music-you { };
 
   # deb / autoPatchelf

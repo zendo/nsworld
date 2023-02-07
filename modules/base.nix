@@ -1,9 +1,6 @@
 { config, pkgs, ... }: {
 
-  zramSwap = {
-    enable = true;
-    swapDevices = 1;
-  };
+  zramSwap.enable = true;
 
   boot = {
     # tmpOnTmpfs = true;

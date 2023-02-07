@@ -7,7 +7,7 @@ in
 {
   home.packages = with pkgs; [
     iotas
-    # nightpdf
+    nightpdf
     azcomicv
     # (opera.override { proprietaryCodecs = true; })
     # clash-verge

@@ -46,7 +46,7 @@
 
     # agenix.url = github:ryantm/agenix;
     # sops-nix.url = github:Mic92/sops-nix;
-    nur.url = "github:nix-community/NUR";
+    # nur.url = "github:nix-community/NUR";
     musnix.url = "github:musnix/musnix";
     templates.url = "github:NixOS/templates";
     flake-utils.url = "github:numtide/flake-utils";
@@ -66,7 +66,7 @@
       mkHost = import ./lib/mkHost.nix inputs;
 
       overlays = [
-        inputs.nur.overlay
+        # inputs.nur.overlay
         inputs.nix-alien.overlay
         inputs.emacs-overlay.overlay
         (import ./overlays)

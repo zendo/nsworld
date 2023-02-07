@@ -1,6 +1,14 @@
 { config, pkgs, ... }: {
 
   services = {
+    xserver = {
+      enable = true;
+      excludePackages = [ pkgs.xterm ];
+
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
+
     gnome.sushi.enable = true;
     packagekit.enable = false;
     gnome.tracker.enable = false;
@@ -42,6 +50,7 @@
     dash-to-panel
     night-theme-switcher
     clipboard-history
+    # clipboard-indicator
     # blur-my-shell
     gradient-top-bar
     # weather-oclock
@@ -53,8 +62,6 @@
     runcat
     # forge
     caffeine
-    # gtile
-    # pop-shell
     ddterm
     # replace-activities-text
   ]);
@@ -81,13 +88,5 @@
     #   # libpinyin
     #   # typing-booster
     # ];
-  };
-
-  services.xserver = {
-    enable = true;
-    excludePackages = [ pkgs.xterm ];
-
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
   };
 }
