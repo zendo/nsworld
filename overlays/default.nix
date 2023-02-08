@@ -30,7 +30,7 @@ final: prev: {
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
   clash-verge = prev.callPackage ./clash-verge { };
-  # clash-verge-source = prev.callPackage ./clash-verge-source { };
+  clash-verge-source = prev.callPackage ./clash-verge-source { };
   freedownloadmanager = prev.callPackage ./freedownloadmanager { };
 
   # C
@@ -109,8 +109,8 @@ final: prev: {
       src = prev.fetchFromGitHub {
         owner = "sddm";
         repo = "sddm";
-        rev = "3e486499b9300ce8f9c62bd102e5119b27a2fad1";
-        hash = "sha256-Y9WPm0MLWl/s0e0aoKKk0SSojqBrI/RdyxkgOz2Tk38==";
+        rev = "c42bb38036eae02c1fe274a37c5a9b4915146004";
+        hash = "sha256-h9XPVCYb7RB+XqyV19klqEhR60HKCTThIOJtbroRmcQ=";
       };
       patches = [ ];
     });

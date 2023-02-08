@@ -41,14 +41,20 @@ inputs @ { pkgs }: {
       nodejs
       electron
 
-      # cargo-tauri
+      ## cargo-tauri
       # cargo
       # rustc
       # openssl
       # pkg-config
-      # glib
+      # gobject-introspection
+      # atk
       # libsoup
+      # glib
+      # gtk3
       # webkitgtk
+      # quickjs
+      # libappindicator-gtk3
+      # libayatana-appindicator
     ];
     # ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron_20}/bin";
   };

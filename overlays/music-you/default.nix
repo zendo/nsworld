@@ -19,14 +19,15 @@ buildNpmPackage rec {
 
   # dontNpmBuild = true;
 
-  # NODE_OPTIONS = "--openssl-legacy-provider";
+  # makeCacheWritable = true;
+  # npmFlags = [ "--legacy-peer-deps" ];
 
-  makeCacheWritable = true;
-  npmFlags = [ "--legacy-peer-deps" ];
+  # The prepack script runs the build script, which we'd rather do in the build phase.
+  npmPackFlags = [ "--ignore-scripts" ];
 
-  npmBuild = ''
-    npm run electron:build
-  '';
+  NODE_OPTIONS = "--openssl-legacy-provider";
+
+  ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
 
   # nativeBuildInputs = [
   # ];

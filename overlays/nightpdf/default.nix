@@ -3,8 +3,6 @@
 , mkYarnPackage
 , fetchYarnDeps
 , electron
-# , yarn
-# , nodejs
 , makeDesktopItem
 , copyDesktopItems
 , makeWrapper
@@ -31,27 +29,13 @@ mkYarnPackage rec {
   };
 
   nativeBuildInputs = [
-    # yarn
-    # nodejs
     copyDesktopItems
     makeWrapper
   ];
 
-  # buildInputs = [
-  # ];
-
-  # configurePhase = ''
-  #   runHook preConfigure
-
-  #   export HOME=$(mktemp -d)
-  #   yarn config --offline set yarn-offline-mirror $offlineCache
-  #   # fixup_yarn_lock yarn.lock
-  #   yarn install --offline --frozen-lockfile --ignore-platform --ignore-scripts --no-progress --non-interactive
-  #   patchShebangs node_modules/
-
-  #   runHook postConfigure
-  # '';
-
+  distPhase = "true";
+  # dontInstall = true;
+  # dontFixup = true;
 
   buildPhase = ''
     runHook preBuild
@@ -63,10 +47,6 @@ mkYarnPackage rec {
 
     runHook postBuild
   '';
-
-  distPhase = "true";
-  # dontInstall = true;
-  # dontFixup = true;
 
   installPhase = ''
     runHook preInstall
@@ -93,20 +73,22 @@ mkYarnPackage rec {
     runHook postInstall
   '';
 
-  desktopItems = [(makeDesktopItem {
-    name = pname;
-    exec = pname;
-    icon = pname;
-    desktopName = pname;
-    comment = meta.description;
-    categories = [ "Office" ];
-  })];
+  desktopItems = [
+    (makeDesktopItem {
+      name = pname;
+      exec = pname;
+      icon = pname;
+      desktopName = "NightPDF";
+      comment = meta.description;
+      categories = [ "Office" ];
+    })
+  ];
 
   meta = with lib; {
     description = "Dark Mode PDF Reader built using Electron and PDF.js";
     homepage = "https://github.com/Lunarequest/NightPDF";
     license = licenses.gpl2Only;
-    platforms = [ "x86_64-linux" ];
+    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 }

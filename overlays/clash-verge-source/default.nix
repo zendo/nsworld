@@ -16,30 +16,41 @@
 # WIP!!!
 let
   pname = "clash-verge";
-  version = "1.2.2";
+  version = "1.2.3";
 
   src = fetchFromGitHub {
     owner = "zzzgydi";
     repo = "clash-verge";
-    rev = "v1.2.2";
-    hash = "sha256-SesccsQa9f7KVlZcVYN2lGIuTbz5+xy/sHdwaufEuek=";
+    rev = "v1.2.3";
+    hash = "sha256-epeC5rUq8V3m/8UgvqBfTmfkzsoEDJ3u0SauWZfrsa8=";
   };
 
   frontend-build = mkYarnPackage {
     inherit version src;
     pname = "clash-verge-ui";
 
-    offlineCache = fetchYarnDeps {
-      yarnLock = src + "/yarn.lock";
-      hash = "sha256-SesccsQa9f7KVlZcVYN2sGIuTbz5+xy/sHdwaufEuek=";
-    };
+    # offlineCache = fetchYarnDeps {
+    #   yarnLock = src + "/yarn.lock";
+    #   hash = "sha256-SesccsQa9f7KVlZcVsN2sGIuTbz5+xy/sHdwaufEuek=";
+    # };
 
     packageJSON = ./package.json;
+    yarnLock = ./yarn.lock;
+    yarnNix = ./yarn.nix;
 
     buildPhase = ''
+      runHook preBuild
+
       export HOME=$(mktemp -d)
-      yarn --offline run prebuild
+      yarn run check
+      # yarn --offline build
+      # ls ./
+      # cp -r deps/clash-verge/out $out
+
+      # yarn --offline run prebuild
       # cp -r deps/xplorer/out $out
+
+      runHook postBuild
     '';
 
     distPhase = "true";
@@ -51,14 +62,14 @@ rustPlatform.buildRustPackage rec {
 
   sourceRoot = "source/src-tauri";
 
-  cargoHash = "sha256-U97V3b/luAsGxSFszwSNu0fvd6PpieDgF1BVECH2pMQ=";
+  cargoHash = "sha256-U97V3b/luAssxSFszwSNu0fvd6PpieDgF1BVECH2pMQ=";
 
   # Copy the frontend static resources to final build directory
   # Also modify tauri.conf.json so that it expects the resources at the new location
   preBuild = ''
     mkdir -p frontend-build
     cp -R ${frontend-build}/src frontend-build
-    substituteInPlace tauri.conf.json --replace '"distDir": "../out/src",' '"distDir": "frontend-build/src",'
+    # substituteInPlace tauri.conf.json --replace '"distDir": "../out/src",' '"distDir": "frontend-build/src",'
   '';
 
   # nativeBuildInputs = [ pkg-config ];
