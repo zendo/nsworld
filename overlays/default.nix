@@ -88,6 +88,8 @@ final: prev: {
 
   # flutter
   spotube = prev.callPackage ./spotube { }; # WIP!!!
+  fclash = prev.callPackage ./fclash { };
+  # https://github.com/ferraridamiano/ConverterNOW
 
   # Libraries
   # lib = prev.lib.extend (finalLib: prevLib:

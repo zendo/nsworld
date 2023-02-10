@@ -50,7 +50,7 @@
         "clipboard-history@alexsaveau.dev"
         "space-bar@luchrioh"
         "gradienttopbar@pshow.org"
-        # "nightthemeswitcher@romainvigier.fr"
+        "nightthemeswitcher@romainvigier.fr"
         # "appindicatorsupport@rgcjonas.gmail.com"
       ];
       favorite-apps = [

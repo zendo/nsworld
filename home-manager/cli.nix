@@ -112,6 +112,7 @@
     bandwhich
     traceroute
     speedtest-cli
+    proxychains-ng
     # airgeddon # wifi crack
 
     # Game & fun

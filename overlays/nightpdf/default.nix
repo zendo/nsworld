@@ -19,10 +19,6 @@ mkYarnPackage rec {
     hash = "sha256-QO9FRdd2TSqoIliCnouGg9CJT2/NIA7TjPx2fLMLJ9c=";
   };
 
-  # packageJSON = ./package.json;
-  # yarnLock = ./yarn.lock;
-  # yarnNix = ./yarn.nix;
-
   offlineCache = fetchYarnDeps {
     yarnLock = src + "/yarn.lock";
     hash = "sha256-HAq68o0xkRE3a4sGxZOFblCm5Zs88N0OMIbYOqF4v/Y=";
@@ -34,8 +30,6 @@ mkYarnPackage rec {
   ];
 
   distPhase = "true";
-  # dontInstall = true;
-  # dontFixup = true;
 
   buildPhase = ''
     runHook preBuild
@@ -52,7 +46,7 @@ mkYarnPackage rec {
     runHook preInstall
 
     mkdir -p $out/share/{applications,nightpdf}
-    cp deps/nightpdf/dist/linux-unpacked/resources/app.asar $out/share/nightpdf
+    cp deps/${pname}/dist/linux-unpacked/resources/app.asar $out/share/${pname}
 
     # pushd deps/nightpdf/build/icon.iconset
     # for image in *png; do
@@ -61,14 +55,13 @@ mkYarnPackage rec {
     # done
     # popd
 
-    mkdir -p $out/share/icons/hicolor/{32x32,128x128,256x256,512x512}/apps
-    cp deps/nightpdf/build/icon.iconset/icon_32x32.png $out/share/icons/hicolor/32x32/apps/${pname}.png
-    cp deps/nightpdf/build/icon.iconset/icon_128x128.png $out/share/icons/hicolor/128x128/apps/${pname}.png
-    cp deps/nightpdf/build/icon.iconset/icon_256x256.png $out/share/icons/hicolor/256x256/apps/${pname}.png
-    cp deps/nightpdf/build/icon.iconset/icon_512x512.png $out/share/icons/hicolor/512x512/apps/${pname}.png
+    for size in 16 32 128 256 512; do
+      install -D deps/nightpdf/build/icon.iconset/icon_''${size}x''${size}.png \
+        $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
+    done
 
     makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/share/nightpdf/app.asar
+      --add-flags $out/share/${pname}/app.asar
 
     runHook postInstall
   '';

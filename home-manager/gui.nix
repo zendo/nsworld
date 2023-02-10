@@ -9,39 +9,29 @@ in
     iotas
     nightpdf
     azcomicv
-    # (opera.override { proprietaryCodecs = true; })
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
-
-    # nur.repos.linyinfeng.clash-for-windows
-    # nur.repos.rewine.aliyunpan
-    # nur.repos.yes.lx-music-desktop
 
     # foot
     kitty
     # alacritty
-    # wezterm
     warp
-    remmina # (webkitgtk)
-    # clash-verge
-    # qv2ray
-    # clash
-    proxychains-ng
     whatip
+    remmina # (webkitgtk)
 
     # Browsers
-    (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=VaapiVideoDecoder"
-        "--use-gl=egl"
-      ];
-    })
+    # (google-chrome.override {
+    #   commandLineArgs = [
+    #     "--enable-features=VaapiVideoDecoder"
+    #     "--use-gl=egl"
+    #   ];
+    # })
+    # (vivaldi.override {
+    #   proprietaryCodecs = true;
+    #   enableWidevine = true; # drm
+    # })
     # microsoft-edge-beta
-    # vivaldi
-    # vivaldi-ffmpeg-codecs
-    # vivaldi-widevine
-    # poedit    # translate .po file
-    handlr # mime
+    # (opera.override { proprietaryCodecs = true; })
 
     # Social media
     tdesktop # (webkitgtk)
@@ -62,7 +52,6 @@ in
     # rhythmbox
     goodvibes
     go-musicfox
-    # yesplaymusic
     # netease-cloud-music-gtk
     mousai # 听歌识曲
     # eartag
@@ -90,12 +79,15 @@ in
     # rclone-browser
     # vorta
     # qalculate-gtk # scientific calculator
+    # poedit    # translate .po file
+    handlr # mime
 
     # OFFICE
     # libreoffice-fresh
     # drawio
     # rnote # handwritten note
     # foliate # (webkitgtk)
+    # standardnotes
     # paper-note
     # endeavour
     ghostwriter
@@ -161,17 +153,11 @@ in
   };
 
   home.file = {
-    # Fix tiny cursor in qt-apps at gnome
+    # Fix qt tiny cursor on gnome
     ".icons/default/index.theme".text = lib.optionalString gnomeEnable ''
       [icon theme]
       Inherits=Adwaita
     '';
-
-    # Fix flatpak font
-    # ".local/share/flatpak/overrides/global".text = ''
-    #   [Context]
-    #   filesystems=/run/current-system/sw/share/X11/fonts:ro;/nix/store:ro
-    # '';
   };
 
   xdg.userDirs = {
