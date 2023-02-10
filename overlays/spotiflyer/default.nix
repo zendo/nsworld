@@ -31,14 +31,14 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    makeWrapper ${jre}/bin/java $out/bin/${pname} --add-flags "-jar $src"
-    install -Dm444 $icon $out/share/icons/hicolor/scalable/apps/SpotiFlyer.svg
-    runHook postInstall
-  '';
 
-  postInstall = ''
-    wrapProgram $out/bin/${pname} \
+    install -Dm444 $icon $out/share/icons/hicolor/scalable/apps/SpotiFlyer.svg
+
+    makeWrapper ${jre}/bin/java $out/bin/${pname} \
+      --add-flags "-jar $src" \
       --prefix PATH : ${lib.makeBinPath [ ffmpeg-full ]}
+
+    runHook postInstall
   '';
 
   desktopItems = [

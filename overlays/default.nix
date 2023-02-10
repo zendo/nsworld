@@ -1,7 +1,7 @@
 final: prev: {
   /*
-  nix build --impure --expr 'with import <nixpkgs> {}; callPackage ./default.nix {}' -L
-  nix build --impure --expr 'with import <nixpkgs> {}; callPackage ./default.nix {}' -L \
+    nix build --impure --expr 'with import <nixpkgs> {}; callPackage ./default.nix {}' -L
+    nix build --impure --expr 'with import <nixpkgs> {}; callPackage ./default.nix {}' -L \
     -I $HOME/nsworld # ???
     -I nixpkgs=flake:github:NixOS/nixpkgs/nixos-22.05
     -I nixpkgs=flake:github:NixOS/nixpkgs/$(nixos-version --revision)
@@ -43,6 +43,8 @@ final: prev: {
   charcoal-dict = prev.callPackage ./charcoal-dict { };
 
   # Go
+  clash-meta = prev.callPackage ./clash-meta { };
+  clash-premium = prev.callPackage ./clash-premium { };
 
   # Gtk
   paleta = prev.callPackage ./paleta { };

@@ -7,7 +7,7 @@ in
 {
   home.packages = with pkgs; [
     iotas
-    nightpdf
+    # nightpdf
     azcomicv
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
