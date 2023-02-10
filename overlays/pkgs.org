@@ -1,120 +1,6 @@
 #+STARTUP: show2levels indent hidestars
 
-* buildGoModule
-** templates
-#+begin_src nix
-  { lib
-  , fetchFromGitHub
-  , buildGoModule
-  , mpv
-  , makeWrapper
-  , installShellFiles
-  , nix-update-script
-  , testers
-  , radioboat
-  }:
-
-  buildGoModule rec {
-    pname = "radioboat";
-    version = "0.2.1";
-
-    src = fetchFromGitHub {
-      owner = "slashformotion";
-      repo = "radioboat";
-      rev = "v${version}";
-      hash = "sha256-ZAKTWmK3hCJxm/578cjtdgMA2ZRhCFtzfGdta0gmuFY=";
-    };
-
-    subPackages = ["."];
-
-    proxyVendor = true;
-
-    deleteVendor = true;
-
-    vendorHash = "sha256-X3KiqaiOQYQBfVckh50C+4oxIVN6gXyNuQtBwGvjdFQ=";
-
-    ldflags = [
-      "-s"
-      "-w"
-      "-X github.com/slashformotion/radioboat/internal/buildinfo.Version=${version}"
-    ];
-
-    nativeBuildInputs = [ makeWrapper installShellFiles ];
-
-    preBuild = ''
-    export CGO_ENABLED=0
-  '';
-
-    preFixup = ''
-      wrapProgram $out/bin/radioboat --prefix PATH ":" "${lib.makeBinPath [ mpv ]}";
-    '';
-
-    postInstall = ''
-      installShellCompletion --cmd radioboat \
-        --bash <($out/bin/radioboat completion bash) \
-        --fish <($out/bin/radioboat completion fish) \
-        --zsh <($out/bin/radioboat completion zsh)
-    '';
-
-    passthru = {
-      updateScript = nix-update-script { attrPath = pname; };
-      tests.version = testers.testVersion {
-        package = radioboat;
-        command = "radioboat version";
-        version = version;
-      };
-    };
-
-    meta = with lib; {
-      description = "A terminal web radio client";
-      homepage = "https://github.com/slashformotion/radioboat";
-      license = licenses.asl20;
-      platforms = platforms.linux;
-      maintainers = with maintainers; [ zendo ];
-    };
-  }
-#+end_src
-
 * buildRustPackage
-** cli 
-#+begin_src nix
-  { lib
-  , fetchFromGitHub
-  , rustPlatform
-  , pkg-config
-  , libxkbcommon
-  }:
-
-  rustPlatform.buildRustPackage rec {
-    pname = "zee";
-    version = "0.3.1";
-
-    src = fetchFromGitHub {
-      owner = "mcobzarenco";
-      repo = pname;
-      rev = "v${version}";
-      fetchSubmodules = true;
-      hash = "sha256-0vHvzxdtxTsGVq1iJezjHCB0NKF5bCqMIrD15gOWcvE=";
-    };
-
-    cargoHash = "sha256-eXCbTM6+oLRIY4LIlrFs53V8IqYGhZyku48AgXmeYs8=";
-
-    nativeBuildInputs = [pkg-config];
-    buildInputs = [openssl tree-sitter];
-
-    # Needed to get openssl-sys to use pkg-config.
-    OPENSSL_NO_VENDOR = 1;
-
-    meta = with lib; {
-      description = "Modern editor for the terminal";
-      homepage = "https://github.com/mcobzarenco/zee";
-      license = licenses.mit;
-      maintainers = with maintainers; [ zendo ];
-    };
-  }
-
-#+end_src
-
 ** gui gtk4
 #+begin_src nix
   {
@@ -371,23 +257,6 @@ python3.pkgs.buildPythonApplication rec {
 }
 #+end_src
 
-* mkYarnPackage
-** notes
-yarn2nix > yarn.nix
-If you have not generated a yarn.lock file before, run
-yarn install
-
-
-#+begin_src nix
-buildPhase = ''
-  yarn build --offline
-'';
-
-distPhase = "true";
-
-configurePhase = "ln -s $node_modules node_modules";
-#+end_src
-
 * buildNimPackage
 #+begin_src nix
 { lib, nimPackages, fetchFromGitHub, }:
@@ -489,68 +358,20 @@ stdenv.mkDerivation rec {
 }
 #+end_src
 
-* autoPatchelfHook binary
-
-cat pkgs/applications/audio/spotify/default.nix
-
-
-#+begin_src nix
-stdenv.mkDerivation rec {
-  name = "studio-link-${version}";
-
-  version = "21.07.0";
-
-  src = fetchurl {
-    url = "https://download.studio.link/releases/v${version}-stable/linux/studio-link-standalone-v${version}.tar.gz";
-    sha256 = "sha256-4CkijAlenhht8tyk3nBULaBPE0GBf6DVII699/RmmWI=";
-  };
-
-  nativeBuildInputs = [
-    autoPatchelfHook
-  ];
-
-  buildInputs = [
-    alsaLib
-    openssl
-    zlib
-    pulseaudio
-  ];
-
-  sourceRoot = ".";
-
-  installPhase = ''
-    install -m755 -D studio-link-standalone-v${version} $out/bin/studio-link
-  '';
-#+end_src>
-
 * electron & appimageTool
-https://github.com/nix-community/nur-combined/blob/master/repos/yes/electronAppImage/default.nix
 
 electron source:
 cat pkgs/servers/web-apps/outline/default.nix
-
-# maybe fix fonts
-ln -s /run/current-system/sw/share/X11/fonts ~/.local/share/fonts
-
-#+begin_src bash 
-yarn install --frozen-lockfile
-yarn build or yarn dev
-#+end_src>
+cat pkgs/servers/web-apps/hedgedoc/default.nix
 
 #+begin_src nix
-    makeWrapper ${appimage-run}/bin/appimage-run $out/bin/${pname} \
-      --add-flags "$src"
-
-    makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/opt/${pname}_v${version}.asar
-
-    makeWrapper ${electron}/bin/electron "$out/bin/${pname}" \
-      --add-flags "$out/share/${source.pname}/app.asar" \
-      --set ELECTRON_IS_DEV 0 \
-      --set NODE_ENV production
+  makeWrapper ${electron}/bin/electron "$out/bin/${pname}" \
+    --add-flags "$out/share/${source.pname}/app.asar" \
+    --set ELECTRON_IS_DEV 0 \
+    --set NODE_ENV production
 #+end_src
 
-** templates - wrapType2
+** AppImage - wrapType2
 #+begin_src nix
   { lib, fetchurl, appimageTools }:
 
@@ -595,7 +416,7 @@ yarn build or yarn dev
   }
 #+end_src
 
-** templates - stdenv
+** AppImage - stdenv
 #+begin_src nix
 { lib
 , stdenv

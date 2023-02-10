@@ -11,9 +11,7 @@ final: prev: {
   # Data
   nixos-helper = prev.callPackage ./nixos-helper { };
   zhudou-sans = prev.callPackage ./zhudou-sans { };
-  lxgw-neoxihei-screen = prev.callPackage ./lxgw-neoxihei-screen { };
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
-  adi1090x-plymouth-themes = prev.callPackage ./adi1090x-plymouth-themes { };
 
   # RIME
   fcitx5-breeze = prev.callPackage ./fcitx5-breeze { };

@@ -6,6 +6,7 @@
 , makeWrapper
 }:
 
+# cat pkgs/servers/web-apps/hedgedoc/default.nix
 mkYarnPackage rec {
   pname = "koodo-reader";
   version = "1.5.1";
@@ -26,13 +27,20 @@ mkYarnPackage rec {
 
   distPhase = "true";
 
+  configurePhase = ''
+    cp -r "$node_modules" node_modules
+    chmod -R u+w node_modules
+  '';
+
   buildPhase = ''
     runHook preBuild
 
-    yarn --offline electron-builder \
-      --dir --linux --x64 \
-      -c.electronDist=${electron}/lib/electron \
-      -c.electronVersion=${electron.version}
+    # export HOME=$(mktemp -d)
+    export NODE_OPTIONS=--openssl-legacy-provider
+    yarn --offline build
+
+    # patchShebangs node_modules
+    # export PATH=$PWD/node_modules/.bin:$PATH
 
     runHook postbuild
   '';
@@ -41,11 +49,11 @@ mkYarnPackage rec {
     runHook preInstall
 
     mkdir -p $out/share/{applications,koodo-reader}
-    cp deps/${pname}/dist/linux-unpacked/resources/app.asar $out/share/${pname}
     cp -r ./* $out/share/koodo-reader
 
     makeWrapper ${electron}/bin/electron $out/bin/${pname} \
-      --add-flags $out/share/${pname}/app.asar
+      --argv0 "koodo-reader" \
+      --add-flags "$out/share/koodo-reader"
 
     runHook postInstall
   '';

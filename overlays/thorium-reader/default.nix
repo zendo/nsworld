@@ -1,29 +1,51 @@
-{ lib, fetchurl, appimageTools }:
-
-let
+{ lib
+, buildNpmPackage
+, fetchFromGitHub
+, electron
+, openssl
+, libsecret
+, esbuild
+}:
+# WIP!!!
+buildNpmPackage rec {
   pname = "thorium-reader";
-  version = "2.1.1";
+  version = "2.2.0";
 
-  src = fetchurl {
-    url = "https://github.com/edrlab/thorium-reader/releases/download/latest-linux/Thorium-${version}-alpha.0.3537141800.AppImage";
-    hash = "sha256-rGt2Ofs9h5SO+5gAqI4BlS2Vn0MAinZlNTI+Pv2Z8q0=";
+  src = fetchFromGitHub {
+    owner = "edrlab";
+    repo = pname;
+    rev = "v${version}";
+    hash = "sha256-I781JIr43TEqnqSWLy45oduj/MIJP72F8etzxxRsCdg=";
   };
 
-  appimageContents = appimageTools.extractType2 { inherit pname version src; };
+  npmDepsHash = "sha256-p9dXz/aDcXyxewZIW0bnylWTsIf9JVGYyW9+J3dQG4s=";
 
-in
-appimageTools.wrapType2 {
-  inherit pname version src;
+  # dontNpmBuild = true;
 
-  extraInstallCommands = ''
-    mv $out/bin/${pname}-${version} $out/bin/${pname}
+  makeCacheWritable = true;
+  npmFlags = [ "--legacy-peer-deps" ];
 
-    install -Dm 444 ${appimageContents}/thorium.desktop -t $out/share/applications
-    cp -a ${appimageContents}/usr/share/icons $out/share/
-
-    substituteInPlace $out/share/applications/thorium.desktop \
-      --replace 'Exec=AppRun' 'Exec=${pname}'
+  npmBuild = ''
+    npm run package:linux
   '';
+
+  # The prepack script runs the build script, which we'd rather do in the build phase.
+  # npmPackFlags = [ "--ignore-scripts" ];
+
+  # NODE_OPTIONS = "--openssl-legacy-provider";
+
+  # ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
+
+  # ESBUILD_BINARY_PATH = "${esbuild}/bin/esbuild";
+  # USE_SYSTEM_LIBDELTACHAT = "true";
+
+  # dontNpmBuild = true;
+
+  # installPhase = ''
+  #     mkdir -p $out
+  #     cp -r node_modules $out/
+  #   '';
+
 
   meta = with lib; {
     description = "A cross platform desktop reading app, based on the Readium Desktop toolkit";
