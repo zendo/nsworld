@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   mkOOSL = config.lib.file.mkOutOfStoreSymlink;
@@ -7,7 +7,7 @@ in
 {
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
-    "${config.xdg.configHome}/emacs/bin"
+    "${config.home.homeDirectory}/.emacs.d/bin"
   ];
 
   home.sessionVariables = {
@@ -16,9 +16,6 @@ in
   };
 
   home.file = {
-    # ".emacs.d/init.el".source = ../emacs/init.el;
-    # ".emacs.d/early-init.el".source = ../emacs/early-init.el;
-    # ".emacs.d/elisp".source = mkOOSL hmDots + "/emacs/elisp";
     ".doom.d".source = mkOOSL hmDots + "/doom";
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
   };
@@ -33,10 +30,14 @@ in
     "wezterm".source = ../dotfiles/wezterm;
     "gtklock".source = ../dotfiles/gtklock;
     "swaylock".source = ../dotfiles/swaylock;
-    "alacritty".source = ../dotfiles/alacritty;
-    "starship.toml".source = ../dotfiles/starship.toml;
-    "radioboat".source = ../dotfiles/radioboat;
     "nix-init".source = ../dotfiles/nix-init;
+    "alacritty".source = ../dotfiles/alacritty;
+    "radioboat".source = ../dotfiles/radioboat;
+    "starship.toml".source = ../dotfiles/starship.toml;
+
+    "emacs/init.el".source = ../dotfiles/emacs/init.el;
+    "emacs/early-init.el".source = ../dotfiles/emacs/early-init.el;
+    "emacs/elisp".source = mkOOSL hmDots + "/emacs/elisp";
 
     "lf".source = mkOOSL hmDots + "/lf";
     "mako".source = mkOOSL hmDots + "/mako";

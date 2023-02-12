@@ -63,7 +63,6 @@
       history = "history 0"; # show whole history
     };
     profileExtra = ''
-      # echo -n "\e[?45l"                        # Fix foot terminal dynamic spinner
       setopt no_nomatch                        # bash wildcard
       unsetopt correct                         # Disable AutoCorrect
 
@@ -99,7 +98,7 @@
       bindkey  "^[[H"   beginning-of-line      # Home key
       bindkey  "^[[F"   end-of-line            # End key
       bindkey '^[[5~' history-beginning-search-backward # Page up key
-      bindkey '^[[6~' history-beginning-search-forward # Page down key
+      bindkey '^[[6~' history-beginning-search-forward  # Page down key
       bindkey "\e[27;2;13~" accept-line        # Shift - enter
       bindkey "\e[27;5;13~" accept-line        # Ctrl - enter
       bindkey '^H' backward-kill-word          # Ctrl - backspace
