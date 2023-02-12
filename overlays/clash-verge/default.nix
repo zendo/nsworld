@@ -46,12 +46,15 @@ stdenv.mkDerivation rec {
     cp -r usr/share $out/share
     ln -s $out/usr/bin/${pname} $out/bin/${pname}
 
+    substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Development' 'Network'
+
     # makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
     #   --prefix PATH : "${lib.makeBinPath [  ]}"
   '';
 
   meta = with lib; {
-    description = "A Clash GUI based on tauri. Supports Windows, macOS and Linux";
+    description = "A Clash GUI based on tauri";
     homepage = "https://github.com/zzzgydi/clash-verge";
     license = licenses.gpl3Plus;
     platforms = [ "x86_64-linux" ];

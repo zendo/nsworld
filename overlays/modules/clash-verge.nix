@@ -38,6 +38,7 @@
         }))
       ];
 
+      # https://github.com/zzzgydi/clash-verge/issues/182
       security.wrappers.clash-verge = lib.mkIf cfg.tunMode {
         owner = "root";
         group = "root";
