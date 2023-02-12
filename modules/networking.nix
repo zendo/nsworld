@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
 
   imports = [
-    ../overlays/modules/clash-verge.nix
+    ../overlays/services/clash-verge.nix
   ];
 
   programs.clash-verge = {

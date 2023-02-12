@@ -1,7 +1,7 @@
 { config, pkgs, lib, username, ... }: {
 
   imports = [
-    # ../overlays/modules/gtklock.nix
+    # ../overlays/services/gtklock.nix
   ];
 
   services = {
@@ -75,8 +75,8 @@
     { config, pkgs, ... }: {
 
       imports = [
-        ../overlays/modules/wob.nix
-        ../overlays/modules/polkit.nix
+        ../overlays/services/wob.nix
+        ../overlays/services/polkit.nix
       ];
 
       home.packages = with pkgs; [
