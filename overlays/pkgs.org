@@ -358,18 +358,7 @@ stdenv.mkDerivation rec {
 }
 #+end_src
 
-* electron & appimageTool
-
-electron source:
-cat pkgs/servers/web-apps/outline/default.nix
-cat pkgs/servers/web-apps/hedgedoc/default.nix
-
-#+begin_src nix
-  makeWrapper ${electron}/bin/electron "$out/bin/${pname}" \
-    --add-flags "$out/share/${source.pname}/app.asar" \
-    --set ELECTRON_IS_DEV 0 \
-    --set NODE_ENV production
-#+end_src
+* deb & appimageTool
 
 ** AppImage - wrapType2
 #+begin_src nix
@@ -488,8 +477,48 @@ stdenv.mkDerivation rec {
     '';
 #+end_src
 
-* qt
-qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default.nix
+* electron
+
+cat pkgs/servers/web-apps/outline/default.nix
+cat pkgs/servers/web-apps/hedgedoc/default.nix
+
+#+begin_src nix
+  buildPhase = ''
+    runHook preBuild
+
+    yarn --offline electron-builder \
+      --dir --linux --x64 \
+      -c.electronDist=${electron}/lib/electron \
+      -c.electronVersion=${electron.version}
+
+    runHook postBuild
+  '';
+
+  mkdir -p $out/share/{applications,${pname}}
+  cp deps/${pname}/dist/linux-unpacked/resources/app.asar $out/share/${pname}
+
+  pushd deps/nightpdf/build/icon.iconset
+  for image in *png; do
+    mkdir -p $out/share/icons/hicolor/''${image%.png}/apps
+    cp -r $image $out/share/icons/hicolor/''${image%.png}/apps/${pname}.png
+  done
+  popd
+#+end_src
+
+#+begin_src nix
+
+  makeWrapper ${electron}/bin/electron $out/bin/${pname} \
+    --add-flags $out/share/${pname}/app.asar
+
+  makeWrapper ${electron}/bin/electron $out/bin/${pname} \
+    --argv0 "${pname}" \
+    --add-flags "$out/share/${pname}"
+
+  makeWrapper ${electron}/bin/electron "$out/bin/${pname}" \
+    --add-flags "$out/share/${source.pname}/app.asar" \
+    --set ELECTRON_IS_DEV 0 \
+    --set NODE_ENV production
+#+end_src
 
 * wrapper
 #+begin_src nix
@@ -505,14 +534,8 @@ qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default
   '';
 
   preFixup = ''
-    gappsWrapperArgs+=(
+    gappsWrapperArgs+=(    // qtWrapperArgs+=(
       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
-    )
-  '';
-
-  preFixup = ''
-    qtWrapperArgs+=(
-       --prefix PATH : "${lib.makeBinPath [ffmpeg-full]}"
     )
   '';
 
@@ -521,10 +544,6 @@ qmake: https://github.com/wineee/nur-packages/blob/main/packages/landrop/default
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.desktop -t $out/share/applications/
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.svg -t $out/share/icons/hicolor/scalable/apps/
     install -Dm444 src/resources/com.github.weclaw1.ImageRoll.metainfo.xml -t $out/share/metainfo/
-  '';
-
-  postInstall = ''
-    ln -s $out/bin/com.github.cassidyjames.dippi $out/bin/dippi
   '';
 #+end_src
 

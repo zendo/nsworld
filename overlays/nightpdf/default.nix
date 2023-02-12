@@ -2,10 +2,10 @@
 , fetchFromGitHub
 , mkYarnPackage
 , fetchYarnDeps
-, electron
 , makeDesktopItem
 , copyDesktopItems
 , makeWrapper
+, electron
 }:
 
 mkYarnPackage rec {
@@ -45,18 +45,11 @@ mkYarnPackage rec {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/share/{applications,nightpdf}
+    mkdir -p $out/share/{applications,${pname}}
     cp deps/${pname}/dist/linux-unpacked/resources/app.asar $out/share/${pname}
 
-    # pushd deps/nightpdf/build/icon.iconset
-    # for image in *png; do
-    #   mkdir -p $out/share/icons/hicolor/''${image%.png}/apps
-    #   cp -r $image $out/share/icons/hicolor/''${image%.png}/apps/nightpdf.png
-    # done
-    # popd
-
     for size in 16 32 128 256 512; do
-      install -D deps/nightpdf/build/icon.iconset/icon_''${size}x''${size}.png \
+      install -D deps/${pname}/build/icon.iconset/icon_''${size}x''${size}.png \
         $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
     done
 

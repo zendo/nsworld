@@ -18,10 +18,14 @@ mkYarnPackage rec {
     hash = "sha256-5H43kLxtjUvn4vwhdy3oCA8Iw+yQ+KBocQLemXiVhUA=";
   };
 
-  offlineCache = fetchYarnDeps {
-    yarnLock = src + "/yarn.lock";
-    hash = "sha256-Qrn99eOKndbg+8zH5YEog0DwL5Jh18hCCEzVCg1uHu8=";
-  };
+  # offlineCache = fetchYarnDeps {
+  #   yarnLock = src + "/yarn.lock";
+  #   hash = "sha256-Qrn99eOKndbg+8zH5YEog0DwL5Jh18hCCEzVCg1uHu8=";
+  # };
+
+  yarnNix = ./yarn.nix;
+  packageJSON = ./package.json;
+  yarnLock = ./yarn.lock;
 
   nativeBuildInputs = [ makeWrapper ];
 
@@ -49,7 +53,10 @@ mkYarnPackage rec {
     runHook preInstall
 
     mkdir -p $out/share/{applications,koodo-reader}
+    # cp -r ./* $out/share/koodo-reader
+    # mkdir -p $out/share
     cp -r ./* $out/share/koodo-reader
+    rm -r $out/share/koodo-reader/node_modules/{app-builder-bin,typescript,.cache}
 
     makeWrapper ${electron}/bin/electron $out/bin/${pname} \
       --argv0 "koodo-reader" \

@@ -51,6 +51,7 @@
         "space-bar@luchrioh"
         "gradienttopbar@pshow.org"
         "nightthemeswitcher@romainvigier.fr"
+        "caffeine@patapon.info"
         # "appindicatorsupport@rgcjonas.gmail.com"
       ];
       favorite-apps = [

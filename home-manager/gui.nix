@@ -7,7 +7,7 @@ in
 {
   home.packages = with pkgs; [
     iotas
-    # nightpdf
+    nightpdf
     azcomicv
     # clash-verge
     # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
@@ -30,14 +30,12 @@ in
     #   proprietaryCodecs = true;
     #   enableWidevine = true; # drm
     # })
-    # microsoft-edge-beta
     # (opera.override { proprietaryCodecs = true; })
-
-    # Social media
-    tdesktop # (webkitgtk)
+    # microsoft-edge-beta
     # nheko
     # fractal-next
     # discord
+    tdesktop # (webkitgtk)
 
     # Multi-media
     (spotify.override {

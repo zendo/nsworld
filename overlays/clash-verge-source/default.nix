@@ -55,6 +55,11 @@ let
 
     distPhase = "true";
     # dontInstall = true;
+
+    postBuild = ''
+       mkdir -p src-tauri/sidecar
+       cp ${lib.getExe clash-premium} src-tauri/sidecar/clash-x86_64-unknown-linux-gnu
+    '';
   };
 in
 rustPlatform.buildRustPackage rec {
