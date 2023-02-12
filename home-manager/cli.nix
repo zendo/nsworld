@@ -5,11 +5,8 @@
     nixos-helper
     nixpkgs-fmt
     # alejandra
-    # nixfmt
     # nil # lsp
-    # rnix-lsp
     lorri
-    # nvd # nix profile diff
     # cachix
     nixos-generators
     # nix-template
@@ -24,7 +21,6 @@
     comma # ,
     nix-alien # Run binaries
     # nix-output-monitor
-    # nvfetcher
 
     # Developing
     jq
@@ -35,7 +31,6 @@
     gitui
     # onefetch
     efm-langserver # markdown lsp
-    # distrobox
     gnumake
     # python3
 
@@ -44,8 +39,8 @@
     unzip
     unrar
     ouch
-    patool
-    atool
+    # patool
+    # atool
     trash-cli
 
     # FileManager
@@ -55,7 +50,8 @@
     sd
     choose
     sops
-    rage # age encrypt RIIR
+    age
+    # rage # age encrypt RIIR
     lf
     # ctpv
     viu # image viewer

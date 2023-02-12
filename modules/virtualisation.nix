@@ -33,6 +33,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     bridge-utils
+    # distrobox
     # bottles # wine manager
     # yuzu
     # gnome.gnome-boxes

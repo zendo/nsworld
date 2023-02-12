@@ -2,10 +2,6 @@
 
   programs.bash = {
     enable = true;
-    # shellAliases = {
-    # };
-    # bashrcExtra = ''
-    # '';
   };
 
   # ~/.inputrc
