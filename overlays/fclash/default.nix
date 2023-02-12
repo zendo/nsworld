@@ -15,6 +15,7 @@
   , libappindicator-gtk3
 }:
 
+# WIP!!!
 # https://nixos.wiki/wiki/Flutter
 flutter.mkFlutterApp rec {
   pname = "fclash";

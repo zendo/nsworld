@@ -6,6 +6,7 @@
 , makeWrapper
 }:
 
+# WIP!!!
 # cat pkgs/servers/web-apps/hedgedoc/default.nix
 mkYarnPackage rec {
   pname = "koodo-reader";

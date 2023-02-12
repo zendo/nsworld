@@ -52,7 +52,7 @@
         "gradienttopbar@pshow.org"
         "nightthemeswitcher@romainvigier.fr"
         "caffeine@patapon.info"
-        # "appindicatorsupport@rgcjonas.gmail.com"
+        "appindicatorsupport@rgcjonas.gmail.com"
       ];
       favorite-apps = [
         "kitty.desktop"

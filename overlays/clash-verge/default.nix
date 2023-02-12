@@ -2,12 +2,11 @@
 , stdenv
 , fetchurl
 , dpkg
-, autoPatchelfHook
 , makeWrapper
-, udev
+, autoPatchelfHook
 , openssl
 , webkitgtk
-, libcap
+, udev
 , libappindicator-gtk3
 , libayatana-appindicator
 }:
@@ -45,10 +44,10 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp -r usr $out
     cp -r usr/share $out/share
+    ln -s $out/usr/bin/${pname} $out/bin/${pname}
 
-    # works?
-    makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
-      --prefix PATH : "${lib.makeBinPath [ libcap ]}"
+    # makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
+    #   --prefix PATH : "${lib.makeBinPath [  ]}"
   '';
 
   meta = with lib; {
@@ -56,7 +55,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/zzzgydi/clash-verge";
     license = licenses.gpl3Plus;
     platforms = [ "x86_64-linux" ];
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     maintainers = with maintainers; [ zendo ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
   };
 }

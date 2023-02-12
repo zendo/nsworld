@@ -28,6 +28,11 @@ buildGoModule rec {
     "-X github.com/Dreamacro/clash/constant.Version=${version}"
   ];
 
+  # https://github.com/MetaCubeX/Clash.Meta/blob/667f42dcdcaacfef0c6cd84d38267d5971315f0d/Makefile#L15
+  tags = [
+    "with_gvisor" # tun mode
+  ];
+
   # network required
   doCheck = false;
 
