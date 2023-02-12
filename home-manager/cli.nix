@@ -187,8 +187,6 @@
     enable = true;
   };
 
-  # AstroNvim
-  # git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
   programs.neovim = {
     enable = true;
     viAlias = true;

@@ -87,6 +87,12 @@
   #######################################################################
   services.btrfs.autoScrub.enable = true;
   fileSystems."/".options = [ "compress=zstd" "autodefrag" "noatime" ];
+  # fileSystems = {
+  #   "/".options = [ "compress=zstd" ];
+  #   "/home".options = [ "compress=zstd" ];
+  #   "/nix".options = [ "compress=zstd" "noatime" ];
+  #   "/swap".options = [ "noatime" ];
+  # };
 
   # Swapfile
   # https://github.com/NixOS/nixpkgs/pull/194343

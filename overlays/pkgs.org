@@ -562,8 +562,9 @@ ${placeholder "out"}
     longDescription = ''
     '';
     homepage = "";
-    license = licenses.mit;
-    platforms = platforms.unix;
+    mainProgram = "";
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
     maintainers = with maintainers; [ zendo ];
   };
 #+end_src
