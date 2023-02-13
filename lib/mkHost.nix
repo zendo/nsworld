@@ -36,7 +36,11 @@ nixpkgs.lib.nixosSystem {
       hardware.enableRedistributableFirmware = true;
 
       networking.hostName = "${hostname}";
-      # services.xserver.displayManager.autoLogin.user = "${username}";
+
+      services.xserver.displayManager.autoLogin.user = "${username}";
+      # Fix: https://nixos.wiki/wiki/GNOME
+      systemd.services."getty@tty1".enable = false;
+      systemd.services."autovt@tty1".enable = false;
     }
 
   ] ++ nixpkgs.lib.optionals virtEnable [

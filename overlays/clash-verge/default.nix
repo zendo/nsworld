@@ -2,7 +2,7 @@
 , stdenv
 , fetchurl
 , dpkg
-, makeWrapper
+, wrapGAppsHook
 , autoPatchelfHook
 , openssl
 , webkitgtk
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     dpkg
-    makeWrapper
+    wrapGAppsHook
     autoPatchelfHook
   ];
 

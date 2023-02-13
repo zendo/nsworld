@@ -29,7 +29,7 @@
       auto-optimise-store = true;
       flake-registry = /etc/nix/registry.json;
 
-      substituters = [
+      substituters = lib.mkForce [
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=30"
         # "https://mirrors.ustc.edu.cn/nix-channels/store"

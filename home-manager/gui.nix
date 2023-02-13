@@ -9,8 +9,6 @@ in
     iotas
     nightpdf
     azcomicv
-    # clash-verge
-    # (makeAutostartItem { name = "clash-verge"; package = clash-verge; })
 
     # foot
     kitty

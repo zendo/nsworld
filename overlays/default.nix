@@ -108,15 +108,15 @@ final: prev: {
 
   # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
-    sddm = prevy.sddm.overrideAttrs (oldAttrs: {
-      src = prev.fetchFromGitHub {
-        owner = "sddm";
-        repo = "sddm";
-        rev = "c42bb38036eae02c1fe274a37c5a9b4915146004";
-        hash = "sha256-h9XPVCYb7RB+XqyV19klqEhR60HKCTThIOJtbroRmcQ=";
-      };
-      patches = [ ];
-    });
+    # sddm = prevy.sddm.overrideAttrs (oldAttrs: {
+    #   src = prev.fetchFromGitHub {
+    #     owner = "sddm";
+    #     repo = "sddm";
+    #     rev = "c42bb38036eae02c1fe274a37c5a9b4915146004";
+    #     hash = "sha256-h9XPVCYb7RB+XqyV19klqEhR60HKCTThIOJtbroRmcQ=";
+    #   };
+    #   patches = [ ];
+    # });
   });
 
 
