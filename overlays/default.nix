@@ -10,7 +10,6 @@ final: prev: {
 
   # Data
   nixos-helper = prev.callPackage ./nixos-helper { };
-  zhudou-sans = prev.callPackage ./zhudou-sans { };
   sddm-theme-astronaut = prev.callPackage ./sddm-theme-astronaut { };
 
   # RIME
@@ -55,11 +54,7 @@ final: prev: {
   v2ray-desktop = prev.libsForQt5.callPackage ./v2ray-desktop { };
 
   # Python
-  textsnatcher = prev.callPackage ./textsnatcher { };
-  bt-dualboot = prev.callPackage ./bt-dualboot { };
-  konsave = prev.callPackage ./konsave { };
   iotas = prev.callPackage ./iotas { };
-  zdict = prev.callPackage ./zdict { };
   gestures-gtk = prev.callPackage ./gestures-gtk { }; #WIP!!
 
   # Python Module Overlays

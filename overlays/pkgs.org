@@ -1,88 +1,6 @@
 #+STARTUP: show2levels indent hidestars
 
 * buildRustPackage
-** gui gtk4
-#+begin_src nix
-  {
-    lib,
-    stdenv,
-    fetchFromGitLab,
-    rustPlatform,
-    desktop-file-utils,
-    appstream-glib,
-    meson,
-    ninja,
-    pkg-config,
-    reuse,
-    wrapGAppsHook,
-    glib,
-    gtk4,
-    gst_all_1,
-    libadwaita,
-    dbus,
-  }:
-  stdenv.mkDerivation rec {
-    pname = "amberol";
-    version = "0.3.0";
-
-    src = fetchFromGitLab {
-      domain = "gitlab.gnome.org";
-      owner = "ebassi";
-      repo = pname;
-      rev = version;
-      hash = "sha256-+9lrSkjk7V+ZnIhmhw7lEiEywDp5adoAW+5PEAlhpSI=";
-    };
-
-    cargoDeps = rustPlatform.fetchCargoTarball {
-      inherit src;
-      name = "${pname}-${version}";
-      hash = "sha256-ZJiD6RshEjZ7h+/KYcY+ZjL5fHRb5+RKgIdgbD6LdkA=";
-    };
-
-    postPatch = ''
-      patchS
-      hebangs build-aux
-    '';
-
-    nativeBuildInputs = [
-      appstream-glib
-      desktop-file-utils
-      meson
-      ninja
-      pkg-config
-      reuse
-      wrapGAppsHook
-    ]
-    ++ (with rustPlatform; [
-      cargoSetupHook
-      rust.cargo
-      rust.rustc
-    ]);
-
-    buildInputs = [
-      glib
-      gtk4
-      libadwaita
-      dbus
-    ]  ++ (with gst_all_1; [
-      gstreamer
-      gst-libav
-      gst-plugins-base
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-    ]);
-
-    meta = with lib; {
-      homepage = "https://gitlab.gnome.org/ebassi/amberol";
-      description = "A small and simple sound and music player";
-      license = licenses.gpl3Plus;
-      platforms = platforms.linux;
-      maintainers = with maintainers; [ linsui ];
-    };
-  }
-#+end_src
-
 ** cargo.lock script
 
 cargoPatches = [ ./cargo-lock.patch ];
@@ -113,17 +31,9 @@ rm -rf "$checkout"
 ** notes
 #+begin_src nix
 
-  # dialect / gnome-frog
-
-  # setup.py and pyproject.toml not found
-  format = "other";
-
   buildPhase = "./build.py";
 
   installPhase = "./install.py";
-
-  # Specify runtime dependencies for the package
-  propagatedBuildInputs = with python3.pkgs; [pyyaml];
 
   postPatch = ''
     chmod +x build-aux/meson/postinstall.py
@@ -131,7 +41,7 @@ rm -rf "$checkout"
     ----------------------------------
     sed -i '21,41d' meson.build # 删除 21-41 行
     substituteInPlace requirements.txt \
-    --replace 'PyYaml==5.4.1' 'PyYaml'
+      --replace 'PyYaml==5.4.1' 'PyYaml'
     substituteInPlace ./build-aux/meson/postinstall.py \
       --replace "gtk-update-icon-cache" "gtk4-update-icon-cache"
   '';
@@ -141,12 +51,6 @@ rm -rf "$checkout"
     sed -i '$ d' meson.build
   '';
 
-  # fix gi.repository import Gio
-  pythonPath = with python3.pkgs; requiredPythonModules [ pygobject3 ];
-
-  propagatedNativeBuildInputs = [
-  ];
-
   checkInputs = [ python3.pkgs.pytestCheckHook ];
 
   # checkInputs = [ python3.pkgs.pytest ];
@@ -155,10 +59,6 @@ rm -rf "$checkout"
   #   export HOME=$(mktemp -d)
   #   pytest
   # '';
-
-  pythonImportsCheck = [
-    "wordbook"
-  ];
 
   # homeless-shelter: permission denied
   preConfigure = ''
@@ -358,7 +258,7 @@ stdenv.mkDerivation rec {
 }
 #+end_src
 
-* deb & appimageTool
+* appimageTool
 
 ** AppImage - wrapType2
 #+begin_src nix
@@ -462,21 +362,6 @@ stdenv.mkDerivation rec {
 }
 #+end_src
 
-** deb templates
-#+begin_src nix
-  installPhase = ''
-      mkdir -p $out/bin
-
-      # 复制出客户端的 Javascript 部分，其它的不要了
-      cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
-
-      # 生成 bilibili 命令，运行这个命令时会调用 electron 加载客户端的 Javascript 包（$out/opt/app.asar）
-      makeWrapper ${electron}/bin/electron $out/bin/bilibili \
-        --argv0 "bilibili" \
-        --add-flags "$out/opt/app.asar"
-    '';
-#+end_src
-
 * electron
 
 cat pkgs/servers/web-apps/outline/default.nix
@@ -496,13 +381,6 @@ cat pkgs/servers/web-apps/hedgedoc/default.nix
 
   mkdir -p $out/share/{applications,${pname}}
   cp deps/${pname}/dist/linux-unpacked/resources/app.asar $out/share/${pname}
-
-  pushd deps/nightpdf/build/icon.iconset
-  for image in *png; do
-    mkdir -p $out/share/icons/hicolor/''${image%.png}/apps
-    cp -r $image $out/share/icons/hicolor/''${image%.png}/apps/${pname}.png
-  done
-  popd
 #+end_src
 
 #+begin_src nix
@@ -552,7 +430,20 @@ cat pkgs/servers/web-apps/hedgedoc/default.nix
 #+begin_src bash
 mkdir -p $out/share/fonts/{opentype,truetype}
 unzip -j $downloadedFile -d $out/share/fonts/mononoki
+find . -name '*.ttf' -exec install -Dm644 -t $out/share/fonts/truetype {} \;
 ${placeholder "out"}
+
+for size in 16 32 128 256 512; do
+  install -D deps/${pname}/build/icon.iconset/icon_''${size}x''${size}.png \
+    $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
+done
+
+pushd deps/nightpdf/build/icon.iconset
+  for image in *png; do
+  mkdir -p $out/share/icons/hicolor/''${image%.png}/apps
+  cp -r $image $out/share/icons/hicolor/''${image%.png}/apps/${pname}.png
+  done
+popd
 #+end_src>
 
 * meta

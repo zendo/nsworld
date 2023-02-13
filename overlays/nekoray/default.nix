@@ -18,14 +18,15 @@
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=nekoray
 stdenv.mkDerivation rec {
   pname = "nekoray";
-  version = "2.14";
+  version = "2.15";
 
   src = fetchFromGitHub {
     owner = "MatsuriDayo";
     repo = pname;
-    rev = version;
+    # rev = version;
+    rev = "fbffd4e6066660037a7d64389979d7c615faf248";
     fetchSubmodules = true;
-    hash = "sha256-vZyOsG8M/ZMRgk5gTpMZlerJp1+vvZP3N3QjtOAWLLk=";
+    hash = "sha256-pxezOwiXtHT47e5MedzCO3S+u6SMTu26faXVohkpYlc=";
   };
 
   # binTarball = fetchurl {
@@ -51,7 +52,7 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [
-    "-DNKR_NO_EXTERNAL=zxing" # need zxing-cpp 1.3.0
+    # "-DNKR_NO_EXTERNAL=zxing" # need zxing-cpp 1.3.0
     # "-DNKR_PACKAGE=true" # ?
   ];
 
