@@ -101,11 +101,11 @@ while [[ $# -gt 0 ]]; do
             shift ;;
 
         references)
-            nix-store -q --references "$(readlink -f "$(which "$2")")"
+            nix-store -q --references "$2"
             shift ;;
 
         depends)
-            nix path-info -rsSh "$(readlink -f "$(which "$2")")"
+            nix path-info -rsSh "$2"
             shift ;;
 
         git-fetch-merge)

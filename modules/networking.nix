@@ -2,11 +2,17 @@
 
   imports = [
     ../overlays/services/clash-verge.nix
+    ../overlays/services/clash-for-windows.nix
   ];
 
   programs.clash-verge = {
     enable = true;
     tunMode = true;
+    autoStart = true;
+  };
+
+  programs.clash-for-windows = {
+    enable = false;
     autoStart = true;
   };
 

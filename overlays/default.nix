@@ -27,9 +27,12 @@ final: prev: {
 
   # deb / autoPatchelf
   xmind = prev.callPackage ./xmind { };
+  freedownloadmanager = prev.callPackage ./freedownloadmanager { };
   clash-verge = prev.callPackage ./clash-verge { };
   clash-verge-source = prev.callPackage ./clash-verge-source { };
-  freedownloadmanager = prev.callPackage ./freedownloadmanager { };
+  clash-for-windows = prev.callPackage ./clash-for-windows { };
+  clash-meta = prev.callPackage ./clash-meta { };
+  clash-premium = prev.callPackage ./clash-premium { };
 
   # C
   xclicker = prev.callPackage ./xclicker { };
@@ -40,11 +43,8 @@ final: prev: {
   # mousai = prev.callPackage ./mousai {};
   sniffnet = prev.callPackage ./sniffnet { }; # iced
   gnome-metronome = prev.callPackage ./gnome-metronome { };
-  charcoal-dict = prev.callPackage ./charcoal-dict { };
 
   # Go
-  clash-meta = prev.callPackage ./clash-meta { };
-  clash-premium = prev.callPackage ./clash-premium { };
 
   # Gtk
   paleta = prev.callPackage ./paleta { };
@@ -52,6 +52,7 @@ final: prev: {
   # Qt
   nekoray = prev.libsForQt5.callPackage ./nekoray { };
   aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre { };
+  v2ray-desktop = prev.libsForQt5.callPackage ./v2ray-desktop { };
 
   # Python
   textsnatcher = prev.callPackage ./textsnatcher { };

@@ -130,7 +130,7 @@ in
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-bin;
+    # package = pkgs.firefox-bin;
     # profiles."default".extraConfig = ''
     #   # drm
     #   "media.eme.enabled" = true;
