@@ -6,13 +6,14 @@
   ];
 
   programs.clash-verge = {
-    enable = true;
+    enable = false;
     tunMode = true;
     autoStart = true;
   };
 
   programs.clash-for-windows = {
     enable = false;
+    tunMode = true;
     autoStart = true;
   };
 

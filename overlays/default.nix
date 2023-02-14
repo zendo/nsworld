@@ -7,6 +7,7 @@ final: prev: {
     -I nixpkgs=flake:github:NixOS/nixpkgs/$(nixos-version --revision)
   */
 
+  # amdvlk = prev.callPackage ./amdvlk { };
 
   # Data
   nixos-helper = prev.callPackage ./nixos-helper { };

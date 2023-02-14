@@ -74,13 +74,13 @@ stdenv.mkDerivation rec {
     mkdir -p "$out/share/applications"
     install "${desktopItem}/share/applications/"* "$out/share/applications/"
 
-    icon_dir="$out/share/icons/hicolor"
-    for s in 16 24 32 48 64 128 256; do
-      size="''${s}x''${s}"
-      echo "create icon \"$size\""
-      mkdir -p "$icon_dir/$size/apps"
-      ${imagemagick}/bin/convert -resize "$size" "${icon}" "$icon_dir/$size/apps/clash-for-windows.png"
-    done
+    # icon_dir="$out/share/icons/hicolor"
+    # for s in 16 24 32 48 64 128 256; do
+    #   size="''${s}x''${s}"
+    #   echo "create icon \"$size\""
+    #   mkdir -p "$icon_dir/$size/apps"
+    #   ${imagemagick}/bin/convert -resize "$size" "${icon}" "$icon_dir/$size/apps/clash-for-windows.png"
+    # done
   '';
 
   meta = with lib; {

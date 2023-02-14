@@ -1,14 +1,29 @@
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
 
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote # Secure Boot
 
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-    inputs.nixos-hardware.nixosModules.common-gpu-amd
+    # inputs.nixos-hardware.nixosModules.common-gpu-amd
     # inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     # cpupower frequency-info
     # cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver
     # ls /sys/devices/system/cpu/cpu0/   :show CPPCCPPC
+  ];
+
+  # AMD GPU Temporary
+  services.xserver.videoDrivers = lib.mkDefault [ "amdgpu" ];
+
+  hardware.opengl = {
+    driSupport = lib.mkDefault true;
+    driSupport32Bit = lib.mkDefault true;
+  };
+
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
+  hardware.opengl.extraPackages = with pkgs; [
+    rocm-opencl-icd
+    rocm-opencl-runtime
   ];
 
   #######################################################################

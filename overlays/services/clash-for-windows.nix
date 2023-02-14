@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # WIP!!!
   options.programs.clash-for-windows = {
     enable = lib.mkEnableOption (lib.mdDoc ''
       clash-for-windows.
@@ -39,33 +38,29 @@
         source = "${lib.getExe pkgs.clash-for-windows}";
       };
 
-      # https://github.com/Fndroid/clash_for_windows_pkg/issues/3464
       systemd.services.clash-for-windows = lib.mkIf cfg.tunMode {
         unitConfig = {
           Description = "clash-for-windows service";
-          Documentation = "https://github.com/v2rayA/v2rayA/wiki";
+          Documentation = "https://github.com/Fndroid/clash_for_windows_pkg/issues/3464";
           After = [
             "network.target"
-            # "nss-lookup.target"
-            "network-online.target "
+            "network-online.target"
             "nftables.service"
             "iptables.service"
             # "ip6tables.service"
+            # "nss-lookup.target"
           ];
-          # Wants = [ "network.target" ];
-          Wants = [ "network.target" ];
         };
 
         serviceConfig = {
           # User = "root";
           ExecStart = "${pkgs.clash-for-windows}/opt/clash-for-windows/resources/static/files/linux/x64/service/clash-core-service";
-          # Environment = [ "V2RAYA_LOG_FILE=/var/log/v2raya/v2raya.log" ];
-          # LimitNPROC = 500;
-          # LimitNOFILE = 1000000;
           Restart = "always";
           RestartSec = 5;
           Type = "simple";
         };
+
+        wantedBy = [ "multi-user.target" ];
       };
 
       meta.maintainers = with lib.maintainers; [ zendo ];

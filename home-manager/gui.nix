@@ -7,8 +7,8 @@ in
 {
   home.packages = with pkgs; [
     iotas
-    nightpdf
-    azcomicv
+    # nightpdf
+    # azcomicv
 
     # foot
     kitty
@@ -36,9 +36,9 @@ in
     tdesktop # (webkitgtk)
 
     # Multi-media
-    (spotify.override {
-      deviceScaleFactor = 2;
-    })
+    # (spotify.override {
+    #   deviceScaleFactor = 2;
+    # })
     # spot # Premium accounts!
     # vlc
     # ffmpeg
