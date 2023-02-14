@@ -9,7 +9,8 @@
 # -v --verbose             冗长显示输出结果
 ##################################################################
 
-this_dir=$(cd "$(dirname "$0")";pwd) #current dir
+# this_dir=$(cd "$(dirname "$0")";pwd) #current dir
+this_dir=$( dirname -- "$( readlink -f -- "$0"; )"; ) #current dir
 
 # -e exists
 if [[ ! -e "$HOME/.config/ibus/rime" ]]; then

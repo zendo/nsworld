@@ -61,7 +61,7 @@
   */
   boot.lanzaboote = {
     enable = true;
-    configurationLimit = 5;
+    configurationLimit = 8;
     pkiBundle = "/etc/secureboot";
   };
 
@@ -72,7 +72,7 @@
     };
     systemd-boot = {
       enable = false;
-      configurationLimit = 5; # bootmenu items
+      configurationLimit = 8; # bootmenu items
       consoleMode = "max";
     };
     grub = {

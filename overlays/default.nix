@@ -8,6 +8,7 @@ final: prev: {
   */
 
   # amdvlk = prev.callPackage ./amdvlk { };
+  spotify = prev.callPackage ./spotify { };
 
   # Data
   nixos-helper = prev.callPackage ./nixos-helper { };
@@ -104,15 +105,15 @@ final: prev: {
 
   # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
-    # sddm = prevy.sddm.overrideAttrs (oldAttrs: {
-    #   src = prev.fetchFromGitHub {
-    #     owner = "sddm";
-    #     repo = "sddm";
-    #     rev = "c42bb38036eae02c1fe274a37c5a9b4915146004";
-    #     hash = "sha256-h9XPVCYb7RB+XqyV19klqEhR60HKCTThIOJtbroRmcQ=";
-    #   };
-    #   patches = [ ];
-    # });
+    sddm = prevy.sddm.overrideAttrs (oldAttrs: {
+      src = prev.fetchFromGitHub {
+        owner = "sddm";
+        repo = "sddm";
+        rev = "bf69d7badacdbef9ff4de203b8d08ee1dd796e30";
+        hash = "sha256-raszEq/GkCH8rSFGBzj5rMXWwSR3w8NlJbveY57grUE=";
+      };
+      patches = [ ];
+    });
   });
 
 

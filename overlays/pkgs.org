@@ -438,6 +438,13 @@ for size in 16 32 128 256 512; do
     $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
 done
 
+for i in 16 22 24 32 48 64 128 256 512; do
+  ixi="$i"x"$i"
+  mkdir -p "$out/share/icons/hicolor/$ixi/apps"
+  ln -s "$out/share/spotify/icons/spotify-linux-$i.png" \
+    "$out/share/icons/hicolor/$ixi/apps/spotify-client.png"
+done
+
 pushd deps/nightpdf/build/icon.iconset
   for image in *png; do
   mkdir -p $out/share/icons/hicolor/''${image%.png}/apps
