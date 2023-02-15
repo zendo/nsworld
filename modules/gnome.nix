@@ -27,7 +27,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # gthumb
+    gthumb
     # authenticator
     gparted
     dconf2nix

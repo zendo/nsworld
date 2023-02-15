@@ -8,7 +8,6 @@ final: prev: {
   */
 
   # amdvlk = prev.callPackage ./amdvlk { };
-  spotify = prev.callPackage ./spotify { };
 
   # Data
   nixos-helper = prev.callPackage ./nixos-helper { };
@@ -27,6 +26,7 @@ final: prev: {
   music-you = prev.callPackage ./music-you { };
 
   # deb / autoPatchelf
+  he3 = prev.callPackage ./he3 { };
   xmind = prev.callPackage ./xmind { };
   freedownloadmanager = prev.callPackage ./freedownloadmanager { };
   clash-verge = prev.callPackage ./clash-verge { };

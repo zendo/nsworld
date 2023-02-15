@@ -5,29 +5,42 @@
 , openssl
 , libsecret
 , esbuild
+, pkg-config
+, python3
 }:
 # WIP!!!
 buildNpmPackage rec {
   pname = "thorium-reader";
-  version = "2.2.0";
+  version = "2.3.0-alpha.1";
 
   src = fetchFromGitHub {
     owner = "edrlab";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-I781JIr43TEqnqSWLy45oduj/MIJP72F8etzxxRsCdg=";
+    rev = "latest-linux";
+    hash = "sha256-Y2WAzmX2ThBUdBv2qQ8kvhLdFPgpY2kOmfEVC2sbuFM=";
   };
 
-  npmDepsHash = "sha256-p9dXz/aDcXyxewZIW0bnylWTsIf9JVGYyW9+J3dQG4s=";
+  npmDepsHash = "sha256-p9dXz/aDcXyxewZsW0bnylWTsIf9JVGYyW9+J3dQG4s=";
 
   # dontNpmBuild = true;
 
-  makeCacheWritable = true;
-  npmFlags = [ "--legacy-peer-deps" ];
+  # postPatch = ''
+  #   substituteInPlace package.json --replace '"version": "0.0.0"' '"version": "${version}"'
+  # '';
 
-  npmBuild = ''
-    npm run package:linux
-  '';
+  # nativeBuildInputs = [ pkg-config python3 ];
+
+  # buildInputs = [ libsecret electron];
+
+  makeCacheWritable = true;
+  npmFlags = [
+    "--legacy-peer-deps"
+    "--ignore-scripts"
+  ];
+
+  # npmBuild = ''
+  #   npm run package:linux
+  # '';
 
   # The prepack script runs the build script, which we'd rather do in the build phase.
   # npmPackFlags = [ "--ignore-scripts" ];
