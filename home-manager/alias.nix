@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
 
   home.shellAliases = {
-    cat = "bat -p";
-    l = "exa -l --icons";
+    cat = "${lib.getExe pkgs.bat} -p";
+    l = "${lib.getExe pkgs.exa} -l --icons";
     "la." = "ls -d .*";
-    rm = "trash-put";
+    rm = "${pkgs.trash-cli}/bin/trash-put";
     free = "free -h";
     tree = "${lib.getExe pkgs.erdtree}";
     bc = "${lib.getExe pkgs.libqalculate}";
@@ -14,7 +14,7 @@
 
     inxi = "inxi -Fz";
     ip = "ip --color=auto";
-    nload = "nload devices wlp1s0";
+    nload = "${lib.getExe pkgs.nload} devices wlp1s0";
 
     wttr = "curl \"wttr.in/Huadu\?0\&lang=zh\"";
     paste-ixio = "curl -F 'f:1=<-' ix.io";

@@ -23,6 +23,7 @@
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod_latest
     # kernelParams = ["quite"];
     supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+    initrd.systemd.enable = lib.mkForce false;
   };
 
   services.xserver = {
