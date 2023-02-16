@@ -121,8 +121,8 @@ in
   programs.mpv = {
     enable = true;
     scripts = with pkgs.mpvScripts; [
-      inhibit-gnome
       mpris
+      inhibit-gnome
     ];
   };
 

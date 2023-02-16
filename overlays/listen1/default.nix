@@ -1,27 +1,65 @@
-{ lib, fetchurl, appimageTools }:
-let
+{ lib
+, buildNpmPackage
+, fetchFromGitHub
+, electron
+, openssl
+, libsecret
+, esbuild
+, pkg-config
+, python3
+  , nodejs
+}:
+# WIP!!!
+buildNpmPackage rec {
   pname = "listen1";
   version = "2.27.0";
 
-  src = fetchurl {
-    url = "https://github.com/listen1/listen1_desktop/releases/download/v${version}/listen1_${version}_linux_x86_64.AppImage";
-    hash = "sha256-tVtaTWn7dF+Swxo2c18Fw0/ne5EF02tJE+JBD+yOK2M=";
+  src = fetchFromGitHub {
+    owner = pname;
+    repo = "listen1_desktop";
+    rev = "v${version}";
+    hash = "sha256-E42snHx7tO//5fbKJ+LcIwkO9fSGj5dYJfawkctmw54=";
   };
 
-  appimageContents = appimageTools.extractType2 { inherit pname version src; };
-in
-appimageTools.wrapType2 {
-  inherit pname version src;
+  npmDepsHash = "sha256-/exiIPirhMZAag30jDrF196u+ZmI61oQc6ZjOVbJPR4=";
 
-  extraInstallCommands = ''
-    mv $out/bin/${pname}-${version} $out/bin/${pname}
+  # dontNpmBuild = true;
 
-    install -Dm 444 ${appimageContents}/${pname}.desktop -t $out/share/applications
-    cp -a ${appimageContents}/usr/share/icons $out/share/
+  # postPatch = ''
+  #   substituteInPlace package.json --replace '"version": "0.0.0"' '"version": "${version}"'
+  # '';
 
-    substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace 'Exec=AppRun' 'Exec=${pname}'
+  # nativeBuildInputs = [ pkg-config python3 ];
+
+  buildInputs = [ libsecret electron nodejs];
+
+  makeCacheWritable = true;
+  npmFlags = [
+    "--legacy-peer-deps"
+    "--ignore-scripts"
+  ];
+
+  npmBuild = ''
+    npm run dist:linux64
   '';
+
+  # The prepack script runs the build script, which we'd rather do in the build phase.
+  # npmPackFlags = [ "--ignore-scripts" ];
+
+  NODE_OPTIONS = "--openssl-legacy-provider";
+
+  ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
+
+  # ESBUILD_BINARY_PATH = "${esbuild}/bin/esbuild";
+  USE_SYSTEM_LIBDELTACHAT = "true";
+
+  dontNpmBuild = true;
+
+  # installPhase = ''
+  #     mkdir -p $out
+  #     cp -r node_modules $out/
+  #   '';
+
 
   meta = with lib; {
     description = "A simple, clean and cross-platform music player";

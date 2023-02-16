@@ -51,6 +51,12 @@
     templates.url = "github:NixOS/templates";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # dream2nix.url = "github:nix-community/dream2nix";
+    # dream2nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # nix-npm-buildpackage.url = "github:serokell/nix-npm-buildpackage";
+    # nix-npm-buildpackage.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
