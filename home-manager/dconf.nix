@@ -53,6 +53,7 @@
         "nightthemeswitcher@romainvigier.fr"
         "caffeine@patapon.info"
         "appindicatorsupport@rgcjonas.gmail.com"
+        "runcat@kolesnikov.se"
       ];
       favorite-apps = [
         "kitty.desktop"

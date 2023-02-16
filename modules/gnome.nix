@@ -48,6 +48,7 @@
     # rocketbar
     dash-to-dock
     dash-to-panel
+    dock-from-dash
     night-theme-switcher
     clipboard-history
     # clipboard-indicator

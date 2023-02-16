@@ -4,15 +4,12 @@
 
   nix = {
     # nix registry list
-    registry = lib.mapAttrs'
-      (
-        n: v: lib.nameValuePair n { flake = v; }
-      )
-      inputs;
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
     # compatible for old nix
     # echo $NIX_PATH | tr ":" "\n"
     nixPath = lib.mapAttrsToList (name: path: "${name}=${path}") inputs ++ [
+      "nixos-config=${inputs.self}"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
 
