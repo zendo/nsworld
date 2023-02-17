@@ -11,7 +11,7 @@ in
     # azcomicv
 
     # foot
-    kitty
+    # kitty
     # alacritty
     warp
     whatip
