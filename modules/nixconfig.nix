@@ -1,17 +1,23 @@
-{ lib, config, inputs, ... }: {
-
+{
+  lib,
+  config,
+  inputs,
+  ...
+}: {
   programs.nix-ld.enable = true;
 
   nix = {
     # nix registry list
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # compatible for old nix
     # echo $NIX_PATH | tr ":" "\n"
-    nixPath = lib.mapAttrsToList (name: path: "${name}=${path}") inputs ++ [
-      "nixos-config=${inputs.self}"
-      "/nix/var/nix/profiles/per-user/root/channels"
-    ];
+    nixPath =
+      lib.mapAttrsToList (name: path: "${name}=${path}") inputs
+      ++ [
+        "nixos-config=${inputs.self}"
+        "/nix/var/nix/profiles/per-user/root/channels"
+      ];
 
     gc = {
       automatic = true;
@@ -33,7 +39,7 @@
         "https://nix-community.cachix.org"
       ];
 
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = ["root" "@wheel"];
       # List of binary cache URLs that non-root users can use
       trusted-substituters = [
       ];
@@ -41,7 +47,7 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
 
-      experimental-features = [ "nix-command" "flakes" "repl-flake" "auto-allocate-uids" "cgroups" ];
+      experimental-features = ["nix-command" "flakes" "repl-flake" "auto-allocate-uids" "cgroups"];
       auto-allocate-uids = true; # Nix 2.12.0
       use-cgroups = true; # Nix 2.12.0
     };

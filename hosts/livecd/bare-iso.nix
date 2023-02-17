@@ -1,5 +1,10 @@
-{ lib, pkgs, config, modulesPath, ... }: {
-
+{
+  lib,
+  pkgs,
+  config,
+  modulesPath,
+  ...
+}: {
   imports = [
     # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
@@ -9,7 +14,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod_latest
-    supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+    supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
   };
 
   services.xserver = {
@@ -29,7 +34,7 @@
     substituters = lib.mkForce [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
     ];
-    trusted-users = [ "@wheel" ];
+    trusted-users = ["@wheel"];
   };
 
   #######################################################################

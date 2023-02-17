@@ -1,9 +1,11 @@
-{ config, pkgs, lib, ... }:
-
-let
-  hidpiEnable = config.hardware.video.hidpi.enable;
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  hidpiEnable = config.hardware.video.hidpi.enable;
+in {
   services = {
     colord.enable = true;
     geoclue2.enable = true;
@@ -19,30 +21,32 @@ in
   # security.pam.services.login.enableGnomeKeyring = true;
   # programs.seahorse.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    # falkon
-    kalendar
-    yakuake
-    gparted
-    # latte-dock
-    kcolorchooser
-    gnome.gnome-color-manager # broken?
-  ] ++ (with libsForQt5; [
-    ark
-    juk
-    kate
-    kalk
-    krfb
-    krdc
-    kgamma5 # broken?
-    kweather
-    ksystemlog
-    kmousetool
-    # kleopatra
-    # konqueror
-    # kcontacts
-    # korganizer
-  ]);
+  environment.systemPackages = with pkgs;
+    [
+      # falkon
+      kalendar
+      yakuake
+      gparted
+      # latte-dock
+      kcolorchooser
+      gnome.gnome-color-manager # broken?
+    ]
+    ++ (with libsForQt5; [
+      ark
+      juk
+      kate
+      kalk
+      krfb
+      krdc
+      kgamma5 # broken?
+      kweather
+      ksystemlog
+      kmousetool
+      # kleopatra
+      # konqueror
+      # kcontacts
+      # korganizer
+    ]);
 
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -57,7 +61,7 @@ in
 
   services.xserver = {
     enable = true;
-    excludePackages = [ pkgs.xterm ];
+    excludePackages = [pkgs.xterm];
 
     displayManager = {
       defaultSession = "plasmawayland";

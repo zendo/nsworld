@@ -1,5 +1,8 @@
-{ config, pkgs, ... }: {
-
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../overlays/services/clash-verge.nix
     ../overlays/services/clash-for-windows.nix

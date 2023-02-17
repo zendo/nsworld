@@ -1,11 +1,11 @@
-{ lib
-, pkgs
-, config
-, username
-, modulesPath
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  username,
+  modulesPath,
+  ...
 }: {
-
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
     ../../modules/gnome.nix
@@ -22,7 +22,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # latest zen xanmod_latest
     # kernelParams = ["quite"];
-    supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+    supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
     initrd.systemd.enable = lib.mkForce false;
   };
 
@@ -33,6 +33,7 @@
   # services.xserver.displayManager.autoLogin.enable = lib.mkForce false;
 
   # password: livecd
-  users.users.${username}.hashedPassword = lib.mkForce
+  users.users.${username}.hashedPassword =
+    lib.mkForce
     "$6$UYQgz/DrPc.MozSy$iU1FVbSqDfSH9ppUo66RPMvX6qBR6yHJfdS/wgFxSBb5Evgf0VPLgXbhGEgoYWbEWkFyms3ahTmQqTCOy.4o/.";
 }

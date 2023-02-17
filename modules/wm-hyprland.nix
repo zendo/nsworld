@@ -1,5 +1,11 @@
-{ config, pkgs, lib, inputs, username, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  username,
+  ...
+}: {
   imports = [
     ./wm.nix
     inputs.hyprland.nixosModules.default
@@ -16,9 +22,13 @@
 
   # programs.hyprland.enable = true;
 
-  home-manager.users.${username} = { inputs, config, pkgs, ... }: {
-
-    imports = [ inputs.hyprland.homeManagerModules.default ];
+  home-manager.users.${username} = {
+    inputs,
+    config,
+    pkgs,
+    ...
+  }: {
+    imports = [inputs.hyprland.homeManagerModules.default];
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -30,7 +40,7 @@
     home.packages = with pkgs; [
       # hyprpaper # wallpaper
       (waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       }))
     ];
   };

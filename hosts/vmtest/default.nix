@@ -1,5 +1,11 @@
-{ config, pkgs, lib, inputs, username, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  username,
+  ...
+}: {
   imports = [
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
@@ -21,7 +27,7 @@
     gnomeExtensions.appindicator
   ];
 
-  environment.variables = { };
+  environment.variables = {};
 
   services.xserver = {
     enable = true;

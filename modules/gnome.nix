@@ -1,9 +1,12 @@
-{ config, pkgs, ... }: {
-
+{
+  config,
+  pkgs,
+  ...
+}: {
   services = {
     xserver = {
       enable = true;
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
 
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
@@ -26,46 +29,48 @@
     gnome.gnome-software
   ];
 
-  environment.systemPackages = with pkgs; [
-    gthumb
-    # authenticator
-    gparted
-    dconf2nix
-    gnome-randr
+  environment.systemPackages = with pkgs;
+    [
+      gthumb
+      # authenticator
+      gparted
+      dconf2nix
+      gnome-randr
 
-    gnome.gnome-tweaks
-    gnome.dconf-editor
-    gnome.gnome-power-manager
-    gnome.gnome-sound-recorder
-    # gnome.pomodoro
-    # gnome.gnome-boxes
-    # gnome-network-displays  # miracast
-    # gnome-builder
-    # gnome-firmware-updater
-  ] ++ (with gnomeExtensions; [
-    appindicator
-    app-icons-taskbar
-    # rocketbar
-    dash-to-dock
-    dash-to-panel
-    dock-from-dash
-    night-theme-switcher
-    clipboard-history
-    # clipboard-indicator
-    # blur-my-shell
-    gradient-top-bar
-    # weather-oclock
-    # proxy-switcher
-    # just-perfection
-    # user-avatar-in-quick-settings
-    space-bar
-    dotspaces
-    runcat
-    # forge
-    caffeine
-    ddterm
-    # replace-activities-text
-  ]);
+      gnome.gnome-tweaks
+      gnome.dconf-editor
+      gnome.gnome-power-manager
+      gnome.gnome-sound-recorder
+      # gnome.pomodoro
+      # gnome.gnome-boxes
+      # gnome-network-displays  # miracast
+      # gnome-builder
+      # gnome-firmware-updater
+    ]
+    ++ (with gnomeExtensions; [
+      appindicator
+      app-icons-taskbar
+      # rocketbar
+      dash-to-dock
+      dash-to-panel
+      dock-from-dash
+      night-theme-switcher
+      clipboard-history
+      # clipboard-indicator
+      # blur-my-shell
+      gradient-top-bar
+      # weather-oclock
+      # proxy-switcher
+      # just-perfection
+      # user-avatar-in-quick-settings
+      space-bar
+      dotspaces
+      runcat
+      # forge
+      caffeine
+      ddterm
+      # replace-activities-text
+    ]);
 
   programs.kdeconnect = {
     enable = true;

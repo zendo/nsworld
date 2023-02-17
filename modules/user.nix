@@ -1,5 +1,8 @@
-{ config, username, ... }: {
-
+{
+  config,
+  username,
+  ...
+}: {
   # Disable `useradd`
   users.mutableUsers = false;
   # users.defaultUserShell = pkgs.zsh;

@@ -1,5 +1,4 @@
-{ config, ... }: {
-
+{config, ...}: {
   dconf.settings = {
     "org/gnome/system/location" = {
       enabled = true;
@@ -20,27 +19,27 @@
     };
 
     "org/gnome/desktop/input-sources" = {
-      xkb-options = [ "terminate:ctrl_alt_bksp" "ctrl:swapcaps" ];
+      xkb-options = ["terminate:ctrl_alt_bksp" "ctrl:swapcaps"];
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [ ];
-      close = [ "<Super>q" ];
-      switch-to-workspace-1 = [ "<Super>1" ];
-      switch-to-workspace-2 = [ "<Super>2" ];
-      switch-to-workspace-3 = [ "<Super>3" ];
-      switch-to-workspace-4 = [ "<Super>4" ];
-      move-to-workspace-1 = [ "<Alt>1" ];
-      move-to-workspace-2 = [ "<Alt>2" ];
-      move-to-workspace-3 = [ "<Alt>3" ];
-      move-to-workspace-4 = [ "<Alt>4" ];
+      activate-window-menu = [];
+      close = ["<Super>q"];
+      switch-to-workspace-1 = ["<Super>1"];
+      switch-to-workspace-2 = ["<Super>2"];
+      switch-to-workspace-3 = ["<Super>3"];
+      switch-to-workspace-4 = ["<Super>4"];
+      move-to-workspace-1 = ["<Alt>1"];
+      move-to-workspace-2 = ["<Alt>2"];
+      move-to-workspace-3 = ["<Alt>3"];
+      move-to-workspace-4 = ["<Alt>4"];
     };
 
     "org/gnome/shell/keybindings" = {
-      switch-to-application-1 = [ ];
-      switch-to-application-2 = [ ];
-      switch-to-application-3 = [ ];
-      switch-to-application-4 = [ ];
+      switch-to-application-1 = [];
+      switch-to-application-2 = [];
+      switch-to-application-3 = [];
+      switch-to-application-4 = [];
     };
 
     "org/gnome/shell" = {

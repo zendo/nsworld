@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   mkOOSL = config.lib.file.mkOutOfStoreSymlink;
   hmDots = config.home.homeDirectory + "/nsworld/dotfiles";
-in
-{
+in {
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.emacs.d/bin"

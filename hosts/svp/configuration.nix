@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }: {
-
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
     inputs.nixos-hardware.nixosModules.common-gpu-intel
@@ -44,5 +48,5 @@
   #######################################################################
   # fileSystems."/".options = ["noatime" "nodiratime"];
   services.btrfs.autoScrub.enable = true;
-  fileSystems."/".options = [ "compress=zstd" "autodefrag" "noatime" ];
+  fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
 }

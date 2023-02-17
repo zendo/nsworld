@@ -1,5 +1,9 @@
-{ config, pkgs, username, ... }: {
-
+{
+  config,
+  pkgs,
+  username,
+  ...
+}: {
   wsl = {
     enable = true;
     defaultUser = "${username}";
@@ -33,7 +37,7 @@
   };
 
   # for zsh completion in home-manager
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
 
   documentation.enable = false;
   documentation.nixos.enable = false;
@@ -45,7 +49,11 @@
   #######################################################################
   ##  Home Manager
   #######################################################################
-  home-manager.users.${username} = { config, pkgs, ... }: {
+  home-manager.users.${username} = {
+    config,
+    pkgs,
+    ...
+  }: {
     home.packages = with pkgs; [
       # mpg123 # for ydict
       wslu

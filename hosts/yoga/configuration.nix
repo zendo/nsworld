@@ -1,5 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote # Secure Boot
 
@@ -12,14 +17,14 @@
   ];
 
   # AMD GPU Temporary
-  services.xserver.videoDrivers = lib.mkDefault [ "amdgpu" ];
+  services.xserver.videoDrivers = lib.mkDefault ["amdgpu"];
 
   hardware.opengl = {
     driSupport = lib.mkDefault true;
     driSupport32Bit = lib.mkDefault true;
   };
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
 
   hardware.opengl.extraPackages = with pkgs; [
     rocm-opencl-icd
@@ -53,11 +58,11 @@
   ## Bootloader
   #######################################################################
   /*
-    Disable Secure Boot & reset to Setup Mode
-    sudo -i
-    sbctl create-keys
-    After nixos bootup:
-    sbctl enroll-keys --microsoft
+  Disable Secure Boot & reset to Setup Mode
+  sudo -i
+  sbctl create-keys
+  After nixos bootup:
+  sbctl enroll-keys --microsoft
   */
   boot.lanzaboote = {
     enable = true;
@@ -101,7 +106,7 @@
   ## FileSystem
   #######################################################################
   services.btrfs.autoScrub.enable = true;
-  fileSystems."/".options = [ "compress=zstd" "autodefrag" "noatime" ];
+  fileSystems."/".options = ["compress=zstd" "autodefrag" "noatime"];
   # fileSystems = {
   #   "/".options = [ "compress=zstd" ];
   #   "/home".options = [ "compress=zstd" ];
@@ -111,10 +116,12 @@
 
   # Swapfile
   # https://github.com/NixOS/nixpkgs/pull/194343
-  swapDevices = [{
-    device = "/var/swapfile";
-    size = (1024 * 8);
-  }];
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 1024 * 8;
+    }
+  ];
   # findmnt -no UUID -T /swap/swapfile
   # sudo filefrag -v /swap/swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'
   # boot.resumeDevice = "/dev/disk/by-uuid/a0e48512-1e47-409d-9c91-7bbca721dbfc";

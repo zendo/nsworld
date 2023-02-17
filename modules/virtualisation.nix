@@ -1,27 +1,30 @@
 /*
 
-  # check hardwave virtual supports
-  LC_ALL=C lscpu | grep Virtualization
-  dmesg | grep IOMMU
+# check hardwave virtual supports
+LC_ALL=C lscpu | grep Virtualization
+dmesg | grep IOMMU
 
-  # fix network `default` inactive
-  sudo virsh net-start default
-  sudo virsh net-autostart default
+# fix network `default` inactive
+sudo virsh net-start default
+sudo virsh net-autostart default
 
-  Guest:
-  spice-vdagent  # for clipboard share
+Guest:
+spice-vdagent  # for clipboard share
 
-  # share file
-  sudo mkdir /mnt/vfs_share
-  sudo chown iab /mnt/vfs_share
-  mkdir share #guest
-  sudo mount -t 9p -o trans=virtio share ~/share #guest
+# share file
+sudo mkdir /mnt/vfs_share
+sudo chown iab /mnt/vfs_share
+mkdir share #guest
+sudo mount -t 9p -o trans=virtio share ~/share #guest
 
-  qemu-system-x86_64 -enable-kvm -m 8192 -cdrom result/iso
-
+qemu-system-x86_64 -enable-kvm -m 8192 -cdrom result/iso
 */
-{ config, pkgs, lib, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # services.flatpak.enable = true;
 
   # programs.adb.enable = true;
