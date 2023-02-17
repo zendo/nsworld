@@ -2,16 +2,8 @@
 
   home.packages = with pkgs; [
     pure-prompt
-  ];
 
-  programs.kitty = {
-    enable = true;
-    extraConfig = ''
-      include ${../dotfiles/kitty/custom.conf}
-      include ${../dotfiles/kitty/Mountain.conf}
-      shell ${lib.getExe pkgs.zsh}  --login -c "tmux attach || tmux"
-    '';
-  };
+  ];
 
   programs.fish = {
     enable = false;
