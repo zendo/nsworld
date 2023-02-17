@@ -25,18 +25,14 @@
     extraConfig = ''
       # set-option -g prefix2 C-x
 
-      # for non-nixos
-      set -g default-command "zsh"
-
       bind m copy-mode
 
       unbind '"'
       bind 2 splitw -v -c '#{pane_current_path}'
       unbind %
       bind 3 splitw -h -c '#{pane_current_path}'
-
-      unbind x
       bind 0 kill-pane
+      bind x swap-pane -D
 
       # unbind c
       bind t new-window -c "#{pane_current_path}"

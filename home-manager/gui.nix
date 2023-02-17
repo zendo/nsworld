@@ -12,7 +12,7 @@ in
 
     foot
     kitty
-    # alacritty
+    # alacrittyz
     warp
     whatip
     remmina # (webkitgtk)
