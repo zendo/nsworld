@@ -11,7 +11,7 @@
     clock24 = true;
     baseIndex = 1;
     aggressiveResize = true;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     shell = "${lib.getExe pkgs.zsh}";
     prefix = "C-x";
     disableConfirmationPrompt = true;
@@ -25,6 +25,11 @@
     extraConfig = ''
       # set-option -g prefix2 C-x
 
+      # for non-nixos
+      set -g default-command "zsh"
+
+      bind m copy-mode
+
       unbind '"'
       bind 2 splitw -v -c '#{pane_current_path}'
       unbind %
@@ -33,13 +38,14 @@
       unbind x
       bind 0 kill-pane
 
-      # bind -n M-c new-window -c '#{pane_current_path}'
-      bind b list-windows
+      # unbind c
+      bind t new-window -c "#{pane_current_path}"
       bind k kill-window
+      bind b list-windows
       bind Left previous-window
       bind Right next-window
 
-      bind C-c new-session
+      bind S new-session
       bind Up switch-client -p
       bind Down switch-client -n
 

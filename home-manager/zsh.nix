@@ -2,7 +2,6 @@
 
   home.packages = with pkgs; [
     pure-prompt
-
   ];
 
   programs.fish = {

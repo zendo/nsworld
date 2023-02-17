@@ -10,7 +10,7 @@ in
     # nightpdf
     # azcomicv
 
-    # foot
+    foot
     kitty
     # alacritty
     warp
