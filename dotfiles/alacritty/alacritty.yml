@@ -8,6 +8,8 @@ shell:
   program: zsh
   args:
     - -l
+    - -c
+    - "tmux attach || tmux"
 
 window:
   dimensions:

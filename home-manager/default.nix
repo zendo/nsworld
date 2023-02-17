@@ -5,6 +5,7 @@
     ./cli.nix
     ./zsh.nix
     ./bash.nix
+    ./tmux.nix
     ./alias.nix
     ./xdg.nix
   ] ++ lib.optionals nixosConfig.services.xserver.enable [

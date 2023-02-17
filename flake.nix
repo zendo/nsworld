@@ -165,6 +165,7 @@
               ./home-manager/cli.nix
               ./home-manager/git.nix
               ./home-manager/zsh.nix
+              ./home-manager/tmux.nix
               ./home-manager/xdg.nix
               ./home-manager/non-nixos.nix
               {
