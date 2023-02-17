@@ -137,7 +137,7 @@
         };
       };
 
-      # or: nixos-generate -f iso -c ~/nsworld/hosts/bare-iso.nix
+      # or: nixos-generate -f iso -c ~/nsworld/hosts/livecd/bare-iso.nix
       livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
 
       # for repl
