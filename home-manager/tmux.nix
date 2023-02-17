@@ -14,10 +14,10 @@
     mouse = true;
     clock24 = true;
     baseIndex = 1;
-    aggressiveResize = true;
-    terminal = "tmux-256color";
-    shell = "${lib.getExe pkgs.zsh}";
     prefix = "C-x";
+    aggressiveResize = true;
+    terminal = "xterm-kitty"; # tmux-256color
+    shell = "${lib.getExe pkgs.zsh}";
     disableConfirmationPrompt = true;
     plugins = with pkgs.tmuxPlugins; [
       yank

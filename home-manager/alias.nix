@@ -9,6 +9,8 @@
     l = "${lib.getExe pkgs.exa} -l --icons";
     "la." = "ls -d .*";
     rm = "${pkgs.trash-cli}/bin/trash-put";
+    rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
+    rm-restore = "${pkgs.trash-cli}/bin/trash-restore";
     free = "free -h";
     tree = "${lib.getExe pkgs.erdtree}";
     bc = "${lib.getExe pkgs.libqalculate}";
