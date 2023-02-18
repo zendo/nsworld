@@ -55,8 +55,8 @@
         "runcat@kolesnikov.se"
       ];
       favorite-apps = [
-        # "foot.desktop"
-        "kitty.desktop"
+        "foot.desktop"
+        # "kitty.desktop"
         "org.gnome.Nautilus.desktop"
         "emacs.desktop"
         "firefox.desktop"

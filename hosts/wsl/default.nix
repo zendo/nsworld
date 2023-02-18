@@ -29,6 +29,12 @@
     gptfdisk
     wget
     nix-bash-completions
+
+    # Gui
+    foot
+    emacs
+    alacritty
+    goodvibes
   ];
 
   programs.gnupg.agent = {
@@ -55,13 +61,8 @@
     ...
   }: {
     home.packages = with pkgs; [
-      # mpg123 # for ydict
       wslu
       wsl-open
-      kitty
-      foot
-      emacs
-      goodvibes
     ];
 
     home.shellAliases = {
