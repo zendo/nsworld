@@ -8,8 +8,8 @@
     enable = true;
     defaultUser = "${username}";
     startMenuLaunchers = true;
+    nativeSystemd = true; # Not working at first boot
     # wslConf.automount.root = "/mnt"; # defult
-    # nativeSystemd = true; # Not working!!
 
     # Enable native Docker support
     # docker-native.enable = true;

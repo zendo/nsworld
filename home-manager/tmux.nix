@@ -24,7 +24,7 @@
       urlview
       fuzzback # ?
       extrakto # tab
-      onedark-theme
+      # onedark-theme
     ];
     extraConfig = ''
       # set-option -g prefix2 C-x
@@ -49,8 +49,50 @@
       bind Up switch-client -p
       bind Down switch-client -n
 
-      set-option -g set-titles on
+      ######################
+      ###  DESIGN THEME  ###
+      ######################
+
+      # loud or quiet?
+      set -g visual-activity off
+      set -g visual-bell off
+      set -g visual-silence off
+      setw -g monitor-activity off
+      set -g bell-action none
+
+      # Modes
+      setw -g clock-mode-colour colour5
+      setw -g mode-style 'fg=colour1 bg=colour18 bold'
+
+      # Title bar
+      set-option -g set-titles off
       set-option -g set-titles-string '#H: #W #T'
+
+      # Pane borders
+      set -g pane-border-style bg=black,fg=green
+      set -g pane-active-border-style bg=yellow,fg=green
+
+      # Command line
+      set -g message-style bright,bg=white,fg=black
+
+      # Status bar
+      set -g status-position top
+      set -g status-justify left
+      set -g status-style 'bg=#282c34 fg=#aab2bf dim'
+      set -g status-left ' '
+      set -g status-right '#[bg=#282c34,fg=#aab2bf] %m/%d #[fg=colour233,bg=colour8] %H:%M '
+      set -g status-right-length 50
+      set -g status-left-length 20
+
+      # default window title colors
+      setw -g window-status-style 'fg=colour244,bg=default,dim'
+      setw -g window-status-format ' [#S]:#I#[fg=colour237]:#[fg=black]#T '
+
+      # active window title colors
+      setw -g window-status-current-style 'fg=black bg=brightgreen bold'
+      setw -g window-status-current-format ' [#S]:#I#[fg=colour249]:#[fg=black]#T '
+
+      setw -g window-status-bell-style 'fg=colour255 bg=colour1 bold'
     '';
   };
 }
