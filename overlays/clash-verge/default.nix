@@ -42,12 +42,12 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp -r usr $out
-    cp -r usr/share $out/share
-    ln -s $out/usr/bin/${pname} $out/bin/${pname}
+    mv usr/* $out
+    # cp -r usr/share $out/share
+    # ln -s $out/usr/bin/${pname} $out/bin/${pname}
 
-    substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace 'Development' 'Network'
+    # substituteInPlace $out/share/applications/${pname}.desktop \
+    #   --replace 'Development' 'Network'
 
     # makeWrapper $out/usr/bin/${pname} $out/bin/${pname} \
     #   --prefix PATH : "${lib.makeBinPath [  ]}"

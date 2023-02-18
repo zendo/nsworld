@@ -55,7 +55,6 @@ final: prev: {
   aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre {};
 
   # Python
-  iotas = prev.callPackage ./iotas {};
   gestures-gtk = prev.callPackage ./gestures-gtk {}; #WIP!!
 
   # Python Module Overlays

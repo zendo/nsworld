@@ -10,6 +10,7 @@ in {
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.emacs.d/bin"
+    "${../dotfiles/bin}"
   ];
 
   home.sessionVariables = {

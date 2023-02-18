@@ -9,13 +9,12 @@
   gnomeEnable = nixosConfig.services.xserver.desktopManager.gnome.enable;
 in {
   home.packages = with pkgs; [
-    iotas
     # nightpdf
     # azcomicv
 
     foot
     kitty
-    # alacrittyz
+    alacritty
     warp
     whatip
     remmina # (webkitgtk)
@@ -87,6 +86,7 @@ in {
     # rnote # handwritten note
     # foliate # (webkitgtk)
     # standardnotes
+    # iotas
     # paper-note
     # endeavour
     ghostwriter

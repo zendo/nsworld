@@ -24,6 +24,8 @@
       urlview
       fuzzback # ?
       extrakto # tab
+      continuum # automatically save 15m
+      resurrect # manually save C-s/C-r
       # onedark-theme
     ];
     extraConfig = ''
