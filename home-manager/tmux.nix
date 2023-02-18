@@ -65,12 +65,12 @@
       setw -g mode-style 'fg=colour1 bg=colour18 bold'
 
       # Title bar
-      set-option -g set-titles off
-      set-option -g set-titles-string '#H: #W #T'
+      set-option -g set-titles on
+      set-option -g set-titles-string '#H: #W' # Host W T
 
       # Pane borders
-      set -g pane-border-style bg=black,fg=green
-      set -g pane-active-border-style bg=yellow,fg=green
+      set -g pane-border-style fg=colour235 #fg=base02
+      set -g pane-active-border-style fg=colour240 #fg=base01
 
       # Command line
       set -g message-style bright,bg=white,fg=black
