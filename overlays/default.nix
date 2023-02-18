@@ -100,6 +100,25 @@ final: prev: {
         cp -r $out/usr/share $out/share '';
     });
 
+  # fix duplicate desktop shortcut in kde
+  emacsPgtk = prev.symlinkJoin {
+    name = "emacsPgtk";
+    paths = [ prev.emacsPgtk ];
+    postBuild = ''
+      rm $out/share/applications/emacsclient.desktop
+    '';
+  };
+
+  logseq-wayland = prev.symlinkJoin {
+    name = "logseq";
+    paths = [ prev.logseq ];
+    nativeBuildInputs = [ prev.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/logseq \
+        --add-flags "--socket=wayland --enable-features=UseOzonePlatform --ozone-platform=wayland"
+    '';
+  };
+
   # libsForQt5 override
   libsForQt5 = prev.libsForQt5.overrideScope' (finay: prevy: {
     sddm = prevy.sddm.overrideAttrs (oldAttrs: {
