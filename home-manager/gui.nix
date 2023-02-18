@@ -14,6 +14,7 @@ in {
     # azcomicv
 
     foot
+    kitty
     # alacrittyz
     warp
     whatip
@@ -118,15 +119,6 @@ in {
 
   services = {
     easyeffects.enable = true;
-  };
-
-  programs.kitty = {
-    enable = true;
-    extraConfig = ''
-      include ${../dotfiles/kitty/custom.conf}
-      include ${../dotfiles/kitty/Mountain.conf}
-      shell ${lib.getExe pkgs.zsh} -lc "${lib.getExe pkgs.tmux} attach || ${lib.getExe pkgs.tmux}"
-    '';
   };
 
   programs.mpv = {

@@ -27,6 +27,7 @@ in {
     "cava".source = ../dotfiles/cava;
     "wofi".source = ../dotfiles/wofi;
     "foot".source = ../dotfiles/foot;
+    "kitty".source = ../dotfiles/kitty;
     "helix".source = ../dotfiles/helix;
     "wezterm".source = ../dotfiles/wezterm;
     "gtklock".source = ../dotfiles/gtklock;
