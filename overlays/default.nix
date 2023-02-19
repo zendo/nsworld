@@ -101,13 +101,13 @@ final: prev: {
     });
 
   # fix duplicate desktop shortcut in kde
-  emacsPgtk = prev.symlinkJoin {
-    name = "emacsPgtk";
-    paths = [ prev.emacsPgtk ];
-    postBuild = ''
-      rm $out/share/applications/emacsclient.desktop
-    '';
-  };
+  # emacs = prev.symlinkJoin {
+  #   name = "emacs";
+  #   paths = [ prev.emacs ];
+  #   postBuild = ''
+  #     rm $out/share/applications/emacsclient.desktop
+  #   '';
+  # };
 
   logseq-wayland = prev.symlinkJoin {
     name = "logseq";

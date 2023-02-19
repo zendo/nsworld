@@ -8,7 +8,12 @@
   #######################################################################
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtk;
+    package =
+      pkgs.emacsPgtk;
+    # fix duplicate desktop shortcut in kde
+    # pkgs.emacsPgtk.overrideAttrs (oldAttrs: {
+    #   postFixup = ''rm $out/share/applications/emacsclient.desktop'';
+    # });
     extraPackages = epkgs:
       with epkgs; [
         vterm
