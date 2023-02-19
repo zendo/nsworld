@@ -68,8 +68,6 @@
     flake-utils,
     ...
   }: let
-    mkHost = import ./lib/mkHost.nix inputs;
-
     overlays = [
       # inputs.nur.overlay
       inputs.nix-alien.overlay
@@ -79,10 +77,16 @@
       #   pr = nixpkgs-pr.legacyPackages.${prev.system};
       # })
     ];
+
+    lib = nixpkgs.lib.extend (final: prev:
+      import ./lib {
+        inherit inputs;
+        lib = final;
+      });
   in
     {
       nixosConfigurations = {
-        yoga = mkHost {
+        yoga = lib.mkHost {
           username = "iab";
           hostname = "yoga";
           inherit overlays;
@@ -109,7 +113,7 @@
         };
 
         # nixos-rebuild --target-host zendo@192.168.2.197 --use-remote-sudo --flake .#svp switch
-        svp = mkHost {
+        svp = lib.mkHost {
           username = "zendo";
           hostname = "svp";
           # hmEnable = false;
@@ -123,7 +127,7 @@
         };
 
         # nixos-rebuild build-vm --flake .#vmtest
-        vmtest = mkHost {
+        vmtest = lib.mkHost {
           username = "test";
           hostname = "vmtest";
           # hmEnable = false;
@@ -132,7 +136,7 @@
           # nixpkgs = inputs.nixpkgs-pr;
         };
 
-        livecd = mkHost {
+        livecd = lib.mkHost {
           username = "livecd";
           hostname = "livecd";
           virtEnable = false;
@@ -144,7 +148,7 @@
       livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
 
       # for repl
-      lib = nixpkgs.lib;
+      inherit lib;
 
       #######################################################################
       ## HM Standalone
