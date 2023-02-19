@@ -5,8 +5,15 @@
 , extra-cmake-modules
 , kirigami2
 , qtwebkit
+  , qtwebengine
 , qtquickcontrols2
 , wrapQtAppsHook
+, qtbase
+, qttools
+, kcoreaddons
+, pkg-config
+, kconfig
+  , ki18n
 }:
 
 stdenv.mkDerivation rec {
@@ -22,13 +29,20 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
+    # pkg-config
+    # qttools
     extra-cmake-modules
     wrapQtAppsHook
   ];
 
   buildInputs = [
+    # qtbase
+    ki18n
+    kconfig
+    kcoreaddons
     kirigami2
-    qtwebkit
+    # qtwebkit
+    qtwebengine
     qtquickcontrols2
   ];
 
