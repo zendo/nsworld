@@ -220,13 +220,15 @@
           # allowBroken = true;
           # allowUnsupportedSystem = true;
         };
-      in {
-        # nix fmt :Formatter all files in this repo.
-        formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
-        # nix develop .#rust
-        devShells = import ./devshells.nix {inherit pkgs;};
+      in rec {
         # nix build .#apps or self#apps / nix run self#apps
         packages = pkgs;
+
+        # nix fmt :Formatter all files in this repo.
+        formatter = packages.alejandra;
+
+        # nix develop .#rust
+        devShells = import ./devshells.nix {inherit pkgs;};
       }
     );
 
