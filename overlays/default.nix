@@ -52,6 +52,7 @@ final: prev: {
 
   # Qt
   nekoray = prev.libsForQt5.callPackage ./nekoray {};
+  klever = prev.libsForQt5.callPackage ./klever {};
   aphototoollibre = prev.libsForQt5.callPackage ./aphototoollibre {};
 
   # Python

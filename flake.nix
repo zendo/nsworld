@@ -144,7 +144,7 @@
         };
       };
 
-      # Home-Manager Standalone
+      ## Home-Manager Standalone
       homeConfigurations = {
         iab = lib.mkHome {
           username = "iab";
@@ -207,6 +207,9 @@
 
         # nix fmt :Formatter all files in this repo.
         formatter = packages.alejandra;
+
+        # nix run . -- diff
+        defaultPackage = packages.nixos-helper;
 
         # nix develop .#rust
         devShells = import ./devshells.nix {inherit pkgs;};
