@@ -144,22 +144,20 @@
         };
       };
 
-      # or: nixos-generate -f iso -c ~/nsworld/hosts/livecd/bare-iso.nix
-      livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
-
-      # for repl
-      inherit lib;
-
-      #######################################################################
-      ## HM Standalone
-      #######################################################################
-      # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
+      # Home-Manager Standalone
       homeConfigurations = {
         iab = lib.mkHome {
           username = "iab";
           inherit overlays;
         };
       };
+
+      # for repl
+      inherit lib;
+
+      livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
+      # or
+      # nixos-generate -f iso -c ~/nsworld/hosts/livecd/bare-iso.nix
 
       #######################################################################
       ## WSL

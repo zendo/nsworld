@@ -24,7 +24,7 @@
       urlview
       fuzzback # ?
       extrakto # tab
-      continuum # automatically save 15m
+      # continuum # automatically save 15m Not working
       resurrect # manually save C-s/C-r
       # onedark-theme
     ];
