@@ -74,7 +74,7 @@
       inputs.emacs-overlay.overlay
       (import ./overlays)
       # (final: prev: {
-      #   pr = nixpkgs-pr.legacyPackages.${prev.system};
+      #   stable = nixpkgs-stable.legacyPackages.${prev.system};
       # })
     ];
 
@@ -157,7 +157,7 @@
 
       livecd-iso = self.nixosConfigurations.livecd.config.system.build.isoImage;
       # or
-      # nixos-generate -f iso -c ~/nsworld/hosts/livecd/bare-iso.nix
+      # nixos-generate -f iso -c ~/nsworld/hosts/livecd/vanilla-iso.nix
 
       #######################################################################
       ## WSL
