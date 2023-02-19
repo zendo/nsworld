@@ -154,31 +154,10 @@
       ## HM Standalone
       #######################################################################
       # nix run nixpkgs#home-manager build switch -- --flake .#$(whoami)
-      homeConfigurations = let
-        username = "iab";
-        system = "x86_64-linux";
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          config.allowUnfree = true;
-        };
-      in {
-        ${username} = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          # extraSpecialArgs = {inherit inputs;};
-          modules = [
-            ./home-manager/alias.nix
-            ./home-manager/cli.nix
-            ./home-manager/git.nix
-            ./home-manager/zsh.nix
-            ./home-manager/tmux.nix
-            ./home-manager/xdg.nix
-            ./home-manager/non-nixos.nix
-            {
-              home.stateVersion = "22.05";
-              home.username = "${username}";
-              home.homeDirectory = "/home/${username}";
-            }
-          ];
+      homeConfigurations = {
+        iab = lib.mkHome {
+          username = "iab";
+          inherit overlays;
         };
       };
 
