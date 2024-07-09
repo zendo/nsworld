@@ -79,7 +79,7 @@
     shellcheck
     translate-shell
     aspellDicts.en
-    asciinema # record the terminal
+    # asciinema # record the terminal
     paperoni # save html
     calcurse
     # zee
@@ -87,7 +87,7 @@
     # Networking
     lsof
     dogdns
-    nali
+    # nali
     mtr
     nload
     ipinfo
