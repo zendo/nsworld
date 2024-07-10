@@ -47,7 +47,7 @@
     #   plugins = with deadbeefPlugins; [mpris2];
     # })
     # amberol
-    audacious
+    # audacious
     # rhythmbox
     goodvibes
     go-musicfox

@@ -53,7 +53,7 @@
   ## Hardware
   ###############################################
 
-  hardware.amdgpu.amdvlk.enable = true;
+  # hardware.amdgpu.amdvlk.enable = true;
 
   # Optimize SSD
   services.fstrim.enable = lib.mkDefault true;
