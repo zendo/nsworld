@@ -25,8 +25,8 @@
 
     # "${inputs.nixpkgs-pr}/nixos/modules/config/swap.nix"
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
@@ -63,7 +63,6 @@
   ###############################################
   # mods.daeWithConfig.enable = true;
 
-  # disabledModules = [ "programs/clash-verge.nix" ];
   programs.clash-verge = {
     enable = true;
     tunMode = true;
@@ -77,6 +76,7 @@
   ## Kernel
   ###############################################
   boot = {
+    # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
 
     supportedFilesystems = [ "ntfs" ];
