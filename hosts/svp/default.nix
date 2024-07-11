@@ -31,12 +31,11 @@
   ###############################################
   # mods.daeWithConfig.enable = true;
 
-  disabledModules = [ "programs/clash-verge.nix" ];
   programs.clash-verge = {
     enable = true;
     tunMode = true;
     autoStart = true;
-    # package = pkgs.clash-nyanpasu;
+    package = pkgs.clash-verge-rev;
   };
 
   # services.v2raya.enable = true;
