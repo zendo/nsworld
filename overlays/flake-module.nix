@@ -29,11 +29,11 @@
       # };
 
       # Combining overrideAttrs and override
-      librime =
-        (prev.librime.overrideAttrs (oldAttrs: {
-          buildInputs = oldAttrs.buildInputs ++ [ prev.luajit ];
-        })).override
-          { plugins = [ prev.librime-lua ]; };
+      # librime =
+      #   (prev.librime.overrideAttrs (oldAttrs: {
+      #     buildInputs = oldAttrs.buildInputs ++ [ prev.luajit ];
+      #   })).override
+      #     { plugins = [ prev.librime-lua ]; };
 
       # wrapProgram $out/bin/telegram-desktop --set QT_QPA_PLATFORM xcb
       logseq-wayland = prev.symlinkJoin {
@@ -60,7 +60,6 @@
       # Data
       ns-cli = prev.callPackage ./ns-cli { };
       rime-ice = prev.callPackage ./rime-ice { };
-      librime-lua = prev.callPackage ./librime-lua { };
       fcitx5-breeze = prev.callPackage ./fcitx5-breeze { };
       fluent-fcitx5 = prev.callPackage ./fluent-fcitx5 { };
 
