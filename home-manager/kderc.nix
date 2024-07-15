@@ -14,6 +14,7 @@
   };
 
   # rm .config/k* .config/plasma* .config/power*
+  # rm .local/share/plasma-manager/last_run_* ; ~/.local/share/plasma-manager/run_all.sh
   programs.plasma = {
     enable = true;
 
