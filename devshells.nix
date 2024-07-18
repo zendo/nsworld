@@ -47,6 +47,25 @@
     '';
   };
 
+  qt6 = pkgs.mkShell {
+    buildInputs = with pkgs; [
+      qt6.qmake
+      pkg-config
+      qt6.wrapQtAppsHook
+
+      qt6.qtbase
+      qt6.qttools
+      qt6.qtsvg
+      qt6.qtwayland
+      qt6.qt5compat
+      qt6.qtmultimedia
+      qt6.qtimageformats
+      libGLU
+      libunarr
+      qt6Packages.poppler
+    ];
+  };
+
   ###############################################
   ##  NodeJS
   ###############################################

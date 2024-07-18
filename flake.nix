@@ -116,7 +116,7 @@
 
   # auto-fetch deps when `nix run/shell/develop`
   nixConfig = {
-    bash-prompt = "[nix]λ ";
+    # bash-prompt = "[nix]λ ";
     # substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
     # extra-substituters = ["https://nix-gaming.cachix.org"];
     # extra-trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
