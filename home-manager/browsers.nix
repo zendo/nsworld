@@ -41,6 +41,7 @@ in
   programs.firefox = {
     enable = true;
     # package = pkgs.firefox-bin;
+    languagePacks = [ "zh-CN" ];
     profiles.default = {
       settings = {
         "browser.tabs.closeTabByDblclick" = true; # 双击关闭标签

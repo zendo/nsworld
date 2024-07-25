@@ -40,7 +40,6 @@
 
   programs = {
     # nix-ld.enable = true;
-    firefox.enable = true;
   };
 
   # disabledModules = ["config/swap.nix"];
