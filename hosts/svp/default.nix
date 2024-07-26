@@ -6,7 +6,8 @@
 }:
 {
   imports = [
-    # ./disko.nix
+    # ./disko-btrfs.nix
+    ./disko-bcachefs.nix
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
 
