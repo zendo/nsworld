@@ -2,14 +2,14 @@
   disko.devices = {
     disk = {
       vda = {
-        type = "disk";
         device = "/dev/vda";
+        type = "disk";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
+              end = "500M";
               type = "EF00";
-              end = "500MiB";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -17,6 +17,7 @@
               };
             };
             root = {
+              name = "root";
               end = "-0";
               content = {
                 type = "filesystem";
