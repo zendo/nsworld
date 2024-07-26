@@ -65,7 +65,10 @@
   ###############################################
   ## FileSystem
   ###############################################
-  services.btrfs.autoScrub.enable = true;
+  boot.supportedFilesystems = [
+    "ntfs"
+    "bcachefs"
+  ];
 
   # Swapfile
   swapDevices = [

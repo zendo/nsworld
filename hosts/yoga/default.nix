@@ -78,7 +78,10 @@
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
 
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = [
+      "ntfs"
+      "bcachefs"
+    ];
 
     # plymouth = {
     #   theme = "double";

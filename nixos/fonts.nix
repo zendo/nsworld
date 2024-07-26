@@ -22,7 +22,12 @@
       mononoki
       jetbrains-mono
       # cascadia-code
-      # (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
+      (nerdfonts.override {
+        fonts = [
+          "FiraCode"
+          "JetBrainsMono"
+        ];
+      })
     ];
 
     fontconfig = {

@@ -10,13 +10,15 @@
 }:
 {
   imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
+    "${modulesPath}/installer/cd-dvd/installation-cd-base.nix"
 
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
+
+  networking.wireless.enable = lib.mkImageMediaOverride false;
 
   # fast but lowest compression level
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
@@ -28,12 +30,17 @@
   boot = {
     initrd.systemd.enable = false;
     kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = {
+      bcachefs = true;
+      # always broken
+      zfs = lib.mkForce false;
+    };
   };
 
   services.xserver = {
-    xkbOptions = "ctrl:swapcaps"; # Xorg Layout
+    xkb.options = "ctrl:swapcaps"; # Xorg Layout
   };
 
   # password: livecd
-  users.users.${username}.password = lib.mkForce "livecd";
+  users.users.${username}.hashedPassword = lib.mkForce "$y$j9T$rpwQr.lgxCy.V92cSxZcX1$fIUOx3Xx0vI7G/0R/DPI7IHjFAsUc0trqcuzJo7xGY2";
 }
