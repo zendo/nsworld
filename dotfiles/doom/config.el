@@ -84,9 +84,8 @@
 (global-visual-line-mode 1)
 
 ;; Nix Mode
-(add-hook 'nix-mode-hook #'rainbow-delimiters-mode)
-;; C-c c f
-;; (set-formatter! 'nixfmt "nixfmt" :modes '(nix-mode))
+(use-package! nix-mode
+  :custom (nix-nixfmt-bin "nixfmt"))
 
 ;; disable flycheck in some mode
 (setq flycheck-disabled-checkers '(sh-shellscript
