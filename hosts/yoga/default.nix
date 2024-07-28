@@ -25,8 +25,8 @@
 
     # "${inputs.nixpkgs-pr}/nixos/modules/config/swap.nix"
 
-    # self.nixosModules.gnome
-    self.nixosModules.kde
+    self.nixosModules.gnome
+    # self.nixosModules.kde
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
