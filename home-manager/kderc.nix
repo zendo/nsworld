@@ -20,7 +20,7 @@
 
     workspace = {
       # clickItemTo = "open";
-      lookAndFeel = "org.kde.breezetwilight.desktop"; # breezedark, breezetwilight
+      # lookAndFeel = "org.kde.breezetwilight.desktop"; # breezedark, breezetwilight
       # cursor = {
       #   theme = "Bibata-Modern-Ice";
       #   size = 32;
@@ -51,9 +51,8 @@
           "org.kde.plasma.kickoff"
           "org.kde.plasma.marginsseparator" # 边距分隔符
           {
-            name = "org.kde.plasma.icontasks";
-            config = {
-              General.launchers = [
+            iconTasks = {
+              launchers = [
                 "applications:kitty.desktop"
                 "applications:org.kde.dolphin.desktop"
                 # "applications:org.kde.kate.desktop"

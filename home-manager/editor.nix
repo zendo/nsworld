@@ -81,12 +81,7 @@
       vim-lsp
       vim-markdown
       editorconfig-vim
-      (nvim-treesitter.withPlugins (
-        plugins: with plugins; [
-          tree-sitter-markdown
-          tree-sitter-nix
-        ]
-      ))
+      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     ];
   };
 
