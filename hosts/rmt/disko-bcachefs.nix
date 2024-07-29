@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk = {
-      vda = {
+      main = {
         device = "/dev/vda";
         type = "disk";
         content = {
@@ -23,6 +23,7 @@
                 type = "filesystem";
                 format = "bcachefs";
                 mountpoint = "/";
+                mountOptions = [ "compress=zstd" ];
               };
             };
           };

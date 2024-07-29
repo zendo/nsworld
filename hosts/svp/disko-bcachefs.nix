@@ -23,6 +23,7 @@
                 type = "filesystem";
                 format = "bcachefs";
                 mountpoint = "/";
+                mountOptions = [ "compress=zstd" ];
               };
             };
           };

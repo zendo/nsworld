@@ -13,7 +13,7 @@
     fastConnection = true; # copy from ssh
     nodes = {
       "svp" = {
-        hostname = "192.168.2.198";
+        hostname = "192.168.2.197";
         profiles.system = {
           user = "root";
           sshUser = "zendo";

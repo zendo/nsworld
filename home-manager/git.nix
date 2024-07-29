@@ -68,7 +68,7 @@
         User iab
 
       Host svp
-        HostName 192.168.2.198
+        HostName 192.168.2.197
         Port 22
         User zendo
 
