@@ -27,7 +27,6 @@
 # https://github.com/archlinuxcn/repo/blob/master/archlinuxcn/clash-verge/PKGBUILD
 # https://github.com/clash-verge-rev/clash-verge-rev/blob/main/scripts/check.mjs#L54
 let
-  # overrideAttrs not play well with buildGoModule. Simply redefine a drv.
   mihomo-alpha = mihomo.overrideAttrs {
     pname = "mihomo";
     version = "1.18.6-unstable-2024-06-28";
