@@ -13,27 +13,15 @@
     # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
   ];
 
-  # fast but lowest compression level
-  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
-
-  hardware.enableAllFirmware = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  nixpkgs.config.allowUnfree = true;
-
-  nix.settings = {
-    substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
-    trusted-users = [ "@wheel" ];
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = {
+      bcachefs = true;
+      # always broken
+      zfs = lib.mkForce false;
+    };
   };
 
-  ###############################################
-  ## Essential Apps
-  ###############################################
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -62,4 +50,20 @@
   ];
 
   time.timeZone = "Asia/Shanghai";
+
+  hardware.enableAllFirmware = true;
+
+  nixpkgs.config.allowUnfree = true;
+
+  nix.settings = {
+    substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+    trusted-users = [ "@wheel" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+
+  # fast but lowest compression level
+  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 }

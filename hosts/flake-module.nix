@@ -39,7 +39,9 @@
                 };
               }
             ]
+            # modules from ../nixos/flake-module
             ++ nixpkgs.lib.optionals defaultModules [ self.nixosModules.default ]
+            # and more modules
             ++ extraModules;
         };
     in
