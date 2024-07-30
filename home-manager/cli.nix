@@ -23,7 +23,6 @@
     # Developing
     jq
     jql
-    cloc # count code lines
     sqlite
     openssl
     discount # markdown

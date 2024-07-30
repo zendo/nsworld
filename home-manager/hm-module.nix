@@ -7,7 +7,7 @@
       ./cli.nix
       ./zsh.nix
       ./bash.nix
-      ./tmux.nix
+      ./zellij.nix
       ./alias.nix
       ./files.nix
     ]
