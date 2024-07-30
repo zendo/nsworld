@@ -35,7 +35,7 @@
                   extraSpecialArgs = {
                     inherit inputs;
                   };
-                  users.${username} = import ../home-manager/hm-module.nix;
+                  users.${username} = ../home-manager/hm-module.nix;
                 };
               }
             ]
