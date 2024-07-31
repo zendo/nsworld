@@ -4,7 +4,7 @@ let
 in
 {
   home.file = {
-    ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
+    # ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
   };
 
   xdg.configFile = {
@@ -24,7 +24,7 @@ in
     "emacs/init.el".source = "${lnDots}/emacs/init.el";
     "emacs/early-init.el".source = "${lnDots}/emacs/early-init.el";
 
-    "lf".source = "${lnDots}/lf";
+    # "lf".source = "${lnDots}/lf";
     "mpv".source = "${lnDots}/mpv";
     "mako".source = "${lnDots}/mako";
     "helix".source = "${lnDots}/helix";

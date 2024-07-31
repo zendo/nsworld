@@ -21,7 +21,6 @@ in
       fcitx5.waylandFrontend = true;
       fcitx5.addons = with pkgs; [
         fluent-fcitx5
-        # fcitx5-breeze
         # fcitx5-chinese-addons
         (fcitx5-rime.override { rimeDataPkgs = [ pkgs.rime-ice ]; })
       ];

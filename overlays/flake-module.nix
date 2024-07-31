@@ -59,7 +59,6 @@
       # Data
       ns-cli = prev.callPackage ./ns-cli { };
       rime-ice = prev.callPackage ./rime-ice { };
-      fcitx5-breeze = prev.callPackage ./fcitx5-breeze { };
       fluent-fcitx5 = prev.callPackage ./fluent-fcitx5 { };
 
       # AppImage

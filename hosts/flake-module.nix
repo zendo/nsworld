@@ -27,6 +27,7 @@
             ++ nixpkgs.lib.optionals hmEnable [
               # home-manager module
               inputs.home-manager.nixosModules.home-manager
+              # home-manager initialize
               {
                 home-manager = {
                   useGlobalPkgs = true;
