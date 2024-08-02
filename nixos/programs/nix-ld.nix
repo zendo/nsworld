@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 {
   programs.nix-ld = {
-    enable = lib.mkDefault false;
     libraries = with pkgs; [
       alsa-lib
       at-spi2-atk
