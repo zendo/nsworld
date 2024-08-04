@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     # Nix Tools
     nil
-    # nixd
+    nixd
     ns-cli
     # alejandra
     nixpkgs-fmt

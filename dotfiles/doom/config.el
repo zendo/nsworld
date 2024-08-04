@@ -84,6 +84,7 @@
 (global-visual-line-mode 1)
 
 ;; Nix Mode
+(setq! lsp-nix-server-path "nixd")
 (use-package! nix-mode
   :custom (nix-nixfmt-bin "nixfmt"))
 
