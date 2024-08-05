@@ -64,11 +64,10 @@
         "nix-command"
         # "configurable-impure-env"
 
-        # Allows Nix to automatically pick UIDs for builds, rather than creating nixbld* user accounts
-        "auto-allocate-uids"
-
         # Allows Nix to execute builds inside cgroups
         "cgroups"
+        # Allows Nix to automatically pick UIDs for builds, rather than creating nixbld* user accounts
+        "auto-allocate-uids"
       ];
     };
   };

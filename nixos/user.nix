@@ -33,9 +33,9 @@ in
     ];
     extraGroups = [
       "wheel"
-      "audio"
-      "video"
-      "networkmanager"
+      # "audio"
+      # "video"
+      # "networkmanager"
       (mkIf config.virtualisation.lxd.enable "lxd")
       (mkIf config.virtualisation.docker.enable "docker")
       (mkIf config.virtualisation.podman.enable "podman")
@@ -51,9 +51,9 @@ in
     password = "guest";
     extraGroups = [
       "wheel"
-      "audio"
-      "video"
-      "networkmanager"
+      # "audio"
+      # "video"
+      # "networkmanager"
       (mkIf config.virtualisation.lxd.enable "lxd")
       (mkIf config.virtualisation.docker.enable "docker")
       (mkIf config.virtualisation.podman.enable "podman")
