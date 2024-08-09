@@ -4,24 +4,19 @@
 
   home.packages = with pkgs; [
     # Nix Tools
-    nil
-    nixd
     ns-cli
     # alejandra
-    nixpkgs-fmt
     nixfmt-rfc-style
     # lorri
     # cachix
     # comma # ,
     nix-tree
     # nix-prefetch
-    # colmena
     # nix-update
     # nix-template
     # nix-output-monitor
 
     # Developing
-    jq
     jql
     sqlite
     openssl
@@ -120,6 +115,10 @@
     };
 
     fd = {
+      enable = true;
+    };
+
+    jq = {
       enable = true;
     };
 

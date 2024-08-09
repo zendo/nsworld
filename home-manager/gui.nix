@@ -7,14 +7,17 @@
 }:
 {
   home.packages = with pkgs; [
+    kitty
     # nightpdf
     # azcomicv
     # moonfm
 
-    kitty
+    # nil
+    nixd
     nurl
     # nix-init
     # nixpkgs-review
+    # colmena
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs
 
     # nheko

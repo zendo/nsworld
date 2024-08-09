@@ -124,14 +124,14 @@
   (eglot-autoshutdown t) ; shutdown after closing the last managed buffer
   (eglot-sync-connect 0) ; async, do not block
   (eglot-extend-to-xref t) ; can be interesting!
-  (eglot-ignored-server-capabilities
-   '(:hoverProvider
-     :documentHighlightProvider
-     :documentFormattingProvider
-     :documentRangeFormattingProvider
-     :documentOnTypeFormattingProvider
-     :colorProvider
-     :foldingRangeProvider))
+  ;; (eglot-ignored-server-capabilities
+  ;;  '(:hoverProvider
+  ;;    :documentHighlightProvider
+  ;;    :documentFormattingProvider
+  ;;    :documentRangeFormattingProvider
+  ;;    :documentOnTypeFormattingProvider
+  ;;    :colorProvider
+  ;;    :foldingRangeProvider))
   :hook (
          (c-mode . eglot-ensure)
          (c++-mode . eglot-ensure)

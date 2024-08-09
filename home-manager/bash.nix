@@ -13,7 +13,8 @@
     extraConfig = ''
       set bell-style none
       set completion-ignore-case on
-      # Show all tab-completion options on first <tab>
+
+      # Display matches for ambiguous patterns at first tab press
       set show-all-if-ambiguous on
     '';
   };
