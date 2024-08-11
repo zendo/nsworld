@@ -11,8 +11,8 @@
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
@@ -22,22 +22,18 @@
   ];
 
   mods.virt.enable = false;
-  # mods.fcitx.enable = true;
   # mods.daeWithConfig.enable = true;
 
   environment.systemPackages = with pkgs; [
     git
     firefox
     notes
-    gnomeExtensions.appindicator
   ];
 
   environment.variables = { };
 
-  # services.desktopManager.plasma6.enable = true;
-
   services.xserver = {
-    enable = true;
+    # enable = true;
     desktopManager = {
       # gnome.enable = true;
       # xfce.enable = true;
@@ -50,7 +46,7 @@
       # lxqt.enable = true;
     };
     # displayManager.autoLogin.user = lib.mkForce "guest";
-    xkbOptions = "ctrl:swapcaps"; # Xorg Layout
+    xkb.options = "ctrl:swapcaps"; # Xorg Layout
   };
 
   # boot.initrd.kernelModules = ["virtio" "virtio_pci" "virtio_net" "virtio_rng" "virtio_blk" "virtio_console"];
@@ -78,7 +74,8 @@
   };
 
   users.users.root.password = "root";
-  users.users.${username}.password = lib.mkForce "test";
+  # psaawd: test
+  users.users.${username}.hashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
 
   home-manager.users.${username} = { };
 }
