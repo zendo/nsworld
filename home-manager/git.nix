@@ -26,15 +26,16 @@
         # "/home/iab/devel/nixpkgs"
       ];
     };
-  };
 
-  programs.git.delta = {
-    enable = true;
-  };
+    # syntax-highlighting pager for git, diff, and grep output
+    delta = {
+      enable = true;
+    };
 
-  # Git Large File Storage
-  programs.git.lfs = {
-    enable = true;
+    # Git Large File Storage
+    lfs = {
+      enable = true;
+    };
   };
 
   programs.gh = {

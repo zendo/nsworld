@@ -26,30 +26,15 @@
 # https://github.com/clash-verge-rev/clash-verge-rev/blob/main/src-tauri/tauri.conf.json
 # https://github.com/archlinuxcn/repo/blob/master/archlinuxcn/clash-verge/PKGBUILD
 # https://github.com/clash-verge-rev/clash-verge-rev/blob/main/scripts/check.mjs#L54
-let
-  mihomo-alpha = mihomo.overrideAttrs {
-    pname = "mihomo";
-    version = "1.18.6-unstable-2024-06-28";
-
-    src = fetchFromGitHub {
-      owner = "MetaCubeX";
-      repo = "mihomo";
-      rev = "0e228765fce4d709af1e672426dea5294e6b7544";
-      hash = "sha256-ZrNnFkkvS8hLEW6u9ZOZ9icehkqlpI4iA3lQf7wM0tg=";
-    };
-
-    vendorHash = "sha256-lBHL4vD+0JDOlc6SWFsj0cerE/ypImoh8UFbL736SmA=";
-  };
-in
 stdenv.mkDerivation (finalAttrs: {
   pname = "clash-verge-rev";
-  version = "1.6.4";
+  version = "1.7.5";
 
   src = fetchFromGitHub {
     owner = "clash-verge-rev";
     repo = "clash-verge-rev";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-1oPDrNsL92VUXe7HRIR7zlf45K0xQFIdncC11MRvsP8=";
+    hash = "sha256-Ej5A8HfsJlD59Q2pLjGykF/5LCW/DdiMO5x6wnHqIi8=";
   };
 
   sourceRoot = "${finalAttrs.src.name}/src-tauri";
@@ -68,14 +53,13 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-yv7VjLcwIBR5Xh14IAwiUFzjoLgdJV18psKGWzhXULw=";
+    hash = "sha256-DYsx1X1yXYEPFuMlvZtbJdefcCR8/wSUidFwsMy8oLk=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = ./Cargo.lock;
     outputHashes = {
-      "auto-launch-0.5.0" = "sha256-hH3jcPkcwHZToEu/IPJB4Gk/8X+pyRgkE0Fez4hpRD8=";
-      "sysproxy-0.3.0" = "sha256-kxpbzWgIrIvQXezF/cnL/R7YmMKxTGCjB5O2NjJ5gDw=";
+      "sysproxy-0.3.0" = "sha256-TEC51s/viqXUoEH9rJev8LdC2uHqefInNcarxeogePk=";
     };
   };
 
@@ -113,7 +97,6 @@ stdenv.mkDerivation (finalAttrs: {
 
   postFixup = ''
     ln -sf ${lib.getExe mihomo} $out/bin/clash-meta
-    ln -sf ${lib.getExe mihomo-alpha} $out/bin/clash-meta-alpha
 
     mkdir -p $out/lib/clash-verge/resources
     ln -sf ${v2ray-geoip}/share/v2ray/geoip.dat $out/lib/clash-verge/resources
