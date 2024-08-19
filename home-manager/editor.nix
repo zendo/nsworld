@@ -8,6 +8,10 @@
     # zed-editor
   ];
 
+  programs.pandoc = {
+    enable = false;
+  };
+
   ###############################################
   ##  EMACS
   ###############################################
@@ -70,22 +74,21 @@
   };
 
   programs.neovim = {
-    enable = true;
+    # enable = true;
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
-      lazy-nvim
-      LazyVim
+      nvim-lspconfig
       neogit
+      fzf-vim
       vim-nix
       vim-lsp
       vim-markdown
       editorconfig-vim
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     ];
-  };
-
-  programs.pandoc = {
-    enable = false;
+    extraPackages = with pkgs; [ lua-language-server ];
+    # extraConfig = ''
+    # '';
   };
 }
