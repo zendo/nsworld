@@ -7,8 +7,11 @@
 {
   boot = {
     plymouth.enable = true;
-    # tmp.useTmpfs = true;
-    tmp.cleanOnBoot = !config.boot.tmp.useTmpfs;
+
+    tmp = {
+      # useTmpfs = true;
+      cleanOnBoot = !config.boot.tmp.useTmpfs;
+    };
 
     initrd.systemd = {
       enable = lib.mkDefault true;

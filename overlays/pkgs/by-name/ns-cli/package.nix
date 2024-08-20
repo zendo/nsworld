@@ -14,11 +14,11 @@ stdenvNoCC.mkDerivation rec {
     install -D ${bashComp} $out/share/bash-completion/completions/ns.bash
   '';
 
-  meta = with lib; {
-    description = "My nixos helper";
+  meta = {
+    description = "My nixos helper tool";
     homepage = "https://github.com/zendo/nsworld";
-    license = licenses.mit;
-    platforms = platforms.all;
-    maintainers = with maintainers; [ zendo ];
+    license = lib.licenses.mit;
+    platforms = lib.platforms.all;
+    maintainers = with lib.maintainers; [ zendo ];
   };
 }
