@@ -25,7 +25,9 @@
       perSystem =
         {
           inputs',
+          lib,
           pkgs,
+          config,
           system,
           ...
         }:
@@ -44,11 +46,18 @@
           # access pkgs from self & overlays
           legacyPackages = pkgs;
 
+          packages =
+            lib.packagesFromDirectoryRecursive {
+              inherit (pkgs) callPackage;
+              directory = ./overlays/pkgs/by-name;
+            }
+            // {
+              # nix run .
+              default = config.packages.ns-cli;
+            };
+
           # nix fmt
           formatter = pkgs.nixfmt-rfc-style;
-
-          # nix run .
-          packages.default = pkgs.ns-cli;
 
           # nix develop .#rust
           devShells = import ./devshells.nix { inherit pkgs; };

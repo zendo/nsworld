@@ -10,8 +10,7 @@
     #   };
     # };
 
-    # nix build --impure --expr "(import <nixpkgs> {}).callPackage ./. {}" -L
-    default =
+    additions =
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
         inherit (prev) callPackage;
