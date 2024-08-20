@@ -9,7 +9,9 @@
       ds = "diff --stat";
       undo = "reset --hard HEAD~1";
       patch = "format-patch --stdout HEAD~1";
+      rpatch = "reset --hard HEAD~1";
       rank = "shortlog -s -n --no-merges";
+      ls = "log --stat --abbrev-commit";
       lg = "log --graph --decorate --all --oneline";
       ll = "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative";
       unstage = "reset HEAD --";

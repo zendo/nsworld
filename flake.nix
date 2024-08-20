@@ -4,7 +4,6 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       flake-parts,
       ...
     }:
@@ -22,7 +21,7 @@
         ./hosts/deployment.nix
         ./lib/flake-module.nix
         ./lib/repl.nix
-        ./templates
+        ./templates/flake-module.nix
         inputs.devenv.flakeModule
         # inputs.treefmt-nix.flakeModule
       ];

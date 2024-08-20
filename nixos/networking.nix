@@ -58,4 +58,6 @@
     #   "20.205.243.166" = ["github.com"];
     # };
   };
+
+  # systemd.services.NetworkManager-wait-online.enable = false;
 }
