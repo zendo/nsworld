@@ -10,6 +10,14 @@
     #   };
     # };
 
+    # nix build --impure --expr "(import <nixpkgs> {}).callPackage ./. {}" -L
+    default =
+      final: prev:
+      prev.lib.packagesFromDirectoryRecursive {
+        inherit (prev) callPackage;
+        directory = ./pkgs/by-name;
+      };
+
     modifications = _: prev: {
       # fix .desktop missing
       wl-color-picker = prev.wl-color-picker.overrideAttrs (oldAttrs: {
@@ -47,73 +55,27 @@
       };
     };
 
-    # This one brings our custom packages from the 'pkgs' directory
-    # additions = final: _prev: import ../pkgs final.pkgs;
+    # Python Module Overlays
+    # pythonPackagesOverlays =
+    #   (prev.pythonPackagesOverlays or [])
+    #   ++ [
+    #     (python-final: python-prev: {
+    #       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
+    #     })
+    #   ];
+    # python3 = let
+    #   self = prev.python3.override {
+    #     inherit self;
+    #     packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+    #   };
+    # in
+    #   self;
+    # python3Packages = final.python3.pkgs;
 
-    # nix build --impure --expr "(import <nixpkgs> {}).callPackage ./. {}" -L
-    default = final: prev: {
-      clash-verge-rev = prev.callPackage ./clash-verge-rev-bin { };
-      # clash-verge-rev = prev.callPackage ./clash-verge-rev-source { };
-      clash-nyanpasu = prev.callPackage ./clash-nyanpasu { };
-
-      # Data
-      ns-cli = prev.callPackage ./ns-cli { };
-      rime-ice = prev.callPackage ./rime-ice { };
-      fluent-fcitx5 = prev.callPackage ./fluent-fcitx5 { };
-
-      # AppImage
-      moonfm = prev.callPackage ./moonfm { };
-
-      # deb / autoPatchelf
-      he3 = prev.callPackage ./he3 { };
-      xmind = prev.callPackage ./xmind { };
-
-      # electron ALL WIP!!!
-      nightpdf = prev.callPackage ./nightpdf { };
-      weektodo = prev.callPackage ./weektodo { };
-      thorium-reader = prev.callPackage ./thorium-reader { };
-
-      # C
-      azcomicv = prev.callPackage ./azcomicv { };
-
-      # Rust
-
-      # Go
-      trzsz-go = prev.callPackage ./trzsz-go { };
-
-      # Gtk
-
-      # Qt
-
-      # Python
-
-      # Python Module Overlays
-      # pythonPackagesOverlays =
-      #   (prev.pythonPackagesOverlays or [])
-      #   ++ [
-      #     (python-final: python-prev: {
-      #       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
-      #     })
-      #   ];
-      # python3 = let
-      #   self = prev.python3.override {
-      #     inherit self;
-      #     packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-      #   };
-      # in
-      #   self;
-      # python3Packages = final.python3.pkgs;
-
-      # Java
-
-      # flutter
-
-      # gnome extensions
-      # gnomeExtensions =
-      #   prev.gnomeExtensions
-      #   // {
-      #     night-theme-switcher = prev.callPackage ./night-theme-switcher {};
-      #   };
-    };
+    # gnomeExtensions =
+    #   prev.gnomeExtensions
+    #   // {
+    #     night-theme-switcher = prev.callPackage ./night-theme-switcher {};
+    #   };
   };
 }

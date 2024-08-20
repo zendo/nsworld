@@ -58,7 +58,7 @@
 
       # Compatibility bash completion
       autoload -U bashcompinit && bashcompinit
-      source ${../overlays/ns-cli/ns.bash}
+      source ${../overlays/pkgs/by-name/ns-cli/ns.bash}
 
       # Using nix-shell on zsh
       ${lib.getExe pkgs.any-nix-shell} zsh --info-right | source /dev/stdin
