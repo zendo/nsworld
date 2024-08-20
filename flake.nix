@@ -2,11 +2,7 @@
   description = "NIX SAVE THE WORLD";
 
   outputs =
-    inputs@{
-      self,
-      flake-parts,
-      ...
-    }:
+    inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
@@ -34,16 +30,14 @@
           ...
         }:
         {
-          _module.args = {
-            pkgs = import inputs.nixpkgs {
-              inherit system;
-              overlays = builtins.attrValues self.overlays;
-              config = {
-                allowUnfree = true;
-                # allowBroken = true;
-                # allowInsecure = true;
-                # allowUnsupportedSystem = true;
-              };
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = builtins.attrValues self.overlays;
+            config = {
+              allowUnfree = true;
+              # allowBroken = true;
+              # allowInsecure = true;
+              # allowUnsupportedSystem = true;
             };
           };
 
