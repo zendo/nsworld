@@ -14,7 +14,7 @@
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
         inherit (prev) callPackage;
-        directory = ./pkgs/by-name;
+        directory = ../pkgs/by-name;
       };
 
     modifications = _: prev: {

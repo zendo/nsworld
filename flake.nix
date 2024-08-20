@@ -34,7 +34,7 @@
         {
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
-            overlays = builtins.attrValues self.overlays;
+            overlays = [ self.overlays.modifications ];
             config = {
               allowUnfree = true;
               # allowBroken = true;
@@ -49,7 +49,7 @@
           packages =
             lib.packagesFromDirectoryRecursive {
               inherit (pkgs) callPackage;
-              directory = ./overlays/pkgs/by-name;
+              directory = ./pkgs/by-name;
             }
             // {
               # nix run .
