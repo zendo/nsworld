@@ -24,6 +24,7 @@
   services = {
     fwupd.enable = true;
     acpid.enable = true;
+
     zram-generator = {
       enable = lib.mkDefault true;
       settings.zram0 = {
