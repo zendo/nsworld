@@ -6,11 +6,6 @@
   ...
 }:
 {
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = builtins.attrValues inputs.self.overlays;
-  };
-
   nix = {
     channel.enable = false;
 
