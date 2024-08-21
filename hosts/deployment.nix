@@ -4,7 +4,7 @@
   or
   nixos-rebuild --target-host zendo@192.168.2.198 --use-remote-sudo --flake .#svp boot
 */
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   flake.deploy = {
     sudo = "doas -u";
