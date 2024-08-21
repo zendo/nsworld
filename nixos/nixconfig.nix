@@ -30,10 +30,6 @@
       # max-jobs = 8; # limit the number of parallel jobs
       flake-registry = ""; # disable global registry
 
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      # https://github.com/NixOS/nixpkgs/pull/273170
-      nix-path = config.nix.nixPath;
-
       # for direnv GC roots
       # keep-outputs = true;
       # keep-derivations = true;
