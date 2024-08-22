@@ -22,7 +22,12 @@ in
       fcitx5.addons = with pkgs; [
         fcitx5-fluent
         # fcitx5-chinese-addons
-        (fcitx5-rime.override { rimeDataPkgs = [ pkgs.rime-ice ]; })
+        (fcitx5-rime.override {
+          rimeDataPkgs = [
+            pkgs.rime-frost
+            # pkgs.rime-ice
+          ];
+        })
       ];
     };
   };

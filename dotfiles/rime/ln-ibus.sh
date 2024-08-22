@@ -21,6 +21,8 @@ fi
 ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom.yaml
 ln -sfv "$this_dir"/ibus_rime.custom.yaml "$HOME"/.config/ibus/rime/ibus_rime.custom.yaml
 
-## Ice
+# rime-ice
 ln -sfv "$this_dir"/rime_ice.custom.yaml "$HOME"/.config/ibus/rime/rime_ice.custom.yaml
+
+# rime-frost
 ln -sfv "$this_dir"/rime_frost.custom.yaml "$HOME"/.config/ibus/rime/rime_frost.custom.yaml
