@@ -33,6 +33,7 @@ in
     ];
     extraGroups = [
       "wheel"
+      "networkmanager"
       (mkIf config.virtualisation.lxd.enable "lxd")
       (mkIf config.virtualisation.docker.enable "docker")
       (mkIf config.virtualisation.podman.enable "podman")
@@ -46,14 +47,6 @@ in
     isNormalUser = true;
     # `passwd`
     password = "guest";
-    extraGroups = [
-      (mkIf config.virtualisation.lxd.enable "lxd")
-      (mkIf config.virtualisation.docker.enable "docker")
-      (mkIf config.virtualisation.podman.enable "podman")
-      (mkIf config.virtualisation.libvirtd.enable "libvirtd")
-      (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
-      (mkIf config.programs.adb.enable "adbusers")
-    ];
   };
 
   # doas

@@ -9,7 +9,7 @@
     plymouth.enable = true;
 
     tmp = {
-      # useTmpfs = true;
+      useTmpfs = true;
       cleanOnBoot = !config.boot.tmp.useTmpfs;
     };
 
@@ -19,6 +19,8 @@
     };
 
     kernelParams = lib.optionals config.boot.initrd.systemd.enable [ "systemd.show_status=false" ];
+
+    # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
   };
 
   services = {

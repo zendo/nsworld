@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   inputs,
   ...
 }:
@@ -60,5 +61,10 @@
         "auto-allocate-uids"
       ];
     };
+  };
+
+  # for large files
+  systemd.services.nix-daemon = lib.mkIf config.boot.tmp.useTmpfs {
+    environment.TMPDIR = "/var/tmp";
   };
 }

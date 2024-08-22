@@ -35,6 +35,7 @@
     networkmanager = {
       enable = true; # conflict with networking.wireless
       dns = "none"; # for Transparent Proxy
+      wifi.backend = "iwd"; # replace "wpa_supplicant"
       plugins = lib.mkForce [ ]; # openconnect (webkitgtk)
     };
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
