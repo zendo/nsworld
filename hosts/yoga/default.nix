@@ -95,6 +95,8 @@
     # kernel.sysctl = {
     #   "vm.max_map_count" = 2147483642; # default: 1048576
     # };
+
+    # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
   };
 
   # services.logind = {

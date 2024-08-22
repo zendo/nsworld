@@ -3,7 +3,12 @@
   stdenv,
   fetchurl,
   dpkg,
-  atomEnv,
+  alsa-lib,
+  mesa,
+  nss,
+  nspr,
+  systemd,
+  xorg,
   autoPatchelfHook,
   makeWrapper,
   makeDesktopItem,
@@ -13,11 +18,11 @@
 
 stdenv.mkDerivation rec {
   pname = "xmind";
-  version = "22.10.0920";
+  version = "24.04.10311-202405240010";
 
   src = fetchurl {
     url = "https://dl3.xmind.net/Xmind-for-Linux-amd64bit-${version}.deb";
-    hash = "sha256-jU20cQrP7lABTr3QtSMPIGEJBHlI7LjKBGFQjoDyznU=";
+    hash = "sha256-54nNI4LoujcllUfqY9nqa6oshIeRmj4ObHvsUSozz+s=";
   };
 
   desktopItem = makeDesktopItem {
@@ -38,7 +43,14 @@ stdenv.mkDerivation rec {
     wrapGAppsHook
   ];
 
-  buildInputs = atomEnv.packages;
+  buildInputs = [
+    alsa-lib
+    mesa
+    nss
+    nspr
+    xorg.libxkbfile
+    systemd
+  ];
 
   installPhase = ''
     mkdir -p "$out/bin"
@@ -59,13 +71,13 @@ stdenv.mkDerivation rec {
       "''${gappsWrapperArgs[@]}"
   '';
 
-  meta = with lib; {
+  meta = {
     description = "Mind Mapping & Brainstorming";
     homepage = "https://xmind.app";
-    license = licenses.bsd3;
-    # license = licenses.unfree;
+    license = lib.licenses.bsd3;
+    # license = lib.licenses.unfree;
     platforms = [ "x86_64-linux" ];
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
-    maintainers = with maintainers; [ zendo ];
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+    maintainers = with lib.maintainers; [ zendo ];
   };
 }

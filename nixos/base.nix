@@ -19,8 +19,6 @@
     };
 
     kernelParams = lib.optionals config.boot.initrd.systemd.enable [ "systemd.show_status=false" ];
-
-    # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
   };
 
   services = {
