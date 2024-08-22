@@ -7,7 +7,12 @@
     type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [
       # libpinyin
-      (rime.override { rimeDataPkgs = [ pkgs.rime-ice ]; })
+      (rime.override {
+        rimeDataPkgs = [
+          pkgs.rime-frost
+          # pkgs.rime-ice
+        ];
+      })
     ];
   };
 
