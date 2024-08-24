@@ -11,8 +11,8 @@
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
 
-    # self.nixosModules.gnome
-    self.nixosModules.kde
+    self.nixosModules.gnome
+    # self.nixosModules.kde
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
@@ -25,7 +25,6 @@
   # mods.daeWithConfig.enable = true;
 
   environment.systemPackages = with pkgs; [
-    git
     firefox
     notes
   ];
@@ -73,9 +72,9 @@
     };
   };
 
-  users.users.root.password = "root";
+  users.users.root.initialPassword = "root";
   # psaawd: test
-  users.users.${username}.hashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
+  users.users.${username}.initialHashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
 
   home-manager.users.${username} = { };
 }

@@ -44,8 +44,8 @@
     baobab
     gnome-tour
     gnome-photos
-    gnome.gnome-music
-    gnome.gnome-software
+    gnome-music
+    gnome-software
   ];
 
   environment.systemPackages =
@@ -59,8 +59,8 @@
 
       gnome-tweaks
       dconf-editor
-      gnome.gnome-power-manager
-      gnome.gnome-sound-recorder
+      gnome-power-manager
+      gnome-sound-recorder
       # gnome.pomodoro
       # gnome.gnome-boxes
       # gnome-network-displays

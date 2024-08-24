@@ -77,9 +77,14 @@
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "24.11";
 
-  # TODO: an experimental re-implementation of `switch-to-configuration`
-  system.switch = {
+  # switch-to-configuration-ng reimplements switch-to-configuration, but
+  # without perl.
+  system.switch = lib.mkDefault {
     enable = false;
     enableNg = true;
   };
+
+  # Remove perl from activation
+  # system.etc.overlay.enable = lib.mkDefault true;
+  # systemd.sysusers.enable = lib.mkDefault true;
 }

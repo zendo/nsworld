@@ -18,6 +18,7 @@ in
     "nix-init".source = ../dotfiles/nix-init;
     "alacritty".source = ../dotfiles/alacritty;
     "radioboat".source = ../dotfiles/radioboat;
+    "starship.toml".source = ../dotfiles/starship.toml;
 
     "doom".source = "${lnDots}/doom";
     "emacs/elisp".source = "${lnDots}/emacs/elisp";
@@ -30,7 +31,6 @@ in
     "helix".source = "${lnDots}/helix";
     "waybar".source = "${lnDots}/waybar";
     "yt-dlp".source = "${lnDots}/yt-dlp";
-    "starship.toml".source = "${lnDots}/starship.toml";
     "sway/custom.conf".source = "${lnDots}/sway/custom.conf";
     "hypr/custom.conf".source = "${lnDots}/hypr/custom.conf";
     "hypr/hyprlock.conf".source = "${lnDots}/hypr/hyprlock.conf";

@@ -1,4 +1,8 @@
-{ lib, nixosConfig, ... }:
+{
+  lib,
+  nixosConfig,
+  ...
+}:
 {
   imports =
     [
@@ -22,6 +26,8 @@
     ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./kderc.nix ]
     ++ lib.optionals nixosConfig.services.xserver.desktopManager.gnome.enable [ ./dconf.nix ];
 
-  home.stateVersion = nixosConfig.system.stateVersion;
-  home.enableNixpkgsReleaseCheck = false;
+  home = {
+    enableNixpkgsReleaseCheck = false;
+    stateVersion = nixosConfig.system.stateVersion;
+  };
 }

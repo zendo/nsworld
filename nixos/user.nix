@@ -19,7 +19,7 @@ let
 in
 {
   users = {
-    # mutableUsers = false;
+    mutableUsers = false;
     # defaultUserShell = pkgs.zsh;
 
     # groups.${username} = { };
@@ -33,7 +33,10 @@ in
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz linzway@qq.com"
       ];
-      # group = "${username}";
+      # createHome = true;
+      # home = "/home/${username}";
+      # group = username;
+      # uid = 1000;
       extraGroups = [
         "wheel"
         "networkmanager"
@@ -46,11 +49,11 @@ in
       ];
     };
 
-    users.guest = {
-      isNormalUser = true;
-      # `passwd`
-      initialPassword = "guest";
-    };
+    # users.guest = {
+    #   isNormalUser = true;
+    #   # `passwd`
+    #   initialPassword = "guest";
+    # };
   };
 
   # doas
