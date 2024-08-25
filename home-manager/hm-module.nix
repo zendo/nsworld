@@ -11,7 +11,6 @@
       ./cli.nix
       ./zsh.nix
       ./bash.nix
-      ./zellij.nix
       ./alias.nix
       ./files.nix
     ]

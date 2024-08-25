@@ -25,7 +25,6 @@
             ./git.nix
             ./cli.nix
             ./zsh.nix
-            ./zellij.nix
             ./alias.nix
             ./files.nix
             ./non-nixos.nix
