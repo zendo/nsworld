@@ -31,6 +31,7 @@ in
     "helix".source = "${lnDots}/helix";
     "waybar".source = "${lnDots}/waybar";
     "yt-dlp".source = "${lnDots}/yt-dlp";
+    "zellij".source = "${lnDots}/zellij";
     "sway/custom.conf".source = "${lnDots}/sway/custom.conf";
     "hypr/custom.conf".source = "${lnDots}/hypr/custom.conf";
     "hypr/hyprlock.conf".source = "${lnDots}/hypr/hyprlock.conf";

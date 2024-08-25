@@ -12,6 +12,10 @@
     enableZshIntegration = true;
   };
 
+  programs.zellij = {
+    enable = true;
+  };
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
