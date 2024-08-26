@@ -8,8 +8,8 @@
 }:
 {
   imports = [
-    # ./disko-btrfs.nix
-    ./disko-bcachefs.nix
+    ../disko/bcachefs-single.nix
+    # ../disko/btrfs-subvolumes.nix
     ./hardware-configuration.nix
 
     self.nixosModules.gnome

@@ -1,8 +1,9 @@
+{ lib, ... }:
 {
   disko.devices = {
     disk = {
       main = {
-        device = "/dev/sda";
+        device = lib.mkDefault "/dev/vda";
         type = "disk";
         content = {
           type = "gpt";
@@ -21,8 +22,7 @@
               };
             };
             root = {
-              name = "root";
-              end = "-0";
+              size = "100%";
               content = {
                 type = "filesystem";
                 format = "bcachefs";

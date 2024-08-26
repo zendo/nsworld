@@ -1,41 +1,32 @@
+{ lib, ... }:
+
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vda";
+        device = lib.mkDefault "/dev/vda";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              label = "ESP";
-              type = "EF00";
               priority = 1;
-              size = "512M";
+              name = "ESP";
+              start = "1M";
+              end = "500M";
+              type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/efi";
               };
             };
-            # swap = {
-            #   label = "swap";
-            #   type = "8200";
-            #   size = "4G";
-            #   content = {
-            #     type = "swap";
-            #     # randomEncryption = true;
-            #     # resumeDevice = true;  # resume from hiberation from this device
-            #   };
-            # };
             root = {
-              label = "root";
               size = "100%";
+              name = "root";
               content = {
                 type = "btrfs";
                 extraArgs = [ "-f" ]; # Override existing partition
-                # Subvolumes must set a mountpoint in order to be mounted,
-                # unless their parent is mounted
                 subvolumes = {
                   # Subvolume name is different from mountpoint
                   "/rootfs" = {

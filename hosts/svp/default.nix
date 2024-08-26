@@ -6,8 +6,9 @@
 }:
 {
   imports = [
-    # ./disko-btrfs.nix
-    ./disko-bcachefs.nix
+    ../disko/bcachefs-single.nix
+    # ../disko/btrfs-subvolumes.nix
+
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
 
@@ -66,9 +67,10 @@
   ###############################################
   ## FileSystem
   ###############################################
+  disko.devices.disk.main.device = "/dev/sda";
+
   boot.supportedFilesystems = [
     "ntfs"
-    "bcachefs"
   ];
 
   # Swapfile
