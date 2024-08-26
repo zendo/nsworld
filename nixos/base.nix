@@ -9,7 +9,7 @@
     plymouth.enable = true;
 
     tmp = {
-      useTmpfs = true;
+      useTmpfs = lib.mkDefault true;
       cleanOnBoot = !config.boot.tmp.useTmpfs;
     };
 

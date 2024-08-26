@@ -46,7 +46,7 @@
       # lxqt.enable = true;
     };
     # displayManager.autoLogin.user = lib.mkForce "guest";
-    xkbOptions = "ctrl:swapcaps"; # Xorg Layout
+    xkb.options = "ctrl:swapcaps"; # Xorg Layout
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

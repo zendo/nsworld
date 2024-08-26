@@ -23,6 +23,7 @@
   ];
 
   boot = {
+    tmp.useTmpfs = false;
     initrd.systemd.enable = false;
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = {
