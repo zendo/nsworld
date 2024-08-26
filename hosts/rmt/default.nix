@@ -9,7 +9,7 @@
 {
   imports = [
     # ./disko-btrfs.nix
-    # ./disko-bcachefs.nix
+    ./disko-bcachefs.nix
     ./hardware-configuration.nix
 
     self.nixosModules.gnome
@@ -19,6 +19,8 @@
   ];
 
   # services.flatpak.enable = true;
+
+  mods.virt.enable = false;
 
   environment.systemPackages = with pkgs; [
     notes
@@ -49,13 +51,15 @@
     xkb.options = "ctrl:swapcaps"; # Xorg Layout
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
 
-  # Systemd-boot
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/efi";
-    systemd-boot.enable = true;
+    # Systemd-boot
+    loader = {
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/efi";
+      systemd-boot.enable = true;
+    };
   };
 
   # SSH
