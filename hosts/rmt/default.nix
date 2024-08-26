@@ -23,19 +23,13 @@
   mods.virt.enable = false;
 
   environment.systemPackages = with pkgs; [
-    notes
-
-    skim
-    ripgrep
     duf
     gdu
   ];
 
-  # services.desktopManager.plasma6.enable = true;
-
   # Desktop Envirment
   services.xserver = {
-    enable = true;
+    # enable = true;
     desktopManager = {
       # gnome.enable = true;
       # xfce.enable = true;

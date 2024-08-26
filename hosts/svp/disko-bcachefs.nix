@@ -8,12 +8,16 @@
           type = "gpt";
           partitions = {
             ESP = {
-              end = "500M";
               type = "EF00";
+              end = "500M";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/efi";
+                mountOptions = [
+                  "fmask=0022"
+                  "dmask=0022"
+                ];
               };
             };
             root = {
