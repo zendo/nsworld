@@ -9,8 +9,9 @@ mkfs.fat -F32 /dev/nvme0n1p3
 mkswap /dev/nvme0n1p4
 swapon /dev/nvme0n1p4
 bcachefs format /dev/nvme0n1p5
-mount -t bcachefs /dev/nvme0n1p5 /mnt
+mount /dev/nvme0n1p5 /mnt
 mkdir /mnt/efi
+mount /dev/nvme0n1p1 /mnt/efi
 nixos-generate-config --root /mnt
 
 nix run github:nix-community/disko -- -m disko hosts/rmt/disko-bcachefs.nix --arg disks '[ "/dev/sda" ]'
