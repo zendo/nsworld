@@ -9,8 +9,8 @@
 {
   imports = [
     # ./disko-btrfs.nix
-    ./disko-bcachefs.nix
-    (modulesPath + "/profiles/qemu-guest.nix")
+    # ./disko-bcachefs.nix
+    ./hardware-configuration.nix
 
     self.nixosModules.gnome
     # self.nixosModules.kde
@@ -48,9 +48,6 @@
     # displayManager.autoLogin.user = lib.mkForce "guest";
     xkbOptions = "ctrl:swapcaps"; # Xorg Layout
   };
-
-  # Kernel
-  boot.kernelModules = [ "kvm-amd" ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
