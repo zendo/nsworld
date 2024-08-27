@@ -1,8 +1,8 @@
 patch:
   # 方案列表
   schema_list:
-    - schema: "rime_frost" 
-    # - schema: "rime_ice"
+    # - schema: "rime_frost" 
+    - schema: "rime_ice"
     # - schema: "aurora_pinyin"
     # - schema: "luna_pinyin_simp"
     # - schema: "clover"

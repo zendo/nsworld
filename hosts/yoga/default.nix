@@ -62,11 +62,12 @@
   ###############################################
   # mods.daeWithConfig.enable = true;
 
+  disabledModules = [ "programs/clash-verge.nix" ];
   programs.clash-verge = {
     enable = true;
     tunMode = true;
     autoStart = true;
-    package = pkgs.clash-verge-rev;
+    package = pkgs.mihomo-party;
   };
 
   # services.v2raya.enable = true;

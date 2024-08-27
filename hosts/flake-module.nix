@@ -101,6 +101,7 @@
         extraModules = [
           ./wsl
           ../nixos/fonts.nix
+          ../nixos/nixpkgs.nix
           ../nixos/nixconfig.nix
           inputs.nixos-wsl.nixosModules.wsl
         ];

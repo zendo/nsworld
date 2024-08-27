@@ -19,6 +19,10 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/efi";
+                mountOptions = [
+                  "fmask=0022"
+                  "dmask=0022"
+                ];
               };
             };
             root = {
