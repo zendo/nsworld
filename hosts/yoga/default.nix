@@ -81,7 +81,6 @@
 
     supportedFilesystems = [
       "ntfs"
-      "bcachefs"
     ];
 
     # plymouth = {

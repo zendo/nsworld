@@ -51,7 +51,7 @@ stdenv.mkDerivation rec {
     ln -s $out/mihomo-party/mihomo-party $out/bin
 
     substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace '/opt/mihomo-party/mihomo-party' 'mihomo-party'
+      --replace-fail '/opt/mihomo-party/mihomo-party' 'mihomo-party'
 
     runHook postInstall
   '';
