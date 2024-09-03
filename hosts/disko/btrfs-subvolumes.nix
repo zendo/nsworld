@@ -1,11 +1,9 @@
-{ lib, ... }:
-
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = lib.mkDefault "/dev/vda";
+        device = "/dev/vda";
         content = {
           type = "gpt";
           partitions = {

@@ -71,7 +71,6 @@
   ###############################################
   ## FileSystem
   ###############################################
-  # disko.devices.disk.main.device = "/dev/sda";
 
   boot.supportedFilesystems = [
     "ntfs"

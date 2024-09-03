@@ -1,16 +1,15 @@
-{ lib, ... }:
 {
   disko.devices = {
     disk = {
       main = {
-        device = lib.mkDefault "/dev/sda";
+        device = "/dev/sda";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
               type = "EF00";
-              end = "1G";
+              size = "1G";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -23,7 +22,7 @@
             };
             root = {
               # dual-boot with Windows
-              start = "70G";
+              start = "71G";
               size = "100%";
               content = {
                 type = "filesystem";
