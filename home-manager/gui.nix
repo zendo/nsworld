@@ -18,8 +18,7 @@
     # nix-init
     # nixpkgs-review
     # colmena
-    deploy-rs
-    # inputs.deploy-rs.packages.x86_64-linux.deploy-rs
+    inputs.deploy-rs.packages.x86_64-linux.deploy-rs
 
     # nheko
     # fractal

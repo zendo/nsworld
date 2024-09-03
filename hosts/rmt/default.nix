@@ -18,6 +18,8 @@
     # self.nixosModules.hyprland
   ];
 
+  disabledModules = [ "programs/clash-verge.nix" ];
+
   # services.flatpak.enable = true;
 
   mods.virt.enable = false;
@@ -51,7 +53,6 @@
     # Systemd-boot
     loader = {
       efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = "/efi";
       systemd-boot.enable = true;
     };
   };

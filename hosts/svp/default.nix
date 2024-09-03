@@ -6,8 +6,7 @@
 }:
 {
   imports = [
-    ../disko/bcachefs-single.nix
-    # ../disko/btrfs-subvolumes.nix
+    ./bcachefs-single.nix
 
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
@@ -47,28 +46,32 @@
   ## Bootloader
   ###############################################
   boot.loader = {
-    efi.efiSysMountPoint = "/efi";
-    systemd-boot.enable = true;
+    # systemd-boot.enable = true;
     grub = {
-      # enable = true;
+      enable = true;
       device = "nodev";
       efiSupport = true;
       # Because this machine's efivars can't touch
       # It just move grubx64.efi -> Boot/bootx64.efi
       efiInstallAsRemovable = true;
-      # extraEntries = ''
+      extraEntries = ''
+        menuentry "Windows" {
+         search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+         chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+        }
+
       #   menuentry "Arch Linux" {
       #    search --file --no-floppy --set=root /EFI/arch/grubx64.efi
       #    chainloader (''${root})/EFI/arch/grubx64.efi
       #   }
-      # '';
+      '';
     };
   };
 
   ###############################################
   ## FileSystem
   ###############################################
-  disko.devices.disk.main.device = "/dev/sda";
+  # disko.devices.disk.main.device = "/dev/sda";
 
   boot.supportedFilesystems = [
     "ntfs"
