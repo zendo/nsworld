@@ -46,9 +46,9 @@
   ## Bootloader
   ###############################################
   boot.loader = {
-    # systemd-boot.enable = true;
+    systemd-boot.enable = true;
     grub = {
-      enable = true;
+      # enable = true;
       device = "nodev";
       efiSupport = true;
       # Because this machine's efivars can't touch

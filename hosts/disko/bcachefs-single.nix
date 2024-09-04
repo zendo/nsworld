@@ -21,6 +21,10 @@
               };
             };
             root = {
+              # dual-boot with Windows
+              # start = "71G";
+              # size = "100%";
+              # single system
               size = "100%";
               content = {
                 type = "filesystem";

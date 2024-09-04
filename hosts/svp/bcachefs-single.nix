@@ -9,7 +9,7 @@
           partitions = {
             ESP = {
               type = "EF00";
-              size = "1G";
+              size = "500M";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -21,8 +21,6 @@
               };
             };
             root = {
-              # dual-boot with Windows
-              start = "71G";
               size = "100%";
               content = {
                 type = "filesystem";

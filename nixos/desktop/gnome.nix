@@ -17,7 +17,7 @@
   };
 
   services = {
-    displayManager.autoLogin.user = "${username}";
+    # displayManager.autoLogin.user = "${username}";
 
     xserver = {
       enable = true;
