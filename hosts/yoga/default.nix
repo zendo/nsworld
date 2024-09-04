@@ -9,6 +9,7 @@
 }:
 {
   imports = [
+    ./bcachefs-single.nix
     ./hardware-configuration.nix
 
     # Secure Boot
@@ -132,12 +133,12 @@
       # efiSysMountPoint = "/efi"; # default /boot
     };
     systemd-boot = {
-      # enable = true;
+      enable = true;
       configurationLimit = 5; # bootmenu items
       consoleMode = "max";
     };
     grub = {
-      enable = true;
+      # enable = true;
       device = "nodev";
       efiSupport = true;
       gfxmodeEfi = "1024x768";
@@ -167,7 +168,7 @@
   ###############################################
   ## FileSystem
   ###############################################
-  services.btrfs.autoScrub.enable = true;
+  # services.btrfs.autoScrub.enable = true;
 
   fileSystems = {
     "/".options = [
