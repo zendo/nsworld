@@ -46,6 +46,7 @@
   ## Bootloader
   ###############################################
   boot.loader = {
+    efi.efiSysMountPoint = "/efi"; # default /boot
     systemd-boot.enable = true;
     grub = {
       # enable = true;

@@ -53,6 +53,7 @@
     # Systemd-boot
     loader = {
       efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/efi"; # default /boot
       systemd-boot.enable = true;
     };
   };

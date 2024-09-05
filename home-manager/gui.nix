@@ -11,6 +11,7 @@
     # nightpdf
     # azcomicv
     # moonfm
+    picacomic
 
     # nil
     nixd
