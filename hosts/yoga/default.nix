@@ -9,7 +9,6 @@
 }:
 {
   imports = [
-    ./bcachefs-single.nix
     ./hardware-configuration.nix
 
     # Secure Boot
@@ -168,7 +167,7 @@
   ###############################################
   ## FileSystem
   ###############################################
-  # services.btrfs.autoScrub.enable = true;
+  services.btrfs.autoScrub.enable = true;
 
   fileSystems = {
     "/".options = [
