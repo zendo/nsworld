@@ -9,6 +9,8 @@
   webkitgtk_4_1,
   udev,
   libayatana-appindicator,
+  makeDesktopItem,
+  copyDesktopItems,
 }:
 
 stdenv.mkDerivation rec {
@@ -24,6 +26,7 @@ stdenv.mkDerivation rec {
     dpkg
     wrapGAppsHook
     autoPatchelfHook
+    copyDesktopItems
   ];
 
   buildInputs = [
@@ -43,12 +46,21 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp -r usr/local/lib/pica-comic usr/share $out
     ln -s $out/pica-comic/pica_comic $out/bin/picacomic
-
-    substituteInPlace $out/share/applications/pica-comic.desktop \
-      --replace-fail '/usr/local/lib/pica-comic/pica_comic %u' 'picacomic %u'
+    rm $out/share/applications/pica-comic.desktop
 
     runHook postInstall
   '';
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = pname;
+      exec = pname;
+      icon = "pica-comic";
+      desktopName = pname;
+      comment = meta.description;
+      categories = [ "Office" ];
+    })
+  ];
 
   meta = {
     description = "Comic app built with Flutter, supporting multiple comic sources";
