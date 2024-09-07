@@ -12,6 +12,7 @@ in
     "wofi".source = ../dotfiles/wofi;
     "foot".source = ../dotfiles/foot;
     "kitty".source = ../dotfiles/kitty;
+    "zellij".source = ../dotfiles/zellij;
     "wezterm".source = ../dotfiles/wezterm;
     "gtklock".source = ../dotfiles/gtklock;
     "swaylock".source = ../dotfiles/swaylock;
@@ -31,7 +32,6 @@ in
     "helix".source = "${lnDots}/helix";
     "waybar".source = "${lnDots}/waybar";
     "yt-dlp".source = "${lnDots}/yt-dlp";
-    "zellij".source = "${lnDots}/zellij";
     "sway/custom.conf".source = "${lnDots}/sway/custom.conf";
     "hypr/custom.conf".source = "${lnDots}/hypr/custom.conf";
     "hypr/hyprlock.conf".source = "${lnDots}/hypr/hyprlock.conf";
