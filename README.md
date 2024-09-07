@@ -24,9 +24,11 @@ nixos-install --no-root-passwd --flake .#host
 --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store"
 ```
 
-[Config Example](https://github.com/thiagokokada/nix-configs)
+[SrvOS](https://github.com/nix-community/srvos)
 
-[More Example](https://github.com/foo-dogsquared/nixos-config)
+[Mic92](https://github.com/Mic92/dotfiles)
+
+[thiagokokada](https://github.com/thiagokokada/nix-configs)
 
 # Nix Commands
 
