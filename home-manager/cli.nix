@@ -18,6 +18,7 @@
 
     # Developing
     jql
+    igrep
     sqlite
     openssl
     discount # markdown
