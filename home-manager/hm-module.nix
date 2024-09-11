@@ -15,7 +15,7 @@
       ./files.nix
     ]
     # for desktop environment
-    ++ lib.optionals nixosConfig.services.pipewire.enable [
+    ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
       ./gui.nix
       ./xdg.nix
       ./editor.nix

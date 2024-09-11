@@ -19,6 +19,10 @@
       imports = [ ./desktop/kde.nix ];
     };
 
+    cosmic = {
+      imports = [ ./desktop/cosmic.nix ];
+    };
+
     sway = {
       imports = [
         ./desktop/wm.nix
