@@ -33,16 +33,20 @@
     };
   };
 
+  services = {
+    displayManager.autoLogin.user = "${username}";
+    xserver = {
+      xkb.options = "ctrl:swapcaps"; # Xorg Layout
+    };
+  };
+
+  users.mutableUsers = true;
+  # password: live
+  users.users.${username}.initialHashedPassword = lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
+
   mods.virt.enable = false;
 
   environment.systemPackages = with pkgs; [ dippi ];
-
-  services.xserver = {
-    xkb.options = "ctrl:swapcaps"; # Xorg Layout
-  };
-
-  # password: livecd
-  users.users.${username}.hashedPassword = lib.mkForce "$y$j9T$rpwQr.lgxCy.V92cSxZcX1$fIUOx3Xx0vI7G/0R/DPI7IHjFAsUc0trqcuzJo7xGY2";
 
   networking.wireless.enable = lib.mkImageMediaOverride false;
 

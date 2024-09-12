@@ -20,7 +20,10 @@
           modules =
             [
               # nixos setup
-              { networking.hostName = "${hostname}"; }
+              {
+                networking.hostName = "${hostname}";
+                disabledModules = [ "programs/clash-verge.nix" ];
+              }
               # disko module
               inputs.disko.nixosModules.disko
             ]
@@ -79,7 +82,7 @@
 
       # nix build .#nixosConfigurations.livecd-graphical.config.system.build.isoImage
       livecd-graphical = mkHost {
-        username = "livecd";
+        username = "live";
         hostname = "livecd";
         extraModules = [ ./livecd/graphical.nix ];
       };

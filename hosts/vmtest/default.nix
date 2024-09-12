@@ -24,6 +24,8 @@
   mods.virt.enable = false;
   # mods.daeWithConfig.enable = true;
 
+  users.mutableUsers = true;
+
   environment.systemPackages = with pkgs; [
     firefox
     notes
@@ -31,21 +33,23 @@
 
   environment.variables = { };
 
-  services.xserver = {
-    # enable = true;
-    desktopManager = {
-      # gnome.enable = true;
-      # xfce.enable = true;
-      # budgie.enable = true;
-      # deepin.enable = true;
-      # cinnamon.enable = true;
-      # pantheon.enable = true;
-      # enlightenment.enable = true;
-      # mate.enable = true;
-      # lxqt.enable = true;
+  services = {
+    xserver = {
+      # enable = true;
+      desktopManager = {
+        # gnome.enable = true;
+        # xfce.enable = true;
+        # budgie.enable = true;
+        # deepin.enable = true;
+        # cinnamon.enable = true;
+        # pantheon.enable = true;
+        # enlightenment.enable = true;
+        # mate.enable = true;
+        # lxqt.enable = true;
+      };
+      xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
-    # displayManager.autoLogin.user = lib.mkForce "guest";
-    xkb.options = "ctrl:swapcaps"; # Xorg Layout
+    displayManager.autoLogin.user = "${username}";
   };
 
   # boot.initrd.kernelModules = ["virtio" "virtio_pci" "virtio_net" "virtio_rng" "virtio_blk" "virtio_console"];

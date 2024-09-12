@@ -3,6 +3,7 @@
   self,
   pkgs,
   lib,
+  username,
   modulesPath,
   ...
 }:
@@ -18,11 +19,11 @@
     # self.nixosModules.hyprland
   ];
 
-  disabledModules = [ "programs/clash-verge.nix" ];
-
   # services.flatpak.enable = true;
 
   mods.virt.enable = false;
+
+  users.mutableUsers = true;
 
   environment.systemPackages = with pkgs; [
     duf
@@ -30,21 +31,23 @@
   ];
 
   # Desktop Envirment
-  services.xserver = {
-    # enable = true;
-    desktopManager = {
-      # gnome.enable = true;
-      # xfce.enable = true;
-      # budgie.enable = true;
-      # deepin.enable = true;
-      # cinnamon.enable = true;
-      # pantheon.enable = true;
-      # enlightenment.enable = true;
-      # mate.enable = true;
-      # lxqt.enable = true;
+  services = {
+    xserver = {
+      # enable = true;
+      desktopManager = {
+        # gnome.enable = true;
+        # xfce.enable = true;
+        # budgie.enable = true;
+        # deepin.enable = true;
+        # cinnamon.enable = true;
+        # pantheon.enable = true;
+        # enlightenment.enable = true;
+        # mate.enable = true;
+        # lxqt.enable = true;
+      };
+      xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
-    # displayManager.autoLogin.user = lib.mkForce "guest";
-    xkb.options = "ctrl:swapcaps"; # Xorg Layout
+    displayManager.autoLogin.user = "${username}";
   };
 
   boot = {

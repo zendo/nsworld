@@ -62,7 +62,6 @@
   ###############################################
   # mods.daeWithConfig.enable = true;
 
-  disabledModules = [ "programs/clash-verge.nix" ];
   programs.clash-verge = {
     enable = true;
     tunMode = true;

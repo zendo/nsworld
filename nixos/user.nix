@@ -19,7 +19,7 @@ let
 in
 {
   users = {
-    mutableUsers = false;
+    mutableUsers = lib.mkDefault false;
 
     users.${username} = {
       isNormalUser = true;
