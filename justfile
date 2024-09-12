@@ -41,7 +41,7 @@ build-livecd-minimal:
 
 build-wsl-installer:
     nix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder
-    # sudo ./result/bin/nixos-wsl-tarball-builder nixos-wsl.tar.gz
+    # sudo ./result/bin/nixos-wsl-tarball-builder ~/nixos-wsl.tar.gz
 
 nix-tree-with-gcroots:
     nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree

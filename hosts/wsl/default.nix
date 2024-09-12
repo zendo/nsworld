@@ -1,7 +1,3 @@
-/*
-  wsl --import NixOS --version 2 $env:USERPROFILE\NixOS\ nixos-wsl.tar.gz
-  wsl --unregister nixos
-*/
 {
   lib,
   pkgs,
@@ -56,5 +52,5 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
