@@ -45,7 +45,7 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/bin
     cp -r usr/local/lib/pica-comic usr/share $out
-    ln -s $out/pica-comic/pica_comic $out/bin/picacomic
+    ln -s $out/pica-comic/pica_comic $out/bin/
     rm $out/share/applications/pica-comic.desktop
 
     runHook postInstall
@@ -53,19 +53,19 @@ stdenv.mkDerivation rec {
 
   desktopItems = [
     (makeDesktopItem {
-      name = pname;
-      exec = pname;
+      name = "PicaComic";
+      desktopName = "PicaComic";
+      exec = meta.mainProgram;
       icon = "pica-comic";
-      desktopName = pname;
       comment = meta.description;
-      categories = [ "Office" ];
+      categories = [ "Graphics" ];
     })
   ];
 
   meta = {
     description = "Comic app built with Flutter, supporting multiple comic sources";
     homepage = "https://github.com/wgh136/PicaComic";
-    mainProgram = "picacomic";
+    mainProgram = "pica_comic";
     platforms = [ "x86_64-linux" ];
     license = lib.licenses.mit;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
