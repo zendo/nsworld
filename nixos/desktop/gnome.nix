@@ -17,8 +17,6 @@
   };
 
   services = {
-    # displayManager.autoLogin.user = "${username}";
-
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];

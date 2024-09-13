@@ -19,9 +19,10 @@
     # self.nixosModules.hyprland
   ];
 
-  # services.flatpak.enable = true;
-
-  mods.virt.enable = false;
+  mods = {
+    # steam.enable = true;
+    # daeWithConfig.enable = true;
+  };
 
   users.mutableUsers = true;
 
@@ -32,6 +33,7 @@
 
   # Desktop Envirment
   services = {
+    displayManager.autoLogin.user = "${username}";
     xserver = {
       # enable = true;
       desktopManager = {
@@ -47,7 +49,6 @@
       };
       xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
-    displayManager.autoLogin.user = "${username}";
   };
 
   boot = {

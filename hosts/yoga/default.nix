@@ -4,6 +4,7 @@
   config,
   pkgs,
   lib,
+  username,
   modulesPath,
   ...
 }:
@@ -31,15 +32,27 @@
     # self.nixosModules.hyprland
   ];
 
-  ###############################################
-  ## Mods
-  ###############################################
-  mods = {
-    # steam.enable = true;
+  services = {
+    fstrim.enable = lib.mkDefault true; # Optimize SSD
+    btrfs.autoScrub.enable = true;
+    displayManager.autoLogin.user = "${username}";
+    # v2raya.enable = true;
   };
 
   programs = {
     # nix-ld.enable = true;
+
+    clash-verge = {
+      enable = true;
+      tunMode = true;
+      autoStart = true;
+      package = pkgs.mihomo-party;
+    };
+  };
+
+  mods = {
+    # steam.enable = true;
+    # daeWithConfig.enable = true;
   };
 
   # disabledModules = ["config/swap.nix"];
@@ -53,23 +66,6 @@
   ###############################################
 
   # hardware.amdgpu.amdvlk.enable = true;
-
-  # Optimize SSD
-  services.fstrim.enable = lib.mkDefault true;
-
-  ###############################################
-  ## Network
-  ###############################################
-  # mods.daeWithConfig.enable = true;
-
-  programs.clash-verge = {
-    enable = true;
-    tunMode = true;
-    autoStart = true;
-    package = pkgs.mihomo-party;
-  };
-
-  # services.v2raya.enable = true;
 
   ###############################################
   ## Kernel
@@ -166,8 +162,6 @@
   ###############################################
   ## FileSystem Btrfs
   ###############################################
-  services.btrfs.autoScrub.enable = true;
-
   fileSystems = {
     "/".options = [
       "compress=zstd"

@@ -7,7 +7,6 @@
     geoclue2.enable = true;
 
     desktopManager.plasma6.enable = true;
-    # displayManager.autoLogin.user = "${username}";
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;

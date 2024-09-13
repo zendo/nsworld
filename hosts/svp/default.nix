@@ -2,6 +2,7 @@
   inputs,
   self,
   pkgs,
+  username,
   ...
 }:
 {
@@ -17,29 +18,29 @@
     # self.nixosModules.hyprland
   ];
 
-  ###############################################
-  ## Mods
-  ###############################################
-
-  # mods.steam.enable = true;
-
-  # programs.nix-ld.enable = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  ###############################################
-  ## Network
-  ###############################################
-  # mods.daeWithConfig.enable = true;
-
-  programs.clash-verge = {
-    enable = true;
-    tunMode = true;
-    autoStart = true;
-    package = pkgs.mihomo-party;
+  services = {
+    # btrfs.autoScrub.enable = true;
+    displayManager.autoLogin.user = "${username}";
+    # v2raya.enable = true;
   };
 
-  # services.v2raya.enable = true;
+  mods = {
+    # steam.enable = true;
+    # daeWithConfig.enable = true;
+  };
+
+  programs = {
+    # nix-ld.enable = true;
+
+    clash-verge = {
+      enable = true;
+      tunMode = true;
+      autoStart = true;
+      package = pkgs.mihomo-party;
+    };
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   ###############################################
   ## Bootloader
@@ -55,15 +56,15 @@
       # It just move grubx64.efi -> Boot/bootx64.efi
       efiInstallAsRemovable = true;
       extraEntries = ''
-        menuentry "Windows" {
-         search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-         chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
-        }
+          menuentry "Windows" {
+           search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+           chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+          }
 
-      #   menuentry "Arch Linux" {
-      #    search --file --no-floppy --set=root /EFI/arch/grubx64.efi
-      #    chainloader (''${root})/EFI/arch/grubx64.efi
-      #   }
+        #   menuentry "Arch Linux" {
+        #    search --file --no-floppy --set=root /EFI/arch/grubx64.efi
+        #    chainloader (''${root})/EFI/arch/grubx64.efi
+        #   }
       '';
     };
   };
