@@ -160,17 +160,8 @@
   };
 
   ###############################################
-  ## FileSystem Btrfs
+  ## FileSystem
   ###############################################
-  fileSystems = {
-    "/".options = [
-      "compress=zstd"
-      "noatime"
-    ];
-    #   "/home".options = [ "compress=zstd" ];
-    #   "/nix".options = [ "compress=zstd" "noatime" ];
-    #   "/swap".options = [ "noatime" ];
-  };
 
   # Swapfile
   swapDevices = [

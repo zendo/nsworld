@@ -40,7 +40,14 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    # latest / zen / lqx / xanmod_latest
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    supportedFilesystems = [
+      "ntfs"
+    ];
+  };
 
   ###############################################
   ## Bootloader
@@ -68,14 +75,6 @@
       '';
     };
   };
-
-  ###############################################
-  ## FileSystem
-  ###############################################
-
-  boot.supportedFilesystems = [
-    "ntfs"
-  ];
 
   # Swapfile
   # swapDevices = [
