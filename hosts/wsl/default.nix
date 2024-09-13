@@ -33,16 +33,15 @@
     # emacs29-pgtk
   ];
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+  programs = {
+    zsh.enable = true;
+    command-not-found.enable = false;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
-
-  # zsh
-  programs.zsh.enable = true;
-  # users.defaultUserShell = pkgs.zsh;
-
-  programs.command-not-found.enable = false;
 
   documentation = {
     enable = lib.mkDefault false;

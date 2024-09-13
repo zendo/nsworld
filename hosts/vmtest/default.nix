@@ -21,10 +21,10 @@
     # "services/desktops/pipewire/pipewire.nix"
   ];
 
-  mods.virt.enable = false;
-  # mods.daeWithConfig.enable = true;
-
-  users.mutableUsers = true;
+  mods = {
+    virt.enable = false;
+    # daeWithConfig.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     firefox
@@ -76,9 +76,11 @@
     };
   };
 
-  users.users.root.initialPassword = "root";
-  # psaawd: test
-  users.users.${username}.initialHashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
+  users.users = {
+    root.initialPassword = "root";
+    # psaawd: test
+    ${username}.initialHashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
+  };
 
   home-manager.users.${username} = { };
 }

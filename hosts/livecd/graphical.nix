@@ -40,9 +40,11 @@
     };
   };
 
-  users.mutableUsers = true;
-  # password: live
-  users.users.${username}.initialHashedPassword = lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
+  users.users = {
+    root.initialPassword = "root";
+    # psaawd: live
+    ${username}.initialHashedPassword = lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
+  };
 
   mods.virt.enable = false;
 
