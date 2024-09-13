@@ -8,7 +8,7 @@
 {
   options.programs.clash-verge = {
     enable = lib.mkEnableOption "Clash Verge";
-    package = lib.mkPackageOption pkgs "clash-verge" { };
+    package = lib.mkPackageOption pkgs "clash-verge-rev" { };
     autoStart = lib.mkEnableOption "Clash Verge auto launch";
     tunMode = lib.mkEnableOption "Clash Verge TUN mode";
   };
