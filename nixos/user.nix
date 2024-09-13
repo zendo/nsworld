@@ -21,6 +21,8 @@ in
   users = {
     mutableUsers = lib.mkDefault false;
 
+    users.root.initialPassword = "$y$j9T$hLnsh06hinp1nz/NU0RzV0$ixT.gQXDVrS6NLEKOH6JEtpfnOF4Fr24p5JInYJwlf3";
+
     users.${username} = {
       isNormalUser = true;
       # `mkpasswd`

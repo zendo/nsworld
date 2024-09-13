@@ -54,18 +54,18 @@
     # efitools
   ];
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  programs = {
+    zsh.enable = true;
+    command-not-found.enable = false;
 
-  # zsh@hm need this
-  programs.zsh.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
 
   # make `xdg-open` works inside FHS envs
   xdg.portal.xdgOpenUsePortal = true;
-
-  programs.command-not-found.enable = false;
 
   documentation = {
     enable = lib.mkDefault false;
