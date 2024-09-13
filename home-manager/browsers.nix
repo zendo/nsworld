@@ -7,6 +7,13 @@ let
     "--gtk-version=4"
     "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,Vulkan,WebRTCPipeWireCapturer,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
   ];
+
+  betterfox = pkgs.fetchFromGitHub {
+    owner = "yokoffing";
+    repo = "Betterfox";
+    rev = "129.0";
+    hash = "sha256-hpkEO5BhMVtINQG8HN4xqfas/R6q5pYPZiFK8bilIDs=";
+  };
 in
 {
   home.packages = with pkgs; [
@@ -41,6 +48,9 @@ in
     # package = pkgs.firefox-bin;
     languagePacks = [ "zh-CN" ];
     profiles.default = {
+      extraConfig = ''
+        ${builtins.readFile "${betterfox}/Fastfox.js"}
+      '';
       settings = {
         "browser.tabs.closeTabByDblclick" = true; # 双击关闭标签
         "browser.tabs.selectOwnerOnClose" = false; # 关闭标签后选附近标签而不是原始
