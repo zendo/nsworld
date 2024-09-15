@@ -25,9 +25,7 @@
     fwupd.enable = true;
     acpid.enable = true;
 
-    # This allows PipeWire to run with realtime privileges (i.e: less cracks)
-    rtkit.enable = config.services.pipewire.enable;
-
+    # enable default by services.graphical-desktop
     pipewire = {
       # alsa.support32Bit = true;
       # jack.enable = true;
@@ -46,6 +44,16 @@
     '';
   };
 
+  programs = {
+    zsh.enable = true;
+    command-not-found.enable = false;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -62,15 +70,10 @@
     # efitools
   ];
 
-  programs = {
-    zsh.enable = true;
-    command-not-found.enable = false;
+  hardware.bluetooth.enable = config.services.graphical-desktop.enable;
 
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
+  # This allows PipeWire to run with realtime privileges (i.e: less cracks)
+  security.rtkit.enable = config.services.pipewire.enable;
 
   # make `xdg-open` works inside FHS envs
   xdg.portal.xdgOpenUsePortal = true;

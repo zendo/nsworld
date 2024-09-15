@@ -1,36 +1,5 @@
 { lib, ... }:
 {
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-
-  services = {
-    openssh = {
-      enable = true;
-      # Forbid root login through SSH.
-      settings.PermitRootLogin = lib.mkDefault "no";
-    };
-
-    # resolved.enable = true;
-    # resolved.fallbackDns = config.networking.nameservers;
-
-    # opensnitch.enable = true;
-
-    # Enable CUPS to print documents.
-    # printing.enable = true;
-
-    # Publish this server and its address on the network
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      # publish = {
-      #   enable = true;
-      #   domain = true;
-      #   addresses = true;
-      #   workstation = true;
-      # };
-    };
-  };
-
   networking = {
     networkmanager = {
       enable = true; # conflict with networking.wireless
@@ -61,4 +30,32 @@
   };
 
   # systemd.services.NetworkManager-wait-online.enable = false;
+
+  services = {
+    openssh = {
+      enable = true;
+      # Forbid root login through SSH.
+      settings.PermitRootLogin = lib.mkDefault "no";
+    };
+
+    # resolved.enable = true;
+    # resolved.fallbackDns = config.networking.nameservers;
+
+    # opensnitch.enable = true;
+
+    # Enable CUPS to print documents.
+    # printing.enable = true;
+
+    # Publish this server and its address on the network
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      # publish = {
+      #   enable = true;
+      #   domain = true;
+      #   addresses = true;
+      #   workstation = true;
+      # };
+    };
+  };
 }
