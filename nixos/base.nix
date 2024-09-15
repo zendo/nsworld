@@ -25,6 +25,14 @@
     fwupd.enable = true;
     acpid.enable = true;
 
+    # This allows PipeWire to run with realtime privileges (i.e: less cracks)
+    rtkit.enable = config.services.pipewire.enable;
+
+    pipewire = {
+      # alsa.support32Bit = true;
+      # jack.enable = true;
+    };
+
     zram-generator = {
       enable = lib.mkDefault true;
       settings.zram0 = {
