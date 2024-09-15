@@ -41,7 +41,8 @@
   };
 
   users.users = {
-    root.initialPassword = "root";
+    # passwd: root
+    root.initialHashedPassword = lib.mkForce "$y$j9T$8/wRQiclXB6j79eGn8FKp.$MayXuTGruzrN4kDOUXSIJhPUg3BLdL69EOERDXRRQq.";
     # psaawd: live
     ${username}.initialHashedPassword = lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
   };
