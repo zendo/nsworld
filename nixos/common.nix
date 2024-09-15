@@ -25,7 +25,7 @@
     fwupd.enable = true;
     acpid.enable = true;
 
-    # enable default by services.graphical-desktop
+    # auto-enable by services.graphical-desktop
     pipewire = {
       # alsa.support32Bit = true;
       # jack.enable = true;
