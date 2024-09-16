@@ -16,11 +16,11 @@
 
 stdenv.mkDerivation rec {
   pname = "mihomo-party";
-  version = "1.2.16";
+  version = "1.2.19";
 
   src = fetchurl {
     url = "https://github.com/pompurin404/mihomo-party/releases/download/v${version}/mihomo-party-linux-${version}-amd64.deb";
-    hash = "sha256-EMXGg9pjCwcGhIuJ0qzzJ7kcSYfZf0PoIodxW34+tqc=";
+    hash = "sha256-rpjtHmnB9FFkSvHz+HAiFnkOMlRCeuUApV31k5AnZVQ=";
   };
 
   nativeBuildInputs = [
