@@ -29,6 +29,7 @@
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.sway
+    # self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 

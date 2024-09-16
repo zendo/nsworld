@@ -11,8 +11,9 @@
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
 
-    self.nixosModules.gnome
+    # self.nixosModules.gnome
     # self.nixosModules.kde
+    self.nixosModules.niri
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
@@ -77,7 +78,8 @@
   };
 
   users.users = {
-    root.initialPassword = "root";
+    # passwd: root
+    root.initialHashedPassword = lib.mkForce "$y$j9T$0t8NyDpq3ikgERiGgdPru0$pI6bTECjj2pSb68lF.U0xpftH.2vTF26uiRasZnROD3";
     # psaawd: test
     ${username}.initialHashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
   };

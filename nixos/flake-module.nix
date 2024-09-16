@@ -23,6 +23,10 @@
       imports = [ ./desktop/cosmic.nix ];
     };
 
+    niri = {
+      imports = [./desktop/wm-niri.nix ];
+    };
+
     sway = {
       imports = [
         ./desktop/wm.nix
