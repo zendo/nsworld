@@ -111,10 +111,10 @@
         pamixer # volume control
 
         # Needs when use other DM
-        gnome.adwaita-icon-theme
-        gnome.gnome-themes-extra
-        gnome.dconf-editor
-        gnome.gnome-tweaks # (webkitgtk)
+        adwaita-icon-theme
+        gnome-themes-extra
+        dconf-editor
+        gnome-tweaks # (webkitgtk)
 
         xfce.mousepad
         nomacs
