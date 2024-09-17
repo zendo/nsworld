@@ -86,7 +86,6 @@ ln-ibus-rime:
 
     # rime-ice
     ln -sfv "$(pwd)"/dotfiles/rime/rime_ice.custom.yaml "$HOME"/.config/ibus/rime/rime_ice.custom.yaml
-
     # rime-frost
     ln -sfv "$(pwd)"/dotfiles/rime/rime_frost.custom.yaml "$HOME"/.config/ibus/rime/rime_frost.custom.yaml
 
@@ -100,12 +99,11 @@ ln-fcitx-conf-rime:
 
     # rime-ice
     ln -sfv "$(pwd)"/dotfiles/rime/rime_ice.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_ice.custom.yaml
-
     # rime-frost
     ln -sfv "$(pwd)"/dotfiles/rime/rime_frost.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_frost.custom.yaml
 
     # fcitx5-conf
-    ln -sfv "$(pwd)"/dotfiles/fcitx5/classicui.conf "$HOME"/.config/fcitx5/conf/classicui.conf
-    ln -sfv "$(pwd)"/dotfiles/fcitx5/clipboard.conf "$HOME"/.config/fcitx5/conf/clipboard.conf
-    ln -sfv "$(pwd)"/dotfiles/fcitx5/config "$HOME"/.config/fcitx5/config
-    ln -sfv "$(pwd)"/dotfiles/fcitx5/profile "$HOME"/.config/fcitx5/profile
+    cp "$(pwd)"/dotfiles/fcitx5/classicui.conf "$HOME"/.config/fcitx5/conf/classicui.conf
+    cp "$(pwd)"/dotfiles/fcitx5/clipboard.conf "$HOME"/.config/fcitx5/conf/clipboard.conf
+    cp "$(pwd)"/dotfiles/fcitx5/config "$HOME"/.config/fcitx5/config
+    cp "$(pwd)"/dotfiles/fcitx5/profile "$HOME"/.config/fcitx5/profile

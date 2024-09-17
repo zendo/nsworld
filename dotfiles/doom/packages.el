@@ -37,4 +37,6 @@
 
 (package! ctrlf)
 
+(package! just-mode)
+
 (package! deadgrep)
