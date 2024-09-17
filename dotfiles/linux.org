@@ -195,6 +195,31 @@ https://github.com/onceupon/Bash-Oneliner
       | wget -qi -
 #+end_src
 
+* Bash Scripts
+#+begin_src bash
+#! /usr/bin/env bash
+
+##################################################################
+# ln: make symbolic links
+# -s --symbolic            软链接
+# -f --force               强制覆盖
+# -n --no-dereference
+# -T 可以覆盖旧的软链目录，而不会在内部重复套娃
+# -v --verbose             冗长显示输出结果
+##################################################################
+
+# this_dir=$(cd "$(dirname "$0")";pwd) #current dir
+# this_dir=$( dirname "$( readlink -f "${BASH_SOURCE[0]}" )" ) #current dir
+this_dir=$( dirname -- "$( readlink -f -- "$0"; )"; ) #current dir
+
+# -e exists
+if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
+    mkdir "$HOME/.local/share/fcitx5/rime"
+fi
+
+ln -sfv "$this_dir"/default.custom.yaml "$HOME"/.local/share/fcitx5/rime/default.custom.yaml
+#+end_src
+
 * Regex 正则表达式
 
 https://deerchao.cn/tutorials/regex/regex.htm
@@ -245,52 +270,7 @@ fd -e md  #文件扩展名
 fd '^foo' #foo起始名的文件
 #+end_src>
 
-* KDE Config
-
-https://github.com/shalva97/kde-configuration-files
-
-examplles
-https://github.com/corytertel/nix-configuration/blob/main/config/kde/shared.nix
-
-* HM Codes
-
-#+begin_src nix
-home.activation = {
-    doom-clone = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      if [ ! -d ${emacsDir} ]; then
-        git clone https://github.com/hlissner/doom-emacs.git ${emacsDir}
-      fi
-    '';
-  };
-
-  xdg.dataFile."dotfiles/mypalette.el".text = ''
-    ${lib.strings.concatStrings (lib.attrsets.mapAttrsToList (name: value: ''
-      (defconst palette${name} "${value}")
-    '') my.palette)}
-    (provide 'mypalette)
-  '';
-###################
-system.userActivationScripts = {               # Installation script every time nixos-rebuild is run. So not during initial install.
-    doomEmacs = {
-      text = ''
-        source ${config.system.build.setEnvironment}
-        DOOM="$HOME/.emacs.d"
-        if [ ! -d "$DOOM" ]; then
-          git clone https://github.com/hlissner/doom-emacs.git $DOOM
-          yes | $DOOM/bin/doom install
-          rm -r $HOME/.doom.d
-          ln -s ${location}/modules/editors/emacs/doom.d $HOME/.doom.d
-          $DOOM/bin/doom sync
-        else
-          $DOOM/bin/doom sync
-        fi
-      '';                                        # It will always sync when rebuild is done. So changes will always be applied.
-    };
-  };
-
-#+end_src
-
-* Nix Codes
+* NixOS
 
 #+begin_src nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {}
@@ -344,11 +324,3 @@ nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
 tree-sitter
 https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/
 
-* NixOS
-
-nix build
-
-* Links
-
-emacs theme
-https://github.com/nasyxx/emacs-nasy-theme
