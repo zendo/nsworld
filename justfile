@@ -73,3 +73,39 @@ backup-data:
     # rsync -avhpL ~/.config/chromium ~/Documents/homeBackups/
     # rsync -avhpL ~/.config/google-chrome ~/Documents/homeBackups/
     rsync -avhpL ~/.config/fcitx5/conf ~/Documents/homeBackups/
+
+
+ln-ibus-rime:
+    #! /usr/bin/env bash
+    if [[ ! -e "$HOME/.config/ibus/rime" ]]; then
+        mkdir "$HOME/.config/ibus/rime"
+    fi
+
+    ln -sfv "$(pwd)"/dotfiles/rime/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom.yaml
+    ln -sfv "$(pwd)"/dotfiles/rime/ibus_rime.custom.yaml "$HOME"/.config/ibus/rime/ibus_rime.custom.yaml
+
+    # rime-ice
+    ln -sfv "$(pwd)"/dotfiles/rime/rime_ice.custom.yaml "$HOME"/.config/ibus/rime/rime_ice.custom.yaml
+
+    # rime-frost
+    ln -sfv "$(pwd)"/dotfiles/rime/rime_frost.custom.yaml "$HOME"/.config/ibus/rime/rime_frost.custom.yaml
+
+ln-fcitx-conf-rime:
+    #! /usr/bin/env bash
+    if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
+        mkdir "$HOME/.local/share/fcitx5/rime"
+    fi
+
+    ln -sfv "$(pwd)"/dotfiles/rime/default.custom.yaml "$HOME"/.local/share/fcitx5/rime/default.custom.yaml
+
+    # rime-ice
+    ln -sfv "$(pwd)"/dotfiles/rime/rime_ice.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_ice.custom.yaml
+
+    # rime-frost
+    ln -sfv "$(pwd)"/dotfiles/rime/rime_frost.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_frost.custom.yaml
+
+    # fcitx5-conf
+    ln -sfv "$(pwd)"/dotfiles/fcitx5/classicui.conf "$HOME"/.config/fcitx5/conf/classicui.conf
+    ln -sfv "$(pwd)"/dotfiles/fcitx5/clipboard.conf "$HOME"/.config/fcitx5/conf/clipboard.conf
+    ln -sfv "$(pwd)"/dotfiles/fcitx5/config "$HOME"/.config/fcitx5/config
+    ln -sfv "$(pwd)"/dotfiles/fcitx5/profile "$HOME"/.config/fcitx5/profile
