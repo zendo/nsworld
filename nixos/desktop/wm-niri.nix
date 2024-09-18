@@ -9,21 +9,18 @@
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri";
+      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri-session";
       # Autologin
-      # initial_session = {
-      #   command = "niri";
-      #   user = "${username}";
-      # };
+      initial_session = {
+        command = "niri-session";
+        user = "${username}";
+      };
     };
   };
 
-  # WIP!!!
-  environment.systemPackages = with pkgs; [
-    niri
-  ];
-
-  home-manager.users.${username} =
-    {
-    };
+  home-manager.users.${username} = {
+    home.packages = with pkgs; [
+      niri
+    ];
+  };
 }
