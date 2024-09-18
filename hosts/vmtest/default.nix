@@ -13,7 +13,8 @@
 
     # self.nixosModules.gnome
     # self.nixosModules.kde
-    self.nixosModules.niri
+    self.nixosModules.cosmic
+    # self.nixosModules.niri
     # self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
@@ -25,6 +26,16 @@
   mods = {
     virt.enable = false;
     # daeWithConfig.enable = true;
+  };
+
+  programs = {
+    # nix-ld.enable = true;
+
+    clash-verge = {
+      # enable = true;
+      tunMode = true;
+      autoStart = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -61,9 +72,9 @@
   services.spice-webdavd.enable = true;
 
   virtualisation = {
-    memorySize = 1024 * 3;
+    memorySize = 1024 * 4;
     diskSize = 1024 * 8;
-    cores = 4;
+    cores = 8;
     msize = 104857600; # 100M
     qemu = {
       options = [
