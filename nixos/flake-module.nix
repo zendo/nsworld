@@ -24,7 +24,10 @@
     };
 
     niri = {
-      imports = [./desktop/wm-niri.nix ];
+      imports = [
+        ./desktop/wm.nix
+        ./desktop/wm-niri.nix
+      ];
     };
 
     sway = {

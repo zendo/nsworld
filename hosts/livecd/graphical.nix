@@ -1,7 +1,5 @@
 /*
-  remember remove nixconfig.nix
-  "auto-allocate-uids" and "cgroups"
-  or
+  https://github.com/NixOS/nix/issues/8911
   --option auto-allocate-uids false
 */
 {
