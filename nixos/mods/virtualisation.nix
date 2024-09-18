@@ -70,6 +70,7 @@ in
           pkgs: with pkgs; [
             libthai
             libsecret
+            # libepoxy
           ];
       })
     ];
