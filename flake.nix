@@ -106,10 +106,10 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixos-cosmic = {
+    #   url = "github:lilyinstarlight/nixos-cosmic";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # nur.url = "github:nix-community/NUR";
     # agenix.url = "github:ryantm/agenix";

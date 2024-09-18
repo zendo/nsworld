@@ -1,6 +1,8 @@
 /*
   remember remove nixconfig.nix
   "auto-allocate-uids" and "cgroups"
+  or
+  --option auto-allocate-uids false
 */
 {
   inputs,
