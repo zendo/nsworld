@@ -65,14 +65,6 @@ in
       # gnome.gnome-boxes
       # steam-run
       # yuzu
-      (appimage-run.override {
-        extraPkgs =
-          pkgs: with pkgs; [
-            libthai
-            libsecret
-            # libepoxy
-          ];
-      })
     ];
 
     virtualisation = {
