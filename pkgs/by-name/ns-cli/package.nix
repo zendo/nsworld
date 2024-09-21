@@ -1,17 +1,14 @@
-{ stdenvNoCC, lib }:
+{ lib, stdenvNoCC }:
 
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation {
   name = "ns";
-
   src = ./ns;
-
-  bashComp = ./ns.bash;
 
   dontUnpack = true;
 
   installPhase = ''
     install -Dm755 "$src" "$out/bin/ns"
-    install -D ${bashComp} $out/share/bash-completion/completions/ns.bash
+    install -D ${./ns.bash} $out/share/bash-completion/completions/ns.bash
   '';
 
   meta = {
