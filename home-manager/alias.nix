@@ -23,7 +23,6 @@
     my-location = ''curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | jq -r '"\(.location.lat):\(.location.lng)"' '';
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
-    paperoni-single-html = "paperoni --export html --inline-images";
 
     nse = "nix search nixpkgs";
     ee = "emacsclient --create-frame";

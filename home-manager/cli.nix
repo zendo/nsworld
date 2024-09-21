@@ -75,7 +75,6 @@
     translate-shell
     aspellDicts.en
     # asciinema # record the terminal
-    paperoni # save html
     calcurse
     # zee
 
