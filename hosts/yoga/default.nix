@@ -170,7 +170,7 @@
   swapDevices = [
     {
       device = "/var/swapfile";
-      size = 1024 * 8;
+      size = 1024 * 10;
     }
   ];
   # findmnt -no UUID -T /swap/swapfile
