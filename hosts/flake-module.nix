@@ -77,6 +77,7 @@
       vmtest = mkHost {
         username = "test";
         hostname = "vmtest";
+        hmEnable = false;
         extraModules = [ ./vmtest ];
       };
 

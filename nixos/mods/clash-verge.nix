@@ -8,7 +8,14 @@
 {
   options.programs.clash-verge = {
     enable = lib.mkEnableOption "Clash Verge";
-    package = lib.mkPackageOption pkgs "clash-verge-rev" { };
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = ''
+        The clash-verge package to use. Available options are
+        `clash-verge-rev`, `clash-nyanpasu` and `mihomo-party`.
+      '';
+      example = "pkgs.clash-verge-rev";
+    };
     autoStart = lib.mkEnableOption "Clash Verge auto launch";
     tunMode = lib.mkEnableOption "Clash Verge TUN mode";
   };

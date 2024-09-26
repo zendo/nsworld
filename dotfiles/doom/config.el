@@ -27,8 +27,13 @@
         doom-symbol-font (font-spec :family "Segoe UI Emoji")
 
         default-directory "~/Desktop/"
-        org-directory "~/Documents/Notes/"
-        ))
+        org-directory "~/Documents/Notes/")
+  ;; https://emacs-china.org/t/doom-emacs/23513/10
+  (defun my-cjk-font()
+    (dolist (charset '(kana han cjk-misc symbol bopomofo))
+      (set-fontset-font t charset (font-spec :family "Microsoft Yahei"))))
+
+  (add-hook 'after-setting-font-hook #'my-cjk-font))
 
 (when (featurep :system 'linux)
   (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
@@ -36,8 +41,13 @@
         doom-big-font-increment 2
         doom-symbol-font (font-spec :family "Noto Color Emoji")
 
-        ;; org-directory "~/Documents/Notes/"
-        ))
+        org-directory "~/Documents/Notes/")
+
+  (defun my-cjk-font()
+    (dolist (charset '(kana han cjk-misc symbol bopomofo))
+      (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC"))))
+
+  (add-hook 'after-setting-font-hook #'my-cjk-font))
 
 ;; basic
 (setq user-full-name "zendo"

@@ -96,5 +96,5 @@
     ${username}.initialHashedPassword = lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
   };
 
-  home-manager.users.${username} = { };
+  # home-manager.users.${username} = { };
 }
