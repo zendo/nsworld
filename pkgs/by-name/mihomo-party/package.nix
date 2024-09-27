@@ -12,6 +12,7 @@
   webkitgtk,
   udev,
   libayatana-appindicator,
+# libGL,
 }:
 
 stdenv.mkDerivation rec {
@@ -55,6 +56,11 @@ stdenv.mkDerivation rec {
 
     runHook postInstall
   '';
+
+  # postInstall = ''
+  #   makeWrapper $out/mihomo-party/mihomo-party $out/bin/mihomo-party \
+  #     --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libGL ]}"
+  # '';
 
   meta = {
     description = "Another Mihomo GUI";

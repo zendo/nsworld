@@ -50,6 +50,7 @@
   programs.xwayland.enable = true;
 
   environment.pathsToLink = [
+    "/share"
     "/share/fcitx5" # for fxitx theme
   ];
 

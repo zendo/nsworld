@@ -12,8 +12,8 @@
     ./bcachefs-single.nix
     ./hardware-configuration.nix
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.sway
     # self.nixosModules.niri
     # self.nixosModules.hyprland
@@ -30,6 +30,18 @@
     duf
     gdu
   ];
+
+  programs = {
+    # appimage.enable = true;
+    # nix-ld.enable = true;
+
+    clash-verge = {
+      enable = true;
+      tunMode = true;
+      autoStart = true;
+      package = pkgs.mihomo-party;
+    };
+  };
 
   # Desktop Envirment
   services = {

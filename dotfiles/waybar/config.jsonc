@@ -1,8 +1,9 @@
 {
   "layer": "top",
+  "position": "top",
+  "mod": "dock",
   "output": "eDP-1",
   "height": 30,
-  "position": "top",
 
   "modules-left": [
     // "custom/launcher",
