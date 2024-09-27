@@ -11,8 +11,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "iDvel";
     repo = "rime-ice";
-    rev = "1a3a57d067595f1dafbb73364811bc6c787441e7";
-    hash = "sha256-ta77Aw1Z0JZO3VRcAio7Kv/gGve2XPQTTflTm8ZYf34=";
+    rev = "ea74e40bec2bd6580fa8d807075cd107739ba6cd";
+    hash = "sha256-R2K2LNycXqsUxXvMMq5fcQJUhDnhQMcTlvryMLeiKH0=";
   };
 
   installPhase = ''
