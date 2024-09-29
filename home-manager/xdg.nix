@@ -56,6 +56,14 @@
           "text/plain" = "org.kde.kwrite.desktop";
           "application/pdf" = "org.kde.okular.desktop";
         })
+        # for wm
+        (lib.mkIf config.services.wlsunset.enable {
+          "image/jpeg" = "org.nomacs.ImageLounge.desktop";
+          "image/png" = "org.nomacs.ImageLounge.desktop";
+          "image/webp" = "org.nomacs.ImageLounge.desktop";
+          "text/plain" = "org.gnome.TextEditor.desktop";
+          "application/pdf" = "org.gnome.Evince.desktop";
+        })
       ];
     };
 

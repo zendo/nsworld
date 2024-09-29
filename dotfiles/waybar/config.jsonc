@@ -7,7 +7,7 @@
 
   "modules-left": [
     // "custom/launcher",
-    "wlr/workspaces",
+    // "wlr/workspaces",
     "sway/workspaces",
     "wlr/taskbar"
   ],
@@ -106,7 +106,7 @@
     "timezone": "Asia/Shanghai",
     "on-click": "calcurse",
     //"format": "{: %m/%d   %R}",
-    "format": "{: %R}",
+    "format": " {:%R}",
     "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>"
   },
 

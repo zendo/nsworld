@@ -43,11 +43,11 @@ in
       ];
     };
 
-    # users.guest = {
-    #   isNormalUser = true;
-    #   # `passwd`
-    #   initialPassword = "guest";
-    # };
+    users.guest = {
+      isNormalUser = true;
+      # guest
+      initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
+    };
   };
 
   # doas

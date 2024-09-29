@@ -27,6 +27,7 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
+    gnome.gnome-keyring.enable = true;
   };
 
   programs = {
@@ -61,11 +62,15 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
+  # systemctl --user show-environment
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-    config.common.default = "*";
+    # wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+    # config.common.default = "*";
   };
 
   home-manager.users.${username} =
@@ -97,7 +102,7 @@
 
         # Display
         brightnessctl # same like light
-        wlsunset # nightlight
+        wlsunset # nightlight for manually control
         wl-gammactl
         wdisplays
         wlr-randr
