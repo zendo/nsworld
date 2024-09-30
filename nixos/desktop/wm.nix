@@ -27,7 +27,6 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
-    gnome.gnome-keyring.enable = true;
   };
 
   programs = {
@@ -70,7 +69,6 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ];
-    # config.common.default = "*";
   };
 
   home-manager.users.${username} =

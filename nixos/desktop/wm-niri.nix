@@ -10,10 +10,10 @@
     settings = {
       default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri-session";
       # Autologin
-      # initial_session = {
-      #   command = "niri-session";
-      #   user = "${username}";
-      # };
+      initial_session = {
+        command = "niri-session";
+        user = "${username}";
+      };
     };
   };
 

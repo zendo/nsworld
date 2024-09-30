@@ -35,7 +35,6 @@
   ];
 
   services = {
-    fstrim.enable = lib.mkDefault true; # Optimize SSD
     btrfs.autoScrub.enable = true;
     displayManager.autoLogin.user = "${username}";
     # v2raya.enable = true;

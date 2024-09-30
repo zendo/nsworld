@@ -5,7 +5,6 @@
   ...
 }:
 {
-  # DisplayManager
   services.greetd = {
     enable = true;
     settings = {
@@ -17,6 +16,8 @@
       };
     };
   };
+
+  xdg.portal.configPackages = [ pkgs.sway ];
 
   home-manager.users.${username} = {
     wayland.windowManager.sway = {
