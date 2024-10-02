@@ -18,6 +18,8 @@
       };
 
     modifications = _: prev: {
+      clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
+
       # fix .desktop missing
       wl-color-picker = prev.wl-color-picker.overrideAttrs (oldAttrs: {
         postFixup = "cp -r $out/usr/share $out/share ";
