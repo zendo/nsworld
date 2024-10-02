@@ -107,9 +107,9 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Clash Meta GUI based on Tauri, Continuation of Clash Verge";
     homepage = "https://github.com/clash-verge-rev/clash-verge-rev";
+    mainProgram = "clash-verge";
     license = lib.licenses.gpl3Plus;
     platforms = lib.platforms.linux;
-    mainProgram = "clash-verge";
     maintainers = with lib.maintainers; [
       zendo
       Guanran928

@@ -10,6 +10,7 @@
     #   };
     # };
 
+    # add new pkgs
     additions =
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
@@ -17,6 +18,7 @@
         directory = ../pkgs/by-name;
       };
 
+    # mod repo pkgs
     modifications = _: prev: {
       # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
 
