@@ -18,7 +18,7 @@
       };
 
     modifications = _: prev: {
-      clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
+      # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
 
       # fix .desktop missing
       wl-color-picker = prev.wl-color-picker.overrideAttrs (oldAttrs: {
