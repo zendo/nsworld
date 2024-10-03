@@ -19,7 +19,7 @@
       };
 
     # mod existed pkgs
-    modifications = _: prev: {
+    modifications = final: prev: {
       # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
 
       # cargo-tauri v2
@@ -59,29 +59,31 @@
             --add-flags "--socket=wayland --enable-features=UseOzonePlatform --ozone-platform=wayland"
         '';
       };
+
+      # gnomeExtensions =
+      #   prev.gnomeExtensions
+      #   // {
+      #     night-theme-switcher = prev.callPackage ./night-theme-switcher {};
+      #   };
+
+      # Python Module Overlays
+      # nix build .#python3Packages.pyjokes
+      # pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
+      #   (python-final: python-prev: {
+      #     pyjokes = python-final.callPackage ./python-modules/pyjokes { };
+      #   })
+      # ];
+      # python3 =
+      #   let
+      #     self = prev.python3.override {
+      #       inherit self;
+      #       packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
+      #     };
+      #   in
+      #   self;
+      # python3Packages = final.python3.pkgs;
+
+      # ...
     };
-
-    # Python Module Overlays
-    # pythonPackagesOverlays =
-    #   (prev.pythonPackagesOverlays or [])
-    #   ++ [
-    #     (python-final: python-prev: {
-    #       pyjokes = python-final.callPackage ./python-modules/pyjokes {};
-    #     })
-    #   ];
-    # python3 = let
-    #   self = prev.python3.override {
-    #     inherit self;
-    #     packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-    #   };
-    # in
-    #   self;
-    # python3Packages = final.python3.pkgs;
-
-    # gnomeExtensions =
-    #   prev.gnomeExtensions
-    #   // {
-    #     night-theme-switcher = prev.callPackage ./night-theme-switcher {};
-    #   };
   };
 }

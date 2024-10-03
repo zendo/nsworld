@@ -24,6 +24,7 @@
   services = {
     fwupd.enable = true;
     acpid.enable = true;
+    earlyoom.enable = true;
 
     # auto-enable by services.graphical-desktop
     pipewire = {
@@ -53,6 +54,8 @@
       enableSSHSupport = true;
     };
   };
+
+  systemd.oomd.enable = false;
 
   environment.systemPackages = with pkgs; [
     binutils
