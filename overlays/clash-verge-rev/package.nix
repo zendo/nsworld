@@ -28,13 +28,13 @@
 # https://github.com/clash-verge-rev/clash-verge-rev/blob/main/scripts/check.mjs#L54
 stdenv.mkDerivation (finalAttrs: {
   pname = "clash-verge-rev";
-  version = "1.7.5";
+  version = "1.7.7";
 
   src = fetchFromGitHub {
     owner = "clash-verge-rev";
     repo = "clash-verge-rev";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-Ej5A8HfsJlD59Q2pLjGykF/5LCW/DdiMO5x6wnHqIi8=";
+    hash = "sha256-5sd0CkUCV52wrBPo0IRIa1uqf2QNkjXuZhE33cZW3SY=";
   };
 
   sourceRoot = "${finalAttrs.src.name}/src-tauri";
@@ -110,9 +110,6 @@ stdenv.mkDerivation (finalAttrs: {
     mainProgram = "clash-verge";
     license = lib.licenses.gpl3Plus;
     platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [
-      zendo
-      Guanran928
-    ];
+    maintainers = with lib.maintainers; [ zendo ];
   };
 })

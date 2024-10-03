@@ -18,9 +18,12 @@
         directory = ../pkgs/by-name;
       };
 
-    # mod repo pkgs
+    # mod existed pkgs
     modifications = _: prev: {
       # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
+
+      # cargo-tauri v2
+      cargo-tauri = prev.callPackage ./cargo-tauri { };
 
       # fix .desktop missing
       wl-color-picker = prev.wl-color-picker.overrideAttrs (oldAttrs: {

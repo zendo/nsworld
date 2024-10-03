@@ -57,6 +57,8 @@
     # daeWithConfig.enable = true;
   };
 
+  systemd.oomd.enable = false;
+
   # disabledModules = ["config/swap.nix"];
 
   # environment.systemPackages = with pkgs; [
