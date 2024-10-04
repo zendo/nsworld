@@ -45,13 +45,13 @@
     # vlc
     # ffmpeg
     kooha
-    qmmp
+    # qmmp
     # fooyin
     # (deadbeef-with-plugins.override {
     #   plugins = with deadbeefPlugins; [mpris2];
     # })
     # amberol
-    # audacious
+    audacious
     # rhythmbox
     goodvibes
     go-musicfox

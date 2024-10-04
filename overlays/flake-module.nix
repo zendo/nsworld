@@ -22,9 +22,6 @@
     modifications = final: prev: {
       # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
 
-      # cargo-tauri v2
-      cargo-tauri = prev.callPackage ./cargo-tauri { };
-
       # fix .desktop missing
       wl-color-picker = prev.wl-color-picker.overrideAttrs (oldAttrs: {
         postFixup = "cp -r $out/usr/share $out/share ";
@@ -83,7 +80,7 @@
       #   self;
       # python3Packages = final.python3.pkgs;
 
-      # ...
+      # etc ...
     };
   };
 }
