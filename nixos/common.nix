@@ -45,6 +45,8 @@
     '';
   };
 
+  systemd.oomd.enable = false;
+
   programs = {
     zsh.enable = true;
     command-not-found.enable = false;
@@ -54,8 +56,6 @@
       enableSSHSupport = true;
     };
   };
-
-  systemd.oomd.enable = false;
 
   environment.systemPackages = with pkgs; [
     binutils
