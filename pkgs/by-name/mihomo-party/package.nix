@@ -13,21 +13,23 @@
   udev,
   libayatana-appindicator,
   libGL,
+  makeWrapper,
 }:
 
 stdenv.mkDerivation rec {
   pname = "mihomo-party";
-  version = "1.4.3";
+  version = "1.4.4";
 
   src = fetchurl {
     url = "https://github.com/pompurin404/mihomo-party/releases/download/v${version}/mihomo-party-linux-${version}-amd64.deb";
-    hash = "sha256-yRH6jyRW9yYq2z02YIoZUKacGzjINdnMd3Ru0zMcFf4=";
+    hash = "sha256-D0Afz7acmh0CnzevpzhqzcYhawmM9fvcqrt6KfibFCU=";
   };
 
   nativeBuildInputs = [
     dpkg
     wrapGAppsHook
     autoPatchelfHook
+    makeWrapper
   ];
 
   buildInputs = [
@@ -57,8 +59,9 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  postInstall = ''
-    makeWrapper $out/mihomo-party/mihomo-party $out/bin/mihomo-party \
+  postFixup = ''
+    wrapProgram "$out/bin/mihomo-party" \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libGL ]}"
   '';
 
