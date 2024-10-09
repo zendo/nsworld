@@ -14,10 +14,10 @@ mkdir /mnt/efi
 mount /dev/nvme0n1p1 /mnt/efi
 nixos-generate-config --root /mnt
 
-nix run github:nix-community/disko -- -m disko hosts/rmt/disko-bcachefs.nix
+nix run nixpkgs#disko -- -m disko hosts/rmt/disko-bcachefs.nix
 nixos-generate-config --no-filesystems --root /mnt
 
-nix run github:nix-community/nixos-anywhere -- --flake .#rmt root@192.168.122.89 --no-substitute-on-destination
+nix run nixpkgs#nixos-anywhere -- --flake .#rmt root@192.168.122.89 --no-substitute-on-destination
 
 nixos-install --no-root-passwd --flake .#host
 --option substituters "https://cache.nixos.org"
