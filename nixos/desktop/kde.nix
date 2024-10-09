@@ -27,17 +27,12 @@
       kcolorchooser
     ]
     ++ (with kdePackages; [
-      kalk
       krfb
       krdc
       kgamma # broken?
       ksystemlog
-      kmousetool
       # kleopatra
-      # konqueror
-      # kcontacts
       # korganizer
-      sddm-kcm
     ]);
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [

@@ -43,7 +43,7 @@ binds {
     Mod+F { spawn "thunar"; }
     Mod+X { spawn "wofi" "--show" "drun"; }
     Mod+L { spawn "swaylock"; }
-    // Mod+V { spawn "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
+    Mod+V { spawn "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Q { close-window; }

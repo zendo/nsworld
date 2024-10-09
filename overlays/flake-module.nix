@@ -80,7 +80,7 @@
       #   self;
       # python3Packages = final.python3.pkgs;
 
-      # etc ...
+      # And etc...
     };
   };
 }

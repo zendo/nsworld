@@ -178,13 +178,13 @@
       # }; #### powermanagement end here.
 
       kwinrc = {
-        # 夜间颜色
+        # 夜间颜色 2700K~3000K
         NightColor = {
           "Active" = true;
           "Mode" = "Location";
           "LatitudeFixed" = 23.12;
           "LongitudeFixed" = 113.26;
-          "NightTemperature" = 3800;
+          "NightTemperature" = 2800;
         };
 
         # 窗口管理 - 任务切换器
