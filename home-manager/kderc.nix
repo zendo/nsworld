@@ -45,7 +45,7 @@
       {
         location = "bottom";
         height = 44; # default value
-        floating = true;
+        # floating = true;
         widgets = [
           "org.kde.plasma.panelspacer" # 面板间隙
           "org.kde.plasma.kickoff"
