@@ -20,6 +20,8 @@
       hack-font
       fira-code
       mononoki
+      # recursive
+      # ibm-plex
       jetbrains-mono
       # cascadia-code
       (nerdfonts.override {
