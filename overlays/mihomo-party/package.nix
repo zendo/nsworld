@@ -9,7 +9,7 @@
   nspr,
   alsa-lib,
   openssl,
-  webkitgtk,
+  webkitgtk_4_0,
   udev,
   libayatana-appindicator,
   libGL,
@@ -18,11 +18,11 @@
 
 stdenv.mkDerivation rec {
   pname = "mihomo-party";
-  version = "1.4.4";
+  version = "1.4.7";
 
   src = fetchurl {
     url = "https://github.com/pompurin404/mihomo-party/releases/download/v${version}/mihomo-party-linux-${version}-amd64.deb";
-    hash = "sha256-D0Afz7acmh0CnzevpzhqzcYhawmM9fvcqrt6KfibFCU=";
+    hash = "sha256-aZrNtf5o7HXT8T9MEhcU7X2LWCRvTUZiCIgfJjfbKQs=";
   };
 
   nativeBuildInputs = [
@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
     nspr
     alsa-lib
     openssl
-    webkitgtk
+    webkitgtk_4_0
     stdenv.cc.cc
   ];
 

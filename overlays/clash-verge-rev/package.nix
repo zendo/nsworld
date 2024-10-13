@@ -14,7 +14,7 @@
   gtk3,
   libsoup,
   openssl,
-  webkitgtk,
+  webkitgtk_4_0,
   libayatana-appindicator,
   mihomo,
   dbip-country-lite,
@@ -79,7 +79,7 @@ stdenv.mkDerivation (finalAttrs: {
     gtk3
     libsoup
     openssl
-    webkitgtk
+    webkitgtk_4_0
     libayatana-appindicator
   ];
 

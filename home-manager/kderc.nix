@@ -20,7 +20,7 @@
 
     workspace = {
       # clickItemTo = "open";
-      # lookAndFeel = "org.kde.breezetwilight.desktop"; # breezedark, breezetwilight
+      lookAndFeel = "org.kde.breezetwilight.desktop"; # breezedark, breezetwilight
       # cursor = {
       #   theme = "Bibata-Modern-Ice";
       #   size = 32;

@@ -22,6 +22,8 @@
     modifications = final: prev: {
       # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
 
+      mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
+
       # fix .desktop missing
       wl-color-picker = prev.wl-color-picker.overrideAttrs (oldAttrs: {
         postFixup = "cp -r $out/usr/share $out/share ";

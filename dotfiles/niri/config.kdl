@@ -43,7 +43,7 @@ binds {
     Mod+F { spawn "thunar"; }
     Mod+X { spawn "wofi" "--show" "drun"; }
     Mod+L { spawn "swaylock"; }
-    Mod+V { spawn "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
+    Mod+V { spawn "sh" "-c" "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Q { close-window; }
@@ -92,5 +92,13 @@ binds {
     Mod+Shift+E { quit; }
 
     Mod+Shift+P { power-off-monitors; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "volumectl" "-u" "up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "volumectl" "-u" "down"; }
+    XF86AudioMute        allow-when-locked=true { spawn "volumectl"  "toggle-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "volumectl" "-m" "toggle-mute"; }
+
+    XF86MonBrightnessUp { spawn "lightctl" "up"; }
+    XF86MonBrightnessDown { spawn "lightctl" "down"; }
 }
 
