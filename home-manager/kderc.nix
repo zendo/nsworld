@@ -140,7 +140,6 @@
       # 剪贴板
       klipperrc = {
         "General"."MaxClipItems" = 300;
-        "General"."SyncClipboards" = true;
       };
 
       # FIXME: https://github.com/pjones/plasma-manager/issues/47
