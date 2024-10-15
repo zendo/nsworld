@@ -24,7 +24,7 @@
     # nheko
     # fractal
     # discord
-    # tdesktop # (webkitgtk)
+    tdesktop # (webkitgtk)
     # nekoray
     # (pkgs.makeAutostartItem {
     #   name = "nekoray";

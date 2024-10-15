@@ -62,9 +62,6 @@
 
           # nix develop .#rust
           devShells = import ./devshells.nix { inherit pkgs; };
-
-          # nix develop --no-pure-eval .#rust-env
-          devenv.shells = import ./devenvs.nix { inherit pkgs; };
         };
     };
 

@@ -3,7 +3,7 @@
   buildGoModule,
   fetchFromGitHub,
   makeWrapper,
-  gnome,
+  zenity,
 }:
 
 buildGoModule rec {
@@ -28,7 +28,7 @@ buildGoModule rec {
 
   preFixup = ''
     wrapProgram $out/bin/trzsz \
-      --prefix PATH ":" "${lib.makeBinPath [ gnome.zenity ]}";
+      --prefix PATH ":" "${lib.makeBinPath [ zenity ]}";
   '';
 
   meta = with lib; {
