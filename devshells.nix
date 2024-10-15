@@ -213,6 +213,64 @@
   };
 
   ###############################################
+  ##  Android
+  ###############################################
+  # https://discourse.nixos.org/t/building-expo-react-native-android-app-on-nixos/38194/3
+  apk =
+    let
+      pinnedJDK = pkgs.jdk17;
+      buildToolsVersion = "34.0.0";
+      ndkVersion = "25.1.8937393";
+      androidComposition = pkgs.androidenv.composeAndroidPackages {
+        buildToolsVersions = [
+          buildToolsVersion
+          "33.0.1"
+        ];
+        platformVersions = [
+          "34"
+          "33"
+          "32"
+          "31"
+        ];
+        # armeabi-v7a (ARM 32-bit), arm64-v8a (ARM 64-bit), and x86-64 (x86 64-bit)
+        abiVersions = [ "arm64-v8a" ];
+        cmakeVersions = [
+          "3.10.2"
+          "3.22.1"
+        ];
+        includeEmulator = true;
+        emulatorVersion = "34.1.9";
+        includeNDK = true;
+        ndkVersions = [ ndkVersion ];
+      };
+    in
+    pkgs.mkShell rec {
+      buildInputs = with pkgs; [
+        pinnedJDK
+        androidComposition.androidsdk
+        pkg-config
+        flutter
+      ];
+
+      JAVA_HOME = pinnedJDK;
+      ANDROID_SDK_ROOT = "${androidComposition.androidsdk}/libexec/android-sdk";
+      ANDROID_NDK_ROOT = "${ANDROID_SDK_ROOT}/ndk-bundle";
+
+      GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_SDK_ROOT}/build-tools/${buildToolsVersion}/aapt2";
+    };
+  /*
+    # Flutter
+    keytool -genkey -v -keystore key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+    cp key.jks android/app
+
+    micro android/key.properties
+    storePassword=123456
+    keyPassword=123456
+    keyAlias=key
+    storeFile=./key.jks
+  */
+
+  ###############################################
   ##  Haskell
   ###############################################
   haskell = pkgs.mkShell {

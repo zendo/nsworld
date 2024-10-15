@@ -8,6 +8,7 @@
       # allowBroken = true;
       # allowInsecure = true;
       # allowUnsupportedSystem = true;
+      android_sdk.accept_license = true;
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "unrar"
         "steam"

@@ -35,7 +35,7 @@ nixos-install --no-root-passwd --flake .#host
 ``` shell
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
-nix flake init -t github:github:MordragT/nix-templates#tauri
+nix flake init -t github:MordragT/nix-templates#tauri
 ```
 
 # Nix Lang

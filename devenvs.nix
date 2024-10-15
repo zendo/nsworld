@@ -14,6 +14,13 @@
     containers = pkgs.lib.mkForce { };
   };
 
+  apk-env = {
+    android = {
+      enable = true;
+      flutter.enable = true;
+    };
+  };
+
   ###############################################
   ##  Golang
   ###############################################
