@@ -184,7 +184,7 @@
           "Mode" = "Location";
           "LatitudeFixed" = 23.12;
           "LongitudeFixed" = 113.26;
-          "NightTemperature" = 2800;
+          "NightTemperature" = 3300;
         };
 
         # 窗口管理 - 任务切换器
