@@ -11,7 +11,7 @@
     # nightpdf
     # azcomicv
     # moonfm
-    # picacomic
+    picacomic
 
     # nil
     nixd
@@ -24,7 +24,7 @@
     # nheko
     # fractal
     # discord
-    tdesktop # (webkitgtk)
+    # tdesktop # (webkitgtk)
     # nekoray
     # (pkgs.makeAutostartItem {
     #   name = "nekoray";
@@ -81,7 +81,8 @@
     warp
     # remmina # (webkitgtk)
     gnome-decoder
-    localsend
+    # https://github.com/nix-community/home-manager/issues/5173
+    (lib.hiPrio localsend)
     # motrix
     qbittorrent
     # deja-dup

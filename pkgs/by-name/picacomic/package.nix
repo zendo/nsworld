@@ -1,54 +1,63 @@
 {
   lib,
-  stdenv,
-  fetchurl,
-  dpkg,
-  wrapGAppsHook,
-  autoPatchelfHook,
-  openssl,
-  webkitgtk_4_1,
-  udev,
-  libayatana-appindicator,
-  makeDesktopItem,
+  flutter324,
+  fetchFromGitHub,
   copyDesktopItems,
+  makeDesktopItem,
+  pkg-config,
+  gtk3,
+  webkitgtk_4_1,
+  libayatana-appindicator,
+  callPackage,
 }:
 
-stdenv.mkDerivation rec {
+flutter324.buildFlutterApplication rec {
   pname = "picacomic";
-  version = "4.0.3";
+  version = "4.0.4";
 
-  src = fetchurl {
-    url = "https://github.com/wgh136/PicaComic/releases/download/v${version}/pica-comic_${version}_amd64.deb";
-    hash = "sha256-ceXMu21PkuS2krhIkQHlsXsyEtTDQj67673tVVT+R+c=";
+  src = fetchFromGitHub {
+    owner = "wgh136";
+    repo = "PicaComic";
+    rev = "v${version}";
+    hash = "sha256-2OPCPKgnxHCzroAeOr3AYs2q9pWITrBwxdQRSZS9S+U=";
+  };
+
+  pubspecLock = lib.importJSON ./pubspec.lock.json;
+
+  gitHashes = {
+    "desktop_webview_window" = "sha256-fPC5NeyN/yBAm3ERApQ42bWN8QJ/s7iQUJkQMBv4cdo=";
+    "flutter_inappwebview_android" = "sha256-u8K0r08d02UfVBoW6HSTupFPibKizqK6IHqQX0uB2fg=";
+    "flutter_qjs" = "sha256-IeOuw2oh3WpuYQgfE77BoPU8Qukp4l8SSmZtHebKU4M=";
+    "image_gallery_saver" = "sha256-Axw6aHcPExnkXk2gEhxTwL6e3tzpKGb8ejL6wL1Re0k=";
+    "photo_view" = "sha256-Z+9xgvk8YS+bgCbBW7BBY72tV6JUq2kCX5OwKFK4YPE=";
+    "webdav_client" = "sha256-WMw0GIpRyF6E//sxAPpQfwTJstc5j7In+aV6/6xo95M=";
+    "workmanager" = "sha256-iFr1RJ0VWVlPpInwDZU6vbPGwMShrad5JTJFvLGfwTA=";
+    "zip_flutter" = "sha256-hf+jkZBiDCN1ENUuFpnk+rPdnXmAdl+TSDM5iX/+ofY=";
+  };
+
+  # https://github.com/NixOS/nixpkgs/pull/326367
+  customSourceBuilders = {
+    sqlite3_flutter_libs = callPackage ./sqlite3_flutter_libs { };
   };
 
   nativeBuildInputs = [
-    dpkg
-    wrapGAppsHook
-    autoPatchelfHook
+    pkg-config
     copyDesktopItems
   ];
 
   buildInputs = [
-    openssl
+    gtk3
     webkitgtk_4_1
-    stdenv.cc.cc
-  ];
-
-  runtimeDependencies = [
-    (lib.getLib udev)
     libayatana-appindicator
   ];
 
-  installPhase = ''
-    runHook preInstall
+  postInstall = ''
+    mkdir -p $out/share/{icons,applications}
+    install -Dm644 $src/debian/gui/pica-comic.png $out/share/icons/
+  '';
 
-    mkdir -p $out/bin
-    cp -r usr/local/lib/pica-comic usr/share $out
-    ln -s $out/pica-comic/pica_comic $out/bin/
-    rm $out/share/applications/pica-comic.desktop
-
-    runHook postInstall
+  extraWrapProgramArgs = ''
+    --prefix LD_LIBRARY_PATH : "$out/app/lib"
   '';
 
   desktopItems = [
@@ -66,9 +75,8 @@ stdenv.mkDerivation rec {
     description = "Comic app built with Flutter, supporting multiple comic sources";
     homepage = "https://github.com/wgh136/PicaComic";
     mainProgram = "pica_comic";
-    platforms = [ "x86_64-linux" ];
+    platforms = lib.platforms.linux;
     license = lib.licenses.mit;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = with lib.maintainers; [ zendo ];
   };
 }
