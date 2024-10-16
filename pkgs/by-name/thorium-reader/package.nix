@@ -1,27 +1,22 @@
 {
   lib,
-  buildNpmPackage,
   fetchFromGitHub,
+  buildNpmPackage,
   electron,
-  openssl,
-  libsecret,
-  esbuild,
-  pkg-config,
-  python3,
 }:
-# WIP!!!
-buildNpmPackage rec {
+# https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=thorium-reader
+buildNpmPackage {
   pname = "thorium-reader";
-  version = "2.3.0-alpha.1";
+  version = "3.0.0";
 
   src = fetchFromGitHub {
     owner = "edrlab";
-    repo = pname;
+    repo = "thorium-reader";
     rev = "latest-linux";
-    hash = "sha256-Y2WAzmX2ThBUdBv2qQ8kvhLdFPgpY2kOmfEVC2sbuFM=";
+    hash = "sha256-qpZPIB8FgnXbILkooC8A+0HG1PUWz08S93izcITJFnc=";
   };
 
-  npmDepsHash = "sha256-p9dXz/aDcXyxewZsW0bnylWTsIf9JVGYyW9+J3dQG4s=";
+  npmDepsHash = "sha256-ZegRmxI1Wbeb7L/JB51sTqBoJsmItarLK400o0l2OJI=";
 
   # dontNpmBuild = true;
 
@@ -46,26 +41,42 @@ buildNpmPackage rec {
   # The prepack script runs the build script, which we'd rather do in the build phase.
   # npmPackFlags = [ "--ignore-scripts" ];
 
-  # NODE_OPTIONS = "--openssl-legacy-provider";
+  env.ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
 
-  # ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
+  dontNpmBuild = true;
 
-  # ESBUILD_BINARY_PATH = "${esbuild}/bin/esbuild";
-  # USE_SYSTEM_LIBDELTACHAT = "true";
+  postBuild = ''
+    npm install --no-audit --no-fund --prefer-offline
+    npm run package:build
+    npm exec electron-builder -- \
+      --dir \
+      -c.electronDist=${electron.dist} \
+      -c.electronVersion=${electron.version}
+  '';
 
-  # dontNpmBuild = true;
+  installPhase = ''
+    runHook preInstall
 
-  # installPhase = ''
-  #     mkdir -p $out
-  #     cp -r node_modules $out/
-  #   '';
+    # mkdir -p $out/opt
+    # cp -r ./* $_
 
-  meta = with lib; {
-    description = "A cross platform desktop reading app, based on the Readium Desktop toolkit";
+    mkdir -p $out $out/opt/thorium-reader
+    cp -r release/linux-unpacked/{locales,resources{,.pak}} $out/opt/thorium-reader
+
+    makeWrapper ${lib.getExe electron} $out/bin/thorium-reader \
+      --add-flags $out/thorium-reader/resources/app.asar \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
+      --set-default ELECTRON_IS_DEV 0 \
+      --inherit-argv0
+
+    runHook postInstall
+  '';
+
+  meta = {
+    description = "Cross platform desktop reading app, based on the Readium Desktop toolkit";
     homepage = "https://github.com/edrlab/thorium-reader";
-    license = licenses.bsd3;
-    platforms = [ "x86_64-linux" ];
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
-    maintainers = with maintainers; [ zendo ];
+    license = lib.licenses.bsd3;
+    platforms = lib.platforms.linux;
+    maintainers = with lib.maintainers; [ zendo ];
   };
 }
