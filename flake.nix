@@ -18,7 +18,6 @@
         ./lib/flake-module.nix
         ./lib/repl.nix
         ./templates/flake-module.nix
-        inputs.devenv.flakeModule
         # inputs.treefmt-nix.flakeModule
       ];
 
@@ -112,7 +111,6 @@
     # nur.url = "github:nix-community/NUR";
     # agenix.url = "github:ryantm/agenix";
     sops-nix.url = "github:Mic92/sops-nix";
-    devenv.url = "github:cachix/devenv";
     templates.url = "github:NixOS/templates";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
