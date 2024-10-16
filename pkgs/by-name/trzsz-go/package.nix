@@ -8,16 +8,16 @@
 
 buildGoModule rec {
   pname = "trzsz-go";
-  version = "1.1.5";
+  version = "1.1.8";
 
   src = fetchFromGitHub {
     owner = "trzsz";
     repo = "trzsz-go";
     rev = "v${version}";
-    hash = "sha256-Uivb8tGiQ+5RUrx1pVefZSl8EKybGLqZR+DhZp+8B7M=";
+    hash = "sha256-g1fbgKTFS9aPAmnTeFYoymrDEoZ6BtzUhA2Z9SNYbsU=";
   };
 
-  vendorHash = "sha256-kZu0q/E3NWcYGRBQNoScBm3dXLcmVNtgrZFrhvA2wps=";
+  vendorHash = "sha256-AsrRHHBlzW5s/PtJSQ+hAgqUIYwDwoemQaerRV/QKX0=";
 
   ldflags = [
     "-s"
@@ -31,11 +31,11 @@ buildGoModule rec {
       --prefix PATH ":" "${lib.makeBinPath [ zenity ]}";
   '';
 
-  meta = with lib; {
-    description = "A simple SSH file transfer tools similar to lrzsz written in Go";
+  meta = {
+    description = "Simple SSH file transfer tools similar to lrzsz written in Go";
     homepage = "https://github.com/trzsz/trzsz-go";
     mainProgram = "trzsz";
-    license = licenses.mit;
-    maintainers = with maintainers; [ zendo ];
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ zendo ];
   };
 }
