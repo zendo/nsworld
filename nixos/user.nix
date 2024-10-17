@@ -18,6 +18,8 @@ let
   };
 in
 {
+  services.userborn.enable = lib.mkDefault true;
+
   users = {
     mutableUsers = lib.mkDefault false;
 

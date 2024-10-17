@@ -93,5 +93,4 @@
 
   # Remove perl from activation
   # system.etc.overlay.enable = lib.mkDefault true;
-  services.userborn.enable = lib.mkDefault true;
 }

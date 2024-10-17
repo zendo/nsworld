@@ -29,7 +29,6 @@
     ++ (with kdePackages; [
       krfb
       krdc
-      kgamma # broken?
       ksystemlog
       # kleopatra
       # korganizer

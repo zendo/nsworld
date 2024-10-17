@@ -114,7 +114,7 @@
     templates.url = "github:NixOS/templates";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
   # auto-fetch deps when `nix run/shell/develop`

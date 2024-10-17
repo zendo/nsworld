@@ -124,7 +124,6 @@
         nomacs
         # gnome.gnome-power-manager
         # gnome.gnome-characters
-        # gnome.eog
         # gthumb
         # kdePackages.gwenview
         gparted
