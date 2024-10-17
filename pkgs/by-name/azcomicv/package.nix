@@ -52,7 +52,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   meta = {
-    description = "A simple comic reader";
+    description = "Simple comic reader";
     homepage = "http://azsky2.html.xdomain.jp/soft/index.html";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;

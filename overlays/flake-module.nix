@@ -10,7 +10,7 @@
     #   };
     # };
 
-    # add new pkgs
+    # Add new pkgs
     additions =
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
@@ -18,10 +18,9 @@
         directory = ../pkgs/by-name;
       };
 
-    # mod existed pkgs
+    # Mod existed pkgs
     modifications = final: prev: {
       # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
-
       mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
 
       # fix .desktop missing

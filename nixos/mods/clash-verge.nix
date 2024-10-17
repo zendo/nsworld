@@ -18,6 +18,7 @@
     };
     autoStart = lib.mkEnableOption "Clash Verge auto launch";
     tunMode = lib.mkEnableOption "Clash Verge TUN mode";
+    serviceMode = lib.mkEnableOption "Clash Verge Service mode";
   };
 
   config =
@@ -42,6 +43,21 @@
         capabilities = "cap_net_bind_service,cap_net_admin=+ep";
         source = "${lib.getExe cfg.package}";
       };
+
+      systemd.services.${lib.getName cfg.package} = lib.mkIf cfg.serviceMode {
+        owner = "root";
+        enable = true;
+        group = "root";
+        Restart = "on-failure";
+        capabilities = "cap_net_bind_service,cap_net_admin=+ep";
+        description = "Clash Verge Service Mode";
+        source = "${lib.getExe cfg.package}";
+        serviceConfig = {
+          ExecStart = "${cfg.package}/bin/clash-verge-service";
+        };
+        wantedBy = [ "multi-user.target" ];
+      };
+
     };
 
   meta.maintainers = with lib.maintainers; [ zendo ];
