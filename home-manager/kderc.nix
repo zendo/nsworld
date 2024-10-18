@@ -47,6 +47,7 @@
         height = 44; # default value
         # floating = true;
         widgets = [
+          "plasmusic-toolbar"
           "org.kde.plasma.panelspacer" # 面板间隙
           "org.kde.plasma.kickoff"
           "org.kde.plasma.marginsseparator" # 边距分隔符
