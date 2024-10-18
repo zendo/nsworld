@@ -5,7 +5,6 @@
     cmake
     gnumake
     python3
-    # zed-editor
   ];
 
   programs.pandoc = {
@@ -69,6 +68,31 @@
     # ];
   };
 
+  ###############################################
+  ##  ZED-EDITOR
+  ###############################################
+  programs.zed-editor = {
+    # enable = true;
+    extensions = [
+      "nix"
+      "xy-zed" # a gorgeous dark theme
+    ];
+    userSettings = {
+      features = {
+        copilot = false;
+      };
+      telemetry = {
+        metrics = false;
+      };
+      vim_mode = false;
+      ui_font_size = 16;
+      buffer_font_size = 16;
+    };
+  };
+
+  ###############################################
+  ##  TUI
+  ###############################################
   programs.helix = {
     enable = true;
   };
