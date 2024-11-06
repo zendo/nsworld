@@ -1,0 +1,19 @@
+# nix run nixpkgs#completely generate ns.yaml
+ns:
+- boot
+- switch
+- upgrade
+- hmswitch
+- hmsource
+- hmprofiles
+- hmdiff
+- diff
+- os-source
+- os-installed
+- os-profiles
+- os-generations
+- pr-pull
+- pr-build
+- hash2sri
+- indexdb-update
+- git-sync-nixosVersion

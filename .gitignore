@@ -1,0 +1,7 @@
+/result
+/result-bin
+/result-man
+/overlays/_sources
+/.direnv
+/.devenv
+*.qcow2

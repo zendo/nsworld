@@ -1,0 +1,7 @@
+maintainers = ["zendo"]
+
+# access tokens to access private repositories and avoid rate limits
+# [access-tokens]
+# "github.com" = "ghp_blahblahblah..."
+# "gitlab.com".command = ["secret-tool", "or", "whatever", "you", "use"]
+# "gitlab.gnome.org".file = "/path/to/api/token"
