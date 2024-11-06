@@ -49,7 +49,7 @@ while [[ $# -gt 0 ]]; do
 
         upgrade)
             cd "$dotConfig" || exit ; \
-                nix flake update && \
+                nix flake update --commit-lock-file && \
                 nixos-rebuild --use-remote-sudo --flake "$dotConfig"#"$getHost" boot
                 shift ;;
 

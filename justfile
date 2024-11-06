@@ -17,7 +17,7 @@ os-boot:
     nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
 
 os-upgrade:
-    nix flake update && \
+    nix flake update --commit-lock-file && \
       nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
 
 # nix run n#nvd -- diff $(\ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
