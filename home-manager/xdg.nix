@@ -8,7 +8,6 @@
   home.sessionPath = [
     "${../dotfiles/bin}"
     "${config.home.homeDirectory}/.local/bin"
-    "${config.home.homeDirectory}/.emacs.d/bin"
   ];
 
   home.sessionVariables = {
@@ -92,6 +91,11 @@
       #   icon = "vscode";
       #   exec = "code --disable-features=WaylandFractionalScaleV1";
       # };
+      doom-emacs = {
+        name = "Doom Emacs";
+        icon = "${../dotfiles/emacs/doom-emacs.svg}";
+        exec = ''sh -c "emacs --init-directory ${config.home.homeDirectory}/.config/doom-emacs"'';
+      };
     };
   };
 }
