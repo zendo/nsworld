@@ -85,17 +85,11 @@
       #     terminal = false;
       #     categories = ["Application" "Music"];
       #   };
-      # FIXME: fix bury on gnome wayland 2x scale
-      # code = {
-      #   name = "Visual Studio Code";
-      #   icon = "vscode";
-      #   exec = "code --disable-features=WaylandFractionalScaleV1";
+      # doom-emacs = {
+      #   name = "Doom Emacs";
+      #   icon = "${../dotfiles/emacs/doom-emacs.svg}";
+      #   exec = ''sh -c "emacs --init-directory ${config.home.homeDirectory}/.config/doom-emacs"'';
       # };
-      doom-emacs = {
-        name = "Doom Emacs";
-        icon = "${../dotfiles/emacs/doom-emacs.svg}";
-        exec = ''sh -c "emacs --init-directory ${config.home.homeDirectory}/.config/doom-emacs"'';
-      };
     };
   };
 }
