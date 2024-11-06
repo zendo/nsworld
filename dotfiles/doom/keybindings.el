@@ -53,7 +53,7 @@
  "C-x 4 r" #'consult-buffer-other-window
  "C-x 4 x" #'ace-swap-window
  [remap other-window] #'ace-window
- [remap kill-buffer] #'kill-this-buffer
+ [remap kill-buffer] #'kill-current-buffer
 
  "C-." #'hippie-expand
  "C-," #'+company/complete

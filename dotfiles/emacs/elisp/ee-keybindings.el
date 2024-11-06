@@ -13,7 +13,7 @@
 
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 (global-set-key (kbd "C-z") 'nil) ;unbind C-z
-(global-set-key [remap kill-buffer] #'kill-this-buffer)
+(global-set-key [remap kill-buffer] #'kill-current-buffer)
 
 ;; (use-package devil
 ;;   :config
