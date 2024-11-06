@@ -71,7 +71,7 @@
 (show-paren-mode 1)                         ;括号匹配 parens
 (electric-pair-mode t)                      ;自动补全括号
 (delete-selection-mode t)                   ;overwrite selected text
-(global-visual-line-mode 1)                 ;折叠 word wrap
+;; (global-visual-line-mode 1)                 ;折叠 word wrap
 (global-prettify-symbols-mode 1)            ;Show lambda as λ.
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名

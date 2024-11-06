@@ -91,7 +91,9 @@
 ;; Editor
 (when (modulep! :editor word-wrap)
   (+global-word-wrap-mode +1))
-(global-visual-line-mode 1)
+;; or
+(set-default 'word-wrap nil)
+(set-default 'truncate-lines nil)
 
 ;; Nix Mode
 (setq! lsp-nix-server-path "nixd")
