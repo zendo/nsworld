@@ -14,14 +14,10 @@
 
 ;; Completion style for matching regexps in any order
 (use-package orderless
-  :init (setq completion-styles '(orderless)
-              completion-ignore-case  t
-              read-buffer-completion-ignore-case  t
-              read-file-name-completion-ignore-case  t
-              orderless-smart-case  t
-              orderless-matching-styles '(orderless-prefixes
-                                          orderless-initialism
-                                          orderless-regexp)))
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
 
 ;; Enrich existing commands with completion annotations
 (use-package marginalia
@@ -38,8 +34,9 @@
 
 ;; Consulting completing-read
 (use-package consult
-  :bind (([remap list-buffers] . consult-buffer) ; C-x b
+  :bind (("C-c M-x" . consult-mode-command)
          ([remap apropos-command] . consult-apropos) ; C-h a
+         ([remap list-buffers] . consult-buffer) ; C-x b
          ([remap find-file-read-only-other-window] . consult-buffer-other-window)
          ([remap yank-pop] . consult-yank-pop) ; M-y
          ("C-x C-r" . consult-recent-file)
@@ -52,7 +49,7 @@
 (use-package embark
   :bind (("C-c C-c" . embark-act)
          ("C-c C-o" . embark-export)
-         ("C-h b" . embark-bindings))
+         ("C-h B" . embark-bindings))
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command))
