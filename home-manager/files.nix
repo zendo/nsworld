@@ -33,8 +33,8 @@ in
     "waybar".source = "${lnDots}/waybar";
     "yt-dlp".source = "${lnDots}/yt-dlp";
     "niri".source = "${lnDots}/niri";
-    "sway/custom.conf".source = "${lnDots}/sway/custom.conf";
-    "hypr/custom.conf".source = "${lnDots}/hypr/custom.conf";
+    "sway/config".source = "${lnDots}/sway/config";
+    "hypr/hyprland.conf".source = "${lnDots}/hypr/hyprland.conf";
     "hypr/hyprlock.conf".source = "${lnDots}/hypr/hyprlock.conf";
   };
 

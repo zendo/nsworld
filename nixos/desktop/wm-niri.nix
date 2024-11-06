@@ -17,11 +17,5 @@
     };
   };
 
-  xdg.portal.configPackages = [ pkgs.niri ];
-
-  home-manager.users.${username} = {
-    home.packages = with pkgs; [
-      niri
-    ];
-  };
+  programs.niri.enable = true;
 }

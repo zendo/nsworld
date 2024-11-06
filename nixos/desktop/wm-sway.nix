@@ -17,22 +17,10 @@
     };
   };
 
-  xdg.portal.configPackages = [ pkgs.sway ];
-
-  home-manager.users.${username} = {
-    wayland.windowManager.sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      config = null;
-      extraConfig = ''
-        include ./custom.conf
-      '';
-      # extraSessionCommands = ''
-      #   export XDG_CURRENT_DESKTOP="sway"
-      # '';
-    };
-
-    home.packages = with pkgs; [
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
       swayr
       autotiling-rs
     ];
