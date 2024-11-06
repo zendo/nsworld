@@ -92,7 +92,8 @@
 
  :prefix-map git-mode
  :prefix "C-c v"
- ("d" . magit-dispatch)
+ ("/" . magit-dispatch)
+ ("." . magit-file-dispatch)
  ("t" . git-timemachine)
 
  :prefix-map remove-map
