@@ -20,6 +20,7 @@
       hack-font
       fira-code
       mononoki
+      lexend # improve reading fluency
       # recursive
       # ibm-plex
       jetbrains-mono
