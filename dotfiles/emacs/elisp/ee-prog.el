@@ -16,6 +16,8 @@
       compilation-scroll-output 'first-error ; Automatically scroll to first error
       )
 
+(editorconfig-mode t)
+
 (use-package indent-bars
   :defer t)
 
@@ -52,13 +54,6 @@
   "\\lfrc$" "\\.keywords$" "\\.license$"
   "\\.mask$" "\\.unmask$" "\\.use$")
 (global-set-key [remap conf-space-keywords] #'project-find-file)
-
-(use-package editorconfig
-  :diminish editorconfig-mode
-  :custom
-  (editorconfig-get-properties-function  'editorconfig-core-get-properties-hash)
-  :init
-  (editorconfig-mode t))
 
 ;; Markdown
 (use-package markdown-mode
