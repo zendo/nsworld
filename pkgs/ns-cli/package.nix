@@ -1,4 +1,8 @@
-{ lib, stdenvNoCC }:
+{
+  lib,
+  stdenvNoCC,
+  installShellFiles,
+}:
 
 stdenvNoCC.mkDerivation {
   name = "ns";
@@ -6,9 +10,15 @@ stdenvNoCC.mkDerivation {
 
   dontUnpack = true;
 
+  nativeBuildInputs = [
+    installShellFiles
+  ];
+
   installPhase = ''
     install -Dm755 "$src" "$out/bin/ns"
-    install -D ${./ns.bash} $out/share/bash-completion/completions/ns.bash
+    installShellCompletion \
+      --bash ${./ns.bash} \
+      --fish ${./ns.fish}
   '';
 
   meta = {

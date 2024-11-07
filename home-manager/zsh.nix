@@ -2,18 +2,24 @@
 {
   home.packages = with pkgs; [ pure-prompt ];
 
-  programs.fish = {
-    enable = false;
-  };
-
   programs.starship = {
     enable = true;
     enableBashIntegration = false;
     enableZshIntegration = true;
+    enableFishIntegration = true;
   };
 
   programs.zellij = {
     enable = true;
+  };
+
+  programs.fish = {
+    enable = true;
+    generateCompletions = false;
+    interactiveShellInit = ''
+      # Disable the greeting message.
+      set fish_greeting
+    '';
   };
 
   programs.zsh = {
@@ -63,9 +69,6 @@
       # Compatibility bash completion
       autoload -U bashcompinit && bashcompinit
       source ${pkgs.ns-cli}/share/bash-completion/completions/ns.bash
-
-      # Using nix-shell on zsh
-      ${lib.getExe pkgs.any-nix-shell} zsh --info-right | source /dev/stdin
 
       # Completions
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive tab completion
