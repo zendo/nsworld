@@ -54,7 +54,7 @@
     # rhythmbox
     goodvibes
     go-musicfox
-    qcm
+    # qcm
     # netease-cloud-music-gtk
     # mousai
     songrec

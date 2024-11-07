@@ -42,7 +42,11 @@
                   extraSpecialArgs = {
                     inherit inputs;
                   };
-                  users.${username} = ../home-manager/hm-module.nix;
+                  sharedModules = [
+                    ../home-manager/hm-module.nix
+                  ];
+                  # home-manager user initialize
+                  users.${username} = ./users/${username}.nix;
                 };
               }
             ]
