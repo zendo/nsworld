@@ -116,5 +116,13 @@
   :config
   (setq view-read-only t))
 
+;; M-backspace 删除而非剪切
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+(global-set-key [remap backward-kill-word] #'backward-delete-word)
+
 (provide 'ee-keybindings)
 ;;; keybindings.el ends here
