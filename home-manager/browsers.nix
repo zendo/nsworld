@@ -75,4 +75,15 @@ in
       };
     };
   };
+
+  programs.floorp = {
+    # enable = true;
+    profiles.default = {
+      settings = {
+        "browser.tabs.closeTabByDblclick" = true; # 双击关闭标签
+        "browser.tabs.selectOwnerOnClose" = false; # 关闭标签后选附近标签而不是原始
+        "browser.tabs.closeWindowWithLastTab" = false; # 关闭最后一个标签不退出界面
+      };
+    };
+  };
 }
