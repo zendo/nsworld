@@ -10,25 +10,54 @@ home_dir := env_var('HOME')
 default:
     @just --choose
 
-os-switch:
+switch:
     nixos-rebuild --use-remote-sudo --flake .#"{{host}}" switch
 
-os-boot:
+boot:
     nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
 
-os-upgrade:
+upgrade:
     nix flake update --commit-lock-file && \
       nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
 
-# nix run n#nvd -- diff $(\ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
-os-diff:
+diff:
+    # nix run n#nvd -- diff $(\ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
     nix profile diff-closures --profile /nix/var/nix/profiles/system
+
+diff-commits:
+    #!/usr/bin/env bash
+    osrev=$(nixos-version --revision)
+    nixpkgs=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixos-unstable-small | awk '{print $1}')
+    if [[ "$osrev" = "$nixpkgs" ]]; then
+        echo "There is no update."
+    else
+        xdg-open https://github.com/NixOS/nixpkgs/compare/"$osrev"..."$nixpkgs"
+    fi
 
 hm-switch:
     home-manager switch --flake .#"{{user}}"
 
 hm-diff:
     nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
+
+hm-sourece:
+    readlink -f /nix/var/nix/profiles/per-user/#"{{user}}"/home-manager
+
+hm-profiles:
+    ls -la /nix/var/nix/profiles/per-user/#"{{user}}"
+
+os-source:
+    readlink -f /nix/var/nix/profiles/system
+
+os-profiles:
+    ls -la /nix/var/nix/profiles
+
+os-generations:
+    nix profile history --profile /nix/var/nix/profiles/system
+
+os-installed:
+    # cut -d- -f2-
+    nix path-info --recursive /run/current-system | cut -b 45- | sort
 
 build-livecd-graphical:
     nix build .#nixosConfigurations.livecd-graphical.config.system.build.isoImage
@@ -42,6 +71,12 @@ build-wsl-installer:
 
 nix-tree-with-gcroots:
     nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree
+
+pr-build:
+    nix build github:NixOS/nixpkgs/pull/"$2"/merge#"$3"
+
+hash2sri:
+    nix hash convert --hash-algo sha256 --to sri "$2"
 
 nix-index-database-update:
     #!/usr/bin/env bash

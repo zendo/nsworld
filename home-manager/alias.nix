@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   home.shellAliases = {
     cat = "${lib.getExe pkgs.bat} -p";
@@ -25,6 +30,7 @@
     paste-rs = "curl --data-binary @- https://paste.rs/";
 
     nse = "nix search nixpkgs";
+    j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
     ee = "emacsclient --create-frame";
     ee-config = "emacs --init-directory ~/.config/emacs";
     ssr = "export {http,https,ftp}_proxy=socks5h://127.0.0.1:7897 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://127.0.0.1:7897";

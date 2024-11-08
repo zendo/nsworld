@@ -78,9 +78,9 @@ while [[ $# -gt 0 ]]; do
 
         diff-commits)
             osrev=$(nixos-version --revision)
-            nixpkgs=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixos-unstable-small | awk '{ print $1 }')
+            nixpkgs=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixos-unstable-small | awk '{print $1}')
             if [[ "$osrev" = "$nixpkgs" ]]; then
-                echo "There is no update today."
+                echo "There is no update."
             else
                 xdg-open https://github.com/NixOS/nixpkgs/compare/"$osrev"..."$nixpkgs"
             fi
