@@ -29,7 +29,7 @@ _ns_completions() {
 
   case "$compline" in
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_ns_completions_filter "boot switch upgrade hmswitch hmsource hmprofiles hmdiff diff os-source os-installed os-profiles os-generations pr-pull pr-build hash2sri indexdb-update git-sync-nixosVersion")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_ns_completions_filter "boot switch upgrade hmswitch hmsource hmprofiles hmdiff diff diff-commits os-source os-installed os-profiles os-generations pr-pull pr-build hash2sri indexdb-update git-sync-nixosVersion")" -- "$cur" )
       ;;
 
   esac

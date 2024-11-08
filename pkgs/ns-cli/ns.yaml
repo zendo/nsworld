@@ -8,6 +8,7 @@ ns:
 - hmprofiles
 - hmdiff
 - diff
+- diff-commits
 - os-source
 - os-installed
 - os-profiles
