@@ -4,7 +4,6 @@
 
   home.packages = with pkgs; [
     # Nix Tools
-    ns-cli
     # alejandra
     nixfmt-rfc-style
     # lorri

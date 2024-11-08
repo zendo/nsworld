@@ -66,10 +66,6 @@
       # source minimal.zsh
       # source ${../dotfiles/zsh/oxide.zsh-theme}
 
-      # Compatibility bash completion
-      autoload -U bashcompinit && bashcompinit
-      source ${pkgs.ns-cli}/share/bash-completion/completions/ns.bash
-
       # Completions
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive tab completion
       zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # Colored completion (different colors for dirs/files/etc)

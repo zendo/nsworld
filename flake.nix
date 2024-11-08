@@ -53,7 +53,7 @@
             }
             // {
               # nix run .
-              default = config.packages.ns-cli;
+              default = config.packages.azcomicv;
             };
 
           # nix fmt
