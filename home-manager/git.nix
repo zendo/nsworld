@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   programs.git = {
     enable = true;
@@ -17,9 +17,7 @@
       unstage = "reset HEAD --";
       quick-rebase = "rebase --interactive --autostash --committer-date-is-author-date";
       pr-pull = "!f() { git fetch upstream pull/$1/head:pr-$1 && git checkout pr-$1; }; f";
-      # nixos
       sync-nixosVersion = ''!git fetch upstream master && git merge "$(nixos-version --revision)"'';
-      pr-pull-nixpkgs = "!f() { git fetch git@github.com:NixOS/nixpkgs pull/$1/head:pr-$1 && git checkout pr-$1; }; f";
     };
     extraConfig = {
       init.defaultBranch = "main";

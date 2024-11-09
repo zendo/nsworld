@@ -21,7 +21,6 @@ upgrade:
       nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
 
 diff:
-    # nix run n#nvd -- diff $(\ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
 diff-commits:

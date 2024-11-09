@@ -16,13 +16,9 @@
     nurl
     # nix-init
     nix-update
-    # nixpkgs-review
-    # colmena
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs
 
     # nheko
-    # fractal
-    # discord
     tdesktop # (webkitgtk)
     # nekoray
     # (pkgs.makeAutostartItem {
