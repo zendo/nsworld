@@ -1,7 +1,5 @@
-{ pkgs, lib, ... }:
+{ ... }:
 {
-  home.packages = with pkgs; [ pure-prompt ];
-
   programs.starship = {
     enable = true;
     enableBashIntegration = false;
@@ -30,11 +28,6 @@
     syntaxHighlighting.enable = true;
     plugins = [
       # {
-      #   name = "zsh-nix-shell";
-      #   file = "nix-shell.plugin.zsh";
-      #   src = "${pkgs.zsh-nix-shell}/share/zsh-nix-shell";
-      # }
-      # {
       #   name = "minimal";
       #   file = "minimal.zsh";
       #   src = pkgs.fetchFromGitHub {
@@ -56,13 +49,7 @@
       # setopt no_nomatch # Compatible bash wildcard
       unsetopt correct  # Disable AutoCorrect
 
-      ## Promt theme
-      # autoload -U promptinit; promptinit
-      # PURE_PROMPT_SYMBOL=›
-      # PURE_PROMPT_VICMD_SYMBOL=‹
-      # prompt pure
-
-      ## Other themes
+      ## Themes
       # source minimal.zsh
       # source ${../dotfiles/zsh/oxide.zsh-theme}
 
