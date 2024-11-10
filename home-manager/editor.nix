@@ -5,6 +5,8 @@
     cmake
     gnumake
     python3
+    # nil
+    nixd
   ];
 
   programs.pandoc = {

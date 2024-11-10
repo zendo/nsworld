@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   manual.manpages.enable = false;
 
@@ -8,10 +8,12 @@
     nixfmt-rfc-style
     # lorri
     # cachix
-    # comma # ,
+    comma # ,
     nix-tree
+    nurl
+    nix-update
+    nix-forecast
     # nix-prefetch
-    # nix-update
     # nix-template
     # nix-output-monitor
 

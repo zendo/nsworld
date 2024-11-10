@@ -2,7 +2,6 @@
   lib,
   pkgs,
   inputs,
-  config,
   ...
 }:
 {
@@ -11,12 +10,7 @@
     # azcomicv
     picacomic
 
-    # nil
-    nixd
-    nurl
     # nix-init
-    nix-update
-    nix-forecast
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs
 
     # nheko
