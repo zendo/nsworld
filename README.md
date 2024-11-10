@@ -4,7 +4,7 @@
 
 # Installation
 
-``` shell
+```shell
 mkfs.fat -F32 /dev/nvme0n1p3
 mkswap /dev/nvme0n1p4
 swapon /dev/nvme0n1p4
@@ -32,7 +32,7 @@ nixos-install --no-root-passwd --flake .#host
 
 # Nix Commands
 
-``` shell
+```shell
 # Developer Environments
 nix develop --no-write-lock-file github:nix-community/nix-environments#openwrt
 nix flake init -t github:MordragT/nix-templates#tauri
@@ -45,4 +45,3 @@ nix flake init -t github:MordragT/nix-templates#tauri
 [Nix one pager](https://github.com/tazjin/nix-1p)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-

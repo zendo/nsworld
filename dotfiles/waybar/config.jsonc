@@ -9,12 +9,12 @@
     // "custom/launcher",
     // "wlr/workspaces",
     "sway/workspaces",
-    "wlr/taskbar"
+    "wlr/taskbar",
   ],
   "modules-center": [
     // "custom/notification",
     "clock",
-    "custom/playerctl"
+    "custom/playerctl",
   ],
   "modules-right": [
     "tray",
@@ -23,10 +23,10 @@
     // "idle_inhibitor",
     "battery",
     // "custom/sysmenu",
-    "custom/logout"
+    "custom/logout",
   ],
 
-// Modules configuration
+  // Modules configuration
 
   "wlr/workspaces": {
     "disable-scroll": true,
@@ -43,7 +43,7 @@
       "7": [],
       "8": [],
       "9": [],
-      "10": []
+      "10": [],
     },
     /*"format-icons": {
       "1": "",
@@ -67,17 +67,17 @@
     // "icon-theme": "Papirus-Dark",
     "tooltip-format": "{app_id}: {title}",
     "on-click": "activate",
-    "on-click-middle": "close"
+    "on-click-middle": "close",
   },
 
   "sway/mode": {
     "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-    "tooltip": false
+    "tooltip": false,
   },
 
   "sway/window": {
     "format": "{}",
-    "max-length": 120
+    "max-length": 120,
   },
 
   "sway/workspaces": {
@@ -92,14 +92,14 @@
       "5:portal": "",
       "urgent": "",
       "focused": "",
-      "default": ""
-    }
+      "default": "",
+    },
   },
 
   "custom/sysmenu": {
     "format": "󰤆",
     "on-click": "sh $HOME/.config/waybar/scripts/sysmenu.sh",
-    "tooltip": false
+    "tooltip": false,
   },
 
   "clock": {
@@ -107,7 +107,7 @@
     "on-click": "calcurse",
     //"format": "{: %m/%d   %R}",
     "format": " {:%R}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>"
+    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>",
   },
 
   "cpu": {
@@ -115,9 +115,9 @@
     "format": "﬙ {usage}%",
     "states": {
       "warning": 70,
-      "critical": 90
+      "critical": 90,
     },
-    "on-click": "swaymsg exec \\$term_float htop"
+    "on-click": "swaymsg exec \\$term_float htop",
   },
 
   "memory": {
@@ -125,17 +125,17 @@
     "format": " {}%",
     "states": {
       "warning": 70,
-      "critical": 90
+      "critical": 90,
     },
-    "on-click": "swaymsg exec \\$term_float htop"
+    "on-click": "swaymsg exec \\$term_float htop",
   },
 
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": ""
-    }
+      "deactivated": "",
+    },
   },
 
   "temperature": {
@@ -144,24 +144,24 @@
     "format": "{icon} {temperatureC}°C",
     "format-icons": ["", "", ""],
     "tooltip": false,
-    "on-click": "swaymsg exec \"\\$term_float watch sensors\""
+    "on-click": "swaymsg exec \"\\$term_float watch sensors\"",
   },
 
   "custom/caffeine": {
     "exec": "~/.config/waybar/scripts/caffeine.sh",
     "return-type": "json",
     "interval": 3,
-    "format-icons": ["❄️", "", "",  "", ""],
-    "format": "{icon}"
+    "format-icons": ["❄️", "", "", "", ""],
+    "format": "{icon}",
   },
 
   "custom/logout": {
     "on-click": "wlogout",
     "format-icons": ["⏻"],
-    "format": "{icon}"
+    "format": "{icon}",
   },
 
-  "custom/weather" :{
+  "custom/weather": {
     "return-type": "json",
     "interval": 1800,
     "exec": "sh $HOME/.config/waybar/scripts/weather.sh",
@@ -176,13 +176,13 @@
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
     "on-scroll-up": "playerctl previous",
-    "on-scroll-down": "playerctl next"
+    "on-scroll-down": "playerctl next",
   },
 
   "custom/language": {
     "exec": "cat /tmp/kb_layout",
     "interval": 3,
-    "format": " {}"
+    "format": " {}",
   },
 
   "custom/notification": {
@@ -192,42 +192,42 @@
       "notification": "",
       "none": " ",
       "dnd-notification": "",
-      "dnd-none": " "
+      "dnd-none": " ",
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true
+    "escape": true,
   },
 
   "custom/launcher": {
-    "format":" ",
+    "format": " ",
     "on-click": "exec nwg-drawer -c 7 -is 70 -spacing 23",
     "tooltip": false,
   },
 
   "tray": {
     "icon-size": 13,
-    "spacing": 10
+    "spacing": 10,
   },
 
-  "backlight":{
+  "backlight": {
     "device": "backlight",
     "format": "{icon} {percent}%",
-    "format-icons": ["🔅","🔆"],
+    "format-icons": ["🔅", "🔆"],
     "on-scroll-up": "brightnessctl set 1%+",
     "on-scroll-down": "brightnessctl set 1%-",
     // "min-length": 6,
-    "on-click": "sh $HOME/.config/waybar/scripts/sunset.sh"
+    "on-click": "sh $HOME/.config/waybar/scripts/sunset.sh",
   },
 
   "battery": {
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 20
+      "critical": 20,
     },
     "format": "{icon}",
     "format-charging": " {capacity}%",
@@ -236,7 +236,7 @@
     "tooltip-format": "{capacity}%",
     "tooltip": true,
     "on-click": "exec gnome-power-statistics",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": ["", "", "", "", ""],
   },
 
   "network": {
@@ -244,7 +244,7 @@
     "format-ethernet": " {essid}",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "⚠ Disconnected",
-    "tooltip-format-wifi": "Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}"
+    "tooltip-format-wifi": "Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
   },
 
   "pulseaudio": {
@@ -263,7 +263,7 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""]
-    }
-  }
+      "default": ["", "", ""],
+    },
+  },
 }
