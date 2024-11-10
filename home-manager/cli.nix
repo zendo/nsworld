@@ -8,7 +8,7 @@
     nixfmt-rfc-style
     # lorri
     # cachix
-    comma # ,
+    # comma # ,
     nix-tree
     nurl
     nix-update
@@ -20,7 +20,6 @@
     # Developing
     yq
     jql
-    igrep
     sqlite
     openssl
     discount # markdown
@@ -68,7 +67,10 @@
 
     # Utils
     just
+    igrep
     cht-sh
+    tlrc # tldr
+    # tealdeer # tldr
     # difftastic # too big
     kalker # calculator
     ydict
@@ -79,6 +81,7 @@
     # asciinema # record the terminal
     calcurse
     # zee
+    wthrr # weather
 
     # Networking
     lsof
@@ -143,10 +146,6 @@
 
     # hh :history
     hstr = {
-      enable = true;
-    };
-
-    tealdeer = {
       enable = true;
     };
 
