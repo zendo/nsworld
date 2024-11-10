@@ -15,6 +15,7 @@
         "vscode"
         "spotify"
         "google-chrome"
+        "steam-unwrapped"
       ];
     };
   };

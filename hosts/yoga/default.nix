@@ -52,7 +52,7 @@
   };
 
   mods = {
-    # steam.enable = true;
+    steam.enable = true;
     # daeWithConfig.enable = true;
   };
 
