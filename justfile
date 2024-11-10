@@ -39,18 +39,6 @@ hm-switch:
 hm-diff:
     nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
 
-hm-sourece:
-    readlink -f /nix/var/nix/profiles/per-user/#"{{user}}"/home-manager
-
-hm-profiles:
-    ls -la /nix/var/nix/profiles/per-user/#"{{user}}"
-
-os-source:
-    readlink -f /nix/var/nix/profiles/system
-
-os-profiles:
-    ls -la /nix/var/nix/profiles
-
 os-generations:
     nix profile history --profile /nix/var/nix/profiles/system
 

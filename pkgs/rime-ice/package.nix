@@ -7,13 +7,13 @@
 # nix-update --flake --version=branch rime-ice
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "rime-ice";
-  version = "2024.09.25-unstable-2024-11-04";
+  version = "2024.09.25-unstable-2024-11-09";
 
   src = fetchFromGitHub {
     owner = "iDvel";
     repo = "rime-ice";
-    rev = "a022f0943fedf71eae154e1f06cad64079a3f536";
-    hash = "sha256-nLuR4rfza0Tjjh28e51ZNzgVXUo9GpClMOrl5Do0+iw=";
+    rev = "9a2a217bf57f53212b114aa7c0a702e4d8b55519";
+    hash = "sha256-OyaOriiyIMRsZz59LyOS/LtG1J4DU02NHcaJ6PdaffU=";
   };
 
   installPhase = ''
