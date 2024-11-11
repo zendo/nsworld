@@ -84,7 +84,7 @@
   ##  ZED-EDITOR
   ###############################################
   programs.zed-editor = {
-    enable = true;
+    # enable = true;
     extensions = [
       "nix"
       "xy-zed" # a gorgeous dark theme

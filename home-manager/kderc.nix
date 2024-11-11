@@ -58,6 +58,7 @@
                 "applications:org.kde.dolphin.desktop"
                 # "applications:org.kde.kate.desktop"
                 # "applications:emacs.desktop"
+                "applications:code.desktop"
                 "applications:firefox.desktop"
                 "applications:org.telegram.desktop.desktop"
               ];
@@ -133,10 +134,10 @@
       dolphinrc."General"."ShowFullPath" = true;
 
       # 密码库
-      kwalletrc = {
-        "Wallet"."Enabled" = false;
-        "Wallet"."First Use" = false;
-      };
+      # kwalletrc = {
+      #   "Wallet"."Enabled" = false;
+      #   "Wallet"."First Use" = false;
+      # };
 
       # 剪贴板
       klipperrc = {

@@ -13,7 +13,7 @@
   #   "/sys/module/zswap/parameters/enabled"."w-".argument = "1";
   # };
 
-  # Using earlyoom instead
+  # systemd-oomd or earlyoom
   # systemd.oomd.enable = false;
 
   # Only enable on Desktop
@@ -47,7 +47,7 @@
     # earlyoom.enable = true;
     btrfs.autoScrub.enable = config.fileSystems."/".fsType == "btrfs";
 
-    # auto-enable by services.graphical-desktop
+    # auto-enabled by services.graphical-desktop
     pipewire = {
       # alsa.support32Bit = true;
       # jack.enable = true;
