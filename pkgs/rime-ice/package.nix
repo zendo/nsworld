@@ -4,6 +4,7 @@
   fetchFromGitHub,
 }:
 
+# update an unstable package to the latest commit of the default branch
 # nix-update --flake --version=branch rime-ice
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "rime-ice";
