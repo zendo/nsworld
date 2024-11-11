@@ -6,7 +6,7 @@ builds:
     - "packages.x86_64-linux.weektodo"
     - "packages.x86_64-linux.thorium-reader"
   include:
-    # - '*.x86_64-linux.*'
+    # - "*.x86_64-linux.*"
     # - devShell.x86_64-linux
     - packages.x86_64-linux.*
     - defaultPackage.x86_64-linux
