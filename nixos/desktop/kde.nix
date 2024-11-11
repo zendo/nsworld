@@ -10,7 +10,7 @@
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
-      theme = "sddm-astronaut-theme";
+      # theme = "sddm-astronaut-theme";
     };
   };
 
@@ -26,7 +26,7 @@
       yakuake
       gparted
       kcolorchooser
-      sddm-astronaut
+      # sddm-astronaut
     ]
     ++ (with kdePackages; [
       krfb

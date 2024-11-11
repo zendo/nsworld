@@ -7,6 +7,7 @@
     python3
     # nil
     nixd
+    vscode
   ];
 
   programs.pandoc = {
@@ -39,16 +40,22 @@
   ##  VSCODE
   ###############################################
   programs.vscode = {
-    enable = true;
+    # enable = true;
     extensions = with pkgs.vscode-extensions; [
       ms-ceintl.vscode-language-pack-zh-hans
-      jnoortheen.nix-ide
-      editorconfig.editorconfig
       file-icons.file-icons
+      eamodio.gitlens
+      editorconfig.editorconfig
+      foxundermoon.shell-format
+      tamasfe.even-better-toml
+      # kdl-org.kdl
+      nefrob.vscode-just-syntax
+      esbenp.prettier-vscode
       golang.go
       mattn.lisp
-      eamodio.gitlens
-      ms-vscode.cmake-tools
+      ms-python.python
+      jnoortheen.nix-ide
+      # ms-vscode.cmake-tools
     ];
     userSettings = {
       "files.autoSave" = "onFocusChange";
@@ -60,6 +67,9 @@
       # "workbench.commandPalette.preserveInput" = true;
       # "workbench.editor.enablePreviewFromCodeNavigation" = true;
       # "workbench.iconTheme" = "vscode-icons";
+      "[yaml]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
     };
     # keybindings = [
     #   {
@@ -74,7 +84,7 @@
   ##  ZED-EDITOR
   ###############################################
   programs.zed-editor = {
-    # enable = true;
+    enable = true;
     extensions = [
       "nix"
       "xy-zed" # a gorgeous dark theme
