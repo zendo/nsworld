@@ -26,6 +26,7 @@
     niri = {
       imports = [
         ./desktop/wm.nix
+        ./desktop/wm-dm.nix
         ./desktop/wm-niri.nix
       ];
     };
@@ -33,6 +34,7 @@
     sway = {
       imports = [
         ./desktop/wm.nix
+        ./desktop/wm-dm.nix
         ./desktop/wm-sway.nix
       ];
     };
@@ -40,6 +42,7 @@
     hyprland = {
       imports = [
         ./desktop/wm.nix
+        ./desktop/wm-dm.nix
         ./desktop/wm-hyprland.nix
       ];
     };

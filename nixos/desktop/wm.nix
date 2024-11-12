@@ -1,28 +1,12 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  ...
+}:
 {
   mods.fcitx.enable = true;
 
   services = {
-    xserver.displayManager.lightdm = {
-      enable = false; # greetd instaed
-      greeters.gtk = {
-        cursorTheme.size = 48;
-        extraConfig = ''
-          xft-dpi=261
-          clock-format=%H:%M
-        '';
-        indicators = [
-          "~spacer"
-          "~clock"
-          "~spacer"
-          "~session"
-          # "~language"
-          # "~a11y"
-          "~power"
-        ];
-      };
-    };
-
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     blueman.enable = true;

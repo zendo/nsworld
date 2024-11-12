@@ -1,23 +1,8 @@
 {
-  lib,
   pkgs,
-  username,
   ...
 }:
 {
-  # DisplayManager
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd Hyprland";
-      # Autologin
-      initial_session = {
-        command = "Hyprland";
-        user = "${username}";
-      };
-    };
-  };
-
   programs.hyprland = {
     enable = true;
   };
