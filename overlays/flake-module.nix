@@ -10,6 +10,9 @@
     #   };
     # };
 
+    # update an unstable package to the latest commit of the default branch
+    # nix-update --flake --version=branch rime-ice
+
     # Add new pkgs
     additions =
       final: prev:
