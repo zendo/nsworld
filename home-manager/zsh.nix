@@ -12,7 +12,7 @@
   };
 
   programs.fish = {
-    enable = true;
+    # enable = true;
     generateCompletions = false;
     interactiveShellInit = ''
       # Disable the greeting message.
