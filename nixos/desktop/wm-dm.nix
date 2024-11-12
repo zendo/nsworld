@@ -14,7 +14,7 @@ let
     else if config.programs.niri.enable then
       "niri-session"
     else
-      throw "No wm enable!";
+      throw "No Window Manager enabled!";
 in
 {
   # greetd
