@@ -42,8 +42,8 @@
   };
 
   services = {
-    fwupd.enable = true;
     acpid.enable = true;
+    # fwupd.enable = true;
     # earlyoom.enable = true;
     btrfs.autoScrub.enable = config.fileSystems."/".fsType == "btrfs";
 

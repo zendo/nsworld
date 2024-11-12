@@ -9,6 +9,7 @@
     kitty
     # azcomicv
     picacomic
+    television
 
     # nix-init
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs

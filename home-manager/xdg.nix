@@ -85,6 +85,11 @@
       #     terminal = false;
       #     categories = ["Application" "Music"];
       #   };
+      code = {
+        name = "Visual Studio Code";
+        icon = "vscode";
+        exec = "code --enable-wayland-ime";
+      };
       # doom-emacs = {
       #   name = "Doom Emacs";
       #   icon = "${../dotfiles/emacs/doom-emacs.svg}";
