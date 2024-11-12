@@ -40,16 +40,6 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  # systemctl --user show-environment
-  xdg.portal = {
-    enable = true;
-    # wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
-    ];
-  };
-
   home-manager.users.${username} =
     { config, pkgs, ... }:
     {

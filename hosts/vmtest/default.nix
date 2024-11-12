@@ -12,10 +12,10 @@
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
 
     # self.nixosModules.gnome
-    # self.nixosModules.kde
+    self.nixosModules.kde
     # self.nixosModules.cosmic
+    # self.nixosModules.sway
     # self.nixosModules.niri
-    self.nixosModules.sway
     # self.nixosModules.hyprland
   ];
 
