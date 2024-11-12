@@ -12,7 +12,9 @@
 (pixel-scroll-precision-mode t)
 
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
-(global-set-key (kbd "C-z") 'nil) ;unbind C-z
+;; (global-set-key (kbd "C-z") 'nil) ;unbind C-z
+(global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-S-z") 'undo-redo)
 (global-set-key [remap kill-buffer] #'kill-current-buffer)
 
 ;; (use-package devil
@@ -26,7 +28,7 @@
 
  ;; ("C-." . company-complete)
  ("C-." . hippie-expand)
- ("C-;" . comment-line)
+ ("C-/" . comment-line)
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
 
@@ -37,6 +39,7 @@
  ("C-c /" . consult-ripgrep)
  ("C-c ," . project-switch-to-buffer)
  ("C-x b" . project-switch-to-buffer)
+ ("C-<tab>" . project-switch-to-buffer)
 
  ("C-x 2" . (lambda()
               (interactive)

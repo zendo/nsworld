@@ -13,9 +13,9 @@
 (pixel-scroll-precision-mode t)
 
 (ffap-bindings)
-(global-set-key (kbd "C-z") nil)
-;; (global-set-key (kbd "C-z") 'undo)
-;; (global-set-key (kbd "C-S-z") 'undo-redo)
+;; (global-set-key (kbd "C-z") nil)
+(global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-S-z") 'undo-redo)
 
 ;; vterm or eshell
 (when (featurep :system 'windows)
@@ -42,6 +42,7 @@
  "C-\\" #'align-regexp
  "M-s" #'avy-goto-word-1 ;默认 isearch 被覆盖
  "<f1>" #'+treemacs/toggle
+ "C-<tab>" #'consult-buffer
 
  "C-c s r" #'deadgrep
  "C-c C-s" #'deadgrep
@@ -57,7 +58,7 @@
 
  "C-." #'hippie-expand
  "C-," #'+company/complete
- "C-;" #'comment-line
+ "C-/" #'comment-line
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo
