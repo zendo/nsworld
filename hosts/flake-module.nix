@@ -46,7 +46,7 @@
                     ../home-manager/hm-module.nix
                   ];
                   # home-manager user initialize
-                  users.${username} = ./users/${username}.nix;
+                  users.${username}.home.username = username;
                 };
               }
             ]

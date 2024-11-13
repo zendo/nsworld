@@ -58,7 +58,7 @@
                 "applications:org.kde.dolphin.desktop"
                 # "applications:org.kde.kate.desktop"
                 # "applications:emacs.desktop"
-                "applications:code.desktop"
+                # "applications:code.desktop"
                 "applications:firefox.desktop"
                 "applications:org.telegram.desktop.desktop"
               ];
