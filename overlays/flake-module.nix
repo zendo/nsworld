@@ -29,10 +29,6 @@
       # https://github.com/NixOS/nixpkgs/issues/261217
       # gnome-decoder = prev.callPackage ./gnome-decoder/package.nix { };
 
-      # vscode = prev.vscode.override {
-      #   commandLineArgs = [ "--enable-wayland-ime" ];
-      # };
-
       # xwayland env for inputMethod & native CSD
       spotify = prev.spotify.overrideAttrs (oldAttrs: {
         postFixup = ''

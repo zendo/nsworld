@@ -32,7 +32,7 @@ in
 
   # lightdm
   services.xserver.displayManager.lightdm = {
-    enable = false;
+    # enable = true;
     greeters.gtk = {
       cursorTheme.size = 48;
       extraConfig = ''
