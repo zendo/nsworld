@@ -20,6 +20,9 @@ upgrade:
     nix flake update --commit-lock-file && \
       nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
 
+nom-build-os:
+    nom build .#nixosConfigurations."{{host}}".config.system.build.toplevel
+
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
