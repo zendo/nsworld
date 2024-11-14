@@ -9,6 +9,7 @@
 {
   imports = [
     ./bcachefs-single.nix
+    # ./btrfs-subvolumes.nix
 
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel

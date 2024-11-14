@@ -15,7 +15,9 @@
     nix-forecast
     # nix-prefetch
     # nix-template
-    # nix-output-monitor
+    nix-output-monitor
+    disko
+    nixos-anywhere
 
     # Developing
     yq
