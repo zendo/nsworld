@@ -64,7 +64,7 @@ in
         "media.eme.enabled" = true; # DRM
 
         "gfx.webrender.all" = true; # 开启极速渲染
-        "media.ffmpeg.vaapi.enabled" = true; # enable hw video acceleration, if supported
+        "media.ffmpeg.vaapi.enabled" = true; # enable hw video acceleration
         # https://pandasauce.org/get-fonts-done/
         # "gfx.text.subpixel-position.force-enabled" = true;
         # "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
