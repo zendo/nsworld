@@ -22,8 +22,7 @@
     # })
 
     # Terminal
-    cava
-
+    # cava
     ripdrag
     graphviz
     # imagemagick
