@@ -17,6 +17,7 @@
     shellAliases = {
       nixgl = "nix run --impure github:guibou/nixGL";
     };
+    enableNixpkgsReleaseCheck = false;
   };
 
   home.packages = with pkgs; [

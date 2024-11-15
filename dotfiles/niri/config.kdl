@@ -18,7 +18,7 @@ input {
 
 output "eDP-1" {
     mode "2880x1800"
-    scale 2
+    // scale 2
     
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.

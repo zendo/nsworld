@@ -18,11 +18,11 @@
 
 stdenv.mkDerivation rec {
   pname = "mihomo-party";
-  version = "1.5.7";
+  version = "1.5.10";
 
   src = fetchurl {
     url = "https://github.com/pompurin404/mihomo-party/releases/download/v${version}/mihomo-party-linux-${version}-amd64.deb";
-    hash = "sha256-2qaKkBA1dav3dTKEPBfjkFO6NxngAFMoYCLl7HgTubg=";
+    hash = "sha256-G3EomRE4hb6qSqFd6WctqBttWJVTpprsEq+V+1jIqEc=";
   };
 
   nativeBuildInputs = [
@@ -71,7 +71,7 @@ stdenv.mkDerivation rec {
     mainProgram = "mihomo-party";
     platforms = [ "x86_64-linux" ];
     license = lib.licenses.gpl3Plus;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = with lib.maintainers; [ zendo ];
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
 }

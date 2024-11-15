@@ -114,6 +114,9 @@
           };
         };
 
+        # Dark Mode
+        dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
         qt = {
           enable = true;
           platformTheme.name = "adwaita";
