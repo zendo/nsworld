@@ -28,13 +28,13 @@
 # https://github.com/clash-verge-rev/clash-verge-rev/blob/main/scripts/check.mjs#L54
 stdenv.mkDerivation (finalAttrs: {
   pname = "clash-verge-rev";
-  version = "1.7.7";
+  version = "alpha";
 
   src = fetchFromGitHub {
     owner = "clash-verge-rev";
     repo = "clash-verge-rev";
-    rev = "v${finalAttrs.version}";
-    hash = "sha256-5sd0CkUCV52wrBPo0IRIa1uqf2QNkjXuZhE33cZW3SY=";
+    rev = "${finalAttrs.version}";
+    hash = "sha256-iGTgi2hkyiSWNPaU3weFyrLYnbSvuWIqeIJhSNaj/SU=";
   };
 
   sourceRoot = "${finalAttrs.src.name}/src-tauri";
@@ -53,21 +53,22 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-DYsx1X1yXYEPFuMlvZtbJdefcCR8/wSUidFwsMy8oLk=";
+    hash = "sha256-9hbcEL6NPaXz7v3sUNQkhGETh2hleY3qo0OPLgby+m8=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = ./Cargo.lock;
     outputHashes = {
-      "sysproxy-0.3.0" = "sha256-TEC51s/viqXUoEH9rJev8LdC2uHqefInNcarxeogePk=";
+      "sysproxy-0.3.0" = "sha256-7+dfHn3vblaE2ktrbyuhJyoeT5MFRjRy3c2QdprrRr0=";
+      # "tauri-plugin-clipboard-manager-2.0.0-rc.3" = "sha256-ci3pATssIE/VAIiVqgZOARkPqLDaSQzGrTUzanj6sh8=";
     };
   };
 
   nativeBuildInputs = [
-    rustPlatform.cargoSetupHook
     cargo
     rustc
-    cargo-tauri
+    rustPlatform.cargoSetupHook
+    cargo-tauri.hook
     nodejs
     pnpm.configHook
     pkg-config
@@ -83,17 +84,17 @@ stdenv.mkDerivation (finalAttrs: {
     libayatana-appindicator
   ];
 
-  preConfigure = ''
-    chmod +w ..
-  '';
+  # preConfigure = ''
+  #   chmod +w ..
+  # '';
 
-  preBuild = ''
-    cargo tauri build -b deb
-  '';
+  # preBuild = ''
+  #   cargo tauri build -b deb
+  # '';
 
-  preInstall = ''
-    mv target/release/bundle/deb/*/data/usr/ $out
-  '';
+  # preInstall = ''
+  #   mv target/release/bundle/deb/*/data/usr/ $out
+  # '';
 
   postFixup = ''
     ln -sf ${lib.getExe mihomo} $out/bin/clash-meta
