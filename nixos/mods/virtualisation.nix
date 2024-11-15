@@ -49,12 +49,13 @@ in
   config = lib.mkIf cfg.enable {
     # services.flatpak.enable = true;
 
-    # programs.adb.enable = true;
-
-    # programs.java.enable = true;
+    programs = {
+      # adb.enable = true;
+      # java.enable = true;
+      virt-manager.enable = true;
+    };
 
     environment.systemPackages = with pkgs; [
-      virt-manager
       virtiofsd
       bridge-utils # brctl: network bridge
       # win-virtio # needs ?
