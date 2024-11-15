@@ -9,7 +9,16 @@
     { self, nixpkgs, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      # pkgs = nixpkgs.legacyPackages.${system};
+      hello-overlays = final: prev: {
+        hello = prev.callPackage ./hello/package.nix { };
+      };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          hello-overlays
+        ];
+      };
     in
     {
       packages.${system} = {

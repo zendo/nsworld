@@ -22,6 +22,15 @@
             ...
           }:
           {
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              overlays = [
+                (final: prev: {
+                  hello = prev.callPackage ./hello/package.nix;
+                })
+              ];
+            };
+
             # nix run
             packages = {
               hello = pkgs.callPackage ./default.nix { };
