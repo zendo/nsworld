@@ -43,12 +43,12 @@
   };
 
   programs.gh = {
-    enable = true;
+    # enable = true;
   };
 
-  # programs.lazygit = {
-  #   enable = true;
-  # };
+  programs.lazygit = {
+    # enable = true;
+  };
 
   programs.jujutsu = {
     # enable = true;
