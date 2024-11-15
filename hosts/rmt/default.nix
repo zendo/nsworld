@@ -9,7 +9,7 @@
 }:
 {
   imports = [
-    ./bcachefs-single.nix
+    # ./bcachefs-single.nix
     ./hardware-configuration.nix
 
     self.nixosModules.gnome
