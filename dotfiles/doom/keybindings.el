@@ -58,7 +58,8 @@
 
  "C-." #'hippie-expand
  "C-," #'+company/complete
- "C-/" #'comment-line
+ "C-/" #'comment-line ;vscode
+ "C-S-i" #'lsp-format-buffer ;vscode
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo

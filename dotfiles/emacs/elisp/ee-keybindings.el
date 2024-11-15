@@ -28,9 +28,10 @@
 
  ;; ("C-." . company-complete)
  ("C-." . hippie-expand)
- ("C-/" . comment-line)
+ ("C-/" . comment-line) ;vscode
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
+ ("C-S-i" . eglot-format) ;vscode
 
  ;; doom-like
  ("C-c <SPC>" . project-find-file)
