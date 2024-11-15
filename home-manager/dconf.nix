@@ -24,9 +24,9 @@
       idle-delay = lib.hm.gvariant.mkUint32 600; # 电源 - 10分钟熄屏
     };
 
-    "org/gnome/settings-daemon/plugins/power" = {
-      sleep-inactive-ac-type = "nothing"; # 电源 - 节电 - 自动挂起（插入电源时关闭）
-    };
+    # "org/gnome/settings-daemon/plugins/power" = {
+    #   sleep-inactive-ac-type = "nothing"; # 电源 - 节电 - 自动挂起（插入电源时关闭）
+    # };
 
     ###############################################
     ##  Extensions

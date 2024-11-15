@@ -21,6 +21,7 @@
   ];
 
   mods = {
+    virt.enable = false;
     # steam.enable = true;
     # daeWithConfig.enable = true;
   };
@@ -37,7 +38,7 @@
     # nix-ld.enable = true;
 
     clash-verge = {
-      enable = true;
+      # enable = true;
       tunMode = true;
       autoStart = true;
       package = pkgs.mihomo-party;

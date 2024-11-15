@@ -14,7 +14,7 @@ backup-data:
     rsync -avhpL ~/.mozilla ~/Documents/homeBackups/
     # rsync -avhpL ~/.config/chromium ~/Documents/homeBackups/
     # rsync -avhpL ~/.config/google-chrome ~/Documents/homeBackups/
-    rsync -avhpL ~/.config/fcitx5/conf ~/Documents/homeBackups/
+    # rsync -avhpL ~/.config/fcitx5/conf ~/Documents/homeBackups/
 
 
 ln-ibus-rime:
