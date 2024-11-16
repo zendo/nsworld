@@ -14,13 +14,13 @@
 
 flutter324.buildFlutterApplication rec {
   pname = "picacomic";
-  version = "4.1.6";
+  version = "4.1.7";
 
   src = fetchFromGitHub {
     owner = "Pacalini";
     repo = "PicaComic";
     rev = "v${version}";
-    hash = "sha256-wWCIRaxy3jbhshJXWPvprhO08Jk11uEKqmLHsXHHshY=";
+    hash = "sha256-X4tOOQh1VMpOGtfgyegKZ9b09hUShD9Ll4g6gWpn+GA=";
   };
 
   # nix run n#yq . pubspec.lock > pubspec.lock.json

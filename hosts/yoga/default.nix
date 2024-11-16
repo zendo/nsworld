@@ -68,20 +68,13 @@
 
   # hardware.amdgpu.amdvlk.enable = true;
 
-  ###############################################
-  ## Kernel
-  ###############################################
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
 
-    # nixos-hardware thinkpad yoga.nix
     kernelParams = [
-      # "mem_sleep_default=deep"
-      # "pcie_aspm.policy=powersupersave"
-
-      ## Fixes for s2idle:
-      ##    https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
+      # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
+      # Fixes for s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
 
