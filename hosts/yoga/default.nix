@@ -24,8 +24,6 @@
     # cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver
     # ls /sys/devices/system/cpu/cpu0/   :show CPPCCPPC
 
-    # "${inputs.nixpkgs-pr}/nixos/modules/config/swap.nix"
-
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
@@ -73,13 +71,16 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [
-      # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       # Fixes for s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
+      # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
 
       # btrfs swapfile hibernate resume
       # sudo btrfs inspect-internal map-swapfile -r /var/swapfile
       "resume_offset=18988408"
+
+      # Disabling Laptop's internal keyboard
+      # "i8042.nokbd"
     ];
 
     # btrfs swapfile hibernate resume
@@ -89,17 +90,14 @@
       "ntfs"
     ];
 
-    # plymouth = {
-    #   theme = "double";
-    #   themePackages = [pkgs.adi1090x-plymouth-themes];
-    # };
-
-    # Disabling Laptop's internal keyboard
-    # kernelParams = ["i8042.nokbd"];
-
     # https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
     # kernel.sysctl = {
     #   "vm.max_map_count" = 2147483642; # default: 1048576
+    # };
+
+    # plymouth = {
+    #   theme = "double";
+    #   themePackages = [pkgs.adi1090x-plymouth-themes];
     # };
 
     # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];

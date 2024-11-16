@@ -61,7 +61,10 @@
       yoga = mkHost {
         username = "iab";
         hostname = "yoga";
-        extraModules = [ ./yoga ];
+        extraModules = [
+          ./yoga
+          ./common/laptop.nix
+        ];
       };
 
       # nixos-rebuild --target-host zendo@192.168.2.198 --use-remote-sudo --flake .#svp boot
