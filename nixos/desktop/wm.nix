@@ -16,6 +16,7 @@
     light.enable = true;
     # gtklock.enable = true;
     evince.enable = true;
+    evince.package = "pkgs.papers";
     file-roller.enable = true;
 
     thunar = {

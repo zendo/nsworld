@@ -46,7 +46,7 @@
           "image/png" = "org.gnome.Loupe.desktop";
           "image/webp" = "org.gnome.Loupe.desktop";
           "text/plain" = "org.gnome.TextEditor.desktop";
-          "application/pdf" = "org.gnome.Evince.desktop";
+          "application/pdf" = "org.gnome.Papers.desktop";
         })
         (lib.mkIf nixosConfig.services.desktopManager.plasma6.enable {
           "image/jpeg" = "org.kde.gwenview.desktop";
@@ -61,7 +61,7 @@
           "image/png" = "org.nomacs.ImageLounge.desktop";
           "image/webp" = "org.nomacs.ImageLounge.desktop";
           "text/plain" = "org.gnome.TextEditor.desktop";
-          "application/pdf" = "org.gnome.Evince.desktop";
+          "application/pdf" = "org.gnome.Papers.desktop";
         })
       ];
     };

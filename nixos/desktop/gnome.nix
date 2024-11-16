@@ -50,6 +50,7 @@
     with pkgs;
     [
       gthumb
+      papers
       # authenticator
       gparted
       gnome-randr
@@ -82,6 +83,7 @@
       runcat
       caffeine
       paperwm
+      tiling-shell
       # ddterm
     ]);
 
