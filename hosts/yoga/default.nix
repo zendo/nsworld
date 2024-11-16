@@ -76,7 +76,14 @@
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       # Fixes for s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       "acpi.prefer_microsoft_dsm_guid=1"
+
+      # btrfs swapfile hibernate resume
+      # sudo btrfs inspect-internal map-swapfile -r /var/swapfile
+      "resume_offset=18988408"
     ];
+
+    # btrfs swapfile hibernate resume
+    resumeDevice = "/dev/disk/by-uuid/c8f434fd-a614-4768-b110-cd305c2151d1";
 
     supportedFilesystems = [
       "ntfs"
@@ -97,6 +104,14 @@
 
     # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
   };
+
+  # Swapfile
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 1024 * 10;
+    }
+  ];
 
   # services.logind = {
   #   lidSwitch = "suspend-then-hibernate";
@@ -162,21 +177,4 @@
       # };
     };
   };
-
-  ###############################################
-  ## FileSystem
-  ###############################################
-
-  # Swapfile
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 1024 * 10;
-    }
-  ];
-  # findmnt -no UUID -T /swap/swapfile
-  # sudo filefrag -v /swap/swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'
-  # boot.resumeDevice = "/dev/disk/by-uuid/a0e48512-1e47-409d-9c91-7bbca721dbfc";
-  # boot.kernelParams = [ # "mem_sleep_default=deep"
-  #                       "resume_offset=42166446" ];
 }
