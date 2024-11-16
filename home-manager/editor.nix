@@ -106,7 +106,7 @@
   ##  TUI
   ###############################################
   programs.helix = {
-    enable = true;
+    # enable = true;
   };
 
   programs.neovim = {

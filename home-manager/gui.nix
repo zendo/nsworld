@@ -121,7 +121,7 @@
     # squirreldisk
 
     # libinput
-    wallutils # lsmon getdpi wayinfo
+    # wallutils # lsmon getdpi wayinfo
     wayland-utils
     # wdisplays # wlr
 

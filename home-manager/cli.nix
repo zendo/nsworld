@@ -91,7 +91,7 @@
     # nali
     mtr
     nload
-    ipinfo
+    # ipinfo # 62M
     elinks
     dnspeep
     nethogs
