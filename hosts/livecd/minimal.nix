@@ -38,13 +38,10 @@
     bind
     git
     nix-bash-completions
-    # bcachefs-tools
 
     vim
     micro
-    fish
     btop
-    unrar
     ouch
     ipinfo
   ];
