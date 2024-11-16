@@ -27,8 +27,9 @@
       # cascadia-code
       (nerdfonts.override {
         fonts = [
-          "FiraCode"
-          "JetBrainsMono"
+          # "FiraCode"
+          # "JetBrainsMono"
+          "NerdFontsSymbolsOnly"
         ];
       })
     ];
