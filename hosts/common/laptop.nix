@@ -21,18 +21,18 @@
       };
     };
 
-    # logind = {
-    #   lidSwitch = "suspend-then-hibernate";
-    #   extraConfig = ''
-    #     HandlePowerKey=suspend-then-hibernate
-    #     IdleAction=suspend-then-hibernate
-    #     IdleActionSec=2m
-    #   '';
-    # };
+    logind = {
+      lidSwitch = "suspend-then-hibernate";
+      # extraConfig = ''
+      #   HandlePowerKey=suspend-then-hibernate
+      #   IdleAction=suspend-then-hibernate
+      #   IdleActionSec=2m
+      # '';
+    };
   };
 
   # Go into hibernate after specific suspend time
   systemd.sleep.extraConfig = ''
-    HibernateDelaySec=1h
+    HibernateDelaySec=60min
   '';
 }
