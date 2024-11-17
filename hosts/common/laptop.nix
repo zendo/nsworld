@@ -31,5 +31,8 @@
     # };
   };
 
-  # systemd.sleep.extraConfig = "HibernateDelaySec=1h";
+  # Go into hibernate after specific suspend time
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=1h
+  '';
 }

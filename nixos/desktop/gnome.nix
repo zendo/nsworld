@@ -31,6 +31,15 @@
     # gnome.localsearch.enable = false;
   };
 
+  programs = {
+    evince.package = pkgs.papers;
+    kdeconnect = {
+      # enable = true;
+      package = pkgs.valent;
+      # package = pkgs.gnomeExtensions.gsconnect;
+    };
+  };
+
   # Fix autologin failed: https://nixos.wiki/wiki/GNOME
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
@@ -50,7 +59,6 @@
     with pkgs;
     [
       gthumb
-      papers
       # authenticator
       gparted
       gnome-randr
@@ -86,10 +94,4 @@
       tiling-shell
       # ddterm
     ]);
-
-  programs.kdeconnect = {
-    # enable = true;
-    package = pkgs.valent;
-    # package = pkgs.gnomeExtensions.gsconnect;
-  };
 }

@@ -22,7 +22,7 @@
       };
 
       "rmt" = {
-        hostname = "192.168.122.240";
+        hostname = "192.168.122.20";
         profiles.system = {
           user = "root";
           sshUser = "aaa";
