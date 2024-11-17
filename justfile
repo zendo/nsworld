@@ -62,9 +62,6 @@ build-wsl-installer:
 nix-tree-with-gcroots:
     nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree
 
-pr-build:
-    nix build github:NixOS/nixpkgs/pull/"$2"/merge#"$3"
-
 hash2sri:
     nix hash convert --hash-algo sha256 --to sri "$2"
 
