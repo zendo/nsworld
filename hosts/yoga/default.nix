@@ -74,9 +74,6 @@
       # Fixes for s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
-
-      # Disabling Laptop's internal keyboard
-      # "i8042.nokbd"
     ];
 
     supportedFilesystems = [
