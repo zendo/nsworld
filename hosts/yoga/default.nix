@@ -75,16 +75,9 @@
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
 
-      # btrfs swapfile hibernate resume
-      # sudo btrfs inspect-internal map-swapfile -r /var/swapfile
-      "resume_offset=18988408"
-
       # Disabling Laptop's internal keyboard
       # "i8042.nokbd"
     ];
-
-    # btrfs swapfile hibernate resume
-    resumeDevice = "/dev/disk/by-uuid/c8f434fd-a614-4768-b110-cd305c2151d1";
 
     supportedFilesystems = [
       "ntfs"

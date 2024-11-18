@@ -65,6 +65,8 @@
         "cgroups"
         # Allows Nix to automatically pick UIDs for builds, rather than creating nixbld* user accounts
         "auto-allocate-uids"
+
+        "pipe-operators"
       ];
     };
   };
