@@ -54,6 +54,11 @@
       # jack.enable = true;
     };
 
+    scx = {
+      # enable = true;
+      # scheduler = "scx_rustland";
+    };
+
     journald.extraConfig = ''
       SystemMaxUse=50M
     '';

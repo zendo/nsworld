@@ -8,7 +8,7 @@
   };
 
   programs.zellij = {
-    enable = true;
+    # enable = true;
   };
 
   programs.fish = {
