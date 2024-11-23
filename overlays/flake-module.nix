@@ -23,7 +23,6 @@
 
     # Mod existed pkgs
     modifications = final: prev: {
-      # clash-verge-rev = prev.callPackage ./clash-verge-rev/package.nix { };
       mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
 
       # https://github.com/NixOS/nixpkgs/issues/261217
