@@ -101,7 +101,7 @@
 
     # HARDWARE TEST
     # amdgpu_top
-    nvtopPackages.amd
+    # nvtopPackages.amd
     inxi
     lm_sensors
     lshw

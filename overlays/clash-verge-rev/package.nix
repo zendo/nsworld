@@ -22,19 +22,15 @@
   v2ray-domain-list-community,
 }:
 
-# https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/system/lact/default.nix
-# https://github.com/clash-verge-rev/clash-verge-rev/blob/main/src-tauri/tauri.conf.json
-# https://github.com/archlinuxcn/repo/blob/master/archlinuxcn/clash-verge/PKGBUILD
-# https://github.com/clash-verge-rev/clash-verge-rev/blob/main/scripts/check.mjs#L54
 stdenv.mkDerivation (finalAttrs: {
   pname = "clash-verge-rev";
-  version = "alpha";
+  version = "2.0.0";
 
   src = fetchFromGitHub {
     owner = "clash-verge-rev";
     repo = "clash-verge-rev";
-    rev = "${finalAttrs.version}";
-    hash = "sha256-iGTgi2hkyiSWNPaU3weFyrLYnbSvuWIqeIJhSNaj/SU=";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-pvlW5oZWhN1sHauO++dEmAsYp1WeABieM9yJRCZJ9Xc=";
   };
 
   sourceRoot = "${finalAttrs.src.name}/src-tauri";
@@ -53,7 +49,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-9hbcEL6NPaXz7v3sUNQkhGETh2hleY3qo0OPLgby+m8=";
+    hash = "sha256-zsgZhLC+XUzlCUKKGAJV5MlSpWsoLmAgMwKkmAkAX9Q=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
@@ -84,9 +80,9 @@ stdenv.mkDerivation (finalAttrs: {
     libayatana-appindicator
   ];
 
-  # preConfigure = ''
-  #   chmod +w ..
-  # '';
+  preConfigure = ''
+    chmod +w ..
+  '';
 
   # preBuild = ''
   #   cargo tauri build -b deb
