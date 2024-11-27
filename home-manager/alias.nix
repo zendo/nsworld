@@ -16,6 +16,7 @@
     bc = "${lib.getExe pkgs.libqalculate}";
     psp = "${lib.getExe pkgs.procs} --sortd UsageMem";
     ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
+    dd-log="sudo dd bs=8M oflag=sync,direct conv=fsync status=progress";
     mount-ls = "mount | column -t";
     beep = ''echo -en "\007"'';
 
