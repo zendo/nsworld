@@ -16,7 +16,6 @@
       source-code-pro
       # comic-relief
       # font-awesome
-      emacs-all-the-icons-fonts
       hack-font
       fira-code
       mononoki
@@ -25,13 +24,7 @@
       # ibm-plex
       jetbrains-mono
       # cascadia-code
-      (nerdfonts.override {
-        fonts = [
-          # "FiraCode"
-          # "JetBrainsMono"
-          "NerdFontsSymbolsOnly"
-        ];
-      })
+      nerd-fonts.symbols-only
     ];
 
     fontconfig = {

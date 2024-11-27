@@ -52,7 +52,7 @@
   (dashboard-set-file-icons t)
   (dashboard-set-footer nil)
   (dashboard-center-content t)
-  (dashboard-icon-type 'all-the-icons)
+  (dashboard-icon-type 'nerd-icons)
   (dashboard-projects-backend 'project-el)
   (dashboard-banner-logo-title nil) ; "Welcome to Emacs!"
   (dashboard-items  '((recents  . 12)
@@ -65,6 +65,7 @@
   :custom ((centaur-tabs-height 28)
            (centaur-tabs-style "wave")
            (centaur-tabs-set-icons t)
+           (centaur-tabs-icon-type 'nerd-icons)
            (centaur-tabs-set-bar 'over)
            (centaur-tabs-set-close-button nil)
            (centaur-tabs-set-modified-marker t)

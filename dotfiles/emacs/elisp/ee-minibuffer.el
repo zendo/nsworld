@@ -25,12 +25,12 @@
   :init
   (marginalia-mode +1))
 
-;; all-the-icons-completion
-(use-package all-the-icons-completion
-  :after all-the-icons
-  :hook
-  (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  :init (all-the-icons-completion-mode))
+;; nerd-icons-completion
+(use-package nerd-icons-completion
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 ;; Consulting completing-read
 (use-package consult

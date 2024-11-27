@@ -53,7 +53,7 @@
 ;;   (setq haki-region "#2e8b6d")
 ;;   (load-theme 'haki t))
 
-(use-package all-the-icons)
+(use-package nerd-icons)
 
 (use-package helpful
   :bind (("C-h f" . helpful-callable)
