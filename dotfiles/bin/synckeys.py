@@ -5,7 +5,7 @@
 # cat ~/keydump.reg
 # echo "ce150a771612" | sed 's/\(..\)/\1:/g; s/:$//' | tr 'a-z' 'A-Z'
 # mv <linux-paired-MAC> <windows-paired-MAC>
-# sudo python3 ~/nsworld/dotfiles/bin/synckeys.py ~keydump.reg
+# sudo python3 ~/nsworld/dotfiles/bin/synckeys.py ~/keydump.reg
 
 #!/usr/bin/env python
 

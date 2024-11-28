@@ -72,7 +72,10 @@
         username = "zendo";
         hostname = "svp";
         # nixpkgs = inputs.nixpkgs-stable;
-        extraModules = [ ./svp ];
+        extraModules = [
+          ./svp
+          ./common/laptop.nix
+        ];
       };
 
       # remote machine test @ qemu
