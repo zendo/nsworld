@@ -25,13 +25,6 @@
   :init
   (marginalia-mode +1))
 
-;; nerd-icons-completion
-(use-package nerd-icons-completion
-  :after marginalia
-  :config
-  (nerd-icons-completion-mode)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
-
 ;; Consulting completing-read
 (use-package consult
   :bind (("C-c M-x" . consult-mode-command)

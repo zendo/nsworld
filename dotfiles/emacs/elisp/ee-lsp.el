@@ -60,7 +60,7 @@
   :bind
   (:map corfu-map
         ("<escape>" . corfu-quit)
-        ;; ("<tab>" . corfu-next)
+        ("<tab>" . corfu-complete)
         ("M-d" . corfu-info-documentation)
         ("M-l" . corfu-info-location))
   :custom
