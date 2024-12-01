@@ -70,6 +70,10 @@
   :mode ("\\.sql\\'")
   :interpreter (("sql" . sql-mode)))
 
+;; powershell
+(use-package powershell
+  :mode ("\\.ps1'"))
+
 ;; docker
 (use-package dockerfile-mode
   :mode ("Dockerfile\\'"))
