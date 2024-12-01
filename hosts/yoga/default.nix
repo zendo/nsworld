@@ -33,7 +33,7 @@
   ];
 
   services = {
-    displayManager.autoLogin.user = "${username}";
+    # displayManager.autoLogin.user = "${username}";
     # v2raya.enable = true;
   };
 

@@ -31,19 +31,15 @@
     ripgrep
     gdu
     duf
-    fastfetch
     parted
     gptfdisk
     wget
     bind
-    git
-    nix-bash-completions
 
     vim
     micro
     btop
     ouch
-    ipinfo
   ];
 
   time.timeZone = "Asia/Shanghai";
