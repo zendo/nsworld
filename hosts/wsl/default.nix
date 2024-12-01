@@ -38,7 +38,6 @@
     tree
     file
     wget
-    nix-bash-completions
     wslu
     wsl-open
   ];
@@ -61,5 +60,5 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

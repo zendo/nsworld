@@ -79,7 +79,6 @@
     gptfdisk
     micro
     sniffglue
-    nix-bash-completions
     sbctl
     efibootmgr
     # efitools
@@ -93,7 +92,7 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 
   # Remove perl from activation
   # system.etc.overlay.enable = lib.mkDefault true;
