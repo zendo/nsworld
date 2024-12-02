@@ -17,6 +17,7 @@
 
 (load! "keybindings")
 (load! "functions")
+(load! "dired")
 
 ;; Load the default init file
 (load "default" 'noerror 'nomessage)

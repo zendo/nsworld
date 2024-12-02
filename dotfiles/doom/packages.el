@@ -17,5 +17,6 @@
 (package! deadgrep)
 (package! indent-bars)
 (package! goto-last-change)
+(package! dired-git-info)
 (package! powershell)
 ;; :recipe (:host github :repo "camdez/goto-last-change"))
