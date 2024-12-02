@@ -190,6 +190,10 @@
       enable = true;
     };
 
+    nix-your-shell = {
+      enable = true;
+    };
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
