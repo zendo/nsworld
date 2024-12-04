@@ -1,7 +1,7 @@
-/result
-/result-bin
-/result-man
-/overlays/_sources
-/.direnv
-/.devenv
+result
+result-*
 *.qcow2
+.envrc
+.direnv
+.devenv
+.DS_Store

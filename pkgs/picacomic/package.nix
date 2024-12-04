@@ -9,18 +9,17 @@
   webkitgtk_4_1,
   glib-networking,
   libayatana-appindicator,
-  callPackage,
 }:
 
 flutter324.buildFlutterApplication rec {
   pname = "picacomic";
-  version = "4.1.7";
+  version = "4.2.0";
 
   src = fetchFromGitHub {
     owner = "Pacalini";
     repo = "PicaComic";
     rev = "v${version}";
-    hash = "sha256-X4tOOQh1VMpOGtfgyegKZ9b09hUShD9Ll4g6gWpn+GA=";
+    hash = "sha256-ifqgClpxskOPi3tts/BJe+QqncTq8l28j90+B0iv6XE=";
   };
 
   # nix run n#yq . pubspec.lock > pubspec.lock.json
@@ -39,9 +38,9 @@ flutter324.buildFlutterApplication rec {
   };
 
   # https://github.com/NixOS/nixpkgs/pull/326367
-  customSourceBuilders = {
-    sqlite3_flutter_libs = callPackage ./sqlite3_flutter_libs { };
-  };
+  # customSourceBuilders = {
+  #   sqlite3_flutter_libs = callPackage ./sqlite3_flutter_libs { };
+  # };
 
   nativeBuildInputs = [
     pkg-config
