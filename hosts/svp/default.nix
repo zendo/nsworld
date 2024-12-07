@@ -81,10 +81,10 @@
   };
 
   # Swapfile
-  # swapDevices = [
-  #   {
-  #     device = "/var/swapfile";
-  #     size = 1024 * 8;
-  #   }
-  # ];
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 1024 * 8;
+    }
+  ];
 }

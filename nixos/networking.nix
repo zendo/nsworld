@@ -35,7 +35,7 @@
     openssh = {
       enable = true;
       # Forbid root login through SSH.
-      settings.PermitRootLogin = lib.mkDefault "no";
+      settings.PermitRootLogin = "no";
     };
 
     # resolved.enable = true;

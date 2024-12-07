@@ -35,6 +35,8 @@
 
   services = {
     displayManager.autoLogin.user = "${username}";
+    # enable root login through SSH for nixos-anywhere
+    openssh.settings.PermitRootLogin = "yes";
     xserver = {
       xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
