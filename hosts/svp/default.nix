@@ -80,11 +80,11 @@
     };
   };
 
-  # Swapfile
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 1024 * 8;
-    }
-  ];
+  # Swapfile (bcachefs not support)
+  # swapDevices = [
+  #   {
+  #     device = "/var/swapfile";
+  #     size = 1024 * 8;
+  #   }
+  # ];
 }
