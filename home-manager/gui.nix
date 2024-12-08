@@ -140,6 +140,8 @@
       mpris
       # uosc
       inhibit-gnome
+      thumbfast
+      modernz
     ];
   };
 
