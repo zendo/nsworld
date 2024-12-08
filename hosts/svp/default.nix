@@ -8,8 +8,8 @@
 }:
 {
   imports = [
-    ./bcachefs-single.nix
-    # ./btrfs-subvolumes.nix
+    # ./bcachefs-single.nix
+    ./btrfs-subvolumes.nix
 
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
@@ -81,10 +81,10 @@
   };
 
   # Swapfile (bcachefs not support)
-  # swapDevices = [
-  #   {
-  #     device = "/var/swapfile";
-  #     size = 1024 * 8;
-  #   }
-  # ];
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 1024 * 8;
+    }
+  ];
 }

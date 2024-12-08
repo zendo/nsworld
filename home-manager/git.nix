@@ -16,7 +16,7 @@
       ll = "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative";
       unstage = "reset HEAD --";
       quick-rebase = "rebase --interactive --autostash --committer-date-is-author-date";
-      pr-pull = "!f() { git fetch upstream pull/$1/head:pr-$1 && git checkout pr-$1; }; f";
+      pr-pull = "!f() { git fetch upstream pull/$1/head:pr-$1-$2 && git checkout pr-$1-$2; }; f";
       sync-nixosVersion = ''!git fetch upstream master && git merge "$(nixos-version --revision)"'';
     };
     extraConfig = {
