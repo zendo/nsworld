@@ -69,7 +69,7 @@
     # nixpkgs-temp.url = "github:NixOS/nixpkgs/5a8e9243812ba528000995b294292d3b5e120947";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     # nixpkgs.url = "github:NixOS/nixpkgs/pull/213619/merge";
-    # nixpkgs.url = "git+file:///home/iab/dev/nixpkgs/?ref=pr-279683";
+    # nixpkgs.url = "git+file:///home/iab/dev/nixpkgs/?ref=pr-358877-clash-rev";
 
     home-manager = {
       url = "github:nix-community/home-manager";
