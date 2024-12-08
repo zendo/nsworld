@@ -9,27 +9,16 @@
     enable = true;
     defaultUser = "${username}";
     startMenuLaunchers = true;
-
-    # Enable native Docker support
-    # docker-native.enable = true;
-
-    # Enable integration with Docker Desktop (needs to be installed)
-    # docker-desktop.enable = true;
   };
 
   home-manager.users.${username} =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        gcc
-        cmake
-        gnumake
-        python3
-        nixd
         # GUI
         foot
         kitty
-        # goodvibes
+        goodvibes
       ];
     };
 
