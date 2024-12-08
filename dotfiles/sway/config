@@ -109,7 +109,7 @@ bindsym {
   $mod+e exec $editor
   $mod+f exec $filemanager
   $mod+n exec $note
-  $mod+l exec swaylock
+  $mod+l exec hyprlock
   $mod+Escape exec wlogout
   Ctrl+alt+Delete exec wlogout
   $mod+space exec $menu

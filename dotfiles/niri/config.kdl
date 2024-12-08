@@ -42,7 +42,7 @@ binds {
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }
     Mod+X { spawn "wofi" "--show" "drun"; }
-    Mod+L { spawn "swaylock"; }
+    Mod+L { spawn "hyprlock"; }
     Mod+V { spawn "sh" "-c" "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
