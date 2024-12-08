@@ -14,7 +14,6 @@
 
   programs = {
     light.enable = true;
-    # gtklock.enable = true;
     evince.enable = true;
     evince.package = pkgs.papers;
     file-roller.enable = true;
@@ -47,6 +46,7 @@
           swappy # screenshot annotation editor
           swaybg # wallpaper tool
           swaylock-effects
+          hyprlock
           # mako  # , notify-send "sth"
           libnotify # notify-send
           swayidle

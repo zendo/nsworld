@@ -14,7 +14,6 @@ in
     "kitty".source = ../dotfiles/kitty;
     "zellij".source = ../dotfiles/zellij;
     "wezterm".source = ../dotfiles/wezterm;
-    "gtklock".source = ../dotfiles/gtklock;
     "swaylock".source = ../dotfiles/swaylock;
     "nix-init".source = ../dotfiles/nix-init;
     "alacritty".source = ../dotfiles/alacritty;
