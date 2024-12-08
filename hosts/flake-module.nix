@@ -23,7 +23,6 @@
               {
                 networking.hostName = "${hostname}";
                 disabledModules = [
-                  "programs/clash-verge.nix"
                   "i18n/input-method/ibus.nix"
                 ];
               }
