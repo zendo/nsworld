@@ -8,7 +8,7 @@
   home.packages = with pkgs; [
     kitty
     # azcomicv
-    picacomic
+    # picacomic
     jhentai
     # nixos-rebuild-ng
 

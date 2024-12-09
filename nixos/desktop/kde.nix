@@ -32,6 +32,7 @@
       krfb
       krdc
       ksystemlog
+      karousel # Scrollable tiling wm
       # kleopatra
       # korganizer
     ]);
