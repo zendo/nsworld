@@ -18,7 +18,6 @@
         # GUI
         foot
         kitty
-        goodvibes
       ];
     };
 
