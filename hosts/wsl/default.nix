@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   username,
   ...
@@ -50,13 +49,7 @@
     };
   };
 
-  documentation = {
-    enable = lib.mkDefault false;
-    man.enable = lib.mkDefault false;
-    info.enable = lib.mkDefault false;
-    nixos.enable = lib.mkDefault false;
-  };
-
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
+  documentation.enable = false;
 }
