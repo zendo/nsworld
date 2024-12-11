@@ -5,11 +5,17 @@
   ...
 }:
 {
+  imports = [
+    ./vscode-remote-workaround.nix
+  ];
+
   wsl = {
     enable = true;
     defaultUser = "${username}";
     startMenuLaunchers = true;
   };
+
+  vscode-remote-workaround.enable = true;
 
   home-manager.users.${username} =
     { pkgs, ... }:
