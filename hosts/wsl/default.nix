@@ -25,6 +25,10 @@
         foot
         kitty
       ];
+
+      imports = [
+        ../../home-manager/emacs.nix
+      ];
     };
 
   environment.systemPackages = with pkgs; [

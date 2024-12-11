@@ -19,6 +19,7 @@
       ./gui.nix
       ./xdg.nix
       ./editor.nix
+      ./emacs.nix
       ./browsers.nix
       ./mods/polkit.nix
     ]
