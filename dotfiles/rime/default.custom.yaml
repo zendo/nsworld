@@ -21,4 +21,4 @@ patch:
 
   # 呼出菜单键
   switcher/hotkeys:
-    - "Control+Shift+grave"
+    - "Control+F4"

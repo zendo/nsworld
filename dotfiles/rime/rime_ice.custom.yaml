@@ -1,5 +1,5 @@
 patch:
-  "switches":
+  switches:
     - name: ascii_mode # 0 中文，1 英文
       states: [中, A]
       reset: 1
