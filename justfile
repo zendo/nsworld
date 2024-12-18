@@ -29,7 +29,7 @@ diff:
 diff-commits:
     #!/usr/bin/env bash
     osrev=$(nixos-version --revision)
-    nixpkgs=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixos-unstable-small | awk '{print $1}')
+    nixpkgs=$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/nixos-unstable | awk '{print $1}')
     if [[ "$osrev" = "$nixpkgs" ]]; then
         echo "There is no update."
     else

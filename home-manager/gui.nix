@@ -9,6 +9,7 @@
     kitty
     # azcomicv
     # picacomic
+    # venera
     jhentai
     # nixos-rebuild-ng
 
