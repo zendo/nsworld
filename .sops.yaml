@@ -1,7 +1,11 @@
 keys:
-  - &primary age1w0r39x5z0ye2wcml5e5q6nt8zp7zplndagnl58arvjupdk6qm54shyshqz
+  - &main age1w0r39x5z0ye2wcml5e5q6nt8zp7zplndagnl58arvjupdk6qm54shyshqz
+  - &yoga age1ymt28y57e4fwyfwpt9mcyx6u3r6nvgasu37n6pkxsfmrfgv4yewqavsqzr
+  - &rmt age19e79dxz6fnkgpy0vrcd2s0aan2l3qcc5hap3wtat2yx3r09zuy9s69sf47
 creation_rules:
   - path_regex: nixos/secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *primary
+          - *main
+          - *yoga
+          - *rmt
