@@ -88,6 +88,9 @@
   system.stateVersion = "25.05";
   documentation.enable = lib.mkDefault false;
 
+  # nixos-rebuild-ng: Python-based re-implementation
+  system.rebuild.enableNg = true;
+
   # Remove perl from activation
   # system.etc.overlay.enable = lib.mkDefault true;
 }

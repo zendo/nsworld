@@ -82,3 +82,10 @@ non-nixos-setup:
     trusted-users = root @wheel {{user}}
     substituters = https://mirror.sjtu.edu.cn/nix-channels/store
     EOF
+
+sops-ssh2keyfile:
+    #!/usr/bin/env bash
+    mkdir -p ~/.config/sops/age
+    sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
+    age-keygen -y ~/.config/sops/age/keys.txt
+    # sops updatekeys ~/nsworld/nixos/secrets/secrets.yaml
