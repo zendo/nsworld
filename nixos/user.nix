@@ -2,13 +2,14 @@
   lib,
   config,
   username,
+  self,
   ...
 }:
 let
   inherit (lib) mkIf;
 
   sudoRule = {
-    users = [ "${username}" ];
+    users = [ "${self.nixosConfigurations.yoga._module.specialArgs.username}" ];
     commands = [
       {
         command = "ALL";

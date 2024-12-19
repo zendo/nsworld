@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  username,
+  self,
   ...
 }:
 let
@@ -23,7 +23,7 @@ in
       # wheelNeedsPassword = false;
       extraRules = [
         {
-          users = [ "${username}" ];
+          users = [ "${self.nixosConfigurations.yoga._module.specialArgs.username}" ];
           noPass = true;
           keepEnv = true;
         }
