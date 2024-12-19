@@ -74,6 +74,7 @@ nix-index-database-update:
     ln -f "$filename" files
     popd > /dev/null
     ls -l ~/.cache/nix-index
+    echo -e "\033[32m \n nix-index datebase update successfully. \033[0m"
 
 non-nixos-setup:
     #!/usr/bin/env bash
@@ -84,8 +85,7 @@ non-nixos-setup:
     EOF
 
 sops-ssh2keyfile:
-    #!/usr/bin/env bash
     mkdir -p ~/.config/sops/age
     sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
-    age-keygen -y ~/.config/sops/age/keys.txt
-    # sops updatekeys ~/nsworld/nixos/secrets/secrets.yaml
+    age-keygen -y ~/.config/sops/age/keys.txt | nix run nixpkgs#clolcat
+    # sops updatekeys nixos/secrets/secrets.yaml
