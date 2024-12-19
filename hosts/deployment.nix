@@ -7,7 +7,7 @@
 { inputs, ... }:
 {
   flake.deploy = {
-    sudo = "doas -u";
+    # sudo = "doas -u";
     autoRollback = false;
     magicRollback = false;
     fastConnection = true; # copy from ssh
@@ -17,6 +17,7 @@
         profiles.system = {
           user = "root";
           sshUser = "zendo";
+          interactiveSudo = true;
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."svp";
         };
       };
@@ -26,6 +27,7 @@
         profiles.system = {
           user = "root";
           sshUser = "aaa";
+          interactiveSudo = true;
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."rmt";
         };
       };

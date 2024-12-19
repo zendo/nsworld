@@ -54,7 +54,7 @@ in
   };
 
   # doas
-  mods.doas.enable = true;
+  # mods.doas.enable = true;
 
   # sudo-rs
   # security.sudo.enable = false;
@@ -64,7 +64,7 @@ in
   # security.sudo-rs.wheelNeedsPassword = false;
 
   # vanilla sudo
-  # security.sudo.extraRules = [sudoRule];
+  security.sudo.extraRules = [sudoRule];
   # or
   # security.sudo.wheelNeedsPassword = false;
 }

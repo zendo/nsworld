@@ -29,7 +29,7 @@
 
   mods = {
     # steam.enable = true;
-    # daeWithConfig.enable = true;
+    daeWithConfig.enable = true;
   };
 
   programs = {
@@ -42,6 +42,11 @@
       autoStart = true;
       package = pkgs.mihomo-party;
     };
+  };
+
+  users.users.${username} = {
+    # 123
+    hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
   };
 
   boot = {

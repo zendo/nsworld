@@ -26,7 +26,10 @@
     # daeWithConfig.enable = true;
   };
 
-  users.mutableUsers = true;
+  users.users.${username} = {
+    # 123
+    hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
+  };
 
   environment.systemPackages = with pkgs; [
     duf

@@ -18,7 +18,7 @@
         User zendo
 
       Host rmt
-        HostName 192.168.122.85
+        HostName 192.168.122.20
         Port 22
         User aaa
 
