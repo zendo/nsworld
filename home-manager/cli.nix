@@ -103,6 +103,10 @@
     # airgeddon # wifi crack
 
     # Game & fun
+    sl
+    cowsay
+    fortune
+    clolcat
     # pipes-rs
     # cbonsai
     # hollywood
