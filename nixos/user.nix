@@ -24,7 +24,7 @@ in
   users = {
     mutableUsers = lib.mkDefault false;
 
-    users.root.initialHashedPassword = "$y$j9T$hLnsh06hinp1nz/NU0RzV0$ixT.gQXDVrS6NLEKOH6JEtpfnOF4Fr24p5JInYJwlf3";
+    users.root.initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
 
     users.${username} = {
       isNormalUser = true;
