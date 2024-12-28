@@ -49,6 +49,9 @@
     };
   };
 
+  # nixos-rebuild-ng: Python-based re-implementation
+  system.rebuild.enableNg = true;
+
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
   documentation.enable = false;

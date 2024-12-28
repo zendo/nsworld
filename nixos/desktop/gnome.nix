@@ -88,6 +88,7 @@
       # blur-my-shell
       top-bar-organizer
       # just-perfection
+      kimpanel
       runcat
       caffeine
       paperwm

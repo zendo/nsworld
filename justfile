@@ -11,14 +11,14 @@ default:
     @just --choose
 
 switch:
-    nixos-rebuild --use-remote-sudo --flake .#"{{host}}" switch
+    nixos-rebuild --sudo --flake .#"{{host}}" switch
 
 boot:
-    nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
+    nixos-rebuild --sudo --flake .#"{{host}}" boot
 
 upgrade:
     nix flake update --commit-lock-file && \
-      nixos-rebuild --use-remote-sudo --flake .#"{{host}}" boot
+      nixos-rebuild --sudo --flake .#"{{host}}" boot
 
 nom-build-os:
     nom build .#nixosConfigurations."{{host}}".config.system.build.toplevel

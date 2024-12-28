@@ -24,16 +24,20 @@ in
   users = {
     mutableUsers = lib.mkDefault false;
 
-    users.root.initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
+    users.root = {
+      initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
+      # copy ssh pub key to /etc/ssh/authorized_keys.d/root
+      # or copy to ~/.ssh/authorized_keys
+      # ssh-copy-id -i ~/.ssh/id_ed25519.pub aaa@192.168.122.85
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz linzway@qq.com"
+      ];
+    };
 
     users.${username} = {
       isNormalUser = true;
       # `mkpasswd`
       initialHashedPassword = "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
-      # ssh-copy-id -i ~/.ssh/id_ed25519.pub nixos@192.168.122.85
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz linzway@qq.com"
-      ];
       extraGroups = [
         "wheel"
         "networkmanager"
@@ -64,7 +68,7 @@ in
   # security.sudo-rs.wheelNeedsPassword = false;
 
   # vanilla sudo
-  security.sudo.extraRules = [sudoRule];
+  security.sudo.extraRules = [ sudoRule ];
   # or
   # security.sudo.wheelNeedsPassword = false;
 }

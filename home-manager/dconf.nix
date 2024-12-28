@@ -41,6 +41,7 @@
         "caffeine@patapon.info"
         "appindicatorsupport@rgcjonas.gmail.com"
         "runcat@kolesnikov.se"
+        "kimpanel@kde.org"
         # "gsconnect@andyholmes.github.io"
       ];
       favorite-apps = [

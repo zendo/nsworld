@@ -1,4 +1,6 @@
 /*
+  https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD
+
   https://github.com/NixOS/nix/issues/8911
   --option auto-allocate-uids false
 */

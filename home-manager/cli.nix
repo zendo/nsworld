@@ -35,7 +35,7 @@
     # unar # free but oversize
     unrar # unfree
     ouch
-    patool
+    # patool
     # atool
 
     # FileManager

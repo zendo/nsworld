@@ -17,7 +17,7 @@
         jinx
         vterm
         emojify
-        emacsql-sqlite
+        sqlite3
         # lsp-bridge
         # pdf-tools
         # telega

@@ -8,6 +8,7 @@
 {
   flake.deploy = {
     # sudo = "doas -u";
+    sshUser = "root";
     autoRollback = false;
     magicRollback = false;
     fastConnection = true; # copy from ssh
@@ -15,9 +16,6 @@
       "svp" = {
         hostname = "192.168.2.197";
         profiles.system = {
-          user = "root";
-          sshUser = "zendo";
-          interactiveSudo = true;
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."svp";
         };
       };
@@ -25,9 +23,6 @@
       "rmt" = {
         hostname = "192.168.122.20";
         profiles.system = {
-          user = "root";
-          sshUser = "aaa";
-          interactiveSudo = true;
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."rmt";
         };
       };
