@@ -7,6 +7,7 @@
 {
   home.packages = with pkgs; [
     kitty
+    # ghostty
     # azcomicv
     # picacomic
     # venera
