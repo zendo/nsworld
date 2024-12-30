@@ -54,7 +54,8 @@
           {
             iconTasks = {
               launchers = [
-                "applications:kitty.desktop"
+                # "applications:kitty.desktop"
+                "com.mitchellh.ghostty.desktop"
                 "applications:org.kde.dolphin.desktop"
                 # "applications:org.kde.kate.desktop"
                 # "applications:emacs.desktop"
