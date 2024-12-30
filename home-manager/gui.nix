@@ -7,14 +7,14 @@
 {
   home.packages = with pkgs; [
     kitty
-    # ghostty
+    ghostty
     # azcomicv
-    # picacomic
-    # venera
-    jhentai
-    # nixos-rebuild-ng
+    picacomic
+    venera
+    # jhentai
 
     # nix-init
+    # nixos-rebuild-ng
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs
 
     # nheko
