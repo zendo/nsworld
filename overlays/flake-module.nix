@@ -10,10 +10,9 @@
     #   };
     # };
 
+    # Add new pkgs
     # update an unstable package to the latest commit of the default branch
     # nix-update --flake --version=branch rime-ice
-
-    # Add new pkgs
     additions =
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
@@ -24,9 +23,6 @@
     # Mod existed pkgs
     modifications = final: prev: {
       mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
-
-      # https://github.com/NixOS/nixpkgs/issues/261217
-      # gnome-decoder = prev.callPackage ./gnome-decoder/package.nix { };
 
       # xwayland env for inputMethod & native CSD
       spotify = prev.spotify.overrideAttrs (oldAttrs: {
