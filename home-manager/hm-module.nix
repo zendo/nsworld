@@ -20,7 +20,8 @@
       ./xdg.nix
       ./editor.nix
       ./emacs.nix
-      ./browsers.nix
+      ./chrome.nix
+      ./firefox.nix
       ./mods/polkit.nix
     ]
     ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./kderc.nix ]

@@ -52,7 +52,7 @@
           ./gui.nix
           ./bash.nix
           ./editor.nix
-          ./browsers.nix
+          ./firefox.nix
         ];
       };
     };
