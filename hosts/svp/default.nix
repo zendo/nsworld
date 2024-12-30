@@ -36,11 +36,16 @@
     appimage.enable = true;
     # nix-ld.enable = true;
 
-    clash-client = {
+    # clash-client = {
+    #   enable = true;
+    #   tunMode = true;
+    #   autoStart = true;
+    #   package = pkgs.mihomo-party;
+    # };
+
+    clash-verge = {
       enable = true;
-      tunMode = true;
       autoStart = true;
-      package = pkgs.mihomo-party;
     };
   };
 

@@ -46,6 +46,11 @@
     #   autoStart = true;
     #   package = pkgs.mihomo-party;
     # };
+
+    # clash-verge = {
+    #   enable = true;
+    #   autoStart = true;
+    # };
   };
 
   # Desktop Envirment
@@ -77,12 +82,6 @@
       efi.efiSysMountPoint = "/efi"; # default /boot
       systemd-boot.enable = true;
     };
-  };
-
-  # SSH
-  services.openssh = {
-    # enable root login through SSH
-    settings.PermitRootLogin = lib.mkForce "yes";
   };
 
   # Clipboard shared for NixOS@Guest
