@@ -1,3 +1,4 @@
+# ghostty +show-config --default --docs
 
 command = zsh --login
 shell-integration-features = no-cursor,sudo
@@ -12,7 +13,9 @@ window-height = 28
 window-width = 90
 
 ## KEYBINDINGS
-keybind =f11=toggle_fullscreen
+keybind = ctrl+enter=unbind
+
+keybind = f11=toggle_fullscreen
 
 # copy-on-select = clipboard
 keybind = alt+w=copy_to_clipboard

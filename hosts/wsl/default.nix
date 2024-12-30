@@ -22,7 +22,7 @@
       home.packages = with pkgs; [
         # GUI
         foot
-        # kitty
+        kitty
         ghostty
       ];
 
