@@ -31,6 +31,7 @@ in
     "helix".source = "${lnDots}/helix";
     "waybar".source = "${lnDots}/waybar";
     "yt-dlp".source = "${lnDots}/yt-dlp";
+    "ghostty".source = "${lnDots}/ghostty";
     "niri".source = "${lnDots}/niri";
     "sway/config".source = "${lnDots}/sway/config";
     "hypr/hyprland.conf".source = "${lnDots}/hypr/hyprland.conf";

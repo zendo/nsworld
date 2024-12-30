@@ -46,7 +46,8 @@
       ];
       favorite-apps = [
         # "foot.desktop"
-        "kitty.desktop"
+        # "kitty.desktop"
+        "com.mitchellh.ghostty.desktop"
         "org.gnome.Nautilus.desktop"
         # "code.desktop"
         "emacs.desktop"

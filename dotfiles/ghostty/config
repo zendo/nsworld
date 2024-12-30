@@ -1,0 +1,12 @@
+command = zsh
+
+# font-family = BerkeleyMono Nerd Font
+# font-size = 20
+
+background-opacity = 0.94
+# theme = GruvboxDarkHard
+# cursor-style = block
+# copy-on-select = clipboard
+
+# keybindings
+
