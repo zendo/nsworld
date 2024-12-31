@@ -5,26 +5,16 @@
   ...
 }:
 {
-  # zram
-  zramSwap.enable = lib.mkDefault true;
-
-  # zswap
-  # systemd.tmpfiles.settings."zswap" = {
-  #   "/sys/module/zswap/parameters/enabled"."w-".argument = "1";
-  #   "/sys/module/zswap/parameters/zpool"."w-".argument = "zsmalloc";
-  # };
-
-  # systemd-oomd or earlyoom
-  # systemd.oomd.enable = false;
-
   # Only enable on Desktop
   hardware.bluetooth.enable = config.services.graphical-desktop.enable;
 
   # This allows PipeWire to run with realtime privileges (i.e: less cracks)
   security.rtkit.enable = config.services.pipewire.enable;
 
-  # Making `xdg-open` works inside FHS apps
+  # Make `xdg-open` works inside FHS envs
   xdg.portal.xdgOpenUsePortal = true;
+
+  zramSwap.enable = lib.mkDefault true;
 
   boot = {
     plymouth.enable = true;
@@ -45,10 +35,9 @@
   services = {
     acpid.enable = true;
     # fwupd.enable = true;
-    # earlyoom.enable = true;
     btrfs.autoScrub.enable = config.fileSystems."/".fsType == "btrfs";
 
-    # auto-enabled by services.graphical-desktop
+    # auto-enabled by `services.graphical-desktop`
     pipewire = {
       # alsa.support32Bit = true;
       # jack.enable = true;
@@ -82,7 +71,6 @@
     sbctl
     efibootmgr
     # efitools
-    nixos-rebuild-ng
   ];
 
   time.timeZone = "Asia/Shanghai";

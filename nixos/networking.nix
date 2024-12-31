@@ -2,15 +2,11 @@
 {
   networking = {
     networkmanager = {
-      enable = true; # conflict with networking.wireless
+      enable = true; # conflict with `networking.wireless`
       dns = "none"; # for Transparent Proxy
       wifi.backend = "iwd"; # replace "wpa_supplicant"
-      plugins = lib.mkForce [ ]; # openconnect include (webkitgtk)
+      plugins = lib.mkForce [ ]; # include openconnect(webkitgtk)
     };
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    # defaultGateway = "192.168.2.1";
-    # interfaces.eno1.useDHCP = true;
-    # interfaces.wlp1s0.useDHCP = true;
 
     nameservers = [
       "8.8.8.8"
