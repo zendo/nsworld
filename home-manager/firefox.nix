@@ -30,30 +30,19 @@ in
         // user_pref("permissions.default.desktop-notification", 0);
       '';
       settings = {
-        "browser.tabs.closeTabByDblclick" = true; # 双击关闭标签
-        "browser.tabs.closeWindowWithLastTab" = false; # 关闭最后一个标签不退出界面
-        "browser.tabs.selectOwnerOnClose" = false; # 关闭标签后选附近标签而不是原始
-        "browser.tabs.loadBookmarksInBackground" = true; # 在后台打开书签栏新建标签页
-        "browser.toolbars.bookmarks.visibility" = "always"; # 总是显示书签栏
-        "browser.aboutwelcome.enabled" = false; # 关闭欢迎引导界面
-        "browser.aboutConfig.showWarning" = false; # 关闭 about:config 打开警告
+        "browser.tabs.closeTabByDblclick" = true;
+        "browser.tabs.closeWindowWithLastTab" = false; # Prevent closing Firefox when closing the last tab
+        "browser.tabs.selectOwnerOnClose" = false; # Closing tab and return to the adjacent tab
+        "browser.tabs.loadBookmarksInBackground" = true;
+        "browser.toolbars.bookmarks.visibility" = "always";
+        "browser.aboutwelcome.enabled" = false;
+        "browser.aboutConfig.showWarning" = false;
 
-        "gfx.webrender.all" = true; # 开启GPU极速渲染
+        "gfx.webrender.all" = true; # enable GPU render
         "media.ffmpeg.vaapi.enabled" = true; # enable hw video acceleration
         # https://pandasauce.org/get-fonts-done/
         "gfx.text.subpixel-position.force-enabled" = true;
         "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
-      };
-    };
-  };
-
-  programs.floorp = {
-    # enable = true;
-    profiles.default = {
-      settings = {
-        "browser.tabs.closeTabByDblclick" = true; # 双击关闭标签
-        "browser.tabs.closeWindowWithLastTab" = false; # 关闭最后一个标签不退出界面
-        "browser.tabs.selectOwnerOnClose" = false; # 关闭标签后选附近标签而不是原始
       };
     };
   };

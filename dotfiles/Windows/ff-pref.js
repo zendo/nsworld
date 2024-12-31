@@ -18,11 +18,12 @@ user_pref("browser.tabs.closeWindowWithLastTab", false); // Prevent closing Fire
 user_pref("browser.tabs.selectOwnerOnClose", false); // Closing tab and return to the adjacent tab
 user_pref("browser.tabs.loadBookmarksInBackground", true);
 user_pref("browser.toolbars.bookmarks.visibility", "always");
-// user_pref("browser.urlbar.openintab", true); // open in new tab
+// user_pref("browser.urlbar.openintab", true); // open in a new tab
 // user_pref("browser.search.openintab", true); // open in a new tab
-// user_pref("browser.tabs.loadBookmarksInTabs", true); // open in new tab
+// user_pref("browser.tabs.loadBookmarksInTabs", true); // open in a new tab
 user_pref("browser.aboutConfig.showWarning", false);
 
+// https://github.com/yokoffing/Betterfox/wiki/Common-Overrides#font-improvement
 // PREF: improve font rendering by using DirectWrite everywhere like Chrome [WINDOWS]
 user_pref("gfx.font_rendering.cleartype_params.rendering_mode", 5);
 user_pref("gfx.font_rendering.cleartype_params.cleartype_level", 100);
