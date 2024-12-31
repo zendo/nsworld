@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
   # https://github.com/yokoffing/Betterfox
+  # nurl https://github.com/yokoffing/Betterfox 133.0
   betterfox = pkgs.fetchFromGitHub {
     owner = "yokoffing";
     repo = "Betterfox";
