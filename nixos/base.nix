@@ -21,7 +21,7 @@
 
     tmp = {
       useTmpfs = lib.mkDefault true;
-      cleanOnBoot = !config.boot.tmp.useTmpfs;
+      cleanOnBoot = lib.mkDefault true;
     };
 
     initrd.systemd = {
