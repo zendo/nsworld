@@ -38,7 +38,8 @@
     userSettings = {
       "files.autoSave" = "onFocusChange";
       "editor.fontSize" = 13;
-      "editor.fontFamily" = "'JetBrains Mono', 'Hack', 'Droid Sans Mono', monospace, 'Droid Sans Fallback'";
+      "editor.fontFamily" =
+        "'JetBrains Mono', 'Hack', 'Droid Sans Mono', monospace, 'Droid Sans Fallback'";
       "update.mode" = "none";
       "nix.formatterPath" = "nixfmt";
       # "workbench.colorTheme" = "Monokai";

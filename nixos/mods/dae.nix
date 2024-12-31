@@ -5,8 +5,8 @@ in
 {
   options.mods.daeWithConfig = {
     enable = lib.mkEnableOption ''
-        my dae encryption config.
-      '';
+      my dae encryption config.
+    '';
   };
 
   config = lib.mkIf cfg.enable {

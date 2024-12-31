@@ -22,9 +22,6 @@
               # nixos setup
               {
                 networking.hostName = "${hostname}";
-                disabledModules = [
-                  "i18n/input-method/ibus.nix"
-                ];
               }
               # disko module
               inputs.disko.nixosModules.disko

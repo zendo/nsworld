@@ -3,6 +3,7 @@
   flake.overlays = {
     # nur = inputs.nur.overlay;
 
+    # https://wiki.nixos.org/wiki/Flakes#Importing_packages_from_multiple_nixpkgs_branches
     # stable-packages = final: _prev: {
     #   stable = import inputs.nixpkgs-stable {
     #     system = final.system;
