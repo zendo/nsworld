@@ -16,7 +16,6 @@ in
     profiles.default = {
       extraConfig = ''
         ${builtins.readFile "${betterfox}/user.js"}
-        ${builtins.readFile "${betterfox}/Fastfox.js"}
 
         // PREF: restore Top Sites on New Tab page
         user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);

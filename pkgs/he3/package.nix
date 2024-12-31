@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
     nspr
     libdrm
     alsa-lib
-    stdenv.cc.cc
+    (lib.getLib stdenv.cc.cc)
   ];
 
   runtimeDependencies = [ (lib.getLib udev) ];
