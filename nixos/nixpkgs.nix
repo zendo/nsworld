@@ -18,6 +18,7 @@
           "spotify"
           "google-chrome"
           "steam-unwrapped"
+          "balatro"
         ];
     };
   };

@@ -21,7 +21,7 @@
         # lsp-bridge
         # pdf-tools
         # telega
-        (treesit-grammars.with-grammars (p: builtins.attrValues p))
+        treesit-grammars.with-all-grammars
       ];
     extraConfig = ''
       (display-time-mode 1)

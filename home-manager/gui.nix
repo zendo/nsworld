@@ -13,8 +13,10 @@
     picacomic
     venera
     # jhentai
+    balatro
+    torzu
 
-    # nix-init
+    nix-init
     # nixos-rebuild-ng
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs
 
