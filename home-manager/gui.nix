@@ -13,8 +13,6 @@
     picacomic
     venera
     # jhentai
-    balatro
-    torzu
 
     nix-init
     # nixos-rebuild-ng
