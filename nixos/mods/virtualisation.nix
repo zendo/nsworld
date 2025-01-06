@@ -57,6 +57,7 @@ in
 
     environment.systemPackages = with pkgs; [
       virtiofsd
+      virt-viewer
       bridge-utils # brctl: network bridge
       # win-virtio # needs ?
       wl-clipboard # waydroid clipborad

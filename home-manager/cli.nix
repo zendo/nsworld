@@ -37,6 +37,7 @@
     ouch
     # patool
     # atool
+    cdrtools # mkisofs
 
     # FileManager
     f2
