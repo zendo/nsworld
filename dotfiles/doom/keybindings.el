@@ -130,7 +130,7 @@
 ;; evil keymap
 (when (modulep! :editor evil +everywhere)
   (map!
-   :niv "C-=" #'er/expand-region
+   :niv "C-=" #'expreg-expand
    :niv "C-y" #'yank
    :niv "C-k" #'crux-smart-kill-line
    :niv "C-e" #'end-of-line

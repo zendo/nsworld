@@ -109,9 +109,10 @@
          ;; ("s-<mouse-1>" . mc/add-cursor-on-click)
          ))
 
-(use-package expand-region
-  :bind (("C-=" . er/expand-region)
-         ("C--" . er/contract-region)))
+;; Simple expand region
+(use-package expreg
+  :bind (("C-=" . expreg-expand)
+         ("C--" . expreg-contract)))
 
 ;; Smartly select region, rectangle, multi cursors
 (use-package smart-region
