@@ -116,6 +116,7 @@
     # nur.url = "github:nix-community/NUR";
     # agenix.url = "github:ryantm/agenix";
     sops-nix.url = "github:Mic92/sops-nix";
+    nvf.url = "github:notashelf/nvf";
     templates.url = "github:NixOS/templates";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";

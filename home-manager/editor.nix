@@ -87,23 +87,4 @@
   programs.helix = {
     # enable = true;
   };
-
-  programs.neovim = {
-    # enable = true;
-    viAlias = true;
-    vimAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig
-      neogit
-      fzf-vim
-      vim-nix
-      vim-lsp
-      vim-markdown
-      editorconfig-vim
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
-    ];
-    extraPackages = with pkgs; [ lua-language-server ];
-    # extraConfig = ''
-    # '';
-  };
 }

@@ -27,6 +27,7 @@
             ./zsh.nix
             ./alias.nix
             ./files.nix
+            ./nvim.nix
             ./emacs.nix
             ./non-nixos.nix
 

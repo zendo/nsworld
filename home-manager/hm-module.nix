@@ -19,6 +19,7 @@
       ./gui.nix
       ./xdg.nix
       ./editor.nix
+      ./nvim.nix
       ./emacs.nix
       ./chrome.nix
       ./firefox.nix
