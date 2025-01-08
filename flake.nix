@@ -18,7 +18,7 @@
         ./lib/flake-module.nix
         ./lib/repl.nix
         ./templates/flake-module.nix
-        # inputs.treefmt-nix.flakeModule
+        ./treefmt.nix
       ];
 
       perSystem =
@@ -57,7 +57,7 @@
             };
 
           # nix fmt
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = config.treefmt.build.wrapper;
 
           # nix develop .#rust
           devShells = import ./devshells.nix { inherit pkgs; };
