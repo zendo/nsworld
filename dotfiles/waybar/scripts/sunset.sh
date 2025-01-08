@@ -9,11 +9,11 @@
 SERVICE=wlsunset
 
 is_running() {
-    pgrep "$SERVICE" > /dev/null
+  pgrep "$SERVICE" >/dev/null
 }
 
 if is_running; then
-    wlsunset &
+  wlsunset &
 else
-    wlsunset -l 22 -L 114 &
+  wlsunset -l 22 -L 114 &
 fi
