@@ -53,7 +53,7 @@
     # };
   };
 
-  # Desktop Envirment
+  # Desktop Environment
   services = {
     displayManager.autoLogin.user = "${username}";
     xserver = {

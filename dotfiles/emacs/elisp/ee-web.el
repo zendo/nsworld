@@ -6,7 +6,7 @@
 
 (use-package scss-mode
   :init
-  ;; Disable complilation on save
+  ;; Disable complication on save
   (setq scss-compile-at-save nil))
 
 (unless (fboundp 'less-css-mode)

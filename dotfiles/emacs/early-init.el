@@ -45,7 +45,7 @@
                     )))
 
 (defun display-startup-echo-area-message ()
-  "Delete starup message"
+  "Delete startup message"
   (message ""))
 
 (provide 'early-init)
