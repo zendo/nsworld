@@ -5,8 +5,16 @@
   ];
 
   perSystem =
-    { inputs', pkgs, ... }:
     {
+      inputs',
+      pkgs,
+      config,
+      ...
+    }:
+    {
+      # nix fmt
+      formatter = config.treefmt.build.wrapper;
+
       treefmt = {
         projectRootFile = "flake.nix";
 
@@ -22,6 +30,19 @@
         # shell
         programs.shfmt.enable = true;
         # programs.shellcheck.enable = true;
+
+        # html/css/json/ts/yaml
+        programs.prettier.enable = true;
+        settings.formatter.prettier.excludes = [
+          "*secrets*"
+        ];
+        # programs.yamlfmt.enable = true;
+
+        # lua
+        programs.stylua.enable = true;
+
+        # python
+        programs.black.enable = true;
       };
     };
 }

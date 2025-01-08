@@ -56,9 +56,6 @@
               default = config.packages.azcomicv;
             };
 
-          # nix fmt
-          formatter = config.treefmt.build.wrapper;
-
           # nix develop .#rust
           devShells = import ./devshells.nix { inherit pkgs; };
         };
