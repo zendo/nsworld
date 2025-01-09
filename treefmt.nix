@@ -17,7 +17,9 @@
       treefmt = {
         projectRootFile = "flake.nix";
 
-        # nix
+        ###############################################
+        ## NIX
+        ###############################################
         # programs.deadnix.enable = true;
         # programs.statix.enable = true;
         programs.nixfmt.enable = true;
@@ -26,11 +28,15 @@
           "lib/*"
         ];
 
-        # shell
+        ###############################################
+        ## SHELL
+        ###############################################
         programs.shfmt.enable = true;
         # programs.shellcheck.enable = true;
 
-        # html/css/json/ts/yaml
+        ###############################################
+        ## HTML/CSS/TS/JSON/YAML/MARKDOWN
+        ###############################################
         programs.prettier.enable = true;
         settings.formatter.prettier.excludes = [
           "*secrets*"
@@ -38,10 +44,14 @@
         ];
         # programs.yamlfmt.enable = true;
 
-        # lua
+        ###############################################
+        ## LUA
+        ###############################################
         programs.stylua.enable = true;
 
-        # python
+        ###############################################
+        ## PYTHON
+        ###############################################
         programs.black.enable = true;
       };
     };
