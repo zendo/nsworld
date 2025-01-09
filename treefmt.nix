@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.treefmt-nix.flakeModule
@@ -6,7 +6,6 @@
 
   perSystem =
     {
-      inputs',
       pkgs,
       config,
       ...
@@ -35,6 +34,7 @@
         programs.prettier.enable = true;
         settings.formatter.prettier.excludes = [
           "*secrets*"
+          "dotfiles/Windows/*"
         ];
         # programs.yamlfmt.enable = true;
 
