@@ -24,8 +24,8 @@
     # cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver
     # ls /sys/devices/system/cpu/cpu0/   :show CPPCCPPC
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri
@@ -41,17 +41,17 @@
     appimage.enable = true;
     # nix-ld.enable = true;
 
-    clash-client = {
-      enable = true;
-      tunMode = true;
-      autoStart = true;
-      package = pkgs.mihomo-party;
-    };
-
-    # clash-verge = {
+    # clash-client = {
     #   enable = true;
+    #   tunMode = true;
     #   autoStart = true;
+    #   package = pkgs.mihomo-party;
     # };
+
+    clash-verge = {
+      enable = true;
+      autoStart = true;
+    };
   };
 
   mods = {

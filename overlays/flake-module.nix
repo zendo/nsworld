@@ -23,8 +23,6 @@
 
     # Mod existed pkgs
     modifications = final: prev: {
-      # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
-
       # xwayland env for inputMethod & native CSD
       spotify = prev.spotify.overrideAttrs (oldAttrs: {
         postFixup = ''

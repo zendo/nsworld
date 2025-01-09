@@ -4,7 +4,6 @@ let
     # Force GPU acceleration
     "--ignore-gpu-blocklist"
     "--enable-zero-copy"
-    "--gtk-version=4"
     "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,Vulkan,WebRTCPipeWireCapturer,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
   ];
 in
