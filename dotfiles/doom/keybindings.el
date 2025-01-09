@@ -53,6 +53,7 @@
  "M-m" #'consult-mark
  "C-x 4 r" #'consult-buffer-other-window
  "C-x 4 x" #'ace-swap-window
+ "C-S-t" #'tab-new
  [remap other-window] #'ace-window
  [remap kill-buffer] #'kill-current-buffer
 

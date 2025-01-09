@@ -32,6 +32,7 @@
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
  ("C-S-i" . eglot-format) ;vscode
+ ("C-S-t" . tab-new)
 
  ;; doom-like
  ("C-c <SPC>" . project-find-file)
