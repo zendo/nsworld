@@ -150,11 +150,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736204492,
-        "narHash": "sha256-CoBPRgkUex9Iz6qGSzi/BFVUQjndB0PmME2B6eEyeCs=",
+        "lastModified": 1736421950,
+        "narHash": "sha256-RyrX0WFXxFrYvzHNLTIyuk3NcNl3UBykuYru/P0zW5E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "20665c6efa83d71020c8730f26706258ba5c6b2a",
+        "rev": "d4aebb947a301b8da8654a804979a738c5c5da50",
         "type": "github"
       },
       "original": {
@@ -249,11 +249,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1736235881,
-        "narHash": "sha256-9mqVu3ar76rR/kMioeeEcySJqC/QYADrmXS+8X4NsxY=",
+        "lastModified": 1736283893,
+        "narHash": "sha256-BG1FfTexFwNty5VhYjaQLMR6CMPfI3QRcaZrFQYu2EM=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "4c5c3be74dc61a11346528e8240a655b8c26f0d2",
+        "rev": "4f339f6be2b61662f957c2ee9eda0fa597d8a6d6",
         "type": "github"
       },
       "original": {
@@ -285,11 +285,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1736012469,
-        "narHash": "sha256-/qlNWm/IEVVH7GfgAIyP6EsVZI6zjAx1cV5zNyrs+rI=",
+        "lastModified": 1736344531,
+        "narHash": "sha256-8YVQ9ZbSfuUk2bUf2KRj60NRraLPKPS0Q4QFTbc+c2c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8f3e1f807051e32d8c95cd12b9b421623850a34d",
+        "rev": "bffc22eb12172e6db3c5dde9e3e5628f8e3e7912",
         "type": "github"
       },
       "original": {
@@ -496,6 +496,7 @@
         "plugin-nvim-tree-lua": "plugin-nvim-tree-lua",
         "plugin-nvim-treesitter-context": "plugin-nvim-treesitter-context",
         "plugin-nvim-ts-autotag": "plugin-nvim-ts-autotag",
+        "plugin-nvim-ufo": "plugin-nvim-ufo",
         "plugin-nvim-web-devicons": "plugin-nvim-web-devicons",
         "plugin-obsidian-nvim": "plugin-obsidian-nvim",
         "plugin-omnisharp-extended": "plugin-omnisharp-extended",
@@ -507,6 +508,7 @@
         "plugin-plenary-nvim": "plugin-plenary-nvim",
         "plugin-precognition-nvim": "plugin-precognition-nvim",
         "plugin-project-nvim": "plugin-project-nvim",
+        "plugin-promise-async": "plugin-promise-async",
         "plugin-registers": "plugin-registers",
         "plugin-render-markdown-nvim": "plugin-render-markdown-nvim",
         "plugin-rose-pine": "plugin-rose-pine",
@@ -535,11 +537,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1736219415,
-        "narHash": "sha256-guUJWyyKVYZwyP86CR6i5gchQLxIBG5j7JjX/9rA7dU=",
+        "lastModified": 1736409411,
+        "narHash": "sha256-mg0hjiL9ouJyuBQZu7UAI6I64kK+Tp5fbHZUE2+CrNU=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "aa7b55fa49a55f12e72807466e905a204c32384a",
+        "rev": "a26cdd2d25cc677978f0cada818c4d94b691e0da",
         "type": "github"
       },
       "original": {
@@ -1933,6 +1935,22 @@
         "type": "github"
       }
     },
+    "plugin-nvim-ufo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1735147722,
+        "narHash": "sha256-etyfm4KpwjYN+kkotOMl0LgbQniILmqMqab4acMtTlw=",
+        "owner": "kevinhwang91",
+        "repo": "nvim-ufo",
+        "rev": "32cb247b893a384f1888b9cd737264159ecf183c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kevinhwang91",
+        "repo": "nvim-ufo",
+        "type": "github"
+      }
+    },
     "plugin-nvim-web-devicons": {
       "flake": false,
       "locked": {
@@ -2106,6 +2124,22 @@
       "original": {
         "owner": "ahmedkhalf",
         "repo": "project.nvim",
+        "type": "github"
+      }
+    },
+    "plugin-promise-async": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722813441,
+        "narHash": "sha256-9eM66brPjiFlY64vmBetRYrKnpDyN7+/URMm4GsGimA=",
+        "owner": "kevinhwang91",
+        "repo": "promise-async",
+        "rev": "119e8961014c9bfaf1487bf3c2a393d254f337e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kevinhwang91",
+        "repo": "promise-async",
         "type": "github"
       }
     },
