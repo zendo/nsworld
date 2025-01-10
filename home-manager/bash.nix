@@ -10,12 +10,18 @@
     bindings = {
       "\\C-h" = "backward-kill-word";
     };
-    extraConfig = ''
-      set bell-style none
-      set completion-ignore-case on
-
-      # Display matches for ambiguous patterns at first tab press
-      set show-all-if-ambiguous on
-    '';
+    variables = {
+      bell-style = "none";
+      bind-tty-special-chars = true;
+      blink-matching-paren = true;
+      colored-completion-prefix = true;
+      colored-stats = true;
+      # completion-display-width = 0;
+      completion-ignore-case = true;
+      enable-bracketed-paste = true;
+      match-hidden-files = true;
+      show-all-if-ambiguous = true;
+      mark-symlinked-directories = true;
+    };
   };
 }

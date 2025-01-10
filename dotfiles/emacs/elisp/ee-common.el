@@ -3,7 +3,15 @@
 ;;; Code:
 
 ;; Environment
-(when (eq system-type 'gnu/linux)
+(defconst IS-MAC     (eq system-type 'darwin))
+(defconst IS-LINUX   (eq system-type 'gnu/linux))
+(defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
+(defconst IS-BSD     (or IS-MAC (eq system-type 'berkeley-unix)))
+(defconst IS-WSL     (and IS-LINUX
+                          (string-match-p "Microsoft"
+                                          (shell-command-to-string "uname -a"))))
+
+(when IS-LINUX
   (setq org-directory "~/Documents/Notes")
   (set-face-font 'default "JetBrains Mono-10")
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -12,7 +20,7 @@
                       (font-spec :family "Noto Sans CJK SC" :size 12)))
   )
 
-(when (eq system-type 'windows-nt)
+(when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
         )
@@ -22,6 +30,14 @@
     (set-fontset-font (frame-parameter nil 'font)
                       charset
                       (font-spec :family "Microsoft Yahei" :size 24))))
+
+(when IS-WSL
+  ;; WSLg breaks copy-paste from Emacs into Windows
+  ;; see: https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
+  (setq select-active-regions nil
+        select-enable-clipboard 't
+        select-enable-primary nil
+        interprogram-cut-function #'gui-select-text))
 
 ;; fonts
 ;; Consolas, Hack, Source Code Pro,
