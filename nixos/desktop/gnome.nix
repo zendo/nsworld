@@ -9,7 +9,6 @@
   #     # libpinyin
   #     (rime.override {
   #       rimeDataPkgs = [
-  #         # pkgs.rime-frost
   #         pkgs.rime-ice
   #       ];
   #     })

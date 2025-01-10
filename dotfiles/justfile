@@ -28,8 +28,6 @@ ln-ibus-rime:
 
     # rime-ice
     ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.config/ibus/rime/rime_ice.custom.yaml
-    # rime-frost
-    ln -sfv "$(pwd)"/rime/rime_frost.custom.yaml "$HOME"/.config/ibus/rime/rime_frost.custom.yaml
 
 ln-fcitx-conf-rime:
     #! /usr/bin/env bash
@@ -41,8 +39,6 @@ ln-fcitx-conf-rime:
 
     # rime-ice
     ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_ice.custom.yaml
-    # rime-frost
-    ln -sfv "$(pwd)"/rime/rime_frost.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_frost.custom.yaml
 
     # fcitx5-conf
     cp "$(pwd)"/fcitx5/classicui.conf "$HOME"/.config/fcitx5/conf/classicui.conf

@@ -25,7 +25,6 @@ in
         # fcitx5-chinese-addons
         (fcitx5-rime.override {
           rimeDataPkgs = [
-            # pkgs.rime-frost
             pkgs.rime-ice
           ];
         })
