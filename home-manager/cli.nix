@@ -12,7 +12,6 @@
     nix-tree
     nurl
     nix-update
-    # nix-forecast
     # nix-prefetch
     # nix-template
     nix-output-monitor
