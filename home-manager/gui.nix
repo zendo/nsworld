@@ -17,6 +17,7 @@
     nix-init
     # nixos-rebuild-ng
     inputs.deploy-rs.packages.x86_64-linux.deploy-rs
+    inputs.self.formatter.x86_64-linux
 
     # nheko
     tdesktop # (webkitgtk)

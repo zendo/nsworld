@@ -4,7 +4,7 @@ command = zsh --login
 shell-integration-features = no-cursor,sudo
 cursor-style = block
 background-opacity = 0.94
-# theme = GruvboxDarkHard
+theme = Tomorrow Night
 
 # font-family = BerkeleyMono Nerd Font
 font-size = 11
