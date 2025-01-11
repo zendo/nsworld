@@ -1,8 +1,8 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
-  home.packages = [
-    inputs.nvf.packages.x86_64-linux.default
-    # inputs.nvf.packages.x86_64-linux.maximal
+  home.packages = with pkgs; [
+    inputs.nvf.packages.${system}.default
+    # inputs.nvf.packages.${system}.maximal
   ];
 
   # imports = [inputs.nvf.homeManagerModules.default];

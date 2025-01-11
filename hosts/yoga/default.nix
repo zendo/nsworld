@@ -62,7 +62,7 @@
   # disabledModules = ["config/swap.nix"];
 
   # environment.systemPackages = with pkgs; [
-  #   # inputs.nixpkgs-pr.legacyPackages.x86_64-linux.apps
+  #   inputs.nixpkgs-pr.legacyPackages.${system}.apps
   # ];
 
   ###############################################
