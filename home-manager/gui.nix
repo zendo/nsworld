@@ -10,14 +10,14 @@
     kitty
     ghostty
     # azcomicv
-    picacomic
+    # picacomic
     venera
     # jhentai
 
     nix-init
     # nixos-rebuild-ng
-    inputs.deploy-rs.packages.x86_64-linux.deploy-rs
-    inputs.self.formatter.x86_64-linux
+    inputs.deploy-rs.packages.${system}.deploy-rs
+    inputs.self.formatter.${system}
 
     # nheko
     tdesktop # (webkitgtk)
