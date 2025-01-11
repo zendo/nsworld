@@ -2,7 +2,7 @@
   # Deployment
   deploy -s .#svp
   or
-  nixos-rebuild --target-host zendo@192.168.2.198 --use-remote-sudo --flake .#svp boot
+  nixos-rebuild --target-host aaa@192.168.122.20 --flake .#rmt switch --ask-sudo-password
 */
 { inputs, ... }:
 {
@@ -27,8 +27,5 @@
         };
       };
     };
-    checks = builtins.mapAttrs (
-      system: deployLib: deployLib.deployChecks inputs.self.deploy
-    ) inputs.deploy-rs.lib;
   };
 }
