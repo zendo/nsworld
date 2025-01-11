@@ -31,7 +31,7 @@
   programs = {
     # nix-ld.enable = true;
 
-    clash-verge = {
+    clash-client = {
       enable = true;
       tunMode = true;
       autoStart = true;
