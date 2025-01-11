@@ -16,7 +16,6 @@
         ./home-manager/hm-standalone.nix
         ./hosts/deployment.nix
         ./lib/flake-module.nix
-        ./lib/repl.nix
         ./templates/flake-module.nix
         ./treefmt.nix
       ];
