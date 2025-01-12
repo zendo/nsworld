@@ -15,7 +15,6 @@
     # jhentai
 
     nix-init
-    # nixos-rebuild-ng
     inputs.deploy-rs.packages.${system}.deploy-rs
     inputs.self.formatter.${system}
 

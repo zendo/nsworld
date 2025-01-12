@@ -116,7 +116,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  # auto-fetch deps when `nix run/shell/develop`
+  # Flake Local Nix Configuration
   nixConfig = {
     # bash-prompt = "[nix]λ ";
     # substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];

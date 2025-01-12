@@ -1,20 +1,15 @@
 {
+  lib,
   pkgs,
   username,
   ...
 }:
 {
-  imports = [
-    ./vscode-remote-workaround.nix
-  ];
-
   wsl = {
     enable = true;
     defaultUser = "${username}";
     startMenuLaunchers = true;
   };
-
-  vscode-remote-workaround.enable = true;
 
   home-manager.users.${username} =
     { pkgs, ... }:
@@ -52,6 +47,22 @@
 
   # nixos-rebuild-ng: Python-based re-implementation
   system.rebuild.enableNg = true;
+
+  # vscode-remote-workaround
+  # https://github.com/K900/vscode-remote-workaround
+  systemd.user = {
+    paths.vscode-remote-workaround = {
+      wantedBy = [ "default.target" ];
+      pathConfig.PathChanged = "%h/.vscode-server/bin";
+    };
+
+    services.vscode-remote-workaround.script = ''
+      for i in ~/.vscode-server/bin/*; do
+        echo "Fixing vscode-server in $i..."
+        ln -sf ${lib.getExe pkgs.nodejs}/bin/node $i/node
+      done
+    '';
+  };
 
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
