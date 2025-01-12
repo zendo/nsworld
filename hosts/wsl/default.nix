@@ -59,7 +59,7 @@
     services.vscode-remote-workaround.script = ''
       for i in ~/.vscode-server/bin/*; do
         echo "Fixing vscode-server in $i..."
-        ln -sf ${lib.getExe pkgs.nodejs}/bin/node $i/node
+        ln -sf ${lib.getExe pkgs.nodejs} $i/node
       done
     '';
   };
