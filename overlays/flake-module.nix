@@ -11,7 +11,7 @@
     #   };
     # };
 
-    # Add new pkgs
+    # Add new packages
     # update an unstable package to the latest commit of the default branch
     # nix-update --flake --version=branch rime-ice
     additions =
@@ -21,8 +21,10 @@
         directory = ../pkgs;
       };
 
-    # Mod existed pkgs
+    # Mod existed packages
     modifications = final: prev: {
+      # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
+
       # xwayland env for inputMethod & native CSD
       spotify = prev.spotify.overrideAttrs (oldAttrs: {
         postFixup = ''
