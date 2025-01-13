@@ -27,7 +27,7 @@
         };
     in
     {
-      # nixos-rebuild --use-remote-sudo --flake .#yoga
+      # nixos-rebuild --sudo --flake .#yoga switch
       yoga = mkHost {
         username = "iab";
         hostname = "yoga";
@@ -39,7 +39,7 @@
         ];
       };
 
-      # nixos-rebuild --target-host zendo@192.168.2.198 --use-remote-sudo --flake .#svp boot
+      # nixos-rebuild --target-host zendo@192.168.2.198 --sudo --flake .#svp boot
       svp = mkHost {
         username = "zendo";
         hostname = "svp";
@@ -94,7 +94,7 @@
         modules = [ ./livecd/minimal.nix ];
       };
 
-      # nix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder
+      # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
       wsl = mkHost {
         username = "iab";
         hostname = "wsl";
