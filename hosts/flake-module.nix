@@ -8,8 +8,6 @@
           username,
           nixpkgs ? inputs.nixpkgs,
           system ? "x86_64-linux",
-          defaultModules ? true,
-          hmEnable ? true,
           extraModules ? [ ],
         }:
         nixpkgs.lib.nixosSystem {
@@ -23,32 +21,7 @@
               {
                 networking.hostName = "${hostname}";
               }
-              # disko module
-              inputs.disko.nixosModules.disko
             ]
-            ++ nixpkgs.lib.optionals hmEnable [
-              # home-manager module
-              inputs.home-manager.nixosModules.home-manager
-              # home-manager initialize
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  # fd hm_bak -H -x rm -r
-                  backupFileExtension = "hm_bak~";
-                  extraSpecialArgs = {
-                    inherit inputs;
-                  };
-                  sharedModules = [
-                    ../home-manager/hm-module.nix
-                  ];
-                  # home-manager user initialize
-                  users.${username}.home.username = username;
-                };
-              }
-            ]
-            # modules from ../nixos/flake-module
-            ++ nixpkgs.lib.optionals defaultModules [ self.nixosModules.default ]
             # and more modules
             ++ extraModules;
         };
@@ -59,6 +32,8 @@
         username = "iab";
         hostname = "yoga";
         extraModules = [
+          self.nixosModules.default
+          self.nixosModules.homeManagerInit
           ./yoga
           ./common/laptop.nix
         ];
@@ -70,6 +45,8 @@
         hostname = "svp";
         # nixpkgs = inputs.nixpkgs-stable;
         extraModules = [
+          self.nixosModules.default
+          self.nixosModules.homeManagerInit
           ./svp
           ./common/laptop.nix
         ];
@@ -79,23 +56,33 @@
       rmt = mkHost {
         username = "aaa";
         hostname = "rmt";
-        # hmEnable = false;
-        extraModules = [ ./rmt ];
+        extraModules = [
+          self.nixosModules.default
+          self.nixosModules.homeManagerInit
+          ./rmt
+        ];
       };
 
       # nixos-rebuild build-vm --flake .#vmtest
       vmtest = mkHost {
         username = "test";
         hostname = "vmtest";
-        # hmEnable = false;
-        extraModules = [ ./vmtest ];
+        extraModules = [
+          self.nixosModules.default
+          self.nixosModules.homeManagerInit
+          ./vmtest
+        ];
       };
 
       # nix build .#nixosConfigurations.livecd-graphical.config.system.build.isoImage
       livecd-graphical = mkHost {
         username = "live";
         hostname = "livecd";
-        extraModules = [ ./livecd/graphical.nix ];
+        extraModules = [
+          self.nixosModules.default
+          self.nixosModules.homeManagerInit
+          ./livecd/graphical.nix
+        ];
       };
 
       # nix build .#nixosConfigurations.livecd-minimal.config.system.build.isoImage
@@ -111,13 +98,13 @@
       wsl = mkHost {
         username = "iab";
         hostname = "wsl";
-        defaultModules = false;
         extraModules = [
+          self.nixosModules.homeManagerInit
+          inputs.nixos-wsl.nixosModules.wsl
           ./wsl
           ../nixos/fonts.nix
           ../nixos/nixpkgs.nix
           ../nixos/nixconfig.nix
-          inputs.nixos-wsl.nixosModules.wsl
         ];
       };
     };

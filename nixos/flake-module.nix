@@ -11,6 +11,10 @@
       };
     };
 
+    homeManagerInit = {
+      imports = [ ../home-manager/hm-as-module.nix ];
+    };
+
     gnome = {
       imports = [ ./desktop/gnome.nix ];
     };
