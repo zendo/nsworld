@@ -1,10 +1,13 @@
 { config, ... }:
 let
-  lnDots = config.lib.file.mkOutOfStoreSymlink config.home.homeDirectory + "/nsworld/dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${path}";
+  linkFlake =
+    path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/${path}";
 in
 {
   home.file = {
-    # ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
+    ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
+    ".memo".source = link "Documents/memo";
   };
 
   xdg.configFile = {
@@ -20,21 +23,21 @@ in
     "radioboat".source = ../dotfiles/radioboat;
     "starship.toml".source = ../dotfiles/starship.toml;
 
-    "doom".source = "${lnDots}/doom";
-    "emacs/elisp".source = "${lnDots}/emacs/elisp";
-    "emacs/init.el".source = "${lnDots}/emacs/init.el";
-    "emacs/early-init.el".source = "${lnDots}/emacs/early-init.el";
+    "doom".source = linkFlake "dotfiles/doom";
+    "emacs/elisp".source = linkFlake "dotfiles/emacs/elisp";
+    "emacs/init.el".source = linkFlake "dotfiles/emacs/init.el";
+    "emacs/early-init.el".source = linkFlake "dotfiles/emacs/early-init.el";
 
-    "mpv".source = "${lnDots}/mpv";
-    "mako".source = "${lnDots}/mako";
-    "helix".source = "${lnDots}/helix";
-    "waybar".source = "${lnDots}/waybar";
-    "yt-dlp".source = "${lnDots}/yt-dlp";
-    "ghostty".source = "${lnDots}/ghostty";
-    "niri".source = "${lnDots}/niri";
-    "sway/config".source = "${lnDots}/sway/config";
-    "hypr/hyprland.conf".source = "${lnDots}/hypr/hyprland.conf";
-    "hypr/hyprlock.conf".source = "${lnDots}/hypr/hyprlock.conf";
+    "mpv".source = linkFlake "dotfiles/mpv";
+    "mako".source = linkFlake "dotfiles/mako";
+    "helix".source = linkFlake "dotfiles/helix";
+    "waybar".source = linkFlake "dotfiles/waybar";
+    "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
+    "ghostty".source = linkFlake "dotfiles/ghostty";
+    "niri".source = linkFlake "dotfiles/niri";
+    "sway/config".source = linkFlake "dotfiles/sway/config";
+    "hypr/hyprland.conf".source = linkFlake "dotfiles/hypr/hyprland.conf";
+    "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
   };
 
   xdg.dataFile = {
