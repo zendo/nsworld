@@ -106,6 +106,7 @@
     sl
     cowsay
     fortune
+    cmatrix
     clolcat
     # pipes-rs
     # cbonsai

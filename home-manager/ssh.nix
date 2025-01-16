@@ -8,12 +8,12 @@
         Port 443
 
       Host yoga
-        HostName 192.168.2.118
+        HostName 192.168.1.118
         Port 22
         User iab
 
       Host svp
-        HostName 192.168.2.197
+        HostName 192.168.1.197
         Port 22
         User zendo
 

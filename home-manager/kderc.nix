@@ -17,7 +17,7 @@
   # rm .local/share/plasma-manager/last_run_* ; ~/.local/share/plasma-manager/run_all.sh
   programs.plasma = {
     enable = true;
-
+    # .config/kdeglobals
     workspace = {
       # clickItemTo = "open";
       lookAndFeel = "org.kde.breezetwilight.desktop"; # breezedark, breezetwilight
@@ -33,19 +33,13 @@
       # wallpaper = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Patak/contents/images/1080x1920.png";
     };
 
-    # fonts = {
-    #   general = {
-    #     family = "JetBrains Mono";
-    #     pointSize = 12;
-    #   };
-    # };
-
     # 面板
     panels = [
       {
         location = "bottom";
         height = 44; # default value
         # floating = true;
+        ## .config/plasma-org.kde.plasma.desktop-appletsrc
         widgets = [
           "plasmusic-toolbar"
           "org.kde.plasma.panelspacer" # 面板间隙
@@ -100,6 +94,7 @@
       # }
     ]; # panels end here.
 
+    # .config/kwinrc
     kwin = {
       titlebarButtons = {
         left = [ "more-window-actions" ];
@@ -126,6 +121,43 @@
         desktopSwitching.animation = "slide";
       };
     }; # kwin end here.
+
+    # 电源管理 .config/powerdevilrc
+    powerdevil = {
+      AC = {
+        # 空闲时
+        # autoSuspend = {
+        #   action = "sleep";
+        #   idleTimeout = 900;
+        # };
+        # 关闭屏幕
+        # turnOffDisplay = {
+        #   idleTimeout = 900;
+        #   idleTimeoutWhenLocked = "immediately";
+        # };
+        # 睡眠时进入此模式：混合睡眠
+        whenSleepingEnter = "hybridSleep";
+      };
+      battery = {
+        # 睡眠时进入此模式：待机然后休眠
+        whenSleepingEnter = "standbyThenHibernate";
+      };
+      lowBattery = {
+        whenLaptopLidClosed = "hibernate";
+      };
+    }; # powerdevil end here.
+
+    input.mice = [
+      # cat /proc/bus/input/devices
+      {
+        # yoga laptop touchpad
+        name = "MSFT0001:00 06CB:CE44 Touchpad";
+        productId = "ce44";
+        vendorId = "06cb";
+        naturalScroll = true;
+        enable = true;
+      }
+    ];
 
     configFile = {
       # 搜索
@@ -155,30 +187,6 @@
         "Daemon"."Timeout" = 8; # minutes
       };
 
-      # 电源管理
-      # powermanagementprofilesrc = {
-      #   "AC.DPMSControl".idleTime = 780; # 13 min
-      #   "AC.DimDisplay".idleTime = 480000; # 8 min
-      #   "AC.HandleButtonEvents" = {
-      #     lidAction = 32;
-      #     triggerLidActionWhenExternalMonitorPresent = false;
-      #   };
-      #   "AC.SuspendSession" = {
-      #     idleTime = null;
-      #     suspendThenHibernate = null;
-      #     suspendType = null;
-      #   };
-      #   "Battery.DPMSControl".idleTime = 600; # 10 min
-      #   "Battery.DimDisplay".idleTime = 300000; # 5 min
-      #   "Battery.HandleButtonEvents".triggerLidActionWhenExternalMonitorPresent = false;
-      #   "Battery.SuspendSession" = {
-      #     idleTime = null;
-      #     suspendThenHibernate = null;
-      #     suspendType = null;
-      #   };
-      #   "LowBattery.SuspendSession".suspendThenHibernate = false;
-      # }; #### powermanagement end here.
-
       kwinrc = {
         # 夜间颜色 2700K~3000K
         NightColor = {
@@ -198,7 +206,7 @@
         # Windows = {
 
         # };
-      }; # ### kwinrc end here.
+      }; # kwinrc end here.
 
       # 键盘 - 布局/高级
       kxkbrc = {
