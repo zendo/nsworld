@@ -24,8 +24,8 @@
     # cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver
     # ls /sys/devices/system/cpu/cpu0/   :show CPPCCPPC
 
-    # self.nixosModules.gnome
-    self.nixosModules.kde
+    self.nixosModules.gnome
+    # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri

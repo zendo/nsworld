@@ -4,10 +4,6 @@
   outputs =
     inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
 
       imports = [
         ./hosts/flake-module.nix
@@ -18,6 +14,11 @@
         ./lib/flake-module.nix
         ./templates/flake-module.nix
         ./treefmt.nix
+      ];
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
       ];
 
       perSystem =
