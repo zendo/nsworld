@@ -48,7 +48,7 @@ stdenv.mkDerivation rec {
     ln -s $out/He3/${pname} $out/bin/${pname}
 
     substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace '/opt/He3/he3' 'he3'
+      --replace-fail '/opt/He3/he3' 'he3'
   '';
 
   meta = {

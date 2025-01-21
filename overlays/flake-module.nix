@@ -29,7 +29,7 @@
       spotify = prev.spotify.overrideAttrs (oldAttrs: {
         postFixup = ''
           substituteInPlace $out/share/applications/spotify.desktop \
-            --replace "Exec=spotify %U" "Exec=env NIXOS_OZONE_WL= spotify %U"
+            --replace-fail "Exec=spotify %U" "Exec=env NIXOS_OZONE_WL= spotify %U"
         '';
       });
 
