@@ -51,6 +51,7 @@
     trash-cli
     eget
     croc
+    dufs
     magic-wormhole-rs
 
     # System Monitor
