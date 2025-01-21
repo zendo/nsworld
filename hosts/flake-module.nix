@@ -72,6 +72,20 @@
         ];
       };
 
+      # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
+      wsl = mkHost {
+        username = "iab";
+        hostname = "wsl";
+        extraModules = [
+          self.nixosModules.homeManagerInit
+          inputs.nixos-wsl.nixosModules.wsl
+          ./wsl
+          ../nixos/fonts.nix
+          ../nixos/nixpkgs.nix
+          ../nixos/nixconfig.nix
+        ];
+      };
+
       # nix build .#nixosConfigurations.livecd-graphical.config.system.build.isoImage
       livecd-graphical = mkHost {
         username = "live";
@@ -90,20 +104,6 @@
         };
         system = "x86_64-linux";
         modules = [ ./livecd/minimal.nix ];
-      };
-
-      # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
-      wsl = mkHost {
-        username = "iab";
-        hostname = "wsl";
-        extraModules = [
-          self.nixosModules.homeManagerInit
-          inputs.nixos-wsl.nixosModules.wsl
-          ./wsl
-          ../nixos/fonts.nix
-          ../nixos/nixpkgs.nix
-          ../nixos/nixconfig.nix
-        ];
       };
     };
 }
