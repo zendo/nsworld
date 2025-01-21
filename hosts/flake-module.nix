@@ -99,10 +99,6 @@
 
       # nix build .#nixosConfigurations.livecd-minimal.config.system.build.isoImage
       livecd-minimal = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        system = "x86_64-linux";
         modules = [ ./livecd/minimal.nix ];
       };
     };

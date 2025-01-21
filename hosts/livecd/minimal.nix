@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   modulesPath,
   ...
 }:
@@ -46,7 +45,10 @@
 
   hardware.enableAllFirmware = true;
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    hostPlatform = "x86_64-linux";
+    config.allowUnfree = true;
+  };
 
   nix.settings = {
     substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
