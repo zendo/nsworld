@@ -6,6 +6,7 @@
         path = ./.;
         exclude = [
           ./desktop
+          ./profiles
           ./flake-module.nix
         ];
       };
@@ -13,6 +14,10 @@
 
     homeManagerInit = {
       imports = [ ../home-manager/hm-as-module.nix ];
+    };
+
+    laptopPowerPlan = {
+      imports = [ ./profiles/laptop-power-plan.nix ];
     };
 
     gnome = {

@@ -32,8 +32,8 @@
         extraModules = [
           self.nixosModules.default
           self.nixosModules.homeManagerInit
+          self.nixosModules.laptopPowerPlan
           ./yoga
-          ./common/laptop.nix
         ];
       };
 
@@ -45,8 +45,8 @@
         extraModules = [
           self.nixosModules.default
           self.nixosModules.homeManagerInit
+          self.nixosModules.laptopPowerPlan
           ./svp
-          ./common/laptop.nix
         ];
       };
 
