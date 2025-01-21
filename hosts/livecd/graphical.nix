@@ -56,6 +56,8 @@
 
   networking.wireless.enable = lib.mkImageMediaOverride false;
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   # fast but lowest compression level
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 }

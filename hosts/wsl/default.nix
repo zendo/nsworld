@@ -66,4 +66,5 @@
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
   documentation.enable = false;
+  nixpkgs.hostPlatform = "x86_64-linux";
 }
