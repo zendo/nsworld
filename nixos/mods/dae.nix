@@ -22,19 +22,20 @@ in
 
     sops.templates."config.dae".content = ''
       global {
-        wan_interface: auto
+        # Bind to LAN and/or WAN as you want. Replace the interface name to your own.
+        #lan_interface: docker0
+        wan_interface: auto # Use "auto" to auto detect WAN interface.
 
         log_level: info
         allow_insecure: false
         auto_config_kernel_parameter: true
-        # auto_config_firewall_rule: true
-          }
+      }
 
       subscription {
         airport: '${config.sops.placeholder."dae-sub"}'
       }
 
-      # 更多的 DNS 样例见 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md
+      # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md for full examples.
       dns {
         upstream {
           googledns: 'tcp+udp://dns.google:53'
@@ -42,6 +43,7 @@ in
         }
         routing {
           request {
+            qtype(https) -> reject
             fallback: alidns
           }
           response {
@@ -59,14 +61,14 @@ in
         }
       }
 
-      # 更多的 Routing 样例见 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/routing.md
+      # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/routing.md for full examples.
       routing {
         pname(NetworkManager) -> direct
         dip(224.0.0.0/3, 'ff00::/8') -> direct
 
-        ### 以下为自定义规则
+        ### Write your rules below.
 
-        # 禁用 h3，因为它通常消耗很多 CPU 和内存资源
+        # Disable h3 because it usually consumes too much cpu/mem resources.
         l4proto(udp) && dport(443) -> block
         dip(geoip:private) -> direct
         dip(geoip:cn) -> direct
