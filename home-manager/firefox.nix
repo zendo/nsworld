@@ -44,6 +44,63 @@ in
         "gfx.text.subpixel-position.force-enabled" = true;
         "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
       };
+      search.engines = {
+        Google.metaData.alias = "@g";
+        GitHub = {
+          urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
+          iconUpdateURL = "https://github.com/fluidicon.png";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = [ "@git" ];
+        };
+        MyNixOS = {
+          urls = [ { template = "https://www.mynixos.com/search?q={searchTerms}"; } ];
+          iconUpdateURL = "https://mynixos.com/favicon.ico";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = [ "@nse" "@mynixos" ];
+        };
+        "Nix Packages" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@nix" ];
+        };
+        "Home Manager Options" = {
+          urls = [
+            {
+              template = "https://home-manager-options.extranix.com/";
+              params = [
+                {
+                  name = "release";
+                  value = "master";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@hm" ];
+        };
+      };
     };
   };
 }
