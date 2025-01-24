@@ -29,25 +29,4 @@ in
       };
     };
   };
-
-  # lightdm
-  services.xserver.displayManager.lightdm = {
-    # enable = true;
-    greeters.gtk = {
-      cursorTheme.size = 48;
-      extraConfig = ''
-        xft-dpi=261
-        clock-format=%H:%M
-      '';
-      indicators = [
-        "~spacer"
-        "~clock"
-        "~spacer"
-        "~session"
-        # "~language"
-        # "~a11y"
-        "~power"
-      ];
-    };
-  };
 }
