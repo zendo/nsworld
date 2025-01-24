@@ -57,7 +57,7 @@
     # System Monitor
     ctop # containers monitor
     iotop-c
-    dstat
+    dool # py fork of dstat
     powertop
     psmisc # pstree
     procs
