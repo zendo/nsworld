@@ -7,8 +7,8 @@ host := `uname -n`
 user := `loginctl --no-legend list-users | awk '{print $2;}'`
 home_dir := env_var('HOME')
 
-default:
-    @just --choose
+_default:
+    @just --choose --unsorted
 
 switch:
     nixos-rebuild --sudo --flake .#"{{host}}" switch

@@ -3,7 +3,7 @@ set shell := ["bash", "-uc"]
 user := `loginctl --no-legend list-users | awk '{print $2;}'`
 home_dir := env_var('HOME')
 
-default:
+_default:
     @just --choose
 
 backup-data:
