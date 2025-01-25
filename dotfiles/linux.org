@@ -56,28 +56,6 @@ file1 -nt file2  is 1 newer than 2
 -lt less
 -ne not equal
 
-** 权限
-~install -Dm644 file~
-~install -Dm755 folder~
-
--/rwx/rw-/r--
-第一个字符 文件类型
-- 普通文件
-d 目录
-l 符号链接
-c
-b
-第二组 所有者权限
-r 读取 w 写入 x 可执行
-第三组 组权限
-第四组 其它用户权限
-
-** ls
-ls Download Document
-ls -Sla 文件大小排序 / -r 倒序排序
-ls -tla 修改时间排序
-lt -L 2 树形目录二层
-
 ** cp
 cp -u --update 仅复制不存在和不一样的文件
 cp filename{,.bak} 快速建立备份文件
@@ -183,12 +161,4 @@ sed 's/origin/fininal/g' xxx.txt    # s替换 g全局 原本/修改后
 sudo sed -i 's/$/ fedora/' /etc/hosts  # 每行末尾添加
 #+end_src>
 https://github.com/adrianscheff/useful-sed
-
-* fd & rg
-#+begin_src bash
-fd -t[f/d/l/x] #文件/目录/符号链接/执行文件
-fd -H  #搜索隐藏文件
-fd -e md  #文件扩展名
-fd '^foo' #foo起始名的文件
-#+end_src>
 
