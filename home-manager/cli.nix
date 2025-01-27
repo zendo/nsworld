@@ -27,6 +27,7 @@
     efm-langserver # markdown lsp
     strace
     lurk # strace alternative
+    flow-editor
 
     # Compressor / Archiver
     p7zip
