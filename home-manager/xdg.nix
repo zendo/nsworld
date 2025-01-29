@@ -11,8 +11,8 @@
   ];
 
   home.sessionVariables = {
-    VISUAL = "micro";
-    EDITOR = "emacs";
+    VISUAL = "flow";
+    EDITOR = "flow";
     NIXOS_OZONE_WL = lib.mkDefault 1; # Electron wayland native
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
