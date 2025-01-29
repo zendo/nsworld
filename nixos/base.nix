@@ -5,9 +5,6 @@
   ...
 }:
 {
-  # Only enable on Desktop
-  hardware.bluetooth.enable = config.services.graphical-desktop.enable;
-
   # Make `xdg-open` works inside FHS envs
   xdg.portal.xdgOpenUsePortal = true;
 
