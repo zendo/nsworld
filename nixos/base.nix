@@ -8,9 +8,6 @@
   # Only enable on Desktop
   hardware.bluetooth.enable = config.services.graphical-desktop.enable;
 
-  # This allows PipeWire to run with realtime privileges (i.e: less cracks)
-  security.rtkit.enable = config.services.pipewire.enable;
-
   # Make `xdg-open` works inside FHS envs
   xdg.portal.xdgOpenUsePortal = true;
 
@@ -47,12 +44,6 @@
     acpid.enable = true;
     # fwupd.enable = true;
     btrfs.autoScrub.enable = config.fileSystems."/".fsType == "btrfs";
-
-    # auto-enabled by `services.graphical-desktop`
-    pipewire = {
-      # alsa.support32Bit = true;
-      # jack.enable = true;
-    };
 
     journald.extraConfig = ''
       SystemMaxUse=50M
