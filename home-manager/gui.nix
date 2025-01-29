@@ -10,9 +10,6 @@
     kitty
     ghostty
     # azcomicv
-    # picacomic
-    venera
-    # jhentai
 
     nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
@@ -25,6 +22,9 @@
     #   name = "nekoray";
     #   package = pkgs.nekoray;
     # })
+    picacomic
+    venera
+    # jhentai
 
     # Terminal
     cava

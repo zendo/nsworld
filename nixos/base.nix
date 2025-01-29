@@ -20,10 +20,9 @@
 
     initrd.systemd = {
       enable = lib.mkDefault true;
-      # root = "gpt-auto";
     };
 
-    # Enable "Silent Boot"
+    # Silent Boot
     consoleLogLevel = 0;
     initrd.verbose = false;
     kernelParams = lib.optionals config.boot.plymouth.enable [
