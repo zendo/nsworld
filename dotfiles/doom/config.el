@@ -115,8 +115,10 @@
 (define-advice doom--recentf-add-dired-directory-h (:override ()))
 
 ;; projectile
-;; clear cache manual (M-x projectile-invalidate-cache) or
-(setq projectile-enable-caching nil)
+(after! projectile
+  ;; manual clear cache (M-x projectile-invalidate-cache) or
+  (setq projectile-enable-caching nil)
+  )
 
 ;; hippie expand is dabbrev expand on steroids
 ;; doom 顺序似乎不对，这里覆盖自己的配置
