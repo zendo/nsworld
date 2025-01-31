@@ -50,13 +50,13 @@
 
     clash-verge = {
       enable = true;
-      autoStart = true;
+      # autoStart = true;
     };
   };
 
   mods = {
     steam.enable = true;
-    # daeWithConfig.enable = true;
+    daeWithConfig.enable = true;
   };
 
   # disabledModules = ["config/swap.nix"];
@@ -133,7 +133,7 @@
       configurationLimit = 5; # bootmenu items
       consoleMode = "max";
       windows = {
-        "11-home" = {
+        "nvme0n1p1" = {
           title = "Windows 11";
           # sudo blkid //check Windows ESP PARTUUID
           # reboot to systemd-boot uefi shell and type: map
