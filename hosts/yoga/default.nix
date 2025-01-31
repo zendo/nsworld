@@ -129,12 +129,22 @@
       efiSysMountPoint = "/efi"; # default /boot
     };
     systemd-boot = {
-      # enable = true;
+      enable = true;
       configurationLimit = 5; # bootmenu items
       consoleMode = "max";
+      windows = {
+        "11-home" = {
+          title = "Windows 11";
+          # sudo blkid //check Windows ESP PARTUUID
+          # reboot to systemd-boot uefi shell and type: map
+          # find the FS alias match Windows ESP (ex: HD0a66666a2, HD0b, FS1, or BLK7)
+          efiDeviceHandle = "FS0";
+          sortKey = "a_windows";
+        };
+      };
     };
     grub = {
-      enable = true;
+      # enable = true;
       device = "nodev";
       efiSupport = true;
       gfxmodeEfi = "1024x768";

@@ -1,8 +1,8 @@
 # https://github.com/ademlabs/synckeys
 
 # gsudo psexec -s -i regedit /e %HOMEPATH%\Desktop\keydump.reg HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTHPORT\Parameters\Keys
-# cd /var/lib/bluetooth/<adapter>/<linux-paired-MAC>
-# cat ~/keydump.reg
+# cd /var/lib/bluetooth/<adapter>
+# cat ~/keydump.reg // find and copy <windows-paired-MAC>
 # echo "ce150a771612" | sed 's/\(..\)/\1:/g; s/:$//' | tr 'a-z' 'A-Z'
 # mv <linux-paired-MAC> <windows-paired-MAC>
 # sudo python3 ~/nsworld/dotfiles/bin/synckeys.py ~/keydump.reg

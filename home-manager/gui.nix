@@ -76,7 +76,7 @@
 
     # warp
     # remmina # (webkitgtk)
-    gnome-decoder
+    # gnome-decoder
     # https://github.com/nix-community/home-manager/issues/5173
     (lib.hiPrio localsend)
     # motrix

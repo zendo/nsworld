@@ -14,13 +14,13 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c8f434fd-a614-4768-b110-cd305c2151d1";
+    { device = "/dev/disk/by-uuid/39b70377-02ad-4df7-9b5e-748933099ad8";
       fsType = "btrfs";
       options = [ "compress=zstd" "noatime" ];
     };
 
   fileSystems."/efi" =
-    { device = "/dev/disk/by-uuid/4E52-03B1";
+    { device = "/dev/disk/by-uuid/E836-2C34";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
@@ -32,7 +32,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
