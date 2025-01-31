@@ -82,9 +82,3 @@ non-nixos-setup:
     trusted-users = root @wheel {{user}}
     substituters = https://mirror.sjtu.edu.cn/nix-channels/store
     EOF
-
-sops-ssh2keyfile:
-    mkdir -p ~/.config/sops/age
-    sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
-    age-keygen -y ~/.config/sops/age/keys.txt | nix run nixpkgs#clolcat
-    # sops updatekeys nixos/secrets/secrets.yaml

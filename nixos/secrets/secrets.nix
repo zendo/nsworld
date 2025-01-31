@@ -6,6 +6,7 @@
   # or Using own private ssh key
   ssh-to-age -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt
   # or Remote host [sshKeyPaths]
+  cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
   sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key | age-keygen -y
 
   # Print out public key and add in .sops.yaml
@@ -14,7 +15,7 @@
   # Update all secrets when add new key
   sops updatekeys nixos/secrets/secrets.yaml
 
-  # decrypt and show the real value
+  # Decrypt and show the real value
   sops --extract '["hello"]' --decrypt secrets/secrets.yaml
 */
 { inputs, username, ... }:
