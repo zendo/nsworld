@@ -4,6 +4,7 @@
     # https://wiki.debian.org/thermald
     thermald.enable = true;
 
+    # Conflicts with auto-cpufreq
     power-profiles-daemon.enable = false;
 
     # https://github.com/AdnanHodzic/auto-cpufreq

@@ -32,14 +32,20 @@
 
   programs = {
     evince.package = pkgs.papers;
+
     kdeconnect = {
       # enable = true;
       package = pkgs.valent;
       # package = pkgs.gnomeExtensions.gsconnect;
     };
+
+    nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "kitty";
+    };
   };
 
-  # Fix autologin failed: https://nixos.wiki/wiki/GNOME
+  # Fix autologin failed: https://wiki.nixos.org/wiki/GNOME#Automatic_login
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
