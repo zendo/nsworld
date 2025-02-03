@@ -6,11 +6,11 @@
 }:
 {
   home.packages = with pkgs; [
+    # azcomicv
+
     foot
     kitty
     ghostty
-    # azcomicv
-
     nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
     inputs.self.formatter.${system}
@@ -33,6 +33,8 @@
     # imagemagick
     exiftool
     ffmpegthumbnailer
+    # unar # free but oversize
+    unrar # unfree
 
     # Multimedia
     spotify
