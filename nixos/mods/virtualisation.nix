@@ -79,7 +79,6 @@ in
           package = pkgs.qemu_kvm; # emulate only host architectures
           # swtpm.enable = true; # emulated TPM
           ovmf = {
-            enable = true; # UEFI
             # packages = [
             #   (pkgs.OVMFFull.override
             #     {

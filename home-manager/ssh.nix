@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   programs.ssh = {
     enable = true;
@@ -10,17 +10,17 @@
       Host yoga
         HostName 192.168.1.118
         Port 22
-        User iab
+        User root
 
       Host svp
         HostName 192.168.1.197
         Port 22
-        User zendo
+        User root
 
       Host rmt
         HostName 192.168.122.20
         Port 22
-        User aaa
+        User root
 
       #ProxyCommand nc -X 5 -x 127.0.0.1:7890 %h %p
     '';
