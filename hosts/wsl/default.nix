@@ -5,12 +5,6 @@
   ...
 }:
 {
-  wsl = {
-    enable = true;
-    defaultUser = "${username}";
-    startMenuLaunchers = true;
-  };
-
   home-manager.users.${username} =
     { pkgs, ... }:
     {
@@ -47,6 +41,17 @@
       };
     };
 
+  wsl = {
+    enable = true;
+    defaultUser = "${username}";
+    startMenuLaunchers = true;
+  };
+
+  programs = {
+    zsh.enable = true;
+    command-not-found.enable = false;
+  };
+
   environment.systemPackages = with pkgs; [
     binutils
     tree
@@ -57,19 +62,6 @@
     wslu
     wsl-open
   ];
-
-  programs = {
-    zsh.enable = true;
-    command-not-found.enable = false;
-
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
-
-  # nixos-rebuild-ng: Python-based re-implementation
-  system.rebuild.enableNg = true;
 
   # vscode-remote-workaround
   # https://github.com/K900/vscode-remote-workaround
@@ -90,4 +82,7 @@
   system.stateVersion = "25.05";
   documentation.enable = false;
   nixpkgs.hostPlatform = "x86_64-linux";
+
+  # nixos-rebuild-ng: Python-based re-implementation
+  system.rebuild.enableNg = true;
 }
