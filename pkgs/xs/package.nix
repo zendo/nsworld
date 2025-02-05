@@ -12,14 +12,10 @@
   nspr,
   alsa-lib,
   libdrm,
-  libva,
-  libvdpau,
-  libunwind,
-  libarchive,
-  libpulseaudio,
-  lcms2,
   xorg,
   mpv-unwrapped,
+  fd,
+  libwebp,
 }:
 
 stdenv.mkDerivation rec {
@@ -53,6 +49,8 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
+    ${fd}/bin/fd -e webp -p usr/share/icons -x ${libwebp}/bin/dwebp {} -o {.}.png
+    ${fd}/bin/fd -e webp -p usr/share/icons -x rm
     cp -r usr/share $out
     ln -s $out/share/xs/xs $out/bin
   '';
