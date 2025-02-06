@@ -88,7 +88,7 @@
       # code = {
       #   name = "Visual Studio Code";
       #   icon = "vscode";
-      #   exec = "code --enable-wayland-ime";
+      #   exec = "env NIXOS_OZONE_WL= code";
       # };
       # doom-emacs = {
       #   name = "Doom Emacs";
