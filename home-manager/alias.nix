@@ -9,9 +9,9 @@
     cat = "${lib.getExe pkgs.bat} -p";
     l = "${lib.getExe pkgs.eza} -l --icons";
     "la." = "ls -d .*";
-    rm = "${pkgs.trash-cli}/bin/trash-put";
-    rm-empty = "${pkgs.trash-cli}/bin/trash-empty";
-    rm-restore = "${pkgs.trash-cli}/bin/trash-restore";
+    rm = "${lib.getExe pkgs.gtrash} put";
+    rm-empty = "${lib.getExe pkgs.gtrash} find --rm";
+    rm-restore = "${lib.getExe pkgs.gtrash} restore";
     free = "free -h";
     bc = "${lib.getExe pkgs.libqalculate}";
     inxi = "inxi -Fz";
