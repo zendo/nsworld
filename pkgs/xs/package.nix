@@ -14,17 +14,15 @@
   libdrm,
   xorg,
   mpv-unwrapped,
-  fd,
-  libwebp,
 }:
 
 stdenv.mkDerivation rec {
   pname = "xs";
-  version = "1.0.16";
+  version = "1.0.17";
 
   src = fetchurl {
     url = "https://github.com/Sle2p/xs.cx/releases/download/${version}/xs-${version}+1-linux.deb";
-    hash = "sha256-SAPAEn1y/wLt8F3QuITOJxqWBDyRVl9UsEhW1eBsU9Y=";
+    hash = "sha256-d9mSN3OcX/asIa7H7aa+rEfosLHfnQ1ArKT554jS5PQ=";
   };
 
   nativeBuildInputs = [
@@ -49,8 +47,6 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    ${fd}/bin/fd -e webp -p usr/share/icons -x ${libwebp}/bin/dwebp {} -o {.}.png
-    ${fd}/bin/fd -e webp -p usr/share/icons -x rm
     cp -r usr/share $out
     ln -s $out/share/xs/xs $out/bin
   '';
