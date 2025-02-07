@@ -46,7 +46,7 @@
     # rage # age encrypt RIIR
     chafa # image viewer
     viu # image viewer
-    trash-cli
+    gtrash
     eget
     croc
     dufs

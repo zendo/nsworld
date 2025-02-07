@@ -69,6 +69,7 @@
       gnome-randr
       qadwaitadecorations-qt6
 
+      refine
       gnome-tweaks
       dconf-editor
       gnome-power-manager

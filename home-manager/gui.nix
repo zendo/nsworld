@@ -23,7 +23,7 @@
     #   name = "nekoray";
     #   package = pkgs.nekoray;
     # })
-    picacomic
+    # picacomic
     venera
     # jhentai
 
