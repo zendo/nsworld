@@ -50,13 +50,13 @@
 
     clash-verge = {
       enable = true;
-      # autoStart = true;
+      autoStart = true;
     };
   };
 
   mods = {
     steam.enable = true;
-    daeWithConfig.enable = true;
+    # daeWithConfig.enable = true;
   };
 
   # disabledModules = ["config/swap.nix"];

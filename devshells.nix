@@ -167,6 +167,13 @@
   # python setup.py install --root=/home/iab/devs/
   python = pkgs.mkShell {
     buildInputs = with pkgs; [
+      (python3.withPackages (
+        p: with p; [
+          numpy
+          requests
+          pandas
+        ]
+      ))
       python3
       virtualenv
       python3Packages.pip
@@ -181,6 +188,10 @@
       pygments
       # pyqt5
       # pyqt6
+    ];
+    env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+      pkgs.stdenv.cc.cc.lib
+      pkgs.libz
     ];
   };
 
