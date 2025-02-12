@@ -1,16 +1,7 @@
 { ... }:
 {
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = false;
-  };
-
-  programs.zellij = {
-    # enable = true;
-  };
-
   programs.fish = {
-    # enable = true;
+    enable = false;
     generateCompletions = false;
     interactiveShellInit = ''
       # Disable the greeting message.

@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    inputs.nvf.packages.${system}.default
+    # inputs.nvf.packages.${system}.default
     # inputs.nvf.packages.${system}.maximal
   ];
 

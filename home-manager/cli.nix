@@ -203,6 +203,15 @@
       nix-direnv.enable = true;
     };
 
+    starship = {
+      enable = true;
+      enableBashIntegration = false;
+    };
+
+    zellij = {
+      # enable = true;
+    };
+
     micro = {
       enable = true;
       settings = {
