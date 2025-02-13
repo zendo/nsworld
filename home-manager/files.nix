@@ -1,13 +1,13 @@
 { config, ... }:
 let
-  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${path}";
+  linkHome = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${path}";
   linkFlake =
     path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/${path}";
 in
 {
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
-    ".memo".source = link "Documents/memo";
+    ".memo".source = linkHome "Documents/memo";
   };
 
   xdg.configFile = {
