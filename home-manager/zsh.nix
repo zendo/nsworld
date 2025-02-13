@@ -1,32 +1,11 @@
 { ... }:
 {
-  programs.fish = {
-    enable = false;
-    generateCompletions = false;
-    interactiveShellInit = ''
-      # Disable the greeting message.
-      set fish_greeting
-    '';
-  };
-
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    plugins = [
-      # {
-      #   name = "minimal";
-      #   file = "minimal.zsh";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "subnixr";
-      #     repo = "minimal";
-      #     rev = "6588a399744f34194a25988b4c159cb8b8c67e27";
-      #     hash = "sha256-r5AIk7TzXQ5x+mXRA6isWCn0FvmICeFR36k5Kq4s+Yk=";
-      #   };
-      # }
-    ];
     history = {
       extended = true; # Save timestamp
       expireDuplicatesFirst = true;

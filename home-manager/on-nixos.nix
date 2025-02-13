@@ -10,6 +10,7 @@
       ./git.nix
       ./cli.nix
       ./zsh.nix
+      ./fish.nix
       ./bash.nix
       ./alias.nix
       ./files.nix

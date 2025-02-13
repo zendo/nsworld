@@ -25,6 +25,7 @@
             ./git.nix
             ./cli.nix
             ./zsh.nix
+            ./fish.nix
             ./alias.nix
             ./files.nix
             ./nvim.nix
