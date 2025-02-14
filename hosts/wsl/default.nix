@@ -57,7 +57,6 @@
     tree
     file
     wget
-    micro
     flow-editor
     wslu
     wsl-open

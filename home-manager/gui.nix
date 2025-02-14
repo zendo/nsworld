@@ -51,7 +51,7 @@
     # amberol
     audacious
     # rhythmbox
-    # lowfi
+    lowfi
     goodvibes
     go-musicfox
     # qcm

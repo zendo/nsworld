@@ -64,7 +64,6 @@
     curl
     parted
     gptfdisk
-    micro
     flow-editor
     sniffglue
     sbctl
