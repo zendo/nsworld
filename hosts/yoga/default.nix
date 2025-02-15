@@ -69,6 +69,10 @@
   ## Hardware
   ###############################################
 
+  # fix ax200 bluetooth disconnect
+  hardware.enableAllFirmware = true;
+  nixpkgs.config.allowUnfree = true;
+
   # hardware.amdgpu.amdvlk.enable = true;
 
   boot = {
