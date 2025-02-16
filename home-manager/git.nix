@@ -4,6 +4,7 @@
     enable = true;
     userName = "zendo";
     userEmail = "linzway@qq.com";
+    signing.format = "openpgp";
     aliases = {
       st = "status -sb";
       ds = "diff --stat";
