@@ -18,7 +18,6 @@ in
     "zellij".source = ../dotfiles/zellij;
     "wezterm".source = ../dotfiles/wezterm;
     "swaylock".source = ../dotfiles/swaylock;
-    "nix-init".source = ../dotfiles/nix-init;
     "alacritty".source = ../dotfiles/alacritty;
     "radioboat".source = ../dotfiles/radioboat;
     "starship.toml".source = ../dotfiles/starship.toml;
