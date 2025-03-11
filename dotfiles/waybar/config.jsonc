@@ -14,10 +14,7 @@
     "sway/workspaces",
   ],
 
-  "modules-center": [
-    "clock",
-    "custom/playerctl",
-  ],
+  "modules-center": ["clock", "custom/playerctl"],
 
   "modules-right": [
     "tray",
@@ -27,16 +24,16 @@
     "backlight",
     "battery",
     // "power-profiles-daemon",
-    "custom/wlogout"
+    "custom/wlogout",
   ],
 
   // modules-left
   "custom/launcher": {
     "format": "{icon}",
     "format-icons": {
-      "default": ""
+      "default": "",
     },
-    "on-click": "wofi"
+    "on-click": "wofi",
   },
 
   "hyprland/workspaces": {
@@ -44,9 +41,9 @@
     "on-click": "activate",
     "format-icons": {
       "default": "",
-      "active": ""
+      "active": "",
     },
-    "sort-by-number": true
+    "sort-by-number": true,
   },
 
   "wlr/workspaces": {
@@ -82,13 +79,12 @@
       }*/
   },
 
-
   // modules-center
   "clock": {
     "format": " {:%H:%M}",
     "format-alt": " {:%d-%m-%Y}",
     "on-click-right": "uwsm app -- gnome-calendar",
-    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>"
+    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>",
   },
 
   "custom/playerctl": {
@@ -111,7 +107,7 @@
     "format-off": "󰂲",
     "format-on": "󰂯",
     "format-disabled": "󰂲",
-    "on-click": "blueman-manager"
+    "on-click": "blueman-manager",
   },
 
   "wireplumber": {
@@ -122,8 +118,8 @@
     "on-click": "pwvucontrol",
     "on-click-right": "easyeffects",
     "format-icons": {
-      "default": ["󰕿", "󰖀", "󰕾"]
-    }
+      "default": ["󰕿", "󰖀", "󰕾"],
+    },
   },
 
   "network": {
@@ -132,7 +128,7 @@
     "format-ethernet": "",
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "on-click-right": "XDG_CURRENT_DESKTOP=GNOME uwsm app -- gnome-control-center wifi",
-    "on-click": "uwsm app -- kitty nmtui"
+    "on-click": "uwsm app -- kitty nmtui",
   },
 
   "backlight": {
@@ -150,13 +146,13 @@
       "good": 95,
       "decent": 50,
       "warning": 30,
-      "critical": 20
+      "critical": 20,
     },
     "format": "{icon}",
     "format-time": "{H} h {M} min",
     "format-alt": "{icon} {time}",
     "tooltip-format": "{capacity}%",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": ["", "", "", "", ""],
   },
 
   "power-profiles-daemon": {
@@ -167,8 +163,8 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": ""
-    }
+      "power-saver": "",
+    },
   },
 
   "cpu": {
@@ -242,8 +238,8 @@
   "custom/wlogout": {
     "format": "{icon}",
     "format-icons": {
-      "default": "⏻"
+      "default": "⏻",
     },
-    "on-click": "wlogout"
+    "on-click": "wlogout",
   },
 }

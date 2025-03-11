@@ -12,7 +12,7 @@ in
   config = lib.mkIf cfg.enable {
     services.dae = {
       enable = true;
-      # configFile = "/home/iab/dev/config.dae";
+      # configFile = "/home/iab/.sub/config.dae";
       configFile = config.sops.templates."config.dae".path;
     };
 
@@ -20,6 +20,7 @@ in
       dae-sub = { };
     };
 
+    # https://github.com/daeuniverse/dae/blob/main/docs/en/README.md#minimal-configuration
     sops.templates."config.dae".content = ''
       global {
         # Bind to LAN and/or WAN as you want. Replace the interface name to your own.

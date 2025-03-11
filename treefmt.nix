@@ -36,6 +36,9 @@
         ## HTML/CSS/TS/JSON/YAML/MARKDOWN
         ###############################################
         programs.prettier.enable = true;
+        settings.formatter.prettier.includes = [
+          "*.jsonc"
+        ];
         settings.formatter.prettier.excludes = [
           "*secrets*"
           "dotfiles/Windows/*"
