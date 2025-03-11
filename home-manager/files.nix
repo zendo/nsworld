@@ -20,7 +20,6 @@ in
     "zellij".source = ../dotfiles/zellij;
     "swaylock".source = ../dotfiles/swaylock;
     "alacritty".source = ../dotfiles/alacritty;
-    "radioboat".source = ../dotfiles/radioboat;
     "starship.toml".source = ../dotfiles/starship.toml;
 
     "mpv".source = linkFlake "dotfiles/mpv";

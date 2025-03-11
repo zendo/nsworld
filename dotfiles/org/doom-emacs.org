@@ -59,7 +59,7 @@
        ;; (objed +manual)             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
-       snippets          ; my elves. They type so I don't have to
+       ;; snippets          ; my elves. They type so I don't have to
        ;; word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
@@ -438,6 +438,12 @@
   (interactive)
   (call-interactively #'dired-mark-files-regexp)
   (command-execute "tk"))
+#+end_src
+** Org
+#+begin_src emacs-lisp :tangle no
+(after! org
+
+  )
 #+end_src
 
 ** Shell
