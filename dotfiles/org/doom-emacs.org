@@ -5,7 +5,7 @@
 #+AUTO_TANGLE: t
 
 * init
-#+begin_src emacs-lisp :tangle "~/.doom.d/init.el"
+#+begin_src emacs-lisp :tangle "~/.config/doom/init.el"
 ;;; $DOOMDIR/init.el -*- lexical-binding: t; -*-
 (doom! :input
        ;;chinese
@@ -189,7 +189,7 @@
 #+end_src
 
 * package
-#+begin_src emacs-lisp :tangle "~/.doom.d/packages.el"
+#+begin_src emacs-lisp :tangle "~/.config/doom/packages.el"
 ;;;; $DOOMDIR/packages.el -*- lexical-binding: t; -*-
 (package! crux)
 (package! rotate)
@@ -212,7 +212,7 @@
 #+end_src
 
 * config
-#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.doom.d/config.el"
+#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/doom/config.el"
 ** Header
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-

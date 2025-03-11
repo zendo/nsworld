@@ -2,11 +2,11 @@
 #+AUTHOR: zendo
 #+DATE: 03/2025
 #+STARTUP: overview indent
-#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.emacs.d/init.el"
+#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/init.el"
 #+AUTO_TANGLE: t
 
 * early-init.el
-#+begin_src emacs-lisp :tangle "~/.emacs.d/early-init.el"
+#+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
 ;;; early-init.el --- Early Initialization -*- lexical-binding: t; -*-
 
 ;;; Commentary:

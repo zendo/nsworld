@@ -8,8 +8,6 @@ in
   home.file = {
     ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
     ".memo".source = linkHome "Documents/memo";
-    ".emacs.d/all-emacs.org".source = linkFlake "dotfiles/org/all-emacs.org";
-    ".doom.d/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
   };
 
   xdg.configFile = {
@@ -33,6 +31,8 @@ in
     "sway/config".source = linkFlake "dotfiles/sway/config";
     "hypr/hyprland.conf".source = linkFlake "dotfiles/hypr/hyprland.conf";
     "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
+    "doom/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
+    "emacs/all-emacs.org".source = linkFlake "dotfiles/org/all-emacs.org";
   };
 
   xdg.dataFile = {
