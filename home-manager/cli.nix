@@ -162,7 +162,7 @@
 
     # hh :history
     hstr = {
-      enable = true;
+      # enable = true;
     };
 
     fzf = {

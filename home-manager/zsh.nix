@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -7,6 +7,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     history = {
+      path = "${config.xdg.dataHome}/zsh/history";
       extended = true; # Save timestamp
       expireDuplicatesFirst = true;
     };
