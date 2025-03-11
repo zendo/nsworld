@@ -1,32 +1,53 @@
+// https://github.com/caffeine01/dotfiles/tree/main/common/home/services/waybar/config
+
 {
-  "layer": "top",
-  "position": "top",
-  "mod": "dock",
-  "output": "eDP-1",
-  "height": 30,
+  "layer": "bottom",
+  // "position": "top",
+  // "mod": "dock",
+  // "output": "eDP-1",
+  "height": 40,
 
   "modules-left": [
-    // "custom/launcher",
+    "custom/launcher",
+    // "hyprland/workspaces",
     // "wlr/workspaces",
     "sway/workspaces",
-    "wlr/taskbar",
   ],
+
   "modules-center": [
-    // "custom/notification",
     "clock",
     "custom/playerctl",
   ],
+
   "modules-right": [
     "tray",
-    "pulseaudio",
+    // "bluetooth",
+    "wireplumber",
+    // "network",
     "backlight",
-    // "idle_inhibitor",
     "battery",
-    // "custom/sysmenu",
-    "custom/logout",
+    // "power-profiles-daemon",
+    "custom/wlogout"
   ],
 
-  // Modules configuration
+  // modules-left
+  "custom/launcher": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": ""
+    },
+    "on-click": "wofi"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "default": "",
+      "active": ""
+    },
+    "sort-by-number": true
+  },
 
   "wlr/workspaces": {
     "disable-scroll": true,
@@ -61,53 +82,93 @@
       }*/
   },
 
-  "wlr/taskbar": {
-    "format": "{icon}",
-    "icon-size": 18,
-    // "icon-theme": "Papirus-Dark",
-    "tooltip-format": "{app_id}: {title}",
-    "on-click": "activate",
-    "on-click-middle": "close",
-  },
 
-  "sway/mode": {
-    "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-    "tooltip": false,
-  },
-
-  "sway/window": {
-    "format": "{}",
-    "max-length": 120,
-  },
-
-  "sway/workspaces": {
-    "all-outputs": false,
-    "disable-scroll": true,
-    "format": "{icon} {name}",
-    "format-icons": {
-      "1:www": "",
-      "2:mail": "",
-      "3:editor": "",
-      "4:terminals": "",
-      "5:portal": "",
-      "urgent": "",
-      "focused": "",
-      "default": "",
-    },
-  },
-
-  "custom/sysmenu": {
-    "format": "󰤆",
-    "on-click": "sh $HOME/.config/waybar/scripts/sysmenu.sh",
-    "tooltip": false,
-  },
-
+  // modules-center
   "clock": {
-    "timezone": "Asia/Shanghai",
-    "on-click": "calcurse",
-    //"format": "{: %m/%d   %R}",
-    "format": " {:%R}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>",
+    "format": " {:%H:%M}",
+    "format-alt": " {:%d-%m-%Y}",
+    "on-click-right": "uwsm app -- gnome-calendar",
+    "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>"
+  },
+
+  "custom/playerctl": {
+    "format": "  {}",
+    "max-length": 60,
+    "interval": 5, // Remove this if your script is endless and write in loop
+    "exec": "$HOME/.config/waybar/scripts/playerctl.sh 2> /dev/null",
+    "tooltip": false,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next",
+  },
+
+  // modules-right
+  "bluetooth": {
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias}",
+    "tooltip-format-connected-battery": "󰥉 {device_battery_percentage}%",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "format-disabled": "󰂲",
+    "on-click": "blueman-manager"
+  },
+
+  "wireplumber": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 {volume}%",
+    "on-click": "pwvucontrol",
+    "on-click-right": "easyeffects",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    }
+  },
+
+  "network": {
+    "tooltip": false,
+    "format-wifi": "{icon} {essid}",
+    "format-ethernet": "",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "on-click-right": "XDG_CURRENT_DESKTOP=GNOME uwsm app -- gnome-control-center wifi",
+    "on-click": "uwsm app -- kitty nmtui"
+  },
+
+  "backlight": {
+    "tooltip": false,
+    "format": " {}%",
+    "interval": 1,
+    "on-scroll-up": "brightnessctl set 1%+",
+    "on-scroll-down": "brightnessctl set 1%-",
+    "on-click": "sh $HOME/.config/waybar/scripts/sunset.sh",
+  },
+
+  "battery": {
+    "states": {
+      "full": 100,
+      "good": 95,
+      "decent": 50,
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "{icon}",
+    "format-time": "{H} h {M} min",
+    "format-alt": "{icon} {time}",
+    "tooltip-format": "{capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
   },
 
   "cpu": {
@@ -155,34 +216,10 @@
     "format": "{icon}",
   },
 
-  "custom/logout": {
-    "on-click": "wlogout",
-    "format-icons": ["⏻"],
-    "format": "{icon}",
-  },
-
   "custom/weather": {
     "return-type": "json",
     "interval": 1800,
     "exec": "sh $HOME/.config/waybar/scripts/weather.sh",
-  },
-
-  "custom/playerctl": {
-    "format": "  {}",
-    "max-length": 60,
-    "interval": 5, // Remove this if your script is endless and write in loop
-    "exec": "$HOME/.config/waybar/scripts/playerctl.sh 2> /dev/null",
-    "tooltip": false,
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "on-scroll-up": "playerctl previous",
-    "on-scroll-down": "playerctl next",
-  },
-
-  "custom/language": {
-    "exec": "cat /tmp/kb_layout",
-    "interval": 3,
-    "format": " {}",
   },
 
   "custom/notification": {
@@ -202,68 +239,11 @@
     "escape": true,
   },
 
-  "custom/launcher": {
-    "format": " ",
-    "on-click": "exec nwg-drawer -c 7 -is 70 -spacing 23",
-    "tooltip": false,
-  },
-
-  "tray": {
-    "icon-size": 13,
-    "spacing": 10,
-  },
-
-  "backlight": {
-    "device": "backlight",
-    "format": "{icon} {percent}%",
-    "format-icons": ["🔅", "🔆"],
-    "on-scroll-up": "brightnessctl set 1%+",
-    "on-scroll-down": "brightnessctl set 1%-",
-    // "min-length": 6,
-    "on-click": "sh $HOME/.config/waybar/scripts/sunset.sh",
-  },
-
-  "battery": {
-    "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 20,
-    },
+  "custom/wlogout": {
     "format": "{icon}",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
-    "format-alt": "{time} {icon}",
-    "tooltip-format": "{capacity}%",
-    "tooltip": true,
-    "on-click": "exec gnome-power-statistics",
-    "format-icons": ["", "", "", "", ""],
-  },
-
-  "network": {
-    "format-wifi": " {essid}",
-    "format-ethernet": " {essid}",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "⚠ Disconnected",
-    "tooltip-format-wifi": "Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
-  },
-
-  "pulseaudio": {
-    "format": "{icon} {volume}% {format_source}",
-    "format-muted": "🔇 {format_source}",
-    "format-source": "",
-    "format-source-muted": "",
-    //"format-bluetooth" : "{volume}% {icon}  {format_source}";
-    //"format-bluetooth-muted" : " {icon}  {format_source}";
-    "scroll-step": 1,
-    "on-click": "pavucontrol",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""],
+      "default": "⏻"
     },
+    "on-click": "wlogout"
   },
 }

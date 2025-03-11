@@ -1,167 +1,106 @@
 * {
   border: none;
-  border-radius: 0;
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 14px;
-  min-height: 0;
+  border-radius: 6px;
+  font-family: "Symbols Nerd Font Mono", "Jetbrains Mono";
+  /* font-size: 16px; */
+  /* font-weight: 500; */
+  /* min-height: 16px; */
+  margin: 3px 4px 3px 4px;
 }
 
 window#waybar {
-  /* background: #15121B; */
-  background: transparent;
-  color: #cdd6f4;
+  background-color: transparent;
 }
 
-tooltip {
-  background: #1e1e2e;
-  border-radius: 10px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #11111b;
+window#waybar > box {
+  margin: initial;
+  margin-bottom: 3px;
+  background-color: rgba(40,40,40,0.9);
+  box-shadow: 0px 0px 2px 2px rgba(32,32,32,1);
 }
 
-#workspaces button {
-  padding: 5px;
-  color: #313244;
-  margin-right: 5px;
-}
-
-#workspaces button.active {
-  color: #a6adc8;
-}
-
-#workspaces button.focused {
-  color: #a6adc8;
-  /* background: #eba0ac; */
-  border-radius: 10px;
-}
-
-#workspaces button.urgent {
-  color: #11111b;
-  background: #a6e3a1;
-  border-radius: 10px;
-}
-
-#workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
-  border-radius: 10px;
-}
-
-#window {
-  border-radius: 20px;
+#custom-launcher,
+#workspaces,
+#clock,
+#custom-playerctl,
+#tray,
+#bluetooth,
+#wireplumber,
+#network,
+#backlight,
+#battery,
+#power-profiles-daemon,
+#custom-wlogout,
+{
+  background: #282828;
+  border: 2px solid #3c3836;
+  box-shadow: 0px 0px 2px 2px rgba(32,32,32,1);
+  color: #ebdbb2;
   padding-left: 10px;
   padding-right: 10px;
+  transition: ease 0.15s;
 }
 
-#custom-language,
-#custom-logout,
-#custom-weather,
-#custom-caffeine,
-#custom-playerctl,
-#custom-notification,
-#custom-launcher,
-#clock,
-#taskbar,
-#battery,
-#idle_inhibitor,
-#pulseaudio,
-#network,
-#workspaces,
-#tray,
-#backlight {
-  background: #1e1e2e;
-  padding: 0px 10px;
-  margin: 3px 0px;
+#custom-launcher:hover,
+#workspaces button:hover,
+#workspaces button.active:hover,
+#workspaces button.empty:hover,
+#clock:hover,
+#bluetooth:hover,
+#wireplumber:hover,
+#network:hover,
+#battery:hover,
+#power-profiles-daemon:hover,
+#backlight:hover,
+#custom-wlogout:hover
+{
+  color: #83a598;
+  margin: 1px 4px 3px 4px;
+  box-shadow: 0px 0px 4px 2px rgba(32,32,32,1);
+  transition: ease 0.2s;
 }
 
-#custom-launcher {
-  border-radius: 10px;
+#workspaces button:hover,
+#workspaces button.active:hover,
+#workspaces button.empty:hover
+{
+  margin: initial;
+  box-shadow: initial;
 }
 
 #workspaces {
-  background: #1e1e2e;
-  border-radius: 10px;
-  padding-right: 0px;
-  padding-left: 5px;
-  margin-left: 5px;
+ padding: initial;
 }
 
-#taskbar {
-  border-radius: 10px;
-  margin-left: 4px;
-}
-#taskbar button {
-  color: @background;
-  border-radius: 12px;
-  padding: 0px 9px 0px 9px;
-}
-/* #taskbar button.active { */
-/*     background-color: #89b4fa; */
-/*     border-color: rgba(16,17,16,.3); */
-/*     border-width: 1px; */
-/*     border-radius: 10px; */
-/* } */
-
-#network {
-  color: #fab387;
-  border-radius: 10px 0 0 10px;
+#workspaces button {
+  margin: initial;
+  padding: initial;
+  padding-left: 2px;
+  padding-right: 2px;
+  color: #665c54;
 }
 
-#custom-caffeine {
-  color: #89dceb;
-  border-radius: 10px 0px 0px 10px;
-  padding-right: 12px;
+#workspaces button.active,
+#workspaces button.empty
+{
+  color: #ebdbb2;
 }
 
-#custom-playerctl {
-  color: #fab387;
-  border-radius: 10px;
-  margin-left: 4px;
+
+#battery.critical:not(.charging) {
+  animation-name: blink;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 5;
+  animation-direction: alternate;
 }
 
-#custom-notification {
-  border-radius: 10px;
-  margin-right: 4px;
+@keyframes blink {
+  to {
+    background-color: #fb4934;
+  }
 }
 
-#clock {
-  color: #f9e2af;
-  border-radius: 10px;
-}
-
-#custom-weather {
-  background-color: #1e1e2e;
-  margin-left: 4px;
-  margin-right: 4px;
-  border-radius: 10px 10px 10px 10px;
-}
-
-#tray {
-  border-radius: 10px;
-  margin-right: 4px;
-}
-
-#pulseaudio {
-  color: #89b4fa;
-  border-radius: 10px 0 0 10px;
-}
-
-#backlight {
-  color: #cba6f7;
-  margin-left: -10px;
-  margin-right: -10px;
-}
-
-#battery {
-  color: #a6e3a1;
-  border-radius: 0 10px 10px 0;
-  margin-right: 5px;
-}
-
-#custom-logout {
-  color: #f5c2e7;
-  border-radius: 10px;
-  margin-right: 4px;
+#custom-launcher {
+    color: #458588;
 }
