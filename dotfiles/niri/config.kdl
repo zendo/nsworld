@@ -1,4 +1,4 @@
-// https://github.com/maxhbr/myconfig/blob/master/modules/myconfig.desktop.wayland.niri/config.kdl
+// https://github.com/YaLTeR/niri/blob/main/resources/default-config.kdl
 
 hotkey-overlay {
     skip-at-startup
@@ -30,11 +30,34 @@ layout {
     // center-focused-column "on-overflow"
 
     // You can change the default width of the new windows.
-    // default-column-width { proportion 1.0; }
+    default-column-width { proportion 0.5; }
+    focus-ring {
+      off
+    }
+    shadow {
+      on
+      softness 8
+      spread 1
+      offset x=0 y=3
+    }
+    tab-indicator {
+      gap 0
+      width 5
+      length total-proportion=0.3
+      gaps-between-tabs 2
+      active-gradient from="#808080" to="#bbddff" angle=45
+      inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
 }
 
 spawn-at-startup "waybar"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "swaybg" "--image" "~/Pictures/Wallpapers/bay-night.png"
+// spawn-at-startup "xwayland-satellite"
+
+// environment {
+//     DISPLAY ":1"
+// }
 
 binds {
     Mod+Return { spawn "kitty"; }

@@ -79,7 +79,8 @@
           # grim # grab image
           # slurp # select region
           shotman
-          pavucontrol
+          # pavucontrol
+          pwvucontrol # Pipewire Volume Control
           playerctl # media player control
           pamixer # volume control
 
