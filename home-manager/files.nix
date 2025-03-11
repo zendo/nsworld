@@ -6,8 +6,7 @@ let
 in
 {
   home.file = {
-    ".proxychains/proxychains.conf".source = ../dotfiles/proxychains.conf;
-    ".memo".source = linkHome "Documents/memo";
+    # ".memo".source = linkHome "Documents/memo";
   };
 
   xdg.configFile = {
@@ -27,10 +26,14 @@ in
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
     "ghostty".source = linkFlake "dotfiles/ghostty";
     "wezterm".source = linkFlake "dotfiles/wezterm";
+
+    # wm
     "niri".source = linkFlake "dotfiles/niri";
     "sway/config".source = linkFlake "dotfiles/sway/config";
     "hypr/hyprland.conf".source = linkFlake "dotfiles/hypr/hyprland.conf";
     "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
+
+    # emacs
     "doom/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
     "emacs/all-emacs.org".source = linkFlake "dotfiles/org/all-emacs.org";
   };
