@@ -32,9 +32,10 @@
     # self.nixosModules.hyprland
   ];
 
-  disabledModules = [
-    "services/networking/sing-box.nix"
-  ];
+  mods = {
+    steam.enable = true;
+    # daeWithConfig.enable = true;
+  };
 
   services = {
     # displayManager.autoLogin.user = "${username}";
@@ -67,13 +68,6 @@
       # autoStart = true;
     };
   };
-
-  mods = {
-    steam.enable = true;
-    # daeWithConfig.enable = true;
-  };
-
-  # disabledModules = ["config/swap.nix"];
 
   # environment.systemPackages = with pkgs; [
   #   inputs.nixpkgs-pr.legacyPackages.${system}.apps

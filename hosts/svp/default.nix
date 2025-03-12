@@ -22,14 +22,14 @@
     # self.nixosModules.hyprland
   ];
 
-  services = {
-    displayManager.autoLogin.user = "${username}";
-    # v2raya.enable = true;
-  };
-
   mods = {
     # steam.enable = true;
     daeWithConfig.enable = true;
+  };
+
+  services = {
+    displayManager.autoLogin.user = "${username}";
+    # v2raya.enable = true;
   };
 
   programs = {

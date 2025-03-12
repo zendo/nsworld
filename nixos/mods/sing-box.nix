@@ -10,6 +10,7 @@ let
   settingsFormat = pkgs.formats.json { };
 in
 {
+  disabledModules = [ "services/networking/sing-box.nix" ];
 
   meta = {
     maintainers = with lib.maintainers; [
