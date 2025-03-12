@@ -28,19 +28,6 @@
       ninja
       pkg-config
       boost
-
-      # qt5.qtbase
-      # qt5.qttools
-      # qt5.qtx11extras
-      # qt5.wrapQtAppsHook
-      # qt5.qtsvg
-      # protobuf
-      # libyamlcpp
-      # zxing-cpp
-      # zxing
-      # xorg.libX11
-      # xorg.libXi
-      # xorg.libXinerama
     ];
     name = "gcc";
     shellHook = ''
@@ -164,16 +151,29 @@
   ###############################################
   ##  Python
   ###############################################
-  # python setup.py install --root=/home/iab/devs/
-  python = pkgs.mkShell {
+  py-withPackages = pkgs.mkShell {
     buildInputs = with pkgs; [
       (python3.withPackages (
         p: with p; [
           numpy
           requests
           pandas
+          flask
+
+          scp
+          paramiko
+          chardet
+          cryptography
+          pyaml
+          ruamel-yaml
         ]
       ))
+    ];
+  };
+
+  # python setup.py install --root=/home/iab/devs/
+  py-dev = pkgs.mkShell {
+    buildInputs = with pkgs; [
       python3
       virtualenv
       python3Packages.pip
