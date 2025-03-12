@@ -40,10 +40,14 @@
     # displayManager.autoLogin.user = "${username}";
     # v2raya.enable = true;
 
+    dae = {
+      # enable = true;
+      configFile = "/home/iab/.sub/dae-config.dae";
+    };
+
     sing-box = {
       enable = true;
       configFile = "/home/iab/.sub/config.json";
-      # configFile = "/home/iab/.local/share/GUI.for.SingBox/data/sing-box/config.json";
     };
   };
 

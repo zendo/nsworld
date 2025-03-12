@@ -12,7 +12,6 @@ in
   config = lib.mkIf cfg.enable {
     services.dae = {
       enable = true;
-      # configFile = "/home/iab/.sub/config.dae";
       configFile = config.sops.templates."config.dae".path;
     };
 
