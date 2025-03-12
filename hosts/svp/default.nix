@@ -24,7 +24,7 @@
 
   mods = {
     # steam.enable = true;
-    daeWithConfig.enable = true;
+    # daeWithConfig.enable = true;
   };
 
   services = {
@@ -35,13 +35,6 @@
   programs = {
     appimage.enable = true;
     # nix-ld.enable = true;
-
-    # clash-client = {
-    #   enable = true;
-    #   tunMode = true;
-    #   autoStart = true;
-    #   package = pkgs.mihomo-party;
-    # };
 
     clash-verge = {
       enable = true;
