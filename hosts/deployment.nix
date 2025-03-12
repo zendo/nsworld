@@ -2,7 +2,9 @@
   # Deployment
   deploy -s .#svp
   or
-  nixos-rebuild --target-host aaa@192.168.122.20 --flake .#rmt switch --ask-sudo-password
+  nixos-rebuild --target-host root@192.168.1.197 \
+    --ask-sudo-password \
+    --flake .#svp switch
 */
 { inputs, ... }:
 {
