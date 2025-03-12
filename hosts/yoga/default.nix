@@ -22,7 +22,7 @@
     # inputs.nixos-hardware.nixosModules.lenovo-yoga-7-14ARH7.amdgpu
     # cpupower frequency-info
     # cat /sys/devices/system/cpu/cpufreq/policy0/scaling_driver
-    # ls /sys/devices/system/cpu/cpu0/   :show CPPCCPPC
+    # ls /sys/devices/system/cpu/cpu0/ :show CPPCCPPC
 
     self.nixosModules.gnome
     # self.nixosModules.kde
