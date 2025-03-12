@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  config,
   ...
 }:
 {
@@ -136,7 +137,7 @@
 
   services = {
     # disable on wm
-    # easyeffects.enable = !config.services.greetd.enable;
+    easyeffects.enable = !config.services.wlsunset.enable;
   };
 
   programs.mpv = {

@@ -33,12 +33,12 @@
 
     dae = {
       # enable = true;
-      configFile = "/home/iab/.sub/dae-config.dae";
+      configFile = "/home/${username}/.sub/dae-config.dae";
     };
 
     sing-box = {
       enable = true;
-      configFile = "/home/iab/.sub/config.json";
+      configFile = "/home/${username}/.sub/config.json";
     };
   };
 
