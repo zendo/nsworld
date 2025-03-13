@@ -29,7 +29,6 @@
 
   services = {
     # displayManager.autoLogin.user = "${username}";
-    # v2raya.enable = true;
 
     dae = {
       # enable = true;
