@@ -8,6 +8,7 @@
 {
   home.packages = with pkgs; [
     cyc # 次元城动画
+    sub2singbox
     # azcomicv
 
     foot
