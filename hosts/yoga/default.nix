@@ -46,7 +46,7 @@
     # nix-ld.enable = true;
 
     clash-verge = {
-      # enable = true;
+      enable = true;
       # autoStart = true;
     };
   };
