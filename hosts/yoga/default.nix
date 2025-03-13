@@ -34,11 +34,6 @@
       # enable = true;
       configFile = "/home/${username}/.sub/dae-config.dae";
     };
-
-    sing-box = {
-      enable = true;
-      configFile = "/home/${username}/.sub/config.json";
-    };
   };
 
   programs = {
