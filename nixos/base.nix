@@ -64,7 +64,7 @@
     curl
     parted
     gptfdisk
-    flow-editor
+    micro
     sniffglue
     sbctl
     efibootmgr

@@ -9,6 +9,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
+        sub2singbox
         # GUI
         foot
         kitty
@@ -57,7 +58,7 @@
     tree
     file
     wget
-    flow-editor
+    micro
     wslu
     wsl-open
   ];

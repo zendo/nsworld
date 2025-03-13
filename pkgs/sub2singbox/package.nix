@@ -45,8 +45,7 @@ stdenv.mkDerivation {
     #   --replace-fail "template_dir = 'config_template'" "template_dir = '$out/opt/config_template'"
 
     makeWrapper ${pythonEnv}/bin/python $out/bin/sub2singbox \
-      --add-flags "$out/opt/main.py" \
-      --add-flags "--template_index=1"
+      --add-flags "$out/opt/main.py"
 
     runHook postInstall
   '';
