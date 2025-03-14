@@ -6,7 +6,7 @@ default:
 sing-box-setup:
     # eget SagerNet/sing-box
     # iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe
-    # just eget Zephyruso/zashboard -d
+    # eget Zephyruso/zashboard -d
     # Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
     # ni $HOME\Desktop\sub -ItemType Directory
     # mi sing-box.exe, winsw.exe, winsw.xml, ui $HOME\Desktop\sub
