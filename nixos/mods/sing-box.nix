@@ -7,7 +7,8 @@
 {
   systemd.services.sing-box = {
     # enable = false;
-    preStart = "ln -sf ${pkgs.metacubexd} $STATE_DIRECTORY/ui";
+    # zashboard / metacubexd
+    preStart = "[ -e $STATE_DIRECTORY/ui ] && rm -fr $STATE_DIRECTORY/ui; ln -sf ${pkgs.zashboard} $STATE_DIRECTORY/ui";
     serviceConfig = {
       StateDirectory = "sing-box";
       StateDirectoryMode = "0700";

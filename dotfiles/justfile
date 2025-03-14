@@ -16,7 +16,6 @@ backup-data:
     # rsync -avhpL ~/.config/google-chrome ~/Documents/homeBackups/
     # rsync -avhpL ~/.config/fcitx5/conf ~/Documents/homeBackups/
 
-
 ln-ibus-rime:
     #! /usr/bin/env bash
     if [[ ! -e "$HOME/.config/ibus/rime" ]]; then
