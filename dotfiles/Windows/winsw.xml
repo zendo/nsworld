@@ -1,0 +1,9 @@
+<service>
+  <id>sing-box</id>
+  <name>sing-box</name>
+  <description>This service runs sing-box continuous integration system.</description>
+  <executable>%BASE%\sing-box.exe</executable>
+  <arguments>run</arguments>
+  <log mode="reset" />
+  <onfailure action="restart" />
+</service>

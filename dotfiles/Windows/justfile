@@ -3,6 +3,14 @@ set windows-shell := ["powershell.exe", "-c"]
 default:
     @just --choose
 
+sing-box-setup:
+    # eget SagerNet/sing-box
+    # iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe
+    # just eget Zephyruso/zashboard -d
+    # Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
+    # ni $HOME\Desktop\sub -ItemType Directory
+    # mi sing-box.exe, winsw.exe, winsw.xml, ui $HOME\Desktop\sub
+
 betterfox:
     iwr "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
     iwr "https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/Windows/ff-pref.js" | \
