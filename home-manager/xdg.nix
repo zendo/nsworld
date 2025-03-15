@@ -12,7 +12,7 @@
 
   home.sessionVariables = {
     EDITOR = "micro";
-    VISUAL = "bat"; # or less
+    VISUAL = "micro";
     NIXOS_OZONE_WL = lib.mkDefault 1; # Electron wayland native
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };

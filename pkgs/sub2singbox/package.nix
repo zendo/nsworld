@@ -21,13 +21,13 @@ let
 in
 stdenv.mkDerivation {
   pname = "sing-box-subscribe";
-  version = "2.8.0-unstable-2025-02-24";
+  version = "2.8.0-unstable-2025-03-15";
 
   src = fetchFromGitHub {
     owner = "Toperlock";
     repo = "sing-box-subscribe";
-    rev = "92e7bcd7cbd61952c7259240a0788075b3a3f2be";
-    hash = "sha256-mQa7YnwPiEA6pbqWQVyJ7qCe9U19rvFq824FYj6BC3Y=";
+    rev = "f7208af375e10c69a077934612860797a3c26cbd";
+    hash = "sha256-PJCgbSvIQfMex0ScTEJXlASFcTpkwroH8WBqYcuw+A4=";
   };
 
   nativeBuildInputs = [

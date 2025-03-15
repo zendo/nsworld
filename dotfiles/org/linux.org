@@ -162,3 +162,53 @@ sudo sed -i 's/$/ fedora/' /etc/hosts  # 每行末尾添加
 #+end_src>
 https://github.com/adrianscheff/useful-sed
 
+* sing-box
+
+https://sing-box.sagernet.org/configuration/
+
+https://wiki.metacubex.one/config/
+
+https://linux.do/t/topic/434004 sing-box 1.11/1.12 配置模板及 sub-store 生成指南
+
+https://icloudnative.io/posts/sing-box-tutorial/
+
+https://github.com/Toperlock/sing-box-subscribe 模板
+
+https://github.com/tangnahuaite/sing-box_Route-rules
+
+** inbounds
+
+mixed: inbound is a socks4, socks4a, socks5 and http server.
+mtu: The maximum transmission unit.
+
+"listen": "127.0.0.1", : ipv4
+"listen": "::", ：ipv6
+
+listen_port
+sudo lsof -i :7890
+netstat -ano | findstr :7890 // windows
+
+Defaults to the mixed stack if the gVisor build tag is enabled, otherwise defaults to the system stack.
+system 使用系统协议栈，可以提供更稳定/全面的 tun 体验，且占用相对其他堆栈更低
+gvisor 通过在用户空间中实现网络协议栈，可以提供更高的安全性和隔离性，同时可以避免操作系统内核和用户空间之间的切换，从而在特定情况下具有更好的网络处理性能
+mixed 混合堆栈，tcp 使用 system 栈，udp 使用 gvisor 栈，使用体验可能相对更好
+
+** dns
+
+tls: DNS over TLS (DoT)
+quic: DNS over QUIC (DoQ)
+https: DNS over HTTPS (DoH)
+h3: DNS over HTTP3 (DoH3) *recommend*
+
+** experimental
+
+# zashboard
+"https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
+
+# yacd
+"https://gh-proxy.com/https://github.com/MetaCubeX/yacd/archive/gh-pages.zip"
+
+# metacubexd
+"https://gh-proxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+cache_file enabled: required to save rule-set cache.
