@@ -1727,6 +1727,12 @@ https://one.tonyaldon.com/
 
 (use-package json-reformat
   :commands json-reformat-region)
+
+(use-package json-navigator
+  :commands json-navigator-navigate-region)
+
+(use-package ox-json
+  :defer t)
 #+end_src
 
 ** yaml
