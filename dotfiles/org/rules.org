@@ -1,5 +1,5 @@
 #+STARTUP: show2levels indent
-#+PROPERTY: header-args:json :results silent :tangle "~/.sub/sing-box-subscribe/config_template/custom.json"
+#+PROPERTY: header-args:json :results silent :tangle "~/.sub/sing-box-subscribe/config_template/base.json"
 
 * Notes
 
@@ -8,6 +8,8 @@ https://sing-box.sagernet.org/configuration/
 https://wiki.metacubex.one/config/
 
 https://linux.do/t/topic/434004 sing-box 1.11/1.12 配置模板及 sub-store 生成指南
+
+https://icloudnative.io/posts/sing-box-tutorial/
 
 https://github.com/Toperlock/sing-box-subscribe 模板
 
@@ -24,6 +26,43 @@ https://github.com/Toperlock/sing-box-subscribe 模板
     "server": "ntp.aliyun.com",
     "server_port": 123
   },
+#+end_src
+
+* inbounds
+mixed: inbound is a socks4, socks4a, socks5 and http server.
+mtu: The maximum transmission unit.
+
+"listen": "127.0.0.1", : ipv4
+"listen": "::", ：ipv6
+
+listen_port
+sudo lsof -i :7890
+netstat -ano | findstr :7890 // windows
+
+Defaults to the mixed stack if the gVisor build tag is enabled, otherwise defaults to the system stack.
+system 使用系统协议栈，可以提供更稳定/全面的 tun 体验，且占用相对其他堆栈更低
+gvisor 通过在用户空间中实现网络协议栈，可以提供更高的安全性和隔离性，同时可以避免操作系统内核和用户空间之间的切换，从而在特定情况下具有更好的网络处理性能
+mixed 混合堆栈，tcp 使用 system 栈，udp 使用 gvisor 栈，使用体验可能相对更好
+
+#+begin_src json
+"inbounds": [
+    {
+        "type": "tun",
+        "tag": "tun-in",
+        "address": [
+            "172.18.0.1/30",
+            "fdfe:dcba:9876::1/126"
+        ],
+        "auto_route": true,
+        "strict_route": true
+    },
+    {
+        "type": "mixed",
+        "tag": "mixed-in",
+        "listen": "127.0.0.1",
+        "listen_port": 7890
+    }
+],
 #+end_src
 
 * dns
@@ -408,43 +447,6 @@ final: Default outbound tag. the first outbound will be used if empty.
     "type": "direct",
     "tag": "direct"
   }
-],
-#+end_src
-
-* inbounds
-mixed: inbound is a socks4, socks4a, socks5 and http server.
-mtu: The maximum transmission unit.
-
-"listen": "127.0.0.1", : ipv4 
-"listen": "::", ：ipv6
-
-listen_port
-sudo lsof -i :7890
-netstat -ano | findstr :7890 // windows
-
-Defaults to the mixed stack if the gVisor build tag is enabled, otherwise defaults to the system stack.
-system 使用系统协议栈，可以提供更稳定/全面的 tun 体验，且占用相对其他堆栈更低
-gvisor 通过在用户空间中实现网络协议栈，可以提供更高的安全性和隔离性，同时可以避免操作系统内核和用户空间之间的切换，从而在特定情况下具有更好的网络处理性能
-mixed 混合堆栈，tcp 使用 system 栈，udp 使用 gvisor 栈，使用体验可能相对更好
-
-#+begin_src json
-"inbounds": [
-    {
-        "type": "tun",
-        "tag": "tun-in",
-        "address": [
-            "172.18.0.1/30",
-            "fdfe:dcba:9876::1/126"
-        ],
-        "auto_route": true,
-        "strict_route": true
-    },
-    {
-        "type": "mixed",
-        "tag": "mixed-in",
-        "listen": "127.0.0.1",
-        "listen_port": 7890
-    }
 ],
 #+end_src
 

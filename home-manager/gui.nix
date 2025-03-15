@@ -132,6 +132,7 @@
     # wallutils # lsmon getdpi wayinfo
     wayland-utils
     # wdisplays # wlr
+    wl-clipboard
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
   ];

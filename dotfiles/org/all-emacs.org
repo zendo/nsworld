@@ -216,7 +216,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 #+begin_src emacs-lisp
 (setq visible-bell 1)
 
-;; (setq confirm-kill-processes nil)
+(setq confirm-kill-processes nil)
 
 ;; Allow for shorter responses: "y" for yes and "n" for no.
 ;; (setq read-answer-short t)
