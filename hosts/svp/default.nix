@@ -35,11 +35,6 @@
   programs = {
     appimage.enable = true;
     # nix-ld.enable = true;
-
-    clash-verge = {
-      enable = true;
-      autoStart = true;
-    };
   };
 
   users.users.${username} = {

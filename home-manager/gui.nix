@@ -20,7 +20,7 @@
 
     # nheko
     # fluffychat
-    tdesktop # (webkitgtk)
+    # tdesktop # (webkitgtk)
     # nekoray
     # (pkgs.makeAutostartItem {
     #   name = "nekoray";
