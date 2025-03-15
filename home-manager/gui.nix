@@ -20,7 +20,7 @@
 
     # nheko
     # fluffychat
-    # tdesktop # (webkitgtk)
+    tdesktop # (webkitgtk)
     # nekoray
     # (pkgs.makeAutostartItem {
     #   name = "nekoray";
@@ -133,6 +133,7 @@
     wayland-utils
     # wdisplays # wlr
     wl-clipboard
+    satty
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
   ];

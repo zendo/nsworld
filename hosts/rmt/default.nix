@@ -38,7 +38,6 @@
   ];
 
   programs = {
-    # appimage.enable = true;
     # nix-ld.enable = true;
   };
 

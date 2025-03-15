@@ -29,11 +29,9 @@
 
   services = {
     displayManager.autoLogin.user = "${username}";
-    # v2raya.enable = true;
   };
 
   programs = {
-    appimage.enable = true;
     # nix-ld.enable = true;
   };
 

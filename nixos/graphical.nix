@@ -10,10 +10,13 @@
 
     hardware.bluetooth.enable = true;
 
-    programs.clash-verge = {
-      # enable = true;
-      # autoStart = true;
-    };
+    programs = {
+      appimage.enable = true;
 
+      clash-verge = {
+        # enable = true;
+        # autoStart = true;
+      };
+    };
   };
 }
