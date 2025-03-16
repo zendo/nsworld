@@ -26,7 +26,7 @@
     #   name = "nekoray";
     #   package = pkgs.nekoray;
     # })
-    # gui-for-singbox
+    gui-for-singbox
     # hiddify-app
     # picacomic
     venera

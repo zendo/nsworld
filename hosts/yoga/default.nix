@@ -32,7 +32,7 @@
 
     dae = {
       # enable = true;
-      configFile = "/home/${username}/dev/sub/dae-config.dae";
+      configFile = "/home/${username}/code/sub/dae-config.dae";
     };
   };
 
