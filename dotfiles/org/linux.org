@@ -164,9 +164,11 @@ https://github.com/adrianscheff/useful-sed
 
 * sing-box
 
-https://sing-box.sagernet.org/configuration/
+https://sing-box.sagernet.org/zh/configuration/
 
 https://wiki.metacubex.one/config/
+
+https://github.com/qichiyuhub/sbshell tproxy
 
 https://linux.do/t/topic/434004 sing-box 1.11/1.12 配置模板及 sub-store 生成指南
 
@@ -178,7 +180,6 @@ https://github.com/tangnahuaite/sing-box_Route-rules
 
 ** inbounds
 
-mixed: inbound is a socks4, socks4a, socks5 and http server.
 mtu: The maximum transmission unit.
 
 "listen": "127.0.0.1", : ipv4
@@ -188,10 +189,48 @@ listen_port
 sudo lsof -i :7890
 netstat -ano | findstr :7890 // windows
 
+*** tun
 Defaults to the mixed stack if the gVisor build tag is enabled, otherwise defaults to the system stack.
+
 system 使用系统协议栈，可以提供更稳定/全面的 tun 体验，且占用相对其他堆栈更低
 gvisor 通过在用户空间中实现网络协议栈，可以提供更高的安全性和隔离性，同时可以避免操作系统内核和用户空间之间的切换，从而在特定情况下具有更好的网络处理性能
 mixed 混合堆栈，tcp 使用 system 栈，udp 使用 gvisor 栈，使用体验可能相对更好
+
+#+begin_src json
+{
+    "type": "tun",
+    "tag": "tun-in",
+    "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+    ],
+    "auto_route": true,
+    "strict_route": true
+},
+#+end_src
+
+*** mixed
+mixed: inbound is a socks4, socks4a, socks5 and http server.
+
+#+begin_src json
+{
+    "type": "mixed",
+    "tag": "mixed-in",
+    "listen": "127.0.0.1",
+    "listen_port": 7890
+}
+#+end_src
+
+*** tproxy
+
+#+begin_src json
+{
+    "type": "tproxy",
+    "tag": "tproxy-in",
+    "listen": "0.0.0.0",
+    "listen_port": 7895
+}
+#+end_src
 
 ** dns
 

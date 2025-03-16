@@ -21,6 +21,8 @@
       # allowedTCPPorts = [ 53317 ];
     };
 
+    # nftables.enable = true; # for tproxy
+
     # ping github.com
     # hosts = {
     #   "20.205.243.166" = ["github.com"];
