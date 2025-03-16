@@ -21,6 +21,7 @@
     # Developing
     yq
     jql
+    otree # tui tree for JSON/YAML/TOML
     sqlite
     openssl
     discount # markdown

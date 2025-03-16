@@ -7,6 +7,7 @@ in
 {
   home.file = {
     # ".memo".source = linkHome "Documents/memo";
+    ".sub/sb-template.json".source = linkFlake "dotfiles/Windows/sb-template.json";
   };
 
   xdg.configFile = {
