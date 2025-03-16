@@ -21,15 +21,15 @@
   environment.systemPackages =
     with pkgs;
     [
-      yakuake
       gparted
-      kcolorchooser
       # sddm-astronaut
     ]
     ++ (with kdePackages; [
+      yakuake
       krfb
       krdc
       ksystemlog
+      kcolorchooser
       karousel # Scrollable tiling wm
       # kleopatra
       # korganizer
