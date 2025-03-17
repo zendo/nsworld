@@ -394,7 +394,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 ** Treemacs
 #+begin_src emacs-lisp
 (use-package treemacs
-  :bind (("<f1>" . treemacs)
+  :bind (("<f1>" . +treemacs/toggle)
          (:map treemacs-mode-map
                ("<mouse-1>" . treemacs-single-click-expand-action)))
   :config
@@ -405,6 +405,25 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
         treemacs-show-cursor nil
         treemacs-silent-filewatch t
         treemacs-silent-refresh t))
+
+;; https://github.com/doomemacs/doomemacs/blob/master/modules/ui/treemacs/autoload.el
+;;;###autoload
+(defun +treemacs/toggle ()
+  "Initialize or toggle treemacs.
+
+Ensures that only the current project is present and all other projects have
+been removed.
+
+Use `treemacs' command for old functionality."
+  (interactive)
+  (require 'treemacs)
+  (pcase (treemacs-current-visibility)
+    (`visible (delete-window (treemacs-get-local-window)))
+    (_ (let ((project (treemacs--find-current-user-project)))
+         (if (and project (not (file-equal-p project "~")))
+             (treemacs-add-and-display-current-project-exclusively)
+           (message "No valid project in current buffer; opening last treemacs session")
+           (treemacs))))))
 #+end_src
 
 ** Buffer
