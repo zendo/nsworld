@@ -24,10 +24,10 @@ sing_box_outbounds = sing_box_data.get("outbounds", [])
 sing_box_outbounds.extend(nodes_outbounds)
 
 # 获取 "自动选择" 的 outbound 配置
-auto_select = next((out for out in sing_box_outbounds if out.get("tag") == "自动"), None)
+auto_select = next((out for out in sing_box_outbounds if out.get("tag") == "🎈 自动选择"), None)
 
 # 获取 "proxy" 的 outbound 配置
-proxy_select = next((out for out in sing_box_outbounds if out.get("tag") == "默认"), None)
+proxy_select = next((out for out in sing_box_outbounds if out.get("tag") == "🚀 节点选择"), None)
 
 if auto_select and isinstance(auto_select.get("outbounds"), list):
     # 添加所有 nodes.json 中的 tag 到 "自动选择" 的 outbounds

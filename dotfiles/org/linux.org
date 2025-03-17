@@ -178,6 +178,38 @@ https://github.com/Toperlock/sing-box-subscribe 模板
 
 https://github.com/tangnahuaite/sing-box_Route-rules
 
+** GUI.for.SingBox
+
+混入自定义配置：
+手动修改：DNS设置——服务器——Local-DNS: h3://223.5
+
+#+begin_src json
+{
+  "log": {
+    "timestamp": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
+      "external_ui_download_detour": "🎯 全球直连",
+      "secret": "1984",
+      "access_control_allow_origin": [
+        "http://127.0.0.1",
+        "https://yacd.metacubex.one",
+        "https://metacubex.github.io",
+        "https://metacubexd.pages.dev",
+        "https://board.zash.run.place"
+      ]
+    }
+  },
+  "dns": {
+    "strategy": "ipv4_only"
+  }
+}
+#+end_src
+
 ** inbounds
 
 mtu: The maximum transmission unit.
@@ -251,3 +283,4 @@ h3: DNS over HTTP3 (DoH3) *recommend*
 "https://gh-proxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
 
 cache_file enabled: required to save rule-set cache.
+
