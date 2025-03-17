@@ -164,28 +164,25 @@ https://github.com/adrianscheff/useful-sed
 
 * sing-box
 
+journalctl -u sing-box -f --output=cat
+
 https://sing-box.sagernet.org/zh/configuration/
-
 https://wiki.metacubex.one/config/
-
-https://github.com/qichiyuhub/sbshell tproxy
-
-https://linux.do/t/topic/434004 sing-box 1.11/1.12 配置模板及 sub-store 生成指南
-
 https://icloudnative.io/posts/sing-box-tutorial/
 
+https://github.com/qichiyuhub/sbshell tproxy
 https://github.com/Toperlock/sing-box-subscribe 模板
-
-https://github.com/tangnahuaite/sing-box_Route-rules
 
 ** GUI.for.SingBox
 
 混入自定义配置：
-手动修改：DNS设置——服务器——Local-DNS: h3://223.5
+手动打开 Tun
+DNS设置——服务器——Local-DNS: h3://223.5
 
 #+begin_src json
 {
   "log": {
+    "level": "info",
     "timestamp": true
   },
   "experimental": {
