@@ -170,15 +170,18 @@ Use ~getenv~ check the environment variables.
 #+end_src
 
 ** windows
-https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
 
 #+begin_src emacs-lisp
 (when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
         )
-  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN Regular-10")))
+  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-10")))
 #+end_src
+
+https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
+https://emacs-china.org/t/windows-emacs-daemon/24379
+
 
 ** tty
 #+begin_src emacs-lisp
@@ -459,25 +462,6 @@ Use `treemacs' command for old functionality."
   ;; (setq wg-morph-on nil) ;; switch off animation
   (setq persp-auto-resume-time 0)
   (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
-#+end_src
-
-** Mouse
-#+begin_src emacs-lisp
-(blink-cursor-mode -1)               ;禁用指针闪烁
-(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
-(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
-(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
-
-;; Scroll
-;; (pixel-scroll-precision-mode t)
-(use-package ultra-scroll
-  :vc (:url "https://github.com/jdtsmith/ultra-scroll"
-            :rev :newest)
-  :init
-  (setq scroll-conservatively 101 ; important!
-        scroll-margin 0)
-  :config
-  (ultra-scroll-mode 1))
 #+end_src
 
 * Editor
@@ -1296,6 +1280,27 @@ Completion style for matching regexps in any order
  ("p" . project-forget-project)
  )
 #+END_SRC
+
+** Mouse
+#+begin_src emacs-lisp
+(blink-cursor-mode -1)               ;禁用指针闪烁
+(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
+(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
+(global-unset-key (kbd "C-<wheel-up>"))
+(global-unset-key (kbd "C-<wheel-down>"))
+(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+
+;; Scroll
+;; (pixel-scroll-precision-mode t)
+(use-package ultra-scroll
+  :vc (:url "https://github.com/jdtsmith/ultra-scroll"
+            :rev :newest)
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0)
+  :config
+  (ultra-scroll-mode 1))
+#+end_src
 
 ** view-mode
 #+begin_src emacs-lisp
