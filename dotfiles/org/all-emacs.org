@@ -177,10 +177,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
         )
-  (set-face-attribute 'default nil :font
-                      (format "JetBrains Mono-10"))
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font t charset (font-spec :family "Microsoft Yahei" :size 24))))
+  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN Regular-10")))
 #+end_src
 
 ** tty
@@ -341,7 +338,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
            (column-number-mode 1)))
 
 (use-package mood-line
-  :disable t
+  :disabled t
   :config
   (mood-line-mode))
 
@@ -1497,7 +1494,7 @@ https://github.com/alphapapa/org-super-agenda
 ** Org-modern
 #+begin_src emacs-lisp
 (use-package org-modern
-  :disable t
+  :disabled t
   :after org
   :hook (org-mode . org-modern-mode))
 #+end_src

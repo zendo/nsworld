@@ -4,12 +4,12 @@ default:
     @just --choose
 
 sing-box-setup:
+    # ni $HOME\Desktop\sub -ItemType Directory; cd $HOME\Desktop\sub
     # eget SagerNet/sing-box
-    # iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe
+    # iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O sb-service.exe
     # eget Zephyruso/zashboard -d
     # Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
-    # ni $HOME\Desktop\sub -ItemType Directory
-    # mi sing-box.exe, winsw.exe, winsw.xml, ui $HOME\Desktop\sub
+    # ci $HOME\nsworld\dotfiles\Windows\services\sb-service.xml .
 
 betterfox:
     iwr "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
