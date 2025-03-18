@@ -2099,6 +2099,44 @@ Saves to a temp file and puts the filename in the kill ring."
 (global-set-key [remap backward-kill-word] #'backward-delete-word)
 #+end_src
 
+** proxy
+https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
+
+#+begin_src emacs-lisp
+;;;###autoload
+(defun show-http-proxy ()
+  "Show HTTP/HTTPS proxy."
+  (interactive)
+  (if url-proxy-services
+      (message "Current HTTP proxy is enable")
+    (message "No HTTP proxy")))
+
+;;;###autoload
+(defun enable-http-proxy ()
+  "Enable HTTP/HTTPS proxy."
+  (interactive)
+  (setq url-proxy-services
+        `(("http" . "127.0.0.1:20122")
+          ("https" . "127.0.0.1:20122")
+          ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)")))
+  (show-http-proxy))
+
+;;;###autoload
+(defun disable-http-proxy ()
+  "Disable HTTP/HTTPS proxy."
+  (interactive)
+  (setq url-proxy-services nil)
+  (show-http-proxy))
+
+;;;###autoload
+(defun my/toggle-http-proxy ()
+  "Toggle HTTP/HTTPS proxy."
+  (interactive)
+  (if (bound-and-true-p url-proxy-services)
+      (disable-http-proxy)
+    (enable-http-proxy)))
+#+end_src
+
 * Footer
 #+begin_src emacs-lisp
 
