@@ -325,6 +325,15 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
   (dired-mode . nerd-icons-dired-mode))
 #+end_src
 
+** emoji
+Linux handle by nix.
+
+#+begin_src emacs-lisp
+(use-package emojify
+  :when IS-WINDOWS
+  :hook (after-init . global-emojify-mode))
+#+end_src
+
 ** Mode-line
 #+begin_src emacs-lisp
 (column-number-mode t)      ;显示列数
@@ -1094,6 +1103,7 @@ https://github.com/minad/corfu
 #+begin_src emacs-lisp
 (use-package corfu
   ;; :disabled t
+  :unless IS-WINDOWS
   :bind
   (:map corfu-map
         ("<escape>" . corfu-quit)
@@ -2108,8 +2118,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
   "Show HTTP/HTTPS proxy."
   (interactive)
   (if url-proxy-services
-      (message "Current HTTP proxy is enable")
-    (message "No HTTP proxy")))
+      (message "HTTP proxy is enabled")
+    (message "HTTP proxy is disabled")))
 
 ;;;###autoload
 (defun enable-http-proxy ()
