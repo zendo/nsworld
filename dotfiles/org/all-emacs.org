@@ -63,9 +63,9 @@
                     initial-major-mode 'fundamental-mode
 
                     initial-frame-alist (quote ((fullscreen . maximized)))
-                    ;; (setq default-frame-alist
-                    ;;       '((height . 48)
-                    ;;         (width . 83)))
+                    ;; default-frame-alist
+                    ;; '((height . 40)
+                    ;;   (width . 80))
                     )))
 
 (defun display-startup-echo-area-message ()
@@ -153,9 +153,10 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (when IS-LINUX
   (setq org-directory "~/Documents/Notes")
-  (set-face-attribute 'default nil :font "JetBrains Mono-10")
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
+  (add-to-list 'default-frame-alist '(font . "JetBrains Mono-10")))
+  ;; (set-face-attribute 'default nil :font "JetBrains Mono-10")
+  ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
+  ;;   (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
 #+end_src
 
 ** wsl
@@ -324,7 +325,7 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
   (dired-mode . nerd-icons-dired-mode))
 #+end_src
 
-** Mode line
+** Mode-line
 #+begin_src emacs-lisp
 (column-number-mode t)      ;显示列数
 (size-indication-mode t)    ;显示文件大小
@@ -347,7 +348,7 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 
 ;; Scrollbar on mode line
 (use-package mlscroll
-  ;; :disable t
+  :disabled t
   :config
   (setq mlscroll-shortfun-min-width 11) ; truncate which-func
   (mlscroll-mode 1))
@@ -389,6 +390,8 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
                       (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
+;; Fix for emacsclient 启动打开 dashboard 而不是 scratch
+(add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
 
 ** Treemacs
