@@ -1,8 +1,5 @@
 set shell := ["bash", "-uc"]
 
-# alias c := check
-# alias b := build
-
 host := `uname -n`
 user := `loginctl --no-legend list-users | awk '{print $2;}'`
 home_dir := env_var('HOME')
