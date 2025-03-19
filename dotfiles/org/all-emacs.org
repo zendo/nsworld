@@ -1002,151 +1002,8 @@ Show current command and its binding.
 #+end_src
 
 * Completions
-#+begin_src emacs-lisp
-;; (setq tab-always-indent 'complete   ;Tab key indent first then completion.
-;;       completion-cycle-threshold 3  ;TAB cycle if there are only few candidates
-;;       )
-#+end_src
-
-** vertico
-VERTical Interactive COmpletion.
-
-#+begin_src emacs-lisp
-(use-package vertico
-  :bind (:map vertico-map
-              ("<escape>" . #'minibuffer-keyboard-quit)
-              ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-char))
-  :init
-  (vertico-mode)
-  (vertico-mouse-mode 1))
-
-;;----------------------------------------------------------------------------
-;; Functions
-;;----------------------------------------------------------------------------
-;; Prefix the current candidate 箭头显示当前项
-(defun minibuffer-format-candidate (orig cand prefix suffix index _start)
-  (let ((prefix (if (= vertico--index index)
-                    " » "
-                  "   ")))
-    (funcall orig cand prefix suffix index _start)))
-
-(advice-add #'vertico--format-candidate
-           :around #'minibuffer-format-candidate)
-#+end_src
-
-** marginali
- Enrich existing commands with completion annotations.
-
-#+begin_src emacs-lisp
-(use-package marginalia
-  :after vertico
-  :init
-  (marginalia-mode +1))
-#+end_src
-
-** consult
-Consulting completing-read.
-
-#+begin_src emacs-lisp
-(use-package consult
-  :bind (("C-c M-x" . consult-mode-command)
-         ([remap apropos-command] . consult-apropos) ; C-h a
-         ([remap list-buffers] . consult-buffer) ; C-x b
-         ([remap find-file-read-only-other-window] . consult-buffer-other-window)
-         ([remap yank-pop] . consult-yank-pop) ; M-y
-         ([remap goto-line] . consult-goto-line)
-         ([remap imenu] . consult-imenu)
-         ;; ("C-x C-r" . consult-recent-file)
-         ("C-c b" . consult-bookmark)
-         ("C-s" . consult-line)
-         ("M-." . consult-imenu)
-         ("M-m" . consult-mark)
-         :map prog-mode-map
-         ("C-c C-j" . consult-outline)
-         :map minibuffer-local-map
-         ("C-r" . consult-history)
-         ))
-#+end_src
-
-** embark
-Mini-Buffer Actions Rooted in Keymaps.
-
-#+begin_src emacs-lisp
-(use-package embark
-  :bind (("C-c C-c" . embark-act)
-         ("C-c C-o" . embark-export)
-         ("C-h B" . embark-bindings))
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command))
-
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :after (embark consult)
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-#+end_src
-
-** Hippie Expand
-hippie expand is dabbrev expand on steroids
-
-#+begin_src emacs-lisp
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
-        try-expand-dabbrev-all-buffers     ;搜索所有 buffer
-        try-expand-dabbrev-from-kill       ;从 kill-ring 中搜索
-        try-complete-file-name-partially   ;文件名部分匹配
-        try-complete-file-name             ;文件名匹配
-        try-expand-all-abbrevs             ;匹配所有缩写词, according to all abbrev tables
-        try-expand-list                    ;补全一个列表
-        try-expand-line                    ;补全当前行
-        try-complete-lisp-symbol-partially ;部分补全 lisp symbol
-        try-complete-lisp-symbol))         ;补全 lisp symbol
-#+end_src
-
-** dabbrev
-#+begin_src emacs-lisp
-;; Use Dabbrev with Corfu!
-(use-package dabbrev
-  :ensure nil
-  ;; Swap M-/ and C-M-/
-  :bind (("M-/" . dabbrev-completion)
-         ("C-M-/" . dabbrev-expand))
-  :config
-  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
-  ;; Since 29.1, use `dabbrev-ignored-buffer-regexps' on older.
-  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
-#+end_src
-
-** completion-preview-mode
-#+begin_src emacs-lisp :tangle no
-(add-hook 'prog-mode-hook #'completion-preview-mode)
-(keymap-set completion-preview-active-mode-map "M-n" #'completion-preview-next-candidate)
-(keymap-set completion-preview-active-mode-map "M-p" #'completion-preview-prev-candidate)
-#+end_src
-
-** Company
-http://company-mode.github.io/manual/Getting-Started.html
-
-#+begin_src emacs-lisp :tangle no
-(use-package company
-  :custom
-  (company-minimum-prefix-length 4)
-  (company-dabbrev-minimum-length 8)
-  (company-selection-wrap-around t)
-  :init
-  (global-company-mode))
-
-(use-package company-posframe
-  :config
-  (company-posframe-mode 1))
-#+end_src
-
 ** Corfu
-https://github.com/minad/corfu
+Completion Overlay Region FUnction: https://github.com/minad/corfu
 
 #+begin_src emacs-lisp
 (use-package corfu
@@ -1200,6 +1057,8 @@ https://github.com/minad/corfu
 #+end_src
 
 ** Cape
+Completion At Point Extensions: https://github.com/minad/cape
+
 #+begin_src emacs-lisp
 (use-package cape
   ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
@@ -1239,6 +1098,143 @@ Completion style for matching regexps in any order
   ;; (completion-category-overrides nil)
   (completion-category-overrides '((file (styles partial-completion))))
   )
+#+end_src
+
+** Company
+http://company-mode.github.io/manual/Getting-Started.html
+
+#+begin_src emacs-lisp :tangle no
+(use-package company
+  :custom
+  (company-minimum-prefix-length 4)
+  (company-dabbrev-minimum-length 8)
+  (company-selection-wrap-around t)
+  :init
+  (global-company-mode))
+
+(use-package company-posframe
+  :config
+  (company-posframe-mode 1))
+#+end_src
+
+** consult
+Consulting completing-read.
+
+#+begin_src emacs-lisp
+(use-package consult
+  :bind (("C-c M-x" . consult-mode-command)
+         ([remap apropos-command] . consult-apropos) ; C-h a
+         ([remap list-buffers] . consult-buffer) ; C-x b
+         ([remap find-file-read-only-other-window] . consult-buffer-other-window)
+         ([remap yank-pop] . consult-yank-pop) ; M-y
+         ([remap goto-line] . consult-goto-line)
+         ([remap imenu] . consult-imenu)
+         ;; ("C-x C-r" . consult-recent-file)
+         ("C-c b" . consult-bookmark)
+         ("C-s" . consult-line)
+         ("M-." . consult-imenu)
+         ("M-m" . consult-mark)
+         :map prog-mode-map
+         ("C-c C-j" . consult-outline)
+         :map minibuffer-local-map
+         ("C-r" . consult-history)
+         ))
+#+end_src
+
+** vertico
+VERTical Interactive COmpletion.
+
+#+begin_src emacs-lisp
+(use-package vertico
+  :bind (:map vertico-map
+              ("<escape>" . #'minibuffer-keyboard-quit)
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char))
+  :init
+  (vertico-mode)
+  (vertico-mouse-mode 1))
+
+;;----------------------------------------------------------------------------
+;; Functions
+;;----------------------------------------------------------------------------
+;; Prefix the current candidate 箭头显示当前项
+(defun minibuffer-format-candidate (orig cand prefix suffix index _start)
+  (let ((prefix (if (= vertico--index index)
+                    " » "
+                  "   ")))
+    (funcall orig cand prefix suffix index _start)))
+
+(advice-add #'vertico--format-candidate
+           :around #'minibuffer-format-candidate)
+#+end_src
+
+** marginali
+ Enrich existing commands with completion annotations.
+
+#+begin_src emacs-lisp
+(use-package marginalia
+  :after vertico
+  :init
+  (marginalia-mode +1))
+#+end_src
+
+** embark
+Mini-Buffer Actions Rooted in Keymaps.
+
+#+begin_src emacs-lisp
+(use-package embark
+  :bind (("C-c C-c" . embark-act)
+         ("C-c C-o" . embark-export)
+         ("C-h B" . embark-bindings))
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :after (embark consult)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+#+end_src
+
+** dabbrev
+#+begin_src emacs-lisp
+;; Use Dabbrev with Corfu!
+(use-package dabbrev
+  :ensure nil
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  ;; Since 29.1, use `dabbrev-ignored-buffer-regexps' on older.
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
+#+end_src
+
+** Hippie Expand
+hippie expand is dabbrev expand on steroids
+
+#+begin_src emacs-lisp
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
+        try-expand-dabbrev-all-buffers     ;搜索所有 buffer
+        try-expand-dabbrev-from-kill       ;从 kill-ring 中搜索
+        try-complete-file-name-partially   ;文件名部分匹配
+        try-complete-file-name             ;文件名匹配
+        try-expand-all-abbrevs             ;匹配所有缩写词, according to all abbrev tables
+        try-expand-list                    ;补全一个列表
+        try-expand-line                    ;补全当前行
+        try-complete-lisp-symbol-partially ;部分补全 lisp symbol
+        try-complete-lisp-symbol))         ;补全 lisp symbol
+#+end_src
+
+** completion-preview-mode
+#+begin_src emacs-lisp :tangle no
+(add-hook 'prog-mode-hook #'completion-preview-mode)
+(keymap-set completion-preview-active-mode-map "M-n" #'completion-preview-next-candidate)
+(keymap-set completion-preview-active-mode-map "M-p" #'completion-preview-prev-candidate)
 #+end_src
 
 ** Yasnippet
