@@ -1333,6 +1333,8 @@ Completion style for matching regexps in any order
 #+END_SRC
 
 ** Mouse
+https://github.com/jamescherti/inhibit-mouse.el
+
 #+begin_src emacs-lisp
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
@@ -1442,6 +1444,7 @@ Completion style for matching regexps in any order
 (use-package ediff
   :ensure nil
   :custom
+  (ediff-custom-diff-options "-u")
   (ediff-split-window-function 'split-window-horizontally)
   (ediff-window-setup-function 'ediff-setup-windows-plain))
 #+end_src

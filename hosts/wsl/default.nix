@@ -9,7 +9,6 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        sub2singbox
         # GUI
         foot
         kitty
