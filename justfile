@@ -8,17 +8,17 @@ _default:
     @just --choose --unsorted
 
 switch:
-    nixos-rebuild --sudo --flake .#"{{host}}" switch
+    nixos-rebuild --sudo --flake .#"{{ host }}" switch
 
 boot:
-    nixos-rebuild --sudo --flake .#"{{host}}" boot
+    nixos-rebuild --sudo --flake .#"{{ host }}" boot
 
 upgrade:
     nix flake update --commit-lock-file && \
-      nixos-rebuild --sudo --flake .#"{{host}}" boot
+      nixos-rebuild --sudo --flake .#"{{ host }}" boot
 
 nom-build-os:
-    nom build .#nixosConfigurations."{{host}}".config.system.build.toplevel
+    nom build .#nixosConfigurations."{{ host }}".config.system.build.toplevel
 
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
@@ -34,7 +34,7 @@ diff-commits:
     fi
 
 hm-switch:
-    home-manager switch --flake .#"{{user}}"
+    home-manager switch --flake .#"{{ user }}"
 
 hm-diff:
     nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
@@ -76,7 +76,7 @@ non-nixos-setup:
     #!/usr/bin/env bash
     sudo tee -a /etc/nix/nix.conf <<EOF
     experimental-features = nix-command flakes
-    trusted-users = root @wheel {{user}}
+    trusted-users = root @wheel {{ user }}
     substituters = https://mirror.sjtu.edu.cn/nix-channels/store
     EOF
 
