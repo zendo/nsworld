@@ -176,13 +176,16 @@ Use ~getenv~ check the environment variables.
 (when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
+        ;; 优化
+        w32-get-true-file-attributes nil
+        w32-pipe-read-delay 0
+        w32-pipe-buffer-size (* 64 1024)
         )
   (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-10")))
 #+end_src
 
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
 https://emacs-china.org/t/windows-emacs-daemon/24379
-
 
 ** tty
 #+begin_src emacs-lisp
@@ -221,7 +224,8 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 
 ;; Allow for shorter responses: "y" for yes and "n" for no.
 ;; (setq read-answer-short t)
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
+;; (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Follow symlinks without prompt
 (setq vc-follow-symlinks t)
@@ -506,6 +510,17 @@ Use `treemacs' command for old functionality."
 (electric-pair-mode t) ;自动补全括号
 #+end_src
 
+** puni
+soft kill line.
+https://github.com/AmaiKinono/puni
+
+#+begin_src emacs-lisp
+(use-package puni
+  :disabled t
+  :config
+  (puni-global-mode +1))
+#+end_src
+
 ** tabs and whitespace
 #+begin_src emacs-lisp
 (setq-default tab-width 4
@@ -529,6 +544,18 @@ Use `treemacs' command for old functionality."
 #+begin_src emacs-lisp
 (use-package writeroom-mode
   :commands writeroom-mode)
+#+end_src
+
+** perfect-margin
+#+begin_src emacs-lisp
+(use-package perfect-margin
+  ;; :custom
+  ;; (perfect-margin-visible-width 128)
+  :config
+  (perfect-margin-mode t)
+  (setq perfect-margin-ignore-filters nil) ;; auto-center minibuffer windows
+  (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
+)
 #+end_src
 
 * Files
@@ -1115,6 +1142,7 @@ https://github.com/minad/corfu
          (eshell-mode . corfu-mode))
 
   :custom
+  (corfu-cycle t)
   (corfu-auto t)                    ;; Enable auto completion
   (corfu-auto-delay 0)
   (corfu-auto-prefix 1)
@@ -1193,6 +1221,9 @@ Completion style for matching regexps in any order
          :map tempel-map
          ("M-]" . tempel-next)
          ("M-[" . tempel-previous)))
+
+;; (use-package tempel-collection
+;;   :after tempel)
 #+end_src
 
 * Keybindings
@@ -1346,7 +1377,15 @@ Completion style for matching regexps in any order
   (("C-c g" . magit-status)
    ("s-g" . magit-status))
   :custom
-  (magit-format-file-function #'magit-format-file-nerd-icons))
+  (magit-format-file-function #'magit-format-file-nerd-icons)
+  :config
+  (when IS-WINDOWS
+    (setq magit-refresh-status-buffer nil)
+    (setq auto-revert-buffer-list-filter
+          'magit-auto-revert-repository-buffer-p)
+    (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
+    (remove-hook 'server-switch-hook 'magit-commit-diff)
+    (remove-hook 'with-editor-filter-visit-hook 'magit-commit-diff)))
 #+end_src
 
 ** Git-gutter
@@ -1689,6 +1728,20 @@ https://one.tonyaldon.com/
                                      )))
 #+end_src
 
+** flymake
+#+begin_src emacs-lisp
+(use-package flymake
+  :disabled t
+  :hook (prog-mode . flymake-mode)
+  :bind ( :map my-error-map
+          ("l" . flymake-show-buffer-diagnostics)
+          ("L" . flymake-show-project-diagnostics)
+          ("n" . flymake-goto-next-error)
+          ("p" . flymake-goto-prev-error))
+  :init
+  (setq-default flymake-no-changes-timeout 1.0))
+#+end_src
+
 ** quick-run
 #+begin_src emacs-lisp
 (use-package quickrun
@@ -1792,6 +1845,10 @@ https://one.tonyaldon.com/
 (use-package sql-indent
   :mode ("\\.sql\\'")
   :interpreter (("sql" . sql-mode)))
+
+;; (use-package sqlformat
+;;   :init
+;;   (setq sqlformat-command "sqlfluff"))
 #+end_src
 
 ** just
@@ -2165,4 +2222,5 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 - https://jansky520.github.io/p/org%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/ org 快速指南
 - https://orgmode.org/quickstart.html
 - https://orgmode.org/manual/Working-with-Source-Code.html
+- https://jwiegley.github.io/use-package/keywords/
    
