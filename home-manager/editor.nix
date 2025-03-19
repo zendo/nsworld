@@ -5,6 +5,7 @@
     cmake
     gnumake
     python3
+    nodejs
     # nil
     nixd
     vscode
