@@ -2204,48 +2204,15 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
 #+begin_src emacs-lisp
 ;;;###autoload
-(defun show-http-proxy ()
-  "Show HTTP/HTTPS proxy."
-  (interactive)
-  (if url-proxy-services
-      (message "HTTP proxy is enabled")
-    (message "HTTP proxy is disabled")))
-
-;;;###autoload
-(defun enable-http-proxy ()
-  "Enable HTTP/HTTPS proxy."
-  (interactive)
-  (setq url-proxy-services
-        `(("http" . "127.0.0.1:20122")
-          ("https" . "127.0.0.1:20122")
-          ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)")))
-  (show-http-proxy))
-
-;;;###autoload
-(defun disable-http-proxy ()
-  "Disable HTTP/HTTPS proxy."
-  (interactive)
-  (setq url-proxy-services nil)
-  (show-http-proxy))
-
-;;;###autoload
-(defun my/toggle-http-proxy ()
-  "Toggle HTTP/HTTPS proxy."
-  (interactive)
-  (if (bound-and-true-p url-proxy-services)
-      (disable-http-proxy)
-    (enable-http-proxy)))
-
-;;;###autoload
 (defun my-toggle-url-proxy ()
   "Toggle proxy for the url.el library."
   (interactive)
   (cond
    (url-proxy-services
-    (message "Turn off URL proxy")
+    (message "URL proxy turn off")
     (setq url-proxy-services nil))
    (t
-    (message "Turn on URL proxy")
+    (message "URL proxy turn on")
     (setq url-proxy-services
           '(("http" . "localhost:20122")
             ("https" . "localhost:20122")
