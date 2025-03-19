@@ -1003,9 +1003,9 @@ Show current command and its binding.
 
 * Completions
 #+begin_src emacs-lisp
-(setq tab-always-indent 'complete   ;Tab key indent first then completion.
-      completion-cycle-threshold 3  ;TAB cycle if there are only few candidates
-      )
+;; (setq tab-always-indent 'complete   ;Tab key indent first then completion.
+;;       completion-cycle-threshold 3  ;TAB cycle if there are only few candidates
+;;       )
 #+end_src
 
 ** vertico
@@ -1105,6 +1105,22 @@ hippie expand is dabbrev expand on steroids
         try-complete-lisp-symbol))         ;补全 lisp symbol
 #+end_src
 
+** dabbrev
+#+begin_src emacs-lisp
+;; Use Dabbrev with Corfu!
+(use-package dabbrev
+  :ensure nil
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  ;; Since 29.1, use `dabbrev-ignored-buffer-regexps' on older.
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
+#+end_src
+
 ** completion-preview-mode
 #+begin_src emacs-lisp :tangle no
 (add-hook 'prog-mode-hook #'completion-preview-mode)
@@ -1135,62 +1151,81 @@ https://github.com/minad/corfu
 #+begin_src emacs-lisp
 (use-package corfu
   ;; :disabled t
-  :unless IS-WINDOWS
+  ;; :unless IS-WINDOWS
   :bind
   (:map corfu-map
         ("<escape>" . corfu-quit)
-        ("<tab>" . corfu-complete)
+        ("<tab>" . corfu-next)
         ("M-d" . corfu-info-documentation)
         ("M-l" . corfu-info-location))
-  :hook ((prog-mode . corfu-mode)
-         (shell-mode . corfu-mode)
-         (eshell-mode . corfu-mode))
-
   :custom
-  (corfu-cycle t)
-  (corfu-auto t)                    ;; Enable auto completion
-  (corfu-auto-delay 0)
-  (corfu-auto-prefix 1)
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-auto t)                    ;; Enable auto completion
+  (corfu-cycle t)                   ;; Enable cycling for `corfu-next/previous'
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  (corfu-quit-no-match t)
   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
   ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  (corfu-scroll-margin 5)           ;; Use scroll margin
-  (corfu-max-width 50)
-  (corfu-min-width 50)
-  (corfu-popupinfo-delay 0.5)
-  ;; Disable Ispell completion function. As an alternative try `cape-dict'.
+
+  ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (tab-always-indent 'complete)
+
+  ;; Emacs 30 and newer: Disable Ispell completion function.
+  ;; Try `cape-dict' as an alternative.
   (text-mode-ispell-word-completion nil)
 
-  :config
-  (setq corfu-popupinfo-delay '(1.25 . 0.5))
+  ;; Hide commands in M-x which do not apply to the current mode.  Corfu
+  ;; commands are hidden, since they are not used via M-x. This setting is
+  ;; useful beyond Corfu.
+  (read-extended-command-predicate #'command-completion-default-include-p)
+
+  ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
+  ;; be used globally (M-/).  See also the customization variable
+  ;; `global-corfu-modes' to exclude certain modes.
   :init
   (global-corfu-mode)
-  (corfu-popupinfo-mode t))
+  (corfu-popupinfo-mode))
 
-  ;; Corfu backend
-  (use-package cape
-    :defer t
-    :commands (cape-dabbrev cape-file cape-elisp-block)
-    ;; :bind ("C-c p" . cape-prefix-map)
-    :init
-    (add-to-list 'completion-at-point-functions #'cape-file)
-    (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-    (add-to-list 'completion-at-point-functions #'cape-keyword)  ; programming language keyword
-    (add-to-list 'completion-at-point-functions #'cape-ispell)
-    (add-to-list 'completion-at-point-functions #'cape-dict)
-    (add-to-list 'completion-at-point-functions #'cape-symbol)   ; elisp symbol
-    (add-to-list 'completion-at-point-functions #'cape-line))
+(use-package kind-icon
+  :if (display-graphic-p)
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+#+end_src
 
-  ;; Pretty icons for corfu
-  (use-package kind-icon
-    :if (display-graphic-p)
-    :after corfu
-    :config
-    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+** Cape
+#+begin_src emacs-lisp
+(use-package cape
+  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
+  ;; Press C-c p ? to for help.
+  :bind ("C-c ." . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  ;; Alternatively bind Cape commands individually.
+  ;; :bind (("C-c p d" . cape-dabbrev)
+  ;;        ("C-c p h" . cape-history)
+  ;;        ("C-c p f" . cape-file)
+  ;;        ...)
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-keyword) ;programming language keyword
+  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (add-to-list 'completion-at-point-functions #'cape-dict)
+  (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
+  ;; (add-to-list 'completion-at-point-functions #'cape-line)
+  ;; ...
+  )
 #+end_src
 
 ** Orderless
@@ -1201,8 +1236,8 @@ Completion style for matching regexps in any order
   :custom
   (completion-styles '(orderless partial-completion basic))
   (completion-category-defaults nil)
-  (completion-category-overrides nil)
-  ;; (completion-category-overrides '((file (styles partial-completion))))
+  ;; (completion-category-overrides nil)
+  (completion-category-overrides '((file (styles partial-completion))))
   )
 #+end_src
 
@@ -1259,7 +1294,7 @@ Completion style for matching regexps in any order
  ;; doom-like
  ("C-c <SPC>" . project-find-file)
  ("C-c C-<SPC>" . project-find-file)
- ("C-c ." . find-file)
+ ;; ("C-c ." . find-file)
  ("C-c /" . consult-ripgrep)
  ("C-c ," . project-switch-to-buffer)
  ("C-x b" . project-switch-to-buffer)
@@ -1344,15 +1379,15 @@ https://github.com/jamescherti/inhibit-mouse.el
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 
 ;; Scroll
-;; (pixel-scroll-precision-mode t)
-(use-package ultra-scroll
-  :vc (:url "https://github.com/jdtsmith/ultra-scroll"
-            :rev :newest)
-  :init
-  (setq scroll-conservatively 101 ; important!
-        scroll-margin 0)
-  :config
-  (ultra-scroll-mode 1))
+(pixel-scroll-precision-mode t)
+;; (use-package ultra-scroll
+;;   :vc (:url "https://github.com/jdtsmith/ultra-scroll"
+;;             :rev :newest)
+;;   :init
+;;   (setq scroll-conservatively 101 ; important!
+;;         scroll-margin 0)
+;;   :config
+;;   (ultra-scroll-mode 1))
 #+end_src
 
 ** view-mode
