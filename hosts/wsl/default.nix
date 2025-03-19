@@ -62,6 +62,10 @@
     wsl-open
   ];
 
+  environment.variables = {
+    BROWSER = "wsl-open";
+  };
+
   # vscode-remote-workaround
   # https://github.com/K900/vscode-remote-workaround
   systemd.user = {

@@ -27,7 +27,7 @@
 
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
-    open-substore = "cd ~/code/sub/sub-store && xdg-open http://127.0.0.1:3000 ; nix run nixpkgs#nodejs sub-store.bundle.js";
+    open-substore = "pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; nix run nixpkgs#nodejs sub-store.bundle.js & ; popd > /dev/null";
 
     nse = "nix search nixpkgs";
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
