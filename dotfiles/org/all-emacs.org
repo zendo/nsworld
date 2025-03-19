@@ -58,10 +58,6 @@
                     use-dialog-box nil
                     ;; inhibit-default-init t ;skip load default.el
 
-                    ;; scratch buffer
-                    initial-scratch-message  nil
-                    initial-major-mode 'fundamental-mode
-
                     initial-frame-alist (quote ((fullscreen . maximized)))
                     ;; default-frame-alist
                     ;; '((height . 40)
@@ -445,6 +441,10 @@ Use `treemacs' command for old functionality."
 
 ** Buffer
 #+begin_src emacs-lisp
+;; Empty the *scratch* buffer
+(setq initial-scratch-message nil
+      initial-major-mode 'fundamental-mode)
+
 ;; ibuffer
 (defalias 'list-buffers 'ibuffer)
 (setq ibuffer-expert t) ; 直接操作不询问
@@ -1057,7 +1057,7 @@ Consulting completing-read.
          ([remap yank-pop] . consult-yank-pop) ; M-y
          ([remap goto-line] . consult-goto-line)
          ([remap imenu] . consult-imenu)
-         ("C-x C-r" . consult-recent-file)
+         ;; ("C-x C-r" . consult-recent-file)
          ("C-c b" . consult-bookmark)
          ("C-s" . consult-line)
          ("M-." . consult-imenu)
@@ -1254,6 +1254,7 @@ Completion style for matching regexps in any order
  ("C-x \\" . toggle-input-method)
  ("C-S-i" . eglot-format) ;vscode
  ("C-S-t" . tab-new)
+ ("C-x C-r" . recentf)
 
  ;; doom-like
  ("C-c <SPC>" . project-find-file)
@@ -1434,6 +1435,15 @@ Completion style for matching regexps in any order
 #+begin_src emacs-lisp
 (use-package blamer
   :commands blamer-mode)
+#+end_src
+
+** ediff
+#+begin_src emacs-lisp
+(use-package ediff
+  :ensure nil
+  :custom
+  (ediff-split-window-function 'split-window-horizontally)
+  (ediff-window-setup-function 'ediff-setup-windows-plain))
 #+end_src
 
 * Shell
@@ -2204,7 +2214,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
 #+begin_src emacs-lisp
 ;;;###autoload
-(defun my-toggle-url-proxy ()
+(defun my/toggle-url-proxy ()
   "Toggle proxy for the url.el library."
   (interactive)
   (cond
