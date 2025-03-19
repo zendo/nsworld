@@ -202,20 +202,6 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 #+end_src
 
 * General
-** Emacsclient server
-#+BEGIN_SRC emacs-lisp
-;; server
-(unless (and (fboundp 'server-running-p)
-             (server-running-p))
-  (server-start))
-
-;; kill emacsclient message
-(add-hook 'server-after-make-frame-hook
-          (lambda ()
-            (setq inhibit-message t)
-            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
-#+END_SRC
-
 ** Silence Warnings
 #+begin_src emacs-lisp
 (setq visible-bell 1)
@@ -256,6 +242,20 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
                dired-find-alternate-file))
   (put cmd 'disabled nil))
 #+end_src
+
+** Emacsclient server
+#+BEGIN_SRC emacs-lisp
+;; server
+(unless (and (fboundp 'server-running-p)
+             (server-running-p))
+  (server-start))
+
+;; kill emacsclient message
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (setq inhibit-message t)
+            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
+#+END_SRC
 
 ** Spell
 #+begin_src emacs-lisp
@@ -556,6 +556,15 @@ https://github.com/AmaiKinono/puni
   (setq perfect-margin-ignore-filters nil) ;; auto-center minibuffer windows
   (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
 )
+#+end_src
+
+** large file & long line
+#+begin_src emacs-lisp
+;;Don't hang when visiting files with extremely long lines
+(global-so-long-mode t)
+
+;; View Large Files
+(use-package vlf)
 #+end_src
 
 * Files
@@ -946,13 +955,6 @@ expand region alternative
   :bind (("C-c y" . fanyi-dwim2)))
 #+end_src
 
-** vlf
-View Large Files
-
-#+begin_src emacs-lisp
-(use-package vlf)
-#+end_src
-
 ** gcmh
 Garbage Collector Magic Hack
 
@@ -1055,8 +1057,6 @@ Consulting completing-read.
          ("C-s" . consult-line)
          ("M-." . consult-imenu)
          ("M-m" . consult-mark)
-         ;; :map org-mode-map
-         ;; ("C-c C-j" . consult-org-heading)
          :map prog-mode-map
          ("C-c C-j" . consult-outline)
          :map minibuffer-local-map
@@ -1304,9 +1304,10 @@ Completion style for matching regexps in any order
  ("m" . bm-toggle)
  ("0" . bm-remove-all-current-buffer)
 
- :prefix-map code-map
- :prefix "C-c c"
- ("." . consult-lsp-diagnostics)
+ ;; org-mode-map
+ ;; :prefix-map code-map
+ ;; :prefix "C-c c"
+ ;; ("." . consult-lsp-diagnostics)
 
  ;; :prefix-map lsp-map
  ;; :prefix "C-c l"
@@ -1472,28 +1473,57 @@ Completion style for matching regexps in any order
 
 * Org
 #+begin_src emacs-lisp
-(bind-keys :prefix-map org-map
-           :prefix "C-c o"
-           ("l" . org-store-link)
-           ("a" . org-agenda)
-           ("c" . org-capture)
-           ("b" . org-switchb))
+(use-package org
+  :ensure nil
+  :defer t
+  :mode ("\\.org\\'" . org-mode)
+  :bind(:map org-mode-map
+             ("C-c a" . org-agenda)
+             ("C-c c" . org-capture)
+             ("C-c l" . org-store-link)
+             ("C-c C-j" . consult-outline)
+             ("M-." . find-function-at-point))
+  :config
+  (setq
+   ;; Start collapsed for speed
+   org-startup-folded t
+   ;; org-startup-indented t
+   org-startup-truncated nil
+   org-hide-leading-stars t
+   org-refile-targets (quote ((nil :maxlevel . 9)
+                              (org-agenda-files :maxlevel . 9)))
+   org-support-shift-select t
+
+   ;; Edit settings
+   org-auto-align-tags nil
+   org-tags-column 0
+   org-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
+
+   ;; Org styling, hide markup etc.
+   org-hide-emphasis-markers t
+   org-pretty-entities t
+
+   ;; Agenda styling
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "◀── now ─────────────────────────────────────────────────")
+
+  ;; Ellipsis styling
+  ;; (setq org-ellipsis " ▼ ")
+  org-ellipsis " \u25bc" ;; " ⤵" " ↴" " ➤" " ▼"
+  ;; org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA"
+  (set-face-attribute 'org-ellipsis nil :inherit 'default :box nil))
 
 ;; Org-table font
 (custom-set-faces
  '(org-table ((t (:family "JetBrains Mono")))))
-
-(setq org-startup-indented t
-      org-startup-truncated nil
-      org-hide-leading-stars t
-      org-ellipsis " \u25bc" ;; " ⤵" " ↴" " ➤" " ▼"
-      ;; org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA"
-      org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9)))
-      org-support-shift-select t)
-
-;; <s TAB: The old way, C-c C-, New way.
-;; (require 'org-tempo) ;; Startup blame
 #+end_src
 
 ** Babel
@@ -2202,6 +2232,21 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
   (if (bound-and-true-p url-proxy-services)
       (disable-http-proxy)
     (enable-http-proxy)))
+
+;;;###autoload
+(defun my-toggle-url-proxy ()
+  "Toggle proxy for the url.el library."
+  (interactive)
+  (cond
+   (url-proxy-services
+    (message "Turn off URL proxy")
+    (setq url-proxy-services nil))
+   (t
+    (message "Turn on URL proxy")
+    (setq url-proxy-services
+          '(("http" . "localhost:20122")
+            ("https" . "localhost:20122")
+            ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)"))))))
 #+end_src
 
 * Footer
