@@ -404,7 +404,8 @@ Linux handle by nix.
   :config
   (dashboard-setup-startup-hook))
 ;; Fix for emacsclient 启动打开 dashboard 而不是 scratch
-(add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
+;; bug: 会导致 magit comit save 后跳到 dashboard
+;; (add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
 
 ** Treemacs
@@ -457,6 +458,10 @@ Use `treemacs' command for old functionality."
 
 ** Window
 #+begin_src emacs-lisp
+;; prefer vertical splits by default
+(setq split-width-threshold 120
+      split-height-threshold nil)
+
 ;; winner C-c ←/→ undo/redo window
 (winner-mode 1)
 
