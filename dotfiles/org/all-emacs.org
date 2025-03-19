@@ -98,9 +98,6 @@
 
 ;; Load the default init file
 ;; (load "default" 'noerror 'nomessage)
-
-(provide 'init)
-;;; init.el ends here
 #+end_src
 
 * Package Initialization
@@ -287,23 +284,19 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 * Interface
 ** Themes
 #+begin_src emacs-lisp
-(use-package doom-themes)
-(load-theme 'doom-tomorrow-night t)
-;; (load-theme 'doom-badger t)
+(use-package doom-themes
+  :config
+  ;; (load-theme 'doom-badger t)
+  (load-theme 'doom-tomorrow-night t)
+  )
 
-;; (use-package ef-themes)
-;; (load-theme 'ef-frost t)
-
-;; (use-package tangonov-theme)
-;; (use-package monokai-theme)
-;; (use-package vscode-dark-plus-theme)
-;; (use-package zenburn)
-;; (use-package eclipse-theme)
-
-;; (use-package haki-theme
+;; (use-package eclipse-theme
 ;;   :config
-;;   (setq haki-region "#2e8b6d")
-;;   (load-theme 'haki t))
+;;   (load-theme 'eclipse t))
+
+;; (use-package ef-theme
+;;   :config
+;;   (load-theme 'ef-frost t))
 #+end_src
 
 ** Icons
@@ -1079,9 +1072,9 @@ Completion At Point Extensions: https://github.com/minad/cape
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
   (add-hook 'completion-at-point-functions #'cape-history)
   (add-to-list 'completion-at-point-functions #'cape-keyword) ;programming language keyword
-  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   (add-to-list 'completion-at-point-functions #'cape-dict)
-  (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
+  ;; (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
   ;; (add-to-list 'completion-at-point-functions #'cape-line)
   ;; ...
   )
