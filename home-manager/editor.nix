@@ -37,6 +37,16 @@
     '';
   };
 
+  services.emacs = {
+    # enable = true;
+    client = {
+      enable = true;
+      arguments = [ "--create-frame" ];
+    };
+    startWithUserSession = true;
+    defaultEditor = true;
+  };
+
   ###############################################
   ##  VSCODE
   ###############################################

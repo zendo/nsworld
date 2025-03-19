@@ -36,15 +36,6 @@
 ;; No second pass of case-insensitive search over auto-mode-alist.
 (setq auto-mode-case-fold nil)
 
-;; Faster to disable these here (before they've been initialized)
-(push '(vertical-scroll-bars . nil) default-frame-alist)
-(push '(menu-bar-lines       . nil) default-frame-alist)
-(push '(tool-bar-lines       . nil) default-frame-alist)
-;; (push '(alpha-background     . 98 ) default-frame-alist)
-;; (push '(scroll-bar-mode      . nil) default-frame-alist)
-;; (push '(blink-cursor-mode    . nil) default-frame-alist)
-;; (push '(column-number-mode   . nil) default-frame-alist)
-
 ;; Disable GUI elements
 (add-hook 'before-make-frame-hook
           #'(lambda ()
@@ -282,6 +273,13 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 #+end_src
 
 * Interface
+** UI
+#+begin_src emacs-lisp
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+#+end_src
+
 ** Themes
 #+begin_src emacs-lisp
 (use-package doom-themes
@@ -995,6 +993,8 @@ Show current command and its binding.
 #+end_src
 
 * Completions
+https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-completion.el
+
 ** Corfu
 Completion Overlay Region FUnction: https://github.com/minad/corfu
 
@@ -1067,16 +1067,16 @@ Completion At Point Extensions: https://github.com/minad/cape
   ;; used by `completion-at-point'.  The order of the functions matters, the
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  (add-hook 'completion-at-point-functions #'cape-history)
-  (add-to-list 'completion-at-point-functions #'cape-keyword) ;programming language keyword
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;; (add-to-list 'completion-at-point-functions #'cape-history)
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
-  (add-to-list 'completion-at-point-functions #'cape-dict)
+  ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
   ;; (add-to-list 'completion-at-point-functions #'cape-line)
-  ;; ...
   )
 #+end_src
 

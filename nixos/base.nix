@@ -11,7 +11,7 @@
   zramSwap.enable = lib.mkDefault true;
 
   boot = {
-    # plymouth.enable = true;
+    plymouth.enable = true;
 
     tmp = {
       useTmpfs = lib.mkDefault true;
