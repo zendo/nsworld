@@ -888,9 +888,11 @@ expand region alternative
 ** crux
 #+begin_src emacs-lisp
 (use-package crux
-  :bind (("C-k" . crux-smart-kill-line)
-         ("C-<return>" . crux-smart-open-line)
-         ("C-S-<return>" . crux-smart-open-line-above)))
+  :bind
+  ([remap kill-line] . crux-smart-kill-line)
+  ([remap open-line] . crux-smart-open-line)
+  ("C-<return>" . crux-smart-open-line)
+  ("C-S-<return>" . crux-smart-open-line-above))
 #+end_src
 
 ** deadgrep
@@ -1766,6 +1768,9 @@ https://one.tonyaldon.com/
         lsp-ui-doc-use-childframe t)
   :commands lsp-ui-mode)
 #+end_src
+
+** lsp-proxy
+https://github.com/jadestrong/lsp-proxy
 
 * Programming Languages
 ** prog-mode
