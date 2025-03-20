@@ -811,6 +811,13 @@ Remember the last cursor position within a file.
   :bind (("M-z" . avy-zap-up-to-char-dwim)))
 #+end_src
 
+** ace-isearch
+#+begin_src emacs-lisp
+(use-package ace-isearch
+  :config
+  (global-ace-isearch-mode +1))
+#+end_src
+
 ** ialign
 #+begin_src emacs-lisp
 (use-package ialign
