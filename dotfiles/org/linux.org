@@ -107,17 +107,18 @@ https://github.com/onceupon/Bash-Oneliner
 
 ** curl
 #+begin_src bash
-  curl --silent https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest | jq -r 'first(.assets[].browser_download_url | select(endswith(".tar.gz")))'
+curl -s https://api.github.com/repos/sub-store-org/Sub-Store/releases/latest | \
+    grep -E "browser_download_url.*bundle" | \
+    cut -d : -f 2,3 | tr -d \" | \
+    wget -i -
 
-  curl -s https://api.github.com/repos/fkxxyz/rime-cloverpinyin/releases/latest | grep "browser_download_url.*build.*" | cut -d '"' -f 4 | xargs -n 1 curl -LJO
+curl -s https://api.github.com/repos/sub-store-org/Sub-Store/releases/latest | \
+    jq -r '.assets[] | select(.name == "sub-store.bundle.js") | .browser_download_url' | \
+    xargs curl -O
 
-  curl -s https://api.github.com/repos/magiclen/m-prober/releases/latest | sed -r -n 's/.*"browser_download_url": *"(.*\/mprober_'$(uname -m)')".*/\1/p' | wget -i -
-
-  curl -s https://api.github.com/repos/jgm/pandoc/releases/latest \
-      | grep "browser_download_url.*deb" \
-      | cut -d : -f 2,3 \
-      | tr -d \" \
-      | wget -qi -
+curl -s https://api.github.com/repos/magiclen/m-prober/releases/latest | \
+    sed -r -n 's/.*"browser_download_url": *"(.*\/mprober_'$(uname -m)')".*/\1/p' | \
+    wget -i -
 #+end_src
 
 * Regex 正则表达式
@@ -163,15 +164,10 @@ sudo sed -i 's/$/ fedora/' /etc/hosts  # 每行末尾添加
 https://github.com/adrianscheff/useful-sed
 
 * sing-box
-
+#+begin_src bash
 journalctl -u sing-box -f --output=cat
-
-https://sing-box.sagernet.org/zh/configuration/
-https://wiki.metacubex.one/config/
-https://icloudnative.io/posts/sing-box-tutorial/
-
-https://github.com/qichiyuhub/sbshell tproxy
-https://github.com/Toperlock/sing-box-subscribe 模板
+jq -i 'del(.inbounds[] | select(.type == "tun"))' config.json
+#+end_src
 
 ** GUI.for.SingBox
 
@@ -281,3 +277,10 @@ h3: DNS over HTTP3 (DoH3) *recommend*
 
 cache_file enabled: required to save rule-set cache.
 
+** Links
+https://sing-box.sagernet.org/zh/configuration/
+https://wiki.metacubex.one/config/
+https://icloudnative.io/posts/sing-box-tutorial/
+
+https://github.com/qichiyuhub/sbshell tproxy
+https://github.com/Toperlock/sing-box-subscribe 模板
