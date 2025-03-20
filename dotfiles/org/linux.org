@@ -166,7 +166,7 @@ https://github.com/adrianscheff/useful-sed
 * sing-box
 #+begin_src bash
 journalctl -u sing-box -f --output=cat
-jq -i 'del(.inbounds[] | select(.type == "tun"))' config.json
+jq 'del(.inbounds[] | select(.type == "tun"))' feiji.json > config.json
 #+end_src
 
 ** GUI.for.SingBox
