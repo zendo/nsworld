@@ -984,14 +984,6 @@ Show current command and its binding.
   )
 #+end_src
 
-** Third Party
-#+begin_src emacs-lisp
-;; C-x SPC, ?
-;; (use-package speedrect
-;;   :vc (:url "https://github.com/jdtsmith/speedrect"
-;;             :rev :newest))
-#+end_src
-
 * Completions
 https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-completion.el
 
@@ -1124,7 +1116,7 @@ Consulting completing-read.
          ([remap imenu] . consult-imenu)
          ;; ("C-x C-r" . consult-recent-file)
          ("C-c b" . consult-bookmark)
-         ("C-s" . consult-line)
+         ;; ("C-s" . consult-line)
          ("M-." . consult-imenu)
          ("M-m" . consult-mark)
          :map prog-mode-map
@@ -1377,6 +1369,18 @@ https://github.com/jamescherti/inhibit-mouse.el
 ;;         scroll-margin 0)
 ;;   :config
 ;;   (ultra-scroll-mode 1))
+#+end_src
+
+** casual
+https://github.com/kickingvegas/casual
+
+#+begin_src emacs-lisp
+(use-package casual
+  :bind (("C-c o" . #'casual-editkit-main-tmenu)
+         :map dired-mode-map ("C-o" . casual-dired-tmenu)
+         :map isearch-mode-map ("C-o" . casual-isearch-tmenu)
+         :map calc-mode-map ("C-o" . casual-calc-tmenu)
+         :map Info-mode-map ("C-o" . casual-info-tmenu)))
 #+end_src
 
 ** view-mode
