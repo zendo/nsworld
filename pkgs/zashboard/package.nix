@@ -9,13 +9,13 @@
 # https://github.com/NixOS/nixpkgs/pull/380665
 stdenv.mkDerivation (finalAttrs: {
   pname = "zashboard";
-  version = "1.73.1";
+  version = "1.75.0";
 
   src = fetchFromGitHub {
     owner = "Zephyruso";
     repo = "zashboard";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-fOwxC71qrITC6/xesMGosj01SG+0SP2B5s3maqme/yw=";
+    hash = "sha256-QFDZ96rhlTzUL6mh5ARjF2iUI1QzsXEnoHpLjmiq7nA=";
   };
 
   nativeBuildInputs = [
@@ -25,7 +25,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-XvR0791aSgmCTYlM5EImejGYnOwsPyxpdUTTbaIJBdM=";
+    hash = "sha256-miZKrgJC8uLIabpq3ozBYMpfI2l5qCvxayzcu5a41MI=";
   };
 
   buildPhase = ''
