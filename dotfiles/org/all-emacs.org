@@ -29,8 +29,11 @@
 ;; to skip the mtime checks on every *.elc file.
 (setq load-prefer-newer noninteractive)
 
-;; Without this, Emacs will try to resize itself to a specific column size
-(setq frame-inhibit-implied-resize t)
+;; Resizing the Emacs frame can be an expensive part of changing the
+;; font. Inhibit this to reduce startup times with fonts that are
+;; larger than the system default.
+(setq frame-inhibit-implied-resize t
+      frame-resize-pixelwise t)
 
 ;; A second, case-insensitive pass over `auto-mode-alist' is time wasted.
 ;; No second pass of case-insensitive search over auto-mode-alist.
@@ -554,6 +557,13 @@ https://github.com/AmaiKinono/puni
 )
 #+end_src
 
+** mixed-pitch
+#+begin_src emacs-lispxx
+(use-package mixed-pitch
+  :config
+  (setq-default mixed-pitch-set-height t))
+#+end_src
+
 ** large file & long line
 #+begin_src emacs-lisp
 ;;Don't hang when visiting files with extremely long lines
@@ -974,7 +984,8 @@ Garbage Collector Magic Hack
 Show current command and its binding.
 
 #+begin_src emacs-lisp
-(use-package keycast)
+(use-package keycast
+  :defer t)
 #+end_src
 
 ** pass
@@ -991,6 +1002,12 @@ Show current command and its binding.
               ("j" . scroll-up-line)
               ("k" . scroll-down-line))
   )
+#+end_src
+
+** qrencode
+#+begin_src emacs-lisp
+(use-package qrencode
+  :defer t)
 #+end_src
 
 * Completions
@@ -1073,7 +1090,7 @@ Completion At Point Extensions: https://github.com/minad/cape
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
   (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;; (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-history)
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
