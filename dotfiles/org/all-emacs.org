@@ -821,13 +821,6 @@ Remember the last cursor position within a file.
   :bind (("M-z" . avy-zap-up-to-char-dwim)))
 #+end_src
 
-** ace-isearch
-#+begin_src emacs-lisp
-(use-package ace-isearch
-  :config
-  (global-ace-isearch-mode +1))
-#+end_src
-
 ** ialign
 #+begin_src emacs-lisp
 (use-package ialign
@@ -1008,6 +1001,12 @@ Show current command and its binding.
 #+begin_src emacs-lisp
 (use-package qrencode
   :defer t)
+#+end_src
+
+** esup
+#+begin_src emacs-lisp :tangle no
+(use-package esup
+  :commands esup)
 #+end_src
 
 * Completions
@@ -1451,6 +1450,9 @@ https://github.com/kickingvegas/casual
   :custom
   (magit-format-file-function #'magit-format-file-nerd-icons)
   :config
+  ;; Magit status fullscreen
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+
   (when IS-WINDOWS
     (setq magit-refresh-status-buffer nil)
     (setq auto-revert-buffer-list-filter

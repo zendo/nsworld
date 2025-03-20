@@ -15,10 +15,11 @@
         ghostty
 
         # DEV
+        nixd
         gcc
         cmake
         python3
-        nixd
+        nodejs
       ];
 
       programs.emacs = {
@@ -58,11 +59,12 @@
     file
     wget
     micro
+    dos2unix
     wslu
     wsl-open
   ];
 
-  environment.variables = {
+  environment.sessionVariables = {
     BROWSER = "wsl-open";
   };
 
