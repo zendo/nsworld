@@ -812,19 +812,19 @@ Remember the last cursor position within a file.
 ** avy
 #+begin_src emacs-lisp
 (use-package avy
-  :bind (("M-s" . avy-goto-char)))
+  :defer t)
 #+end_src
 
 ** avy-zap
 #+begin_src emacs-lisp
 (use-package avy-zap
-  :bind (("M-z" . avy-zap-up-to-char-dwim)))
+  :bind ("M-z" . avy-zap-up-to-char-dwim))
 #+end_src
 
 ** ialign
 #+begin_src emacs-lisp
 (use-package ialign
-  :bind (("C-x l" . ialign)))
+  :commands ialign)
 #+end_src
 
 ** mwim
@@ -984,7 +984,7 @@ Show current command and its binding.
 ** pass
 #+begin_src emacs-lisp :tangle no
 (use-package pass
-  :commands (pass))
+  :commands pass)
 #+end_src
 
 ** nov
@@ -1277,6 +1277,19 @@ hippie expand is dabbrev expand on steroids
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 (setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
 
+;; Built-in
+(bind-keys
+  ;; M-s
+ :map search-map
+ ("s" . deadgrep)
+ ("<SPC>" . consult-line)
+ ("l" . consult-line)
+ ("L" . consult-line-multi)
+ ("g" . consult-grep)
+ ("f" . consult-fd)
+ ("r" . consult-ripgrep)
+ ("p" . consult-isearch-history))
+
 (bind-keys*
  ;; ("C-z" . nil) ;unbind C-z
  ("C-z" . undo)
@@ -1336,12 +1349,8 @@ hippie expand is dabbrev expand on steroids
  ("D" . crux-delete-file-and-buffer)
  ("<f2>" . rename-visited-file)
 
- :prefix-map search-map
- :prefix "C-c s"
- ("s" . deadgrep)
- ("l" . consult-line)
- ("g" . consult-grep)
- ("r" . consult-ripgrep)
+ ;; :prefix-map search-map
+ ;; :prefix "C-c s"
 
  :prefix-map mark-map
  :prefix "C-c m"
