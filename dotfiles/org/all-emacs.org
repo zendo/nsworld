@@ -1294,185 +1294,6 @@ hippie expand is dabbrev expand on steroids
 ;;   :after tempel)
 #+end_src
 
-* Keybindings
-#+BEGIN_SRC emacs-lisp
-(which-key-mode)
-
-(ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
-(setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
-
-;; Built-in
-(bind-keys
-  ;; M-s
- :map search-map
- ("s" . deadgrep)
- ("<SPC>" . consult-line)
- ("l" . consult-line)
- ("L" . consult-line-multi)
- ("g" . consult-grep)
- ("f" . consult-fd)
- ("r" . consult-ripgrep)
- ("p" . consult-isearch-history))
-
-(bind-keys*
- ;; ("C-z" . nil) ;unbind C-z
- ("C-z" . undo)
- ("C-S-z" . undo-redo)
- ([remap kill-buffer] . kill-current-buffer)
-
- ("M-+" . text-scale-increase)
- ("M-_" . text-scale-decrease)
-
- ;; ("C-." . company-complete)
- ("C-." . hippie-expand)
- ("C-/" . comment-line) ;vscode
- ("C-\\" . align-regexp)
- ("C-x \\" . toggle-input-method)
- ("C-S-i" . eglot-format) ;vscode
- ("C-S-t" . tab-new)
- ("C-x C-r" . recentf)
-
- ;; doom-like
- ("C-c <SPC>" . project-find-file)
- ("C-c C-<SPC>" . project-find-file)
- ;; ("C-c ." . find-file)
- ("C-c /" . consult-ripgrep)
- ("C-c ," . project-switch-to-buffer)
- ("C-x b" . project-switch-to-buffer)
- ("C-<tab>" . project-switch-to-buffer)
-
- ("C-x 2" . (lambda()
-              (interactive)
-              (split-window-below)
-              (select-window (next-window))))
- ("C-x 3" . (lambda()
-              (interactive)
-              (split-window-right)
-              (select-window (next-window))))
-
- ("<f7>" . compile)
- ("<C-f7>" . (lambda()
-               (interactive)
-               (save-buffer)
-               (recompile)))
-
- :prefix-map buffer-map
- :prefix "C-c b"
- ("i" . ibuffer)
- ("r" . revert-buffer)
- ("s" . save-some-buffers)
- ("S" . crux-sudo-edit)
- ("D" . crux-delete-file-and-buffer)
- ("<f2>" . rename-visited-file)
-
- :prefix-map file-map
- :prefix "C-c f"
- ("o" . crux-open-with)
- ("s" . save-some-buffers)
- ("S" . crux-sudo-edit)
- ("D" . crux-delete-file-and-buffer)
- ("<f2>" . rename-visited-file)
-
- ;; :prefix-map search-map
- ;; :prefix "C-c s"
-
- :prefix-map mark-map
- :prefix "C-c m"
- ("'" . er/mark-inside-quotes)
- ("[" . er/mark-inside-pairs)
- ("l" . goto-last-change)
- ("m" . bm-toggle)
- ("0" . bm-remove-all-current-buffer)
-
- ;; org-mode-map
- ;; :prefix-map code-map
- ;; :prefix "C-c c"
- ;; ("." . consult-lsp-diagnostics)
-
- ;; :prefix-map lsp-map
- ;; :prefix "C-c l"
-
- :prefix-map git-mode
- :prefix "C-c v"
- ("/" . magit-dispatch)
- ("." . magit-file-dispatch)
- ("t" . git-timemachine)
-
- :prefix-map remove-map
- :prefix "C-c -"
- ("b" . bookmark-delete)
- ("r" . recentf-edit-list)
- ("p" . project-forget-project)
-
- :prefix-map toggle-map
- :prefix "C-c t"
- ("f" . global-display-fill-column-indicator-mode)
- ("z" . writeroom-mode)
- ("p" . perfect-margin)
- ("i" . indent-bars-mode)
- ("k" . keycast)
- ("u" . disk-usage)
- )
-#+END_SRC
-
-** Mouse
-https://github.com/jamescherti/inhibit-mouse.el
-
-#+begin_src emacs-lisp
-(blink-cursor-mode -1)               ;禁用指针闪烁
-(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
-(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
-(global-unset-key (kbd "C-<wheel-up>"))
-(global-unset-key (kbd "C-<wheel-down>"))
-(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
-
-;; Scroll
-(pixel-scroll-precision-mode t)
-;; (use-package ultra-scroll
-;;   :vc (:url "https://github.com/jdtsmith/ultra-scroll"
-;;             :rev :newest)
-;;   :init
-;;   (setq scroll-conservatively 101 ; important!
-;;         scroll-margin 0)
-;;   :config
-;;   (ultra-scroll-mode 1))
-#+end_src
-
-** casual
-https://github.com/kickingvegas/casual
-
-#+begin_src emacs-lisp
-(use-package casual
-  :bind (("C-c o" . #'casual-editkit-main-tmenu)
-         :map dired-mode-map ("C-o" . casual-dired-tmenu)
-         :map isearch-mode-map ("C-o" . casual-isearch-tmenu)
-         :map calc-mode-map ("C-o" . casual-calc-tmenu)
-         :map Info-mode-map ("C-o" . casual-info-tmenu)))
-#+end_src
-
-** view-mode
-#+begin_src emacs-lisp
-(use-package view
-  :ensure nil
-  :bind (:map view-mode-map
-              ("j" . next-line)
-              ("k" . previous-line)
-              ("h" . backward-char)
-              ("l" . forward-char)
-              ("g" . goto-line)
-              ("b" . View-scroll-page-backward))
-  :config
-  (setq view-read-only t))
-#+end_src
-
-** devil
-#+begin_src emacs-lisp :tangle no
-(use-package devil
-  :config
-  (global-devil-mode)
-  (global-set-key (kbd "C-,") 'global-devil-mode))
-#+end_src
-
 * Version Control
 ** Magit
 #+begin_src emacs-lisp
@@ -2333,6 +2154,186 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
           '(("http" . "localhost:20122")
             ("https" . "localhost:20122")
             ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)"))))))
+#+end_src
+
+* Keybindings
+#+BEGIN_SRC emacs-lisp
+(which-key-mode)
+
+(ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
+(setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
+
+;; Built-in
+(bind-keys
+  ;; M-s
+ :map search-map
+ ("s" . deadgrep)
+ ("<SPC>" . consult-line)
+ ("l" . consult-line)
+ ("L" . consult-line-multi)
+ ("g" . consult-grep)
+ ("f" . consult-fd)
+ ("r" . consult-ripgrep)
+ ("p" . consult-isearch-history))
+
+(bind-keys*
+ ;; ("C-z" . nil) ;unbind C-z
+ ("C-z" . undo)
+ ("C-S-z" . undo-redo)
+ ([remap kill-buffer] . kill-current-buffer)
+
+ ("M-+" . text-scale-increase)
+ ("M-_" . text-scale-decrease)
+
+ ;; ("C-." . company-complete)
+ ("C-." . hippie-expand)
+ ("C-/" . comment-line) ;vscode
+ ("C-\\" . align-regexp)
+ ("C-x \\" . toggle-input-method)
+ ("C-S-i" . eglot-format) ;vscode
+ ("C-S-t" . tab-new)
+ ("C-x C-r" . recentf)
+
+ ;; doom-like
+ ("C-c <SPC>" . project-find-file)
+ ("C-c C-<SPC>" . project-find-file)
+ ;; ("C-c ." . find-file)
+ ("C-c /" . consult-ripgrep)
+ ("C-c ," . project-switch-to-buffer)
+ ("C-x b" . project-switch-to-buffer)
+ ("C-<tab>" . project-switch-to-buffer)
+
+ ("C-x 2" . (lambda()
+              (interactive)
+              (split-window-below)
+              (select-window (next-window))))
+ ("C-x 3" . (lambda()
+              (interactive)
+              (split-window-right)
+              (select-window (next-window))))
+
+ ("<f7>" . compile)
+ ("<C-f7>" . (lambda()
+               (interactive)
+               (save-buffer)
+               (recompile)))
+
+ :prefix-map buffer-map
+ :prefix "C-c b"
+ ("i" . ibuffer)
+ ("r" . revert-buffer)
+ ("s" . save-some-buffers)
+ ("S" . crux-sudo-edit)
+ ("D" . crux-delete-file-and-buffer)
+ ("<f2>" . rename-visited-file)
+
+ :prefix-map file-map
+ :prefix "C-c f"
+ ("o" . crux-open-with)
+ ("s" . save-some-buffers)
+ ("S" . crux-sudo-edit)
+ ("D" . crux-delete-file-and-buffer)
+ ("<f2>" . rename-visited-file)
+
+ ;; :prefix-map search-map
+ ;; :prefix "C-c s"
+
+ :prefix-map mark-map
+ :prefix "C-c m"
+ ("'" . er/mark-inside-quotes)
+ ("[" . er/mark-inside-pairs)
+ ("l" . goto-last-change)
+ ("m" . bm-toggle)
+ ("0" . bm-remove-all-current-buffer)
+
+ ;; org-mode-map
+ ;; :prefix-map code-map
+ ;; :prefix "C-c c"
+ ;; ("." . consult-lsp-diagnostics)
+
+ ;; :prefix-map lsp-map
+ ;; :prefix "C-c l"
+
+ :prefix-map git-mode
+ :prefix "C-c v"
+ ("/" . magit-dispatch)
+ ("." . magit-file-dispatch)
+ ("t" . git-timemachine)
+ ("b" . browse-at-remote)
+
+ :prefix-map remove-map
+ :prefix "C-c -"
+ ("b" . bookmark-delete)
+ ("r" . recentf-edit-list)
+ ("p" . project-forget-project)
+
+ :prefix-map toggle-map
+ :prefix "C-c t"
+ ("f" . global-display-fill-column-indicator-mode)
+ ("z" . writeroom-mode)
+ ("p" . perfect-margin)
+ ("i" . indent-bars-mode)
+ ("k" . keycast)
+ ("u" . disk-usage)
+ )
+#+END_SRC
+
+** Mouse
+https://github.com/jamescherti/inhibit-mouse.el
+
+#+begin_src emacs-lisp
+(blink-cursor-mode -1)               ;禁用指针闪烁
+(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
+(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
+(global-unset-key (kbd "C-<wheel-up>"))
+(global-unset-key (kbd "C-<wheel-down>"))
+(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+
+;; Scroll
+(pixel-scroll-precision-mode t)
+;; (use-package ultra-scroll
+;;   :vc (:url "https://github.com/jdtsmith/ultra-scroll"
+;;             :rev :newest)
+;;   :init
+;;   (setq scroll-conservatively 101 ; important!
+;;         scroll-margin 0)
+;;   :config
+;;   (ultra-scroll-mode 1))
+#+end_src
+
+** casual
+https://github.com/kickingvegas/casual
+
+#+begin_src emacs-lisp
+(use-package casual
+  :bind (("C-c o" . #'casual-editkit-main-tmenu)
+         :map dired-mode-map ("C-o" . casual-dired-tmenu)
+         :map isearch-mode-map ("C-o" . casual-isearch-tmenu)
+         :map calc-mode-map ("C-o" . casual-calc-tmenu)
+         :map Info-mode-map ("C-o" . casual-info-tmenu)))
+#+end_src
+
+** view-mode
+#+begin_src emacs-lisp
+(use-package view
+  :ensure nil
+  :bind (:map view-mode-map
+              ("j" . next-line)
+              ("k" . previous-line)
+              ("h" . backward-char)
+              ("l" . forward-char)
+              ("g" . goto-line)
+              ("b" . View-scroll-page-backward))
+  :config
+  (setq view-read-only t))
+#+end_src
+
+** devil
+#+begin_src emacs-lisp :tangle no
+(use-package devil
+  :config
+  (global-devil-mode)
+  (global-set-key (kbd "C-,") 'global-devil-mode))
 #+end_src
 
 * Footer

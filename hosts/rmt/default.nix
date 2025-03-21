@@ -24,7 +24,6 @@
   mods = {
     virt.enable = false;
     # steam.enable = true;
-    # daeWithConfig.enable = true;
   };
 
   users.users.${username} = {

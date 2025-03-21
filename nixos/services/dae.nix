@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.mods.daeWithConfig;
+  cfg = config.services.daeWithConfig;
 in
 {
-  options.mods.daeWithConfig = {
+  options.services.daeWithConfig = {
     enable = lib.mkEnableOption ''
       my dae encryption config.
     '';

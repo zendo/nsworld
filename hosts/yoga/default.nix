@@ -24,7 +24,7 @@
 
   mods = {
     steam.enable = true;
-    # daeWithConfig.enable = true;
+    # virt.enable = true; # default: true
   };
 
   services = {
@@ -34,6 +34,7 @@
       # enable = true;
       configFile = "/home/${username}/code/sub/dae-config.dae";
     };
+    # daeWithConfig.enable = true;
   };
 
   programs = {

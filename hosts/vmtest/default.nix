@@ -25,7 +25,6 @@
 
   mods = {
     virt.enable = false;
-    # daeWithConfig.enable = true;
   };
 
   programs = {

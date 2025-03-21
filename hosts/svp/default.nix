@@ -24,7 +24,6 @@
 
   mods = {
     # steam.enable = true;
-    # daeWithConfig.enable = true;
   };
 
   services = {
