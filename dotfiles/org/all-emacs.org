@@ -39,29 +39,6 @@
 ;; No second pass of case-insensitive search over auto-mode-alist.
 (setq auto-mode-case-fold nil)
 
-;; Disable GUI elements
-(add-hook 'before-make-frame-hook
-          #'(lambda ()
-              (setq inhibit-splash-screen t
-                    inhibit-startup-screen t
-                    inhibit-startup-message t ;关闭欢迎界面
-                    inhibit-startup-buffer-menu t
-
-                    inhibit-x-resources t
-                    use-file-dialog nil
-                    use-dialog-box nil
-                    ;; inhibit-default-init t ;skip load default.el
-
-                    initial-frame-alist (quote ((fullscreen . maximized)))
-                    ;; default-frame-alist
-                    ;; '((height . 40)
-                    ;;   (width . 80))
-                    )))
-
-(defun display-startup-echo-area-message ()
-  "Delete startup message."
-  (message ""))
-
 (provide 'early-init)
 ;;; early-init.el ends here
 #+end_src
@@ -84,14 +61,17 @@
 ;; Control use of local variables in files you visit.
 ;; :safe means set the safe variables, and ignore the rest.
 (setq enable-local-variables :safe)
+#+end_src
 
+** load files
+#+begin_src emacs-lisp
 ;; Split emacs auto customizations
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file nil t)) ;or 'noerror
 
-;; Load the default init file
-;; (load "default" 'noerror 'nomessage)
+;; (load "default" 'noerror 'nomessage) ; Load the default init file
+;; (setq inhibit-default-init t) ; Don't load default.el
 #+end_src
 
 * Package Initialization
@@ -199,8 +179,10 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 * General
 ** Silence Warnings
 #+begin_src emacs-lisp
+;; Beep Beep
 (setq visible-bell 1)
 
+;; Close without ask
 (setq confirm-kill-processes nil)
 
 ;; Y/N
@@ -281,14 +263,42 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 (setq world-clock-time-format "  %a %d %b %R %Z")
 #+end_src
 
+** helpful
+#+begin_src emacs-lisp
+(use-package helpful
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)))
+#+end_src
+
 * Interface
 ** UI
 #+begin_src emacs-lisp
+;; Disable GUI elements
 (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
+
+(setq inhibit-splash-screen t
+      inhibit-startup-screen t
+      inhibit-startup-message t ;关闭欢迎界面
+      inhibit-startup-buffer-menu t
+
+      inhibit-x-resources t
+      use-file-dialog nil
+      use-dialog-box nil
+
+      initial-frame-alist (quote ((fullscreen . maximized)))
+      ;; default-frame-alist
+      ;; '((height . 40)
+      ;;   (width . 80))
+      )
+
+(defun display-startup-echo-area-message ()
+  "Delete startup message."
+  (message ""))
 #+end_src
 
 ** Themes
@@ -504,6 +514,31 @@ https://github.com/neeasade/stillness-mode.el
   (stillness-mode +1))
 #+end_src
 
+** indent-bars
+#+begin_src emacs-lisp
+(use-package indent-bars
+  :defer t)
+#+end_src
+
+** rainbow
+#+begin_src emacs-lisp
+;; rainbow 颜色代码显色 #00FF00
+(use-package rainbow-mode
+  :commands rainbow-mode)
+
+;; rainbow-delimiters 彩虹括号
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+** scrollkeeper (like beacon)
+#+begin_src emacs-lisp
+(use-package scrollkeeper
+  :bind
+  (([remap scroll-up-command] . scrollkeeper-contents-up)
+   ([remap scroll-down-command] . scrollkeeper-contents-down)))
+#+end_src
+
 * Editor
 #+begin_src emacs-lisp
 (delete-selection-mode t) ;overwrite selected text
@@ -545,7 +580,7 @@ https://github.com/AmaiKinono/puni
   (puni-global-mode +1))
 #+end_src
 
-** tabs and whitespace
+** tabs & whitespace
 #+begin_src emacs-lisp
 (setq-default tab-width 4
               indent-tabs-mode nil) ;indent with spaces, never with TABs
@@ -702,9 +737,6 @@ https://github.com/AmaiKinono/puni
 ;; save system clipboard before emacs clipboard
 (setq save-interprogram-paste-before-kill t)
 
-;; 自动加载被外部修改过的文件
-(global-auto-revert-mode 1)
-
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
@@ -719,12 +751,6 @@ https://github.com/AmaiKinono/puni
 
 (setq auto-save-default nil        ;stop creating #autosave# files
       create-lockfiles nil)        ;stop creating .#lockfile# files 多人编辑中
-
-;; Auto save buffer
-;; (setq auto-save-timeout 3) ; autosave if idled for 3 seconds.
-;; (setq auto-save-visited-interval 15) ; 用哪个？
-;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
-;; (auto-save-visited-mode 1)
 #+end_src
 
 ** super-save
@@ -754,6 +780,20 @@ https://github.com/AmaiKinono/puni
           (save-buffer)))))
   (advice-add 'super-save-command :override 'super-save/save-all-buffers)
   )
+#+end_src
+
+** auto-save buffer
+#+begin_src emacs-lispxx
+(setq auto-save-timeout 3) ; autosave if idled for 3 seconds.
+;; (setq auto-save-visited-interval 15) ; 用哪个？
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+(auto-save-visited-mode 1)
+#+end_src
+
+** auto-revert
+#+begin_src emacs-lisp
+;; 自动加载被外部修改过的文件
+(global-auto-revert-mode 1)
 #+end_src
 
 ** recentf
@@ -825,14 +865,6 @@ Remember the last cursor position within a file.
 #+end_src
 
 * Packages
-** helpful
-#+begin_src emacs-lisp
-(use-package helpful
-  :bind (("C-h f" . helpful-callable)
-         ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key)))
-#+end_src
-
 ** avy
 #+begin_src emacs-lisp
 (use-package avy
@@ -941,31 +973,6 @@ expand region alternative
   :bind
   ([remap query-replace] . anzu-query-replace)
   ([remap query-replace-regexp] . anzu-query-replace-regexp))
-#+end_src
-
-** rainbow
-#+begin_src emacs-lisp
-;; rainbow 颜色代码显色 #00FF00
-(use-package rainbow-mode
-  :commands rainbow-mode)
-
-;; rainbow-delimiters  彩虹括号
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-#+end_src
-
-** scrollkeeper (like beacon)
-#+begin_src emacs-lisp
-(use-package scrollkeeper
-  :bind
-  (([remap scroll-up-command] . scrollkeeper-contents-up)
-   ([remap scroll-down-command] . scrollkeeper-contents-down)))
-#+end_src
-
-** indent-bars
-#+begin_src emacs-lisp
-(use-package indent-bars
-  :defer t)
 #+end_src
 
 ** hl-todo
@@ -2157,12 +2164,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 #+end_src
 
 * Keybindings
-#+BEGIN_SRC emacs-lisp
-(which-key-mode)
-
-(ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
-(setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
-
+** bind-keys
+#+begin_src emacs-lisp
 ;; Built-in
 (bind-keys
   ;; M-s
@@ -2276,7 +2279,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("k" . keycast)
  ("u" . disk-usage)
  )
-#+END_SRC
+#+end_src
 
 ** Mouse
 https://github.com/jamescherti/inhibit-mouse.el
@@ -2334,6 +2337,14 @@ https://github.com/kickingvegas/casual
   :config
   (global-devil-mode)
   (global-set-key (kbd "C-,") 'global-devil-mode))
+#+end_src
+
+** which-key & ffap
+#+begin_src emacs-lisp
+(which-key-mode)
+
+(ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
+(setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
 #+end_src
 
 * Footer
