@@ -132,8 +132,7 @@ Use ~getenv~ check the environment variables.
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 (defconst IS-BSD     (or IS-MAC (eq system-type 'berkeley-unix)))
 (defconst IS-WSL     (and IS-LINUX
-                          (string-match-p "Microsoft"
-                                          (shell-command-to-string "uname -a"))))
+                          (getenv "WSLENV")))
 #+end_src
 
 ** linux
@@ -149,8 +148,17 @@ Use ~getenv~ check the environment variables.
 ** wsl
 #+begin_src emacs-lisp
 (when IS-WSL
+  ;; open links in Windows browser
+  ;; https://emacsredux.com/blog/2021/12/19/wsl-specific-emacs-configuration/
+  (let ((cmd-exe "/mnt/c/Windows/System32/cmd.exe")
+        (cmd-args '("/c" "start")))
+    (when (file-exists-p cmd-exe)
+      (setq browse-url-generic-program  cmd-exe
+            browse-url-generic-args     cmd-args
+            browse-url-browser-function 'browse-url-generic
+            search-web-default-browser 'browse-url-generic)))
   ;; WSLg breaks copy-paste from Emacs into Windows
-  ;; see: https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
+  ;; https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
   (setq select-active-regions nil
         select-enable-clipboard 't
         select-enable-primary nil
