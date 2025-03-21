@@ -2,7 +2,7 @@ param ( [string]$SourceExe, [string]$ArgumentsToSourceExe, [string]$DestinationP
 
 $DestinationPath = "$Home\Desktop\GNU Emacs.lnk"
 $SourceExe = "$Home\scoop\apps\emacs\current\bin\emacsclientw.exe"
-$ArgumentsToSourceExe = "-c -n -a """
+$ArgumentsToSourceExe = '-c -n -a ""'
 
 $WshShell = New-Object -COMObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut($DestinationPath)
