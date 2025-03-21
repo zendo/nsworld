@@ -1,6 +1,6 @@
 set windows-shell := ["powershell.exe", "-c"]
 
-default:
+_default:
     @just --choose
 
 betterfox:
@@ -11,14 +11,11 @@ betterfox:
 emacs-mklink:
     Start-Process -Verb RunAs Invoke-Item -FilePath ".\emacs_mklink_admin.cmd"
 
+emacsclient-shortcut-startup:
+    .\emacsclient-shortcut.ps1
+
 emacs-ob-tangle:
     emacs --batch -l org --eval '(setq vc-follow-symlinks nil)' --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
-
-emacsclient-setup:
-    # Win+r shell:startup
-    # ci $HOME\nsworld\dotfiles\Windows\emacs-daemon.vbs .
-    # 桌面新建快捷方式: GNU Emacs
-    # C:\Users\zendo\scoop\apps\emacs\current\bin\emacsclientw.exe -c -n -a ""
 
 sing-box-setup:
     # ni $HOME\Desktop\sub -ItemType Directory; cd $HOME\Desktop\sub
