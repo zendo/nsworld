@@ -5,7 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/init.el"
 #+AUTO_TANGLE: t
 
-* early-init.el
+* early-init
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
 ;;; early-init.el --- Early Initialization -*- lexical-binding: t; -*-
 
@@ -43,7 +43,8 @@
 ;;; early-init.el ends here
 #+end_src
 
-* Startup Performance
+* Startup
+** Performance
 #+begin_src emacs-lisp
 ;;; init.el --- Initialization -*- lexical-binding: t; -*-
 
@@ -103,9 +104,9 @@
 #+end_src
 
 * Systems
+** variables
 Use ~getenv~ check the environment variables.
 
-** variables
 #+begin_src emacs-lisp
 (defconst IS-MAC     (eq system-type 'darwin))
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
@@ -540,8 +541,13 @@ https://github.com/neeasade/stillness-mode.el
 #+end_src
 
 * Editor
+** basic
 #+begin_src emacs-lisp
-(delete-selection-mode t) ;overwrite selected text
+;; save system clipboard before emacs clipboard
+(setq save-interprogram-paste-before-kill t)
+
+;; overwrite selected text
+(delete-selection-mode t)
 
 ;; (global-visual-line-mode 1) ;折叠 word wrap
 
@@ -733,10 +739,8 @@ https://github.com/AmaiKinono/puni
 #+end_src
 
 * Backup
+** backup files
 #+begin_src emacs-lisp
-;; save system clipboard before emacs clipboard
-(setq save-interprogram-paste-before-kill t)
-
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
