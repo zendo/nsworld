@@ -203,10 +203,8 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 
 (setq confirm-kill-processes nil)
 
-;; Allow for shorter responses: "y" for yes and "n" for no.
-;; (setq read-answer-short t)
+;; Y/N
 (setq use-short-answers t)
-;; (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Follow symlinks without prompt
 (setq vc-follow-symlinks t)
@@ -286,9 +284,11 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 * Interface
 ** UI
 #+begin_src emacs-lisp
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
 (menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 #+end_src
 
 ** Themes
@@ -368,7 +368,7 @@ Linux handle by nix.
   :commands nyan-mode)
 #+end_src
 
-** Tab line mode
+** Tab-line-mode
 #+begin_src emacs-lisp
 (use-package centaur-tabs
   :custom ((centaur-tabs-height 28)
@@ -446,8 +446,10 @@ Use `treemacs' command for old functionality."
 ;; Empty the *scratch* buffer
 (setq initial-scratch-message nil
       initial-major-mode 'fundamental-mode)
+#+end_src
 
-;; ibuffer
+*** ibuffer
+#+begin_src emacs-lisp
 (defalias 'list-buffers 'ibuffer)
 (setq ibuffer-expert t) ; 直接操作不询问
 (setq ibuffer-use-other-window t)
@@ -466,25 +468,40 @@ Use `treemacs' command for old functionality."
 
 ;; winner C-c ←/→ undo/redo window
 (winner-mode 1)
+#+end_src
 
-;; ace-window
+*** ace-window
+#+begin_src emacs-lisp
 (use-package ace-window
   :bind
   (([remap other-window] . ace-window)
    ("C-x 4 x" . ace-swap-window)
    ("C-c w x" . ace-swap-window)))
+#+end_src
 
-;; rotate
+*** rotate
+#+begin_src emacs-lisp
 (use-package rotate
   :bind (("C-c w v" . rotate-layout)))
+#+end_src
 
-;; Persp-mode
+*** persp-mode
+#+begin_src emacs-lisp
 (use-package persp-mode
   :init (setq persp-keymap-prefix (kbd "C-c w"))
   :config
   ;; (setq wg-morph-on nil) ;; switch off animation
   (setq persp-auto-resume-time 0)
   (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
+#+end_src
+
+*** stillness-mode
+弹出 minibuffer 时候保持 window 稳定
+https://github.com/neeasade/stillness-mode.el
+#+begin_src emacs-lisp
+(use-package stillness-mode
+  :config
+  (stillness-mode +1))
 #+end_src
 
 * Editor
@@ -691,8 +708,8 @@ https://github.com/AmaiKinono/puni
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
-(setq make-backup-files t          ; Backup of a file the first time it is saved.
-      vc-make-backup-files t       ; No backup of files under version contr
+(setq make-backup-files t          ; Backup of a file the first time it is saved
+      vc-make-backup-files t       ; Backup files even covered by version control
       backup-by-copying t          ; Don't clobber symlinks
       version-control t            ; Version numbers for backup files
       delete-old-versions t        ; Delete excess backup files silently
@@ -703,12 +720,11 @@ https://github.com/AmaiKinono/puni
 (setq auto-save-default nil        ;stop creating #autosave# files
       create-lockfiles nil)        ;stop creating .#lockfile# files 多人编辑中
 
-;; 自动保存 autosave
+;; Auto save buffer
+;; (setq auto-save-timeout 3) ; autosave if idled for 3 seconds.
+;; (setq auto-save-visited-interval 15) ; 用哪个？
+;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
 ;; (auto-save-visited-mode 1)
-;; 定时自动保存
-;; (setq auto-save-visited-interval 15) ;default is 5s
-;; 失去焦点便自动保存
-;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 #+end_src
 
 ** super-save
@@ -2070,8 +2086,9 @@ https://github.com/jadestrong/lsp-proxy
   :commands lsp)
 #+end_src
 
-** java
+** java & android
 #+begin_src emacs-lisp
+(use-package groovy-mode)
 #+end_src
 
 ** haskell
@@ -2110,6 +2127,7 @@ https://github.com/jadestrong/lsp-proxy
 ** nix
 #+begin_src emacs-lisp
 (use-package direnv
+  :when (eq system-type 'gnu/linux) ; no Windows
   :config
   (direnv-mode))
 
