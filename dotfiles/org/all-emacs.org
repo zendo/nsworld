@@ -330,7 +330,7 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 ** emoji
 Linux handle by nix.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package emojify
   :when IS-WINDOWS
   :hook (after-init . global-emojify-mode))
