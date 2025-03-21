@@ -18,9 +18,9 @@ emacs-ob-tangle:
     emacs --batch -l org --eval '(setq vc-follow-symlinks nil)' --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
 
 sing-box-setup:
-    # ni $HOME\Desktop\sub -ItemType Directory; cd $HOME\Desktop\sub
-    # eget SagerNet/sing-box
-    # iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O sb-service.exe
-    # eget Zephyruso/zashboard -d
-    # Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
-    # ci $HOME\nsworld\dotfiles\Windows\sb-service.xml .
+    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O sb-service.exe
+    iwr "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" -O dist.zip
+    Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
+    New-Item $HOME\Desktop\subs -ItemType Directory -Force
+    Copy-Item sb-service.xml $HOME\Desktop\subs
+    Move-Item sb-service.exe, ui $HOME\Desktop\subs
