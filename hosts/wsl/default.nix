@@ -53,19 +53,22 @@
     command-not-found.enable = false;
   };
 
-  environment.systemPackages = with pkgs; [
-    binutils
-    tree
-    file
-    wget
-    micro
-    dos2unix
-    wslu
-    wsl-open
-  ];
+  environment = {
+    sessionVariables = {
+      BROWSER = "wsl-open";
+    };
 
-  environment.sessionVariables = {
-    BROWSER = "wsl-open";
+    systemPackages = with pkgs; [
+      binutils
+      tree
+      file
+      wget
+      micro
+      dos2unix
+      wslu
+      wsl-open
+      xdg-utils # for git oauth
+    ];
   };
 
   # vscode-remote-workaround
