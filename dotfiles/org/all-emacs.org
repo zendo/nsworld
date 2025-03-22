@@ -39,12 +39,27 @@
 ;; No second pass of case-insensitive search over auto-mode-alist.
 (setq auto-mode-case-fold nil)
 
+;; Disable Magic File Name temporary
+(defconst my-saved-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
+;; Disable GUI element early
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
+
 (provide 'early-init)
 ;;; early-init.el ends here
 #+end_src
 
 * Startup
 ** Performance
+Emacs の起動時間を""詰める"":
+https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
+
+Emacsを世界最速級で起動する方法:
+https://zenn.dev/takeokunn/articles/56010618502ccc
+
 #+begin_src emacs-lisp
 ;;; init.el --- Initialization -*- lexical-binding: t; -*-
 
@@ -97,7 +112,8 @@
   (diminish 'visual-line-mode))
 
 ;; libraries
-(require 'cl-lib)
+(eval-when-compile
+  (require 'cl-lib))(require 'cl-lib)
 ;; (use-package dash) ;modern list library
 (use-package s) ;string manipulation library
 (use-package f) ;file manipulation
@@ -240,7 +256,7 @@ nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary
 (require 'flyspell)
 (setq ispell-dictionary "en"        ; 使用英文词典
       ispell-program-name "hunspell"  ; aspell hunspell
-      ispell-extra-args '("--sug-mode=ultra")
+      ispell-extra-args '("--sug-mode=ultra"))
 #+end_src
 
 ** Time
@@ -278,11 +294,11 @@ nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary
 ** UI
 #+begin_src emacs-lisp
 ;; Disable GUI elements
-(menu-bar-mode -1)
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+;; (menu-bar-mode -1)
+;; (when (fboundp 'tool-bar-mode)
+;;   (tool-bar-mode -1))
+;; (when (fboundp 'scroll-bar-mode)
+;;   (scroll-bar-mode -1))
 
 (setq inhibit-splash-screen t
       inhibit-startup-screen t
@@ -1024,8 +1040,8 @@ Garbage Collector Magic Hack
 #+begin_src emacs-lisp
 (use-package gcmh
   :diminish
-  :init (setq gc-cons-threshold (* 80 1024 1024))
-  :hook (emacs-startup . gcmh-mode))
+  :config
+  (gcmh-mode 1))
 #+end_src
 
 ** keycast
@@ -2392,6 +2408,8 @@ https://github.com/kickingvegas/casual
 
 * Footer
 #+begin_src emacs-lisp
+;; 回收 early-init.el 的 Magic File Name 禁用
+(setq file-name-handler-alist my-saved-file-name-handler-alist)
 
 (provide 'init.el)
 ;;; init.el ends here
