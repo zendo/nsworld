@@ -169,16 +169,18 @@ https://wiki.metacubex.one/config/
 #+begin_src yaml
 # https://linux.do/t/topic/487334
 # 基本设置
-port: 7890                # HTTP代理端口
-socks-port: 7891          # SOCKS代理端口
-allow-lan: false           # 允许局域网连接
-bind-address: "*"         # 绑定地址，* 表示所有地址
-mode: rule                # 代理模式，rule表示规则模式
-log-level: info           # 日志级别
+port: 7890        # HTTP代理端口
+socks-port: 7891  # SOCKS代理端口
+allow-lan: false  # 允许局域网连接
+bind-address: "*" # 绑定地址，* 表示所有地址
+mode: rule        # 代理模式，rule表示规则模式
+log-level: info   # 日志级别
 ipv6: false
+
 # 外部控制配置
 external-controller: 127.0.0.1:9090 # 允许通过 RESTful API 或 Web 界面（如 Clash Dashboard）在本地控制 Clash
 secret: jkfdjk43#$#@LI#@fsdf3  #外部控制,api访问密钥，确保只有知道密码的人才能控制 Clash
+
 # 性能优化
 unified-delay: true       # 更换延迟计算方式，去除握手等额外延迟
 tcp-concurrent: true      # 启用 TCP 并发连接。这允许 Clash 同时建立多个 TCP 连接，可以提高网络性能和连接速度
@@ -189,15 +191,15 @@ global-client-fingerprint: chrome  # 设置全局客户端指纹为 Chrome，使
 
 # DNS配置
 dns:
-  enable: true            # 启用 Clash 的 DNS 功能
-  ipv6: false              # IPv6 DNS 解析
-  listen: '0.0.0.0:53'    # DNS 服务器监听地址和端口，:53 表示监听所有接口的 53 端口
-  enhanced-mode: fake-ip  # 设置增强模式为 fake-ip 模式，提高解析速度和连接性能
-  fake-ip-range: 198.18.0.1/16  # 设置 fake-ip 的 IP 地址范围为 198.18.0.1/16
-  use-hosts: true         # 启用 hosts 文件解析，Clash 会检查系统的 hosts 文件
-  use-system-hosts: true  # 使用系统的 hosts 文件进行域名解析
-  prefer-h3: true         # 如果DNS服务器支持DoH3会优先使用h3，提升性能
-  respect-rules: true     # 让 DNS 解析遵循 Clash 的路由规则
+  enable: true                 # 启用 Clash 的 DNS 功能
+  ipv6: false                  # IPv6 DNS 解析
+  listen: '0.0.0.0:53'         # DNS 服务器监听地址和端口，:53 表示监听所有接口的 53 端口
+  enhanced-mode: fake-ip       # 设置增强模式为 fake-ip 模式，提高解析速度和连接性能
+  fake-ip-range: 198.18.0.1/16 # 设置 fake-ip 的 IP 地址范围为 198.18.0.1/16
+  use-hosts: true              # 启用 hosts 文件解析，Clash 会检查系统的 hosts 文件
+  use-system-hosts: true       # 使用系统的 hosts 文件进行域名解析
+  prefer-h3: true              # 如果DNS服务器支持DoH3会优先使用h3，提升性能
+  respect-rules: true          # 让 DNS 解析遵循 Clash 的路由规则
   # 定义不使用虚假IP解析的域名列表
   fake-ip-filter:
     - '*.lan'
@@ -245,13 +247,13 @@ profile:
 
 # 域名嗅探
 sniffer:
-  enable: true            # 启用网络流量嗅探功能，允许 Clash 分析和识别流量类型
+  enable: true                   # 启用网络流量嗅探功能，允许 Clash 分析和识别流量类型
   sniff:
     TLS:
-      ports: [443, 8443]  # 要嗅探的 TLS 流量端口，包括标准 HTTPS 端口 443 和常用的备用 HTTPS 端口 8443
+      ports: [443, 8443]         # 要嗅探的 TLS 流量端口，包括标准 HTTPS 端口 443 和常用的备用 HTTPS 端口 8443
     HTTP:
-      ports: [80, 8080-8880]  # 要嗅探的 HTTP 流量端口，包括标准 HTTP 端口 80 和常用的 HTTP 端口范围 8080-8880
-      override-destination: true  # 启用目标覆盖功能，允许 Clash 根据嗅探到的域名重写请求的目标地址
+      ports: [80, 8080-8880]     # 要嗅探的 HTTP 流量端口，包括标准 HTTP 端口 80 和常用的 HTTP 端口范围 8080-8880
+      override-destination: true # 启用目标覆盖功能，允许 Clash 根据嗅探到的域名重写请求的目标地址
 
 # GeoData 配置
 geodata-mode: true        # 启用地理数据模式，使 Clash 使用 GeoIP/GeoSite 数据库进行流量的地理位置识别和规则匹配

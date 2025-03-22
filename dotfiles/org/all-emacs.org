@@ -120,10 +120,10 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (when IS-LINUX
   (setq org-directory "~/Documents/Notes")
-  (add-to-list 'default-frame-alist '(font . "JetBrains Mono-10")))
-  ;; (set-face-attribute 'default nil :font "JetBrains Mono-10")
-  ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-  ;;   (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
+  ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-10")))
+  (set-face-attribute 'default nil :font "JetBrains Mono-10")
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
 #+end_src
 
 ** wsl
@@ -515,6 +515,25 @@ https://github.com/neeasade/stillness-mode.el
   (stillness-mode +1))
 #+end_src
 
+** perfect-margin
+#+begin_src emacs-lisp
+(use-package perfect-margin
+  ;; :custom
+  ;; (perfect-margin-visible-width 128)
+  :config
+  (perfect-margin-mode t)
+  (setq perfect-margin-ignore-filters nil) ;; auto-center minibuffer windows
+  (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
+)
+#+end_src
+
+** spatial-padding
+#+begin_src emacs-lisp
+(use-package spacious-padding
+  :config
+  (spacious-padding-mode +1))
+#+end_src
+
 ** indent-bars
 #+begin_src emacs-lisp
 (use-package indent-bars
@@ -611,19 +630,9 @@ https://github.com/AmaiKinono/puni
   :commands writeroom-mode)
 #+end_src
 
-** perfect-margin
-#+begin_src emacs-lisp
-(use-package perfect-margin
-  ;; :custom
-  ;; (perfect-margin-visible-width 128)
-  :config
-  (perfect-margin-mode t)
-  (setq perfect-margin-ignore-filters nil) ;; auto-center minibuffer windows
-  (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
-)
-#+end_src
-
 ** mixed-pitch
+https://gitlab.com/jabranham/mixed-pitch
+
 #+begin_src emacs-lispxx
 (use-package mixed-pitch
   :config
@@ -972,11 +981,20 @@ expand region alternative
 #+end_src
 
 ** anzu
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package anzu
   :bind
   ([remap query-replace] . anzu-query-replace)
   ([remap query-replace-regexp] . anzu-query-replace-regexp))
+#+end_src
+
+** visual-replace
+#+begin_src emacs-lisp
+(use-package visual-replace
+  :bind (([remap query-replace] . visual-replace)
+         ;; ("C-c r" . visual-replace)
+         :map isearch-mode-map
+         ("C-c r" . visual-replace-from-isearch)))
 #+end_src
 
 ** hl-todo
@@ -1617,6 +1635,9 @@ Static Site Generator for Emacs Lisp programmers.
 
 https://one.tonyaldon.com/
 
+** note-taking
+https://github.com/kaorahi/howm
+
 * LSP
 ** eglot
 #+begin_src emacs-lisp
@@ -1720,6 +1741,9 @@ https://github.com/jadestrong/lsp-proxy
   :init
   (setq-default flymake-no-changes-timeout 1.0))
 #+end_src
+
+** dape
+https://github.com/svaante/dape
 
 ** quick-run
 #+begin_src emacs-lisp
