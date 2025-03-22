@@ -79,7 +79,9 @@
     typos
     shellcheck
     translate-shell
+    # aspell
     # aspellDicts.en
+    hunspell
     hunspellDicts.en_US
     # asciinema # record the terminal
     calcurse

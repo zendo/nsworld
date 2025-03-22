@@ -233,12 +233,14 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
             (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
 #+END_SRC
 
-** Spell
+** TODO Spell
+nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary with a .aff affix file
+
 #+begin_src emacs-lisp
 (require 'flyspell)
-(setq ispell-dictionary "en"        ;使用英文词典
-      ispell-program-name "aspell" ; use aspell instead of ispell
-      ispell-extra-args '("--sug-mode=ultra"))
+(setq ispell-dictionary "en"        ; 使用英文词典
+      ispell-program-name "hunspell"  ; aspell hunspell
+      ispell-extra-args '("--sug-mode=ultra")
 #+end_src
 
 ** Time
