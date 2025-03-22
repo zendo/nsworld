@@ -1982,16 +1982,16 @@ https://github.com/svaante/dape
 
 ** nix
 #+begin_src emacs-lisp
-(use-package direnv
-  :when (eq system-type 'gnu/linux) ; no Windows
-  :config
-  (direnv-mode))
-
 (use-package nix-mode
   :mode ("\\.nix'"))
 
 (use-package nixpkgs-fmt
   :defer t)
+
+;; (use-package direnv
+;;   :when (eq system-type 'gnu/linux) ; Windows unsupport
+;;   :config
+;;   (direnv-mode))
 #+end_src
 
 * Web Development
@@ -2310,15 +2310,28 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 #+end_src
 
 ** Mouse
-https://github.com/jamescherti/inhibit-mouse.el
+M-x ~describe-key~
 
 #+begin_src emacs-lisp
 (blink-cursor-mode -1)               ;禁用指针闪烁
 (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
+(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (global-unset-key (kbd "C-<wheel-up>"))
 (global-unset-key (kbd "C-<wheel-down>"))
-(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+;; 禁用 mouse-drag-region
+(global-unset-key [M-mouse-1])
+(global-unset-key [M-drag-mouse-1])
+(global-unset-key [M-down-mouse-1])
+(global-unset-key [M-mouse-3])
+
+;; 禁用所有鼠标
+(use-package inhibit-mouse
+  :disabled
+  :config
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
+    (inhibit-mouse-mode 1)))
 
 ;; Scroll
 (pixel-scroll-precision-mode t)
