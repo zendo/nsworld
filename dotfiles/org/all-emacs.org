@@ -136,7 +136,7 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (when IS-LINUX
   (setq org-directory "~/Documents/Notes")
-  ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-10")))
+  ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NL NF CN-10")))
   (set-face-attribute 'default nil :font "JetBrains Mono-10")
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))

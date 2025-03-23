@@ -9,16 +9,19 @@
       noto-fonts-cjk-serif
       # sarasa-gothic
       # lxgw-wenkai
-      source-code-pro
-      # comic-relief
+      # No-Ligature, Nerd-Font, Unhinted for HiDPI
+      maple-mono.NL-NF-CN-unhinted
+      maple-mono.variable
+      mononoki
       hack-font
       fira-code
-      mononoki
-      lexend # improve reading fluency
-      # recursive
-      # ibm-plex
       jetbrains-mono
-      # cascadia-code
+      source-code-pro
+      # ibm-plex
+      # cascadia-code # Microsoft
+      # recursive
+      # comic-relief
+      lexend # improve reading fluency
       nerd-fonts.symbols-only
     ];
 

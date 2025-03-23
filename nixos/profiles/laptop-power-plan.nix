@@ -1,15 +1,20 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   services = {
     # https://wiki.debian.org/thermald
     thermald.enable = true;
 
     # Conflicts with auto-cpufreq
-    power-profiles-daemon.enable = false;
+    power-profiles-daemon.enable = !config.services.auto-cpufreq.enable;
 
     # https://github.com/AdnanHodzic/auto-cpufreq
     auto-cpufreq = {
-      enable = true;
+      # enable = true;
       settings = {
         battery = {
           governor = "powersave";
