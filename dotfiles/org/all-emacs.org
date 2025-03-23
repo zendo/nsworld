@@ -161,12 +161,16 @@ Use ~getenv~ check the environment variables.
 (when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         ;; org-directory "c:/Users/zendo/Documents/org/"
-        ;; 优化
-        w32-get-true-file-attributes nil
-        w32-pipe-read-delay 0
-        w32-pipe-buffer-size (* 64 1024)
-        )
-  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-10")))
+        ;; Optimization
+        w32-get-true-file-attributes nil   ; decrease file IO workload
+        w32-use-native-image-API t         ; use native w32 API
+        w32-pipe-read-delay 0              ; faster IPC
+        w32-pipe-buffer-size 65536))       ; read more at a time (64K, was 4K)
+;; encoding
+(add-to-list 'process-coding-system-alist
+             '("cmdproxy" utf-8 . gbk))
+(set-selection-coding-system 'utf-8)
+(add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-10"))
 #+end_src
 
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
@@ -602,13 +606,11 @@ https://github.com/neeasade/stillness-mode.el
 
 ** Encoding (UTF-8)
 #+begin_src emacs-lisp
-  ;; Set UTF-8 as the default coding system
-  (when (fboundp 'set-charset-priority)
-    (set-charset-priority 'unicode))
-  (prefer-coding-system 'utf-8)
-  (setq locale-coding-system 'utf-8)
-  (unless (eq system-type 'windows-nt)
-    (set-selection-coding-system 'utf-8))
+;; Set UTF-8 as the default coding system
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
 #+end_src
 
 ** parens
@@ -1454,8 +1456,8 @@ hippie expand is dabbrev expand on steroids
   :init
   (setq shell-pop-window-size 30
         shell-pop-shell-type
-        (cond ((fboundp 'vterm) '("vterm" "*vterm*" #'vterm))
-              ((eq system-type 'windows-nt) '("eshell" "*eshell*" #'eshell))
+        (cond ((eq system-type 'gnu/linux) '("vterm" "*vterm*" #'vterm))
+              (IS-WINDOWS '("eshell" "*eshell*" #'eshell))
               (t '("terminal" "*terminal*"
                    (lambda () (term shell-pop-term-shell)))))))
 #+end_src
