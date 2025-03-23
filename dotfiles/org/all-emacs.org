@@ -6,13 +6,25 @@
 #+AUTO_TANGLE: t
 
 * early-init
+https://github.com/seagle0128/.emacs.d/blob/master/early-init.el
+
+Emacs の起動時間を""詰める"":
+https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
+
+Emacsを世界最速級で起動する方法:
+https://zenn.dev/takeokunn/articles/56010618502ccc
+
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
 ;;; early-init.el --- Early Initialization -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Vanilla Emacs configuration.
+;; Startup Performance
 
 ;;; Code:
+
+;; Defer garbage collection further back in the startup process
+(setq gc-cons-threshold most-positive-fixnum)
 
 ;; Prevent unwanted runtime compilation for gccemacs (native-comp) users;
 ;; packages are compiled ahead-of-time when they are installed and site files
@@ -23,6 +35,9 @@
 ;; loaded, but after `early-init-file'. We handle package
 ;; initialization, so we must prevent Emacs from doing it early!
 (setq package-enable-at-startup nil)
+
+;; It must be set before loading `use-package'.
+(setq use-package-enable-imenu-support t)
 
 ;; In noninteractive sessions, prioritize non-byte-compiled source files to
 ;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
@@ -39,27 +54,28 @@
 ;; No second pass of case-insensitive search over auto-mode-alist.
 (setq auto-mode-case-fold nil)
 
+;; Control use of local variables in files you visit.
+;; :safe means set the safe variables, and ignore the rest.
+(setq enable-local-variables :safe)
+
 ;; Disable Magic File Name temporary
 (defconst my-saved-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-;; Disable GUI element early
+;; Faster to disable these here (before they've been initialized)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
+(when (featurep 'ns)
+  (push '(ns-transparent-titlebar . t) default-frame-alist))
+;; Prevent flashing of unstyled modeline at startup
+(setq-default mode-line-format nil)
 
 (provide 'early-init)
 ;;; early-init.el ends here
 #+end_src
 
-* Startup
-** Performance
-Emacs の起動時間を""詰める"":
-https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
-
-Emacsを世界最速級で起動する方法:
-https://zenn.dev/takeokunn/articles/56010618502ccc
-
+* Header
 #+begin_src emacs-lisp
 ;;; init.el --- Initialization -*- lexical-binding: t; -*-
 
@@ -68,26 +84,6 @@ https://zenn.dev/takeokunn/articles/56010618502ccc
 
 ;;; Code:
 
-;; Defer garbage collection further back in the startup process
-(setq gc-cons-threshold most-positive-fixnum)
-
-;; Prevent flash of unstyled modeline at startup
-(setq-default mode-line-format nil)
-
-;; Control use of local variables in files you visit.
-;; :safe means set the safe variables, and ignore the rest.
-(setq enable-local-variables :safe)
-#+end_src
-
-** load files
-#+begin_src emacs-lisp
-;; Split emacs auto customizations
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file nil t)) ;or 'noerror
-
-;; (load "default" 'noerror 'nomessage) ; Load the default init file
-;; (setq inhibit-default-init t) ; Don't load default.el
 #+end_src
 
 * Package Initialization
@@ -137,7 +133,7 @@ Use ~getenv~ check the environment variables.
 (when IS-LINUX
   (setq org-directory "~/Documents/Notes")
   ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NL NF CN-10")))
-  (set-face-attribute 'default nil :font "JetBrains Mono-10")
+  (set-face-attribute 'default nil :font "Maple Mono-10")
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
 #+end_src
@@ -194,6 +190,17 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 #+end_src
 
 * General
+** load files
+#+begin_src emacs-lisp
+;; Split emacs auto customizations
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file nil t)) ;or 'noerror
+
+;; (load "default" 'noerror 'nomessage) ; Load the default init file
+;; (setq inhibit-default-init t) ; Don't load default.el
+#+end_src
+
 ** Silence Warnings
 #+begin_src emacs-lisp
 ;; Beep Beep
