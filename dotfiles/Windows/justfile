@@ -15,7 +15,10 @@ emacsclient-shortcut-startup:
     .\emacsclient-shortcut.ps1
 
 emacs-ob-tangle:
-    emacs --batch -l org --eval '(setq vc-follow-symlinks nil)' --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
+    emacs -Q --batch \
+    -l org \
+    --eval '(setq vc-follow-symlinks nil)' \
+    --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
 
 sing-box-setup:
     iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O sb-service.exe

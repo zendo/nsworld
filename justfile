@@ -81,7 +81,13 @@ non-nixos-setup:
     EOF
 
 emacs-ob-tangle:
-    emacs --batch -l org --eval '(setq vc-follow-symlinks nil)' --eval '(org-babel-tangle-file "~/.config/emacs/all-emacs.org")'
+    emacs -Q --batch \
+    -l org \
+    --eval '(setq vc-follow-symlinks nil)' \
+    --eval '(org-babel-tangle-file "~/.config/emacs/all-emacs.org")'
 
 emacs-ob-tangle-doom:
-    emacs --batch -l org --eval '(setq vc-follow-symlinks nil)' --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
+    emacs -Q --batch \
+    -l org \
+    --eval '(setq vc-follow-symlinks nil)' \
+    --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
