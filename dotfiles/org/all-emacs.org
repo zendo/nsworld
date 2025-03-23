@@ -2337,7 +2337,7 @@ M-x ~describe-key~
 
 #+begin_src emacs-lisp
 (blink-cursor-mode -1)               ;禁用指针闪烁
-(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
+;; (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (global-unset-key (kbd "C-<wheel-up>"))
