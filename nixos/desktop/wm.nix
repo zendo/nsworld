@@ -10,6 +10,7 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
+    soteria.enable = true; # Polkit agent
   };
 
   programs = {
@@ -104,7 +105,6 @@
           udiskie.enable = true;
           gnome-keyring.enable = true;
           # playerctld.enable = true;
-          polkit.enable = true;
           swaync.enable = true; # notification center
 
           wlsunset = {
