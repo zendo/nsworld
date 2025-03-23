@@ -11,9 +11,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/early-init.el
 Emacs の起動時間を""詰める"":
 https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 
-Emacsを世界最速級で起動する方法:
-https://zenn.dev/takeokunn/articles/56010618502ccc
-
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
 ;;; early-init.el --- Early Initialization -*- lexical-binding: t; -*-
 
@@ -422,6 +419,7 @@ Linux handle by nix.
 ** Dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
+  :when (display-graphic-p)
 ;; :diminish (dashboard-mode page-break-lines-mode)
   :custom
   (dashboard-startup-banner 2)
@@ -1160,12 +1158,12 @@ Completion At Point Extensions: https://github.com/minad/cape
   ;; used by `completion-at-point'.  The order of the functions matters, the
   ;; first function returning a result wins.  Note that the list of buffer-local
   ;; completion functions takes precedence over the global list.
-  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  ;; (add-to-list 'completion-at-point-functions #'cape-file)
-  ;; (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
   ;; (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;; (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-history)
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
@@ -2349,6 +2347,8 @@ M-x ~describe-key~
 (global-unset-key [M-drag-mouse-1])
 (global-unset-key [M-down-mouse-1])
 (global-unset-key [M-mouse-3])
+;; disable mouse in minibuffer
+;; TODO
 
 ;; 禁用所有鼠标
 (use-package inhibit-mouse
