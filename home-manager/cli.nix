@@ -51,6 +51,7 @@
     eget
     croc
     dufs
+    sshfs
     magic-wormhole-rs
 
     # System Monitor

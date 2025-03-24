@@ -78,6 +78,7 @@ in
           # runAsRoot = false;
           package = pkgs.qemu_kvm; # emulate only host architectures
           # swtpm.enable = true; # emulated TPM
+          # vhostUserPackages = [ pkgs.virtiofsd ]; # ???
           ovmf = {
             # packages = [
             #   (pkgs.OVMFFull.override

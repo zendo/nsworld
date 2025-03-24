@@ -14,7 +14,7 @@
     shellAliases = {
       history = "history 0"; # show whole history
     };
-    initExtra = ''
+    initContent = ''
       unsetopt correct  # Disable AutoCorrect
 
       # Completions
