@@ -83,9 +83,8 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 
 #+end_src
 
-* Package Initialization
+* Use-package
 #+begin_src emacs-lisp
-;; Repositories
 (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
@@ -586,6 +585,12 @@ https://github.com/neeasade/stillness-mode.el
    ([remap scroll-down-command] . scrollkeeper-contents-down)))
 #+end_src
 
+** writeroom-mode
+#+begin_src emacs-lisp
+(use-package writeroom-mode
+  :commands writeroom-mode)
+#+end_src
+
 * Editor
 ** basic
 #+begin_src emacs-lisp
@@ -604,7 +609,7 @@ https://github.com/neeasade/stillness-mode.el
       require-final-newline t)
 #+end_src
 
-** Encoding (UTF-8)
+** encoding
 #+begin_src emacs-lisp
 ;; Set UTF-8 as the default coding system
 (when (fboundp 'set-charset-priority)
@@ -647,12 +652,6 @@ https://github.com/AmaiKinono/puni
 
 #+begin_src emacs-lisp
 (setq-default fill-column 80) ; default: 70
-#+end_src
-
-** writeroom-mode
-#+begin_src emacs-lisp
-(use-package writeroom-mode
-  :commands writeroom-mode)
 #+end_src
 
 ** mixed-pitch
@@ -1049,14 +1048,6 @@ Garbage Collector Magic Hack
   :diminish
   :config
   (gcmh-mode 1))
-#+end_src
-
-** keycast
-Show current command and its binding.
-
-#+begin_src emacs-lisp
-(use-package keycast
-  :defer t)
 #+end_src
 
 ** pass
@@ -2413,6 +2404,14 @@ https://github.com/kickingvegas/casual
 
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 (setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
+#+end_src
+
+** keycast
+Show current command and its binding.
+
+#+begin_src emacs-lisp
+(use-package keycast
+  :defer t)
 #+end_src
 
 * Footer
