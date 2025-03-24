@@ -5,8 +5,7 @@ _default:
 
 betterfox:
     iwr "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
-    iwr "https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/Windows/ff-pref.js" | \
-    add-content user.js
+    Get-Content ff-pref.js | Add-Content user.js
 
 emacs-mklink:
     Start-Process -Verb RunAs Invoke-Item -FilePath ".\emacs_mklink_admin.cmd"
