@@ -28,4 +28,9 @@ Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\runemacs.exe" `
 # '
 # $Startup | Out-File "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\emacs-daemon.vbs"
 
+# 任务栏图标重复
+# pin runemacs.exe
+# shift+右键：属性-目标，改为以上桌面快捷方式一样的
+# Win+r shell:User Pinned\Taskbar
+
 Write-Output "Shortcuts is created successfully."
