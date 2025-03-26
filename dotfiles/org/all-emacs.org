@@ -267,8 +267,9 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 
 ** Silence Warnings
 #+begin_src emacs-lisp
-;; Beep Beep
-(setq visible-bell 1)
+;; Turn off Beep and flash
+(setq visible-bell nil
+      ring-bell-function #'ignore)
 
 ;; Close without ask
 (setq confirm-kill-processes nil)
@@ -1077,7 +1078,13 @@ expand region alternative
 ** fanyi
 #+begin_src emacs-lisp
 (use-package fanyi
-  :bind (("C-c y" . fanyi-dwim2)))
+  :bind ("C-c y" . fanyi-dwim2)
+  :custom
+  (fanyi-providers '(fanyi-haici-provider ;; 海词
+                     fanyi-youdao-thesaurus-provider ;; 有道同义词词典
+                     ;; fanyi-etymon-provider ;; Etymonline
+                     ;; fanyi-longman-provider ;; Longman
+                     )))
 #+end_src
 
 ** maple-translate
