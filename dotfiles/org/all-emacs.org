@@ -112,7 +112,7 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 #+end_src
 
 * Systems
-** variables
+** Variables
 Use ~getenv~ check the environment variables.
 
 #+begin_src emacs-lisp
@@ -124,7 +124,7 @@ Use ~getenv~ check the environment variables.
                           (getenv "WSLENV")))
 #+end_src
 
-** linux
+** Linux
 #+begin_src emacs-lisp
 (when IS-LINUX
   (setq org-directory "~/Documents/org")
@@ -134,7 +134,7 @@ Use ~getenv~ check the environment variables.
     (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
 #+end_src
 
-** wsl
+** WSL
 #+begin_src emacs-lisp
 (when IS-WSL
   ;; open links in Windows browser
@@ -154,8 +154,7 @@ Use ~getenv~ check the environment variables.
         interprogram-cut-function #'gui-select-text))
 #+end_src
 
-** windows
-
+** Windows
 #+begin_src emacs-lisp
 (when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
@@ -175,7 +174,7 @@ Use ~getenv~ check the environment variables.
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
 https://emacs-china.org/t/windows-emacs-daemon/24379
 
-** tty
+** TTY
 #+begin_src emacs-lisp
 ;; Mouse active in tty mode.
 (unless (display-graphic-p)
@@ -183,13 +182,53 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 
 ;; Support for the Kitty Keyboard Protocol in Emacs
 (use-package kkp
-  :if (not window-system)
+  :unless (display-graphic-p)
   :config
   ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
   (global-kkp-mode +1))
 #+end_src
 
-** server & client
+** Shell
+*** tramp
+#+begin_src emacs-lisp
+(setq tramp-default-method "ssh"
+      password-cache-expiry 36000)
+#+end_src
+
+*** exec-path-from-shell
+#+begin_src emacs-lisp
+(use-package exec-path-from-shell
+  :defer t
+  :when IS-LINUX
+  :init
+  (exec-path-from-shell-initialize))
+#+end_src
+
+*** vterm
+#+begin_src emacs-lisp
+(use-package vterm
+  :defer t
+  :when (eq system-type 'gnu/linux)
+  :config
+  (setq vterm-shell "zsh")
+  :bind (:map vterm-mode-map
+              ("<f2>" . shell-pop)))
+#+end_src
+
+*** shell-pop
+#+begin_src emacs-lisp
+(use-package shell-pop
+  :bind (("<f2>" . shell-pop))
+  :init
+  (setq shell-pop-window-size 30
+        shell-pop-shell-type
+        (cond ((eq system-type 'gnu/linux) '("vterm" "*vterm*" #'vterm))
+              (IS-WINDOWS '("eshell" "*eshell*" #'eshell))
+              (t '("terminal" "*terminal*"
+                   (lambda () (term shell-pop-term-shell)))))))
+#+end_src
+
+** Server & Client
 #+BEGIN_SRC emacs-lisp
 ;; server
 (unless (and (fboundp 'server-running-p)
@@ -699,34 +738,8 @@ https://gitlab.com/jabranham/mixed-pitch
 (use-package vlf)
 #+end_src
 
-* Files
-** Project
-#+begin_src emacs-lisp
-;; (define-key global-map (kbd "C-c p") project-prefix-map)
-
-;; (use-package project
-;;   :ensure nil
-;;   :config
-;;   ;; (setq project-switch-commands #'project-find-file)
-;;   (setq project-switch-commands
-;;         '((project-find-file "Find file" f)
-;;           (project-dired "Dired" d)
-;;           ;; (deadgrep "rg" r) # TODO
-;;           (project-vc-dir "VC-Dir" v)
-;;           (project-shell "Shell" s)
-;;           (project-eshell "Eshell" e)
-;;           (magit-project-status "Magit" ?m)))
-;;   )
-
-;; Transient menus for dispatching `project.el'
-(use-package disproject
-  :bind ( :map ctl-x-map
-          ("p" . disproject-dispatch)
-          :map global-map
-          ("C-c p" . disproject-dispatch)))
-#+end_src
-
-** dired
+* Dired
+** dired enhanced
 #+begin_src emacs-lisp
 (use-package diredfl
   :config
@@ -1364,6 +1377,32 @@ hippie expand is dabbrev expand on steroids
 #+end_src
 
 * Version Control
+** Project
+#+begin_src emacs-lisp
+;; (define-key global-map (kbd "C-c p") project-prefix-map)
+
+;; (use-package project
+;;   :ensure nil
+;;   :config
+;;   ;; (setq project-switch-commands #'project-find-file)
+;;   (setq project-switch-commands
+;;         '((project-find-file "Find file" f)
+;;           (project-dired "Dired" d)
+;;           ;; (deadgrep "rg" r) # TODO
+;;           (project-vc-dir "VC-Dir" v)
+;;           (project-shell "Shell" s)
+;;           (project-eshell "Eshell" e)
+;;           (magit-project-status "Magit" ?m)))
+;;   )
+
+;; Transient menus for dispatching `project.el'
+(use-package disproject
+  :bind ( :map ctl-x-map
+          ("p" . disproject-dispatch)
+          :map global-map
+          ("C-c p" . disproject-dispatch)))
+#+end_src
+
 ** Magit
 #+begin_src emacs-lisp
 (use-package magit
@@ -1435,46 +1474,6 @@ hippie expand is dabbrev expand on steroids
   (ediff-custom-diff-options "-u")
   (ediff-split-window-function 'split-window-horizontally)
   (ediff-window-setup-function 'ediff-setup-windows-plain))
-#+end_src
-
-* Shell
-** tramp
-#+begin_src emacs-lisp
-(setq tramp-default-method "ssh"
-      password-cache-expiry 36000)
-#+end_src
-
-** exec-path-from-shell
-#+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :defer t
-  :when IS-LINUX
-  :init
-  (exec-path-from-shell-initialize))
-#+end_src
-
-** vterm
-#+begin_src emacs-lisp
-(use-package vterm
-  :defer t
-  :when (eq system-type 'gnu/linux)
-  :config
-  (setq vterm-shell "zsh")
-  :bind (:map vterm-mode-map
-              ("<f2>" . shell-pop)))
-#+end_src
-
-** shell-pop
-#+begin_src emacs-lisp
-(use-package shell-pop
-  :bind (("<f2>" . shell-pop))
-  :init
-  (setq shell-pop-window-size 30
-        shell-pop-shell-type
-        (cond ((eq system-type 'gnu/linux) '("vterm" "*vterm*" #'vterm))
-              (IS-WINDOWS '("eshell" "*eshell*" #'eshell))
-              (t '("terminal" "*terminal*"
-                   (lambda () (term shell-pop-term-shell)))))))
 #+end_src
 
 * Org
