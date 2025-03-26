@@ -17,10 +17,12 @@
       fira-code
       jetbrains-mono
       source-code-pro
+      # geist-font
       # ibm-plex
       # cascadia-code # Microsoft
       # recursive
       # comic-relief
+      # alegreya
       lexend # improve reading fluency
       nerd-fonts.symbols-only
     ];

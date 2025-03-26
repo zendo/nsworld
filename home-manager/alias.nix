@@ -12,6 +12,8 @@
     rm = "${lib.getExe pkgs.gtrash} put";
     rm-empty = "${lib.getExe pkgs.gtrash} find --rm";
     rm-restore = "${lib.getExe pkgs.gtrash} restore";
+    ff = "${lib.getExe pkgs.fzf}";
+    fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
     free = "free -h";
     bc = "${lib.getExe pkgs.libqalculate}";
     inxi = "inxi -Fz";
@@ -35,6 +37,7 @@
     e = "emacs -nw";
     ee = "emacsclient --create-frame";
     ee-config = "emacs --init-directory ~/.config/emacs";
+    magit = "emacsclient -n -c -e \(magit-status\)";
     ssr = "export {http,https,ftp}_proxy=socks5h://127.0.0.1:7897 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://127.0.0.1:7897";
     nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
     nix-build-pr = ''f() { nix build github:NixOS/nixpkgs/pull/$1/merge#$2 }; f'';

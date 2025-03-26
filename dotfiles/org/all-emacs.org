@@ -381,7 +381,7 @@ Linux handle by nix.
 ;;   (display-battery-mode 1))
 
 (use-package doom-modeline
-  ;; :disable t
+  :disable
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-buffer-file-name-style 'relative-to-project)
            (doom-modeline-icon nil)
@@ -389,13 +389,13 @@ Linux handle by nix.
            (column-number-mode 1)))
 
 (use-package mood-line
-  :disabled t
+  ;; :disabled
   :config
   (mood-line-mode))
 
 ;; Scrollbar on mode line
 (use-package mlscroll
-  :disabled t
+  :disabled
   :config
   (setq mlscroll-shortfun-min-width 11) ; truncate which-func
   (mlscroll-mode 1))
@@ -782,7 +782,7 @@ https://gitlab.com/jabranham/mixed-pitch
       backup-by-copying t          ; Don't clobber symlinks
       version-control t            ; Version numbers for backup files
       delete-old-versions t        ; Delete excess backup files silently
-      kept-old-versions 6          ; Number of old versions to keep
+      kept-old-versions 1          ; Number of old versions to keep
       kept-new-versions 9          ; Number of new versions to keep
       delete-by-moving-to-trash t) ; Delete files to trash
 
@@ -1040,6 +1040,14 @@ expand region alternative
   :bind (("C-c y" . fanyi-dwim2)))
 #+end_src
 
+** maple-translate
+#+begin_src emacs-lispxx
+(use-package maple-translate
+  :vc (:url "https://github.com/honmaple/emacs-maple-translate"
+            :rev :newest)
+  :commands (maple-translate maple-translate+))
+#+end_src
+
 ** gcmh
 Garbage Collector Magic Hack
 
@@ -1084,6 +1092,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-completion.el
 ** Corfu
 Completion Overlay Region FUnction: https://github.com/minad/corfu
 
+https://www.youtube.com/watch?v=Vx0bSKF4y78
+
 #+begin_src emacs-lisp
 (use-package corfu
   ;; :disabled t
@@ -1091,19 +1101,23 @@ Completion Overlay Region FUnction: https://github.com/minad/corfu
   :bind
   (:map corfu-map
         ("<escape>" . corfu-quit)
-        ("<tab>" . corfu-next)
+        ("<tab>" . corfu-complete)
         ("SPC" . corfu-insert-separator)
         ("M-d" . corfu-info-documentation)
         ("M-l" . corfu-info-location))
   :custom
   ;; (corfu-auto t)                    ;; Enable auto completion
+  ;; (corfu-auto-prefix 2)
+  ;; (corfu-auto-delay 0.0)
   (corfu-cycle t)                   ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  (corfu-quit-at-boundary 'separator)   ;; Never quit at completion boundqary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
   ;; (corfu-preview-current nil)    ;; Disable current candidate preview
   ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-separator ?\s)          ;; Orderless field separator
+
+  ;; (corfu-info t)
 
   ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
   ;; :hook ((prog-mode . corfu-mode)
@@ -1228,8 +1242,8 @@ VERTical Interactive COmpletion.
               ("RET" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char))
   :init
-  (vertico-mode)
-  (vertico-mouse-mode 1))
+  ;; (vertico-mouse-mode 1)
+  (vertico-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Functions
@@ -1276,7 +1290,6 @@ Mini-Buffer Actions Rooted in Keymaps.
 
 ** dabbrev
 #+begin_src emacs-lisp
-;; Use Dabbrev with Corfu!
 (use-package dabbrev
   :ensure nil
   ;; Swap M-/ and C-M-/
@@ -1294,6 +1307,7 @@ Mini-Buffer Actions Rooted in Keymaps.
 hippie expand is dabbrev expand on steroids
 
 #+begin_src emacs-lisp
+;; (global-set-key [remap dabbrev-expand] #'hippie-expand)
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
         try-expand-dabbrev-all-buffers     ;搜索所有 buffer
@@ -1321,9 +1335,8 @@ hippie expand is dabbrev expand on steroids
   :custom
   (yas-prompt-functions '(yas-completing-prompt))
   :config
-  (yas-reload-all)
-  :hook
-  ((prog-mode feature-mode)  . yas-minor-mode))
+  ;; (yas-reload-all)
+  (yas-global-mode 1))
 #+end_src
 
 ** Tempel
@@ -1533,6 +1546,8 @@ hippie expand is dabbrev expand on steroids
 https://github.com/alphapapa/org-super-agenda
 
 ** org-capture
+emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (org-capture))'
+
 #+begin_src emacs-lisp
 (setq org-capture-templates `(("t" "Tasks" entry (file+headline "tasks.org" "Reminders")
                             "* TODO %i%?"
@@ -2340,8 +2355,8 @@ M-x ~describe-key~
 (global-unset-key [M-drag-mouse-1])
 (global-unset-key [M-down-mouse-1])
 (global-unset-key [M-mouse-3])
-;; disable mouse in minibuffer
-;; TODO
+;; disable mouse in minibuffer echo area
+(keymap-unset minibuffer-inactive-mode-map "<mouse-1>")
 
 ;; 禁用所有鼠标
 (use-package inhibit-mouse
@@ -2430,6 +2445,7 @@ Show current command and its binding.
 - https://github.com/seagle0128/.emacs.d Centaur Emacs
 - https://github.com/abougouffa/minemacs Mineemacs
 - https://github.com/Lambda-Emacs/lambda-emacs Lambda-emacs
+- https://github.com/shynur/.emacs.d
 - https://github.com/rougier/dotemacs Litterate configuration org
 - https://jansky520.github.io/p/org%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/ org 快速指南
 - https://orgmode.org/quickstart.html
