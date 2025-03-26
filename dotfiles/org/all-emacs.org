@@ -127,7 +127,7 @@ Use ~getenv~ check the environment variables.
 ** linux
 #+begin_src emacs-lisp
 (when IS-LINUX
-  (setq org-directory "~/Documents/Notes")
+  (setq org-directory "~/Documents/org")
   ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NL NF CN-10")))
   (set-face-attribute 'default nil :font "Maple Mono-10")
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -159,7 +159,7 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
-        ;; org-directory "c:/Users/zendo/Documents/org/"
+        org-directory "c:/Users/zendo/Documents/org/"
         ;; Optimization
         w32-get-true-file-attributes nil   ; decrease file IO workload
         w32-use-native-image-API t         ; use native w32 API
@@ -188,6 +188,31 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
   ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
   (global-kkp-mode +1))
 #+end_src
+
+** server & client
+#+BEGIN_SRC emacs-lisp
+;; server
+(unless (and (fboundp 'server-running-p)
+             (server-running-p))
+  (server-start))
+
+;; kill emacsclient message
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (setq inhibit-message t)
+            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
+
+;; emacsclient frame size
+(add-hook 'before-make-frame-hook
+          #'(lambda ()
+              (add-to-list 'default-frame-alist '(top    . 0))
+              (add-to-list 'default-frame-alist '(left   . -1))
+              (add-to-list 'default-frame-alist '(height . 44))
+              (add-to-list 'default-frame-alist '(width  . 80))))
+
+;; fix recentf not load
+(add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
+#+END_SRC
 
 * General
 ** load files
@@ -242,31 +267,6 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
   (put cmd 'disabled nil))
 #+end_src
 
-** Emacsclient server
-#+BEGIN_SRC emacs-lisp
-;; server
-(unless (and (fboundp 'server-running-p)
-             (server-running-p))
-  (server-start))
-
-;; kill emacsclient message
-(add-hook 'server-after-make-frame-hook
-          (lambda ()
-            (setq inhibit-message t)
-            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil)))))
-
-;; emacsclient frame size
-(add-hook 'before-make-frame-hook
-          #'(lambda ()
-              (add-to-list 'default-frame-alist '(top    . 0))
-              (add-to-list 'default-frame-alist '(left   . -1))
-              (add-to-list 'default-frame-alist '(height . 44))
-              (add-to-list 'default-frame-alist '(width  . 80))))
-
-;; fix recentf not load
-(add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
-#+END_SRC
-
 ** TODO Spell
 nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary with a .aff affix file
 
@@ -306,6 +306,22 @@ nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)))
+#+end_src
+
+** gcmh
+Garbage Collector Magic Hack
+
+#+begin_src emacs-lisp
+(use-package gcmh
+  :diminish
+  :config
+  (gcmh-mode 1))
+#+end_src
+
+** esup
+#+begin_src emacs-lisp :tangle no
+(use-package esup
+  :commands esup)
 #+end_src
 
 * Interface
@@ -392,7 +408,7 @@ Linux handle by nix.
 ;;   (display-battery-mode 1))
 
 (use-package doom-modeline
-  :disable
+  :disabled
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-buffer-file-name-style 'relative-to-project)
            (doom-modeline-icon nil)
@@ -1059,16 +1075,6 @@ expand region alternative
   :commands (maple-translate maple-translate+))
 #+end_src
 
-** gcmh
-Garbage Collector Magic Hack
-
-#+begin_src emacs-lisp
-(use-package gcmh
-  :diminish
-  :config
-  (gcmh-mode 1))
-#+end_src
-
 ** pass
 #+begin_src emacs-lisp :tangle no
 (use-package pass
@@ -1089,12 +1095,6 @@ Garbage Collector Magic Hack
 #+begin_src emacs-lisp
 (use-package qrencode
   :defer t)
-#+end_src
-
-** esup
-#+begin_src emacs-lisp :tangle no
-(use-package esup
-  :commands esup)
 #+end_src
 
 * Completions

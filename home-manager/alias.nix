@@ -12,7 +12,6 @@
     rm = "${lib.getExe pkgs.gtrash} put";
     rm-empty = "${lib.getExe pkgs.gtrash} find --rm";
     rm-restore = "${lib.getExe pkgs.gtrash} restore";
-    ff = "${lib.getExe pkgs.fzf}";
     fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
     free = "free -h";
     bc = "${lib.getExe pkgs.libqalculate}";
