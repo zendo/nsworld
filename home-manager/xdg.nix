@@ -11,8 +11,8 @@
   ];
 
   home.sessionVariables = {
-    EDITOR = "micro";
-    VISUAL = "micro";
+    EDITOR = "emacsclient -c -a emacs";
+    VISUAL = "emacs";
     NIXOS_OZONE_WL = lib.mkDefault 1; # Electron wayland native
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };

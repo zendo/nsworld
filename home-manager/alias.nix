@@ -41,6 +41,7 @@
     ee = "emacsclient --create-frame";
     ee-config = "emacs --init-directory ~/.config/emacs";
     magit = ''emacsclient -n -c -e \(magit-status\)'';
+    dired = ''emacsclient -n -c -e "(dired default-directory)"'';
 
     # nix
     nse = "nix search nixpkgs";

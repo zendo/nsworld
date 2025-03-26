@@ -1492,8 +1492,8 @@ hippie expand is dabbrev expand on steroids
   :mode ("\\.org\\'" . org-mode)
   :bind(:map org-mode-map
              ("C-c a" . org-agenda)
-             ("C-c c" . org-capture)
-             ("C-c l" . org-store-link)
+             ;; ("C-c c" . org-capture)
+             ;; ("C-c l" . org-store-link)
              ("C-c C-j" . consult-outline)
              ("M-." . find-function-at-point))
   :config
@@ -1700,7 +1700,7 @@ https://github.com/kaorahi/howm
   (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
-  (add-to-list 'eglot-server-programs '(python-mode . ("pyls")))
+  (add-to-list 'eglot-server-programs '(python-mode . ("pylyzer" "--server")))
   (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
   (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
@@ -1740,6 +1740,34 @@ https://github.com/kaorahi/howm
 
 ** lsp-proxy
 https://github.com/jadestrong/lsp-proxy
+
+** apheleia
+Run code formatters on ~after-save-hook~
+
+#+begin_src emacs-lisp
+(use-package apheleia
+  :defer t
+  :commands (apheleia-mode
+             apheleia-global-mode)
+  :hook ((prog-mode . apheleia-mode)))
+#+end_src
+
+** reformatter
+#+begin_src emacs-lispxx
+(use-package reformatter
+  :defer t
+  :config
+  (reformatter-define nixfmt
+    :program "nixfmt"
+    )
+  ;; Experimental.
+  ;; (reformatter-define golint
+  ;;   :program "golint"
+  ;;   :stdin nil
+  ;;   :stdout nil
+  ;;   :args (list (buffer-file-name)))
+  )
+#+end_src
 
 * Programming Languages
 ** prog-mode
@@ -1820,23 +1848,6 @@ https://github.com/svaante/dape
   :when (eq system-type 'gnu/linux)
   :config
   (global-treesit-auto-mode))
-#+end_src
-
-** reformatter
-#+begin_src emacs-lisp
-(use-package reformatter
-  :defer t
-  :config
-  (reformatter-define nixfmt
-    :program "nixfmt"
-    )
-  ;; Experimental.
-  ;; (reformatter-define golint
-  ;;   :program "golint"
-  ;;   :stdin nil
-  ;;   :stdout nil
-  ;;   :args (list (buffer-file-name)))
-  )
 #+end_src
 
 ** markdown
@@ -2330,8 +2341,9 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ;; :prefix "C-c c"
  ;; ("." . consult-lsp-diagnostics)
 
- ;; :prefix-map lsp-map
- ;; :prefix "C-c l"
+ :prefix-map lsp-map
+ :prefix "C-c l"
+ ("f" . eglot-format)
 
  :prefix-map git-mode
  :prefix "C-c v"

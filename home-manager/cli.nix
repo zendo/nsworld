@@ -52,6 +52,7 @@
     croc
     dufs
     sshfs
+    simple-http-server
     magic-wormhole-rs
 
     # System Monitor

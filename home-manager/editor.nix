@@ -5,7 +5,9 @@
     cmake
     gnumake
     python3
+    pylyzer
     nodejs
+    bash-language-server
     # nil
     nixd
     vscode
