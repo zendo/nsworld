@@ -56,28 +56,20 @@
         '';
       };
 
-      # gnomeExtensions =
-      #   prev.gnomeExtensions
-      #   // {
-      #     night-theme-switcher = prev.callPackage ./night-theme-switcher {};
-      #   };
+      # gnomeExtensions = prev.gnomeExtensions // {
+      #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
+      # };
 
       # Python Module Overlays
       # nix build .#python3Packages.pyjokes
-      # pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-      #   (python-final: python-prev: {
-      #     pyjokes = python-final.callPackage ./python-modules/pyjokes { };
-      #   })
-      # ];
-      # python3 =
-      #   let
-      #     self = prev.python3.override {
-      #       inherit self;
-      #       packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
-      #     };
-      #   in
-      #   self;
-      # python3Packages = final.python3.pkgs;
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (python-final: python-prev: {
+          pyjokes = python-final.callPackage ./python-modules/pyjokes { };
+          # foo = python-prev.foo.overridePythonAttrs (oldAttrs: {
+          #   ...
+          # });
+        })
+      ];
 
       # And etc...
     };
