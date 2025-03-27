@@ -2044,9 +2044,6 @@ https://github.com/svaante/dape
 (use-package nix-mode
   :mode ("\\.nix'"))
 
-(use-package nixpkgs-fmt
-  :defer t)
-
 ;; (use-package direnv
 ;;   :when (eq system-type 'gnu/linux) ; Windows unsupport
 ;;   :config
