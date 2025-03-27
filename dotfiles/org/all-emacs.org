@@ -697,7 +697,7 @@ https://github.com/AmaiKinono/puni
 
 #+begin_src emacs-lisp
 (use-package puni
-  :disabled t
+  :disabled
   :config
   (puni-global-mode +1))
 #+end_src
@@ -1127,7 +1127,7 @@ https://www.youtube.com/watch?v=Vx0bSKF4y78
 
 #+begin_src emacs-lisp
 (use-package corfu
-  ;; :disabled t
+  ;; :disabled
   ;; :unless IS-WINDOWS
   :bind
   (:map corfu-map
@@ -1593,7 +1593,7 @@ emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (or
 ** org-modern
 #+begin_src emacs-lisp
 (use-package org-modern
-  :disabled t
+  :disabled
   :after org
   :hook (org-mode . org-modern-mode))
 #+end_src
@@ -1807,7 +1807,7 @@ Run code formatters on ~after-save-hook~
 ** flymake
 #+begin_src emacs-lisp
 (use-package flymake
-  :disabled t
+  :disabled
   :hook (prog-mode . flymake-mode)
   :bind ( :map my-error-map
           ("l" . flymake-show-buffer-diagnostics)
@@ -2250,19 +2250,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 * Keybindings
 ** bind-keys
 #+begin_src emacs-lisp
-;; Built-in
-(bind-keys
-  ;; M-s
- :map search-map
- ("s" . deadgrep)
- ("<SPC>" . consult-line)
- ("l" . consult-line)
- ("L" . consult-line-multi)
- ("g" . consult-grep)
- ("f" . consult-fd)
- ("r" . consult-ripgrep)
- ("p" . consult-isearch-history))
-
 (bind-keys*
  ;; ("C-z" . nil) ;unbind C-z
  ("C-z" . undo)
@@ -2304,6 +2291,17 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
                (interactive)
                (save-buffer)
                (recompile)))
+
+ ;; Built-in: M-s
+ :map search-map
+ ("s" . deadgrep)
+ ("<SPC>" . consult-line)
+ ("l" . consult-line)
+ ("L" . consult-line-multi)
+ ("g" . consult-grep)
+ ("f" . consult-fd)
+ ("r" . consult-ripgrep)
+ ("p" . consult-isearch-history)
 
  :prefix-map buffer-map
  :prefix "C-c b"

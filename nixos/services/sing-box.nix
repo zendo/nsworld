@@ -6,7 +6,7 @@
 }:
 {
   systemd.services.sing-box = {
-    # enable = false;
+    enable = lib.mkDefault false;
     # zashboard / metacubexd
     preStart = "[ -e $STATE_DIRECTORY/ui ] && rm -fr $STATE_DIRECTORY/ui; ln -sf ${pkgs.zashboard} $STATE_DIRECTORY/ui";
     serviceConfig = {

@@ -97,7 +97,7 @@
     # drawio
     # rnote # handwritten note
     foliate # (webkitgtk)
-    koodo-reader
+    # koodo-reader
     notes
     planify
     # ghostwriter # (qtwebengine)

@@ -52,7 +52,7 @@
     eget
     croc
     dufs
-    sshfs
+    # sshfs
     simple-http-server
     magic-wormhole-rs
 

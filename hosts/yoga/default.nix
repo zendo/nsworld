@@ -27,6 +27,10 @@
     # virt.enable = true; # default: true
   };
 
+  systemd = {
+    services.sing-box.enable = true;
+  };
+
   services = {
     # displayManager.autoLogin.user = "${username}";
 
