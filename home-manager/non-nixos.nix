@@ -11,8 +11,8 @@
       "${config.home.homeDirectory}/.local/bin"
     ];
     sessionVariables = {
-      VISUAL = "flow";
-      EDITOR = "flow";
+      VISUAL = "micro";
+      EDITOR = "micro";
     };
     shellAliases = {
       nixgl = "nix run --impure github:guibou/nixGL";

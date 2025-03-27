@@ -60,7 +60,7 @@
   };
 
   programs.jujutsu = {
-    enable = true;
+    # enable = true;
     settings = {
       user = {
         name = "zendo";

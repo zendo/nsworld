@@ -88,14 +88,14 @@
         ];
       };
 
-      # nix build .#nixosConfigurations.livecd-graphical.config.system.build.isoImage
-      livecd-graphical = mkHost {
+      # nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
+      livecd-standard = mkHost {
         username = "live";
         hostname = "livecd";
         extraModules = [
           self.nixosModules.default
           self.nixosModules.homeManagerInit
-          ./livecd/graphical.nix
+          ./livecd/standard.nix
         ];
       };
 

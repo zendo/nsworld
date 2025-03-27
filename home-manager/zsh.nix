@@ -8,7 +8,7 @@
     syntaxHighlighting.enable = true;
     history = {
       path = "${config.xdg.dataHome}/zsh/history";
-      extended = true; # Save timestamp
+      extended = true; # timestamp
       expireDuplicatesFirst = true;
     };
     shellAliases = {
