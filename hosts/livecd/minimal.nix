@@ -22,7 +22,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    binutils
     tree
     file
     p7zip

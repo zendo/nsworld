@@ -54,7 +54,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    binutils
+    (lib.hiPrio uutils-coreutils-noprefix)
     tree
     file
     wget
