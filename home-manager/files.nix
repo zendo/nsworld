@@ -23,7 +23,6 @@ in
     "helix".source = linkFlake "dotfiles/helix";
     "waybar".source = linkFlake "dotfiles/waybar";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
-    "ghostty".source = linkFlake "dotfiles/ghostty";
     "wezterm".source = linkFlake "dotfiles/wezterm";
 
     "niri".source = linkFlake "dotfiles/niri";

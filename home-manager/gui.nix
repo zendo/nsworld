@@ -12,7 +12,6 @@
 
     foot
     kitty
-    ghostty
     nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
     inputs.self.formatter.${system}

@@ -8,11 +8,14 @@
   home-manager.users.${username} =
     { pkgs, ... }:
     {
+      imports = [
+        ../../home-manager/ghostty.nix
+      ];
+
       home.packages = with pkgs; [
         # GUI
         foot
         kitty
-        ghostty
 
         # DEV
         nixd

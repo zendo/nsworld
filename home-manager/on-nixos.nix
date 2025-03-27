@@ -23,6 +23,7 @@
       ./nvim.nix
       ./chrome.nix
       ./firefox.nix
+      ./ghostty.nix
     ]
     ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./kderc.nix ]
     ++ lib.optionals nixosConfig.services.xserver.desktopManager.gnome.enable [ ./dconf.nix ];
