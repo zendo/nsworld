@@ -39,10 +39,10 @@
       # package = pkgs.gnomeExtensions.gsconnect;
     };
 
-    nautilus-open-any-terminal = {
-      enable = true;
-      terminal = "kitty";
-    };
+    # nautilus-open-any-terminal = {
+    #   enable = true;
+    #   terminal = "kitty";
+    # };
   };
 
   # Fix autologin failed: https://wiki.nixos.org/wiki/GNOME#Automatic_login

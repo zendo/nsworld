@@ -40,6 +40,7 @@
     # FileManager
     f2
     sd
+    xcp
     choose
     ssh-to-age
     sops
