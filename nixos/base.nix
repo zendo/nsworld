@@ -5,9 +5,6 @@
   ...
 }:
 {
-  # Make `xdg-open` works inside FHS envs
-  xdg.portal.xdgOpenUsePortal = true;
-
   zramSwap.enable = lib.mkDefault true;
 
   boot = {

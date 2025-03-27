@@ -34,10 +34,7 @@
             inherit system;
             overlays = [ self.overlays.modifications ];
             config = {
-              allowUnfree = true;
-              # allowBroken = true;
               # allowInsecure = true;
-              # allowUnsupportedSystem = true;
               android_sdk.accept_license = true;
             };
           };
@@ -63,7 +60,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-    # nixpkgs.url = "git+file:///home/iab/dev/nixpkgs/?ref=pr-358877-clash-rev";
+    # nixpkgs.url = "git+file:///home/iab/dev/nixpkgs/?ref=pr-358877";
 
     home-manager = {
       url = "github:nix-community/home-manager";
