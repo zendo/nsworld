@@ -8,6 +8,8 @@
     pylyzer
     nodejs
     bash-language-server
+    lua-language-server
+    efm-langserver
     # nil
     nixd
     vscode
