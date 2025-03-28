@@ -14,7 +14,6 @@ in
     "wofi".source = ../dotfiles/wofi;
     "foot".source = ../dotfiles/foot;
     "kitty".source = ../dotfiles/kitty;
-    "zellij".source = ../dotfiles/zellij;
     "swaylock".source = ../dotfiles/swaylock;
     "alacritty".source = ../dotfiles/alacritty;
 

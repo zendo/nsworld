@@ -6,6 +6,7 @@
     gnumake
     python3
     pylyzer
+    # ruff
     nodejs
     bash-language-server
     lua-language-server

@@ -11,7 +11,7 @@ in
 
   config = lib.mkIf cfg.enable {
     services.dae = {
-      enable = lib.mkDefault true;
+      enable = true;
       configFile = config.sops.templates."config.dae".path;
     };
 
