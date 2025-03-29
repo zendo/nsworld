@@ -10,6 +10,7 @@
     cat = "${lib.getExe pkgs.bat} -p";
     cp = "${lib.getExe pkgs.xcp}";
     l = "${lib.getExe pkgs.eza} -l --icons";
+    lm = "${lib.getExe pkgs.eza} -l -a --reverse --sort=modified";
     "la." = "ls -d .*";
     rm = "${lib.getExe pkgs.gtrash} put";
     rm-empty = "${lib.getExe pkgs.gtrash} find --rm";

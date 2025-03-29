@@ -34,6 +34,6 @@
 
   # Go into hibernate after specific suspend time
   systemd.sleep.extraConfig = ''
-    HibernateDelaySec=40min
+    HibernateDelaySec=90min
   '';
 }
