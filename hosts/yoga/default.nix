@@ -29,6 +29,7 @@
 
   systemd = {
     services.sing-box.enable = true;
+    services.sub-store.enable = true;
   };
 
   services = {

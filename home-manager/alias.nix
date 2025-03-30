@@ -35,8 +35,6 @@
     # web
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
-    download-sub-store = "wget https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    open-substore = "pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null";
 
     # emacs
     e = "emacs -nw";

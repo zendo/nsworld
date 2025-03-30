@@ -389,3 +389,10 @@ https://icloudnative.io/posts/sing-box-tutorial/
 
 https://github.com/qichiyuhub/sbshell tproxy
 https://github.com/Toperlock/sing-box-subscribe 模板
+
+* sub-store
+#+begin_src bash
+wget https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js
+wget https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip && unzip dist.zip && rm dist.zip && mv dist frontend
+pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
+#+end_src
