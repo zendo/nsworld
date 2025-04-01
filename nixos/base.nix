@@ -5,7 +5,7 @@
   ...
 }:
 {
-  zramSwap.enable = lib.mkDefault true;
+  # zramSwap.enable = lib.mkDefault true;
 
   boot = {
     plymouth.enable = true;
