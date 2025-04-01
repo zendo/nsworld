@@ -21,6 +21,7 @@
        ;;  +icons
        ;;  +prescient)
        (vertico           ; the search engine of the future
+        ;; +childframe
         +icons)
 
        :ui
@@ -63,7 +64,7 @@
        ;; word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +icons)            ; making dired pretty [functional]
+       (dired +dirvish +icons)            ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ;;eww           ; the internet is gross
        ibuffer         ; interactive buffer management
@@ -92,7 +93,9 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        lookup              ; navigate your code and its documentation
-       lsp               ; M-x vscode
+       (lsp
+        ;; +eglot
+        +peek)
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds

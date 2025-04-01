@@ -23,7 +23,7 @@
       # Restart = "on-failure";
       # DynamicUser = true;
     };
-    wantedBy = [ "multi-user.target" ];
+    # wantedBy = [ "multi-user.target" ]; # Turn off Auto-Start
   };
 
   # node $SUB_STORE_DATA_BASE_PATH/sub-store.bundle.js > $SUB_STORE_DATA_BASE_PATH/run.log 2> $SUB_STORE_DATA_BASE_PATH/error.log &

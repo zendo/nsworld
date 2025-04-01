@@ -13,6 +13,7 @@
     efm-langserver
     # nil
     nixd
+    vips # dirvish image
     vscode
   ];
 

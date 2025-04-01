@@ -243,11 +243,11 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 
 ;; emacsclient frame size
 (add-hook 'before-make-frame-hook
-          #'(lambda ()
-              (add-to-list 'default-frame-alist '(top    . 0))
-              (add-to-list 'default-frame-alist '(left   . -1))
-              (add-to-list 'default-frame-alist '(height . 44))
-              (add-to-list 'default-frame-alist '(width  . 80))))
+          (lambda ()
+            (add-to-list 'default-frame-alist '(top    . 0))
+            (add-to-list 'default-frame-alist '(left   . -1))
+            (add-to-list 'default-frame-alist '(height . 44))
+            (add-to-list 'default-frame-alist '(width  . 80))))
 
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
@@ -667,15 +667,18 @@ https://github.com/neeasade/stillness-mode.el
 ;; overwrite selected text
 (delete-selection-mode t)
 
-;; (global-visual-line-mode 1) ;折叠 word wrap
-
 (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
 (setq sentence-end-double-space nil ;Sentences should end in one space
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
       require-final-newline t)
 #+end_src
+** wrap
+#+begin_src emacs-lisp
+;; (global-visual-line-mode 1) ;折叠 word wrap
 
+;; (setq word-wrap-by-category t) ; fix CJK 语言文本自动换行
+#+end_src
 ** encoding
 #+begin_src emacs-lisp
 ;; Set UTF-8 as the default coding system
@@ -781,7 +784,7 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 ** dirvish
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package dirvish
   :hook (after-init . dirvish-override-dired-mode)
   :bind (:map dired-mode-map
@@ -795,6 +798,8 @@ https://gitlab.com/jabranham/mixed-pitch
               ("M-p" . dirvish-go-backward-history)
               ("M-s" . dirvish-setup-menu)
               ("M-f" . dirvish-toggle-fullscreen)
+              ([left] . dired-up-directory)
+              ([right] . dired-find-file)
               ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
               ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
               ([remap dired-summary] . dirvish-dispatch)
