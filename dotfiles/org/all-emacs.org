@@ -2255,6 +2255,18 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 * Keybindings
 ** bind-keys
 #+begin_src emacs-lisp
+(bind-keys
+ ;; Built-in: M-s
+ :map search-map
+ ("s" . deadgrep)
+ ("<SPC>" . consult-line)
+ ("l" . consult-line)
+ ("L" . consult-line-multi)
+ ("g" . consult-grep)
+ ("f" . consult-fd)
+ ("r" . consult-ripgrep)
+ ("p" . consult-isearch-history))
+
 (bind-keys*
  ;; ("C-z" . nil) ;unbind C-z
  ("C-z" . undo)
@@ -2296,17 +2308,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
                (interactive)
                (save-buffer)
                (recompile)))
-
- ;; Built-in: M-s
- :map search-map
- ("s" . deadgrep)
- ("<SPC>" . consult-line)
- ("l" . consult-line)
- ("L" . consult-line-multi)
- ("g" . consult-grep)
- ("f" . consult-fd)
- ("r" . consult-ripgrep)
- ("p" . consult-isearch-history)
 
  :prefix-map buffer-map
  :prefix "C-c b"
