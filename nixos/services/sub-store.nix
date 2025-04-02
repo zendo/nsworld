@@ -5,7 +5,6 @@
 }:
 {
   systemd.services.sub-store = {
-    enable = lib.mkDefault false;
     serviceConfig = {
       StateDirectory = "sub-store";
       StateDirectoryMode = "0700";
