@@ -31,7 +31,7 @@
        ;; doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;; (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;indent-guides     ; highlighted indent columns
+       indent-guides     ; highlighted indent columns
        ;;ligatures         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
@@ -197,14 +197,12 @@
 (package! crux)
 (package! rotate)
 (package! easy-kill)
-(package! smart-region)
 (package! avy-zap)
 (package! iedit)
 (package! fanyi)
 (package! ialign)
 (package! just-mode)
 (package! deadgrep)
-(package! indent-bars)
 (package! goto-last-change)
 (package! dired-git-info)
 (package! powershell)
@@ -314,13 +312,6 @@
 ;; or
 (set-default 'word-wrap nil)
 (set-default 'truncate-lines nil)
-#+end_src
-
-*** smart-region
-#+begin_src emacs-lisp
-;; set-mark multiple times to expands
-(use-package! smart-region
-  :hook (after-init . smart-region-on))
 #+end_src
 
 ** Programming
@@ -465,10 +456,19 @@
 ** Mouse
 #+begin_src emacs-lisp
 (blink-cursor-mode -1)               ;禁用指针闪烁
-(setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
-(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
+(global-unset-key (kbd "C-<wheel-up>"))
+(global-unset-key (kbd "C-<wheel-down>"))
+;; 禁用 mouse-drag-region
+(global-unset-key [M-mouse-1])
+(global-unset-key [M-drag-mouse-1])
+(global-unset-key [M-down-mouse-1])
+(global-unset-key [M-mouse-3])
+;; disable mouse in minibuffer echo area
+(keymap-unset minibuffer-inactive-mode-map "<mouse-1>")
 
+;; Scroll
 (pixel-scroll-precision-mode t)
 #+end_src
 

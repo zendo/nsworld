@@ -7,7 +7,7 @@
 
 stdenv.mkDerivation {
   pname = "sub-store";
-  version = "latest";
+  version = "2.15.12";
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
@@ -16,7 +16,7 @@ stdenv.mkDerivation {
 
   js = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-XvRq6j1N0h76WacFIMXvfQ2+kZ+MP1xF9klWO8S7OWY=";
+    sha256 = "sha256-XuHY07sHH83yl7vy5kWcC55wOCF9crNSha4lIh+w/AY=";
   };
 
   nativeBuildInputs = [ unzip ];

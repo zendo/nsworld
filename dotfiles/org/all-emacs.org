@@ -59,14 +59,26 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 (defconst my-saved-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-;; Faster to disable these here (before they've been initialized)
-(push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
-(when (featurep 'ns)
-  (push '(ns-transparent-titlebar . t) default-frame-alist))
 ;; Prevent flashing of unstyled modeline at startup
 (setq-default mode-line-format nil)
+
+;; Faster to disable these here (before they've been initialized)
+(setq default-frame-alist
+      (append
+       '((menu-bar-lines . 0)
+         (tool-bar-lines . 0)
+         (vertical-scroll-bars))
+       (when (featurep 'ns)
+         '((ns-transparent-titlebar . t)))
+       default-frame-alist))
+
+;; Split customizations file
+(setq-default custom-file (concat user-emacs-directory "site-lisp/custom.el"))
+(when (file-exists-p custom-file) (load custom-file))
+
+;; default file
+;; (load "default" 'noerror 'nomessage) ; Load the default init file
+;; (setq inhibit-default-init t) ; Don't load default.el
 
 (provide 'early-init)
 ;;; early-init.el ends here
@@ -232,30 +244,21 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
 #+BEGIN_SRC emacs-lisp
-;; server
-(unless (and (fboundp 'server-running-p)
-             (server-running-p))
-  (server-start))
-
-;; remove message on minibuffer
-(setq server-client-instructions nil)
+(use-package server
+  :ensure nil
+  :if window-system
+  :defer 2
+  :config
+  ;; remove client startup messages
+  (setq server-client-instructions nil)
+  (unless (server-running-p)
+      (server-start)))
 
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
 
 * General
-** load files
-#+begin_src emacs-lisp
-;; Split emacs auto customizations
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file nil t)) ;or 'noerror
-
-;; (load "default" 'noerror 'nomessage) ; Load the default init file
-;; (setq inhibit-default-init t) ; Don't load default.el
-#+end_src
-
 ** Silence Warnings
 #+begin_src emacs-lisp
 ;; Turn off Beep and flash
@@ -560,6 +563,8 @@ Use `treemacs' command for old functionality."
 #+end_src
 
 ** Window
+emacs31: https://p.bauherren.ovh/blog/tech/new_window_cmds
+
 #+begin_src emacs-lisp
 ;; prefer vertical splits by default
 (setq split-width-threshold 120
@@ -674,6 +679,13 @@ https://github.com/neeasade/stillness-mode.el
 
 ;; (setq word-wrap-by-category t) ; fix CJK 语言文本自动换行
 #+end_src
+** line-numbers-mode
+#+begin_src emacs-lisp
+;; 滚动时保持显示稳定
+(setq display-line-numbers-width-start nil)
+(setq display-line-numbers-grow-only t)
+#+end_src
+
 ** encoding
 #+begin_src emacs-lisp
 ;; Set UTF-8 as the default coding system
@@ -1019,14 +1031,6 @@ expand region alternative
 (use-package expreg
   :bind (("C-=" . expreg-expand)
          ("C--" . expreg-contract)))
-#+end_src
-
-** smart-region
-#+begin_src emacs-lisp
-;; Smartly select region, rectangle, multi cursors
-(use-package smart-region
-  :commands smart-region-on
-  :hook (after-init . smart-region-on))
 #+end_src
 
 ** crux
@@ -2250,6 +2254,16 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
             ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)"))))))
 #+end_src
 
+** pkill-emacs
+#+begin_src emacs-lisp
+;;;###autoload
+(defun my/pkill-emacs ()
+  (interactive)
+  (progn
+    (save-buffers-kill-emacs)
+    (shell-command-to-string "pkill -i emacs")))
+#+end_src
+
 * Keybindings
 ** bind-keys
 #+begin_src emacs-lisp
@@ -2373,7 +2387,6 @@ M-x ~describe-key~
 
 #+begin_src emacs-lisp
 (blink-cursor-mode -1)               ;禁用指针闪烁
-;; (setq mouse-yank-at-point t)         ;禁用鼠标点击粘贴
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (global-unset-key (kbd "C-<wheel-up>"))
