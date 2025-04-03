@@ -164,6 +164,7 @@ sudo sed -i 's/$/ fedora/' /etc/hosts  # 每行末尾添加
 https://github.com/adrianscheff/useful-sed
 
 * clash
+https://xtls.github.io/
 https://wiki.metacubex.one/config/
 
 #+begin_src yaml
