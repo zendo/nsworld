@@ -405,9 +405,11 @@ Garbage Collector Magic Hack
 ** Themes
 #+begin_src emacs-lisp
 (use-package doom-themes
-  :config
-  ;; (load-theme 'doom-badger t)
-  (load-theme 'doom-tomorrow-night t)
+  :hook
+  ;; doom-badger
+  (after-init
+   . (lambda ()
+       (load-theme 'doom-tomorrow-night t)))
   )
 
 ;; (use-package eclipse-theme
@@ -457,7 +459,8 @@ Linux handle by nix.
 
 (use-package doom-modeline
   :disabled
-  :init (doom-modeline-mode 1)
+  :hook
+  (after-init . doom-modeline-mode)
   :custom ((doom-modeline-buffer-file-name-style 'relative-to-project)
            (doom-modeline-icon nil)
            (line-number-mode 1)
@@ -465,8 +468,9 @@ Linux handle by nix.
 
 (use-package mood-line
   ;; :disabled
-  :config
-  (mood-line-mode))
+  :hook
+  ;; load it earilier to have a smooth startup
+  (after-init . mood-line-mode))
 
 ;; Scrollbar on mode line
 (use-package mlscroll
