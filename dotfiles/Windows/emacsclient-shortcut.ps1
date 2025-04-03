@@ -12,8 +12,10 @@ function Create-Shortcut {
 }
 
 # 创建桌面快捷方式
+# ((fullscreen . maximized))
+# ((top . 0)(left . -1)(height . 44)(width . 80))
 Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\emacsclientw.exe" `
-                -ArgumentsToSourceExe '-c -n -a ""' `
+                -ArgumentsToSourceExe '-c -n -a "" -F "((top . 0)(left . -1)(height . 44)(width . 80))"' `
                 -DestinationPath "$Home\Desktop\GNU Emacs.lnk"
 
 # 创建启动项快捷方式

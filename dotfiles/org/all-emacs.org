@@ -229,14 +229,7 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 #+end_src
 
 ** Server & Client
-
--c / --create-frame - Create a new frame (don’t pass this if you want to reuse the same open frame)
--n / --no-wait - Don’t wait for the Emacs frame to close
--e / --eval - Evaluate an Emacs Lisp expression within the daemon
--u / --suppress-output - Suppress output from Emacs (useful when running in a script)
--s / --socket-name=name - Use a named daemon (emacs --daemon=name)
--a / --alternate-editor=name - If Emacs daemon isn’t running, use this command instead
-filename - Open a file in the current frame (or a new one if -c is passed)
+https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
 #+BEGIN_SRC emacs-lisp
 ;; server
@@ -244,18 +237,8 @@ filename - Open a file in the current frame (or a new one if -c is passed)
              (server-running-p))
   (server-start))
 
-
-(add-hook 'server-after-make-frame-hook
-          (lambda ()
-            ;; emacsclient frame size
-            (add-to-list 'default-frame-alist '(top    . 0))
-            (add-to-list 'default-frame-alist '(left   . -1))
-            (add-to-list 'default-frame-alist '(height . 44))
-            (add-to-list 'default-frame-alist '(width  . 80))
-            ;; kill emacsclient message
-            (setq inhibit-message t)
-            (run-with-idle-timer 0 nil (lambda () (setq inhibit-message nil))))
-          )
+;; remove message on minibuffer
+(setq server-client-instructions nil)
 
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
