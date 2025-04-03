@@ -1526,7 +1526,7 @@ hippie expand is dabbrev expand on steroids
   ;; (setq org-ellipsis " ▼ ")
   org-ellipsis " \u25bc" ;; " ⤵" " ↴" " ➤" " ▼"
   ;; org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA"
-  (set-face-attribute 'org-ellipsis nil :inherit 'default :box nil)))
+  ))
 #+end_src
 
 ** org-babel
