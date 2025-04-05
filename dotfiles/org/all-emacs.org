@@ -23,18 +23,15 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 ;; Defer garbage collection further back in the startup process
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; Prevent unwanted runtime compilation for gccemacs (native-comp) users;
-;; packages are compiled ahead-of-time when they are installed and site files
-;; are compiled when gccemacs is installed.
-(setq native-comp-jit-compilation nil)
+;; Prevent unwanted run-time compilation for native-comp users
+(setq inhibit-automatic-native-compilation t)
 
 ;; Package initialize occurs automatically, before `user-init-file' is
 ;; loaded, but after `early-init-file'. We handle package
 ;; initialization, so we must prevent Emacs from doing it early!
 (setq package-enable-at-startup nil)
-
-;; It must be set before loading `use-package'.
-(setq use-package-enable-imenu-support t)
+;; Prevent loading from the package cache.
+(setq package-quickstart nil)
 
 ;; In noninteractive sessions, prioritize non-byte-compiled source files to
 ;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
@@ -72,6 +69,26 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
          '((ns-transparent-titlebar . t)))
        default-frame-alist))
 
+(setq inhibit-splash-screen t
+      inhibit-startup-screen t
+      inhibit-startup-message t ;关闭欢迎界面
+      inhibit-startup-buffer-menu t
+
+      inhibit-x-resources t
+      use-file-dialog nil
+      use-dialog-box nil
+
+      initial-frame-alist (quote ((fullscreen . maximized)))
+      )
+
+;; (fset 'display-startup-echo-area-message 'ignore)
+;; or
+;; (put 'inhibit-startup-echo-area-message 'saved-value
+;;      (setq inhibit-startup-echo-area-message (user-login-name)))
+(defun display-startup-echo-area-message ()
+  "Empty startup message."
+  (message ""))
+
 ;; Split customizations file
 (setq-default custom-file (concat user-emacs-directory "site-lisp/custom.el"))
 (when (file-exists-p custom-file) (load custom-file))
@@ -102,11 +119,15 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 
 (package-initialize)
 
-(use-package use-package
-  :custom
-  (use-package-always-ensure t)
-  (package-native-compile t)
-  (use-package-enable-imenu-support t))
+(require 'use-package)
+(setq use-package-always-ensure t)
+(setq use-package-enable-imenu-support t)
+
+;; (use-package use-package
+;;   :custom
+;;   (use-package-always-ensure t)
+;;   (package-native-compile t)
+;;   (use-package-enable-imenu-support t))
 
 (use-package bind-key)
 
@@ -119,8 +140,8 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 (eval-when-compile
   (require 'cl-lib))(require 'cl-lib)
 ;; (use-package dash) ;modern list library
-(use-package s) ;string manipulation library
-(use-package f) ;file manipulation
+;; (use-package s) ;string manipulation library
+;; (use-package f) ;file manipulation
 #+end_src
 
 * Systems
@@ -134,6 +155,13 @@ Use ~getenv~ check the environment variables.
 (defconst IS-BSD     (or IS-MAC (eq system-type 'berkeley-unix)))
 (defconst IS-WSL     (and IS-LINUX
                           (getenv "WSLENV")))
+
+;; Remove command line options that aren't relevant to the current OS; this
+;; results in slightly less processing at startup.
+(unless IS-MAC
+  (setq command-line-ns-option-alist nil))
+(unless IS-LINUX
+  (setq command-line-x-option-alist nil))
 #+end_src
 
 ** Linux
@@ -172,6 +200,7 @@ Use ~getenv~ check the environment variables.
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         org-directory "c:/Users/zendo/Documents/org/"
         ;; Optimization
+        ;; inhibit-compacting-font-caches t   ; speed up font rendering for special characters
         w32-get-true-file-attributes nil   ; decrease file IO workload
         w32-use-native-image-API t         ; use native w32 API
         w32-pipe-read-delay 0              ; faster IPC
@@ -353,41 +382,15 @@ Garbage Collector Magic Hack
 #+end_src
 
 ** esup
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package esup
-  :commands esup)
+  :defer t
+  :init
+  ;; https://github.com/progfolio/elpaca/issues/23
+  (setq esup-depth 0))
 #+end_src
 
 * Interface
-** UI
-#+begin_src emacs-lisp
-;; Disable GUI elements
-;; (menu-bar-mode -1)
-;; (when (fboundp 'tool-bar-mode)
-;;   (tool-bar-mode -1))
-;; (when (fboundp 'scroll-bar-mode)
-;;   (scroll-bar-mode -1))
-
-(setq inhibit-splash-screen t
-      inhibit-startup-screen t
-      inhibit-startup-message t ;关闭欢迎界面
-      inhibit-startup-buffer-menu t
-
-      inhibit-x-resources t
-      use-file-dialog nil
-      use-dialog-box nil
-
-      initial-frame-alist (quote ((fullscreen . maximized)))
-      ;; default-frame-alist
-      ;; '((height . 40)
-      ;;   (width . 80))
-      )
-
-(defun display-startup-echo-area-message ()
-  "Delete startup message."
-  (message ""))
-#+end_src
-
 ** Themes
 #+begin_src emacs-lisp
 (use-package doom-themes
@@ -675,10 +678,19 @@ https://github.com/neeasade/stillness-mode.el
 #+end_src
 ** wrap
 #+begin_src emacs-lisp
-;; (global-visual-line-mode 1) ;折叠 word wrap
+;; 折叠 word wrap
+;; (global-visual-line-mode 1)
 
-;; (setq word-wrap-by-category t) ; fix CJK 语言文本自动换行
+;; Better word wrapping for CJK characters
+;; (setq word-wrap-by-category t)
 #+end_src
+** fill-column
+~display-fill-column-indicator-mode~
+
+#+begin_src emacs-lisp
+(setq-default fill-column 80) ; default: 70
+#+end_src
+
 ** line-numbers-mode
 #+begin_src emacs-lisp
 ;; 滚动时保持显示稳定
@@ -724,13 +736,6 @@ https://github.com/AmaiKinono/puni
 (whitespace-mode 1)
 #+end_src
 
-** fill-column
-~display-fill-column-indicator-mode~
-
-#+begin_src emacs-lisp
-(setq-default fill-column 80) ; default: 70
-#+end_src
-
 ** mixed-pitch
 https://gitlab.com/jabranham/mixed-pitch
 
@@ -746,7 +751,8 @@ https://gitlab.com/jabranham/mixed-pitch
 (global-so-long-mode t)
 
 ;; View Large Files
-(use-package vlf)
+(use-package vlf
+  :defer t)
 #+end_src
 
 * Dired
@@ -1496,7 +1502,7 @@ hippie expand is dabbrev expand on steroids
   :mode ("\\.org\\'" . org-mode)
   :bind(:map org-mode-map
              ("C-c a" . org-agenda)
-             ;; ("C-c c" . org-capture)
+             ("C-c x" . org-capture)
              ;; ("C-c l" . org-store-link)
              ("C-c C-j" . consult-outline)
              ("M-." . find-function-at-point))
