@@ -7,6 +7,7 @@
 }:
 {
   home.packages = with pkgs; [
+    anich # 在线动漫弹幕
     cyc # 次元城动画
     # azcomicv
 
