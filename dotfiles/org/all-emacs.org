@@ -592,6 +592,12 @@ emacs31: https://p.bauherren.ovh/blog/tech/new_window_cmds
   :bind (("C-c w v" . rotate-layout)))
 #+end_src
 
+*** golden-ratio
+#+begin_src emacs-lisp
+(use-package golden-ratio
+  :config (golden-ratio-mode 1))
+#+end_src
+
 *** persp-mode
 #+begin_src emacs-lisp
 (use-package persp-mode

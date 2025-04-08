@@ -38,8 +38,6 @@ in
         "browser.aboutwelcome.enabled" = false;
         "browser.aboutConfig.showWarning" = false;
 
-        "gfx.webrender.all" = true; # enable GPU render
-        "media.ffmpeg.vaapi.enabled" = true; # enable hw video acceleration
         # https://pandasauce.org/get-fonts-done/
         "gfx.text.subpixel-position.force-enabled" = true;
         "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
