@@ -4,6 +4,7 @@
   ...
 }:
 {
+  # https://surge.tel/08/2930
   systemd.services.sub-store = {
     serviceConfig = {
       StateDirectory = "sub-store";

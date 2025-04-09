@@ -119,7 +119,12 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 
 (package-initialize)
 
-(require 'use-package)
+(eval-when-compile (require 'use-package))
+;; when starting the daemon, packages are always loaded eagerly
+;; and when loading without daemon, it always defers
+;; (setq use-package-always-defer (not (daemonp))
+;;   use-package-always-demand (daemonp))
+
 (setq use-package-always-ensure t)
 (setq use-package-enable-imenu-support t)
 
