@@ -34,6 +34,7 @@
             inherit system;
             overlays = [ self.overlays.modifications ];
             config = {
+              allowUnfree = true;
               # allowInsecure = true;
               android_sdk.accept_license = true;
             };

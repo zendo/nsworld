@@ -5,12 +5,15 @@
 {
   mods.fcitx.enable = true;
 
+  security = {
+    soteria.enable = true; # Polkit agent
+  };
+
   services = {
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
-    soteria.enable = true; # Polkit agent
   };
 
   programs = {

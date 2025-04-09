@@ -19,6 +19,7 @@
           "google-chrome"
           "steam-unwrapped"
           "balatro"
+          "android-sdk-cmdline-tools"
         ];
     };
   };
