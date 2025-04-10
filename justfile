@@ -46,8 +46,8 @@ os-installed:
     # cut -d- -f2-
     nix path-info --recursive /run/current-system | cut -b 45- | sort
 
-build-livecd-graphical:
-    nix build .#nixosConfigurations.livecd-graphical.config.system.build.isoImage
+build-livecd-standard:
+    nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
 
 build-livecd-minimal:
     nix build .#nixosConfigurations.livecd-minimal.config.system.build.isoImage

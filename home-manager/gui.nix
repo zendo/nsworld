@@ -27,7 +27,7 @@
     # })
     # gui-for-singbox
     # hiddify-app
-    picacomic
+    # picacomic
     venera
     # jhentai
 
