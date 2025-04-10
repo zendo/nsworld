@@ -488,6 +488,8 @@ Linux handle by nix.
            (centaur-tabs-set-close-button nil)
            (centaur-tabs-set-modified-marker t)
            (centaur-tabs-modified-marker "●"))
+  :hook
+  (dashboard-mode . centaur-tabs-local-mode) ;; Disable centaur-tabs in selected buffers
   :config
   (centaur-tabs-mode t))
 #+end_src
@@ -1093,7 +1095,7 @@ expand region alternative
 ** goto-last-change
 #+begin_src emacs-lisp
 (use-package goto-last-change
-  :defer t)
+  :bind ("M-g l" . goto-last-change))
 #+end_src
 
 ** fanyi
@@ -2360,8 +2362,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
  :prefix-map mark-map
  :prefix "C-c m"
- ("'" . er/mark-inside-quotes)
- ("[" . er/mark-inside-pairs)
+ ;; ("'" . er/mark-inside-quotes)
+ ;; ("[" . er/mark-inside-pairs)
  ("l" . goto-last-change)
  ("m" . bm-toggle)
  ("0" . bm-remove-all-current-buffer)

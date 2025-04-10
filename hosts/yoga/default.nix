@@ -14,8 +14,8 @@
     # inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nixos-hardware.nixosModules.common-gpu-amd
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri
