@@ -600,7 +600,7 @@ emacs31: https://p.bauherren.ovh/blog/tech/new_window_cmds
 #+end_src
 
 *** golden-ratio
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package golden-ratio
   :config (golden-ratio-mode 1))
 #+end_src

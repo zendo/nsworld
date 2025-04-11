@@ -15,6 +15,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # fix svg theme not showing
+    programs.gdk-pixbuf.modulePackages = lib.mkDefault [ pkgs.librsvg ];
+
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
