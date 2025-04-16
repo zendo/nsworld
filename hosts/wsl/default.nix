@@ -74,7 +74,6 @@
     ];
   };
 
-  # vscode-remote-workaround
   # https://github.com/K900/vscode-remote-workaround
   systemd.user = {
     paths.vscode-remote-workaround = {
