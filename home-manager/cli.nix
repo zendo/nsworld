@@ -77,7 +77,7 @@
     tlrc # tldr
     # tealdeer # tldr
     # difftastic # too big
-    kalker # calculator
+    # kalker # calculator
     ydict
     typos
     shellcheck
@@ -94,6 +94,7 @@
     # Networking
     lsof
     dogdns
+    q # dns
     # nali
     mtr
     nload

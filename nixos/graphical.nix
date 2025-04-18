@@ -11,11 +11,6 @@
     # Graphical Applications
     programs = {
       appimage.enable = true;
-
-      clash-verge = {
-        # enable = true;
-        # autoStart = true;
-      };
     };
 
     # Bluetooth

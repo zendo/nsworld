@@ -28,7 +28,7 @@
   };
 
   systemd = {
-    services.sing-box.enable = true;
+    # services.sing-box.enable = true;
   };
 
   services = {
@@ -43,6 +43,11 @@
 
   programs = {
     # nix-ld.enable = true;
+
+    clash-verge = {
+      enable = true;
+      autoStart = true;
+    };
   };
 
   # environment.systemPackages = with pkgs; [
