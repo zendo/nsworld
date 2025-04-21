@@ -28,6 +28,7 @@
       yakuake
       krfb
       krdc
+      kwave
       ksystemlog
       kcolorchooser
       karousel # Scrollable tiling wm

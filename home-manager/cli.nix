@@ -109,6 +109,7 @@
     # airgeddon # wifi crack
 
     # Game & fun
+    clock-rs
     # curl parrot.live
     # fortune | cowsay -f tux | lolcat
     sl
