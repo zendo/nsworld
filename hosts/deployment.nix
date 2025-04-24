@@ -16,7 +16,7 @@
     fastConnection = true; # copy from ssh
     nodes = {
       "svp" = {
-        hostname = "192.168.1.197";
+        hostname = "192.168.1.4";
         profiles.system = {
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."svp";
         };

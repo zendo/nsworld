@@ -8,12 +8,12 @@
         Port 443
 
       Host yoga
-        HostName 192.168.1.118
+        HostName 192.168.1.2
         Port 22
         User root
 
       Host svp
-        HostName 192.168.1.197
+        HostName 192.168.1.4
         Port 22
         User root
 
