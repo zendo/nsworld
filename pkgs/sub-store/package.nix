@@ -11,12 +11,12 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
-    sha256 = "sha256-KKwsi9yfgNqggHF4km9JW7RVK2lFMKq7y5asQA/tmN8=";
+    sha256 = "sha256-o+L8W3tTJnyPghVgaMxMDcOTYwJYM3Zy0dsAbQiPOVM=";
   };
 
   js = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-gmZq+L/5GUBEfHyjYAvxHeKYuxUaXVySAdmQHFhpL28=";
+    sha256 = "sha256-khyRz5QC01lMsW0dnmY2OGCimJXRRzpyQgP+EMnGjHQ=";
   };
 
   nativeBuildInputs = [ unzip ];
