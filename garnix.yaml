@@ -1,10 +1,7 @@
 # https://garnix.io/docs/yaml_config
 builds:
   exclude:
-    - "packages.x86_64-linux.he3"
-    - "packages.x86_64-linux.xmind"
     - "packages.x86_64-linux.picacomic"
-    - "packages.x86_64-linux.thorium-reader"
   include:
     # - "*.x86_64-linux.*"
     # - devShell.x86_64-linux
