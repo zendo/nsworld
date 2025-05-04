@@ -27,7 +27,7 @@
     # gui-for-singbox
     # hiddify-app
     venera
-    # jhentai
+    jhentai
 
     # Terminal
     cava
