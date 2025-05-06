@@ -17,7 +17,7 @@ upgrade:
     nix flake update --commit-lock-file && \
       nixos-rebuild --sudo --flake .#"{{ host }}" boot
 
-nom-build-os:
+build-os-nom:
     nom build .#nixosConfigurations."{{ host }}".config.system.build.toplevel
 
 diff:

@@ -51,6 +51,7 @@
     gtrash
     eget
     croc
+    goshs
     dufs
     # sshfs
     simple-http-server
