@@ -44,19 +44,25 @@ in
       };
       search.enable = false;
       search.engines = {
-        Google.metaData.alias = "g";
+        google.metaData.alias = "g";
         GitHub = {
           urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
-          iconUpdateURL = "https://github.com/fluidicon.png";
+          icon = "https://github.com/fluidicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = [ "git" ];
         };
-        MyNixOS = {
-          urls = [ { template = "https://www.mynixos.com/search?q={searchTerms}"; } ];
-          iconUpdateURL = "https://mynixos.com/favicon.ico";
-          updateInterval = 24 * 60 * 60 * 1000; # every day
+        Searchix = {
+          urls = [ { template = "https://searchix.ovh/?query={searchTerms}"; } ];
           definedAliases = [
             "nse"
+            "searchix"
+          ];
+        };
+        MyNixOS = {
+          urls = [ { template = "https://www.mynixos.com/search?q={searchTerms}"; } ];
+          icon = "https://mynixos.com/favicon.ico";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = [
             "mynixos"
           ];
         };
