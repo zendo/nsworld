@@ -206,6 +206,9 @@
         # Windows = {
 
         # };
+
+        # fcitx5-wayland-launcher.desktop / org.fcitx.Fcitx5.desktop
+        Wayland.InputMethod = "/run/current-system/sw/share/applications/fcitx5-wayland-launcher.desktop";
       }; # kwinrc end here.
 
       # 键盘 - 布局/高级
