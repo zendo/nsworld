@@ -13,7 +13,7 @@
         User root
 
       Host svp
-        HostName 192.168.1.4
+        HostName 192.168.2.30
         Port 22
         User root
 
