@@ -14,18 +14,12 @@
     kitty
     nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
-    inputs.self.formatter.${system}
+    inputs.self.formatter.${system} # persistent cache
 
+    tdesktop # (webkitgtk)
     # nheko
     # fluffychat
-    tdesktop # (webkitgtk)
-    # nekoray
-    # (pkgs.makeAutostartItem {
-    #   name = "nekoray";
-    #   package = pkgs.nekoray;
-    # })
     # gui-for-singbox
-    # hiddify-app
     venera
     jhentai
 
@@ -53,7 +47,6 @@
     # amberol
     audacious
     # rhythmbox
-    lowfi
     goodvibes
     go-musicfox
     # qcm
