@@ -376,10 +376,24 @@ nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary
          ("C-h k" . helpful-key)))
 #+end_src
 
-** gcmh
-Garbage Collector Magic Hack
+** Garbage Collection Manually
+https://jackjamison.xyz/blog/emacs-garbage-collection/
 
 #+begin_src emacs-lisp
+(defun my-minibuffer-setup-hook ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun my-minibuffer-exit-hook ()
+  (setq gc-cons-threshold 800000000))
+
+(setq gc-cons-threshold most-positive-fixnum)
+
+(run-with-idle-timer 1.2 t 'garbage-collect)
+#+end_src
+
+** Garbage Collector Magic Hack - gcmh
+
+#+begin_src emacs-lispxx
 (use-package gcmh
   :diminish
   :config
@@ -635,6 +649,7 @@ https://github.com/neeasade/stillness-mode.el
   (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
 )
 #+end_src
+
 
 ** spatial-padding
 #+begin_src emacs-lisp
