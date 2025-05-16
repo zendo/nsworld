@@ -91,7 +91,7 @@
     foliate # (webkitgtk)
     # koodo-reader
     notes
-    planify
+    # planify
     # ghostwriter # (qtwebengine)
     meld
     # textpieces

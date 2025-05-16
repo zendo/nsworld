@@ -92,6 +92,7 @@
       # clipboard-indicator
       # blur-my-shell
       top-bar-organizer
+      compiz-windows-effect
       # just-perfection
       kimpanel
       runcat
