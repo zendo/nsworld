@@ -51,12 +51,16 @@ in
             "Name" = "keyboard-us";
           };
         };
-        # globalOptions = {
-        #   # 快捷键 - 切换启用/禁用输入法
-        #   "Hotkey/TriggerKeys" = {
-        #     "0" = "Control+Shift+space";
-        #   };
-        # };
+        globalOptions = {
+          # 切换启用/禁用输入法
+          "Hotkey/TriggerKeys" = {
+            "0" = "Control+space";
+          };
+          # 临时在当前和第一个输入法之间切换
+          "Hotkey/AltTriggerKeys" = {
+            "0" = "";
+          };
+        };
         addons = {
           classicui.globalSection = {
             Font = "Noto Sans CJK SC 12";
