@@ -23,7 +23,7 @@
       };
 
       "rmt" = {
-        hostname = "192.168.122.78";
+        hostname = "192.168.122.174";
         profiles.system = {
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."rmt";
         };

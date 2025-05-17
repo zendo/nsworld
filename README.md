@@ -20,7 +20,7 @@ nixos-anywhere \
   --disko-mode mount \ # skip disk reformat
   --no-substitute-on-destination \
   --flake .#rmt \
-  root@192.168.122.78
+  root@192.168.122.174
 
 nixos-install \
   --no-root-passwd \
