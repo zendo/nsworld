@@ -22,6 +22,7 @@ in
       enable = true;
       type = "fcitx5";
       fcitx5.waylandFrontend = true;
+
       fcitx5.addons = with pkgs; [
         fcitx5-fluent
         fcitx5-mellow-themes
@@ -32,6 +33,49 @@ in
           ];
         })
       ];
+
+      fcitx5.settings = {
+        inputMethod = {
+          "GroupOrder" = {
+            "0" = "default";
+          };
+          "Groups/0" = {
+            "Name" = "default";
+            "DefaultIM" = "rime";
+            "Default Layout" = "us";
+          };
+          "Groups/0/Items/0" = {
+            "Name" = "rime";
+          };
+          "Groups/0/Items/1" = {
+            "Name" = "keyboard-us";
+          };
+        };
+        # globalOptions = {
+        #   # 快捷键 - 切换启用/禁用输入法
+        #   "Hotkey/TriggerKeys" = {
+        #     "0" = "Control+Shift+space";
+        #   };
+        # };
+        addons = {
+          classicui.globalSection = {
+            Font = "Noto Sans CJK SC 12";
+            # MenuFont = "Sans Serif 12";
+            # TrayFont = "Sans Serif 12";
+            Theme = "FluentDark-solid";
+            # DarkTheme = "mellow-youlan-dark"; # FluentDark-solid/mellow-youlan-dark
+            # UseDarkTheme = true; # 跟随系统浅色/深色设置
+          };
+          clipboard.globalSection = {
+            "TriggerKey" = "";
+            # eval error: attrsets not supported.
+            # "TriggerKey" = {
+            #   "0" = "Control+Alt+semicolon";
+            # };
+          };
+        };
+      };
+
     };
   };
 }

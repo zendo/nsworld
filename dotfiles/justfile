@@ -38,9 +38,3 @@ ln-fcitx-conf-rime:
 
     # rime-ice
     ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_ice.custom.yaml
-
-    # fcitx5-conf
-    cp "$(pwd)"/fcitx5/classicui.conf "$HOME"/.config/fcitx5/conf/classicui.conf
-    cp "$(pwd)"/fcitx5/clipboard.conf "$HOME"/.config/fcitx5/conf/clipboard.conf
-    cp "$(pwd)"/fcitx5/config "$HOME"/.config/fcitx5/config
-    cp "$(pwd)"/fcitx5/profile "$HOME"/.config/fcitx5/profile
