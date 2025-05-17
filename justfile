@@ -39,13 +39,6 @@ hm-switch:
 hm-diff:
     nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
 
-os-generations:
-    nix profile history --profile /nix/var/nix/profiles/system
-
-os-installed:
-    # cut -d- -f2-
-    nix path-info --recursive /run/current-system | cut -b 45- | sort
-
 build-livecd-standard:
     nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
 
