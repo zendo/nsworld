@@ -16,25 +16,25 @@ backup-data:
     # rsync -avhpL ~/.config/google-chrome ~/Documents/homeBackups/
     # rsync -avhpL ~/.config/fcitx5/conf ~/Documents/homeBackups/
 
-ln-ibus-rime:
-    #! /usr/bin/env bash
-    if [[ ! -e "$HOME/.config/ibus/rime" ]]; then
-        mkdir "$HOME/.config/ibus/rime"
-    fi
+# ln-ibus-rime:
+#     #! /usr/bin/env bash
+#     if [[ ! -e "$HOME/.config/ibus/rime" ]]; then
+#         mkdir "$HOME/.config/ibus/rime"
+#     fi
 
-    ln -sfv "$(pwd)"/rime/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom.yaml
-    ln -sfv "$(pwd)"/rime/ibus_rime.custom.yaml "$HOME"/.config/ibus/rime/ibus_rime.custom.yaml
+#     ln -sfv "$(pwd)"/rime/default.custom.yaml "$HOME"/.config/ibus/rime/default.custom.yaml
+#     ln -sfv "$(pwd)"/rime/ibus_rime.custom.yaml "$HOME"/.config/ibus/rime/ibus_rime.custom.yaml
 
-    # rime-ice
-    ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.config/ibus/rime/rime_ice.custom.yaml
+#     # rime-ice
+#     ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.config/ibus/rime/rime_ice.custom.yaml
 
-ln-fcitx-conf-rime:
-    #! /usr/bin/env bash
-    if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
-        mkdir "$HOME/.local/share/fcitx5/rime"
-    fi
+# ln-fcitx-conf-rime:
+#     #! /usr/bin/env bash
+#     if [[ ! -e "$HOME/.local/share/fcitx5/rime" ]]; then
+#         mkdir "$HOME/.local/share/fcitx5/rime"
+#     fi
 
-    ln -sfv "$(pwd)"/rime/default.custom.yaml "$HOME"/.local/share/fcitx5/rime/default.custom.yaml
+#     ln -sfv "$(pwd)"/rime/default.custom.yaml "$HOME"/.local/share/fcitx5/rime/default.custom.yaml
 
-    # rime-ice
-    ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_ice.custom.yaml
+#     # rime-ice
+#     ln -sfv "$(pwd)"/rime/rime_ice.custom.yaml "$HOME"/.local/share/fcitx5/rime/rime_ice.custom.yaml
