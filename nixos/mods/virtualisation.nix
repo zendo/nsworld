@@ -78,8 +78,8 @@ in
           # runAsRoot = false;
           package = pkgs.qemu_kvm; # emulate only host architectures
           # swtpm.enable = true; # emulated TPM
-          # Shared folders
-          qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+          # Shared folders: https://wiki.nixos.org/wiki/Virt-manager#Shared_folders
+          vhostUserPackages = with pkgs; [ virtiofsd ];
           ovmf = {
             # packages = [
             #   (pkgs.OVMFFull.override
