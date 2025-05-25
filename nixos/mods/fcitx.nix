@@ -26,7 +26,6 @@ in
       fcitx5.addons = with pkgs; [
         fcitx5-fluent
         fcitx5-mellow-themes
-        # fcitx5-chinese-addons
         (fcitx5-rime.override {
           rimeDataPkgs = [
             pkgs.rime-ice
@@ -71,10 +70,12 @@ in
             # UseDarkTheme = true; # 跟随系统浅色/深色设置
           };
           clipboard = {
-            globalSection = { };
-            sections.TriggerKey = {
-              "0" = "Control+Alt+semicolon";
+            globalSection = {
+              "TriggerKey" = "";
             };
+            # sections.TriggerKey = {
+            #   "0" = "Control+Alt+semicolon";
+            # };
           };
           notifications = {
             globalSection = { };
