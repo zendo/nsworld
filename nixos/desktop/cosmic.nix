@@ -1,16 +1,11 @@
 {
-  inputs,
   pkgs,
   ...
 }:
 {
-  imports = [
-    inputs.nixos-cosmic.nixosModules.default
-  ];
-
   services = {
-    displayManager.cosmic-greeter.enable = true;
     desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
   };
 
   mods.fcitx.enable = true;
