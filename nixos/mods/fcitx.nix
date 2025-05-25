@@ -70,16 +70,20 @@ in
             # DarkTheme = "mellow-youlan-dark"; # FluentDark-solid/mellow-youlan-dark
             # UseDarkTheme = true; # 跟随系统浅色/深色设置
           };
-          clipboard.globalSection = {
-            "TriggerKey" = "";
-            # eval error: attrsets not supported.
-            # "TriggerKey" = {
-            #   "0" = "Control+Alt+semicolon";
-            # };
+          clipboard = {
+            globalSection = { };
+            sections.TriggerKey = {
+              "0" = "Control+Alt+semicolon";
+            };
+          };
+          notifications = {
+            globalSection = { };
+            sections.HiddenNotifications = {
+              "0" = "fcitx-rime-deploy";
+            };
           };
         };
       };
-
     };
   };
 }
