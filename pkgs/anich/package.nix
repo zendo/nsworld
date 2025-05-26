@@ -16,12 +16,12 @@
   mpv-unwrapped,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "anich";
   version = "1.4.0";
 
   src = fetchurl {
-    url = "https://github.com/Sle2p/AniCh/releases/download/${version}/anich-linux-${version}.deb";
+    url = "https://github.com/Sle2p/AniCh/releases/download/${finalAttrs.version}/anich-linux-${finalAttrs.version}.deb";
     hash = "sha256-nSf4JqslAdQccrBnrwpkFGVZzIqe57z24lB1LEAz4QQ=";
   };
 
@@ -60,4 +60,4 @@ stdenv.mkDerivation rec {
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = with lib.maintainers; [ zendo ];
   };
-}
+})
