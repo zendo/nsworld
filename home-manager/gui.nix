@@ -8,6 +8,7 @@
 {
   home.packages = with pkgs; [
     anich # 在线动漫弹幕
+    algermusicplayer
     # azcomicv
 
     foot
