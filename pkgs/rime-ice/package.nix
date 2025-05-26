@@ -24,7 +24,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   meta = {
     description = "雾凇拼音，功能齐全，词库体验良好，长期更新修订";
     homepage = "https://github.com/iDvel/rime-ice";
-    license = lib.licenses.gpl3Plus;
+    license = lib.licenses.gpl3Only;
     platforms = lib.platforms.all;
     maintainers = with lib.maintainers; [ zendo ];
   };
