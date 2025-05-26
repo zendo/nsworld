@@ -17,10 +17,10 @@ disko -m disko hosts/rmt/disko-bcachefs.nix
 nixos-generate-config --no-filesystems --flake --root /mnt
 
 nixos-anywhere \
-  --disko-mode mount \ # skip disk reformat
+  # --disko-mode mount \
   --no-substitute-on-destination \
   --flake .#rmt \
-  root@192.168.122.174
+  root@192.168.122.25
 
 nixos-install \
   --no-root-passwd \
