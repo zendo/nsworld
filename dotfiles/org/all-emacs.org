@@ -420,6 +420,8 @@ https://jackjamison.xyz/blog/emacs-garbage-collection/
        (load-theme 'doom-tomorrow-night t)))
   )
 
+;; (use-package doric-themes)
+
 ;; (use-package eclipse-theme
 ;;   :config
 ;;   (load-theme 'eclipse t))
@@ -649,7 +651,6 @@ https://github.com/neeasade/stillness-mode.el
   (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
 )
 #+end_src
-
 
 ** spatial-padding
 #+begin_src emacs-lisp
