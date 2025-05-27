@@ -36,10 +36,10 @@
       bindkey "\e[27;2;13~" accept-line                 # Shift - enter
       bindkey "\e[27;5;13~" accept-line                 # Ctrl  - enter
       bindkey "^H" backward-kill-word                   # Ctrl  - backspace
-      bindkey "^[[1;5C" forward-word                    # Ctrl  - ->
-      bindkey "^[[1;5D" backward-word                   # Ctrl  - <-
-      bindkey "^[[1;3C" forward-word                    # Alt   - ->
-      bindkey "^[[1;3D" backward-word                   # Alt   - <-
+      bindkey "^[[1;5C" forward-word                    # Ctrl  - →
+      bindkey "^[[1;5D" backward-word                   # Ctrl  - ←
+      bindkey "^[[1;3C" forward-word                    # Alt   - →
+      bindkey "^[[1;3D" backward-word                   # Alt   - ←
       bindkey '\e[1;3A' beginning-of-line               # ALT   - ↑
       bindkey '\e[1;3B' end-of-line                     # ALT   - ↓
     '';
