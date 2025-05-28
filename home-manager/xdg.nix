@@ -43,7 +43,7 @@
           "x-scheme-handler/http" = "firefox.desktop";
           "x-scheme-handler/https" = "firefox.desktop";
         }
-        (lib.mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
+        (lib.mkIf nixosConfig.services.desktopManager.gnome.enable {
           "image/jpeg" = "org.gnome.Loupe.desktop";
           "image/png" = "org.gnome.Loupe.desktop";
           "image/webp" = "org.gnome.Loupe.desktop";

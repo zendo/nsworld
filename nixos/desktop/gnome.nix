@@ -16,13 +16,8 @@
   # };
 
   services = {
-    xserver = {
-      enable = true;
-      excludePackages = [ pkgs.xterm ];
-
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-    };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
 
     packagekit.enable = false;
     # gnome.sushi.enable = true;

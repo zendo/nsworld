@@ -26,7 +26,7 @@
       ./ghostty.nix
     ]
     ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./kderc.nix ]
-    ++ lib.optionals nixosConfig.services.xserver.desktopManager.gnome.enable [ ./dconf.nix ];
+    ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./dconf.nix ];
 
   home = {
     enableNixpkgsReleaseCheck = false;
