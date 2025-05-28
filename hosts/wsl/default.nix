@@ -45,17 +45,9 @@
       };
     };
 
-  wsl = {
-    enable = true;
-    defaultUser = "${username}";
-    startMenuLaunchers = true;
-  };
-
-  programs = {
-    zsh.enable = true;
-    command-not-found.enable = false;
-  };
-
+  ###############################################
+  ##  System-wide
+  ###############################################
   environment = {
     sessionVariables = {
       BROWSER = "wsl-open";
@@ -72,6 +64,27 @@
       wsl-open
       xdg-utils # for git oauth
     ];
+  };
+
+  programs = {
+    zsh.enable = true;
+    command-not-found.enable = false;
+  };
+
+  time.timeZone = "Asia/Shanghai";
+  system.stateVersion = "25.05";
+  documentation.enable = false;
+  nixpkgs.hostPlatform = "x86_64-linux";
+  # nixos-rebuild-ng: Python-based re-implementation
+  system.rebuild.enableNg = true;
+
+  ###############################################
+  ##  WSL Settings
+  ###############################################
+  wsl = {
+    enable = true;
+    defaultUser = "${username}";
+    startMenuLaunchers = true;
   };
 
   # https://github.com/K900/vscode-remote-workaround
@@ -97,12 +110,4 @@
       "${pkgs.coreutils}/bin/true"
     ];
   };
-
-  time.timeZone = "Asia/Shanghai";
-  system.stateVersion = "25.05";
-  documentation.enable = false;
-  nixpkgs.hostPlatform = "x86_64-linux";
-
-  # nixos-rebuild-ng: Python-based re-implementation
-  system.rebuild.enableNg = true;
 }
