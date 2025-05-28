@@ -88,6 +88,16 @@
     '';
   };
 
+  # FIXME: https://github.com/microsoft/WSL/issues/12041
+  # https://github.com/nix-community/NixOS-WSL/pull/648
+  systemd.services."user-runtime-dir@" = {
+    overrideStrategy = "asDropin";
+    serviceConfig.ExecStart = [
+      "" # unset old value
+      "${pkgs.coreutils}/bin/true"
+    ];
+  };
+
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
   documentation.enable = false;
