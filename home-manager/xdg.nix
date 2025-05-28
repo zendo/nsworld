@@ -40,6 +40,8 @@
           "audio/flac" = "qmmp.desktop";
           "audio/x-vorbis+ogg" = "qmmp.desktop";
           "text/html" = "firefox.desktop";
+          "x-scheme-handler/http" = "firefox.desktop";
+          "x-scheme-handler/https" = "firefox.desktop";
         }
         (lib.mkIf nixosConfig.services.xserver.desktopManager.gnome.enable {
           "image/jpeg" = "org.gnome.Loupe.desktop";
