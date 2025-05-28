@@ -1,22 +1,22 @@
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
   unzip,
 }:
 
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "sub-store";
-  version = "2.19.42";
+  version = "2.19.56";
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
-    sha256 = "sha256-0v0KmrQKhH6fiqO8h50PePRFKIiidkay+/SueYv235I=";
+    sha256 = "sha256-Ep/YoAQjO+fh5tgB1YIdIzeUzj7sCMePRoQbyV9WWVg=";
   };
 
   js = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-HaCzX8PBFHwACqvTLwzabexcqIrK8S563m621qyjw1M=";
+    sha256 = "sha256-dGMWlGk5HliM5NLAGKlkCAzcGAOVUiD/b8QSBBDJGP8=";
   };
 
   nativeBuildInputs = [ unzip ];
@@ -32,6 +32,7 @@ stdenv.mkDerivation {
     homepage = "https://github.com/sub-store-org/Sub-Store";
     downloadPage = "https://github.com/sub-store-org/Sub-Store-Front-End";
     license = lib.licenses.agpl3Only;
+    platforms = lib.platforms.all;
     maintainers = with lib.maintainers; [ zendo ];
   };
 }
