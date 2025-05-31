@@ -14,6 +14,7 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
+    xserver.desktopManager.runXdgAutostartIfNone = true;
   };
 
   programs = {
