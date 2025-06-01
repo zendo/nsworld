@@ -25,13 +25,8 @@ nixos-anywhere \
 nixos-install \
   --no-root-passwd \
   --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store" \
-  --option extra-substituters "https://cache.nixos.org" \
+  # --option substituters "https://cache.nixos.org" \
   --flake .#host
-
-nixos-rebuild \
-  --option substituters "https://cache.garnix.io" \
-  --option extra-substituters "https://cache.nixos.org" \
-  --sudo --flake .#"yoga" boot
 ```
 
 [SrvOS](https://github.com/nix-community/srvos)

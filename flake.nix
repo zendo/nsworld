@@ -113,8 +113,10 @@
   # Flake Local Nix Configuration
   nixConfig = {
     # bash-prompt = "[nix]λ ";
-    # substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
-    # extra-substituters = ["https://nix-gaming.cachix.org"];
-    # extra-trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+    # substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+    # extra-substituters = [ "https://cache.garnix.io" ];
+    # extra-trusted-public-keys = [
+    #   "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    # ];
   };
 }
