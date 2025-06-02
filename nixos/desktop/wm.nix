@@ -79,6 +79,7 @@
           wdisplays
           wlr-randr
           # kanshi # autorandr
+          xwayland-satellite
 
           # Media
           # grim # grab image
@@ -110,13 +111,14 @@
           gnome-keyring.enable = true;
           # playerctld.enable = true;
           swaync.enable = true; # notification center
-          way-displays = true; # alternative kanshi
+          # way-displays.enable = true; # alternative kanshi
 
           wlsunset = {
             enable = true;
             # gama = "2.0";
             latitude = "22.2783";
             longitude = "114.1747";
+            temperature.night = 3000; # default: 4000
           };
         };
 

@@ -84,8 +84,11 @@ exec swayidle -w \
   before-sleep 'playerctl pause' \
   before-sleep 'swaylock -f'
 
-# exec --no-startup-id  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec --no-startup-id systemctl --user import-environment XDG_SESSION_PATH WAYLAND_DISPLAY
+# Import the most important environment variables into the D-Bus and systemd
+# user environments (e.g. required for screen sharing and Pinentry prompts):
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+# enable systemd-integration
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 
 # Polkit daemon
 # exec mate-polkit

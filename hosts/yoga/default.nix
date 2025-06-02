@@ -14,11 +14,11 @@
     # inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nixos-hardware.nixosModules.common-gpu-amd
 
-    self.nixosModules.gnome
+    # self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
-    # self.nixosModules.niri
+    self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 
@@ -59,8 +59,8 @@
   ###############################################
 
   # fix ax200 bluetooth randomly lose connectivity
-  hardware.enableAllFirmware = true;
-  nixpkgs.config.allowUnfree = true;
+  # hardware.enableAllFirmware = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # hardware.amdgpu.amdvlk.enable = true;
 
