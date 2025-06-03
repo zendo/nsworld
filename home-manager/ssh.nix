@@ -8,7 +8,7 @@
         Port 443
 
       Host yoga
-        HostName 192.168.1.2
+        HostName 192.168.2.218
         Port 22
         User root
 

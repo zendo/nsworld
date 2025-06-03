@@ -2,11 +2,22 @@ profile yoga14s {
   output $YOGA14S enable
 }
 
+profile svp {
+  output $SVP enable
+}
+
 output "Lenovo Group Limited 0x8A90 Unknown" {
   mode 2880x1800@90
   position 0,0
   scale 2
   alias $YOGA14S
+}
+
+output "Panasonic Industry Company VVX13F009G00 Unknown" {
+  mode 1920x1080
+  position 0,0
+  scale 1.5
+  alias $SVP
 }
 
 output "LG Display 0x058B Unknown" {
