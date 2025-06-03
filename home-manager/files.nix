@@ -14,6 +14,7 @@ in
     "wofi".source = ../dotfiles/wofi;
     "foot".source = ../dotfiles/foot;
     "kitty".source = ../dotfiles/kitty;
+    "kanshi".source = ../dotfiles/kanshi;
     "swaylock".source = ../dotfiles/swaylock;
     "alacritty".source = ../dotfiles/alacritty;
 
@@ -21,7 +22,6 @@ in
     "mako".source = linkFlake "dotfiles/mako";
     "helix".source = linkFlake "dotfiles/helix";
     "waybar".source = linkFlake "dotfiles/waybar";
-    "kanshi".source = linkFlake "dotfiles/kanshi";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
     "wezterm".source = linkFlake "dotfiles/wezterm";
 

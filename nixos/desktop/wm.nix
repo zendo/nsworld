@@ -8,7 +8,7 @@
   mods.fcitx.enable = true;
 
   security = {
-    soteria.enable = true; # Polkit agent
+    # soteria.enable = true; # Polkit agent
   };
 
   services = {
@@ -16,7 +16,6 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
-    xserver.desktopManager.runXdgAutostartIfNone = true;
 
     # https://github.com/apognu/tuigreet/issues/145
     greetd = {
@@ -38,9 +37,12 @@
 
   programs = {
     light.enable = true;
-    evince.enable = true;
-    evince.package = pkgs.papers;
     file-roller.enable = true;
+
+    evince = {
+      enable = true;
+      package = pkgs.papers;
+    };
 
     thunar = {
       enable = true;
@@ -95,12 +97,10 @@
 
           # Display
           brightnessctl # same like light
-          wlsunset # nightlight for manually control
           wl-gammactl
           wdisplays
           wlr-randr
-          kanshi # autorandr
-          way-displays
+          wlsunset
 
           # Media
           # grim # grab image

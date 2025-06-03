@@ -16,7 +16,6 @@ output "Lenovo Group Limited 0x8A90 Unknown" {
 output "Panasonic Industry Company VVX13F009G00 Unknown" {
   mode 1920x1080
   position 0,0
-  scale 1.5
   alias $SVP
 }
 
