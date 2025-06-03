@@ -1,5 +1,7 @@
 {
   pkgs,
+  lib,
+  config,
   ...
 }:
 {
@@ -15,6 +17,23 @@
     blueman.enable = true;
     geoclue2.enable = true;
     xserver.desktopManager.runXdgAutostartIfNone = true;
+
+    # https://github.com/apognu/tuigreet/issues/145
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = lib.concatStringsSep " " [
+            "${pkgs.greetd.tuigreet}/bin/tuigreet"
+            "--time"
+            "--asterisks"
+            "--remember"
+            "--remember-session"
+            "--sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"
+          ];
+        };
+      };
+    };
   };
 
   programs = {
