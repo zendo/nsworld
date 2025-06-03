@@ -52,6 +52,7 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "sh" "-c" "swaybg -i ~/Pictures/Wallpapers/night_tower.jpg"
 spawn-at-startup "xwayland-satellite"
 environment {
     DISPLAY ":0"
