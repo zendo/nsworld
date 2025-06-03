@@ -1,0 +1,17 @@
+profile yoga14s {
+  output $YOGA14S enable
+}
+
+output "Lenovo Group Limited 0x8A90 Unknown" {
+  mode 2880x1800@90
+  position 0,0
+  scale 2
+  alias $YOGA14S
+}
+
+output "LG Display 0x058B Unknown" {
+  mode 2560x1440@59.99800
+  position 0,0
+  scale 2
+  alias $INTERNAL
+}

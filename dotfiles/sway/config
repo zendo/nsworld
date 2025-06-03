@@ -20,13 +20,13 @@ set {
 }
 
 # swaymsg -t get_outputs
-set {
-  $Mon1 eDP-1
-  $Mon2 eDP-2
-  $HDMon1 HDMI-A-1
-  $HDMon2 HDMI-A-2
-}
-output $Mon1 resolution 2880x1800@90Hz position 0,0 scale 2 render_bit_depth 10
+# set {
+#   $Mon1 eDP-1
+#   $Mon2 eDP-2
+#   $HDMon1 HDMI-A-1
+#   $HDMon2 HDMI-A-2
+# }
+# output $Mon1 resolution 2880x1800@90Hz position 0,0 scale 2 render_bit_depth 10
 # output $Mon2 resolution 1920x1080@60Hz position 0,0 scale 1.0
 # output $HDMon1 resolution 1920x1080 position 1920,0
 

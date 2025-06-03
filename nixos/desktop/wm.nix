@@ -99,7 +99,8 @@
           wl-gammactl
           wdisplays
           wlr-randr
-          # kanshi # autorandr
+          kanshi # autorandr
+          way-displays
 
           # Media
           # grim # grab image
@@ -132,7 +133,16 @@
           gnome-keyring.enable = true;
           # playerctld.enable = true;
           swaync.enable = true; # notification center
-          # way-displays.enable = true; # alternative kanshi
+
+          # kanshi alternative
+          # way-displays = {
+          #   enable = true;
+          # };
+
+          # https://wiki.archlinux.org/title/Kanshi
+          kanshi = {
+            enable = true;
+          };
 
           wlsunset = {
             enable = true;
