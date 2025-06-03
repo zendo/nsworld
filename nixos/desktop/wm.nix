@@ -57,6 +57,8 @@
           swayidle
           wlogout
           waybar
+          uwsm
+          xwayland-satellite
 
           wofi # quick run
           wofi-emoji
@@ -79,7 +81,6 @@
           wdisplays
           wlr-randr
           # kanshi # autorandr
-          xwayland-satellite
 
           # Media
           # grim # grab image
@@ -98,6 +99,7 @@
 
           xfce.mousepad
           nomacs
+          loupe
           # gnome.gnome-power-manager
           # gnome.gnome-characters
           # gthumb

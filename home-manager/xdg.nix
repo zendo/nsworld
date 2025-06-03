@@ -42,11 +42,11 @@
           "text/html" = "firefox.desktop";
           "x-scheme-handler/http" = "firefox.desktop";
           "x-scheme-handler/https" = "firefox.desktop";
-        }
-        (lib.mkIf nixosConfig.services.desktopManager.gnome.enable {
           "image/jpeg" = "org.gnome.Loupe.desktop";
           "image/png" = "org.gnome.Loupe.desktop";
           "image/webp" = "org.gnome.Loupe.desktop";
+        }
+        (lib.mkIf nixosConfig.services.desktopManager.gnome.enable {
           "text/plain" = "org.gnome.TextEditor.desktop";
           "application/pdf" = "org.gnome.Papers.desktop";
         })
@@ -59,9 +59,6 @@
         })
         # for wm
         (lib.mkIf config.services.wlsunset.enable {
-          "image/jpeg" = "org.nomacs.ImageLounge.desktop";
-          "image/png" = "org.nomacs.ImageLounge.desktop";
-          "image/webp" = "org.nomacs.ImageLounge.desktop";
           "text/plain" = "org.gnome.TextEditor.desktop";
           "application/pdf" = "org.gnome.Papers.desktop";
         })
