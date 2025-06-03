@@ -1,29 +1,16 @@
 {
-  lib,
   pkgs,
   config,
   username,
   ...
 }:
-let
-  wm =
-    if config.programs.sway.enable then
-      "sway"
-    else if config.programs.hyprland.enable then
-      "Hyprland"
-    else if config.programs.niri.enable then
-      "niri-session"
-    else
-      throw "No Window Manager enabled!";
-in
 {
+  # https://ryjelsum.me/homelab/greetd-session-choose/
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${wm}";
-      # autologin
-      initial_session = {
-        command = "${wm}";
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions --remember --remember-user-session";
         user = "${username}";
       };
     };
