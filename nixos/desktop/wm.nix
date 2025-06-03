@@ -8,7 +8,7 @@
   mods.fcitx.enable = true;
 
   security = {
-    # soteria.enable = true; # Polkit agent
+    soteria.enable = true; # Polkit agent
   };
 
   services = {
