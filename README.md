@@ -25,7 +25,6 @@ nixos-anywhere \
 nixos-install \
   --no-root-passwd \
   --option substituters "https://mirror.sjtu.edu.cn/nix-channels/store" \
-  # --option substituters "https://cache.nixos.org" \
   --flake .#host
 ```
 
