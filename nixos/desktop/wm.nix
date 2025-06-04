@@ -116,7 +116,6 @@
           adwaita-icon-theme
           gnome-themes-extra
           dconf-editor
-          gnome-tweaks # (webkitgtk)
 
           xfce.mousepad
           nomacs
@@ -130,8 +129,6 @@
 
         services = {
           avizo.enable = true;
-          udiskie.enable = true;
-          gnome-keyring.enable = true;
           # playerctld.enable = true;
           swaync.enable = true; # notification center
 
