@@ -90,20 +90,6 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 # enable systemd-integration
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 
-# Polkit daemon
-# exec mate-polkit
-# exec --no-startup-id /etc/polkit-gnome-authentication-agent-1
-
-# Wob
-# exec mkfifo /tmp/wobpipe
-# exec mkfifo /tmp/wobpipe | wob --border-color '#ffdcbb8c' --background-color '#cc3a3a3a' --bar-color '#ffdcbb8c'
-
-# Swayr
-# exec env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
-
-# Daemons
-# exec_always
-
 # -------===[ Keybindings ]===-------
 bindsym {
   $mod+Return exec $term
@@ -169,16 +155,6 @@ bindsym {
   $mod+minus scratchpad show
   alt+tab scratchpad show
 }
-
-# TODO
-# Activities
-bindsym $mod+p exec swayr switch-window
-
-# Activities and workspaces
-bindsym $mod+Shift+p exec swayr switch-workspace-or-window
-
-# Switch to the last recently used window
-bindsym $mod+Tab exec swayr switch-to-urgent-or-lru-window
 
 # Switch the current container between different layout styles
 # bindsym $mod+s layout stacking
