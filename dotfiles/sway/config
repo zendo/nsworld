@@ -78,6 +78,7 @@ bindsym {
   $mod+space exec $menu
   $mod+x exec $menu
   $mod+period exec bemoji
+  #$mod+apostrophe exec bemoji
   $mod+v exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
 
   $mod+h floating toggle
