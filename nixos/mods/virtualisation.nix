@@ -3,6 +3,9 @@
   sudo virsh net-start default
   sudo virsh net-autostart default
 
+  ## fix efi
+  edit xml, delete `loader` and `nvram` line, apply
+
   ## for clipboard share
   apt install spice-vdagent (Guest)
 
