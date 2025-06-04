@@ -11,38 +11,8 @@ set {
   $calendar qalculate-gtk
   $menu wofi --show=drun
   $launcher nwg-drawer -c 7 -is 70 -spacing 23
-  $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-  
-  $my_cursor Adwaita
-  $my_cursor_size 32
   $wallpapers ~/Pictures/Wallpapers
-  $wallpaper ~/Pictures/Wallpapers/night_tower.jpg
 }
-
-# swaymsg -t get_outputs
-# set {
-#   $Mon1 eDP-1
-#   $Mon2 eDP-2
-#   $HDMon1 HDMI-A-1
-#   $HDMon2 HDMI-A-2
-# }
-# output $Mon1 resolution 2880x1800@90Hz position 0,0 scale 2 render_bit_depth 10
-# output $Mon2 resolution 1920x1080@60Hz position 0,0 scale 1.0
-# output $HDMon1 resolution 1920x1080 position 1920,0
-
-# set $laptop eDP-1
-# bindswitch lid:on output $laptop disable
-# bindswitch lid:off output $laptop enable
-# bindswitch --reload --locked lid:on output $laptop disable
-# bindswitch --reload --locked lid:off output $laptop enable
-
-# Cursor
-# seat seat0 xcursor_theme $my_cursor $my_cursor_size
-
-# Wallpaper
-# output "*" bg $wallpaper fill
-# output * bg #16161d solid_color
-# output * bg `find $wallpapers -type f | shuf -n 1` fill
 
 # -------===[ Input ]===-------
 # swaymsg -t get_inputs
@@ -62,12 +32,21 @@ input "type:touchpad" {
   # pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 }
 
+# Wallpapers
+# output * bg #16161d solid_color
+# output * bg `find $wallpapers -type f | shuf -n 1` fill
+
 # Status bar
 bar {
   swaybar_command waybar
 }
 
 # -------===[ Autostart ]===-------
+# include /etc/sway/config.d/*
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_ID
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
+
 # exec autotiling
 exec autotiling-rs
 exec nm-applet --indicator
@@ -83,12 +62,6 @@ exec swayidle -w \
      resume 'swaymsg "output * dpms on" && brightnessctl -r' \
   before-sleep 'playerctl pause' \
   before-sleep 'swaylock -f'
-
-# Import the most important environment variables into the D-Bus and systemd
-# user environments (e.g. required for screen sharing and Pinentry prompts):
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-# enable systemd-integration
-exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 
 # -------===[ Keybindings ]===-------
 bindsym {
@@ -206,7 +179,7 @@ bindsym --locked {
   XF86Search exec $menu
 }
 
-# Cosmetics
+# -------===[ Style ]===-------
 default_border pixel 3
 
 gaps inner 4
@@ -226,7 +199,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 client.background       #F8F8F2
 
-# Windows Rules
+# -------===[ Window Rules ]===-------
 # swaymsg -t get_tree | jq -r '..|try select(.app_id)' 
 for_window {
   [title="Firefox — Sharing Indicator"] floating enable
