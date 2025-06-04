@@ -147,9 +147,11 @@
           wlsunset = {
             enable = true;
             # gama = "2.0";
-            latitude = "22.2783";
-            longitude = "114.1747";
             temperature.night = 3000; # default: 4000
+            sunset = "19:00";
+            sunrise = "07:00";
+            # latitude = "22.2783";
+            # longitude = "114.1747";
           };
         };
 
