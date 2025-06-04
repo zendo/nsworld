@@ -82,8 +82,8 @@
           uwsm
           xwayland-satellite
 
-          wofi # quick run
-          wofi-emoji
+          fuzzel
+          bemoji
           wl-clipboard
           wf-recorder
           cliphist

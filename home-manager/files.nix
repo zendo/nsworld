@@ -11,7 +11,6 @@ in
 
   xdg.configFile = {
     "cava".source = ../dotfiles/cava;
-    "wofi".source = ../dotfiles/wofi;
     "foot".source = ../dotfiles/foot;
     "kitty".source = ../dotfiles/kitty;
     "kanshi".source = ../dotfiles/kanshi;
@@ -22,6 +21,7 @@ in
     "mako".source = linkFlake "dotfiles/mako";
     "helix".source = linkFlake "dotfiles/helix";
     "waybar".source = linkFlake "dotfiles/waybar";
+    "fuzzel".source = linkFlake "dotfiles/fuzzel";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
     "wezterm".source = linkFlake "dotfiles/wezterm";
 

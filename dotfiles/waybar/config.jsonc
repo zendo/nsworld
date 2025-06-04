@@ -33,7 +33,7 @@
     "format-icons": {
       "default": "",
     },
-    "on-click": "wofi",
+    "on-click": "fuzzel",
   },
 
   "hyprland/workspaces": {
