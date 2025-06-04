@@ -71,6 +71,7 @@
         home.packages = with pkgs; [
           swappy # screenshot annotation editor
           swaybg # wallpaper tool
+          waypaper
           swaylock-effects
           hyprlock
           # mako  # , notify-send "sth"
@@ -152,6 +153,17 @@
             sunrise = "07:00";
             # latitude = "22.2783";
             # longitude = "114.1747";
+          };
+
+          wpaperd = {
+            enable = true;
+            settings = {
+              default = {
+                duration = "30m";
+                mode = "center";
+              };
+              any.path = "~/Pictures/Wallpapers";
+            };
           };
         };
 

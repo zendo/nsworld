@@ -42,7 +42,7 @@ set {
 # Wallpaper
 # output "*" bg $wallpaper fill
 # output * bg #16161d solid_color
-output * bg `find $wallpapers -type f | shuf -n 1` fill
+# output * bg `find $wallpapers -type f | shuf -n 1` fill
 
 # -------===[ Input ]===-------
 # swaymsg -t get_inputs

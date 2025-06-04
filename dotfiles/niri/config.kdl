@@ -16,15 +16,6 @@ input {
     }
 }
 
-//output "eDP-1" {
-//    mode "2880x1800"
-//    scale 2
-    
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-//    transform "normal"
-//}
-
 layout {
     gaps 10
     // center-focused-column "on-overflow"
@@ -52,7 +43,6 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
-spawn-at-startup "sh" "-c" "swaybg -i ~/Pictures/Wallpapers/night_tower.jpg"
 spawn-at-startup "sh" "-c" "swayidle -w timeout 200 'brightnessctl -s s 10%' resume 'brightnessctl -r' timeout 300 'swaylock -f' timeout 360 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors && brightnessctl -r' before-sleep 'playerctl pause' before-sleep 'swaylock -f'"
 spawn-at-startup "xwayland-satellite"
 environment {
@@ -104,6 +94,7 @@ binds {
     Mod+R { switch-preset-column-width; }
     // Mod+F { maximize-column; }
     Mod+C { center-column; }
+    Mod+Z { toggle-column-tabbed-display; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
