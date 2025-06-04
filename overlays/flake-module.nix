@@ -60,6 +60,14 @@
         '';
       };
 
+      kitten-quick-terminal-desktop = prev.pkgs.makeDesktopItem {
+        name = "kitten-quick-terminal";
+        desktopName = "kitten quick terminal";
+        exec = "kitten quick-access-terminal";
+        noDisplay = true;
+        startupNotify = false;
+      };
+
       # gnomeExtensions = prev.gnomeExtensions // {
       #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
       # };

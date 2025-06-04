@@ -50,7 +50,8 @@ environment {
 }
 
 binds {
-    Mod+Return { spawn "kitty"; }
+    Mod+T { spawn "kitty"; }
+    Mod+Return { spawn "sh" "-c" "kitten quick-access-terminal"; }
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }

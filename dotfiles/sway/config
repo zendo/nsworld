@@ -65,8 +65,9 @@ exec swayidle -w \
 
 # -------===[ Keybindings ]===-------
 bindsym {
-  $mod+Return exec $term
-  $mod+t exec $float_term
+  $mod+t exec $term
+  $mod+z exec $float_term
+  $mod+Return exec kitten quick-access-terminal
   $mod+w exec $browser
   $mod+e exec $editor
   $mod+f exec $filemanager
