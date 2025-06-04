@@ -178,11 +178,12 @@ Use ~getenv~ check the environment variables.
   ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
   ;;   (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
   (set-frame-font (font-spec :family "Maple Mono" :size 12))
-  (dolist (script '(han cjk-misc bopomofo))
-    (set-fontset-font
-     (frame-parameter nil 'font)
-     script
-     (font-spec :name "Noto Sans CJK SC"))))
+  (when (display-graphic-p)
+    (dolist (script '(han cjk-misc bopomofo))
+      (set-fontset-font
+       (frame-parameter nil 'font)
+       script
+       (font-spec :name "Noto Sans CJK SC")))))
 ;; 中英文字体缩放不一致：https://emacs-china.org/t/face-charset-size/16916
 #+end_src
 
