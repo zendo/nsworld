@@ -60,7 +60,7 @@
         '';
       };
 
-      kitten-quick-terminal-desktop = prev.pkgs.makeDesktopItem {
+      kitten-quick-terminal = prev.pkgs.makeDesktopItem {
         name = "kitten-quick-terminal";
         desktopName = "kitten quick terminal";
         exec = "kitten quick-access-terminal";

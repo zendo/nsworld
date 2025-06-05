@@ -1,11 +1,11 @@
 { pkgs, ... }:
 let
-  # nurl https://github.com/yokoffing/Betterfox 133.0
+  # nurl https://github.com/yokoffing/Betterfox 138.0
   betterfox = pkgs.fetchFromGitHub {
     owner = "yokoffing";
     repo = "Betterfox";
-    rev = "137.0";
-    hash = "sha256-oK8nP7mZ8Q6TNgCY/E7D5E28e7qaBHfE4tbdus7vusU=";
+    rev = "138.0";
+    hash = "sha256-ci9g4Igy2dc7cDtPy+l6NaaEz8YsD0BSixFaYWYOKTs=";
   };
 in
 {

@@ -12,7 +12,7 @@
 
     foot
     kitty
-    kitten-quick-terminal-desktop
+    kitten-quick-terminal
     nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
     inputs.self.formatter.${system} # persistent cache
