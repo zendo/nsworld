@@ -1086,6 +1086,12 @@ expand region alternative
   ("C-S-<return>" . crux-smart-open-line-above))
 #+end_src
 
+** deadgrep
+#+begin_src emacs-lisp
+(use-package deadgrep
+  :bind ("C-c C-s" . deadgrep))
+#+end_src
+
 ** anzu
 #+begin_src emacs-lispxx
 (use-package anzu
@@ -2505,12 +2511,6 @@ Show current command and its binding.
 #+begin_src emacs-lisp
 (use-package keycast
   :defer t)
-#+end_src
-
-** deadgrep
-#+begin_src emacs-lisp
-(use-package deadgrep
-  :bind ("C-c C-s" . deadgrep))
 #+end_src
 
 * Footer
