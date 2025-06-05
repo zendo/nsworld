@@ -17,7 +17,6 @@
     blueman.enable = true;
     geoclue2.enable = true;
 
-    # https://github.com/apognu/tuigreet/issues/145
     greetd = {
       enable = true;
       settings = {
@@ -137,7 +136,6 @@
           #   enable = true;
           # };
 
-          # https://wiki.archlinux.org/title/Kanshi
           kanshi = {
             enable = true;
           };
