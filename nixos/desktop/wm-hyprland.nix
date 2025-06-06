@@ -10,8 +10,6 @@
 
   programs.hyprlock.enable = true;
 
-  services.hypridle.enable = true;
-
   environment.systemPackages = with pkgs; [
     # hyprpaper # wallpaper
     hyprpicker

@@ -133,7 +133,7 @@
           swaync.enable = true; # notification center
 
           # wdisplays set the right outputs
-          # micro .config/shikane/config.toml
+          # install -Dm644 /dev/null ~/.config/shikane/config.toml
           # shikane
           # shikanectl export "host"
           shikane = {
