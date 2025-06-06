@@ -25,6 +25,7 @@
       # alegreya
       lexend # improve reading fluency
       nerd-fonts.symbols-only
+      fast-font
     ];
 
     fontconfig = {
