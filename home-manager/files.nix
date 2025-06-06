@@ -20,6 +20,7 @@ in
     "mpv".source = linkFlake "dotfiles/mpv";
     "mako".source = linkFlake "dotfiles/mako";
     "helix".source = linkFlake "dotfiles/helix";
+    "ironbar".source = linkFlake "dotfiles/ironbar";
     "waybar".source = linkFlake "dotfiles/waybar";
     "fuzzel".source = linkFlake "dotfiles/fuzzel";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
@@ -28,6 +29,7 @@ in
     "niri".source = linkFlake "dotfiles/niri";
     "sway/config".source = linkFlake "dotfiles/sway/config";
     "hypr/hyprland.conf".source = linkFlake "dotfiles/hypr/hyprland.conf";
+    "hypr/hypridle.conf".source = linkFlake "dotfiles/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
 
     "doom/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
