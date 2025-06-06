@@ -99,6 +99,7 @@
           brightnessctl # same like light
           wl-gammactl
           wdisplays
+          shikane
           wlr-randr
           wlsunset
 
@@ -131,12 +132,11 @@
           # playerctld.enable = true;
           swaync.enable = true; # notification center
 
-          # kanshi alternative
-          # way-displays = {
-          #   enable = true;
-          # };
-
-          kanshi = {
+          # wdisplays set the right outputs
+          # micro .config/shikane/config.toml
+          # shikane
+          # shikanectl export "host"
+          shikane = {
             enable = true;
           };
 

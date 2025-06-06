@@ -13,7 +13,7 @@ in
     "cava".source = ../dotfiles/cava;
     "foot".source = ../dotfiles/foot;
     "kitty".source = ../dotfiles/kitty;
-    "kanshi".source = ../dotfiles/kanshi;
+    "shikane".source = ../dotfiles/shikane;
     "swaylock".source = ../dotfiles/swaylock;
     "alacritty".source = ../dotfiles/alacritty;
 
@@ -29,6 +29,7 @@ in
     "sway/config".source = linkFlake "dotfiles/sway/config";
     "hypr/hyprland.conf".source = linkFlake "dotfiles/hypr/hyprland.conf";
     "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
+    "hyor/hypridle.conf".source = linkFlake "dotfiles/hypr/hypridle.conf";
 
     "doom/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
     "emacs/all-emacs.org".source = linkFlake "dotfiles/org/all-emacs.org";
