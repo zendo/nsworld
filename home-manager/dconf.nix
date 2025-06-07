@@ -120,7 +120,7 @@
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Super>t";
+      binding = "<Super>Return";
       command = "kitty";
       name = "open-terminal";
     };
