@@ -12,7 +12,7 @@
 
     foot
     kitty
-    kitten-quick-terminal
+    kitten-quick-terminal # .desktop
     nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
     inputs.self.formatter.${system} # persistent cache
@@ -36,10 +36,6 @@
 
     # Multimedia
     spotify
-    # muzika
-    # vlc
-    # ffmpeg
-    kooha
     # qmmp
     # fooyin
     # (deadbeef-with-plugins.override {
@@ -50,16 +46,15 @@
     # rhythmbox
     goodvibes
     go-musicfox
-    # qcm
-    # netease-cloud-music-gtk
     # mousai
     songrec
-    # yt-dlp
+    kooha
     # jamesdsp
+    # yt-dlp
+    # vlc
+    # ffmpeg
     # ciano
     # video-trimmer
-    # spotiflyer
-    # downonspot
 
     # Image manipulation
     # shutter
@@ -68,22 +63,18 @@
     contrast
     # font-manager # (webkitgtk)
     # gcolor3
-    # wl-color-picker
+    satty # annotation
 
-    # warp
     # remmina # (webkitgtk)
     # gnome-decoder
     # https://github.com/nix-community/home-manager/issues/5173
     (lib.hiPrio localsend)
-    # motrix
     qbittorrent
     # deja-dup
     # rclone
     # rclone-browser
     # vorta
     # qalculate-gtk # scientific calculator
-    # poedit    # translate .po file
-    handlr # mime
 
     # OFFICE
     # libreoffice-fresh
@@ -91,7 +82,6 @@
     # rnote # handwritten note
     foliate # (webkitgtk)
     # koodo-reader
-    notes
     # planify
     # ghostwriter # (qtwebengine)
     meld
@@ -117,14 +107,9 @@
     edid-decode
     read-edid
     xorg.xeyes
-    # squirreldisk
-
     # libinput
-    # wallutils # lsmon getdpi wayinfo
-    wayland-utils
-    # wdisplays # wlr
     wl-clipboard
-    satty
+    # squirreldisk
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
   ];

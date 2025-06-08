@@ -14,6 +14,8 @@
       background-opacity = "0.9";
       window-height = "28";
       window-width = "90";
+      window-padding-x = "8";
+      window-padding-y = "4";
       cursor-style = "block";
       # copy-on-select = "clipboard";
       keybind = [
