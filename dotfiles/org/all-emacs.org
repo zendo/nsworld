@@ -1946,6 +1946,12 @@ https://github.com/svaante/dape
   :mode ("\\.toml'"))
 #+end_src
 
+** kdl
+#+begin_src emacs-lisp
+(use-package kdl-mode
+  :mode ("\\.kdl'"))
+#+end_src
+
 ** lua
 #+begin_src emacs-lisp
 (use-package lua-mode

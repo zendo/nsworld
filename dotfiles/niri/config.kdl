@@ -1,23 +1,10 @@
 // https://github.com/YaLTeR/niri/blob/main/resources/default-config.kdl
 
-hotkey-overlay {
-    skip-at-startup
-}
-
-input {
-    keyboard {
-        xkb {
-            options "ctrl:swapcaps"
-        }
-    }
-    touchpad {
-        tap
-        natural-scroll
-    }
-}
+prefer-no-csd
 
 layout {
-    gaps 5
+    gaps 6
+    background-color "transparent"
     // center-focused-column "on-overflow"
 
     // You can change the default width of the new windows.
@@ -69,6 +56,10 @@ binds {
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
 
+    Mod+MouseMiddle     { maximize-column; }
+    Mod+WheelScrollUp   { focus-window-up-or-column-left; }
+    Mod+WheelScrollDown { focus-window-down-or-column-right; }
+
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -89,6 +80,8 @@ binds {
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
+    Mod+Shift+T { toggle-column-tabbed-display; }
     Mod+R { switch-preset-column-width; }
     // Mod+F { maximize-column; }
     Mod+C { center-column; }
@@ -114,3 +107,46 @@ binds {
     XF86MonBrightnessDown { spawn "lightctl" "down"; }
 }
 
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    keyboard {
+        xkb {
+            options "ctrl:swapcaps"
+        }
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+// window-rule {
+//     geometry-corner-radius 8
+//     clip-to-geometry true
+// }
+
+layer-rule {
+    match namespace="^wallpaper$"
+    match namespace="wpaperd"
+    place-within-backdrop true
+}
+
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+
+    open-floating true
+    default-floating-position x=32 y=32 relative-to="bottom-left"
+}
+
+window-rule {
+    match app-id="org.gnome.Loupe"
+    open-floating true
+}
+
+window-rule {
+    match app-id="mpv"
+    open-floating true
+}
