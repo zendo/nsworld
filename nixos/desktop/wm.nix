@@ -73,7 +73,6 @@
           waypaper
           swaylock-effects
           hyprlock
-          # mako  # , notify-send "sth"
           libnotify # notify-send
           swayidle
           wlogout

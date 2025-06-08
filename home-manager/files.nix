@@ -18,7 +18,6 @@ in
     "alacritty".source = ../dotfiles/alacritty;
 
     "mpv".source = linkFlake "dotfiles/mpv";
-    "mako".source = linkFlake "dotfiles/mako";
     "helix".source = linkFlake "dotfiles/helix";
     "ironbar".source = linkFlake "dotfiles/ironbar";
     "waybar".source = linkFlake "dotfiles/waybar";
