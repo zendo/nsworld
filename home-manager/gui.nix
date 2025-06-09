@@ -18,6 +18,7 @@
     inputs.self.formatter.${system} # persistent cache
 
     tdesktop # (webkitgtk)
+    # vesktop # discord
     # nheko
     # fluffychat
     # gui-for-singbox

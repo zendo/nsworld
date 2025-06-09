@@ -30,7 +30,7 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
-spawn-at-startup "sh" "-c" "swayidle -w timeout 200 'brightnessctl -s s 10%' resume 'brightnessctl -r' timeout 300 'swaylock -f' timeout 360 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors && brightnessctl -r' before-sleep 'playerctl pause' before-sleep 'swaylock -f'"
+// spawn-at-startup "sh" "-c" "swayidle -w timeout 200 'brightnessctl -s s 10%' resume 'brightnessctl -r' timeout 300 'swaylock -f' timeout 360 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors && brightnessctl -r' before-sleep 'playerctl pause' before-sleep 'swaylock -f'"
 
 binds {
     Mod+Return { spawn "kitty"; }
@@ -83,9 +83,9 @@ binds {
     Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
     Mod+Shift+T { toggle-column-tabbed-display; }
     Mod+R { switch-preset-column-width; }
-    // Mod+F { maximize-column; }
+    Mod+Z { toggle-window-floating; }
     Mod+C { center-column; }
-    Mod+Z { toggle-column-tabbed-display; }
+    Mod+Tab { switch-focus-between-floating-and-tiling; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -136,17 +136,21 @@ layer-rule {
 
 window-rule {
     match app-id="firefox$" title="^Picture-in-Picture$"
-
     open-floating true
     default-floating-position x=32 y=32 relative-to="bottom-left"
 }
 
 window-rule {
     match app-id="org.gnome.Loupe"
+    match app-id="mpv"
     open-floating true
 }
 
 window-rule {
-    match app-id="mpv"
-    open-floating true
+    match app-id="goodvibes"
+    max-width 300
+    // min-height 400
+    max-height 400
+    // default-column-width { fixed 300; }
+    default-window-height { fixed 400; }
 }

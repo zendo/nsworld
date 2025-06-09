@@ -9,6 +9,8 @@
 
   security = {
     soteria.enable = true; # Polkit agent
+    pam.services.swaylock = { };
+    pam.services.hyprlock = { };
   };
 
   services = {
@@ -16,6 +18,7 @@
     upower.enable = true;
     blueman.enable = true;
     geoclue2.enable = true;
+    hypridle.enable = true;
 
     greetd = {
       enable = true;
@@ -119,6 +122,7 @@
           xfce.mousepad
           nomacs
           loupe
+          hyprpicker
           # gnome.gnome-power-manager
           # gnome.gnome-characters
           # gthumb
