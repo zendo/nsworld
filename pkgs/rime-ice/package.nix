@@ -6,19 +6,19 @@
 
 stdenvNoCC.mkDerivation {
   pname = "rime-ice";
-  version = "2025.04.06-unstable-2025-05-25";
+  version = "2025.04.06-unstable-2025-06-09";
 
   src = fetchFromGitHub {
     owner = "iDvel";
     repo = "rime-ice";
-    rev = "904aedb7c2097309e4f5a9be29baf6ce5cc64415";
-    hash = "sha256-a0b6k0dOwrdxCf+ZcX/fiF4K1LLGuEw5eBriRFkY2AI=";
+    rev = "5b94b7df626bffedc3fe05ee71511aa0272bfc36";
+    hash = "sha256-RK5togo9YEQVSUL1bpkcsHmzK1V8IMe0adFB1T2hVoI=";
   };
 
   installPhase = ''
     mkdir -p $out/share/rime-data
     rm -r ./others
-    mv default.yaml rime_ice_suggestion.yaml
+    cp default.yaml rime_ice_suggestion.yaml
     cp -r ./* $out/share/rime-data
   '';
 
