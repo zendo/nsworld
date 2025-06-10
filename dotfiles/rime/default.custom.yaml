@@ -1,4 +1,6 @@
 patch:
+  __include: rime_ice_suggestion.yaml:/
+
   # 方案列表
   schema_list:
     # - schema: "rime_frost"

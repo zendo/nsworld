@@ -18,6 +18,7 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/share/rime-data
     rm -r ./others
+    mv default.yaml rime_ice_suggestion.yaml
     cp -r ./* $out/share/rime-data
   '';
 

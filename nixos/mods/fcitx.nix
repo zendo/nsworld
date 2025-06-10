@@ -28,6 +28,7 @@ in
         fcitx5-mellow-themes
         (fcitx5-rime.override {
           rimeDataPkgs = [
+            pkgs.rime-data
             pkgs.rime-ice
           ];
         })
