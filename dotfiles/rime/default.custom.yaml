@@ -1,5 +1,5 @@
 patch:
-  __include: rime_ice_suggestion.yaml:/
+  __include: rime_ice_suggestion:/
 
   # 方案列表
   schema_list:
