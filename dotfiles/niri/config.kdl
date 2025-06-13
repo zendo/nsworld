@@ -39,9 +39,10 @@ binds {
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }
-    Mod+L { spawn "swaylock" "-f"; }
+    Mod+L { spawn "hyprlock"; }
     Mod+X { spawn "fuzzel"; }
     Mod+Period { spawn "bemoji"; }
+    Mod+Escape { spawn "wlogout"; }
     Mod+V { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }

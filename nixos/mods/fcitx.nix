@@ -29,6 +29,14 @@ in
         (fcitx5-rime.override {
           rimeDataPkgs = [
             pkgs.rime-ice
+            (pkgs.symlinkJoin {
+              name = "empty-default-yaml";
+              paths = [ pkgs.emptyDirectory ];
+              postBuild = ''
+                mkdir -p $out/share/rime-data
+                touch $out/share/rime-data/default.yaml
+              '';
+            })
           ];
         })
       ];
