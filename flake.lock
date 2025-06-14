@@ -150,11 +150,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1749808356,
-        "narHash": "sha256-VQ2HFRVz0VxjYYFtdRTlAq/PuOT+j876YTWubk0WLJM=",
+        "lastModified": 1749832440,
+        "narHash": "sha256-lfxhuxAaHlYFGr8yOrAXZqdMt8PrFLzjVqH9v3lQaoY=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "b328aa7871068d9f98b656d8f6829b39a541a114",
+        "rev": "db030f62a449568345372bd62ed8c5be4824fa49",
         "type": "github"
       },
       "original": {
@@ -186,11 +186,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1749819456,
-        "narHash": "sha256-WPilOO6Qm0m2Vw2FvknecDHfE/oxHIeoZgSftRZ5atw=",
-        "rev": "ec4c48ddcd5718cc1312f432b800fbbfe63ee2fe",
+        "lastModified": 1749900883,
+        "narHash": "sha256-muYQRU7Lu+bbiv4yKECbKk7kvhbFIbyyxQhnK7E5Rrw=",
+        "rev": "ba48a1f6ce571455cb631dee840c6cd401ea4adb",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-25.11pre814387.ec4c48ddcd57/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-25.11pre814779.ba48a1f6ce57/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
