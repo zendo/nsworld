@@ -50,7 +50,7 @@
             }
             // {
               # nix run .
-              default = config.packages.azcomicv;
+              default = config.packages.anich;
             };
 
           # nix develop .#rust
