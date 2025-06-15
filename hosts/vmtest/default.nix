@@ -52,7 +52,6 @@
         # mate.enable = true;
         # lxqt.enable = true;
       };
-      xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
     displayManager.autoLogin.user = "${username}";
   };

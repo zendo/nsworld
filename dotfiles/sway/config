@@ -19,7 +19,7 @@ set {
 input "*" {
   # xkb_layout "us,cn"
   # xkb_variant "colemak,,typewriter"
-  xkb_options "ctrl:swapcaps"
+  # xkb_options "ctrl:swapcaps"
   # repeat_rate 30
   # repeat_delay 300
 }

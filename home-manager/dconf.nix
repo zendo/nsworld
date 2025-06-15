@@ -84,12 +84,12 @@
       click-method = "areas";
     };
 
-    "org/gnome/desktop/input-sources" = {
-      xkb-options = [
-        "terminate:ctrl_alt_bksp"
-        "ctrl:swapcaps"
-      ];
-    };
+    # "org/gnome/desktop/input-sources" = {
+    #   xkb-options = [
+    #     "terminate:ctrl_alt_bksp"
+    #     "ctrl:swapcaps"
+    #   ];
+    # };
 
     "org/gnome/desktop/wm/keybindings" = {
       activate-window-menu = [ ];

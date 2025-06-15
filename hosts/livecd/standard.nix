@@ -38,7 +38,7 @@
   services = {
     displayManager.autoLogin.user = "${username}";
     xserver = {
-      xkb.options = "ctrl:swapcaps"; # Xorg Layout
+      # xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
   };
 

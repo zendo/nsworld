@@ -116,7 +116,7 @@ hotkey-overlay {
 input {
     keyboard {
         xkb {
-            options "ctrl:swapcaps"
+            // options "ctrl:swapcaps"
         }
     }
     touchpad {

@@ -217,7 +217,7 @@
         "Layout"."ResetOldOptions" = true;
         "Layout"."SwitchMode" = "Global";
         "Layout"."LayoutList" = "cn";
-        "Layout"."Options" = "ctrl:swapcaps";
+        # "Layout"."Options" = "ctrl:swapcaps";
       };
     }; # configFile end here.
 
