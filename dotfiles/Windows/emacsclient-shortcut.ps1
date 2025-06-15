@@ -20,9 +20,10 @@ Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\emacsclientw.exe"
 
 # 创建启动项快捷方式
 # Win+r shell:startup
+$startupFolder = [Environment]::GetFolderPath('Startup')
 Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\runemacs.exe" `
                 -ArgumentsToSourceExe "--daemon" `
-                -DestinationPath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\emacs-daemon.lnk"
+                -DestinationPath "$startupFolder\emacs-daemon.lnk"
 
 # or VBScript
 # $Startup = 'Set objShell = WScript.CreateObject("WScript.Shell")
