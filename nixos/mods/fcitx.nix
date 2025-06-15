@@ -29,6 +29,7 @@ in
         (fcitx5-rime.override {
           rimeDataPkgs = [
             pkgs.rime-ice
+            # https://github.com/NixOS/nixpkgs/pull/416105
             (pkgs.symlinkJoin {
               name = "empty-default-yaml";
               paths = [ pkgs.emptyDirectory ];

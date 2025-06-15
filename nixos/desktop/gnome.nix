@@ -68,11 +68,6 @@
       dconf-editor
       gnome-power-manager
       gnome-sound-recorder
-      # gnome.pomodoro
-      # gnome.gnome-boxes
-      # gnome-network-displays
-      # gnome-builder
-      # gnome-firmware-updater
     ]
     ++ (with gnomeExtensions; [
       app-hider
@@ -80,11 +75,9 @@
       app-icons-taskbar
       # rocketbar
       dash-to-dock
-      # dash2dock-lite
       # dash-to-panel
       night-theme-switcher
       clipboard-history
-      # clipboard-indicator
       # blur-my-shell
       top-bar-organizer
       compiz-windows-effect
