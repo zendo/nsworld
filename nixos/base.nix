@@ -8,8 +8,6 @@
   # zramSwap.enable = lib.mkDefault true;
 
   boot = {
-    plymouth.enable = true;
-
     tmp = {
       useTmpfs = lib.mkDefault true;
       cleanOnBoot = lib.mkDefault true;
@@ -19,18 +17,6 @@
       enable = lib.mkDefault true;
     };
 
-    # Silent Boot
-    consoleLogLevel = 0;
-    initrd.verbose = false;
-    kernelParams = lib.optionals config.boot.plymouth.enable [
-      "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
-    ];
   };
 
   services = {
@@ -62,7 +48,6 @@
     parted
     gptfdisk
     micro
-    sniffglue
     sbctl
     efibootmgr
     # efitools

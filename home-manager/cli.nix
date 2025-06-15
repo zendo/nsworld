@@ -99,6 +99,7 @@
     # nali
     mtr
     nload
+    sniffglue
     # ipinfo # 62M
     elinks
     dnspeep
