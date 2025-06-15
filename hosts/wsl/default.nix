@@ -75,8 +75,6 @@
   system.stateVersion = "25.05";
   documentation.enable = false;
   nixpkgs.hostPlatform = "x86_64-linux";
-  # nixos-rebuild-ng: Python-based re-implementation
-  system.rebuild.enableNg = true;
 
   ###############################################
   ##  WSL Settings

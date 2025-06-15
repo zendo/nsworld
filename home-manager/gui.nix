@@ -81,6 +81,7 @@
     # drawio
     # rnote # handwritten note
     foliate # (webkitgtk)
+    readest
     # koodo-reader
     # planify
     # ghostwriter # (qtwebengine)
