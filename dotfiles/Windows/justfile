@@ -13,6 +13,9 @@ emacs-mklink:
 emacsclient-shortcut-startup:
     .\emacsclient-shortcut.ps1
 
+kanata-shortcut-startup:
+    .\kanata-shortcut.ps1
+
 emacs-ob-tangle:
     emacs -Q --batch \
     -l org \
