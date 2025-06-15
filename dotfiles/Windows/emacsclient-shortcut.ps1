@@ -37,3 +37,5 @@ Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\runemacs.exe" `
 # Win+r shell:User Pinned\Taskbar
 
 Write-Output "Shortcuts is created successfully."
+
+Start-Process -FilePath $startupFolder

@@ -1,26 +1,17 @@
-function Create-Shortcut {
-    param (
-        [string]$SourceExe,
-        [string]$ArgumentsToSourceExe,
-        [string]$DestinationPath
-    )
-    $WshShell = New-Object -COMObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($DestinationPath)
-    $Shortcut.TargetPath = $SourceExe
-    $Shortcut.Arguments = $ArgumentsToSourceExe
-    $Shortcut.Save()
-}
-
-# 创建桌面快捷方式
-Create-Shortcut -SourceExe "kanata_gui.exe" `
-                -ArgumentsToSourceExe "-c $Home\nsworld\dotfiles\kanata\minimal.kbd" `
-                -DestinationPath "$Home\Desktop\Kanata Gui.lnk"
-
-# 创建启动项快捷方式
-# Win+r shell:startup
+# Environment Variables
 $startupFolder = [Environment]::GetFolderPath('Startup')
-Create-Shortcut -SourceExe "kanata_gui.exe" `
-                -ArgumentsToSourceExe "-c $Home\nsworld\dotfiles\kanata\minimal.kbd" `
-                -DestinationPath "$startupFolder\kanata-daemon.lnk"
 
-Write-Output "Shortcuts is created successfully."
+# Create WScript Shell Object
+$WScriptShell = New-Object -ComObject WScript.Shell
+
+# Create the shortcut
+$Shortcut = $WScriptShell.CreateShortcut("$startupFolder\kanata-daemon.lnk")
+$Shortcut.Description = "Kanata GUI"
+$Shortcut.TargetPath = "kanata_gui.exe"
+$Shortcut.Arguments = "-c minimal.kbd"
+$Shortcut.WorkingDirectory = "$Home\nsworld\dotfiles\kanata"
+$Shortcut.Save()
+
+Write-Output "Installation complete! Kanata GUI will start automatically with Windows."
+
+Start-Process -FilePath $startupFolder
