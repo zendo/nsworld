@@ -3,7 +3,7 @@
 }:
 {
   services = {
-    # keyd: https://github.com/rvaiya/keyd
+    # https://github.com/rvaiya/keyd
     keyd = {
       enable = true;
       keyboards = {
@@ -18,7 +18,7 @@
       };
     };
 
-    # kanata: https://github.com/jtroo/kanata
+    # https://github.com/jtroo/kanata
     kanata = {
       # enable = true;
       keyboards = {
