@@ -1,5 +1,4 @@
 { lib, ... }:
-
 {
   /*
     Recursively merge a list of attrsets into a single attrset.
