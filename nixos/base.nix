@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }:
 {
@@ -31,7 +32,11 @@
 
   programs = {
     zsh.enable = true;
-    command-not-found.enable = false;
+
+    command-not-found = {
+      enable = true;
+      dbPath = inputs.nixpkgs + "/programs.sqlite";
+    };
 
     gnupg.agent = {
       enable = true;

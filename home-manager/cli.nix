@@ -210,7 +210,7 @@
     };
 
     nix-index = {
-      enable = true;
+      # enable = true;
     };
 
     nix-your-shell = {

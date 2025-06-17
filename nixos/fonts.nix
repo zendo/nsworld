@@ -7,6 +7,7 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      adwaita-fonts
       # sarasa-gothic
       # lxgw-wenkai
       # No-Ligature, Nerd-Font, Unhinted for HiDPI
