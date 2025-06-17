@@ -23,7 +23,7 @@
       # jack.enable = true;
     };
 
-    # Make `xdg-open` works inside FHS envs
+    # Fix xdg-open in FHS sandbox
     xdg.portal.xdgOpenUsePortal = true;
 
     # Plymouth

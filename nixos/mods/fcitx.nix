@@ -15,7 +15,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # fix svg theme not showing
+    # fix svg theme
     programs.gdk-pixbuf.modulePackages = lib.mkDefault [ pkgs.librsvg ];
 
     i18n.inputMethod = {
@@ -29,15 +29,6 @@ in
         (fcitx5-rime.override {
           rimeDataPkgs = [
             pkgs.rime-ice
-            # https://github.com/NixOS/nixpkgs/pull/416105
-            (pkgs.symlinkJoin {
-              name = "empty-default-yaml";
-              paths = [ pkgs.emptyDirectory ];
-              postBuild = ''
-                mkdir -p $out/share/rime-data
-                touch $out/share/rime-data/default.yaml
-              '';
-            })
           ];
         })
       ];

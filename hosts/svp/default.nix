@@ -14,12 +14,12 @@
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
 
-    # self.nixosModules.gnome
+    self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
-    self.nixosModules.sway
-    self.nixosModules.niri
-    self.nixosModules.hyprland
+    # self.nixosModules.sway
+    # self.nixosModules.niri
+    # self.nixosModules.hyprland
   ];
 
   mods = {
