@@ -1,6 +1,6 @@
 /*
   # update an unstable package to the latest commit of the default branch
-  nix-update --flake --version=branch rime-ice
+  nix-update --flake --version=branch
 
   nix build --impure --expr 'with (import <nixpkgs>{}); soxr.overrideAttrs(oldAttrs: {outputs = [ "out" ];})'
 */

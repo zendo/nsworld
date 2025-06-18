@@ -78,7 +78,7 @@
             }
           ];
           icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "nix" ];
+          definedAliases = [ "np" ];
         };
         "Home Manager Options" = {
           urls = [
