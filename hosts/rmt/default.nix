@@ -66,7 +66,12 @@
     loader = {
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/efi"; # default /boot
-      systemd-boot.enable = true;
+      # systemd-boot.enable = true;
+      limine = {
+        enable = true;
+        style.wallpapers = [ ];
+        style.interface.branding = " ";
+      };
     };
   };
 

@@ -53,26 +53,7 @@
   ###############################################
   boot.loader = {
     efi.efiSysMountPoint = "/efi"; # default /boot
-    systemd-boot.enable = true;
-    grub = {
-      # enable = true;
-      device = "nodev";
-      efiSupport = true;
-      # Because this machine's efivars can't touch
-      # It just move grubx64.efi -> Boot/bootx64.efi
-      efiInstallAsRemovable = true;
-      extraEntries = ''
-          menuentry "Windows" {
-           search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-           chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
-          }
-
-        #   menuentry "Arch Linux" {
-        #    search --file --no-floppy --set=root /EFI/arch/grubx64.efi
-        #    chainloader (''${root})/EFI/arch/grubx64.efi
-        #   }
-      '';
-    };
+    limine.enable = true;
   };
 
   # Swapfile (bcachefs not support)

@@ -1,3 +1,11 @@
+/*
+  nixos/refind: init module #414394:
+  https://github.com/NixOS/nixpkgs/pull/414394
+
+  nixos/lemurs: init #329496:
+  https://github.com/NixOS/nixpkgs/pull/329496
+*/
+
 {
   inputs,
   self,
@@ -121,8 +129,11 @@
       canTouchEfiVariables = true;
       efiSysMountPoint = "/efi"; # default /boot
     };
+    ################
+    ## Systemd-boot
+    ################
     systemd-boot = {
-      enable = true;
+      # enable = true;
       configurationLimit = 5; # bootmenu items
       consoleMode = "max";
       windows = {
@@ -136,6 +147,34 @@
         };
       };
     };
+    ################
+    ## Limine
+    ################
+    # https://wiki.archlinux.org/title/Limine
+    # https://github.com/limine-bootloader/limine/blob/trunk/CONFIG.md
+    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/system/boot/loader/limine/limine.nix
+    limine = {
+      enable = true;
+      maxGenerations = 8;
+      style.interface.branding = " ";
+      # style.interface.helpHidden = true; # FIXME
+      style.wallpapers = [
+        # pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath
+        # pkgs.nixos-artwork.wallpapers.gnome-dark.gnomeFilePath
+        # pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath
+      ];
+      extraConfig = ''
+        interface_help_hidden: yes
+      '';
+      extraEntries = ''
+        /Windows
+            protocol: efi
+            path: boot(1):/EFI/Microsoft/Boot/bootmgfw.efi
+      '';
+    };
+    ################
+    ## GRUB2
+    ################
     grub = {
       # enable = true;
       device = "nodev";
