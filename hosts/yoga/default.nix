@@ -22,8 +22,8 @@
     # inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nixos-hardware.nixosModules.common-gpu-amd
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri
@@ -156,6 +156,7 @@
     limine = {
       enable = true;
       maxGenerations = 8;
+      secureBoot.enable = true;
       style.interface.branding = " ";
       # style.interface.helpHidden = true; # FIXME
       style.wallpapers = [

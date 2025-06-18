@@ -11,7 +11,7 @@ stdenvNoCC.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
-    sha256 = "sha256-Vy3fi0tnCk2PDpsTjO7xQm8eCUramRcE+p5Rz6+2zHU=";
+    sha256 = "sha256-OGeXTRAS+v8uD5Ef8UI8YiePia73uVcT9zvIHEvgp5c=";
   };
 
   js = fetchurl {

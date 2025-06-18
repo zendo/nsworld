@@ -19,6 +19,7 @@
           "google-chrome"
           "steam-unwrapped"
           "balatro"
+          "memtest86-efi"
           "android-sdk-cmdline-tools"
         ];
     };

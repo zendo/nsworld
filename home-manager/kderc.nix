@@ -226,7 +226,7 @@
       "emacs.desktop"."_launch" = "Meta+E";
       "firefox.desktop"."_launch" = "Meta+W";
       "kitty.desktop"."_launch" = "Meta+Return";
-      "kitten-quick-terminal.desktop"."_launch" = "Meta+Comma";
+      "kitten-quick-terminal.desktop"."_launch" = "Meta+/";
 
       "org.kde.dolphin.desktop"."_launch" = "Meta+F";
       "org.kde.plasma.emojier.desktop"."_launch" = "Meta+.";

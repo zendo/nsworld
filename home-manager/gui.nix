@@ -87,7 +87,7 @@
     # ghostwriter # (qtwebengine)
     meld
     # textpieces
-    devtoolbox
+    # devtoolbox
 
     # HARDWARE TEST
     # amdgpu_top
