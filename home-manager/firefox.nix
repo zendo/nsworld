@@ -1,13 +1,4 @@
 { pkgs, ... }:
-let
-  # nurl https://github.com/yokoffing/Betterfox 138.0
-  betterfox = pkgs.fetchFromGitHub {
-    owner = "yokoffing";
-    repo = "Betterfox";
-    rev = "138.0";
-    hash = "sha256-ci9g4Igy2dc7cDtPy+l6NaaEz8YsD0BSixFaYWYOKTs=";
-  };
-in
 {
   programs.firefox = {
     enable = true;
@@ -15,7 +6,7 @@ in
     languagePacks = [ "zh-CN" ];
     profiles.default = {
       extraConfig = ''
-        ${builtins.readFile "${betterfox}/user.js"}
+        ${builtins.readFile "${pkgs.betterfox}/user.js"}
 
         // PREF: restore Top Sites on New Tab page
         user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);

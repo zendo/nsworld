@@ -68,7 +68,6 @@
 
   programs = {
     zsh.enable = true;
-    command-not-found.enable = false;
   };
 
   time.timeZone = "Asia/Shanghai";

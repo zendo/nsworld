@@ -29,6 +29,14 @@
     modifications = final: prev: {
       # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
 
+      # nurl https://github.com/yokoffing/Betterfox 138.0
+      betterfox = prev.pkgs.fetchFromGitHub {
+        owner = "yokoffing";
+        repo = "Betterfox";
+        rev = "138.0";
+        hash = "sha256-ci9g4Igy2dc7cDtPy+l6NaaEz8YsD0BSixFaYWYOKTs=";
+      };
+
       # FIXME: https://github.com/NixOS/nixpkgs/issues/332812
       plymouth = prev.plymouth.overrideAttrs (
         { src, ... }:
