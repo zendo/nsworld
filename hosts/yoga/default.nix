@@ -107,14 +107,16 @@
     }
   ];
 
+  # zramSwap.enable = lib.mkDefault true;
+
   ###############################################
   ## Bootloader
   ###############################################
   /*
-    disable Secure-Boot and reset to Setup-Mode
+    Disable "Secure Boot" and reset to “Setup Mode”
     sudo -i
     sbctl create-keys
-    sbctl enroll-keys --microsoft
+    sbctl enroll-keys -m -f
   */
   # boot.lanzaboote = {
   #   enable = true;

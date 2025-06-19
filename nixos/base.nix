@@ -6,25 +6,21 @@
   ...
 }:
 {
-  # zramSwap.enable = lib.mkDefault true;
-
   boot = {
-    tmp = {
-      useTmpfs = lib.mkDefault true;
-      cleanOnBoot = lib.mkDefault true;
-    };
-
     initrd.systemd = {
       enable = lib.mkDefault true;
     };
 
+    tmp = {
+      useTmpfs = lib.mkDefault true;
+      cleanOnBoot = lib.mkDefault true;
+    };
   };
 
   services = {
     acpid.enable = true;
     # fwupd.enable = true;
     btrfs.autoScrub.enable = config.fileSystems."/".fsType == "btrfs";
-
     journald.extraConfig = ''
       SystemMaxUse=50M
     '';
