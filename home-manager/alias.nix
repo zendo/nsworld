@@ -47,6 +47,5 @@
     nse = "nix search nixpkgs";
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
     nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
-    nix-build-pr = ''f() { nix build github:NixOS/nixpkgs/pull/$1/merge#$2 }; f'';
   };
 }
