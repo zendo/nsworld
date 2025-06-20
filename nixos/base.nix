@@ -10,7 +10,6 @@
     initrd.systemd = {
       enable = lib.mkDefault true;
     };
-
     tmp = {
       useTmpfs = lib.mkDefault true;
       cleanOnBoot = lib.mkDefault true;
@@ -27,16 +26,13 @@
   };
 
   programs = {
-    zsh.enable = true;
-
-    command-not-found = {
-      enable = true;
-      dbPath = inputs.nixpkgs + "/programs.sqlite";
-    };
-
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+    };
+    command-not-found = {
+      enable = true;
+      dbPath = inputs.nixpkgs + "/programs.sqlite";
     };
   };
 

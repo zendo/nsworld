@@ -11,6 +11,7 @@ in
 {
   home.packages = with pkgs; [
     (google-chrome.override { commandLineArgs = chromeEnv; })
+    # (brave.override { commandLineArgs = chromeEnv; })
     # (vivaldi.override {
     #   proprietaryCodecs = true;
     #   enableWidevine = true; # drm
