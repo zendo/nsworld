@@ -209,6 +209,10 @@
       # };
     };
 
+    pay-respects = {
+      enable = true;
+    };
+
     nix-index = {
       # enable = true;
     };
