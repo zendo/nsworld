@@ -8,13 +8,13 @@ betterfox:
     Get-Content ff-pref.js | Add-Content user.js
 
 emacs-mklink:
-    Start-Process -Verb RunAs Invoke-Item -FilePath ".\emacs_mklink_admin.cmd"
+    Start-Process -Verb RunAs Invoke-Item -FilePath ".\mklink-emacs-admin.cmd"
 
 emacsclient-shortcut-startup:
-    .\emacsclient-shortcut.ps1
+    .\shortcut-emacsclient.ps1
 
 kanata-shortcut-startup:
-    .\kanata-shortcut.ps1
+    .\shortcut-kanata.ps1
 
 emacs-ob-tangle:
     emacs -Q --batch \
