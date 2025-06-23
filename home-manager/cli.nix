@@ -210,7 +210,7 @@
     };
 
     pay-respects = {
-      enable = true;
+      # enable = true;
     };
 
     nix-index = {

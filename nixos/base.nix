@@ -31,7 +31,7 @@
       enableSSHSupport = true;
     };
     command-not-found = {
-      enable = true;
+      # enable = true;
       dbPath = inputs.nixpkgs + "/programs.sqlite";
     };
   };
