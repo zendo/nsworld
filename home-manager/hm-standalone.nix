@@ -29,6 +29,7 @@
             ./alias.nix
             ./files.nix
             ./nvim.nix
+            ./nix-tools.nix
             ./non-nixos.nix
 
             {

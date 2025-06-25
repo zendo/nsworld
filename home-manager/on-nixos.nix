@@ -14,6 +14,7 @@
       ./bash.nix
       ./alias.nix
       ./files.nix
+      ./nix-tools.nix
     ]
     # for desktop environment
     ++ lib.optionals nixosConfig.services.graphical-desktop.enable [

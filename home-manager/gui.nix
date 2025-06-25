@@ -12,9 +12,6 @@
     foot
     kitty
     kitten-quick-terminal # .desktop
-    nix-init
-    inputs.deploy-rs.packages.${system}.deploy-rs
-    inputs.self.formatter.${system} # persistent cache
 
     tdesktop # (webkitgtk)
     # vesktop # discord

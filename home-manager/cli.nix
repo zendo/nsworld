@@ -1,23 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   manual.manpages.enable = false;
 
   home.packages = with pkgs; [
-    # Nix Tools
-    # alejandra
-    nixfmt-rfc-style
-    # lorri
-    # cachix
-    # comma # ,
-    nix-tree
-    nurl
-    nix-update
-    # nix-prefetch
-    # nix-template
-    nix-output-monitor
-    disko
-    nixos-anywhere
-
     # Developing
     yq
     jql
@@ -211,20 +196,6 @@
 
     pay-respects = {
       # enable = true;
-    };
-
-    nix-index = {
-      # enable = true;
-    };
-
-    nix-your-shell = {
-      enable = true;
-    };
-
-    # echo "use flake" >> .envrc && direnv allow
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
     };
 
     starship = {
