@@ -14,7 +14,14 @@
     };
 
     # Bluetooth
-    hardware.bluetooth.enable = true;
+    hardware.bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          JustWorksRepairing = "always";
+        };
+      };
+    };
 
     # Sound
     security.rtkit.enable = config.services.pipewire.enable;
