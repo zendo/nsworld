@@ -63,6 +63,7 @@
     contrast
     # font-manager # (webkitgtk)
     # gcolor3
+    gradia
     satty # annotation
 
     # remmina # (webkitgtk)
