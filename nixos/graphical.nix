@@ -16,12 +16,6 @@
     # Bluetooth
     hardware.bluetooth = {
       enable = true;
-      settings = {
-        General = {
-          # immediately resume from sleep/suspend
-          JustWorksRepairing = "always";
-        };
-      };
     };
 
     # Sound

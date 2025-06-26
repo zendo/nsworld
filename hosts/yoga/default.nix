@@ -65,8 +65,6 @@
   ###############################################
   ## Hardware
   ###############################################
-
-  # fix ax200 bluetooth randomly lose connectivity
   # hardware.enableAllFirmware = true;
   # nixpkgs.config.allowUnfree = true;
 
