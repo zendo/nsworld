@@ -30,9 +30,6 @@
         username = "iab";
         hostname = "yoga";
         extraModules = [
-          self.nixosModules.default
-          self.nixosModules.homeManagerInit
-          self.nixosModules.laptopPowerPlan
           ./yoga
         ];
       };
@@ -43,9 +40,6 @@
         hostname = "svp";
         # nixpkgs = inputs.nixpkgs-stable;
         extraModules = [
-          self.nixosModules.default
-          self.nixosModules.homeManagerInit
-          self.nixosModules.laptopPowerPlan
           ./svp
         ];
       };
@@ -55,8 +49,6 @@
         username = "aaa";
         hostname = "rmt";
         extraModules = [
-          self.nixosModules.default
-          self.nixosModules.homeManagerInit
           ./rmt
         ];
       };
@@ -68,8 +60,6 @@
         username = "test";
         hostname = "vmtest";
         extraModules = [
-          self.nixosModules.default
-          self.nixosModules.homeManagerInit
           ./vmtest
         ];
       };
@@ -79,12 +69,7 @@
         username = "iab";
         hostname = "wsl";
         extraModules = [
-          self.nixosModules.homeManagerInit
-          inputs.nixos-wsl.nixosModules.wsl
           ./wsl
-          ../nixos/fonts.nix
-          ../nixos/nixpkgs.nix
-          ../nixos/nixconfig.nix
         ];
       };
 
@@ -93,8 +78,6 @@
         username = "live";
         hostname = "livecd";
         extraModules = [
-          self.nixosModules.default
-          self.nixosModules.homeManagerInit
           ./livecd/standard.nix
         ];
       };

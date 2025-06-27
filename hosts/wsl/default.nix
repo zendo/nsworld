@@ -1,10 +1,19 @@
 {
   lib,
   pkgs,
+  inputs,
   username,
   ...
 }:
 {
+  impports = [
+    inputs.self.nixosModules.homeManagerInit
+    inputs.nixos-wsl.nixosModules.wsl
+    ../../nixos/fonts.nix
+    ../../nixos/nixpkgs.nix
+    ../../nixos/nixconfig.nix
+  ];
+
   home-manager.users.${username} =
     { pkgs, ... }:
     {

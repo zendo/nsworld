@@ -14,6 +14,10 @@
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
 
+    self.nixosModules.default
+    self.nixosModules.homeManagerInit
+    self.nixosModules.laptopPowerPlan
+
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic

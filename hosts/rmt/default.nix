@@ -13,6 +13,9 @@
     # ./btrfs-subvolumes.nix
     ./hardware-configuration.nix
 
+    self.nixosModules.default
+    self.nixosModules.homeManagerInit
+
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic

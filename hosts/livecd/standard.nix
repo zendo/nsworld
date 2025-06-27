@@ -18,6 +18,9 @@
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-base.nix"
 
+    self.nixosModules.default
+    self.nixosModules.homeManagerInit
+
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.sway

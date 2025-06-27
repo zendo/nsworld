@@ -22,6 +22,10 @@
     # inputs.lanzaboote.nixosModules.lanzaboote
     inputs.nixos-hardware.nixosModules.common-gpu-amd
 
+    self.nixosModules.default
+    self.nixosModules.homeManagerInit
+    self.nixosModules.laptopPowerPlan
+
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
