@@ -13,16 +13,17 @@
     # comma # ,
     nix-tree
     nurl
+    nix-init
     nix-update
     # nix-prefetch
     # nix-template
     nix-output-monitor
     disko
     nixos-anywhere
-
-    nix-init
     inputs.deploy-rs.packages.${system}.deploy-rs
-    inputs.self.formatter.${system} # persistent cache
+
+    # persistent cache
+    inputs.self.formatter.${system}
   ];
 
   programs = {
