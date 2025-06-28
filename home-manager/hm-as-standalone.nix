@@ -17,37 +17,26 @@
           };
 
           extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs username;
           };
 
-          modules = [
-            ./ssh.nix
-            ./git.nix
-            ./cli.nix
-            ./zsh.nix
-            ./fish.nix
-            ./alias.nix
-            ./files.nix
-            ./nvim.nix
-            ./nix-tools.nix
-            ./non-nixos.nix
-
-            {
-              home.username = "${username}";
-              home.homeDirectory = "/home/${username}";
-              home.stateVersion = "25.05";
-            }
-          ] ++ extraModules;
+          modules =
+            # basic setup
+            [
+              ./hm-non-nixos.nix
+            ]
+            # and more modules
+            ++ extraModules;
         };
     in
     {
-      # non-nixos
+      # main
       iab = mkHome {
         username = "iab";
         extraModules = [ ./dconf.nix ];
       };
 
-      # other user on nixos
+      # MAYBE: other user on nixos
       guest = mkHome {
         username = "guest";
         extraModules = [

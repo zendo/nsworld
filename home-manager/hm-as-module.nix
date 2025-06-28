@@ -16,7 +16,7 @@
       inherit inputs;
     };
     sharedModules = [
-      ./on-nixos.nix
+      ./hm-on-nixos.nix
     ];
     # home-manager user initialize
     users.${username}.home.username = username;

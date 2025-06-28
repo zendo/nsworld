@@ -9,7 +9,7 @@
         ./hosts/flake-module.nix
         ./nixos/flake-module.nix
         ./overlays/flake-module.nix
-        ./home-manager/hm-standalone.nix
+        ./home-manager/hm-as-standalone.nix
         ./hosts/deployment.nix
         ./lib/flake-module.nix
         ./templates/flake-module.nix
