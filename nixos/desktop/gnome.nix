@@ -20,7 +20,6 @@
     desktopManager.gnome.enable = true;
 
     packagekit.enable = false;
-    # gnome.sushi.enable = true;
     # gnome.tinysparql.enable = false;
     # gnome.localsearch.enable = false;
   };
@@ -46,6 +45,7 @@
 
   environment.gnome.excludePackages = with pkgs; [
     yelp
+    sushi # heavyweight
     geary
     totem
     baobab
