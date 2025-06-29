@@ -78,6 +78,14 @@
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
 
+    # Intel AX200
+    # nix shell nixpkgs#wirelesstools --command iwconfig
+    # https://github.com/zachlatta/nixos-configs/blob/master/bak/lugia/intel_ax200_fix.nix
+    extraModprobeConfig = ''
+      options iwlwifi power_save=0
+      options iwlmvm power_scheme=1
+    '';
+
     kernelParams = [
       # Fixes for s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
