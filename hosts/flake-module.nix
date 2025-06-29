@@ -44,7 +44,6 @@
         ];
       };
 
-      # test machine
       rmt = mkHost {
         username = "aaa";
         hostname = "rmt";
@@ -53,8 +52,6 @@
         ];
       };
 
-      # nixos-rebuild build-vm --flake .#vmtest
-      # or
       # nix build .#nixosConfigurations.vmtest.config.system.build.vm
       vmtest = mkHost {
         username = "test";

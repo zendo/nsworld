@@ -15,6 +15,8 @@
     VISUAL = "micro";
     NIXOS_OZONE_WL = lib.mkDefault 1; # Electron wayland native
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    # TODO: https://github.com/NixOS/nix/issues/13367
+    NIXOS_REBUILD_I_UNDERSTAND_THE_CONSEQUENCES_PLEASE_BREAK_MY_SYSTEM = 1;
   };
 
   xdg = {

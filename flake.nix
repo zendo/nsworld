@@ -6,14 +6,14 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
 
       imports = [
-        ./hosts/flake-module.nix
-        ./nixos/flake-module.nix
-        ./overlays/flake-module.nix
-        ./home-manager/hm-as-standalone.nix
-        ./hosts/deployment.nix
-        ./lib/flake-module.nix
-        ./templates/flake-module.nix
-        ./treefmt.nix
+        ./hosts/flake-module.nix # flake.nixosConfigurations
+        ./nixos/flake-module.nix # flake.nixosModules
+        ./overlays/flake-module.nix # flake.overlays
+        ./home-manager/hm-as-standalone.nix # flake.homeConfigurations
+        ./hosts/deployment.nix # flake.deploy
+        ./lib/flake-module.nix # flake.lib
+        ./templates/flake-module.nix # flake.templates
+        ./treefmt.nix # flake.formatter
       ];
 
       systems = [
@@ -56,6 +56,8 @@
           # nix develop .#rust
           devShells = import ./devshells.nix { inherit pkgs; };
         };
+
+      debug = true;
     };
 
   inputs = {
