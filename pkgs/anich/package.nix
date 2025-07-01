@@ -14,15 +14,17 @@
   libdrm,
   xorg,
   mpv-unwrapped,
+  webkitgtk_4_1,
+  libsoup_3,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "anich";
-  version = "1.4.0";
+  version = "1.4.1";
 
   src = fetchurl {
     url = "https://github.com/Sle2p/AniCh/releases/download/${finalAttrs.version}/anich-linux-${finalAttrs.version}.deb";
-    hash = "sha256-nSf4JqslAdQccrBnrwpkFGVZzIqe57z24lB1LEAz4QQ=";
+    hash = "sha256-y808X6zIj+PswSF3aM9cZw7mdvRB/DhM+SXTXowiJWo=";
   };
 
   nativeBuildInputs = [
@@ -40,6 +42,8 @@ stdenv.mkDerivation (finalAttrs: {
     libdrm
     xorg.libXv
     mpv-unwrapped
+    webkitgtk_4_1
+    libsoup_3
     (lib.getLib stdenv.cc.cc)
   ];
 
