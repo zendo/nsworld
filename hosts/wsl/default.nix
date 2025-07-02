@@ -6,7 +6,7 @@
   ...
 }:
 {
-  impports = [
+  imports = [
     inputs.self.nixosModules.homeManagerInit
     inputs.nixos-wsl.nixosModules.wsl
     ../../nixos/fonts.nix
