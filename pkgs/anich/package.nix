@@ -20,11 +20,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "anich";
-  version = "1.4.1";
+  version = "1.4.2";
 
   src = fetchurl {
     url = "https://github.com/Sle2p/AniCh/releases/download/${finalAttrs.version}/anich-linux-${finalAttrs.version}.deb";
-    hash = "sha256-y808X6zIj+PswSF3aM9cZw7mdvRB/DhM+SXTXowiJWo=";
+    hash = "sha256-5Fwj0O3nBUjACr1xR/hhVw3Al+vMhxoJunMDtPEixlk=";
   };
 
   nativeBuildInputs = [
