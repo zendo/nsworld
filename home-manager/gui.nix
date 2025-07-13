@@ -43,6 +43,7 @@
     # rhythmbox
     goodvibes
     go-musicfox
+    splayer
     # mousai
     songrec
     kooha

@@ -40,14 +40,14 @@
   };
 
   systemd = {
-    services.sing-box.enable = true;
+    # services.sing-box.enable = true;
   };
 
   services = {
     # displayManager.autoLogin.user = "${username}";
 
     dae = {
-      # enable = true;
+      enable = true;
       configFile = "/home/${username}/code/sub/dae-config.dae";
     };
     # daeWithConfig.enable = true;
@@ -179,6 +179,7 @@
       ];
       extraConfig = ''
         interface_help_hidden: yes
+        remember_last_entry: yes
       '';
       extraEntries = ''
         /Windows
