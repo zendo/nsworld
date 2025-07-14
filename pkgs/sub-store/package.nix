@@ -16,7 +16,7 @@ stdenvNoCC.mkDerivation {
 
   js = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-PGraH/tqQaKEh6ovAqAhZyGXs+BulQUCjcy8j1DJp1g=";
+    sha256 = "sha256-1xmtFnRL21nN4qPG468Jtt45hQUCY59pD9z6GKrkMbM=";
   };
 
   nativeBuildInputs = [ unzip ];
