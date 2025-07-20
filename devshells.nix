@@ -8,7 +8,7 @@
       sops
       ssh-to-age
       home-manager
-      nixfmt-rfc-style
+      nixfmt
     ];
     name = "bootstrap";
     shellHook = ''

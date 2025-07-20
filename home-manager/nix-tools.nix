@@ -7,7 +7,7 @@
 {
   home.packages = with pkgs; [
     # alejandra
-    nixfmt-rfc-style
+    nixfmt
     # lorri
     # cachix
     # comma # ,
