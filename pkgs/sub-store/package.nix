@@ -11,12 +11,12 @@ stdenvNoCC.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
-    sha256 = "sha256-OGeXTRAS+v8uD5Ef8UI8YiePia73uVcT9zvIHEvgp5c=";
+    sha256 = "sha256-wPLtF1VJVrCLO85gKl6M8mIbDJBCaCEh1WmloRnWQpQ=";
   };
 
   js = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-1xmtFnRL21nN4qPG468Jtt45hQUCY59pD9z6GKrkMbM=";
+    sha256 = "sha256-Qb6G1GlJcLU+0F7NFe8xAp3EJ3G9YQ/k8OhCzcm9bT4=";
   };
 
   nativeBuildInputs = [ unzip ];
