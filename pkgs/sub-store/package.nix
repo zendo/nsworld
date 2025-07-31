@@ -7,16 +7,16 @@
 
 stdenvNoCC.mkDerivation {
   pname = "sub-store";
-  version = "2.19.63";
+  version = "2.19.98";
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
-    sha256 = "sha256-wPLtF1VJVrCLO85gKl6M8mIbDJBCaCEh1WmloRnWQpQ=";
+    sha256 = "sha256-bZ+llD5WpkUi6yz6YpehK9XrMlxD7GXJVjV1/mnZUAw=";
   };
 
   js = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-Qb6G1GlJcLU+0F7NFe8xAp3EJ3G9YQ/k8OhCzcm9bT4=";
+    sha256 = "sha256-8fIQYaCUQ7qSkY9ynH8f4P/E/PEL8dLh6nTgHIEUAzg=";
   };
 
   nativeBuildInputs = [ unzip ];
