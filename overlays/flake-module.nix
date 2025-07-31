@@ -33,8 +33,8 @@
       betterfox = prev.pkgs.fetchFromGitHub {
         owner = "yokoffing";
         repo = "Betterfox";
-        rev = "138.0";
-        hash = "sha256-ci9g4Igy2dc7cDtPy+l6NaaEz8YsD0BSixFaYWYOKTs=";
+        rev = "140.0";
+        hash = "sha256-gHFA/1PeQ0iNAcjATGwgJOqRlR9YmxD/RJKkYN36QYA=";
       };
 
       # FIXME: https://github.com/NixOS/nixpkgs/issues/332812
