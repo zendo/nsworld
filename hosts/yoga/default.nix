@@ -1,9 +1,6 @@
 /*
   nixos/refind: init module #414394:
   https://github.com/NixOS/nixpkgs/pull/414394
-
-  nixos/lemurs: init #329496:
-  https://github.com/NixOS/nixpkgs/pull/329496
 */
 
 {

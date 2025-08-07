@@ -5,46 +5,50 @@
 # This notice must be retained in all copies of this function, including modified versions!
 # The MIT License can be found here:
 # https://github.com/yunfachi/nypkgs/blob/master/LICENSE
-{ lib, ... }:
-let
-  umport =
-    inputs@{
-      path ? null,
-      paths ? [ ],
-      include ? [ ],
-      exclude ? [ ],
-      recursive ? true,
-    }:
-    with lib;
-    with fileset;
-    let
-      excludedFiles = filter (path: pathIsRegularFile path) exclude;
-      excludedDirs = filter (path: pathIsDirectory path) exclude;
-      isExcluded =
-        path:
-        if elem path excludedFiles then
-          true
-        else
-          (filter (excludedDir: lib.path.hasPrefix excludedDir path) excludedDirs) != [ ];
+{lib, ...}: {
+  umport = {
+    path ? null,
+    paths ? [],
+    include ? [],
+    exclude ? [],
+    recursive ? true,
+  }: let
+    recursively = let
+      inherit
+        (lib.fileset)
+        unions
+        union
+        difference
+        fileFilter
+        toList
+        ;
+      nixOnly = paths: unions (map (fileFilter (file: file.hasExt "nix")) paths);
+
+      pathsFs = nixOnly (paths ++ lib.optionals (path != null) [path]);
+      includeFs = nixOnly include;
+      excludeFs = nixOnly exclude;
+
+      excluded = difference pathsFs excludeFs;
+      included = union excluded includeFs;
     in
-    unique (
-      (filter
-        (file: pathIsRegularFile file && hasSuffix ".nix" (builtins.toString file) && !isExcluded file)
-        (
-          concatMap (
-            _path:
-            if recursive then
-              toList _path
-            else
-              mapAttrsToList (
-                name: type: _path + (if type == "directory" then "/${name}/default.nix" else "/${name}")
-              ) (builtins.readDir _path)
-          ) (unique (if path == null then paths else [ path ] ++ paths))
-        )
-      )
-      ++ (if recursive then concatMap (path: toList path) (unique include) else unique include)
-    );
-in
-{
-  inherit umport;
+      toList included;
+
+    nonRecursively = let
+      isNotExcluded = path: lib.all (x: !lib.path.hasPrefix x path) exclude;
+      readDirs = builtins.concatMap (
+        path: map (x: path + "/${x}") (builtins.attrNames (builtins.readDir path))
+      );
+
+      pathsList = readDirs (paths ++ lib.optionals (path != null) [path]);
+      includeList = readDirs include;
+
+      excluded = lib.filter isNotExcluded pathsList;
+      included = lib.unique (excluded ++ includeList);
+      nixOnly = lib.filter (file: lib.pathIsDirectory file || lib.hasSuffix ".nix" file) included;
+    in
+      nixOnly;
+  in
+    if recursive
+    then recursively
+    else nonRecursively;
 }
