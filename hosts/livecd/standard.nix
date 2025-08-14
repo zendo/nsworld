@@ -27,9 +27,10 @@
     # self.nixosModules.hyprland
   ];
 
+  mods.virt.enable = false;
+
   boot = {
     tmp.useTmpfs = false;
-    initrd.systemd.enable = false;
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = {
       bcachefs = true;
@@ -52,8 +53,6 @@
     ${username}.initialHashedPassword =
       lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
   };
-
-  mods.virt.enable = false;
 
   environment.systemPackages = with pkgs; [ dippi ];
 
