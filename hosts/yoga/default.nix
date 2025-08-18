@@ -1,8 +1,3 @@
-/*
-  nixos/refind: init module #414394:
-  https://github.com/NixOS/nixpkgs/pull/414394
-*/
-
 {
   inputs,
   self,
@@ -160,15 +155,12 @@
     ################
     ## Limine
     ################
-    # https://wiki.archlinux.org/title/Limine
     # https://github.com/limine-bootloader/limine/blob/trunk/CONFIG.md
-    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/system/boot/loader/limine/limine.nix
     limine = {
       enable = true;
       maxGenerations = 8;
       secureBoot.enable = true;
       style.interface.branding = " ";
-      # style.interface.helpHidden = true; # FIXME
       style.wallpapers = [
         # pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath
         # pkgs.nixos-artwork.wallpapers.gnome-dark.gnomeFilePath

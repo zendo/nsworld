@@ -25,7 +25,7 @@
       settings = {
         default_session = {
           command = lib.concatStringsSep " " [
-            "${pkgs.greetd.tuigreet}/bin/tuigreet"
+            "${lib.getExe pkgs.tuigreet}"
             "--time"
             "--asterisks"
             "--remember"
@@ -160,7 +160,7 @@
                 duration = "30m";
                 mode = "center";
               };
-              any.path = "~/Pictures/Wallpapers";
+              any.path = "${config.home.homeDirectory}/Pictures/Wallpapers";
             };
           };
         };
