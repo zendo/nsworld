@@ -46,7 +46,7 @@
           packages =
             lib.packagesFromDirectoryRecursive {
               inherit (pkgs) callPackage;
-              directory = ./pkgs;
+              directory = ./overlays/pkgs;
             }
             // {
               # nix run .
