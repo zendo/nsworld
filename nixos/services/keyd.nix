@@ -1,6 +1,7 @@
 { ... }:
 {
   # https://github.com/rvaiya/keyd
+  # sudo nix run nixpkgs#keyd monitor
   services.keyd = {
     enable = true;
     keyboards = {
