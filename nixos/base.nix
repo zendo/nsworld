@@ -2,20 +2,9 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 {
-  boot = {
-    initrd.systemd = {
-      enable = lib.mkDefault true;
-    };
-    tmp = {
-      useTmpfs = lib.mkDefault true;
-      cleanOnBoot = lib.mkDefault true;
-    };
-  };
-
   services = {
     acpid.enable = true;
     # fwupd.enable = true;
@@ -23,17 +12,6 @@
     journald.extraConfig = ''
       SystemMaxUse=50M
     '';
-  };
-
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    command-not-found = {
-      # enable = true;
-      dbPath = inputs.nixpkgs + "/programs.sqlite";
-    };
   };
 
   environment.systemPackages = with pkgs; [

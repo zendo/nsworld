@@ -27,22 +27,5 @@
 
     # Fix xdg-open in FHS sandbox
     xdg.portal.xdgOpenUsePortal = true;
-
-    # Plymouth
-    boot = {
-      plymouth.enable = true;
-      # Silent Boot
-      consoleLogLevel = 0;
-      initrd.verbose = false;
-      kernelParams = lib.optionals config.boot.plymouth.enable [
-        "quiet"
-        "splash"
-        "boot.shell_on_fail"
-        "loglevel=3"
-        "rd.systemd.show_status=false"
-        "rd.udev.log_level=3"
-        "udev.log_priority=3"
-      ];
-    };
   };
 }
