@@ -27,8 +27,8 @@
       };
     };
 
-    logind = {
-      lidSwitch = "suspend-then-hibernate";
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend-then-hibernate";
     };
   };
 
