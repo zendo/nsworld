@@ -83,12 +83,19 @@
       # Python Module Overlays
       # nix build .#python3Packages.pyjokes
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-        (python-final: python-prev: {
-          pyjokes = python-final.callPackage ./python-modules/pyjokes { };
-          # foo = python-prev.foo.overridePythonAttrs (oldAttrs: {
-          #   ...
-          # });
-        })
+        (
+          python-final: python-prev:
+          prev.lib.packagesFromDirectoryRecursive {
+            inherit (prev.python3Packages) callPackage;
+            directory = ./python-modules;
+          }
+        )
+        # (python-final: python-prev: {
+        #   pyjokes = python-final.callPackage ./python-modules/pyjokes { };
+        #   # foo = python-prev.foo.overridePythonAttrs (oldAttrs: {
+        #   #   ...
+        #   # });
+        # })
       ];
 
       # And etc...

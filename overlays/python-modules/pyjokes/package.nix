@@ -14,6 +14,8 @@ buildPythonPackage rec {
     sha256 = "sha256-CIYO7beMv6RhgkPI2wiPIcOYI+zh/a8BM+UtnFbpgaU=";
   };
 
+  pyproject = true;
+
   pythonImportsCheck = [ "pyjokes" ];
 
   meta = with lib; {
