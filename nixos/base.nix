@@ -14,6 +14,9 @@
     '';
   };
 
+  # Load configs form nixos/modules
+  programs.zsh.enable = true;
+
   environment.systemPackages = with pkgs; [
     (lib.hiPrio uutils-coreutils-noprefix)
     tree

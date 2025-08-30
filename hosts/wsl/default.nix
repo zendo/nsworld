@@ -78,6 +78,8 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
   documentation.enable = false;
