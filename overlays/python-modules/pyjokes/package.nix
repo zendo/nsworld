@@ -2,6 +2,7 @@
   lib,
   buildPythonPackage,
   fetchPypi,
+  setuptools,
   pytest,
 }:
 
@@ -18,9 +19,11 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "pyjokes" ];
 
-  meta = with lib; {
+  build-system = [ setuptools ];
+
+  meta = {
     description = "One line jokes for programmers (jokes as a service)";
     homepage = "https://pyjok.es/";
-    license = licenses.bsd3;
+    license = lib.licenses.bsd3;
   };
 }
