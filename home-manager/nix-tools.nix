@@ -18,6 +18,7 @@
     # nix-prefetch
     # nix-template
     nix-output-monitor
+    nixpkgs-track
     disko
     nixos-anywhere
     inputs.deploy-rs.packages.${system}.deploy-rs
