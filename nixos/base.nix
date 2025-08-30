@@ -14,7 +14,7 @@
     '';
   };
 
-  # Load configs form nixos/modules
+  # Load configs from nixos/modules
   programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
