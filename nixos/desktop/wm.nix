@@ -81,7 +81,7 @@
           wlogout
           waybar
           uwsm
-          xwayland-satellite
+          # xwayland-satellite
 
           fuzzel
           bemoji

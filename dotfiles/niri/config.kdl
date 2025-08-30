@@ -30,12 +30,12 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "niriswitcher"
-spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-sh-at-startup "wl-paste --watch cliphist store"
 // spawn-at-startup "sh" "-c" "swayidle -w timeout 200 'brightnessctl -s s 10%' resume 'brightnessctl -r' timeout 300 'swaylock -f' timeout 360 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors && brightnessctl -r' before-sleep 'playerctl pause' before-sleep 'swaylock -f'"
 
 binds {
     Mod+Return { spawn "kitty"; }
-    Mod+Comma { spawn "sh" "-c" "kitten quick-access-terminal"; }
+    Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }
@@ -43,7 +43,7 @@ binds {
     Mod+X { spawn "fuzzel"; }
     Mod+Period { spawn "bemoji"; }
     Mod+Escape { spawn "wlogout"; }
-    Mod+V { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+    Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Q { close-window; }
@@ -87,7 +87,7 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+Z { toggle-window-floating; }
     Mod+C { center-column; }
-    Alt+Tab repeat=false { spawn "niriswitcherctl" "show" "--window"; }
+    Alt+Tab repeat=false { spawn-sh "niriswitcherctl show --window"; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -100,13 +100,13 @@ binds {
 
     Mod+Shift+P { power-off-monitors; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "volumectl" "-u" "up"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "volumectl" "-u" "down"; }
-    XF86AudioMute        allow-when-locked=true { spawn "volumectl"  "toggle-mute"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "volumectl" "-m" "toggle-mute"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "volumectl -u up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "volumectl -u down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "volumectl toggle-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "volumectl -m toggle-mute"; }
 
-    XF86MonBrightnessUp { spawn "lightctl" "up"; }
-    XF86MonBrightnessDown { spawn "lightctl" "down"; }
+    XF86MonBrightnessUp { spawn-sh "lightctl up"; }
+    XF86MonBrightnessDown { spawn-sh "lightctl down"; }
 }
 
 hotkey-overlay {
