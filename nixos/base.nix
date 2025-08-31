@@ -14,13 +14,12 @@
     micro
     parted
     gptfdisk
-    sbctl
     efibootmgr
     # efitools
   ];
 
   programs.command-not-found = {
-    enable = true;
+    # enable = true;
     dbPath = inputs.nixpkgs + "/programs.sqlite";
   };
 
