@@ -36,6 +36,10 @@
   };
 
   services = {
+    acpid.enable = true;
+    # fwupd.enable = true;
+    btrfs.autoScrub.enable = true;
+
     # displayManager.autoLogin.user = "${username}";
 
     dae = {

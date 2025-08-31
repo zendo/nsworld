@@ -54,7 +54,6 @@
     gdu
     duf
     dysk
-    tokei # count code
 
     # Utils
     just
@@ -75,6 +74,7 @@
     # asciinema # record the terminal
     calcurse
     # zee
+    tokei # count code
     wthrr # weather
 
     # Networking
