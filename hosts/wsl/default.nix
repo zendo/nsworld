@@ -9,7 +9,6 @@
   imports = [
     inputs.self.nixosModules.homeManagerInit
     inputs.nixos-wsl.nixosModules.wsl
-    ../../nixos/base.nix
     ../../nixos/fonts.nix
     ../../nixos/nixpkgs.nix
     ../../nixos/nixconfig.nix
@@ -74,7 +73,12 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   nixpkgs.hostPlatform = "x86_64-linux";
+  time.timeZone = "Asia/Shanghai";
+  system.stateVersion = "25.05";
+  documentation.enable = lib.mkDefault false;
 
   ###############################################
   ##  WSL Settings

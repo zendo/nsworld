@@ -78,6 +78,8 @@
     wthrr # weather
 
     # Networking
+    wget
+    curl
     lsof
     dogdns
     q # dns
