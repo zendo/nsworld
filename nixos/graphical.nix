@@ -8,11 +8,6 @@
   # Only enable on Desktop
   config = lib.mkIf config.services.graphical-desktop.enable {
 
-    # Graphical Applications
-    programs = {
-      appimage.enable = true;
-    };
-
     # Bluetooth
     hardware.bluetooth = {
       enable = true;

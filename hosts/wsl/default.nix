@@ -9,6 +9,7 @@
   imports = [
     inputs.self.nixosModules.homeManagerInit
     inputs.nixos-wsl.nixosModules.wsl
+    ../../nixos/base.nix
     ../../nixos/fonts.nix
     ../../nixos/nixpkgs.nix
     ../../nixos/nixconfig.nix
@@ -66,11 +67,6 @@
     };
 
     systemPackages = with pkgs; [
-      (lib.hiPrio uutils-coreutils-noprefix)
-      tree
-      file
-      wget
-      micro
       dos2unix
       wslu
       wsl-open
@@ -78,11 +74,6 @@
     ];
   };
 
-  programs.zsh.enable = true;
-
-  time.timeZone = "Asia/Shanghai";
-  system.stateVersion = "25.05";
-  documentation.enable = false;
   nixpkgs.hostPlatform = "x86_64-linux";
 
   ###############################################

@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.appimage = {
+    enable = config.services.graphical-desktop.enable;
     binfmt = true;
     package = pkgs.appimage-run.override {
       extraPkgs =
