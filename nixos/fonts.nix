@@ -1,4 +1,3 @@
-# https://wiki.nixos.org/wiki/Locales
 {
   lib,
   pkgs,
