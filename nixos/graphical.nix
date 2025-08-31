@@ -22,5 +22,21 @@
 
     # Fix xdg-open in FHS sandbox
     xdg.portal.xdgOpenUsePortal = true;
+
+    # fcitx or ibus
+    mods.fcitx.enable = true;
+
+    # i18n.inputMethod = {
+    #   enable = true;
+    #   type = "ibus";
+    #   ibus.engines = with pkgs.ibus-engines; [
+    #     # libpinyin
+    #     (rime.override {
+    #       rimeDataPkgs = [
+    #         pkgs.rime-ice
+    #       ];
+    #     })
+    #   ];
+    # };
   };
 }

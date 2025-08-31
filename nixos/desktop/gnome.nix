@@ -1,20 +1,5 @@
 { pkgs, ... }:
 {
-  mods.fcitx.enable = true;
-
-  # i18n.inputMethod = {
-  #   enable = true;
-  #   type = "ibus";
-  #   ibus.engines = with pkgs.ibus-engines; [
-  #     # libpinyin
-  #     (rime.override {
-  #       rimeDataPkgs = [
-  #         pkgs.rime-ice
-  #       ];
-  #     })
-  #   ];
-  # };
-
   services = {
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;

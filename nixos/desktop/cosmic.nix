@@ -8,7 +8,5 @@
     displayManager.cosmic-greeter.enable = true;
   };
 
-  mods.fcitx.enable = true;
-
   # environment.systemPackages = with pkgs; [ ];
 }

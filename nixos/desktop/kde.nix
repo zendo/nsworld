@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  mods.fcitx.enable = true;
-
   services = {
     colord.enable = true;
     geoclue2.enable = true;
