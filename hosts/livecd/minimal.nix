@@ -24,23 +24,22 @@
   environment.systemPackages = with pkgs; [
     tree
     file
-    p7zip
+    wget
+    curl
+    micro
+    parted
+    gptfdisk
+    efibootmgr
+
+    bind
     fd
     ripgrep
     gdu
     duf
-    parted
-    gptfdisk
-    wget
-    bind
-
-    vim
-    micro
     btop
+    p7zip
     ouch
   ];
-
-  time.timeZone = "Asia/Shanghai";
 
   hardware.enableAllFirmware = true;
 
@@ -57,6 +56,8 @@
       "flakes"
     ];
   };
+
+  time.timeZone = "Asia/Shanghai";
 
   # fast but lowest compression level
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";

@@ -76,6 +76,7 @@
   programs.zsh.enable = true;
 
   nixpkgs.hostPlatform = "x86_64-linux";
+  i18n.defaultLocale = "zh_CN.UTF-8";
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";
   documentation.enable = lib.mkDefault false;
