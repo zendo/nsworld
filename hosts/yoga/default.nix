@@ -103,6 +103,13 @@
     #   themePackages = [pkgs.adi1090x-plymouth-themes];
     # };
 
+    # zswap
+    kernel.sysfs.module.zswap.parameters = {
+      enabled = true;
+      zpool = "zsmalloc";
+      compressor = "zstd";
+    };
+
     # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
   };
 
