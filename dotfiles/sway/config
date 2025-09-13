@@ -53,7 +53,6 @@ exec nm-applet --indicator
 exec blueman-applet
 exec fcitx5 -rd
 # exec wlsunset -l 22 -L 114
-exec wl-paste --watch cliphist store
 exec swayidle -w \
   timeout 200 'brightnessctl -s s 10%' \
      resume 'brightnessctl -r' \

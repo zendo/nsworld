@@ -141,6 +141,11 @@
             enable = true;
           };
 
+          cliphist = {
+            enable = true;
+            allowImages = true;
+          };
+
           wlsunset = {
             enable = true;
             # gama = "2.0";
