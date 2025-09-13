@@ -25,6 +25,7 @@
 
   # Load configs from nixos/modules
   programs.zsh.enable = true;
+  # programs.fish.enable = true;
 
   # Remove perl from activation
   # system.etc.overlay.enable = lib.mkDefault true;
