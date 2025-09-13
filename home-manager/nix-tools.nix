@@ -17,6 +17,7 @@
     nix-update
     # nix-prefetch
     # nix-template
+    dix # diff
     nix-output-monitor
     nixpkgs-track
     disko

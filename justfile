@@ -23,6 +23,9 @@ build-os-nom:
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
+diff-dix:
+    dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+
 diff-commits:
     #!/usr/bin/env bash
     osrev=$(nixos-version --revision)
