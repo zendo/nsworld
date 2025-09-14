@@ -76,6 +76,14 @@
         startupNotify = false;
       };
 
+      # qt6Packages override
+      qt6Packages = prev.qt6Packages.overrideScope (
+        qt6final: qt6prev: {
+          # `fcitx5-configtool` heavy dependency KDE Frameworks
+          fcitx5-with-addons = qt6prev.fcitx5-with-addons.override { withConfigtool = false; };
+        }
+      );
+
       # gnomeExtensions = prev.gnomeExtensions // {
       #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
       # };
