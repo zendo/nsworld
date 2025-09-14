@@ -41,7 +41,6 @@ in
       extraGroups = [
         "wheel"
         "networkmanager"
-        (mkIf config.virtualisation.lxd.enable "lxd")
         (mkIf config.virtualisation.docker.enable "docker")
         (mkIf config.virtualisation.podman.enable "podman")
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
