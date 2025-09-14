@@ -95,6 +95,11 @@ in
         };
       };
 
+      # https://wiki.nixos.org/wiki/Incus
+      # incus = {
+      #   enable = true;
+      # };
+
       # virtualbox = {
       #   host.enable = true;
       #   # host.enableExtensionPack = true;
