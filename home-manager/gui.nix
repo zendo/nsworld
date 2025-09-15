@@ -33,7 +33,7 @@
     unrar # unfree
 
     # Multimedia
-    # spotify
+    spotify
     # qmmp
     # fooyin
     # (deadbeef-with-plugins.override {
