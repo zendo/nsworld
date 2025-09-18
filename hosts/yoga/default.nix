@@ -69,8 +69,6 @@
   # hardware.enableAllFirmware = true;
   # nixpkgs.config.allowUnfree = true;
 
-  # hardware.amdgpu.amdvlk.enable = true;
-
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;

@@ -21,6 +21,6 @@
       # Restart = "on-failure";
       # DynamicUser = true;
     };
-    # wantedBy = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" ];
   };
 }
