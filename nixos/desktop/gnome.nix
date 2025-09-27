@@ -10,9 +10,6 @@
   };
 
   programs = {
-    # GNOME 49 Makes Papers a Core App, Replacing Evince
-    evince.package = pkgs.papers;
-
     kdeconnect = {
       # enable = true;
       package = pkgs.valent;

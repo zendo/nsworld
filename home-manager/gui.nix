@@ -80,7 +80,7 @@
     # libreoffice-fresh
     # drawio
     # rnote # handwritten note
-    foliate # (webkitgtk)
+    # foliate # (webkitgtk)
     readest
     # koodo-reader
     # planify
