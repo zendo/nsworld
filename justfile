@@ -7,6 +7,9 @@ home_dir := env_var('HOME')
 _default:
     @just --choose --unsorted
 
+justfile-windows:
+    just --justfile=./dotfiles/Windows/justfile
+
 switch:
     nixos-rebuild --sudo --flake .#"{{ host }}" switch
 
