@@ -27,4 +27,11 @@
       "udev.log_priority=3"
     ];
   };
+
+  # Remove perl from activation
+  # system.etc.overlay.enable = lib.mkDefault true;
+
+  # Bashless Activation
+  # https://github.com/NixOS/nixpkgs/issues/428908
+  system.nixos-init.enable = true;
 }
