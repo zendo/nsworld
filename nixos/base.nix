@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -17,11 +16,6 @@
     efibootmgr
     # efitools
   ];
-
-  programs.command-not-found = {
-    # enable = true;
-    dbPath = inputs.nixpkgs + "/programs.sqlite";
-  };
 
   # Load configs from nixos/modules
   programs.zsh.enable = true;
