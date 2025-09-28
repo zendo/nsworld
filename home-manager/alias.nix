@@ -30,7 +30,18 @@
     ip = "ip --color=auto";
     ip-info = "curl ip.im/info";
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
-    ssr = "export {http,https,ftp}_proxy=socks5h://127.0.0.1:7897 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://127.0.0.1:7897";
+    ssr = "export {http,https,ftp}_proxy=socks5h://localhost:7890 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://localhost:7890";
+    ssr-nix-daemon = ''
+      sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
+      sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
+      [Service]
+      Environment="http_proxy=socks5h://localhost:7890"
+      Environment="https_proxy=socks5h://localhost:7890"
+      Environment="all_proxy=socks5h://localhost:7890"
+      EOF
+      sudo systemctl daemon-reload
+      sudo systemctl restart nix-daemon
+    '';
 
     # web
     paste-termbin = "nc termbin.com 9999";

@@ -7,7 +7,7 @@
 }:
 {
   home.packages = with pkgs; [
-    anich # 在线动漫弹幕
+    # anich # 在线动漫弹幕
     note-gen
 
     foot
@@ -111,6 +111,7 @@
     # libinput
     wl-clipboard
     # squirreldisk
+    mission-center
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
   ];
