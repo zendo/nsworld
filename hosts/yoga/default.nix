@@ -52,6 +52,11 @@
   programs = {
     # nix-ld.enable = true;
 
+    # throne = {
+    #   enable = true;
+    #   tunMode.enable = true;
+    # };
+
     clash-verge = {
       # enable = true;
       autoStart = true;

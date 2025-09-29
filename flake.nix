@@ -64,7 +64,7 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.xz";
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-    # nixpkgs.url = "git+file:///home/iab/dev/nixpkgs/?ref=pr-358877";
+    # nixpkgs.url = "git+file:///home/iab/code/nixpkgs/?ref=pr-throne-430949";
 
     home-manager = {
       url = "github:nix-community/home-manager";

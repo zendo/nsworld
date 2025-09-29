@@ -2305,8 +2305,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
    (t
     (message "URL proxy turn on")
     (setq url-proxy-services
-          '(("http" . "localhost:7897")
-            ("https" . "localhost:7897")
+          '(("http" . "localhost:7890")
+            ("https" . "localhost:7890")
             ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)"))))))
 #+end_src
 
