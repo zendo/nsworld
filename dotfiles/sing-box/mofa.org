@@ -118,6 +118,7 @@ sing-box merge -c feiji.json -c sb-tun.json config.json
 
 混入自定义配置：
 打开 tun
+mixed-in 监听地址改 ::
 DNS设置——服务器——Local-DNS: h3://223.5
 
 #+begin_src json
