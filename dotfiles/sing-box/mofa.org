@@ -248,4 +248,4 @@ https://linux.do/t/topic/846616
 https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/misc/sb-template.json
 
 脚本：
-https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=wcloud&outbound=%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%8E%88%20%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%9A%80%20%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9&type=%E8%BF%9C%E7%A8%8B%E8%AE%A2%E9%98%85
+https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=liangxin&outbound=%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%8E%88%20%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%9A%80%20%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9&type=%E8%BF%9C%E7%A8%8B%E8%AE%A2%E9%98%85
