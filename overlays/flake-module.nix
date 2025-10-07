@@ -49,6 +49,18 @@
         }
       );
 
+      # https://github.com/reF1nd/sing-box/tags
+      # sing-box = prev.sing-box.overrideAttrs (oldAttrs: rec {
+      #   version = "1.12.9-reF1nd";
+      #   src = prev.fetchFromGitHub {
+      #     owner = "reF1nd";
+      #     repo = "sing-box";
+      #     tag = "v${version}";
+      #     hash = "sha256-GSUT9gA0X2FxFtTUCpKzDEZgNdshHkP8siWkx0mhoo8=";
+      #   };
+      #   vendorHash = "sha256-BUFiYmxRlxzgxdl4bWxBsbvER/ilH4hW1k438A5y08E=";
+      # });
+
       # xwayland env for inputMethod & native CSD
       spotify = prev.spotify.overrideAttrs (oldAttrs: {
         postFixup = ''
