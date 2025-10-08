@@ -37,6 +37,14 @@
         hash = "sha256-3xvZAMPdGfj8w2AaepWW5xAX05Ry+pN8peLMORKNTIc=";
       };
 
+      # nurl https://github.com/rafaelmardojai/firefox-gnome-theme v143
+      firefox-gnome-theme = prev.fetchFromGitHub {
+        owner = "rafaelmardojai";
+        repo = "firefox-gnome-theme";
+        rev = "v143";
+        hash = "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4=";
+      };
+
       # FIXME: https://github.com/NixOS/nixpkgs/issues/332812
       plymouth = prev.plymouth.overrideAttrs (
         { src, ... }:

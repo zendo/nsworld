@@ -5,6 +5,12 @@
     # package = pkgs.firefox-bin;
     languagePacks = [ "zh-CN" ];
     profiles.default = {
+      userChrome = ''
+        @import "${pkgs.firefox-gnome-theme}/userChrome.css";
+      '';
+      userContent = ''
+        @import "${pkgs.firefox-gnome-theme}/userContent.css";
+      '';
       extraConfig = ''
         ${builtins.readFile "${pkgs.betterfox}/user.js"}
 
@@ -19,12 +25,15 @@
 
         // PREF: allow websites to ask you to receive site notifications
         // user_pref("permissions.default.desktop-notification", 0);
+
+        ${builtins.readFile "${pkgs.firefox-gnome-theme}/configuration/user.js"}
       '';
       settings = {
         "browser.tabs.closeTabByDblclick" = true;
         "browser.tabs.closeWindowWithLastTab" = false; # Prevent closing Firefox when closing the last tab
         "browser.tabs.selectOwnerOnClose" = false; # Closing tab and return to the adjacent tab
-        "browser.tabs.loadBookmarksInBackground" = true;
+        "browser.tabs.loadBookmarksInTabs" = true; # Open bookmarks in a new tab
+        # "browser.tabs.loadBookmarksInBackground" = true;
         "browser.toolbars.bookmarks.visibility" = "always";
         "browser.aboutwelcome.enabled" = false;
         "browser.aboutConfig.showWarning" = false;
