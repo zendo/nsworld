@@ -4,16 +4,18 @@
     enable = true;
     # package = pkgs.firefox-bin;
     languagePacks = [ "zh-CN" ];
-    profiles.default = {
+
+    profiles.huohu = {
+      isDefault = true;
       # userChrome = ''
       #   @import "${pkgs.firefox-gnome-theme}/userChrome.css";
       # '';
       # userContent = ''
       #   @import "${pkgs.firefox-gnome-theme}/userContent.css";
       # '';
+      # and add: ${builtins.readFile "${pkgs.firefox-gnome-theme}/configuration/user.js"}
       extraConfig = ''
         ${builtins.readFile "${pkgs.betterfox}/user.js"}
-        // ${builtins.readFile "${pkgs.firefox-gnome-theme}/configuration/user.js"}
 
         // PREF: restore Top Sites on New Tab page
         user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
@@ -27,7 +29,11 @@
         // PREF: allow websites to ask you to receive site notifications
         // user_pref("permissions.default.desktop-notification", 0);
       '';
-      settings = {
+      settings = { };
+    };
+
+    policies = {
+      Preferences = {
         "browser.tabs.closeTabByDblclick" = true;
         "browser.tabs.closeWindowWithLastTab" = false; # Prevent closing Firefox when closing the last tab
         "browser.tabs.selectOwnerOnClose" = false; # Closing tab and return to the adjacent tab
@@ -41,73 +47,38 @@
         "gfx.text.subpixel-position.force-enabled" = true;
         "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
       };
-      search.enable = false;
-      search.engines = {
-        google.metaData.alias = "g";
-        GitHub = {
-          urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
-          icon = "https://github.com/fluidicon.png";
-          updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = [ "git" ];
-        };
-        Searchix = {
-          urls = [ { template = "https://searchix.ovh/?query={searchTerms}"; } ];
-          definedAliases = [
-            "nse"
-            "searchix"
-          ];
-        };
-        MyNixOS = {
-          urls = [ { template = "https://www.mynixos.com/search?q={searchTerms}"; } ];
-          icon = "https://mynixos.com/favicon.ico";
-          updateInterval = 24 * 60 * 60 * 1000; # every day
-          definedAliases = [
-            "mynixos"
-          ];
-        };
-        "Nix Packages" = {
-          urls = [
-            {
-              template = "https://search.nixos.org/packages";
-              params = [
-                {
-                  name = "type";
-                  value = "packages";
-                }
-                {
-                  name = "channel";
-                  value = "unstable";
-                }
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-              ];
-            }
-          ];
-          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "np" ];
-        };
-        "Home Manager Options" = {
-          urls = [
-            {
-              template = "https://home-manager-options.extranix.com/";
-              params = [
-                {
-                  name = "release";
-                  value = "master";
-                }
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-              ];
-            }
-          ];
-          icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "hm" ];
-        };
-      };
-    };
-  };
+      SearchEngines = {
+        Add = [
+          {
+            Name = "GitHub Search";
+            URLTemplate = "https://github.com/search?q={searchTerms}";
+            IconURL = "https://github.com/fluidicon.png";
+            Alias = "gh";
+          }
+          {
+            Name = "Searchix";
+            URLTemplate = "https://searchix.ovh/?query={searchTerms}";
+            Alias = "nse";
+          }
+          {
+            Name = "MyNixOS";
+            URLTemplate = "https://www.mynixos.com/search?q={searchTerms}";
+            IconURL = "https://mynixos.com/favicon.ico";
+            Alias = "mynixos";
+          }
+          {
+            Name = "Nix Packages";
+            URLTemplate = "https://search.nixos.org/packages?channel=unstable&type=packages&query={searchTerms}";
+            IconURL = "file://${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            Alias = "np";
+          }
+          {
+            Name = "Home Manager Options";
+            URLTemplate = "https://home-manager-options.extranix.com/?release=master&query={searchTerms}";
+            Alias = "hm";
+          }
+        ]; # end of Add
+      }; # end of SearchEngines
+    }; # end of policies
+  }; # end of programs.firefox
 }
