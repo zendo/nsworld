@@ -19,6 +19,7 @@
     # nix-template
     dix # diff
     nix-output-monitor
+    nix-search-tv
     nixpkgs-track
     disko
     nixos-anywhere
@@ -26,6 +27,9 @@
 
     # persistent cache
     inputs.self.formatter.${system}
+
+    (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
+    (writeScriptBin "nsa" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))
   ];
 
   programs = {

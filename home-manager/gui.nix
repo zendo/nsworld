@@ -112,8 +112,6 @@
     wl-clipboard
     # squirreldisk
     mission-center
-
-    (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
   ];
 
   services = {
