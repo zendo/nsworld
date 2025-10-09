@@ -5,14 +5,15 @@
     # package = pkgs.firefox-bin;
     languagePacks = [ "zh-CN" ];
     profiles.default = {
-      userChrome = ''
-        @import "${pkgs.firefox-gnome-theme}/userChrome.css";
-      '';
-      userContent = ''
-        @import "${pkgs.firefox-gnome-theme}/userContent.css";
-      '';
+      # userChrome = ''
+      #   @import "${pkgs.firefox-gnome-theme}/userChrome.css";
+      # '';
+      # userContent = ''
+      #   @import "${pkgs.firefox-gnome-theme}/userContent.css";
+      # '';
       extraConfig = ''
         ${builtins.readFile "${pkgs.betterfox}/user.js"}
+        // ${builtins.readFile "${pkgs.firefox-gnome-theme}/configuration/user.js"}
 
         // PREF: restore Top Sites on New Tab page
         user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
@@ -25,8 +26,6 @@
 
         // PREF: allow websites to ask you to receive site notifications
         // user_pref("permissions.default.desktop-notification", 0);
-
-        ${builtins.readFile "${pkgs.firefox-gnome-theme}/configuration/user.js"}
       '';
       settings = {
         "browser.tabs.closeTabByDblclick" = true;
