@@ -30,6 +30,8 @@
     ip = "ip --color=auto";
     ip-info = "curl ip.im/info";
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
+
+    # proxy
     # export ssr_ip=localhost ; ssr && ssr-nix-daemon
     ssr = "export {http,https,ftp}_proxy=socks5h://\${ssr_ip}:7890 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://\${ssr_ip}:7890";
     ssr-nix-daemon = ''
@@ -43,6 +45,7 @@
       sudo systemctl daemon-reload
       sudo systemctl restart nix-daemon
     '';
+    chrome-ssr = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}:7890"'';
 
     # web
     paste-termbin = "nc termbin.com 9999";
