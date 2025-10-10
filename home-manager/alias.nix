@@ -32,7 +32,7 @@
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
 
     # proxy
-    # export ssr_ip=localhost ; ssr && ssr-nix-daemon
+    # ssr_ip=localhost ; ssr ; ssr-nix-daemon
     ssr = "export {http,https,ftp}_proxy=socks5h://\${ssr_ip}:7890 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://\${ssr_ip}:7890";
     ssr-nix-daemon = ''
       sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
