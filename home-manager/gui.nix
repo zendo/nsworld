@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     # anich # 在线动漫弹幕
     note-gen
+    lsx
 
     foot
     kitty
