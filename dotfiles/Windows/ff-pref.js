@@ -17,11 +17,11 @@ user_pref("browser.tabs.closeTabByDblclick", true);
 user_pref("browser.tabs.closeWindowWithLastTab", false); // Prevent closing Firefox when closing the last tab
 user_pref("browser.tabs.selectOwnerOnClose", false); // Closing tab and return to the adjacent tab
 user_pref("browser.tabs.loadBookmarksInTabs", true); // Open bookmarks in a new tab
+user_pref("browser.tabs.insertAfterCurrent", true); // Open new tabs next to current
 // user_pref("browser.tabs.loadBookmarksInBackground", true);
-user_pref("browser.toolbars.bookmarks.visibility", "always");
 // user_pref("browser.urlbar.openintab", true); // open in a new tab
 // user_pref("browser.search.openintab", true); // open in a new tab
-// user_pref("browser.tabs.loadBookmarksInTabs", true); // open in a new tab
+user_pref("browser.toolbars.bookmarks.visibility", "always");
 user_pref("browser.aboutConfig.showWarning", false);
 
 // https://github.com/yokoffing/Betterfox/wiki/Common-Overrides#font-improvement
