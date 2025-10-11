@@ -59,6 +59,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
+      # quickemu
       virtiofsd
       virt-viewer
       bridge-utils # brctl: network bridge
