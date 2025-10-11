@@ -5,6 +5,7 @@
     # package = pkgs.firefox-bin;
     languagePacks = [ "zh-CN" ];
 
+    # Random Name
     profiles.huohu = {
       isDefault = true;
       # userChrome = ''
@@ -32,6 +33,7 @@
       settings = { };
     };
 
+    # Administrator Group Policy
     policies = {
       Preferences = {
         "browser.tabs.closeTabByDblclick" = true;
@@ -50,6 +52,7 @@
         "gfx.text.subpixel-position.force-enabled" = true;
         "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
       };
+      # https://mozilla.github.io/policy-templates/#searchengines--add
       SearchEngines = {
         Add = [
           {
