@@ -3,10 +3,12 @@ set windows-shell := ["powershell.exe", "-c"]
 _default:
     @just --choose
 
-betterfox:
+ff-betterfox:
     iwr "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
     Get-Content ff-pref.js | Add-Content user.js
-    Move-Item user.js $HOME\Desktop
+    Move-Item user.js $HOME\Desktop -Force
+    Write-Host "`n about:support`n" -ForegroundColor Green
+    ii $env:APPDATA\Mozilla\Firefox\Profiles
 
 emacs-mklink:
     Start-Process -Verb RunAs Invoke-Item -FilePath ".\mklink-emacs-admin.cmd"
