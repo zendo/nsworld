@@ -84,15 +84,6 @@ in
           # swtpm.enable = true; # emulated TPM
           # Shared folders: https://wiki.nixos.org/wiki/Virt-manager#Shared_folders
           vhostUserPackages = with pkgs; [ virtiofsd ];
-          ovmf = {
-            # packages = [
-            #   (pkgs.OVMFFull.override
-            #     {
-            #       secureBoot = true;
-            #       tpmSupport = true;
-            #     })
-            # ];
-          };
         };
       };
 
