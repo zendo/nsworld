@@ -37,7 +37,7 @@
 
   programs = {
     light.enable = true;
-    file-roller.enable = true;
+    # file-roller.enable = true;
 
     evince = {
       enable = true;
@@ -94,6 +94,7 @@
           wvkbd # on-screen keyboard
           # waypipe # proxy ?
           # wtype # xdotool
+          file-roller
 
           # Display
           brightnessctl # same like light

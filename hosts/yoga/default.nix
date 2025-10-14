@@ -40,7 +40,7 @@
     # fwupd.enable = true;
     btrfs.autoScrub.enable = true;
 
-    # displayManager.autoLogin.user = "${username}";
+    displayManager.autoLogin.user = "${username}";
 
     dae = {
       # enable = true;
