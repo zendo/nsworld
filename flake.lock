@@ -174,11 +174,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759833546,
-        "narHash": "sha256-rOfkgIiiZNPUbf61OqEym60wXEODeDG8XH+gV/SUoUc=",
+        "lastModified": 1760441980,
+        "narHash": "sha256-HLO1uUa1DJWT6bXD+RigrSthZmxY6JHlbn+zhMizzBo=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "7c0c0f4c3a51761434f18209fa9499b8579ff730",
+        "rev": "3534ac7ff39683da15dbf3adb2a950841a6d58d4",
         "type": "github"
       },
       "original": {
@@ -189,11 +189,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1760338980,
-        "narHash": "sha256-MttbJFPXZ7s4k7ssIsruNyUYwBhhTOqjpaLkFvhsxQ0=",
-        "rev": "662e2ea08d7caacdfacdb92512a13b3f336f6e56",
+        "lastModified": 1760438857,
+        "narHash": "sha256-oqHc9cvnOUgYMKAj2UDgrYgN6d9GZF1hc5NOkmVxtOg=",
+        "rev": "db25466bd95abdbe3012be2900a5562fcfb95d51",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-25.11pre876962.662e2ea08d7c/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-25.11pre877573.db25466bd95a/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -291,11 +291,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1760240450,
-        "narHash": "sha256-sa9bS9jSyc4vH0jSWrUsPGdqtMvDwmkLg971ntWOo2U=",
+        "lastModified": 1760393368,
+        "narHash": "sha256-8mN3kqyqa2PKY0wwZ2UmMEYMcxvNTwLaOrrDsw6Qi4E=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "41fd1f7570c89f645ee0ada0be4e2d3c4b169549",
+        "rev": "ab8d56e85b8be14cff9d93735951e30c3e86a437",
         "type": "github"
       },
       "original": {
@@ -336,11 +336,11 @@
     },
     "templates": {
       "locked": {
-        "lastModified": 1725249436,
-        "narHash": "sha256-qqKaxlPv+6Fyj+NUuOLPOlD82caqDkmpw63qOQkIzzc=",
+        "lastModified": 1760444628,
+        "narHash": "sha256-wkIx1uPjYVOOcho0SAknX3tw2U8vswKwC/uZ3U0HAxE=",
         "owner": "NixOS",
         "repo": "templates",
-        "rev": "ad0e221dda33c4b564fad976281130ce34a20cb9",
+        "rev": "2557dc639215476df149ae6842a1ae94d60a884c",
         "type": "github"
       },
       "original": {
