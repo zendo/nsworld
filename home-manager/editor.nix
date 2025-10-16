@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     gcc
+    gnumake
     cmake
     gnumake
     python3

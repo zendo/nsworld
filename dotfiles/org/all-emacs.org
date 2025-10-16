@@ -2528,6 +2528,13 @@ Show current command and its binding.
   :defer t)
 #+end_src
 
+** rime
+#+begin_src emacs-lisp
+(use-package rime
+  :custom
+  (default-input-method "rime"))
+#+end_src
+
 * Footer
 #+begin_src emacs-lisp
 ;; 回收 early-init.el 的 Magic File Name 禁用
