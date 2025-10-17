@@ -60,7 +60,8 @@
       dash-to-dock
       # dash-to-panel
       night-theme-switcher
-      clipboard-history
+      clipboard-indicator
+      # clipboard-history
       # blur-my-shell
       top-bar-organizer
       compiz-windows-effect
