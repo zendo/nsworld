@@ -28,12 +28,14 @@ in
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-      "hbhaimhpaplfkjfncbkdnadppobbopbi" # SimpleProxy
-      "mjidkpedjlfnanainpdfnedkdlacidla" # CLEAN crxMouse Gestures
+      "jlgkpaicikihijadgifklkbpdajbkhjo" # CrxMouse: Mouse Gestures
       "hmbmmdjlcdediglgfcdkhinjdelkiock" # Font Rendering Enhancer
-      "aapbdbdomjkkjkaonfhkkikfgjllcleb" # Google Translate
-      "jinjaccalgkegednnccohejagnlnfdag" # Violentmonkey
+      "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
       "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
+      "laachonhdpgpkjkppmjebihlklbeekhm" # Simple Proxy Switcher
+      "edenohjoklbajppddnaimojnemafnkkg" # markab
+      "bpoadfkcbjbfhfodiogcnhhhpibjhbnh" # Immersive Translate
+      "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
     ];
   };
 }
