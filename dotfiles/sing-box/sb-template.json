@@ -10,7 +10,7 @@
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
-      "external_ui_download_detour": "🎯 全球直连",
+      "external_ui_download_detour": "🚀 节点选择",
       "secret": "1984",
       "default_mode": "rule",
       "access_control_allow_origin": [
@@ -20,7 +20,7 @@
         "https://metacubexd.pages.dev",
         "https://board.zash.run.place"
       ],
-      "access_control_allow_private_network": false
+      "access_control_allow_private_network": true
     },
     "cache_file": {
       "enabled": true,
@@ -51,9 +51,9 @@
       ],
       "mtu": 9000,
       "auto_route": true,
-      "strict_route": false,
+      "strict_route": true,
       "endpoint_independent_nat": false,
-      "stack": "mixed"
+      "stack": "system"
     }
   ],
   "outbounds": [
@@ -118,10 +118,6 @@
         "action": "route",
         "clash_mode": "global",
         "outbound": "GLOBAL"
-      },
-      {
-        "action": "reject",
-        "protocol": "quic"
       },
       {
         "action": "reject",
@@ -210,39 +206,45 @@
       }
     ],
     "auto_detect_interface": true,
-    "final": "🐟 漏网之鱼"
+    "find_process": true,
+    "final": "🐟 漏网之鱼",
+    "default_domain_resolver": {
+      "server": "Local-DNS"
+    }
   },
   "dns": {
     "servers": [
       {
         "tag": "Local-DNS",
-        "address": "h3://223.5.5.5:443/dns-query",
-        "address_resolver": "Local-DNS-Resolver",
-        "detour": "🎯 全球直连"
+        "type": "https",
+        "domain_resolver": "Local-DNS-Resolver",
+        "server_port": 443,
+        "server": "223.5.5.5",
+        "path": "/dns-query"
       },
       {
         "tag": "Local-DNS-Resolver",
-        "address": "udp://223.5.5.5:53",
-        "detour": "🎯 全球直连"
+        "type": "udp",
+        "server_port": 53,
+        "server": "223.5.5.5"
       },
       {
         "tag": "Remote-DNS",
-        "address": "tls://8.8.8.8:853",
-        "address_resolver": "Remote-DNS-Resolver",
-        "detour": "🚀 节点选择"
+        "type": "tls",
+        "detour": "🚀 节点选择",
+        "domain_resolver": "Remote-DNS-Resolver",
+        "server_port": 853,
+        "server": "8.8.8.8"
       },
       {
         "tag": "Remote-DNS-Resolver",
-        "address": "udp://8.8.8.8:53",
-        "detour": "🚀 节点选择"
+        "type": "udp",
+        "detour": "🚀 节点选择",
+        "server_port": 53,
+        "server": "8.8.8.8"
       }
     ],
     "rules": [
-      {
-        "action": "route",
-        "server": "Local-DNS",
-        "outbound": "any"
-      },
       {
         "action": "route",
         "clash_mode": "direct",
@@ -270,7 +272,7 @@
     ],
     "disable_cache": false,
     "disable_expire": false,
-    "independent_cache": false,
+    "independent_cache": true,
     "final": "Remote-DNS",
     "strategy": "ipv4_only"
   }

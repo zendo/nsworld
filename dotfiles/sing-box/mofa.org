@@ -116,10 +116,14 @@ sing-box merge -c feiji.json -c sb-tun.json config.json
 
 ** GUI.for.SingBox
 
+https://linux.do/t/topic/938696
+
 混入自定义配置：
-打开 tun
 mixed-in 监听地址改 ::
+打开 tun，模式堆栈选 system
+路由设置——规则：删除 reject quic
 DNS设置——服务器——Local-DNS: h3://223.5
+出战设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
 
 #+begin_src json
 {
@@ -132,8 +136,10 @@ DNS设置——服务器——Local-DNS: h3://223.5
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
-      "external_ui_download_detour": "🎯 全球直连",
       "secret": "1984",
+      "default_mode": "rule",
+      "external_ui_download_detour": "🚀 节点选择",
+      "access_control_allow_private_network": true,
       "access_control_allow_origin": [
         "http://127.0.0.1",
         "https://yacd.metacubex.one",
@@ -143,7 +149,11 @@ DNS设置——服务器——Local-DNS: h3://223.5
       ]
     }
   },
+  "route": {
+    "find_process": true
+  },
   "dns": {
+    "independent_cache": true,
     "strategy": "ipv4_only"
   }
 }
@@ -201,6 +211,45 @@ mixed: inbound is a socks4, socks4a, socks5 and http server.
     "listen": "0.0.0.0",
     "listen_port": 7895
 }
+#+end_src
+
+** providers
+outbounds —— 节点选择/自动选择 添加：
+
+#+begin_src json
+"use_all_providers": true,
+#+end_src
+
+#+begin_src json
+  "providers": [
+    {
+      "type": "remote",
+      "tag": "sub1",
+      "url": "",
+      "user_agent": "sing-box",
+      "download_detour": "🎯 全球直连",
+      "update_interval": "24h",
+      "override_dialer": {}
+    },
+    {
+      "type": "remote",
+      "tag": "sub2",
+      "url": "",
+      "user_agent": "sing-box",
+      "download_detour": "🎯 全球直连",
+      "update_interval": "24h",
+      "override_dialer": {}
+    },
+    {
+      "type": "remote",
+      "tag": "sub3",
+      "url": "",
+      "user_agent": "sing-box",
+      "download_detour": "🎯 全球直连",
+      "update_interval": "24h",
+      "override_dialer": {}
+    }
+  ]
 #+end_src
 
 ** dns
