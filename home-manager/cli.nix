@@ -27,6 +27,7 @@
     sd
     xcp
     choose
+    lazyssh
     ssh-to-age
     sops
     age
