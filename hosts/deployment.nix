@@ -16,14 +16,14 @@
     fastConnection = true; # copy from ssh
     nodes = {
       "svp" = {
-        hostname = "192.168.2.30";
+        hostname = "svp";
         profiles.system = {
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."svp";
         };
       };
 
       "rmt" = {
-        hostname = "192.168.122.25";
+        hostname = "rmt";
         profiles.system = {
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."rmt";
         };
