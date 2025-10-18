@@ -9,12 +9,14 @@
     {
       pkgs,
       system,
+      lib,
+      config,
       ...
     }:
     {
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
-        overlays = builtins.attrValues self.overlays;
+        overlays = [ self.overlays.modifications ];
         config = {
           allowUnfree = true;
           # allowInsecure = true;
@@ -25,6 +27,16 @@
       # nix build .#
       # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
       legacyPackages = pkgs;
+
+      packages =
+        lib.packagesFromDirectoryRecursive {
+          inherit (pkgs) callPackage;
+          directory = ../pkgs;
+        }
+        // {
+          # nix run .
+          default = config.packages.lsx;
+        };
 
       # nix develop .#rust
       devShells = {
