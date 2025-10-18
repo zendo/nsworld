@@ -13,6 +13,7 @@
         ./hosts/deployment.nix # flake.deploy
         ./lib/flake-module.nix # flake.lib
         ./templates/flake-module.nix # flake.templates
+        ./devshells/flake-module.nix # flake.devShells
         ./devshells/treefmt.nix # flake.formatter
       ];
 
@@ -52,9 +53,6 @@
               # nix run .
               default = config.packages.anich;
             };
-
-          # nix develop .#rust
-          devShells = import ./devshells { inherit pkgs; };
         };
 
       debug = true;
