@@ -32,15 +32,15 @@
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
 
     # proxy
-    # ssr_ip=localhost ; ssr ; ssr-nix-daemon
-    ssr = "export {http,https,ftp}_proxy=socks5h://\${ssr_ip}:7890 ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://\${ssr_ip}:7890";
+    # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
+    ssr = "export {http,https,ftp}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://\${ssr_ip}";
     ssr-nix-daemon = ''
       sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
       sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
       [Service]
-      Environment="http_proxy=socks5h://''${ssr_ip}:7890"
-      Environment="https_proxy=socks5h://''${ssr_ip}:7890"
-      Environment="all_proxy=socks5h://''${ssr_ip}:7890"
+      Environment="http_proxy=socks5h://''${ssr_ip}"
+      Environment="https_proxy=socks5h://''${ssr_ip}"
+      Environment="all_proxy=socks5h://''${ssr_ip}"
       EOF
       sudo systemctl daemon-reload
       sudo systemctl restart nix-daemon
