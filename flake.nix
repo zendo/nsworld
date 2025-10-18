@@ -17,6 +17,8 @@
         ./devshells/treefmt.nix # flake.formatter
       ];
 
+      debug = true;
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -24,16 +26,14 @@
 
       perSystem =
         {
-          lib,
           pkgs,
-          config,
           system,
           ...
         }:
         {
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
-            overlays = [ self.overlays.modifications ];
+            overlays = builtins.attrValues self.overlays;
             config = {
               allowUnfree = true;
               # allowInsecure = true;
@@ -41,21 +41,10 @@
             };
           };
 
+          # nix build .#
           # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
           legacyPackages = pkgs;
-
-          packages =
-            lib.packagesFromDirectoryRecursive {
-              inherit (pkgs) callPackage;
-              directory = ./overlays/pkgs;
-            }
-            // {
-              # nix run .
-              default = config.packages.anich;
-            };
         };
-
-      debug = true;
     };
 
   inputs = {
