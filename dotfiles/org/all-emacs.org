@@ -1476,7 +1476,7 @@ hippie expand is dabbrev expand on steroids
   (magit-format-file-function #'magit-format-file-nerd-icons)
   :config
   ;; Magit status fullscreen
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  ;; (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 
   (when IS-WINDOWS
     (setq magit-refresh-status-buffer nil)

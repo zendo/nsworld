@@ -1,13 +1,9 @@
 # https://garnix.io/docs/yaml_config
 builds:
-  exclude:
-    - "packages.x86_64-linux.sub-store"
   include:
     # - "*.x86_64-linux.*"
     # - devShell.x86_64-linux
-    - packages.x86_64-linux.*
-    - defaultPackage.x86_64-linux
     # - homeConfigurations.*
     # - darwinConfigurations.*
     # - nixosConfigurations.*
-    - "nixosConfigurations.yoga"
+    - nixosConfigurations.yoga

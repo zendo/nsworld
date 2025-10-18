@@ -32,7 +32,7 @@
         User root
 
       Host rmt
-        HostName 192.168.122.25
+        HostName 192.168.122.247
         Port 22
         User root
 
