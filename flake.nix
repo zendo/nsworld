@@ -13,7 +13,7 @@
         ./hosts/deployment.nix # flake.deploy
         ./lib/flake-module.nix # flake.lib
         ./templates/flake-module.nix # flake.templates
-        ./treefmt.nix # flake.formatter
+        ./devshells/treefmt.nix # flake.formatter
       ];
 
       systems = [
@@ -54,7 +54,7 @@
             };
 
           # nix develop .#rust
-          devShells = import ./devshells.nix { inherit pkgs; };
+          devShells = import ./devshells { inherit pkgs; };
         };
 
       debug = true;
