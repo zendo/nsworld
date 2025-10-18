@@ -2,7 +2,7 @@
   description = "NIX SAVE THE WORLD";
 
   outputs =
-    inputs@{ self, flake-parts, ... }:
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
 
       imports = [
@@ -13,38 +13,13 @@
         ./hosts/deployment.nix # flake.deploy
         ./lib/flake-module.nix # flake.lib
         ./templates/flake-module.nix # flake.templates
-        ./devshells/flake-module.nix # flake.devShells
+        ./devshells/flake-module.nix # flake.devShells & perSystem
         ./devshells/treefmt.nix # flake.formatter
       ];
 
+      # repl: flake.debug
       debug = true;
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-
-      perSystem =
-        {
-          pkgs,
-          system,
-          ...
-        }:
-        {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = builtins.attrValues self.overlays;
-            config = {
-              allowUnfree = true;
-              # allowInsecure = true;
-              android_sdk.accept_license = true;
-            };
-          };
-
-          # nix build .#
-          # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
-          legacyPackages = pkgs;
-        };
     };
 
   inputs = {

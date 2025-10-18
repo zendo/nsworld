@@ -1,11 +1,31 @@
-{ ... }:
+{ inputs, self, ... }:
 {
+  systems = [
+    "x86_64-linux"
+    "aarch64-linux"
+  ];
+
   perSystem =
     {
       pkgs,
+      system,
       ...
     }:
     {
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues self.overlays;
+        config = {
+          allowUnfree = true;
+          # allowInsecure = true;
+          android_sdk.accept_license = true;
+        };
+      };
+
+      # nix build .#
+      # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
+      legacyPackages = pkgs;
+
       # nix develop .#rust
       devShells = {
         default = pkgs.mkShell {
