@@ -5,26 +5,28 @@
   unzip,
 }:
 
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation rec {
   pname = "sub-store";
-  version = "2.20.24";
+  version = "2.20.30";
 
   src = fetchurl {
+    url = "https://github.com/sub-store-org/Sub-Store/releases/download/${version}/sub-store.bundle.js";
+    sha256 = "sha256-7j4mu/WXryTpwPT3N+pOZRxkR6ovM6odU3DJ7db3PFg=";
+  };
+
+  ui = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
     sha256 = "sha256-G6nzR1mnQqHGORC6MK5F9nv5eL2szRM6RrYCtwbg/U4=";
   };
 
-  js = fetchurl {
-    url = "https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js";
-    sha256 = "sha256-ymsQMkcVAEiJsTvkH6TdCfgVD99XrB+L2WRifuYarHo=";
-  };
-
   nativeBuildInputs = [ unzip ];
+
+  dontUnpack = true;
 
   installPhase = ''
     mkdir -p $out/frontend
-    cp -r . $out/frontend
-    cp $js $out/sub-store.bundle.js
+    unzip -j $ui -d $out/frontend
+    cp $src $out/sub-store.bundle.js
   '';
 
   meta = {
