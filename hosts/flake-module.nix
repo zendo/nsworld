@@ -13,15 +13,14 @@
           specialArgs = {
             inherit inputs self username;
           };
-          modules =
-            [
-              # nixos setup
-              {
-                networking.hostName = "${hostname}";
-              }
-            ]
-            # and more modules
-            ++ extraModules;
+          modules = [
+            # nixos setup
+            {
+              networking.hostName = "${hostname}";
+            }
+          ]
+          # and more modules
+          ++ extraModules;
         };
     in
     {
