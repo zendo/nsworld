@@ -87,8 +87,8 @@ in
               "0" = "fcitx-rime-deploy";
             };
           };
-        };
-      };
-    };
-  };
+        }; # end of addons
+      }; # end of fcitx5.settings
+    }; # end of i18n.inputMethod
+  }; # end of config
 }

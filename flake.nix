@@ -13,13 +13,11 @@
         ./hosts/deployment.nix # flake.deploy
         ./lib/flake-module.nix # flake.lib
         ./templates/flake-module.nix # flake.templates
-        ./devshells/flake-module.nix # flake.devShells & flake.packages & perSystem
+        ./devshells/flake-module.nix # flake.devShells / flake.packages / perSystem
         ./devshells/treefmt.nix # flake.formatter
       ];
 
-      # repl: flake.debug
-      debug = true;
-
+      debug = true; # repl: flake.debug
     };
 
   inputs = {
