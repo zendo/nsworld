@@ -1,5 +1,9 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    pure-prompt
+  ];
+
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
@@ -14,8 +18,15 @@
     shellAliases = {
       history = "history 0"; # show whole history
     };
+    # loginExtra = ''
+    #   cd ~/nsworld
+    # '';
     initContent = ''
       unsetopt correct  # Disable AutoCorrect
+
+      # Theme
+      autoload -U promptinit; promptinit
+      prompt pure
 
       # Completions
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive tab completion

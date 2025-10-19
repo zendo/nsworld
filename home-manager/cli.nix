@@ -95,7 +95,7 @@
     bandwhich
     traceroute
     speedtest-cli
-    proxychains-ng
+    # proxychains-ng
     # airgeddon # wifi crack
 
     # Game & fun
@@ -206,7 +206,7 @@
     };
 
     starship = {
-      enable = true;
+      # enable = true;
       enableBashIntegration = false;
       settings = {
         command_timeout = 3000; # Timeout for commands executed
