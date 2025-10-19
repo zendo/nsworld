@@ -26,12 +26,14 @@ in
       fcitx5.addons = with pkgs; [
         fcitx5-fluent
         fcitx5-mellow-themes
+        # 命令行手动部署
+        # nix shell nixpkgs#librime --command rime_deployer --build ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
         (fcitx5-rime.override {
           rimeDataPkgs = [
             # 换个输入法方案需要重启再部署，不然环境不干净
             # /run/current-system/sw/share/rime-data/
-            # pkgs.rime-ice
-            pkgs.rime-wanxiang
+            pkgs.rime-ice
+            # pkgs.rime-wanxiang
           ];
         })
       ];
