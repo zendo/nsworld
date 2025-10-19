@@ -28,7 +28,10 @@ in
         fcitx5-mellow-themes
         (fcitx5-rime.override {
           rimeDataPkgs = [
-            pkgs.rime-ice
+            # 换个输入法方案需要重启再部署，不然环境不干净
+            # /run/current-system/sw/share/rime-data/
+            # pkgs.rime-ice
+            pkgs.rime-wanxiang
           ];
         })
       ];
