@@ -64,6 +64,7 @@
           {
             Name = "Searchix";
             URLTemplate = "https://searchix.ovh/?query={searchTerms}";
+            IconURL = "https://searchix.ovh/favicon.ico";
             Alias = "nse";
           }
           {
