@@ -39,8 +39,7 @@
       enabled-extensions = [
         "app-hider@lynith.dev"
         "dash-to-dock@micxgx.gmail.com"
-        "clipboard-indicator@tudmotu.com"
-        # "clipboard-history@alexsaveau.dev"
+        "clipboard-history@alexsaveau.dev"
         # "gradienttopbar@pshow.org"
         "nightthemeswitcher@romainvigier.fr"
         "caffeine@patapon.info"
