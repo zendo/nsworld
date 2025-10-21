@@ -206,7 +206,7 @@ Use ~getenv~ check the environment variables.
             search-web-default-browser 'browse-url-generic)))
   ;; 解决从 Windows 复制中文到 WSLg 乱码
   (set-clipboard-coding-system 'gbk-dos)
-  ;; WSLg breaks copy-paste from Emacs into Windows
+  ;; 解决从 Emacs 复制内容到 Windows 剪贴板
   ;; https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
   (setq select-active-regions nil
         select-enable-clipboard 't

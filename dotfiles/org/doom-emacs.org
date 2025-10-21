@@ -285,6 +285,26 @@
 #+end_src
 
 *** WSL
+#+begin_src emacs-lisp
+(when (featurep :system 'wsl)
+  ;; open links in Windows browser
+  ;; https://emacsredux.com/blog/2021/12/19/wsl-specific-emacs-configuration/
+  ;; (let ((cmd-exe "/mnt/c/Windows/System32/cmd.exe")
+  ;;       (cmd-args '("/c" "start")))1
+  ;;   (when (file-exists-p cmd-exe)
+  ;;     (setq browse-url-generic-program  cmd-exe
+  ;;           browse-url-generic-args     cmd-args
+  ;;           browse-url-browser-function 'browse-url-generic
+  ;;           search-web-default-browser 'browse-url-generic)))
+  ;; 解决从 Windows 复制中文到 WSLg 乱码
+  (set-clipboard-coding-system 'gbk-dos)
+  ;; 解决从 Emacs 复制内容到 Windows 剪贴板
+  ;; https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
+  (setq select-active-regions nil
+        select-enable-clipboard 't
+        select-enable-primary nil
+        interprogram-cut-function #'gui-select-text))
+#+end_src
 
 ** UI
 #+begin_src emacs-lisp
