@@ -57,6 +57,8 @@
       appindicator
       app-icons-taskbar
       # rocketbar
+      # dock-ng
+      # dock-from-dash
       dash-to-dock
       # dash-to-panel
       night-theme-switcher

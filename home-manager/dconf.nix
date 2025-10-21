@@ -39,6 +39,8 @@
       enabled-extensions = [
         "app-hider@lynith.dev"
         "dash-to-dock@micxgx.gmail.com"
+        # "dock-from-dash@fthx"
+        # "dock-ng@ochi12.github.com"
         "clipboard-history@alexsaveau.dev"
         # "gradienttopbar@pshow.org"
         "nightthemeswitcher@romainvigier.fr"

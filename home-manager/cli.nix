@@ -35,7 +35,6 @@
     chafa # image viewer
     viu # image viewer
     gtrash
-    eget
     croc
     goshs
     dufs
