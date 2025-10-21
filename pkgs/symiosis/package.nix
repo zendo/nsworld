@@ -49,9 +49,10 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Notational Velocity inspired notes app";
     homepage = "https://github.com/dathinaios/symiosis";
-    platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [ zendo ];
     license = lib.licenses.gpl2;
+    platforms = lib.platforms.linux;
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+    maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "Symiosis";
   };
 })
