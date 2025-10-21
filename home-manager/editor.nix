@@ -42,6 +42,12 @@
       ];
     extraConfig = ''
       (display-time-mode 1)
+      ;; toggle-input-method
+      ;; cp ~/nsworld/dotfiles/rime/default.custom.yaml ~/.config/emacs/rime/
+      ;; touch ~/.config/emacs/rime/default.yaml
+      (setq rime-librime-root "${pkgs.librime}"
+            rime-emacs-module-header-root "${pkgs.emacs-pgtk}/include"
+            rime-share-data-dir "${pkgs.rime-ice}/share/rime-data")
     '';
   };
 

@@ -211,6 +211,7 @@
 (package! dired-git-info)
 (package! powershell)
 (package! super-save)
+(package! rime)
 ;; (package! this-package
 ;; :recipe (:host github :repo "camdez/goto-last-change"))
 (package! org-modern :disable t)
