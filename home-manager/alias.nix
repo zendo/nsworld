@@ -33,7 +33,7 @@
 
     # proxy
     # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
-    ssr = "export {http,https,ftp}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,FTP}_PROXY=socks5h://\${ssr_ip}";
+    ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
     ssr-nix-daemon = ''
       sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
       sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
