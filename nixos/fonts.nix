@@ -8,29 +8,31 @@
   config = lib.mkIf (config.i18n.defaultLocale == "zh_CN.UTF-8") {
     fonts = {
       packages = with pkgs; [
-        noto-fonts
+        ######## Necessary #########
+        adwaita-fonts
+        noto-fonts-color-emoji
+        nerd-fonts.symbols-only
+        ####### Chinese #########
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
-        noto-fonts-color-emoji
-        adwaita-fonts
         # sarasa-gothic
         # lxgw-wenkai
-        # No-Ligature, Nerd-Font, Unhinted for HiDPI
-        maple-mono.NL-NF-CN-unhinted
+        ###### Programming ########
         maple-mono.variable
-        mononoki
-        hack-font
-        fira-code
+        maple-mono.NL-NF-CN-unhinted
         jetbrains-mono
         source-code-pro
-        # geist-font
+        hack-font
+        fira-code
+        mononoki
         # ibm-plex
-        # cascadia-code # Microsoft
+        # geist-font
         # recursive
+        # cascadia-code # Microsoft
+        ###### MISC ########
         # comic-relief
-        # alegreya
+        # alegreya # for comfortable reading
         lexend # improve reading fluency
-        nerd-fonts.symbols-only
       ];
 
       fontconfig = {
