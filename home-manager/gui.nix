@@ -44,7 +44,7 @@
     # rhythmbox
     goodvibes
     go-musicfox
-    # splayer # netease cloud music
+    splayer
     # mousai
     songrec
     kooha
