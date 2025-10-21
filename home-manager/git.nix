@@ -6,6 +6,16 @@
     settings = {
       user.name = "zendo";
       user.email = "linzway@qq.com";
+      init.defaultBranch = "main";
+      column.ui = "auto";
+      # pull.rebase = true;
+      # merge.ff = "only";
+      # core.editor = "vim";
+      # credential.helper = "store";
+      # safe.directory = [
+      #   "/home/iab/nsworld"
+      #   "/home/iab/code/nixpkgs"
+      # ];
       alias = {
         st = "status -sb";
         ds = "diff --stat";
@@ -20,18 +30,6 @@
         quick-rebase = "rebase --interactive --autostash --committer-date-is-author-date";
         pr-pull = "!f() { git fetch upstream pull/$1/head:pr-$2-$1 && git checkout pr-$2-$1; }; f";
         sync-nixos-version = ''!git fetch upstream master && git merge "$(nixos-version --revision)"'';
-      };
-      extraConfig = {
-        column.ui = "auto";
-        init.defaultBranch = "main";
-        # pull.rebase = true;
-        # merge.ff = "only";
-        # core.editor = "vim";
-        # credential.helper = "store";
-        safe.directory = [
-          # "/home/iab/nsworld"
-          # "/home/iab/devel/nixpkgs"
-        ];
       };
     }; # end of settings
 
