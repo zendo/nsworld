@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  imports = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
+  imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
   programs.kate = {
     enable = true;
