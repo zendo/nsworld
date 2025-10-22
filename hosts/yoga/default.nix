@@ -18,8 +18,8 @@
     self.nixosModules.homeManagerInit
     self.nixosModules.laptopPowerPlan
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri
@@ -40,7 +40,7 @@
     # fwupd.enable = true;
     btrfs.autoScrub.enable = true;
 
-    displayManager.autoLogin.user = "${username}";
+    # displayManager.autoLogin.user = "${username}";
 
     dae = {
       # enable = true;

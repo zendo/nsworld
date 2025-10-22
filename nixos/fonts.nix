@@ -15,11 +15,11 @@
         ####### Chinese #########
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
+        maple-mono.NL-NF-CN-unhinted
         # sarasa-gothic
         # lxgw-wenkai
         ###### Programming ########
         maple-mono.variable
-        maple-mono.NL-NF-CN-unhinted
         jetbrains-mono
         source-code-pro
         hack-font
