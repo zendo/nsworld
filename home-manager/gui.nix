@@ -116,7 +116,7 @@
 
   services = {
     # disable on wm
-    easyeffects.enable = !config.services.wlsunset.enable;
+    # easyeffects.enable = !config.services.wlsunset.enable;
   };
 
   programs.mpv = {
