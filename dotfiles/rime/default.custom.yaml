@@ -5,12 +5,6 @@ patch:
   # 方案列表
   schema_list:
     - schema: rime_ice
-    # - schema: wanxiang
-    # - schema: "rime_frost"
-    # - schema: "aurora_pinyin"
-    # - schema: "luna_pinyin_simp"
-    # - schema: "clover"
-    # - schema: "easy_en"
 
   # 中英文切换
   ascii_composer:
