@@ -36,11 +36,15 @@
       ];
 
       fontconfig = {
-        # antialias = true; # default true
-        # hinting.enable = false; # default true
+        # antialias = true; # default value: true
+        # hinting = {
+        #   enable = false; # default value: true
+        #   autohint = false; # default value: false
+        #   style = "slight"; # default value: slight
+        # };
         # subpixel = {
-        #   rgba = "none"; # default rgb
-        #   lcdfilter = "none"; # default default
+        #   rgba = "none"; # default value: none
+        #   lcdfilter = "default"; # default value: default
         # };
 
         defaultFonts = {
@@ -60,8 +64,8 @@
             "Source Han Serif SC"
             "DejaVu Serif"
           ];
-        }; # defaultFonts
-      }; # fontconfig
-    }; # fonts
-  }; # config
+        }; # end of defaultFonts
+      }; # end of fontconfig
+    }; # end of fonts
+  }; # end of config
 }
