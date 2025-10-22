@@ -20,7 +20,6 @@
     # .config/kdeglobals
     workspace = {
       # clickItemTo = "open";
-      lookAndFeel = "org.kde.breezetwilight.desktop"; # breezedark, breezetwilight
       # cursor = {
       #   theme = "Bibata-Modern-Ice";
       #   size = 32;
@@ -92,7 +91,7 @@
       #     "org.kde.plasma.appmenu"
       #   ];
       # }
-    ]; # panels end here.
+    ]; # end of panels
 
     # .config/kwinrc
     kwin = {
@@ -116,9 +115,8 @@
       };
       # 窗口管理 - 桌面特效
       effects = {
+        # 窗口惯性晃动
         wobblyWindows.enable = true;
-        cube.enable = true;
-        desktopSwitching.animation = "slide";
       };
     }; # kwin end here.
 
@@ -177,11 +175,6 @@
         "General"."MaxClipItems" = 300;
       };
 
-      # FIXME: https://github.com/pjones/plasma-manager/issues/47
-      # kcminputrc = {
-      #   "Libinput.1739.52804.MSFT0001:00 06CB:CE44 Touchpad"."NaturalScroll" = true;
-      # };
-
       # 锁屏
       kscreenlockerrc = {
         "Daemon"."Timeout" = 8; # minutes
@@ -191,34 +184,34 @@
         # 夜间颜色 2700K~3000K
         NightColor = {
           "Active" = true;
-          "Mode" = "Location";
-          "LatitudeFixed" = 23.12;
-          "LongitudeFixed" = 113.26;
+          # "Mode" = "Location";
+          # "LatitudeFixed" = 23.12;
+          # "LongitudeFixed" = 113.26;
           "NightTemperature" = 3000;
         };
 
         # 窗口管理 - 任务切换器
-        TabBox = {
-          LayoutName = "big_icons";
-          # HighlightWindows = false;
-        };
+        # TabBox = {
+        #   LayoutName = "big_icons";
+        #   # HighlightWindows = false;
+        # };
 
         # Windows = {
 
         # };
 
-        # fcitx5-wayland-launcher.desktop / org.fcitx.Fcitx5.desktop
+        # fcitx5-wayland-launcher.desktop or org.fcitx.Fcitx5.desktop
         Wayland.InputMethod = "/run/current-system/sw/share/applications/fcitx5-wayland-launcher.desktop";
       }; # kwinrc end here.
 
       # 键盘 - 布局/高级
-      kxkbrc = {
-        "Layout"."Use" = true;
-        "Layout"."ResetOldOptions" = true;
-        "Layout"."SwitchMode" = "Global";
-        "Layout"."LayoutList" = "cn";
-        # "Layout"."Options" = "ctrl:swapcaps";
-      };
+      # kxkbrc = {
+      #   "Layout"."Use" = true;
+      #   "Layout"."ResetOldOptions" = true;
+      #   "Layout"."SwitchMode" = "Global";
+      #   "Layout"."LayoutList" = "cn";
+      #   # "Layout"."Options" = "ctrl:swapcaps";
+      # };
     }; # configFile end here.
 
     # 键盘 - 快捷键
@@ -274,7 +267,7 @@
           "Meta+4"
           "Ctrl+F4"
         ];
-      }; # kwin end here.
-    }; # shortcuts end here.
-  }; # programs.plasma end here.
+      }; # end of kwin
+    }; # end of shortcuts
+  }; # end of programs.plasma
 }
