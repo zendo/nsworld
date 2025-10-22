@@ -124,10 +124,10 @@
     powerdevil = {
       AC = {
         # 空闲时
-        # autoSuspend = {
-        #   action = "sleep";
-        #   idleTimeout = 900;
-        # };
+        autoSuspend = {
+          action = "sleep";
+          idleTimeout = 600;
+        };
         # 关闭屏幕
         # turnOffDisplay = {
         #   idleTimeout = 900;
@@ -137,6 +137,11 @@
         whenSleepingEnter = "hybridSleep";
       };
       battery = {
+        # 空闲时
+        autoSuspend = {
+          action = "sleep";
+          idleTimeout = 300;
+        };
         # 睡眠时进入此模式：待机然后休眠
         whenSleepingEnter = "standbyThenHibernate";
       };
