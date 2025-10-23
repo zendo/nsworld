@@ -18,8 +18,8 @@
     self.nixosModules.homeManagerInit
     self.nixosModules.laptopPowerPlan
 
-    # self.nixosModules.gnome
-    self.nixosModules.kde
+    self.nixosModules.gnome
+    # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri
