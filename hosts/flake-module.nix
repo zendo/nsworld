@@ -24,7 +24,7 @@
         };
     in
     {
-      # nixos-rebuild --sudo --flake .#yoga switch
+      # Main Drive
       yoga = mkHost {
         username = "iab";
         hostname = "yoga";
