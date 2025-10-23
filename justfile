@@ -4,24 +4,19 @@ host := `uname -n`
 user := `loginctl --no-legend list-users | awk '{print $2;}'`
 home_dir := env_var('HOME')
 
+[private]
 _default:
     @just --choose --unsorted
 
 justfile-windows:
-    just --justfile=./dotfiles/Windows/justfile
+    just dotfiles/Windows/
 
-switch:
-    nixos-rebuild --sudo --flake .#"{{ host }}" switch
+# switch / boot / test
+os *args:
+    nixos-rebuild --sudo --flake .#"{{ host }}" {{ args }}
 
-boot:
-    nixos-rebuild --sudo --flake .#"{{ host }}" boot
-
-upgrade:
-    nix flake update --commit-lock-file && \
-      nixos-rebuild --sudo --flake .#"{{ host }}" boot
-
-build-os-nom:
-    nom build .#nixosConfigurations."{{ host }}".config.system.build.toplevel
+up *inputs:
+    nix flake update --commit-lock-file {{ inputs }}
 
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
@@ -42,26 +37,22 @@ diff-commits:
 gc-all:
     sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
 
-hm-switch:
-    home-manager switch --flake .#"{{ user }}"
+# switch / build
+hm *args:
+    home-manager --flake .#"{{ user }}" {{ args }}
 
 hm-diff:
     nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
 
-build-livecd-standard:
-    nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
-
-build-livecd-minimal:
-    nix build .#nixosConfigurations.livecd-minimal.config.system.build.isoImage
+# livecd-minimal / livecd-standard
+build-iso *args:
+    nix build .#nixosConfigurations.{{ args }}.config.system.build.isoImage
 
 build-wsl-installer:
     sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
 
 nix-tree-with-gcroots:
     nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree
-
-hash2sri:
-    nix hash convert --hash-algo sha256 --to sri "$2"
 
 nix-index-database-update:
     #!/usr/bin/env bash
