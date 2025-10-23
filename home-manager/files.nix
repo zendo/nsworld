@@ -31,7 +31,7 @@ in
     "hypr/hypridle.conf".source = linkFlake "dotfiles/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
 
-    "doom/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
+    "doom/doom-emacs.org".source = linkFlake "dotfiles/org/doom-emacs.org";
     "emacs/all-emacs.org".source = linkFlake "dotfiles/org/all-emacs.org";
 
     # rime
