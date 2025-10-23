@@ -83,4 +83,4 @@ emacs-ob-tangle-doom:
     emacs -Q --batch \
     -l org \
     --eval '(setq vc-follow-symlinks nil)' \
-    --eval '(org-babel-tangle-file "~/.config/doom/doom-emacs.org")'
+    --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
