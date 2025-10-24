@@ -15,14 +15,6 @@ justfile-windows:
 os *args:
     nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
 
-up:
-    #!/usr/bin/env bash
-    before_update=$(nix eval --raw .\#nixosConfigurations."{{ host }}".config.system.nixos.revision)
-    nix flake update --commit-lock-file
-    after_update=$(nix eval --raw .\#nixosConfigurations."{{ host }}".config.system.nixos.revision)
-    echo -e "\033[1;33m \n Nixpkgs Comparing changes: \033[0m"
-    echo -e "\033[32m https://github.com/NixOS/nixpkgs/compare/"$before_update"..."$after_update" \033[0m"
-
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
@@ -38,6 +30,18 @@ hm *args:
 
 hm-diff:
     nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
+
+up:
+    #!/usr/bin/env bash
+    before_update=$(nix eval --raw .\#nixosConfigurations."{{ host }}".config.system.nixos.revision)
+    nix flake update --commit-lock-file
+    after_update=$(nix eval --raw .\#nixosConfigurations."{{ host }}".config.system.nixos.revision)
+    if [[ "$before_update" = "$after_update" ]]; then
+        echo -e "\n Nixpkgs is no update."
+    else
+        echo -e "\033[1;33m \n Nixpkgs Comparing changes: \033[0m"
+        echo -e "\033[32m https://github.com/NixOS/nixpkgs/compare/"$before_update"..."$after_update" \033[0m"
+    fi
 
 # livecd-minimal / livecd-standard
 build-iso *args:
@@ -68,12 +72,14 @@ non-nixos-setup:
     substituters = https://mirror.sjtu.edu.cn/nix-channels/store
     EOF
 
+[group('emacs')]
 emacs-ob-tangle:
     emacs -Q --batch \
     -l org \
     --eval '(setq vc-follow-symlinks nil)' \
     --eval '(org-babel-tangle-file "~/.config/emacs/all-emacs.org")'
 
+[group('emacs')]
 emacs-ob-tangle-doom:
     emacs -Q --batch \
     -l org \
