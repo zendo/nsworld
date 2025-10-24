@@ -21,6 +21,9 @@ diff:
 diff-dix:
     dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
 
+diff-commit:
+    git commit -m "flake.lock: Update details" -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)"
+
 gc-all:
     sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
 
@@ -39,8 +42,11 @@ up:
     if [[ "$before_update" = "$after_update" ]]; then
         echo -e "\n Nixpkgs is no update."
     else
+        OLD_MSG=$(git log -1 --pretty=%B)
+        ADD_MSG=$(echo https://github.com/NixOS/nixpkgs/compare/"$before_update"..."$after_update")
         echo -e "\033[1;33m \n Nixpkgs Comparing changes: \033[0m"
-        echo -e "\033[32m https://github.com/NixOS/nixpkgs/compare/"$before_update"..."$after_update" \033[0m"
+        echo -e "\033[32m $ADD_MSG \033[0m"
+        git commit --amend --quiet -m "$OLD_MSG" -m "Nixpkgs Comparing changes: $ADD_MSG"
     fi
 
 # livecd-minimal / livecd-standard
