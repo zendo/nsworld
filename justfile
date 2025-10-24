@@ -22,7 +22,7 @@ diff-dix:
     dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
 
 diff-commit:
-    git commit -m "flake.lock: Update details" -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)"
+    git commit -m "flake.lock: Update details" -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)" --allow-empty
 
 gc-all:
     sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
