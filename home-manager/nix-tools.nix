@@ -23,6 +23,7 @@
     nixpkgs-track
     disko
     nixos-anywhere
+    colmena
     inputs.deploy-rs.packages.${system}.deploy-rs
 
     # persistent cache
