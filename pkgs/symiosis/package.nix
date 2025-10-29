@@ -3,7 +3,7 @@
   stdenv,
   fetchurl,
   dpkg,
-  wrapGAppsHook,
+  wrapGAppsHook3,
   autoPatchelfHook,
   udev,
   libgbm,
@@ -24,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     dpkg
-    wrapGAppsHook
+    wrapGAppsHook3
     autoPatchelfHook
   ];
 

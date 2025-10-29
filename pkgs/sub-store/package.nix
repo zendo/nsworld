@@ -7,11 +7,11 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "sub-store";
-  version = "2.20.31";
+  version = "2.20.32";
 
   src = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store/releases/download/${version}/sub-store.bundle.js";
-    sha256 = "sha256-6fyo3Ausn0a8TL5Y9g/gmMkjCks6NrQcWZYESnI34Tw=";
+    sha256 = "sha256-MS8tLZ3rq0Cr+BUe2oQuf12JEvKpOtrACk7XDzkkU24=";
   };
 
   ui = fetchurl {
