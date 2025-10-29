@@ -20,9 +20,9 @@
   home-manager.users.${username} =
     { pkgs, ... }:
     {
-      # imports = [
-      #   ../../home-manager/ghostty.nix
-      # ];
+      imports = [
+        ../../home-manager/ghostty.nix
+      ];
 
       home.packages = with pkgs; [
         # GUI
@@ -81,6 +81,8 @@
   };
 
   programs.zsh.enable = true;
+
+  nix.settings.auto-optimise-store = false;
 
   nixpkgs.hostPlatform = "x86_64-linux";
   i18n.defaultLocale = "zh_CN.UTF-8";

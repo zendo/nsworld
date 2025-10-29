@@ -24,7 +24,7 @@
 
     settings = {
       warn-dirty = false;
-      auto-optimise-store = true;
+      auto-optimise-store = lib.mkDefault true;
       auto-allocate-uids = true;
       use-cgroups = true;
       # max-jobs = 8; # limit the number of parallel jobs
