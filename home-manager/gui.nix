@@ -14,7 +14,7 @@
     kitty
     kitten-quick-terminal # .desktop
 
-    tdesktop # (webkitgtk)
+    telegram-desktop # (webkitgtk)
     # vesktop # discord
     # nheko
     # fluffychat
@@ -81,7 +81,7 @@
     # drawio
     # rnote # handwritten note
     # foliate # (webkitgtk)
-    readest
+    # readest
     # koodo-reader
     # planify
     # ghostwriter # (qtwebengine)
