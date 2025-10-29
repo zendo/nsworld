@@ -25,8 +25,8 @@
       unsetopt correct  # Disable AutoCorrect
 
       # Theme
-      autoload -U promptinit; promptinit
-      prompt pure
+      # autoload -U promptinit; promptinit
+      # prompt pure
 
       # Completions
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive tab completion
