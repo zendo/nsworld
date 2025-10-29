@@ -45,6 +45,14 @@
         hash = "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4=";
       };
 
+      # nurl https://github.com/sahaj-b/ghostty-cursor-shaders
+      ghostty-cursor-shaders = prev.fetchFromGitHub {
+        owner = "sahaj-b";
+        repo = "ghostty-cursor-shaders";
+        rev = "14f7cd035f1b483dfe46ba11aef7377b6c4c687d";
+        hash = "sha256-ky343PVJklT4MqF5whULGwC5e5YfKF7PRGjB+CoBVUI=";
+      };
+
       # FIXME: https://github.com/NixOS/nixpkgs/issues/332812
       plymouth = prev.plymouth.overrideAttrs (
         { src, ... }:

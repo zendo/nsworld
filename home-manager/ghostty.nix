@@ -1,11 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # ghostty +show-config --default --docs
   programs.ghostty = {
-    # enable = true;
+    enable = true;
     settings = {
       command = "zsh --login";
       shell-integration-features = "no-cursor,sudo";
+      custom-shader = "${pkgs.ghostty-cursor-shaders}/cursor_warp.glsl";
       font-family = "Maple mono";
       font-size = "11";
       # theme = "Tomorrow Night";
