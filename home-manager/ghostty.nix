@@ -26,9 +26,9 @@
         "ctrl+y=paste_from_clipboard"
         "ctrl+x>2=new_split:down"
         "ctrl+x>3=new_split:right"
-        "ctrl+x>0=close_window"
+        "ctrl+x>0=close_surface"
         "ctrl+shift+q=close_window"
-        "ctrl+shift+backspace=close_window"
+        "ctrl+shift+backspace=close_surface"
       ];
     };
   };

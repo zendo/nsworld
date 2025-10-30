@@ -1,13 +1,16 @@
+#!/usr/bin/env python
+
 # https://github.com/ademlabs/synckeys
 
+# Pair Linux first, then pair Windows.
 # gsudo psexec -s -i regedit /e %HOMEPATH%\Desktop\keydump.reg HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\BTHPORT\Parameters\Keys
-# cd /var/lib/bluetooth/<adapter>
-# cat ~/keydump.reg // find and copy <windows-paired-MAC>
+# cat keydump.reg // find and copy <windows-paired-MAC>
 # echo "ce150a771612" | sed 's/\(..\)/\1:/g; s/:$//' | tr 'a-z' 'A-Z'
+# sudo -i
+# cd /var/lib/bluetooth/<adapter>
 # mv <linux-paired-MAC> <windows-paired-MAC>
-# sudo python3 ~/nsworld/dotfiles/bin/synckeys.py ~/keydump.reg
-
-#!/usr/bin/env python
+# sudo python3 ~/nsworld/dotfiles/bin/synckeys.py keydump.reg
+# sudo systemctl restart bluetooth.service
 
 import configparser
 import argparse
