@@ -1,5 +1,11 @@
 # https://github.com/juspay/colmena-flake
-{ config, lib, self, inputs, ... }:
+{
+  config,
+  lib,
+  self,
+  inputs,
+  ...
+}:
 
 {
   options = {
@@ -27,7 +33,9 @@
             description = ''
               The SSH connection string for colmena nodes
             '';
-            default = builtins.mapAttrs (_: v: "${v.targetUser}@${v.targetHost}") config.colmena-flake.deployment;
+            default = builtins.mapAttrs (
+              _: v: "${v.targetUser}@${v.targetHost}"
+            ) config.colmena-flake.deployment;
             readOnly = true;
           };
         };
@@ -49,14 +57,13 @@
         # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
         nodeSpecialArgs = builtins.mapAttrs (_: value: value._module.specialArgs) self.nixosConfigurations;
       };
-    } // builtins.mapAttrs
-      (name: value: {
-        imports = value._module.args.modules ++ [{
+    }
+    // builtins.mapAttrs (name: value: {
+      imports = value._module.args.modules ++ [
+        {
           deployment = config.colmena-flake.deployment.${name};
-        }];
-      })
-      (lib.filterAttrs
-        (k: _: lib.hasAttr k config.colmena-flake.deployment)
-        self.nixosConfigurations);
+        }
+      ];
+    }) (lib.filterAttrs (k: _: lib.hasAttr k config.colmena-flake.deployment) self.nixosConfigurations);
   };
 }

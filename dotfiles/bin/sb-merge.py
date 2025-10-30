@@ -24,19 +24,27 @@ sing_box_outbounds = sing_box_data.get("outbounds", [])
 sing_box_outbounds.extend(nodes_outbounds)
 
 # 获取 "自动选择" 的 outbound 配置
-auto_select = next((out for out in sing_box_outbounds if out.get("tag") == "🎈 自动选择"), None)
+auto_select = next(
+    (out for out in sing_box_outbounds if out.get("tag") == "🎈 自动选择"), None
+)
 
 # 获取 "proxy" 的 outbound 配置
-proxy_select = next((out for out in sing_box_outbounds if out.get("tag") == "🚀 节点选择"), None)
+proxy_select = next(
+    (out for out in sing_box_outbounds if out.get("tag") == "🚀 节点选择"), None
+)
 
 if auto_select and isinstance(auto_select.get("outbounds"), list):
     # 添加所有 nodes.json 中的 tag 到 "自动选择" 的 outbounds
-    auto_select["outbounds"].extend([out["tag"] for out in nodes_outbounds if "tag" in out])
+    auto_select["outbounds"].extend(
+        [out["tag"] for out in nodes_outbounds if "tag" in out]
+    )
 else:
     print("未找到 '自动选择' 的 outbound 配置，或其结构不符合预期")
 
 if proxy_select and isinstance(proxy_select.get("outbounds"), list):
-    proxy_select["outbounds"].extend([out["tag"] for out in nodes_outbounds if "tag" in out])
+    proxy_select["outbounds"].extend(
+        [out["tag"] for out in nodes_outbounds if "tag" in out]
+    )
 
 # 保存修改后的文件
 with open("config.json", "w", encoding="utf-8") as updated_file:
