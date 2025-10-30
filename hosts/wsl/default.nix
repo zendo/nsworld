@@ -28,6 +28,7 @@
         # GUI
         foot
         kitty
+        goodvibes
 
         # DEV
         nixd
