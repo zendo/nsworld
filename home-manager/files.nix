@@ -34,7 +34,7 @@ in
     "doom/config.org".source = linkFlake "dotfiles/org/doom-emacs.org";
     "emacs/all-emacs.org".source = linkFlake "dotfiles/org/all-emacs.org";
 
-    # rime
+    # rime for ibus
     "ibus/rime/default.custom.yaml".source = ../dotfiles/rime/default.custom.yaml;
     "ibus/rime/rime_ice.custom.yaml".source = ../dotfiles/rime/rime_ice.custom.yaml;
     "ibus/rime/ibus_rime.custom.yaml".text = ''
@@ -48,7 +48,7 @@ in
     "goodvibes".source = ../dotfiles/goodvibes;
     "color-schemes/Genshin.colors".source = ../dotfiles/misc/kde-color-Genshin.colors;
 
-    # rime
+    # rime for fcitx5
     "fcitx5/rime/default.custom.yaml".source = ../dotfiles/rime/default.custom.yaml;
     "fcitx5/rime/rime_ice.custom.yaml".source = ../dotfiles/rime/rime_ice.custom.yaml;
 
