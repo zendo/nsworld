@@ -54,7 +54,7 @@
        ;; (meow +qwerty +override +keypad)
        ;; file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       ;; (format +onsave)  ; automated prettiness
+       (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
@@ -212,6 +212,7 @@
 (package! powershell)
 (package! super-save)
 (package! rime)
+(package! casual)
 ;; (package! this-package
 ;; :recipe (:host github :repo "camdez/goto-last-change"))
 (package! org-modern :disable t)
@@ -644,6 +645,18 @@
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
    ))
+#+end_src
+
+*** casual
+https://github.com/kickingvegas/casual
+
+#+begin_src emacs-lisp
+(use-package casual
+  :bind (("C-c o o" . #'casual-editkit-main-tmenu)
+         :map dired-mode-map ("C-o" . casual-dired-tmenu)
+         :map isearch-mode-map ("C-o" . casual-isearch-tmenu)
+         :map calc-mode-map ("C-o" . casual-calc-tmenu)
+         :map Info-mode-map ("C-o" . casual-info-tmenu)))
 #+end_src
 
 ** Functions
