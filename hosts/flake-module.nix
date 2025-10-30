@@ -24,7 +24,6 @@
         };
     in
     {
-      # Main Drive
       yoga = mkHost {
         username = "iab";
         hostname = "yoga";
@@ -33,7 +32,6 @@
         ];
       };
 
-      # nixos-rebuild --target-host zendo@192.168.2.198 --sudo --flake .#svp boot
       svp = mkHost {
         username = "zendo";
         hostname = "svp";

@@ -78,9 +78,9 @@
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
 
-    # Intel AX200
-    # nix shell nixpkgs#wirelesstools --command iwconfig
+    # Fixes for `Intel AX200` power saving mode
     # https://github.com/zachlatta/nixos-configs/blob/master/bak/lugia/intel_ax200_fix.nix
+    # nix shell nixpkgs#wirelesstools --command iwconfig
     extraModprobeConfig = ''
       options iwlwifi power_save=0
       options iwlmvm power_scheme=1

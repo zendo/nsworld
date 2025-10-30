@@ -39,7 +39,7 @@
   imports = [ ./colmena-flake.nix ];
 
   colmena-flake.deployment = {
-    # colmena apply-local --sudo -v
+    # colmena apply-local --sudo
     yoga = {
       targetHost = "yoga";
       targetUser = "root";
