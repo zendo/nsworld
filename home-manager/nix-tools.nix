@@ -24,10 +24,10 @@
     disko
     nixos-anywhere
     colmena
-    inputs.deploy-rs.packages.${system}.deploy-rs
+    inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
 
     # persistent cache
-    inputs.self.formatter.${system}
+    inputs.self.formatter.${stdenv.hostPlatform.system}
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
     (writeScriptBin "nsa" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))
