@@ -17,7 +17,7 @@
         ./devshells/treefmt.nix # flake.formatter
       ];
 
-      debug = true; # repl: flake.debug
+      debug = true; # repl: flake.currentSystem / flake.debug
     };
 
   inputs = {
