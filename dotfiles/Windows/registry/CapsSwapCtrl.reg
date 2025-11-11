@@ -1,0 +1,21 @@
+Windows Registry Editor Version 5.00
+
+; The hex data is in five groups of four bytes:
+;   00,00,00,00,\    header version (always 00000000)
+;   00,00,00,00,\    header flags (always 00000000)
+;   04,00,00,00,\    # of entries (3 in this case) plus a NULL terminator line.
+;                    Entries are in 2-byte pairs: Key code to send & keyboard key to send it.
+;                    Each entry is in "least significant byte, most significant byte" order,
+;                    e.g. 0x1234 becomes `34,12`
+;   1d,00,3a,00,\    Send LEFT CTRL (0x001d) code when user presses the CAPS LOCK key (0x003a) 
+;   38,00,1d,00,\    Send LEFT ALT (0x0038) code when user presses the LEFT CTRL key (0x001d) 
+;   3a,00,38,00,\    Send CAPS LOCK (0x003a) code when user presses the LEFT ALT key (0x0038) 
+;   00,00,00,00      NULL terminator
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,\
+                   00,00,00,00,\
+                   04,00,00,00,\
+                   1d,00,3a,00,\
+                   3a,00,1d,00,\
+                   00,00,00,00
