@@ -43,6 +43,7 @@
     magic-wormhole-rs
 
     # System Monitor
+    fastfetchMinimal
     ctop # containers monitor
     iotop-c
     dool # py fork of dstat
