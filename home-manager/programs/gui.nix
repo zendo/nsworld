@@ -89,7 +89,11 @@
     # textpieces
     # devtoolbox
 
-    # HARDWARE TEST
+    # HARDWARE TOOLS
+    parted
+    gptfdisk
+    efibootmgr
+    # efitools
     # amdgpu_top
     # nvtopPackages.amd
     inxi

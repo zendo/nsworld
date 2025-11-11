@@ -10,6 +10,7 @@
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
     inputs.self.nixosModules.homeManagerInit
+    (rootPath + "/nixos/core/base.nix")
     (rootPath + "/nixos/core/fonts.nix")
     (rootPath + "/nixos/core/nixpkgs.nix")
     (rootPath + "/nixos/core/nixconfig.nix")
@@ -28,7 +29,6 @@
       ];
 
       home.packages = with pkgs; [
-        # GUI
         foot
         kitty
         goodvibes
@@ -51,15 +51,7 @@
     ];
   };
 
-  programs.zsh.enable = true;
-
-  nix.settings.auto-optimise-store = false;
-
   nixpkgs.hostPlatform = "x86_64-linux";
-  i18n.defaultLocale = "zh_CN.UTF-8";
-  time.timeZone = "Asia/Shanghai";
-  system.stateVersion = "25.05";
-  documentation.enable = lib.mkDefault false;
 
   ###############################################
   ##  WSL Settings

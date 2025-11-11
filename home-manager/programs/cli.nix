@@ -56,6 +56,8 @@
     dysk
 
     # Utils
+    (lib.hiPrio uutils-coreutils-noprefix)
+    file
     bat
     just
     igrep
@@ -76,7 +78,6 @@
     calcurse
     # zee
     tokei # count code
-    wthrr # weather
 
     # Networking
     wget
@@ -90,6 +91,7 @@
     sniffglue
     # ipinfo # 62M
     elinks
+    wthrr # weather
     dnspeep
     nethogs
     bandwhich
