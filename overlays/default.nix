@@ -17,7 +17,9 @@
     #   };
     # };
 
-    # Add new packages
+    ###############################################
+    ##  Add new packages
+    ###############################################
     additions =
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
@@ -25,7 +27,9 @@
         directory = ../pkgs;
       };
 
-    # Mod existed packages
+    ###############################################
+    ##  Mod existed packages
+    ###############################################
     modifications = final: prev: {
       # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
 
@@ -135,6 +139,6 @@
       ];
 
       # And etc...
-    };
-  };
+    }; # end of modifications
+  }; # end of flake.overlays
 }
