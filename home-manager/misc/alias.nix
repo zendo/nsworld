@@ -31,22 +31,6 @@
     ip-info = "curl ip.im/info";
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
 
-    # proxy
-    # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
-    ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
-    ssr-nix-daemon = ''
-      sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
-      sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
-      [Service]
-      Environment="http_proxy=socks5h://''${ssr_ip}"
-      Environment="https_proxy=socks5h://''${ssr_ip}"
-      Environment="all_proxy=socks5h://''${ssr_ip}"
-      EOF
-      sudo systemctl daemon-reload
-      sudo systemctl restart nix-daemon
-    '';
-    chrome-ssr = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}:7890"'';
-
     # web
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
@@ -62,6 +46,28 @@
     nse = "nix search nixpkgs";
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
     nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
-    nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
   };
+
+  programs.zsh.shellAliases = {
+    # nix
+    nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
+
+    # proxy
+    # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
+    ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
+    ssr-nix-daemon = ''
+      sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
+      sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
+      [Service]
+      Environment="http_proxy=socks5h://''${ssr_ip}"
+      Environment="https_proxy=socks5h://''${ssr_ip}"
+      Environment="all_proxy=socks5h://''${ssr_ip}"
+      EOF
+      sudo systemctl daemon-reload
+      sudo systemctl restart nix-daemon
+    '';
+    chrome-ssr = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}:7890"'';
+  };
+
+  # programs.fish.shellAliases = ;
 }
