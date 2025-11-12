@@ -62,5 +62,6 @@
     nse = "nix search nixpkgs";
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
     nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
+    nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
   };
 }
