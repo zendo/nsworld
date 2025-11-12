@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   nixosConfig,
   ...
@@ -21,6 +22,14 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+    };
+
+    autostart = {
+      # enable = true;
+      # readOnly = true;
+      entries = [
+        "${pkgs.goodvibes}/share/applications/io.gitlab.Goodvibes.desktop"
+      ];
     };
 
     dataFile = {
