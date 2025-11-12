@@ -36,6 +36,7 @@
       dippi
       goodvibes
       kitty
+      ghostty
     ];
   };
 

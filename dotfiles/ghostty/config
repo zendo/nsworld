@@ -33,4 +33,4 @@ keybind = ctrl+shift+backspace=close_surface
 
 # enable the quick terminal
 # keybind = global:alt+ctrl+cmd+space=toggle_quick_terminal
-quick-terminal-position = center
+# quick-terminal-position = center
