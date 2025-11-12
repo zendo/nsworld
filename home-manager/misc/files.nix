@@ -24,6 +24,7 @@ in
     "fuzzel".source = linkFlake "dotfiles/fuzzel";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
     "wezterm".source = linkFlake "dotfiles/wezterm";
+    "ghostty".source = linkFlake "dotfiles/ghostty";
 
     "niri".source = linkFlake "dotfiles/niri";
     "sway/config".source = linkFlake "dotfiles/sway/config";

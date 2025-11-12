@@ -2,7 +2,7 @@
 {
   # ghostty +show-config --default --docs
   programs.ghostty = {
-    enable = true;
+    # enable = true;
     settings = {
       command = "zsh --login";
       shell-integration-features = "no-cursor,sudo";

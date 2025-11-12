@@ -13,6 +13,7 @@
     foot
     kitty
     kitten-quick-terminal # .desktop
+    ghostty
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
