@@ -62,8 +62,8 @@ rec {
       enabled-extensions = map (extension: extension.extensionUuid) home.packages;
       favorite-apps = [
         # "foot.desktop"
-        "kitty.desktop"
-        # "com.mitchellh.ghostty.desktop"
+        # "kitty.desktop"
+        "com.mitchellh.ghostty.desktop"
         "org.gnome.Nautilus.desktop"
         # "code.desktop"
         "emacs.desktop"
