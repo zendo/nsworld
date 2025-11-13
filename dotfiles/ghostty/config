@@ -2,6 +2,7 @@
 # ghostty +show-config --default --docs
 
 # config-file = ?someconfig
+# custom-shader = cursor-shaders/cursor_warp.glsl
 
 command = zsh --login
 shell-integration-features = no-cursor,sudo
@@ -19,6 +20,8 @@ background = 0F0F0F
 background-opacity = 0.9
 
 # gtk-titlebar = false
+# gtk-wide-tabs = false
+
 # window-width = 90
 # window-height = 28
 window-padding-x = 8
