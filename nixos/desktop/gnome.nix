@@ -47,6 +47,7 @@
     gnome-randr
     gnome-power-manager
     gnome-sound-recorder
+    # gnome-extension-manager
     qadwaitadecorations-qt6
   ];
 }

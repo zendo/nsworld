@@ -1,24 +1,28 @@
 # https://ghostty.org/docs/config/reference
 # ghostty +show-config --default --docs
 
-#config-file = ?someconfig
+# config-file = ?someconfig
 
 command = zsh --login
 shell-integration-features = no-cursor,sudo
 
 font-family = Maple mono
+font-family = Noto Sans SC
 font-size = 11
 
 cursor-style = block
 
+# ghostty +list-themes
+# theme = Afterglow
 background = 0F0F0F
 # foreground = F0F0F0
 background-opacity = 0.9
 
+# gtk-titlebar = false
 # window-width = 90
 # window-height = 28
-# window-padding-x = 8
-# window-padding-y = 4
+window-padding-x = 8
+window-padding-y = 4
 
 keybind = ctrl+enter=unbind
 keybind = f11=toggle_fullscreen
@@ -32,5 +36,5 @@ keybind = ctrl+shift+q=close_window
 keybind = ctrl+shift+backspace=close_surface
 
 # enable the quick terminal
-# keybind = global:alt+ctrl+cmd+space=toggle_quick_terminal
+ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 # quick-terminal-position = center
