@@ -5,7 +5,7 @@ rec {
     appindicator
     # app-icons-taskbar
     # rocketbar
-    # dock-ng
+    # dockng
     # dock-from-dash
     dash-to-dock
     # dash-to-panel
