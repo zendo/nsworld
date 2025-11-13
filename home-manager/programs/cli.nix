@@ -6,7 +6,7 @@
     # Developing
     yq
     jql
-    otree # tui tree for JSON/YAML/TOML
+    # otree # tui tree for JSON/YAML/TOML
     sqlite
     openssl
     discount # markdown
@@ -23,6 +23,12 @@
     cdrtools # mkisofs
 
     # FileManager
+    file
+    tree
+    erdtree
+    gdu
+    duf
+    dysk
     f2
     sd
     xcp
@@ -50,15 +56,10 @@
     powertop
     psmisc # pstree
     procs
-    erdtree
     ikill
-    gdu
-    duf
-    dysk
 
     # Utils
     (lib.hiPrio uutils-coreutils-noprefix)
-    file
     bat
     just
     igrep
