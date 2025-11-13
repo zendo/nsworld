@@ -35,7 +35,7 @@
         }
         // {
           # nix run .
-          default = config.packages.lsx;
+          default = config.packages.anich;
         };
 
       # nix develop .#rust
