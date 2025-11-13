@@ -24,8 +24,6 @@ in
     "fuzzel".source = linkFlake "dotfiles/fuzzel";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
     "wezterm".source = linkFlake "dotfiles/wezterm";
-    "ghostty/config".source = linkFlake "dotfiles/ghostty/config";
-    # "ghostty/cursor-shaders".source = "${pkgs.ghostty-cursor-shaders}";
 
     "niri".source = linkFlake "dotfiles/niri";
     "sway/config".source = linkFlake "dotfiles/sway/config";

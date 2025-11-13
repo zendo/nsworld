@@ -1,23 +1,29 @@
 { pkgs, ... }:
 {
+  # https://ghostty.org/docs/config/reference
   # ghostty +show-config --default --docs
   programs.ghostty = {
-    # enable = true;
+    enable = true;
     settings = {
       command = "zsh --login";
       shell-integration-features = "no-cursor,sudo";
       custom-shader = "${pkgs.ghostty-cursor-shaders}/cursor_warp.glsl";
-      font-family = "Maple mono";
+      font-family = [
+        "Maple mono"
+        "Noto Sans SC"
+      ];
       font-size = "11";
-      # theme = "Tomorrow Night";
+      cursor-style = "block";
+      # theme = "Afterglow";
       background = "0F0F0F";
       # foreground = "F0F0F0";
       background-opacity = "0.9";
-      window-height = "28";
-      window-width = "90";
+      gtk-titlebar = false;
+      # gtk-wide-tabs = false;
+      # window-width = "90";
+      # window-height = "28";
       window-padding-x = "8";
       window-padding-y = "4";
-      cursor-style = "block";
       # copy-on-select = "clipboard";
       keybind = [
         "ctrl+enter=unbind"
