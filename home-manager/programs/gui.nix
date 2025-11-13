@@ -45,7 +45,7 @@
     # rhythmbox
     goodvibes
     go-musicfox
-    # splayer # (electron)
+    splayer # (electron)
     # mousai
     songrec
     kooha
