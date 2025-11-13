@@ -14,6 +14,7 @@
     ./programs/cli.nix
     ./programs/zsh.nix
     ./programs/fish.nix
+    ./programs/ghostty.nix
     ./programs/nix-tools.nix
   ];
 
@@ -35,8 +36,6 @@
     packages = with pkgs; [
       dippi
       goodvibes
-      kitty
-      ghostty
     ];
   };
 

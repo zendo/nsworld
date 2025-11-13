@@ -30,8 +30,6 @@
 
       home.packages = with pkgs; [
         foot
-        kitty
-        ghostty
         goodvibes
       ];
     };

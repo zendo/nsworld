@@ -11,9 +11,8 @@
     lsx
 
     foot
-    kitty
-    kitten-quick-terminal # .desktop
-    ghostty
+    # kitty
+    # kitten-quick-terminal # .desktop
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
