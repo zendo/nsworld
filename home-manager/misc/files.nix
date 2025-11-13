@@ -19,7 +19,6 @@ in
 
     "mpv".source = linkFlake "dotfiles/mpv";
     "helix".source = linkFlake "dotfiles/helix";
-    "ironbar".source = linkFlake "dotfiles/ironbar";
     "waybar".source = linkFlake "dotfiles/waybar";
     "fuzzel".source = linkFlake "dotfiles/fuzzel";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
