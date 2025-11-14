@@ -48,7 +48,7 @@
             iconTasks = {
               launchers = [
                 # "applications:kitty.desktop"
-                "com.mitchellh.ghostty.desktop"
+                "applications:com.mitchellh.ghostty.desktop"
                 "applications:org.kde.dolphin.desktop"
                 # "applications:org.kde.kate.desktop"
                 # "applications:emacs.desktop"
@@ -223,7 +223,7 @@
     shortcuts = {
       "emacs.desktop"."_launch" = "Meta+E";
       "firefox.desktop"."_launch" = "Meta+W";
-      "kitty.desktop"."_launch" = "Meta+Return";
+      "com.mitchellh.ghostty.desktop"."_launch" = "Meta+Return";
       "kitten-quick-terminal.desktop"."_launch" = "Meta+/";
 
       "org.kde.dolphin.desktop"."_launch" = "Meta+F";

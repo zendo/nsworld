@@ -44,6 +44,8 @@
     goodvibes
     go-musicfox
     splayer # (electron)
+    # mpd
+    # rmpc
     # mousai
     songrec
     kooha
