@@ -25,10 +25,11 @@
     };
 
     autostart = {
-      # enable = true;
-      # readOnly = true;
+      enable = true;
+      readOnly = true;
       entries = [
-        "${pkgs.goodvibes}/share/applications/io.gitlab.Goodvibes.desktop"
+        # "${pkgs.goodvibes}/share/applications/io.gitlab.Goodvibes.desktop"
+        # "${pkgs.throne}/share/applications/throne.desktop"
       ];
     };
 
@@ -45,9 +46,9 @@
       enable = true;
       defaultApplications = lib.mkMerge [
         {
-          "audio/mpeg" = "qmmp.desktop";
-          "audio/flac" = "qmmp.desktop";
-          "audio/x-vorbis+ogg" = "qmmp.desktop";
+          # "audio/mpeg" = "audacious.desktop";
+          # "audio/flac" = "audacious.desktop";
+          # "audio/x-vorbis+ogg" = "audacious.desktop";
           "text/html" = "firefox.desktop";
           "x-scheme-handler/http" = "firefox.desktop";
           "x-scheme-handler/https" = "firefox.desktop";

@@ -36,6 +36,8 @@
     gnome-photos
     gnome-music
     gnome-software
+    decibels
+    showtime
   ];
 
   environment.systemPackages = with pkgs; [
