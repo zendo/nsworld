@@ -304,11 +304,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1763045742,
-        "narHash": "sha256-DgZZO+KccdSsyLOyDci7l40+ydqtfqXDpM7ifD+Pc3U=",
-        "rev": "036c3539550f49b625e98fdda29e16cca62040a1",
+        "lastModified": 1763061370,
+        "narHash": "sha256-BNfgfYSwFGU/tpj/kd5UNLIpNuycq5+pvicLrOC6CcE=",
+        "rev": "636528d617af0dbafc261a3b97fab7c9ca0a53f4",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-25.11pre895326.036c3539550f/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-25.11pre895491.636528d617af/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -403,11 +403,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1763023272,
-        "narHash": "sha256-TCVNCn/GcKhwm+WlSJEZEPW4ISQdU9ICIU3lTiOLBYc=",
+        "lastModified": 1763069729,
+        "narHash": "sha256-A91a+K0Q9wfdPLwL06e/kbHeAWSzPYy2EGdTDsyfb+s=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "b80c966e70fa0615352c9596315678df1de75801",
+        "rev": "a2bcd1c25c1d29e22756ccae094032ab4ada2268",
         "type": "github"
       },
       "original": {
