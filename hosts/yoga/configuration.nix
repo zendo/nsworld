@@ -32,7 +32,7 @@
   };
 
   systemd = {
-    services.sing-box.enable = true;
+    # services.sing-box.enable = true;
   };
 
   services = {
@@ -52,10 +52,10 @@
   programs = {
     # nix-ld.enable = true;
 
-    # throne = {
-    #   enable = true;
-    #   tunMode.enable = true;
-    # };
+    throne = {
+      enable = true;
+      tunMode.enable = true;
+    };
 
     clash-verge = {
       # enable = true;
