@@ -34,8 +34,8 @@
     ]);
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    # elisa
-    # khelpcenter
+    elisa
+    khelpcenter
     # print-manager
     plasma-browser-integration
   ];

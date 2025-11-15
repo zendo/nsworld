@@ -46,9 +46,9 @@
       enable = true;
       defaultApplications = lib.mkMerge [
         {
-          # "audio/mpeg" = "audacious.desktop";
-          # "audio/flac" = "audacious.desktop";
-          # "audio/x-vorbis+ogg" = "audacious.desktop";
+          "audio/mpeg" = "audacious.desktop";
+          "audio/flac" = "audacious.desktop";
+          "audio/x-vorbis+ogg" = "audacious.desktop";
           "text/html" = "firefox.desktop";
           "x-scheme-handler/http" = "firefox.desktop";
           "x-scheme-handler/https" = "firefox.desktop";

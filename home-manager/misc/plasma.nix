@@ -118,6 +118,23 @@
         # 窗口惯性晃动
         wobblyWindows.enable = true;
       };
+      # 夜间颜色 2700K~3000K
+      nightLight = {
+        enable = true;
+        mode = "location";
+        temperature = {
+          # day = "";
+          night = 3000;
+        };
+        location = {
+          latitude = "23.12";
+          longitude = "113.26";
+        };
+        # time = {
+        #   evening = ;
+        #   morning = ;
+        # };
+      };
     }; # kwin end here.
 
     # 电源管理 .config/powerdevilrc
@@ -186,14 +203,6 @@
       };
 
       kwinrc = {
-        # 夜间颜色 2700K~3000K
-        NightColor = {
-          "Active" = true;
-          # "Mode" = "Location";
-          # "LatitudeFixed" = 23.12;
-          # "LongitudeFixed" = 113.26;
-          "NightTemperature" = 3000;
-        };
 
         # 窗口管理 - 任务切换器
         # TabBox = {
