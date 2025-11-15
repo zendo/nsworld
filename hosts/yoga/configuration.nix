@@ -18,8 +18,8 @@
     self.nixosModules.homeManagerInit
     self.nixosModules.laptopPowerPlans
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
+    # self.nixosModules.gnome
+    self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
     # self.nixosModules.niri
@@ -91,6 +91,9 @@
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
+
+    # Fixes for touhpad two finger
+    blacklistedKernelModules = [ "elan_i2c" ];
 
     supportedFilesystems = [
       "ntfs"
