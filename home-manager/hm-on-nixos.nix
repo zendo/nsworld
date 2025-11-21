@@ -21,8 +21,9 @@
     ./programs/gui.nix
     ./programs/chrome.nix
     ./programs/firefox.nix
-    ./programs/ghostty.nix
+    ./programs/foot.nix
     ./programs/kitty.nix
+    ./programs/ghostty.nix
     ./programs/vicinae.nix
     # dev & editor
     ./editor/nvim.nix

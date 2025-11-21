@@ -17,7 +17,6 @@
     jhentai
 
     # Terminal
-    foot
     cava
     ripdrag
     graphviz

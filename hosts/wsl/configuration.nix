@@ -23,6 +23,7 @@
     { pkgs, ... }:
     {
       imports = [
+        (rootPath + "/home-manager/programs/foot.nix")
         (rootPath + "/home-manager/programs/ghostty.nix")
         # (rootPath + "/home-manager/programs/kitty.nix")
         (rootPath + "/home-manager/editor/dev-tools.nix")

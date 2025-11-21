@@ -21,6 +21,7 @@
     ./programs/cli.nix
     ./programs/ghostty.nix
     # ./programs/kitty.nix
+    # ./programs/foot.nix
     ./programs/nix-tools.nix
     # editor
     ./editor/micro.nix
