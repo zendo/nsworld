@@ -56,8 +56,10 @@ in
     };
   };
 
-  # doas
-  # mods.doas.enable = true;
+  # original sudo
+  # security.sudo.extraRules = [ sudoRule ];
+  # or
+  # security.sudo.wheelNeedsPassword = false;
 
   # sudo-rs
   security.sudo-rs.enable = true;
@@ -65,8 +67,6 @@ in
   # or
   # security.sudo-rs.wheelNeedsPassword = false;
 
-  # vanilla sudo
-  # security.sudo.extraRules = [ sudoRule ];
-  # or
-  # security.sudo.wheelNeedsPassword = false;
+  # doas
+  # mods.doas.enable = true;
 }

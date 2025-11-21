@@ -42,6 +42,7 @@
         settings.formatter.prettier.excludes = [
           "*secrets*"
           "dotfiles/Windows/*"
+          "dotfiles/sing-box/*"
         ];
         # programs.yamlfmt.enable = true;
 
