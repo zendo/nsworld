@@ -15,13 +15,14 @@
     ./shell/atuin.nix
     ./shell/starship.nix
     ./shell/zellij.nix
+    # terminal
+    ./terminal/foot.nix
+    ./terminal/kitty.nix
+    ./terminal/ghostty.nix
     # programs
     ./programs/ssh.nix
     ./programs/git.nix
     ./programs/cli.nix
-    ./programs/ghostty.nix
-    # ./programs/kitty.nix
-    # ./programs/foot.nix
     ./programs/nix-tools.nix
     # editor
     ./editor/micro.nix

@@ -23,9 +23,9 @@
     { pkgs, ... }:
     {
       imports = [
-        (rootPath + "/home-manager/programs/foot.nix")
-        (rootPath + "/home-manager/programs/ghostty.nix")
-        # (rootPath + "/home-manager/programs/kitty.nix")
+        (rootPath + "/home-manager/terminal/foot.nix")
+        (rootPath + "/home-manager/terminal/ghostty.nix")
+        # (rootPath + "/home-manager/terminal/kitty.nix")
         (rootPath + "/home-manager/editor/dev-tools.nix")
         (rootPath + "/home-manager/editor/emacs.nix")
       ];

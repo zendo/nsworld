@@ -18,12 +18,14 @@
   # for desktop environment
   ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
     ./misc/xdg.nix
+    # terminal
+    ./terminal/foot.nix
+    ./terminal/kitty.nix
+    ./terminal/ghostty.nix
+    # programs
     ./programs/gui.nix
     ./programs/chrome.nix
     ./programs/firefox.nix
-    ./programs/foot.nix
-    ./programs/kitty.nix
-    ./programs/ghostty.nix
     ./programs/vicinae.nix
     # dev & editor
     ./editor/nvim.nix
