@@ -13,22 +13,18 @@
       enable = true;
     };
 
-    # Sound
+    # Sounds
     security.rtkit.enable = config.services.pipewire.enable;
     services.pipewire = {
       # alsa.support32Bit = true;
       # jack.enable = true;
     };
 
-    # Fix xdg-open in FHS sandbox
+    # Make `xdg-open` works in FHS sandbox
     xdg.portal.xdgOpenUsePortal = true;
-
-    services.btrfs.autoScrub.enable =
-      config.fileSystems ? "/" && config.fileSystems."/".fsType == "btrfs";
 
     # fcitx or ibus
     mods.fcitx.enable = true;
-
     # i18n.inputMethod = {
     #   enable = true;
     #   type = "ibus";

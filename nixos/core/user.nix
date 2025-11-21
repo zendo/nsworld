@@ -51,7 +51,7 @@ in
 
     users.guest = {
       isNormalUser = true;
-      # guest
+      # pw: guest
       initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
     };
   };

@@ -61,7 +61,7 @@
         "nix-command"
       ];
       substituters = [
-        # "https://cache.nixos.org"
+        # "https://nix-community.cachix.org"
         "https://cache.garnix.io"
         "https://cache.nixos.org"
       ];

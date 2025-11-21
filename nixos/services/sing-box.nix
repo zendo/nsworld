@@ -5,10 +5,6 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    sing-box
-  ];
-
   systemd.services.sing-box = {
     enable = lib.mkDefault false;
     # zashboard / metacubexd

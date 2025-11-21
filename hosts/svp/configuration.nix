@@ -34,7 +34,7 @@
   services.displayManager.autoLogin.user = "${username}";
 
   users.users.${username} = {
-    # 123
+    # pw: 123
     hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
   };
 

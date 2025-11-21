@@ -28,7 +28,7 @@
     ];
   };
 
-  # Remove perl from activation
+  # Perlless Activation
   # system.etc.overlay.enable = lib.mkDefault true;
 
   # Bashless Activation

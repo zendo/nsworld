@@ -8,6 +8,7 @@
 {
   nix = {
     channel.enable = false;
+    # package = pkgs.nixVersions.latest;
 
     registry = lib.mkMerge [
       { n.flake = inputs.nixpkgs; }
@@ -19,8 +20,6 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
-
-    # package = pkgs.nixVersions.latest;
 
     settings = {
       warn-dirty = false;
@@ -38,20 +37,18 @@
         # "https://mirror.sjtu.edu.cn/nix-channels/store"
         # "https://mirrors.ustc.edu.cn/nix-channels/store"
         # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-        # "https://cache.nixos.org"
         # "https://nix-community.cachix.org"
         "https://cache.garnix.io"
+      ];
+
+      trusted-public-keys = [
+        # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
 
       trusted-users = [
         "root"
         "@wheel"
-      ];
-      # List of binary cache URLs that non-root users can use
-      trusted-substituters = [ ];
-      trusted-public-keys = [
-        # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
 
       experimental-features = [
