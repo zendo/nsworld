@@ -18,8 +18,6 @@
 
     # Terminal
     foot
-    # kitty
-    # kitten-quick-terminal # .desktop
     cava
     ripdrag
     graphviz

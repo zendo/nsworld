@@ -12,7 +12,6 @@ in
   xdg.configFile = {
     "cava".source = ../../dotfiles/cava;
     "foot".source = ../../dotfiles/foot;
-    "kitty".source = ../../dotfiles/kitty;
     "shikane".source = ../../dotfiles/shikane;
     "swaylock".source = ../../dotfiles/swaylock;
     "alacritty".source = ../../dotfiles/alacritty;
