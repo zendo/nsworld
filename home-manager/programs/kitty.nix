@@ -1,6 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # xdg.configFile."kitty".source = ../../dotfiles/kitty;
+  # xdg.configFile."kitty".source =
+  #   config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/kitty";
+
   # home.packages = with pkgs; [
   #   kitty
   #   kitten-quick-terminal # .desktop
@@ -12,10 +15,9 @@
     # enable = true;
     # show right prompts
     shellIntegration.mode = "no-cursor no-sudo";
+    # kitten theme
+    themeFile = "zenbones_dark";
     keybindings = {
-      # default
-      # "kitty_mod" = "ctrl+shift";
-      # "kitty_mod+f2" = "open kitty.conf";
       "f11" = "toggle_fullscreen";
       "alt+w" = "copy_to_clipboard";
       "ctrl+y" = "paste_from_clipboard";
