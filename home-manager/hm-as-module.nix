@@ -1,0 +1,25 @@
+{
+  inputs,
+  username,
+  ...
+}:
+{
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
+
+  home-manager = {
+    # using system configuration’s `pkgs` argument
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    # fd hm_bak -H -x rm -r
+    backupFileExtension = "hm_bak~";
+    overwriteBackup = true;
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    ### Common User Initialization ###
+    # sharedModules = [ ./hm-on-nixos.nix ];
+    # users.${username}.home.username = username;
+    ### Specific User Initialization ###
+    users.${username} = ./hm-on-nixos.nix;
+  };
+}

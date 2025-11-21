@@ -1,0 +1,284 @@
+#+STARTUP: show2levels indent hidestars
+
+* clash
+https://xtls.github.io/
+https://wiki.metacubex.one/config/
+
+#+begin_src yaml
+# https://linux.do/t/topic/487334
+# 基本设置
+port: 7890        # HTTP代理端口
+socks-port: 7891  # SOCKS代理端口
+allow-lan: false  # 允许局域网连接
+bind-address: "*" # 绑定地址，* 表示所有地址
+mode: rule        # 代理模式，rule表示规则模式
+log-level: info   # 日志级别
+ipv6: false
+
+# 外部控制配置
+external-controller: 127.0.0.1:9090 # 允许通过 RESTful API 或 Web 界面（如 Clash Dashboard）在本地控制 Clash
+secret: jkfdjk43#$#@LI#@fsdf3  #外部控制,api访问密钥，确保只有知道密码的人才能控制 Clash
+
+# 性能优化
+unified-delay: true       # 更换延迟计算方式，去除握手等额外延迟
+tcp-concurrent: true      # 启用 TCP 并发连接。这允许 Clash 同时建立多个 TCP 连接，可以提高网络性能和连接速度
+
+find-process-mode: strict  # 设置进程查找模式为严格模式，Clash 会更精确地识别和匹配网络流量来源的进程
+global-client-fingerprint: chrome  # 设置全局客户端指纹为 Chrome，使 Clash 在建立连接时模拟 Chrome 浏览器的 TLS 指纹，增强隐私性和绕过某些网站的指纹检测
+
+
+# DNS配置
+dns:
+  enable: true                 # 启用 Clash 的 DNS 功能
+  ipv6: false                  # IPv6 DNS 解析
+  listen: '0.0.0.0:53'         # DNS 服务器监听地址和端口，:53 表示监听所有接口的 53 端口
+  enhanced-mode: fake-ip       # 设置增强模式为 fake-ip 模式，提高解析速度和连接性能
+  fake-ip-range: 198.18.0.1/16 # 设置 fake-ip 的 IP 地址范围为 198.18.0.1/16
+  use-hosts: true              # 启用 hosts 文件解析，Clash 会检查系统的 hosts 文件
+  use-system-hosts: true       # 使用系统的 hosts 文件进行域名解析
+  prefer-h3: true              # 如果DNS服务器支持DoH3会优先使用h3，提升性能
+  respect-rules: true          # 让 DNS 解析遵循 Clash 的路由规则
+  # 定义不使用虚假IP解析的域名列表
+  fake-ip-filter:
+    - '*.lan'
+    - localhost.ptlogin2.qq.com
+    - '+.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.xboxlive.com'
+    - 'xbox.*.microsoft.com'
+    - '*.battlenet.com.cn'
+    - '*.battlenet.com'
+    - '*.blzstatic.cn'
+    - '*.battle.net'
+  
+
+  # 用来解析 nameserver 和 fallback 里面的域名的，必须为 IP, 可为加密 DNS
+  default-nameserver: [223.5.5.5, 119.29.29.29]
+  # 8.8.8.8           # Google DNS
+  # 1.1.1.1           # Cloudflare DNS
+  # 119.29.29.29      # 腾讯DNSPod
+  # 223.5.5.5         # 阿里DNS
+  # 223.6.6.6         # 阿里DNS
+  # 180.76.76.76      # 百度DNS
+
+  # 用于direct出口域名解析的 DNS 服务器
+  # 如果不填则遵循nameserver-policy、nameserver和fallback的配置
+  direct-nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+  nameserver: ['https://8.8.8.8/dns-query#🚀 节点选择', 'https://1.1.1.1/dns-query#🚀 节点选择']
+
+  # 解析代理服务器域名的DNS服务器,就是节点本身中包含的域名
+  # 代理节点域名解析服务器，仅用于解析代理节点的域名，如果不填则遵循nameserver-policy、nameserver和fallback的配置
+  proxy-server-nameserver:
+    - https://1.1.1.1/dns-query          # Cloudflare DNS
+    - https://8.8.8.8/dns-query          # Google DNS
+    - https://doh.pub/dns-query          #腾讯
+    - https://dns.alidns.com/dns-query   #阿里
+    - https://9.9.9.9/dns-query          #Quad9
+    - https://208.67.222.222/dns-query   #OpenDNS
+
+# 配置文件管理
+profile:
+  store-selected: true    # 保存用户选择的代理配置，在 Clash 重启后仍然记住上次选择的代理服务器
+  store-fake-ip: true     # 适用于 Clash 在 Fake IP 模式下工作时。它会将域名到 Fake IP 的映射关系保存下来，确保 Clash 重启后依然能使用相同的 Fake IP 分配给相同的域名，保持连接的一致性和稳定性
+
+# 域名嗅探
+sniffer:
+  enable: true                   # 启用网络流量嗅探功能，允许 Clash 分析和识别流量类型
+  sniff:
+    TLS:
+      ports: [443, 8443]         # 要嗅探的 TLS 流量端口，包括标准 HTTPS 端口 443 和常用的备用 HTTPS 端口 8443
+    HTTP:
+      ports: [80, 8080-8880]     # 要嗅探的 HTTP 流量端口，包括标准 HTTP 端口 80 和常用的 HTTP 端口范围 8080-8880
+      override-destination: true # 启用目标覆盖功能，允许 Clash 根据嗅探到的域名重写请求的目标地址
+
+# GeoData 配置
+geodata-mode: true        # 启用地理数据模式，使 Clash 使用 GeoIP/GeoSite 数据库进行流量的地理位置识别和规则匹配
+geo-auto-update: true     # 启用地理数据库自动更新功能，Clash 会定期检查并更新 GeoIP/GeoSite 数据库
+geo-update-interval: 24   # 设置地理数据库的更新间隔为24小时，Clash 会每24小时自动检查一次更新（小时）
+geodata-loader: standard  # 设置地理数据加载器为标准模式，使用标准的数据解析和加载方式处理地理数据库
+# GeoData下载源（使用国内加速下载源）
+# 备用下载域名https://ghfast.top、https://ghproxy.net、https://ghgo.xyz
+geox-url:
+  geoip: https://fastgh.lainbo.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
+  geosite: https://fastgh.lainbo.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
+  mmdb: https://fastgh.lainbo.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
+  asn: https://fastgh.lainbo.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
+#+end_src
+
+* sing-box
+Windows Tun 防火墙问题，需要手动运行一次提示放行：
+gsudo sing-box run -c coonfig.json
+
+#+begin_src bash
+jq 'del(.inbounds[] | select(.type == "tun"))' feiji.json > config.json
+sing-box merge -c feiji.json -c sb-tun.json config.json
+journalctl -u sing-box -f --output=cat
+#+end_src
+
+** GUI.for.SingBox
+日志时间戳 / api地址 9090 / api密钥 1984 / ui路径 ui / 允许私有网络访问
+https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+mixed-in 监听地址改 :: 7890
+打开 tun，模式堆栈选 system
+出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
+路由设置——规则：删除 reject quic
+# DNS设置——服务器——Local-DNS: h3://223.5
+
+https://linux.do/t/topic/938696
+
+** inbounds
+
+mtu: The maximum transmission unit.
+
+"listen": "127.0.0.1", : ipv4
+"listen": "::", ：ipv6
+
+listen_port
+sudo lsof -i :7890
+netstat -ano | findstr :7890 // windows
+
+*** tun
+Defaults to the mixed stack if the gVisor build tag is enabled, otherwise defaults to the system stack.
+
+system 使用系统协议栈，可以提供更稳定/全面的 tun 体验，且占用相对其他堆栈更低
+gvisor 通过在用户空间中实现网络协议栈，可以提供更高的安全性和隔离性，同时可以避免操作系统内核和用户空间之间的切换，从而在特定情况下具有更好的网络处理性能
+mixed 混合堆栈，tcp 使用 system 栈，udp 使用 gvisor 栈，使用体验可能相对更好
+
+#+begin_src json
+{
+    "type": "tun",
+    "tag": "tun-in",
+    "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+    ],
+    "auto_route": true,
+    "strict_route": true
+},
+#+end_src
+
+*** mixed
+mixed: inbound is a socks4, socks4a, socks5 and http server.
+
+#+begin_src json
+{
+    "type": "mixed",
+    "tag": "mixed-in",
+    "listen": "127.0.0.1",
+    "listen_port": 7890
+}
+#+end_src
+
+*** tproxy
+
+#+begin_src json
+{
+    "type": "tproxy",
+    "tag": "tproxy-in",
+    "listen": "0.0.0.0",
+    "listen_port": 7895
+}
+#+end_src
+
+** providers
+outbounds —— 节点选择/自动选择 添加：
+
+#+begin_src json
+"use_all_providers": true,
+#+end_src
+
+#+begin_src json
+  "providers": [
+    {
+      "type": "remote",
+      "tag": "sub1",
+      "url": "",
+      "user_agent": "sing-box",
+      "download_detour": "🎯 全球直连",
+      "update_interval": "24h",
+      "override_dialer": {}
+    },
+    {
+      "type": "remote",
+      "tag": "sub2",
+      "url": "",
+      "user_agent": "sing-box",
+      "download_detour": "🎯 全球直连",
+      "update_interval": "24h",
+      "override_dialer": {}
+    },
+    {
+      "type": "remote",
+      "tag": "sub3",
+      "url": "",
+      "user_agent": "sing-box",
+      "download_detour": "🎯 全球直连",
+      "update_interval": "24h",
+      "override_dialer": {}
+    }
+  ]
+#+end_src
+
+** dns
+
+tls: DNS over TLS (DoT)
+quic: DNS over QUIC (DoQ)
+https: DNS over HTTPS (DoH)
+h3: DNS over HTTP3 (DoH3) *recommend*
+
+** experimental
+cache_file enabled: required to save rule-set cache.
+
+#+begin_src json
+{
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
+      "secret": "1984",
+      "default_mode": "rule",
+      "external_ui_download_detour": "🚀 节点选择",
+      "access_control_allow_private_network": true,
+      "access_control_allow_origin": [
+        "http://127.0.0.1",
+        "https://yacd.metacubex.one",
+        "https://metacubex.github.io",
+        "https://metacubexd.pages.dev",
+        "https://board.zash.run.place"
+      ]
+    }
+  }
+}
+#+end_src
+
+** Links
+https://sing-box.sagernet.org/zh/configuration/
+https://icloudnative.io/posts/sing-box-tutorial/
+https://linux.do/t/topic/1164538#p-10270168-sing-box-7
+
+https://github.com/qichiyuhub/sbshell tproxy
+https://github.com/Toperlock/sing-box-subscribe 模板
+https://github.com/bestnite/sub2sing-box
+
+* sub-store
+
+安装：
+#+begin_src bash
+wget https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js
+wget https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip && unzip dist.zip && rm dist.zip && mv dist frontend
+pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
+#+end_src
+
+教程：
+https://linux.do/t/topic/846616
+
+文件管理 - 创建文件 - config.json
+
+模板：
+https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/misc/sb-template.json
+
+脚本：
+https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=liangxin&outbound=%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%8E%88%20%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%9A%80%20%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9&type=%E8%BF%9C%E7%A8%8B%E8%AE%A2%E9%98%85

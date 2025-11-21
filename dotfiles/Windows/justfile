@@ -1,0 +1,34 @@
+set windows-shell := ["powershell.exe", "-c"]
+
+_default:
+    @just --choose
+
+ff-betterfox:
+    iwr "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
+    Get-Content ff-pref.js | Add-Content user.js
+    Move-Item user.js $HOME\Desktop -Force
+    Write-Host "`n about:support`n" -ForegroundColor Green
+    ii $env:APPDATA\Mozilla\Firefox\Profiles
+
+emacs-mklink:
+    Start-Process -Verb RunAs Invoke-Item -FilePath ".\mklink-emacs-admin.cmd"
+
+emacsclient-shortcut-startup:
+    .\shortcut-emacsclient.ps1
+
+kanata-shortcut-startup:
+    .\shortcut-kanata.ps1
+
+emacs-ob-tangle:
+    emacs -Q --batch \
+    -l org \
+    --eval '(setq vc-follow-symlinks nil)' \
+    --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
+
+sing-box-setup:
+    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O sb-service.exe
+    iwr "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" -O dist.zip
+    Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
+    New-Item $HOME\Desktop\subs -ItemType Directory -Force
+    Copy-Item sb-service.xml $HOME\Desktop\subs
+    Move-Item sb-service.exe, ui $HOME\Desktop\subs

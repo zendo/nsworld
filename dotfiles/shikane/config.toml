@@ -1,0 +1,24 @@
+[[profile]]
+name = "yoga"
+
+[[profile.output]]
+enable = true
+search = ["m=0x8A90", "s=", "v=Lenovo Group Limited"]
+mode = "2880x1800@90Hz"
+position = "0,0"
+scale = 2
+transform = "normal"
+adaptive_sync = false
+
+
+[[profile]]
+name = "svp"
+
+[[profile.output]]
+enable = true
+search = ["m=VVX13F009G00", "s=", "v=Panasonic Industry Company"]
+mode = "1920x1080@60Hz"
+position = "0,0"
+scale = 1.5
+transform = "normal"
+adaptive_sync = false

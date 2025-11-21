@@ -1,0 +1,14 @@
+# https://garnix.io/docs/yaml_config
+builds:
+  exclude:
+    - "packages.x86_64-linux.anich"
+  include:
+    # - '*.x86_64-linux.*'
+    # - defaultPackage.x86_64-linux
+    # - devShell.x86_64-linux
+    # - homeConfigurations.*
+    # - darwinConfigurations.*
+    # - nixosConfigurations.*
+    - packages.x86_64-linux.*
+    - defaultPackage.x86_64-linux
+    - "nixosConfigurations.yoga"
