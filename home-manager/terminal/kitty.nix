@@ -11,35 +11,35 @@ let
     url_color             #9ec3c4
 
     # black
-    color8   #777777
-    color0   #4c4c4c
+    color8  #777777
+    color0  #4c4c4c
 
     # red
-    color1   #ac8a8c
-    color9   #c49ea0
+    color1  #ac8a8c
+    color9  #c49ea0
 
     # green
-    color2   #CCFF90
-    color10  #9ec49f
+    color2  #CCFF90
+    color10 #9ec49f
 
     # yellow
-    color3   #aca98a
-    color11  #c4c19e
+    color3  #aca98a
+    color11 #c4c19e
 
     # blue
     color4  #8f8aac
     color12 #a39ec4
 
     # magenta
-    color5   #ac8aac
-    color13  #c49ec4
+    color5  #ac8aac
+    color13 #c49ec4
 
     # cyan
-    color6   #8aacab
-    color14  #9ec3c4
+    color6  #8aacab
+    color14 #9ec3c4
 
     # white
-    color15   #e7e7e7
+    color15 #e7e7e7
     color7  #f0f0f0
   '';
 in
