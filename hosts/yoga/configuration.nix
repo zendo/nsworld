@@ -38,7 +38,7 @@
   ###############################################
   environment.systemPackages = with pkgs; [
     # inputs.nixpkgs-pr.legacyPackages.${system}.apps
-    # mihomo
+    mihomo
     sing-box
     # gui-for-singbox
     # v2rayn

@@ -59,14 +59,14 @@
 
       # https://github.com/reF1nd/sing-box/tags
       # sing-box = prev.sing-box.overrideAttrs (oldAttrs: rec {
-      #   version = "1.12.10-reF1nd";
+      #   version = "1.12.12-reF1nd";
       #   src = prev.fetchFromGitHub {
       #     owner = "reF1nd";
       #     repo = "sing-box";
       #     tag = "v${version}";
-      #     hash = "sha256-s2TDZtVIgf/m3iJZHwJSNIsY98wHKua7Ld74szAn/pQ=";
+      #     hash = "sha256-7hV9cHXEEYXY6v/4v1z/QjnHgI13F1YLdFjW6giOzbI=";
       #   };
-      #   vendorHash = "sha256-xsN+cdOFl7OS124xYj2EG1ZIz8MZV+lfbMPj1h+o55Q=";
+      #   vendorHash = "sha256-d44VxELcjgbP2Ei6gc/zh3Jg2b1N/gnSQf8vR5rCuBk=";
       # });
 
       # xwayland env for inputMethod & native CSD
