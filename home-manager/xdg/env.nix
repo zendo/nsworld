@@ -17,6 +17,13 @@
     _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
   };
 
+  # Cursor Theme
+  # home.pointerCursor = {
+  #   name = "Vanilla-DMZ-AA";
+  #   package = pkgs.vanilla-dmz;
+  #   size = 128;
+  # };
+
   xdg = {
     userDirs = {
       enable = true;
@@ -39,25 +46,7 @@
       '';
     };
 
-    # Cursor Theme
-    # home.pointerCursor = {
-    #   name = "Vanilla-DMZ-AA";
-    #   package = pkgs.vanilla-dmz;
-    #   size = 128;
-    #   # name = "Bibata-Modern-Classic";
-    #   # package = pkgs.bibata-cursors;
-    #   # size = 128;
-    # };
-
     desktopEntries = {
-      #   spotify = {
-      #     name = "Spotify";
-      #     genericName = "Music Player";
-      #     icon = "spotify-client";
-      #     exec = "env NIXOS_OZONE_WL= spotify %U --force-device-scale-factor=2";
-      #     terminal = false;
-      #     categories = ["Application" "Music"];
-      #   };
       # code = {
       #   name = "Visual Studio Code";
       #   icon = "vscode";
