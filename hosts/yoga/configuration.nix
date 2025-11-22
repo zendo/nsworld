@@ -36,9 +36,6 @@
   ###############################################
   ## Proxy
   ###############################################
-  systemd.services.sing-box.enable = true;
-  systemd.services.sub-store.enable = true;
-
   environment.systemPackages = with pkgs; [
     # inputs.nixpkgs-pr.legacyPackages.${system}.apps
     sing-box
@@ -59,6 +56,16 @@
     #   package = throne;
     # })
   ];
+
+  systemd.services.sub-store.enable = true;
+  # systemd.services.sing-box.enable = true;
+
+  services.mihomo = {
+    enable = true;
+    tunMode = true;
+    webui = pkgs.zashboard;
+    configFile = "/home/${username}/code/sub/config.yaml";
+  };
 
   # services.daeWithConfig.enable = true;
   services.dae = {

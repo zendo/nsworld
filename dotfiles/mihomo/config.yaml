@@ -1,0 +1,212 @@
+# https://wiki.metacubex.one/config/
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: info
+ipv6: false
+keep-alive-interval: 15
+keep-alive-idle: 15
+tcp-concurrent: true # 更换延迟计算方式，去除握手等额外延迟
+unified-delay: true # 启用 TCP 并发连接。这允许 Clash 同时建立多个 TCP 连接，可以提高网络性能和连接速度
+find-process-mode: strict  # 设置进程查找模式为严格模式，Clash 会更精确地识别和匹配网络流量来源的进程
+global-client-fingerprint: chrome  # 设置全局客户端指纹为 Chrome，使 Clash 在建立连接时模拟 Chrome 浏览器的 TLS 指纹，增强隐私性和绕过某些网站的指纹检测
+global-ua: mihomo # 默认 clash.meta
+external-controller: 127.0.0.1:9090
+secret: "1984"
+external-ui: ./ui
+external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+tun:
+  enable: true
+  stack: system
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+
+# 需要将订阅链接填入url字段中，filter: 可填写正则表达式过滤节点，如"香港|HK|Taiwan|台湾"，additional-prefix: 可为节点名称添加前缀，如"[宝可梦|] "
+proxy-providers:
+  Provider1:
+    type: http
+    url: ""
+    interval: 3600
+    timeout: 1000
+    path: ./profiles/Provider1
+    filter: ""
+    health-check:
+      enable: true
+      interval: 600
+      url: "https://cp.cloudflare.com/generate_204"
+    override:
+      skip-cert-verify: true
+      additional-prefix: "[wcloud|] "
+  Provider2:
+    type: http
+    url: ""
+    interval: 3600
+    timeout: 1000
+    path: ./profiles/Provider2
+    filter: ""
+    health-check:
+      enable: true
+      interval: 600
+      url: "https://cp.cloudflare.com/generate_204"
+    override:
+      skip-cert-verify: true
+      additional-prefix: "[lemao|] "
+  Provider3:
+    type: http
+    url: ""
+    interval: 3600
+    timeout: 1000
+    path: ./profiles/Provider3
+    filter: ""
+    health-check:
+      enable: true
+      interval: 600
+      url: "https://cp.cloudflare.com/generate_204"
+    override:
+      skip-cert-verify: true
+      additional-prefix: "[nano|] "
+
+# 配置文件管理
+profile:
+  store-selected: true # 保存用户选择的代理配置，在 Clash 重启后仍然记住上次选择的代理服务器
+  store-fake-ip: true # 适用于 Clash 在 Fake IP 模式下工作时。它会将域名到 Fake IP 的映射关系保存下来，确保 Clash 重启后依然能使用相同的 Fake IP 分配给相同的域名，保持连接的一致性和稳定性
+
+proxy-groups:
+  # PROXY: 主代理组（可自定义添加其他策略组到proxies列表中）
+  - name: PROXY
+    type: select
+    proxies:
+      - AUTO
+      - DIRECT
+      - AI-PROXY
+    include-all: true
+    max-failed-times: 1
+    interval: 600
+    timeout: 1000
+    lazy: false
+  # AUTO: 自动选择最快节点（use中填写你使用的provider名称，或者用include-all）
+  - name: AUTO
+    type: url-test
+    url: https://cp.cloudflare.com/generate_204
+    max-failed-times: 1
+    interval: 600
+    timeout: 1000
+    use:
+      - Provider1
+      - Provider2
+    lazy: false
+  # AI-PROXY: AI服务专用代理（exclude-filter可过滤不想用的地区，如"HK|US|JP"）
+  - name: AI-PROXY
+    type: select
+    url: https://cp.cloudflare.com/generate_204
+    max-failed-times: 1
+    interval: 600
+    timeout: 1000
+    use:
+      - Provider1
+      - Provider2
+    exclude-filter: "HK|香港|Hong Kong"
+    lazy: false
+
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  asn: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb
+
+# 域名嗅探
+sniffer:
+  enable: false # 启用网络流量嗅探功能，允许 Clash 分析和识别流量类型
+  sniff:
+    TLS:
+      ports: [443, 8443] # 要嗅探的 TLS 流量端口，包括标准 HTTPS 端口 443 和常用的备用 HTTPS 端口 8443
+    HTTP:
+      ports: [80, 8080-8880] # 要嗅探的 HTTP 流量端口，包括标准 HTTP 端口 80 和常用的 HTTP 端口范围 8080-8880
+      override-destination: true # 启用目标覆盖功能，允许 Clash 根据嗅探到的域名重写请求的目标地址
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip # 设置增强模式为 fake-ip 模式，提高解析速度和连接性能
+  fake-ip-range: 198.18.0.1/16
+  # 定义不使用虚假IP解析的域名列表
+  fake-ip-filter:
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - "+.srv.nintendo.net"
+    - "+.stun.playstation.net"
+    - "geosite:private"
+    - "geosite:cn"
+  # prefer-h3: true # 如果DNS服务器支持DoH3会优先使用h3，提升性能
+  default-nameserver:      #基础DNS服务器，必须先有它才能使用域名类型的DNS配置，因此必须为IP，此处使用阿里云DNS
+    - tls://223.5.5.5
+    - tls://223.6.6.6
+  nameserver:         #在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+  proxy-server-nameserver:         #解析代理节点时使用的DNS，为了使下面的respect-rules生效必须设置，最好设置为国内DNS，否则在代理的第一步就可能因为连接不上国外DNS而解析不出代理节点的IP，最终倒在起点
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  direct-nameserver:           #规则匹配到直连时使用的DNS，既然是可以直连的，当然要用国内DNS
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  respect-rules: true      #让连接DNS服务器时能够遵循规则，也就是通过代理节点连接到上面设置的国外DNS，因为直连可能连接不上
+
+# 规则优先级从上到下，匹配到即停止
+rules:
+# ========== AI服务专用代理规则 ==========
+# AI-PROXY策略组：适用于ChatGPT、Claude等AI服务（可根据需要添加或删除）
+ - DOMAIN-SUFFIX,ping0.cc,AI-PROXY
+ - DOMAIN-SUFFIX,ipdata.co,AI-PROXY
+ - DOMAIN-SUFFIX,pingip.cn,AI-PROXY
+# PROXY策略组：需要代理访问的域名（根据个人需求自由添加）
+ - DOMAIN-SUFFIX,live.com,PROXY
+ - DOMAIN-SUFFIX,teracloud.jp,PROXY
+# ========== 直连规则 ==========
+# DIRECT策略组：不走代理直接连接（根据个人需求自由添加）
+ - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
+ - DOMAIN-SUFFIX,msftncsi.com,DIRECT
+ - DOMAIN-SUFFIX,steamserver.net,DIRECT
+ - DOMAIN-SUFFIX,steamcontent.com,DIRECT
+ - DOMAIN,stun.l.google.com,DIRECT
+ - DOMAIN-SUFFIX,edu.cn,DIRECT
+ - DOMAIN-SUFFIX,v6.navy,DIRECT
+ - DOMAIN-SUFFIX,dynv6.com,DIRECT
+# ========== 基于GeoSite的智能分流规则 ==========
+# 以下为固定规则，一般无需修改
+# 如需调整某个服务的策略，可修改后面的策略组名称
+ - GEOSITE,cursor,AI-PROXY
+ - GEOSITE,telegram,PROXY
+ - GEOSITE,google,AI-PROXY
+ - GEOSITE,steam@cn,DIRECT
+ - GEOSITE,category-games@cn,DIRECT
+ - GEOSITE,category-ai-!cn,AI-PROXY
+ - GEOSITE,category-ai-cn,DIRECT
+ - GEOSITE,onedrive,DIRECT
+ - GEOSITE,private,DIRECT
+ - GEOSITE,category-scholar-!cn,PROXY
+ - GEOSITE,microsoft@cn,DIRECT
+ - GEOSITE,apple-cn,DIRECT
+ - GEOSITE,geolocation-!cn,PROXY
+ - GEOSITE,CN,DIRECT
+ - GEOIP,private,DIRECT,no-resolve
+ - GEOIP,telegram,PROXY,no-resolve
+ - GEOIP,CN,DIRECT
+ # 兜底规则：以上规则都不匹配时使用PROXY代理
+ - MATCH,PROXY
