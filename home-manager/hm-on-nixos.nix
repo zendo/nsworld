@@ -16,7 +16,7 @@
   ++ (lib.filesystem.listFilesRecursive ./shell)
   # for desktop environment
   ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
-    ./xdg/xdg.nix
+    ./xdg/env.nix
     # terminal
     ./terminal/foot.nix
     ./terminal/kitty.nix
