@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    ./misc/files.nix
+    ./xdg/files.nix
     ./editor/micro.nix
     ./editor/helix.nix
     ./programs/ssh.nix
@@ -16,7 +16,7 @@
   ++ (lib.filesystem.listFilesRecursive ./shell)
   # for desktop environment
   ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
-    ./misc/xdg.nix
+    ./xdg/xdg.nix
     # terminal
     ./terminal/foot.nix
     ./terminal/kitty.nix

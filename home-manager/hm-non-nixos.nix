@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    ./misc/files.nix
+    ./xdg/files.nix
     # shell
     ./shell/zsh.nix
     ./shell/fish.nix
