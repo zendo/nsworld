@@ -29,7 +29,6 @@
       readOnly = true;
       entries = [
         # "${pkgs.goodvibes}/share/applications/io.gitlab.Goodvibes.desktop"
-        # "${pkgs.throne}/share/applications/throne.desktop"
       ];
     };
 
