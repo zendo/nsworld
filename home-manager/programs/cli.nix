@@ -59,7 +59,7 @@
     ikill
 
     # Utils
-    (lib.hiPrio uutils-coreutils-noprefix)
+    (lib.hiPrio uutils-coreutils-noprefix) # riir
     bat
     just
     igrep

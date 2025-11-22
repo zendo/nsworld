@@ -61,7 +61,7 @@ in
   # or
   # security.sudo.wheelNeedsPassword = false;
 
-  # sudo-rs
+  # sudo-rs riir
   security.sudo-rs.enable = true;
   security.sudo-rs.extraRules = [ sudoRule ];
   # or
