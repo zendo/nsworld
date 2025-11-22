@@ -38,13 +38,13 @@
       ];
     };
 
-    dataFile = {
-      # Fix qt tiny cursor on gnome
-      "icons/default/index.theme".text = ''
-        [icon theme]
-        Inherits=Adwaita
-      '';
-    };
+    # dataFile = {
+    #   # Fix qt tiny cursor on gnome
+    #   "icons/default/index.theme".text = ''
+    #     [icon theme]
+    #     Inherits=Adwaita
+    #   '';
+    # };
 
     desktopEntries = {
       # code = {
