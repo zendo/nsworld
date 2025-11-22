@@ -19,7 +19,7 @@ external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/arch
 
 tun:
   enable: true
-  stack: system
+  stack: mixed
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true

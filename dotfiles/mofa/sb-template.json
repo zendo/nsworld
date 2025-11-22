@@ -49,7 +49,7 @@
       "auto_route": true,
       "strict_route": true,
       "endpoint_independent_nat": false,
-      "stack": "system"
+      "stack": "mixed"
     }
   ],
   "outbounds": [
