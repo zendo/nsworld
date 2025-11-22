@@ -71,7 +71,7 @@
     ydict
     typos
     shellcheck
-    translate-shell
+    # translate-shell
     # aspell
     # aspellDicts.en
     hunspell

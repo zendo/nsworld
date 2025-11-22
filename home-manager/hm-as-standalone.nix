@@ -35,7 +35,7 @@
       # main
       iab = mkHome {
         username = "iab";
-        extraModules = [ ./misc/dconf.nix ];
+        extraModules = [ ./xdg/dconf.nix ];
       };
 
       # MAYBE: other user on nixos
