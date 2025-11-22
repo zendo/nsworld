@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+    ./xdg/env.nix
     ./xdg/files.nix
     # shell
     ./shell/zsh.nix
@@ -30,24 +31,14 @@
   ];
 
   home = {
-    username = "${username}";
-    homeDirectory = "/home/${username}";
-    stateVersion = "25.05";
-
-    sessionPath = [
-      "${../dotfiles/bin}"
-      "${config.home.homeDirectory}/.local/bin"
-    ];
-
-    sessionVariables = {
-      VISUAL = "micro";
-      EDITOR = "micro";
-    };
-
     packages = with pkgs; [
       dippi
       goodvibes
     ];
+
+    username = "${username}";
+    homeDirectory = "/home/${username}";
+    stateVersion = "25.05";
   };
 
   nix = {
