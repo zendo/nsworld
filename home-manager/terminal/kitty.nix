@@ -1,9 +1,49 @@
-{ pkgs, config, ... }:
-{
-  # xdg.configFile."kitty".source = ../../dotfiles/kitty;
-  # xdg.configFile."kitty".source =
-  #   config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/kitty";
+{ pkgs, ... }:
+let
+  mountain = pkgs.writeText "Mountain.conf" ''
+    cursor #f0f0f0
+    cursor_text_color #ffffff
 
+    foreground            #f0f0f0
+    background            #0f0f0f
+    selection_foreground  #262626
+    selection_background  #f0f0f0
+    url_color             #9ec3c4
+
+    # black
+    color8   #777777
+    color0   #4c4c4c
+
+    # red
+    color1   #ac8a8c
+    color9   #c49ea0
+
+    # green
+    color2   #CCFF90
+    color10  #9ec49f
+
+    # yellow
+    color3   #aca98a
+    color11  #c4c19e
+
+    # blue
+    color4  #8f8aac
+    color12 #a39ec4
+
+    # magenta
+    color5   #ac8aac
+    color13  #c49ec4
+
+    # cyan
+    color6   #8aacab
+    color14  #9ec3c4
+
+    # white
+    color15   #e7e7e7
+    color7  #f0f0f0
+  '';
+in
+{
   # home.packages = with pkgs; [
   #   kitty
   #   kitten-quick-terminal # .desktop
@@ -11,12 +51,13 @@
 
   # https://sw.kovidgoyal.net/kitty/conf
   # https://sw.kovidgoyal.net/kitty/_downloads/433dadebd0bf504f8b008985378086ce/kitty.conf
+  # ctrl+shift+f5 :reload config
   programs.kitty = {
-    # enable = true;
+    enable = true;
     # show right prompts
     shellIntegration.mode = "no-cursor no-sudo";
-    # kitten theme
-    themeFile = "zenbones_dark";
+    # kitten theme: Afterglow / vague / bl1nk
+    # themeFile = "bl1nk";
     keybindings = {
       "f11" = "toggle_fullscreen";
       "alt+w" = "copy_to_clipboard";
@@ -30,6 +71,7 @@
     settings = {
       shell = "zsh -l";
       # Theme
+      include = "${mountain}";
       background_opacity = "0.9";
       wayland_titlebar_color = "background";
       hide_window_decorations = "yes";
@@ -59,6 +101,11 @@
       # visual_bell_color = "red";
       # window_alert_on_bell = "yes";
       # bell_on_tab = "🔔 ";
+    };
+    # https://sw.kovidgoyal.net/kitty/kittens/quick-access-terminal/
+    # kitten quick-access-terminal
+    quickAccessTerminalConfig = {
+      hide_on_focus_loss = "yes";
     };
   };
 }
