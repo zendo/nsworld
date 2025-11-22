@@ -23,9 +23,7 @@ tun:
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
-  dns-hijack:
-    - "any:53"
-    - "tcp://any:53"
+  strict-route: true
 
 # 需要将订阅链接填入url字段中，filter: 可填写正则表达式过滤节点，如"香港|HK|Taiwan|台湾"，additional-prefix: 可为节点名称添加前缀，如"[宝可梦|] "
 proxy-providers:
@@ -151,22 +149,26 @@ dns:
     - "*.msftncsi.com"
     - "+.srv.nintendo.net"
     - "+.stun.playstation.net"
+    - "+.push.apple.com"
+    - "+.market.xiaomi.com"
     - "geosite:private"
     - "geosite:cn"
   # prefer-h3: true # 如果DNS服务器支持DoH3会优先使用h3，提升性能
-  default-nameserver:      #基础DNS服务器，必须先有它才能使用域名类型的DNS配置，因此必须为IP，此处使用阿里云DNS
+  default-nameserver: #基础DNS服务器，必须先有它才能使用域名类型的DNS配置，因此必须为IP，此处使用阿里云DNS
     - tls://223.5.5.5
     - tls://223.6.6.6
-  nameserver:         #在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
+  nameserver: #在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
     - https://cloudflare-dns.com/dns-query
     - https://dns.google/dns-query
-  proxy-server-nameserver:         #解析代理节点时使用的DNS，为了使下面的respect-rules生效必须设置，最好设置为国内DNS，否则在代理的第一步就可能因为连接不上国外DNS而解析不出代理节点的IP，最终倒在起点
+  proxy-server-nameserver: #解析代理节点时使用的DNS，为了使下面的respect-rules生效必须设置，最好设置为国内DNS，否则在代理的第一步就可能因为连接不上国外DNS而解析不出代理节点的IP，最终倒在起点
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-  direct-nameserver:           #规则匹配到直连时使用的DNS，既然是可以直连的，当然要用国内DNS
+  direct-nameserver: #规则匹配到直连时使用的DNS，既然是可以直连的，当然要用国内DNS
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-  respect-rules: true      #让连接DNS服务器时能够遵循规则，也就是通过代理节点连接到上面设置的国外DNS，因为直连可能连接不上
+  #让连接DNS服务器时能够遵循规则，也就是通过代理节点连接到上面设置的国外DNS，因为直连可能连接不上
+  #强烈不建议和 prefer-h3 一起使用
+  respect-rules: true
 
 # 规则优先级从上到下，匹配到即停止
 rules:
