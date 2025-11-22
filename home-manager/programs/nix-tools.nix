@@ -21,6 +21,7 @@
     nix-output-monitor
     nix-search-tv
     nixpkgs-track
+    hydra-check
     disko
     nixos-anywhere
     # colmena # outdated

@@ -5,14 +5,13 @@
 }:
 {
   imports = [
-    ./misc/alias.nix
     ./misc/files.nix
+    ./editor/micro.nix
+    ./editor/helix.nix
     ./programs/ssh.nix
     ./programs/git.nix
     ./programs/cli.nix
     ./programs/nix-tools.nix
-    ./editor/micro.nix
-    ./editor/helix.nix
   ]
   ++ (lib.filesystem.listFilesRecursive ./shell)
   # for desktop environment

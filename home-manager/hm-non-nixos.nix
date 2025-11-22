@@ -7,11 +7,11 @@
 }:
 {
   imports = [
-    ./misc/alias.nix
     ./misc/files.nix
     # shell
     ./shell/zsh.nix
     ./shell/fish.nix
+    ./shell/alias.nix
     ./shell/atuin.nix
     ./shell/starship.nix
     ./shell/zellij.nix
