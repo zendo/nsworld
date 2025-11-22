@@ -13,7 +13,6 @@ in
     "cava".source = ../../dotfiles/cava;
     "shikane".source = ../../dotfiles/shikane;
     "swaylock".source = ../../dotfiles/swaylock;
-    "alacritty".source = ../../dotfiles/alacritty;
 
     "mpv".source = linkFlake "dotfiles/mpv";
     "helix".source = linkFlake "dotfiles/helix";

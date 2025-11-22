@@ -23,6 +23,7 @@
     ./terminal/foot.nix
     ./terminal/kitty.nix
     ./terminal/ghostty.nix
+    # ./terminal/alacritty.nix
     # programs
     ./programs/gui.nix
     ./programs/chrome.nix
