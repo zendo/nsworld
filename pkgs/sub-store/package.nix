@@ -33,7 +33,7 @@ stdenvNoCC.mkDerivation rec {
     description = "All-in-One Subscription Manager for QX, Loon, Surge, Stash, Clash, SingBox, ShadowRocket, and More";
     homepage = "https://github.com/sub-store-org/Sub-Store";
     downloadPage = "https://github.com/sub-store-org/Sub-Store-Front-End";
-    license = lib.licenses.agpl3Only;
+    license = lib.licenses.agpl3Plus;
     platforms = lib.platforms.all;
     maintainers = with lib.maintainers; [ zendo ];
   };
