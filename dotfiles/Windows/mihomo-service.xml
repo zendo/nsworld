@@ -1,0 +1,9 @@
+<service>
+  <id>mihomo</id>
+  <name>mihomo</name>
+  <description>This service runs mihomo continuous integration system.</description>
+  <executable>C:\Users\zendo\scoop\shims\mihomo</executable>
+  <arguments>-d .</arguments>
+  <log mode="reset" />
+  <onfailure action="restart" />
+</service>

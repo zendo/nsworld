@@ -32,3 +32,10 @@ sing-box-setup:
     New-Item $HOME\Desktop\subs -ItemType Directory -Force
     Copy-Item sb-service.xml $HOME\Desktop\subs
     Move-Item sb-service.exe, ui $HOME\Desktop\subs
+
+mihomo-setup:
+    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O mihomo-service.exe
+    New-Item $HOME\Desktop\mihomo -ItemType Directory -Force
+    Copy-Item ..\mofa\config.yaml $HOME\Desktop\mihomo
+    Copy-Item mihomo-service.xml $HOME\Desktop\mihomo
+    Move-Item mihomo-service.exe $HOME\Desktop\mihomo
