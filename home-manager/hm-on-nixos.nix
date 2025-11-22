@@ -17,6 +17,7 @@
   # for desktop environment
   ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
     ./xdg/env.nix
+    ./xdg/mime.nix
     # terminal
     ./terminal/foot.nix
     ./terminal/kitty.nix
@@ -33,8 +34,8 @@
     ./editor/zed.nix
     ./editor/dev-tools.nix
   ]
-  ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./misc/plasma.nix ]
-  ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./misc/dconf.nix ];
+  ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./xdg/plasma.nix ]
+  ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./xdg/dconf.nix ];
 
   home.stateVersion = nixosConfig.system.stateVersion;
 }
