@@ -1,34 +1,58 @@
 {
   pkgs,
   inputs,
-  config,
   username,
   ...
 }:
 {
   imports = [
-    ./xdg/env.nix
-    ./xdg/files.nix
-    # shell
-    ./shell/zsh.nix
-    ./shell/fish.nix
+    ###########################
+    ## EDITOR
+    ###########################
+    # ./editor/dev-tools.nix
+    # ./editor/emacs.nix
+    ./editor/helix.nix
+    ./editor/micro.nix
+    ./editor/nvim.nix
+    # ./editor/vscode.nix
+    # ./editor/zed.nix
+    ###########################
+    ## PROGRAMS
+    ###########################
+    # ./programs/chrome.nix
+    ./programs/cli.nix
+    # ./programs/firefox.nix
+    ./programs/git.nix
+    # ./programs/gui.nix
+    ./programs/nix-tools.nix
+    ./programs/ssh.nix
+    # ./programs/vicinae.nix
+    ###########################
+    ## SHELL
+    ###########################
     ./shell/alias.nix
     ./shell/atuin.nix
+    # ./shell/bash.nix
+    ./shell/fish.nix
     ./shell/starship.nix
     ./shell/zellij.nix
-    # terminal
-    ./terminal/foot.nix
-    ./terminal/kitty.nix
-    ./terminal/ghostty.nix
+    ./shell/zsh.nix
+    ###########################
+    ## TERMINAL
+    ###########################
     # ./terminal/alacritty.nix
-    # programs
-    ./programs/ssh.nix
-    ./programs/git.nix
-    ./programs/cli.nix
-    ./programs/nix-tools.nix
-    # editor
-    ./editor/micro.nix
-    ./editor/helix.nix
+    ./terminal/foot.nix
+    ./terminal/ghostty.nix
+    ./terminal/kitty.nix
+    ###########################
+    ## XDG
+    ###########################
+    # ./xdg/dconf.nix
+    ./xdg/env.nix
+    ./xdg/files.nix
+    # ./xdg/mime.nix
+    # ./xdg/plasma.nix
+    ./xdg/xdg.nix
   ];
 
   home = {
@@ -41,6 +65,11 @@
     homeDirectory = "/home/${username}";
     stateVersion = "25.05";
   };
+
+  news.display = "silent";
+  programs.home-manager.enable = true;
+  # https://github.com/nix-community/home-manager/blob/master/docs/manual/usage/gpu-non-nixos.md
+  targets.genericLinux.gpu.enable = true;
 
   nix = {
     package = pkgs.nixVersions.stable;
@@ -67,9 +96,4 @@
       ];
     };
   };
-
-  news.display = "silent";
-  programs.home-manager.enable = true;
-  # https://github.com/nix-community/home-manager/blob/master/docs/manual/usage/gpu-non-nixos.md
-  targets.genericLinux.gpu.enable = true;
 }

@@ -5,36 +5,38 @@
 }:
 {
   imports = [
-    ./xdg/files.nix
-    ./editor/micro.nix
     ./editor/helix.nix
-    ./programs/ssh.nix
-    ./programs/git.nix
+    ./editor/micro.nix
+    ###################
     ./programs/cli.nix
+    ./programs/git.nix
     ./programs/nix-tools.nix
+    ./programs/ssh.nix
+    ###################
+    ./xdg/files.nix
   ]
   ++ (lib.filesystem.listFilesRecursive ./shell)
   # for desktop environment
   ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
-    ./xdg/env.nix
-    ./xdg/xdg.nix
-    ./xdg/mime.nix
-    # terminal
-    ./terminal/foot.nix
-    ./terminal/kitty.nix
-    ./terminal/ghostty.nix
-    # ./terminal/alacritty.nix
-    # programs
-    ./programs/gui.nix
-    ./programs/chrome.nix
-    ./programs/firefox.nix
-    ./programs/vicinae.nix
-    # dev & editor
-    ./editor/nvim.nix
+    ./editor/dev-tools.nix
     ./editor/emacs.nix
+    ./editor/nvim.nix
     ./editor/vscode.nix
     ./editor/zed.nix
-    ./editor/dev-tools.nix
+    ###################
+    ./programs/chrome.nix
+    ./programs/firefox.nix
+    ./programs/gui.nix
+    ./programs/vicinae.nix
+    ###################
+    # ./terminal/alacritty.nix
+    ./terminal/foot.nix
+    ./terminal/ghostty.nix
+    ./terminal/kitty.nix
+    ###################
+    ./xdg/env.nix
+    ./xdg/mime.nix
+    ./xdg/xdg.nix
   ]
   ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./xdg/plasma.nix ]
   ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./xdg/dconf.nix ];
