@@ -30,9 +30,8 @@ rec {
       clock-show-date = false;
       cursor-theme = "Adwaita";
       icon-theme = "Adwaita";
-      # font render
-      font-hinting = "full";
-      font-antialiasing = "rgba";
+      # font-hinting = "full";
+      # font-antialiasing = "rgba";
     };
 
     "org/gnome/mutter" = {
