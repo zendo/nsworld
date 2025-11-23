@@ -51,6 +51,8 @@ dns:
   ipv6: false
   # prefer-h3: true # 如果DNS服务器支持DoH3会优先使用h3，提升性能
   respect-rules: true # dns 连接遵守路由规则,需配置 proxy-server-nameserver，强烈不建议和 prefer-h3 一起使用
+  use-system-hosts: false
+  cache-algorithm: arc
   enhanced-mode: fake-ip # DNS 处理模式 redir-host/fake-ip，fake-ip提高解析速度和连接性能
   fake-ip-range: 198.18.0.1/16
   # 定义不使用虚假IP解析的域名列表
