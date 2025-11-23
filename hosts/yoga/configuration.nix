@@ -93,7 +93,7 @@
 
   # 虚拟网络会干扰 geoclue2 ip 定位
   services.geoclue2 = {
-    enableStatic = true;
+    # enableStatic = true;
     staticAltitude = 10; # 海拔高度
     staticAccuracy = 1000; # 精度半径
   };

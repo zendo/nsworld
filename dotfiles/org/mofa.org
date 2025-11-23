@@ -14,10 +14,8 @@ journalctl -u sing-box -f --output=cat
 日志时间戳 / api地址 9090 / api密钥 1984 / ui路径 ui / 允许私有网络访问
 https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 mixed-in 监听地址改 :: 7890
-打开 tun，模式堆栈选 system
 出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
 路由设置——规则：删除 reject quic
-# DNS设置——服务器——Local-DNS: h3://223.5
 
 https://linux.do/t/topic/938696
 

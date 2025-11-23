@@ -30,6 +30,7 @@
     ip = "ip --color=auto";
     ip-info = "curl ip.im/info";
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
+    where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
 
     # web
     paste-termbin = "nc termbin.com 9999";
