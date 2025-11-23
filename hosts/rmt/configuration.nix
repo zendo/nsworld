@@ -63,7 +63,6 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     loader = {
-      efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/efi";
       limine.enable = true;
     };

@@ -40,8 +40,8 @@
     # inputs.nixpkgs-pr.legacyPackages.${system}.apps
     mihomo
     sing-box
-    gui-for-clash
     gui-for-singbox
+    # gui-for-clash
     # v2rayn
     # flclash
     # (makeAutostartItem {
@@ -99,8 +99,8 @@
     staticAccuracy = 1000; # 精度半径
   };
   location = {
-    latitude = 23.38;
-    longitude = 113.20;
+    latitude = 23.38; # 纬度
+    longitude = 113.20; # 经度
   };
 
   ###############################################

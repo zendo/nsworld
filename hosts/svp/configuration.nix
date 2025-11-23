@@ -50,7 +50,7 @@
     ];
   };
 
-  # Swapfile (bcachefs not support)
+  # Swapfile
   swapDevices = [
     {
       device = "/var/swapfile";
