@@ -77,6 +77,13 @@
         '';
       });
 
+      # Remove attributes from set
+      # gui-for-singbox = prev.gui-for-singbox.overrideAttrs (oldAttrs: {
+      #   meta = builtins.removeAttrs oldAttrs.meta [
+      #     "hydraPlatforms"
+      #   ];
+      # });
+
       # wrapProgram $out/bin/telegram-desktop --set QT_QPA_PLATFORM xcb
       logseq-wayland = prev.symlinkJoin {
         name = "logseq";
