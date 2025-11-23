@@ -1,8 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
-  config,
   ...
 }:
 {
@@ -121,11 +119,6 @@
     # squirreldisk
     mission-center
   ];
-
-  services = {
-    # disable on wm
-    # easyeffects.enable = !config.services.wlsunset.enable;
-  };
 
   # programs.obs-studio = {
   #   enable = true;
