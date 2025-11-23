@@ -40,7 +40,8 @@
     # inputs.nixpkgs-pr.legacyPackages.${system}.apps
     mihomo
     sing-box
-    # gui-for-singbox
+    gui-for-clash
+    gui-for-singbox
     # v2rayn
     # flclash
     # (makeAutostartItem {
