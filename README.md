@@ -16,8 +16,11 @@ nixos-generate-config --flake --root /mnt
 disko -m disko hosts/rmt/disko-bcachefs.nix
 nixos-generate-config --no-filesystems --flake --root /mnt
 
+nmtui / cfdisk
+sudo -i / passwd
 nixos-anywhere \
   # --disko-mode mount \
+  # --generate-hardware-config nixos-generate-config ./hardware-configuration.nix \
   --no-substitute-on-destination \
   --flake .#rmt \
   root@192.168.122.25
