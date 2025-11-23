@@ -42,9 +42,11 @@
     viu # image viewer
     gtrash
     croc
-    goshs
+    # sshfs [user@]hostname:[directory] mountpoint
+    # umount mountpoint
+    sshfs
     dufs
-    # sshfs
+    goshs
     simple-http-server
     magic-wormhole-rs
 

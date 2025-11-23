@@ -32,7 +32,7 @@
     inputs.self.formatter.${stdenv.hostPlatform.system}
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
-    (writeScriptBin "nsa" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))
+    (writeScriptBin "nse" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))
   ];
 
   programs = {

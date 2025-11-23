@@ -18,7 +18,6 @@
 
     # Terminal
     cava
-    ripdrag
     graphviz
     # imagemagick
     exiftool

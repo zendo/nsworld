@@ -44,7 +44,6 @@
     dired = ''emacsclient -n -c -e "(dired default-directory)"'';
 
     # nix
-    nse = "nix search nixpkgs";
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
     nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
   };
