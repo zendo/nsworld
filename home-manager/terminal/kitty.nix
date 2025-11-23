@@ -45,7 +45,6 @@ let
 in
 {
   # home.packages = with pkgs; [
-  #   kitty
   #   kitten-quick-terminal # .desktop
   # ];
 

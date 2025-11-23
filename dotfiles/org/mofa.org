@@ -8,6 +8,8 @@ gsudo sing-box run -c coonfig.json
 jq 'del(.inbounds[] | select(.type == "tun"))' feiji.json > config.json
 sing-box merge -c feiji.json -c sb-tun.json config.json
 journalctl -u sing-box -f --output=cat
+sudo lsof -i :7890
+netstat -ano | findstr :7890 // windows
 #+end_src
 
 ** GUI.for.SingBox
@@ -16,62 +18,6 @@ https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/down
 mixed-in 监听地址改 :: 7890
 出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
 路由设置——规则：删除 reject quic
-
-https://linux.do/t/topic/938696
-
-** inbounds
-
-mtu: The maximum transmission unit.
-
-"listen": "127.0.0.1", : ipv4
-"listen": "::", ：ipv6
-
-listen_port
-sudo lsof -i :7890
-netstat -ano | findstr :7890 // windows
-
-*** tun
-Defaults to the mixed stack if the gVisor build tag is enabled, otherwise defaults to the system stack.
-
-system 使用系统协议栈，可以提供更稳定/全面的 tun 体验，且占用相对其他堆栈更低
-gvisor 通过在用户空间中实现网络协议栈，可以提供更高的安全性和隔离性，同时可以避免操作系统内核和用户空间之间的切换，从而在特定情况下具有更好的网络处理性能
-mixed 混合堆栈，tcp 使用 system 栈，udp 使用 gvisor 栈，使用体验可能相对更好
-
-#+begin_src json
-{
-    "type": "tun",
-    "tag": "tun-in",
-    "address": [
-        "172.18.0.1/30",
-        "fdfe:dcba:9876::1/126"
-    ],
-    "auto_route": true,
-    "strict_route": true
-},
-#+end_src
-
-*** mixed
-mixed: inbound is a socks4, socks4a, socks5 and http server.
-
-#+begin_src json
-{
-    "type": "mixed",
-    "tag": "mixed-in",
-    "listen": "127.0.0.1",
-    "listen_port": 7890
-}
-#+end_src
-
-*** tproxy
-
-#+begin_src json
-{
-    "type": "tproxy",
-    "tag": "tproxy-in",
-    "listen": "0.0.0.0",
-    "listen_port": 7895
-}
-#+end_src
 
 ** providers
 outbounds —— 节点选择/自动选择 添加：
@@ -112,47 +58,11 @@ outbounds —— 节点选择/自动选择 添加：
   ]
 #+end_src
 
-** dns
-
-tls: DNS over TLS (DoT)
-quic: DNS over QUIC (DoQ)
-https: DNS over HTTPS (DoH)
-h3: DNS over HTTP3 (DoH3) *recommend*
-
-** experimental
-cache_file enabled: required to save rule-set cache.
-
-#+begin_src json
-{
-  "experimental": {
-    "clash_api": {
-      "external_controller": "127.0.0.1:9090",
-      "external_ui": "ui",
-      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
-      "secret": "1984",
-      "default_mode": "rule",
-      "external_ui_download_detour": "🚀 节点选择",
-      "access_control_allow_private_network": true,
-      "access_control_allow_origin": [
-        "http://127.0.0.1",
-        "https://yacd.metacubex.one",
-        "https://metacubex.github.io",
-        "https://metacubexd.pages.dev",
-        "https://board.zash.run.place"
-      ]
-    }
-  }
-}
-#+end_src
-
 ** Links
 https://sing-box.sagernet.org/zh/configuration/
 https://icloudnative.io/posts/sing-box-tutorial/
-https://linux.do/t/topic/1164538#p-10270168-sing-box-7
-
-https://github.com/qichiyuhub/sbshell tproxy
 https://github.com/Toperlock/sing-box-subscribe 模板
-https://github.com/bestnite/sub2sing-box
+https://linux.do/t/topic/938696 gui-for-singbox 教程
 
 * sub-store
 
@@ -169,7 +79,7 @@ https://linux.do/t/topic/846616
 文件管理 - 创建文件 - config.json
 
 模板：
-https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/misc/sb-template.json
+https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sb-template.json
 
 脚本：
 https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=liangxin&outbound=%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%8E%88%20%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%9A%80%20%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9&type=%E8%BF%9C%E7%A8%8B%E8%AE%A2%E9%98%85
