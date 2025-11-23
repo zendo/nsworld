@@ -20,10 +20,11 @@ mixed-in 监听地址改 :: 7890
 路由设置——规则：删除 reject quic
 
 ** providers
-outbounds —— 节点选择/自动选择 添加：
+outbounds —— 节点选择和自动选择分别添加：
 
 #+begin_src json
-"use_all_providers": true,
+"outbounds" 替换成：
+"use_all_providers": true
 #+end_src
 
 #+begin_src json
@@ -32,30 +33,13 @@ outbounds —— 节点选择/自动选择 添加：
       "type": "remote",
       "tag": "sub1",
       "url": "",
-      "user_agent": "sing-box",
-      "download_detour": "🎯 全球直连",
-      "update_interval": "24h",
-      "override_dialer": {}
-    },
-    {
-      "type": "remote",
-      "tag": "sub2",
-      "url": "",
-      "user_agent": "sing-box",
-      "download_detour": "🎯 全球直连",
-      "update_interval": "24h",
-      "override_dialer": {}
-    },
-    {
-      "type": "remote",
-      "tag": "sub3",
-      "url": "",
-      "user_agent": "sing-box",
-      "download_detour": "🎯 全球直连",
-      "update_interval": "24h",
-      "override_dialer": {}
+      "user_agent": "mihomo",
+      "health_check": {
+        "enabled": true,
+        "url": "https://cp.cloudflare.com/generate_204"
+      }
     }
-  ]
+  ],
 #+end_src
 
 ** Links
