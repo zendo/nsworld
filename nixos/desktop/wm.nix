@@ -14,7 +14,6 @@
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     geoclue2.enable = true;
-    hypridle.enable = true;
 
     greetd = {
       enable = true;
@@ -67,9 +66,8 @@
         home.packages = with pkgs; [
           libnotify # notify-send
           hyprlock
-          # TODO: idle manager or hypridle
-          # https://saltnpepper97.github.io/stasis/configuration
-          stasis
+          swaylock-effects
+          stasis # idle manager
           wlogout
           fuzzel
           bemoji
@@ -87,6 +85,7 @@
 
           # Display
           avizo # lightctl / volumectl
+          wlsunset
           brightnessctl # same like light
           wl-gammactl
           wdisplays
@@ -136,6 +135,10 @@
           cliphist = {
             enable = true;
             allowImages = true;
+          };
+
+          hypridle = {
+            # enable = true;
           };
         };
 

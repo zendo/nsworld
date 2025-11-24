@@ -18,6 +18,7 @@ in
     "waybar".source = linkFlake "dotfiles/waybar";
     "fuzzel".source = linkFlake "dotfiles/fuzzel";
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
+    "swaylock".source = linkFlake "dotfiles/swaylock";
 
     "niri".source = linkFlake "dotfiles/niri";
     "sway/config".source = linkFlake "dotfiles/sway/config";
