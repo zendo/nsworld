@@ -37,9 +37,9 @@ input "type:touchpad" {
 # output * bg `find $wallpapers -type f | shuf -n 1` fill
 
 # Status bar
-bar {
-  swaybar_command waybar
-}
+# bar {
+#   swaybar_command waybar
+# }
 
 # -------===[ Autostart ]===-------
 # include /etc/sway/config.d/*

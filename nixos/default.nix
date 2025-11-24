@@ -15,9 +15,36 @@
 
     kde.imports = [ ./desktop/kde.nix ];
     gnome.imports = [ ./desktop/gnome.nix ];
-    cosmic.imports = [ ./desktop/cosmic.nix ];
-    niri.imports = [ ./desktop/wm-niri.nix ];
-    sway.imports = [ ./desktop/wm-sway.nix ];
-    hyprland.imports = [ ./desktop/wm-hyprland.nix ];
+
+    cosmic = {
+      services.desktopManager.cosmic.enable = true;
+      services.displayManager.cosmic-greeter.enable = true;
+    };
+
+    niri = {
+      imports = [ ./desktop/wm.nix ];
+      programs.niri.enable = true;
+    };
+
+    hyprland = {
+      imports = [ ./desktop/wm.nix ];
+      programs.hyprland = {
+        enable = true;
+        withUWSM = true;
+      };
+    };
+
+    sway =
+      { pkgs, ... }:
+      {
+        imports = [ ./desktop/wm.nix ];
+        programs.sway = {
+          enable = true;
+          wrapperFeatures.gtk = true;
+          extraPackages = [
+            pkgs.autotiling-rs
+          ];
+        };
+      };
   };
 }

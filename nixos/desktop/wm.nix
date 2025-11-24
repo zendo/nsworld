@@ -62,6 +62,11 @@
     (
       { config, pkgs, ... }:
       {
+        imports = [
+          # ../../home-manager/xdg/noctalia.nix
+          ../../home-manager/xdg/wayland.nix
+        ];
+
         home.packages = with pkgs; [
           swappy # screenshot annotation editor
           swaybg # wallpaper tool
@@ -74,9 +79,7 @@
           stasis
           swayidle
           wlogout
-          waybar
           uwsm
-          better-control
 
           fuzzel
           bemoji
@@ -100,7 +103,6 @@
           wdisplays
           shikane
           wlr-randr
-          wlsunset
 
           # Media
           # grim # grab image
@@ -116,7 +118,6 @@
           gnome-themes-extra
           dconf-editor
 
-          xfce.mousepad
           nomacs
           loupe
           hyprpicker
@@ -128,32 +129,7 @@
         ];
 
         services = {
-          avizo.enable = true;
           # playerctld.enable = true;
-          swaync = {
-            enable = true;
-            settings = {
-              notification-visibility = {
-                bluetooth-connected = "never";
-              };
-            };
-          };
-
-          # https://darkman.whynothugo.nl/#CONFIGURATION
-          darkman = {
-            enable = true;
-            settings = {
-              usegeoclue = "true";
-              # lat = "";
-              # lng = "";
-              darkModeScripts.gtk-theme = ''
-                dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-              '';
-              lightModeScripts.gtk-theme = ''
-                dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-              '';
-            };
-          };
 
           # wdisplays set the right outputs
           # install -Dm644 /dev/null ~/.config/shikane/config.toml
@@ -166,16 +142,6 @@
           cliphist = {
             enable = true;
             allowImages = true;
-          };
-
-          wlsunset = {
-            enable = true;
-            # gama = "2.0";
-            temperature.night = 3000; # default: 4000
-            # sunset = "19:00";
-            # sunrise = "07:00";
-            latitude = "22.38";
-            longitude = "114.20";
           };
 
           wpaperd = {

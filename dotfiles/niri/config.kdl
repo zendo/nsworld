@@ -28,7 +28,6 @@ layout {
     }
 }
 
-spawn-at-startup "waybar"
 // spawn-at-startup "niriswitcher"
 // spawn-at-startup "sh" "-c" "swayidle -w timeout 200 'brightnessctl -s s 10%' resume 'brightnessctl -r' timeout 300 'swaylock -f' timeout 360 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors && brightnessctl -r' before-sleep 'playerctl pause' before-sleep 'swaylock -f'"
 
@@ -40,8 +39,10 @@ binds {
     Mod+F { spawn "nautilus"; }
     Mod+L { spawn "hyprlock"; }
     Mod+X { spawn "fuzzel"; }
+    // Mod+X { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     Mod+Period { spawn "bemoji"; }
     Mod+Escape { spawn "wlogout"; }
+    // Mod+Escape { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
     Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
