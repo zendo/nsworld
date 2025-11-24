@@ -19,10 +19,10 @@
         "image/jpeg" = "org.gnome.Loupe.desktop";
         "image/png" = "org.gnome.Loupe.desktop";
         "image/webp" = "org.gnome.Loupe.desktop";
+        "application/pdf" = "org.gnome.Papers.desktop";
       }
       (lib.mkIf nixosConfig.services.desktopManager.gnome.enable {
         "text/plain" = "org.gnome.TextEditor.desktop";
-        "application/pdf" = "org.gnome.Papers.desktop";
       })
       (lib.mkIf nixosConfig.services.desktopManager.plasma6.enable {
         "image/jpeg" = "org.kde.gwenview.desktop";

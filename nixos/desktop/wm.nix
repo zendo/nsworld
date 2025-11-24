@@ -69,6 +69,9 @@
           swaylock-effects
           hyprlock
           libnotify # notify-send
+          # TODO: idle manager
+          # https://saltnpepper97.github.io/stasis/configuration
+          stasis
           swayidle
           wlogout
           waybar
@@ -127,7 +130,14 @@
         services = {
           avizo.enable = true;
           # playerctld.enable = true;
-          swaync.enable = true; # notification center
+          swaync = {
+            enable = true;
+            settings = {
+              notification-visibility = {
+                bluetooth-connected = "never";
+              };
+            };
+          };
 
           # wdisplays set the right outputs
           # install -Dm644 /dev/null ~/.config/shikane/config.toml
@@ -165,13 +175,21 @@
         };
 
         # Dark Mode
-        dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        # dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
-        qt = {
-          enable = true;
-          platformTheme.name = "adwaita";
-          style.name = "adwaita";
-          style.package = pkgs.adwaita-qt;
+        # qt = {
+        #   enable = true;
+        #   platformTheme.name = "adwaita";
+        #   style.name = "adwaita";
+        #   style.package = pkgs.adwaita-qt;
+        # };
+
+        xdg.dataFile = {
+          # Fix qt tiny cursor on gnome
+          "icons/default/index.theme".text = ''
+            [icon theme]
+            Inherits=Adwaita
+          '';
         };
       }
     )
