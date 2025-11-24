@@ -30,7 +30,7 @@ layout {
 
 binds {
     Mod+Return { spawn "ghostty"; }
-    Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
+    // Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "nautilus"; }
@@ -125,7 +125,6 @@ input {
 
 layer-rule {
     match namespace="^wallpaper$"
-    match namespace="noctalia"
     place-within-backdrop true
 }
 

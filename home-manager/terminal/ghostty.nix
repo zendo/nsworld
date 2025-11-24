@@ -26,6 +26,7 @@
       window-padding-y = "4";
       # copy-on-select = "clipboard";
       keybind = [
+        "global:super+comma=toggle_quick_terminal"
         "ctrl+enter=unbind"
         "f11=toggle_fullscreen"
         "alt+w=copy_to_clipboard"
