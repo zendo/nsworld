@@ -7,7 +7,6 @@
 {
   security = {
     soteria.enable = true; # Polkit agent
-    pam.services.swaylock = { };
     pam.services.hyprlock = { };
   };
 
@@ -70,13 +69,11 @@
           swappy # screenshot annotation editor
           swaybg # wallpaper tool
           waypaper
-          swaylock-effects
           hyprlock
           libnotify # notify-send
           # TODO: idle manager
           # https://saltnpepper97.github.io/stasis/configuration
           stasis
-          swayidle
           wlogout
           uwsm
 

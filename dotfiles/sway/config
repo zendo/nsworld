@@ -48,14 +48,14 @@ exec autotiling-rs
 exec nm-applet --indicator
 exec blueman-applet
 exec fcitx5 -rd
-exec swayidle -w \
+exec hypridle -w \
   timeout 200 'brightnessctl -s s 10%' \
      resume 'brightnessctl -r' \
-  timeout 300 'swaylock -f' \
+  timeout 300 'hyprlock' \
   timeout 360 'swaymsg "output * dpms off"' \
      resume 'swaymsg "output * dpms on" && brightnessctl -r' \
   before-sleep 'playerctl pause' \
-  before-sleep 'swaylock -f'
+  before-sleep 'hyprlock'
 
 # -------===[ Keybindings ]===-------
 bindsym {

@@ -12,7 +12,6 @@ in
   xdg.configFile = {
     "cava".source = ../../dotfiles/cava;
     "shikane".source = ../../dotfiles/shikane;
-    "swaylock".source = ../../dotfiles/swaylock;
 
     "mpv".source = linkFlake "dotfiles/mpv";
     "helix".source = linkFlake "dotfiles/helix";
