@@ -85,6 +85,7 @@
           # wtype # xdotool
 
           # Display
+          avizo # lightctl / volumectl
           brightnessctl # same like light
           wl-gammactl
           wdisplays
@@ -106,6 +107,7 @@
           adwaita-icon-theme
           gnome-themes-extra
           dconf-editor
+          glib.bin # gsettings
 
           loupe
           papers
