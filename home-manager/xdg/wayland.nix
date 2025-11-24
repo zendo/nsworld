@@ -4,21 +4,8 @@
     wlsunset
   ];
 
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-  };
-
   services.avizo.enable = true;
-
-  services.swaync = {
-    enable = true;
-    settings = {
-      notification-visibility = {
-        bluetooth-connected = "never";
-      };
-    };
-  };
+  services.swaync.enable = true;
 
   services.wpaperd = {
     enable = true;

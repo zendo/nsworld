@@ -36,10 +36,6 @@ input "type:touchpad" {
 # output * bg #16161d solid_color
 # output * bg `find $wallpapers -type f | shuf -n 1` fill
 
-# Status bar
-# bar {
-#   swaybar_command waybar
-# }
 
 # -------===[ Autostart ]===-------
 # include /etc/sway/config.d/*
@@ -52,7 +48,6 @@ exec autotiling-rs
 exec nm-applet --indicator
 exec blueman-applet
 exec fcitx5 -rd
-# exec wlsunset -l 22 -L 114
 exec swayidle -w \
   timeout 200 'brightnessctl -s s 10%' \
      resume 'brightnessctl -r' \
