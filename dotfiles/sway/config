@@ -43,10 +43,7 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
-# exec autotiling
 exec autotiling-rs
-exec nm-applet --indicator
-# exec blueman-applet
 exec fcitx5 -rd
 exec hypridle -w \
   timeout 200 'brightnessctl -s s 10%' \

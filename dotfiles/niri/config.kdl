@@ -1,8 +1,11 @@
-include "custom.kdl"
+include "origin.kdl"
 
-// Overrides
+// Noctalia Keybinds Overrides
+// https://docs.noctalia.dev/getting-started/keybinds/
 binds {
     Mod+X { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     Mod+V { spawn-sh "noctalia-shell ipc call launcher clipboard"; }
     Mod+Escape { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
+    Mod+Period { spawn-sh "noctalia-shell ipc call launcher emoji"; }
+    Mod+Shift+N { spawn-sh "noctalia-shell ipc call notifications toggleHistory"; }
 }

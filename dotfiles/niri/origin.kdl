@@ -35,10 +35,10 @@ binds {
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "nautilus"; }
     Mod+L { spawn "hyprlock"; }
-    Mod+X { spawn "fuzzel"; }
-    Mod+Period { spawn "bemoji"; }
-    Mod+Escape { spawn "wlogout"; }
-    Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+    Mod+X { spawn "fuzzel"; }  // Overrides
+    Mod+Period { spawn "bemoji"; } // Overrides
+    Mod+Escape { spawn "wlogout"; } // Overrides
+    Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; } // Overrides
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Q { close-window; }

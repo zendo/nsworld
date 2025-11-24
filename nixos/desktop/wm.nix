@@ -65,31 +65,24 @@
         ];
 
         home.packages = with pkgs; [
-          swappy # screenshot annotation editor
-          swaybg # wallpaper tool
-          waypaper
-          hyprlock
           libnotify # notify-send
+          hyprlock
           # TODO: idle manager or hypridle
           # https://saltnpepper97.github.io/stasis/configuration
           stasis
           wlogout
           uwsm
-
           fuzzel
           bemoji
           wl-clipboard
           wf-recorder
           cliphist
-          networkmanagerapplet
           blueberry
           wlopm
           wev # wayland event view
           wvkbd # on-screen keyboard
           # waypipe # proxy ?
           # wtype # xdotool
-          file-roller
-          papers
 
           # Display
           brightnessctl # same like light
@@ -102,6 +95,8 @@
           # grim # grab image
           # slurp # select region
           shotman
+          nomacs
+          hyprpicker
           # pavucontrol
           pwvucontrol # Pipewire Volume Control
           playerctl # media player control
@@ -112,9 +107,10 @@
           gnome-themes-extra
           dconf-editor
 
-          nomacs
           loupe
-          hyprpicker
+          papers
+          file-roller
+          swappy # screenshot annotation editor
           # gnome.gnome-power-manager
           # gnome.gnome-characters
           # gthumb
@@ -123,6 +119,7 @@
         ];
 
         services = {
+          # network-manager-applet.enable = true;
           # playerctld.enable = true;
 
           # wdisplays set the right outputs
