@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
     wlsunset
@@ -17,6 +17,17 @@
       notification-visibility = {
         bluetooth-connected = "never";
       };
+    };
+  };
+
+  services.wpaperd = {
+    enable = true;
+    settings = {
+      default = {
+        duration = "30m";
+        mode = "center";
+      };
+      any.path = "${config.home.homeDirectory}/Pictures/Wallpapers";
     };
   };
 

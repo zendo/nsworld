@@ -63,8 +63,8 @@
       { config, pkgs, ... }:
       {
         imports = [
-          # ../../home-manager/xdg/noctalia.nix
-          ../../home-manager/xdg/wayland.nix
+          ../../home-manager/xdg/noctalia.nix
+          # ../../home-manager/xdg/wayland.nix
         ];
 
         home.packages = with pkgs; [
@@ -142,17 +142,6 @@
           cliphist = {
             enable = true;
             allowImages = true;
-          };
-
-          wpaperd = {
-            enable = true;
-            settings = {
-              default = {
-                duration = "30m";
-                mode = "center";
-              };
-              any.path = "${config.home.homeDirectory}/Pictures/Wallpapers";
-            };
           };
         };
 
