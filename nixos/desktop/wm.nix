@@ -13,7 +13,6 @@
   services = {
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
-    blueman.enable = true;
     geoclue2.enable = true;
     hypridle.enable = true;
 
@@ -71,7 +70,7 @@
           waypaper
           hyprlock
           libnotify # notify-send
-          # TODO: idle manager
+          # TODO: idle manager or hypridle
           # https://saltnpepper97.github.io/stasis/configuration
           stasis
           wlogout
@@ -83,7 +82,6 @@
           wf-recorder
           cliphist
           networkmanagerapplet
-          bluetuith
           blueberry
           wlopm
           wev # wayland event view

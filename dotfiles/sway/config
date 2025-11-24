@@ -46,7 +46,7 @@ exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.t
 # exec autotiling
 exec autotiling-rs
 exec nm-applet --indicator
-exec blueman-applet
+# exec blueman-applet
 exec fcitx5 -rd
 exec hypridle -w \
   timeout 200 'brightnessctl -s s 10%' \
