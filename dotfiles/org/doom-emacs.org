@@ -213,6 +213,7 @@
 (package! super-save)
 (package! rime)
 (package! casual)
+(package! kdl-mode)
 ;; (package! this-package
 ;; :recipe (:host github :repo "camdez/goto-last-change"))
 (package! org-modern :disable t)
