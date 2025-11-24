@@ -71,13 +71,14 @@
           # https://saltnpepper97.github.io/stasis/configuration
           stasis
           wlogout
-          uwsm
           fuzzel
           bemoji
           wl-clipboard
           wf-recorder
           cliphist
           blueberry
+          uwsm
+          xwayland-satellite
           wlopm
           wev # wayland event view
           wvkbd # on-screen keyboard
