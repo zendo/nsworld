@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   nixosConfig,
   ...
 }:
@@ -30,11 +29,6 @@
         "image/webp" = "org.kde.gwenview.desktop";
         "text/plain" = "org.kde.kwrite.desktop";
         "application/pdf" = "org.kde.okular.desktop";
-      })
-      # for wm
-      (lib.mkIf config.services.wlsunset.enable {
-        "text/plain" = "org.gnome.TextEditor.desktop";
-        "application/pdf" = "org.gnome.Papers.desktop";
       })
     ];
   };

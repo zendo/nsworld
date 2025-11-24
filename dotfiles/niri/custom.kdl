@@ -125,7 +125,6 @@ input {
 
 layer-rule {
     match namespace="^wallpaper$"
-    match namespace="wpaperd"
     match namespace="noctalia"
     place-within-backdrop true
 }

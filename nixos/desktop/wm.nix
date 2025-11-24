@@ -60,11 +60,10 @@
 
   home-manager.sharedModules = [
     (
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       {
         imports = [
           ../../home-manager/xdg/noctalia.nix
-          # ../../home-manager/xdg/wayland.nix
         ];
 
         home.packages = with pkgs; [
