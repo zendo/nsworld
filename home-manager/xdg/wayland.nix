@@ -22,11 +22,12 @@
 
   # https://darkman.whynothugo.nl/#CONFIGURATION
   services.darkman = {
-    enable = true;
+    # TODO: not working!
+    # enable = true;
     settings = {
-      usegeoclue = true;
-      # lat = "";
-      # lng = "";
+      lat = 22.38;
+      lng = 114.20;
+      # usegeoclue = true;
       darkModeScripts = {
         gtk-theme = ''
           ${pkgs.dconf}/bin/dconf write \
@@ -46,9 +47,9 @@
     enable = true;
     # gama = "2.0";
     temperature.night = 3000; # default: 4000
-    # sunset = "19:00";
-    # sunrise = "07:00";
     latitude = "22.38";
     longitude = "114.20";
+    # sunset = "19:00";
+    # sunrise = "07:00";
   };
 }
