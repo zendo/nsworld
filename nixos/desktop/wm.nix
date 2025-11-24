@@ -137,21 +137,21 @@
                 bluetooth-connected = "never";
               };
             };
+          };
 
-            # https://darkman.whynothugo.nl/#CONFIGURATION
-            darkman = {
-              enable = true;
-              settings = {
-                usegeoclue = "true";
-                # lat = "";
-                # lng = "";
-                darkModeScripts.gtk-theme = ''
-                  dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-                '';
-                lightModeScripts.gtk-theme = ''
-                  dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-                '';
-              };
+          # https://darkman.whynothugo.nl/#CONFIGURATION
+          darkman = {
+            enable = true;
+            settings = {
+              usegeoclue = "true";
+              # lat = "";
+              # lng = "";
+              darkModeScripts.gtk-theme = ''
+                dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+              '';
+              lightModeScripts.gtk-theme = ''
+                dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+              '';
             };
           };
 
@@ -189,9 +189,6 @@
             };
           };
         };
-
-        # Dark Mode
-        # dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
         # qt = {
         #   enable = true;
