@@ -16,6 +16,7 @@
           "steam"
           "vscode"
           "spotify"
+          "qqmusic"
           "google-chrome"
           "microsoft-edge"
           "vivaldi"

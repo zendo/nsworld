@@ -15,9 +15,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # fix svg theme
-    programs.gdk-pixbuf.modulePackages = lib.mkDefault [ pkgs.librsvg ];
-
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
@@ -71,7 +68,7 @@ in
             Font = "Noto Sans CJK SC 12";
             # MenuFont = "Sans Serif 12";
             # TrayFont = "Sans Serif 12";
-            Theme = "FluentDark-solid";
+            Theme = "mellow-youlan-dark";
             # DarkTheme = "mellow-youlan-dark"; # FluentDark-solid/mellow-youlan-dark
             # UseDarkTheme = true; # 跟随系统浅色/深色设置
           };
