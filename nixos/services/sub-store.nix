@@ -4,7 +4,6 @@
   ...
 }:
 {
-  # https://surge.tel/08/2930
   # http://127.0.0.1:3001/subs
   systemd.services.sub-store = {
     enable = lib.mkDefault false;

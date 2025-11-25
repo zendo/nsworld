@@ -57,22 +57,41 @@ dns:
   fake-ip-range: 198.18.0.1/16
   # 定义不使用虚假IP解析的域名列表
   fake-ip-filter:
+    # 本地网络及保留域名
     - "*.lan"
-    - "*.localdomain"
-    - "*.example"
-    - "*.invalid"
-    - "*.localhost"
-    - "*.test"
     - "*.local"
+    - "*.localhost"
+    - "*.localdomain"
     - "*.home.arpa"
-    - "*.msftconnecttest.com"
-    - "*.msftncsi.com"
-    - "+.srv.nintendo.net"
-    - "+.stun.playstation.net"
-    - "+.push.apple.com"
-    - "+.market.xiaomi.com"
+    - "*.invalid"
+    - "+.miwifi.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    # NTP 时间同步服务
+    - "+.pool.ntp.org"
+    - "time.*.com"
+    - "time.*.gov"
+    - "time.*.edu.cn"
+    - "time.*.apple.com"
+    - "time-ios.apple.com"
+    - "ntp.*.com"
+    - "*.ntp.org.cn"
+    - "*.time.edu.cn"
+    # STUN 服务
+    - "+.stun"
+    - turn.cloudflare.com
+    - "+.rustdesk.com"
+    # Google
+    - "lens.l.google.com"
+    # 米家物联网
+    - "Mijia Cloud"
+    # 快捷登录
+    - "graph.qq.com"
+    - "+.ptlogin2.qq.com"
+    # cn地址
     - "geosite:private"
     - "geosite:cn"
+
   default-nameserver: # 基础DNS服务器，必须先有它才能使用域名类型的DNS配置，因此必须为IP
     - tls://223.5.5.5
     - tls://223.6.6.6

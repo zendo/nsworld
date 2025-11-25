@@ -71,10 +71,12 @@ pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node 
 
 文件管理 - 创建文件 - config.json
 模板：https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sb-template.json
-脚本：
-https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=liangxin&outbound=%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%8E%88%20%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%9A%80%20%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9&type=%E8%BF%9C%E7%A8%8B%E8%AE%A2%E9%98%85
+单条订阅脚本：
+https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=wcloud&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
+组合订阅脚本：
+https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#type=组合订阅&name=all&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
 
 打开：http://127.0.0.1:3001/subs
 下载：curl -O http://127.0.0.1:3000/api/file/config.json
 
-教程：https://linux.do/t/topic/846616
+教程：https://surge.tel/08/2930
