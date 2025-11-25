@@ -41,5 +41,6 @@
   ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./xdg/plasma.nix ]
   ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./xdg/dconf.nix ];
 
+  home.enableNixpkgsReleaseCheck = false;
   home.stateVersion = nixosConfig.system.stateVersion;
 }

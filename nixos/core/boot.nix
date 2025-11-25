@@ -29,7 +29,7 @@
   };
 
   # Perlless Activation
-  # system.etc.overlay.enable = lib.mkDefault true;
+  # system.etc.overlay.enable = true;
 
   # Bashless Activation
   # https://github.com/NixOS/nixpkgs/issues/428908
