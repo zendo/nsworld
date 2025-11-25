@@ -43,6 +43,7 @@
   environment.systemPackages = with pkgs; [
     # authenticator
     refine
+    file-roller
     gthumb
     gparted
     dconf-editor

@@ -24,6 +24,7 @@
       # window-height = "28";
       window-padding-x = "8";
       window-padding-y = "4";
+      window-theme = "ghostty";
       # copy-on-select = "clipboard";
       keybind = [
         "global:super+comma=toggle_quick_terminal"
