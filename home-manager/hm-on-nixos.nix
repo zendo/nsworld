@@ -7,12 +7,12 @@
   imports = [
     ./editor/helix.nix
     ./editor/micro.nix
-    ###################
+    # -------------------------------------
     ./programs/cli.nix
     ./programs/git.nix
     ./programs/nix-tools.nix
     ./programs/ssh.nix
-    ###################
+    # -------------------------------------
     ./xdg/files.nix
   ]
   ++ (lib.filesystem.listFilesRecursive ./shell)
@@ -23,17 +23,17 @@
     ./editor/nvim.nix
     ./editor/vscode.nix
     ./editor/zed.nix
-    ###################
+    # -------------------------------------
     ./programs/chrome.nix
     ./programs/firefox.nix
     ./programs/gui.nix
     ./programs/vicinae.nix
-    ###################
+    # -------------------------------------
     # ./terminal/alacritty.nix
     ./terminal/foot.nix
     ./terminal/ghostty.nix
     ./terminal/kitty.nix
-    ###################
+    # -------------------------------------
     ./xdg/env.nix
     ./xdg/mime.nix
     ./xdg/xdg.nix

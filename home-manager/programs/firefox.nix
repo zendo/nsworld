@@ -5,7 +5,7 @@
     # package = pkgs.firefox-bin;
     languagePacks = [ "zh-CN" ];
 
-    # Random name
+    # Random Profiles Name
     profiles.huohu = {
       isDefault = true;
       # userChrome = ''
@@ -65,7 +65,7 @@
             Name = "Searchix";
             URLTemplate = "https://searchix.ovh/?query={searchTerms}";
             IconURL = "https://searchix.ovh/favicon.ico";
-            Alias = "nse";
+            Alias = "nsa";
           }
           {
             Name = "MyNixOS";

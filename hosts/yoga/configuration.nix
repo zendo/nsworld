@@ -1,9 +1,8 @@
 {
   inputs,
   self,
-  config,
-  pkgs,
   lib,
+  pkgs,
   username,
   ...
 }:
@@ -33,11 +32,11 @@
   # services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${username}";
 
-  ###############################################
-  ## Proxy
-  ###############################################
+  # =========================================================================
+  # Proxy
+  # =========================================================================
   environment.systemPackages = with pkgs; [
-    # inputs.nixpkgs-pr.legacyPackages.${system}.apps
+    # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
     inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
     mihomo
     sing-box
@@ -104,9 +103,9 @@
     longitude = 113.20; # 经度
   };
 
-  ###############################################
-  ## Hardware
-  ###############################################
+  # =========================================================================
+  # Hardware
+  # =========================================================================
   # hardware.enableAllFirmware = true;
   # nixpkgs.config.allowUnfree = true;
 
@@ -165,9 +164,9 @@
 
   # zramSwap.enable = lib.mkDefault true;
 
-  ###############################################
-  ## Bootloader
-  ###############################################
+  # =========================================================================
+  # Bootloader
+  # =========================================================================
   /*
     Disable "Secure Boot" and reset to “Setup Mode”
     sudo -i
@@ -187,9 +186,10 @@
       canTouchEfiVariables = true;
       efiSysMountPoint = "/efi"; # default /boot
     };
-    ################
-    ## Systemd-boot
-    ################
+
+    # -----------------------------------------------------------------------
+    # Systemd-boot
+    # -----------------------------------------------------------------------
     systemd-boot = {
       # enable = true;
       configurationLimit = 5; # bootmenu items
@@ -205,9 +205,10 @@
         };
       };
     };
-    ################
-    ## Limine
-    ################
+
+    # -----------------------------------------------------------------------
+    # Limine
+    # -----------------------------------------------------------------------
     # https://github.com/limine-bootloader/limine/blob/trunk/CONFIG.md
     limine = {
       enable = true;
@@ -229,9 +230,9 @@
             path: boot(1):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
     };
-    ################
-    ## GRUB2
-    ################
+    # -----------------------------------------------------------------------
+    # GRUB2
+    # -----------------------------------------------------------------------
     grub = {
       # enable = true;
       device = "nodev";

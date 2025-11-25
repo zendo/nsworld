@@ -6,7 +6,11 @@
 */
 { inputs, ... }:
 {
+  # Collection of overlays definitions
   flake.overlays = {
+    # =========================================================================
+    # Inputs Overlays
+    # =========================================================================
     # nur = inputs.nur.overlay;
 
     # https://wiki.nixos.org/wiki/Flakes#Importing_packages_from_multiple_nixpkgs_branches
@@ -17,9 +21,9 @@
     #   };
     # };
 
-    ###############################################
-    ##  Add new packages
-    ###############################################
+    # =========================================================================
+    # Adding Packages
+    # =========================================================================
     additions =
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
@@ -27,9 +31,9 @@
         directory = ../pkgs;
       };
 
-    ###############################################
-    ##  Mod existed packages
-    ###############################################
+    # =========================================================================
+    # Modifying Packages
+    # =========================================================================
     modifications = final: prev: {
       # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
 
@@ -121,7 +125,9 @@
         startupNotify = false;
       };
 
-      # qt6Packages override
+      # -----------------------------------------------------------------------
+      # qt6Packages overrideScope
+      # -----------------------------------------------------------------------
       qt6Packages = prev.qt6Packages.overrideScope (
         qt6final: qt6prev: {
           # `fcitx5-configtool` has a heavy dependency KDE Frameworks
@@ -129,11 +135,9 @@
         }
       );
 
-      # gnomeExtensions = prev.gnomeExtensions // {
-      #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
-      # };
-
+      # -----------------------------------------------------------------------
       # Python Module Overlays
+      # -----------------------------------------------------------------------
       # nix build .#python3Packages.pyjokes
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
         (
@@ -151,7 +155,14 @@
         # })
       ];
 
-      # And etc...
+      # -----------------------------------------------------------------------
+      # Gnome Extensions
+      # -----------------------------------------------------------------------
+      # gnomeExtensions = prev.gnomeExtensions // {
+      #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
+      # };
+
+      # etc...
     }; # end of modifications
   }; # end of flake.overlays
 }
