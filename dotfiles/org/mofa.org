@@ -19,7 +19,7 @@ mixed-in 监听地址改 :: 7890
 出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
 路由设置——规则：删除 reject quic
 
-"route" - "rules":
+"route" - "rules" 加在后面
 #+begin_src json
       {
         "action": "route",
@@ -69,13 +69,12 @@ wget https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/downlo
 pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
 #+end_src
 
-教程：
-https://linux.do/t/topic/846616
-
 文件管理 - 创建文件 - config.json
-
-模板：
-https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sb-template.json
-
+模板：https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sb-template.json
 脚本：
 https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=liangxin&outbound=%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%8E%88%20%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%F0%9F%95%B3%E2%84%B9%EF%B8%8F%F0%9F%9A%80%20%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9&type=%E8%BF%9C%E7%A8%8B%E8%AE%A2%E9%98%85
+
+打开：http://127.0.0.1:3001/subs
+下载：curl -O http://127.0.0.1:3000/api/file/config.json
+
+教程：https://linux.do/t/topic/846616
