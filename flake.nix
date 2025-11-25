@@ -49,6 +49,7 @@
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs"; # remove when colmena release
     deploy-rs.url = "github:serokell/deploy-rs";
+    nix-alien.url = "github:thiagokokada/nix-alien";
     plasma-manager.url = "github:nix-community/plasma-manager";
     templates.url = "github:NixOS/templates";
     treefmt-nix.url = "github:numtide/treefmt-nix";
