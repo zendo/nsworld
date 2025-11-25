@@ -19,6 +19,18 @@ mixed-in 监听地址改 :: 7890
 出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
 路由设置——规则：删除 reject quic
 
+"route" - "rules":
+#+begin_src json
+      {
+        "action": "route",
+        "domain_suffix": [
+          "beacondb.net",
+          "ip-api.com"
+        ],
+        "outbound": "🎯 全球直连"
+      }
+#+end_src
+
 ** providers
 outbounds —— 节点选择和自动选择分别添加：
 
