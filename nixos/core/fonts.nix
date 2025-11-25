@@ -13,6 +13,8 @@
         noto-fonts-color-emoji
         nerd-fonts.symbols-only
         ####### Chinese #########
+        # noto-fonts-cjk-sans-static
+        # noto-fonts-cjk-serif-static
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         maple-mono.NL-NF-CN-unhinted

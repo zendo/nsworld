@@ -114,7 +114,8 @@
 
           loupe
           papers
-          file-roller
+          # file-roller
+          xarchiver
           swappy # screenshot annotation editor
           # gnome.gnome-power-manager
           # gnome.gnome-characters
