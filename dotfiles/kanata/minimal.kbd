@@ -1,37 +1,29 @@
+;; https://github.com/jtroo/kanata/blob/main/cfg_samples/minimal.kbd
 ;; https://shom.dev/start/using-kanata-to-remap-any-keyboard/
-;; https://github.com/jtroo/kanata
 
 (defcfg
-  #|
-  This configuration will process all keys pressed inside of kanata, even if
-  they are not mapped in defsrc. This is so that certain actions can activate
-  at the right time for certain input sequences. By default, unmapped keys are
-  not processed through kanata due to a Windows issue related to AltGr. If you
-  use AltGr in your keyboard, you will likely want to follow the simple.kbd
-  file while unmapping lctl and ralt from defsrc.
-  |#
-  process-unmapped-keys yes
+    ;; 处理未映射的按键：yes 表示 Kanata 会处理所有按键，包括未在层中定义的按键
+    ;; 如果设置为 no，未映射的按键将直接由操作系统处理
+    process-unmapped-keys yes
 )
 
 (defsrc
-  caps grv         i
-              j    k    l
-  lsft rsft
+    ;; 定义物理按键源 - 这里只列出了 caps 键
+    ;; defsrc 部分声明了物理键盘上实际存在的按键
+    ;; Kanata 将只处理在这里声明的物理按键
+    caps
 )
 
-(deflayer default
-  @cap @grv        _
-              _    _    _
-  _    _
-)
-
-(deflayer arrows
-  _    _           up
-              left down rght
-  _    _
+(deflayer base
+    ;; 基础层定义
+    ;; 这里将物理 caps 键映射到我们自定义的 @cap 别名
+    @cap
 )
 
 (defalias
-  cap (tap-hold-press 200 200 caps lctl)
-  grv (tap-hold-press 200 200 grv (layer-toggle arrows))
+    ;; 定义别名：cap
+    ;; 使用 tap-hold-press 功能实现轻触/长按行为：
+    ;; - 轻触（快速按下并释放，200ms 内）：发送 caps 键
+    ;; - 长按（按住超过 200ms）：发送 lctl（左 Control 键）
+    cap (tap-hold-press 200 200 caps lctl)
 )
