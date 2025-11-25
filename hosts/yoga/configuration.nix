@@ -17,16 +17,16 @@
     self.nixosModules.homeManagerInit
     self.nixosModules.laptopPowerPlans
 
-    # self.nixosModules.gnome
+    self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
-    self.nixosModules.sway
-    self.nixosModules.niri
-    self.nixosModules.hyprland
+    # self.nixosModules.sway
+    # self.nixosModules.niri
+    # self.nixosModules.hyprland
   ];
 
   mods.virt.enable = true;
-  mods.steam.enable = true;
+  # mods.steam.enable = true;
   # programs.nix-ld.enable = true;
 
   services.acpid.enable = true;

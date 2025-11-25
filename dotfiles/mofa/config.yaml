@@ -41,7 +41,7 @@ proxy-groups:
   # PROXY: 主代理组（可自定义添加其他策略组到proxies列表中）
   - {name: PROXY, type: select, proxies: [AUTO,DIRECT,AI-PROXY], include-all: true, max-failed-times: 1, interval: 600, timeout: 1000, lazy: false}
   # AUTO: 自动选择最快节点（use中填写你使用的provider名称，或者用include-all）
-  - {name: AUTO, type: url-test, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, use: [Provider1,Provider2], lazy: false}
+  - {name: AUTO, type: url-test, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, include-all: true, lazy: false}
   # AI-PROXY: AI服务专用代理（exclude-filter可过滤不想用的地区，如"HK|US|JP"）
   - {name: AI-PROXY, type: select, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, use: [Provider1,Provider2], exclude-filter: "HK|香港|Hong Kong", lazy: false}
 
@@ -107,6 +107,7 @@ rules:
  - DOMAIN-SUFFIX,v6.navy,DIRECT
  - DOMAIN-SUFFIX,dynv6.com,DIRECT
  - DOMAIN-SUFFIX,api.beacondb.net,DIRECT
+ - DOMAIN-SUFFIX,ip-api.com,DIRECT
 # ========== 基于GeoSite的智能分流规则 ==========
 # 以下为固定规则，一般无需修改
 # 如需调整某个服务的策略，可修改后面的策略组名称

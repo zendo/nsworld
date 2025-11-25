@@ -41,6 +41,8 @@ in
       extraGroups = [
         "wheel"
         "networkmanager"
+        "input"
+        "video"
         (mkIf config.virtualisation.docker.enable "docker")
         (mkIf config.virtualisation.podman.enable "podman")
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
