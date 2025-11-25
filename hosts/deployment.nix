@@ -5,11 +5,11 @@
 */
 { inputs, lib, ... }:
 {
-  ###############################################
-  ## Colmena
-  ## https://github.com/juspay/colmena-flake/blob/main/flake-module.nix
-  ## https://git.eisfunke.com/MonsterDruide1/nixos/-/blob/main/flake/colmena.nix
-  ###############################################
+  # =========================================================================
+  # Colmena
+  # https://github.com/juspay/colmena-flake/blob/main/flake-module.nix
+  # https://git.eisfunke.com/MonsterDruide1/nixos/-/blob/main/flake/colmena.nix
+  # =========================================================================
   flake.colmena =
     let
       deployment = {
@@ -46,9 +46,9 @@
 
   flake.colmenaHive = inputs.colmena.lib.makeHive inputs.self.outputs.colmena;
 
-  ###############################################
-  ## deploy-rs
-  ###############################################
+  # =========================================================================
+  # deploy-rs
+  # =========================================================================
   flake.deploy = {
     # sudo = "doas -u";
     sshUser = "root";
@@ -70,6 +70,6 @@
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."rmt";
         };
       };
-    };
+    }; # end of nodes
   }; # end of flake.deploy
 }

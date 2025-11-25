@@ -3,7 +3,7 @@
   # https://github.com/rvaiya/keyd
   # sudo nix run nixpkgs#keyd monitor
   services.keyd = {
-    enable = true;
+    # enable = true;
     keyboards = {
       default = {
         ids = [ "*" ];

@@ -1,10 +1,7 @@
 {
-  inputs,
   self,
   pkgs,
-  lib,
   username,
-  modulesPath,
   ...
 }:
 {
@@ -16,19 +13,15 @@
     self.nixosModules.default
     self.nixosModules.homeManagerInit
 
-    # self.nixosModules.gnome
+    self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
-    self.nixosModules.niri
+    # self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 
   # programs.nix-ld.enable = true;
-
-  # Clipboard shared for NixOS@Guest
-  services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true;
 
   environment.systemPackages = with pkgs; [
     duf
@@ -53,6 +46,10 @@
       };
     };
   };
+
+  # Clipboard shared for NixOS@Guest
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
 
   users.users.${username} = {
     # pw: 123

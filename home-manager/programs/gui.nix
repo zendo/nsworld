@@ -32,7 +32,7 @@
     goodvibes
     # go-musicfox
     # splayer # (electron)
-    qqmusic
+    # qqmusic
     spotify
     # mousai
     songrec

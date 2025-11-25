@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 {
   # Load configs from nixos/modules
   programs.zsh.enable = true;

@@ -2,7 +2,7 @@
 {
   # https://github.com/jtroo/kanata
   services.kanata = {
-    # enable = true;
+    enable = true;
     keyboards = {
       default.configFile = ../../dotfiles/kanata/minimal.kbd;
     };
