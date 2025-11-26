@@ -11,7 +11,6 @@
         }:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            rootPath = ../.;
             inherit inputs self username;
           };
           modules = [

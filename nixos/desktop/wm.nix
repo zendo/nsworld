@@ -1,6 +1,7 @@
 {
-  pkgs,
   lib,
+  pkgs,
+  self,
   config,
   ...
 }:
@@ -63,7 +64,7 @@
       { pkgs, ... }:
       {
         imports = [
-          ../../home-manager/xdg/noctalia.nix
+          (self + /home-manager/xdg/noctalia.nix)
         ];
 
         home.packages = with pkgs; [
