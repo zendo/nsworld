@@ -49,11 +49,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1764017209,
-        "narHash": "sha256-RoJGCtKExXXkNCZUmmxezG3eOczEOTBw38DaZGSYJC0=",
+        "lastModified": 1764110879,
+        "narHash": "sha256-xanUzIb0tf3kJ+PoOFmXEXV1jM3PjkDT/TQ5DYeNYRc=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "ec8eabe00c4ee9a2ddc50162c125f0ec2a7099e1",
+        "rev": "aecba248f9a7d68c5d1ed15de2d1c8a4c994a3c5",
         "type": "github"
       },
       "original": {
@@ -165,11 +165,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764075860,
-        "narHash": "sha256-KYEIHCBBw+/lwKsJNRNoUxBB4ZY2LK0G0T8f+0i65q0=",
+        "lastModified": 1764135300,
+        "narHash": "sha256-5xOuutXM7UPTUcn3uDAD8UlPQsXmqPrX81cXoDOAGcA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "295d90e22d557ccc3049dc92460b82f372cd3892",
+        "rev": "f4cb25928fafa9ae68660fe71f730fc820a59028",
         "type": "github"
       },
       "original": {
@@ -376,11 +376,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1764072303,
-        "narHash": "sha256-o6e3rWdKcEWuSnz8jSMFBUI0nJW2R9T3YBcBsigHDT8=",
-        "rev": "798ce8bfd0567bbd12ee633a88e53737969ec7d9",
+        "lastModified": 1764115418,
+        "narHash": "sha256-MmTXhawyp2o260DBuY7Zdk21DEjyu4e8/SaFhbkmSm4=",
+        "rev": "792461ff11c903153774c729cbbd49bdcf459218",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.05pre902290.798ce8bfd056/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.05pre902583.792461ff11c9/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -442,11 +442,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764081084,
-        "narHash": "sha256-wFyZkoWiicLbrOBrcLm/FYs09GuE1qdsarCDFXc0sLg=",
+        "lastModified": 1764149695,
+        "narHash": "sha256-IR0yVfyvI2bB5Jam1sOyE8eZ7wjb8UILNdzGcODMHmY=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "1d396afb05927ec21bf2ccb2ecc34b80dabbbf25",
+        "rev": "737bde0a6aae414b6adc61a5f4dc76e5c6489dd5",
         "type": "github"
       },
       "original": {
