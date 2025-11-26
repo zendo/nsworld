@@ -23,6 +23,7 @@ in
       fcitx5.addons = with pkgs; [
         fcitx5-fluent
         fcitx5-mellow-themes
+        fcitx5-themes-candlelight
         # 命令行手动部署
         # nix shell nixpkgs#librime --command rime_deployer --build ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
         (fcitx5-rime.override {
@@ -68,8 +69,9 @@ in
             Font = "Noto Sans CJK SC 12";
             # MenuFont = "Sans Serif 12";
             # TrayFont = "Sans Serif 12";
-            Theme = "mellow-youlan-dark";
-            # DarkTheme = "mellow-youlan-dark"; # FluentDark-solid/mellow-youlan-dark
+            # FluentDark-solid / mellow-youlan-dark / winter
+            Theme = "winter";
+            # DarkTheme = "mellow-youlan-dark";
             # UseDarkTheme = true; # 跟随系统浅色/深色设置
           };
           clipboard = {
