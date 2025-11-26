@@ -45,12 +45,13 @@ proxy-groups:
   # AI-PROXY: AI服务专用代理（exclude-filter可过滤不想用的地区，如"HK|US|JP"）
   - {name: AI-PROXY, type: select, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, use: [Provider1,Provider2], exclude-filter: "HK|香港|Hong Kong", lazy: false}
 
+# https://linux.do/t/topic/1212835
 dns:
   # 使用 DoH、DoT、DoQ 协议比传统基于 UDP 的查询更消耗系统资源，且延迟通常更高
   enable: true # 如为 false,则使用系统 DNS 解析
   ipv6: false
   # prefer-h3: true # 如果DNS服务器支持DoH3会优先使用h3，提升性能
-  respect-rules: true # dns 连接遵守路由规则,需配置 proxy-server-nameserver，强烈不建议和 prefer-h3 一起使用
+  use-hosts: false
   use-system-hosts: false
   cache-algorithm: arc
   enhanced-mode: fake-ip # DNS 处理模式 redir-host/fake-ip，fake-ip提高解析速度和连接性能
@@ -92,18 +93,19 @@ dns:
     - "geosite:private"
     - "geosite:cn"
 
-  default-nameserver: # 基础DNS服务器，必须先有它才能使用域名类型的DNS配置，因此必须为IP
-    - tls://223.5.5.5
-    - tls://223.6.6.6
-  nameserver: # 在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-  proxy-server-nameserver: #解析代理节点时使用的DNS，为了使respect-rules生效必须设置，最好设置为国内DNS，否则在代理的第一步就可能因为连接不上国外DNS而解析不出代理节点的IP，最终倒在起点
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-  direct-nameserver: #规则匹配到直连时使用的DNS，既然是可以直连的，当然要用国内DNS
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
+  # 在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
+  nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  # 解析代理节点时使用的DNS，为了使respect-rules生效必须设置，最好设置为国内DNS，否则在代理的第一步就可能因为连接不上国外DNS而解析不出代理节点的IP，最终倒在起点
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+  # 规则匹配到直连时使用的DNS，既然是可以直连的，当然要用国内DNS
+  direct-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+  respect-rules: true # dns 连接遵守路由规则,需配置 proxy-server-nameserver，强烈不建议和 prefer-h3 一起使用
 
 # 规则优先级从上到下，匹配到即停止
 rules:
