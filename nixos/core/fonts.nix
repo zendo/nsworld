@@ -18,6 +18,7 @@
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         maple-mono.NL-NF-CN-unhinted
+        # https://zhuanlan.zhihu.com/p/627059922
         # sarasa-gothic
         # lxgw-wenkai
         ###### Programming ########
