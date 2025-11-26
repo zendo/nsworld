@@ -27,17 +27,14 @@
       yoga = {
         hostname = "192.168.2.218";
         port = 22;
-        user = "root";
       };
       svp = {
         hostname = "192.168.2.30";
         port = 22;
-        user = "root";
       };
       rmt = {
         hostname = "192.168.122.247";
         port = 22;
-        user = "root";
       };
     };
     extraConfig = ''
