@@ -25,17 +25,17 @@ emacs-ob-tangle:
     --eval '(setq vc-follow-symlinks nil)' \
     --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
 
-sing-box-setup:
-    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O sb-service.exe
+singbox-mihomo-setup:
+    # Download
+    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe
     iwr "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" -O dist.zip
     Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
-    New-Item $HOME\Desktop\subs -ItemType Directory -Force
-    Copy-Item sb-service.xml $HOME\Desktop\subs
-    Move-Item sb-service.exe, ui $HOME\Desktop\subs
-
-mihomo-setup:
-    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O mihomo-service.exe
-    New-Item $HOME\Desktop\mihomo -ItemType Directory -Force
-    Copy-Item ..\mofa\config.yaml $HOME\Desktop\mihomo
-    Copy-Item mihomo-service.xml $HOME\Desktop\mihomo
-    Move-Item mihomo-service.exe $HOME\Desktop\mihomo
+    # Create directory
+    New-Item $HOME\subs -ItemType Directory -Force
+    Move-Item ui $HOME\subs
+    # Copy services
+    Copy-Item ..\mofa\config.yaml $HOME\subs
+    Copy-Item sb-service.xml, mihomo-service.xml $HOME\subs
+    Copy-Item winsw.exe $HOME\subs\sb-service.exe
+    Copy-Item winsw.exe $HOME\subs\mihomo-service.exe
+    Remove-Item winsw.exe

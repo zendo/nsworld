@@ -3,7 +3,8 @@
   <name>mihomo</name>
   <description>This service runs mihomo continuous integration system.</description>
   <executable>C:\Users\zendo\scoop\shims\mihomo</executable>
-  <arguments>-d .</arguments>
+  <arguments>-d .\state -f config.yaml</arguments>
   <log mode="reset" />
+  <logpath>%BASE%\logs</logpath>
   <onfailure action="restart" />
 </service>

@@ -70,7 +70,7 @@ pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node 
 #+end_src
 
 文件管理 - 创建文件 - config.jsonc
-模板：https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sb-template.json
+模板：https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sing-box-template.json
 单条订阅脚本：
 https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=wcloud&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
 组合订阅脚本：
