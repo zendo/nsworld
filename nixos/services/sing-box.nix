@@ -14,7 +14,7 @@
       StateDirectoryMode = "0700";
       # RuntimeDirectory = "sing-box";
       # RuntimeDirectoryMode = "0700";
-      ExecStart = "${lib.getExe pkgs.sing-box} run -c /home/${username}/code/sub/config.json -D \${STATE_DIRECTORY}";
+      ExecStart = "${lib.getExe pkgs.sing-box} run -c /home/${username}/code/sub/config.jsonc -D \${STATE_DIRECTORY}";
       Restart = "on-failure";
       # DynamicUser = true;
     };

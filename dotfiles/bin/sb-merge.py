@@ -3,10 +3,9 @@
 import json
 import sys
 
-# 用法 https://github.com/wynemo/tech-notes/blob/master/science/sing-box/merge.py
-# nodes.json 可以用Sub-Store生成 sing-box 格式的
-# python3 merge.py sing-box-basic.json nodes.json
-# 文件已成功更新并保存为 sing-box-basic-updated.json
+# https://github.com/wynemo/tech-notes/blob/master/science/sing-box/merge.py
+# Sub-Store 生成 sing-box 格式的 nodes.json
+# python3 merge.py sb-template.json nodes.json
 
 # 节点
 with open(sys.argv[2], "r", encoding="utf-8") as nodes_file:
@@ -47,7 +46,7 @@ if proxy_select and isinstance(proxy_select.get("outbounds"), list):
     )
 
 # 保存修改后的文件
-with open("config.json", "w", encoding="utf-8") as updated_file:
+with open("config.jsonc", "w", encoding="utf-8") as updated_file:
     json.dump(sing_box_data, updated_file, ensure_ascii=False, indent=2)
 
-print("文件已成功更新并保存为 config.json")
+print("文件已成功更新并保存为 config.jsonc")
