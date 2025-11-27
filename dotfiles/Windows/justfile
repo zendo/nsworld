@@ -27,12 +27,12 @@ emacs-ob-tangle:
 
 singbox-mihomo-setup:
     # Download
-    iwr "https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe
-    iwr "https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" -O dist.zip
+    iwr "https://ghfast.top/https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe
+    iwr "https://ghfast.top/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip" -O dist.zip
     Expand-Archive -Path "dist.zip"; mi "dist\dist" "ui"; ri "dist.zip", "dist"
     # Create directory
-    New-Item $HOME\subs -ItemType Directory -Force
-    Move-Item ui $HOME\subs
+    New-Item $HOME\subs\state -ItemType Directory -Force
+    Move-Item ui $HOME\subs\state
     # Copy services
     Copy-Item ..\mofa\config.yaml $HOME\subs
     Copy-Item sb-service.xml, mihomo-service.xml $HOME\subs

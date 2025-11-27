@@ -3,7 +3,7 @@
   <name>sing-box</name>
   <description>This service runs sing-box continuous integration system.</description>
   <executable>C:\Users\zendo\scoop\shims\sing-box</executable>
-  <arguments>run -D %BASE% -c config.jsonc</arguments>
+  <arguments>run -c %BASE%\config.jsonc -D .\state</arguments>
   <log mode="reset" />
   <logpath>%BASE%\logs</logpath>
   <onfailure action="restart" />
