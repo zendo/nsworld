@@ -1,5 +1,4 @@
 [![Built with nix](https://img.shields.io/static/v1?label=Built%20with&message=nix&color=blue&style=flat&logo=nixos&link=https://nixos.org&labelColor=111212)](https://nixos.org/learn/)
-[![works on my machine](https://img.shields.io/badge/status-works_on_my_machine-458?style=flat-square&logo=nixos&labelColor=1d2021)](https://github.com/zendo)
 [![garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fzendo%2Fnsworld%3Fbranch%3Dmain)](https://garnix.io/repo/zendo/nsworld)
 
 # Installation
