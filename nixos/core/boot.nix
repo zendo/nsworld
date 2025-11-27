@@ -29,9 +29,9 @@
   };
 
   # Perlless Activation
-  # system.etc.overlay.enable = true;
+  system.etc.overlay.enable = true;
 
   # Bashless Activation
   # https://github.com/NixOS/nixpkgs/issues/428908
-  # system.nixos-init.enable = true;
+  system.nixos-init.enable = true;
 }

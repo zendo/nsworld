@@ -70,7 +70,7 @@ in
             # MenuFont = "Sans Serif 12";
             # TrayFont = "Sans Serif 12";
             # FluentDark-solid / mellow-youlan-dark / winter
-            Theme = "winter";
+            Theme = "mellow-youlan-dark";
             # DarkTheme = "mellow-youlan-dark";
             # UseDarkTheme = true; # 跟随系统浅色/深色设置
           };

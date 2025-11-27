@@ -15,8 +15,11 @@
     # -------------------------------------
     ./xdg/files.nix
   ]
+  # Automatically import all shell configuration files from ./shell directory
   ++ (lib.filesystem.listFilesRecursive ./shell)
-  # for desktop environment
+  # ===========================================================================
+  # Graphical Desktop Environment Configurations
+  # ===========================================================================
   ++ lib.optionals nixosConfig.services.graphical-desktop.enable [
     ./editor/dev-tools.nix
     ./editor/emacs.nix
@@ -38,9 +41,11 @@
     ./xdg/mime.nix
     ./xdg/xdg.nix
   ]
+  # KDE Plasma specific configurations
   ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./xdg/plasma.nix ]
+  # GNOME specific configurations
   ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./xdg/dconf.nix ];
 
-  home.enableNixpkgsReleaseCheck = false;
+  # home.enableNixpkgsReleaseCheck = false;
   home.stateVersion = nixosConfig.system.stateVersion;
 }
