@@ -23,7 +23,6 @@ in
       fcitx5.addons = with pkgs; [
         fcitx5-fluent
         fcitx5-mellow-themes
-        fcitx5-themes-candlelight
         # 命令行手动部署
         # nix shell nixpkgs#librime --command rime_deployer --build ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
         (fcitx5-rime.override {
