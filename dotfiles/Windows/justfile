@@ -11,13 +11,13 @@ ff-betterfox:
     Write-Host "`n about:support`n" -ForegroundColor Green
 
 emacs-mklink:
-    Start-Process -Verb RunAs Invoke-Item -FilePath ".\mklink-emacs-admin.cmd"
+    Start-Process -Verb RunAs Invoke-Item -FilePath ".\scripts\mklink-emacs-admin.cmd"
 
 emacsclient-shortcut-startup:
-    .\shortcut-emacsclient.ps1
+    .\scripts\shortcut-emacsclient.ps1
 
 kanata-shortcut-startup:
-    .\shortcut-kanata.ps1
+    .\scripts\shortcut-kanata.ps1
 
 emacs-ob-tangle:
     emacs -Q --batch \
