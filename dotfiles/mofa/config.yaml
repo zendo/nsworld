@@ -1,7 +1,7 @@
 # https://wiki.metacubex.one/config/
 mixed-port: 7890
 allow-lan: true
-bind-address: '*'
+bind-address: "*"
 mode: rule
 log-level: info
 ipv6: false
@@ -13,8 +13,8 @@ keep-alive-interval: 30 # 发送 Keep-Alive 探测包的间隔时间 单位 s
 keep-alive-idle: 60 # 连接空闲多久后开始发送 Keep-Alive 探测包
 tcp-concurrent: true # 更换延迟计算方式，去除握手等额外延迟
 unified-delay: true # 启用 TCP 并发连接。这允许 Clash 同时建立多个 TCP 连接，可以提高网络性能和连接速度
-find-process-mode: strict  # 设置进程查找模式为严格模式，Clash 会更精确地识别和匹配网络流量来源的进程
-global-client-fingerprint: chrome  # 模拟 Chrome 浏览器的 TLS 指纹，增强隐私性和绕过某些网站的指纹检测
+find-process-mode: strict # 设置进程查找模式为严格模式，Clash 会更精确地识别和匹配网络流量来源的进程
+global-client-fingerprint: chrome # 模拟 Chrome 浏览器的 TLS 指纹，增强隐私性和绕过某些网站的指纹检测
 global-ua: mihomo # 默认 clash.meta
 
 tun:
@@ -109,48 +109,48 @@ dns:
 
 # 规则优先级从上到下，匹配到即停止
 rules:
-# ========== AI服务专用代理规则 ==========
-# AI-PROXY策略组：适用于ChatGPT、Claude等AI服务（可根据需要添加或删除）
- - DOMAIN-SUFFIX,ping0.cc,AI-PROXY
- - DOMAIN-SUFFIX,ipdata.co,AI-PROXY
- - DOMAIN-SUFFIX,pingip.cn,AI-PROXY
-# PROXY策略组：需要代理访问的域名（根据个人需求自由添加）
- - DOMAIN-SUFFIX,live.com,PROXY
- - DOMAIN-SUFFIX,teracloud.jp,PROXY
-# ========== 直连规则 ==========
-# DIRECT策略组：不走代理直接连接（根据个人需求自由添加）
- - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
- - DOMAIN-SUFFIX,msftncsi.com,DIRECT
- - DOMAIN-SUFFIX,steamserver.net,DIRECT
- - DOMAIN-SUFFIX,steamcontent.com,DIRECT
- - DOMAIN,stun.l.google.com,DIRECT
- - DOMAIN-SUFFIX,edu.cn,DIRECT
- - DOMAIN-SUFFIX,v6.navy,DIRECT
- - DOMAIN-SUFFIX,dynv6.com,DIRECT
- - DOMAIN-SUFFIX,api.beacondb.net,DIRECT
- - DOMAIN-SUFFIX,ip-api.com,DIRECT
-# ========== 基于GeoSite的智能分流规则 ==========
-# 以下为固定规则，一般无需修改
-# 如需调整某个服务的策略，可修改后面的策略组名称
- - GEOSITE,cursor,AI-PROXY
- - GEOSITE,telegram,PROXY
- - GEOSITE,google,AI-PROXY
- - GEOSITE,steam@cn,DIRECT
- - GEOSITE,category-games@cn,DIRECT
- - GEOSITE,category-ai-!cn,AI-PROXY
- - GEOSITE,category-ai-cn,DIRECT
- - GEOSITE,onedrive,DIRECT
- - GEOSITE,private,DIRECT
- - GEOSITE,category-scholar-!cn,PROXY
- - GEOSITE,microsoft@cn,DIRECT
- - GEOSITE,apple-cn,DIRECT
- - GEOSITE,geolocation-!cn,PROXY
- - GEOSITE,CN,DIRECT
- - GEOIP,private,DIRECT,no-resolve
- - GEOIP,telegram,PROXY,no-resolve
- - GEOIP,CN,DIRECT
- # 兜底规则：以上规则都不匹配时使用PROXY代理
- - MATCH,PROXY
+  # ========== AI服务专用代理规则 ==========
+  # AI-PROXY策略组：适用于ChatGPT、Claude等AI服务（可根据需要添加或删除）
+  - DOMAIN-SUFFIX,ping0.cc,AI-PROXY
+  - DOMAIN-SUFFIX,ipdata.co,AI-PROXY
+  - DOMAIN-SUFFIX,pingip.cn,AI-PROXY
+  # PROXY策略组：需要代理访问的域名（根据个人需求自由添加）
+  - DOMAIN-SUFFIX,live.com,PROXY
+  - DOMAIN-SUFFIX,teracloud.jp,PROXY
+  # ========== 直连规则 ==========
+  # DIRECT策略组：不走代理直接连接（根据个人需求自由添加）
+  - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
+  - DOMAIN-SUFFIX,msftncsi.com,DIRECT
+  - DOMAIN-SUFFIX,steamserver.net,DIRECT
+  - DOMAIN-SUFFIX,steamcontent.com,DIRECT
+  - DOMAIN,stun.l.google.com,DIRECT
+  - DOMAIN-SUFFIX,edu.cn,DIRECT
+  - DOMAIN-SUFFIX,v6.navy,DIRECT
+  - DOMAIN-SUFFIX,dynv6.com,DIRECT
+  - DOMAIN-SUFFIX,api.beacondb.net,DIRECT
+  - DOMAIN-SUFFIX,ip-api.com,DIRECT
+  # ========== 基于GeoSite的智能分流规则 ==========
+  # 以下为固定规则，一般无需修改
+  # 如需调整某个服务的策略，可修改后面的策略组名称
+  - GEOSITE,cursor,AI-PROXY
+  - GEOSITE,telegram,PROXY
+  - GEOSITE,google,AI-PROXY
+  - GEOSITE,steam@cn,DIRECT
+  - GEOSITE,category-games@cn,DIRECT
+  - GEOSITE,category-ai-!cn,AI-PROXY
+  - GEOSITE,category-ai-cn,DIRECT
+  - GEOSITE,onedrive,DIRECT
+  - GEOSITE,private,DIRECT
+  - GEOSITE,category-scholar-!cn,PROXY
+  - GEOSITE,microsoft@cn,DIRECT
+  - GEOSITE,apple-cn,DIRECT
+  - GEOSITE,geolocation-!cn,PROXY
+  - GEOSITE,CN,DIRECT
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOIP,telegram,PROXY,no-resolve
+  - GEOIP,CN,DIRECT
+  # 兜底规则：以上规则都不匹配时使用PROXY代理
+  - MATCH,PROXY
 
 geo-auto-update: true
 geo-update-interval: 24
