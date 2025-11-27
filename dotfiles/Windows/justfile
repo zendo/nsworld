@@ -4,11 +4,11 @@ _default:
     @just --choose
 
 ff-betterfox:
-    iwr "https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
+    iwr "https://ghfast.top/https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
     Get-Content ff-pref.js | Add-Content user.js
-    Move-Item user.js $HOME\Desktop -Force
-    Write-Host "`n about:support`n" -ForegroundColor Green
+    Move-Item user.js $env:APPDATA\Mozilla\Firefox\Profiles
     ii $env:APPDATA\Mozilla\Firefox\Profiles
+    Write-Host "`n about:support`n" -ForegroundColor Green
 
 emacs-mklink:
     Start-Process -Verb RunAs Invoke-Item -FilePath ".\mklink-emacs-admin.cmd"
