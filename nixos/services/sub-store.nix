@@ -5,8 +5,11 @@
 }:
 {
   # http://127.0.0.1:3001/subs
+  # curl -O "http://127.0.0.1:3000/download/collection/all?target=sing-box"
   systemd.services.sub-store = {
     enable = lib.mkDefault false;
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
     serviceConfig = {
       StateDirectory = "sub-store";
       StateDirectoryMode = "0700";
@@ -19,8 +22,8 @@
         "SUB_STORE_FRONTEND_PORT=3001"
       ];
       ExecStart = "${lib.getExe pkgs.nodejs} ${pkgs.sub-store}/sub-store.bundle.js";
-      # Restart = "on-failure";
-      # DynamicUser = true;
+      Restart = "on-failure";
+      DynamicUser = true;
     };
     wantedBy = [ "multi-user.target" ];
   };
