@@ -20,11 +20,6 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 
 ;;; Code:
 
-;; Emacs 31 新特性，缓存 load-path 加快加载速度，大约提升 15%
-;; https://emacs-china.org/t/emacs-2025/30467
-(setq load-suffixes '(".elc" ".el"))      ; to avoid searching .so/.dll
-(setq load-file-rep-suffixes '(""))       ; to avoid searching *.gz
-
 ;; Defer garbage collection further back in the startup process
 (setq gc-cons-threshold most-positive-fixnum)
 
@@ -187,7 +182,7 @@ Use ~getenv~ check the environment variables.
   ;; (set-face-attribute 'default nil :font "Maple Mono-10")
   ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
   ;;   (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
-  (set-frame-font (font-spec :family "JetBrains Mono" :size 13))
+  (set-frame-font (font-spec :family "JetBrains Mono" :size 14))
   (when (display-graphic-p)
     (dolist (script '(han cjk-misc bopomofo))
       (set-fontset-font
