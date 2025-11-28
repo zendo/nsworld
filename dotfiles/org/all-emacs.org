@@ -21,7 +21,7 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 ;;; Code:
 
 ;; Defer garbage collection further back in the startup process
-(setq gc-cons-threshold most-positive-fixnum)
+;; (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Prevent unwanted run-time compilation for native-comp users
 (setq inhibit-automatic-native-compilation t)
@@ -400,7 +400,7 @@ nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary
 ** Garbage Collection Manually
 https://jackjamison.xyz/blog/emacs-garbage-collection/
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (defun my-minibuffer-setup-hook ()
   (setq gc-cons-threshold most-positive-fixnum))
 
