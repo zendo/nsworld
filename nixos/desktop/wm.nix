@@ -155,7 +155,7 @@
         # };
 
         xdg.dataFile = {
-          # Fix qt tiny cursor on gnome
+          # Fix tiny cursor on qt apps
           "icons/default/index.theme".text = ''
             [icon theme]
             Inherits=Adwaita

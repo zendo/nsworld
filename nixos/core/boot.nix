@@ -1,5 +1,10 @@
 { lib, config, ... }:
 {
+  # Perlless Activation
+  system.etc.overlay.enable = true;
+  # Bashless Activation
+  system.nixos-init.enable = true;
+
   boot = {
     # enable systemd in initrd
     initrd.systemd = {
@@ -27,9 +32,4 @@
       "udev.log_priority=3"
     ];
   };
-
-  # Perlless Activation
-  system.etc.overlay.enable = true;
-  # Bashless Activation
-  system.nixos-init.enable = true;
 }

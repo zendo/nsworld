@@ -4,8 +4,8 @@
   ...
 }:
 {
-  # http://127.0.0.1:3001/subs
-  # curl -O "http://127.0.0.1:3000/download/collection/all?target=sing-box"
+  # FRONTEND: http://127.0.0.1:3001/subs
+  # BACKEND: curl -O "http://127.0.0.1:3000/download/collection/all?target=sing-box"
   systemd.services.sub-store = {
     enable = lib.mkDefault false;
     after = [ "network.target" ];

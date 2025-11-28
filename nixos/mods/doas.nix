@@ -21,6 +21,7 @@ in
     security.doas = {
       enable = true;
       # wheelNeedsPassword = false;
+      # or
       extraRules = [
         {
           users = [ "${self.nixosConfigurations.yoga._module.specialArgs.username}" ];

@@ -5,6 +5,7 @@
   username,
   ...
 }:
+# Copy: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/sing-box.nix
 let
   cfg = config.services'.sing-box;
 in
@@ -15,7 +16,6 @@ in
       package = lib.mkPackageOption pkgs "sing-box" { };
     };
   };
-  # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/sing-box.nix
   config = lib.mkIf cfg.enable {
     systemd.services.sing-box = {
       preStart = "[ -e $STATE_DIRECTORY/ui ] && rm -fr $STATE_DIRECTORY/ui; ln -sf ${pkgs.zashboard} $STATE_DIRECTORY/ui";
@@ -36,7 +36,6 @@ in
       wantedBy = [ "multi-user.target" ];
     };
 
-    # for polkit rules
     environment.systemPackages = [ cfg.package ];
     services.dbus.packages = [ cfg.package ];
     systemd.packages = [ cfg.package ];

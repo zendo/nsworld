@@ -93,7 +93,7 @@
     tunMode = true;
   };
 
-  # 虚拟网络会干扰 geoclue2 ip 定位
+  # Virtual network interfering Geoclue2's IP-based location
   services.geoclue2 = {
     # enableStatic = true;
     staticAltitude = 10; # 海拔高度
