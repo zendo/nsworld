@@ -31,8 +31,6 @@
     ip-info = "curl ip.im/info";
     nload = "${lib.getExe pkgs.nload} devices wlp1s0";
     where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
-
-    # web
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
 
@@ -40,8 +38,12 @@
     e = "emacs -nw";
     ee = "emacsclient --create-frame";
     ee-config = "emacs --init-directory ~/.config/emacs";
-    magit = ''emacsclient -n -c -e \(magit-status\)'';
-    dired = ''emacsclient -n -c -e "(dired default-directory)"'';
+    dired = ''emacsclient -nw -c -e "(dired default-directory)"'';
+    magit = ''
+      emacsclient -nw -c \
+      -e "(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)" \
+      -e "(magit-status)"
+    '';
 
     # nix
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
