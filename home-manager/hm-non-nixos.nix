@@ -94,6 +94,28 @@
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
-    };
-  };
+    }; # end of settings
+  }; # end of nix
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [ "Noto Color Emoji" ];
+      monospace = [
+        "Noto Sans Mono CJK SC"
+        "Sarasa Mono SC"
+        "DejaVu Sans Mono"
+      ];
+      sansSerif = [
+        "Noto Sans CJK SC"
+        "Source Han Sans SC"
+        "DejaVu Sans"
+      ];
+      serif = [
+        "Noto Serif CJK SC"
+        "Source Han Serif SC"
+        "DejaVu Serif"
+      ];
+    }; # end of defaultFonts
+  }; # end of fontconfig
 }
