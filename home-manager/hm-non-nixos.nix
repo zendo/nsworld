@@ -55,6 +55,9 @@
     ./xdg/xdg.nix
   ];
 
+  # =========================================================================
+  #  Home
+  # =========================================================================
   home = {
     packages = with pkgs; [
       dippi
@@ -66,11 +69,17 @@
     stateVersion = "25.05";
   };
 
+  # =========================================================================
+  #  Home-manager Settings
+  # =========================================================================
   news.display = "silent";
   programs.home-manager.enable = true;
   # https://github.com/nix-community/home-manager/blob/master/docs/manual/usage/gpu-non-nixos.md
   targets.genericLinux.gpu.enable = true;
 
+  # =========================================================================
+  #  Nix Settings
+  # =========================================================================
   nix = {
     package = pkgs.nixVersions.stable;
     registry = {
@@ -97,6 +106,9 @@
     }; # end of settings
   }; # end of nix
 
+  # =========================================================================
+  #  Fonts Config
+  # =========================================================================
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
