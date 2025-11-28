@@ -62,21 +62,19 @@ https://linux.do/t/topic/938696 gui-for-singbox 教程
 
 * sub-store
 
-安装：
+脚本安装：
 #+begin_src bash
 wget https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js
 wget https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip && unzip dist.zip && rm dist.zip && mv dist frontend
 pushd ~/code/subs/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
 #+end_src
 
-文件管理 - 创建文件 - config.jsonc
+文件管理 - 创建文件:
+
 模板：https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sing-box-template.json
+
 单条订阅脚本：
 https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=wcloud&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
+
 组合订阅脚本：
 https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#type=组合订阅&name=all&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
-
-打开：http://127.0.0.1:3001/subs
-下载：curl -O http://127.0.0.1:3000/api/file/config.json
-
-教程：https://surge.tel/08/2930
