@@ -33,6 +33,7 @@
     sd
     xcp
     choose
+    rsync
     lazyssh
     ssh-to-age
     sops

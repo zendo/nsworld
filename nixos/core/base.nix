@@ -8,7 +8,12 @@
   services.btrfs.autoScrub.enable =
     config.fileSystems ? "/" && config.fileSystems."/".fsType == "btrfs";
 
-  documentation.enable = lib.mkDefault false;
+  documentation = {
+    enable = lib.mkDefault false;
+    info.enable = lib.mkDefault false;
+    nixos.enable = lib.mkDefault false;
+  };
+
   i18n.defaultLocale = "zh_CN.UTF-8";
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "25.05";

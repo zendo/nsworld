@@ -29,7 +29,7 @@ in
         WorkingDirectory = "/var/lib/sing-box";
         ExecStart = [
           ""
-          "${lib.getExe pkgs.sing-box} run -c /home/${username}/code/sub/config.jsonc -D \${STATE_DIRECTORY}"
+          "${lib.getExe pkgs.sing-box} run -c /home/${username}/code/subs/config.jsonc -D \${STATE_DIRECTORY}"
         ];
         Restart = "on-failure";
       };

@@ -67,13 +67,13 @@
     # enable = true;
     tunMode = true;
     webui = pkgs.zashboard;
-    configFile = "/home/${username}/code/sub/config.yaml";
+    configFile = "/home/${username}/code/subs/config.yaml";
   };
 
   # services.daeWithConfig.enable = true;
   services.dae = {
     # enable = true;
-    configFile = "/home/${username}/code/sub/dae-config.dae";
+    configFile = "/home/${username}/code/subs/dae-config.dae";
   };
 
   programs.throne = {

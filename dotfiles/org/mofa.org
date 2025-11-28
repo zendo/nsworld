@@ -66,7 +66,7 @@ https://linux.do/t/topic/938696 gui-for-singbox 教程
 #+begin_src bash
 wget https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js
 wget https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip && unzip dist.zip && rm dist.zip && mv dist frontend
-pushd ~/code/sub/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
+pushd ~/code/subs/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
 #+end_src
 
 文件管理 - 创建文件 - config.jsonc
