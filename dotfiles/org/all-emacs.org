@@ -1245,11 +1245,17 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
               ("<f2>" . shell-pop)))
 #+end_src
 
+*** eshell
+#+begin_src emacs-lisp
+#+end_src
+
 *** eat
-#+begin_src emacs-lispxx
+#+begin_src emacs-lisp
 (use-package eat
   :defer t
-  :when (eq system-type 'gnu/linux)
+  :hook
+  ;; For `eat-eshell-mode' -- integration with eshell.
+  (eshell-mode-hook . eat-eshell-mode)
   :config
   (setq eat-kill-buffer-on-exit t
         eat-enable-yank-to-terminal t
