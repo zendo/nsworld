@@ -1105,6 +1105,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 ;; ustc
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
+                         ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
 
 ;; (package-initialize)
@@ -1202,7 +1203,7 @@ Use ~getenv~ check the environment variables.
   ;;              '("cmdproxy" utf-8 . gbk))
   (set-selection-coding-system 'gbk-dos)
   ;; Fonts
-  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-10"))
+  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
 )
 #+end_src
 
@@ -1245,7 +1246,7 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
 #+end_src
 
 *** eat
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package eat
   :defer t
   :when (eq system-type 'gnu/linux)
@@ -2381,12 +2382,12 @@ http://company-mode.github.io/manual/Getting-Started.html
 ;; navigate and select from completion candidates (e.g., when `M-x` is pressed).
 (use-package vertico
   ;; (Note: It is recommended to also enable the savehist package.)
-  :ensure t
-  ;; :bind (:map vertico-map
-  ;;             ("<escape>" . #'minibuffer-keyboard-quit)
-  ;;             ("RET" . vertico-directory-enter)
-  ;;             ("DEL" . vertico-directory-delete-char))
-  :config
+  :bind (:map vertico-map
+              ("<escape>" . #'minibuffer-keyboard-quit)
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char))
+  :init
+  ;; (vertico-mouse-mode 1)
   (vertico-mode))
 
 ;; Vertico leverages Orderless' flexible matching capabilities, allowing users
@@ -2548,6 +2549,20 @@ http://company-mode.github.io/manual/Getting-Started.html
 ;;
 ;; (advice-add #'vertico--format-candidate
 ;;             :around #'minibuffer-format-candidate)
+#+end_src
+
+** isl
+https://github.com/thierryvolpiatto/isearch-light
+
+#+begin_src emacs-lisp
+(use-package isl
+  :bind
+  ("C-s" . isl-search)
+  ;; ([remap isearch-forward] . )
+  ;; ([remap isearch-backward] . )
+  ;; ([remap isearch-forward-regexp] . )
+  ;; ([remap isearch-forward-regexp] .)
+  )
 #+end_src
 
 ** dabbrev
