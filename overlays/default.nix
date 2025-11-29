@@ -12,7 +12,7 @@
     # Inputs Overlays
     # =========================================================================
     # nur = inputs.nur.overlay;
-    emacs-overlay = inputs.emacs-overlay.overlay;
+    # emacs-overlay = inputs.emacs-overlay.overlay;
 
     # https://wiki.nixos.org/wiki/Flakes#Importing_packages_from_multiple_nixpkgs_branches
     # stable-packages = final: _prev: {

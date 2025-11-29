@@ -6,7 +6,8 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-igc-pgtk;
+    # package = pkgs.emacs-igc-pgtk;
+    package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
         eat
