@@ -1810,6 +1810,7 @@ https://github.com/neeasade/stillness-mode.el
 ;; 识别中文标点符号
 (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 #+end_src
+
 ** wrap
 #+begin_src emacs-lisp
 ;; 折叠 word wrap
@@ -1818,6 +1819,7 @@ https://github.com/neeasade/stillness-mode.el
 ;; Better word wrapping for CJK characters
 ;; (setq word-wrap-by-category t)
 #+end_src
+
 ** fill-column
 ~display-fill-column-indicator-mode~
 
