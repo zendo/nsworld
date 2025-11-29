@@ -39,11 +39,7 @@
     ee = "emacsclient --create-frame";
     ee-config = "emacs --init-directory ~/.config/emacs";
     dired = ''emacsclient -nw -c -e "(dired default-directory)"'';
-    magit = ''
-      emacsclient -nw -c \
-      -e "(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)" \
-      -e "(magit-status)"
-    '';
+    magit = ''emacsclient -nw -c -e "(magit-status)"'';
 
     # nix
     j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";

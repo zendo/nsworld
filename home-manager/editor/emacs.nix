@@ -10,7 +10,6 @@
     package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
-        eat
         jinx
         vterm
         emojify
