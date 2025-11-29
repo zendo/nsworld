@@ -115,7 +115,8 @@
     # libinput
     wl-clipboard
     # squirreldisk
-    mission-center
+    resources
+    # mission-center
   ];
 
   # programs.obs-studio = {

@@ -6,6 +6,8 @@
 #+AUTO_TANGLE: t
 
 * early-init
+https://github.com/jamescherti/minimal-emacs.d minimal-emacs.d
+
 curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/early-init.el | wl-copy
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
 ;;; early-init.el --- Early Init -*- lexical-binding: t; -*-
@@ -1098,6 +1100,47 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 #+end_src
 
 * Use-package
+** compile-angel
+#+begin_src emacs-lispxx
+;; Native compilation enhances Emacs performance by converting Elisp code into
+;; native machine code, resulting in faster execution and improved
+;; responsiveness.
+;;
+;; Ensure adding the following compile-angel code at the very beginning
+;; of your `~/.emacs.d/post-init.el` file, before all other packages.
+(use-package compile-angel
+  :demand t
+  :ensure t
+  :custom
+  ;; Set `compile-angel-verbose` to nil to suppress output from compile-angel.
+  ;; Drawback: The minibuffer will not display compile-angel's actions.
+  (compile-angel-verbose t)
+
+  :config
+  ;; The following directive prevents compile-angel from compiling your init
+  ;; files. If you choose to remove this push to `compile-angel-excluded-files'
+  ;; and compile your pre/post-init files, ensure you understand the
+  ;; implications and thoroughly test your code. For example, if you're using
+  ;; the `use-package' macro, you'll need to explicitly add:
+  ;; (eval-when-compile (require 'use-package))
+  ;; at the top of your init file.
+  (push "/init.el" compile-angel-excluded-files)
+  (push "/early-init.el" compile-angel-excluded-files)
+  (push "/pre-init.el" compile-angel-excluded-files)
+  (push "/post-init.el" compile-angel-excluded-files)
+  (push "/pre-early-init.el" compile-angel-excluded-files)
+  (push "/post-early-init.el" compile-angel-excluded-files)
+
+  ;; A local mode that compiles .el files whenever the user saves them.
+  ;; (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode)
+
+  ;; A global mode that compiles .el files prior to loading them via `load' or
+  ;; `require'. Additionally, it compiles all packages that were loaded before
+  ;; the mode `compile-angel-on-load-mode' was activated.
+  (compile-angel-on-load-mode 1))
+#+end_src
+
+** mirrors
 #+begin_src emacs-lisp
 ;; tuna
 ;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
@@ -1310,6 +1353,12 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; Close without ask
 (setq confirm-kill-processes nil)
 
+;; In Emacs, customization variables modified via the UI (e.g., M-x customize)
+;; are typically stored in a separate file, commonly named 'custom.el'. To
+;; ensure these settings are loaded during Emacs initialization, it is necessary
+;; to explicitly load this file if it exists.
+(load custom-file 'noerror 'no-message)
+
 ;; disable warnings
 ;; (setq warning-minimum-level :emergency
 ;;       byte-compile-warnings '(not
@@ -1336,7 +1385,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
                dired-find-alternate-file))
   (put cmd 'disabled nil))
 #+end_src
-
 ** ispell、flyspell
 #+begin_src emacs-lispxx
 ;; The flyspell package is a built-in Emacs minor mode that provides
@@ -1461,6 +1509,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 
 ** Themes
 #+begin_src emacs-lisp
+(mapc #'disable-theme custom-enabled-themes)  ; Disable all active minimal-emacs.d themes
 (use-package doom-themes
   :hook
   ;; doom-badger
@@ -1672,8 +1721,7 @@ Use `treemacs' command for old functionality."
 ** Window
 #+begin_src emacs-lisp
 ;; prefer vertical splits by default
-(setq split-width-threshold 120
-      split-height-threshold nil)
+(setq split-width-threshold 120)
 
 ;; winner C-c ←/→ undo/redo window
 (add-hook 'after-init-hook #'winner-mode)
@@ -1856,6 +1904,57 @@ https://github.com/neeasade/stillness-mode.el
 (electric-pair-mode t) ;自动补全括号
 #+end_src
 
+** outline
+#+begin_src emacs-lispxx
+;; The built-in outline-minor-mode provides structured code folding in modes
+;; such as Emacs Lisp and Python, allowing users to collapse and expand sections
+;; based on headings or indentation levels. This feature enhances navigation and
+;; improves the management of large files with hierarchical structures.
+(use-package outline
+  :ensure nil
+  :commands outline-minor-mode
+  :hook
+  ((emacs-lisp-mode . outline-minor-mode)
+   ;; Use " ▼" instead of the default ellipsis "..." for folded text to make
+   ;; folds more visually distinctive and readable.
+   (outline-minor-mode
+    .
+    (lambda()
+      (let* ((display-table (or buffer-display-table (make-display-table)))
+             (face-offset (* (face-id 'shadow) (ash 1 22)))
+             (value (vconcat (mapcar (lambda (c) (+ face-offset c)) " ▼"))))
+        (set-display-table-slot display-table 'selective-display value)
+        (setq buffer-display-table display-table))))))
+
+;; The outline-indent Emacs package provides a minor mode that enables code
+;; folding based on indentation levels.
+;;
+;; In addition to code folding, *outline-indent* allows:
+;; - Moving indented blocks up and down
+;; - Indenting/unindenting to adjust indentation levels
+;; - Inserting a new line with the same indentation level as the current line
+;; - Move backward/forward to the indentation level of the current line
+;; - and other features.
+(use-package outline-indent
+  :ensure t
+  :commands outline-indent-minor-mode
+
+  :custom
+  (outline-indent-ellipsis " ▼")
+
+  :init
+  ;; The minor mode can also be automatically activated for a certain modes.
+  (add-hook 'python-mode-hook #'outline-indent-minor-mode)
+  (add-hook 'python-ts-mode-hook #'outline-indent-minor-mode)
+
+  (add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
+  (add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
+
+  (add-hook 'nix-mode-hook #'outline-indent-minor-mode)
+  (add-hook 'nix-ts-mode-hook #'outline-indent-minor-mode)
+  )
+#+end_src
+
 ** puni
 soft kill line.
 https://github.com/AmaiKinono/puni
@@ -1874,6 +1973,35 @@ https://github.com/AmaiKinono/puni
                          trailing space-before-tab
                          indentation empty space-after-tab))
 (whitespace-mode 1)
+#+end_src
+
+** stripspace
+#+begin_src emacs-lispxx
+;; The stripspace Emacs package provides stripspace-local-mode, a minor mode
+;; that automatically removes trailing whitespace and blank lines at the end of
+;; the buffer when saving.
+(use-package stripspace
+  :commands stripspace-local-mode
+
+  ;; Enable for prog-mode-hook, text-mode-hook, conf-mode-hook
+  :hook ((prog-mode . stripspace-local-mode)
+         (text-mode . stripspace-local-mode)
+         (conf-mode . stripspace-local-mode))
+
+  :custom
+  ;; The `stripspace-only-if-initially-clean' option:
+  ;; - nil to always delete trailing whitespace.
+  ;; - Non-nil to only delete whitespace when the buffer is clean initially.
+  ;; (The initial cleanliness check is performed when `stripspace-local-mode'
+  ;; is enabled.)
+  (stripspace-only-if-initially-clean nil)
+
+  ;; Enabling `stripspace-restore-column' preserves the cursor's column position
+  ;; even after stripping spaces. This is useful in scenarios where you add
+  ;; extra spaces and then save the file. Although the spaces are removed in the
+  ;; saved file, the cursor remains in the same position, ensuring a consistent
+  ;; editing experience without affecting cursor placement.
+  (stripspace-restore-column t))
 #+end_src
 
 ** mixed-pitch
@@ -2244,7 +2372,7 @@ expand region alternative
 #+end_src
 
 ** idle-highlight-mode
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package idle-highlight-mode
   :hook ((prog-mode text-mode) . idle-highlight-mode)
   :config
@@ -2322,7 +2450,6 @@ expand region alternative
 ;; current candidates, positioned either below or above the point. Candidates
 ;; can be selected by navigating up or down.
 (use-package corfu
-  :ensure t
   :commands (corfu-mode global-corfu-mode)
 
   :hook ((prog-mode . corfu-mode)
@@ -2344,7 +2471,6 @@ expand region alternative
 ;; in-buffer completion. It integrates with Corfu or the default completion UI,
 ;; by providing additional backends through completion-at-point-functions.
 (use-package cape
-  :ensure t
   :commands (cape-dabbrev cape-file cape-elisp-block)
   :bind ("C-c p" . cape-prefix-map)
   :init
@@ -2352,7 +2478,11 @@ expand region alternative
   ;; used by `completion-at-point'.
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block))
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-symbol) ;elisp symbol
+  (add-hook 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-history)
+  )
 #+end_src
 
 ** Company
@@ -2360,7 +2490,6 @@ http://company-mode.github.io/manual/Getting-Started.html
 
 #+begin_src emacs-lispxx
 (use-package company
-  :ensure t
   :diminish company-mode
   :hook
   (prog-mode . company-mode)
@@ -2400,7 +2529,6 @@ http://company-mode.github.io/manual/Getting-Started.html
 ;; to input multiple patterns separated by spaces, which Orderless then
 ;; matches in any order against the candidates.
 (use-package orderless
-  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
@@ -2410,7 +2538,7 @@ http://company-mode.github.io/manual/Getting-Started.html
 ;; In addition to that, Marginalia also enhances Vertico by adding rich
 ;; annotations to the completion candidates displayed in Vertico's interface.
 (use-package marginalia
-  :ensure t
+  :after vertico
   :commands (marginalia-mode marginalia-cycle)
   :hook (after-init . marginalia-mode))
 
@@ -2422,7 +2550,6 @@ http://company-mode.github.io/manual/Getting-Started.html
   ;; Embark is an Emacs package that acts like a context menu, allowing
   ;; users to perform context-sensitive actions on selected items
   ;; directly from the completion interface.
-  :ensure t
   :commands (embark-act
              embark-dwim
              embark-export
@@ -2445,14 +2572,12 @@ http://company-mode.github.io/manual/Getting-Started.html
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
-  :ensure t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
 ;; Consult offers a suite of commands for efficient searching, previewing, and
 ;; interacting with buffers, file contents, and more, improving various tasks.
 (use-package consult
-  :ensure t
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
@@ -2460,9 +2585,10 @@ http://company-mode.github.io/manual/Getting-Started.html
          ("C-c m" . consult-man)
          ("C-c i" . consult-info)
          ([remap Info-search] . consult-info)
+         ;; ([remap apropos-command] . consult-apropos) ; C-h a
          ;; C-x bindings in `ctl-x-map'
          ("C-x M-:" . consult-complex-command)
-         ("C-x b" . consult-buffer)
+         ([remap list-buffers] . consult-buffer)
          ("C-x 4 b" . consult-buffer-other-window)
          ("C-x 5 b" . consult-buffer-other-frame)
          ("C-x t b" . consult-buffer-other-tab)
@@ -3811,7 +3937,6 @@ Show current command and its binding.
 
 * Links
 - https://remacs.fun/posts/ 面向产品经理的 Emacs 教程
-- https://github.com/jamescherti/minimal-emacs.d Minimal emacs.d
 - https://github.com/LionyxML/emacs-solo Pure Emacs (no external packages)
 - https://github.com/seagle0128/.emacs.d Centaur Emacs
 - https://github.com/abougouffa/minemacs Mineemacs

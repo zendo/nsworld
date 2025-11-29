@@ -126,7 +126,12 @@
     ];
 
     # Fix touhpad two finger somtimes unavailable
-    blacklistedKernelModules = [ "elan_i2c" ];
+    # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
+    initrd.kernelModules = [ "hid-multitouch" ];
+    # initrd.availableKernelModules = [ "hid-multitouch" ];
+
+    # Fix touhpad two finger somtimes unavailable
+    # blacklistedKernelModules = [ "elan_i2c" ];
 
     supportedFilesystems = [
       "ntfs"
