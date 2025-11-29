@@ -2462,6 +2462,10 @@ expand region alternative
   ;; Disable Ispell completion function. As an alternative try `cape-dict'.
   (text-mode-ispell-word-completion nil)
   (tab-always-indent 'complete)
+  (corfu-auto t) ; Enable auto completion
+  (corfu-cycle t) ; Allows cycling through candidates
+  (corfu-min-width 25)
+  (corfu-preview-current nil) ; Disable previewing the current candidate
 
   ;; Enable Corfu
   :config
@@ -3941,7 +3945,6 @@ Show current command and its binding.
 - https://github.com/seagle0128/.emacs.d Centaur Emacs
 - https://github.com/abougouffa/minemacs Mineemacs
 - https://github.com/Lambda-Emacs/lambda-emacs Lambda-emacs
-- https://github.com/shynur/.emacs.d
 - https://github.com/rougier/dotemacs Litterate configuration org
 - https://jansky520.github.io/p/org%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/ org 快速指南
 - https://orgmode.org/quickstart.html
