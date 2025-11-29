@@ -2183,7 +2183,9 @@ moving to the beginning/end code
 ** multiple-cursors
 #+begin_src emacs-lisp
 (use-package multiple-cursors
-  :bind (("C-}" . mc/mark-next-like-this)
+  :bind (("C-<f2>" . mc/mark-all-words-like-this)
+         ("M-<mouse-1>" .  mc/toggle-cursor-on-click)
+         ("C-}" . mc/mark-next-like-this)
          ("C-{" . mc/mark-previous-like-this)
          ("C-|" . mc/mark-all-like-this-dwim)
          ;; ("s-<mouse-1>" . mc/add-cursor-on-click)
@@ -2230,6 +2232,23 @@ expand region alternative
          ;; ("C-c r" . visual-replace)
          :map isearch-mode-map
          ("C-c r" . visual-replace-from-isearch)))
+#+end_src
+
+** idle-highlight-mode
+#+begin_src emacs-lisp
+(use-package idle-highlight-mode
+  :hook ((prog-mode text-mode) . idle-highlight-mode)
+  :config
+  (setq idle-highlight-idle-time 0.2
+        ;; highlight subwords too
+        idle-highlight-exceptions-syntax nil))
+#+end_src
+
+** breadcrumb
+#+begin_src emacs-lispxx
+(use-package breadcrumb
+  :efer t
+  :config (breadcrumb-mode))
 #+end_src
 
 ** hl-todo
@@ -2332,12 +2351,22 @@ http://company-mode.github.io/manual/Getting-Started.html
 
 #+begin_src emacs-lispxx
 (use-package company
-  :custom
-  (company-minimum-prefix-length 4)
-  (company-dabbrev-minimum-length 8)
-  (company-selection-wrap-around t)
-  :init
-  (global-company-mode))
+  :ensure t
+  :diminish company-mode
+  :hook
+  (prog-mode . company-mode)
+  (tex-mode . company-mode)
+  (special-mode . company-mode)
+  (comint-mode . company-mode)
+  :bind
+  (:map company-mode-map
+        ("C-i" . company-complete)
+        ("C-<space>" . company-complete))
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-selection)
+        ("TAB" . company-complete-selection)))
+
 
 (use-package company-posframe
   :config
@@ -2927,6 +2956,9 @@ https://github.com/kaorahi/howm
   (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
   (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
   )
+
+;; (use-package consult-eglot
+;;   :after eglot)
 #+end_src
 
 ** lsp-mode
@@ -3663,7 +3695,7 @@ M-x ~describe-key~
 (global-unset-key (kbd "C-<wheel-up>"))
 (global-unset-key (kbd "C-<wheel-down>"))
 ;; 禁用 mouse-drag-region
-(global-unset-key [M-mouse-1])
+;; (global-unset-key [M-mouse-1])
 (global-unset-key [M-drag-mouse-1])
 (global-unset-key [M-down-mouse-1])
 (global-unset-key [M-mouse-3])
