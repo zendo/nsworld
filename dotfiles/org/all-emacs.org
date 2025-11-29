@@ -274,6 +274,20 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
               ("<f2>" . shell-pop)))
 #+end_src
 
+*** eat
+#+begin_src emacs-lisp
+(use-package eat
+  :defer t
+  :when (eq system-type 'gnu/linux)
+  :config
+  (setq eat-kill-buffer-on-exit t
+        eat-enable-yank-to-terminal t
+        eat-enable-directory-tracking t
+        eat-enable-shell-command-history t
+        eat-enable-shell-prompt-annotation t
+        eat-term-scrollback-size nil))
+#+end_src
+
 *** shell-pop
 #+begin_src emacs-lisp
 (use-package shell-pop
