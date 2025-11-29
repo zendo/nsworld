@@ -2,108 +2,1093 @@
 #+AUTHOR: zendo
 #+DATE: 03/2025
 #+STARTUP: overview indent
-#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/init.el"
+#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/post-init.el"
 #+AUTO_TANGLE: t
 
 * early-init
-https://github.com/seagle0128/.emacs.d/blob/master/early-init.el
-
-Emacs の起動時間を""詰める"":
-https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
-
+curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/early-init.el | wl-copy
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
-;;; early-init.el --- Early Initialization -*- lexical-binding: t; -*-
+;;; early-init.el --- Early Init -*- lexical-binding: t; -*-
+
+;; Author: James Cherti
+;; URL: https://github.com/jamescherti/minimal-emacs.d
+;; Package-Requires: ((emacs "29.1"))
+;; Keywords: maint
+;; Version: 1.3.0
+;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
-;; Vanilla Emacs configuration.
-;; Startup Performance
+;; The minimal-emacs.d project is a lightweight and optimized Emacs base
+;; (init.el and early-init.el) that gives you full control over your
+;; configuration. It provides better defaults, an optimized startup, and a clean
+;; foundation for building your own vanilla Emacs setup.
+;;
+;; Building the minimal-emacs.d init.el and early-init.el was the result of
+;; extensive research and testing to fine-tune the best parameters and
+;; optimizations for an Emacs configuration.
+;;
+;; Do not modify this file; instead, modify pre-early-init.el or
+;; post-early-init.el.
 
 ;;; Code:
 
-;; Defer garbage collection further back in the startup process
-;; (setq gc-cons-threshold most-positive-fixnum)
+;;; Internal variables
 
-;; Prevent unwanted run-time compilation for native-comp users
-(setq inhibit-automatic-native-compilation t)
+;; Backup of `gc-cons-threshold' and `gc-cons-percentage' before startup.
+(defvar minimal-emacs--backup-gc-cons-threshold gc-cons-threshold)
+(defvar minimal-emacs--backup-gc-cons-percentage gc-cons-percentage)
 
-;; Package initialize occurs automatically, before `user-init-file' is
-;; loaded, but after `early-init-file'. We handle package
-;; initialization, so we must prevent Emacs from doing it early!
-(setq package-enable-at-startup nil)
-;; Prevent loading from the package cache.
-(setq package-quickstart nil)
+;; Temporarily raise the garbage collection threshold to its maximum value.
+;; It will be restored later to controlled values.
+(setq gc-cons-threshold most-positive-fixnum)
+(setq gc-cons-percentage 1.0)
 
-;; In noninteractive sessions, prioritize non-byte-compiled source files to
-;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
-;; to skip the mtime checks on every *.elc file.
-(setq load-prefer-newer noninteractive)
+;;; Variables
 
-;; Resizing the Emacs frame can be an expensive part of changing the
-;; font. Inhibit this to reduce startup times with fonts that are
-;; larger than the system default.
-(setq frame-inhibit-implied-resize t
-      frame-resize-pixelwise t)
+(defvar minimal-emacs-ui-features '()
+  "List of user interface features to enable in minimal Emacs setup.
+This variable holds a list of Emacs UI features that can be enabled:
+- context-menu (Enables the context menu in graphical environments.)
+- tool-bar (Enables the tool bar in graphical environments.)
+- menu-bar (Enables the menu bar in graphical environments.)
+- dialogs (Enables both file dialogs and dialog boxes.)
+- tooltips (Enables tooltips.)")
 
-;; A second, case-insensitive pass over `auto-mode-alist' is time wasted.
-;; No second pass of case-insensitive search over auto-mode-alist.
-(setq auto-mode-case-fold nil)
+(defvar minimal-emacs-frame-title-format "%b – Emacs"
+  "Template for displaying the title bar of visible and iconified frame.")
 
-;; Control use of local variables in files you visit.
-;; :safe means set the safe variables, and ignore the rest.
-(setq enable-local-variables :safe)
+(defvar minimal-emacs-debug (bound-and-true-p init-file-debug)
+  "Non-nil to enable debug.")
 
-;; Disable Magic File Name temporary
-(defconst my-saved-file-name-handler-alist file-name-handler-alist)
-(setq file-name-handler-alist nil)
+(defvar minimal-emacs-optimize-startup-gc t
+  "If non-nil, increase `gc-cons-threshold' during startup to reduce pauses.
+After Emacs finishes loading, `gc-cons-threshold' is restored to the value
+stored in `minimal-emacs-gc-cons-threshold'.")
 
-;; Prevent flashing of unstyled modeline at startup
-(setq-default mode-line-format nil)
+(defvar minimal-emacs-gc-cons-threshold (* 32 1024 1024)
+  "Value to which `gc-cons-threshold' is set after Emacs startup.
+Ignored if `minimal-emacs-optimize-startup-gc' is nil.")
 
-;; Faster to disable these here (before they've been initialized)
-(setq default-frame-alist
-      (append
-       '((menu-bar-lines . 0)
-         (tool-bar-lines . 0)
-         (vertical-scroll-bars))
-       (when (featurep 'ns)
-         '((ns-transparent-titlebar . t)))
-       default-frame-alist))
+(defvar minimal-emacs-gc-cons-percentage gc-cons-percentage
+  "Value to which `gc-cons-percentage' is set after Emacs startup.
+Ignored if `minimal-emacs-optimize-startup-gc' is nil.")
 
-(setq inhibit-splash-screen t
-      inhibit-startup-screen t
-      inhibit-startup-message t ;关闭欢迎界面
-      inhibit-startup-buffer-menu t
+(defvar minimal-emacs-gc-cons-threshold-restore-delay nil
+  "Number of seconds to wait before restoring `gc-cons-threshold'.")
 
-      inhibit-x-resources t
-      use-file-dialog nil
-      use-dialog-box nil
+(defvar minimal-emacs-optimize-file-name-handler-alist t
+  "Enable optimization of `file-name-handler-alist'.
+When non-nil, this variable activates optimizations to reduce file name handler
+lookups during Emacs startup.")
 
-      initial-frame-alist (quote ((fullscreen . maximized)))
-      )
+(defvar minimal-emacs-disable-mode-line-during-startup t
+  "Disable the mode line during startup.
+This reduces visual clutter and slightly enhances startup performance. The
+tradeoff is that the mode line is hidden during the startup phase.")
 
-;; (fset 'display-startup-echo-area-message 'ignore)
-;; or
-;; (put 'inhibit-startup-echo-area-message 'saved-value
-;;      (setq inhibit-startup-echo-area-message (user-login-name)))
-(defun display-startup-echo-area-message ()
-  "Empty startup message."
-  (message ""))
+(defvar minimal-emacs-package-initialize-and-refresh t
+  "Whether to automatically initialize and refresh packages.
+When set to non-nil, Emacs will automatically call `package-initialize' and
+`package-refresh-contents' to set up and update the package system.")
 
-;; Split customizations file
-(setq-default custom-file (concat user-emacs-directory "site-lisp/custom.el"))
-(when (file-exists-p custom-file) (load custom-file))
+(defvar minimal-emacs-setup-native-compilation t
+  "Controls whether native compilation settings are enabled during setup.
+When non-nil, the following variables are set to non-nil to enable
+native compilation features:
+- `native-comp-deferred-compilation'
+- `native-comp-jit-compilation'
+- `package-native-compile'
+If nil, these variables are left at their default values and are not
+modified during setup.")
 
-;; default file
-;; (load "default" 'noerror 'nomessage) ; Load the default init file
-;; (setq inhibit-default-init t) ; Don't load default.el
+(defvar minimal-emacs-inhibit-redisplay-during-startup nil
+  "Suppress redisplay during startup to improve performance.
+This prevents visual updates while Emacs initializes. The tradeoff is that you
+won't see the progress or activities during the startup process.")
 
-(provide 'early-init)
+(defvar minimal-emacs-inhibit-message-during-startup nil
+  "Suppress startup messages for a cleaner experience.
+This slightly enhances performance. The tradeoff is that you won't be informed
+of the progress or any relevant activities during startup.")
+
+(defvar minimal-emacs-user-directory user-emacs-directory
+  "Directory beneath minimal-emacs.d files are placed.
+Note that this should end with a directory separator.")
+
+;;; Load pre-early-init.el
+
+;; Prefer loading newer compiled files
+(setq load-prefer-newer t)
+(setq debug-on-error minimal-emacs-debug)
+
+(defvar minimal-emacs--success nil)
+(defun minimal-emacs--check-success ()
+  "Verify that the Emacs configuration has loaded successfully."
+  (unless minimal-emacs--success
+    (cond
+     ((or (file-exists-p (expand-file-name "~/.emacs.el"))
+          (file-exists-p (expand-file-name "~/.emacs")))
+      (error "Emacs ignored loading 'init.el'. Please ensure that files such as ~/.emacs or ~/.emacs.el do not exist, as they may be preventing Emacs from loading the 'init.el' file"))
+
+     (t
+      (error "Configuration error. Debug by starting Emacs with: emacs --debug-init")))))
+(add-hook 'emacs-startup-hook #'minimal-emacs--check-success 102)
+
+(defvar minimal-emacs-load-compiled-init-files nil
+  "If non-nil, attempt to load byte-compiled .elc for init files.
+This will enable minimal-emacs to load byte-compiled or possibly native-compiled
+init files for the following initialization files: pre-init.el, post-init.el,
+pre-early-init.el, and post-early-init.el.")
+
+(defun minimal-emacs--remove-el-file-suffix (filename)
+  "Remove the Elisp file suffix from FILENAME and return it (.el, .el.gz...)."
+  (let ((suffixes (mapcar (lambda (ext) (concat ".el" ext))
+                          load-file-rep-suffixes)))
+    (catch 'done
+      (dolist (suffix suffixes filename)
+        (when (string-suffix-p suffix filename)
+          (setq filename (substring filename 0 (- (length suffix))))
+          (throw 'done t))))
+    filename))
+
+(defun minimal-emacs-load-user-init (filename)
+  "Execute a file of Lisp code named FILENAME."
+  (let ((init-file (expand-file-name filename
+                                     minimal-emacs-user-directory)))
+    (if (not minimal-emacs-load-compiled-init-files)
+        (load init-file :no-error (not init-file-debug) :nosuffix)
+      ;; Remove the file suffix (.el, .el.gz, etc.) to let the `load' function
+      ;; select between .el and .elc files.
+      (setq init-file (minimal-emacs--remove-el-file-suffix init-file))
+      (load init-file :no-error (not init-file-debug)))))
+
+(minimal-emacs-load-user-init "pre-early-init.el")
+
+(setq custom-theme-directory
+      (expand-file-name "themes/" minimal-emacs-user-directory))
+
+(setq custom-file (expand-file-name "custom.el" minimal-emacs-user-directory))
+
+;;; Garbage collection
+;; Garbage collection significantly affects startup times. This setting delays
+;; garbage collection during startup but will be reset later.
+
+(setq garbage-collection-messages minimal-emacs-debug)
+
+(defun minimal-emacs--restore-gc-values ()
+  "Restore garbage collection values to minimal-emacs.d values."
+  (setq gc-cons-threshold minimal-emacs-gc-cons-threshold)
+  (setq gc-cons-percentage minimal-emacs-gc-cons-percentage))
+
+(defun minimal-emacs--restore-gc ()
+  "Restore garbage collection settings."
+  (if (bound-and-true-p minimal-emacs-gc-cons-threshold-restore-delay)
+      ;; Defer garbage collection during initialization to avoid 2 collections.
+      (run-with-timer minimal-emacs-gc-cons-threshold-restore-delay nil
+                      #'minimal-emacs--restore-gc-values)
+    (minimal-emacs--restore-gc-values)))
+
+(if minimal-emacs-optimize-startup-gc
+    ;; `gc-cons-threshold' is managed by minimal-emacs.d
+    (add-hook 'emacs-startup-hook #'minimal-emacs--restore-gc 105)
+  ;; gc-cons-threshold is not managed by minimal-emacs.d.
+  (when (= gc-cons-threshold most-positive-fixnum)
+    (setq gc-cons-threshold minimal-emacs--backup-gc-cons-threshold)
+    (setq gc-cons-percentage minimal-emacs--backup-gc-cons-percentage)))
+
+;;; Native compilation and Byte compilation
+
+(if (and (featurep 'native-compile)
+         (fboundp 'native-comp-available-p)
+         (native-comp-available-p))
+    (when minimal-emacs-setup-native-compilation
+      ;; Activate `native-compile'
+      (setq package-native-compile t))
+  ;; Deactivate the `native-compile' feature if it is not available
+  (setq features (delq 'native-compile features)))
+
+(setq native-comp-warning-on-missing-source minimal-emacs-debug
+      native-comp-async-report-warnings-errors (or minimal-emacs-debug 'silent))
+
+(setq jka-compr-verbose minimal-emacs-debug)
+(setq byte-compile-warnings minimal-emacs-debug
+      byte-compile-verbose minimal-emacs-debug)
+
+;;; Miscellaneous
+
+(set-language-environment "UTF-8")
+
+;; Set-language-environment sets default-input-method, which is unwanted.
+(setq default-input-method nil)
+
+;; Increase how much is read from processes in a single chunk
+(setq read-process-output-max (* 2 1024 1024))  ; 1024kb
+
+(setq process-adaptive-read-buffering nil)
+
+;; Don't ping things that look like domain names.
+(setq ffap-machine-p-known 'reject)
+
+(setq warning-minimum-level (if minimal-emacs-debug :warning :error))
+(setq warning-suppress-types '((lexical-binding)))
+
+(when minimal-emacs-debug
+  (setq message-log-max 16384))
+
+;; In PGTK, this timeout introduces latency. Reducing it from the default 0.1
+;; improves responsiveness of childframes and related packages.
+(when (boundp 'pgtk-wait-for-event-timeout)
+  (setq pgtk-wait-for-event-timeout 0.001))
+
+;; Disable warnings from the legacy advice API. They aren't useful.
+(setq ad-redefinition-action 'accept)
+
+;;; Performance: Miscellaneous options
+
+;; Font compacting can be very resource-intensive, especially when rendering
+;; icon fonts on Windows. This will increase memory usage.
+(setq inhibit-compacting-font-caches t)
+
+(when (and (not (daemonp)) (not noninteractive))
+  ;; Resizing the Emacs frame can be costly when changing the font. Disable this
+  ;; to improve startup times with fonts larger than the system default.
+  (setq frame-resize-pixelwise t)
+
+  ;; Without this, Emacs will try to resize itself to a specific column size
+  (setq frame-inhibit-implied-resize t)
+
+  ;; A second, case-insensitive pass over `auto-mode-alist' is time wasted.
+  ;; No second pass of case-insensitive search over auto-mode-alist.
+  (setq auto-mode-case-fold nil)
+
+  ;; Reduce *Message* noise at startup. An empty scratch buffer (or the
+  ;; dashboard) is more than enough, and faster to display.
+  (setq inhibit-startup-screen t
+        inhibit-startup-echo-area-message user-login-name)
+  (setq initial-buffer-choice nil
+        inhibit-startup-buffer-menu t
+        inhibit-x-resources t)
+
+  ;; Disable bidirectional text scanning for a modest performance boost.
+  (setq-default bidi-display-reordering 'left-to-right
+                bidi-paragraph-direction 'left-to-right)
+
+  ;; Give up some bidirectional functionality for slightly faster re-display.
+  (setq bidi-inhibit-bpa t)
+
+  ;; Remove "For information about GNU Emacs..." message at startup
+  (advice-add 'display-startup-echo-area-message :override #'ignore)
+
+  ;; Suppress the vanilla startup screen completely. We've disabled it with
+  ;; `inhibit-startup-screen', but it would still initialize anyway.
+  (advice-add 'display-startup-screen :override #'ignore)
+
+  ;; The initial buffer is created during startup even in non-interactive
+  ;; sessions, and its major mode is fully initialized. Modes like `text-mode',
+  ;; `org-mode', or even the default `lisp-interaction-mode' load extra packages
+  ;; and run hooks, which can slow down startup.
+  ;;
+  ;; Using `fundamental-mode' for the initial buffer to avoid unnecessary
+  ;; startup overhead.
+  (setq initial-major-mode 'fundamental-mode
+        initial-scratch-message nil)
+
+  (unless minimal-emacs-debug
+    ;; Unset command line options irrelevant to the current OS. These options
+    ;; are still processed by `command-line-1` but have no effect.
+    (unless (eq system-type 'darwin)
+      (setq command-line-ns-option-alist nil))
+    (unless (memq initial-window-system '(x pgtk))
+      (setq command-line-x-option-alist nil))))
+
+;;; Performance: File-name-handler-alist
+
+(defvar minimal-emacs--old-file-name-handler-alist (default-toplevel-value
+                                                    'file-name-handler-alist))
+
+(defun minimal-emacs--respect-file-handlers (fn args-left)
+  "Respect file handlers.
+FN is the function and ARGS-LEFT is the same argument as `command-line-1'.
+Emacs processes command-line files very early in startup. These files may
+include special paths like TRAMP paths, so restore `file-name-handler-alist' for
+this stage of initialization."
+  (let ((file-name-handler-alist (if args-left
+                                     minimal-emacs--old-file-name-handler-alist
+                                   file-name-handler-alist)))
+    (funcall fn args-left)))
+
+(defun minimal-emacs--restore-file-name-handler-alist ()
+  "Restore `file-name-handler-alist'."
+  (set-default-toplevel-value
+   'file-name-handler-alist
+   ;; Merge instead of overwrite to preserve any changes made since startup.
+   (delete-dups (append file-name-handler-alist
+                        minimal-emacs--old-file-name-handler-alist))))
+
+(when (and minimal-emacs-optimize-file-name-handler-alist
+           (not (daemonp))
+           (not minimal-emacs-debug))
+  ;; Determine the state of bundled libraries using calc-loaddefs.el. If
+  ;; compressed, retain the gzip handler in `file-name-handler-alist`. If
+  ;; compiled or neither, omit the gzip handler during startup for improved
+  ;; startup and package load time.
+  (set-default-toplevel-value
+   'file-name-handler-alist
+   (if (locate-file-internal "calc-loaddefs.el" load-path)
+       nil
+     (list (rassq 'jka-compr-handler
+                  minimal-emacs--old-file-name-handler-alist))))
+
+  ;; Ensure the new value persists through any current let-binding.
+  (put 'file-name-handler-alist 'initial-value
+       minimal-emacs--old-file-name-handler-alist)
+
+  ;; Emacs processes command-line files very early in startup. These files may
+  ;; include special paths TRAMP. Restore `file-name-handler-alist'.
+  (advice-add 'command-line-1 :around #'minimal-emacs--respect-file-handlers)
+
+  (add-hook 'emacs-startup-hook #'minimal-emacs--restore-file-name-handler-alist
+            101))
+
+;;; Performance: Inhibit redisplay
+
+(defun minimal-emacs--reset-inhibit-redisplay ()
+  "Reset inhibit redisplay."
+  (setq-default inhibit-redisplay nil)
+  (remove-hook 'post-command-hook #'minimal-emacs--reset-inhibit-redisplay))
+
+(when (and minimal-emacs-inhibit-redisplay-during-startup
+           (not (daemonp))
+           (not noninteractive)
+           (not minimal-emacs-debug))
+  ;; Suppress redisplay and redraw during startup to avoid delays and
+  ;; prevent flashing an unstyled Emacs frame.
+  (setq-default inhibit-redisplay t)
+  (add-hook 'post-command-hook #'minimal-emacs--reset-inhibit-redisplay -100))
+
+;;; Performance: Inhibit message
+
+(defun minimal-emacs--reset-inhibit-message ()
+  "Reset inhibit message."
+  (setq-default inhibit-message nil)
+  (remove-hook 'post-command-hook #'minimal-emacs--reset-inhibit-message))
+
+(when (and minimal-emacs-inhibit-message-during-startup
+           (not (daemonp))
+           (not noninteractive)
+           (not minimal-emacs-debug))
+  (setq-default inhibit-message t)
+  (add-hook 'post-command-hook #'minimal-emacs--reset-inhibit-message -100))
+
+;;; Performance: Disable mode-line during startup
+
+(when (and minimal-emacs-disable-mode-line-during-startup
+           (not (daemonp))
+           (not noninteractive)
+           (not minimal-emacs-debug))
+  (put 'mode-line-format
+       'initial-value (default-toplevel-value 'mode-line-format))
+  (setq-default mode-line-format nil)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (setq mode-line-format nil))))
+
+;;; Restore values
+
+(defun minimal-emacs--startup-load-user-init-file (fn &rest args)
+  "Advice to reset `mode-line-format'. FN and ARGS are the function and args."
+  (unwind-protect
+      ;; Start up as normal
+      (apply fn args)
+    ;; If we don't undo inhibit-{message, redisplay} and there's an error, we'll
+    ;; see nothing but a blank Emacs frame.
+    (when minimal-emacs-inhibit-message-during-startup
+      (setq-default inhibit-message nil))
+    (when minimal-emacs-inhibit-redisplay-during-startup
+      (setq-default inhibit-redisplay nil))
+    ;; Restore the mode-line
+    (when minimal-emacs-disable-mode-line-during-startup
+      (unless (default-toplevel-value 'mode-line-format)
+        (setq-default mode-line-format (get 'mode-line-format
+                                            'initial-value))))))
+
+(advice-add 'startup--load-user-init-file :around
+            #'minimal-emacs--startup-load-user-init-file)
+
+;;; UI elements
+
+(setq frame-title-format minimal-emacs-frame-title-format
+      icon-title-format minimal-emacs-frame-title-format)
+
+;; Disable startup screens and messages
+(setq inhibit-splash-screen t)
+
+;; I intentionally avoid calling `menu-bar-mode', `tool-bar-mode', and
+;; `scroll-bar-mode' because manipulating frame parameters can trigger or queue
+;; a superfluous and potentially expensive frame redraw at startup, depending
+;; on the window system. The variables must also be set to `nil' so users don't
+;; have to call the functions twice to re-enable them.
+(unless (memq 'menu-bar minimal-emacs-ui-features)
+  (push '(menu-bar-lines . 0) default-frame-alist)
+  (unless (memq window-system '(mac ns))
+    (setq menu-bar-mode nil)))
+
+(defun minimal-emacs--setup-toolbar (&rest _)
+  "Setup the toolbar."
+  (when (fboundp 'tool-bar-setup)
+    (advice-remove 'tool-bar-setup #'ignore)
+    (when (bound-and-true-p tool-bar-mode)
+      (funcall 'tool-bar-setup))))
+
+(when (and (not (daemonp))
+           (not noninteractive))
+  (when (fboundp 'tool-bar-setup)
+    ;; Temporarily override the tool-bar-setup function to prevent it from
+    ;; running during the initial stages of startup
+    (advice-add 'tool-bar-setup :override #'ignore)
+
+    (advice-add 'startup--load-user-init-file :after
+                #'minimal-emacs--setup-toolbar)))
+
+(unless (memq 'tool-bar minimal-emacs-ui-features)
+  (push '(tool-bar-lines . 0) default-frame-alist)
+  (setq tool-bar-mode nil))
+
+(setq default-frame-scroll-bars 'right)
+(push '(vertical-scroll-bars) default-frame-alist)
+(push '(horizontal-scroll-bars) default-frame-alist)
+(setq scroll-bar-mode nil)
+
+(unless (memq 'tooltips minimal-emacs-ui-features)
+  (when (bound-and-true-p tooltip-mode)
+    (tooltip-mode -1)))
+
+;; Disable GUIs because they are inconsistent across systems, desktop
+;; environments, and themes, and they don't match the look of Emacs.
+(unless (memq 'dialogs minimal-emacs-ui-features)
+  (setq use-file-dialog nil)
+  (setq use-dialog-box nil))
+
+;;; Security
+(setq gnutls-verify-error t)  ; Prompts user if there are certificate issues
+(setq tls-checktrust t)  ; Ensure SSL/TLS connections undergo trust verification
+(setq gnutls-min-prime-bits 3072)  ; Stronger GnuTLS encryption
+
+;;; package.el
+(setq use-package-compute-statistics minimal-emacs-debug)
+
+;; Setting use-package-expand-minimally to (t) results in a more compact output
+;; that emphasizes performance over clarity.
+(setq use-package-expand-minimally (not minimal-emacs-debug))
+
+(setq package-quickstart-file
+      (expand-file-name "package-quickstart.el" user-emacs-directory))
+(setq use-package-minimum-reported-time (if minimal-emacs-debug 0 0.1))
+(setq use-package-verbose minimal-emacs-debug)
+(setq package-enable-at-startup nil)  ; Let the init.el file handle this
+(setq use-package-always-ensure t)
+(setq use-package-enable-imenu-support t)
+(setq package-archives '(("melpa"        . "https://melpa.org/packages/")
+                         ("gnu"          . "https://elpa.gnu.org/packages/")
+                         ("nongnu"       . "https://elpa.nongnu.org/nongnu/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
+(setq package-archive-priorities '(("gnu"    . 99)
+                                   ("nongnu" . 80)
+                                   ("melpa"  . 70)
+                                   ("melpa-stable" . 50)))
+
+;;; Load post-early-init.el
+(minimal-emacs-load-user-init "post-early-init.el")
+
+;; Local variables:
+;; byte-compile-warnings: (not obsolete free-vars)
+;; End:
+
 ;;; early-init.el ends here
+#+end_src
+
+* init.el
+curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init.el | wl-copy
+#+begin_src emacs-lisp :tangle "~/.config/emacs/init.el"
+;;; init.el --- Init -*- lexical-binding: t; -*-
+
+;; Author: James Cherti
+;; URL: https://github.com/jamescherti/minimal-emacs.d
+;; Package-Requires: ((emacs "29.1"))
+;; Keywords: maint
+;; Version: 1.3.0
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
+;;; Commentary:
+;; The minimal-emacs.d project is a lightweight and optimized Emacs base
+;; (init.el and early-init.el) that gives you full control over your
+;; configuration. It provides better defaults, an optimized startup, and a clean
+;; foundation for building your own vanilla Emacs setup.
+;;
+;; Building the minimal-emacs.d init.el and early-init.el was the result of
+;; extensive research and testing to fine-tune the best parameters and
+;; optimizations for an Emacs configuration.
+;;
+;; Do not modify this file; instead, modify pre-init.el or post-init.el.
+
+;;; Code:
+
+;;; Load pre-init.el
+(if (fboundp 'minimal-emacs-load-user-init)
+    (minimal-emacs-load-user-init "pre-init.el")
+  (error "The early-init.el file failed to loaded"))
+
+;;; Before package
+
+;; Ask the user whether to terminate asynchronous compilations on exit.
+;; This prevents native compilation from leaving temporary files in /tmp.
+(setq native-comp-async-query-on-exit t)
+
+;; Allow for shorter responses: "y" for yes and "n" for no.
+(setq read-answer-short t)
+(if (boundp 'use-short-answers)
+    (setq use-short-answers t)
+  (advice-add 'yes-or-no-p :override #'y-or-n-p))
+
+;;; Undo/redo
+
+(setq undo-limit (* 13 160000)
+      undo-strong-limit (* 13 240000)
+      undo-outer-limit (* 13 24000000))
+
+;;; package.el
+
+(when (bound-and-true-p minimal-emacs-package-initialize-and-refresh)
+  ;; Initialize and refresh package contents again if needed
+  (package-initialize)
+  ;; Install use-package if necessary
+  (unless (package-installed-p 'use-package)
+    (unless (seq-empty-p package-archive-contents)
+      (package-refresh-contents))
+    (package-install 'use-package))
+
+  ;; Ensure use-package is available
+  (require 'use-package))
+
+;;; Minibuffer
+
+;; Allow nested minibuffers
+(setq enable-recursive-minibuffers t)
+
+;; Keep the cursor out of the read-only portions of the.minibuffer
+(setq minibuffer-prompt-properties
+      '(read-only t intangible t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+;;; User interface
+
+;; By default, Emacs "updates" its ui more often than it needs to
+(setq which-func-update-delay 1.0)
+(setq idle-update-delay which-func-update-delay)  ;; Obsolete in >= 30.1
+
+(defalias #'view-hello-file #'ignore)  ; Never show the hello file
+
+;; No beeping or blinking
+(setq visible-bell nil)
+(setq ring-bell-function #'ignore)
+
+;;; Show-paren
+
+(setq show-paren-delay 0.1
+      show-paren-highlight-openparen t
+      show-paren-when-point-inside-paren t
+      show-paren-when-point-in-periphery t)
+
+;;; Misc
+
+(setq custom-buffer-done-kill t)
+
+(setq whitespace-line-column nil)  ; Use the value of `fill-column'.
+
+;; Can be activated with `display-line-numbers-mode'
+(setq-default display-line-numbers-width 3)
+(setq-default display-line-numbers-widen t)
+
+(setq truncate-string-ellipsis "…")
+
+;; Disable truncation of printed s-expressions in the message buffer
+(setq eval-expression-print-length nil
+      eval-expression-print-level nil)
+
+;; Position underlines at the descent line instead of the baseline.
+(setq x-underline-at-descent-line t)
+
+(setq remote-file-name-inhibit-cache 50)
+
+;; Automatically rescan the buffer for Imenu entries when `imenu' is invoked
+;; This ensures the index reflects recent edits.
+(setq imenu-auto-rescan t)
+
+;; Prevent truncation of long function names in `imenu' listings
+(setq imenu-max-item-length 160)
+
+;; Disable auto-adding a new line at the bottom when scrolling.
+(setq next-line-add-newlines nil)
+
+;; This setting forces Emacs to save bookmarks immediately after each change.
+;; Benefit: you never lose bookmarks if Emacs crashes.
+(setq bookmark-save-flag 1)
+
+;;; tramp
+
+(setq tramp-verbose 1)
+(setq tramp-completion-reread-directory-timeout 50)
+
+;;; Files
+
+;; Delete by moving to trash in interactive mode
+(setq delete-by-moving-to-trash (not noninteractive))
+(setq remote-file-name-inhibit-delete-by-moving-to-trash t)
+
+;; Ignoring this is acceptable since it will redirect to the buffer regardless.
+(setq find-file-suppress-same-file-warnings t)
+
+;; Resolve symlinks so that operations are conducted from the file's directory
+(setq find-file-visit-truename t
+      vc-follow-symlinks t)
+
+;; Prefer vertical splits over horizontal ones
+(setq split-width-threshold 170
+      split-height-threshold nil)
+
+;;; Buffers
+
+(setq uniquify-buffer-name-style 'forward)
+
+;;; comint (general command interpreter in a window)
+
+(setq ansi-color-for-comint-mode t
+      comint-prompt-read-only t
+      comint-buffer-maximum-size 4096)
+
+;;; Compilation
+
+(setq compilation-ask-about-save nil
+      compilation-always-kill t
+      compilation-scroll-output 'first-error)
+
+;; Skip confirmation prompts when creating a new file or buffer
+(setq confirm-nonexistent-file-or-buffer nil)
+
+;;; Backup files
+
+;; Avoid backups or lockfiles to prevent creating world-readable copies of files
+(setq create-lockfiles nil)
+(setq make-backup-files nil)
+
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name "backup" user-emacs-directory))))
+(setq tramp-backup-directory-alist backup-directory-alist)
+(setq backup-by-copying-when-linked t)
+(setq backup-by-copying t)  ; Backup by copying rather renaming
+(setq delete-old-versions t)  ; Delete excess backup versions silently
+(setq version-control t)  ; Use version numbers for backup files
+(setq kept-new-versions 5)
+(setq kept-old-versions 5)
+
+;;; VC
+
+(setq vc-git-print-log-follow t)
+(setq vc-make-backup-files nil)  ; Do not backup version controlled files
+(setq vc-git-diff-switches '("--histogram"))  ; Faster algorithm for diffing.
+
+;;; Auto save
+
+;; Enable auto-save to safeguard against crashes or data loss. The
+;; `recover-file' or `recover-session' functions can be used to restore
+;; auto-saved data.
+(setq auto-save-default nil)
+(setq auto-save-no-message t)
+
+;; Do not auto-disable auto-save after deleting large chunks of
+;; text.
+(setq auto-save-include-big-deletions t)
+
+(setq auto-save-list-file-prefix
+      (expand-file-name "autosave/" user-emacs-directory))
+(setq tramp-auto-save-directory
+      (expand-file-name "tramp-autosave/" user-emacs-directory))
+
+;; Auto save options
+(setq kill-buffer-delete-auto-save-files t)
+
+;; Remove duplicates from the kill ring to reduce clutter
+(setq kill-do-not-save-duplicates t)
+
+;;; Auto revert
+;; Auto-revert in Emacs is a feature that automatically updates the contents of
+;; a buffer to reflect changes made to the underlying file.
+(setq revert-without-query (list ".")  ; Do not prompt
+      auto-revert-stop-on-user-input nil
+      auto-revert-verbose t)
+
+;; Revert other buffers (e.g, Dired)
+(setq global-auto-revert-non-file-buffers t)
+(setq global-auto-revert-ignore-modes '(Buffer-menu-mode))  ; Resolve issue #29
+
+;;; recentf
+
+;; `recentf' is an that maintains a list of recently accessed files.
+(setq recentf-max-saved-items 300) ; default is 20
+(setq recentf-max-menu-items 15)
+(setq recentf-auto-cleanup 'mode)
+(setq recentf-exclude nil)
+
+;;; saveplace
+
+;; Enables Emacs to remember the last location within a file upon reopening.
+(setq save-place-file (expand-file-name "saveplace" user-emacs-directory))
+(setq save-place-limit 600)
+
+;;; savehist
+
+;; `savehist-mode' is an Emacs feature that preserves the minibuffer history
+;; between sessions.
+(setq history-length 300)
+(setq savehist-save-minibuffer-history t)  ;; Default
+(setq savehist-additional-variables
+      '(kill-ring                        ; clipboard
+        register-alist                   ; macros
+        mark-ring global-mark-ring       ; marks
+        search-ring regexp-search-ring)) ; searches
+
+;;; Frames and windows
+
+;; However, do not resize windows pixelwise, as this can cause crashes in some
+;; cases when resizing too many windows at once or rapidly.
+(setq window-resize-pixelwise nil)
+
+(setq resize-mini-windows 'grow-only)
+
+;; The native border "uses" a pixel of the fringe on the rightmost
+;; splits, whereas `window-divider-mode' does not.
+(setq window-divider-default-bottom-width 1
+      window-divider-default-places t
+      window-divider-default-right-width 1)
+
+;;; Fontification
+
+;; Disable fontification during user input to reduce lag in large buffers.
+;; Also helps marginally with scrolling performance.
+(setq redisplay-skip-fontification-on-input t)
+
+;;; Scrolling
+
+;; Enables faster scrolling. This may result in brief periods of inaccurate
+;; syntax highlighting, which should quickly self-correct.
+(setq fast-but-imprecise-scrolling t)
+
+;; Move point to top/bottom of buffer before signaling a scrolling error.
+(setq scroll-error-top-bottom t)
+
+;; Keep screen position if scroll command moved it vertically out of the window.
+(setq scroll-preserve-screen-position t)
+
+;; Emacs recenters the window when the cursor moves past `scroll-conservatively'
+;; lines beyond the window edge. A value over 101 disables recentering; the
+;; default (0) is too eager. Here it is set to 20 for a balanced behavior.
+(setq scroll-conservatively 20)
+
+;; 1. Preventing automatic adjustments to `window-vscroll' for long lines.
+;; 2. Resolving the issue of random half-screen jumps during scrolling.
+(setq auto-window-vscroll nil)
+
+;; Number of lines of margin at the top and bottom of a window.
+(setq scroll-margin 0)
+
+;; Number of lines of continuity when scrolling by screenfuls.
+(setq next-screen-context-lines 0)
+
+;; Horizontal scrolling
+(setq hscroll-margin 2
+      hscroll-step 1)
+
+;;; Mouse
+
+(setq mouse-yank-at-point nil)
+
+;; Emacs 29
+(when (memq 'context-menu minimal-emacs-ui-features)
+  (when (and (display-graphic-p) (fboundp 'context-menu-mode))
+    (add-hook 'after-init-hook #'context-menu-mode)))
+
+;;; Cursor
+
+;; The blinking cursor is distracting and interferes with cursor settings in
+;; some minor modes that try to change it buffer-locally (e.g., Treemacs).
+(when (bound-and-true-p blink-cursor-mode)
+  (blink-cursor-mode -1))
+
+;; Don't blink the paren matching the one at point, it's too distracting.
+(setq blink-matching-paren nil)
+
+;; Do not extend the cursor to fit wide characters
+(setq x-stretch-cursor nil)
+
+;; Reduce rendering/line scan work by not rendering cursors or regions in
+;; non-focused windows.
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+
+;;; Text editing, indent, font, and formatting
+
+;; Avoid automatic frame resizing when adjusting settings.
+(setq global-text-scale-adjust-resizes-frames nil)
+
+;; A longer delay can be annoying as it causes a noticeable pause after each
+;; deletion, disrupting the flow of editing.
+(setq delete-pair-blink-delay 0.03)
+
+(setq-default left-fringe-width  8)
+(setq-default right-fringe-width 8)
+
+;; Disable visual indicators in the fringe for buffer boundaries and empty lines
+(setq-default indicate-buffer-boundaries nil)
+(setq-default indicate-empty-lines nil)
+
+;; Continue wrapped lines at whitespace rather than breaking in the
+;; middle of a word.
+(setq-default word-wrap t)
+
+;; Disable wrapping by default due to its performance cost.
+(setq-default truncate-lines t)
+
+;; If enabled and `truncate-lines' is disabled, soft wrapping will not occur
+;; when the window is narrower than `truncate-partial-width-windows' characters.
+(setq truncate-partial-width-windows nil)
+
+;; Configure automatic indentation to be triggered exclusively by newline and
+;; DEL (backspace) characters.
+(setq-default electric-indent-chars '(?\n ?\^?))
+
+;; Prefer spaces over tabs. Spaces offer a more consistent default compared to
+;; 8-space tabs. This setting can be adjusted on a per-mode basis as needed.
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+
+;; Enable indentation and completion using the TAB key
+(setq tab-always-indent 'complete)
+(setq tab-first-completion 'word-or-paren-or-punct)
+
+;; Perf: Reduce command completion overhead.
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+
+;; Enable multi-line commenting which ensures that `comment-indent-new-line'
+;; properly continues comments onto new lines.
+(setq comment-multi-line t)
+
+;; Ensures that empty lines within the commented region are also commented out.
+;; This prevents unintended visual gaps and maintains a consistent appearance.
+(setq comment-empty-lines t)
+
+;; We often split terminals and editor windows or place them side-by-side,
+;; making use of the additional horizontal space.
+(setq-default fill-column 80)
+
+;; Disable the obsolete practice of end-of-line spacing from the typewriter era.
+(setq sentence-end-double-space nil)
+
+;; According to the POSIX, a line is defined as "a sequence of zero or more
+;; non-newline characters followed by a terminating newline".
+(setq require-final-newline t)
+
+;; Eliminate delay before highlighting search matches
+(setq lazy-highlight-initial-delay 0)
+
+;;; Modeline
+
+;; Makes Emacs omit the load average information from the mode line.
+(setq display-time-default-load-average nil)
+
+;;; Filetype
+
+;; Do not notify the user each time Python tries to guess the indentation offset
+(setq python-indent-guess-indent-offset-verbose nil)
+
+(setq sh-indent-after-continuation 'always)
+
+;;; Dired and ls-lisp
+
+(setq dired-free-space nil
+      dired-dwim-target t  ; Propose a target for intelligent moving/copying
+      dired-deletion-confirmer 'y-or-n-p
+      dired-filter-verbose nil
+      dired-recursive-deletes 'top
+      dired-recursive-copies 'always
+      dired-vc-rename-file t
+      dired-create-destination-dirs 'ask
+      ;; Suppress Dired buffer kill prompt for deleted dirs
+      dired-clean-confirm-killing-deleted-buffers nil)
+
+;; This is a higher-level predicate that wraps `dired-directory-changed-p'
+;; with additional logic. This `dired-buffer-stale-p' predicate handles remote
+;; files, wdired, unreadable dirs, and delegates to dired-directory-changed-p
+;; for modification checks.
+(setq auto-revert-remote-files nil)
+(setq dired-auto-revert-buffer 'dired-buffer-stale-p)
+
+;; dired-omit-mode
+(setq dired-omit-verbose nil
+      dired-omit-files (concat "\\`[.]\\'"))
+
+(setq ls-lisp-verbosity nil)
+(setq ls-lisp-dirs-first t)
+
+;;; Ediff
+
+;; Configure Ediff to use a single frame and split windows horizontally
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
+
+;;; Help
+
+;; Enhance `apropos' and related functions to perform more extensive searches
+(setq apropos-do-all t)
+
+;; Fixes #11: Prevents help command completion from triggering autoload.
+;; Loading additional files for completion can slow down help commands and may
+;; unintentionally execute initialization code from some libraries.
+(setq help-enable-completion-autoload nil)
+(setq help-enable-autoload nil)
+(setq help-enable-symbol-autoload nil)
+(setq help-window-select t)  ;; Focus new help windows when opened
+
+;;; Eglot
+
+;; A setting of nil or 0 means Eglot will not block the UI at all, allowing
+;; Emacs to remain fully responsive, although LSP features will only become
+;; available once the connection is established in the background.
+(setq eglot-sync-connect 0)
+
+(setq eglot-autoshutdown t)  ; Shut down server after killing last managed buffer
+
+;; Activate Eglot in cross-referenced non-project files
+(setq eglot-extend-to-xref t)
+
+;; Eglot optimization
+(if minimal-emacs-debug
+    (setq eglot-events-buffer-config '(:size 2000000 :format full))
+  ;; This reduces log clutter to improves performance.
+  (setq jsonrpc-event-hook nil)
+  ;; Reduce memory usage and avoid cluttering *EGLOT events* buffer
+  (setq eglot-events-buffer-size 0)  ; Deprecated
+  (setq eglot-events-buffer-config '(:size 0 :format short)))
+
+(setq eglot-report-progress minimal-emacs-debug)  ; Prevent minibuffer spam
+
+;;; Flymake
+
+(setq flymake-show-diagnostics-at-end-of-line nil)
+
+;; Disable wrapping around when navigating Flymake errors.
+(setq flymake-wrap-around nil)
+
+;;; hl-line-mode
+
+;; Restrict `hl-line-mode' highlighting to the current window, reducing visual
+;; clutter and slightly improving `hl-line-mode' performance.
+(setq hl-line-sticky-flag nil)
+(setq global-hl-line-sticky-flag nil)
+
+;;; icomplete
+
+;; Do not delay displaying completion candidates in `fido-mode' or
+;; `fido-vertical-mode'
+(setq icomplete-compute-delay 0.01)
+
+;;; flyspell
+
+(setq flyspell-issue-welcome-flag nil)
+
+;; Improves flyspell performance by preventing messages from being displayed for
+;; each word when checking the entire buffer.
+(setq flyspell-issue-message-flag nil)
+
+;;; ispell
+
+;; In Emacs 30 and newer, disable Ispell completion to avoid annotation errors
+;; when no `ispell' dictionary is set.
+(setq text-mode-ispell-word-completion nil)
+
+(setq ispell-silently-savep t)
+
+;;; ibuffer
+
+(setq ibuffer-formats
+      '((mark modified read-only locked
+              " " (name 55 55 :left :elide)
+              " " (size 8 -1 :right)
+              " " (mode 18 18 :left :elide) " " filename-and-process)
+        (mark " " (name 16 -1) " " filename)))
+
+;;; xref
+
+;; Enable completion in the minibuffer instead of the definitions buffer
+(setq xref-show-definitions-function 'xref-show-definitions-completing-read
+      xref-show-xrefs-function 'xref-show-definitions-completing-read)
+
+;;; abbrev
+
+;; Ensure `abbrev_defs` is stored in the correct location when
+;; `user-emacs-directory` is modified, as it defaults to ~/.emacs.d/abbrev_defs
+;; regardless of the change.
+(setq abbrev-file-name (expand-file-name "abbrev_defs" user-emacs-directory))
+
+(setq save-abbrevs 'silently)
+
+;;; dabbrev
+
+(setq dabbrev-upcase-means-case-search t)
+
+(setq dabbrev-ignored-buffer-modes
+      '(archive-mode image-mode docview-mode tags-table-mode
+                     pdf-view-mode tags-table-mode))
+
+(setq dabbrev-ignored-buffer-regexps
+      '(;; - Buffers starting with a space (internal or temporary buffers)
+        "\\` "
+        ;; Tags files such as ETAGS, GTAGS, RTAGS, TAGS, e?tags, and GPATH,
+        ;; including versions with numeric extensions like <123>
+        "\\(?:\\(?:[EG]?\\|GR\\)TAGS\\|e?tags\\|GPATH\\)\\(<[0-9]+>\\)?"))
+
+;;; Remove warnings from narrow-to-region, upcase-region...
+
+(dolist (cmd '(list-timers narrow-to-region upcase-region downcase-region
+                           list-threads erase-buffer scroll-left
+                           dired-find-alternate-file set-goal-column))
+  (put cmd 'disabled nil))
+
+;;; Load post init
+(when (fboundp 'minimal-emacs-load-user-init)
+  (minimal-emacs-load-user-init "post-init.el"))
+(setq minimal-emacs--success t)
+
+;; Local variables:
+;; byte-compile-warnings: (not obsolete free-vars)
+;; End:
+
+;;; init.el ends here
+#+end_src
+
+* pre-early-init.el
+#+begin_src emacs-lisp :tangle "~/.config/emacs/pre-early-init.el"
+;;; pre-early-init.el --- DESCRIPTION -*- no-byte-compile: t; lexical-binding: t; -*-
+;; (setq minimal-emacs-ui-features '(context-menu tool-bar menu-bar dialogs tooltips))
+
+;;; Reducing clutter in ~/.emacs.d by redirecting files to ~/.emacs.d/var/
+;; NOTE: This must be placed in 'pre-early-init.el'.
+(setq user-emacs-directory (expand-file-name "var/" minimal-emacs-user-directory))
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 #+end_src
 
 * Header
 #+begin_src emacs-lisp
-;;; init.el --- Initialization -*- lexical-binding: t; -*-
+;;; post-init.el --- DESCRIPTION -*- no-byte-compile: t; lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Vanilla Emacs configuration.
@@ -122,22 +1107,7 @@ https://zenn.dev/zk_phi/books/cba129aacd4c1418ade4/viewer/a53ba0ad0d729886a1dc
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
 
-(package-initialize)
-
-(eval-when-compile (require 'use-package))
-;; when starting the daemon, packages are always loaded eagerly
-;; and when loading without daemon, it always defers
-;; (setq use-package-always-defer (not (daemonp))
-;;   use-package-always-demand (daemonp))
-
-(setq use-package-always-ensure t)
-(setq use-package-enable-imenu-support t)
-
-;; (use-package use-package
-;;   :custom
-;;   (use-package-always-ensure t)
-;;   (package-native-compile t)
-;;   (use-package-enable-imenu-support t))
+;; (package-initialize)
 
 (use-package bind-key)
 
@@ -330,31 +1300,21 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 * General
 ** Silence Warnings
 #+begin_src emacs-lisp
-;; Turn off Beep and flash
-(setq visible-bell nil
-      ring-bell-function #'ignore)
-
 ;; Close without ask
 (setq confirm-kill-processes nil)
 
-;; Y/N
-(setq use-short-answers t)
-
-;; Follow symlinks without prompt
-(setq vc-follow-symlinks t)
-
 ;; disable warnings
-(setq warning-minimum-level :emergency
-      byte-compile-warnings '(not
-                              obsolete
-                              free-vars
-                              unresolved
-                              callargs
-                              redefine
-                              noruntime
-                              cl-functions
-                              interactive-only
-                              make-local))
+;; (setq warning-minimum-level :emergency
+;;       byte-compile-warnings '(not
+;;                               obsolete
+;;                               free-vars
+;;                               unresolved
+;;                               callargs
+;;                               redefine
+;;                               noruntime
+;;                               cl-functions
+;;                               interactive-only
+;;                               make-local))
 
 ;; disable prompt
 (dolist (cmd '(narrow-to-region
@@ -370,14 +1330,66 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   (put cmd 'disabled nil))
 #+end_src
 
-** TODO Spell
-nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary with a .aff affix file
+** ispell、flyspell
+#+begin_src emacs-lispxx
+;; The flyspell package is a built-in Emacs minor mode that provides
+;; on-the-fly spell checking. It highlights misspelled words as you type,
+;; offering interactive corrections. In text modes, it checks the entire buffer,
+;; while in programming modes, it typically checks only comments and strings. It
+;; integrates with external spell checkers like aspell, hunspell, or
+;; ispell to provide suggestions and corrections.
+;;
+;; NOTE: flyspell-mode can become slow when using Aspell, especially with large
+;; buffers or aggressive suggestion settings like --sug-mode=ultra. This
+;; slowdown occurs because Flyspell checks words dynamically as you type or
+;; navigate text, requiring frequent communication between Emacs and the
+;; external Aspell process. Each check involves sending words to Aspell and
+;; receiving results, which introduces overhead from process invocation and
+;; inter-process communication.
+(use-package ispell
+  :ensure nil
+  :commands (ispell ispell-minor-mode)
+  :custom
+  ;; Set the ispell program name to aspell
+  ;; aspell or hunspell
+  (ispell-program-name "hunspell")
 
-#+begin_src emacs-lisp
-(require 'flyspell)
-(setq ispell-dictionary "en"        ; 使用英文词典
-      ispell-program-name "hunspell"  ; aspell hunspell
-      ispell-extra-args '("--sug-mode=ultra"))
+  ;; Define the "en_US" spell-check dictionary locally, telling Emacs to use
+  ;; UTF-8 encoding, match words using alphabetic characters, allow apostrophes
+  ;; inside words, treat non-alphabetic characters as word boundaries, and pass
+  ;; -d en_US to the underlying spell-check program.
+  (ispell-local-dictionary-alist
+   '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+
+  ;; Configures Aspell's suggestion mode to "ultra", which provides more
+  ;; aggressive and detailed suggestions for misspelled words. The language
+  ;; is set to "en_US" for US English, which can be replaced with your desired
+  ;; language code (e.g., "en_GB" for British English, "de_DE" for German).
+  (ispell-extra-args '(; "--sug-mode=ultra"
+                       "--lang=en_US")))
+
+;; The flyspell package is a built-in Emacs minor mode that provides
+;; on-the-fly spell checking. It highlights misspelled words as you type,
+;; offering interactive corrections.
+(use-package flyspell
+  :ensure nil
+  :commands flyspell-mode
+  :hook
+  (; (prog-mode . flyspell-prog-mode)
+   (text-mode . (lambda()
+                  (if (or (derived-mode-p 'yaml-mode)
+                          (derived-mode-p 'yaml-ts-mode)
+                          (derived-mode-p 'ansible-mode))
+                      (flyspell-prog-mode 1)
+                    (flyspell-mode 1)))))
+  :config
+  ;; Remove strings from Flyspell
+  (setq flyspell-prog-text-faces (delq 'font-lock-string-face
+                                       flyspell-prog-text-faces))
+
+  ;; Remove doc from Flyspell
+  (setq flyspell-prog-text-faces (delq 'font-lock-doc-face
+                                       flyspell-prog-text-faces)))
 #+end_src
 
 ** Time
@@ -405,34 +1417,24 @@ nixos error: ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary
 
 ** helpful
 #+begin_src emacs-lisp
+;; Helpful is an alternative to the built-in Emacs help that provides much more
+;; contextual information.
 (use-package helpful
-  :bind (("C-h f" . helpful-callable)
-         ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key)))
-#+end_src
-
-** Garbage Collection Manually
-https://jackjamison.xyz/blog/emacs-garbage-collection/
-
-#+begin_src emacs-lispxx
-(defun my-minibuffer-setup-hook ()
-  (setq gc-cons-threshold most-positive-fixnum))
-
-(defun my-minibuffer-exit-hook ()
-  (setq gc-cons-threshold 800000000))
-
-(setq gc-cons-threshold most-positive-fixnum)
-
-(run-with-idle-timer 1.2 t 'garbage-collect)
-#+end_src
-
-** Garbage Collector Magic Hack - gcmh
-
-#+begin_src emacs-lispxx
-(use-package gcmh
-  :diminish
-  :config
-  (gcmh-mode 1))
+  :ensure t
+  :commands (helpful-callable
+             helpful-variable
+             helpful-key
+             helpful-command
+             helpful-at-point
+             helpful-function)
+  :bind
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-key] . helpful-key)
+  ([remap describe-symbol] . helpful-symbol)
+  ([remap describe-variable] . helpful-variable)
+  :custom
+  (helpful-max-buffers 7))
 #+end_src
 
 ** esup
@@ -445,6 +1447,11 @@ https://jackjamison.xyz/blog/emacs-garbage-collection/
 #+end_src
 
 * Interface
+#+begin_src emacs-lisp
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+(setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名
+#+end_src
+
 ** Themes
 #+begin_src emacs-lisp
 (use-package doom-themes
@@ -483,6 +1490,12 @@ https://jackjamison.xyz/blog/emacs-garbage-collection/
 (use-package nerd-icons-dired
   :hook
   (dired-mode . nerd-icons-dired-mode))
+
+;; (use-package kind-icon
+;;   :if (display-graphic-p)
+;;   :after corfu
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+end_src
 
 ** emoji
@@ -496,9 +1509,10 @@ Linux handle by nix.
 
 ** Mode-line
 #+begin_src emacs-lisp
-(column-number-mode t)      ;显示列数
-(size-indication-mode t)    ;显示文件大小
-(display-time-mode 1)       ;显示时间
+;; Handle by mood-modeline
+;; (column-number-mode t) ;显示列数
+;; (size-indication-mode t) ;显示文件大小
+;; (add-hook 'after-init-hook #'display-time-mode) ;显示时间
 ;; (unless (string-match-p "^Power N/A" (battery))
 ;;   (display-battery-mode 1))
 
@@ -528,7 +1542,7 @@ Linux handle by nix.
   :commands nyan-mode)
 #+end_src
 
-** Tab-line-mode
+** Tab-bar
 #+begin_src emacs-lisp
 (use-package centaur-tabs
   :custom ((centaur-tabs-height 28)
@@ -611,6 +1625,16 @@ Use `treemacs' command for old functionality."
       initial-major-mode 'fundamental-mode)
 #+end_src
 
+*** uniquify
+#+begin_src emacs-lisp
+(use-package uniquify
+  :ensure nil
+  :custom
+  (uniquify-buffer-name-style 'reverse)
+  (uniquify-separator "•")
+  (uniquify-after-kill-buffer-p t))
+#+end_src
+
 *** ibuffer
 #+begin_src emacs-lisp
 (defalias 'list-buffers 'ibuffer)
@@ -618,21 +1642,34 @@ Use `treemacs' command for old functionality."
 (setq ibuffer-use-other-window t)
 #+end_src
 
-** Frame
+*** buffer-terminator
 #+begin_src emacs-lisp
-(setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名
+(use-package buffer-terminator
+  :ensure t
+  :custom
+  ;; Enable/Disable verbose mode to log buffer cleanup events
+  (buffer-terminator-verbose nil)
+
+  ;; Set the inactivity timeout (in seconds) after which buffers are considered
+  ;; inactive (default is 30 minutes):
+  (buffer-terminator-inactivity-timeout (* 30 60)) ; 30 minutes
+
+  ;; Define how frequently the cleanup process should run (default is every 10
+  ;; minutes):
+  (buffer-terminator-interval (* 10 60)) ; 10 minutes
+
+  :config
+  (buffer-terminator-mode 1))
 #+end_src
 
 ** Window
-emacs31: https://p.bauherren.ovh/blog/tech/new_window_cmds
-
 #+begin_src emacs-lisp
 ;; prefer vertical splits by default
 (setq split-width-threshold 120
       split-height-threshold nil)
 
 ;; winner C-c ←/→ undo/redo window
-(winner-mode 1)
+(add-hook 'after-init-hook #'winner-mode)
 #+end_src
 
 *** ace-window
@@ -664,6 +1701,40 @@ emacs31: https://p.bauherren.ovh/blog/tech/new_window_cmds
   ;; (setq wg-morph-on nil) ;; switch off animation
   (setq persp-auto-resume-time 0)
   (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
+#+end_src
+
+*** easysession-mode
+#+begin_src emacs-lispxx
+;; The easysession Emacs package is a session manager for Emacs that can persist
+;; and restore file editing buffers, indirect buffers/clones, Dired buffers,
+;; windows/splits, the built-in tab-bar (including tabs, their buffers, and
+;; windows), and Emacs frames. It offers a convenient and effortless way to
+;; manage Emacs editing sessions and utilizes built-in Emacs functions to
+;; persist and restore frames.
+(use-package easysession
+  :ensure t
+  :commands (easysession-switch-to
+             easysession-save-as
+             easysession-save-mode
+             easysession-load-including-geometry)
+
+  :custom
+  (easysession-mode-line-misc-info t)  ; Display the session in the modeline
+  (easysession-save-interval (* 10 60))  ; Save every 10 minutes
+
+  :init
+  ;; Key mappings:
+  ;; C-c l for switching sessions
+  ;; and C-c s for saving the current session
+  (global-set-key (kbd "C-c l") 'easysession-switch-to)
+  (global-set-key (kbd "C-c s") 'easysession-save-as)
+
+  ;; The depth 102 and 103 have been added to to `add-hook' to ensure that the
+  ;; session is loaded after all other packages. (Using 103/102 is particularly
+  ;; useful for those using minimal-emacs.d, where some optimizations restore
+  ;; `file-name-handler-alist` at depth 101 during `emacs-startup-hook`.)
+  (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
+  (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
 #+end_src
 
 *** stillness-mode
@@ -736,9 +1807,8 @@ https://github.com/neeasade/stillness-mode.el
 
 (global-prettify-symbols-mode 1) ;Show lambda as λ.
 
-(setq sentence-end-double-space nil ;Sentences should end in one space
-      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ;识别中文标点符号
-      require-final-newline t)
+;; 识别中文标点符号
+(setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 #+end_src
 ** wrap
 #+begin_src emacs-lisp
@@ -752,7 +1822,7 @@ https://github.com/neeasade/stillness-mode.el
 ~display-fill-column-indicator-mode~
 
 #+begin_src emacs-lisp
-(setq-default fill-column 80) ; default: 70
+;; (setq-default fill-column 80) ; default: 70 init: 80
 #+end_src
 
 ** line-numbers-mode
@@ -773,7 +1843,7 @@ https://github.com/neeasade/stillness-mode.el
 
 ** parens
 #+begin_src emacs-lisp
-(show-paren-mode 1)    ;括号匹配 parens
+(add-hook 'after-init-hook #'show-paren-mode)    ;括号匹配 parens
 (electric-pair-mode t) ;自动补全括号
 #+end_src
 
@@ -788,11 +1858,8 @@ https://github.com/AmaiKinono/puni
   (puni-global-mode +1))
 #+end_src
 
-** tabs & whitespace
+** whitespace
 #+begin_src emacs-lisp
-(setq-default tab-width 4
-              indent-tabs-mode nil) ;indent with spaces, never with TABs
-
 (setq whitespace-action '(auto-cleanup)  ;automatically clean up bad whitespace
       whitespace-style '(face
                          trailing space-before-tab
@@ -835,11 +1902,7 @@ https://gitlab.com/jabranham/mixed-pitch
 
 (use-package dired
   :ensure nil
-  :custom ((dired-recursive-copies 'always) ;递归操作目录
-           (dired-recursive-deletes 'top) ;询问一次;
-           (dired-auto-revert-buffer t)
-           (dired-omit-files "\\`[.]?#\\|\\`[.][.]?") ;hide .dot files
-           (dired-listing-switches "-lha --group-directories-first"))
+  :custom ((dired-listing-switches "-lha --group-directories-first"))
   :bind (("s-d" . dired-jump)
          ("C-x C-d" . dired-jump)
          :map dired-mode-map
@@ -883,7 +1946,7 @@ https://gitlab.com/jabranham/mixed-pitch
               ([remap dired-do-copy] . dirvish-yank-menu)
               ([remap mode-line-other-buffer] . dirvish-other-buffer))
   :config
-  (dirvish-peek-mode)
+  ; (dirvish-peek-mode) ;; file-preview cost a lot time
   (setq dirvish-hide-details t)
   )
 #+end_src
@@ -895,26 +1958,31 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 * Backup
-** backup files
 #+begin_src emacs-lisp
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory "backups"))))
-
-(setq make-backup-files t          ; Backup of a file the first time it is saved
-      vc-make-backup-files t       ; Backup files even covered by version control
-      backup-by-copying t          ; Don't clobber symlinks
-      version-control t            ; Version numbers for backup files
-      delete-old-versions t        ; Delete excess backup files silently
-      kept-old-versions 1          ; Number of old versions to keep
-      kept-new-versions 9          ; Number of new versions to keep
-      delete-by-moving-to-trash t) ; Delete files to trash
-
-(setq auto-save-default nil        ;stop creating #autosave# files
-      create-lockfiles nil)        ;stop creating .#lockfile# files 多人编辑中
+(setq delete-by-moving-to-trash t) ; Delete files to trash
 #+end_src
 
-** super-save
+** auto-save or super-save
 #+begin_src emacs-lisp
+;; Enable `auto-save-mode' to prevent data loss. Use `recover-file' or
+;; `recover-session' to restore unsaved changes.
+(setq auto-save-interval 300)
+(setq auto-save-timeout 30)
+
+;; When auto-save-visited-mode is enabled, Emacs will auto-save file-visiting
+;; buffers after a certain amount of idle time if the user forgets to save it
+;; with save-buffer or C-x s for example.
+;;
+;; This is different from auto-save-mode: auto-save-mode periodically saves
+;; all modified buffers, creating backup files, including those not associated
+;; with a file, while auto-save-visited-mode only saves file-visiting buffers
+;; after a period of idle time, directly saving to the file itself without
+;; creating backup files.
+;; (setq auto-save-visited-interval 5)   ; Save after 5 seconds if inactivity
+;; (auto-save-visited-mode 1)
+
+;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+
 (use-package super-save
   :hook (after-init . super-save-mode)
   :config
@@ -942,54 +2010,76 @@ https://gitlab.com/jabranham/mixed-pitch
   )
 #+end_src
 
-** auto-save buffer
-#+begin_src emacs-lispxx
-(setq auto-save-timeout 3) ; autosave if idled for 3 seconds.
-;; (setq auto-save-visited-interval 15) ; 用哪个？
-(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
-(auto-save-visited-mode 1)
-#+end_src
-
-** auto-revert
+** recentf、savehist、saveplace、auto-revert
 #+begin_src emacs-lisp
-;; 自动加载被外部修改过的文件
-(global-auto-revert-mode 1)
-#+end_src
+;; Auto-revert in Emacs is a feature that automatically updates the
+;; contents of a buffer to reflect changes made to the underlying file
+;; on disk.
+(use-package autorevert
+  :ensure nil
+  :commands (auto-revert-mode global-auto-revert-mode)
+  :hook
+  (after-init . global-auto-revert-mode)
+  :custom
+  (auto-revert-interval 3)
+  (auto-revert-remote-files nil)
+  (auto-revert-use-notify t)
+  (auto-revert-avoid-polling nil)
+  (auto-revert-verbose t))
 
-** recentf
-#+begin_src emacs-lisp
-(setq recentf-auto-cleanup 'never ;disable before we start recentf!
-      recentf-max-saved-items 50
-      recentf-max-menu-items 15
-      recentf-save-file (expand-file-name ".recentf" user-emacs-directory)
-      recentf-exclude
-      '("COMMIT" "autoloads" "archive-contents" "eld" "elpa" "bookmarks" "session"
-        "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "/TAGS$" ".cache" "persp-auto-save"
-        ".recentf" "emacs_backup" "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\)$"))
-(recentf-mode 1)
-#+end_src
+;; Recentf is an Emacs package that maintains a list of recently
+;; accessed files, making it easier to reopen files you have worked on
+;; recently.
+(use-package recentf
+  :ensure nil
+  :commands (recentf-mode recentf-cleanup)
+  :hook
+  (after-init . recentf-mode)
 
-** savehist
-#+begin_src emacs-lisp
-(setq savehist-file (expand-file-name ".savehist" user-emacs-directory)
-      savehist-save-minibuffer-history t
-      savehist-autosave-interval 60
-      savehist-additional-variables
-      '(kill-ring                        ; clipboard
-        register-alist                   ; macros
-        mark-ring global-mark-ring       ; marks
-        search-ring regexp-search-ring)) ; searches
+  :custom
+  (recentf-auto-cleanup (if (daemonp) 300 'never))
+  (recentf-exclude
+   (list "\\.tar$" "\\.tbz2$" "\\.tbz$" "\\.tgz$" "\\.bz2$"
+         "\\.bz$" "\\.gz$" "\\.gzip$" "\\.xz$" "\\.zip$"
+         "\\.7z$" "\\.rar$"
+         "COMMIT_EDITMSG\\'" "persp-auto-save"
+         "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
+         "-autoloads\\.el$" "autoload\\.el$"))
 
-(savehist-mode 1)
-#+end_src
+  :config
+  ;; A cleanup depth of -90 ensures that `recentf-cleanup' runs before
+  ;; `recentf-save-list', allowing stale entries to be removed before the list
+  ;; is saved by `recentf-save-list', which is automatically added to
+  ;; `kill-emacs-hook' by `recentf-mode'.
+  (add-hook 'kill-emacs-hook #'recentf-cleanup -90))
 
-** save-place
-Remember the last cursor position within a file.
+;; savehist is an Emacs feature that preserves the minibuffer history between
+;; sessions. It saves the history of inputs in the minibuffer, such as commands,
+;; search strings, and other prompts, to a file. This allows users to retain
+;; their minibuffer history across Emacs restarts.
+(use-package savehist
+  :ensure nil
+  :commands (savehist-mode savehist-save)
+  :hook
+  (after-init . savehist-mode)
+  :custom
+  (savehist-autosave-interval 600)
+  (savehist-additional-variables
+   '(kill-ring                        ; clipboard
+     register-alist                   ; macros
+     mark-ring global-mark-ring       ; marks
+     search-ring regexp-search-ring)))
 
-#+begin_src emacs-lisp
-(setq save-place-forget-unreadable-files t
-      save-place-file (expand-file-name ".saveplace" user-emacs-directory))
-(save-place-mode 1)
+;; save-place-mode enables Emacs to remember the last location within a file
+;; upon reopening. This feature is particularly beneficial for resuming work at
+;; the precise point where you previously left off.
+(use-package saveplace
+  :ensure nil
+  :commands (save-place-mode save-place-local-mode)
+  :hook
+  (after-init . save-place-mode)
+  :custom
+  (save-place-limit 400))
 #+end_src
 
 ** bookmark
@@ -1004,15 +2094,21 @@ Remember the last cursor position within a file.
 
 ** undo-fu
 #+begin_src emacs-lisp
-;; undo-fu
-(use-package undo-fu)
+;; The undo-fu package is a lightweight wrapper around Emacs' built-in undo
+;; system, providing more convenient undo/redo functionality.
+(use-package undo-fu
+  :ensure t
+  :commands (undo-fu-only-undo
+             undo-fu-only-redo
+             undo-fu-only-redo-all
+             undo-fu-disable-checkpoint))
 
-;; undo-fu-session
+;; The undo-fu-session package complements undo-fu by enabling the saving
+;; and restoration of undo history across Emacs sessions, even after restarting.
 (use-package undo-fu-session
-  :custom
-  (undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'"))
-  :config
-  (global-undo-fu-session-mode 1))
+  :ensure t
+  :commands undo-fu-session-global-mode
+  :hook (after-init . undo-fu-session-global-mode))
 #+end_src
 
 ** vundo
@@ -1192,108 +2288,43 @@ expand region alternative
 #+end_src
 
 * Completions
-https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-completion.el
-
-** Corfu
-Completion Overlay Region FUnction: https://github.com/minad/corfu
-
-https://www.youtube.com/watch?v=Vx0bSKF4y78
-
+** Corfu、Cape
 #+begin_src emacs-lisp
+;; Corfu enhances in-buffer completion by displaying a compact popup with
+;; current candidates, positioned either below or above the point. Candidates
+;; can be selected by navigating up or down.
 (use-package corfu
-  ;; :disabled
-  ;; :unless IS-WINDOWS
-  :bind
-  (:map corfu-map
-        ("<escape>" . corfu-quit)
-        ("<tab>" . corfu-complete)
-        ("SPC" . corfu-insert-separator)
-        ("M-d" . corfu-info-documentation)
-        ("M-l" . corfu-info-location))
+  :ensure t
+  :commands (corfu-mode global-corfu-mode)
+
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode . corfu-mode)
+         (eshell-mode . corfu-mode))
+
   :custom
-  ;; (corfu-auto t)                    ;; Enable auto completion
-  ;; (corfu-auto-prefix 2)
-  ;; (corfu-auto-delay 0.0)
-  (corfu-cycle t)                   ;; Enable cycling for `corfu-next/previous'
-  (corfu-quit-at-boundary 'separator)   ;; Never quit at completion boundqary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-
-  ;; (corfu-info t)
-
-  ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
+  ;; Hide commands in M-x which do not apply to the current mode.
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  ;; Disable Ispell completion function. As an alternative try `cape-dict'.
+  (text-mode-ispell-word-completion nil)
   (tab-always-indent 'complete)
 
-  ;; Hide commands in M-x which do not apply to the current mode.  Corfu
-  ;; commands are hidden, since they are not used via M-x. This setting is
-  ;; useful beyond Corfu.
-  (read-extended-command-predicate #'command-completion-default-include-p)
-
-  ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
-  ;; be used globally (M-/).  See also the customization variable
-  ;; `global-corfu-modes' to exclude certain modes.
-  :init
-  (corfu-popupinfo-mode)
+  ;; Enable Corfu
+  :config
   (global-corfu-mode))
 
-(use-package kind-icon
-  :if (display-graphic-p)
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-#+end_src
-
-** Cape
-Completion At Point Extensions: https://github.com/minad/cape
-
-#+begin_src emacs-lisp
+;; Cape, or Completion At Point Extensions, extends the capabilities of
+;; in-buffer completion. It integrates with Corfu or the default completion UI,
+;; by providing additional backends through completion-at-point-functions.
 (use-package cape
-  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
-  ;; Press C-c p ? to for help.
-  :bind ("C-c ." . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
-  ;; Alternatively bind Cape commands individually.
-  ;; :bind (("C-c p d" . cape-dabbrev)
-  ;;        ("C-c p h" . cape-history)
-  ;;        ("C-c p f" . cape-file)
-  ;;        ...)
+  :ensure t
+  :commands (cape-dabbrev cape-file cape-elisp-block)
+  :bind ("C-c p" . cape-prefix-map)
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;; (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-history)
-  ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
-  ;; (add-to-list 'completion-at-point-functions #'cape-dict)
-  (add-to-list 'completion-at-point-functions #'cape-symbol) ;elisp symbol
-  ;; (add-to-list 'completion-at-point-functions #'cape-line)
-  )
-#+end_src
-
-** Orderless
-Completion style for matching regexps in any order
-
-#+begin_src emacs-lisp
-(use-package orderless
-  :custom
-  (completion-styles '(orderless partial-completion basic))
-  (completion-category-defaults nil)
-  ;; (completion-category-overrides nil)
-  (completion-category-overrides '((file (styles partial-completion))))
-  )
+  ;; used by `completion-at-point'.
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 #+end_src
 
 ** Company
@@ -1313,84 +2344,179 @@ http://company-mode.github.io/manual/Getting-Started.html
   (company-posframe-mode 1))
 #+end_src
 
-** consult
-Consulting completing-read.
-
+** Vertico、Consult、Embark
 #+begin_src emacs-lisp
-(use-package consult
-  :bind (("C-c M-x" . consult-mode-command)
-         ([remap apropos-command] . consult-apropos) ; C-h a
-         ([remap list-buffers] . consult-buffer) ; C-x b
-         ([remap find-file-read-only-other-window] . consult-buffer-other-window)
-         ([remap yank-pop] . consult-yank-pop) ; M-y
-         ([remap goto-line] . consult-goto-line)
-         ([remap imenu] . consult-imenu)
-         ;; ("C-x C-r" . consult-recent-file)
-         ("C-c b" . consult-bookmark)
-         ;; ("C-s" . consult-line)
-         ("M-." . consult-imenu)
-         ("M-m" . consult-mark)
-         :map prog-mode-map
-         ("C-c C-j" . consult-outline)
-         :map minibuffer-local-map
-         ("C-r" . consult-history)
-         ))
-#+end_src
-
-** vertico
-VERTical Interactive COmpletion.
-
-#+begin_src emacs-lisp
+;; Vertico provides a vertical completion interface, making it easier to
+;; navigate and select from completion candidates (e.g., when `M-x` is pressed).
 (use-package vertico
-  :bind (:map vertico-map
-              ("<escape>" . #'minibuffer-keyboard-quit)
-              ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-char))
-  :init
-  ;; (vertico-mouse-mode 1)
+  ;; (Note: It is recommended to also enable the savehist package.)
+  :ensure t
+  ;; :bind (:map vertico-map
+  ;;             ("<escape>" . #'minibuffer-keyboard-quit)
+  ;;             ("RET" . vertico-directory-enter)
+  ;;             ("DEL" . vertico-directory-delete-char))
+  :config
   (vertico-mode))
+
+;; Vertico leverages Orderless' flexible matching capabilities, allowing users
+;; to input multiple patterns separated by spaces, which Orderless then
+;; matches in any order against the candidates.
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+;; Marginalia allows Embark to offer you preconfigured actions in more contexts.
+;; In addition to that, Marginalia also enhances Vertico by adding rich
+;; annotations to the completion candidates displayed in Vertico's interface.
+(use-package marginalia
+  :ensure t
+  :commands (marginalia-mode marginalia-cycle)
+  :hook (after-init . marginalia-mode))
+
+;; Embark integrates with Consult and Vertico to provide context-sensitive
+;; actions and quick access to commands based on the current selection, further
+;; improving user efficiency and workflow within Emacs. Together, they create a
+;; cohesive and powerful environment for managing completions and interactions.
+(use-package embark
+  ;; Embark is an Emacs package that acts like a context menu, allowing
+  ;; users to perform context-sensitive actions on selected items
+  ;; directly from the completion interface.
+  :ensure t
+  :commands (embark-act
+             embark-dwim
+             embark-export
+             embark-collect
+             embark-bindings
+             embark-prefix-help-command)
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+;; Consult offers a suite of commands for efficient searching, previewing, and
+;; interacting with buffers, file contents, and more, improving various tasks.
+(use-package consult
+  :ensure t
+  :bind (;; C-c bindings in `mode-specific-map'
+         ("C-c M-x" . consult-mode-command)
+         ("C-c h" . consult-history)
+         ("C-c k" . consult-kmacro)
+         ("C-c m" . consult-man)
+         ("C-c i" . consult-info)
+         ([remap Info-search] . consult-info)
+         ;; C-x bindings in `ctl-x-map'
+         ("C-x M-:" . consult-complex-command)
+         ("C-x b" . consult-buffer)
+         ("C-x 4 b" . consult-buffer-other-window)
+         ("C-x 5 b" . consult-buffer-other-frame)
+         ("C-x t b" . consult-buffer-other-tab)
+         ("C-x r b" . consult-bookmark)
+         ("C-x p b" . consult-project-buffer)
+         ;; Custom M-# bindings for fast register access
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)
+         ("C-M-#" . consult-register)
+         ;; Other custom bindings
+         ("M-y" . consult-yank-pop)
+         ;; M-g bindings in `goto-map'
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)
+         ("M-g g" . consult-goto-line)
+         ("M-g M-g" . consult-goto-line)
+         ("M-g o" . consult-outline)
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ;; M-s bindings in `search-map'
+         ("M-s d" . consult-find)
+         ("M-s c" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s L" . consult-line-multi)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch-history)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch-history)
+         ("M-s e" . consult-isearch-history)
+         ("M-s l" . consult-line)
+         ("M-s L" . consult-line-multi)
+         ;; Minibuffer history
+         :map minibuffer-local-map
+         ("M-s" . consult-history)
+         ("M-r" . consult-history))
+
+  ;; Enable automatic preview at point in the *Completions* buffer.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  :init
+  ;; Optionally configure the register formatting. This improves the register
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+
+  ;; Optionally tweak the register preview window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Aggressive asynchronous that yield instantaneous results. (suitable for
+  ;; high-performance systems.) Note: Minad, the author of Consult, does not
+  ;; recommend aggressive values.
+  ;; Read: https://github.com/minad/consult/discussions/951
+  ;;
+  ;; However, the author of minimal-emacs.d uses these parameters to achieve
+  ;; immediate feedback from Consult.
+  ;; (setq consult-async-input-debounce 0.02
+  ;;       consult-async-input-throttle 0.05
+  ;;       consult-async-refresh-delay 0.02)
+
+  :config
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
+  (setq consult-narrow-key "<"))
 
 ;;----------------------------------------------------------------------------
 ;; Functions
 ;;----------------------------------------------------------------------------
 ;; Prefix the current candidate 箭头显示当前项
-(defun minibuffer-format-candidate (orig cand prefix suffix index _start)
-  (let ((prefix (if (= vertico--index index)
-                    " » "
-                  "   ")))
-    (funcall orig cand prefix suffix index _start)))
-
-(advice-add #'vertico--format-candidate
-           :around #'minibuffer-format-candidate)
-#+end_src
-
-** marginali
- Enrich existing commands with completion annotations.
-
-#+begin_src emacs-lisp
-(use-package marginalia
-  :after vertico
-  :init
-  (marginalia-mode +1))
-#+end_src
-
-** embark
-Mini-Buffer Actions Rooted in Keymaps.
-
-#+begin_src emacs-lisp
-(use-package embark
-  :bind (("C-c C-c" . embark-act)
-         ("C-c C-o" . embark-export)
-         ("C-h B" . embark-bindings))
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command))
-
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :after (embark consult)
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+;; (defun minibuffer-format-candidate (orig cand prefix suffix index _start)
+;;   (let ((prefix (if (= vertico--index index)
+;;                     " » "
+;;                   "   ")))
+;;     (funcall orig cand prefix suffix index _start)))
+;;
+;; (advice-add #'vertico--format-candidate
+;;             :around #'minibuffer-format-candidate)
 #+end_src
 
 ** dabbrev
@@ -1435,13 +2561,35 @@ hippie expand is dabbrev expand on steroids
 
 ** Yasnippet
 #+begin_src emacs-lisp :tangle no
+;; The official collection of snippets for yasnippet.
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+;; YASnippet is a template system designed that enhances text editing by
+;; enabling users to define and use snippets. When a user types a short
+;; abbreviation, YASnippet automatically expands it into a full template, which
+;; can include placeholders, fields, and dynamic content.
 (use-package yasnippet
-  :defer t
+  :ensure t
+  :commands (yas-minor-mode
+             yas-global-mode)
+
+  :hook
+  (after-init . yas-global-mode)
+
   :custom
-  (yas-prompt-functions '(yas-completing-prompt))
-  :config
-  ;; (yas-reload-all)
-  (yas-global-mode 1))
+  (yas-also-auto-indent-first-line t)  ; Indent first line of snippet
+  (yas-also-indent-empty-lines t)
+  (yas-snippet-revival nil)  ; Setting this to t causes issues with undo
+  (yas-wrap-around-region nil) ; Do not wrap region when expanding snippets
+  ;; (yas-triggers-in-field nil)  ; Disable nested snippet expansion
+  ;; (yas-indent-line 'fixed) ; Do not auto-indent snippet content
+  ;; (yas-prompt-functions '(yas-no-prompt))  ; No prompt for snippet choices
+
+  :init
+  ;; Suppress verbose messages
+  (setq yas-verbosity 0))
 #+end_src
 
 ** Tempel
@@ -1923,7 +3071,10 @@ https://github.com/svaante/dape
 #+begin_src emacs-lisp
 (use-package treesit-auto
   :when (eq system-type 'gnu/linux)
+  ; :custom
+  ; (treesit-auto-install 'prompt)
   :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 #+end_src
 
@@ -2120,6 +3271,50 @@ https://github.com/svaante/dape
               ("C-c e" . macrostep-expand)
               :map lisp-interaction-mode-map
               ("C-c e" . macrostep-expand)))
+#+end_src
+
+** paredit、aggressive-indent、highlight-defined
+#+begin_src emacs-lispxx
+;; Prevent parenthesis imbalance
+(use-package paredit
+  :ensure t
+  :commands paredit-mode
+  :hook
+  (emacs-lisp-mode . paredit-mode)
+  :config
+  (define-key paredit-mode-map (kbd "RET") nil))
+
+;; Displays visible indicators for page breaks
+(use-package page-break-lines
+  :ensure t
+  :commands (page-break-lines-mode
+             global-page-break-lines-mode)
+  :hook
+  (emacs-lisp-mode . page-break-lines-mode))
+
+;; Provides functions to find references to functions, macros, variables,
+;; special forms, and symbols in Emacs Lisp
+(use-package elisp-refs
+  :ensure t
+  :commands (elisp-refs-function
+             elisp-refs-macro
+             elisp-refs-variable
+             elisp-refs-special
+             elisp-refs-symbol))
+
+;; Enables automatic indentation of code while typing
+(use-package aggressive-indent
+  :ensure t
+  :commands aggressive-indent-mode
+  :hook
+  (emacs-lisp-mode . aggressive-indent-mode))
+
+;; Highlights function and variable definitions in Emacs Lisp mode
+(use-package highlight-defined
+  :ensure t
+  :commands highlight-defined-mode
+  :hook
+  (emacs-lisp-mode . highlight-defined-mode))
 #+end_src
 
 ** nix
@@ -2555,11 +3750,8 @@ Show current command and its binding.
 
 * Footer
 #+begin_src emacs-lisp
-;; 回收 early-init.el 的 Magic File Name 禁用
-(setq file-name-handler-alist my-saved-file-name-handler-alist)
-
-(provide 'init.el)
-;;; init.el ends here
+(provide 'post-init.el)
+;;; post-init.el ends here
 #+end_src
 
 * Links
