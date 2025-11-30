@@ -16,11 +16,11 @@
     self.nixosModules.homeManagerInit
     self.nixosModules.laptopPowerPlans
 
-    self.nixosModules.gnome
+    # self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
-    # self.nixosModules.niri
+    self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 
@@ -125,13 +125,10 @@
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
 
-    # Fix touhpad two finger somtimes unavailable
+    # Fix touhpad multitouch somtimes unavailable
     # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
     initrd.kernelModules = [ "hid-multitouch" ];
     # initrd.availableKernelModules = [ "hid-multitouch" ];
-
-    # Fix touhpad two finger somtimes unavailable
-    # blacklistedKernelModules = [ "elan_i2c" ];
 
     supportedFilesystems = [
       "ntfs"

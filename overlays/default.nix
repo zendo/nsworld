@@ -62,23 +62,23 @@
         hash = "sha256-ky343PVJklT4MqF5whULGwC5e5YfKF7PRGjB+CoBVUI=";
       };
 
-      niri = prev.niri.overrideAttrs (
-        finalAttrs: prevAttrs: {
-          # version = "25.08-unstable-2025-11-24";
-          cargoHash = "sha256-wGqKiinu2K2uRapVSTpRekuwY9P2OukzL7H0R+VR8N8=";
-          src = prev.fetchFromGitHub {
-            owner = "YaLTeR";
-            repo = "niri";
-            rev = "79e41d7d88de44356b48400515076bf5593544e8";
-            hash = "sha256-TNtOfYXppR5ln5Go8ncQFMs5+xa3LqJWkaQq22ymAcI=";
-          };
-          doCheck = false;
-          cargoDeps = prev.rustPlatform.fetchCargoVendor {
-            inherit (finalAttrs) pname src version;
-            hash = finalAttrs.cargoHash;
-          };
-        }
-      );
+      # niri = prev.niri.overrideAttrs (
+      #   finalAttrs: prevAttrs: {
+      #     # version = "25.08-unstable-2025-11-24";
+      #     cargoHash = "sha256-wGqKiinu2K2uRapVSTpRekuwY9P2OukzL7H0R+VR8N8=";
+      #     src = prev.fetchFromGitHub {
+      #       owner = "YaLTeR";
+      #       repo = "niri";
+      #       rev = "79e41d7d88de44356b48400515076bf5593544e8";
+      #       hash = "sha256-TNtOfYXppR5ln5Go8ncQFMs5+xa3LqJWkaQq22ymAcI=";
+      #     };
+      #     doCheck = false;
+      #     cargoDeps = prev.rustPlatform.fetchCargoVendor {
+      #       inherit (finalAttrs) pname src version;
+      #       hash = finalAttrs.cargoHash;
+      #     };
+      #   }
+      # );
 
       # https://github.com/reF1nd/sing-box/tags
       # sing-box = prev.sing-box.overrideAttrs (oldAttrs: rec {
