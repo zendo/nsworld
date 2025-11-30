@@ -1143,16 +1143,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 ** mirrors
 #+begin_src emacs-lisp
-;; tuna
-;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-;;                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-
-;; ustc
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
-
-;; (package-initialize)
 
 (use-package bind-key)
 
@@ -1193,10 +1186,6 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (when IS-LINUX
   (setq org-directory "~/Documents/org")
-  ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NL NF CN-10")))
-  ;; (set-face-attribute 'default nil :font "Maple Mono-10")
-  ;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-  ;;   (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC" :size 12))))
   (set-frame-font (font-spec :family "JetBrains Mono" :size 14))
   (when (display-graphic-p)
     (dolist (script '(han cjk-misc bopomofo))
@@ -1235,24 +1224,18 @@ Use ~getenv~ check the environment variables.
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         org-directory "c:/Users/zendo/Documents/org/"
         ;; Optimization
-
         inhibit-compacting-font-caches t   ; speed up font rendering for special characters
         projectile-git-submodule-command nil
         w32-get-true-file-attributes nil   ; decrease file IO workload
         w32-use-native-image-API t         ; use native w32 API
         w32-pipe-read-delay 0              ; faster IPC
         w32-pipe-buffer-size 65536)        ; read more at a time (64K, was 4K)
-  ;; encoding
-  ;; (add-to-list 'process-coding-system-alist
-  ;;              '("cmdproxy" utf-8 . gbk))
-  (set-selection-coding-system 'gbk-dos)
-  ;; Fonts
+  (set-selection-coding-system 'gbk-dos) ; encoding
   (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
 )
 #+end_src
 
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
-https://emacs-china.org/t/windows-emacs-daemon/24379
 
 ** TTY
 #+begin_src emacs-lisp
@@ -1268,6 +1251,15 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
   (global-kkp-mode +1))
 #+end_src
 
+** Encoding
+#+begin_src emacs-lisp
+;; Set UTF-8 as the default coding system
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+#+end_src
+
 ** Shell
 *** exec-path-from-shell
 #+begin_src emacs-lispxxx
@@ -1276,17 +1268,6 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
   :when IS-MAC
   :init
   (exec-path-from-shell-initialize))
-#+end_src
-
-*** vterm
-#+begin_src emacs-lisp
-(use-package vterm
-  :defer t
-  :when (eq system-type 'gnu/linux)
-  :config
-  (setq vterm-shell "zsh")
-  :bind (:map vterm-mode-map
-              ("<f2>" . shell-pop)))
 #+end_src
 
 *** eshell
@@ -1307,6 +1288,17 @@ https://emacs-china.org/t/windows-emacs-daemon/24379
         eat-enable-shell-command-history t
         eat-enable-shell-prompt-annotation t
         eat-term-scrollback-size nil))
+#+end_src
+
+*** vterm
+#+begin_src emacs-lisp
+(use-package vterm
+  :defer t
+  :when (eq system-type 'gnu/linux)
+  :config
+  (setq vterm-shell "zsh")
+  :bind (:map vterm-mode-map
+              ("<f2>" . shell-pop)))
 #+end_src
 
 *** shell-pop
@@ -1352,7 +1344,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ** Silence Warnings
 #+begin_src emacs-lisp
 ;; Close without ask
-(setq confirm-kill-processes nil)
+;; (setq confirm-kill-processes nil)
 
 ;; In Emacs, customization variables modified via the UI (e.g., M-x customize)
 ;; are typically stored in a separate file, commonly named 'custom.el'. To
@@ -1476,7 +1468,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; Helpful is an alternative to the built-in Emacs help that provides much more
 ;; contextual information.
 (use-package helpful
-  :ensure t
   :commands (helpful-callable
              helpful-variable
              helpful-key
@@ -1676,12 +1667,6 @@ Use `treemacs' command for old functionality."
 #+end_src
 
 ** Buffer
-#+begin_src emacs-lisp
-;; Empty the *scratch* buffer
-(setq initial-scratch-message nil
-      initial-major-mode 'fundamental-mode)
-#+end_src
-
 *** uniquify
 #+begin_src emacs-lisp
 (use-package uniquify
@@ -1855,54 +1840,32 @@ https://github.com/neeasade/stillness-mode.el
 * Editor
 ** basic
 #+begin_src emacs-lisp
+(add-hook 'after-init-hook #'show-paren-mode) ;括号匹配 parens
+(electric-pair-mode t) ;自动补全括号
+
+;; ~display-fill-column-indicator-mode~
+;; (setq-default fill-column 80) ; default: 70 init: 80
+
+;; 折叠 word wrap
+;; (global-visual-line-mode 1)
+;; Better word wrapping for CJK characters
+;; (setq word-wrap-by-category t)
+
+;; 滚动时保持显示稳定
+(setq display-line-numbers-width-start nil)
+(setq display-line-numbers-grow-only t)
+
 ;; save system clipboard before emacs clipboard
 (setq save-interprogram-paste-before-kill t)
-
 ;; overwrite selected text
 (delete-selection-mode t)
 
 (global-prettify-symbols-mode 1) ;Show lambda as λ.
-
 ;; 识别中文标点符号
 (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
-#+end_src
 
-** wrap
-#+begin_src emacs-lisp
-;; 折叠 word wrap
-;; (global-visual-line-mode 1)
-
-;; Better word wrapping for CJK characters
-;; (setq word-wrap-by-category t)
-#+end_src
-
-** fill-column
-~display-fill-column-indicator-mode~
-
-#+begin_src emacs-lisp
-;; (setq-default fill-column 80) ; default: 70 init: 80
-#+end_src
-
-** line-numbers-mode
-#+begin_src emacs-lisp
-;; 滚动时保持显示稳定
-(setq display-line-numbers-width-start nil)
-(setq display-line-numbers-grow-only t)
-#+end_src
-
-** encoding
-#+begin_src emacs-lisp
-;; Set UTF-8 as the default coding system
-(when (fboundp 'set-charset-priority)
-  (set-charset-priority 'unicode))
-(prefer-coding-system 'utf-8)
-(setq locale-coding-system 'utf-8)
-#+end_src
-
-** parens
-#+begin_src emacs-lisp
-(add-hook 'after-init-hook #'show-paren-mode)    ;括号匹配 parens
-(electric-pair-mode t) ;自动补全括号
+;;Don't hang when visiting files with extremely long lines
+(global-so-long-mode t)
 #+end_src
 
 ** outline
@@ -2014,16 +1977,6 @@ https://gitlab.com/jabranham/mixed-pitch
   (setq-default mixed-pitch-set-height t))
 #+end_src
 
-** large file & long line
-#+begin_src emacs-lisp
-;;Don't hang when visiting files with extremely long lines
-(global-so-long-mode t)
-
-;; View Large Files
-(use-package vlf
-  :defer t)
-#+end_src
-
 * Dired
 ** dired enhanced
 #+begin_src emacs-lisp
@@ -2096,10 +2049,6 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 * Backup
-#+begin_src emacs-lisp
-(setq delete-by-moving-to-trash t) ; Delete files to trash
-#+end_src
-
 ** auto-save or super-save
 #+begin_src emacs-lisp
 ;; Enable `auto-save-mode' to prevent data loss. Use `recover-file' or
@@ -2222,9 +2171,7 @@ https://gitlab.com/jabranham/mixed-pitch
 
 ** bookmark
 #+begin_src emacs-lisp
-(setq bookmark-default-file (expand-file-name ".bookmarks" user-emacs-directory)
-      bookmark-save-flag 1              ;automatically save when changed
-      )
+(setq bookmark-default-file (expand-file-name ".bookmarks" user-emacs-directory))
 
 (use-package bm
   :defer t)
@@ -2355,6 +2302,20 @@ expand region alternative
   :bind ("C-c C-s" . deadgrep))
 #+end_src
 
+** isl
+https://github.com/thierryvolpiatto/isearch-light
+
+#+begin_src emacs-lispxx
+(use-package isl
+  :bind
+  ("C-s" . isl-search)
+  ;; ([remap isearch-forward] . )
+  ;; ([remap isearch-backward] . )
+  ;; ([remap isearch-forward-regexp] . )
+  ;; ([remap isearch-forward-regexp] .)
+  )
+#+end_src
+
 ** anzu
 #+begin_src emacs-lispxx
 (use-package anzu
@@ -2426,6 +2387,13 @@ expand region alternative
 #+begin_src emacs-lisp :tangle no
 (use-package pass
   :commands pass)
+#+end_src
+
+** vlf
+#+begin_src emacs-lisp
+;; View Large Files
+(use-package vlf
+  :defer t)
 #+end_src
 
 ** nov
@@ -2686,20 +2654,6 @@ http://company-mode.github.io/manual/Getting-Started.html
 ;;
 ;; (advice-add #'vertico--format-candidate
 ;;             :around #'minibuffer-format-candidate)
-#+end_src
-
-** isl
-https://github.com/thierryvolpiatto/isearch-light
-
-#+begin_src emacs-lisp
-(use-package isl
-  :bind
-  ("C-s" . isl-search)
-  ;; ([remap isearch-forward] . )
-  ;; ([remap isearch-backward] . )
-  ;; ([remap isearch-forward-regexp] . )
-  ;; ([remap isearch-forward-regexp] .)
-  )
 #+end_src
 
 ** dabbrev
@@ -3740,6 +3694,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ;; ("C-z" . nil) ;unbind C-z
  ("C-z" . undo)
  ("C-S-z" . undo-redo)
+ ("C-s" . consult-line)
  ([remap kill-buffer] . kill-current-buffer)
 
  ("M-+" . text-scale-increase)
