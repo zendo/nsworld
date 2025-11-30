@@ -2302,7 +2302,7 @@ expand region alternative
   :bind ("C-c C-s" . deadgrep))
 #+end_src
 
-** isl
+** isl :disable:
 https://github.com/thierryvolpiatto/isearch-light
 
 #+begin_src emacs-lispxx
@@ -2333,7 +2333,7 @@ https://github.com/thierryvolpiatto/isearch-light
          ("C-c r" . visual-replace-from-isearch)))
 #+end_src
 
-** idle-highlight-mode
+** idle-highlight-mode :disable:
 #+begin_src emacs-lispxx
 (use-package idle-highlight-mode
   :hook ((prog-mode text-mode) . idle-highlight-mode)
@@ -2375,7 +2375,7 @@ https://github.com/thierryvolpiatto/isearch-light
                      )))
 #+end_src
 
-** maple-translate
+** maple-translate :disable:
 #+begin_src emacs-lispxx
 (use-package maple-translate
   :vc (:url "https://github.com/honmaple/emacs-maple-translate"
@@ -2476,7 +2476,15 @@ http://company-mode.github.io/manual/Getting-Started.html
   :bind
   (:map company-active-map
         ("<tab>" . company-complete-selection)
-        ("TAB" . company-complete-selection)))
+        ("TAB" . company-complete-selection))
+  :config
+  (setq company-minimum-prefix-length 1) ; 只需敲 1 个字母就开始进行自动补全
+  (setq company-tooltip-align-annotations t)
+  (setq company-idle-delay 0.0)
+  (setq company-show-numbers t) ;; 给选项编号 (按快捷键 M-1、M-2 等等来进行选择).
+  (setq company-selection-wrap-around t)
+  (setq company-transformers '(company-sort-by-occurrence)) ; 根据选择的频率进行排序，读者如果不喜欢可以去掉
+  )
 
 
 (use-package company-posframe
@@ -2958,6 +2966,8 @@ emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (or
 #+end_src
 
 ** org-roam
+https://zhuanlan.zhihu.com/p/633047823
+
 #+begin_src emacs-lisp :tangle no
 (use-package org-roam
   :custom
@@ -2992,7 +3002,7 @@ Make invisible parts of Org elements appear visible.
   )
 #+end_src
 
-** denote :diable:
+** denote :disable:
 #+begin_src emacs-lisp :tangle no
 (use-package denote
   :hook (dired-mode . denote-dired-mode-in-directories)
