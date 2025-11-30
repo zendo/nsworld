@@ -1098,51 +1098,6 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 ;;; Code:
 
-#+end_src
-
-* Use-package
-** compile-angel
-#+begin_src emacs-lispxx
-;; Native compilation enhances Emacs performance by converting Elisp code into
-;; native machine code, resulting in faster execution and improved
-;; responsiveness.
-;;
-;; Ensure adding the following compile-angel code at the very beginning
-;; of your `~/.emacs.d/post-init.el` file, before all other packages.
-(use-package compile-angel
-  :demand t
-  :ensure t
-  :custom
-  ;; Set `compile-angel-verbose` to nil to suppress output from compile-angel.
-  ;; Drawback: The minibuffer will not display compile-angel's actions.
-  (compile-angel-verbose t)
-
-  :config
-  ;; The following directive prevents compile-angel from compiling your init
-  ;; files. If you choose to remove this push to `compile-angel-excluded-files'
-  ;; and compile your pre/post-init files, ensure you understand the
-  ;; implications and thoroughly test your code. For example, if you're using
-  ;; the `use-package' macro, you'll need to explicitly add:
-  ;; (eval-when-compile (require 'use-package))
-  ;; at the top of your init file.
-  (push "/init.el" compile-angel-excluded-files)
-  (push "/early-init.el" compile-angel-excluded-files)
-  (push "/pre-init.el" compile-angel-excluded-files)
-  (push "/post-init.el" compile-angel-excluded-files)
-  (push "/pre-early-init.el" compile-angel-excluded-files)
-  (push "/post-early-init.el" compile-angel-excluded-files)
-
-  ;; A local mode that compiles .el files whenever the user saves them.
-  ;; (add-hook 'emacs-lisp-mode-hook #'compile-angel-on-save-local-mode)
-
-  ;; A global mode that compiles .el files prior to loading them via `load' or
-  ;; `require'. Additionally, it compiles all packages that were loaded before
-  ;; the mode `compile-angel-on-load-mode' was activated.
-  (compile-angel-on-load-mode 1))
-#+end_src
-
-** mirrors
-#+begin_src emacs-lisp
 (setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
                          ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
                          ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
@@ -1155,8 +1110,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
   (diminish 'visual-line-mode))
 
 ;; libraries
-(eval-when-compile
-  (require 'cl-lib))(require 'cl-lib)
+;; (require 'cl-lib)
 ;; (use-package dash) ;modern list library
 ;; (use-package s) ;string manipulation library
 ;; (use-package f) ;file manipulation
@@ -1461,36 +1415,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
         ("Asia/Tokyo" "东京")
         ))
 (setq world-clock-time-format "  %a %d %b %R %Z")
-#+end_src
-
-** helpful
-#+begin_src emacs-lisp
-;; Helpful is an alternative to the built-in Emacs help that provides much more
-;; contextual information.
-(use-package helpful
-  :commands (helpful-callable
-             helpful-variable
-             helpful-key
-             helpful-command
-             helpful-at-point
-             helpful-function)
-  :bind
-  ([remap describe-command] . helpful-command)
-  ([remap describe-function] . helpful-callable)
-  ([remap describe-key] . helpful-key)
-  ([remap describe-symbol] . helpful-symbol)
-  ([remap describe-variable] . helpful-variable)
-  :custom
-  (helpful-max-buffers 7))
-#+end_src
-
-** esup
-#+begin_src emacs-lisp
-(use-package esup
-  :defer t
-  :init
-  ;; https://github.com/progfolio/elpaca/issues/23
-  (setq esup-depth 0))
 #+end_src
 
 * Interface
@@ -2206,6 +2130,27 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 * Packages
+** helpful
+#+begin_src emacs-lisp
+;; Helpful is an alternative to the built-in Emacs help that provides much more
+;; contextual information.
+(use-package helpful
+  :commands (helpful-callable
+             helpful-variable
+             helpful-key
+             helpful-command
+             helpful-at-point
+             helpful-function)
+  :bind
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-key] . helpful-key)
+  ([remap describe-symbol] . helpful-symbol)
+  ([remap describe-variable] . helpful-variable)
+  :custom
+  (helpful-max-buffers 7))
+#+end_src
+
 ** avy
 #+begin_src emacs-lisp
 (use-package avy
@@ -2410,6 +2355,15 @@ https://github.com/thierryvolpiatto/isearch-light
 #+begin_src emacs-lisp
 (use-package qrencode
   :defer t)
+#+end_src
+
+** esup
+#+begin_src emacs-lisp
+(use-package esup
+  :defer t
+  :init
+  ;; https://github.com/progfolio/elpaca/issues/23
+  (setq esup-depth 0))
 #+end_src
 
 * Completions
@@ -3207,16 +3161,6 @@ https://github.com/svaante/dape
 (editorconfig-mode t)
 #+end_src
 
-** conf-mode
-#+begin_src emacs-lisp
-(use-package conf-mode
-  :mode
-  "/credentials$" "\\.accept_keywords$"
-  "\\lfrc$" "\\.keywords$" "\\.license$"
-  "\\.mask$" "\\.unmask$" "\\.use$")
-(global-set-key [remap conf-space-keywords] #'project-find-file)
-#+end_src
-
 ** tree-sitter
 #+begin_src emacs-lisp
 (use-package treesit-auto
@@ -3226,58 +3170,6 @@ https://github.com/svaante/dape
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
-#+end_src
-
-** markdown
-#+begin_src emacs-lisp
-(use-package markdown-mode
-  :config
-  (setq markdown-hide-urls nil
-        markdown-fontify-code-blocks-natively t)
-  :mode (("\\.md\\'" . gfm-mode)
-         ("README\\'" . gfm-mode)))
-
-(use-package markdown-preview-mode
-  :defer t)
-#+end_src
-
-** license-templates
-#+begin_src emacs-lisp
-(use-package license-templates
-  :defer t)
-#+end_src
-
-** json
-#+begin_src emacs-lisp
-(use-package json-mode
-  :mode ("\\.json'"))
-
-(use-package json-reformat
-  :commands json-reformat-region)
-
-(use-package json-navigator
-  :commands json-navigator-navigate-region)
-
-(use-package ox-json
-  :defer t)
-#+end_src
-
-** yaml
-#+begin_src emacs-lisp
-(use-package yaml-mode
-  :mode ("\\.yml'" "\\.yaml'"))
-#+end_src
-
-** toml
-#+begin_src emacs-lisp
-(use-package toml-mode
-  :mode ("\\.toml'"))
-#+end_src
-
-** kdl
-#+begin_src emacs-lisp
-(use-package kdl-mode
-  :mode ("\\.kdl'"))
 #+end_src
 
 ** lua
@@ -3295,12 +3187,6 @@ https://github.com/svaante/dape
 ;; (use-package sqlformat
 ;;   :init
 ;;   (setq sqlformat-command "sqlfluff"))
-#+end_src
-
-** just
-#+begin_src emacs-lisp
-(use-package just-mode
-  :mode ("\\.just'" "justfile\\'"))
 #+end_src
 
 ** dockerfile
@@ -3479,6 +3365,7 @@ https://github.com/svaante/dape
 #+end_src
 
 * Web Development
+** basic
 #+begin_src emacs-lisp :tangle no
 (use-package css-mode
   :ensure nil
@@ -3536,11 +3423,6 @@ https://github.com/svaante/dape
 (use-package add-node-modules-path
   :hook ((web-mode js-mode js2-mode) . add-node-modules-path))
 
-(use-package prettier
-  :diminish
-  :hook ((js-mode js2-mode css-mode sgml-mode web-mode) . prettier-mode)
-  :init (setq prettier-pre-warm 'none))
-
 (use-package web-mode
   :mode ("\\.[agj]sp\\'"
          "\\.as[cp]x\\'"
@@ -3561,6 +3443,84 @@ https://github.com/svaante/dape
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-indent-style 2))
+#+end_src
+
+** conf-mode
+#+begin_src emacs-lisp
+(use-package conf-mode
+  :mode
+  "/credentials$" "\\.accept_keywords$"
+  "\\lfrc$" "\\.keywords$" "\\.license$"
+  "\\.mask$" "\\.unmask$" "\\.use$")
+(global-set-key [remap conf-space-keywords] #'project-find-file)
+#+end_src
+
+** prettier :disable:
+HTML/CSS/TS/JSON/YAML/MARKDOWN
+
+#+begin_src emacs-lispxx
+(use-package prettier
+  :diminish
+  :hook ((js-mode js2-mode css-mode sgml-mode web-mode) . prettier-mode)
+  :init (setq prettier-pre-warm 'none))
+#+end_src
+
+** markdown
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :config
+  (setq markdown-hide-urls nil
+        markdown-fontify-code-blocks-natively t)
+  :mode (("\\.md\\'" . gfm-mode)
+         ("README\\'" . gfm-mode)))
+
+(use-package markdown-preview-mode
+  :defer t)
+#+end_src
+
+** json
+#+begin_src emacs-lisp
+(use-package json-mode
+  :mode ("\\.json'"))
+
+(use-package json-reformat
+  :commands json-reformat-region)
+
+(use-package json-navigator
+  :commands json-navigator-navigate-region)
+
+(use-package ox-json
+  :defer t)
+#+end_src
+
+** yaml
+#+begin_src emacs-lisp
+(use-package yaml-mode
+  :mode ("\\.yml'" "\\.yaml'"))
+#+end_src
+
+** toml
+#+begin_src emacs-lisp
+(use-package toml-mode
+  :mode ("\\.toml'"))
+#+end_src
+
+** kdl
+#+begin_src emacs-lisp
+(use-package kdl-mode
+  :mode ("\\.kdl'"))
+#+end_src
+
+** just
+#+begin_src emacs-lisp
+(use-package just-mode
+  :mode ("\\.just'" "justfile\\'"))
+#+end_src
+
+** license-templates
+#+begin_src emacs-lisp
+(use-package license-templates
+  :defer t)
 #+end_src
 
 * Functions
@@ -3909,7 +3869,7 @@ Show current command and its binding.
 - https://remacs.fun/posts/ 面向产品经理的 Emacs 教程
 - https://github.com/LionyxML/emacs-solo Pure Emacs (no external packages)
 - https://github.com/seagle0128/.emacs.d Centaur Emacs
-- https://github.com/abougouffa/minemacs Mineemacs
+- https://github.com/abougouffa/minemacs Minemacs
 - https://github.com/Lambda-Emacs/lambda-emacs Lambda-emacs
 - https://github.com/rougier/dotemacs Litterate configuration org
 - https://jansky520.github.io/p/org%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/ org 快速指南
