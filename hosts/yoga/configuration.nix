@@ -16,11 +16,11 @@
     self.nixosModules.homeManagerInit
     self.nixosModules.laptopPowerPlans
 
-    # self.nixosModules.gnome
+    self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
-    self.nixosModules.niri
+    # self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 
@@ -127,8 +127,7 @@
 
     # Fix touhpad multitouch somtimes unavailable
     # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
-    initrd.kernelModules = [ "hid-multitouch" ];
-    # initrd.availableKernelModules = [ "hid-multitouch" ];
+    # blacklistedKernelModules = [ "elan_i2c" ];
 
     supportedFilesystems = [
       "ntfs"
