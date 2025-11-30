@@ -7,6 +7,7 @@
 
 * early-init
 https://github.com/jamescherti/minimal-emacs.d minimal-emacs.d
+Release: 1.3.1
 
 curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/early-init.el | wl-copy
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
