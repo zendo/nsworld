@@ -5,12 +5,12 @@
   unzip,
 }:
 
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "sub-store";
   version = "2.20.42";
 
   src = fetchurl {
-    url = "https://github.com/sub-store-org/Sub-Store/releases/download/${version}/sub-store.bundle.js";
+    url = "https://github.com/sub-store-org/Sub-Store/releases/download/${finalAttrs.version}/sub-store.bundle.js";
     hash = "sha256-sZXoPN2MI4cchteIG333AcjnuRJcVDFSCbePBap4kfE=";
   };
 
@@ -37,4 +37,4 @@ stdenvNoCC.mkDerivation rec {
     platforms = lib.platforms.all;
     maintainers = with lib.maintainers; [ zendo ];
   };
-}
+})
