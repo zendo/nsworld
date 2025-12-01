@@ -112,7 +112,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
 
-    # Fixes for `Intel AX200` power saving mode
+    # Disable power management for "Intel AX200" driver
     # https://github.com/zachlatta/nixos-configs/blob/master/bak/lugia/intel_ax200_fix.nix
     # nix shell nixpkgs#wirelesstools --command iwconfig
     extraModprobeConfig = ''
@@ -126,12 +126,12 @@
       "acpi.prefer_microsoft_dsm_guid=1"
 
       # Fix touhpad multitouch somtimes unavailable
-      # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
-      # cat /proc/bus/input/devices
-      # 禁用 hid-multitouch，使用通用HID驱动 VID:PID
+      # cat /proc/bus/input/devices, find VID:PID
+      # Disabling `hid-multitouch`, use the generic HID driver
       # "usbhid.quirks=06CB:CE44"
-      # 强制使用 hid-multitouch
+      # or Force load `hid-multitouch`
       "hid_quirks=06CB:CE44"
+      # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
     ];
 
     # https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
@@ -151,7 +151,10 @@
       compressor = "zstd";
     };
 
-    # binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
+    # binfmt.emulatedSystems = [
+    #   "aarch64-linux"
+    #   "riscv64-linux"
+    # ];
   };
 
   # Swapfile

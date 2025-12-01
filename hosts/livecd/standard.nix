@@ -5,11 +5,9 @@
   --option auto-allocate-uids false
 */
 {
-  inputs,
   self,
   pkgs,
   lib,
-  config,
   username,
   modulesPath,
   ...

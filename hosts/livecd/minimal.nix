@@ -40,24 +40,6 @@
     ouch
   ];
 
-  environment.shellAliases = {
-    # proxy
-    # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
-    ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
-    ssr-nix-daemon = ''
-      sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
-      sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
-      [Service]
-      Environment="http_proxy=socks5h://''${ssr_ip}"
-      Environment="https_proxy=socks5h://''${ssr_ip}"
-      Environment="all_proxy=socks5h://''${ssr_ip}"
-      EOF
-      sudo systemctl daemon-reload
-      sudo systemctl restart nix-daemon
-    '';
-    chrome-ssr = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}:7890"'';
-  };
-
   hardware.enableAllFirmware = true;
 
   nixpkgs = {
@@ -75,7 +57,4 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-
-  # fast but lowest compression level
-  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 }
