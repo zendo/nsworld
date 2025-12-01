@@ -1767,14 +1767,6 @@ https://github.com/neeasade/stillness-mode.el
 (add-hook 'after-init-hook #'show-paren-mode) ;括号匹配 parens
 (electric-pair-mode t) ;自动补全括号
 
-;; ~display-fill-column-indicator-mode~
-;; (setq-default fill-column 80) ; default: 70 init: 80
-
-;; 折叠 word wrap
-;; (global-visual-line-mode 1)
-;; Better word wrapping for CJK characters
-;; (setq word-wrap-by-category t)
-
 ;; 滚动时保持显示稳定
 (setq display-line-numbers-width-start nil)
 (setq display-line-numbers-grow-only t)
@@ -1792,6 +1784,18 @@ https://github.com/neeasade/stillness-mode.el
 (global-so-long-mode t)
 #+end_src
 
+** word-wrap
+#+begin_src emacs-lisp
+;; 折叠 word wrap
+;; (global-visual-line-mode 1)
+;; Better word wrapping for CJK characters
+;; (setq word-wrap-by-category t)
+(set-default 'word-wrap nil)
+(set-default 'truncate-lines nil)
+
+;; ~display-fill-column-indicator-mode~
+;; (setq-default fill-column 80) ; default: 70 init: 80
+#+end_src
 ** outline
 #+begin_src emacs-lispxx
 ;; The built-in outline-minor-mode provides structured code folding in modes
