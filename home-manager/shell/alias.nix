@@ -6,7 +6,6 @@
 }:
 {
   home.shellAliases = {
-    # shell
     cat = "${lib.getExe pkgs.bat} -p";
     cp = "${lib.getExe pkgs.xcp}";
     l = "${lib.getExe pkgs.eza} -l --icons";
