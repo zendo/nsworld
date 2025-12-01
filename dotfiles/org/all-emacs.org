@@ -1114,6 +1114,16 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; (use-package dash) ;modern list library
 ;; (use-package s) ;string manipulation library
 ;; (use-package f) ;file manipulation
+
+;; In Emacs, customization variables modified via the UI (e.g., M-x customize)
+;; are typically stored in a separate file, commonly named 'custom.el'. To
+;; ensure these settings are loaded during Emacs initialization, it is necessary
+;; to explicitly load this file if it exists.
+(load custom-file 'noerror 'no-message)
+
+;; disable prompt
+;; (dolist (cmd '(narrow-to-page narrow-to-defun))
+;;   (put cmd 'disabled nil))
 #+end_src
 
 * Systems
@@ -1171,7 +1181,6 @@ Use ~getenv~ check the environment variables.
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         org-directory "c:/Users/zendo/Documents/org/"
         ;; Optimization
-        inhibit-compacting-font-caches t   ; speed up font rendering for special characters
         projectile-git-submodule-command nil
         w32-get-true-file-attributes nil   ; decrease file IO workload
         w32-use-native-image-API t         ; use native w32 API
@@ -1287,43 +1296,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
 
-** Silence Warnings
-#+begin_src emacs-lisp
-;; Close without ask
-;; (setq confirm-kill-processes nil)
-
-;; In Emacs, customization variables modified via the UI (e.g., M-x customize)
-;; are typically stored in a separate file, commonly named 'custom.el'. To
-;; ensure these settings are loaded during Emacs initialization, it is necessary
-;; to explicitly load this file if it exists.
-(load custom-file 'noerror 'no-message)
-
-;; disable warnings
-;; (setq warning-minimum-level :emergency
-;;       byte-compile-warnings '(not
-;;                               obsolete
-;;                               free-vars
-;;                               unresolved
-;;                               callargs
-;;                               redefine
-;;                               noruntime
-;;                               cl-functions
-;;                               interactive-only
-;;                               make-local))
-
-;; disable prompt
-(dolist (cmd '(narrow-to-region
-               narrow-to-page
-               narrow-to-defun
-               upcase-region
-               downcase-region
-               scroll-left
-               list-timers
-               list-threads
-               erase-buffer
-               dired-find-alternate-file))
-  (put cmd 'disabled nil))
-#+end_src
 ** ispell、flyspell
 #+begin_src emacs-lispxx
 ;; The flyspell package is a built-in Emacs minor mode that provides
@@ -1761,8 +1733,8 @@ https://github.com/neeasade/stillness-mode.el
 ;; (global-visual-line-mode 1)
 ;; Better word wrapping for CJK characters
 ;; (setq word-wrap-by-category t)
-(set-default 'word-wrap nil)
-(set-default 'truncate-lines nil)
+(set-default 'word-wrap nil) ;在任意字符处拆分单词换行
+(set-default 'truncate-lines nil) ;自动折行到下一行，可能影响性能
 
 ;; ~display-fill-column-indicator-mode~
 ;; (setq-default fill-column 80) ; default: 70 init: 80
@@ -2773,9 +2745,7 @@ hippie expand is dabbrev expand on steroids
 (use-package ediff
   :ensure nil
   :custom
-  (ediff-custom-diff-options "-u")
-  (ediff-split-window-function 'split-window-horizontally)
-  (ediff-window-setup-function 'ediff-setup-windows-plain))
+  (ediff-custom-diff-options "-u"))
 #+end_src
 
 * Org
@@ -3714,7 +3684,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 M-x ~describe-key~
 
 #+begin_src emacs-lisp
-(blink-cursor-mode -1)               ;禁用指针闪烁
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (global-unset-key (kbd "C-<wheel-up>"))

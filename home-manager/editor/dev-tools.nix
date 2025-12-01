@@ -16,5 +16,6 @@
     efm-langserver
     # nil
     nixd
+    # devenv
   ];
 }
