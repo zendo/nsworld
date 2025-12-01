@@ -1,17 +1,19 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
+  programs.man.generateCaches = lib.mkDefault false;
+
   programs.fish = {
-    # enable = true;
+    enable = true;
     generateCompletions = true;
     plugins = [
       # {
       #   name = "pure";
       #   src = pkgs.fishPlugins.pure.src;
       # }
-      {
-        name = "tide";
-        src = pkgs.fishPlugins.tide.src;
-      }
+      # {
+      #   name = "tide";
+      #   src = pkgs.fishPlugins.tide.src;
+      # }
     ];
     interactiveShellInit = ''
       # Disable the greeting message.

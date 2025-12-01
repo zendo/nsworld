@@ -25,6 +25,10 @@
       use-cgroups = true;
       # max-jobs = 8; # limit the number of parallel jobs
       flake-registry = ""; # disable global registry
+      # impureEnvVars = [
+      #   "http_proxy"
+      #   "https_proxy"
+      # ];
 
       # for direnv GC roots
       # keep-outputs = true;
