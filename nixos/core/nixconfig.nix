@@ -25,10 +25,6 @@
       use-cgroups = true;
       # max-jobs = 8; # limit the number of parallel jobs
       flake-registry = ""; # disable global registry
-      # impureEnvVars = [
-      #   "http_proxy"
-      #   "https_proxy"
-      # ];
 
       # for direnv GC roots
       # keep-outputs = true;
@@ -56,8 +52,6 @@
         "flakes"
         "nix-command"
         "pipe-operators"
-        # "configurable-impure-env"
-
         # Allows Nix to execute builds inside cgroups
         "cgroups"
         # Allows Nix to automatically pick UIDs for builds, rather than creating nixbld* user accounts

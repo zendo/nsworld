@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
-  programs.man.generateCaches = lib.mkDefault false;
+  programs.man.generateCaches = false;
 
   programs.fish = {
     enable = true;
