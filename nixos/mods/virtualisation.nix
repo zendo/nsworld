@@ -1,20 +1,18 @@
 /*
-  ## fix network `default` inactive
+  ## Network `default` active
   sudo virsh net-start default
   sudo virsh net-autostart default
 
-  ## for clipboard share
+  ## Clipboard share
   apt install spice-vdagent (Guest)
 
-  ## for folders share
-  Memory —— enable the shared memory
-  Add filesystem: virtiofs ~/Downloads shared
-
-  edit xml (nixos bug):
-  <binary path="/run/current-system/sw/bin/virtiofsd"/>
-
-  mkdir shared (Guest)
-  sudo mount -t virtiofs shared /home/iab/shared (Guest)
+  ## Folders share
+  Memory: enable the shared memory
+  Add filesystem: virtiofs ~/Documents/guest-shared
+  Target Path: shared
+  # on guest
+  mkdir yoga
+  sudo mount -t virtiofs shared ~/yoga
 
   ## Windows Guest
   add tpm: tpm-crb、emulator、2.0
