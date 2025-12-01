@@ -53,6 +53,7 @@
     # proxy
     # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
     ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
+    ssr-chrome = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}"'';
     ssr-nix-daemon = ''
       sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
       sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
@@ -64,7 +65,6 @@
       sudo systemctl daemon-reload
       sudo systemctl restart nix-daemon
     '';
-    chrome-ssr = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}:7890"'';
   };
 
   # programs.fish.shellAliases = ;
