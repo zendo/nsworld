@@ -29,7 +29,7 @@
   # programs.nix-ld.enable = true;
 
   services.acpid.enable = true;
-  # services.fwupd.enable = true;
+  services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${username}";
 
   # ╭──────────────────────────────────────────────────────────╮
@@ -107,11 +107,14 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │ HARDWARE                                                 │
   # ╰──────────────────────────────────────────────────────────╯
-  hardware.i2c.enable = true;
-
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
+
+    supportedFilesystems = [ "ntfs" ];
+
+    # Fix touhpad multitouch somtimes unavailable
+    # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
 
     # Fixes for `Intel AX200` power saving mode
     # https://github.com/zachlatta/nixos-configs/blob/master/bak/lugia/intel_ax200_fix.nix
@@ -127,17 +130,9 @@
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
 
-    # Fix touhpad multitouch somtimes unavailable
-    # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
-    # blacklistedKernelModules = [ "elan_i2c" ];
-
-    supportedFilesystems = [
-      "ntfs"
-    ];
-
     # https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
     # kernel.sysctl = {
-    #   "vm.max_map_count" = 2147483642; # default: 1048576
+    #   "vm.max_map_count" = 2147483642;
     # };
 
     # plymouth = {
