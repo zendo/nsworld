@@ -95,7 +95,7 @@
 
   # Virtual network interfering Geoclue2's IP-based location
   services.geoclue2 = {
-    # enableStatic = true;
+    enableStatic = true;
     staticAltitude = 10; # 海拔高度
     staticAccuracy = 1000; # 精度半径
   };
@@ -110,11 +110,7 @@
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
-
     supportedFilesystems = [ "ntfs" ];
-
-    # Fix touhpad multitouch somtimes unavailable
-    # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
 
     # Fixes for `Intel AX200` power saving mode
     # https://github.com/zachlatta/nixos-configs/blob/master/bak/lugia/intel_ax200_fix.nix
@@ -128,6 +124,14 @@
       # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
+
+      # Fix touhpad multitouch somtimes unavailable
+      # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
+      # cat /proc/bus/input/devices
+      # 禁用 hid-multitouch，使用通用HID驱动 VID:PID
+      # "usbhid.quirks=06CB:CE44"
+      # 强制使用 hid-multitouch
+      "hid_quirks=06CB:CE44"
     ];
 
     # https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount

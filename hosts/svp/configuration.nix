@@ -43,10 +43,7 @@
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
-
-    supportedFilesystems = [
-      "ntfs"
-    ];
+    supportedFilesystems = [ "ntfs" ];
   };
 
   # Swapfile
