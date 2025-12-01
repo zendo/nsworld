@@ -2053,7 +2053,7 @@ https://gitlab.com/jabranham/mixed-pitch
    (list "\\.tar$" "\\.tbz2$" "\\.tbz$" "\\.tgz$" "\\.bz2$"
          "\\.bz$" "\\.gz$" "\\.gzip$" "\\.xz$" "\\.zip$"
          "\\.7z$" "\\.rar$"
-         "COMMIT_EDITMSG\\'" "persp-auto-save"
+         "COMMIT_EDITMSG\\'" "persp-auto-save" "\\.cache"
          "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
          "-autoloads\\.el$" "autoload\\.el$"))
 

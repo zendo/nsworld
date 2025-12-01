@@ -1,14 +1,11 @@
 {
   lib,
-  pkgs,
-  config,
   inputs,
   ...
 }:
 {
   nix = {
     channel.enable = false;
-    # package = pkgs.nixVersions.latest;
 
     registry = lib.mkMerge [
       { n.flake = inputs.nixpkgs; }
@@ -54,20 +51,14 @@
       experimental-features = [
         "flakes"
         "nix-command"
+        "pipe-operators"
         # "configurable-impure-env"
 
         # Allows Nix to execute builds inside cgroups
         "cgroups"
         # Allows Nix to automatically pick UIDs for builds, rather than creating nixbld* user accounts
         "auto-allocate-uids"
-
-        "pipe-operators"
       ];
-    };
-  };
-
-  # for large files
-  systemd.services.nix-daemon = lib.mkIf config.boot.tmp.useTmpfs {
-    environment.TMPDIR = "/var/tmp";
-  };
+    }; # end of settings
+  }; # edd of nix
 }

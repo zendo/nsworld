@@ -126,11 +126,6 @@
       "acpi.prefer_microsoft_dsm_guid=1"
 
       # Fix touhpad multitouch somtimes unavailable
-      # cat /proc/bus/input/devices, find VID:PID
-      # Disabling `hid-multitouch`, use the generic HID driver
-      # "usbhid.quirks=06CB:CE44"
-      # or Force load `hid-multitouch`
-      "hid_quirks=06CB:CE44"
       # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
     ];
 

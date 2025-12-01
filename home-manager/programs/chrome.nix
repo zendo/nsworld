@@ -1,11 +1,16 @@
 { pkgs, ... }:
 let
+  # https://wiki.nixos.org/wiki/Chromium
   chromeEnv = [
     # Force GPU acceleration
     "--ignore-gpu-blocklist"
     "--enable-zero-copy"
+    "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+    "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+    "--enable-features=UseMultiPlaneFormatForHardwareVideo"
+    # wayland supports
     "--wayland-text-input-version=3"
-    "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,Vulkan,WebRTCPipeWireCapturer,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
+    "--enable-features=WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
   ];
 in
 {
@@ -22,8 +27,13 @@ in
 
   programs.chromium = {
     # enable = true;
-    # package = pkgs.chromiumDev;
+    # Enabling DRM
+    package = pkgs.chromium.override { enableWideVine = true; };
     commandLineArgs = chromeEnv;
+    # extraOpts = {
+    #   # ManifestV2 support
+    #   "ExtensionManifestV2Availability" = 2;
+    # };
     extensions = [
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
