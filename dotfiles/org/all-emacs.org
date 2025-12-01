@@ -3495,7 +3495,7 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 
 ** yaml
 #+begin_src emacs-lisp
-(use-package yaml-mode
+(use-package yaml-pro
   :mode ("\\.yml'" "\\.yaml'"))
 #+end_src
 

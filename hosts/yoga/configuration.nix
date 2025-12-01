@@ -107,6 +107,8 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │ HARDWARE                                                 │
   # ╰──────────────────────────────────────────────────────────╯
+  hardware.i2c.enable = true;
+
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;

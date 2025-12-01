@@ -22,10 +22,6 @@
     # };
   };
 
-  # Fix autologin failed: https://wiki.nixos.org/wiki/GNOME#Automatic_login
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
   environment.gnome.excludePackages = with pkgs; [
     yelp
     sushi # heavyweight

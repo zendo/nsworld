@@ -4,9 +4,13 @@
     # enable = true;
     generateCompletions = true;
     plugins = [
+      # {
+      #   name = "pure";
+      #   src = pkgs.fishPlugins.pure.src;
+      # }
       {
-        name = "pure";
-        src = pkgs.fishPlugins.pure.src;
+        name = "tide";
+        src = pkgs.fishPlugins.tide.src;
       }
     ];
     interactiveShellInit = ''
