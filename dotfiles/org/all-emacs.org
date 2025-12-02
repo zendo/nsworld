@@ -1700,6 +1700,13 @@ https://github.com/neeasade/stillness-mode.el
   :defer t)
 #+end_src
 
+** hl-todo
+#+begin_src emacs-lisp
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode))
+#+end_src
+
 ** rainbow
 #+begin_src emacs-lisp
 ;; rainbow 颜色代码显色 #00FF00
@@ -1711,12 +1718,33 @@ https://github.com/neeasade/stillness-mode.el
   :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
-** scrollkeeper (like beacon)
+** scrollkeeper
+like ~beacon~
+
 #+begin_src emacs-lisp
 (use-package scrollkeeper
   :bind
   (([remap scroll-up-command] . scrollkeeper-contents-up)
    ([remap scroll-down-command] . scrollkeeper-contents-down)))
+#+end_src
+
+** breadcrumb
+Display the structure path below the tab bar.
+like ~otree~
+
+#+begin_src emacs-lisp
+(use-package breadcrumb
+  :commands breadcrumb-mode)
+#+end_src
+
+** idle-highlight-mode :disable:
+#+begin_src emacs-lispxx
+(use-package idle-highlight-mode
+  :hook ((prog-mode text-mode) . idle-highlight-mode)
+  :config
+  (setq idle-highlight-idle-time 0.2
+        ;; highlight subwords too
+        idle-highlight-exceptions-syntax nil))
 #+end_src
 
 ** writeroom-mode
@@ -2246,30 +2274,6 @@ https://github.com/thierryvolpiatto/isearch-light
          ;; ("C-c r" . visual-replace)
          :map isearch-mode-map
          ("C-c r" . visual-replace-from-isearch)))
-#+end_src
-
-** idle-highlight-mode :disable:
-#+begin_src emacs-lispxx
-(use-package idle-highlight-mode
-  :hook ((prog-mode text-mode) . idle-highlight-mode)
-  :config
-  (setq idle-highlight-idle-time 0.2
-        ;; highlight subwords too
-        idle-highlight-exceptions-syntax nil))
-#+end_src
-
-** breadcrumb
-#+begin_src emacs-lispxx
-(use-package breadcrumb
-  :efer t
-  :config (breadcrumb-mode))
-#+end_src
-
-** hl-todo
-#+begin_src emacs-lisp
-(use-package hl-todo
-  :config
-  (global-hl-todo-mode))
 #+end_src
 
 ** goto-last-change
