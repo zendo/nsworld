@@ -14,14 +14,6 @@
       "1.1.1.1"
     ];
 
-    firewall = {
-      enable = false;
-      # allowedUDPPorts = [ 53317 ];
-      # allowedTCPPorts = [ 53317 ];
-    };
-
-    # nftables.enable = true; # for tproxy
-
     # ping github.com
     # hosts = {
     #   "20.205.243.166" = ["github.com"];
