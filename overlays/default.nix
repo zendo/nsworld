@@ -107,6 +107,12 @@
       #   ];
       # });
 
+      # NPM/Node.js Tool Wrapper
+      # tool-name = prev.writeShellScriptBin "tool-name" ''
+      #   export PATH="${prev.nodejs}/bin:$PATH"
+      #   exec ${prev.nodejs}/bin/npx --yes package-name "$@"
+      # '';
+
       # wrapProgram $out/bin/telegram-desktop --set QT_QPA_PLATFORM xcb
       logseq-wayland = prev.symlinkJoin {
         name = "logseq";
