@@ -296,7 +296,20 @@
         interprogram-cut-function #'gui-select-text))
 #+end_src
 
-* UI
+** Shell
+#+begin_src emacs-lisp
+;; vterm or eshell
+(when (featurep :system 'windows)
+  (global-set-key (kbd "<f2>") '+eshell/toggle))
+
+(when (featurep :system 'linux)
+  (global-set-key (kbd "<f2>") '+vterm/toggle)
+  (after! vterm
+    (setq vterm-shell "zsh")
+    (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
+#+end_src
+
+* Interface
 #+begin_src emacs-lisp
 ;; (add-to-list 'default-frame-alist '(height . 40))
 ;; (add-to-list 'default-frame-alist '(width . 80))
@@ -328,45 +341,41 @@
 (set-default 'truncate-lines nil) ;自动折行到下一行，可能影响性能
 #+end_src
 
-* Programming
+* Files
+** projectile
 #+begin_src emacs-lisp
-(setq +default-want-RET-continue-comments nil ; 别在新行加注释
-      display-line-numbers-type 't ; t / nil / relative
- )
+(after! projectile
+  ;; manual clear cache (M-x projectile-invalidate-cache) or
+  (setq projectile-enable-caching nil)
+  )
 #+end_src
 
-** flycheck
+** dired
 #+begin_src emacs-lisp
-;; disable flycheck in some mode
-(setq flycheck-disabled-checkers '(sh-shellscript
-                                   emacs-lisp
-                                   emacs-lisp-checkdoc))
-#+end_src
+;; recentf 不要保存 dired 记录
+(define-advice doom--recentf-add-dired-directory-h (:override ()))
 
-** nix
-#+begin_src emacs-lisp
-(setq! lsp-nix-server-path "nixd")
-(use-package! nix-mode
-  :custom (nix-nixfmt-bin "nixfmt"))
+(after! dired
+  (setq dired-listing-switches "-aBhlv --group-directories-first"
+        dired-omit-files "\\`[.]?#\\|\\`[.][.]?"  ; hide dot files
+        )
+  (map! :map dired-mode-map
+        "f" #'ido-find-file
+        "<RET>" #'dired-find-alternate-file
+        "<SPC>" #'dired-find-alternate-file
+        "." #'dired-omit-mode
+        "/" #'funs/dired-filter-show-match
+        "b" #'(lambda ()
+                (interactive)
+                (find-alternate-file ".."))
+        ))
+;;;###autoload
+(defun funs/dired-filter-show-match ()
+  "Only show filter file"
+  (interactive)
+  (call-interactively #'dired-mark-files-regexp)
+  (command-execute "tk"))
 #+end_src
-
-* Completion
-#+begin_src emacs-lisp
-;; hippie expand is dabbrev expand on steroids
-;; doom 顺序似乎不对，这里覆盖自己的配置
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
-        try-expand-dabbrev-all-buffers     ;搜索所有 buffer
-        try-expand-dabbrev-from-kill       ;从 kill-ring 中搜索
-        try-complete-file-name-partially   ;文件名部分匹配
-        try-complete-file-name             ;文件名匹配
-        try-expand-all-abbrevs             ;匹配所有缩写词, according to all abbrev tables
-        try-expand-list                    ;补全一个列表
-        try-expand-line                    ;补全当前行
-        try-complete-lisp-symbol-partially ;部分补全 lisp symbol
-        try-complete-lisp-symbol))         ;补全 lisp symbol
-#+end_src
-
 * Backup
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
@@ -413,41 +422,23 @@
   )
 #+end_src
 
-* Files
-** projectile
+* Completion
 #+begin_src emacs-lisp
-(after! projectile
-  ;; manual clear cache (M-x projectile-invalidate-cache) or
-  (setq projectile-enable-caching nil)
-  )
+;; hippie expand is dabbrev expand on steroids
+;; doom 顺序似乎不对，这里覆盖自己的配置
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
+        try-expand-dabbrev-all-buffers     ;搜索所有 buffer
+        try-expand-dabbrev-from-kill       ;从 kill-ring 中搜索
+        try-complete-file-name-partially   ;文件名部分匹配
+        try-complete-file-name             ;文件名匹配
+        try-expand-all-abbrevs             ;匹配所有缩写词, according to all abbrev tables
+        try-expand-list                    ;补全一个列表
+        try-expand-line                    ;补全当前行
+        try-complete-lisp-symbol-partially ;部分补全 lisp symbol
+        try-complete-lisp-symbol))         ;补全 lisp symbol
 #+end_src
 
-** dired
-#+begin_src emacs-lisp
-;; recentf 不要保存 dired 记录
-(define-advice doom--recentf-add-dired-directory-h (:override ()))
-
-(after! dired
-  (setq dired-listing-switches "-aBhlv --group-directories-first"
-        dired-omit-files "\\`[.]?#\\|\\`[.][.]?"  ; hide dot files
-        )
-  (map! :map dired-mode-map
-        "f" #'ido-find-file
-        "<RET>" #'dired-find-alternate-file
-        "<SPC>" #'dired-find-alternate-file
-        "." #'dired-omit-mode
-        "/" #'funs/dired-filter-show-match
-        "b" #'(lambda ()
-                (interactive)
-                (find-alternate-file ".."))
-        ))
-;;;###autoload
-(defun funs/dired-filter-show-match ()
-  "Only show filter file"
-  (interactive)
-  (call-interactively #'dired-mark-files-regexp)
-  (command-execute "tk"))
-#+end_src
 * Org
 #+begin_src emacs-lisp :tangle no
 (after! org
@@ -455,35 +446,26 @@
   )
 #+end_src
 
-* Shell
+* Programming
 #+begin_src emacs-lisp
-;; vterm or eshell
-(when (featurep :system 'windows)
-  (global-set-key (kbd "<f2>") '+eshell/toggle))
-
-(when (featurep :system 'linux)
-  (global-set-key (kbd "<f2>") '+vterm/toggle)
-  (after! vterm
-    (setq vterm-shell "zsh")
-    (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
+(setq +default-want-RET-continue-comments nil ; 别在新行加注释
+      display-line-numbers-type 't ; t / nil / relative
+ )
 #+end_src
 
-* Mouse
+** flycheck
 #+begin_src emacs-lisp
-(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
-(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
-(global-unset-key (kbd "C-<wheel-up>"))
-(global-unset-key (kbd "C-<wheel-down>"))
-;; 禁用 mouse-drag-region
-;; (global-unset-key [M-mouse-1])
-(global-unset-key [M-drag-mouse-1])
-(global-unset-key [M-down-mouse-1])
-(global-unset-key [M-mouse-3])
-;; disable mouse in minibuffer echo area
-(keymap-unset minibuffer-inactive-mode-map "<mouse-1>")
+;; disable flycheck in some mode
+(setq flycheck-disabled-checkers '(sh-shellscript
+                                   emacs-lisp
+                                   emacs-lisp-checkdoc))
+#+end_src
 
-;; Scroll
-(pixel-scroll-precision-mode t)
+** nix
+#+begin_src emacs-lisp
+(setq! lsp-nix-server-path "nixd")
+(use-package! nix-mode
+  :custom (nix-nixfmt-bin "nixfmt"))
 #+end_src
 
 * Keybindings
@@ -635,6 +617,24 @@
    :prefix ("z" . "zap")
    "SPC" #'just-one-space
    ))
+#+end_src
+
+** Mouse
+#+begin_src emacs-lisp
+(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+(global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
+(global-unset-key (kbd "C-<wheel-up>"))
+(global-unset-key (kbd "C-<wheel-down>"))
+;; 禁用 mouse-drag-region
+;; (global-unset-key [M-mouse-1])
+(global-unset-key [M-drag-mouse-1])
+(global-unset-key [M-down-mouse-1])
+(global-unset-key [M-mouse-3])
+;; disable mouse in minibuffer echo area
+(keymap-unset minibuffer-inactive-mode-map "<mouse-1>")
+
+;; Scroll
+(pixel-scroll-precision-mode t)
 #+end_src
 
 ** casual
