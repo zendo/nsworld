@@ -1434,7 +1434,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 #+end_src
 
 ** emoji
-Linux handle by nix.
+Managed by Nix.
 
 #+begin_src emacs-lispxx
 (use-package emojify
@@ -1447,7 +1447,7 @@ Linux handle by nix.
 ;; Handle by mood-modeline
 ;; (column-number-mode t) ;显示列数
 ;; (size-indication-mode t) ;显示文件大小
-;; (add-hook 'after-init-hook #'display-time-mode) ;显示时间
+;; (display-time-mode t) ;显示时间
 ;; (unless (string-match-p "^Power N/A" (battery))
 ;;   (display-battery-mode 1))
 
@@ -1554,127 +1554,6 @@ Use `treemacs' command for old functionality."
            (treemacs))))))
 #+end_src
 
-** Buffer
-*** uniquify
-#+begin_src emacs-lisp
-(use-package uniquify
-  :ensure nil
-  :custom
-  (uniquify-buffer-name-style 'reverse)
-  (uniquify-separator "•")
-  (uniquify-after-kill-buffer-p t))
-#+end_src
-
-*** ibuffer
-#+begin_src emacs-lisp
-(defalias 'list-buffers 'ibuffer)
-(setq ibuffer-expert t) ; 直接操作不询问
-(setq ibuffer-use-other-window t)
-#+end_src
-
-*** buffer-terminator
-#+begin_src emacs-lisp
-(use-package buffer-terminator
-  :ensure t
-  :custom
-  ;; Enable/Disable verbose mode to log buffer cleanup events
-  (buffer-terminator-verbose nil)
-
-  ;; Set the inactivity timeout (in seconds) after which buffers are considered
-  ;; inactive (default is 30 minutes):
-  (buffer-terminator-inactivity-timeout (* 30 60)) ; 30 minutes
-
-  ;; Define how frequently the cleanup process should run (default is every 10
-  ;; minutes):
-  (buffer-terminator-interval (* 10 60)) ; 10 minutes
-
-  :config
-  (buffer-terminator-mode 1))
-#+end_src
-
-** Window
-#+begin_src emacs-lisp
-;; prefer vertical splits by default
-(setq split-width-threshold 120)
-
-;; winner C-c ←/→ undo/redo window
-(add-hook 'after-init-hook #'winner-mode)
-#+end_src
-
-*** ace-window
-#+begin_src emacs-lisp
-(use-package ace-window
-  :bind
-  (([remap other-window] . ace-window)
-   ("C-x 4 x" . ace-swap-window)
-   ("C-c w x" . ace-swap-window)))
-#+end_src
-
-*** rotate
-#+begin_src emacs-lisp
-(use-package rotate
-  :bind (("C-c w v" . rotate-layout)))
-#+end_src
-
-*** golden-ratio
-#+begin_src emacs-lispxx
-(use-package golden-ratio
-  :config (golden-ratio-mode 1))
-#+end_src
-
-*** persp-mode
-#+begin_src emacs-lisp
-(use-package persp-mode
-  :init (setq persp-keymap-prefix (kbd "C-c w"))
-  :config
-  ;; (setq wg-morph-on nil) ;; switch off animation
-  (setq persp-auto-resume-time 0)
-  (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
-#+end_src
-
-*** easysession-mode
-#+begin_src emacs-lispxx
-;; The easysession Emacs package is a session manager for Emacs that can persist
-;; and restore file editing buffers, indirect buffers/clones, Dired buffers,
-;; windows/splits, the built-in tab-bar (including tabs, their buffers, and
-;; windows), and Emacs frames. It offers a convenient and effortless way to
-;; manage Emacs editing sessions and utilizes built-in Emacs functions to
-;; persist and restore frames.
-(use-package easysession
-  :ensure t
-  :commands (easysession-switch-to
-             easysession-save-as
-             easysession-save-mode
-             easysession-load-including-geometry)
-
-  :custom
-  (easysession-mode-line-misc-info t)  ; Display the session in the modeline
-  (easysession-save-interval (* 10 60))  ; Save every 10 minutes
-
-  :init
-  ;; Key mappings:
-  ;; C-c l for switching sessions
-  ;; and C-c s for saving the current session
-  (global-set-key (kbd "C-c l") 'easysession-switch-to)
-  (global-set-key (kbd "C-c s") 'easysession-save-as)
-
-  ;; The depth 102 and 103 have been added to to `add-hook' to ensure that the
-  ;; session is loaded after all other packages. (Using 103/102 is particularly
-  ;; useful for those using minimal-emacs.d, where some optimizations restore
-  ;; `file-name-handler-alist` at depth 101 during `emacs-startup-hook`.)
-  (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
-  (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
-#+end_src
-
-*** stillness-mode
-弹出 minibuffer 时候保持 window 稳定
-https://github.com/neeasade/stillness-mode.el
-#+begin_src emacs-lisp
-(use-package stillness-mode
-  :config
-  (stillness-mode +1))
-#+end_src
-
 ** perfect-margin
 #+begin_src emacs-lisp
 (use-package perfect-margin
@@ -1753,10 +1632,121 @@ like ~otree~
   :commands writeroom-mode)
 #+end_src
 
+* Buffer
+** uniquify
+#+begin_src emacs-lisp
+(use-package uniquify
+  :ensure nil
+  :custom
+  (uniquify-buffer-name-style 'reverse)
+  (uniquify-separator "•")
+  (uniquify-after-kill-buffer-p t))
+#+end_src
+
+** ibuffer
+#+begin_src emacs-lisp
+(defalias 'list-buffers 'ibuffer)
+(setq ibuffer-expert t) ; 直接操作不询问
+(setq ibuffer-use-other-window t)
+#+end_src
+
+** buffer-terminator
+#+begin_src emacs-lisp
+(use-package buffer-terminator
+  :ensure t
+  :custom
+  ;; Enable/Disable verbose mode to log buffer cleanup events
+  (buffer-terminator-verbose nil)
+
+  ;; Set the inactivity timeout (in seconds) after which buffers are considered
+  ;; inactive (default is 30 minutes):
+  (buffer-terminator-inactivity-timeout (* 30 60)) ; 30 minutes
+
+  ;; Define how frequently the cleanup process should run (default is every 10
+  ;; minutes):
+  (buffer-terminator-interval (* 10 60)) ; 10 minutes
+
+  :config
+  (buffer-terminator-mode 1))
+#+end_src
+
+* Window
+#+begin_src emacs-lisp
+;; prefer vertical splits by default
+(setq split-width-threshold 120)
+
+;; winner C-c ←/→ for window undo/redo
+(winner-mode 1)
+#+end_src
+
+** ace-window
+#+begin_src emacs-lisp
+(use-package ace-window
+  :bind ([remap other-window] . ace-window))
+#+end_src
+
+** rotate
+#+begin_src emacs-lisp
+(use-package rotate
+  :defer t)
+#+end_src
+
+** golden-ratio
+#+begin_src emacs-lispxx
+(use-package golden-ratio
+  :config (golden-ratio-mode 1))
+#+end_src
+
+** persp-mode
+#+begin_src emacs-lispxx
+(use-package persp-mode
+  :init (setq persp-keymap-prefix (kbd "C-c w w"))
+  :config
+  ;; (setq wg-morph-on nil) ;; switch off animation
+  (setq persp-auto-resume-time 0)
+  (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
+#+end_src
+
+** easysession-mode
+#+begin_src emacs-lisp
+;; The easysession Emacs package is a session manager for Emacs that can persist
+;; and restore file editing buffers, indirect buffers/clones, Dired buffers,
+;; windows/splits, the built-in tab-bar (including tabs, their buffers, and
+;; windows), and Emacs frames. It offers a convenient and effortless way to
+;; manage Emacs editing sessions and utilizes built-in Emacs functions to
+;; persist and restore frames.
+(use-package easysession
+  :commands (easysession-switch-to
+             easysession-save-as
+             easysession-save-mode
+             easysession-load-including-geometry)
+
+  :custom
+  (easysession-mode-line-misc-info t)  ; Display the session in the modeline
+  (easysession-save-interval (* 10 60))  ; Save every 10 minutes
+
+  :init
+  ;; The depth 102 and 103 have been added to to `add-hook' to ensure that the
+  ;; session is loaded after all other packages. (Using 103/102 is particularly
+  ;; useful for those using minimal-emacs.d, where some optimizations restore
+  ;; `file-name-handler-alist` at depth 101 during `emacs-startup-hook`.)
+  (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
+  (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
+#+end_src
+
+** stillness-mode
+弹出 minibuffer 时候保持 window 稳定
+https://github.com/neeasade/stillness-mode.el
+#+begin_src emacs-lisp
+(use-package stillness-mode
+  :config
+  (stillness-mode +1))
+#+end_src
+
 * Editor
 ** basic
 #+begin_src emacs-lisp
-(add-hook 'after-init-hook #'show-paren-mode) ;括号匹配 parens
+(show-paren-mode t) ;括号匹配 parens
 (electric-pair-mode t) ;自动补全括号
 
 ;; 滚动时保持显示稳定
@@ -3634,6 +3624,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
               (split-window-right)
               (select-window (next-window))))
 
+ ("C-x 4 x" . ace-swap-window)
+
  ("<f7>" . compile)
  ("<C-f7>" . (lambda()
                (interactive)
@@ -3657,6 +3649,16 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("u" . crux-sudo-edit)
  ("D" . crux-delete-file-and-buffer)
  ("<f2>" . rename-visited-file)
+
+ :prefix-map window-map
+ :prefix "C-c w"
+ ("]" . ace-swap-window)
+ ("\\" . rotate-layout)
+ ("s" . easysession-save-as)
+ ("l" . easysession-load)
+ ("X" . easysession-reset)
+ ("D" . easysession-delete)
+ ("<SPC>" . easysession-switch-to)
 
  :prefix-map mark-map
  :prefix "C-c m"
