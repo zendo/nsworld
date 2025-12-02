@@ -1216,6 +1216,28 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (setq locale-coding-system 'utf-8)
 #+end_src
 
+** Localization
+~C-h f~ =format-time-string= for more details.
+
+#+begin_src emacs-lisp
+(setq display-time-24hr-format t)
+;; (setq system-time-locale "C") ;使用英文时间格式
+;; (setq calendar-latitude 23.38
+;;       calendar-longitude 113.20)
+
+(setq world-clock-time-format "  %a %d %b %R %Z")
+(setq world-clock-list
+      '(
+        ("America/Los_Angeles" "旧金山")
+        ("America/New_York" "纽约")
+        ("Europe/London" "伦敦")
+        ("Europe/Paris" "巴黎")
+        ("Asia/Calcutta" "班加罗尔")
+        ("Asia/Shanghai" "上海")
+        ("Asia/Tokyo" "东京")
+        ))
+#+end_src
+
 ** Shell
 *** exec-path-from-shell
 #+begin_src emacs-lispxxx
@@ -1426,8 +1448,6 @@ Linux handle by nix.
 ;; (column-number-mode t) ;显示列数
 ;; (size-indication-mode t) ;显示文件大小
 ;; (add-hook 'after-init-hook #'display-time-mode) ;显示时间
-(setq display-time-24hr-format t)
-;; (setq system-time-locale "C") ;使用英文时间格式
 ;; (unless (string-match-p "^Power N/A" (battery))
 ;;   (display-battery-mode 1))
 
@@ -1509,6 +1529,7 @@ Linux handle by nix.
         treemacs-project-follow-mode t
         treemacs-git-commit-diff-mode t
         treemacs-file-follow-delay 2
+        treemacs-collapse-dirs 0
         treemacs-show-cursor nil
         treemacs-silent-filewatch t
         treemacs-silent-refresh t))
@@ -1936,13 +1957,14 @@ https://gitlab.com/jabranham/mixed-pitch
 ;; with a file, while auto-save-visited-mode only saves file-visiting buffers
 ;; after a period of idle time, directly saving to the file itself without
 ;; creating backup files.
-(setq auto-save-visited-interval 5)   ; Save after 5 seconds if inactivity
-(auto-save-visited-mode 1)
-(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+;; OR `super-save`
+;; (setq auto-save-visited-interval 5) ; Save after 5 seconds if inactivity
+;; (auto-save-visited-mode 1)
+;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
 #+end_src
 
 ** super-save
-#+begin_src emacs-lispxx
+#+begin_src emacs-lisp
 (use-package super-save
   :hook (after-init . super-save-mode)
   :config
