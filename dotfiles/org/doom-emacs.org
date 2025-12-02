@@ -2,6 +2,7 @@
 #+AUTHOR: zendo
 #+DATE: 03/2025
 #+STARTUP: show2levels indent
+#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/doom/config.el"
 #+AUTO_TANGLE: t
 
 * init
@@ -219,9 +220,7 @@
 (package! org-modern :disable t)
 #+end_src
 
-* config
-#+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/doom/config.el"
-** Header
+* Header
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -233,29 +232,18 @@
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
-#+end_src
 
-** Silence Warnings
-#+begin_src emacs-lisp
 (setq confirm-kill-emacs nil
-      confirm-kill-processes nil
+      ;; confirm-kill-processes nil
       warning-minimum-level :emergency ; temp disable
       )
-
-;; throw custom file
-(setq-default custom-file (expand-file-name ".custom.el" doom-local-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-;; disable prompt
-(put 'dired-find-alternate-file 'disabled nil)
 
 ;; Load the default init file
 (load "default" 'noerror 'nomessage)
 #+end_src
 
-** Systems
-*** Windows
+* Systems
+** Windows
 #+begin_src emacs-lisp
 (when (featurep :system 'windows)
   (setq doom-font (font-spec :family "JetBrains Mono" :size 26)
@@ -270,7 +258,7 @@
   (add-hook 'after-setting-font-hook #'my-cjk-font))
 #+end_src
 
-*** Linux
+** Linux
 #+begin_src emacs-lisp
 (when (featurep :system 'linux)
   (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
@@ -286,7 +274,7 @@
   (add-hook 'after-setting-font-hook #'my-cjk-font))
 #+end_src
 
-*** WSL
+** WSL
 #+begin_src emacs-lisp
 (when (featurep :system 'wsl)
   ;; open links in Windows browser
@@ -308,7 +296,7 @@
         interprogram-cut-function #'gui-select-text))
 #+end_src
 
-** UI
+* UI
 #+begin_src emacs-lisp
 ;; (add-to-list 'default-frame-alist '(height . 40))
 ;; (add-to-list 'default-frame-alist '(width . 80))
@@ -323,7 +311,7 @@
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 #+end_src
 
-** Editor
+* Editor
 #+begin_src emacs-lisp
 ;; Repeating C-SPC after popping mark pops
 (setq set-mark-command-repeat-pop t)
@@ -332,23 +320,22 @@
 (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 #+end_src
 
-*** Wrap
+** word-wrap
 #+begin_src emacs-lisp
-(when (modulep! :editor word-wrap)
-  (+global-word-wrap-mode +1))
-;; or
-(set-default 'word-wrap nil)
-(set-default 'truncate-lines nil)
+;; (when (modulep! :editor word-wrap)
+;;   (+global-word-wrap-mode +1))
+(set-default 'word-wrap nil) ;在任意字符处拆分单词换行
+(set-default 'truncate-lines nil) ;自动折行到下一行，可能影响性能
 #+end_src
 
-** Programming
+* Programming
 #+begin_src emacs-lisp
 (setq +default-want-RET-continue-comments nil ; 别在新行加注释
       display-line-numbers-type 't ; t / nil / relative
  )
 #+end_src
 
-*** flycheck
+** flycheck
 #+begin_src emacs-lisp
 ;; disable flycheck in some mode
 (setq flycheck-disabled-checkers '(sh-shellscript
@@ -356,14 +343,14 @@
                                    emacs-lisp-checkdoc))
 #+end_src
 
-*** nix
+** nix
 #+begin_src emacs-lisp
 (setq! lsp-nix-server-path "nixd")
 (use-package! nix-mode
   :custom (nix-nixfmt-bin "nixfmt"))
 #+end_src
 
-** Completion
+* Completion
 #+begin_src emacs-lisp
 ;; hippie expand is dabbrev expand on steroids
 ;; doom 顺序似乎不对，这里覆盖自己的配置
@@ -380,12 +367,13 @@
         try-complete-lisp-symbol))         ;补全 lisp symbol
 #+end_src
 
-** Backup
+* Backup
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
       undo-in-region t
-      recentf-exclude '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$" "autosave$" "treemacs-persist" )
+      recentf-exclude '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$"
+                         "autosave$" "treemacs-persist" )
       )
 
 (after! vundo
@@ -396,7 +384,7 @@
 ;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 #+end_src
 
-*** super-save
+** super-save
 #+begin_src emacs-lisp
 (use-package! super-save
   :config
@@ -425,8 +413,8 @@
   )
 #+end_src
 
-** Files
-*** projectile
+* Files
+** projectile
 #+begin_src emacs-lisp
 (after! projectile
   ;; manual clear cache (M-x projectile-invalidate-cache) or
@@ -434,7 +422,7 @@
   )
 #+end_src
 
-*** dired
+** dired
 #+begin_src emacs-lisp
 ;; recentf 不要保存 dired 记录
 (define-advice doom--recentf-add-dired-directory-h (:override ()))
@@ -460,14 +448,14 @@
   (call-interactively #'dired-mark-files-regexp)
   (command-execute "tk"))
 #+end_src
-** Org
+* Org
 #+begin_src emacs-lisp :tangle no
 (after! org
 
   )
 #+end_src
 
-** Shell
+* Shell
 #+begin_src emacs-lisp
 ;; vterm or eshell
 (when (featurep :system 'windows)
@@ -480,15 +468,14 @@
     (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
 #+end_src
 
-** Mouse
+* Mouse
 #+begin_src emacs-lisp
-(blink-cursor-mode -1)               ;禁用指针闪烁
 (fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (global-unset-key (kbd "C-<wheel-up>"))
 (global-unset-key (kbd "C-<wheel-down>"))
 ;; 禁用 mouse-drag-region
-(global-unset-key [M-mouse-1])
+;; (global-unset-key [M-mouse-1])
 (global-unset-key [M-drag-mouse-1])
 (global-unset-key [M-down-mouse-1])
 (global-unset-key [M-mouse-3])
@@ -499,7 +486,7 @@
 (pixel-scroll-precision-mode t)
 #+end_src
 
-** Keybindings
+* Keybindings
 #+begin_src emacs-lisp
 (ffap-bindings)
 (setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
@@ -509,7 +496,7 @@
 (global-set-key (kbd "C-S-z") 'undo-redo)
 #+end_src
 
-*** Global keymap
+** Global keymap
 #+begin_src emacs-lisp
 (map!
  "C-\\" #'align-regexp
@@ -544,7 +531,7 @@
  "C-}" #'mc/mark-next-like-this
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
- "s-<mouse-1>" #'mc/add-cursor-on-click
+ "M-<mouse-1>" #'mc/toggle-cursor-on-click
 
  "M-z" #'avy-zap-to-char
  [remap kill-ring-save] #'easy-kill
@@ -575,7 +562,7 @@
  )
 #+end_src
 
-*** Emacs leader key
+** Emacs leader key
 #+begin_src emacs-lisp
 (unless (modulep! :editor evil +everywhere)
   ;; (setq doom-leader-alt-key "C-c")
@@ -612,11 +599,13 @@
    "'" #'er/mark-inside-quotes
    "[" #'er/mark-inside-pairs
    :prefix ("w" . "window")
-   "x" #'ace-swap-window
-   "v" #'rotate-layout
+   "]" #'ace-swap-window
+   "\\" #'rotate-layout
+   "<SPC>" #'doom/load-session
    ))
 #+end_src
-*** Evil leader key
+
+** Evil leader key
 #+begin_src emacs-lisp
 (when (modulep! :editor evil +everywhere)
   (map!
@@ -648,7 +637,7 @@
    ))
 #+end_src
 
-*** casual
+** casual
 https://github.com/kickingvegas/casual
 
 #+begin_src emacs-lisp
@@ -660,8 +649,8 @@ https://github.com/kickingvegas/casual
          :map Info-mode-map ("C-o" . casual-info-tmenu)))
 #+end_src
 
-** Functions
-*** backward-delete-word
+* Functions
+** backward-delete-word
 ~M-backspace~ 删除而非剪切
 
 #+begin_src emacs-lisp
