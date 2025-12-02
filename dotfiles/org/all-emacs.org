@@ -1768,12 +1768,11 @@ https://github.com/neeasade/stillness-mode.el
 
 ** word-wrap
 #+begin_src emacs-lisp
-;; 折叠 word wrap
-;; (global-visual-line-mode 1)
+;; (global-visual-line-mode 1) ;视觉换行
 ;; Better word wrapping for CJK characters
 ;; (setq word-wrap-by-category t)
-(set-default 'word-wrap nil) ;在任意字符处拆分单词换行
-(set-default 'truncate-lines nil) ;自动折行到下一行，可能影响性能
+;; (set-default 'word-wrap nil) ;在任意字符处拆分单词换行
+;; (set-default 'truncate-lines nil) ;启用行截断，可能影响性能
 
 ;; ~display-fill-column-indicator-mode~
 ;; (setq-default fill-column 80) ; default: 70 init: 80
@@ -1925,7 +1924,7 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 ** dirvish
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package dirvish
   :hook (after-init . dirvish-override-dired-mode)
   :bind (:map dired-mode-map
@@ -2705,7 +2704,7 @@ hippie expand is dabbrev expand on steroids
   (magit-format-file-function #'magit-format-file-nerd-icons)
   :config
   ;; Magit status fullscreen
-  ;; (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 
   (when IS-WINDOWS
     (setq magit-refresh-status-buffer nil)
@@ -3055,13 +3054,15 @@ Run code formatters on ~after-save-hook~
 * Programming
 ** prog-mode
 #+begin_src emacs-lisp
-;; prog-mode 编程模式设定
-(defun my-prog-settings ()
-  "My owner my-prog-settings."
-  (hl-line-mode)               ;高亮当前行
-  (whitespace-mode)            ;显示空格
-  (display-line-numbers-mode)) ;显示行号
-(add-hook 'prog-mode-hook 'my-prog-settings)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (hl-line-mode)              ;高亮当前行
+            (whitespace-mode)           ;显示空格
+            (display-line-numbers-mode) ;显示行号
+            ;; word-wrap
+            (setq word-wrap nil)        ;在任意字符处拆分单词换行
+            (setq truncate-lines nil)   ;启用行截断
+            ))
 #+end_src
 
 ** compilation
