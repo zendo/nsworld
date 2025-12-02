@@ -11,7 +11,7 @@
     inputs.nixos-wsl.nixosModules.wsl
     inputs.self.nixosModules.homeManagerInit
     (self + /nixos/core/base.nix)
-    (self + /nixos/core/fonts.nix)
+    (self + /nixos/core/fonts-cn.nix)
     (self + /nixos/core/nixpkgs.nix)
     (self + /nixos/core/nixconfig.nix)
   ];
