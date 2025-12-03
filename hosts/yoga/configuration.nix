@@ -160,7 +160,7 @@
     }
   ];
 
-  # zramSwap.enable = lib.mkDefault true;
+  zramSwap.enable = true;
 
   # ╭──────────────────────────────────────────────────────────╮
   # │ BOOTLOADER                                               │
