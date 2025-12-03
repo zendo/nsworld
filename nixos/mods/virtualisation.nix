@@ -41,7 +41,7 @@ in
   '';
 
   config = lib.mkIf cfg.enable {
-    # services.flatpak.enable = true;
+    services.flatpak.enable = true;
 
     programs = {
       # adb.enable = true;

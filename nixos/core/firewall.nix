@@ -1,3 +1,8 @@
+/*
+  sudo firewall-cmd --permanent --zone=trusted --add-interface=tun0
+  sudo firewall-cmd --reload
+  sudo firewall-cmd --list-all-zones
+*/
 { pkgs, ... }:
 {
   networking = {
@@ -14,8 +19,4 @@
       enable = true;
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    firewalld-gui
-  ];
 }

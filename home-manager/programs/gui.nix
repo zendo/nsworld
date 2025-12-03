@@ -11,6 +11,7 @@
     # vesktop # discord
     # fractal
     # fluffychat
+    # newsflash
     venera
     jhentai
 

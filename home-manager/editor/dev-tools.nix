@@ -9,7 +9,7 @@
     pylyzer
     # ruff
     ### forntend ###
-    nodejs
+    # nodejs
     ### lsp ###
     bash-language-server
     lua-language-server
