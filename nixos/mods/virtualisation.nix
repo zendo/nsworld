@@ -41,6 +41,7 @@ in
   '';
 
   config = lib.mkIf cfg.enable {
+    # bazaar
     services.flatpak.enable = true;
 
     programs = {
