@@ -115,7 +115,6 @@
     read-edid
     xorg.xeyes
     # libinput
-    wl-clipboard
     # squirreldisk
     resources
     # mission-center

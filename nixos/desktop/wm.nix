@@ -76,7 +76,6 @@
           wlogout
           fuzzel
           bemoji
-          wl-clipboard
           wf-recorder
           cliphist
           blueberry
