@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     # anich # 在线动漫弹幕
     # animeko
+    amethyst
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
