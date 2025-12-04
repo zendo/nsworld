@@ -22,7 +22,7 @@
 
   inputs = {
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.xz";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     # nixpkgs.url = "git+file:///home/iab/code/nixpkgs/?ref=pr-throne-430949";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
