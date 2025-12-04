@@ -9,12 +9,12 @@
     profiles.huohu = {
       isDefault = true;
       # userChrome = ''
-      #   @import "${pkgs.firefox-gnome-theme}/userChrome.css";
+      #   @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
       # '';
       # userContent = ''
-      #   @import "${pkgs.firefox-gnome-theme}/userContent.css";
+      #   @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
       # '';
-      # and add: ${builtins.readFile "${pkgs.firefox-gnome-theme}/configuration/user.js"}
+      # and add: ${builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js"}
       extraConfig = ''
         ${builtins.readFile "${pkgs.betterfox}/user.js"}
 

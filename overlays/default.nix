@@ -36,15 +36,7 @@
     # Modifying Packages
     # =========================================================================
     modifications = final: prev: {
-      # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
-
-      # nurl https://github.com/rafaelmardojai/firefox-gnome-theme v143
-      firefox-gnome-theme = prev.fetchFromGitHub {
-        owner = "rafaelmardojai";
-        repo = "firefox-gnome-theme";
-        rev = "v143";
-        hash = "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4=";
-      };
+      # foo = prev.callPackage ./foo/package.nix { };
 
       # nurl https://github.com/sahaj-b/ghostty-cursor-shaders
       ghostty-cursor-shaders = prev.fetchFromGitHub {
