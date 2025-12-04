@@ -7,6 +7,7 @@
       # default config from:
       # https://github.com/nix-community/home-manager/blob/master/modules/programs/ssh.nix#L648
       "*" = {
+        # setEnv.TERM = "xterm-256color";
         forwardAgent = false;
         addKeysToAgent = "no";
         compression = false;

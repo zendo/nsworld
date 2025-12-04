@@ -38,14 +38,6 @@
     modifications = final: prev: {
       # mihomo-party = prev.callPackage ./mihomo-party/package.nix { };
 
-      # nurl https://github.com/yokoffing/Betterfox 144.0
-      betterfox = prev.pkgs.fetchFromGitHub {
-        owner = "yokoffing";
-        repo = "Betterfox";
-        rev = "144.0";
-        hash = "sha256-sYOjMSFJSq9VWG4S78n3lXExreYXalUAHmEPXP2vnfM=";
-      };
-
       # nurl https://github.com/rafaelmardojai/firefox-gnome-theme v143
       firefox-gnome-theme = prev.fetchFromGitHub {
         owner = "rafaelmardojai";
