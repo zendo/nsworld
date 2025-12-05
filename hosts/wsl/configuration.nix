@@ -3,7 +3,7 @@
   pkgs,
   self,
   inputs,
-  username,
+  myvar,
   ...
 }:
 {
@@ -19,7 +19,7 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │  Home-manager                                            │
   # ╰──────────────────────────────────────────────────────────╯
-  home-manager.users.${username} =
+  home-manager.users.${myvar.user} =
     { pkgs, ... }:
     {
       imports = [
@@ -59,7 +59,7 @@
   # ╰──────────────────────────────────────────────────────────╯
   wsl = {
     enable = true;
-    defaultUser = "${username}";
+    defaultUser = "${myvar.user}";
     startMenuLaunchers = true;
   };
 

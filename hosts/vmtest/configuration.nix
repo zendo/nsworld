@@ -3,7 +3,7 @@
   lib,
   inputs,
   self,
-  username,
+  myvar,
   ...
 }:
 {
@@ -36,7 +36,7 @@
   environment.variables = { };
 
   services = {
-    displayManager.autoLogin.user = "${username}";
+    displayManager.autoLogin.user = "${myvar.user}";
     xserver = {
       # enable = true;
       desktopManager = {
@@ -86,7 +86,7 @@
     # pw: root
     root.initialHashedPassword = lib.mkForce "$y$j9T$0t8NyDpq3ikgERiGgdPru0$pI6bTECjj2pSb68lF.U0xpftH.2vTF26uiRasZnROD3";
     # pw: test
-    ${username}.initialHashedPassword =
+    ${myvar.user}.initialHashedPassword =
       lib.mkForce "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
   };
 

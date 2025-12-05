@@ -2,7 +2,7 @@
   lib,
   pkgs,
   config,
-  username,
+  myvar,
   ...
 }:
 # Copy: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/sing-box.nix
@@ -29,7 +29,7 @@ in
         WorkingDirectory = "/var/lib/sing-box";
         ExecStart = [
           ""
-          "${lib.getExe pkgs.sing-box} run -c /home/${username}/code/subs/config.jsonc -D \${STATE_DIRECTORY}"
+          "${lib.getExe pkgs.sing-box} run -c /home/${myvar.user}/code/subs/config.jsonc -D \${STATE_DIRECTORY}"
         ];
         Restart = "on-failure";
       };

@@ -2,7 +2,7 @@
   inputs,
   self,
   pkgs,
-  username,
+  myvar,
   ...
 }:
 {
@@ -30,9 +30,9 @@
 
   services.acpid.enable = true;
   # services.fwupd.enable = true;
-  services.displayManager.autoLogin.user = "${username}";
+  services.displayManager.autoLogin.user = "${myvar.user}";
 
-  users.users.${username} = {
+  users.users.${myvar.user} = {
     # pw: 123
     hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
   };

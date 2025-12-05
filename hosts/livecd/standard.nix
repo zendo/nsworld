@@ -8,7 +8,7 @@
   self,
   pkgs,
   lib,
-  username,
+  myvar,
   modulesPath,
   ...
 }:
@@ -37,7 +37,7 @@
   };
 
   services = {
-    displayManager.autoLogin.user = "${username}";
+    displayManager.autoLogin.user = "${myvar.user}";
     xserver = {
       # xkb.options = "ctrl:swapcaps"; # Xorg Layout
     };
@@ -47,7 +47,7 @@
     # passwd: root
     root.initialHashedPassword = lib.mkForce "$y$j9T$8/wRQiclXB6j79eGn8FKp.$MayXuTGruzrN4kDOUXSIJhPUg3BLdL69EOERDXRRQq.";
     # psaawd: live
-    ${username}.initialHashedPassword =
+    ${myvar.user}.initialHashedPassword =
       lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
   };
 

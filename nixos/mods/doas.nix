@@ -24,7 +24,7 @@ in
       # or
       extraRules = [
         {
-          users = [ "${self.nixosConfigurations.yoga._module.specialArgs.username}" ];
+          users = [ "${self.nixosConfigurations.yoga._module.specialArgs.myvar.user}" ];
           noPass = true;
           keepEnv = true;
         }
