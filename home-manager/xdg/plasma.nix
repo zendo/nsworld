@@ -45,7 +45,7 @@
                 "applications:com.mitchellh.ghostty.desktop"
                 "preferred://filemanager"
                 # "applications:org.kde.dolphin.desktop"
-                "applications:emacs.desktop"
+                # "applications:emacs.desktop"
                 # "applications:code.desktop"
                 "preferred://browser"
                 # "applications:org.kde.kate.desktop"
@@ -119,7 +119,7 @@
       # 夜间颜色 2700K~3000K
       nightLight = {
         enable = true;
-        mode = "location";
+        # mode = "location";
         temperature = {
           # day = "";
           night = 3000;
