@@ -2599,7 +2599,7 @@ http://company-mode.github.io/manual/Getting-Started.html
 ** Hippie Expand
 hippie expand is dabbrev expand on steroids
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 ;; (global-set-key [remap dabbrev-expand] #'hippie-expand)
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
