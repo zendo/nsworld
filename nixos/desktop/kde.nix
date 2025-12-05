@@ -22,7 +22,7 @@
       # sddm-astronaut
     ]
     ++ (with kdePackages; [
-      yakuake
+      # yakuake
       krfb
       krdc
       kwave
@@ -36,6 +36,7 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa
     khelpcenter
+    discover
     # print-manager
     plasma-browser-integration
   ];

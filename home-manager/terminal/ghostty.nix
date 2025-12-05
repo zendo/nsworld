@@ -26,6 +26,8 @@
       window-padding-y = "4";
       window-theme = "ghostty";
       # copy-on-select = "clipboard";
+      quick-terminal-size = "60%";
+      quick-terminal-autohide = true;
       keybind = [
         # "global:ctrl+grave_accent=toggle_quick_terminal"
         "global:super+comma=toggle_quick_terminal"
