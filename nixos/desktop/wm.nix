@@ -1,11 +1,15 @@
 {
   lib,
-  pkgs,
   self,
-  config,
+  pkgs,
   ...
 }:
 {
+  imports = [
+    ./dms.nix
+    # ./greetd.nix
+  ];
+
   security = {
     soteria.enable = true; # Polkit agent
     pam.services.hyprlock = { };
@@ -15,23 +19,6 @@
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     geoclue2.enable = true;
-
-    greetd = {
-      enable = true;
-      # useTextGreeter = true;
-      settings = {
-        default_session = {
-          command = lib.concatStringsSep " " [
-            "${lib.getExe pkgs.tuigreet}"
-            "--time"
-            "--asterisks"
-            "--remember"
-            "--remember-session"
-            "--sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"
-          ];
-        };
-      };
-    };
   };
 
   programs = {
@@ -65,7 +52,7 @@
       { pkgs, ... }:
       {
         imports = [
-          (self + /home-manager/xdg/noctalia.nix)
+          # (self + /home-manager/xdg/noctalia.nix)
         ];
 
         home.packages = with pkgs; [

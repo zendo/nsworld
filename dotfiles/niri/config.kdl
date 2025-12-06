@@ -1,2 +1,3 @@
-include "origin.kdl"
-include "noctalia-niri.kdl"
+include "configs/base.kdl"
+// include "configs/noctalia-niri.kdl"
+include "configs/dms-niri.kdl"

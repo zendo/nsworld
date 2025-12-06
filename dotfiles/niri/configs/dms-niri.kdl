@@ -1,0 +1,56 @@
+binds {
+    Mod+X hotkey-overlay-title="Application Launcher" {
+        spawn-sh "dms ipc call spotlight toggle";
+    }
+    Mod+V hotkey-overlay-title="Clipboard Manager" {
+        spawn-sh "dms ipc call clipboard toggle";
+    }
+    Mod+M hotkey-overlay-title="Task Manager" {
+        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+    }
+    Mod+Comma hotkey-overlay-title="Settings" {
+        spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+    }
+    Mod+N hotkey-overlay-title="Notification Center" {
+        spawn-sh "dms ipc call notifications toggle";
+    }
+    Mod+L hotkey-overlay-title="Lock Screen" {
+        spawn-sh "dms ipc call lock lock";
+    }
+
+    // Audio Controls
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn-sh "dms ipc call audio increment 3";
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn-sh "dms ipc call audio decrement 3";
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn-sh "dms ipc call audio mute";
+    }
+
+    // Brightness Controls
+    XF86MonBrightnessUp allow-when-locked=true {
+        spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+        spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+    }
+}
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+window-rule {
+    match app-id=r#"^org\.gnome\."#
+    draw-border-with-background false
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+// Open DMS windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}

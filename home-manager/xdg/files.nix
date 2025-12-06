@@ -20,8 +20,9 @@ in
     "yt-dlp".source = linkFlake "dotfiles/yt-dlp";
     "swaylock".source = linkFlake "dotfiles/swaylock";
 
-    "niri".source = linkFlake "dotfiles/niri";
     "sway/config".source = linkFlake "dotfiles/sway/config";
+    "niri/configs".source = linkFlake "dotfiles/niri/configs";
+    "niri/config.kdl".source = linkFlake "dotfiles/niri/config.kdl";
     "hypr/hyprland.conf".source = linkFlake "dotfiles/hypr/hyprland.conf";
     "hypr/hypridle.conf".source = linkFlake "dotfiles/hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = linkFlake "dotfiles/hypr/hyprlock.conf";
