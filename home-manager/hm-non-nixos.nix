@@ -1,7 +1,7 @@
 {
   pkgs,
   inputs,
-  username,
+  myvars,
   ...
 }:
 {
@@ -64,8 +64,8 @@
       goodvibes
     ];
 
-    username = "${username}";
-    homeDirectory = "/home/${username}";
+    username = "${myvars.user}";
+    homeDirectory = "/home/${myvars.user}";
     stateVersion = "26.05";
   };
 

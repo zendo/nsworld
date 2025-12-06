@@ -6,7 +6,9 @@
     let
       mkHome =
         {
-          username,
+          myvars ? {
+            user = "";
+          },
           nixpkgs ? inputs.nixpkgs,
           system ? "x86_64-linux",
           extraModules ? [ ],
@@ -19,7 +21,7 @@
           };
 
           extraSpecialArgs = {
-            inherit inputs username;
+            inherit inputs myvars;
           };
 
           modules =
@@ -34,13 +36,17 @@
     {
       # main
       iab = mkHome {
-        username = "iab";
+        myvars = {
+          user = "iab";
+        };
         extraModules = [ ./xdg/dconf.nix ];
       };
 
       # MAYBE: other user on nixos
       guest = mkHome {
-        username = "guest";
+        myvars = {
+          user = "guest";
+        };
         extraModules = [
           ./programs/gui.nix
           ./programs/bash.nix

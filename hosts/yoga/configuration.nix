@@ -115,10 +115,10 @@
     # Disable power management for "Intel AX200" driver
     # https://github.com/zachlatta/nixos-configs/blob/master/bak/lugia/intel_ax200_fix.nix
     # nix shell nixpkgs#wirelesstools --command iwconfig
-    # extraModprobeConfig = ''
-    #   options iwlwifi power_save=0
-    #   options iwlmvm power_scheme=1
-    # '';
+    extraModprobeConfig = ''
+      options iwlwifi power_save=0
+      options iwlmvm power_scheme=1
+    '';
 
     kernelParams = [
       # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
