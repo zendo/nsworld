@@ -1,6 +1,6 @@
-{ inputs, ... }:
+{ lib, ... }:
 {
-  flake.lib = inputs.nixpkgs.lib.extend (
-    final: prev: import ./attrsets.nix { lib = final; } // import ./umport.nix { lib = final; }
+  flake.lib = lib.extend (
+    final: prev: (import ./attrsets.nix { lib = final; }) // (import ./umport.nix { lib = final; })
   );
 }
