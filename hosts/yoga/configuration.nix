@@ -32,6 +32,13 @@
   services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
+  # TEST
+  # system.nixos.tags = [
+  #   "${myvars.user}"
+  #   "${myvars.timezone}"
+  #   "${myvars.locale}"
+  # ];
+
   # ╭──────────────────────────────────────────────────────────╮
   # │ PROXY                                                    │
   # ╰──────────────────────────────────────────────────────────╯

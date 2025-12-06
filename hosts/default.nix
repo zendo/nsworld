@@ -18,7 +18,8 @@ let
     in
     nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit inputs self myvars;
+        inherit inputs self;
+        myvars = vars;
       };
       modules = [
         {
