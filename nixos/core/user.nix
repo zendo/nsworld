@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  myvar,
+  myvars,
   self,
   ...
 }:
@@ -9,7 +9,7 @@ let
   inherit (lib) mkIf;
 
   sudoRule = {
-    users = [ "${self.nixosConfigurations.yoga._module.specialArgs.myvar.user}" ];
+    users = [ "${self.nixosConfigurations.yoga._module.specialArgs.myvars.user}" ];
     commands = [
       {
         command = "ALL";
@@ -34,7 +34,7 @@ in
       ];
     };
 
-    users.${myvar.user} = {
+    users.${myvars.user} = {
       isNormalUser = true;
       # `mkpasswd`
       initialHashedPassword = "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";

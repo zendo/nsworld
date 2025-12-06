@@ -1,7 +1,7 @@
 {
   self,
   pkgs,
-  myvar,
+  myvars,
   ...
 }:
 {
@@ -30,7 +30,7 @@
 
   # Desktop Environment
   services = {
-    displayManager.autoLogin.user = "${myvar.user}";
+    displayManager.autoLogin.user = "${myvars.user}";
     xserver = {
       # enable = true;
       desktopManager = {
@@ -51,7 +51,7 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  users.users.${myvar.user} = {
+  users.users.${myvars.user} = {
     # pw: 123
     hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
   };

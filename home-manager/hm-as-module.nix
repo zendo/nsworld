@@ -1,6 +1,6 @@
 {
   inputs,
-  myvar,
+  myvars,
   ...
 }:
 {
@@ -18,8 +18,8 @@
     };
     ### Common User Initialization ###
     # sharedModules = [ ./hm-on-nixos.nix ];
-    # users.${myvar.user}.home.username = myvar.user;
+    # users.${myvars.user}.home.username = myvars.user;
     ### Specific User Initialization ###
-    users.${myvar.user} = ./hm-on-nixos.nix;
+    users.${myvars.user} = ./hm-on-nixos.nix;
   };
 }

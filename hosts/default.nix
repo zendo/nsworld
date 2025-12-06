@@ -4,7 +4,7 @@
     let
       mkHost =
         {
-          myvar ? {
+          myvars ? {
             user = "";
             host = "";
           },
@@ -13,13 +13,13 @@
         }:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs self myvar;
+            inherit inputs self myvars;
           };
           modules = [
             (
-              { lib, myvar, ... }:
+              { lib, myvars, ... }:
               {
-                networking.hostName = myvar.host;
+                networking.hostName = myvars.host;
                 i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
                 time.timeZone = lib.mkDefault "Asia/Shanghai";
                 system.stateVersion = lib.mkDefault "26.05";
@@ -32,7 +32,7 @@
     in
     {
       yoga = mkHost {
-        myvar = {
+        myvars = {
           user = "iab";
           host = "yoga";
         };
@@ -42,7 +42,7 @@
       };
 
       svp = mkHost {
-        myvar = {
+        myvars = {
           user = "zendo";
           host = "svp";
         };
@@ -53,7 +53,7 @@
       };
 
       rmt = mkHost {
-        myvar = {
+        myvars = {
           user = "aaa";
           host = "rmt";
         };
@@ -64,7 +64,7 @@
 
       # nix build .#nixosConfigurations.vmtest.config.system.build.vm
       vmtest = mkHost {
-        myvar = {
+        myvars = {
           user = "test";
           host = "vmtest";
         };
@@ -75,7 +75,7 @@
 
       # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
       wsl = mkHost {
-        myvar = {
+        myvars = {
           user = "iab";
           host = "wsl";
         };
@@ -86,7 +86,7 @@
 
       # nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
       livecd-standard = mkHost {
-        myvar = {
+        myvars = {
           user = "live";
           host = "livecd";
         };

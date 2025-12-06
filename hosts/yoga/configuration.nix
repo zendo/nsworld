@@ -3,7 +3,7 @@
   self,
   lib,
   pkgs,
-  myvar,
+  myvars,
   ...
 }:
 {
@@ -30,7 +30,7 @@
 
   services.acpid.enable = true;
   services.fwupd.enable = true;
-  # services.displayManager.autoLogin.user = "${myvar.user}";
+  # services.displayManager.autoLogin.user = "${myvars.user}";
 
   # ╭──────────────────────────────────────────────────────────╮
   # │ PROXY                                                    │
@@ -67,13 +67,13 @@
     # enable = true;
     tunMode = true;
     webui = pkgs.zashboard;
-    configFile = "/home/${myvar.user}/code/subs/config.yaml";
+    configFile = "/home/${myvars.user}/code/subs/config.yaml";
   };
 
   # services.daeWithConfig.enable = true;
   services.dae = {
     # enable = true;
-    configFile = "/home/${myvar.user}/code/subs/dae-config.dae";
+    configFile = "/home/${myvars.user}/code/subs/dae-config.dae";
   };
 
   programs.throne = {
