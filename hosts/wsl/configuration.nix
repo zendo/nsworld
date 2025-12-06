@@ -49,6 +49,7 @@
       wslu
       wsl-open
       xdg-utils # for git oauth
+      wl-clipboard
     ];
   };
 

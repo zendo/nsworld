@@ -115,6 +115,7 @@
     edid-decode
     read-edid
     xorg.xeyes
+    wl-clipboard
     # libinput
     # squirreldisk
     resources

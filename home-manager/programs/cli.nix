@@ -66,7 +66,6 @@
     bat
     just
     igrep
-    wl-clipboard
     cht-sh
     tlrc # tldr
     # tealdeer # tldr
