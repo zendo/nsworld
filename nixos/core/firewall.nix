@@ -3,7 +3,7 @@
   sudo firewall-cmd --reload
   sudo firewall-cmd --list-all-zones
 */
-{ pkgs, ... }:
+{ ... }:
 {
   networking = {
     nftables.enable = true;

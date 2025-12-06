@@ -31,7 +31,7 @@
     tmp.useTmpfs = false;
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = {
-      # bcachefs = true;
+      bcachefs = true;
       zfs = lib.mkForce false; # always broken
     };
   };
