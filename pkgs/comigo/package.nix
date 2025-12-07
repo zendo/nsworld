@@ -22,6 +22,10 @@ buildGoModule rec {
     "-w"
   ];
 
+  postInstall = ''
+    rm $out/bin/comi
+  '';
+
   meta = {
     description = "Simple and Efficient Comic Reader";
     homepage = "https://github.com/yumenaka/comigo";
