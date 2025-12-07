@@ -27,8 +27,7 @@
 
     # network
     ip = "ip --color=auto";
-    ip-info = "curl ip.im/info";
-    nload = "${lib.getExe pkgs.nload} devices wlp1s0";
+    ip-api = "curl ip-api.com";
     where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
