@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ inputs, self, ... }:
 let
   mkHost =
     {
