@@ -1,7 +1,6 @@
 /*
   nixos-rebuild --target-host root@192.168.1.197 \
-    --ask-sudo-password \
-    --flake .#svp switch
+    -S --flake .#svp switch
 */
 { inputs, lib, ... }:
 {

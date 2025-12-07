@@ -33,12 +33,12 @@ let
           system.stateVersion = myvars.state;
         }
       ]
-      # and more modules
       ++ extraModules;
     };
 in
 {
   flake.nixosConfigurations = {
+    # nixos-rebuild --sudo --flake .#yoga switch
     yoga = mkHost {
       user = "iab";
       host = "yoga";
@@ -47,6 +47,8 @@ in
       ];
     };
 
+    # nix build .#nixosConfigurations.svp.config.system.build.toplevel
+    # ./result/bin/switch-to-configuration switch
     svp = mkHost {
       user = "zendo";
       host = "svp";
@@ -56,6 +58,7 @@ in
       ];
     };
 
+    # nixos-rebuild --target-host aaa@rmt -S --flake .#rmt switch
     rmt = mkHost {
       user = "aaa";
       host = "rmt";
@@ -64,6 +67,7 @@ in
       ];
     };
 
+    # nixos-rebuild build-vm --flake .#vmtest
     # nix build .#nixosConfigurations.vmtest.config.system.build.vm
     vmtest = mkHost {
       user = "test";
@@ -91,6 +95,7 @@ in
       ];
     };
 
+    # nixos-rebuild build-image --image-variant iso-installer --flake .#livecd-minimal
     # nix build .#nixosConfigurations.livecd-minimal.config.system.build.isoImage
     livecd-minimal = inputs.nixpkgs.lib.nixosSystem {
       modules = [ ./livecd/minimal.nix ];
