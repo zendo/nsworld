@@ -18,6 +18,7 @@
 
       debug = true; # repl: flake.currentSystem / flake.debug
 
+      # systems for `perSystem`
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -42,8 +43,8 @@
             };
           };
 
-          # nix build .#
           # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
+          # nix build .#
           legacyPackages = pkgs;
 
           # flake.packages
