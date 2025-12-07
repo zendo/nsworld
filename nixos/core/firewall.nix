@@ -1,7 +1,11 @@
 /*
-  sudo firewall-cmd --permanent --zone=trusted --add-interface=tun0
+  --permanent
+  sudo firewall-cmd --zone=trusted --add-interface=tun0
   sudo firewall-cmd --reload
   sudo firewall-cmd --list-all-zones
+  sudo firewall-cmd --add-port=1234/tcp
+  maybe sudo firewall-cmd --add-port=1234/udp
+  sudo firewall-cmd --list-ports
 */
 { ... }:
 {
