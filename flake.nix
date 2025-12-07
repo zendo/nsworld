@@ -11,13 +11,55 @@
         ./nixos # flake.nixosModules
         ./hosts # flake.nixosConfigurations
         ./templates # flake.templates
-        ./devshells # flake.devShells / flake.packages / perSystem
         ./devshells/treefmt.nix # flake.formatter
         ./hosts/deployment.nix # flake.deploy / flake.colmena
         ./home-manager/hm-as-standalone.nix # flake.homeConfigurations
       ];
 
       debug = true; # repl: flake.currentSystem / flake.debug
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      perSystem =
+        {
+          lib,
+          pkgs,
+          system,
+          config,
+          ...
+        }:
+        {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [ inputs.self.overlays.modifications ];
+            config = {
+              allowUnfree = true;
+              # allowInsecure = true;
+              android_sdk.accept_license = true;
+            };
+          };
+
+          # nix build .#
+          # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
+          legacyPackages = pkgs;
+
+          # flake.packages
+          packages =
+            lib.packagesFromDirectoryRecursive {
+              inherit (pkgs) callPackage;
+              directory = ./pkgs;
+            }
+            // {
+              # nix run .
+              default = config.packages.anich;
+            };
+
+          # nix develop .#rust
+          devShells = import ./devshells { inherit pkgs; };
+        };
     };
 
   inputs = {
