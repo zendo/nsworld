@@ -31,10 +31,10 @@
     inputs.self.formatter.${stdenv.hostPlatform.system}
 
     (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
+    (writeScriptBin "nsa" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))
     (writeScriptBin "pr-check" ''
       curl -s "https://nixpkgs.molybdenum.software/api/v2/landings/"$@"" | jq .
     '')
-    (writeScriptBin "nsa" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))
   ];
 
   programs = {
