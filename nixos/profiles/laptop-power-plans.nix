@@ -6,6 +6,13 @@
 }:
 {
   services = {
+    # sudo scx_rusty --monitor 0.5
+    scx = {
+      enable = true;
+      scheduler = "scx_rusty";
+      package = pkgs.scx.rustscheds;
+    };
+
     # https://wiki.debian.org/thermald
     thermald.enable = true;
 
