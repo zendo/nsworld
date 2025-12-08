@@ -43,10 +43,6 @@
             };
           };
 
-          # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
-          # nix build .#
-          legacyPackages = pkgs;
-
           # flake.packages
           packages =
             lib.packagesFromDirectoryRecursive {
@@ -57,6 +53,10 @@
               # nix run .
               default = config.packages.anich;
             };
+
+          # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
+          # nix build .#
+          legacyPackages = pkgs;
 
           # nix develop .#rust
           devShells = import ./devshells { inherit pkgs; };
