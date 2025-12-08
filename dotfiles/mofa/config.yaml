@@ -1,25 +1,15 @@
-# https://wiki.metacubex.one/config/
-mixed-port: 7890
-allow-lan: true
-bind-address: "*"
-mode: rule
-log-level: info
-ipv6: false
-external-controller: 127.0.0.1:9090
-external-ui: ui
-secret: "1984"
-external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
-keep-alive-interval: 30 # 发送 Keep-Alive 探测包的间隔时间 单位 s
-keep-alive-idle: 60 # 连接空闲多久后开始发送 Keep-Alive 探测包
-tcp-concurrent: true # 更换延迟计算方式，去除握手等额外延迟
-unified-delay: true # 启用 TCP 并发连接。这允许 Clash 同时建立多个 TCP 连接，可以提高网络性能和连接速度
-find-process-mode: strict # 设置进程查找模式为严格模式，Clash 会更精确地识别和匹配网络流量来源的进程
-global-client-fingerprint: chrome # 模拟 Chrome 浏览器的 TLS 指纹，增强隐私性和绕过某些网站的指纹检测
-global-ua: mihomo # 默认 clash.meta / chrome
-profile:
-  store-selected: true # 保存用户选择的代理配置，在 Clash 重启后仍然记住上次选择的代理服务器
-  store-fake-ip: true # 储存 fakeip 映射表，Clash 重启后依然能使用相同的 Fake IP 分配给相同的域名
+# =========================
+# 订阅链接（填入后自动拉取节点）
+# =========================
+# 需要将订阅链接填入url字段中，filter: 可填写正则表达式过滤节点，如"香港|HK|Taiwan|台湾"，additional-prefix: 可为节点名称添加前缀，如"[宝可梦|] "
+proxy-providers:
+  Provider1: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider1, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p1|]"}}
+  Provider2: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider2, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p2|]"}}
+  Provider3: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider2, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p3|]"}}
 
+# =========================
+# 虚拟网卡
+# =========================
 tun:
   enable: true
   stack: mixed # system/gvisor/mixed
@@ -29,13 +19,23 @@ tun:
   auto-detect-interface: true
   # dns-hijack: [ 'any:53','tcp://any:53' ] # 在 MacOS/Windows 无法自动劫持发往局域网的 dns 请求
 
-# 需要将订阅链接填入url字段中，filter: 可填写正则表达式过滤节点，如"香港|HK|Taiwan|台湾"，additional-prefix: 可为节点名称添加前缀，如"[宝可梦|] "
-proxy-providers:
-  Provider1: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider1, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p1|]"}}
-  Provider2: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider2, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p2|]"}}
-  Provider3: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider2, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p3|]"}}
+# =========================
+# 手动节点（可选）
+# =========================
+proxies:
+# 在此粘贴你的节点，格式示例：
+#   - name: 节点名称
+#     type: vless
+#     server: xxx
+#     ...
 
-# 这里可以根据需要修改策略组名称、添加或删除策略组
+# =========================
+# 代理组配置
+# =========================
+# - include-all-proxies: true  包含手动节点
+# - use: [订阅1, 订阅2, 订阅3, 订阅4, 订阅5] 包含订阅节点
+# - domain-strategy: ipv4-only 强制仅使用 IPv4
+# =========================
 proxy-groups:
   # PROXY: 主代理组（可自定义添加其他策略组到proxies列表中）
   - {name: PROXY, type: select, proxies: [AUTO,DIRECT,AI-PROXY], include-all: true, max-failed-times: 1, interval: 600, timeout: 1000, lazy: false}
@@ -44,7 +44,52 @@ proxy-groups:
   # AI-PROXY: AI服务专用代理（exclude-filter可过滤不想用的地区，如"HK|US|JP"）
   - {name: AI-PROXY, type: select, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, use: [Provider1,Provider2], exclude-filter: "HK|香港|Hong Kong", lazy: false}
 
-# https://linux.do/t/topic/1212835
+# https://wiki.metacubex.one/config/
+# https://linux.do/t/topic/1212835 极简防 DNS 泄漏配置（2025 年）2.0 版
+# https://linux.do/t/topic/1089685 分享自用精调的mihomo配置模板
+# https://linux.do/t/topic/1282245 草履虫也能学会的 Clash 配置：无DNS泄露、精确分流、链式代理
+# =========================
+# 基础配置
+# =========================
+mixed-port: 7890
+allow-lan: true
+ipv6: false
+bind-address: "*"
+mode: rule
+log-level: info
+unified-delay: true # 启用 TCP 并发连接，提高网络性能和连接速度
+tcp-concurrent: true # 更换延迟计算方式，去除握手等额外延迟
+find-process-mode: strict # 设置进程查找模式为严格模式
+keep-alive-interval: 30 # 发送 Keep-Alive 探测包的间隔时间 单位 s
+keep-alive-idle: 60 # 连接空闲多久后开始发送 Keep-Alive 探测包
+global-client-fingerprint: chrome # 模拟 Chrome 浏览器的 TLS 指纹
+global-ua: mihomo # 默认 clash.meta / chrome
+
+external-controller: 127.0.0.1:9090
+external-ui: ui
+secret: "1984"
+external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+# =========================
+# 配置文件管理
+# =========================
+profile:
+  store-selected: true # 保存用户选择的代理配置，在 Clash 重启后仍然记住上次选择的代理服务器
+  store-fake-ip: true # 储存 fakeip 映射表，Clash 重启后依然能使用相同的 Fake IP 分配给相同的域名
+
+# =========================
+# 域名/流量嗅探
+# =========================
+# sniffer:
+#   enable: true
+#   parse-pure-ip: true
+#   sniff:
+#     TLS: {ports: [443, 8443]}
+#     HTTP: {ports: [80, 8080-8880], override-destination: true}
+
+# =========================
+# DNS配置
+# =========================
 dns:
   # 使用 DoH、DoT、DoQ 协议比传统基于 UDP 的查询更消耗系统资源，且延迟通常更高
   enable: true # 如为 false,则使用系统 DNS 解析
@@ -56,42 +101,7 @@ dns:
   enhanced-mode: fake-ip # DNS 处理模式 redir-host/fake-ip，fake-ip提高解析速度和连接性能
   fake-ip-range: 198.18.0.1/16
   # 定义不使用虚假IP解析的域名列表
-  fake-ip-filter:
-    # 本地网络及保留域名
-    - "*.lan"
-    - "*.local"
-    - "*.localhost"
-    - "*.localdomain"
-    - "*.home.arpa"
-    - "*.invalid"
-    - "+.miwifi.com"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    # NTP 时间同步服务
-    - "+.pool.ntp.org"
-    - "time.*.com"
-    - "time.*.gov"
-    - "time.*.edu.cn"
-    - "time.*.apple.com"
-    - "time-ios.apple.com"
-    - "ntp.*.com"
-    - "*.ntp.org.cn"
-    - "*.time.edu.cn"
-    # STUN 服务
-    - "+.stun"
-    - "turn.cloudflare.com"
-    - "+.rustdesk.com"
-    # Google
-    - "lens.l.google.com"
-    # 米家物联网
-    - "Mijia Cloud"
-    # 快捷登录
-    - "graph.qq.com"
-    - "+.ptlogin2.qq.com"
-    # cn地址
-    - "geosite:private"
-    - "geosite:cn"
-
+  fake-ip-filter: ["*.lan", "*.local", "*.localhost", "*.localdomain", "*.home.arpa", "*.invalid", "+.miwifi.com", "+.msftconnecttest.com", "+.msftncsi.com", "+.pool.ntp.org", "time.*.com", "time.*.gov", "time.*.edu.cn", "time.*.apple.com", "time-ios.apple.com", "ntp.*.com", "*.ntp.org.cn", "*.time.edu.cn", "+.stun", "turn.cloudflare.com", "+.rustdesk.com", "lens.l.google.com", "Mijia Cloud", "graph.qq.com", "+.ptlogin2.qq.com", "geosite:private", "geosite:cn"]
   # 在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
   nameserver:
     - tls://8.8.8.8
@@ -104,6 +114,9 @@ dns:
       - https://223.5.5.5/dns-query
   respect-rules: true # dns 连接遵守路由规则,需配置 proxy-server-nameserver，强烈不建议和 prefer-h3 一起使用
 
+# =========================
+# 分流规则
+# =========================
 # 规则优先级从上到下，匹配到即停止
 rules:
   # ========== AI服务专用代理规则 ==========
@@ -149,6 +162,9 @@ rules:
   # 兜底规则：以上规则都不匹配时使用PROXY代理
   - MATCH,PROXY
 
+# =========================
+# Geo 数据获取
+# =========================
 geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
