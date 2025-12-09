@@ -8,7 +8,7 @@
   services = {
     # sudo scx_rusty --monitor 0.5
     scx = {
-      enable = true;
+      # enable = true;
       scheduler = "scx_rusty";
       package = pkgs.scx.rustscheds;
     };

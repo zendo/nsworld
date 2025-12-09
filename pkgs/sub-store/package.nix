@@ -16,7 +16,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   ui = fetchurl {
     url = "https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip";
-    hash = "sha256-qC+BYzvs+G59GqDo3j+NKZSssl01KKUZiXmEHoIbmgk=";
+    hash = "sha256-lBlfmKTkpkBFgTRfHJN1rF/PUGcBUB0YTeRtbRyTLYM=";
   };
 
   nativeBuildInputs = [ unzip ];
