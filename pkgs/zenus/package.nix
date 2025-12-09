@@ -11,11 +11,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "zenus";
-  version = "0.2.5";
+  version = "0.2.6";
 
   src = fetchurl {
     url = "https://github.com/skorotkiewicz/zenus/releases/download/${finalAttrs.version}/zenus_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-w1dCHeC4tYpMO+IVfRB005KovhFasOuPdvTQ11jKmNQ=";
+    hash = "sha256-OkjMNB0TDm4V+AuinEBrHFn/q2GFokE6PsCb1IGGbEY=";
   };
 
   nativeBuildInputs = [
