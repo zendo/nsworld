@@ -107,6 +107,10 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │ HARDWARE                                                 │
   # ╰──────────────────────────────────────────────────────────╯
+  # Fix touhpad multitouch somtimes unavailable
+  # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
+  services.sleep-resume.hid-multitouch.enable = true;
+
   boot = {
     # latest / zen / lqx / xanmod_latest
     kernelPackages = pkgs.linuxPackages_latest;
@@ -124,9 +128,6 @@
       # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
-
-      # Fix touhpad multitouch somtimes unavailable
-      # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
     ];
 
     # https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
