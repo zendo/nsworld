@@ -1,7 +1,7 @@
 { lib, config, ... }:
 {
   home.sessionPath = [
-    "${../../dotfiles/bin}"
+    "${../../../dotfiles/bin}"
     "${config.home.homeDirectory}/.local/bin"
   ];
 
