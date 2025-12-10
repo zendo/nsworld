@@ -13,7 +13,7 @@
         ./templates # flake.templates
         ./devshells/treefmt.nix # flake.formatter
         ./hosts/deployment.nix # flake.deploy / flake.colmena
-        ./home-manager/hm-as-standalone.nix # flake.homeConfigurations
+        ./modules/home/hm-as-standalone.nix # flake.homeConfigurations
       ];
 
       debug = true; # repl: flake.currentSystem / flake.debug
