@@ -32,15 +32,10 @@
   lib,
   ...
 }:
-let
-  cfg = config.mods.virt;
-in
 {
-  options.mods.virt.enable = lib.mkEnableOption ''
-    my virtualisation customize.
-  '';
+  options.mods.virt.enable = lib.mkEnableOption "virtualisation customize.";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.mods.virt.enable {
     # bazaar
     services.flatpak.enable = true;
 

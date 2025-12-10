@@ -4,17 +4,10 @@
   config,
   ...
 }:
-let
-  cfg = config.mods.fcitx;
-in
 {
-  options.mods.fcitx = {
-    enable = lib.mkEnableOption ''
-      my fcitx5 customize.
-    '';
-  };
+  options.mods.fcitx.enable = lib.mkEnableOption "fcitx5 customize.";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.mods.fcitx.enable {
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
