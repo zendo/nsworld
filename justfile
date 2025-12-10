@@ -30,7 +30,7 @@ diff-commit:
     git commit -m "flake.lock: Update details on host.{{ host }}" \
     -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)" --allow-empty
 
-gc-all:
+gca:
     sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
 
 up:
