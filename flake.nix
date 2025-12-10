@@ -8,7 +8,7 @@
       imports = [
         ./lib # flake.lib
         ./overlays # flake.overlays
-        ./nixos # flake.nixosModules
+        ./modules/nixos # flake.nixosModules
         ./hosts # flake.nixosConfigurations
         ./templates # flake.templates
         ./devshells/treefmt.nix # flake.formatter

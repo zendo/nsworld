@@ -1,10 +1,10 @@
-{ ... }:
+{ self, ... }:
 {
   # https://github.com/jtroo/kanata
   services.kanata = {
     enable = true;
     keyboards = {
-      default.configFile = ../../dotfiles/kanata/minimal.kbd;
+      default.configFile = (self + /dotfiles/kanata/minimal.kbd);
     };
   };
 }
