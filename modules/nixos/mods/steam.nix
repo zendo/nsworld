@@ -4,15 +4,10 @@
   config,
   ...
 }:
-let
-  cfg = config.mods.steam;
-in
 {
-  options.mods.steam.enable = lib.mkEnableOption ''
-    my steam mode.
-  '';
+  options.mods.steam.enable = lib.mkEnableOption "steam customize.";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.mods.steam.enable {
     environment.systemPackages = with pkgs; [
       mangohud
       goverlay # mangohud config GUI

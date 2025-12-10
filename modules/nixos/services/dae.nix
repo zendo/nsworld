@@ -1,15 +1,10 @@
 { lib, config, ... }:
-let
-  cfg = config.services.daeWithConfig;
-in
 {
   options.services.daeWithConfig = {
-    enable = lib.mkEnableOption ''
-      my dae encryption config.
-    '';
+    enable = lib.mkEnableOption "dae encryption config.";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.services.daeWithConfig.enable {
     services.dae = {
       enable = true;
       configFile = config.sops.templates."config.dae".path;

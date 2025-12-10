@@ -13,8 +13,8 @@
     inputs.nixos-hardware.nixosModules.common-gpu-intel
 
     self.nixosModules.default
+    self.nixosModules.laptop
     self.nixosModules.homeManagerInit
-    self.nixosModules.laptopPowerPlans
 
     self.nixosModules.gnome
     # self.nixosModules.kde

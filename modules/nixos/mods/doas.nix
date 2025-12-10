@@ -1,21 +1,14 @@
 {
-  config,
   lib,
   pkgs,
   self,
+  config,
   ...
 }:
-let
-  cfg = config.mods.doas;
-in
 {
-  options.mods.doas = {
-    enable = lib.mkEnableOption ''
-      my doas customize.
-    '';
-  };
+  options.mods.doas.enable = lib.mkEnableOption "doas customize.";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.mods.doas.enable {
     security.sudo.enable = false;
 
     security.doas = {

@@ -13,8 +13,8 @@
     # inputs.lanzaboote.nixosModules.lanzaboote
 
     self.nixosModules.default
+    self.nixosModules.laptop
     self.nixosModules.homeManagerInit
-    self.nixosModules.laptopPowerPlans
 
     self.nixosModules.gnome
     # self.nixosModules.kde
