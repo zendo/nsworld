@@ -10,10 +10,10 @@
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
     inputs.self.nixosModules.homeManagerInit
-    (self + /nixos/core/base.nix)
-    (self + /nixos/core/fonts-cn.nix)
-    (self + /nixos/core/nixpkgs.nix)
-    (self + /nixos/core/nixconfig.nix)
+    (self + /modules/nixos/core/base.nix)
+    (self + /modules/nixos/core/fonts-cn.nix)
+    (self + /modules/nixos/core/nixpkgs.nix)
+    (self + /modules/nixos/core/nixconfig.nix)
   ];
 
   # ╭──────────────────────────────────────────────────────────╮
@@ -23,11 +23,11 @@
     { pkgs, ... }:
     {
       imports = [
-        (self + /home-manager/terminal/foot.nix)
-        (self + /home-manager/terminal/ghostty.nix)
-        # (self + /home-manager/terminal/kitty.nix)
-        (self + /home-manager/editor/dev-tools.nix)
-        (self + /home-manager/editor/emacs.nix)
+        (self + /modules/home/terminal/foot.nix)
+        (self + /modules/home/terminal/ghostty.nix)
+        # (self + /modules/home/terminal/kitty.nix)
+        (self + /modules/home/editor/dev-tools.nix)
+        (self + /modules/home/editor/emacs.nix)
       ];
 
       home.packages = with pkgs; [
