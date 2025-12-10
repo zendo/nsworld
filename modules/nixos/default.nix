@@ -10,7 +10,7 @@
       ];
     };
 
-    homeManagerInit.imports = [ ../home-manager/hm-as-module.nix ];
+    homeManagerInit.imports = [ ../../home-manager/hm-as-module.nix ];
     laptopPowerPlans.imports = [ ./profiles/laptop-power-plans.nix ];
 
     kde.imports = [ ./desktop/kde.nix ];
