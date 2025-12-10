@@ -2,24 +2,16 @@
   lib,
   config,
   myvars,
-  self,
   ...
 }:
 let
   inherit (lib) mkIf;
-
-  sudoRule = {
-    users = [ "${self.nixosConfigurations.yoga._module.specialArgs.myvars.user}" ];
-    commands = [
-      {
-        command = "ALL";
-        options = [ "NOPASSWD" ];
-      }
-    ];
-  };
 in
 {
   services.userborn.enable = lib.mkDefault true;
+
+  security.sudo-rs.enable = true;
+  # mods.doas.enable = true;
 
   users = {
     mutableUsers = lib.mkDefault false;
@@ -57,18 +49,4 @@ in
       initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
     };
   };
-
-  # original sudo
-  # security.sudo.extraRules = [ sudoRule ];
-  # or
-  # security.sudo.wheelNeedsPassword = false;
-
-  # sudo-rs riir
-  security.sudo-rs.enable = true;
-  security.sudo-rs.extraRules = [ sudoRule ];
-  # or
-  # security.sudo-rs.wheelNeedsPassword = false;
-
-  # doas
-  # mods.doas.enable = true;
 }
