@@ -18,7 +18,7 @@
   # Decrypt and show the real value
   sops --extract '["hello"]' --decrypt secrets/secrets.yaml
 */
-{ inputs, myvars, ... }:
+{ inputs, ... }:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
@@ -26,7 +26,7 @@
     defaultSopsFile = ./secrets.yaml;
     age = {
       sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-      # keyFile = "/home/${myvars.user}/.config/sops/age/keys.txt";
+      # keyFile = "/home/username/.config/sops/age/keys.txt";
     };
   };
 }

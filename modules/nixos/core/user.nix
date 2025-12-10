@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   myvars,
   ...
 }:
@@ -8,10 +9,16 @@ let
   inherit (lib) mkIf;
 in
 {
+  # Declaratively users and groups
   services.userborn.enable = lib.mkDefault true;
 
+  # sudo-rs
   security.sudo-rs.enable = true;
-  # mods.doas.enable = true;
+
+  # doas
+  # security.sudo.enable = false;
+  # security.doas.enable = true;
+  # environment.systemPackages = [ pkgs.doas-sudo-shim ];
 
   users = {
     mutableUsers = lib.mkDefault false;
