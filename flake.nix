@@ -6,61 +6,18 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
 
       imports = [
+        ./modules/flake/flake-parts.nix # toplevel: perSystem / flake.packages
+        ./modules/flake/devshell.nix # flake.devshells
+        ./modules/flake/treefmt.nix # flake.formatter
+        ./modules/flake/templates # flake.templates
+        ./modules/nixos # flake.nixosModules
         ./lib # flake.lib
         ./overlays # flake.overlays
-        ./modules/nixos # flake.nixosModules
         ./hosts # flake.nixosConfigurations
-        ./templates # flake.templates
-        ./devshells/treefmt.nix # flake.formatter
         ./hosts/deployment.nix # flake.deploy / flake.colmena
         ./modules/home/hm-as-standalone.nix # flake.homeConfigurations
       ];
 
-      debug = true; # repl: flake.currentSystem / flake.debug
-
-      # systems for `perSystem`
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-
-      perSystem =
-        {
-          lib,
-          pkgs,
-          system,
-          config,
-          ...
-        }:
-        {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [ inputs.self.overlays.modifications ];
-            config = {
-              allowUnfree = true;
-              # allowInsecure = true;
-              android_sdk.accept_license = true;
-            };
-          };
-
-          # flake.packages
-          packages =
-            lib.packagesFromDirectoryRecursive {
-              inherit (pkgs) callPackage;
-              directory = ./pkgs;
-            }
-            // {
-              # nix run .
-              default = config.packages.anich;
-            };
-
-          # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
-          # nix build .#
-          legacyPackages = pkgs;
-
-          # nix develop .#rust
-          devShells = import ./devshells { inherit pkgs; };
-        };
     };
 
   inputs = {
