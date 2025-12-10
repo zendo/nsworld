@@ -4,20 +4,18 @@
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-
       imports = [
         ./modules/flake/flake-parts.nix # toplevel: perSystem / flake.packages
         ./modules/flake/devshell.nix # flake.devshells
         ./modules/flake/treefmt.nix # flake.formatter
         ./modules/flake/templates # flake.templates
         ./modules/nixos # flake.nixosModules
-        ./lib # flake.lib
         ./overlays # flake.overlays
+        ./lib # flake.lib
         ./hosts # flake.nixosConfigurations
         ./hosts/deployment.nix # flake.deploy / flake.colmena
         ./modules/home/hm-as-standalone.nix # flake.homeConfigurations
       ];
-
     };
 
   inputs = {
