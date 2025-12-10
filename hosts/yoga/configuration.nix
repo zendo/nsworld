@@ -26,7 +26,7 @@
 
   mods.virt.enable = true;
   # programs'.steam.enable = true;
-  # programs.nix-ld.enable = true;
+  # programs'.nix-ld.enable = true;
   programs.command-not-found = {
     # enable = true;
     dbPath = inputs.nixpkgs + "/programs.sqlite";

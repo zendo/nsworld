@@ -25,8 +25,8 @@
   ];
 
   mods.virt.enable = true;
-  # mods.steam.enable = true;
-  # programs.nix-ld.enable = true;
+  # programs'.steam.enable = true;
+  # programs'.nix-ld.enable = true;
 
   services.acpid.enable = true;
   # services.fwupd.enable = true;
