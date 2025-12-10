@@ -25,8 +25,12 @@
   ];
 
   mods.virt.enable = true;
-  # mods.steam.enable = true;
+  # programs'.steam.enable = true;
   # programs.nix-ld.enable = true;
+  programs.command-not-found = {
+    # enable = true;
+    dbPath = inputs.nixpkgs + "/programs.sqlite";
+  };
 
   services.acpid.enable = true;
   services.fwupd.enable = true;
