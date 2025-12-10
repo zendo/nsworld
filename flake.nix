@@ -5,13 +5,13 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./modules/flake/flake-parts.nix # toplevel: perSystem / flake.packages
+        ./modules/flake/flake-parts.nix # flake.packages / perSystem
         ./modules/flake/devshell.nix # flake.devshells
         ./modules/flake/treefmt.nix # flake.formatter
         ./modules/flake/templates # flake.templates
-        ./modules/nixos # flake.nixosModules
+        ./modules/nixos/_default.nix # flake.nixosModules
+        ./modules/lib # flake.lib
         ./overlays # flake.overlays
-        ./lib # flake.lib
         ./hosts # flake.nixosConfigurations
         ./hosts/deployment.nix # flake.deploy / flake.colmena
         ./modules/home/hm-as-standalone.nix # flake.homeConfigurations
@@ -44,6 +44,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    import-tree.url = "github:vic/import-tree";
     # nur.url = "github:nix-community/NUR";
     # agenix.url = "github:ryantm/agenix";
     sops-nix.url = "github:Mic92/sops-nix";
