@@ -120,7 +120,7 @@
 
   boot = {
     # latest / zen / lqx / xanmod_latest
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     supportedFilesystems = [ "ntfs" ];
 
     # Disable power management for "Intel AX200" driver

@@ -17,7 +17,8 @@
         fcitx5-fluent
         fcitx5-mellow-themes
         # 命令行手动部署
-        # nix shell nixpkgs#librime --command rime_deployer --build ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
+        # nix shell nixpkgs#librime --command rime_deployer --build \
+        # ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
         (fcitx5-rime.override {
           rimeDataPkgs = [
             # 换个输入法方案需要重启再部署，不然环境不干净

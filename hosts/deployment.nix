@@ -15,7 +15,7 @@
         # colmena apply-local --sudo
         yoga = {
           targetHost = "yoga";
-          targetUser = "root";
+          targetUser = "iab";
           allowLocalDeployment = true;
         };
         # colmena apply --no-substitutes --on svp
