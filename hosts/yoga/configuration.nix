@@ -32,6 +32,9 @@
   services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
+  security.sudo.wheelNeedsPassword = false;
+  security.sudo-rs.wheelNeedsPassword = false;
+
   # ╭──────────────────────────────────────────────────────────╮
   # │ PROXY                                                    │
   # ╰──────────────────────────────────────────────────────────╯
