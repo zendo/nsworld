@@ -4,7 +4,7 @@ keys:
   - &svp age1z8hzw73nftxarapkty90lttnuyv5mmqxarhhl8jmlply6g455v8safhfc5
   - &rmt age19e79dxz6fnkgpy0vrcd2s0aan2l3qcc5hap3wtat2yx3r09zuy9s69sf47
 creation_rules:
-  - path_regex: nixos/secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: modules/nixos/secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *private-ssh
