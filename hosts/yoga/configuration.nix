@@ -161,12 +161,12 @@
   };
 
   # Swapfile
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 1024 * 16;
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     device = "/var/swapfile";
+  #     size = 1024 * 16;
+  #   }
+  # ];
 
   zramSwap.enable = true;
 
@@ -219,7 +219,7 @@
     limine = {
       enable = true;
       maxGenerations = 8;
-      secureBoot.enable = true;
+      # secureBoot.enable = true;
       style.interface.branding = " ";
       style.wallpapers = [
         # pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath
