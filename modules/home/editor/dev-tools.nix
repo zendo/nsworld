@@ -17,5 +17,6 @@
     # nil
     nixd
     # devenv
+    flamegraph
   ];
 }

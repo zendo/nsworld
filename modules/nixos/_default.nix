@@ -1,3 +1,11 @@
+/*
+  # https://github.com/NixOS/nix/pull/13220
+  nix eval --no-eval-cache .\#nixosConfigurations.yoga.config.system.build.toplevel \
+    --option eval-profiler flamegraph \
+    --option eval-profile-file >(zstd -of nix.profile.zstd)
+  zstd -d nix.profile.zstd
+  flamegraph.pl nix.profile > nixprofile.svg
+*/
 { inputs, ... }:
 {
   flake.nixosModules = {
