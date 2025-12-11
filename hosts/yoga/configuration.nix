@@ -36,6 +36,7 @@
   services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
+  # No need password
   security.sudo.wheelNeedsPassword = false;
   security.sudo-rs.wheelNeedsPassword = false;
 

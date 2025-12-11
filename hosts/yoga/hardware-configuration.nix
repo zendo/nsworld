@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -25,13 +24,13 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/82dd215d-6efd-48df-8525-f2386c07d309";
+    device = "/dev/disk/by-uuid/3cb7ca0e-1b61-4ca1-9ed9-249c4503d39a";
     fsType = "bcachefs";
     options = [ "compress=zstd" ];
   };
 
   fileSystems."/efi" = {
-    device = "/dev/disk/by-uuid/02B1-730C";
+    device = "/dev/disk/by-uuid/F20D-0848";
     fsType = "vfat";
     options = [
       "fmask=0022"
