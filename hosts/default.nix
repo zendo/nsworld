@@ -89,7 +89,7 @@ in
       specialArgs = {
         inherit inputs;
       };
-      modules = [ ./livecd ];
+      modules = [ ./livecd/configuration.nix ];
     };
   };
 }
