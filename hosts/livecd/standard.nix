@@ -1,8 +1,7 @@
 /*
+  nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
+  qemu-system-x86_64 -enable-kvm -m 8192 -cdrom result/iso/
   https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD
-
-  https://github.com/NixOS/nix/issues/8911
-  --option auto-allocate-uids false
 */
 {
   self,
@@ -15,17 +14,14 @@
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-base.nix"
-
     self.nixosModules.default
     self.nixosModules.homeManagerInit
-
     self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.sway
-    # self.nixosModules.hyprland
   ];
 
-  mods.virt.enable = false;
+  environment.systemPackages = with pkgs; [ dippi ];
 
   boot = {
     tmp.useTmpfs = false;
@@ -44,16 +40,14 @@
   };
 
   users.users = {
-    # passwd: root
-    root.initialHashedPassword = lib.mkForce "$y$j9T$8/wRQiclXB6j79eGn8FKp.$MayXuTGruzrN4kDOUXSIJhPUg3BLdL69EOERDXRRQq.";
-    # psaawd: live
+    # pw: root
+    root.initialHashedPassword = lib.mkImageMediaOverride "$y$j9T$IJdpnArgDAkYk8JS4NSWu.$z2HLJElOgWZz1rKDT7W38QdC9fXRXFdshJJug1.vzO8";
+    # pw: live
     ${myvars.user}.initialHashedPassword =
-      lib.mkForce "$y$j9T$0VrmGqGBIdqClS5ndapJv0$sJDzKPsSQdM2bm9Z.o1TI1alC46LMWgIFf14CbSSoWB";
+      lib.mkImageMediaOverride "$y$j9T$uzMw3fo0epQjxDUOReFc2.$p.4FJdQ8X4Mr6aWf6FR2x7ks9byGP0p8.NNxx0zrIpC";
   };
 
-  environment.systemPackages = with pkgs; [ dippi ];
-
-  networking.wireless.enable = lib.mkImageMediaOverride false;
+  security.sudo-rs.enable = lib.mkImageMediaOverride false;
 
   nixpkgs.hostPlatform = "x86_64-linux";
 

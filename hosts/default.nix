@@ -4,9 +4,6 @@ let
     {
       user ? "",
       host ? "",
-      state ? "26.05",
-      locale ? "zh_CN.UTF-8",
-      timezone ? "Asia/Shanghai",
       nixpkgs ? inputs.nixpkgs,
       extraModules ? [ ],
     }:
@@ -15,9 +12,6 @@ let
         inherit
           user
           host
-          state
-          locale
-          timezone
           ;
       };
     in
@@ -26,12 +20,15 @@ let
         inherit inputs self myvars;
       };
       modules = [
-        {
-          networking.hostName = myvars.host;
-          i18n.defaultLocale = myvars.locale;
-          time.timeZone = myvars.timezone;
-          system.stateVersion = myvars.state;
-        }
+        (
+          { lib, ... }:
+          {
+            networking.hostName = myvars.host;
+            i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
+            time.timeZone = lib.mkDefault "Asia/Shanghai";
+            system.stateVersion = lib.mkDefault "26.05";
+          }
+        )
       ]
       ++ extraModules;
     };

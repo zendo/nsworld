@@ -26,8 +26,7 @@
     # "services/desktops/pipewire/pipewire.nix"
   ];
 
-  mods.virt.enable = false;
-  # programs.nix-ld.enable = true;
+  # programs'.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
     dippi

@@ -1,6 +1,13 @@
 { inputs, ... }:
 {
   flake.nixosModules = {
+    # default.imports = self.lib.umport {
+    #   path = ./.;
+    #   exclude = [
+    #     ./desktops
+    #     ./default.nix
+    #   ];
+    # };
     default = (inputs.import-tree ./.);
     homeManagerInit.imports = [ ../home/hm-as-module.nix ];
     laptop.imports = [ ./_desktop/laptop.nix ];
