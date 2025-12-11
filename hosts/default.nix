@@ -83,19 +83,13 @@ in
       ];
     };
 
-    # nix build .#nixosConfigurations.livecd-standard.config.system.build.isoImage
-    livecd-standard = mkHost {
-      user = "live";
-      host = "livecd";
-      extraModules = [
-        ./livecd/standard.nix
-      ];
-    };
-
-    # nixos-rebuild build-image --image-variant iso-installer --flake .#livecd-minimal
-    # nix build .#nixosConfigurations.livecd-minimal.config.system.build.isoImage
-    livecd-minimal = inputs.nixpkgs.lib.nixosSystem {
-      modules = [ ./livecd/minimal.nix ];
+    # nixos-rebuild build-image --image-variant iso-installer --flake .#livecd
+    # nix build .#nixosConfigurations.livecd.config.system.build.isoImage
+    livecd = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [ ./livecd ];
     };
   };
 }
