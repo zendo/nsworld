@@ -12,22 +12,22 @@
 }:
 {
   imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-    # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+    # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
     # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-plasma6.nix"
     # "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
-    # (inputs.self.nixosConfigurations.host.config.system.build.toplevel)
   ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = {
-      # bcachefs = true;
+      bcachefs = true;
       zfs = lib.mkForce false; # always broken
     };
   };
 
   environment.systemPackages = with pkgs; [
+    # (inputs.self.nixosConfigurations.yoga.config.system.build.toplevel)
     tree
     file
     wget
