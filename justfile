@@ -70,6 +70,16 @@ non-nixos-setup:
     substituters = https://mirror.sjtu.edu.cn/nix-channels/store
     EOF
 
+backup-my-data:
+    #!/usr/bin/env bash
+    BACKUP_DIR="$HOME/Documents/mybackup"
+    mkdir -p "$BACKUP_DIR"
+    cd "$BACKUP_DIR"
+    dconf read /org/gnome/shell/app-picker-layout > app-picker-layout-value.txt
+    # dconf load /org/gnome/shell/app-picker-layout/ < app-picker-layout-backup.txt
+    rsync -av "$HOME/.ssh/" ssh/
+    rsync -av "$HOME/.mozilla/" mozilla/
+
 [group('emacs')]
 emacs-ob-tangle:
     emacs -Q --batch \
