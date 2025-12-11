@@ -102,7 +102,7 @@
 
   # Virtual network interfering Geoclue2's IP-based location
   services.geoclue2 = {
-    enableStatic = true;
+    # enableStatic = true;
     staticAltitude = 10; # 海拔高度
     staticAccuracy = 1000; # 精度半径
   };

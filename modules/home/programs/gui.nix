@@ -74,6 +74,7 @@
     # https://github.com/nix-community/home-manager/issues/5173
     (lib.hiPrio localsend)
     qbittorrent
+    # gopeed
     # deja-dup
     # rclone
     # rclone-browser
