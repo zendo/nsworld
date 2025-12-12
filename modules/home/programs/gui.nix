@@ -34,7 +34,7 @@
     audacious
     # rhythmbox
     goodvibes
-    # go-musicfox
+    go-musicfox
     # splayer # (electron)
     # qqmusic
     spotify
