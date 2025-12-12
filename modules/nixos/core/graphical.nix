@@ -24,7 +24,11 @@
     xdg.portal.xdgOpenUsePortal = true;
 
     # fcitx or ibus
-    mods.fcitx.enable = true;
+    mods.fcitx = {
+      enable = true;
+      # withPinyin = true;
+      withRime = true;
+    };
     # i18n.inputMethod = {
     #   enable = true;
     #   type = "ibus";
