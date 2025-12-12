@@ -9,7 +9,6 @@
     comigo
     amethyst
     zenus
-    lfy
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
