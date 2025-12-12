@@ -24,13 +24,13 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/3cb7ca0e-1b61-4ca1-9ed9-249c4503d39a";
-    fsType = "bcachefs";
+    device = "/dev/disk/by-uuid/b97eb95a-fc74-42d2-b523-529f511abb15";
+    fsType = "btrfs";
     options = [ "compress=zstd" ];
   };
 
   fileSystems."/efi" = {
-    device = "/dev/disk/by-uuid/F20D-0848";
+    device = "/dev/disk/by-uuid/E5F8-C8C4";
     fsType = "vfat";
     options = [
       "fmask=0022"

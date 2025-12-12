@@ -27,6 +27,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Make copying cache from local://
     # (inputs.self.nixosConfigurations.yoga.config.system.build.toplevel)
     tree
     file
