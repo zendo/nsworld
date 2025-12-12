@@ -11,26 +11,16 @@
       treefmt = {
         projectRootFile = "flake.nix";
 
-        # -------------------------------------
-        # NIX
-        # -------------------------------------
+        ### NIX ###
         # programs.deadnix.enable = true;
         # programs.statix.enable = true;
         programs.nixfmt.enable = true;
-        settings.formatter.nixfmt.excludes = [
-          "*hardware-configuration*"
-          "lib/*"
-        ];
 
-        # -------------------------------------
-        # SHELL
-        # ------------------------------------
+        ### SHELL ###
         programs.shfmt.enable = true;
         # programs.shellcheck.enable = true;
 
-        # ------------------------------------
-        # HTML/CSS/TS/JSON/YAML/MARKDOWN
-        # ------------------------------------
+        ### HTML/CSS/TS/JSON/YAML/MARKDOWN ###
         programs.prettier.enable = true;
         settings.formatter.prettier.includes = [
           "*.jsonc"
@@ -38,28 +28,20 @@
         settings.formatter.prettier.excludes = [
           "*secrets*"
           "dotfiles/Windows/*"
-          "dotfiles/sing-box/*"
+          "dotfiles/mofa/*"
         ];
         # programs.yamlfmt.enable = true;
 
-        # ------------------------------------
-        # TOML
-        # ------------------------------------
+        ### TOML ###
         programs.taplo.enable = true;
 
-        # ------------------------------------
-        # JUSTFILE
-        # ------------------------------------
+        ### JUSTFILE ###
         programs.just.enable = true;
 
-        # ------------------------------------
-        # LUA
-        # ------------------------------------
+        ### LUA ###
         # programs.stylua.enable = true;
 
-        # ------------------------------------
-        # PYTHON
-        # ------------------------------------
+        ### PYTHON ###
         programs.black.enable = true;
       };
     };
