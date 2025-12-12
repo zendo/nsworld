@@ -36,6 +36,7 @@
     # Modifying Packages
     # =========================================================================
     plasma-workspace-workaround = import ./plasma-workspace.nix;
+
     modifications = final: prev: {
       # foo = prev.callPackage ./foo/package.nix { };
 
