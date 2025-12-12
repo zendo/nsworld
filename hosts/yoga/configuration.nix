@@ -183,7 +183,7 @@
   # boot.lanzaboote = {
   #   enable = true;
   #   configurationLimit = 3;
-  #   pkiBundle = "/etc/secureboot";
+  #   pkiBundle = "/var/lib/secureboot";
   #   # settings = {
   #   # };
   # };
