@@ -9,7 +9,7 @@
         ./modules/flake/devshell.nix # flake.devshells
         ./modules/flake/treefmt.nix # flake.formatter
         ./modules/flake/templates # flake.templates
-        ./modules/nixos/_default.nix # flake.nixosModules
+        ./modules/nixos # flake.nixosModules
         ./modules/lib # flake.lib
         ./overlays # flake.overlays
         ./hosts # flake.nixosConfigurations
@@ -57,7 +57,7 @@
     # agenix.url = "github:ryantm/agenix";
     sops-nix.url = "github:Mic92/sops-nix";
     templates.url = "github:NixOS/templates";
-    import-tree.url = "github:vic/import-tree";
+    # import-tree.url = "github:vic/import-tree";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };

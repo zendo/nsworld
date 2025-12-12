@@ -6,7 +6,7 @@
   zstd -d nix.profile.zstd
   flamegraph.pl nix.profile > nixprofile.svg
 */
-{ inputs, ... }:
+{ lib, ... }:
 {
   flake.nixosModules = {
     # default.imports = self.lib.umport {
@@ -16,7 +16,13 @@
     #     ./default.nix
     #   ];
     # };
-    default = (inputs.import-tree ./.);
+    default.imports = [
+      ./secrets/secrets.nix
+    ]
+    ++ (lib.filesystem.listFilesRecursive ./core)
+    ++ (lib.filesystem.listFilesRecursive ./mods)
+    ++ (lib.filesystem.listFilesRecursive ./programs)
+    ++ (lib.filesystem.listFilesRecursive ./services);
     homeManagerInit.imports = [ ../home/hm-as-module.nix ];
     laptop.imports = [ ./_desktop/laptop.nix ];
     gnome.imports = [ ./_desktop/gnome.nix ];
