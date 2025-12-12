@@ -18,8 +18,10 @@
   };
 
   services = {
+    # https://github.com/Prince213/firewalld-nix/blob/main/example.nix
     firewalld = {
       enable = true;
+      zones.trusted.interfaces = [ "tun0" ];
     };
   };
 }
