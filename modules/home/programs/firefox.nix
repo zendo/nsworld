@@ -14,7 +14,6 @@
       # userContent = ''
       #   @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
       # '';
-      # and add: ${builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js"}
       extraConfig = ''
         ${builtins.readFile "${pkgs.betterfox}/user.js"}
 
@@ -68,15 +67,8 @@
             Alias = "nsa";
           }
           {
-            Name = "MyNixOS";
-            URLTemplate = "https://www.mynixos.com/search?q={searchTerms}";
-            IconURL = "https://mynixos.com/favicon.ico";
-            Alias = "mynixos";
-          }
-          {
             Name = "Nix Packages";
             URLTemplate = "https://search.nixos.org/packages?channel=unstable&type=packages&query={searchTerms}";
-            IconURL = "file://${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             Alias = "np";
           }
           {
