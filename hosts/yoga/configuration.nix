@@ -51,20 +51,10 @@
     sing-box
     gui-for-singbox
     # gui-for-clash
-    # v2rayn
-    # flclash
-    # (makeAutostartItem {
-    #   name = "flclash";
-    #   package = flclash;
-    # })
     # pandora-box
     # (makeAutostartItem {
     #   name = "pandora-box";
     #   package = pandora-box;
-    # })
-    # (makeAutostartItem {
-    #   name = "throne";
-    #   package = throne;
     # })
   ];
 
@@ -83,11 +73,6 @@
   services.dae = {
     # enable = true;
     configFile = "/home/${myvars.user}/code/subs/dae-config.dae";
-  };
-
-  programs.throne = {
-    # enable = true;
-    tunMode.enable = true;
   };
 
   programs.clash-verge = {
