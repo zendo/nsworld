@@ -53,6 +53,7 @@
       {
         imports = [
           # ../../home/xdg/noctalia.nix
+          ../../home/xdg/fuzzel.nix
         ];
 
         home.packages = with pkgs; [
@@ -61,7 +62,6 @@
           swaylock-effects
           stasis # idle manager
           wlogout
-          fuzzel
           bemoji
           wf-recorder
           cliphist
@@ -142,7 +142,6 @@
         # };
 
         xdg.configFile = {
-          "fuzzel".source = (self + /dotfiles/fuzzel);
           "shikane".source = (self + /dotfiles/shikane);
           "swaylock".source = (self + /dotfiles/swaylock);
         };
