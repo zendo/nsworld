@@ -9,7 +9,6 @@
     comigo
     amethyst
     zenus
-    gravel
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord

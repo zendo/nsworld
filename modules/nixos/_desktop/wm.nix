@@ -53,6 +53,7 @@
       {
         imports = [
           ../../home/wm/fuzzel.nix
+          # ../../home/wm/hypridle.nix
           # ../../home/wm/noctalia.nix
           ../../home/wm/shikane.nix
           ../../home/wm/swaylock.nix
@@ -118,10 +119,6 @@
           cliphist = {
             enable = true;
             allowImages = true;
-          };
-
-          hypridle = {
-            # enable = true;
           };
         };
 
