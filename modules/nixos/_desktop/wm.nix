@@ -141,6 +141,12 @@
         #   style.package = pkgs.adwaita-qt;
         # };
 
+        xdg.configFile = {
+          "fuzzel".source = (self + /dotfiles/fuzzel);
+          "shikane".source = (self + /dotfiles/shikane);
+          "swaylock".source = (self + /dotfiles/swaylock);
+        };
+
         xdg.dataFile = {
           # Fix tiny cursor on qt apps
           "icons/default/index.theme".text = ''

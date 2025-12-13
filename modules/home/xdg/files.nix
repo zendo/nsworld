@@ -12,13 +12,11 @@ in
 
   xdg.configFile = {
     "cava".source = staticDot "cava";
-    "shikane".source = staticDot "shikane";
 
     "mpv".source = linkDot "mpv";
-    "helix".source = linkDot "helix";
-    "fuzzel".source = linkDot "fuzzel";
     "yt-dlp".source = linkDot "yt-dlp";
-    "swaylock".source = linkDot "swaylock";
+    "doom/config.org".source = linkDot "org/doom-emacs.org";
+    "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
 
     "sway/config".source = linkDot "sway/config";
     "niri/configs".source = linkDot "niri/configs";
@@ -26,9 +24,6 @@ in
     "hypr/hyprland.conf".source = linkDot "hypr/hyprland.conf";
     "hypr/hypridle.conf".source = linkDot "hypr/hypridle.conf";
     "hypr/hyprlock.conf".source = linkDot "hypr/hyprlock.conf";
-
-    "doom/config.org".source = linkDot "org/doom-emacs.org";
-    "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
 
     # rime for ibus
     "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";

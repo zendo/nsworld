@@ -13,12 +13,16 @@
     ./programs/nix-tools.nix
     ./programs/ssh.nix
     # -------------------------------------
+    ./shell/alias.nix
+    ./shell/atuin.nix
+    ./shell/bash.nix
+    ./shell/fish.nix
+    ./shell/starship.nix
+    ./shell/zellij.nix
+    ./shell/zsh.nix
+    # -------------------------------------
     ./xdg/files.nix
   ]
-  # ===========================================================
-  # Automatically import
-  # ===========================================================
-  ++ (lib.filesystem.listFilesRecursive ./shell)
   # ===========================================================
   # Graphical Desktop Environment Configurations
   # ===========================================================
