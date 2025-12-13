@@ -76,6 +76,7 @@
     (lib.hiPrio localsend)
     qbittorrent
     # gopeed
+    # lock
     # deja-dup
     # rclone
     # rclone-browser
