@@ -52,15 +52,15 @@
       { pkgs, ... }:
       {
         imports = [
-          # ../../home/wm/noctalia.nix
           ../../home/wm/fuzzel.nix
+          # ../../home/wm/noctalia.nix
           ../../home/wm/shikane.nix
+          ../../home/wm/swaylock.nix
         ];
 
         home.packages = with pkgs; [
           libnotify # notify-send
           hyprlock
-          swaylock-effects
           stasis # idle manager
           wlogout
           bemoji
@@ -131,10 +131,6 @@
         #   style.name = "adwaita";
         #   style.package = pkgs.adwaita-qt;
         # };
-
-        xdg.configFile = {
-          "swaylock".source = (self + /dotfiles/swaylock);
-        };
 
         xdg.dataFile = {
           # Fix tiny cursor on qt apps

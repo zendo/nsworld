@@ -12,4 +12,6 @@
   services.shikane = {
     enable = true;
   };
+
+  xdg.configFile."shikane".source = ../../../dotfiles/shikane;
 }
