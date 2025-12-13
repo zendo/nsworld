@@ -9,11 +9,13 @@
 {
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
-    inputs.self.nixosModules.homeManagerInit
+    # nixos core module
     (self + /modules/nixos/core/base.nix)
     (self + /modules/nixos/core/fonts-cn.nix)
     (self + /modules/nixos/core/nixpkgs.nix)
     (self + /modules/nixos/core/nixconfig.nix)
+    # nixos hm module
+    (self + /modules/home/hm-as-module.nix)
   ];
 
   # ╭──────────────────────────────────────────────────────────╮

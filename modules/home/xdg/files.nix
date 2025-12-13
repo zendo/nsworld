@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   staticDot = path: ../../../dotfiles/${path};
   linkDot =
