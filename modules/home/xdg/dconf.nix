@@ -9,6 +9,7 @@ rec {
     night-theme-switcher
     # legacy-gtk3-theme-scheme-auto-switcher
     clipboard-history
+    vicinae
     # blur-my-shell
     # top-bar-organizer
     # just-perfection
@@ -80,6 +81,10 @@ rec {
 
     "org/gnome/shell/extensions/gnome-clipboard" = {
       history-size = lib.hm.gvariant.mkUint32 800;
+    };
+
+    "org/gnome/shell/extensions/vicinae" = {
+      show-status-indicator = false;
     };
 
     ###############################################
