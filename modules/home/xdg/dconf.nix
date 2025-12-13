@@ -5,14 +5,16 @@ rec {
     # dockng
     dash-to-dock
     # dash-to-panel
+    adaptive-brightness
     night-theme-switcher
-    legacy-gtk3-theme-scheme-auto-switcher
-    clipboard-history
+    # legacy-gtk3-theme-scheme-auto-switcher
+    all-in-one-clipboard
+    # clipboard-history
     # blur-my-shell
     # top-bar-organizer
     # just-perfection
     # kimpanel
-    runcat
+    # runcat
     caffeine
   ];
 
@@ -79,6 +81,10 @@ rec {
 
     "org/gnome/shell/extensions/gnome-clipboard" = {
       history-size = lib.hm.gvariant.mkUint32 800;
+    };
+
+    "org/gnome/shell/extensions/all-in-one-clipboard" = {
+      clipboard-history-max-items = lib.hm.gvariant.mkUint32 200;
     };
 
     ###############################################
