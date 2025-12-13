@@ -1,15 +1,10 @@
 { config, pkgs, ... }:
 let
-  linkHome = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${path}";
+  staticDot = path: ../../../dotfiles/${path};
   linkDot =
     path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${path}";
-  staticDot = path: ../../../dotfiles/${path};
 in
 {
-  home.file = {
-    # ".memo".source = linkHome "Documents/memo";
-  };
-
   xdg.configFile = {
     "cava".source = staticDot "cava";
 
