@@ -54,6 +54,7 @@
         imports = [
           # ../../home/xdg/noctalia.nix
           ../../home/xdg/fuzzel.nix
+          ../../home/xdg/shikane.nix
         ];
 
         home.packages = with pkgs; [
@@ -79,8 +80,6 @@
           wlsunset
           brightnessctl # same like light
           wl-gammactl
-          wdisplays
-          shikane
           wlr-randr
 
           # Media
@@ -116,14 +115,6 @@
           # network-manager-applet.enable = true;
           # playerctld.enable = true;
 
-          # wdisplays set the right outputs
-          # install -Dm644 /dev/null ~/.config/shikane/config.toml
-          # shikane
-          # shikanectl export "host"
-          shikane = {
-            enable = true;
-          };
-
           cliphist = {
             enable = true;
             allowImages = true;
@@ -142,7 +133,6 @@
         # };
 
         xdg.configFile = {
-          "shikane".source = (self + /dotfiles/shikane);
           "swaylock".source = (self + /dotfiles/swaylock);
         };
 
