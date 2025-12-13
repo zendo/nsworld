@@ -10,6 +10,8 @@
           libsecret
           libepoxy
           # libsoup_3
+          # libdbusmenu-gtk3
+          libappindicator-gtk3
           # webkitgtk_4_1
         ];
     };
