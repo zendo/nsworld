@@ -128,67 +128,20 @@
   ];
 
   programs = {
-    aria2 = {
-      enable = true;
-    };
-
-    eza = {
-      enable = true;
-    };
-
-    fd = {
-      enable = true;
-    };
-
-    jq = {
-      enable = true;
-    };
-
-    btop = {
-      enable = true;
-    };
-
-    # btm
-    bottom = {
-      enable = true;
-    };
-
-    ripgrep = {
-      enable = true;
-    };
-
-    htop = {
-      enable = true;
-    };
-
-    # hh :history
-    hstr = {
-      # enable = true;
-    };
-
-    fzf = {
-      enable = true;
-    };
-
-    skim = {
-      enable = true;
-    };
-
-    television = {
-      enable = true;
-    };
-
-    yazi = {
-      enable = true;
-    };
-
-    # z: autojump directory
-    zoxide = {
-      enable = true;
-    };
-
-    pay-respects = {
-      # enable = true;
-    };
+    eza.enable = true;
+    fd.enable = true;
+    fzf.enable = true;
+    skim.enable = true;
+    ripgrep.enable = true;
+    television.enable = true;
+    jq.enable = true;
+    yazi.enable = true;
+    aria2.enable = true;
+    btop.enable = true;
+    htop.enable = true;
+    bottom.enable = true; # btm
+    hstr.enable = true; # hh :history
+    zoxide.enable = true; # z: autojump directory
+    # pay-respects.enable = true;
   };
 }
