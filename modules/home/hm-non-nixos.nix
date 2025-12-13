@@ -45,13 +45,19 @@
     ./terminal/ghostty.nix
     ./terminal/kitty.nix
     # ╭──────────────────────────────────────────╮
+    # │ WM                                       │
+    # ╰──────────────────────────────────────────╯
+    ./wm/dconf.nix
+    ./wm/fuzzel.nix
+    ./wm/noctalia.nix
+    ./wm/plasma.nix
+    ./wm/shikane.nix
+    # ╭──────────────────────────────────────────╮
     # │ XDG                                      │
     # ╰──────────────────────────────────────────╯
-    # ./xdg/dconf.nix
     ./xdg/env.nix
     ./xdg/files.nix
     # ./xdg/mime.nix
-    # ./xdg/plasma.nix
     ./xdg/xdg.nix
   ];
 

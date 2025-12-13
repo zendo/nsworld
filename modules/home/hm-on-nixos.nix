@@ -50,11 +50,11 @@
   # ===========================================================
   # KDE Plasma specific configurations
   # ===========================================================
-  ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./xdg/plasma.nix ]
+  ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./wm/plasma.nix ]
   # ===========================================================
   # GNOME specific configurations
   # ===========================================================
-  ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./xdg/dconf.nix ];
+  ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./wm/dconf.nix ];
 
   # home.enableNixpkgsReleaseCheck = false;
   home.stateVersion = nixosConfig.system.stateVersion;

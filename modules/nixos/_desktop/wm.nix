@@ -52,9 +52,9 @@
       { pkgs, ... }:
       {
         imports = [
-          # ../../home/xdg/noctalia.nix
-          ../../home/xdg/fuzzel.nix
-          ../../home/xdg/shikane.nix
+          # ../../home/wm/noctalia.nix
+          ../../home/wm/fuzzel.nix
+          ../../home/wm/shikane.nix
         ];
 
         home.packages = with pkgs; [
