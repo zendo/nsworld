@@ -16,16 +16,16 @@
           on-timeout = "brightnessctl -s s 10%";
           on-resume = "brightnessctl -r";
         }
-        # keyboard backlight
-        # dms brightness list
-        {
-          timeout = 250;
-          on-timeout = "brightnessctl -sd platform::kbd_backlight set 0";
-          on-resume = "brightnessctl -rd platform::kbd_backlight";
-        }
         {
           timeout = 300;
           on-timeout = "loginctl lock-session";
+        }
+        # keyboard backlight
+        # dms brightness list
+        {
+          timeout = 350;
+          on-timeout = "brightnessctl -sd platform::kbd_backlight set 0";
+          on-resume = "brightnessctl -rd platform::kbd_backlight";
         }
         {
           timeout = 360;
