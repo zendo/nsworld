@@ -1276,6 +1276,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   :config
   (setq vterm-shell "zsh")
   :bind (:map vterm-mode-map
+              ;; default: ("C-c C-t" . vterm-copy-mode)
               ("<f2>" . shell-pop)))
 #+end_src
 
