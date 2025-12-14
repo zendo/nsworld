@@ -1,10 +1,10 @@
 binds {
-    Mod+X hotkey-overlay-title="Application Launcher" {
-        spawn-sh "dms ipc call spotlight toggle";
-    }
-    Mod+V hotkey-overlay-title="Clipboard Manager" {
-        spawn-sh "dms ipc call clipboard toggle";
-    }
+    // Mod+X hotkey-overlay-title="Application Launcher" {
+    //     spawn-sh "dms ipc call spotlight toggle";
+    // }
+    // Mod+V hotkey-overlay-title="Clipboard Manager" {
+    //     spawn-sh "dms ipc call clipboard toggle";
+    // }
     Mod+M hotkey-overlay-title="Task Manager" {
         spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
     }

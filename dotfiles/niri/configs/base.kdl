@@ -32,15 +32,17 @@ spawn-at-startup "stasis"
 
 binds {
     Mod+Return { spawn "ghostty"; }
+    Mod+T { spawn "foot"; }
     // Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }
     Mod+L { spawn "swaylock"; }
-    Mod+X { spawn "fuzzel"; }  // Overrides
+    Mod+X { spawn-sh "vicinae toggle"; }  // Overrides
     Mod+Period { spawn "bemoji"; } // Overrides
     Mod+Escape { spawn "wlogout"; } // Overrides
-    Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; } // Overrides
+    // Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; } // Overrides
+    Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Q { close-window; }
@@ -137,8 +139,10 @@ window-rule {
 }
 
 window-rule {
-    match app-id="org.gnome.Loupe"
     match app-id="mpv"
+    match app-id="foot"
+    match app-id="xarchiver"
+    match app-id="org.gnome.Loupe"
     open-floating true
 }
 
@@ -150,3 +154,8 @@ window-rule {
     // default-column-width { fixed 300; }
     default-window-height { fixed 400; }
 }
+
+// window-rule {
+//   match app-id="^thunar$"
+//   open-on-workspace "6"
+// }

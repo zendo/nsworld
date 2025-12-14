@@ -20,6 +20,7 @@
     gvfs.enable = true; # (webkitgtk)
     upower.enable = true;
     geoclue2.enable = true;
+    tumbler.enable = true; # thumbnailer service
   };
 
   programs = {
@@ -53,7 +54,7 @@
       { pkgs, ... }:
       {
         imports = [
-          ../../home/wm/fuzzel.nix
+          # ../../home/wm/fuzzel.nix
           # ../../home/wm/hypridle.nix
           # ../../home/wm/noctalia.nix
           ../../home/wm/shikane.nix
