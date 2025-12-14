@@ -36,6 +36,7 @@ layout {
 
 recent-windows {
     highlight {
+        corner-radius 12
         active-color "#413738"
         urgent-color "#ffb4ab"
     }

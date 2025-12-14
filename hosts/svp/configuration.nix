@@ -16,11 +16,11 @@
     self.nixosModules.laptop
     self.nixosModules.homeManagerInit
 
-    self.nixosModules.gnome
+    # self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
-    # self.nixosModules.niri
+    self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 
@@ -30,7 +30,7 @@
 
   services.acpid.enable = true;
   # services.fwupd.enable = true;
-  services.displayManager.autoLogin.user = "${myvars.user}";
+  # services.displayManager.autoLogin.user = "${myvars.user}";
 
   users.users.${myvars.user} = {
     # pw: 123
