@@ -2,6 +2,8 @@
 
 prefer-no-csd
 
+// spawn-at-startup "stasis"
+
 layout {
     gaps 5
     background-color "transparent"
@@ -10,7 +12,9 @@ layout {
     // You can change the default width of the new windows.
     default-column-width { proportion 0.5; }
     focus-ring {
-      off
+        // off
+        active-gradient from="#ffb1c1cc" to="#ecbe91cc" angle=135
+        urgent-color "#ffb4ab"
     }
     shadow {
       on
@@ -30,7 +34,12 @@ layout {
     }
 }
 
-// spawn-at-startup "stasis"
+recent-windows {
+    highlight {
+        active-color "#413738"
+        urgent-color "#ffb4ab"
+    }
+}
 
 binds {
     Mod+T      { spawn "foot"; }
