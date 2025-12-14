@@ -5,6 +5,7 @@
     settings = {
       animation = "matrix";
       bigclock = true;
+      session_log = null;
     };
   };
 }

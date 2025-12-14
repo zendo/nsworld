@@ -2,15 +2,15 @@
 set {
   $mod Mod4
   
-  $term kitty
+  $term ghostty
   $float_term foot
   $editor emacs
   $browser firefox
   $filemanager thunar
   $note io.posidon.Paper
   $calendar qalculate-gtk
-  $menu fuzzel
-  $launcher nwg-drawer -c 7 -is 70 -spacing 23
+  $menu vicinae toggle
+  $launcher nwg-drawer -ct 7 -is 70 -spacing 23
   $wallpapers ~/Pictures/Wallpapers
 }
 
@@ -66,11 +66,9 @@ bindsym {
   $mod+l exec hyprlock
   $mod+Escape exec wlogout
   Ctrl+alt+Delete exec wlogout
-  $mod+space exec $menu
   $mod+x exec $menu
-  $mod+period exec bemoji
-  #$mod+apostrophe exec bemoji
-  $mod+v exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
+  $mod+period exec vicinae vicinae://extensions/vicinae/vicinae/search-emojis
+  $mod+v exec vicinae vicinae://extensions/vicinae/clipboard/history
 
   $mod+h floating toggle
 
