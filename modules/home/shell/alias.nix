@@ -28,6 +28,8 @@
     # network
     ip = "ip --color=auto";
     ip-api = "curl ip-api.com";
+    ip-info = "curl ipinfo.io";
+    ip-location = "curl -s api.ip2location.io | jq .";
     where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
