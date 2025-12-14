@@ -148,12 +148,12 @@
   };
 
   # Swapfile
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 1024 * 16;
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     device = "/var/swapfile";
+  #     size = 1024 * 16;
+  #   }
+  # ];
 
   zramSwap.enable = true;
 

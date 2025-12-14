@@ -34,13 +34,13 @@
       };
     };
 
-    logind.settings.Login = {
-      HandleLidSwitch = "suspend-then-hibernate";
-    };
+    # logind.settings.Login = {
+    #   HandleLidSwitch = "suspend-then-hibernate";
+    # };
   };
 
   # Go into hibernate after specific suspend time
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=90min
-  '';
+  # systemd.sleep.extraConfig = ''
+  #   HibernateDelaySec=90min
+  # '';
 }
