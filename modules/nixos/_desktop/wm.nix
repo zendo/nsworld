@@ -8,6 +8,7 @@
   imports = [
     ./dms.nix
     # ./greetd.nix
+    # ./ly.nix
   ];
 
   security = {
