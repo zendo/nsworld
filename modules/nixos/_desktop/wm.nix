@@ -1,14 +1,9 @@
-{
-  lib,
-  self,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     ./dms.nix
     # ./greetd.nix
-    # ./ly.nix
+    ./ly.nix
   ];
 
   security = {
@@ -55,7 +50,7 @@
       {
         imports = [
           # ../../home/wm/fuzzel.nix
-          # ../../home/wm/hypridle.nix
+          ../../home/wm/hypridle.nix
           # ../../home/wm/noctalia.nix
           ../../home/wm/shikane.nix
           ../../home/wm/swaylock.nix
@@ -100,7 +95,7 @@
           adwaita-icon-theme
           gnome-themes-extra
           dconf-editor
-          glib.bin # gsettings
+          glib.dev # gsettings
 
           loupe
           papers

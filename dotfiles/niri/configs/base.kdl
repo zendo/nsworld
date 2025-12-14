@@ -28,18 +28,18 @@ layout {
     }
 }
 
-spawn-at-startup "stasis"
+// spawn-at-startup "stasis"
 
 binds {
-    Mod+Return { spawn "ghostty"; }
     Mod+T { spawn "foot"; }
+    Mod+Return { spawn "ghostty"; }
     Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }
     Mod+L { spawn "swaylock"; }
-    Mod+X { spawn-sh "vicinae toggle"; }
     Mod+Escape { spawn "wlogout"; }
+    Mod+X { spawn-sh "vicinae toggle"; }
     Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
     Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
 
@@ -132,7 +132,6 @@ layer-rule {
 }
 
 window-rule {
-    match app-id="mpv"
     match app-id="foot"
     match app-id="xarchiver"
     match app-id="org.gnome.Loupe"

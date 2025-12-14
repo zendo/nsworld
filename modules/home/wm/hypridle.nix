@@ -4,5 +4,5 @@
     enable = true;
   };
 
-  xdg.configFile."hypridle".source = ../../../dotfiles/hypridle;
+  xdg.configFile."hypridle".source = ../../../dotfiles/hypr/hypridle.conf;
 }
