@@ -2,8 +2,9 @@
 {
   imports = [
     ./dms.nix
-    # ./greetd.nix
-    ./ly.nix
+    ./greetd.nix
+    # systemd 加载有问题
+    # ./ly.nix
   ];
 
   security = {
@@ -58,10 +59,12 @@
 
         home.packages = with pkgs; [
           libnotify # notify-send
+          swayidle
+          hypridle
           hyprlock
+          swaylock-effects
           stasis # idle manager
           wlogout
-          bemoji
           wf-recorder
           cliphist
           blueberry
@@ -85,7 +88,6 @@
           # slurp # select region
           shotman
           nomacs
-          hyprpicker
           # pavucontrol
           pwvucontrol # Pipewire Volume Control
           playerctl # media player control
