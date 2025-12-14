@@ -6,8 +6,6 @@ let
 in
 {
   xdg.configFile = {
-    "cava".source = staticDot "cava";
-
     "mpv".source = linkDot "mpv";
     "yt-dlp".source = linkDot "yt-dlp";
     "doom/config.org".source = linkDot "org/doom-emacs.org";
