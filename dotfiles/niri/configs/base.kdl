@@ -1,11 +1,11 @@
-// https://github.com/YaLTeR/niri/blob/main/resources/default-config.kdl
+// https://yalter.github.io/niri/Configuration%3A-Introduction.html
 
 prefer-no-csd
 
 layout {
     gaps 6
     background-color "transparent"
-    // center-focused-column "on-overflow"
+    center-focused-column "on-overflow"
 
     // You can change the default width of the new windows.
     default-column-width { proportion 0.5; }
@@ -33,15 +33,14 @@ spawn-at-startup "stasis"
 binds {
     Mod+Return { spawn "ghostty"; }
     Mod+T { spawn "foot"; }
-    // Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
+    Mod+Comma { spawn-sh "kitten quick-access-terminal"; }
     Mod+E { spawn "emacs"; }
     Mod+W { spawn "firefox"; }
     Mod+F { spawn "thunar"; }
     Mod+L { spawn "swaylock"; }
-    Mod+X { spawn-sh "vicinae toggle"; }  // Overrides
-    Mod+Period { spawn "bemoji"; } // Overrides
-    Mod+Escape { spawn "wlogout"; } // Overrides
-    // Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; } // Overrides
+    Mod+X { spawn-sh "vicinae toggle"; }
+    Mod+Escape { spawn "wlogout"; }
+    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
     Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -122,20 +121,14 @@ input {
     }
 }
 
-// window-rule {
-//     geometry-corner-radius 8
-//     clip-to-geometry true
-// }
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
 
 layer-rule {
     match namespace="^wallpaper$"
     place-within-backdrop true
-}
-
-window-rule {
-    match app-id="firefox$" title="^Picture-in-Picture$"
-    open-floating true
-    default-floating-position x=32 y=32 relative-to="bottom-left"
 }
 
 window-rule {
@@ -147,6 +140,17 @@ window-rule {
 }
 
 window-rule {
+    match app-id="thunar"
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+}
+
+window-rule {
+    match app-id="ghostty"
+    default-column-width { fixed 800; }
+}
+
+window-rule {
     match app-id="goodvibes"
     max-width 300
     // min-height 400
@@ -155,7 +159,8 @@ window-rule {
     default-window-height { fixed 400; }
 }
 
-// window-rule {
-//   match app-id="^thunar$"
-//   open-on-workspace "6"
-// }
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    open-floating true
+    default-floating-position x=32 y=32 relative-to="bottom-left"
+}
