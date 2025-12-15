@@ -15,7 +15,6 @@ in
     "niri/configs".source = linkDot "niri/configs";
     "niri/config.kdl".source = linkDot "niri/config.kdl";
     "hypr/hyprland.conf".source = linkDot "hypr/hyprland.conf";
-    "hypr/hyprlock.conf".source = linkDot "hypr/hyprlock.conf";
 
     # rime for ibus
     "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
