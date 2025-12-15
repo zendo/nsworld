@@ -27,7 +27,6 @@ in
 
   xdg.dataFile = {
     "goodvibes".source = staticDot "goodvibes";
-    "color-schemes/Genshin.colors".source = staticDot "misc/kde-color-Genshin.colors";
 
     # rime for fcitx5
     "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
