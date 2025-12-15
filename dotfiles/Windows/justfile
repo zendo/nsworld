@@ -6,7 +6,7 @@ _default:
 ff-betterfox:
     iwr "https://ghfast.top/https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js" -o "user.js" ; \
     Get-Content ff-pref.js | Add-Content user.js
-    Move-Item user.js $env:APPDATA\Mozilla\Firefox\Profiles
+    Move-Item user.js $env:APPDATA\Mozilla\Firefox\Profiles -Force
     ii $env:APPDATA\Mozilla\Firefox\Profiles
     Write-Host "`n about:support`n" -ForegroundColor Green
 
