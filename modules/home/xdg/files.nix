@@ -7,7 +7,6 @@ in
 {
   xdg.configFile = {
     "mpv".source = linkDot "mpv";
-    "yt-dlp".source = linkDot "yt-dlp";
     "doom/config.org".source = linkDot "org/doom-emacs.org";
     "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
 
