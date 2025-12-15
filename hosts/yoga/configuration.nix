@@ -16,11 +16,11 @@
     self.nixosModules.laptop
     self.nixosModules.homeManagerInit
 
-    # self.nixosModules.gnome
+    self.nixosModules.gnome
     # self.nixosModules.kde
     # self.nixosModules.cosmic
     # self.nixosModules.sway
-    self.nixosModules.niri
+    # self.nixosModules.niri
     # self.nixosModules.hyprland
   ];
 

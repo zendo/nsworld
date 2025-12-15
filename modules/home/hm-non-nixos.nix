@@ -19,6 +19,7 @@
     # ╭──────────────────────────────────────────╮
     # │ PROGRAMS                                 │
     # ╰──────────────────────────────────────────╯
+    ./programs/cava.nix
     # ./programs/chrome.nix
     ./programs/cli.nix
     # ./programs/firefox.nix
@@ -43,15 +44,17 @@
     # ./terminal/alacritty.nix
     ./terminal/foot.nix
     ./terminal/ghostty.nix
-    ./terminal/kitty.nix
+    # ./terminal/kitty.nix
     # ╭──────────────────────────────────────────╮
     # │ WM                                       │
     # ╰──────────────────────────────────────────╯
-    ./wm/dconf.nix
-    ./wm/fuzzel.nix
-    ./wm/noctalia.nix
-    ./wm/plasma.nix
-    ./wm/shikane.nix
+    # ./wm/dconf.nix
+    # ./wm/fuzzel.nix
+    # ./wm/hypridle.nix
+    # ./wm/noctalia.nix
+    # ./wm/plasma.nix
+    # ./wm/shikane.nix
+    # ./wm/swaylock.nix
     # ╭──────────────────────────────────────────╮
     # │ XDG                                      │
     # ╰──────────────────────────────────────────╯

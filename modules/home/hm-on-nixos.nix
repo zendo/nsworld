@@ -33,6 +33,7 @@
     ./editor/vscode.nix
     ./editor/zed.nix
     # -------------------------------------
+    ./programs/cava.nix
     ./programs/chrome.nix
     ./programs/firefox.nix
     ./programs/gui.nix
@@ -41,7 +42,7 @@
     # ./terminal/alacritty.nix
     ./terminal/foot.nix
     ./terminal/ghostty.nix
-    ./terminal/kitty.nix
+    # ./terminal/kitty.nix
     # -------------------------------------
     ./xdg/env.nix
     ./xdg/mime.nix

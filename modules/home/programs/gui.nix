@@ -19,7 +19,6 @@
     jhentai
 
     # Terminal
-    cava
     graphviz
     # imagemagick
     exiftool

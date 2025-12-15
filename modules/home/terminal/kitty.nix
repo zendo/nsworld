@@ -52,7 +52,7 @@ in
   # https://sw.kovidgoyal.net/kitty/_downloads/433dadebd0bf504f8b008985378086ce/kitty.conf
   # ctrl+shift+f5 :reload config
   programs.kitty = {
-    # enable = true;
+    enable = true;
     # show right prompts
     shellIntegration.mode = "no-cursor no-sudo";
     # kitten theme: Afterglow / vague / bl1nk
