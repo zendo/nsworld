@@ -17,20 +17,20 @@ layout {
         urgent-color "#ffb4ab"
     }
     shadow {
-      on
-      softness 8
-      spread 1
-      offset x=0 y=3
+        on
+        softness 8
+        spread 1
+        offset x=0 y=3
     }
 
     // tabbed
     tab-indicator {
-      // gap 0
-      width 10
-      length total-proportion=0.3
-      gaps-between-tabs 2
-      active-gradient from="#808080" to="#bbddff" angle=45
-      inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // gap 0
+        width 10
+        length total-proportion=0.3
+        gaps-between-tabs 2
+        active-gradient from="#808080" to="#bbddff" angle=45
+        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 }
 
