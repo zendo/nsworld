@@ -54,7 +54,6 @@
           ../../home/wm/hypridle.nix
           # ../../home/wm/noctalia.nix
           ../../home/wm/shikane.nix
-          ../../home/wm/swaylock.nix
         ];
 
         home.packages = with pkgs; [
@@ -62,7 +61,6 @@
           swayidle
           hypridle
           hyprlock
-          swaylock-effects
           stasis # idle manager
           wlogout
           wf-recorder

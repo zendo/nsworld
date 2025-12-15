@@ -5,7 +5,6 @@
     settings = {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";
-        # lock_cmd = "pidof swaylock || swaylock";
         before_sleep_cmd = "loginctl lock-session";
         # after_sleep_cmd = "hyprctl dispatch dpms on";
         after_sleep_cmd = "niri msg action power-on-monitors";
