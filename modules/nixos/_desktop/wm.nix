@@ -90,14 +90,13 @@
           # Needs when use other DM
           adwaita-icon-theme
           gnome-themes-extra
-          dconf-editor
           glib.dev # gsettings
+          dconf-editor
 
           loupe
           papers
           # file-roller
           xarchiver
-          swappy # screenshot annotation editor
           # gnome.gnome-power-manager
           # gnome.gnome-characters
           # gthumb
