@@ -58,19 +58,16 @@
 
         home.packages = with pkgs; [
           libnotify # notify-send
+          wlogout
           swayidle
           hypridle
           hyprlock
           stasis # idle manager
-          wlogout
           wf-recorder
-          cliphist
           blueberry
           uwsm
           xwayland-satellite
-          wlopm
           wev # wayland event view
-          wvkbd # on-screen keyboard
           # waypipe # proxy ?
           # wtype # xdotool
 
@@ -84,7 +81,6 @@
           # Media
           # grim # grab image
           # slurp # select region
-          shotman
           nomacs
           # pavucontrol
           pwvucontrol # Pipewire Volume Control
