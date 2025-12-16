@@ -28,6 +28,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # https://github.com/DeterminateSystems/nix-src/releases
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/3.14.0.tar.gz";
+
     # noctalia.url = "github:noctalia-dev/noctalia-shell";
     # noctalia.inputs.nixpkgs.follows = "nixpkgs";
 

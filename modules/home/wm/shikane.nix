@@ -44,7 +44,7 @@
               ];
               mode = "1920x1080@60Hz";
               position = "0,0";
-              scale = 1.5;
+              scale = 1.2;
               transform = "normal";
               adaptive_sync = false;
             }

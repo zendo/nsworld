@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   inputs,
   ...
 }:
@@ -17,6 +18,8 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
+
+    package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
       warn-dirty = false;
