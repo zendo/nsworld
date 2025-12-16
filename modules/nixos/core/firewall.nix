@@ -11,7 +11,7 @@
   networking = {
     nftables.enable = true;
     firewall = {
-      # enable = true;
+      enable = false;
       # allowedUDPPorts = [ 53317 ];
       # allowedTCPPorts = [ 53317 ];
     };

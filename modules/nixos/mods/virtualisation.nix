@@ -76,7 +76,7 @@
 
       # https://wiki.nixos.org/wiki/Incus
       incus = {
-        enable = true;
+        # enable = true;
       };
 
       # virtualbox = {
