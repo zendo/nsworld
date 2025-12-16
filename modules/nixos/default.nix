@@ -20,11 +20,7 @@
     laptop.imports = [ ./_desktop/laptop.nix ];
     gnome.imports = [ ./_desktop/gnome.nix ];
     kde.imports = [ ./_desktop/kde.nix ];
-
-    cosmic = {
-      services.desktopManager.cosmic.enable = true;
-      services.displayManager.cosmic-greeter.enable = true;
-    };
+    cosmic.imports = [ ./_desktop/cosmic.nix ];
 
     niri = {
       imports = [ ./_desktop/wm.nix ];

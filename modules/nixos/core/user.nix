@@ -12,6 +12,9 @@ in
   # Declaratively users and groups
   services.userborn.enable = lib.mkDefault true;
 
+  # sudo rule
+  # security.sudo.execWheelOnly = true;
+
   # sudo-rs
   security.sudo-rs.enable = true;
 

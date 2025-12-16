@@ -7,7 +7,7 @@
 {
   services.greetd = {
     enable = true;
-    # useTextGreeter = true;
+    useTextGreeter = true;
     settings = {
       default_session = {
         command = ''
