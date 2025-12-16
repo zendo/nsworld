@@ -11,16 +11,15 @@
   networking = {
     nftables.enable = true;
     firewall = {
-      enable = false;
+      # enable = true;
       # allowedUDPPorts = [ 53317 ];
       # allowedTCPPorts = [ 53317 ];
     };
   };
 
   services = {
-    # https://github.com/Prince213/firewalld-nix/blob/main/example.nix
     firewalld = {
-      enable = true;
+      # enable = true;
       zones.trusted.interfaces = [ "tun0" ];
     };
   };
