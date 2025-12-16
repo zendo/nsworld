@@ -35,7 +35,7 @@
         }
         {
           timeout = 1800; # 30mins
-          on-timeout = "systemctl sleep";
+          on-timeout = "systemctl suspend";
         }
       ];
     };
