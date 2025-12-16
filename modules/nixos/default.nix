@@ -22,26 +22,7 @@
     kde.imports = [ ./_desktop/kde.nix ];
     cosmic.imports = [ ./_desktop/cosmic.nix ];
     niri.imports = [ ./_desktop/niri.nix ];
-
-    hyprland = {
-      imports = [ ./_desktop/wm.nix ];
-      programs.hyprland = {
-        enable = true;
-        withUWSM = true;
-      };
-    };
-
-    sway =
-      { pkgs, ... }:
-      {
-        imports = [ ./_desktop/wm.nix ];
-        programs.sway = {
-          enable = true;
-          wrapperFeatures.gtk = true;
-          extraPackages = [
-            pkgs.autotiling-rs
-          ];
-        };
-      };
+    sway.imports = [ ./_desktop/sway.nix ];
+    hyprland.imports = [ ./_desktop/hyprland.nix ];
   };
 }
