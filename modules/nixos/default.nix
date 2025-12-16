@@ -21,11 +21,7 @@
     gnome.imports = [ ./_desktop/gnome.nix ];
     kde.imports = [ ./_desktop/kde.nix ];
     cosmic.imports = [ ./_desktop/cosmic.nix ];
-
-    niri = {
-      imports = [ ./_desktop/wm.nix ];
-      programs.niri.enable = true;
-    };
+    niri.imports = [ ./_desktop/niri.nix ];
 
     hyprland = {
       imports = [ ./_desktop/wm.nix ];
