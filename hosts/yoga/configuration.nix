@@ -52,11 +52,6 @@
     sing-box
     gui-for-singbox
     # gui-for-clash
-    # pandora-box
-    # (makeAutostartItem {
-    #   name = "pandora-box";
-    #   package = pandora-box;
-    # })
   ];
 
   systemd.services.sub-store.enable = true;
