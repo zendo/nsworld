@@ -26,10 +26,11 @@
 
   mods.virt.enable = true;
   mods.nixos-diff.enable = true;
+
   # programs'.steam.enable = true;
   # programs'.nix-ld.enable = true;
   programs.command-not-found = {
-    # enable = true;
+    enable = true;
     dbPath = inputs.nixpkgs + "/programs.sqlite";
   };
 
