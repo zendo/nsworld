@@ -7,7 +7,7 @@ prefer-no-csd
 layout {
     gaps 5
     background-color "transparent"
-    center-focused-column "on-overflow"
+    // center-focused-column "on-overflow"
 
     // You can change the default width of the new windows.
     default-column-width { proportion 0.5; }
@@ -89,7 +89,6 @@ binds {
     Mod+Alt+6 { move-column-to-workspace 6; }
 
     // Mouse
-    Mod+MouseRight      { close-window; }
     Mod+MouseMiddle     { maximize-column; }
     Mod+WheelScrollUp   { focus-window-up-or-column-left; }
     Mod+WheelScrollDown { focus-window-down-or-column-right; }
