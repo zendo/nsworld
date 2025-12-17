@@ -1,6 +1,6 @@
 keys:
   - &private-ssh age1w0r39x5z0ye2wcml5e5q6nt8zp7zplndagnl58arvjupdk6qm54shyshqz
-  - &yoga age1xdsx6ydssutcjrnyj4h023qtyfuqryswqlucqnc5j5utjnfcjdmq2twlz8
+  - &yoga age1hwvwpx4nj7qg2v5ptmrrdrws4782vy865dj4a2m6h94j6n68w3rs7laq6t
   - &svp age1z8hzw73nftxarapkty90lttnuyv5mmqxarhhl8jmlply6g455v8safhfc5
   - &rmt age19e79dxz6fnkgpy0vrcd2s0aan2l3qcc5hap3wtat2yx3r09zuy9s69sf47
 creation_rules:
