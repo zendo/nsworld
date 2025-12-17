@@ -68,10 +68,10 @@
   };
 
   # services.daeWithConfig.enable = true;
-  services.dae = {
-    # enable = true;
-    configFile = "/home/${myvars.user}/code/subs/dae-config.dae";
-  };
+  # services.dae = {
+  #   enable = true;
+  #   configFile = "/home/${myvars.user}/code/subs/dae-config.dae";
+  # };
 
   programs.clash-verge = {
     # enable = true;
