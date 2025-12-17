@@ -26,9 +26,9 @@
 
   mods.virt.enable = true;
   mods.nixos-diff.enable = true;
-
   # programs'.steam.enable = true;
   # programs'.nix-ld.enable = true;
+
   programs.command-not-found = {
     enable = true;
     dbPath = inputs.nixpkgs + "/programs.sqlite";
@@ -41,6 +41,8 @@
   # No need password
   security.sudo.wheelNeedsPassword = false;
   security.sudo-rs.wheelNeedsPassword = false;
+
+  nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   # ╭──────────────────────────────────────────────────────────╮
   # │ PROXY                                                    │
