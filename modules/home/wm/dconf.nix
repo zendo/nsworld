@@ -101,9 +101,11 @@ rec {
     #   ];
     # };
 
+    # dconf watch /
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [ ];
       close = [ "<Super>q" ];
+      show-desktop = [ "<Super>d" ];
+      activate-window-menu = [ ]; # <Alt>space
       switch-to-workspace-1 = [ "<Super>1" ];
       switch-to-workspace-2 = [ "<Super>2" ];
       switch-to-workspace-3 = [ "<Super>3" ];
@@ -115,6 +117,7 @@ rec {
     };
 
     "org/gnome/shell/keybindings" = {
+      toggle-message-tray = [ ]; # <Super>v
       switch-to-application-1 = [ ];
       switch-to-application-2 = [ ];
       switch-to-application-3 = [ ];
@@ -128,6 +131,7 @@ rec {
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -154,6 +158,11 @@ rec {
       binding = "<Super>x";
       command = "vicinae toggle";
       name = "open-vicinae";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
+      binding = "<Super>v";
+      command = "vicinae vicinae://extensions/vicinae/clipboard/history";
+      name = "open-vicinae-clipboard";
     };
   };
 }
