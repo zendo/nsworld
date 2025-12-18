@@ -3,8 +3,7 @@
   imports = [
     ./dms.nix
     ./greetd.nix
-    # systemd 加载有问题
-    # ./ly.nix
+    # ./ly.nix  # systemd 加载有问题
   ];
 
   security = {
