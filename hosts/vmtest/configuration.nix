@@ -59,6 +59,7 @@
   services.spice-vdagentd.enable = true;
   services.spice-webdavd.enable = true;
 
+  # ./result/bin/run-vm -m 4G -smp 4 -device virtio-vga-gl -display sdl,gl=on
   virtualisation = {
     memorySize = 1024 * 4;
     diskSize = 1024 * 8;
