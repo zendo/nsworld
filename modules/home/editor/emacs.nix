@@ -17,7 +17,23 @@
         # lsp-bridge
         # pdf-tools
         # telega
-        treesit-grammars.with-all-grammars
+        # treesit-grammars.with-all-grammars
+        (treesit-grammars.with-grammars (
+          grammars: with grammars; [
+            tree-sitter-nix
+            tree-sitter-elisp
+            tree-sitter-bash
+            tree-sitter-json
+            tree-sitter-json5
+            tree-sitter-yaml
+            tree-sitter-toml
+            tree-sitter-kdl
+            tree-sitter-markdown
+            tree-sitter-go
+            tree-sitter-rust
+            tree-sitter-python
+          ]
+        ))
       ];
     # extraConfig = ''
     #   (display-time-mode 1)
