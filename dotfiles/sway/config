@@ -67,8 +67,8 @@ bindsym {
   $mod+Escape exec wlogout
   Ctrl+alt+Delete exec wlogout
   $mod+x exec $menu
-  $mod+period exec vicinae vicinae://extensions/vicinae/vicinae/search-emojis
   $mod+v exec vicinae vicinae://extensions/vicinae/clipboard/history
+  $mod+period exec vicinae vicinae://extensions/vicinae/vicinae/search-emojis
 
   $mod+h floating toggle
 

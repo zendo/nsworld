@@ -52,8 +52,8 @@ binds {
     Mod+L      { spawn "hyprlock"; } // Override by dms
     Mod+Escape { spawn "wlogout"; }
     Mod+X      { spawn-sh "vicinae toggle"; }
-    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
     Mod+V      { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
+    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
 
     Mod+Q       { close-window; }
     Mod+C       { center-column; }
