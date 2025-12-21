@@ -8,7 +8,6 @@
         ./modules/flake/flake-parts.nix # flake.packages / perSystem
         ./modules/flake/devshell.nix # flake.devshells
         ./modules/flake/treefmt.nix # flake.formatter
-        ./modules/flake/templates # flake.templates
         ./modules/nixos # flake.nixosModules
         ./modules/lib # flake.lib
         ./overlays # flake.overlays
