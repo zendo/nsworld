@@ -5,9 +5,10 @@
     let
       attrsets = import ./attrsets.nix { lib = final; };
       umport = import ./umport.nix { lib = final; };
+      paths = import ./paths.nix { lib = final; };
     in
     {
-      custom = attrsets // umport;
+      custom = attrsets // umport // paths;
     }
   );
 }
