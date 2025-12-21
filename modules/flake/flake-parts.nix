@@ -1,5 +1,8 @@
 { inputs, ... }:
 {
+  # for dendritic pattern
+  # imports = [ inputs.flake-parts.flakeModules.modules ];
+
   debug = true; # repl: flake.currentSystem / flake.debug
 
   # systems for `perSystem`
