@@ -12,17 +12,17 @@
     default.imports = self.lib.custom.umport {
       path = ./.;
       exclude = [
-        ./_desktop
+        ./desktop
         ./default.nix
       ];
     };
     homeManagerInit.imports = [ ../home/hm-as-module.nix ];
-    laptop.imports = [ ./_desktop/laptop.nix ];
-    gnome.imports = [ ./_desktop/gnome.nix ];
-    kde.imports = [ ./_desktop/kde.nix ];
-    cosmic.imports = [ ./_desktop/cosmic.nix ];
-    niri.imports = [ ./_desktop/niri.nix ];
-    sway.imports = [ ./_desktop/sway.nix ];
-    hyprland.imports = [ ./_desktop/hyprland.nix ];
+    laptop.imports = [ ./desktop/laptop.nix ];
+    gnome.imports = [ ./desktop/gnome.nix ];
+    kde.imports = [ ./desktop/kde.nix ];
+    cosmic.imports = [ ./desktop/cosmic.nix ];
+    niri.imports = [ ./desktop/niri.nix ];
+    sway.imports = [ ./desktop/sway.nix ];
+    hyprland.imports = [ ./desktop/hyprland.nix ];
   };
 }
