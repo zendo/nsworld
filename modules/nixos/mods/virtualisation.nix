@@ -1,12 +1,12 @@
 /*
-  ## Network `default` active
+  # Network `default` active
   sudo virsh net-start default
   sudo virsh net-autostart default
 
-  ## Clipboard share
+  # Clipboard share
   apt install spice-vdagent (Guest)
 
-  ## Folders share
+  # Folders share
   Memory: enable the shared memory
   Add filesystem: virtiofs ~/Documents/guest-shared
   Target Path: shared
@@ -14,17 +14,12 @@
   mkdir yoga
   sudo mount -t virtiofs shared ~/yoga
 
-  ## Windows Guest
+  # Windows Guest
   add tpm: tpm-crb、emulator、2.0
   https://www.spice-space.org/download.html  # spice-guest-tools
 
-  ## qemu iso emulator
+  # qemu iso emulator
   qemu-system-x86_64 -enable-kvm -m 8192 -cdrom result/iso
-
-  ## waydroid
-  nix shell n\#android-tools
-  adb connect 192.168.240.112:5555
-  adb shell wm set-fix-to-user-rotation enabled  # force vertical
 */
 {
   config,
@@ -36,7 +31,9 @@
   options.mods.virt.enable = lib.mkEnableOption "virtualisation customize.";
 
   config = lib.mkIf config.mods.virt.enable {
-    # bazaar
+
+    # flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    # flatpak install flathub io.github.kolunmi.Bazaar
     services.flatpak.enable = true;
 
     programs = {
@@ -46,18 +43,22 @@
     };
 
     environment.systemPackages = with pkgs; [
+      # gnome-boxes
       # quickemu
       virtiofsd
       virt-viewer
       bridge-utils # brctl: network bridge
-      # win-virtio # needs ?
       wl-clipboard # waydroid clipborad
-      # scrcpy # android
-      # distrobox
+      # win-virtio # needs ?
       # bottles # wine manager
-      # gnome.gnome-boxes
-      # steam-run
+      # scrcpy # android
       # yuzu
+      # ---------- #
+      # distrobox create --root --name archlinux --init --image archlinux:latest
+      # distrobox enter --root archlinux
+      distrobox
+      # toolbox
+      # ---------- #
     ];
 
     virtualisation = {
@@ -90,11 +91,10 @@
       #   enableOnBoot = true;
       # };
 
-      # podman = {
-      #   enable = true;
-      #   # Create a `docker` alias for podman, to use it as a drop-in replacement
-      #   dockerCompat = true;
-      # };
+      podman = {
+        enable = true;
+        dockerCompat = true;
+      };
 
       # containers = {
       #   enable = true;
@@ -105,6 +105,9 @@
       #   ];
       # };
 
+      # nix shell n\#android-tools
+      # adb connect 192.168.240.112:5555
+      # adb shell wm set-fix-to-user-rotation enabled  # force vertical
       # waydroid.enable = true;
     };
 
