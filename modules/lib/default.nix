@@ -1,6 +1,13 @@
 { lib, ... }:
 {
   flake.lib = lib.extend (
-    final: prev: (import ./attrsets.nix { lib = final; }) // (import ./umport.nix { lib = final; })
+    final: prev:
+    let
+      attrsets = import ./attrsets.nix { lib = final; };
+      umport = import ./umport.nix { lib = final; };
+    in
+    {
+      custom = attrsets // umport;
+    }
   );
 }

@@ -9,7 +9,7 @@
 { self, ... }:
 {
   flake.nixosModules = {
-    default.imports = self.lib.umport {
+    default.imports = self.lib.custom.umport {
       path = ./.;
       exclude = [
         ./_desktop
