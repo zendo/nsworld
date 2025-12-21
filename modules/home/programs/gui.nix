@@ -8,7 +8,6 @@
     # anich # 在线动漫弹幕
     comigo
     amethyst
-    zenus
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
