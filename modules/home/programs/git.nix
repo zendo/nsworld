@@ -3,6 +3,21 @@
   programs.git = {
     enable = true;
     signing.format = "openpgp";
+    ignores = [
+      ".csvignore"
+      ".DS_Store"
+      # nix
+      "*.drv"
+      "*.qcow2"
+      "result"
+      "result-*"
+      ".direnv"
+      ".envrc"
+      # python
+      "*.py?"
+      "__pycache__/"
+      ".venv/"
+    ];
     settings = {
       user.name = "zendo";
       user.email = "linzway@qq.com";
