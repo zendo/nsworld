@@ -6,7 +6,7 @@
   # Clipboard share
   apt install spice-vdagent (Guest)
 
-  # Folders share
+  # Shared folders: https://wiki.nixos.org/wiki/Virt-manager#Shared_folders
   Memory: enable the shared memory
   Add filesystem: virtiofs ~/Documents/guest-shared
   Target Path: shared
@@ -41,8 +41,7 @@
     environment.systemPackages = with pkgs; [
       # gnome-boxes
       # quickemu
-      virtiofsd
-      virt-viewer
+      # virt-viewer # 远程查看程序
       bridge-utils # brctl: network bridge
       wl-clipboard # waydroid clipborad
       # win-virtio # needs ?
@@ -66,8 +65,7 @@
           # runAsRoot = false;
           package = pkgs.qemu_kvm; # emulate only host architectures
           # swtpm.enable = true; # emulated TPM
-          # Shared folders: https://wiki.nixos.org/wiki/Virt-manager#Shared_folders
-          vhostUserPackages = with pkgs; [ virtiofsd ];
+          vhostUserPackages = [ pkgs.virtiofsd ];
         };
       };
 
