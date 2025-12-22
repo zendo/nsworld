@@ -36,7 +36,7 @@
             config = {
               source = "/var/lib/incus/storage-pools/default";
             };
-            driver = "btrfs";
+            driver = "dir";
             name = "default";
           }
         ];
