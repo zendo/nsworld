@@ -49,9 +49,9 @@
       # scrcpy # android
       # yuzu
       # ---------- #
-      # distrobox create --root --name archlinux --init --image archlinux:latest
-      # distrobox enter --root archlinux
+      # distrobox create -i archlinux
       distrobox
+      # toolbox create -i quay.io/toolbx/arch-toolbox  / ubuntu-toolbox
       # toolbox
       # ---------- #
     ];
@@ -67,11 +67,6 @@
           # swtpm.enable = true; # emulated TPM
           vhostUserPackages = [ pkgs.virtiofsd ];
         };
-      };
-
-      # https://wiki.nixos.org/wiki/Incus
-      incus = {
-        # enable = true;
       };
 
       # virtualbox = {

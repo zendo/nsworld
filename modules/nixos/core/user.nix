@@ -52,6 +52,18 @@ in
         (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
         (mkIf config.programs.adb.enable "adbusers")
       ];
+      subUidRanges = [
+        {
+          startUid = 100000;
+          count = 65536;
+        }
+      ];
+      subGidRanges = [
+        {
+          startGid = 100000;
+          count = 65536;
+        }
+      ];
     };
 
     users.guest = {
@@ -60,4 +72,26 @@ in
       initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
     };
   };
+
+  # Workaround for userborn: Generate subuid/subgid files from the user configuration
+  # https://github.com/nikstur/userborn/issues/7
+  system.activationScripts.podman-subid =
+    let
+      user = config.users.users.${myvars.user};
+      subuidContent = lib.concatMapStrings (
+        range: "${myvars.user}:${toString range.startUid}:${toString range.count}\n"
+      ) user.subUidRanges;
+      subgidContent = lib.concatMapStrings (
+        range: "${myvars.user}:${toString range.startGid}:${toString range.count}\n"
+      ) user.subGidRanges;
+    in
+    {
+      text = ''
+        if [ -L /etc/subuid ]; then rm /etc/subuid; fi
+        if [ -L /etc/subgid ]; then rm /etc/subgid; fi
+        cp -f ${pkgs.writeText "subuid" subuidContent} /etc/subuid
+        cp -f ${pkgs.writeText "subgid" subgidContent} /etc/subgid
+        chmod 644 /etc/subuid /etc/subgid
+      '';
+    };
 }
