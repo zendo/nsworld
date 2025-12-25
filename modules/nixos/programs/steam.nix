@@ -8,9 +8,13 @@
   options.programs'.steam.enable = lib.mkEnableOption "steam customize.";
 
   config = lib.mkIf config.programs'.steam.enable {
+
     environment.systemPackages = with pkgs; [
       mangohud
       goverlay # mangohud config GUI
+      ## wine
+      # lutris
+      # bottles
     ];
 
     programs.gamemode.enable = true;
