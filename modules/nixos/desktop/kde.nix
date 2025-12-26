@@ -1,19 +1,14 @@
 { pkgs, ... }:
 {
-  services = {
-    colord.enable = true;
-
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm = {
-      enable = true;
-      # theme = "sddm-astronaut-theme";
-    };
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    # theme = "sddm-astronaut-theme";
   };
 
-  programs = {
-    kdeconnect.enable = true;
-    partition-manager.enable = true;
-  };
+  services.colord.enable = true;
+  programs.kdeconnect.enable = true;
+  programs.partition-manager.enable = true;
 
   environment.systemPackages =
     with pkgs;

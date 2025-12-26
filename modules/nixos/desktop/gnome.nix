@@ -1,25 +1,15 @@
 { pkgs, ... }:
 {
-  services = {
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
-    packagekit.enable = false;
-    # gnome.tinysparql.enable = false;
-    # gnome.localsearch.enable = false;
-  };
+  services.packagekit.enable = false;
+  # services.gnome.tinysparql.enable = false;
+  # services.gnome.localsearch.enable = false;
 
-  programs = {
-    kdeconnect = {
-      # enable = true;
-      package = pkgs.valent;
-      # package = pkgs.gnomeExtensions.gsconnect;
-    };
-
-    # nautilus-open-any-terminal = {
-    #   enable = true;
-    #   terminal = "kitty";
-    # };
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.valent;
   };
 
   environment.gnome.excludePackages = with pkgs; [
