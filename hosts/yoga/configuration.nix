@@ -43,7 +43,7 @@
   security.sudo.wheelNeedsPassword = false;
   security.sudo-rs.wheelNeedsPassword = false;
 
-  nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   # ╭──────────────────────────────────────────────────────────╮
   # │ PROXY                                                    │
