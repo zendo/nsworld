@@ -39,7 +39,7 @@
         myvars = {
           user = "iab";
         };
-        extraModules = [ ./xdg/dconf.nix ];
+        extraModules = [ ./wm/dconf.nix ];
       };
 
       # MAYBE: other user on nixos
