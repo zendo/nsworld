@@ -33,6 +33,8 @@
     where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
     paste-termbin = "nc termbin.com 9999";
     paste-rs = "curl --data-binary @- https://paste.rs/";
+    gg-doom = "git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d";
+    gg-astronvim = "git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim";
 
     # emacs
     e = "emacs -nw";
