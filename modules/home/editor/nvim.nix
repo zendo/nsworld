@@ -1,6 +1,7 @@
 { inputs, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    neovim
     # inputs.nvf.packages.${system}.default
     # inputs.nvf.packages.${system}.maximal
   ];
