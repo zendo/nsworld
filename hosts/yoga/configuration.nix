@@ -80,12 +80,6 @@
     serviceMode = true;
   };
 
-  programs.sparkle = {
-    # enable = true;
-    autoStart = true;
-    tunMode = true;
-  };
-
   # Virtual network interfering Geoclue2's IP-based location
   services.geoclue2 = {
     # enableStatic = true;
