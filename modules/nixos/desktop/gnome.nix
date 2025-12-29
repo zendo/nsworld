@@ -3,9 +3,9 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  services.packagekit.enable = false;
   # services.gnome.tinysparql.enable = false;
   # services.gnome.localsearch.enable = false;
+  services.packagekit.enable = false;
 
   programs.kdeconnect = {
     enable = true;
@@ -13,17 +13,11 @@
   };
 
   environment.gnome.excludePackages = with pkgs; [
-    yelp
     sushi # heavyweight
-    geary
-    totem
-    baobab
+    yelp
     gnome-tour
-    gnome-photos
     gnome-music
     gnome-software
-    decibels
-    showtime
   ];
 
   environment.systemPackages = with pkgs; [
@@ -39,7 +33,7 @@
     gnome-power-manager
     gnome-sound-recorder
     # gnome-extension-manager
-    adw-gtk3
+    # adw-gtk3
     qadwaitadecorations-qt6
   ];
 }
