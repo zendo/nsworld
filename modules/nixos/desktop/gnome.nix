@@ -18,6 +18,7 @@
     gnome-tour
     gnome-music
     gnome-software
+    showtime
   ];
 
   environment.systemPackages = with pkgs; [
