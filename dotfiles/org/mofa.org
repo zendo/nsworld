@@ -17,7 +17,6 @@ netstat -ano | findstr :7890 // windows
 https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 mixed-in 监听地址改 :: 7890
 出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
-路由设置——规则：删除 reject quic
 
 "route" - "rules" 加在后面
 #+begin_src json

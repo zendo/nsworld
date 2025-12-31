@@ -21,7 +21,7 @@
     "cache_file": {
       "enabled": true,
       "path": "cache.db",
-      "cache_id": "",
+      "cache_id": "ID_xpv7vkj9",
       "store_fakeip": true,
       "store_rdrc": true,
       "rdrc_timeout": "7d"
@@ -45,7 +45,7 @@
         "172.18.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
-      "mtu": 9000,
+      "mtu": 0,
       "auto_route": true,
       "strict_route": true,
       "endpoint_independent_nat": false,
@@ -71,8 +71,22 @@
       "outbounds": []
     },
     {
-      "type": "direct",
-      "tag": "🎯 全球直连"
+      "type": "selector",
+      "tag": "🎯 全球直连",
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "direct",
+        "block"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🛑 全球拦截",
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "block",
+        "direct"
+      ]
     },
     {
       "type": "selector",
@@ -91,8 +105,17 @@
         "🚀 节点选择",
         "🎈 自动选择",
         "🎯 全球直连",
+        "🛑 全球拦截",
         "🐟 漏网之鱼"
       ]
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
     }
   ],
   "route": {
@@ -121,11 +144,16 @@
         "outbound": "🎯 全球直连"
       },
       {
-        "action": "reject",
+        "action": "route",
+        "protocol": "quic",
+        "outbound": "🛑 全球拦截"
+      },
+      {
+        "action": "route",
         "rule_set": [
           "Category-Ads"
         ],
-        "method": ""
+        "outbound": "🛑 全球拦截"
       },
       {
         "action": "route",
@@ -224,6 +252,12 @@
   "dns": {
     "servers": [
       {
+        "tag": "Fake-IP",
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15",
+        "inet6_range": "fc00::/18"
+      },
+      {
         "tag": "Local-DNS",
         "type": "https",
         "domain_resolver": "Local-DNS-Resolver",
@@ -282,7 +316,6 @@
     "disable_cache": false,
     "disable_expire": false,
     "independent_cache": false,
-    "final": "Remote-DNS",
-    "strategy": "ipv4_only"
+    "final": "Remote-DNS"
   }
 }
