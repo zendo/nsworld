@@ -4,8 +4,7 @@
   ...
 }:
 {
-  # https://surge.tel/08/2930
-  # https://hub.docker.com/r/xream/sub-store
+  # REF: https://surge.tel/08/2930 & https://hub.docker.com/r/xream/sub-store
   # FRONTEND: http://127.0.0.1:3001/subs
   # BACKEND: curl -O "http://127.0.0.1:3000/download/collection/all?target=sing-box"
   systemd.services.sub-store = {
@@ -17,10 +16,10 @@
       # SUB_STORE_FRONTEND_BACKEND_PATH = "/2cXaAxRGfddmGz2yx1wA";
       SUB_STORE_DATA_BASE_PATH = "%S/sub-store";
       SUB_STORE_FRONTEND_PATH = "${pkgs.sub-store}/frontend";
-      SUB_STORE_BACKEND_API_HOST = "127.0.0.1";
-      SUB_STORE_BACKEND_API_PORT = "3000";
-      SUB_STORE_FRONTEND_HOST = "127.0.0.1";
+      SUB_STORE_FRONTEND_HOST = "::";
       SUB_STORE_FRONTEND_PORT = "3001";
+      SUB_STORE_BACKEND_API_HOST = "::";
+      SUB_STORE_BACKEND_API_PORT = "3000";
     };
     serviceConfig = {
       StateDirectory = "sub-store";
