@@ -38,7 +38,7 @@
         }
         // {
           # nix run .
-          default = config.packages.anich;
+          default = config.packages.comigo;
         };
 
       # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
