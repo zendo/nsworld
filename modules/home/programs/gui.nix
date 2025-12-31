@@ -6,7 +6,6 @@
 {
   home.packages = with pkgs; [
     comigo
-    amethyst
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
