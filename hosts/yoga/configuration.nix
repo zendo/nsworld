@@ -109,11 +109,6 @@
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
 
-    # plymouth = {
-    #   theme = "double";
-    #   themePackages = [pkgs.adi1090x-plymouth-themes];
-    # };
-
     # zswap
     kernel.sysfs.module.zswap.parameters = {
       # enabled = true;
