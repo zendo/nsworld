@@ -109,11 +109,6 @@
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
 
-    # https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
-    # kernel.sysctl = {
-    #   "vm.max_map_count" = 2147483642;
-    # };
-
     # plymouth = {
     #   theme = "double";
     #   themePackages = [pkgs.adi1090x-plymouth-themes];
