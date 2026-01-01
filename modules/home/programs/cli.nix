@@ -65,7 +65,7 @@
     (lib.hiPrio uutils-coreutils-noprefix) # riir
     bat
     just
-    igrep
+    # igrep
     cht-sh
     tlrc # tldr
     # tealdeer # tldr
