@@ -15,7 +15,7 @@
       # SUB_STORE_BACKEND_SYNC_CRON = "55 23 * * *"; # 23:55
       # SUB_STORE_FRONTEND_BACKEND_PATH = "/2cXaAxRGfddmGz2yx1wA";
       SUB_STORE_DATA_BASE_PATH = "%S/sub-store";
-      SUB_STORE_FRONTEND_PATH = "${pkgs.sub-store}/frontend";
+      SUB_STORE_FRONTEND_PATH = "${pkgs.sub-store-frontend}";
       SUB_STORE_FRONTEND_HOST = "::";
       SUB_STORE_FRONTEND_PORT = "3001";
       SUB_STORE_BACKEND_API_HOST = "::";
@@ -24,7 +24,7 @@
     serviceConfig = {
       StateDirectory = "sub-store";
       StateDirectoryMode = "0700";
-      ExecStart = "${lib.getExe pkgs.nodejs} ${pkgs.sub-store}/sub-store.bundle.js";
+      ExecStart = "${lib.getExe pkgs.sub-store}";
       Restart = "on-failure";
       DynamicUser = true;
     };
