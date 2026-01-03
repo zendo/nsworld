@@ -88,7 +88,7 @@
     wget
     curl
     lsof
-    dogdns
+    doggo
     q # dns
     # nali
     mtr

@@ -38,8 +38,7 @@
     songrec
     kooha
     # jamesdsp
-    (mpv-unwrapped.wrapper {
-      mpv = pkgs.mpv-unwrapped;
+    (mpv.override {
       youtubeSupport = false; # (yt-dlp)
       scripts = with pkgs.mpvScripts; [
         mpris
@@ -49,6 +48,7 @@
         modernz
       ];
     })
+    kazumi # anime
     # yt-dlp
     # vlc
     # ffmpeg
