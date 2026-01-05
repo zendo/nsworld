@@ -5,7 +5,6 @@ rec {
     # dockng
     dash-to-dock
     # dash-to-panel
-    adaptive-brightness
     night-theme-switcher
     # legacy-gtk3-theme-scheme-auto-switcher
     clipboard-history
