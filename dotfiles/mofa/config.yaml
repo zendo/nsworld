@@ -137,8 +137,8 @@ rules:
   - DOMAIN-SUFFIX,edu.cn,DIRECT
   - DOMAIN-SUFFIX,v6.navy,DIRECT
   - DOMAIN-SUFFIX,dynv6.com,DIRECT
-  - DOMAIN-SUFFIX,api.beacondb.net,DIRECT
-  - DOMAIN-SUFFIX,ip-api.com,DIRECT
+  # - DOMAIN-SUFFIX,api.beacondb.net,DIRECT
+  # - DOMAIN-SUFFIX,ip-api.com,DIRECT
   # ========== 基于GeoSite的智能分流规则 ==========
   # 以下为固定规则，一般无需修改
   # 如需调整某个服务的策略，可修改后面的策略组名称

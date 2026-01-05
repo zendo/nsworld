@@ -189,14 +189,6 @@
           "GeoLocation-!CN"
         ],
         "outbound": "🚀 节点选择"
-      },
-      {
-        "action": "route",
-        "domain_suffix": [
-          "beacondb.net",
-          "ip-api.com"
-        ],
-        "outbound": "🎯 全球直连"
       }
     ],
     "rule_set": [
