@@ -51,7 +51,6 @@
         imports = [
           # ../../home/wm/fuzzel.nix
           ../../home/wm/hypridle.nix
-          # ../../home/wm/noctalia.nix
           ../../home/wm/shikane.nix
         ];
 

@@ -51,7 +51,6 @@
     # ./wm/dconf.nix
     # ./wm/fuzzel.nix
     # ./wm/hypridle.nix
-    # ./wm/noctalia.nix
     # ./wm/plasma.nix
     # ./wm/shikane.nix
     # ╭──────────────────────────────────────────╮
