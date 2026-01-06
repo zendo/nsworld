@@ -116,6 +116,7 @@
     xorg.xeyes
     wl-clipboard
     # libinput
+    android-tools
     # squirreldisk
     resources
     # mission-center

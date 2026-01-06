@@ -45,12 +45,12 @@ in
         "networkmanager"
         "input"
         "video"
+        "adbusers"
         (mkIf config.virtualisation.docker.enable "docker")
         (mkIf config.virtualisation.podman.enable "podman")
         (mkIf config.virtualisation.libvirtd.enable "libvirtd")
         (mkIf config.virtualisation.incus.enable "incus-admin")
         (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
-        (mkIf config.programs.adb.enable "adbusers")
       ];
       subUidRanges = [
         {

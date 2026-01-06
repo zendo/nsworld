@@ -33,7 +33,6 @@
   config = lib.mkIf config.mods.virt.enable {
 
     programs = {
-      # adb.enable = true;
       # java.enable = true;
       virt-manager.enable = true;
     };
