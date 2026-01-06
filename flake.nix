@@ -5,15 +5,13 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./modules/flake/flake-parts.nix # flake.packages / perSystem
-        ./modules/flake/devshell.nix # flake.devshells
-        ./modules/flake/treefmt.nix # flake.formatter
         ./modules/nixos # flake.nixosModules
         ./modules/lib # flake.lib
         ./overlays # flake.overlays
         ./hosts # flake.nixosConfigurations
         ./hosts/deployment.nix # flake.deploy / flake.colmena
         ./modules/home/hm-as-standalone.nix # flake.homeConfigurations
+        (inputs.import-tree ./modules/flake)
       ];
     };
 
@@ -62,8 +60,7 @@
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-alien.url = "github:thiagokokada/nix-alien";
-    templates.url = "github:NixOS/templates";
-    # import-tree.url = "github:vic/import-tree";
+    import-tree.url = "github:vic/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
   };

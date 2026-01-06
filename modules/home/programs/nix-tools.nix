@@ -13,7 +13,7 @@
     # comma # ,
     nix-tree
     nurl
-    # nix-init
+    nix-init
     nix-update
     # nix-prefetch
     # nix-template

@@ -284,6 +284,21 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1763762820,
+        "narHash": "sha256-ZvYKbFib3AEwiNMLsejb/CWs/OL/srFQ8AogkebEPF0=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "3c23749d8013ec6daa1d7255057590e9ca726646",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "nix-alien": {
       "inputs": {
         "flake-compat": "flake-compat_4",
@@ -501,13 +516,13 @@
         "disko": "disko",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "nix-alien": "nix-alien",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
-        "templates": "templates",
         "treefmt-nix": "treefmt-nix"
       }
     },
@@ -559,21 +574,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "templates": {
-      "locked": {
-        "lastModified": 1760444628,
-        "narHash": "sha256-wkIx1uPjYVOOcho0SAknX3tw2U8vswKwC/uZ3U0HAxE=",
-        "owner": "NixOS",
-        "repo": "templates",
-        "rev": "2557dc639215476df149ae6842a1ae94d60a884c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "templates",
         "type": "github"
       }
     },
