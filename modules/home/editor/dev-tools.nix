@@ -12,6 +12,7 @@
     # nodejs
     ### lsp ###
     bash-language-server
+    typescript-language-server
     lua-language-server
     efm-langserver
     # nil
