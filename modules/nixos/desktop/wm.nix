@@ -49,7 +49,6 @@
       { pkgs, ... }:
       {
         imports = [
-          # ../../home/wm/fuzzel.nix
           ../../home/wm/hypridle.nix
           ../../home/wm/shikane.nix
         ];

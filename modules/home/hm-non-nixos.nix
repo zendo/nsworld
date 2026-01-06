@@ -49,7 +49,6 @@
     # │ WM                                       │
     # ╰──────────────────────────────────────────╯
     # ./wm/dconf.nix
-    # ./wm/fuzzel.nix
     # ./wm/hypridle.nix
     # ./wm/plasma.nix
     # ./wm/shikane.nix
