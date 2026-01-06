@@ -26,7 +26,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # https://github.com/DeterminateSystems/nix-src/releases
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/3.14.0.tar.gz";
+    # determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/3.14.0.tar.gz";
 
     # emacs-overlay.url = "github:nix-community/emacs-overlay";
     # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
