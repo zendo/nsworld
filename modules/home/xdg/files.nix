@@ -1,8 +1,8 @@
 { config, ... }:
 let
-  staticDot = path: ../../../dotfiles/${path};
+  staticDot = dir: ../../../dotfiles/${dir};
   linkDot =
-    path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${path}";
+    dir: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${dir}";
 in
 {
   xdg.configFile = {
