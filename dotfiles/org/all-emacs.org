@@ -1598,6 +1598,20 @@ Use `treemacs' command for old functionality."
   :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
+** colorful-mode
+#+begin_src emacs-lisp
+(use-package colorful-mode
+  ;; :diminish
+  ;; :ensure t ; Optional
+  :custom
+  (colorful-use-prefix t)
+  (colorful-only-strings 'only-prog)
+  (css-fontify-colors nil)
+  :config
+  (global-colorful-mode t)
+  (add-to-list 'global-colorful-modes 'helpful-mode))
+#+end_src
+
 ** scrollkeeper
 like ~beacon~
 
@@ -1827,6 +1841,12 @@ https://github.com/neeasade/stillness-mode.el
   (add-hook 'nix-mode-hook #'outline-indent-minor-mode)
   (add-hook 'nix-ts-mode-hook #'outline-indent-minor-mode)
   )
+#+end_src
+** hideshow
+#+begin_src emacs-lisp
+(use-package hideshow
+  :hook
+  (prog-mode . hs-minor-mode))
 #+end_src
 
 ** puni
@@ -3612,7 +3632,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-c /" . consult-ripgrep)
  ("C-c ," . project-switch-to-buffer)
  ("C-x b" . project-switch-to-buffer)
- ("C-<tab>" . project-switch-to-buffer)
+ ;; ("C-<tab>" . project-switch-to-buffer)
 
  ("M-+" . text-scale-increase)
  ("M-_" . text-scale-decrease)
