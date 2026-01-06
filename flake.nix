@@ -34,9 +34,6 @@
     # lanzaboote.url = "github:nix-community/lanzaboote";
     # lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nvf.url = "github:notashelf/nvf";
-    # nvf.inputs.nixpkgs.follows = "nixpkgs";
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
