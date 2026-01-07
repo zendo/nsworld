@@ -26,7 +26,6 @@
 
   mods.virt.enable = true;
   # mods.incus.enable = true;
-  mods.nixos-diff.enable = true;
   # programs'.steam.enable = true;
   # programs'.nix-ld.enable = true;
 
