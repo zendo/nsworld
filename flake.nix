@@ -5,13 +5,13 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./modules/lib # flake.lib
         ./overlays # flake.overlays
         ./hosts # flake.nixosConfigurations
         ./hosts/deployment.nix # flake.deploy / flake.colmena
-        ./modules/home/hm-as-standalone.nix # flake.homeConfigurations
-        ./modules/nixos/_default.nix # flake.nixosModules
-        (inputs.import-tree ./modules/flake)
+        ./modules/lib # flake.lib
+        ./modules/home/hm-standalone.nix # flake.homeConfigurations
+        (inputs.import-tree ./modules/flake) # flake.packages / flake.devShells / flake.formatter
+        (inputs.import-tree ./modules/nixos/_profiles) # flake.modules.nixos
       ];
     };
 

@@ -7,21 +7,21 @@
 }:
 {
   imports = [
-    # ./bcachefs-single.nix
-    ./btrfs-subvolumes.nix
+    # ./disko-bcachefs.nix
+    ./disko-btrfs.nix
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.common-gpu-intel
 
-    self.nixosModules.default
-    self.nixosModules.laptop
-    self.nixosModules.homeManagerInit
+    self.modules.nixos.default
+    self.modules.nixos.laptop
+    self.modules.nixos.hm
 
-    self.nixosModules.gnome
-    # self.nixosModules.kde
-    # self.nixosModules.cosmic
-    # self.nixosModules.niri
-    # self.nixosModules.sway
-    # self.nixosModules.hyprland
+    self.modules.nixos.gnome
+    # self.modules.nixos.kde
+    # self.modules.nixos.cosmic
+    # self.modules.nixos.niri
+    # self.modules.nixos.sway
+    # self.modules.nixos.hyprland
   ];
 
   mods.virt.enable = true;
