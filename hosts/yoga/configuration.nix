@@ -94,8 +94,12 @@
   # │ HARDWARE                                                 │
   # ╰──────────────────────────────────────────────────────────╯
   # Fix touhpad multitouch somtimes unavailable
-  # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
-  services.sleep-resume.hid-multitouch.enable = true;
+  # systemctl cat post-resume.service
+  powerManagement.resumeCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r --wait 500 hid-multitouch
+    ${pkgs.kmod}/bin/modprobe hid-multitouch
+    systemctl --no-block restart bluetooth.service
+  '';
 
   boot = {
     # latest / zen / lqx / xanmod_latest
