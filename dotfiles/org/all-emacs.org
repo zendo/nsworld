@@ -2383,7 +2383,7 @@ https://github.com/thierryvolpiatto/isearch-light
 ;; by providing additional backends through completion-at-point-functions.
 (use-package cape
   :commands (cape-dabbrev cape-file cape-elisp-block)
-  :bind ("C-c p" . cape-prefix-map)
+  :bind ("C-c ." . cape-prefix-map)
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.
