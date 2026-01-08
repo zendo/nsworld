@@ -88,6 +88,7 @@
     wget
     curl
     lsof
+    bind
     doggo
     q # dns
     # nali
