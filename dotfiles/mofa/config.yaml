@@ -1,175 +1,267 @@
-# =========================
-# 订阅链接（填入后自动拉取节点）
-# =========================
-# 需要将订阅链接填入url字段中，filter: 可填写正则表达式过滤节点，如"香港|HK|Taiwan|台湾"，additional-prefix: 可为节点名称添加前缀，如"[宝可梦|] "
+# https://wiki.metacubex.one/example/conf/
+# https://linux.do/t/topic/1212835 极简防DNS泄漏配置
+# https://linux.do/t/topic/1229287 小白也能轻松手搓分流规则
 proxy-providers:
-  Provider1: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider1, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p1|]"}}
-  Provider2: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider2, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p2|]"}}
-  Provider3: {type: http, url: "", interval: 3600, timeout: 1000, path: ./profiles/Provider2, filter: "", health-check: {enable: true, interval: 600, url: "https://cp.cloudflare.com/generate_204"}, override: {skip-cert-verify: true, additional-prefix: "[p3|]"}}
+  provider1: {type: http, url: "", interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}, override: {additional-prefix: "[p1]"}}
+  provider2: {type: http, url: "", interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}, override: {additional-prefix: "[p2]"}}
+  provider3: {type: http, url: "", interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}, override: {additional-prefix: "[p3]"}}
 
-# =========================
-# 虚拟网卡
-# =========================
-tun:
-  enable: true
-  stack: mixed # system/gvisor/mixed
-  strict-route: true
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-  # dns-hijack: [ 'any:53','tcp://any:53' ] # 在 MacOS/Windows 无法自动劫持发往局域网的 dns 请求
-
-# =========================
-# 手动节点（可选）
-# =========================
 proxies:
-# 在此粘贴你的节点，格式示例：
-#   - name: 节点名称
-#     type: vless
-#     server: xxx
-#     ...
+  - name: "直连"
+    type: direct
+    udp: true
 
-# =========================
-# 代理组配置
-# =========================
-# - include-all-proxies: true  包含手动节点
-# - use: [订阅1, 订阅2, 订阅3, 订阅4, 订阅5] 包含订阅节点
-# - domain-strategy: ipv4-only 强制仅使用 IPv4
-# =========================
-proxy-groups:
-  # PROXY: 主代理组（可自定义添加其他策略组到proxies列表中）
-  - {name: PROXY, type: select, proxies: [AUTO,DIRECT,AI-PROXY], include-all: true, max-failed-times: 1, interval: 600, timeout: 1000, lazy: false}
-  # AUTO: 自动选择最快节点（use中填写你使用的provider名称，或者用include-all）
-  - {name: AUTO, type: url-test, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, include-all: true, lazy: false}
-  # AI-PROXY: AI服务专用代理（exclude-filter可过滤不想用的地区，如"HK|US|JP"）
-  - {name: AI-PROXY, type: select, url: https://cp.cloudflare.com/generate_204, max-failed-times: 1, interval: 600, timeout: 1000, use: [Provider1,Provider2], exclude-filter: "HK|香港|Hong Kong", lazy: false}
-
-# https://wiki.metacubex.one/config/
-# https://linux.do/t/topic/1212835 极简防 DNS 泄漏配置（2025 年）2.0 版
-# https://linux.do/t/topic/1089685 分享自用精调的mihomo配置模板
-# https://linux.do/t/topic/1282245 草履虫也能学会的 Clash 配置：无DNS泄露、精确分流、链式代理
-# =========================
-# 基础配置
-# =========================
 mixed-port: 7890
-allow-lan: true
 ipv6: false
-bind-address: "*"
-mode: rule
-log-level: info
-unified-delay: true # 启用 TCP 并发连接，提高网络性能和连接速度
-tcp-concurrent: true # 更换延迟计算方式，去除握手等额外延迟
-find-process-mode: strict # 设置进程查找模式为严格模式
-keep-alive-interval: 30 # 发送 Keep-Alive 探测包的间隔时间 单位 s
-keep-alive-idle: 60 # 连接空闲多久后开始发送 Keep-Alive 探测包
-global-client-fingerprint: chrome # 模拟 Chrome 浏览器的 TLS 指纹
-global-ua: mihomo # 默认 clash.meta / chrome
-
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
 external-controller: 127.0.0.1:9090
 external-ui: ui
 secret: "1984"
 external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 
-# =========================
-# 配置文件管理
-# =========================
+find-process-mode: strict
+global-client-fingerprint: chrome
+global-ua: mihomo # 默认 clash.meta / chrome
+
 profile:
-  store-selected: true # 保存用户选择的代理配置，在 Clash 重启后仍然记住上次选择的代理服务器
-  store-fake-ip: true # 储存 fakeip 映射表，Clash 重启后依然能使用相同的 Fake IP 分配给相同的域名
+  store-selected: true
+  store-fake-ip: true
 
-# =========================
-# 域名/流量嗅探
-# =========================
-# sniffer:
-#   enable: true
-#   parse-pure-ip: true
-#   sniff:
-#     TLS: {ports: [443, 8443]}
-#     HTTP: {ports: [80, 8080-8880], override-destination: true}
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
 
-# =========================
-# DNS配置
-# =========================
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  strict-route: true
+
 dns:
-  # 使用 DoH、DoT、DoQ 协议比传统基于 UDP 的查询更消耗系统资源，且延迟通常更高
-  enable: true # 如为 false,则使用系统 DNS 解析
+  enable: true
   ipv6: false
-  # prefer-h3: true # 如果DNS服务器支持DoH3会优先使用h3，提升性能
-  use-hosts: false
-  use-system-hosts: true
-  cache-algorithm: arc
-  enhanced-mode: fake-ip # DNS 处理模式 redir-host/fake-ip，fake-ip提高解析速度和连接性能
-  fake-ip-range: 198.18.0.1/16
-  # 定义不使用虚假IP解析的域名列表
-  fake-ip-filter: ["*.lan", "*.local", "*.localhost", "*.localdomain", "*.home.arpa", "*.invalid", "+.miwifi.com", "+.msftconnecttest.com", "+.msftncsi.com", "+.pool.ntp.org", "time.*.com", "time.*.gov", "time.*.edu.cn", "time.*.apple.com", "time-ios.apple.com", "ntp.*.com", "*.ntp.org.cn", "*.time.edu.cn", "+.stun", "turn.cloudflare.com", "+.rustdesk.com", "lens.l.google.com", "Mijia Cloud", "graph.qq.com", "+.ptlogin2.qq.com", "geosite:private", "geosite:cn"]
-  # 在访问的国外网站没有匹配到任何域名规则，最终走了MATCH兜底规则时使用的DNS，为了确保不发生DNS泄漏和DNS污染，必须使用国外DNS
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
   nameserver:
-    - tls://8.8.8.8
-  # 解析代理节点时使用的DNS，为了使respect-rules生效必须设置，最好设置为国内DNS，否则在代理的第一步就可能因为连接不上国外DNS而解析不出代理节点的IP，最终倒在起点
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
   proxy-server-nameserver:
     - https://223.5.5.5/dns-query
-  nameserver-policy:
-    # 还可增加其他条目，让特定网址走特定DNS解析
-    geosite:cn: # 也可使用规则集（ruleset）
-      - https://223.5.5.5/dns-query
-  respect-rules: true # dns 连接遵守路由规则,需配置 proxy-server-nameserver，强烈不建议和 prefer-h3 一起使用
+    - https://223.6.6.6/dns-query
+  direct-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+  respect-rules: true
 
-# =========================
-# 分流规则
-# =========================
-# 规则优先级从上到下，匹配到即停止
+proxy-groups:
+
+  - name: 默认
+    type: select
+    proxies: [自动选择,直连,香港,台湾,日本,新加坡,美国,其它地区,全部节点]
+
+  - name: Google
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Telegram
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Twitter
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: 哔哩哔哩
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: 巴哈姆特
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: YouTube
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: NETFLIX
+    type: select
+    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Spotify
+    type: select
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: Github
+    type: select
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  - name: 国内
+    type: select
+    proxies:  [直连,默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择]
+
+  - name: 其他
+    type: select
+    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+
+  #分隔,下面是地区分组
+  - name: 香港
+    type: select
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)港|hk|hongkong|hong kong"
+
+  - name: 台湾
+    type: select
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)台|tw|taiwan"
+
+  - name: 日本
+    type: select
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)日|jp|japan"
+
+  - name: 美国
+    type: select
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)美|us|unitedstates|united states"
+
+  - name: 新加坡
+    type: select
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: 其它地区
+    type: select
+    include-all: true
+    exclude-type: direct
+    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+
+  - name: 全部节点
+    type: select
+    include-all: true
+    exclude-type: direct
+
+  - name: 自动选择
+    type: url-test
+    include-all: true
+    exclude-type: direct
+    tolerance: 10
+
 rules:
-  # ========== AI服务专用代理规则 ==========
-  # AI-PROXY策略组：适用于ChatGPT、Claude等AI服务（可根据需要添加或删除）
-  - DOMAIN-SUFFIX,ping0.cc,AI-PROXY
-  - DOMAIN-SUFFIX,ipdata.co,AI-PROXY
-  - DOMAIN-SUFFIX,pingip.cn,AI-PROXY
-  # PROXY策略组：需要代理访问的域名（根据个人需求自由添加）
-  - DOMAIN-SUFFIX,live.com,PROXY
-  - DOMAIN-SUFFIX,teracloud.jp,PROXY
-  # ========== 直连规则 ==========
-  # DIRECT策略组：不走代理直接连接（根据个人需求自由添加）
-  - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
-  - DOMAIN-SUFFIX,msftncsi.com,DIRECT
-  - DOMAIN-SUFFIX,steamserver.net,DIRECT
-  - DOMAIN-SUFFIX,steamcontent.com,DIRECT
-  - DOMAIN,stun.l.google.com,DIRECT
-  - DOMAIN-SUFFIX,edu.cn,DIRECT
-  - DOMAIN-SUFFIX,v6.navy,DIRECT
-  - DOMAIN-SUFFIX,dynv6.com,DIRECT
-  # - DOMAIN-SUFFIX,api.beacondb.net,DIRECT
-  # - DOMAIN-SUFFIX,ip-api.com,DIRECT
-  # ========== 基于GeoSite的智能分流规则 ==========
-  # 以下为固定规则，一般无需修改
-  # 如需调整某个服务的策略，可修改后面的策略组名称
-  - GEOSITE,cursor,AI-PROXY
-  - GEOSITE,telegram,PROXY
-  - GEOSITE,google,AI-PROXY
-  - GEOSITE,steam@cn,DIRECT
-  - GEOSITE,category-games@cn,DIRECT
-  - GEOSITE,category-ai-!cn,AI-PROXY
-  - GEOSITE,category-ai-cn,DIRECT
-  - GEOSITE,onedrive,DIRECT
-  - GEOSITE,private,DIRECT
-  - GEOSITE,category-scholar-!cn,PROXY
-  - GEOSITE,microsoft@cn,DIRECT
-  - GEOSITE,apple-cn,DIRECT
-  - GEOSITE,geolocation-!cn,PROXY
-  - GEOSITE,CN,DIRECT
-  - GEOIP,private,DIRECT,no-resolve
-  - GEOIP,telegram,PROXY,no-resolve
-  - GEOIP,CN,DIRECT
-  # 兜底规则：以上规则都不匹配时使用PROXY代理
-  - MATCH,PROXY
+  - RULE-SET,private_ip,直连,no-resolve
+  # ==========
+  # - DOMAIN-SUFFIX,api.beacondb.net,直连
+  # - DOMAIN-SUFFIX,ip-api.com,直连
+  # ==========
+  - RULE-SET,github_domain,Github
+  - RULE-SET,twitter_domain,Twitter
+  - RULE-SET,youtube_domain,YouTube
+  - RULE-SET,google_domain,Google
+  - RULE-SET,telegram_domain,Telegram
+  - RULE-SET,netflix_domain,NETFLIX
+  - RULE-SET,bilibili_domain,哔哩哔哩
+  - RULE-SET,bahamut_domain,巴哈姆特
+  - RULE-SET,spotify_domain,Spotify
+  - RULE-SET,cn_domain,国内
+  - RULE-SET,geolocation-!cn,其他
 
-# =========================
-# Geo 数据获取
-# =========================
-geodata-mode: true
-geo-auto-update: true
-geo-update-interval: 24
-geox-url:
-  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
-  geosite: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
-  mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
-  asn: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb
+  - RULE-SET,google_ip,Google
+  - RULE-SET,netflix_ip,NETFLIX
+  - RULE-SET,telegram_ip,Telegram
+  - RULE-SET,twitter_ip,Twitter
+  - RULE-SET,cn_ip,国内
+  - MATCH,其他
+
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+rule-providers:
+  private_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+  cn_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+  biliintl_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/biliintl.mrs"
+  ehentai_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ehentai.mrs"
+  github_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+  twitter_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+  youtube_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+  google_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+  telegram_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+  netflix_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+  bilibili_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
+  bahamut_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs"
+  spotify_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+  pixiv_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/pixiv.mrs"
+  geolocation-!cn:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+
+  private_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+  cn_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+  google_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+  netflix_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+  twitter_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+  telegram_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"

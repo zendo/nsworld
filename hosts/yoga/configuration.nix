@@ -58,10 +58,10 @@
 
   systemd.services.sub-store.enable = true;
 
-  services'.sing-box.enable = true;
+  # services'.sing-box.enable = true;
 
   services.mihomo = {
-    # enable = true;
+    enable = true;
     tunMode = true;
     webui = pkgs.zashboard;
     configFile = "/home/${myvars.user}/code/subs/config.yaml";
