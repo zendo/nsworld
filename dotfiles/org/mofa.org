@@ -59,6 +59,52 @@ https://icloudnative.io/posts/sing-box-tutorial/
 https://github.com/Toperlock/sing-box-subscribe 模板
 https://linux.do/t/topic/938696 gui-for-singbox 教程
 
+* mihomo
+** base
+#+begin_src yaml
+external-controller: 127.0.0.1:9090
+external-ui: ui
+secret: "1984"
+external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+
+global-ua: mihomo # 默认 clash.meta / chrome
+#+end_src
+
+** dns
+#+begin_src yaml
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
+  nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+  direct-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+  respect-rules: true
+#+end_src
+
+** rules
+#+begin_src yaml
+# ==========
+- DOMAIN-SUFFIX,api.beacondb.net,直连
+- DOMAIN-SUFFIX,ip-api.com,直连
+# ==========
+#+end_src
+
+** Links
+https://wiki.metacubex.one/example/conf
+https://linux.do/t/topic/1212835 极简防DNS泄漏配置
+https://linux.do/t/topic/1229287 小白也能轻松手搓分流规则
+
 * sub-store
 
 脚本安装：
