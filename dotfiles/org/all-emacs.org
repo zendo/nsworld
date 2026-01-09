@@ -1447,6 +1447,7 @@ Managed by Nix.
 
 #+begin_src emacs-lisp
 (use-package emojify
+  :defer t
   :when IS-WINDOWS
   :hook (after-init . global-emojify-mode))
 #+end_src
