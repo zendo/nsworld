@@ -1254,18 +1254,26 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 
 *** eat
 #+begin_src emacs-lisp
+;; (use-package eat
+;;   :defer t
+;;   :hook
+;;   ;; For `eat-eshell-mode' -- integration with eshell.
+;;   (eshell-mode-hook . eat-eshell-mode)
+;;   :config
+;;   (setq eat-kill-buffer-on-exit t
+;;         eat-enable-yank-to-terminal t
+;;         eat-enable-directory-tracking t
+;;         eat-enable-shell-command-history t
+;;         eat-enable-shell-prompt-annotation t
+;;         eat-term-scrollback-size nil))
+
 (use-package eat
   :defer t
-  :hook
-  ;; For `eat-eshell-mode' -- integration with eshell.
-  (eshell-mode-hook . eat-eshell-mode)
+  :custom
+  (eat-term-name "xterm")
   :config
-  (setq eat-kill-buffer-on-exit t
-        eat-enable-yank-to-terminal t
-        eat-enable-directory-tracking t
-        eat-enable-shell-command-history t
-        eat-enable-shell-prompt-annotation t
-        eat-term-scrollback-size nil))
+  (eat-eshell-mode)                     ; use Eat to handle term codes in program output
+  (eat-eshell-visual-command-mode))     ; commands like less will be handled by Eat
 #+end_src
 
 *** vterm
@@ -1413,19 +1421,19 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 #+begin_src emacs-lisp
 (use-package nerd-icons)
 
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
 (use-package nerd-icons-completion
   :after marginalia
   :config
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
-(use-package nerd-icons-corfu
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
-
-(use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+;; (use-package nerd-icons-corfu
+;;   :after corfu
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 ;; (use-package kind-icon
 ;;   :if (display-graphic-p)
@@ -2378,6 +2386,17 @@ https://github.com/thierryvolpiatto/isearch-light
   :config
   (global-corfu-mode))
 
+;; Part of corfu
+;; (use-package corfu-popupinfo
+;;   :after corfu
+;;   :ensure nil
+;;   :hook (corfu-mode . corfu-popupinfo-mode)
+;;   :custom
+;;   (corfu-popupinfo-delay '(0.25 . 0.1))
+;;   (corfu-popupinfo-hide nil)
+;;   :config
+;;   (corfu-popupinfo-mode))
+
 ;; Cape, or Completion At Point Extensions, extends the capabilities of
 ;; in-buffer completion. It integrates with Corfu or the default completion UI,
 ;; by providing additional backends through completion-at-point-functions.
@@ -2390,7 +2409,6 @@ https://github.com/thierryvolpiatto/isearch-light
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  (add-hook 'completion-at-point-functions #'cape-symbol) ;elisp symbol
   (add-hook 'completion-at-point-functions #'cape-keyword)
   (add-hook 'completion-at-point-functions #'cape-history)
   )
