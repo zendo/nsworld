@@ -2,10 +2,10 @@
   lib,
   pkgs,
   config,
-  myvars,
   ...
 }:
 # Copy: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/sing-box.nix
+# And: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/mihomo.nix
 let
   cfg = config.services'.sing-box;
 in
@@ -14,6 +14,10 @@ in
     services'.sing-box = {
       enable = lib.mkEnableOption "sing-box universal proxy platform";
       package = lib.mkPackageOption pkgs "sing-box" { };
+      configFile = lib.mkOption {
+        type = lib.types.path;
+        description = "Configuration file to use.";
+      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -27,9 +31,10 @@ in
         # RuntimeDirectory = "sing-box";
         # RuntimeDirectoryMode = "0700";
         WorkingDirectory = "/var/lib/sing-box";
+        LoadCredential = "config.jsonc:${cfg.configFile}";
         ExecStart = [
           ""
-          "${lib.getExe pkgs.sing-box} run -c /home/${myvars.user}/code/subs/config.jsonc -D \${STATE_DIRECTORY}"
+          "${lib.getExe pkgs.sing-box} run -c \${CREDENTIALS_DIRECTORY}/config.jsonc -D \${STATE_DIRECTORY}"
         ];
         Restart = "on-failure";
       };
