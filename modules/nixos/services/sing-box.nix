@@ -18,11 +18,17 @@ in
         type = lib.types.path;
         description = "Configuration file to use.";
       };
+      webui = lib.mkOption {
+        default = null;
+        type = lib.types.nullOr lib.types.path;
+        example = lib.literalExpression "pkgs.metacubexd";
+        description = "Local web interface to use.";
+      };
     };
   };
   config = lib.mkIf cfg.enable {
     systemd.services.sing-box = {
-      preStart = "[ -e $STATE_DIRECTORY/ui ] && rm -fr $STATE_DIRECTORY/ui; ln -sf ${pkgs.zashboard} $STATE_DIRECTORY/ui";
+      preStart = "[ -e $STATE_DIRECTORY/ui ] && rm -fr $STATE_DIRECTORY/ui; ln -sf ${cfg.webui} $STATE_DIRECTORY/ui";
       serviceConfig = {
         User = "sing-box";
         Group = "sing-box";

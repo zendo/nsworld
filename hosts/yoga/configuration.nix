@@ -60,6 +60,7 @@
 
   services'.sing-box = {
     enable = true;
+    webui = pkgs.zashboard;
     configFile = "/home/${myvars.user}/code/subs/config.jsonc";
   };
 
