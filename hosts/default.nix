@@ -20,15 +20,9 @@ let
         inherit inputs self myvars;
       };
       modules = [
-        (
-          { lib, ... }:
-          {
-            networking.hostName = myvars.host;
-            i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
-            time.timeZone = lib.mkDefault "Asia/Shanghai";
-            system.stateVersion = lib.mkDefault "26.05";
-          }
-        )
+        {
+          networking.hostName = myvars.host;
+        }
       ]
       ++ extraModules;
     };

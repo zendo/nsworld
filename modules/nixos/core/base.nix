@@ -5,6 +5,10 @@
   ...
 }:
 {
+  time.timeZone = lib.mkDefault "Asia/Shanghai";
+  i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
+  system.stateVersion = lib.mkDefault "26.05";
+
   # Load configs from nixos/modules
   programs.zsh.enable = true;
   # programs.fish.enable = true;
