@@ -102,7 +102,6 @@
   powerManagement.resumeCommands = ''
     ${pkgs.kmod}/bin/modprobe -r --wait 500 hid-multitouch
     ${pkgs.kmod}/bin/modprobe hid-multitouch
-    systemctl --no-block restart bluetooth.service
   '';
 
   boot = {
@@ -115,6 +114,12 @@
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
     ];
+
+    # Fix Bluetooth mouse reconnect slow
+    extraModprobeConfig = ''
+      options iwlwifi power_save=0
+      options iwlmvm power_scheme=1
+    '';
 
     # zswap
     kernel.sysfs.module.zswap.parameters = {
