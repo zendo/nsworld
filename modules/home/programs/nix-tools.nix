@@ -49,6 +49,11 @@
       # enable = true;
     };
 
+    command-not-found = {
+      enable = true;
+      dbPath = inputs.nixpkgs + "/programs.sqlite";
+    };
+
     nix-your-shell = {
       enable = true;
     };
