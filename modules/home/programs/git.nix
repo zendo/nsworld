@@ -1,4 +1,8 @@
 { ... }:
+let
+  myName = "zendo";
+  myEmail = "linzway@qq.com";
+in
 {
   programs.git = {
     enable = true;
@@ -19,8 +23,8 @@
       ".venv/"
     ];
     settings = {
-      user.name = "zendo";
-      user.email = "linzway@qq.com";
+      user.name = myName;
+      user.email = myEmail;
       init.defaultBranch = "main";
       column.ui = "auto";
       # pull.rebase = true;
@@ -77,8 +81,8 @@
     # enable = true;
     settings = {
       user = {
-        name = "zendo";
-        email = "linzway@qq.com";
+        name = myName;
+        email = myEmail;
       };
     };
   };
