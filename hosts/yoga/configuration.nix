@@ -97,6 +97,7 @@
   powerManagement.resumeCommands = ''
     ${pkgs.kmod}/bin/modprobe -r --wait 500 hid-multitouch
     ${pkgs.kmod}/bin/modprobe hid-multitouch
+    systemctl restart bluetooth.service
   '';
 
   boot = {
