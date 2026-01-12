@@ -16,6 +16,7 @@
     rm-restore = "${lib.getExe pkgs.gtrash} restore";
     fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
     bc = "${lib.getExe pkgs.libqalculate}";
+    ii = "xdg-open"; # Invoke-Item
     inxi = "inxi -Fz";
     free = "free -h";
     beep = ''echo -en "\007"'';
