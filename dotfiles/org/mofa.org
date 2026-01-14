@@ -58,6 +58,7 @@ https://sing-box.sagernet.org/zh/configuration/
 https://icloudnative.io/posts/sing-box-tutorial/
 https://github.com/Toperlock/sing-box-subscribe 模板
 https://linux.do/t/topic/938696 gui-for-singbox 教程
+https://idcflare.com/t/topic/38725 gui-for-singbox 分流规则
 
 * mihomo
 ** base

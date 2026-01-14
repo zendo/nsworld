@@ -50,6 +50,7 @@
     goshs
     simple-http-server
     magic-wormhole-rs
+    sendme
 
     # System Monitor
     fastfetchMinimal
