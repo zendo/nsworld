@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     comigo
     netease-ratui
-    dinky
 
     telegram-desktop # (webkitgtk)
     # vesktop # discord
