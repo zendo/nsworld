@@ -27,7 +27,7 @@ diff-dix:
 
 diff-commit:
     #!/usr/bin/env bash
-    git commit -m "flake.lock: Update details on host.{{ host }}" \
+    git commit -m "📦 flake.lock: Update details on host.{{ host }}" \
     -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)" --allow-empty
 
 gca:
@@ -39,11 +39,11 @@ up:
     nix flake update --commit-lock-file
     after_update=$(nix eval --raw .\#nixosConfigurations."{{ host }}".config.system.nixos.revision)
     if [[ "$before_update" = "$after_update" ]]; then
-        echo -e "\n Nixpkgs is no update."
+        echo -e "\n ✅ Nixpkgs is no update."
     else
         OLD_MSG=$(git log -1 --pretty=%B)
-        ADD_MSG=$(echo https://github.com/NixOS/nixpkgs/compare/"$before_update"..."$after_update")
-        echo -e "\033[1;33m \n Nixpkgs Comparing changes: \033[0m"
+        ADD_MSG=$(echo https://github.com/NixOS/nixpkgs/compare/"${before_update:0:7}"..."${after_update:0:7}")
+        echo -e "\033[1;33m \n 🔍 Nixpkgs Comparing changes: \033[0m"
         echo -e "\033[32m $ADD_MSG \033[0m"
         git commit --amend --quiet -m "$OLD_MSG" -m "Nixpkgs Comparing changes: $ADD_MSG"
     fi
