@@ -8,16 +8,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "netease-ratui";
-  version = "0.0.2";
+  version = "0.0.5";
 
   src = fetchFromGitHub {
     owner = "xlfish233";
     repo = "netease-ratui";
     rev = "v${version}";
-    hash = "sha256-GSbprJLPjlAW1kpgDntDIC/0NJY1EkLOcO3TGNsYry4=";
+    hash = "sha256-5+lJAGilBBuuTTgmMggT/rhLx90uYBGfDnI9h+wz91s=";
   };
 
-  cargoHash = "sha256-g9IuQzmbsSiyODJzfJSz4PiwPOenAtTrg93j39LiD0o=";
+  cargoHash = "sha256-nZKc9PXVZ5rPknviD/GCTMj3CPoy+tbJJnz7zWMepfE=";
 
   nativeBuildInputs = [ pkg-config ];
 
