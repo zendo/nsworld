@@ -17,14 +17,12 @@ buildGoModule rec {
 
   vendorHash = "sha256-picAt4tEvzTRFZUAPxPwa1Y5qwn5IQ+ITr70UI6IEvU=";
 
+  subPackages = [ "." ];
+
   ldflags = [
     "-s"
     "-w"
   ];
-
-  postInstall = ''
-    rm $out/bin/comi
-  '';
 
   meta = {
     description = "Simple and Efficient Comic Reader";
