@@ -88,6 +88,7 @@
     # koodo-reader
     # planify
     # ghostwriter # (qtwebengine)
+    clapgrep
     meld
     # textpieces
     # devtoolbox

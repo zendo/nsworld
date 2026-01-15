@@ -49,7 +49,7 @@
     dufs
     goshs
     simple-http-server
-    magic-wormhole-rs
+    # magic-wormhole-rs
     sendme
 
     # System Monitor
