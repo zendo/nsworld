@@ -53,10 +53,12 @@
 
   systemd.services.sub-store.enable = true;
 
-  services'.sing-box = {
+  services.sing-box = {
     enable = true;
-    webui = pkgs.zashboard;
-    configFile = "/home/${myvars.user}/code/subs/config.jsonc";
+    settings = {
+      _secret = "/home/${myvars.user}/code/subs/config.jsonc";
+      quote = false;
+    };
   };
 
   services.mihomo = {
@@ -71,12 +73,6 @@
   #   enable = true;
   #   configFile = "/home/${myvars.user}/code/subs/dae-config.dae";
   # };
-
-  programs.clash-verge = {
-    # enable = true;
-    autoStart = true;
-    serviceMode = true;
-  };
 
   # Virtual network interfering Geoclue2's IP-based location
   services.geoclue2 = {
