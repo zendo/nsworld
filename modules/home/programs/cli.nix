@@ -95,6 +95,7 @@
     # nali
     mtr
     nload
+    snitch
     sniffglue
     # ipinfo # 62M
     elinks
