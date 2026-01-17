@@ -26,7 +26,6 @@
       environment.systemPackages = with pkgs; [
         # authenticator
         refine
-        rewaita
         # file-roller
         # peazip
         xarchiver
