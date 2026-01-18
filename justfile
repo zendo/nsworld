@@ -27,7 +27,7 @@ diff-dix:
 
 diff-commit:
     #!/usr/bin/env bash
-    git commit -m "📦 flake.lock: Update details on host.{{ host }}" \
+    git commit -m "📦 host.{{ host }}: Update details" \
     -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)" --allow-empty
 
 gca:
