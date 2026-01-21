@@ -21,6 +21,7 @@
         gnome-music
         gnome-software
         showtime
+        simple-scan
       ];
 
       environment.systemPackages = with pkgs; [
