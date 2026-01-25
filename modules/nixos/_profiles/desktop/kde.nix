@@ -20,6 +20,7 @@
         ]
         ++ (with kdePackages; [
           # yakuake
+          kclock
           krfb
           krdc
           kwave
