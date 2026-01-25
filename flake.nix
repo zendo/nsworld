@@ -6,10 +6,10 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./overlays # flake.overlays
-        ./hosts # flake.nixosConfigurations
+        ./modules/hosts # flake.nixosConfigurations
         ./modules/lib # flake.lib
-        # flake.packages / flake.devShells / flake.formatter
         # flake.homeConfigurations / flake.deploy / flake.colmena
+        # flake.packages / flake.devShells / flake.formatter
         (inputs.import-tree ./modules/flake)
         # flake.modules.nixos
         (inputs.import-tree ./modules/nixos/_profiles)
