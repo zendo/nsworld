@@ -16,8 +16,8 @@
     self.modules.nixos.laptop
     self.modules.nixos.hm
 
-    self.modules.nixos.gnome
-    # self.modules.nixos.kde
+    # self.modules.nixos.gnome
+    self.modules.nixos.kde
     # self.modules.nixos.cosmic
     # self.modules.nixos.niri
     # self.modules.nixos.sway
@@ -54,7 +54,7 @@
   systemd.services.sub-store.enable = true;
 
   services.sing-box = {
-    enable = true;
+    # enable = true;
     settings = {
       _secret = "/home/${myvars.user}/code/subs/config.jsonc";
       quote = false;
@@ -62,9 +62,9 @@
   };
 
   services.mihomo = {
-    # enable = true;
+    enable = true;
     tunMode = true;
-    webui = pkgs.zashboard;
+    # webui = pkgs.zashboard;
     configFile = "/home/${myvars.user}/code/subs/config.yaml";
   };
 
@@ -98,7 +98,7 @@
 
   boot = {
     # latest / zen / lqx / xanmod_latest
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
 
     kernelParams = [
