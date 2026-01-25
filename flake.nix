@@ -7,11 +7,12 @@
       imports = [
         ./overlays # flake.overlays
         ./hosts # flake.nixosConfigurations
-        ./hosts/deployment.nix # flake.deploy / flake.colmena
         ./modules/lib # flake.lib
-        ./modules/home/hm-standalone.nix # flake.homeConfigurations
-        (inputs.import-tree ./modules/flake) # flake.packages / flake.devShells / flake.formatter
-        (inputs.import-tree ./modules/nixos/_profiles) # flake.modules.nixos
+        # flake.packages / flake.devShells / flake.formatter
+        # flake.homeConfigurations / flake.deploy / flake.colmena
+        (inputs.import-tree ./modules/flake)
+        # flake.modules.nixos
+        (inputs.import-tree ./modules/nixos/_profiles)
       ];
     };
 
