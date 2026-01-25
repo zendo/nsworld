@@ -7,7 +7,6 @@
       imports = [
         ./overlays # flake.overlays
         ./modules/hosts # flake.nixosConfigurations
-        ./modules/lib # flake.lib
         # flake.homeConfigurations / flake.deploy / flake.colmena
         # flake.packages / flake.devShells / flake.formatter
         (inputs.import-tree ./modules/flake)
