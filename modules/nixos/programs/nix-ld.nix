@@ -8,9 +8,9 @@
   options.programs'.nix-ld.enable = lib.mkEnableOption "nix-ld customize.";
 
   config = lib.mkIf config.programs'.nix-ld.enable {
-    # https://github.com/NixOS/nixpkgs/issues/354513
     programs.nix-ld = {
       enable = true;
+      # https://github.com/NixOS/nixpkgs/issues/354513
       libraries = [
         (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
       ];

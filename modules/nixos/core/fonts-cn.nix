@@ -8,7 +8,7 @@
   config = lib.mkIf (config.i18n.defaultLocale == "zh_CN.UTF-8") {
     fonts = {
       packages = with pkgs; [
-        ######## Necessary #########
+        ######## Essential #########
         adwaita-fonts
         noto-fonts-color-emoji
         nerd-fonts.symbols-only
