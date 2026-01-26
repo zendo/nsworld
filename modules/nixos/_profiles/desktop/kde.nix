@@ -16,6 +16,7 @@
         with pkgs;
         [
           gparted
+          kurve # plasma widgets
           # sddm-astronaut
         ]
         ++ (with kdePackages; [

@@ -14,7 +14,7 @@ stdenv.mkDerivation (finalAttrs: {
   version = "8.0.10+305";
 
   src = fetchurl {
-    url = "https://github.com/jiangtian616/JHenTai/releases/download/v8.0.10%2B305/JHenTai-${finalAttrs.version}-Linux-x64.deb";
+    url = "https://github.com/jiangtian616/JHenTai/releases/download/v${finalAttrs.version}/JHenTai-${finalAttrs.version}-Linux-x64.deb";
     hash = "sha256-q5ozA4NXzYAi8Hy+fHu6Iq1YoZm8w/4frfcGkwDJoA8=";
   };
 
