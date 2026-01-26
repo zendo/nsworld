@@ -12,7 +12,7 @@ _default:
 justfile-windows:
     just dotfiles/Windows/
 
-# switch / boot / test
+# switch/boot/test + |& nom
 os *args:
     nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
 
@@ -27,8 +27,8 @@ diff-dix:
 
 diff-commit:
     #!/usr/bin/env bash
-    git commit -m "📦 host.{{ host }}: Update details" \
-    -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)" --allow-empty
+    git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
+    -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)"
 
 gca:
     sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot

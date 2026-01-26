@@ -48,14 +48,14 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    # agenix.url = "github:ryantm/agenix";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    # agenix.url = "github:ryantm/agenix";
 
-    # nur.url = "github:nix-community/NUR";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # nur.url = "github:nix-community/NUR";
     nix-alien.url = "github:thiagokokada/nix-alien";
     import-tree.url = "github:vic/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
