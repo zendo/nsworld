@@ -96,6 +96,7 @@
       # nix shell n\#android-tools
       # adb connect 192.168.240.112:5555
       # adb shell wm set-fix-to-user-rotation enabled  # force vertical
+      # https://www.reddit.com/r/NixOS/comments/1qnsqrb/waydroid_on_nixos_the_ultimate_guide_to
       # waydroid.enable = true;
     };
 
