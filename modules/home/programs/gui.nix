@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     comigo
 
+    # obsidian
+    # joplin-desktop
     telegram-desktop # (webkitgtk)
     # vesktop # discord
     # fractal
