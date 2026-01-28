@@ -98,7 +98,7 @@
 
   boot = {
     # latest / zen / lqx / xanmod_latest
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     supportedFilesystems = [ "ntfs" ];
 
     kernelParams = [
