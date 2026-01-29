@@ -1187,7 +1187,13 @@ Use ~getenv~ check the environment variables.
         w32-pipe-read-delay 0              ; faster IPC
         w32-pipe-buffer-size 65536)        ; read more at a time (64K, was 4K)
   (set-selection-coding-system 'gbk-dos) ; encoding
-  (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
+  (set-frame-font (font-spec :family "JetBrains Mono" :size 28))
+  (dolist (script '(han cjk-misc bopomofo))
+      (set-fontset-font
+       (frame-parameter nil 'font)
+       script
+       (font-spec :name "Microsoft YaHei")))
+  ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
 )
 #+end_src
 
