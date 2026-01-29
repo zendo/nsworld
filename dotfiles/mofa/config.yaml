@@ -172,8 +172,8 @@ proxy-groups:
 rules:
   - RULE-SET,private_ip,直连,no-resolve
   # ==========
-  # - DOMAIN-SUFFIX,api.beacondb.net,直连
-  # - DOMAIN-SUFFIX,ip-api.com,直连
+  - DOMAIN-SUFFIX,api.beacondb.net,直连
+  - DOMAIN-SUFFIX,ip-api.com,直连
   # ==========
   - RULE-SET,github_domain,Github
   - RULE-SET,twitter_domain,Twitter
