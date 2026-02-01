@@ -13,9 +13,6 @@ ff-betterfox:
 emacs-mklink:
     Start-Process -Verb RunAs Invoke-Item -FilePath ".\scripts\mklink-emacs-admin.cmd"
 
-emacsclient-shortcut-startup:
-    .\scripts\shortcut-emacsclient.ps1
-
 kanata-shortcut-startup:
     .\scripts\shortcut-kanata.ps1
 
