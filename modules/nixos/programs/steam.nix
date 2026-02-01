@@ -15,6 +15,7 @@
       ## wine
       # lutris
       # bottles
+      # heroic
     ];
 
     programs.gamemode.enable = true;

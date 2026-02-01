@@ -7,6 +7,9 @@
   home.packages = with pkgs; [
     comigo
 
+    # AI
+    opencode
+
     # obsidian
     # joplin-desktop
     telegram-desktop # (webkitgtk)
