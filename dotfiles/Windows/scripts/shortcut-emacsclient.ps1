@@ -19,17 +19,14 @@ $startupFolder = [Environment]::GetFolderPath('Startup')
 # 创建桌面快捷方式
 # ((fullscreen . maximized))
 # ((top . 0)(left . -1)(height . 44)(width . 80))
-# Create-Shortcut -SourceExe "emacsclientw.exe" `
-#                 -ArgumentsToSourceExe '-c -n -a "" -F "((top . 0)(left . -1)(height . 44)(width . 80))"' `
-#                 -DestinationPath "$Home\Desktop\GNU Emacs.lnk"
-
-Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\runemacs.exe" `
-                -DestinationPath "$Home\Desktop\Emacs.lnk"
+Create-Shortcut -SourceExe "emacsclientw.exe" `
+                -ArgumentsToSourceExe '-c -n -a "" -F "((top . 0)(left . -1)(height . 44)(width . 80))"' `
+                -DestinationPath "$Home\Desktop\GNU Emacs.lnk"
 
 # 创建启动项快捷方式
-# Create-Shortcut -SourceExe "runemacs.exe" `
-#                 -ArgumentsToSourceExe "--daemon" `
-#                 -DestinationPath "$startupFolder\emacs-daemon.lnk"
+Create-Shortcut -SourceExe "runemacs.exe" `
+                -ArgumentsToSourceExe "--daemon" `
+                -DestinationPath "$startupFolder\emacs-daemon.lnk"
 
 # or VBScript
 # $Startup = 'Set objShell = WScript.CreateObject("WScript.Shell")
@@ -44,4 +41,4 @@ Create-Shortcut -SourceExe "$Home\scoop\apps\emacs\current\bin\runemacs.exe" `
 
 Write-Output "Shortcuts is created successfully."
 
-# Start-Process -FilePath $startupFolder
+Start-Process -FilePath $startupFolder
