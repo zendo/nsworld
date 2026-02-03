@@ -7,11 +7,8 @@
       imports = [
         ./overlays # flake.overlays
         ./modules/hosts # flake.nixosConfigurations
-        # flake.homeConfigurations / flake.deploy / flake.colmena
-        # flake.packages / flake.devShells / flake.formatter
+        (inputs.import-tree ./modules/nixos/_profiles) # flake.modules.nixos
         (inputs.import-tree ./modules/flake)
-        # flake.modules.nixos
-        (inputs.import-tree ./modules/nixos/_profiles)
       ];
     };
 
