@@ -16,8 +16,8 @@
     self.modules.nixos.laptop
     self.modules.nixos.hm
 
-    self.modules.nixos.gnome
-    # self.modules.nixos.kde
+    # self.modules.nixos.gnome
+    self.modules.nixos.kde
     # self.modules.nixos.cosmic
     # self.modules.nixos.niri
     # self.modules.nixos.sway
