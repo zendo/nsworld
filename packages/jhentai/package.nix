@@ -7,15 +7,16 @@
   autoPatchelfHook,
   udev,
   webkitgtk_4_1,
+  glib-networking,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "jhentai";
-  version = "8.0.10+305";
+  version = "8.0.11+306";
 
   src = fetchurl {
-    url = "https://github.com/jiangtian616/JHenTai/releases/download/v${finalAttrs.version}/JHenTai-${finalAttrs.version}-Linux-x64.deb";
-    hash = "sha256-q5ozA4NXzYAi8Hy+fHu6Iq1YoZm8w/4frfcGkwDJoA8=";
+    url = "https://github.com/jiangtian616/JHenTai/releases/download/v8.0.11/JHenTai-8.0.11+306-Linux-x64.deb";
+    hash = "sha256-tj8FPtm7S2+GPwe0AcwCYyW4ASrUZg7/XvgMbia+yTQ=";
   };
 
   nativeBuildInputs = [
@@ -26,6 +27,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   buildInputs = [
     webkitgtk_4_1
+    glib-networking
     (lib.getLib stdenv.cc.cc)
   ];
 
