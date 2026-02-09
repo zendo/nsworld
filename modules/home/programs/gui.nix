@@ -119,7 +119,7 @@
     pciutils
     edid-decode
     read-edid
-    xorg.xeyes
+    xeyes
     wl-clipboard
     # libinput
     android-tools
