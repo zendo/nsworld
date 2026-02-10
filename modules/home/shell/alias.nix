@@ -57,7 +57,7 @@
     # nix
     nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
 
-    # proxy
+    # proxy (move here because fish will complain)
     # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
     ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
     ssr-chrome = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}"'';
