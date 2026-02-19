@@ -245,7 +245,6 @@
       "kitten-quick-terminal.desktop"."_launch" = "Meta+/";
 
       "org.kde.dolphin.desktop"."_launch" = "Meta+F";
-      # "org.kde.plasma.emojier.desktop"."_launch" = "Meta+.";
       "org.kde.krunner.desktop"."_launch" = [
         "Search"
         "Alt+F2"

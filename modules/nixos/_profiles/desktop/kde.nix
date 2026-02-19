@@ -3,10 +3,7 @@
     { pkgs, ... }:
     {
       services.desktopManager.plasma6.enable = true;
-      services.displayManager.sddm = {
-        enable = true;
-        # theme = "sddm-astronaut-theme";
-      };
+      services.displayManager.plasma-login-manager.enable = true;
 
       services.colord.enable = true;
       programs.kdeconnect.enable = true;
@@ -17,7 +14,6 @@
         [
           gparted
           kurve # plasma widgets
-          # sddm-astronaut
         ]
         ++ (with kdePackages; [
           # yakuake
