@@ -29,7 +29,7 @@ let
 in
 {
   flake.nixosConfigurations = {
-    # nixos-rebuild --sudo --flake .#yoga switch
+    # sudo nixos-rebuild --flake .#yoga switch
     yoga = mkHost {
       user = "iab";
       host = "yoga";
