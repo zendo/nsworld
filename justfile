@@ -8,10 +8,6 @@ home_dir := env_var('HOME')
 _default:
     @just --choose --unsorted
 
-[group('just')]
-justfile-windows:
-    just dotfiles/Windows/
-
 # switch/boot/test + |& nom
 os *args:
     sudo nixos-rebuild --flake .\#"{{ host }}" {{ args }}

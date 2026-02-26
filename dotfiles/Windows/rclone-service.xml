@@ -1,0 +1,12 @@
+<service>
+  <id>rclone</id>
+  <name>rclone</name>
+  <description>This service runs rclone continuous integration system.</description>
+  <env name="http_proxy" value="http://127.0.0.1:7890"/>
+  <env name="https_proxy" value="http://127.0.0.1:7890"/>
+  <executable>C:\Users\zendo\scoop\shims\rclone</executable>
+  <arguments>mount infini:/ I: --vfs-cache-mode full</arguments>
+  <log mode="reset" />
+  <logpath>%BASE%\logs</logpath>
+  <onfailure action="restart" />
+</service>
