@@ -2,6 +2,8 @@
 // https://github.com/yokoffing/Betterfox
 
 /** BETTERFOX OVERRIDES ***/
+// PREF: restore AI features
+user_pref("browser.ai.control.default", "available")
 // PREF: restore Top Sites on New Tab page
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
 // PREF: restore search engine suggestions
