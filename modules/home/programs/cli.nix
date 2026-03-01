@@ -48,6 +48,7 @@
     sshfs
     dufs
     goshs
+    rclone
     simple-http-server
     # magic-wormhole-rs
     sendme

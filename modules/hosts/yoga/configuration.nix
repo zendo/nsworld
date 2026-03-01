@@ -39,6 +39,24 @@
 
   # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
+  systemd.services.rclone-infini = {
+    description = "Rclone infini Mount Service";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /infini";
+      ExecStart = ''
+        ${lib.getExe pkgs.rclone} mount \
+        --config=/home/${myvars.user}/.config/rclone/rclone.conf \
+        --vfs-cache-mode full \
+        --allow-other \
+        infini:/ /infini
+      '';
+      Restart = "on-failure";
+    };
+  };
+
   # ╭──────────────────────────────────────────────────────────╮
   # │ PROXY                                                    │
   # ╰──────────────────────────────────────────────────────────╯
