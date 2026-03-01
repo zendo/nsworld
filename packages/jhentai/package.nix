@@ -12,11 +12,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "jhentai";
-  version = "8.0.11+306";
+  version = "8.0.12";
 
   src = fetchurl {
-    url = "https://github.com/jiangtian616/JHenTai/releases/download/v8.0.11/JHenTai-8.0.11+306-Linux-x64.deb";
-    hash = "sha256-tj8FPtm7S2+GPwe0AcwCYyW4ASrUZg7/XvgMbia+yTQ=";
+    url = "https://github.com/jiangtian616/JHenTai/releases/download/v8.0.12/JHenTai-8.0.12+308-Linux-x64.deb";
+    hash = "sha256-ypH1R2d7GEqJ2aJUvFn/V2XIVBXJVPKOSKQ9qqssTxw=";
   };
 
   nativeBuildInputs = [
