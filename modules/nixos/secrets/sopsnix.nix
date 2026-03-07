@@ -8,18 +8,21 @@
 
   # Paste into .sops.yaml
 
+  # Edit
+  sops ~/nsworld/modules/nixos/secrets/sopsnix.yaml
+
   # Update all secrets when key changed
-  sops updatekeys modules/nixos/secrets/secrets.yaml
+  sops updatekeys modules/nixos/secrets/sopsnix.yaml
 
   # Decrypt and show the real value
-  sops --extract '["dae-sub"]' --decrypt modules/nixos/secrets/secrets.yaml
+  sops --extract '["dae-sub"]' --decrypt modules/nixos/secrets/sopsnix.yaml
 */
 { inputs, ... }:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    defaultSopsFile = ./secrets.yaml;
+    defaultSopsFile = ./sopsnix.yaml;
     age = {
       sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     };
