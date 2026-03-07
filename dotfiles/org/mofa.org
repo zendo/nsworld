@@ -89,3 +89,8 @@ https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scr
 
 组合订阅脚本：
 https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#type=组合订阅&name=all&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
+
+* vps
+
+如何用VPS搭建电脑端和移动端的稳定上网环境（文科生小白友好教程）
+https://x.com/gengdaJ/status/2029570219354845577

@@ -36,7 +36,7 @@
     # rhythmbox
     goodvibes
     go-musicfox
-    # splayer # (electron)
+    splayer # (electron)
     # qqmusic
     spotify
     # mousai
