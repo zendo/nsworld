@@ -69,12 +69,12 @@
       # });
 
       # xwayland env for inputMethod & native CSD
-      spotify = prev.spotify.overrideAttrs (oldAttrs: {
-        postFixup = ''
-          substituteInPlace $out/share/applications/spotify.desktop \
-            --replace-fail "Exec=spotify %U" "Exec=env NIXOS_OZONE_WL= spotify %U"
-        '';
-      });
+      # spotify = prev.spotify.overrideAttrs (oldAttrs: {
+      #   postFixup = ''
+      #     substituteInPlace $out/share/applications/spotify.desktop \
+      #       --replace-fail "Exec=spotify %U" "Exec=env NIXOS_OZONE_WL= spotify %U"
+      #   '';
+      # });
 
       # Remove attributes from set
       # gui-for-singbox = prev.gui-for-singbox.overrideAttrs (oldAttrs: {
