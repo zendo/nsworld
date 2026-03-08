@@ -4,7 +4,9 @@
 
   programs.rclone = {
     enable = true;
-    ### webdav@infini ###
+    # ╭────────────────────────╮
+    # │ webdav@infini          │
+    # ╰────────────────────────╯
     remotes.infini = {
       config = {
         type = "webdav";
@@ -23,6 +25,8 @@
         };
       };
     };
-    ### webdav@infini ###
+    # ╭────────────────────────╮
+    # │ sftp@svp               │
+    # ╰────────────────────────╯
   };
 }

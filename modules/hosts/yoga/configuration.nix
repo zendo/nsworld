@@ -47,7 +47,7 @@
     inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
     mihomo
     sing-box
-    gui-for-singbox
+    # gui-for-singbox
     # gui-for-clash
   ];
 
