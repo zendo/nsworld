@@ -28,5 +28,18 @@
     # ╭────────────────────────╮
     # │ sftp@svp               │
     # ╰────────────────────────╯
+    remotes.svp = {
+      config = {
+        type = "sftp";
+        host = "svp";
+        user = "zendo";
+        key_file = "~/.ssh/id_ed25519";
+      };
+      # rclone mount svp: ~/.mnt/svp
+      mounts."" = {
+        # enable = true;
+        mountPoint = "${config.home.homeDirectory}/.mnt/svp";
+      };
+    };
   };
 }
