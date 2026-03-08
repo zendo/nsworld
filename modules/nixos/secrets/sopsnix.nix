@@ -17,10 +17,7 @@
   # Decrypt and show the real value
   sops --extract '["dae-sub"]' --decrypt modules/nixos/secrets/sopsnix.yaml
 */
-{ inputs, ... }:
 {
-  imports = [ inputs.sops-nix.nixosModules.sops ];
-
   sops = {
     defaultSopsFile = ./sopsnix.yaml;
     age = {

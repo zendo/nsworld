@@ -30,4 +30,7 @@
     config.fileSystems ? "/" && config.fileSystems."/".fsType == "btrfs";
   services.bcachefs.autoScrub.enable =
     config.fileSystems ? "/" && config.fileSystems."/".fsType == "bcachefs";
+
+  # Allow non-root users use --allow-other in mounts
+  programs.fuse.userAllowOther = true;
 }

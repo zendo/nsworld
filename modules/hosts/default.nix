@@ -20,6 +20,8 @@ let
         inherit inputs self myvars;
       };
       modules = [
+        inputs.sops-nix.nixosModules.sops
+        inputs.agenix.nixosModules.default
         {
           networking.hostName = myvars.host;
         }

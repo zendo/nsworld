@@ -39,6 +39,7 @@
     sops
     age
     # rage # age encrypt RIIR
+    ragenix
     chafa # image viewer
     viu # image viewer
     gtrash

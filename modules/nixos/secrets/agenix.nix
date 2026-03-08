@@ -6,20 +6,10 @@
   https://github.com/GaetanLepage/nix-config/blob/master/modules/nixos/core/agenix.nix
 */
 {
-  inputs,
   self,
-  pkgs,
   ...
 }:
 {
-  imports = [
-    inputs.agenix.nixosModules.default
-  ];
-
-  environment.systemPackages = [
-    pkgs.ragenix
-  ];
-
   # sudo ls /run/agenix/
   age.secrets = {
     dae.file = (self + /modules/agenix/dae.age);

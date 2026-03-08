@@ -1,10 +1,15 @@
 {
   lib,
+  inputs,
   nixosConfig,
   ...
 }:
 {
   imports = [
+    inputs.sops-nix.homeManagerModules.sops
+    ../nixos/secrets/sopsnix.nix
+  ]
+  ++ [
     ./editor/helix.nix
     ./editor/micro.nix
     # -------------------------------------
@@ -37,6 +42,7 @@
     ./programs/chrome.nix
     ./programs/firefox.nix
     ./programs/gui.nix
+    ./programs/rclone.nix
     ./programs/vicinae.nix
     # -------------------------------------
     # ./terminal/alacritty.nix
