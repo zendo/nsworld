@@ -1,15 +1,14 @@
 {
   lib,
   inputs,
+  config,
   nixosConfig,
   ...
 }:
 {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
-    ../secrets/sopsnix.nix
-  ]
-  ++ [
+
     ./editor/helix.nix
     ./editor/micro.nix
     # -------------------------------------
@@ -62,6 +61,10 @@
   # GNOME specific configurations
   # ===========================================================
   ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./wm/dconf.nix ];
+
+  # sops-nix
+  sops.defaultSopsFile = ../secrets/sopsnix.yaml;
+  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
   # home.enableNixpkgsReleaseCheck = false;
   home.stateVersion = nixosConfig.system.stateVersion;
