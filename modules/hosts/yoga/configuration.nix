@@ -31,7 +31,6 @@
 
   services.acpid.enable = true;
   services.fwupd.enable = true;
-  systemd.services.rclone.enable = true;
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
   # No need password
