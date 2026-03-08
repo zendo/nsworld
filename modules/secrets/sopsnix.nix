@@ -9,10 +9,10 @@
   # Paste into .sops.yaml
 
   # Edit
-  sops ~/nsworld/modules/nixos/secrets/sopsnix.yaml
+  sops ~/nsworld/modules/secrets/sopsnix.yaml
 
   # Update all secrets when key changed
-  sops updatekeys modules/nixos/secrets/sopsnix.yaml
+  sops updatekeys modules/secrets/sopsnix.yaml
 
   # Decrypt and show the real value
   sops --extract '["dae-sub"]' --decrypt modules/nixos/secrets/sopsnix.yaml

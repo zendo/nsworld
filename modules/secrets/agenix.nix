@@ -12,6 +12,6 @@
 {
   # sudo ls /run/agenix/
   age.secrets = {
-    dae.file = (self + /modules/agenix/dae.age);
+    dae.file = ./dae.age;
   };
 }

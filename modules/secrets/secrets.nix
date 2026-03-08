@@ -13,6 +13,7 @@ let
   allSystems = builtins.attrValues systems;
 in
 {
+  # ragenix -e dae.age
   "dae.age".publicKeys = allUsers ++ allSystems;
   # "secret2.age".publicKeys = [
   #   users.iab

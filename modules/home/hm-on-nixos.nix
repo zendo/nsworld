@@ -7,7 +7,7 @@
 {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
-    ../nixos/secrets/sopsnix.nix
+    ../secrets/sopsnix.nix
   ]
   ++ [
     ./editor/helix.nix

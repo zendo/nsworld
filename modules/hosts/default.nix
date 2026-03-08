@@ -21,7 +21,9 @@ let
       };
       modules = [
         inputs.sops-nix.nixosModules.sops
+        ../secrets/sopsnix.nix
         inputs.agenix.nixosModules.default
+        ../secrets/agenix.nix
         {
           networking.hostName = myvars.host;
         }
