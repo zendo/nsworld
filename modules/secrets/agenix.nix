@@ -5,13 +5,11 @@
   https://github.com/oddlama/agenix-rekey
   https://github.com/GaetanLepage/nix-config/blob/master/modules/nixos/core/agenix.nix
 */
-{
-  self,
-  ...
-}:
+{ ... }:
 {
   # sudo ls /run/agenix/
   age.secrets = {
     dae.file = ./dae.age;
+    rclone_infini_pass.file = ./rclone_infini_pass.age;
   };
 }

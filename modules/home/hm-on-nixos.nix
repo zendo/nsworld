@@ -6,9 +6,18 @@
   ...
 }:
 {
+  # agenix
+  age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+
+  # sops-nix
+  sops.defaultSopsFile = ../secrets/sopsnix.yaml;
+  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+
   imports = [
     inputs.sops-nix.homeManagerModules.sops
-
+    inputs.agenix.homeManagerModules.default
+    ../secrets/agenix.nix
+    # -------------------------------------
     ./editor/helix.nix
     ./editor/micro.nix
     # -------------------------------------
@@ -61,10 +70,6 @@
   # GNOME specific configurations
   # ===========================================================
   ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./wm/dconf.nix ];
-
-  # sops-nix
-  sops.defaultSopsFile = ../secrets/sopsnix.yaml;
-  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
   # home.enableNixpkgsReleaseCheck = false;
   home.stateVersion = nixosConfig.system.stateVersion;
