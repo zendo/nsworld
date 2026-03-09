@@ -1,7 +1,5 @@
 { config, ... }:
 {
-  sops.secrets."rclone_infini_pass" = { };
-
   programs.rclone = {
     enable = true;
     # ╭────────────────────────╮

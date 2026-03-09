@@ -10,11 +10,11 @@
   age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
 
   # sops-nix
-  sops.defaultSopsFile = ../secrets/sopsnix.yaml;
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
   imports = [
     inputs.sops-nix.homeManagerModules.sops
+    ../secrets/sopsnix.nix
     inputs.agenix.homeManagerModules.default
     ../secrets/agenix.nix
     # -------------------------------------

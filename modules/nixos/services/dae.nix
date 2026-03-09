@@ -10,10 +10,6 @@
       configFile = config.sops.templates."config.dae".path;
     };
 
-    sops.secrets = {
-      dae-sub = { };
-    };
-
     # https://github.com/daeuniverse/dae/blob/main/docs/en/README.md#minimal-configuration
     sops.templates."config.dae".content = ''
       global {
