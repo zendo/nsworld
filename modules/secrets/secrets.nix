@@ -16,7 +16,7 @@ in
 {
   # ragenix -e dae.age
   "dae.age".publicKeys = allSystems ++ [ users.iab ];
-  "rclone_infini_pass.age".publicKeys = allSystems ++ allUsers;
+  "infini_pass.age".publicKeys = allSystems ++ allUsers;
   # "secret2.age".publicKeys = [
   #   users.iab
   #   systems.yoga

@@ -7,6 +7,6 @@
 {
   age.secrets = {
     # dae.file = ./dae.age;
-    # rclone_infini_pass.file = ./rclone_infini_pass.age;
+    # infini_pass.file = ./infini_pass.age;
   };
 }

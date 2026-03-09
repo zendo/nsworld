@@ -12,7 +12,7 @@
         user = "mifox";
       };
       secrets.pass = config.sops.secrets."rclone_infini_pass".path;
-      # secrets.pass = config.age.secrets."rclone_infini_pass".path;
+      # secrets.pass = config.age.secrets."infini_pass".path;
       # FIXME: https://github.com/nix-community/home-manager/issues/8334
       # rclone config update infini
       mounts."/" = {
