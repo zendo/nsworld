@@ -2,6 +2,7 @@ let
   systems = {
     yoga = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJEkj0tsVI5ijDz6XsJMc9dhyc0kqOyvlU7jsBYAwSs";
     svp = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFML3gSBoZwIlmKuntb0iP1qikgiU3jyg3FSbgaitzee";
+    wsl = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIcGZA7hTWlo5o1bmmhqqzVdA1mpcsMfsjASAier8wdl";
   };
 
   users = {

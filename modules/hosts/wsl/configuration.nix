@@ -42,9 +42,14 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │ System-wide                                              │
   # ╰──────────────────────────────────────────────────────────╯
+  # touch /etc/ssh/ssh_host_ed25519_key for secret management
+  services.openssh.enable = true;
+
   environment = {
     sessionVariables = {
       BROWSER = "wsl-open";
+      EDITOR = "micro";
+      VISUAL = "micro";
     };
 
     systemPackages = with pkgs; [
