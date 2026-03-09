@@ -28,6 +28,6 @@
 
   sops.secrets = {
     rclone_infini_pass = { };
-    dae-sub = { };
+    dae_sub = { };
   };
 }

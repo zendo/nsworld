@@ -7,11 +7,11 @@
   config = lib.mkIf config.services.daeWithConfig.enable {
     services.dae = {
       enable = true;
-      configFile = config.sops.templates."config.dae".path;
+      configFile = config.sops.templates."daeConfig".path;
     };
 
     # https://github.com/daeuniverse/dae/blob/main/docs/en/README.md#minimal-configuration
-    sops.templates."config.dae".content = ''
+    sops.templates."daeConfig".content = ''
       global {
         # Bind to LAN and/or WAN as you want. Replace the interface name to your own.
         #lan_interface: docker0
@@ -23,7 +23,7 @@
       }
 
       subscription {
-        airport: '${config.sops.placeholder."dae-sub"}'
+        airport: '${config.sops.placeholder."dae_sub"}'
       }
 
       # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md for full examples.

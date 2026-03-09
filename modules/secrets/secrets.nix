@@ -6,7 +6,8 @@ let
   };
 
   users = {
-    iab = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz";
+    # https://github.com/zendo.keys
+    zendo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz";
     user2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILI6jSq53F/3hEmSs+oq9L4TwOo1PrDMAgcA1uo1CCV/";
   };
 
@@ -15,7 +16,7 @@ let
 in
 {
   # ragenix -e dae.age
-  "dae.age".publicKeys = allSystems ++ [ users.iab ];
+  "dae.age".publicKeys = allSystems ++ [ users.zendo ];
   "infini_pass.age".publicKeys = allSystems ++ allUsers;
   # "secret2.age".publicKeys = [
   #   users.iab

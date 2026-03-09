@@ -26,6 +26,7 @@
     ./programs/git.nix
     # ./programs/gui.nix
     ./programs/nix-tools.nix
+    # ./programs/rclone.nix
     ./programs/ssh.nix
     # ./programs/vicinae.nix
     # ╭──────────────────────────────────────────╮
