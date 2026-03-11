@@ -18,7 +18,10 @@
     bc = "${lib.getExe pkgs.libqalculate}";
     sc = "systemctl";
     scu = "systemctl --user";
-    ii = "xdg-open"; # Invoke-Item
+    jlog = "journalctl";
+    jlogu = "journalctl --user-unit";
+    jlog-1h = ''journalctl -p err..alert --since "60 min ago"'';
+    ii = "xdg-open"; # `Invoke-Item` powershell style
     inxi = "inxi -Fz";
     free = "free -h";
     beep = ''echo -en "\007"'';
@@ -26,7 +29,6 @@
     dd-log = "sudo dd bs=8M oflag=sync,direct conv=fsync status=progress";
     psp = "${lib.getExe pkgs.procs} --sortd UsageMem";
     ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
-    journalctl-1h = ''journalctl -p err..alert --since "60 min ago"'';
 
     # network
     ip = "ip --color=auto";
