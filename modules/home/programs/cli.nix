@@ -35,10 +35,10 @@
     choose
     rsync
     lazyssh
-    ssh-to-age
-    sops
     age
     # rage # age encrypt RIIR
+    ssh-to-age
+    sops
     ragenix
     chafa # image viewer
     viu # image viewer

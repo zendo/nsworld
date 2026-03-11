@@ -20,12 +20,6 @@ let
         inherit inputs self myvars;
       };
       modules = [
-        inputs.sops-nix.nixosModules.sops
-        {
-          sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        }
-        inputs.agenix.nixosModules.default
-        ../secrets/agenix.nix
         {
           networking.hostName = myvars.host;
         }
