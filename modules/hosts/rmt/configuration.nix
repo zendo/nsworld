@@ -50,6 +50,24 @@
   # Clipboard shared for NixOS@Guest
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
+  # FIXME
+  # https://github.com/NixOS/nixpkgs/issues/481078
+  # https://github.com/NixOS/nixpkgs/pull/266080
+  systemd.user.services.spice-vdagent = {
+    description = "spice-vdagent user daemon";
+    after = [
+      "spice-vdagentd.service"
+      "graphical-session.target"
+    ];
+    requires = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x";
+    };
+    unitConfig = {
+      ConditionPathExists = "/run/spice-vdagentd/spice-vdagent-sock";
+    };
+  };
 
   users.users.${myvars.user} = {
     # pw: 123
