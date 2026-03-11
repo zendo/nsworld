@@ -62,13 +62,13 @@
   };
 
   services.mihomo = {
-    # enable = true;
+    enable = true;
     tunMode = true;
     # webui = pkgs.zashboard;
     configFile = "/home/${myvars.user}/code/subs/config.yaml";
   };
 
-  services.daeWithConfig.enable = true;
+  # services.daeWithConfig.enable = true;
   # services.dae = {
   #   enable = true;
   #   configFile = "/home/${myvars.user}/code/subs/dae-config.dae";

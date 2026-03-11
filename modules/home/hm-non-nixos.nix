@@ -58,6 +58,7 @@
     # ╰──────────────────────────────────────────╯
     ./xdg/env.nix
     ./xdg/files.nix
+    # ./xdg/hm-secrets.nix
     # ./xdg/mime.nix
     ./xdg/xdg.nix
   ];
