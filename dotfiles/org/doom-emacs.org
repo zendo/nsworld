@@ -28,7 +28,7 @@
        :ui
        ;; deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
-       doom-dashboard    ; a nifty splash screen for Emacs
+       dashboard         ; a nifty splash screen for Emacs
        ;; doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;; (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
@@ -90,7 +90,7 @@
        ;;ansible
        ;;biblio            ; Writes a PhD for you (citation needed)
        ;;collab            ; buffers with friends
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       ;;debugger          ; stepping through code, to help you add bugs
        direnv
        ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -115,7 +115,7 @@
 
        :lang
        ;;ada               ; In strong typing we (blindly) trust
-       ;;agda              ; types of types of types of types...
+       ;;(agda +local)     ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        ;;(cc +lsp)                ; C > C++ == 1
        ;;clojure           ; java with a lisp
@@ -226,8 +226,6 @@
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
@@ -304,7 +302,7 @@
 
 (when (featurep :system 'linux)
   (global-set-key (kbd "<f2>") '+vterm/toggle)
-  (after! vterm
+  (with-eval-after-load 'vterm
     (setq vterm-shell "zsh")
     (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
 #+end_src
@@ -320,7 +318,7 @@
 (setq doom-theme 'doom-tomorrow-night)
 
 ;; treemacs
-(after! treemacs
+(with-eval-after-load 'treemacs
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 #+end_src
 
@@ -344,7 +342,7 @@
 * Files
 ** projectile
 #+begin_src emacs-lisp
-(after! projectile
+(with-eval-after-load 'projectile
   ;; manual clear cache (M-x projectile-invalidate-cache) or
   (setq projectile-enable-caching nil)
   )
@@ -355,7 +353,7 @@
 ;; recentf 不要保存 dired 记录
 (define-advice doom--recentf-add-dired-directory-h (:override ()))
 
-(after! dired
+(with-eval-after-load 'dired
   (setq dired-listing-switches "-aBhlv --group-directories-first"
         dired-omit-files "\\`[.]?#\\|\\`[.][.]?"  ; hide dot files
         )
@@ -385,7 +383,7 @@
                          "autosave$" "treemacs-persist" )
       )
 
-(after! vundo
+(with-eval-after-load 'vundo
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (setq vundo-roll-back-on-quit nil))
 
@@ -424,7 +422,7 @@
 
 * Org
 #+begin_src emacs-lisp :tangle no
-(after! org
+(with-eval-after-load 'org
 
   )
 #+end_src
