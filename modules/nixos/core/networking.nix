@@ -21,11 +21,6 @@
   };
 
   services = {
-    openssh = {
-      enable = true;
-      # settings.PasswordAuthentication = lib.mkDefault false;
-    };
-
     # Use systemd-resolved for DNS
     resolved = {
       enable = true;

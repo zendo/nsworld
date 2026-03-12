@@ -12,8 +12,10 @@ in
   # Declaratively users and groups
   services.userborn.enable = lib.mkDefault true;
 
-  # sudo rule
-  # security.sudo.execWheelOnly = true;
+  services.openssh = {
+    enable = true;
+    # settings.PasswordAuthentication = lib.mkDefault false;
+  };
 
   # sudo-rs
   security.sudo-rs.enable = true;
@@ -23,16 +25,19 @@ in
   # security.doas.enable = true;
   # environment.systemPackages = [ pkgs.doas-sudo-shim ];
 
+  # sudo rule
+  security.sudo.execWheelOnly = true;
+  security.sudo-rs.execWheelOnly = true;
+
   users = {
     mutableUsers = lib.mkDefault false;
 
     users.root = {
-      initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
-      # copy ssh pub key to /etc/ssh/authorized_keys.d/root
-      # or copy to ~/.ssh/authorized_keys
+      # initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
+      # copy ssh pub key to /etc/ssh/authorized_keys.d/root or ~/.ssh/authorized_keys
       # ssh-copy-id -i ~/.ssh/id_ed25519.pub aaa@192.168.122.85
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz linzway@qq.com"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
       ];
     };
 
@@ -40,6 +45,9 @@ in
       isNormalUser = true;
       # `mkpasswd`
       initialHashedPassword = "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
+      ];
       extraGroups = [
         "wheel"
         "networkmanager"
@@ -68,7 +76,6 @@ in
 
     users.guest = {
       isNormalUser = true;
-      # pw: guest
       initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
     };
   };
