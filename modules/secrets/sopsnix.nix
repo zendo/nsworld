@@ -28,6 +28,7 @@
 
   sops.secrets = {
     rclone_infini_pass = { };
+    access_tokens = { };
     dae_sub = { };
   };
 }
