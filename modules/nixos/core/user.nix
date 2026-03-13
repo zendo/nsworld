@@ -12,11 +12,6 @@ in
   # Declaratively users and groups
   services.userborn.enable = lib.mkDefault true;
 
-  services.openssh = {
-    enable = true;
-    # settings.PasswordAuthentication = lib.mkDefault false;
-  };
-
   # sudo-rs
   security.sudo-rs.enable = true;
 

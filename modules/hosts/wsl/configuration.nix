@@ -14,7 +14,8 @@
     (self + /modules/nixos/core/base.nix)
     (self + /modules/nixos/core/fonts-cn.nix)
     (self + /modules/nixos/core/nixpkgs.nix)
-    (self + /modules/nixos/core/nixconfig.nix)
+    (self + /modules/nixos/core/ssh.nix)
+    (self + /modules/nixos/core/sys-nixconfig.nix)
   ];
 
   # ╭──────────────────────────────────────────────────────────╮
@@ -42,9 +43,6 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │ System-wide                                              │
   # ╰──────────────────────────────────────────────────────────╯
-  # Create /etc/ssh/ssh_host_ed25519_key for secret management
-  services.openssh.enable = true;
-
   environment = {
     sessionVariables = {
       EDITOR = "micro";

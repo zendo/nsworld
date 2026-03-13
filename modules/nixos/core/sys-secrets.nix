@@ -13,7 +13,7 @@
     (self + /modules/secrets/agenix.nix)
   ];
 
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.sshKeyPaths = [ "/var/lib/ssh/ssh_host_ed25519_key" ];
 
   # defined already = `config.services.openssh.hostKeys`
   # age.identityPaths = [];
