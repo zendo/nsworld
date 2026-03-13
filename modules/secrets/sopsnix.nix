@@ -5,8 +5,8 @@
   mkdir -p ~/.config/sops/age
 
   - Using host ssh key
+  [private]: ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
   [remote]: sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt | age-keygen -y
-  [main]: ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
   chmod 600 ~/.config/sops/age/keys.txt
 
   - Paste into .sops.yaml

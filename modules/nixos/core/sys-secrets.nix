@@ -1,22 +1,28 @@
 {
   inputs,
   self,
+  lib,
+  config,
   pkgs,
   ...
 }:
 {
   imports = [
-    inputs.sops-nix.nixosModules.sops
-    (self + /modules/secrets/sopsnix.nix)
-
     inputs.agenix.nixosModules.default
     (self + /modules/secrets/agenix.nix)
+
+    inputs.sops-nix.nixosModules.sops
+    (self + /modules/secrets/sopsnix.nix)
   ];
 
-  sops.age.sshKeyPaths = [ "/var/lib/ssh/ssh_host_ed25519_key" ];
+  # agenix
+  # age.identityPaths = [ ]; # defined already
 
-  # defined already = `config.services.openssh.hostKeys`
-  # age.identityPaths = [];
+  # sops-nix
+  # Copy: https://github.com/ryantm/agenix/blob/main/modules/age.nix#L241
+  sops.age.sshKeyPaths = map (e: e.path) (
+    lib.filter (e: e.type == "rsa" || e.type == "ed25519") config.services.openssh.hostKeys
+  );
 
   environment.systemPackages = with pkgs; [
     age

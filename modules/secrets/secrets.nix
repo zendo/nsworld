@@ -2,7 +2,7 @@ let
   systems = {
     yoga = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOaubBTa8qwJcVxuukrSQkEM3wQmaqI0RQHUyEADpz/7";
     svp = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFML3gSBoZwIlmKuntb0iP1qikgiU3jyg3FSbgaitzee";
-    rmt = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF+qTsZNtiKopJPwpb0BNZasgTq4Tq8nhdgmJbxUOpOT";
+    rmt = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATekMmx7K+49Xt3k7S2zi8L8XIGwNDwgN+Z9OykOb0m";
     wsl = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIcGZA7hTWlo5o1bmmhqqzVdA1mpcsMfsjASAier8wdl";
   };
 
