@@ -76,6 +76,13 @@ backup-my-data:
     rsync -av "$HOME/.ssh/" ssh/
     rsync -av "$HOME/.mozilla/" mozilla/
 
+[group('secrets')]
+secrets-move-hostkeys-to-home:
+    #!/usr/bin/env bash
+    sudo cp /var/lib/ssh/ssh_host_ed25519_key  ~/.ssh/id_ed25519
+    sudo cp /var/lib/ssh/ssh_host_ed25519_key.pub ~/.ssh/id_ed25519.pub
+    sudo chown -R $USER  ~/.ssh
+
 [group('emacs')]
 emacs-ob-tangle:
     emacs -Q --batch \
