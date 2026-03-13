@@ -25,6 +25,25 @@
       };
     };
     # ╭────────────────────────╮
+    # │ webdav@koofr           │
+    # ╰────────────────────────╯
+    remotes.koofr = {
+      config = {
+        type = "webdav";
+        url = "https://app.koofr.net/dav/Koofr";
+        user = "linzway@qq.com";
+      };
+      secrets.pass = config.sops.secrets."rclone_koofr_pass".path;
+      mounts."/" = {
+        enable = true;
+        mountPoint = "${config.home.homeDirectory}/.mnt/koofr";
+        options = {
+          vfs-cache-mode = "full";
+          allow-other = true;
+        };
+      };
+    };
+    # ╭────────────────────────╮
     # │ sftp@svp               │
     # ╰────────────────────────╯
     remotes.svp = {
