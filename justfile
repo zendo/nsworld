@@ -79,9 +79,19 @@ backup-my-data:
 [group('secrets')]
 secrets-move-hostkeys-to-home:
     #!/usr/bin/env bash
+    read -p "Are u sure? (y/n): " res
+    [[ "$res" =~ ^[Yy](es)?$ ]] || exit 1
     sudo cp /var/lib/ssh/ssh_host_ed25519_key  ~/.ssh/id_ed25519
     sudo cp /var/lib/ssh/ssh_host_ed25519_key.pub ~/.ssh/id_ed25519.pub
     sudo chown -R $USER  ~/.ssh
+
+[group('secrets')]
+secrets-generate-sops-agekey:
+    #!/usr/bin/env bash
+    mkdir -p ~/.config/sops/age
+    ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
+    ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
+    cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 
 [group('emacs')]
 emacs-ob-tangle:

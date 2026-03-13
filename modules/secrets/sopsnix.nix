@@ -10,8 +10,8 @@
   chmod 600 ~/.config/sops/age/keys.txt
 
   - Paste into .sops.yaml
-  cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
   ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
+  cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 
   - Edit
   sops ~/nsworld/modules/secrets/sopsnix.yaml
