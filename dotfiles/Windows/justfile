@@ -35,7 +35,7 @@ singbox-mihomo-setup:
     Copy-Item sb-service.xml, mihomo-service.xml $HOME\services\subs
     Copy-Item winsw.exe $HOME\services\subs\sb-service.exe
     Copy-Item winsw.exe $HOME\services\subs\mihomo-service.exe
-    
+
 rclone-service:
     New-Item $HOME\services\rclone -ItemType Directory -Force
     Copy-Item rclone-service.xml $HOME\services\rclone

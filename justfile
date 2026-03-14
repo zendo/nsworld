@@ -77,7 +77,7 @@ backup-my-data:
     rsync -av "$HOME/.mozilla/" mozilla/
 
 [group('secrets')]
-secrets-move-hostkeys-to-home:
+secrets-move-hostkey-to-home:
     #!/usr/bin/env bash
     read -p "Are u sure? (y/n): " res
     [[ "$res" =~ ^[Yy](es)?$ ]] || exit 1
@@ -86,11 +86,13 @@ secrets-move-hostkeys-to-home:
     sudo chown -R $USER  ~/.ssh
 
 [group('secrets')]
-secrets-generate-sops-agekey:
+secrets-sops-privatekey-to-age:
     #!/usr/bin/env bash
     mkdir -p ~/.config/sops/age
     ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
+    echo "Private key to age:"
     ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
+    echo -e "\nHost key to age:"
     cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 
 [group('emacs')]
