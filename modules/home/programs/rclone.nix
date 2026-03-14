@@ -1,3 +1,9 @@
+/*
+  rclone mount :sftp:/ ~/.mnt/rmt \
+    --sftp-host rmt \
+    --sftp-user aaa \
+    --sftp-key-file ~/.ssh/id_ed25519
+*/
 { config, ... }:
 {
   programs.rclone = {
@@ -35,7 +41,7 @@
       };
       secrets.pass = config.sops.secrets."rclone_koofr_pass".path;
       mounts."/" = {
-        enable = true;
+        # enable = true;
         mountPoint = "${config.home.homeDirectory}/.mnt/koofr";
         options = {
           vfs-cache-mode = "full";
