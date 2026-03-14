@@ -9,7 +9,7 @@
     fresh-editor
 
     # AI
-    opencode
+    # opencode
 
     # obsidian
     # joplin-desktop
