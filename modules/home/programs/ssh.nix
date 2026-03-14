@@ -1,3 +1,9 @@
+/*
+  ssh-add ~/.ssh/id_ed25519
+  ssh-add -l
+  echo "$SSH_AUTH_SOCK"
+  ssh -T git@ssh.github.com -p 443
+*/
 { ... }:
 {
   programs.ssh = {
@@ -14,17 +20,10 @@
         # --- 3. 连接多路复用（秒连神器） ---
         # 第一次连接会建立 Master，后续连接同一台机器将直接复用，无需握手
         controlMaster = "auto";
-        controlPersist = "30m"; # 主连接关闭后，后台保持 30 分钟
+        controlPersist = "10m"; # 主连接关闭后，后台保持 10 分钟
         controlPath = "~/.ssh/master-%r@%n:%p";
         # --- 4. 性能与安全性平衡 ---
         # hashKnownHosts = true; # 开启哈希，保护你的 known_hosts 不被扫描
-        # --- 5. 现代加密偏好 ---
-        extraOptions = {
-          # 优先使用更安全的算法
-          "HostKeyAlgorithms" = "ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512,rsa-sha2-256";
-          # 避免连接时弹出一堆无用的私钥尝试
-          "IdentitiesOnly" = "yes";
-        };
       };
       "github.com" = {
         hostname = "ssh.github.com";
@@ -39,11 +38,12 @@
       svp = {
         hostname = "192.168.2.30";
         port = 22;
+        forwardAgent = true;
       };
       rmt = {
         hostname = "192.168.122.86";
         port = 22;
-        forwardAgent = true; # TODO
+        forwardAgent = true;
       };
     };
     extraConfig = ''
