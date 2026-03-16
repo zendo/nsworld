@@ -111,6 +111,7 @@
     extraModprobeConfig = ''
       options iwlwifi power_save=0
       options iwlmvm power_scheme=1
+      options btusb disable_autosuspend=1
     '';
 
     # zswap

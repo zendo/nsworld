@@ -10,7 +10,7 @@ _default:
 
 # switch/boot/test + |& nom
 os *args:
-    sudo nixos-rebuild --flake .\#"{{ host }}" {{ args }}
+    nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
 
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
