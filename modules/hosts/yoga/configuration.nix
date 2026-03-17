@@ -88,10 +88,10 @@
   # ╭──────────────────────────────────────────────────────────╮
   # │ HARDWARE                                                 │
   # ╰──────────────────────────────────────────────────────────╯
-  # Fix Bluetooth mouse reconnect slow
+  # Fix Bluetooth Mouse reconnect slow
   hardware.bluetooth.input.General = {
     ClassicBondedOnly = false;
-    UserspaceHID = false;
+    UserspaceHID = true;
     LEAutoSecurity = false;
   };
 
