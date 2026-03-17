@@ -38,6 +38,6 @@ singbox-mihomo-setup:
 
 rclone-service:
     New-Item $HOME\services\rclone -ItemType Directory -Force
-    Copy-Item rclone-service.xml $HOME\services\rclone
-    Copy-Item winsw.exe $HOME\services\rclone\rclone-service.exe
+    Copy-Item rclone-infini-service.xml $HOME\services\rclone
+    Copy-Item winsw.exe $HOME\services\rclone\rclone-infini-service.exe
     Remove-Item winsw.exe
