@@ -18,6 +18,7 @@
     # fractal
     # fluffychat
     # newsflash
+    rclone-browser
     venera
     jhentai
 
