@@ -1,4 +1,6 @@
 /*
+  rclone mount infini:/ ~/.mnt/infini --vfs-cache-mode full
+  rclone mount svp: ~/.mnt/svp
   rclone mount :sftp:/ ~/.mnt/rmt \
     --sftp-host rmt \
     --sftp-user aaa \
@@ -22,7 +24,7 @@
       # FIXME: https://github.com/nix-community/home-manager/issues/8334
       # rclone config update infini
       mounts."/" = {
-        enable = true;
+        # enable = true;
         mountPoint = "${config.home.homeDirectory}/.mnt/infini";
         options = {
           vfs-cache-mode = "full";
@@ -50,20 +52,20 @@
       };
     };
     # ╭────────────────────────╮
-    # │ sftp@svp               │
+    # │ sftp                   │
     # ╰────────────────────────╯
-    remotes.svp = {
-      config = {
-        type = "sftp";
-        host = "svp";
-        user = "zendo";
-        key_file = "~/.ssh/id_ed25519";
-      };
-      # rclone mount svp: ~/.mnt/svp
-      mounts."" = {
-        # enable = true;
-        mountPoint = "${config.home.homeDirectory}/.mnt/svp";
-      };
+    remotes.svp.config = {
+      type = "sftp";
+      host = "svp";
+      user = "zendo";
+      key_file = "~/.ssh/id_ed25519";
     };
+    remotes.rmt.config = {
+      type = "sftp";
+      host = "rmt";
+      user = "aaa";
+      key_file = "~/.ssh/id_ed25519";
+    };
+
   };
 }

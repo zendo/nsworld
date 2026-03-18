@@ -79,6 +79,7 @@ backup-my-data:
 [group('secrets')]
 secrets-move-hostkey-to-home:
     #!/usr/bin/env bash
+    [ -f "$HOME/.ssh/id_ed25519" ] && exit 0
     read -p "Are u sure? (y/n): " res
     [[ "$res" =~ ^[Yy](es)?$ ]] || exit 1
     sudo cp /var/lib/ssh/ssh_host_ed25519_key  ~/.ssh/id_ed25519
