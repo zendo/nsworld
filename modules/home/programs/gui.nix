@@ -6,7 +6,7 @@
 {
   home.packages = with pkgs; [
     comigo
-    fresh-editor
+    kula
 
     # AI
     # opencode
