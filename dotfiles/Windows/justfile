@@ -41,5 +41,7 @@ rclone-infini-service:
     { iwr "https://ghfast.top/https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe } ; \
     New-Item $HOME\services\rclone -ItemType Directory -Force
     Copy-Item rclone-infini-service.xml $HOME\services\rclone
+    Copy-Item rclone-koofr-service.xml $HOME\services\rclone
     Copy-Item winsw.exe $HOME\services\rclone\rclone-infini-service.exe
+    Copy-Item winsw.exe $HOME\services\rclone\rclone-koofr-service.exe
     Remove-Item winsw.exe
