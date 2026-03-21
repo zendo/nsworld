@@ -12,10 +12,13 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     # inputs.lanzaboote.nixosModules.lanzaboote
 
+    # [profiles]
     self.modules.nixos.default
-    self.modules.nixos.laptop
     self.modules.nixos.hm
+    self.modules.nixos.laptop
+    # self.modules.nixos.steam
 
+    # [desktop]
     self.modules.nixos.gnome
     # self.modules.nixos.kde
     # self.modules.nixos.cosmic
@@ -26,7 +29,6 @@
 
   mods.virt.enable = true;
   # mods.incus.enable = true;
-  # programs'.steam.enable = true;
   # programs'.nix-ld.enable = true;
 
   services.acpid.enable = true;

@@ -7,6 +7,8 @@
 {
   imports = [
     inputs.self.modules.homeManager.secrets
+    inputs.self.modules.homeManager.ssh
+    inputs.self.modules.homeManager.nixconfig
 
     ./editor/helix.nix
     ./editor/micro.nix
@@ -14,7 +16,6 @@
     ./programs/cli.nix
     ./programs/git.nix
     ./programs/nix-tools.nix
-    ./programs/ssh.nix
     # -------------------------------------
     ./shell/alias.nix
     ./shell/atuin.nix
@@ -49,18 +50,21 @@
     # ./terminal/kitty.nix
     # -------------------------------------
     ./xdg/env.nix
-    ./xdg/hm-nixconfig.nix
     ./xdg/mime.nix
     ./xdg/xdg.nix
   ]
   # ===========================================================
   # KDE Plasma specific configurations
   # ===========================================================
-  ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [ ./wm/plasma.nix ]
+  ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [
+    inputs.self.modules.homeManager.plasma-manager
+  ]
   # ===========================================================
   # GNOME specific configurations
   # ===========================================================
-  ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [ ./wm/dconf.nix ];
+  ++ lib.optionals nixosConfig.services.desktopManager.gnome.enable [
+    inputs.self.modules.homeManager.dconf
+  ];
 
   # home.enableNixpkgsReleaseCheck = false;
   home.stateVersion = nixosConfig.system.stateVersion;

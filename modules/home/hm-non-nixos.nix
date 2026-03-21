@@ -6,6 +6,9 @@
 }:
 {
   imports = [
+    inputs.self.modules.homeManager.secrets
+    inputs.self.modules.homeManager.ssh
+    inputs.self.modules.homeManager.nixconfig
     # ╭──────────────────────────────────────────╮
     # │ EDITOR                                   │
     # ╰──────────────────────────────────────────╯
@@ -27,7 +30,6 @@
     # ./programs/gui.nix
     ./programs/nix-tools.nix
     # ./programs/rclone.nix
-    ./programs/ssh.nix
     # ./programs/vicinae.nix
     # ╭──────────────────────────────────────────╮
     # │ SHELL                                    │
@@ -47,18 +49,10 @@
     ./terminal/ghostty.nix
     # ./terminal/kitty.nix
     # ╭──────────────────────────────────────────╮
-    # │ WM                                       │
-    # ╰──────────────────────────────────────────╯
-    # ./wm/dconf.nix
-    # ./wm/hypridle.nix
-    # ./wm/plasma.nix
-    # ./wm/shikane.nix
-    # ╭──────────────────────────────────────────╮
     # │ XDG                                      │
     # ╰──────────────────────────────────────────╯
     ./xdg/env.nix
     ./xdg/files.nix
-    # ./xdg/hm-nixconfig.nix
     # ./xdg/mime.nix
     ./xdg/xdg.nix
   ];

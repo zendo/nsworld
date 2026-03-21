@@ -1,31 +1,34 @@
-{ self, lib, ... }:
 {
-  nixpkgs = {
-    overlays = builtins.attrValues self.overlays;
+  flake.modules.nixos.core =
+    { self, lib, ... }:
+    {
+      nixpkgs = {
+        overlays = builtins.attrValues self.overlays;
 
-    config = {
-      # allowUnfree = true;
-      # allowBroken = true;
-      # allowInsecure = true;
-      # allowUnsupportedSystem = true;
-      android_sdk.accept_license = true;
-      allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "unrar"
-          "steam"
-          "vscode"
-          "spotify"
-          "qqmusic"
-          "google-chrome"
-          "microsoft-edge"
-          "vivaldi"
-          "widevine-cdm"
-          "steam-unwrapped"
-          "balatro"
-          "memtest86-efi"
-          "android-sdk-cmdline-tools"
-        ];
+        config = {
+          # allowUnfree = true;
+          # allowBroken = true;
+          # allowInsecure = true;
+          # allowUnsupportedSystem = true;
+          android_sdk.accept_license = true;
+          allowUnfreePredicate =
+            pkg:
+            builtins.elem (lib.getName pkg) [
+              "unrar"
+              "steam"
+              "vscode"
+              "spotify"
+              "qqmusic"
+              "google-chrome"
+              "microsoft-edge"
+              "vivaldi"
+              "widevine-cdm"
+              "steam-unwrapped"
+              "balatro"
+              "memtest86-efi"
+              "android-sdk-cmdline-tools"
+            ];
+        };
+      };
     };
-  };
 }

@@ -1,20 +1,23 @@
-{ pkgs, config, ... }:
 {
-  programs.appimage = {
-    enable = config.services.graphical-desktop.enable;
-    binfmt = true;
-    package = pkgs.appimage-run.override {
-      extraPkgs =
-        pkgs: with pkgs; [
-          libthai
-          libsecret
-          libepoxy
-          # libsoup_3
-          # libdbusmenu-gtk3
-          # libappindicator-gtk3
-          # libayatana-appindicator
-          # webkitgtk_4_1
-        ];
+  flake.modules.nixos.programs =
+    { pkgs, config, ... }:
+    {
+      programs.appimage = {
+        enable = config.services.graphical-desktop.enable;
+        binfmt = true;
+        package = pkgs.appimage-run.override {
+          extraPkgs =
+            pkgs: with pkgs; [
+              libthai
+              libsecret
+              libepoxy
+              # libsoup_3
+              # libdbusmenu-gtk3
+              # libappindicator-gtk3
+              # libayatana-appindicator
+              # webkitgtk_4_1
+            ];
+        };
+      };
     };
-  };
 }

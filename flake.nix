@@ -9,7 +9,7 @@
         ./modules/hosts # flake.nixosConfigurations
         ./modules/secrets/secrets-module.nix # flake.modules combine
         (inputs.import-tree ./modules/flake)
-        (inputs.import-tree ./modules/nixos/_profiles) # flake.modules.nixos
+        (inputs.import-tree ./modules/nixos) # flake.modules.nixos
       ];
     };
 

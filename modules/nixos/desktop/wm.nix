@@ -46,11 +46,11 @@
   # │  Home-manager                                       │
   # ╰─────────────────────────────────────────────────────╯
   flake.modules.homeManager.wm =
-    { pkgs, ... }:
+    { inputs, pkgs, ... }:
     {
       imports = [
-        ../../../home/wm/hypridle.nix
-        ../../../home/wm/shikane.nix
+        inputs.self.modules.homeManager.hypridle
+        inputs.self.modules.homeManager.shikane
       ];
 
       home.packages = with pkgs; [
