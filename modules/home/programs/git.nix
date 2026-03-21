@@ -10,6 +10,7 @@ in
     ignores = [
       ".csvignore"
       ".DS_Store"
+      ".vscode"
       # nix
       "*.drv"
       "*.qcow2"
