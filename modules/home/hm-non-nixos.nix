@@ -59,7 +59,6 @@
     ./xdg/env.nix
     ./xdg/files.nix
     # ./xdg/hm-nixconfig.nix
-    # ./xdg/hm-secrets.nix
     # ./xdg/mime.nix
     ./xdg/xdg.nix
   ];

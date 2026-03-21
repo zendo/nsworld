@@ -1,10 +1,13 @@
 {
   lib,
   nixosConfig,
+  inputs,
   ...
 }:
 {
   imports = [
+    inputs.self.modules.homeManager.secrets
+
     ./editor/helix.nix
     ./editor/micro.nix
     # -------------------------------------
@@ -47,7 +50,6 @@
     # -------------------------------------
     ./xdg/env.nix
     ./xdg/hm-nixconfig.nix
-    ./xdg/hm-secrets.nix
     ./xdg/mime.nix
     ./xdg/xdg.nix
   ]

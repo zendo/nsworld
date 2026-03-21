@@ -7,8 +7,9 @@
       imports = [
         ./overlays # flake.overlays
         ./modules/hosts # flake.nixosConfigurations
-        (inputs.import-tree ./modules/nixos/_profiles) # flake.modules.nixos
+        ./modules/secrets/secrets-module.nix # flake.modules combine
         (inputs.import-tree ./modules/flake)
+        (inputs.import-tree ./modules/nixos/_profiles) # flake.modules.nixos
       ];
     };
 
