@@ -29,7 +29,7 @@
           # zellij
           zsh
 
-          fish
+          files
         ]
         # =================================================
         # Graphical Desktop Environment Configurations
@@ -54,7 +54,6 @@
           # kitty
 
           env
-          files
           mime
           xdg
         ]
