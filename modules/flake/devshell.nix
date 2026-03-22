@@ -238,7 +238,7 @@
         buildInputs = with pkgs; [
           jdk
           gradle
-          xorg.libXrender
+          libxrender
         ];
       };
 
@@ -269,7 +269,7 @@
               "3.22.1"
             ];
             includeEmulator = true;
-            emulatorVersion = "34.1.9";
+            emulatorVersion = "34.1.19";
             includeNDK = true;
             ndkVersions = [ ndkVersion ];
           };

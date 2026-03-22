@@ -11,8 +11,10 @@
     "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
 
-    self.modules.nixos.default
     self.modules.nixos.hm
+
+    self.modules.nixos.base
+    self.modules.nixos.user
 
     self.modules.nixos.gnome
     # self.modules.nixos.kde

@@ -27,7 +27,7 @@
           modules =
             # basic setup
             [
-              ../home/hm-non-nixos.nix
+              inputs.self.modules.homeManager.hm-non-nixos
             ]
             # and more modules
             ++ extraModules;
@@ -39,7 +39,7 @@
         myvars = {
           user = "iab";
         };
-        extraModules = [ ../home/wm/dconf.nix ];
+        extraModules = [ inputs.self.modules.homeManager.dconf ];
       };
 
       # MAYBE: other user on nixos
@@ -48,9 +48,9 @@
           user = "guest";
         };
         extraModules = [
-          ../home/programs/gui.nix
-          ../home/programs/bash.nix
-          ../home/programs/firefox.nix
+          inputs.self.modules.homeManager.gui
+          inputs.self.modules.homeManager.bash
+          inputs.self.modules.homeManager.firefox
         ];
       };
     };

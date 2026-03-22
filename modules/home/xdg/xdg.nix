@@ -36,7 +36,7 @@
           # };
           # doom-emacs = {
           #   name = "Doom Emacs";
-          #   icon = "${../dotfiles/emacs/doom-emacs.svg}";
+          #   icon = "${inputs.self}/dotfiles/emacs/doom-emacs.svg}";
           #   exec = ''sh -c "emacs --init-directory ${config.home.homeDirectory}/.config/doom-emacs"'';
           # };
         };

@@ -34,7 +34,7 @@
       packages =
         lib.packagesFromDirectoryRecursive {
           inherit (pkgs) callPackage;
-          directory = ../../packages;
+          directory = (inputs.self + /packages);
         }
         // {
           # nix run .

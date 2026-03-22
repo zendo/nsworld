@@ -41,9 +41,9 @@
 
   # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-  # ╭──────────────────────────────────────────────────────────╮
-  # │ PROXY                                                    │
-  # ╰──────────────────────────────────────────────────────────╯
+  # ╭─────────────────────────────────────────────────────╮
+  # │ PROXY                                               │
+  # ╰─────────────────────────────────────────────────────╯
   environment.systemPackages = with pkgs; [
     # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
     inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
@@ -87,9 +87,9 @@
     longitude = 113.20; # 经度
   };
 
-  # ╭──────────────────────────────────────────────────────────╮
-  # │ HARDWARE                                                 │
-  # ╰──────────────────────────────────────────────────────────╯
+  # ╭─────────────────────────────────────────────────────╮
+  # │ HARDWARE                                            │
+  # ╰─────────────────────────────────────────────────────╯
   # Fix Bluetooth Mouse reconnect slow
   hardware.bluetooth.input.General = {
     ClassicBondedOnly = false;
@@ -138,9 +138,9 @@
 
   zramSwap.enable = true;
 
-  # ╭──────────────────────────────────────────────────────────╮
-  # │ BOOTLOADER                                               │
-  # ╰──────────────────────────────────────────────────────────╯
+  # ╭─────────────────────────────────────────────────────╮
+  # │ BOOTLOADER                                          │
+  # ╰─────────────────────────────────────────────────────╯
   /*
     Disable "Secure Boot" and reset to “Setup Mode”
     sudo -i
