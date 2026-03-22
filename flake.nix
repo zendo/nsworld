@@ -6,10 +6,8 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./overlays # flake.overlays
-        ./modules/hosts # flake.nixosConfigurations
-        ./modules/secrets/secrets-module.nix # flake.modules combine
-        (inputs.import-tree ./modules/flake)
-        (inputs.import-tree ./modules/nixos) # flake.modules.nixos
+        ./secrets/secrets-module.nix
+        (inputs.import-tree ./modules)
       ];
     };
 

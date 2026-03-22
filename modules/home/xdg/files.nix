@@ -1,35 +1,38 @@
-{ config, ... }:
-let
-  staticDot = dir: ../../../dotfiles/${dir};
-  linkDot =
-    dir: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${dir}";
-in
 {
-  xdg.configFile = {
-    "mpv".source = linkDot "mpv";
-    "doom/config.org".source = linkDot "org/doom-emacs.org";
-    "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
+  flake.modules.homeManager.files =
+    { inputs, config, ... }:
+    let
+      staticDot = dir: (inputs.self + /dotfiles/${dir});
+      linkDot =
+        dir: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${dir}";
+    in
+    {
+      xdg.configFile = {
+        "mpv".source = linkDot "mpv";
+        "doom/config.org".source = linkDot "org/doom-emacs.org";
+        "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
 
-    "sway/config".source = linkDot "sway/config";
-    "niri/configs".source = linkDot "niri/configs";
-    "niri/config.kdl".source = linkDot "niri/config.kdl";
-    "hypr/hyprland.conf".source = linkDot "hypr/hyprland.conf";
+        "sway/config".source = linkDot "sway/config";
+        "niri/configs".source = linkDot "niri/configs";
+        "niri/config.kdl".source = linkDot "niri/config.kdl";
+        "hypr/hyprland.conf".source = linkDot "hypr/hyprland.conf";
 
-    # rime for ibus
-    "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
-    "ibus/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
-    "ibus/rime/ibus_rime.custom.yaml".text = ''
-      patch:
-        style:
-          horizontal: true
-    '';
-  };
+        # rime for ibus
+        "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
+        "ibus/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
+        "ibus/rime/ibus_rime.custom.yaml".text = ''
+          patch:
+            style:
+              horizontal: true
+        '';
+      };
 
-  xdg.dataFile = {
-    "goodvibes".source = staticDot "goodvibes";
+      xdg.dataFile = {
+        "goodvibes".source = staticDot "goodvibes";
 
-    # rime for fcitx5
-    "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
-    "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
-  };
+        # rime for fcitx5
+        "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
+        "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
+      };
+    };
 }

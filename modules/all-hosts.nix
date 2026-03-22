@@ -34,7 +34,7 @@ in
       user = "iab";
       host = "yoga";
       extraModules = [
-        ./yoga/configuration.nix
+        (self + /hosts/yoga/configuration.nix)
       ];
     };
 
@@ -45,7 +45,7 @@ in
       host = "svp";
       # nixpkgs = inputs.nixpkgs-stable;
       extraModules = [
-        ./svp/configuration.nix
+        (self + /hosts/svp/configuration.nix)
       ];
     };
 
@@ -54,7 +54,7 @@ in
       user = "aaa";
       host = "rmt";
       extraModules = [
-        ./rmt/configuration.nix
+        (self + /hosts/rmt/configuration.nix)
       ];
     };
 
@@ -64,7 +64,7 @@ in
       user = "test";
       host = "vmtest";
       extraModules = [
-        ./vmtest/configuration.nix
+        (self + /hosts/vmtest/configuration.nix)
       ];
     };
 
@@ -73,7 +73,7 @@ in
       user = "iab";
       host = "wsl";
       extraModules = [
-        ./wsl/configuration.nix
+        (self + /hosts/wsl/configuration.nix)
       ];
     };
 
@@ -83,7 +83,7 @@ in
       specialArgs = {
         inherit inputs;
       };
-      modules = [ ./livecd/configuration.nix ];
+      modules = [ (self + /hosts/livecd/configuration.nix) ];
     };
   };
 }

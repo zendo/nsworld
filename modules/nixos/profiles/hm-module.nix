@@ -22,7 +22,9 @@
         # sharedModules = [ ./hm-on-nixos.nix ];
         # users.${myvars.user}.home.username = myvars.user;
         ### Specific User Initialization ###
-        users.${myvars.user} = ../../home/hm-on-nixos.nix;
+        users.${myvars.user}.imports = [
+          inputs.self.modules.homeManager.hm-on-nixos
+        ];
       };
     };
 }

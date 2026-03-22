@@ -1,23 +1,26 @@
-{ pkgs, ... }:
 {
-  programs.man.generateCaches = false;
+  flake.modules.homeManager.fish =
+    { pkgs, ... }:
+    {
+      programs.man.generateCaches = false;
 
-  programs.fish = {
-    # enable = true;
-    generateCompletions = true;
-    plugins = [
-      # {
-      #   name = "pure";
-      #   src = pkgs.fishPlugins.pure.src;
-      # }
-      # {
-      #   name = "tide";
-      #   src = pkgs.fishPlugins.tide.src;
-      # }
-    ];
-    interactiveShellInit = ''
-      # Disable the greeting message.
-      set fish_greeting
-    '';
-  };
+      programs.fish = {
+        # enable = true;
+        generateCompletions = true;
+        plugins = [
+          # {
+          #   name = "pure";
+          #   src = pkgs.fishPlugins.pure.src;
+          # }
+          # {
+          #   name = "tide";
+          #   src = pkgs.fishPlugins.tide.src;
+          # }
+        ];
+        interactiveShellInit = ''
+          # Disable the greeting message.
+          set fish_greeting
+        '';
+      };
+    };
 }

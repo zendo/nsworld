@@ -1,58 +1,61 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    vips # dirvish image
-  ];
-
-  programs.emacs = {
-    enable = true;
-    # package = pkgs.emacs-igc-pgtk;
-    package = pkgs.emacs-pgtk;
-    extraPackages =
-      epkgs: with epkgs; [
-        jinx
-        vterm
-        emojify
-        sqlite3
-        # lsp-bridge
-        # pdf-tools
-        # telega
-        # treesit-grammars.with-all-grammars
-        (treesit-grammars.with-grammars (
-          grammars: with grammars; [
-            tree-sitter-nix
-            tree-sitter-elisp
-            tree-sitter-bash
-            tree-sitter-json
-            tree-sitter-json5
-            tree-sitter-yaml
-            tree-sitter-toml
-            tree-sitter-kdl
-            tree-sitter-markdown
-            tree-sitter-go
-            tree-sitter-rust
-            tree-sitter-python
-          ]
-        ))
+  flake.modules.homeManager.emacs =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        vips # dirvish image
       ];
-    # extraConfig = ''
-    #   (display-time-mode 1)
-    #   ;; toggle-input-method
-    #   ;; cp ~/nsworld/dotfiles/rime/default.custom.yaml ~/.config/emacs/rime/
-    #   ;; touch ~/.config/emacs/rime/default.yaml
-    #   (setq rime-librime-root "${pkgs.librime}"
-    #         rime-emacs-module-header-root "${pkgs.emacs-pgtk}/include"
-    #         rime-share-data-dir "${pkgs.rime-ice}/share/rime-data")
-    # '';
-  };
 
-  services.emacs = {
-    # enable = true;
-    client = {
-      enable = true;
-      arguments = [ "--create-frame" ];
+      programs.emacs = {
+        enable = true;
+        # package = pkgs.emacs-igc-pgtk;
+        package = pkgs.emacs-pgtk;
+        extraPackages =
+          epkgs: with epkgs; [
+            jinx
+            vterm
+            emojify
+            sqlite3
+            # lsp-bridge
+            # pdf-tools
+            # telega
+            # treesit-grammars.with-all-grammars
+            (treesit-grammars.with-grammars (
+              grammars: with grammars; [
+                tree-sitter-nix
+                tree-sitter-elisp
+                tree-sitter-bash
+                tree-sitter-json
+                tree-sitter-json5
+                tree-sitter-yaml
+                tree-sitter-toml
+                tree-sitter-kdl
+                tree-sitter-markdown
+                tree-sitter-go
+                tree-sitter-rust
+                tree-sitter-python
+              ]
+            ))
+          ];
+        # extraConfig = ''
+        #   (display-time-mode 1)
+        #   ;; toggle-input-method
+        #   ;; cp ~/nsworld/dotfiles/rime/default.custom.yaml ~/.config/emacs/rime/
+        #   ;; touch ~/.config/emacs/rime/default.yaml
+        #   (setq rime-librime-root "${pkgs.librime}"
+        #         rime-emacs-module-header-root "${pkgs.emacs-pgtk}/include"
+        #         rime-share-data-dir "${pkgs.rime-ice}/share/rime-data")
+        # '';
+      };
+
+      services.emacs = {
+        # enable = true;
+        client = {
+          enable = true;
+          arguments = [ "--create-frame" ];
+        };
+        startWithUserSession = true;
+        defaultEditor = true;
+      };
     };
-    startWithUserSession = true;
-    defaultEditor = true;
-  };
 }
