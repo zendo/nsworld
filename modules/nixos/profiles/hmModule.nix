@@ -19,7 +19,7 @@
           inherit inputs;
         };
         ### Common User Initialization ###
-        # sharedModules = [ ./hm-on-nixos.nix ];
+        # sharedModules = [ inputs.self.modules.homeManager.hm-on-nixos ];
         # users.${myvars.user}.home.username = myvars.user;
         ### Specific User Initialization ###
         users.${myvars.user}.imports = [
