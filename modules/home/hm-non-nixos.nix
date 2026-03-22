@@ -7,61 +7,61 @@
       ...
     }:
     {
-      imports = [
-        inputs.self.modules.homeManager.secrets
-        inputs.self.modules.homeManager.ssh
-        inputs.self.modules.homeManager.nixconfig
+      imports = with inputs.self.modules.homeManager; [
+        secrets
+        ssh
+        nixconfig
         # ╭──────────────────────────────────────────╮
         # │ EDITOR                                   │
         # ╰──────────────────────────────────────────╯
-        # ./editor/dev-tools.nix
-        # ./editor/emacs.nix
-        ./editor/helix.nix
-        ./editor/micro.nix
-        ./editor/nvim.nix
-        # ./editor/vscode.nix
-        # ./editor/zed.nix
+        # dev
+        # emacs
+        helix
+        micro
+        nvim
+        # vscode
+        # zed
         # ╭──────────────────────────────────────────╮
         # │ PROGRAMS                                 │
         # ╰──────────────────────────────────────────╯
-        ./programs/cava.nix
-        # ./programs/chrome.nix
-        ./programs/cli.nix
-        # ./programs/firefox.nix
-        ./programs/git.nix
-        # ./programs/gui.nix
-        ./programs/nix-tools.nix
-        # ./programs/rclone.nix
-        # ./programs/vicinae.nix
+        cava
+        # chrome
+        cli
+        # .firefox
+        git
+        # gui
+        nix-tools
+        # rclone
+        # vicinae
         # ╭──────────────────────────────────────────╮
         # │ SHELL                                    │
         # ╰──────────────────────────────────────────╯
-        ./shell/alias.nix
-        ./shell/atuin.nix
-        # ./shell/bash.nix
-        ./shell/fish.nix
-        ./shell/starship.nix
-        ./shell/zellij.nix
-        ./shell/zsh.nix
+        alias
+        atuin
+        # bash
+        fish
+        starship
+        zellij
+        zsh
         # ╭──────────────────────────────────────────╮
         # │ TERMINAL                                 │
         # ╰──────────────────────────────────────────╯
-        # ./terminal/alacritty.nix
-        ./terminal/foot.nix
-        ./terminal/ghostty.nix
-        # ./terminal/kitty.nix
+        # alacritty
+        foot
+        ghostty
+        # kitty
         # ╭──────────────────────────────────────────╮
         # │ XDG                                      │
         # ╰──────────────────────────────────────────╯
-        ./xdg/env.nix
-        ./xdg/files.nix
-        # ./xdg/mime.nix
-        ./xdg/xdg.nix
+        env
+        files
+        # mime
+        xdg
       ];
 
-      # ============================================================
+      # ========================================================
       #  Home
-      # ============================================================
+      # ========================================================
       home = {
         packages = with pkgs; [
           dippi
@@ -73,17 +73,17 @@
         stateVersion = "26.05";
       };
 
-      # ============================================================
+      # ========================================================
       #  Home-manager Settings
-      # ============================================================
+      # ========================================================
       news.display = "silent";
       programs.home-manager.enable = true;
       # https://github.com/nix-community/home-manager/blob/master/docs/manual/usage/gpu-non-nixos.md
       targets.genericLinux.gpu.enable = true;
 
-      # ============================================================
+      # ========================================================
       #  Nix Settings
-      # ============================================================
+      # ========================================================
       nix = {
         package = pkgs.nixVersions.stable;
         registry = {
@@ -110,9 +110,9 @@
         }; # end of settings
       }; # end of nix
 
-      # ============================================================
+      # ========================================================
       #  Fonts Config
-      # ============================================================
+      # ========================================================
       fonts.fontconfig = {
         enable = true;
         defaultFonts = {

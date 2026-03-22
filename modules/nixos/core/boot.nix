@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.core =
+  flake.modules.nixos.boot =
     { lib, config, ... }:
     {
       # Perlless Activation

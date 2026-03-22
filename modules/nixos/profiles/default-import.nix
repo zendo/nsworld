@@ -1,7 +1,17 @@
 { config, ... }:
 {
   flake.modules.nixos.default.imports = with config.flake.modules.nixos; [
-    core
+    # [core]
+    base
+    boot
+    fonts
+    gpg
+    graphical
+    nixconfig
+    nixpkgs
+    ssh
+    user
+
     mods
 
     # [networking]

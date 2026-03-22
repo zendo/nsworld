@@ -11,25 +11,25 @@
     inputs.nixos-wsl.nixosModules.wsl
     self.modules.nixos.hm
     # nixos core module
-    (self + /modules/nixos/core/base.nix)
-    (self + /modules/nixos/core/fonts-cn.nix)
-    (self + /modules/nixos/core/nixpkgs.nix)
-    (self + /modules/nixos/core/ssh.nix)
-    (self + /modules/nixos/core/sys-nixconfig.nix)
+    self.modules.nixos.base
+    self.modules.nixos.fonts
+    self.modules.nixos.nixconfig
+    self.modules.nixos.nixpkgs
+    self.modules.nixos.ssh
   ];
 
   # ╭──────────────────────────────────────────────────────────╮
   # │  Home-manager                                            │
   # ╰──────────────────────────────────────────────────────────╯
   home-manager.users.${myvars.user} =
-    { pkgs, ... }:
+    { inputs, pkgs, ... }:
     {
-      imports = [
-        (self + /modules/home/terminal/foot.nix)
-        (self + /modules/home/terminal/ghostty.nix)
-        # (self + /modules/home/terminal/kitty.nix)
-        (self + /modules/home/editor/dev-tools.nix)
-        (self + /modules/home/editor/emacs.nix)
+      imports = with inputs.self.modules.homeManager; [
+        foot
+        ghostty
+        # kitty
+        dev
+        emacs
       ];
 
       home.packages = with pkgs; [
