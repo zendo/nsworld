@@ -36,7 +36,7 @@ singbox-mihomo-setup:
     Copy-Item winsw.exe $HOME\services\subs\sb-service.exe
     Copy-Item winsw.exe $HOME\services\subs\mihomo-service.exe
 
-rclone-infini-service:
+rclone-services:
     if (!(Test-Path "winsw.exe")) \
     { iwr "https://ghfast.top/https://github.com/winsw/winsw/releases/latest/download/WinSW-x64.exe" -O winsw.exe } ; \
     New-Item $HOME\services\rclone -ItemType Directory -Force
