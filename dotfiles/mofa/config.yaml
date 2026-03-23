@@ -42,7 +42,8 @@ sniffer:
 
 tun:
   enable: true
-  stack: mixed
+  # stack: mixed # default: gvisor
+  # device: utun
   dns-hijack:
     - "any:53"
     - "tcp://any:53"
@@ -167,14 +168,15 @@ proxy-groups:
     type: url-test
     include-all: true
     exclude-type: direct
-    tolerance: 10
+    tolerance: 50
 
 rules:
+  # 局域网与基础过滤
   - RULE-SET,private_ip,直连,no-resolve
-  # ==========
   - DOMAIN-SUFFIX,api.beacondb.net,直连
   - DOMAIN-SUFFIX,ip-api.com,直连
-  # ==========
+
+  # 关键服务逻辑
   - RULE-SET,github_domain,Github
   - RULE-SET,twitter_domain,Twitter
   - RULE-SET,youtube_domain,YouTube
@@ -184,14 +186,17 @@ rules:
   - RULE-SET,bilibili_domain,哔哩哔哩
   - RULE-SET,bahamut_domain,巴哈姆特
   - RULE-SET,spotify_domain,Spotify
-  - RULE-SET,cn_domain,国内
-  - RULE-SET,geolocation-!cn,其他
 
+  # IP 规则（防止漏网之鱼）
+  - RULE-SET,telegram_ip,Telegram
   - RULE-SET,google_ip,Google
   - RULE-SET,netflix_ip,NETFLIX
-  - RULE-SET,telegram_ip,Telegram
   - RULE-SET,twitter_ip,Twitter
+
+  # 兜底逻辑：国内 -> 其他 -> MATCH
+  - RULE-SET,cn_domain,国内
   - RULE-SET,cn_ip,国内
+  - RULE-SET,geolocation-!cn,其他
   - MATCH,其他
 
 rule-anchor:
