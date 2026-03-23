@@ -29,7 +29,7 @@
       final: prev:
       prev.lib.packagesFromDirectoryRecursive {
         inherit (prev) callPackage;
-        directory = (inputs.self + /packages);
+        directory = (inputs.self + /pkgs);
       };
 
     # =======================================================================
@@ -117,7 +117,7 @@
           python-final: python-prev:
           prev.lib.packagesFromDirectoryRecursive {
             inherit (prev.python3Packages) callPackage;
-            directory = ./_python-modules;
+            directory = ./_custom/python-modules;
           }
         )
         # (python-final: python-prev: {
