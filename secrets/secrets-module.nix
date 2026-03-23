@@ -17,13 +17,13 @@
   cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 
   - Edit
-  sops ~/nsworld/modules/secrets/sopsnix.yaml
+  sops ~/nsworld/secrets/sopsnix.yaml
 
   - Update all secrets when key changed
-  sops updatekeys modules/secrets/sopsnix.yaml
+  sops updatekeys ~/nsworld/secrets/sopsnix.yaml
 
   - Decrypt and show the real value
-  sops --extract '["dae-sub"]' --decrypt modules/nixos/secrets/sopsnix.yaml
+  sops --extract '["dae_sub"]' --decrypt ~/nsworld/secrets/sopsnix.yaml
 */
 let
   agenixSecrets = {

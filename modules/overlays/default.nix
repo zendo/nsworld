@@ -117,7 +117,7 @@
           python-final: python-prev:
           prev.lib.packagesFromDirectoryRecursive {
             inherit (prev.python3Packages) callPackage;
-            directory = ./python-modules;
+            directory = ./_python-modules;
           }
         )
         # (python-final: python-prev: {

@@ -5,7 +5,6 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./overlays # flake.overlays
         ./secrets/secrets-module.nix
         (inputs.import-tree ./modules)
       ];
