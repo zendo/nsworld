@@ -24,13 +24,6 @@
     # self.modules.nixos.hyprland
   ];
 
-  mods.virt.enable = true;
-  mods.incus.enable = true;
-  # programs'.steam.enable = true;
-  # programs'.nix-ld.enable = true;
-
-  services.acpid.enable = true;
-  # services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
   users.users.${myvars.user} = {

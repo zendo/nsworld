@@ -7,32 +7,35 @@
   ...
 }:
 {
-  imports = [
-    ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.common-gpu-amd
-    # inputs.lanzaboote.nixosModules.lanzaboote
+  imports =
+    with self.modules.nixos;
+    [
+      # [ profiles ]
+      default
+      hm
+      laptop
+      # steam
 
-    # [profiles]
-    self.modules.nixos.default
-    self.modules.nixos.hm
-    self.modules.nixos.laptop
-    # self.modules.nixos.steam
+      # [ virt ]
+      docker
+      # incus
+      # nix-ld
+      qemu
 
-    # [desktop]
-    self.modules.nixos.gnome
-    # self.modules.nixos.kde
-    # self.modules.nixos.cosmic
-    # self.modules.nixos.niri
-    # self.modules.nixos.sway
-    # self.modules.nixos.hyprland
-  ];
+      # [ desktop ]
+      gnome
+      # kde
+      # cosmic
+      # niri
+      # sway
+      # hyprland
+    ]
+    ++ [
+      ./hardware-configuration.nix
+      inputs.nixos-hardware.nixosModules.common-gpu-amd
+      # inputs.lanzaboote.nixosModules.lanzaboote
+    ];
 
-  mods.virt.enable = true;
-  # mods.incus.enable = true;
-  # programs'.nix-ld.enable = true;
-
-  services.acpid.enable = true;
-  services.fwupd.enable = true;
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
   # No need password

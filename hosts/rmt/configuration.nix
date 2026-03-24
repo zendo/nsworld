@@ -21,8 +21,6 @@
     # self.modules.nixos.hyprland
   ];
 
-  # programs.nix-ld.enable = true;
-
   environment.systemPackages = with pkgs; [
     duf
     gdu

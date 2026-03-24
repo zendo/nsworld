@@ -8,15 +8,19 @@
     }:
     {
       services = {
+        # 监听电源事件响应
+        acpid.enable = true;
+        # 固件更新服务
+        fwupd.enable = true;
+        # Intel 热管理: https://wiki.debian.org/thermald
+        thermald.enable = config.hardware.cpu.intel.updateMicrocode;
+
         # sudo scx_rusty --monitor 0.5
         scx = {
           # enable = true;
           scheduler = "scx_rusty";
           package = pkgs.scx.rustscheds;
         };
-
-        # https://wiki.debian.org/thermald
-        thermald.enable = true;
 
         # Conflicts with auto-cpufreq
         power-profiles-daemon.enable = !config.services.auto-cpufreq.enable;
