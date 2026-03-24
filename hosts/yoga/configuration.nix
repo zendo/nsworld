@@ -119,9 +119,9 @@
     ];
 
     # zswap
+    # grep -r . /sys/module/zswap/parameters/
     kernel.sysfs.module.zswap.parameters = {
-      # enabled = true;
-      zpool = "zsmalloc";
+      enabled = true;
       compressor = "zstd";
     };
 
@@ -139,7 +139,8 @@
   #   }
   # ];
 
-  zramSwap.enable = true;
+  # https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html
+  # zramSwap.enable = true;
 
   # ╭─────────────────────────────────────────────────────╮
   # │ BOOTLOADER                                          │

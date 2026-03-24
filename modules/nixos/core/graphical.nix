@@ -11,7 +11,7 @@
       config = lib.mkIf config.services.graphical-desktop.enable {
 
         # Bluetooth
-        services.blueman.enable = true;
+        # services.blueman.enable = true;
         hardware.bluetooth = {
           enable = true;
         };
