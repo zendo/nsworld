@@ -7,14 +7,14 @@
       ...
     }:
     {
-      time.timeZone = lib.mkDefault "Asia/Shanghai";
-      i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
-      system.stateVersion = lib.mkDefault "26.05";
-
-      # https://github.com/NixOS/nixpkgs/issues/149812
+      # FIXME: https://github.com/NixOS/nixpkgs/issues/149812
       environment.extraInit = ''
         export XDG_DATA_DIRS="$XDG_DATA_DIRS:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
       '';
+
+      time.timeZone = lib.mkDefault "Asia/Shanghai";
+      i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
+      system.stateVersion = lib.mkDefault "26.05";
 
       documentation = {
         enable = lib.mkDefault false;
