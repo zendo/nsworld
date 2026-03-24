@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.ghostty =
-    { pkgs, ... }:
+    { ... }:
     {
       # https://ghostty.org/docs/config/reference
       # ghostty +show-config --default --docs
@@ -8,7 +8,7 @@
         enable = true;
         settings = {
           command = "zsh --login";
-          shell-integration-features = "no-cursor,sudo";
+          shell-integration-features = "no-cursor,sudo"; # ssh-terminfo,ssh-env
           # custom-shader = "${pkgs.ghostty-cursor-shaders}/cursor_warp.glsl";
           font-family = [
             "Maple mono"

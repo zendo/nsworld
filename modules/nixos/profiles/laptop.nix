@@ -1,7 +1,6 @@
 {
   flake.modules.nixos.laptop =
     {
-      lib,
       pkgs,
       config,
       ...
