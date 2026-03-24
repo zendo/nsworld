@@ -123,6 +123,7 @@
     kernel.sysfs.module.zswap.parameters = {
       enabled = true;
       compressor = "zstd";
+      shrinker_enabled = true;
     };
 
     # binfmt.emulatedSystems = [
