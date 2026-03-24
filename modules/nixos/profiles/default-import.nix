@@ -1,7 +1,7 @@
 { config, ... }:
 {
   flake.modules.nixos.default.imports = with config.flake.modules.nixos; [
-    # [core]
+    # [ core ]
     base
     boot
     fonts
@@ -14,7 +14,7 @@
 
     mods
 
-    # [networking]
+    # [ networking ]
     dns
     firewall
     networkmanager
@@ -22,6 +22,10 @@
 
     programs
     services
+
+    # [ shell ]
+    # fish
+    zsh
 
     secrets
   ];

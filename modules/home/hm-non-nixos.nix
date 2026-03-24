@@ -39,9 +39,9 @@
         alias
         atuin
         # bash
-        fish
+        # fish
         starship
-        zellij
+        # zellij
         zsh
         # ╭──────────────────────────────────────────╮
         # │ TERMINAL                                 │

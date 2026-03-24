@@ -11,10 +11,6 @@
       i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
       system.stateVersion = lib.mkDefault "26.05";
 
-      # Load configs from nixos/modules
-      programs.zsh.enable = true;
-      # programs.fish.enable = true;
-
       # https://github.com/NixOS/nixpkgs/issues/149812
       environment.extraInit = ''
         export XDG_DATA_DIRS="$XDG_DATA_DIRS:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"

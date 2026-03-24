@@ -1,11 +1,18 @@
 {
+  flake.modules.nixos.fish =
+    { ... }:
+    {
+      # Load configs from nixos/modules
+      programs.fish.enable = true;
+    };
+
   flake.modules.homeManager.fish =
     { pkgs, ... }:
     {
       programs.man.generateCaches = false;
 
       programs.fish = {
-        # enable = true;
+        enable = true;
         generateCompletions = true;
         plugins = [
           # {
