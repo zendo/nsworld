@@ -1,0 +1,148 @@
+#+STARTUP: show2levels indent hidestars
+
+* SysAdmins
+** strace
+strace-tui
+
+strace --trace=file,process -f -s 200 app >strace.log
+strace -o trace.txt -tt -k -f -s 1024 app
+
+** profiler
+https://github.com/NixOS/nix/pull/13220
+
+#+begin_src bash
+nix eval --no-eval-cache .\#nixosConfigurations.yoga.config.system.build.toplevel \
+  --option eval-profiler flamegraph \
+  --option eval-profile-file yoga
+flamegraph.pl yoga > yoga.svg
+#+end_src
+
+* Packaging
+** nixpkgs
+#+begin_src nix
+nix-shell maintainers/scripts/update.nix --argstr package standardnotes
+#+end_src
+
+** bash
+#+begin_src bash
+mkdir -p $out/share/fonts/{opentype,truetype}
+unzip -j $downloadedFile -d $out/share/fonts/mononoki
+find . -name '*.ttf' -exec install -Dm644 -t $out/share/fonts/truetype {} \;
+${placeholder "out"}
+#+end_src
+
+#+begin_src bash
+for size in 16 32 128 256 512; do
+  install -D deps/${pname}/build/icon.iconset/icon_''${size}x''${size}.png \
+    $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
+done
+#+end_src
+
+** deb
+#+begin_src nix
+unzip $src
+dpkg --fsys-tarfile ./*.deb | tar --extract
+#+end_src
+
+#+begin_src nix
+{
+  lib,
+  stdenv,
+  fetchurl,
+  dpkg,
+  wrapGAppsHook3,
+  autoPatchelfHook,
+  udev,
+  webkitgtk_4_1,
+}:
+
+stdenv.mkDerivation (finalAttrs: {
+  pname = "zenus";
+  version = "0.2.6";
+
+  src = fetchurl {
+    url = "https://github.com/skorotkiewicz/zenus/releases/download/${finalAttrs.version}/zenus_${finalAttrs.version}_amd64.deb";
+    hash = "sha256-OkjMNB0TDm4V+AuinEBrHFn/q2GFokE6PsCb1IGGbEY=";
+  };
+
+  nativeBuildInputs = [
+    dpkg
+    wrapGAppsHook3
+    autoPatchelfHook
+  ];
+
+  buildInputs = [
+    webkitgtk_4_1
+    (lib.getLib stdenv.cc.cc)
+  ];
+
+  runtimeDependencies = [ (lib.getLib udev) ];
+
+  installPhase = ''
+    mkdir -p $out/bin
+    cp -r usr/* $out
+  '';
+
+  meta = {
+    description = "Beautiful note-taking app";
+    homepage = "https://github.com/skorotkiewicz/zenus";
+    license = lib.licenses.mit;
+    platforms = [ "x86_64-linux" ];
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+    maintainers = with lib.maintainers; [ zendo ];
+    mainProgram = "zenus";
+  };
+})
+#+end_src
+
+** python
+#+begin_src nix
+makeWrapper ${pythonEnv}/bin/python $out/bin/sub2singbox \
+   --add-flags "$out/opt/main.py"
+#+end_src
+
+** crystal
+#+begin_src nix
+git checkout version
+nix shell nixpkgs#shards nixpkgs#crystal2nix
+shards lock
+crystal2nix
+#+end_src
+
+** Dotnet
+#+begin_src nix
+touch pkgs/by-name/ta/tagger/deps.nix
+git add .
+nix-build -A tagger.fetch-deps
+/nix/store/yvdrnzy78j26h1klklbjw0jdnm7pjysw-fetch-tagger-deps  pkgs/by-name/ta/tagger/deps.nix
+#+end_src
+
+* Functions
+** importModule
+Return a list of full paths for all entries in the given directory, excluding default.nix
+#+begin_src nix
+importModule' =
+  path:
+  builtins.readDir path
+  |> lib.attrNames
+  |> lib.subtractLists [ "default.nix" ]
+  |> map (n: path + "/${n}");
+#+end_src
+
+* Links
+** vm
+https://kilo.bytesize.xyz/gpu-passthrough-on-nixos
+https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/
+https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3
+https://publish.obsidian.md/muka/tech/PCI+Passthrough
+https://discourse.nixos.org/t/windows-11-vm-on-nixos/30631/3?u=zendo
+
+** preservation
+https://github.com/nix-community/preservation
+https://elis.nu/blog/2020/05/nixos-tmpfs-as-root/
+https://lantian.pub/article/modify-computer/nixos-impermanence.lantian/
+
+** filesytem
+https://haseebmajid.dev/posts/2024-07-30-how-i-setup-btrfs-and-luks-on-nixos-using-disko/
+
+https://linux-hardware.org/?probe=8e84498214   @opensuse
