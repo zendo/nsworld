@@ -94,11 +94,11 @@
   # │ HARDWARE                                            │
   # ╰─────────────────────────────────────────────────────╯
   # Fix Bluetooth Mouse reconnect slow
-  hardware.bluetooth.input.General = {
-    ClassicBondedOnly = false;
-    UserspaceHID = true;
-    LEAutoSecurity = false;
-  };
+  # hardware.bluetooth.input.General = {
+  #   ClassicBondedOnly = false;
+  #   UserspaceHID = true;
+  #   LEAutoSecurity = false;
+  # };
 
   # Fix touhpad multitouch somtimes unavailable
   # systemctl cat post-resume.service
