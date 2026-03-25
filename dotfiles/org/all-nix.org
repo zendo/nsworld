@@ -20,6 +20,7 @@ flamegraph.pl yoga > yoga.svg
 * Packaging
 ** nixpkgs
 #+begin_src nix
+nix-update -u standardnotes
 nix-shell maintainers/scripts/update.nix --argstr package standardnotes
 #+end_src
 

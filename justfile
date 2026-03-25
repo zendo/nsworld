@@ -12,7 +12,7 @@ _default:
 os *args:
     nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
 
-diff:
+diff-os:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
 diff-hm:
