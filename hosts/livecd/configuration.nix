@@ -35,6 +35,7 @@
     wget
     curl
     micro
+    fresh-editor
     parted
     gptfdisk
     efibootmgr

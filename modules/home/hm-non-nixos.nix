@@ -16,8 +16,9 @@
         # ╰──────────────────────────────────────────╯
         # dev
         # emacs
-        helix
         micro
+        fresh-editor
+        # helix
         nvim
         # vscode
         # zed

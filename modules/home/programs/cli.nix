@@ -6,7 +6,6 @@
 
       home.packages = with pkgs; [
         # Developing
-        fresh-editor
         yq
         jql
         # otree # tui tree for JSON/YAML/TOML

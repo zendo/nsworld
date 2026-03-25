@@ -14,8 +14,9 @@
           ssh
           nixconfig
 
-          helix
           micro
+          fresh-editor
+          # helix
 
           cli
           git
