@@ -39,6 +39,7 @@
         audacious
         # rhythmbox
         goodvibes
+        cliamp
         go-musicfox
         splayer # (electron)
         # qqmusic

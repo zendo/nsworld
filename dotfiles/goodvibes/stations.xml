@@ -26,11 +26,6 @@
   </Station>
   
   <Station>
-    <uri>http://ls.qingting.fm/live/3412131.m3u8?bitrate=64</uri>
-    <name>华语金曲500首</name>
-  </Station>
-  
-  <Station>
     <uri>https://lhttp.qtfm.cn/live/5022308/64k.mp3</uri>
     <name>500首华语经典</name>
   </Station>
