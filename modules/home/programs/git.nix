@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.git =
-    { ... }:
+    { config, ... }:
     let
       myName = "zendo";
       myEmail = "linzway@qq.com";
@@ -25,6 +25,14 @@
           "__pycache__/"
           ".venv/"
         ];
+        # git maintenance for large repos
+        # https://git-scm.com/docs/git-maintenance
+        maintenance = {
+          enable = true;
+          repositories = [
+            "${config.home.homeDirectory}/code/nixpkgs"
+          ];
+        };
         settings = {
           user.name = myName;
           user.email = myEmail;
@@ -33,10 +41,9 @@
           # pull.rebase = true;
           # merge.ff = "only";
           # core.editor = "vim";
-          # credential.helper = "store";
           # safe.directory = [
-          #   "/home/iab/nsworld"
-          #   "/home/iab/code/nixpkgs"
+          #   "${config.home.homeDirectory}/nsworld"
+          #   "${config.home.homeDirectory}/code/nixpkgs"
           # ];
           alias = {
             st = "status -sb";
