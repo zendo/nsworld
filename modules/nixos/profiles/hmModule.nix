@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hm =
+  flake.modules.nixos.hmModule =
     {
       inputs,
       myvars,
@@ -19,12 +19,20 @@
           inherit inputs;
         };
         ### Common User Initialization ###
-        # sharedModules = [ inputs.self.modules.homeManager.hm-on-nixos ];
+        sharedModules = [
+          (
+            { nixosConfig, ... }:
+            {
+              # home.enableNixpkgsReleaseCheck = false;
+              home.stateVersion = nixosConfig.system.stateVersion;
+            }
+          )
+        ];
         # users.${myvars.user}.home.username = myvars.user;
         ### Specific User Initialization ###
-        users.${myvars.user}.imports = [
-          inputs.self.modules.homeManager.hm-on-nixos
-        ];
+        # home-manager.users.${myvars.user}.imports = [
+        #   inputs.self.modules.homeManager.default-imports
+        # ];
       };
     };
 }

@@ -7,22 +7,35 @@
   ...
 }:
 {
-  imports = [
-    "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-    # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+  imports =
+    with self.modules.nixos;
+    [
+      # [ profiles ]
+      hmModule
+      base
+      user
+      # default-imports
+      # laptop
+      # steam
 
-    self.modules.nixos.hm
+      # [ virt ]
+      # docker
+      # incus
+      # nix-ld
+      # qemu
 
-    self.modules.nixos.base
-    self.modules.nixos.user
-
-    self.modules.nixos.gnome
-    # self.modules.nixos.kde
-    # self.modules.nixos.cosmic
-    # self.modules.nixos.niri
-    # self.modules.nixos.sway
-    # self.modules.nixos.hyprland
-  ];
+      # [ desktop ]
+      gnome
+      # kde
+      # cosmic
+      # niri
+      # sway
+      # hyprland
+    ]
+    ++ [
+      "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+      # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+    ];
 
   disabledModules = [
     # "services/desktops/pipewire/pipewire.nix"

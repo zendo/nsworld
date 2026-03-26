@@ -9,7 +9,7 @@
 {
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
-    self.modules.nixos.hm
+    self.modules.nixos.hmModule
     # nixos core module
     self.modules.nixos.base
     self.modules.nixos.fonts
@@ -25,6 +25,7 @@
     { inputs, pkgs, ... }:
     {
       imports = with inputs.self.modules.homeManager; [
+        cli-imports
         foot
         ghostty
         # kitty
@@ -33,7 +34,7 @@
       ];
 
       home.packages = with pkgs; [
-        foot
+        # cliamp
         goodvibes
       ];
 
@@ -45,8 +46,6 @@
   # ╰─────────────────────────────────────────────────────╯
   environment = {
     sessionVariables = {
-      EDITOR = "micro";
-      VISUAL = "micro";
       BROWSER = "wsl-open";
     };
 

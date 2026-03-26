@@ -6,22 +6,38 @@
   ...
 }:
 {
-  imports = [
-    # ./disko-bcachefs.nix
-    ./disko-btrfs.nix
-    ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
+  imports =
+    with self.modules.nixos;
+    [
+      # [ profiles ]
+      hmModule
+      default-imports
+      laptop
+      # steam
 
-    self.modules.nixos.default
-    self.modules.nixos.laptop
-    self.modules.nixos.hm
+      # [ virt ]
+      docker
+      # incus
+      # nix-ld
+      qemu
 
-    self.modules.nixos.gnome
-    # self.modules.nixos.kde
-    # self.modules.nixos.cosmic
-    # self.modules.nixos.niri
-    # self.modules.nixos.sway
-    # self.modules.nixos.hyprland
+      # [ desktop ]
+      gnome
+      # kde
+      # cosmic
+      # niri
+      # sway
+      # hyprland
+    ]
+    ++ [
+      # ./disko-bcachefs.nix
+      ./disko-btrfs.nix
+      ./hardware-configuration.nix
+      inputs.nixos-hardware.nixosModules.common-gpu-intel
+    ];
+
+  home-manager.users.${myvars.user}.imports = [
+    self.modules.homeManager.default-imports
   ];
 
   # services.displayManager.autoLogin.user = "${myvars.user}";
