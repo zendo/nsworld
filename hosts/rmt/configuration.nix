@@ -89,12 +89,8 @@
     hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    loader = {
-      efi.efiSysMountPoint = "/efi";
-      limine.enable = true;
-    };
+  boot.loader = {
+    efi.efiSysMountPoint = "/efi";
+    limine.enable = true;
   };
 }

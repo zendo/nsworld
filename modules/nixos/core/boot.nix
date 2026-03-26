@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.boot =
-    { lib, config, ... }:
+    {
+      lib,
+      config,
+      pkgs,
+      ...
+    }:
     {
       # Perlless Activation
       system.etc.overlay.enable = true;
@@ -8,6 +13,8 @@
       system.nixos-init.enable = true;
 
       boot = {
+        kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+
         # enable systemd in initrd
         initrd.systemd = {
           enable = lib.mkDefault true;

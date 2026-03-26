@@ -40,8 +40,6 @@
     self.modules.homeManager.default-imports
   ];
 
-  # services.displayManager.autoLogin.user = "${myvars.user}";
-
   users.users.${myvars.user} = {
     # pw: 123
     hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
@@ -50,11 +48,9 @@
   # ╭─────────────────────────────────────────────────────╮
   # │ HARDWARE                                            │
   # ╰─────────────────────────────────────────────────────╯
-  boot = {
-    # latest / zen / lqx / xanmod_latest
-    kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
-  };
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  zramSwap.enable = true;
 
   # Swapfile
   swapDevices = [
@@ -63,8 +59,6 @@
       size = 1024 * 8;
     }
   ];
-
-  zramSwap.enable = true;
 
   # ╭─────────────────────────────────────────────────────╮
   # │ BOOTLOADER                                          │
