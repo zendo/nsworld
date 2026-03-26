@@ -1,9 +1,9 @@
 { fetchFromGitHub }:
 
-# nurl https://github.com/yokoffing/Betterfox 148.0
+# nurl https://github.com/yokoffing/Betterfox 149.0
 fetchFromGitHub {
   owner = "yokoffing";
   repo = "Betterfox";
-  tag = "148.0";
-  hash = "sha256-rUuEfbjIXox5x5ul/4VarIm7bii/SCcDJjocEbHA1kM=";
+  tag = "149.0";
+  hash = "sha256-B9JG4GhjMguTUukinSrJWmEWmjU1EJ1UzlfQ9q+NTp8=";
 }

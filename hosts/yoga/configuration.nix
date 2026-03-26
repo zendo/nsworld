@@ -120,6 +120,8 @@
       # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
       "acpi.prefer_microsoft_dsm_guid=1"
+      # Fix touhpad multitouch somtimes unavailable
+      "psmouse.synaptics_intertouch=1"
     ];
 
     # zswap

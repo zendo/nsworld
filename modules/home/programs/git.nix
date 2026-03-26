@@ -28,7 +28,7 @@
         # git maintenance for large repos
         # https://git-scm.com/docs/git-maintenance
         maintenance = {
-          enable = true;
+          # enable = true;
           repositories = [
             "${config.home.homeDirectory}/code/nixpkgs"
           ];
