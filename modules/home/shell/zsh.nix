@@ -26,9 +26,6 @@
         shellAliases = {
           history = "history 0"; # show whole history
         };
-        # loginExtra = ''
-        #   cd ~/nsworld
-        # '';
         initContent = ''
           unsetopt correct  # Disable AutoCorrect
 
@@ -37,8 +34,8 @@
           # prompt pure
 
           # Completions
-          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive tab completion
-          zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # Colored completion (different colors for dirs/files/etc)
+          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive
+          zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # Colored
           zstyle ':completion:*' menu select                        # Hit 'TAB' to select
 
           # Bash-like navigation between words
