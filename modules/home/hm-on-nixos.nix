@@ -40,7 +40,7 @@
           emacs
           nvim
           vscode
-          zed
+          # zed
 
           cava
           chrome

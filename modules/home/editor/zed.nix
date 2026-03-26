@@ -3,7 +3,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        # zed-editor
+        zed-editor
       ];
       programs.zed-editor = {
         # enable = true;
