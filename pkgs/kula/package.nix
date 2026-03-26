@@ -6,13 +6,13 @@
 
 buildGo126Module (finalAttrs: {
   pname = "kula";
-  version = "0.10.0";
+  version = "0.13.0";
 
   src = fetchFromGitHub {
     owner = "c0m4r";
     repo = "kula";
     tag = finalAttrs.version;
-    hash = "sha256-DifxXuRjqPAsBB687b2gU9HcJXfMCoTTa0loz0+fvkY=";
+    hash = "sha256-KzJJYko4oaAQGmxwiFMth8scOuYe0bVB8abe8qal/jE=";
   };
 
   vendorHash = "sha256-ZBtlwH54irGAAsh+iLUFs/tnlJWD2GmQi01vSHHVEnw=";
