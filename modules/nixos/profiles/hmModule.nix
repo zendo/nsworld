@@ -1,10 +1,6 @@
 {
   flake.modules.nixos.hmModule =
-    {
-      inputs,
-      myvars,
-      ...
-    }:
+    { inputs, ... }:
     {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
 
@@ -18,7 +14,6 @@
         extraSpecialArgs = {
           inherit inputs;
         };
-        ### Common User Initialization ###
         sharedModules = [
           (
             { nixosConfig, ... }:
@@ -28,11 +23,6 @@
             }
           )
         ];
-        # users.${myvars.user}.home.username = myvars.user;
-        ### Specific User Initialization ###
-        # home-manager.users.${myvars.user}.imports = [
-        #   inputs.self.modules.homeManager.default-imports
-        # ];
       };
     };
 }
