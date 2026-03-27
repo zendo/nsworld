@@ -36,9 +36,11 @@
       # inputs.lanzaboote.nixosModules.lanzaboote
     ];
 
-  home-manager.users.${myvars.user}.imports = [
-    self.modules.homeManager.default-imports
-  ];
+  home-manager.users.${myvars.user} = {
+    imports = [
+      self.modules.homeManager.default-imports
+    ];
+  };
 
   # services.displayManager.autoLogin.user = "${myvars.user}";
 
