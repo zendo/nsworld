@@ -45,7 +45,8 @@
 
   flake.colmenaHive = inputs.colmena.lib.makeHive inputs.self.outputs.colmena;
 
-  # ===========================================================   # deploy-rs
+  # ===========================================================
+  # deploy-rs
   # ============================================================
   flake.deploy = {
     # sudo = "doas -u";
