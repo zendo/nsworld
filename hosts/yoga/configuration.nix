@@ -97,25 +97,13 @@
   # ╭─────────────────────────────────────────────────────╮
   # │ HARDWARE                                            │
   # ╰─────────────────────────────────────────────────────╯
-  # Fix Bluetooth Mouse reconnect slow
-  # hardware.bluetooth.input.General = {
-  #   ClassicBondedOnly = false;
-  #   UserspaceHID = true;
-  #   LEAutoSecurity = false;
-  # };
-
-  # Fix touhpad multitouch somtimes unavailable
-  # systemctl cat post-resume.service
-  # powerManagement.resumeCommands = ''
-  #   ${pkgs.kmod}/bin/modprobe -r --wait 500 hid-multitouch
-  #   ${pkgs.kmod}/bin/modprobe hid-multitouch
-  # '';
-
   boot = {
-    # latest / zen / lqx / xanmod_latest
-    kernelPackages = pkgs.linuxPackages_zen;
     supportedFilesystems = [ "ntfs" ];
 
+    # latest / zen / lqx / xanmod_latest
+    kernelPackages = pkgs.linuxPackages_zen;
+
+    # for Lenovo Yoga/Xiaoxin
     kernelParams = [
       # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
       # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
@@ -124,8 +112,7 @@
       "psmouse.synaptics_intertouch=1"
     ];
 
-    # zswap
-    # grep -r . /sys/module/zswap/parameters/
+    # zswap: grep -r . /sys/module/zswap/parameters/
     kernel.sysfs.module.zswap.parameters = {
       enabled = true;
       compressor = "zstd";
@@ -138,7 +125,7 @@
     # ];
   };
 
-  # Swapfile
+  # swapfile
   # swapDevices = [
   #   {
   #     device = "/var/swapfile";
@@ -146,7 +133,6 @@
   #   }
   # ];
 
-  # https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html
   # zramSwap.enable = true;
 
   # ╭─────────────────────────────────────────────────────╮
