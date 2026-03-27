@@ -7,21 +7,15 @@ let
       nixpkgs ? inputs.nixpkgs,
       extraModules ? [ ],
     }:
-    let
-      myvars = {
-        inherit
-          user
-          host
-          ;
-      };
-    in
     nixpkgs.lib.nixosSystem {
+      # flake.nixosConfigurations.host._module.specialArgs
       specialArgs = {
-        inherit inputs self myvars;
+        inherit inputs self;
+        myvars = { inherit user host; };
       };
       modules = [
         {
-          networking.hostName = myvars.host;
+          networking.hostName = host;
         }
       ]
       ++ extraModules;
