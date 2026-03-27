@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.hm-non-nixos =
+  flake.modules.homeManager.non-nixos =
     {
       pkgs,
       inputs,

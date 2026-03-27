@@ -106,10 +106,10 @@
 
   # Fix touhpad multitouch somtimes unavailable
   # systemctl cat post-resume.service
-  powerManagement.resumeCommands = ''
-    ${pkgs.kmod}/bin/modprobe -r --wait 500 hid-multitouch
-    ${pkgs.kmod}/bin/modprobe hid-multitouch
-  '';
+  # powerManagement.resumeCommands = ''
+  #   ${pkgs.kmod}/bin/modprobe -r --wait 500 hid-multitouch
+  #   ${pkgs.kmod}/bin/modprobe hid-multitouch
+  # '';
 
   boot = {
     # latest / zen / lqx / xanmod_latest

@@ -1,16 +1,5 @@
 { inputs, ... }:
 {
-  # for dendritic pattern
-  imports = [ inputs.flake-parts.flakeModules.modules ];
-
-  debug = true; # repl: flake.currentSystem / flake.debug
-
-  # systems for `perSystem`
-  systems = [
-    "x86_64-linux"
-    "aarch64-linux"
-  ];
-
   perSystem =
     {
       lib,
@@ -30,6 +19,10 @@
         };
       };
 
+      # nix build .#
+      # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
+      legacyPackages = pkgs;
+
       # flake.packages
       packages =
         lib.packagesFromDirectoryRecursive {
@@ -38,11 +31,7 @@
         }
         // {
           # nix run .
-          default = config.packages.comigo;
+          default = config.packages.kula;
         };
-
-      # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
-      # nix build .#
-      legacyPackages = pkgs;
     };
 }

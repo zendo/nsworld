@@ -24,13 +24,10 @@
             inherit inputs myvars;
           };
 
-          modules =
-            # basic setup
-            [
-              inputs.self.modules.homeManager.hm-non-nixos
-            ]
-            # and more modules
-            ++ extraModules;
+          modules = [
+            inputs.self.modules.homeManager.non-nixos-imports
+          ]
+          ++ extraModules;
         };
     in
     {
