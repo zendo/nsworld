@@ -12,6 +12,7 @@
 
         # AI
         # opencode
+        qwen-code
 
         # obsidian
         # joplin-desktop
