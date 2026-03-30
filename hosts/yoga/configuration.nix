@@ -99,6 +99,17 @@
   # ╭─────────────────────────────────────────────────────╮
   # │ HARDWARE                                            │
   # ╰─────────────────────────────────────────────────────╯
+  # hardware.bluetooth.settings = {
+  #   General = {
+  #     # 加快重连
+  #     FastConnectable = true;
+  #     # 保持可发现性
+  #     DiscoverableTimeout = 0;
+  #     # 保持可配对
+  #     PairableTimeout = 0;
+  #   };
+  # };
+
   boot = {
     supportedFilesystems = [ "ntfs" ];
 
@@ -112,6 +123,8 @@
       "acpi.prefer_microsoft_dsm_guid=1"
       # Fix touhpad multitouch somtimes unavailable
       "psmouse.synaptics_intertouch=1"
+      # 防止蓝牙在 suspend 时完全断电
+      "btusb.enable_autosuspend=0"
     ];
 
     # zswap: grep -r . /sys/module/zswap/parameters/
@@ -198,6 +211,7 @@
       ];
       extraConfig = ''
         remember_last_entry: yes
+        # interface_help_hidden: yes
       '';
       extraEntries = ''
         /Windows

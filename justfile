@@ -8,7 +8,7 @@ home_dir := env_var('HOME')
 _default:
     @just --choose --unsorted
 
-# switch/boot/test + |& nom
+# switch/boot/test + |& nom / --install-bootloader
 os *args:
     nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
 
