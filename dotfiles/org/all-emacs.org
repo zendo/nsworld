@@ -3143,6 +3143,8 @@ https://github.com/svaante/dape
 #+end_src
 
 ** tree-sitter
+~C-h v major-mode~
+
 #+begin_src emacs-lisp
 (use-package treesit-auto
   :when (eq system-type 'gnu/linux)
