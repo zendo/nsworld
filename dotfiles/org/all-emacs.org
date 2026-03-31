@@ -1119,21 +1119,11 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
   (diminish 'eldoc-mode) ;echo area 显示函数的参数列表
   (diminish 'visual-line-mode))
 
-;; libraries
-;; (require 'cl-lib)
-;; (use-package dash) ;modern list library
-;; (use-package s) ;string manipulation library
-;; (use-package f) ;file manipulation
-
 ;; In Emacs, customization variables modified via the UI (e.g., M-x customize)
 ;; are typically stored in a separate file, commonly named 'custom.el'. To
 ;; ensure these settings are loaded during Emacs initialization, it is necessary
 ;; to explicitly load this file if it exists.
 (load custom-file 'noerror 'no-message)
-
-;; disable prompt
-;; (dolist (cmd '(narrow-to-page narrow-to-defun))
-;;   (put cmd 'disabled nil))
 #+end_src
 
 * Systems

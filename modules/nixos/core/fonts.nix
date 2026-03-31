@@ -9,11 +9,12 @@
     lib.mkMerge [
       {
         fonts.packages = with pkgs; [
-          ######## Essential #########
+          # [ Essential ]
           adwaita-fonts
           noto-fonts-color-emoji
           nerd-fonts.symbols-only
-          ###### Programming ########
+
+          # [ Programming ]
           maple-mono.variable
           jetbrains-mono
           source-code-pro
@@ -24,7 +25,8 @@
           # geist-font
           # recursive
           # cascadia-code # Microsoft
-          ###### MISC ########
+
+          # [ MISC ]
           # comic-relief
           # alegreya # for comfortable reading
           lexend # improve reading fluency
