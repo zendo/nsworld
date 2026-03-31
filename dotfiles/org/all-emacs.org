@@ -1873,6 +1873,16 @@ https://github.com/neeasade/stillness-mode.el
   :hook
   (prog-mode . hs-minor-mode))
 #+end_src
+** occult
+https://github.com/agzam/occult.el
+#+begin_src emacs-lispxx
+(use-package occult
+  :vc (:url "https://github.com/agzam/occult.el"
+            :rev :newest)
+  :bind (("C-c z" . occult-toggle)
+         ("C-c Z" . occult-reveal-all))
+  )
+#+end_src
 
 ** puni
 soft kill line.
