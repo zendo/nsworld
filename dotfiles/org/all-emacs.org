@@ -3739,14 +3739,6 @@ M-x ~describe-key~
 ;; disable mouse in minibuffer echo area
 (keymap-unset minibuffer-inactive-mode-map "<mouse-1>")
 
-;; 禁用所有鼠标
-(use-package inhibit-mouse
-  :disabled
-  :config
-  (if (daemonp)
-      (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
-    (inhibit-mouse-mode 1)))
-
 ;; Scroll
 (pixel-scroll-precision-mode t)
 ;; (use-package ultra-scroll
@@ -3757,6 +3749,27 @@ M-x ~describe-key~
 ;;         scroll-margin 0)
 ;;   :config
 ;;   (ultra-scroll-mode 1))
+#+end_src
+
+** anju :mouse:
+https://github.com/kickingvegas/anju
+#+begin_src emacs-lisp
+(use-package anju
+  :init
+  (context-menu-mode 1) ; 全局开启 Emacs 的右键菜单基础模式
+  :config
+  (anju-init))
+#+end_src
+
+** inhibit-mouse :mouse:
+禁用所有鼠标
+#+begin_src emacs-lisp
+(use-package inhibit-mouse
+  :disabled
+  :config
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
+    (inhibit-mouse-mode 1)))
 #+end_src
 
 ** casual
