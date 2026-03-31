@@ -7,9 +7,6 @@
       myvars,
       ...
     }:
-    let
-      inherit (lib) mkIf;
-    in
     {
       # Declaratively users and groups
       services.userborn.enable = lib.mkDefault true;
@@ -51,12 +48,13 @@
             "input"
             "video"
             "adbusers"
-            (mkIf config.virtualisation.docker.enable "docker")
-            (mkIf config.virtualisation.podman.enable "podman")
-            (mkIf config.virtualisation.libvirtd.enable "libvirtd")
-            (mkIf config.virtualisation.incus.enable "incus-admin")
-            (mkIf config.virtualisation.virtualbox.host.enable "vboxusers")
-          ];
+          ]
+          ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
+          ++ lib.optionals config.virtualisation.podman.enable [ "podman" ]
+          ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
+          ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
+          ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ];
+
           subUidRanges = [
             {
               startUid = 100000;
