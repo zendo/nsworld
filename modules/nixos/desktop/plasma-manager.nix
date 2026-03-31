@@ -9,26 +9,6 @@
       programs.plasma = {
         enable = true;
 
-        ###############################################
-        ## workspace .config/kdeglobals
-        ###############################################
-        workspace = {
-          # clickItemTo = "open";
-          # cursor = {
-          #   theme = "Bibata-Modern-Ice";
-          #   size = 32;
-          # };
-          # iconTheme = "Papirus-Dark";
-          # colorScheme = "Genshin";
-          # wallpaperPictureOfTheDay = {
-          #   provider = "bing";
-          # };
-          # wallpaper = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Patak/contents/images/1080x1920.png";
-        };
-
-        ###############################################
-        ## panels 面板
-        ###############################################
         panels = [
           {
             location = "bottom";
@@ -47,7 +27,7 @@
                     "applications:com.mitchellh.ghostty.desktop"
                     "preferred://filemanager"
                     # "applications:org.kde.dolphin.desktop"
-                    # "applications:emacs.desktop"
+                    "applications:emacs.desktop"
                     # "applications:code.desktop"
                     "preferred://browser"
                     # "applications:org.kde.kate.desktop"
@@ -97,11 +77,6 @@
         kwin = {
           titlebarButtons = {
             left = [ "more-window-actions" ];
-            # right = [
-            #   "minimize"
-            #   "maximize"
-            #   "close"
-            # ];
           };
           virtualDesktops = {
             number = 4;
@@ -123,57 +98,8 @@
             enable = true;
             # mode = "location";
             temperature = {
-              # day = "";
               night = 3000;
             };
-            # location = {
-            #   latitude = "23.38";
-            #   longitude = "113.20";
-            # };
-            # time = {
-            #   evening = ;
-            #   morning = ;
-            # };
-          };
-        };
-
-        ###############################################
-        ## kscreenlocker
-        ###############################################
-        kscreenlocker = {
-          timeout = 7;
-          passwordRequiredDelay = 30;
-        };
-
-        ###############################################
-        ## powerdevil .config/powerdevilrc
-        ###############################################
-        powerdevil = {
-          AC = {
-            # 空闲时
-            autoSuspend = {
-              action = "sleep";
-              idleTimeout = 600;
-            };
-            # 关闭屏幕
-            # turnOffDisplay = {
-            #   idleTimeout = 900;
-            #   idleTimeoutWhenLocked = "immediately";
-            # };
-            # 睡眠时进入此模式：混合睡眠
-            whenSleepingEnter = "hybridSleep";
-          };
-          battery = {
-            # 空闲时
-            autoSuspend = {
-              action = "sleep";
-              idleTimeout = 300;
-            };
-            # 睡眠时进入此模式：待机然后休眠
-            whenSleepingEnter = "standbyThenHibernate";
-          };
-          lowBattery = {
-            whenLaptopLidClosed = "hibernate";
           };
         };
 
@@ -226,15 +152,6 @@
             # fcitx5-wayland-launcher.desktop or org.fcitx.Fcitx5.desktop
             Wayland.InputMethod = "/run/current-system/sw/share/applications/fcitx5-wayland-launcher.desktop";
           };
-
-          # 键盘 - 布局/高级
-          # kxkbrc = {
-          #   "Layout"."Use" = true;
-          #   "Layout"."ResetOldOptions" = true;
-          #   "Layout"."SwitchMode" = "Global";
-          #   "Layout"."LayoutList" = "cn";
-          #   # "Layout"."Options" = "ctrl:swapcaps";
-          # };
         };
 
         ###############################################
@@ -299,9 +216,9 @@
         enable = true;
         lsp.customServers = {
           nix = {
-            command = [ "nil" ];
+            command = [ "nixd" ];
+            url = "https://github.com/nix-community/nixd";
             highlightingModeRegex = "^Nix$";
-            url = "https://github.com/oxalica/nil";
           };
         };
       };
