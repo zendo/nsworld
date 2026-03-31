@@ -6,13 +6,17 @@
         gcc
         cmake
         gnumake
-        ### python ###
+
+        # [ python ]
         python3
         pylyzer
         # ruff
-        ### forntend ###
+        # uv
+
+        # [ forntend ]
         # nodejs
-        ### lsp ###
+
+        # [ lsp ]
         bash-language-server
         typescript-language-server
         lua-language-server

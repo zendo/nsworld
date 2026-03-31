@@ -3,24 +3,24 @@
   imports = [ inputs.treefmt-nix.flakeModule ];
 
   perSystem =
-    { config, pkgs, ... }:
+    { config, ... }:
     {
-      # nix fmt
+      # nix fmt .
       formatter = config.treefmt.build.wrapper;
 
       treefmt = {
         projectRootFile = "flake.nix";
 
-        ### NIX ###
-        # programs.deadnix.enable = true;
-        # programs.statix.enable = true;
+        # [ NIX ]
         programs.nixfmt.enable = true;
+        # programs.statix.enable = true;
+        # programs.deadnix.enable = true;
 
-        ### SHELL ###
+        # [ SHELL ]
         programs.shfmt.enable = true;
         # programs.shellcheck.enable = true;
 
-        ### HTML/CSS/TS/JSON/YAML/MARKDOWN ###
+        # [ HTML/CSS/TS/JSON/YAML/MARKDOWN ]
         programs.prettier.enable = true;
         settings.formatter.prettier.includes = [
           "*.jsonc"
@@ -32,16 +32,16 @@
         ];
         # programs.yamlfmt.enable = true;
 
-        ### TOML ###
+        # [ TOML]
         programs.taplo.enable = true;
 
-        ### JUSTFILE ###
+        # [ JUSTFILE ]
         programs.just.enable = true;
 
-        ### LUA ###
+        # [ LUA ]
         # programs.stylua.enable = true;
 
-        ### PYTHON ###
+        # [ PYTHON ]
         programs.black.enable = true;
       };
     };
