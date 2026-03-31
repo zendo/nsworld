@@ -14,7 +14,6 @@
           epkgs: with epkgs; [
             jinx
             vterm
-            emojify
             sqlite3
             # lsp-bridge
             # pdf-tools
