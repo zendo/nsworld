@@ -75,18 +75,9 @@
         ## kwin .config/kwinrc
         ###############################################
         kwin = {
-          titlebarButtons = {
-            left = [ "more-window-actions" ];
-          };
           virtualDesktops = {
             number = 4;
             rows = 2;
-            names = [
-              "①"
-              "②"
-              "③"
-              "④"
-            ];
           };
           # 窗口管理 - 桌面特效
           effects = {
