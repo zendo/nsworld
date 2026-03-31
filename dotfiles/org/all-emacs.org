@@ -1989,7 +1989,7 @@ https://gitlab.com/jabranham/mixed-pitch
 #+begin_src emacs-lisp
 ;; Enable `auto-save-mode' to prevent data loss. Use `recover-file' or
 ;; `recover-session' to restore unsaved changes. #file.txt#
-(setq auto-save-default t)
+(setq auto-save-default nil)
 ;; Trigger an auto-save after 300 keystrokes
 (setq auto-save-interval 300)
 ;; Trigger an auto-save 30 seconds of idle time.
@@ -2012,8 +2012,12 @@ https://gitlab.com/jabranham/mixed-pitch
 
 ** super-save
 https://github.com/bbatsov/super-save
+
 #+begin_src emacs-lisp
 (use-package super-save
+  :custom
+  (super-save-auto-save-when-idle t)
+  (super-save-idle-duration 5) ; default: 5
   :config
   (super-save-mode +1))
 #+end_src
@@ -2325,8 +2329,8 @@ https://github.com/thierryvolpiatto/isearch-light
   :defer t)
 #+end_src
 
-** esup
-#+begin_src emacs-lisp
+** esup :disable:
+#+begin_src emacs-lispxx
 (use-package esup
   :defer t
   :init
@@ -3144,6 +3148,7 @@ https://github.com/svaante/dape
 
 ** tree-sitter
 ~C-h v major-mode~
+https://github.com/renzmann/treesit-auto
 
 #+begin_src emacs-lisp
 (use-package treesit-auto
@@ -3768,6 +3773,7 @@ https://github.com/kickingvegas/anju
 
 ** inhibit-mouse :mouse:
 禁用所有鼠标
+
 #+begin_src emacs-lisp
 (use-package inhibit-mouse
   :disabled
