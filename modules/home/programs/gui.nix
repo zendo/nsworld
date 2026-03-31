@@ -59,7 +59,7 @@
             modernz
           ];
         })
-        kazumi # anime
+        # kazumi # anime
         # yt-dlp
         # vlc
         # ffmpeg

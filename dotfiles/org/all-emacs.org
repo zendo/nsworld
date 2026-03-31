@@ -1875,6 +1875,7 @@ https://github.com/neeasade/stillness-mode.el
 #+end_src
 ** occult
 https://github.com/agzam/occult.el
+
 #+begin_src emacs-lispxx
 (use-package occult
   :vc (:url "https://github.com/agzam/occult.el"
@@ -3751,18 +3752,11 @@ M-x ~describe-key~
 
 ;; Scroll
 (pixel-scroll-precision-mode t)
-;; (use-package ultra-scroll
-;;   :vc (:url "https://github.com/jdtsmith/ultra-scroll"
-;;             :rev :newest)
-;;   :init
-;;   (setq scroll-conservatively 101 ; important!
-;;         scroll-margin 0)
-;;   :config
-;;   (ultra-scroll-mode 1))
 #+end_src
 
 ** anju :mouse:
 https://github.com/kickingvegas/anju
+
 #+begin_src emacs-lisp
 (use-package anju
   :init
