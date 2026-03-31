@@ -1107,11 +1107,6 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Vanilla Emacs configuration.
 
 ;;; Code:
-
-(setq package-archives '(("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
-                         ("nongnu" . "https://mirrors.ustc.edu.cn/elpa/nongnu/")
-                         ("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")))
-
 (use-package bind-key)
 
 (use-package diminish

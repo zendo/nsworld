@@ -22,7 +22,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = {
-      bcachefs = true;
+      # bcachefs = true;
       zfs = lib.mkForce false; # always broken
     };
   };
@@ -32,6 +32,7 @@
     # (inputs.self.nixosConfigurations.yoga.config.system.build.toplevel)
     tree
     file
+    bind
     wget
     curl
     micro
@@ -40,13 +41,12 @@
     gptfdisk
     efibootmgr
 
-    bind
     fd
     ripgrep
     gdu
     duf
+    dysk
     btop
-    p7zip
     ouch
   ];
 
@@ -57,7 +57,6 @@
 
   nix.settings = {
     # substituters = lib.mkForce [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
-    trusted-users = [ "@wheel" ];
     experimental-features = [
       "nix-command"
       "flakes"

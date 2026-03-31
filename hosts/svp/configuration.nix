@@ -30,7 +30,6 @@
       # hyprland
     ]
     ++ [
-      # ./disko-bcachefs.nix
       ./disko-btrfs.nix
       ./hardware-configuration.nix
       inputs.nixos-hardware.nixosModules.common-gpu-intel
