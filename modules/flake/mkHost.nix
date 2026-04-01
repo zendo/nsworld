@@ -71,14 +71,5 @@ in
         (self + /hosts/wsl/configuration.nix)
       ];
     };
-
-    # nixos-rebuild build-image --image-variant iso-installer --flake .#livecd
-    # nix build .#nixosConfigurations.livecd.config.system.build.isoImage
-    livecd = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs;
-      };
-      modules = [ (self + /hosts/livecd/configuration.nix) ];
-    };
   };
 }
