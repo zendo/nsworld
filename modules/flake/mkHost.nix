@@ -40,7 +40,7 @@ in
       myvars.host = "svp";
       # nixpkgs = inputs.nixpkgs-stable;
       extraModules = [
-        (self + /hosts/svp/configuration.nix)
+        self.modules.nixos.host-svp
       ];
     };
 
@@ -49,7 +49,7 @@ in
       myvars.user = "aaa";
       myvars.host = "rmt";
       extraModules = [
-        (self + /hosts/rmt/configuration.nix)
+        self.modules.nixos.host-rmt
       ];
     };
 
