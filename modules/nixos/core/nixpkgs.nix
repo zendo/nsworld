@@ -1,9 +1,9 @@
 {
   flake.modules.nixos.nixpkgs =
-    { self, lib, ... }:
+    { inputs, lib, ... }:
     {
       nixpkgs = {
-        overlays = builtins.attrValues self.overlays;
+        overlays = builtins.attrValues inputs.self.overlays;
 
         config = {
           # allowUnfree = true;
