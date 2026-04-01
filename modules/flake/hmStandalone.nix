@@ -25,7 +25,7 @@
           };
 
           modules = [
-            inputs.self.modules.homeManager.non-nixos-imports
+            inputs.self.modules.homeManager.non-nixos
           ]
           ++ extraModules;
         };
