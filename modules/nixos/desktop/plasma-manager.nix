@@ -27,10 +27,9 @@
                     "applications:com.mitchellh.ghostty.desktop"
                     "preferred://filemanager"
                     # "applications:org.kde.dolphin.desktop"
-                    "applications:emacs.desktop"
+                    # "applications:emacs.desktop"
                     # "applications:code.desktop"
                     "preferred://browser"
-                    # "applications:org.kde.kate.desktop"
                     # "applications:firefox.desktop"
                     "applications:org.telegram.desktop.desktop"
                   ];

@@ -11,7 +11,8 @@
         kula
 
         # AI
-        # opencode
+        codex
+        opencode
         qwen-code
 
         # obsidian
