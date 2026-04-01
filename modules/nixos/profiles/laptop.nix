@@ -26,7 +26,7 @@
 
         # https://github.com/AdnanHodzic/auto-cpufreq
         auto-cpufreq = {
-          # enable = true;
+          enable = true;
           settings = {
             battery = {
               governor = "powersave";

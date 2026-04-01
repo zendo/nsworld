@@ -23,8 +23,8 @@
       qemu
 
       # [ desktop ]
-      # gnome
-      kde
+      gnome
+      # kde
       # cosmic
       # niri
       # sway
