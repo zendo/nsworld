@@ -1173,6 +1173,7 @@ Use ~getenv~ check the environment variables.
 (when IS-WINDOWS
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         org-directory "c:/Users/zendo/Documents/org/"
+        package-check-signature nil ; 禁用elpa包签名验证
         ;; Optimization
         projectile-git-submodule-command nil
         w32-get-true-file-attributes nil   ; decrease file IO workload
@@ -1182,12 +1183,12 @@ Use ~getenv~ check the environment variables.
   (set-selection-coding-system 'gbk-dos) ; encoding
   (set-frame-font (font-spec :family "JetBrains Mono" :size 28))
   (dolist (script '(han cjk-misc bopomofo))
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       script
-       (font-spec :name "Microsoft YaHei")))
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     script
+     (font-spec :name "Microsoft YaHei")))
   ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
-)
+  )
 #+end_src
 
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
@@ -3135,9 +3136,8 @@ https://github.com/renzmann/treesit-auto
 
 #+begin_src emacs-lisp
 (use-package treesit-auto
-  :when (eq system-type 'gnu/linux)
-  ; :custom
-  ; (treesit-auto-install 'prompt)
+  ;; :custom
+  ;; (treesit-auto-install 'prompt)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
