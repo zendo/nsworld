@@ -2194,7 +2194,7 @@ moving to the beginning/end code
 #+begin_src emacs-lisp
 (use-package multiple-cursors
   :bind (("C-<f2>" . mc/mark-all-words-like-this)
-         ("M-<mouse-1>" .  mc/toggle-cursor-on-click)
+         ;; ("M-<mouse-1>" .  mc/toggle-cursor-on-click)
          ("C-}" . mc/mark-next-like-this)
          ("C-{" . mc/mark-previous-like-this)
          ("C-|" . mc/mark-all-like-this-dwim)

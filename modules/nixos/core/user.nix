@@ -69,10 +69,10 @@
           ];
         };
 
-        users.guest = {
-          isNormalUser = true;
-          initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
-        };
+        # users.guest = {
+        #   isNormalUser = true;
+        #   initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
+        # };
       };
 
       # Workaround for userborn: Generate subuid/subgid files from the user configuration

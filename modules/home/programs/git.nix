@@ -2,8 +2,8 @@
   flake.modules.homeManager.git =
     { config, ... }:
     let
-      myName = "zendo";
-      myEmail = "linzway@qq.com";
+      gitName = "zendo";
+      gitEmail = "linzway@qq.com";
     in
     {
       programs.git = {
@@ -34,8 +34,8 @@
           ];
         };
         settings = {
-          user.name = myName;
-          user.email = myEmail;
+          user.name = gitName;
+          user.email = gitEmail;
           init.defaultBranch = "main";
           column.ui = "auto";
           # pull.rebase = true;
@@ -91,8 +91,8 @@
         # enable = true;
         settings = {
           user = {
-            name = myName;
-            email = myEmail;
+            name = gitName;
+            email = gitEmail;
           };
         };
       };
