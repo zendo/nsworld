@@ -3337,64 +3337,8 @@ https://github.com/renzmann/treesit-auto
 #+end_src
 
 ** Web And Data Formats
-*** basic
-#+begin_src emacs-lisp :tangle no
-(use-package css-mode
-  :ensure nil
-  :init (setq css-indent-offset 2))
-
-(use-package scss-mode
-  :init
-  ;; Disable complication on save
-  (setq scss-compile-at-save nil))
-
-(unless (fboundp 'less-css-mode)
-  (use-package less-css-mode))
-
-;; nxml
-(use-package nxml-mode
-  :ensure nil
-  :mode (("\\.xaml$" . xml-mode)))
-
-(use-package php-mode
-  :mode "\\.php$")
-
-(use-package typescript-mode
-  :mode ("\\.ts[x]\\'" . typescript-mode))
-
-;; JavaScript
-(use-package js-mode
-  :ensure nil
-  :defines (js-indent-level flycheck-javascript-eslint-executable)
-  :config
-  (setq js-indent-level 2)
-
-  (with-eval-after-load 'flycheck
-    ;; https://github.com/mantoni/eslint_d.js
-    ;; Install: npm -i -g eslint_d
-    (when (executable-find "eslint_d")
-      (setq flycheck-javascript-eslint-executable "eslint_d"))))
-
-
-(use-package js2-mode
-  :mode (("\\.js\\'" . js2-mode)
-         ("\\.jsx\\'" . js2-jsx-mode))
-  :interpreter (("node" . js2-mode)
-                ("node" . js2-jsx-mode))
-  :hook ((js2-mode . js2-imenu-extras-mode)
-         (js2-mode . js2-highlight-unused-variables-mode))
-  :config
-  (with-eval-after-load 'flycheck
-    (when (or (executable-find "eslint_d")
-              (executable-find "eslint")
-              (executable-find "jshint"))
-      (setq js2-mode-show-strict-warnings nil))))
-
-
-;; Adds node_modules/.bin directory to `exec_path'
-(use-package add-node-modules-path
-  :hook ((web-mode js-mode js2-mode) . add-node-modules-path))
-
+*** web-mode
+#+begin_src emacs-lispxx
 (use-package web-mode
   :mode ("\\.[agj]sp\\'"
          "\\.as[cp]x\\'"
@@ -3435,6 +3379,66 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :diminish
   :hook ((js-mode js2-mode css-mode sgml-mode web-mode) . prettier-mode)
   :init (setq prettier-pre-warm 'none))
+#+end_src
+
+*** css, scss
+#+begin_src emacs-lispxx
+(use-package css-mode
+  :ensure nil
+  :init (setq css-indent-offset 2))
+
+(use-package scss-mode
+  :init
+  ;; Disable complication on save
+  (setq scss-compile-at-save nil))
+
+(unless (fboundp 'less-css-mode)
+  (use-package less-css-mode))
+#+end_src
+
+*** javaScript
+#+begin_src emacs-lispxx
+(use-package typescript-mode
+  :mode ("\\.ts[x]\\'" . typescript-mode))
+
+;; JavaScript
+(use-package js-mode
+  :ensure nil
+  :defines (js-indent-level flycheck-javascript-eslint-executable)
+  :config
+  (setq js-indent-level 2)
+
+  (with-eval-after-load 'flycheck
+    ;; https://github.com/mantoni/eslint_d.js
+    ;; Install: npm -i -g eslint_d
+    (when (executable-find "eslint_d")
+      (setq flycheck-javascript-eslint-executable "eslint_d"))))
+
+
+(use-package js2-mode
+  :mode (("\\.js\\'" . js2-mode)
+         ("\\.jsx\\'" . js2-jsx-mode))
+  :interpreter (("node" . js2-mode)
+                ("node" . js2-jsx-mode))
+  :hook ((js2-mode . js2-imenu-extras-mode)
+         (js2-mode . js2-highlight-unused-variables-mode))
+  :config
+  (with-eval-after-load 'flycheck
+    (when (or (executable-find "eslint_d")
+              (executable-find "eslint")
+              (executable-find "jshint"))
+      (setq js2-mode-show-strict-warnings nil))))
+
+
+;; Adds node_modules/.bin directory to `exec_path'
+(use-package add-node-modules-path
+  :hook ((web-mode js-mode js2-mode) . add-node-modules-path))
+#+end_src
+
+*** php
+#+begin_src emacs-lisp
+(use-package php-mode
+  :mode "\\.php$")
 #+end_src
 
 *** markdown
