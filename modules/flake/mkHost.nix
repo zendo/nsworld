@@ -53,14 +53,5 @@ in
       ];
     };
 
-    # nixos-rebuild build-vm --flake .#vmtest
-    # nix build .#nixosConfigurations.vmtest.config.system.build.vm
-    vmtest = mkHost {
-      myvars.user = "test";
-      myvars.host = "vmtest";
-      extraModules = [
-        (self + /hosts/vmtest/configuration.nix)
-      ];
-    };
   };
 }

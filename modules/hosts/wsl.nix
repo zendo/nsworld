@@ -18,6 +18,7 @@ in
       self.modules.nixos.nixconfig
       self.modules.nixos.nixpkgs
       self.modules.nixos.ssh
+      self.modules.nixos.zsh
     ];
   };
 
