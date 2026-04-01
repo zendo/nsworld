@@ -1119,7 +1119,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 (load custom-file 'noerror 'no-message)
 #+end_src
 
-* Systems
+* Platform
 ** Variables
 Use ~getenv~ check the environment variables.
 
@@ -1389,7 +1389,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
                                        flyspell-prog-text-faces)))
 #+end_src
 
-* Interface
+* UI
 #+begin_src emacs-lisp
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 (setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名
@@ -1655,7 +1655,7 @@ like ~otree~
   :commands writeroom-mode)
 #+end_src
 
-* Buffer
+* Buffers And Windows
 ** uniquify
 #+begin_src emacs-lisp
 (use-package uniquify
@@ -1693,7 +1693,7 @@ like ~otree~
   (buffer-terminator-mode 1))
 #+end_src
 
-* Window
+** Window Layout
 #+begin_src emacs-lisp
 ;; prefer vertical splits by default
 (setq split-width-threshold 120)
@@ -1766,7 +1766,7 @@ https://github.com/neeasade/stillness-mode.el
   (stillness-mode +1))
 #+end_src
 
-* Editor
+* Core Editor
 ** basic
 #+begin_src emacs-lisp
 (show-paren-mode t) ;括号匹配 parens
@@ -1897,7 +1897,7 @@ https://gitlab.com/jabranham/mixed-pitch
   (setq-default mixed-pitch-set-height t))
 #+end_src
 
-* Dired
+* File Manager
 ** dired enhanced
 #+begin_src emacs-lisp
 (use-package diredfl
@@ -1968,7 +1968,7 @@ https://gitlab.com/jabranham/mixed-pitch
   :commands disk-usage)
 #+end_src
 
-* Backup
+* Persistence
 ** auto-save
 #+begin_src emacs-lisp
 ;; Enable `auto-save-mode' to prevent data loss. Use `recover-file' or
@@ -2109,7 +2109,7 @@ https://github.com/bbatsov/super-save
   (setq vundo-roll-back-on-quit nil))
 #+end_src
 
-* Packages
+* Navigation And Utilities
 ** helpful
 #+begin_src emacs-lisp
 ;; Helpful is an alternative to the built-in Emacs help that provides much more
@@ -2322,7 +2322,7 @@ https://github.com/thierryvolpiatto/isearch-light
   (setq esup-depth 0))
 #+end_src
 
-* Completions
+* Completion And Search
 ** Corfu、Cape
 #+begin_src emacs-lisp
 ;; Corfu enhances in-buffer completion by displaying a compact popup with
@@ -2670,7 +2670,7 @@ hippie expand is dabbrev expand on steroids
 ;;   :after tempel)
 #+end_src
 
-* Version-Control
+* Projects And VCS
 ** Project
 #+begin_src emacs-lisp
 ;; (define-key global-map (kbd "C-c p") project-prefix-map)
@@ -2771,7 +2771,7 @@ hippie expand is dabbrev expand on steroids
   (ediff-custom-diff-options "-u"))
 #+end_src
 
-* Org
+* Writing And Notes
 ** org-mode
 #+begin_src emacs-lisp
 (use-package org
@@ -2976,7 +2976,7 @@ https://one.tonyaldon.com/
 ** note-taking
 https://github.com/kaorahi/howm
 
-* LSP
+* Development
 ** eglot
 #+begin_src emacs-lisp
 (use-package eglot
@@ -3065,8 +3065,8 @@ Run code formatters on ~after-save-hook~
   )
 #+end_src
 
-* Programming
-** prog-mode
+** Tooling
+*** prog-mode
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -3079,7 +3079,7 @@ Run code formatters on ~after-save-hook~
             ))
 #+end_src
 
-** compilation
+*** compilation
 #+begin_src emacs-lisp
 (setq compilation-ask-about-save nil  ;Just save before compiling
       compilation-always-kill t       ;kill old compile processes before new one
@@ -3087,7 +3087,7 @@ Run code formatters on ~after-save-hook~
       )
 #+end_src
 
-** flycheck
+*** flycheck
 #+begin_src emacs-lisp
 (use-package flycheck
   :defer t
@@ -3102,7 +3102,7 @@ Run code formatters on ~after-save-hook~
                                      )))
 #+end_src
 
-** flymake
+*** flymake
 #+begin_src emacs-lisp
 (use-package flymake
   :disabled
@@ -3116,21 +3116,21 @@ Run code formatters on ~after-save-hook~
   (setq-default flymake-no-changes-timeout 1.0))
 #+end_src
 
-** dape
+*** dape
 https://github.com/svaante/dape
 
-** quick-run
+*** quick-run
 #+begin_src emacs-lisp
 (use-package quickrun
   :defer t)
 #+end_src
 
-** editorconfig
+*** editorconfig
 #+begin_src emacs-lisp
 (editorconfig-mode t)
 #+end_src
 
-** tree-sitter
+*** tree-sitter
 ~C-h v major-mode~
 https://github.com/renzmann/treesit-auto
 
@@ -3143,13 +3143,14 @@ https://github.com/renzmann/treesit-auto
   (global-treesit-auto-mode))
 #+end_src
 
-** lua
+** Languages
+*** lua
 #+begin_src emacs-lisp
 (use-package lua-mode
   :mode ("\\.lua'"))
 #+end_src
 
-** sql
+*** sql
 #+begin_src emacs-lisp
 (use-package sql-indent
   :mode ("\\.sql\\'")
@@ -3160,19 +3161,19 @@ https://github.com/renzmann/treesit-auto
 ;;   (setq sqlformat-command "sqlfluff"))
 #+end_src
 
-** dockerfile
+*** dockerfile
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
   :mode ("Dockerfile\\'"))
 #+end_src
 
-** powershell
+*** powershell
 #+begin_src emacs-lisp
 (use-package powershell
   :mode ("\\.ps1'"))
 #+end_src
 
-** python
+*** python
 #+begin_src emacs-lisp
 (use-package python-mode
   :mode ("\\.py\\'")
@@ -3192,7 +3193,7 @@ https://github.com/renzmann/treesit-auto
                                         ; or lsp-deferred
 #+end_src
 
-** go
+*** go
 #+begin_src emacs-lisp
 (use-package go-mode
   :commands go-mode
@@ -3201,7 +3202,7 @@ https://github.com/renzmann/treesit-auto
   (add-hook 'before-save-hook 'gofmt-before-save))
 #+end_src
 
-** rust
+*** rust
 #+begin_src emacs-lisp
 (use-package rustic
   :mode "\\.rs$"
@@ -3217,7 +3218,7 @@ https://github.com/renzmann/treesit-auto
   (cargo-transient-buffer-name-function #'project-prefixed-buffer-name))
 #+end_src
 
-** ruby
+*** ruby
 #+begin_src emacs-lisp
   ;; (use-package ruby-mode
   ;;   :defvar ruby-mode-map
@@ -3229,7 +3230,7 @@ https://github.com/renzmann/treesit-auto
   ;;     :hook (ruby-mode-hook . inf-ruby-minor-mode)))
 #+end_src
 
-** C
+*** C
 #+begin_src emacs-lisp :tangle no
 (use-package cc-mode
   :bind (:map c-mode-base-map
@@ -3242,12 +3243,12 @@ https://github.com/renzmann/treesit-auto
   :commands lsp)
 #+end_src
 
-** java & android
+*** java & android
 #+begin_src emacs-lisp
 (use-package groovy-mode)
 #+end_src
 
-** haskell
+*** haskell
 #+begin_src emacs-lisp :tangle no
 (use-package haskell-mode
   :init
@@ -3261,7 +3262,7 @@ https://github.com/renzmann/treesit-auto
 (use-package lsp-haskell)
 #+end_src
 
-** elisp
+*** elisp
 #+begin_src emacs-lisp
 (use-package elisp-mode
   :ensure nil
@@ -3280,7 +3281,7 @@ https://github.com/renzmann/treesit-auto
               ("C-c e" . macrostep-expand)))
 #+end_src
 
-** paredit、aggressive-indent、highlight-defined
+*** paredit、aggressive-indent、highlight-defined
 #+begin_src emacs-lispxx
 ;; Prevent parenthesis imbalance
 (use-package paredit
@@ -3324,7 +3325,7 @@ https://github.com/renzmann/treesit-auto
   (emacs-lisp-mode . highlight-defined-mode))
 #+end_src
 
-** nix
+*** nix
 #+begin_src emacs-lisp
 (use-package nix-mode
   :mode ("\\.nix'"))
@@ -3335,8 +3336,8 @@ https://github.com/renzmann/treesit-auto
 ;;   (direnv-mode))
 #+end_src
 
-* Web-Dev
-** basic
+** Web And Data Formats
+*** basic
 #+begin_src emacs-lisp :tangle no
 (use-package css-mode
   :ensure nil
@@ -3416,7 +3417,7 @@ https://github.com/renzmann/treesit-auto
         web-mode-indent-style 2))
 #+end_src
 
-** conf-mode
+*** conf-mode
 #+begin_src emacs-lisp
 (use-package conf-mode
   :mode
@@ -3426,7 +3427,7 @@ https://github.com/renzmann/treesit-auto
 (global-set-key [remap conf-space-keywords] #'project-find-file)
 #+end_src
 
-** prettier :disable:
+*** prettier :disable:
 HTML/CSS/TS/JSON/YAML/MARKDOWN
 
 #+begin_src emacs-lispxx
@@ -3436,7 +3437,7 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :init (setq prettier-pre-warm 'none))
 #+end_src
 
-** markdown
+*** markdown
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :config
@@ -3449,7 +3450,7 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :defer t)
 #+end_src
 
-** json
+*** json
 #+begin_src emacs-lisp
 (use-package json-mode
   :mode ("\\.json'"))
@@ -3464,38 +3465,38 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :defer t)
 #+end_src
 
-** yaml
+*** yaml
 #+begin_src emacs-lisp
 (use-package yaml-pro
   :mode ("\\.yml'" "\\.yaml'"))
 #+end_src
 
-** toml
+*** toml
 #+begin_src emacs-lisp
 (use-package toml-mode
   :mode ("\\.toml'"))
 #+end_src
 
-** kdl
+*** kdl
 #+begin_src emacs-lisp
 (use-package kdl-mode
   :mode ("\\.kdl'"))
 #+end_src
 
-** just
+*** just
 #+begin_src emacs-lisp
 (use-package just-mode
   :mode ("\\.just'" "justfile\\'"))
 #+end_src
 
-** license-templates
+*** license-templates
 #+begin_src emacs-lisp
 (use-package license-templates
   :defer t)
 #+end_src
 
 * Functions
-** make-parent-directory
+*** make-parent-directory
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun make-parent-directory ()
@@ -3504,7 +3505,7 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 (add-hook 'find-file-not-found-functions #'make-parent-directory)
 #+end_src
 
-** space to newline
+*** space to newline
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun my/space-to-newline ()
@@ -3535,7 +3536,7 @@ Version 2017-08-19"
           (replace-match "\n" ))))))
 #+end_src
 
-** insert-timestamp
+*** insert-timestamp
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun my/insert-timestamp ()
@@ -3544,7 +3545,7 @@ Version 2017-08-19"
   (insert (format-time-string "[%02y-%02m-%02d %02H:%02M:%02S] ")))
 #+end_src
 
-** backward-delete-word
+*** backward-delete-word
 ~M-backspace~ 删除而非剪切
 
 #+begin_src emacs-lisp
@@ -3557,7 +3558,7 @@ Version 2017-08-19"
 (global-set-key [remap backward-kill-word] #'backward-delete-word)
 #+end_src
 
-** proxy
+*** proxy
 https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
 #+begin_src emacs-lisp
@@ -3577,7 +3578,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
             ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)"))))))
 #+end_src
 
-** pkill-emacs
+*** pkill-emacs
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun my/pkill-emacs ()
