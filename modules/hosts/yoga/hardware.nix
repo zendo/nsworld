@@ -1,0 +1,45 @@
+{
+  flake.modules.nixos.host-yoga =
+    {
+      config,
+      lib,
+      modulesPath,
+      ...
+    }:
+
+    {
+      imports = [
+        (modulesPath + "/installer/scan/not-detected.nix")
+      ];
+
+      boot.initrd.availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "usb_storage"
+        "sd_mod"
+      ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-amd" ];
+      boot.extraModulePackages = [ ];
+
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/b97eb95a-fc74-42d2-b523-529f511abb15";
+        fsType = "btrfs";
+        options = [ "compress=zstd" ];
+      };
+
+      fileSystems."/efi" = {
+        device = "/dev/disk/by-uuid/E5F8-C8C4";
+        fsType = "vfat";
+        options = [
+          "fmask=0022"
+          "dmask=0022"
+        ];
+      };
+
+      swapDevices = [ ];
+
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+      hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    };
+}

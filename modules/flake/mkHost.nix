@@ -29,7 +29,7 @@ in
       myvars.user = "iab";
       myvars.host = "yoga";
       extraModules = [
-        (self + /hosts/yoga/configuration.nix)
+        self.modules.nixos.host-yoga
       ];
     };
 
