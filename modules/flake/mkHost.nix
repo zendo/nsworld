@@ -62,14 +62,5 @@ in
         (self + /hosts/vmtest/configuration.nix)
       ];
     };
-
-    # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
-    wsl = mkHost {
-      myvars.user = "iab";
-      myvars.host = "wsl";
-      extraModules = [
-        (self + /hosts/wsl/configuration.nix)
-      ];
-    };
   };
 }
