@@ -5,7 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/post-init.el"
 #+AUTO_TANGLE: t
 
-* early-init
+* early-init.el
 https://github.com/jamescherti/minimal-emacs.d minimal-emacs.d
 Release: 1.4.1
 
@@ -1097,7 +1097,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 #+end_src
 
-* Header
+* post-init.el - Header
 #+begin_src emacs-lisp
 ;;; post-init.el --- DESCRIPTION -*- no-byte-compile: t; lexical-binding: t; -*-
 
@@ -3816,7 +3816,7 @@ Show current command and its binding.
   (default-input-method "rime"))
 #+end_src
 
-* Footer
+* post-init.el - Footer
 #+begin_src emacs-lisp
 (provide 'post-init.el)
 ;;; post-init.el ends here
