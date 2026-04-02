@@ -32,7 +32,7 @@
             scrollback-up-page = "Shift+Page_Up Mod1+v";
             scrollback-down-page = "Shift+Page_Down Control+v";
           };
-          colors = {
+          colors-dark = {
             alpha = "0.95";
             foreground = "DEDEDE";
             background = "1B1B1B";
