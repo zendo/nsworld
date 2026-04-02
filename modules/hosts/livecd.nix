@@ -72,8 +72,5 @@
       };
 
       time.timeZone = "Asia/Shanghai";
-
-      # fast but lowest compression level
-      # isoImage.squashfsCompression = "gzip -Xcompression-level 1";
     };
 }
