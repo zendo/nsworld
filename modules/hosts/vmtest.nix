@@ -74,10 +74,10 @@ in
 
       nixpkgs.hostPlatform = "x86_64-linux";
 
+      users.users.root.initialPassword = "root";
       users.users.${userName} = {
         isNormalUser = true;
-        # pw: test
-        initialHashedPassword = "$y$j9T$cwgM31P53Jvlqq2Ed/ad0.$t1G8tnJg7DsspO2687hpTO87v2uSVfB9E5hpBufYhR.";
+        initialPassword = "test";
         extraGroups = [
           "wheel"
           "networkmanager"
@@ -88,9 +88,6 @@ in
           "podman"
         ];
       };
-
-      # pw: root
-      users.users.root.initialHashedPassword = "$y$j9T$0t8NyDpq3ikgERiGgdPru0$pI6bTECjj2pSb68lF.U0xpftH.2vTF26uiRasZnROD3";
 
       security.sudo.wheelNeedsPassword = false;
       security.sudo-rs.wheelNeedsPassword = false;
