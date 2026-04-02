@@ -36,7 +36,10 @@
         myvars = {
           user = "iab";
         };
-        extraModules = [ inputs.self.modules.homeManager.dconf ];
+        extraModules = [
+          inputs.self.modules.homeManager.non-nixos-imports
+          inputs.self.modules.homeManager.dconf
+        ];
       };
 
       # MAYBE: other user on nixos

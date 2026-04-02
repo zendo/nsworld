@@ -1,11 +1,6 @@
 {
-  flake.modules.homeManager.non-nixos =
-    {
-      pkgs,
-      inputs,
-      myvars,
-      ...
-    }:
+  flake.modules.homeManager.non-nixos-imports =
+    { inputs, ... }:
     {
       imports = with inputs.self.modules.homeManager; [
         secrets
@@ -59,10 +54,16 @@
         # mime
         xdg
       ];
+    };
 
-      # ========================================================
-      #  Home
-      # ========================================================
+  flake.modules.homeManager.non-nixos =
+    {
+      pkgs,
+      inputs,
+      myvars,
+      ...
+    }:
+    {
       home = {
         packages = with pkgs; [
           dippi
@@ -74,9 +75,6 @@
         stateVersion = "26.05";
       };
 
-      # ========================================================
-      #  Home-manager Settings
-      # ========================================================
       news.display = "silent";
       programs.home-manager.enable = true;
       # https://github.com/nix-community/home-manager/blob/master/docs/manual/usage/gpu-non-nixos.md
@@ -135,5 +133,6 @@
           ];
         }; # end of defaultFonts
       }; # end of fontconfig
+
     };
 }
