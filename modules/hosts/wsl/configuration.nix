@@ -31,22 +31,52 @@ in
       home-manager.users.${userName} =
         { inputs, pkgs, ... }:
         {
-          imports = with inputs.self.modules.homeManager; [
-            cli-imports
-
-            foot
-            ghostty
-            # kitty
-            dev
-            emacs
-          ];
+          xdg.enable = true;
 
           home.packages = with pkgs; [
             # cliamp
             goodvibes
           ];
 
-          xdg.enable = true;
+          imports = with inputs.self.modules.homeManager; [
+            # [ common ]
+            # secrets
+            ssh
+            nixconfig
+
+            # [ editor ]
+            dev
+            emacs
+            micro
+            fresh-editor
+            helix
+            # nvim
+
+            # [ programs ]
+            cli
+            git
+            nix-tools
+
+            # [ shell ]
+            alias
+            atuin
+            bash
+            # fish
+            starship
+            # zellij
+            zsh
+
+            # [ terminal ]
+            # alacritty
+            foot
+            ghostty
+            # kitty
+
+            # [ xdg ]
+            env
+            files
+            # xdg
+          ];
         };
 
       # ╭─────────────────────────────────────────────────────╮

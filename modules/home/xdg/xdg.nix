@@ -2,13 +2,6 @@
   flake.modules.homeManager.xdg =
     { pkgs, ... }:
     {
-      # Cursor Theme
-      # home.pointerCursor = {
-      #   name = "Vanilla-DMZ-AA";
-      #   package = pkgs.vanilla-dmz;
-      #   size = 128;
-      # };
-
       # https://github.com/search?q=repo%3Anix-community%2Fhome-manager%20%20preferXdgDirectories&type=code
       home.preferXdgDirectories = true;
 
