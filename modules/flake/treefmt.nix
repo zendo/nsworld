@@ -21,15 +21,16 @@
         # programs.shellcheck.enable = true;
 
         # [ HTML/CSS/TS/JSON/YAML/MARKDOWN ]
-        programs.prettier.enable = true;
-        settings.formatter.prettier.includes = [
-          "*.jsonc"
-        ];
-        settings.formatter.prettier.excludes = [
-          "*secrets*"
-          "dotfiles/Windows/*"
-          "dotfiles/mofa/*"
-        ];
+        # FIXME: error: nodePackages has been removed
+        # programs.prettier.enable = true;
+        # settings.formatter.prettier.includes = [
+        #   "*.jsonc"
+        # ];
+        # settings.formatter.prettier.excludes = [
+        #   "*secrets*"
+        #   "dotfiles/Windows/*"
+        #   "dotfiles/mofa/*"
+        # ];
         # programs.yamlfmt.enable = true;
 
         # [ TOML]
