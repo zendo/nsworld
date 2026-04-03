@@ -151,6 +151,7 @@
       qt6Packages = prev.qt6Packages.overrideScope (
         qt6final: qt6prev: {
           # Disable `fcitx5-configtool` to avoid pulling in KDE frameworks dependencies
+          # nix run n#qt6Packages.fcitx5-configtool
           fcitx5-with-addons = qt6prev.fcitx5-with-addons.override { withConfigtool = false; };
         }
       );
