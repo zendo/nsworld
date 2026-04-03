@@ -1,4 +1,7 @@
 { inputs, lib, ... }:
+let
+  inherit (inputs.self) nixosConfigurations;
+in
 {
   # ╭─────────────────────────────────────────────────────╮
   # │ Colmena                                             │
@@ -6,13 +9,13 @@
   flake.colmenaHive = inputs.colmena.lib.makeHive {
     meta = {
       nixpkgs = { inherit lib; };
-      nodeNixpkgs = builtins.mapAttrs (_: v: v.pkgs) inputs.self.nixosConfigurations;
-      nodeSpecialArgs = builtins.mapAttrs (_: v: v._module.specialArgs) inputs.self.nixosConfigurations;
+      nodeNixpkgs = builtins.mapAttrs (_: v: v.pkgs) nixosConfigurations;
+      nodeSpecialArgs = builtins.mapAttrs (_: v: v._module.specialArgs) nixosConfigurations;
     };
 
     # colmena apply-local --sudo
     yoga = {
-      imports = inputs.self.nixosConfigurations.yoga._module.args.modules;
+      imports = nixosConfigurations."yoga"._module.args.modules;
       deployment = {
         targetHost = "yoga";
         targetUser = "iab";
@@ -22,7 +25,7 @@
 
     # colmena apply --no-substitutes --on svp
     svp = {
-      imports = inputs.self.nixosConfigurations.svp._module.args.modules;
+      imports = nixosConfigurations."svp"._module.args.modules;
       deployment = {
         targetHost = "svp";
         targetUser = "root";
@@ -30,7 +33,7 @@
     };
 
     rmt = {
-      imports = inputs.self.nixosConfigurations.rmt._module.args.modules;
+      imports = nixosConfigurations."rmt"._module.args.modules;
       deployment = {
         targetHost = "rmt";
         targetUser = "root";
@@ -52,14 +55,14 @@
       "svp" = {
         hostname = "svp";
         profiles.system = {
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."svp";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."svp";
         };
       };
 
       "rmt" = {
         hostname = "rmt";
         profiles.system = {
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations."rmt";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."rmt";
         };
       };
     };
