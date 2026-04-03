@@ -2313,13 +2313,10 @@ https://github.com/thierryvolpiatto/isearch-light
   :defer t)
 #+end_src
 
-** esup :disable:
-#+begin_src emacs-lispxx
+** esup
+#+begin_src emacs-lisp
 (use-package esup
-  :defer t
-  :init
-  ;; https://github.com/progfolio/elpaca/issues/23
-  (setq esup-depth 0))
+  :defer t)
 #+end_src
 
 * Completion And Search
@@ -3751,7 +3748,7 @@ M-x ~describe-key~
 ** anju :mouse:
 https://github.com/kickingvegas/anju
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package anju
   :init
   (context-menu-mode 1) ; 全局开启 Emacs 的右键菜单基础模式
