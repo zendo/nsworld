@@ -41,6 +41,14 @@
         imports = [
           self.modules.homeManager.default-imports
         ];
+
+        dconf.settings = {
+          "org/gnome/settings-daemon/plugins/power" = {
+            # 修复恢复时蓝牙鼠标连接缓慢问题
+            # 电源 - 节电 - 自动挂起（插入电源时关闭）
+            sleep-inactive-ac-type = "nothing";
+          };
+        };
       };
 
       # services.displayManager.autoLogin.user = "${myvars.user}";
