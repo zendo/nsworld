@@ -2002,6 +2002,7 @@ https://github.com/bbatsov/super-save
   :custom
   (super-save-auto-save-when-idle t)
   (super-save-idle-duration 5) ; default: 5
+  (super-save-all-buffers t)
   :config
   (super-save-mode +1))
 #+end_src
