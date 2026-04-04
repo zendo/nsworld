@@ -1,5 +1,6 @@
 { inputs, self, ... }:
 {
+  # nixos-rebuild --target-host user@host -S --flake .#host switch
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
     specialArgs = {
       inherit inputs self;

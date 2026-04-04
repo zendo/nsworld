@@ -1,6 +1,7 @@
 { inputs, self, ... }:
 {
   flake.nixosConfigurations.yoga = inputs.nixpkgs.lib.nixosSystem {
+    # flake.nixosConfigurations.host._module.specialArgs
     specialArgs = {
       inherit inputs self;
     };
@@ -46,9 +47,7 @@
       myVars.user = "iab";
       networking.hostName = "yoga";
 
-      # services.displayManager.autoLogin.user = "${config.myVars.user}";
-
-      # No need password
+      # No password
       security.sudo.wheelNeedsPassword = false;
       security.sudo-rs.wheelNeedsPassword = false;
 
