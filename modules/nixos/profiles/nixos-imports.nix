@@ -5,10 +5,10 @@
     base
     boot
     fonts
-    gpg
     nixconfig
     nixpkgs
     ssh
+    # gpg
     user
 
     mods
