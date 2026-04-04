@@ -35,8 +35,6 @@ nixos-install \
 
 [Mic92](https://github.com/Mic92/dotfiles)
 
-[thiagokokada](https://github.com/thiagokokada/nix-configs)
-
 # Nix Commands
 
 ```shell

@@ -8,8 +8,9 @@
     modules =
       with inputs.self.modules.nixos;
       [
-        # [ profiles ]
         host-yoga
+
+        # [ profiles ]
         hmModule
         default-imports
         laptop
@@ -46,7 +47,6 @@
       myVars.user = "iab";
       networking.hostName = "yoga";
 
-      # No password
       security.sudo.wheelNeedsPassword = false;
       security.sudo-rs.wheelNeedsPassword = false;
 
@@ -100,6 +100,8 @@
         # ];
       };
 
+      # zramSwap.enable = true;
+
       # swapfile
       # swapDevices = [
       #   {
@@ -107,8 +109,6 @@
       #     size = 1024 * 16;
       #   }
       # ];
-
-      # zramSwap.enable = true;
 
       # ╭─────────────────────────────────────────────────────╮
       # │ BOOTLOADER                                          │

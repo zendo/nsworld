@@ -1,7 +1,6 @@
 /*
   https://github.com/ryantm/agenix
   https://github.com/oddlama/agenix-rekey
-  https://fzakaria.com/2024/07/12/nix-secrets-for-dummies
   https://github.com/Mic92/sops-nix
   https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
 
