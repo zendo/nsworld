@@ -6,7 +6,6 @@
     boot
     fonts
     gpg
-    graphical
     nixconfig
     nixpkgs
     ssh
@@ -20,7 +19,6 @@
     networkmanager
     # print
 
-    programs
     services
 
     # [ shell ]

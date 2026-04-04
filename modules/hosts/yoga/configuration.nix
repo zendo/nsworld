@@ -23,6 +23,7 @@
         qemu
 
         # [ desktop ]
+        graphical
         gnome
         # kde
         # cosmic
