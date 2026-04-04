@@ -3,7 +3,7 @@
     {
       inputs,
       pkgs,
-      myvars,
+      config,
       ...
     }:
     {
@@ -21,7 +21,7 @@
       services.sing-box = {
         # enable = true;
         settings = {
-          _secret = "/home/${myvars.user}/code/subs/config.jsonc";
+          _secret = "/home/${config.myVars.user}/code/subs/config.jsonc";
           quote = false;
         };
       };
@@ -30,7 +30,7 @@
         enable = true;
         tunMode = true;
         # webui = pkgs.zashboard;
-        configFile = "/home/${myvars.user}/code/subs/config.yaml";
+        configFile = "/home/${config.myVars.user}/code/subs/config.yaml";
       };
 
       # services.daeWithConfig.enable = true;

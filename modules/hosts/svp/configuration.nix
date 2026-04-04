@@ -1,46 +1,53 @@
+{ inputs, self, ... }:
 {
+  flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = {
+      inherit inputs self;
+    };
+    modules =
+      with self.modules.nixos;
+      [
+        # [ profiles ]
+        host-svp
+        hmModule
+        default-imports
+        laptop
+        # steam
+
+        # [ virt ]
+        docker
+        # incus
+        # nix-ld
+        qemu
+
+        # [ desktop ]
+        gnome
+        # kde
+        # cosmic
+        # niri
+        # sway
+        # hyprland
+      ]
+      ++ [
+        ./_disko-btrfs.nix
+        inputs.nixos-hardware.nixosModules.common-gpu-intel
+      ];
+  };
+
   flake.modules.nixos.host-svp =
     {
-      inputs,
-      self,
-      pkgs,
-      myvars,
+      config,
       ...
     }:
     {
-      imports =
-        with self.modules.nixos;
-        [
-          # [ profiles ]
-          hmModule
-          default-imports
-          laptop
-          # steam
+      myVars.user = "zendo";
+      networking.hostName = "svp";
 
-          # [ virt ]
-          docker
-          # incus
-          # nix-ld
-          qemu
-
-          # [ desktop ]
-          gnome
-          # kde
-          # cosmic
-          # niri
-          # sway
-          # hyprland
-        ]
-        ++ [
-          ./_disko-btrfs.nix
-          inputs.nixos-hardware.nixosModules.common-gpu-intel
-        ];
-
-      home-manager.users.${myvars.user}.imports = [
+      home-manager.users.${config.myVars.user}.imports = [
         self.modules.homeManager.default-imports
       ];
 
-      users.users.${myvars.user} = {
+      users.users.${config.myVars.user} = {
         # pw: 123
         hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
       };

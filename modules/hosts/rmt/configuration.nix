@@ -1,41 +1,51 @@
+{ inputs, self, ... }:
 {
+  flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = {
+      inherit inputs self;
+    };
+    modules =
+      with self.modules.nixos;
+      [
+        # [ profiles ]
+        host-rmt
+        hmModule
+        default-imports
+        # laptop
+        # steam
+
+        # [ virt ]
+        # docker
+        # incus
+        # nix-ld
+        # qemu
+
+        # [ desktop ]
+        gnome
+        # kde
+        # cosmic
+        # niri
+        # sway
+        # hyprland
+      ]
+      ++ [
+        ./_disko-bcachefs.nix
+        # ./_disko-btrfs.nix
+      ];
+  };
+
   flake.modules.nixos.host-rmt =
     {
       self,
       pkgs,
-      myvars,
+      config,
       ...
     }:
     {
-      imports =
-        with self.modules.nixos;
-        [
-          # [ profiles ]
-          hmModule
-          default-imports
-          # laptop
-          # steam
+      myVars.user = "aaa";
+      networking.hostName = "rmt";
 
-          # [ virt ]
-          # docker
-          # incus
-          # nix-ld
-          # qemu
-
-          # [ desktop ]
-          gnome
-          # kde
-          # cosmic
-          # niri
-          # sway
-          # hyprland
-        ]
-        ++ [
-          ./_disko-bcachefs.nix
-          # ./_disko-btrfs.nix
-        ];
-
-      home-manager.users.${myvars.user}.imports = [
+      home-manager.users.${config.myVars.user}.imports = [
         self.modules.homeManager.default-imports
       ];
 
@@ -46,7 +56,7 @@
 
       # Desktop Environment
       services = {
-        displayManager.autoLogin.user = "${myvars.user}";
+        displayManager.autoLogin.user = "${config.myVars.user}";
         xserver = {
           # enable = true;
           desktopManager = {
@@ -85,7 +95,7 @@
         };
       };
 
-      users.users.${myvars.user} = {
+      users.users.${config.myVars.user} = {
         # pw: 123
         hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
       };

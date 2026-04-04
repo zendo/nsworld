@@ -1,43 +1,63 @@
+{ inputs, self, ... }:
 {
+  flake.nixosConfigurations.yoga = inputs.nixpkgs.lib.nixosSystem {
+    specialArgs = {
+      inherit inputs self;
+    };
+    modules =
+      with self.modules.nixos;
+      [
+        # [ profiles ]
+        host-yoga
+        hmModule
+        default-imports
+        laptop
+        steam
+
+        # [ virt ]
+        docker
+        # incus
+        # nix-ld
+        qemu
+
+        # [ desktop ]
+        gnome
+        # kde
+        # cosmic
+        # niri
+        # sway
+        # hyprland
+      ]
+      ++ [
+        inputs.nixos-hardware.nixosModules.common-gpu-amd
+        # inputs.lanzaboote.nixosModules.lanzaboote
+      ];
+  };
+
   flake.modules.nixos.host-yoga =
     {
-      inputs,
       self,
       lib,
       pkgs,
-      myvars,
+      config,
       ...
     }:
     {
-      imports =
-        with self.modules.nixos;
-        [
-          # [ profiles ]
-          hmModule
-          default-imports
-          laptop
-          steam
+      myVars.user = "iab";
+      networking.hostName = "yoga";
 
-          # [ virt ]
-          docker
-          # incus
-          # nix-ld
-          qemu
+      # services.displayManager.autoLogin.user = "${config.myVars.user}";
 
-          # [ desktop ]
-          gnome
-          # kde
-          # cosmic
-          # niri
-          # sway
-          # hyprland
-        ]
-        ++ [
-          inputs.nixos-hardware.nixosModules.common-gpu-amd
-          # inputs.lanzaboote.nixosModules.lanzaboote
-        ];
+      # No need password
+      security.sudo.wheelNeedsPassword = false;
+      security.sudo-rs.wheelNeedsPassword = false;
 
-      home-manager.users.${myvars.user} = {
+      # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+      # ╭─────────────────────────────────────────────────────╮
+      # │ HOME-MANAGER                                        │
+      # ╰─────────────────────────────────────────────────────╯
+      home-manager.users.${config.myVars.user} = {
         imports = [
           self.modules.homeManager.default-imports
         ];
@@ -50,14 +70,6 @@
           };
         };
       };
-
-      # services.displayManager.autoLogin.user = "${myvars.user}";
-
-      # No need password
-      security.sudo.wheelNeedsPassword = false;
-      security.sudo-rs.wheelNeedsPassword = false;
-
-      # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
       # ╭─────────────────────────────────────────────────────╮
       # │ HARDWARE                                            │
