@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 let
   userName = "zendo";
 in
@@ -8,18 +8,22 @@ in
     specialArgs = {
       inherit inputs;
     };
-    modules = [
-      inputs.nixos-wsl.nixosModules.wsl
-      self.modules.nixos.host-wsl
-      self.modules.nixos.hmModule
+    modules =
+      with inputs.self.modules.nixos;
+      [
+        host-wsl
+        hmModule
 
-      self.modules.nixos.base
-      self.modules.nixos.fonts
-      self.modules.nixos.nixconfig
-      self.modules.nixos.nixpkgs
-      self.modules.nixos.ssh
-      self.modules.nixos.zsh
-    ];
+        base
+        fonts
+        nixconfig
+        nixpkgs
+        ssh
+        zsh
+      ]
+      ++ [
+        inputs.nixos-wsl.nixosModules.wsl
+      ];
   };
 
   flake.modules.nixos.host-wsl =

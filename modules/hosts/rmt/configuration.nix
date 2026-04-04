@@ -1,12 +1,12 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   # nixos-rebuild --target-host user@host -S --flake .#host switch
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
     specialArgs = {
-      inherit inputs self;
+      inherit inputs;
     };
     modules =
-      with self.modules.nixos;
+      with inputs.self.modules.nixos;
       [
         # [ profiles ]
         host-rmt
@@ -37,7 +37,6 @@
 
   flake.modules.nixos.host-rmt =
     {
-      self,
       pkgs,
       config,
       ...
@@ -47,7 +46,7 @@
       networking.hostName = "rmt";
 
       home-manager.users.${config.myVars.user}.imports = [
-        self.modules.homeManager.default-imports
+        inputs.self.modules.homeManager.default-imports
       ];
 
       environment.systemPackages = with pkgs; [

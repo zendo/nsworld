@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 let
   userName = "test";
 in
@@ -9,22 +9,25 @@ in
     specialArgs = {
       inherit inputs;
     };
-    modules = [
-      "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-      # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+    modules =
+      with inputs.self.modules.nixos;
+      [
+        host-vmtest
+        hmModule
 
-      self.modules.nixos.host-vmtest
-      self.modules.nixos.hmModule
-
-      self.modules.nixos.base
-      self.modules.nixos.fonts
-      self.modules.nixos.nixconfig
-      self.modules.nixos.nixpkgs
-      self.modules.nixos.ssh
-      self.modules.nixos.zsh
-      # self.modules.nixos.nix-ld
-      self.modules.nixos.gnome
-    ];
+        base
+        fonts
+        nixconfig
+        nixpkgs
+        ssh
+        zsh
+        # nix-ld
+        gnome
+      ]
+      ++ [
+        "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+        # "${inputs.pkgsReview}/nixos/modules/services/desktops/pipewire/pipewire.nix"
+      ];
   };
 
   flake.modules.nixos.host-vmtest =
@@ -32,7 +35,7 @@ in
     {
       home-manager.users.${userName} = {
         imports = [
-          self.modules.homeManager.default-imports
+          inputs.self.modules.homeManager.default-imports
         ];
       };
 

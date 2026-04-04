@@ -1,11 +1,11 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
     specialArgs = {
-      inherit inputs self;
+      inherit inputs;
     };
     modules =
-      with self.modules.nixos;
+      with inputs.self.modules.nixos;
       [
         # [ profiles ]
         host-svp
@@ -44,7 +44,7 @@
       networking.hostName = "svp";
 
       home-manager.users.${config.myVars.user}.imports = [
-        self.modules.homeManager.default-imports
+        inputs.self.modules.homeManager.default-imports
       ];
 
       users.users.${config.myVars.user} = {
