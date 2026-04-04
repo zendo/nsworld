@@ -3,9 +3,9 @@ keys:
   - &yoga age1jmm676z8v5nkmmlrvz0pdne99spjen43l2myl4h8cvng5ptemunsnqz564
   - &svp age1l46tamf9lgx47xqvy2dqc4qhlhwlwsruzky0qnfvewtsw205wd8qc6alyq
   - &rmt age1dcyjdpcfjav8dlnh383gq8ppp4y2k9ewjnuf5sggt35erh8svdrsysvrfj
-  - &wsl age1zx82dgjq8xpmc5eczxnagpxwsusc7d4dknclh96ae8npmf4pugys3yjesc
+  - &wsl age1jvqz7uyl5x23vzcuseuk363kzza869v9rh7nsqj4srqx6tyjhv2qsc32ww
 creation_rules:
-  - path_regex: modules/secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *private-ssh

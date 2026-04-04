@@ -44,7 +44,7 @@ in
 
           imports = with inputs.self.modules.homeManager; [
             # [ common ]
-            # secrets
+            secrets
             ssh
             nixconfig
 
