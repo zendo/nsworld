@@ -146,26 +146,22 @@
   # ╭──────────────────────────────────────────╮
   # │ HYPRLAND                                 │
   # ╰──────────────────────────────────────────╯
-  flake.modules.nixos.hyprland =
-    { ... }:
-    {
-      imports = [ inputs.self.modules.nixos.wm ];
-      programs.hyprland = {
-        enable = true;
-        withUWSM = true;
-      };
+  flake.modules.nixos.hyprland = {
+    imports = [ inputs.self.modules.nixos.wm ];
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
     };
+  };
 
   # ╭──────────────────────────────────────────╮
   # │ NIRI                                     │
   # ╰──────────────────────────────────────────╯
-  flake.modules.nixos.niri =
-    { ... }:
-    {
-      imports = [ inputs.self.modules.nixos.wm ];
-      programs.niri.enable = true;
-      services.displayManager.dms-greeter.compositor.name = "niri";
-    };
+  flake.modules.nixos.niri = {
+    imports = [ inputs.self.modules.nixos.wm ];
+    programs.niri.enable = true;
+    services.displayManager.dms-greeter.compositor.name = "niri";
+  };
 
   # ╭──────────────────────────────────────────╮
   # │ GREETD                                   │
@@ -200,38 +196,34 @@
   # ╭──────────────────────────────────────────╮
   # │ LY                                       │
   # ╰──────────────────────────────────────────╯
-  flake.modules.nixos.ly =
-    { ... }:
-    {
-      services.displayManager.ly = {
-        enable = true;
-        # https://codeberg.org/fairyglade/ly/src/branch/master/res/config.ini
-        settings = {
-          animation = "matrix";
-          bigclock = true;
-          session_log = null;
-          clear_password = true;
-          hide_version_string = true;
-        };
+  flake.modules.nixos.ly = {
+    services.displayManager.ly = {
+      enable = true;
+      # https://codeberg.org/fairyglade/ly/src/branch/master/res/config.ini
+      settings = {
+        animation = "matrix";
+        bigclock = true;
+        session_log = null;
+        clear_password = true;
+        hide_version_string = true;
       };
     };
+  };
 
   # ╭──────────────────────────────────────────╮
   # │ DMS                                      │
   # ╰──────────────────────────────────────────╯
-  flake.modules.nixos.dms =
-    { ... }:
-    {
-      programs.dms-shell = {
-        enable = true;
-      };
-
-      # include fonts:
-      # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/display-managers/dms-greeter.nix#L210
-      services.displayManager.dms-greeter = {
-        # enable = true;
-      };
-
-      # programs.dsearch.enable = true;
+  flake.modules.nixos.dms = {
+    programs.dms-shell = {
+      enable = true;
     };
+
+    # include fonts:
+    # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/display-managers/dms-greeter.nix#L210
+    services.displayManager.dms-greeter = {
+      # enable = true;
+    };
+
+    # programs.dsearch.enable = true;
+  };
 }
