@@ -74,9 +74,9 @@
               "Source Han Serif SC"
               "DejaVu Serif"
             ];
-          }; # end of defaultFonts
-        }; # end of fontconfig
-      }) # end of zh_CN.UTF-8
+          };
+        };
+      })
 
     ];
 }

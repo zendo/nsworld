@@ -198,9 +198,9 @@
               "Meta+4"
               "Ctrl+F4"
             ];
-          }; # end of kwin
-        }; # end of shortcuts
-      }; # end of programs.plasma
+          }; # kwin
+        }; # shortcuts
+      }; # programs.plasma
 
       programs.kate = {
         enable = true;

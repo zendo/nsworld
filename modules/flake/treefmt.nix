@@ -31,7 +31,7 @@
           "dotfiles/mofa/*"
         ];
 
-        # [ TOML]
+        # [ TOML ]
         programs.taplo.enable = true;
 
         # [ JUSTFILE ]

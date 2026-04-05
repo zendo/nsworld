@@ -81,9 +81,9 @@
                 URLTemplate = "https://home-manager-options.extranix.com/?release=master&query={searchTerms}";
                 Alias = "hm";
               }
-            ]; # end of Add
-          }; # end of SearchEngines
-        }; # end of policies
-      }; # end of programs.firefox
+            ]; # Add
+          }; # SearchEngines
+        }; # policies
+      }; # programs.firefox
     };
 }
