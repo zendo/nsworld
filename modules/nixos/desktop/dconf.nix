@@ -4,8 +4,8 @@
     rec {
       home.packages = with pkgs.gnomeExtensions; [
         appindicator
-        # dockng
-        dash-to-dock
+        dockng
+        # dash-to-dock
         # dash-to-panel
         night-theme-switcher
         # legacy-gtk3-theme-scheme-auto-switcher
