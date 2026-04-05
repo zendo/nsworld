@@ -24,6 +24,7 @@
   - Decrypt and show the real value
   sops --extract '["dae_sub"]' --decrypt ~/nsworld/secrets/sopsnix.yaml
 */
+{ inputs, ... }:
 let
   agenixSecrets = {
     dae.file = ./dae.age;
@@ -40,7 +41,6 @@ in
 {
   flake.modules.nixos.secrets =
     {
-      inputs,
       lib,
       config,
       pkgs,
@@ -75,11 +75,7 @@ in
   # │  Home-manager                                       │
   # ╰─────────────────────────────────────────────────────╯
   flake.modules.homeManager.secrets =
-    {
-      inputs,
-      config,
-      ...
-    }:
+    { config, ... }:
     {
       imports = [
         inputs.agenix.homeManagerModules.default

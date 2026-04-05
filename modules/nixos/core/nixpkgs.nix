@@ -1,6 +1,7 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.nixpkgs =
-    { inputs, lib, ... }:
+    { lib, ... }:
     {
       nixpkgs = {
         overlays = builtins.attrValues inputs.self.overlays;

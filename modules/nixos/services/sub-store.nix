@@ -1,10 +1,6 @@
 {
   flake.modules.nixos.services =
-    {
-      lib,
-      pkgs,
-      ...
-    }:
+    { lib, pkgs, ... }:
     {
       # REF: https://surge.tel/08/2930 & https://hub.docker.com/r/xream/sub-store
       systemd.services.sub-store = {

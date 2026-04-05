@@ -1,10 +1,6 @@
 {
   flake.modules.nixos.laptop =
-    {
-      pkgs,
-      config,
-      ...
-    }:
+    { pkgs, config, ... }:
     {
       services = {
         # 监听电源事件响应

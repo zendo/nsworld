@@ -2,9 +2,9 @@
 {
   flake.nixosConfigurations.yoga = inputs.nixpkgs.lib.nixosSystem {
     # flake.nixosConfigurations.host._module.specialArgs
-    specialArgs = {
-      inherit inputs;
-    };
+    # specialArgs = {
+    #   inherit inputs;
+    # };
     modules =
       with inputs.self.modules.nixos;
       [
@@ -50,6 +50,11 @@
 
       security.sudo.wheelNeedsPassword = false;
       security.sudo-rs.wheelNeedsPassword = false;
+
+      environment.systemPackages = with pkgs; [
+        # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
+        inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+      ];
 
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 

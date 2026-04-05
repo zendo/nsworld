@@ -1,15 +1,8 @@
 {
   flake.modules.nixos.host-yoga =
-    {
-      inputs,
-      pkgs,
-      config,
-      ...
-    }:
+    { pkgs, config, ... }:
     {
       environment.systemPackages = with pkgs; [
-        # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
-        inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
         mihomo
         sing-box
         # gui-for-singbox

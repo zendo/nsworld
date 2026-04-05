@@ -1,10 +1,7 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.nixconfig =
-    {
-      lib,
-      inputs,
-      ...
-    }:
+    { lib, ... }:
     {
       nix = {
         channel.enable = false;

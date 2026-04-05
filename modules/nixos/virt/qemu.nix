@@ -23,11 +23,7 @@
 */
 {
   flake.modules.nixos.qemu =
-    {
-      pkgs,
-      lib,
-      ...
-    }:
+    { pkgs, lib, ... }:
     {
       programs = {
         # java.enable = true;
