@@ -1,13 +1,11 @@
 { inputs, ... }:
 {
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = {
-      inherit inputs;
-    };
     modules =
       with inputs.self.modules.nixos;
       [
         host-svp
+        host-svp-disko-btrfs
 
         # [ profiles ]
         hmModule
@@ -31,7 +29,6 @@
         # hyprland
       ]
       ++ [
-        ./_disko-btrfs.nix
         inputs.nixos-hardware.nixosModules.common-gpu-intel
       ];
   };

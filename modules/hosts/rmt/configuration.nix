@@ -2,39 +2,32 @@
 {
   # nixos-rebuild --target-host user@host -S --flake .#host switch
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = {
-      inherit inputs;
-    };
-    modules =
-      with inputs.self.modules.nixos;
-      [
-        host-rmt
+    modules = with inputs.self.modules.nixos; [
+      host-rmt
+      # host-rmt-disko-btrfs
+      host-rmt-disko-bcachefs
 
-        # [ profiles ]
-        hmModule
-        default-imports
-        # laptop
-        # steam
+      # [ profiles ]
+      hmModule
+      default-imports
+      # laptop
+      # steam
 
-        # [ virt ]
-        # docker
-        # incus
-        # nix-ld
-        # qemu
+      # [ virt ]
+      # docker
+      # incus
+      # nix-ld
+      # qemu
 
-        # [ desktop ]
-        graphical
-        gnome
-        # kde
-        # cosmic
-        # niri
-        # sway
-        # hyprland
-      ]
-      ++ [
-        ./_disko-bcachefs.nix
-        # ./_disko-btrfs.nix
-      ];
+      # [ desktop ]
+      graphical
+      gnome
+      # kde
+      # cosmic
+      # niri
+      # sway
+      # hyprland
+    ];
   };
 
   flake.modules.nixos.host-rmt =
