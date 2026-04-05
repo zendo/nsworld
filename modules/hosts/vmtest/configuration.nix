@@ -6,9 +6,6 @@ in
   # nixos-rebuild build-vm --flake .#vmtest
   # nix build .#nixosConfigurations.vmtest.config.system.build.vm
   flake.nixosConfigurations.vmtest = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = {
-      inherit inputs;
-    };
     modules =
       with inputs.self.modules.nixos;
       [

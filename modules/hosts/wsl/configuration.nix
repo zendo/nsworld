@@ -5,9 +5,6 @@ in
 {
   # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
   flake.nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = {
-      inherit inputs;
-    };
     modules =
       with inputs.self.modules.nixos;
       [

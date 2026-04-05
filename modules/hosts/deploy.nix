@@ -10,7 +10,7 @@ in
     meta = {
       nixpkgs = { inherit lib; };
       nodeNixpkgs = builtins.mapAttrs (_: v: v.pkgs) nixosConfigurations;
-      nodeSpecialArgs = builtins.mapAttrs (_: v: v._module.specialArgs) nixosConfigurations;
+      # nodeSpecialArgs = builtins.mapAttrs (_: v: v._module.specialArgs) nixosConfigurations;
     };
 
     # colmena apply-local --sudo
