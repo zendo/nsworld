@@ -47,15 +47,15 @@
         ];
 
         fonts.fontconfig = {
-          # antialias = true; # default value: true
+          # antialias = true; # default: true
           # hinting = {
-          #   enable = false; # default value: true
-          #   autohint = false; # default value: false
-          #   style = "slight"; # default value: slight
+          #   enable = false; # default: true
+          #   autohint = false; # default: false
+          #   style = "slight"; # default: slight
           # };
           # subpixel = {
-          #   rgba = "none"; # default value: none
-          #   lcdfilter = "default"; # default value: default
+          #   rgba = "none"; # default: none
+          #   lcdfilter = "default"; # default: default
           # };
           defaultFonts = {
             emoji = [ "Noto Color Emoji" ];

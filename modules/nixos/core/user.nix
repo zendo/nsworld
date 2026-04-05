@@ -1,4 +1,11 @@
 {
+  flake.modules.nixos.host-yoga = _: {
+    # No passwd on main machine
+    security.doas.wheelNeedsPassword = false;
+    security.sudo.wheelNeedsPassword = false;
+    security.sudo-rs.wheelNeedsPassword = false;
+  };
+
   flake.modules.nixos.user =
     {
       lib,

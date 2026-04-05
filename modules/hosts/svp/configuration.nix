@@ -7,8 +7,9 @@
     modules =
       with inputs.self.modules.nixos;
       [
-        # [ profiles ]
         host-svp
+
+        # [ profiles ]
         hmModule
         default-imports
         laptop
@@ -21,6 +22,7 @@
         qemu
 
         # [ desktop ]
+        graphical
         gnome
         # kde
         # cosmic
