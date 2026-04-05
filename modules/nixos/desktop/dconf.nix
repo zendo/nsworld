@@ -33,8 +33,6 @@
           clock-show-date = false;
           cursor-theme = "Adwaita";
           icon-theme = "Adwaita";
-          # font-hinting = "full";
-          # font-antialiasing = "rgba";
         };
 
         "org/gnome/mutter" = {
@@ -60,7 +58,6 @@
             # "kitty.desktop"
             "com.mitchellh.ghostty.desktop"
             "org.gnome.Nautilus.desktop"
-            # "code.desktop"
             "emacs.desktop"
             "firefox.desktop"
             # "google-chrome.desktop"
