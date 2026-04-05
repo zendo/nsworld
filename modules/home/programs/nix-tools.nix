@@ -1,11 +1,7 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.nix-tools =
-    {
-      pkgs,
-      config,
-      inputs,
-      ...
-    }:
+    { pkgs, config, ... }:
     {
       home.packages = with pkgs; [
         # alejandra

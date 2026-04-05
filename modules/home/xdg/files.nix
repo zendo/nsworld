@@ -1,6 +1,7 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.files =
-    { inputs, config, ... }:
+    { config, ... }:
     let
       staticDot = dir: (inputs.self + /dotfiles/${dir});
       linkDot =

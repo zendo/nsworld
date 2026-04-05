@@ -1,10 +1,6 @@
 {
   flake.modules.homeManager.gui =
-    {
-      lib,
-      pkgs,
-      ...
-    }:
+    { lib, pkgs, ... }:
     {
       home.packages = with pkgs; [
         comigo

@@ -1,10 +1,8 @@
 {
-  flake.modules.nixos.zsh =
-    { ... }:
-    {
-      # Load configs from nixos/modules
-      programs.zsh.enable = true;
-    };
+  flake.modules.nixos.zsh = {
+    # Load configs from nixos/modules
+    programs.zsh.enable = true;
+  };
 
   flake.modules.homeManager.zsh =
     { config, pkgs, ... }:

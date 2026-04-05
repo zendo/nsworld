@@ -1,11 +1,7 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.env =
-    {
-      inputs,
-      lib,
-      config,
-      ...
-    }:
+    { lib, config, ... }:
     {
       home.sessionPath = [
         "${inputs.self}/dotfiles/bin"

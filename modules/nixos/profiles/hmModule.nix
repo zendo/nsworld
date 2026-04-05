@@ -10,9 +10,9 @@
       # fd hm_bak -H -x rm -r
       backupFileExtension = "hm_bak~";
       overwriteBackup = true;
-      extraSpecialArgs = {
-        inherit inputs;
-      };
+      # extraSpecialArgs = {
+      #   inherit inputs;
+      # };
       sharedModules = [
         (
           { nixosConfig, ... }:

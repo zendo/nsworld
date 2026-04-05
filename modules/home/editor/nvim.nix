@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.nvim =
-    { inputs, pkgs, ... }:
+    { pkgs, ... }:
     {
       home.packages = with pkgs; [
         neovim
