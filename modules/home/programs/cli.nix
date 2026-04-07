@@ -37,11 +37,6 @@
         choose
         rsync
         lazyssh
-        age
-        # rage # age encrypt RIIR
-        ssh-to-age
-        sops
-        ragenix
         chafa # image viewer
         viu # image viewer
         gtrash
@@ -147,8 +142,8 @@
         btop.enable = true;
         htop.enable = true;
         bottom.enable = true; # btm
-        hstr.enable = true; # hh :history
         zoxide.enable = true; # z: autojump directory
+        # hstr.enable = true; # hh :history
         # pay-respects.enable = true;
       };
     };

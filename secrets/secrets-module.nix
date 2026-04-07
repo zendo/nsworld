@@ -75,7 +75,7 @@ in
   # │  Home-manager                                       │
   # ╰─────────────────────────────────────────────────────╯
   flake.modules.homeManager.secrets =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       imports = [
         inputs.agenix.homeManagerModules.default
@@ -88,5 +88,13 @@ in
       sops.secrets = sopsSecrets;
       sops.defaultSopsFile = ./sopsnix.yaml;
       sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+
+      home.packages = with pkgs; [
+        age
+        # rage # age encrypt RIIR
+        ssh-to-age
+        sops
+        ragenix
+      ];
     };
 }
