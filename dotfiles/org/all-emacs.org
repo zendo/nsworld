@@ -802,7 +802,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 (setq history-length 300)
 (setq savehist-additional-variables
       '(register-alist                   ; macros
-        mark-ring global-mark-ring       ; marks
+        mark-ring global-mark-ring kill-ring       ; marks
         search-ring regexp-search-ring)) ; searches
 
 ;;; Frames and windows
@@ -3613,6 +3613,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-z" . undo)
  ("C-S-z" . undo-redo)
  ("C-s" . consult-line)
+ ("M-m" . pop-to-mark-command)
  ;; ("C-." . company-complete)
  ("C-." . hippie-expand)
  ("C-/" . comment-line) ;vscode
