@@ -8,7 +8,7 @@
 
   - Using host ssh key
   [private]: ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
-  [remote]: sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt | age-keygen -y
+  [remote]: sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
   chmod 600 ~/.config/sops/age/keys.txt
 
   - Paste into .sops.yaml
@@ -80,11 +80,12 @@ in
       ];
 
       age.secrets = agenixSecrets;
-      # age.identityPaths = [ ]; # defined already
+      age.identityPaths = [ "${config.home.homeDirectory}/.config/sops/age/keys.txt" ];
 
       sops.secrets = sopsSecrets;
       sops.defaultSopsFile = ./sopsnix.yaml;
-      sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+      # sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+      sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
       home.packages = with pkgs; [
         age
@@ -101,37 +102,36 @@ in
       devshells.default = {
         packages = with pkgs; [
           age
-          rage # age encrypt RIIR
+          # rage # age encrypt RIIR
           ssh-to-age
           sops
           ragenix
         ];
         commands = [
+          # {
+          #   name = "secrets-copy-hostkey-to-home";
+          #   category = "secrets";
+          #   command = ''
+          #     echo "=> Copy host key to home"
+          #     [ -f "$HOME/.ssh/id_ed25519" ] && echo "Do nothing."; exit 0
+          #     read -p "Are u sure? (y/n): " res
+          #     [[ "$res" =~ ^[Yy](es)?$ ]] || exit 1
+          #     sudo cp /var/lib/ssh/ssh_host_ed25519_key  ~/.ssh/id_ed25519
+          #     sudo cp /var/lib/ssh/ssh_host_ed25519_key.pub ~/.ssh/id_ed25519.pub
+          #     sudo chown -R $USER  ~/.ssh
+          #     echo "Done."
+          #   '';
+          # }
           {
-            name = "secrets-copy-hostkey-to-home";
+            name = "secrets-hostkey-to-age";
             category = "secrets";
             command = ''
-              echo "=> Copy host key to home"
-              [ -f "$HOME/.ssh/id_ed25519" ] && echo "Do nothing."; exit 0
-              read -p "Are u sure? (y/n): " res
-              [[ "$res" =~ ^[Yy](es)?$ ]] || exit 1
-              sudo cp /var/lib/ssh/ssh_host_ed25519_key  ~/.ssh/id_ed25519
-              sudo cp /var/lib/ssh/ssh_host_ed25519_key.pub ~/.ssh/id_ed25519.pub
-              sudo chown -R $USER  ~/.ssh
-              echo "Done."
-            '';
-          }
-          {
-            name = "secrets-sops-privatekey-to-age";
-            category = "secrets";
-            command = ''
-              echo "=> Generate private-key to age"
+              echo "=> Generate host-key to age"
               mkdir -p ~/.config/sops/age
-              ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
-              echo "Private key to age:"
-              ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
-              echo -e "\nHost key to age:"
-              cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
+              cat /var/lib/ssh/ssh_host_ed25519_key.pub
+              sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key \
+                                           -o ~/.config/sops/age/keys.txt
+              age-keygen -y ~/.config/sops/age/keys.txt
             '';
           }
         ];
