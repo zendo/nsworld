@@ -1,28 +1,4 @@
-/*
-  https://github.com/ryantm/agenix
-  https://github.com/Mic92/sops-nix
-  https://github.com/oddlama/agenix-rekey
-  https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
-
-  - Convert ssh key to age
-  mkdir -p ~/.config/sops/age
-  [private]: ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
-  [remote]: sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
-  sudo chmod 600 ~/.config/sops/age/keys.txt
-
-  - Paste into .sops.yaml & secrets.nix
-  ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
-  cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
-
-  - Edit
-  sops ~/nsworld/secrets/sopsnix.yaml
-
-  - Update all secrets when key changed
-  sops updatekeys ~/nsworld/secrets/sopsnix.yaml
-
-  - Decrypt and show the real value
-  sops --extract '["dae_sub"]' --decrypt ~/nsworld/secrets/sopsnix.yaml
-*/
+# https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
 { inputs, ... }:
 let
   agenixSecrets = {
@@ -70,7 +46,6 @@ in
 
       sops.secrets = sopsSecrets;
       sops.defaultSopsFile = ./sopsnix.yaml;
-      # sops.age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
       sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
       home.packages = with pkgs; [
@@ -103,7 +78,8 @@ in
                                            -o ~/.config/sops/age/keys.txt
               sudo chmod 600 ~/.config/sops/age/keys.txt
               cat /var/lib/ssh/ssh_host_ed25519_key.pub
-              sudo age-keygen -y ~/.config/sops/age/keys.txt
+              cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
+              # same = sudo age-keygen -y ~/.config/sops/age/keys.txt
             '';
           }
           # {
