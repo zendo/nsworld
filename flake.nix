@@ -58,6 +58,7 @@
     import-tree.url = "github:vic/import-tree";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
   };
 
   # Flake Local Nix Configuration
