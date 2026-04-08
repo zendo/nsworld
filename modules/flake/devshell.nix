@@ -3,10 +3,9 @@
   imports = [ inputs.devshell.flakeModule ];
 
   perSystem =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     {
       devshells.default = {
-        # +secrets-module.nix
         packages = with pkgs; [
           git
           just
@@ -16,6 +15,7 @@
         commands = [
           {
             name = "switch";
+            category = "nix tools";
             command = ''
               hostname=$1
               echo "=> Deploying system '$hostname'"
@@ -24,6 +24,7 @@
           }
           {
             name = "non-nixos-setup";
+            category = "nix tools";
             command = ''
               sudo tee -a /etc/nix/nix.conf <<EOF
               experimental-features = nix-command flakes
@@ -34,6 +35,7 @@
           }
           {
             name = "nix-index-database-update";
+            category = "nix tools";
             command = ''
               filename="index-x86_64-$(uname | tr '[:upper:]' '[:lower:]')"
               mkdir -p ~/.cache/nix-index

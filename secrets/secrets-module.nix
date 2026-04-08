@@ -85,7 +85,7 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      devshells.default = {
+      devshells.secrets = {
         packages = with pkgs; [
           age
           # rage # age encrypt RIIR
@@ -96,7 +96,6 @@ in
         commands = [
           {
             name = "secrets-hostkey-to-age";
-            category = "secrets";
             command = ''
               echo "=> Generate host-key to age"
               mkdir -p ~/.config/sops/age
@@ -109,7 +108,6 @@ in
           }
           # {
           #   name = "secrets-copy-hostkey-to-home";
-          #   category = "secrets";
           #   command = ''
           #     echo "=> Copy host key to home"
           #     [ -f "$HOME/.ssh/id_ed25519" ] && echo "Do nothing."; exit 0
