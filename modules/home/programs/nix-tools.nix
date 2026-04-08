@@ -52,8 +52,9 @@
           dbPath = inputs.nixpkgs + "/programs.sqlite";
         };
 
+        # Causes the `motd` not working
         nix-your-shell = {
-          enable = true;
+          # enable = true;
         };
 
         # echo "use flake" >> .envrc && direnv allow

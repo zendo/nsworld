@@ -47,25 +47,6 @@ up:
 nix-tree-with-gcroots:
     nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree
 
-nix-index-database-update:
-    #!/usr/bin/env bash
-    filename="index-x86_64-$(uname | tr '[:upper:]' '[:lower:]')"
-    mkdir -p ~/.cache/nix-index
-    pushd ~/.cache/nix-index > /dev/null
-    wget -q -N https://github.com/nix-community/nix-index-database/releases/latest/download/"$filename"
-    ln -f "$filename" files
-    popd > /dev/null
-    ls -l ~/.cache/nix-index
-    echo -e "\033[32m \n nix-index datebase update successfully. \033[0m"
-
-non-nixos-setup:
-    #!/usr/bin/env bash
-    sudo tee -a /etc/nix/nix.conf <<EOF
-    experimental-features = nix-command flakes
-    trusted-users = root @wheel {{ user }}
-    substituters = https://mirror.sjtu.edu.cn/nix-channels/store
-    EOF
-
 backup-my-data:
     #!/usr/bin/env bash
     BACKUP_DIR="$HOME/Documents/mybackup"

@@ -109,6 +109,7 @@ in
         commands = [
           {
             name = "secrets-copy-hostkey-to-home";
+            category = "secrets";
             command = ''
               echo "=> Copy host key to home"
               [ -f "$HOME/.ssh/id_ed25519" ] && echo "Do nothing."; exit 0
@@ -122,6 +123,7 @@ in
           }
           {
             name = "secrets-sops-privatekey-to-age";
+            category = "secrets";
             command = ''
               echo "=> Generate private-key to age"
               mkdir -p ~/.config/sops/age
