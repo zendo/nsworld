@@ -8,7 +8,7 @@
   mkdir -p ~/.config/sops/age
   [private]: ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
   [remote]: sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
-  chmod 600 ~/.config/sops/age/keys.txt
+  sudo chmod 600 ~/.config/sops/age/keys.txt
 
   - Paste into .sops.yaml & secrets.nix
   ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
@@ -100,10 +100,10 @@ in
             command = ''
               echo "=> Generate host-key to age"
               mkdir -p ~/.config/sops/age
-              cat /var/lib/ssh/ssh_host_ed25519_key.pub
               sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key \
                                            -o ~/.config/sops/age/keys.txt
-              chmod 600 ~/.config/sops/age/keys.txt
+              sudo chmod 600 ~/.config/sops/age/keys.txt
+              cat /var/lib/ssh/ssh_host_ed25519_key.pub
               age-keygen -y ~/.config/sops/age/keys.txt
             '';
           }
