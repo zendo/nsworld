@@ -104,7 +104,7 @@ in
                                            -o ~/.config/sops/age/keys.txt
               sudo chmod 600 ~/.config/sops/age/keys.txt
               cat /var/lib/ssh/ssh_host_ed25519_key.pub
-              age-keygen -y ~/.config/sops/age/keys.txt
+              sudo age-keygen -y ~/.config/sops/age/keys.txt
             '';
           }
           # {
