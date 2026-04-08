@@ -21,7 +21,7 @@
 
       # nix build .#
       # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
-      legacyPackages = pkgs;
+      # legacyPackages = pkgs;
 
       # flake.packages
       packages =

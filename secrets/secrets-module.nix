@@ -1,17 +1,16 @@
 /*
   https://github.com/ryantm/agenix
-  https://github.com/oddlama/agenix-rekey
   https://github.com/Mic92/sops-nix
+  https://github.com/oddlama/agenix-rekey
   https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
 
+  - Convert ssh key to age
   mkdir -p ~/.config/sops/age
-
-  - Using host ssh key
   [private]: ssh-to-age -private-key -i ~/.ssh/id_ed25519 -o ~/.config/sops/age/keys.txt
   [remote]: sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
   chmod 600 ~/.config/sops/age/keys.txt
 
-  - Paste into .sops.yaml
+  - Paste into .sops.yaml & secrets.nix
   ssh-to-age -private-key -i ~/.ssh/id_ed25519 | age-keygen -y
   cat /var/lib/ssh/ssh_host_ed25519_key.pub | ssh-to-age
 
@@ -40,12 +39,7 @@ let
 in
 {
   flake.modules.nixos.secrets =
-    {
-      lib,
-      config,
-      pkgs,
-      ...
-    }:
+    { lib, config, ... }:
     {
       imports = [
         inputs.agenix.nixosModules.default
@@ -61,14 +55,6 @@ in
       sops.age.sshKeyPaths = map (e: e.path) (
         lib.filter (e: e.type == "rsa" || e.type == "ed25519") config.services.openssh.hostKeys
       );
-
-      environment.systemPackages = with pkgs; [
-        age
-        # rage # age encrypt RIIR
-        ssh-to-age
-        sops
-        ragenix
-      ];
     };
 
   flake.modules.homeManager.secrets =
@@ -108,6 +94,19 @@ in
           ragenix
         ];
         commands = [
+          {
+            name = "secrets-hostkey-to-age";
+            category = "secrets";
+            command = ''
+              echo "=> Generate host-key to age"
+              mkdir -p ~/.config/sops/age
+              cat /var/lib/ssh/ssh_host_ed25519_key.pub
+              sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key \
+                                           -o ~/.config/sops/age/keys.txt
+              chmod 600 ~/.config/sops/age/keys.txt
+              age-keygen -y ~/.config/sops/age/keys.txt
+            '';
+          }
           # {
           #   name = "secrets-copy-hostkey-to-home";
           #   category = "secrets";
@@ -122,18 +121,6 @@ in
           #     echo "Done."
           #   '';
           # }
-          {
-            name = "secrets-hostkey-to-age";
-            category = "secrets";
-            command = ''
-              echo "=> Generate host-key to age"
-              mkdir -p ~/.config/sops/age
-              cat /var/lib/ssh/ssh_host_ed25519_key.pub
-              sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key \
-                                           -o ~/.config/sops/age/keys.txt
-              age-keygen -y ~/.config/sops/age/keys.txt
-            '';
-          }
         ];
       };
     };
