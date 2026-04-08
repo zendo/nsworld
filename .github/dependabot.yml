@@ -5,10 +5,11 @@
 
 version: 2
 updates:
-  - package-ecosystem: "nix" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "nix"
+    directory: "/"
     schedule:
       interval: "daily"
-groups:
-  nix:
-    patterns: ["*"] 
+    groups:
+      nix-group:
+        patterns:
+          - "*"
