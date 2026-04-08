@@ -30,7 +30,7 @@ in
       # │  Home-manager                                       │
       # ╰─────────────────────────────────────────────────────╯
       home-manager.users.${userName} =
-        { inputs, pkgs, ... }:
+        { pkgs, ... }:
         {
           xdg.enable = true;
 

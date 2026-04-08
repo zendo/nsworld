@@ -1,24 +1,28 @@
+{ inputs, ... }:
 {
+  imports = [ inputs.devshell.flakeModule ];
+
   perSystem =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
-      # ╭──────────────────────────────────────╮
-      # │ DEFAULT                              │
-      # ╰──────────────────────────────────────╯
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
+      devshells.default = {
+        # +secrets-module.nix
+        packages = with pkgs; [
           git
           just
-          age
-          sops
-          ssh-to-age
-          home-manager
           nixfmt
+          home-manager
         ];
-        name = "bootstrap";
-        shellHook = ''
-          zsh && exit
-        '';
+        commands = [
+          {
+            name = "switch";
+            command = ''
+              hostname=$1
+              echo "=> Deploying system '$hostname'"
+              nixos-rebuild --sudo --flake .\#"$1" switch
+            '';
+          }
+        ];
       };
 
       # ╭──────────────────────────────────────╮
@@ -288,6 +292,7 @@
 
           GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_SDK_ROOT}/build-tools/${buildToolsVersion}/aapt2";
         };
+
       /*
         # Flutter
         keytool -genkey -v -keystore key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
@@ -311,5 +316,6 @@
           haskell-language-server
         ];
       };
+
     };
 }

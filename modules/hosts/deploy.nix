@@ -68,4 +68,13 @@ in
     };
   };
 
+  perSystem =
+    { inputs', ... }:
+    {
+      devshells.deploy.packages = [
+        inputs'.colmena.packages.colmena
+        # inputs'.deploy-rs.packages.deploy-rs
+        inputs'.nixpkgs.legacyPackages.nixos-rebuild-ng
+      ];
+    };
 }
