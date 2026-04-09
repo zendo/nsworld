@@ -5,14 +5,14 @@
     {
       programs.cava = {
         enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapCava;
+        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-cava;
       };
     };
 
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrapCava = inputs.wrapper-modules.wrappers.cava.wrap {
+      packages.wrap-cava = inputs.wrapper-modules.wrappers.cava.wrap {
         inherit pkgs;
         settings = {
           general = {

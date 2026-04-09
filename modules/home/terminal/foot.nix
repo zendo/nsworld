@@ -1,20 +1,20 @@
+# https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
 { inputs, ... }:
 {
   flake.modules.homeManager.foot =
     { pkgs, ... }:
     {
-      # https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
       programs.foot = {
         enable = true;
         # server.enable = true; # default: false
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapFoot;
+        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-foot;
       };
     };
 
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrapFoot = inputs.wrapper-modules.wrappers.foot.wrap {
+      packages.wrap-foot = inputs.wrapper-modules.wrappers.foot.wrap {
         inherit pkgs;
         settings = {
           main = {
