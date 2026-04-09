@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.host-yoga = _: {
+  flake.modules.nixos.host-yoga = {
     # No passwd on main machine
     security.doas.wheelNeedsPassword = false;
     security.sudo.wheelNeedsPassword = false;
@@ -83,6 +83,9 @@
           #   initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
           # };
         };
+
+        # Allow non-root users use `--allow-other` in mounts
+        programs.fuse.userAllowOther = true;
 
         # Workaround for userborn: Generate subuid/subgid files from the user configuration
         # https://github.com/nikstur/userborn/issues/7

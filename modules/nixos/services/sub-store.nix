@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.services =
+  flake.modules.nixos.sub-store =
     { lib, pkgs, ... }:
     {
       # REF: https://surge.tel/08/2930 & https://hub.docker.com/r/xream/sub-store

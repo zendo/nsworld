@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.services =
+  flake.modules.nixos.dae =
     { lib, config, ... }:
     {
       options.services.daeWithConfig = {

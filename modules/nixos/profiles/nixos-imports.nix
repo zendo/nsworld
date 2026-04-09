@@ -1,6 +1,12 @@
 { config, ... }:
 {
   flake.modules.nixos.default-imports.imports = with config.flake.modules.nixos; [
+    secrets
+
+    # [ shell ]
+    # fish
+    zsh
+
     # [ core ]
     base
     boot
@@ -19,12 +25,14 @@
     networkmanager
     # print
 
-    services
+    # [ services ]
+    dae # services.daeWithConfig
+    kanata
+    # keyd
+    sub-store # systemd.services.sub-store
 
-    # [ shell ]
-    # fish
-    zsh
-
-    secrets
+    # [ desktop ]
+    # [ profiles ]
+    # [ virt ]
   ];
 }
