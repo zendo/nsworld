@@ -1,8 +1,25 @@
+# https://sw.kovidgoyal.net/kitty/conf
+# https://sw.kovidgoyal.net/kitty/_downloads/433dadebd0bf504f8b008985378086ce/kitty.conf
+# ctrl+shift+f5 :reload config
+{ inputs, ... }:
 {
   flake.modules.homeManager.kitty =
     { pkgs, ... }:
+    {
+      # home.packages = with pkgs; [
+      #   kitten-quick-terminal # .desktop
+      # ];
+
+      programs.kitty = {
+        enable = true;
+        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-kitty;
+      };
+    };
+
+  perSystem =
+    { pkgs, ... }:
     let
-      mountain = pkgs.writeText "Mountain.conf" ''
+      theme-mountain = pkgs.writeText "Mountain.conf" ''
         cursor #f0f0f0
         cursor_text_color #ffffff
 
@@ -46,33 +63,17 @@
       '';
     in
     {
-      # home.packages = with pkgs; [
-      #   kitten-quick-terminal # .desktop
-      # ];
-
-      # https://sw.kovidgoyal.net/kitty/conf
-      # https://sw.kovidgoyal.net/kitty/_downloads/433dadebd0bf504f8b008985378086ce/kitty.conf
-      # ctrl+shift+f5 :reload config
-      programs.kitty = {
-        enable = true;
-        # show right prompts
-        shellIntegration.mode = "no-cursor no-sudo";
+      packages.wrap-kitty = inputs.wrapper-modules.wrappers.kitty.wrap {
+        inherit pkgs;
         # kitten theme: Afterglow / vague / bl1nk
         # themeFile = "bl1nk";
-        keybindings = {
-          "f11" = "toggle_fullscreen";
-          "alt+w" = "copy_to_clipboard";
-          "ctrl+y" = "paste_from_clipboard";
-          "alt+v" = "scroll_page_up";
-          "ctrl+shift+v" = "scroll_page_down";
-          "ctrl+shift+backspace" = "close_window";
-          # "ctrl+z>2" = "new_window";
-          # "ctrl+z>x" = "swap_with_window";
-        };
         settings = {
           shell = "zsh -l";
+          # show right prompts
+          # MAYBE
+          shell_integration = "no-cursor no-sudo";
           # Theme
-          include = "${mountain}";
+          include = "${theme-mountain}";
           background_opacity = "0.9";
           wayland_titlebar_color = "background";
           hide_window_decorations = "yes";
@@ -103,10 +104,24 @@
           # window_alert_on_bell = "yes";
           # bell_on_tab = "🔔 ";
         };
+        keybindings = {
+          "f11" = "toggle_fullscreen";
+          "alt+w" = "copy_to_clipboard";
+          "ctrl+y" = "paste_from_clipboard";
+          "alt+v" = "scroll_page_up";
+          "ctrl+shift+v" = "scroll_page_down";
+          "ctrl+shift+backspace" = "close_window";
+          # "ctrl+z>2" = "new_window";
+          # "ctrl+z>x" = "swap_with_window";
+        };
         # https://sw.kovidgoyal.net/kitty/kittens/quick-access-terminal/
         # kitten quick-access-terminal
-        quickAccessTerminalConfig = {
-          hide_on_focus_loss = "yes";
+        # MAYBE
+        constructFiles.kittyQuickConfig = {
+          relPath = "quick-access-terminal.conf";
+          content = ''
+            hide_on_focus_loss yes
+          '';
         };
       };
     };
