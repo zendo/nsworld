@@ -32,6 +32,21 @@
         // {
           # nix run .
           default = config.packages.kula;
+
+          mod-appimage-run = pkgs.appimage-run.override {
+            extraPkgs =
+              pkgs: with pkgs; [
+                libthai
+                libsecret
+                libepoxy
+                # libsoup_3
+                # libdbusmenu-gtk3
+                # libappindicator-gtk3
+                # libayatana-appindicator
+                # webkitgtk_4_1
+              ];
+          };
+
         };
     };
 }

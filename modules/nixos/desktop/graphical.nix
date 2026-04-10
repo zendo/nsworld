@@ -20,24 +20,6 @@
       # flatpak install flathub io.github.kolunmi.Bazaar
       services.flatpak.enable = true;
 
-      programs.appimage = {
-        enable = true;
-        binfmt = true;
-        package = pkgs.appimage-run.override {
-          extraPkgs =
-            pkgs: with pkgs; [
-              libthai
-              libsecret
-              libepoxy
-              # libsoup_3
-              # libdbusmenu-gtk3
-              # libappindicator-gtk3
-              # libayatana-appindicator
-              # webkitgtk_4_1
-            ];
-        };
-      };
-
       mods.fcitx = {
         enable = true;
         # withPinyin = true;
