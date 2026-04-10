@@ -5,10 +5,6 @@
   flake.modules.homeManager.kitty =
     { pkgs, ... }:
     {
-      # home.packages = with pkgs; [
-      #   kitten-quick-terminal # .desktop
-      # ];
-
       programs.kitty = {
         enable = true;
         package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-kitty;
@@ -64,7 +60,7 @@
     {
       packages.wrap-kitty = inputs.wrapper-modules.wrappers.kitty.wrap {
         inherit pkgs;
-        # kitten theme: Afterglow / vague / bl1nk
+        # Afterglow / vague / bl1nk
         # themeFile = "bl1nk";
         settings = {
           shell = "zsh -l";
@@ -112,15 +108,6 @@
           "ctrl+shift+backspace" = "close_window";
           # "ctrl+z>2" = "new_window";
           # "ctrl+z>x" = "swap_with_window";
-        };
-        # MAYBE
-        # kitten quick-access-terminal
-        # https://sw.kovidgoyal.net/kitty/kittens/quick-access-terminal/
-        constructFiles.kittyQuickConfig = {
-          relPath = "quick-access-terminal.conf";
-          content = ''
-            hide_on_focus_loss yes
-          '';
         };
       };
     };

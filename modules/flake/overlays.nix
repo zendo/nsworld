@@ -94,14 +94,6 @@
         '';
       };
 
-      kitten-quick-terminal = prev.pkgs.makeDesktopItem {
-        name = "kitten-quick-terminal";
-        desktopName = "kitten quick terminal";
-        exec = "${prev.pkgs.kitty}/bin/kitten quick-access-terminal";
-        noDisplay = true;
-        startupNotify = false;
-      };
-
       # ---------------------------------------------------
       # Python Module Overlays
       # ---------------------------------------------------

@@ -58,7 +58,7 @@ exec hypridle -w \
 bindsym {
   $mod+Return exec $term
   $mod+t exec $float_term
-  $mod+Comma exec kitten quick-access-terminal
+  # $mod+Comma exec kitten quick-access-terminal
   $mod+w exec $browser
   $mod+e exec $editor
   $mod+f exec $filemanager

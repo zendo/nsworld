@@ -151,7 +151,6 @@
           "emacs.desktop"."_launch" = "Meta+E";
           "firefox.desktop"."_launch" = "Meta+W";
           "com.mitchellh.ghostty.desktop"."_launch" = "Meta+Return";
-          "kitten-quick-terminal.desktop"."_launch" = "Meta+/";
 
           "org.kde.dolphin.desktop"."_launch" = "Meta+F";
           "org.kde.krunner.desktop"."_launch" = [

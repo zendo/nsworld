@@ -45,7 +45,7 @@ recent-windows {
 binds {
     Mod+T      { spawn "foot"; }
     Mod+Return { spawn "ghostty"; }
-    Mod+Comma  { spawn-sh "kitten quick-access-terminal"; }
+    // Mod+Comma  { spawn-sh "kitten quick-access-terminal"; }
     Mod+E      { spawn "emacs"; }
     Mod+W      { spawn "firefox"; }
     Mod+F      { spawn "thunar"; }
