@@ -1,6 +1,5 @@
 # https://sw.kovidgoyal.net/kitty/conf
 # https://sw.kovidgoyal.net/kitty/_downloads/433dadebd0bf504f8b008985378086ce/kitty.conf
-# ctrl+shift+f5 :reload config
 { inputs, ... }:
 {
   flake.modules.homeManager.kitty =
@@ -69,8 +68,8 @@
         # themeFile = "bl1nk";
         settings = {
           shell = "zsh -l";
-          # show right prompts
           # MAYBE
+          # show right prompts
           shell_integration = "no-cursor no-sudo";
           # Theme
           include = "${theme-mountain}";
@@ -114,9 +113,9 @@
           # "ctrl+z>2" = "new_window";
           # "ctrl+z>x" = "swap_with_window";
         };
-        # https://sw.kovidgoyal.net/kitty/kittens/quick-access-terminal/
-        # kitten quick-access-terminal
         # MAYBE
+        # kitten quick-access-terminal
+        # https://sw.kovidgoyal.net/kitty/kittens/quick-access-terminal/
         constructFiles.kittyQuickConfig = {
           relPath = "quick-access-terminal.conf";
           content = ''

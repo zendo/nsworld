@@ -78,7 +78,7 @@
         # https://github.com/nix-community/home-manager/issues/5173
         (lib.hiPrio localsend)
         qbittorrent
-        motrix-next
+        # motrix-next
         # gopeed
         # lock
         # deja-dup
