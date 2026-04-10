@@ -1,9 +1,3 @@
-/*
-  # update an unstable package to the latest commit of the default branch
-  nix-update --commit --flake --version=branch
-
-  nix build --impure --expr 'with (import <nixpkgs>{}); soxr.overrideAttrs(oldAttrs: {outputs = [ "out" ];})'
-*/
 { inputs, ... }:
 {
   # Collection of overlays definitions
