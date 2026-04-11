@@ -33,7 +33,7 @@
           # nix run .
           default = config.packages.kula;
 
-          mod-appimage-run = pkgs.appimage-run.override {
+          appimage-run-extra = pkgs.appimage-run.override {
             extraPkgs =
               pkgs: with pkgs; [
                 libthai
