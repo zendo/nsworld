@@ -6,13 +6,13 @@
 
 buildGoModule rec {
   pname = "comigo";
-  version = "1.2.23";
+  version = "1.2.24";
 
   src = fetchFromGitHub {
     owner = "yumenaka";
     repo = "comigo";
     rev = "v${version}";
-    hash = "sha256-j1QtSOcZGs5mi3GRLc39pJFcOJWMDW7hc+viAn9sYIs=";
+    hash = "sha256-Hgc3CByEKZRff1oudtFftC1fLlNyMcibb3U9Y408gC0=";
   };
 
   vendorHash = "sha256-IEYtO875L/y47IYsDRpeM19/tOjjwevgZWxHgLD6bmo=";
