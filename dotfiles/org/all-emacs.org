@@ -1105,6 +1105,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Vanilla Emacs configuration.
 
 ;;; Code:
+(setq display-time-24hr-format t)
+;; (setq system-time-locale "C") ;使用英文时间格式
+
 (use-package bind-key)
 
 (use-package diminish
@@ -1216,66 +1219,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (setq locale-coding-system 'utf-8)
 #+end_src
 
-** Localization
-~C-h f~ =format-time-string= for more details.
-
-#+begin_src emacs-lisp
-(setq display-time-24hr-format t)
-;; (setq system-time-locale "C") ;使用英文时间格式
-;; (setq calendar-latitude 23.38
-;;       calendar-longitude 113.20)
-
-(setq world-clock-time-format "  %a %d %b %R %Z")
-(setq world-clock-list
-      '(
-        ("America/Los_Angeles" "旧金山")
-        ("America/New_York" "纽约")
-        ("Europe/London" "伦敦")
-        ("Europe/Paris" "巴黎")
-        ("Asia/Calcutta" "班加罗尔")
-        ("Asia/Shanghai" "上海")
-        ("Asia/Tokyo" "东京")
-        ))
-#+end_src
-
 ** Shell
-*** exec-path-from-shell
-#+begin_src emacs-lispxxx
-(use-package exec-path-from-shell
-  :defer t
-  :when IS-MAC
-  :init
-  (exec-path-from-shell-initialize))
-#+end_src
-
-*** eshell
-#+begin_src emacs-lisp
-#+end_src
-
-*** eat
-#+begin_src emacs-lisp
-;; (use-package eat
-;;   :defer t
-;;   :hook
-;;   ;; For `eat-eshell-mode' -- integration with eshell.
-;;   (eshell-mode-hook . eat-eshell-mode)
-;;   :config
-;;   (setq eat-kill-buffer-on-exit t
-;;         eat-enable-yank-to-terminal t
-;;         eat-enable-directory-tracking t
-;;         eat-enable-shell-command-history t
-;;         eat-enable-shell-prompt-annotation t
-;;         eat-term-scrollback-size nil))
-
-(use-package eat
-  :defer t
-  :custom
-  (eat-term-name "xterm")
-  :config
-  (eat-eshell-mode)                     ; use Eat to handle term codes in program output
-  (eat-eshell-visual-command-mode))     ; commands like less will be handled by Eat
-#+end_src
-
 *** vterm
 #+begin_src emacs-lisp
 (use-package vterm
@@ -1309,7 +1253,7 @@ https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
       password-cache-expiry 36000)
 #+end_src
 
-** Server Client
+** Server
 https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
 #+BEGIN_SRC emacs-lisp
@@ -1326,68 +1270,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
-
-** ispell、flyspell
-#+begin_src emacs-lispxx
-;; The flyspell package is a built-in Emacs minor mode that provides
-;; on-the-fly spell checking. It highlights misspelled words as you type,
-;; offering interactive corrections. In text modes, it checks the entire buffer,
-;; while in programming modes, it typically checks only comments and strings. It
-;; integrates with external spell checkers like aspell, hunspell, or
-;; ispell to provide suggestions and corrections.
-;;
-;; NOTE: flyspell-mode can become slow when using Aspell, especially with large
-;; buffers or aggressive suggestion settings like --sug-mode=ultra. This
-;; slowdown occurs because Flyspell checks words dynamically as you type or
-;; navigate text, requiring frequent communication between Emacs and the
-;; external Aspell process. Each check involves sending words to Aspell and
-;; receiving results, which introduces overhead from process invocation and
-;; inter-process communication.
-(use-package ispell
-  :ensure nil
-  :commands (ispell ispell-minor-mode)
-  :custom
-  ;; Set the ispell program name to aspell
-  ;; aspell or hunspell
-  (ispell-program-name "hunspell")
-
-  ;; Define the "en_US" spell-check dictionary locally, telling Emacs to use
-  ;; UTF-8 encoding, match words using alphabetic characters, allow apostrophes
-  ;; inside words, treat non-alphabetic characters as word boundaries, and pass
-  ;; -d en_US to the underlying spell-check program.
-  (ispell-local-dictionary-alist
-   '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
-
-  ;; Configures Aspell's suggestion mode to "ultra", which provides more
-  ;; aggressive and detailed suggestions for misspelled words. The language
-  ;; is set to "en_US" for US English, which can be replaced with your desired
-  ;; language code (e.g., "en_GB" for British English, "de_DE" for German).
-  (ispell-extra-args '(; "--sug-mode=ultra"
-                       "--lang=en_US")))
-
-;; The flyspell package is a built-in Emacs minor mode that provides
-;; on-the-fly spell checking. It highlights misspelled words as you type,
-;; offering interactive corrections.
-(use-package flyspell
-  :ensure nil
-  :commands flyspell-mode
-  :hook
-  (; (prog-mode . flyspell-prog-mode)
-   (text-mode . (lambda()
-                  (if (or (derived-mode-p 'yaml-mode)
-                          (derived-mode-p 'yaml-ts-mode)
-                          (derived-mode-p 'ansible-mode))
-                      (flyspell-prog-mode 1)
-                    (flyspell-mode 1)))))
-  :config
-  ;; Remove strings from Flyspell
-  (setq flyspell-prog-text-faces (delq 'font-lock-string-face
-                                       flyspell-prog-text-faces))
-
-  ;; Remove doc from Flyspell
-  (setq flyspell-prog-text-faces (delq 'font-lock-doc-face
-                                       flyspell-prog-text-faces)))
-#+end_src
 
 * UI
 #+begin_src emacs-lisp
@@ -1444,7 +1326,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 
 ** emoji
 :) :-( :dog:
-
 #+begin_src emacs-lisp
 (use-package emojify
   :defer t
@@ -1461,7 +1342,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;;   (display-battery-mode 1))
 
 (use-package doom-modeline
-  :disabled
+  ;; :disabled
   :hook
   (after-init . doom-modeline-mode)
   :custom ((doom-modeline-buffer-file-name-style 'relative-to-project)
@@ -1470,16 +1351,14 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
            (column-number-mode 1)))
 
 (use-package mood-line
-  ;; :disabled
+  :disabled
   :hook
-  ;; load it earilier to have a smooth startup
   (after-init . mood-line-mode))
 
 ;; Scrollbar on mode line
 (use-package mlscroll
   :disabled
   :config
-  (setq mlscroll-shortfun-min-width 11) ; truncate which-func
   (mlscroll-mode 1))
 
 (use-package nyan-mode
@@ -1585,7 +1464,7 @@ Use `treemacs' command for old functionality."
 ** indent-bars
 #+begin_src emacs-lisp
 (use-package indent-bars
-  :defer t)
+  :commands indent-bars)
 #+end_src
 
 ** hl-todo
@@ -1595,7 +1474,7 @@ Use `treemacs' command for old functionality."
   (global-hl-todo-mode))
 #+end_src
 
-** rainbow
+** rainbow & colorful-mode
 #+begin_src emacs-lisp
 ;; rainbow 颜色代码显色 #00FF00
 (use-package rainbow-mode
@@ -1604,13 +1483,10 @@ Use `treemacs' command for old functionality."
 ;; rainbow-delimiters 彩虹括号
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-#+end_src
 
-** colorful-mode
-#+begin_src emacs-lisp
+;; Modern rainbow
 (use-package colorful-mode
   ;; :diminish
-  ;; :ensure t ; Optional
   :custom
   (colorful-use-prefix t)
   (colorful-only-strings 'only-prog)
@@ -2001,7 +1877,7 @@ https://github.com/bbatsov/super-save
 (use-package super-save
   :custom
   (super-save-auto-save-when-idle t)
-  (super-save-idle-duration 5) ; default: 5
+  (super-save-idle-duration 3) ; default: 5
   (super-save-all-buffers t)
   :config
   (super-save-mode +1))

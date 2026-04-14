@@ -7,6 +7,9 @@
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
+        # lazydocker
+        # docker-compose
+        podman-compose
         distrobox
         # toolbox
       ];
