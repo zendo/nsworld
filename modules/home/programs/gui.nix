@@ -46,16 +46,6 @@
         songrec
         kooha
         # jamesdsp
-        (mpv.override {
-          youtubeSupport = false; # (yt-dlp)
-          scripts = with pkgs.mpvScripts; [
-            mpris
-            # uosc
-            inhibit-gnome
-            thumbfast
-            modernz
-          ];
-        })
         # kazumi # anime
         # yt-dlp
         # vlc

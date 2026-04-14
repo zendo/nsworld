@@ -26,6 +26,7 @@
         # .firefox
         git
         # gui
+        # mpv
         nix-tools
         # rclone
         # vicinae
