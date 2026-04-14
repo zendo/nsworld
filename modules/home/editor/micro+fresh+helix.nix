@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.micro = {
     programs.micro = {
@@ -22,18 +23,34 @@
   };
 
   flake.modules.homeManager.helix =
-    { config, lib, ... }:
+    { pkgs, ... }:
     {
-      config = lib.mkMerge [
-        {
-          programs.helix = {
-            enable = true;
-          };
-        }
-        (lib.mkIf config.programs.helix.enable {
-          xdg.configFile."helix".source =
-            config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/helix";
-        })
-      ];
+      programs.helix = {
+        enable = true;
+        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-helix;
+      };
+    };
+
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.wrap-helix = inputs.wrapper-modules.wrappers.helix.wrap {
+        inherit pkgs;
+        settings = {
+          # everforest_dark / onedark
+          theme = "everforest_dark";
+          editor = {
+            cursorline = true; # highlight current line
+            true-color = true;
+            auto-format = true;
+            indent-guides.render = true;
+            file-picker.hidden = true;
+
+            lsp = {
+              display-inlay-hints = true;
+            };
+          }; # editor
+        }; # settings
+      }; # packages
     };
 }
