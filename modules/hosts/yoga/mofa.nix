@@ -22,7 +22,7 @@
       services.mihomo = {
         enable = true;
         tunMode = true;
-        # webui = pkgs.zashboard;
+        webui = pkgs.zashboard;
         configFile = "/home/${config.myVars.user}/code/subs/config.yaml";
       };
 

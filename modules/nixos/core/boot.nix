@@ -15,11 +15,6 @@
       boot = {
         kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
-        # enable systemd in initrd
-        initrd.systemd = {
-          enable = lib.mkDefault true;
-        };
-
         # /tmp
         tmp = {
           useTmpfs = lib.mkDefault true;

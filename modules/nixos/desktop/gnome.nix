@@ -9,10 +9,10 @@
       # services.gnome.localsearch.enable = false;
       services.packagekit.enable = false;
 
-      programs.kdeconnect = {
-        enable = true;
-        package = pkgs.valent;
-      };
+      # programs.kdeconnect = {
+      #   enable = true;
+      #   package = pkgs.valent;
+      # };
 
       environment.gnome.excludePackages = with pkgs; [
         sushi # heavyweight

@@ -22,7 +22,7 @@
           micro
           fresh-editor
           # helix
-          nvim
+          # nvim
           vscode
           # zed
           # ╭──────────────────────────────────────────╮
