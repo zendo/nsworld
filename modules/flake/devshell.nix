@@ -14,15 +14,6 @@
         ];
         commands = [
           {
-            name = "switch";
-            category = "nix tools";
-            command = ''
-              hostname=$1
-              echo "=> Deploying system '$hostname'"
-              nixos-rebuild --sudo --flake .\#"$1" switch
-            '';
-          }
-          {
             name = "non-nixos-setup";
             category = "nix tools";
             command = ''

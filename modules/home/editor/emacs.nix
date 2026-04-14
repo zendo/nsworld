@@ -2,9 +2,9 @@
   flake.modules.homeManager.emacs =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        vips # dirvish image
-      ];
+      # home.packages = with pkgs; [
+      #   vips # dirvish image
+      # ];
 
       programs.emacs = {
         enable = true;
