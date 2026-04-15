@@ -1232,6 +1232,19 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
               ("<f2>" . shell-pop)))
 #+end_src
 
+*** ghostel
+https://github.com/dakra/ghostel
+#+begin_src emacs-lispxx
+(use-package ghostel
+  :defer t
+  :when (eq system-type 'gnu/linux)
+  :config
+  (setq ghostel-shell "zsh")
+  :bind (:map ghostel-mode-map
+              ;; default: ("C-c C-t" . vterm-copy-mode)
+              ("<f2>" . shell-pop)))
+#+end_src
+
 *** shell-pop
 #+begin_src emacs-lisp
 (use-package shell-pop
