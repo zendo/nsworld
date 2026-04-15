@@ -1,7 +1,7 @@
 let
   hostkey = {
     yoga = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOaubBTa8qwJcVxuukrSQkEM3wQmaqI0RQHUyEADpz/7";
-    yoga-age = "age1w0r39x5z0ye2wcml5e5q6nt8zp7zplndagnl58arvjupdk6qm54shyshqz";
+    yoga-age = "age1jmm676z8v5nkmmlrvz0pdne99spjen43l2myl4h8cvng5ptemunsnqz564";
     svp = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFC7qvKb3CgEXVKrF9HybyHIdnesvXmuVp7ElsEDkkHf";
     svp-age = "age1l46tamf9lgx47xqvy2dqc4qhlhwlwsruzky0qnfvewtsw205wd8qc6alyq";
     rmt = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATekMmx7K+49Xt3k7S2zi8L8XIGwNDwgN+Z9OykOb0m";
