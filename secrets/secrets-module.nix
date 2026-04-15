@@ -77,8 +77,8 @@ in
               sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key \
                                            -o ~/.config/sops/age/keys.txt
               cat /var/lib/ssh/ssh_host_ed25519_key.pub | tee /dev/stderr | ssh-to-age
-              # sudo chmod 600 ~/.config/sops/age/keys.txt # hm permission denied
               # same = sudo age-keygen -y ~/.config/sops/age/keys.txt
+              # sudo chmod 600 ~/.config/sops/age/keys.txt # hm permission denied
             '';
           }
           # {
