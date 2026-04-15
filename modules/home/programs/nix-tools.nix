@@ -11,19 +11,12 @@
         # comma # ,
         nix-tree
         nurl
-        nix-init
-        nix-update
         # nix-prefetch
         # nix-template
         dix # diff
         nix-output-monitor
         nix-search-tv
-        hydra-check
-        disko
-        nixos-anywhere
-        # colmena # outdated
-        inputs.colmena.packages.${stdenv.hostPlatform.system}.colmena
-        # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+        # hydra-check
 
         # persistent cache
         inputs.self.formatter.${stdenv.hostPlatform.system}

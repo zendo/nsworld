@@ -41,7 +41,15 @@
 
       environment.systemPackages = with pkgs; [
         # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
+        # [ nix tools ]
         inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+        nix-init
+        nix-update
+        # [ deploy ]
+        disko
+        nixos-anywhere
+        inputs.colmena.packages.${stdenv.hostPlatform.system}.colmena
+        # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       ];
 
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;

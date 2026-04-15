@@ -60,7 +60,7 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      devshells.secrets = {
+      devshells.per-secrets = {
         packages = with pkgs; [
           age
           # rage # age encrypt RIIR

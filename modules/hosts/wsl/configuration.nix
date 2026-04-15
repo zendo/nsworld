@@ -90,7 +90,6 @@ in
 
         systemPackages = with pkgs; [
           dos2unix
-          wslu
           wsl-open
           xdg-utils # for git oauth
           wl-clipboard

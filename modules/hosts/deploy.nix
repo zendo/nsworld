@@ -69,12 +69,16 @@ in
   };
 
   perSystem =
-    { inputs', ... }:
+    { inputs', pkgs, ... }:
     {
-      devshells.deploy.packages = [
-        inputs'.colmena.packages.colmena
-        # inputs'.deploy-rs.packages.deploy-rs
-        inputs'.nixpkgs.legacyPackages.nixos-rebuild-ng
-      ];
+      devshells.per-deploy = {
+        packages = [
+          pkgs.disko
+          pkgs.nixos-anywhere
+          inputs'.colmena.packages.colmena
+          # inputs'.deploy-rs.packages.deploy-rs
+          inputs'.nixpkgs.legacyPackages.nixos-rebuild-ng
+        ];
+      };
     };
 }
