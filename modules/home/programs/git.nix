@@ -84,7 +84,7 @@
       };
 
       programs.lazygit = {
-        # enable = true;
+        enable = true;
       };
 
       programs.jujutsu = {

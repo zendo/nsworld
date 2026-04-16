@@ -80,7 +80,7 @@
 
       programs.fish = {
         functions = {
-          # set ssr_ip localhost:7890; ssr
+          # set ssr_ip localhost:7890; ssr ; ssr-nix-daemon
           ssr.body = ''
             set ip $argv[1]
             for key in http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY
