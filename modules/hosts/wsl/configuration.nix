@@ -16,7 +16,8 @@ in
         nixconfig
         nixpkgs
         ssh
-        zsh
+        fish
+        # zsh
       ]
       ++ [
         inputs.nixos-wsl.nixosModules.wsl
@@ -62,10 +63,10 @@ in
             alias
             atuin
             bash
-            # fish
+            fish
             starship
             # zellij
-            zsh
+            # zsh
 
             # [ terminal ]
             # alacritty
@@ -101,6 +102,8 @@ in
         defaultUser = userName;
         startMenuLaunchers = true;
       };
+
+      users.defaultUserShell = pkgs.fish;
 
       networking.hostName = "wsl";
       nixpkgs.hostPlatform = "x86_64-linux";
