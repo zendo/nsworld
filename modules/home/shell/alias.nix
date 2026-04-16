@@ -78,6 +78,33 @@
         '';
       };
 
-      # programs.fish.shellAliases = ;
+      programs.fish = {
+        functions = {
+          # set ssr_ip localhost:7890; ssr
+          ssr.body = ''
+            set ip $argv[1]
+            for key in http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY
+                set -gx $key "socks5h://$ssr_ip"
+            end
+          '';
+          ssr-chrome.body = "google-chrome-stable --temp-profile --proxy-server=$ssr_ip";
+          ssr-nix-daemon.body = ''
+            sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
+            echo " \
+            [Service]
+            Environment="http_proxy=socks5h://$ssr_ip"
+            Environment="https_proxy=socks5h://$ssr_ip"
+            Environment="all_proxy=socks5h://$ssr_ip"
+            " | sudo tee /run/systemd/system/nix-daemon.service.d/override.conf > /dev/null
+            sudo systemctl daemon-reload
+            sudo systemctl restart nix-daemon
+          '';
+        };
+        shellAbbrs = {
+          gst = "git status";
+        };
+        # shellAliases = { };
+      };
+
     };
 }

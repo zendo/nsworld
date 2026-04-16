@@ -4,7 +4,7 @@
     secrets
 
     # [ shell ]
-    # fish
+    fish
     zsh
 
     # [ core ]

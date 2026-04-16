@@ -2,6 +2,8 @@
   flake.modules.nixos.fish = {
     # Load configs from nixos/modules
     programs.fish.enable = true;
+
+    documentation.man.cache.enable = false;
   };
 
   flake.modules.homeManager.fish =
@@ -9,9 +11,12 @@
     {
       programs.man.generateCaches = false;
 
+      # https://carapace.sh/
+      programs.carapace.enable = true;
+
       programs.fish = {
         enable = true;
-        generateCompletions = true;
+        # generateCompletions = true;
         plugins = [
           # {
           #   name = "pure";
@@ -23,7 +28,6 @@
           # }
         ];
         interactiveShellInit = ''
-          # Disable the greeting message.
           set fish_greeting
         '';
       };

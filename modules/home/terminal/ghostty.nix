@@ -5,7 +5,7 @@
     programs.ghostty = {
       enable = true;
       settings = {
-        command = "zsh --login";
+        command = "fish --login";
         shell-integration-features = "no-cursor,sudo"; # ssh-terminfo,ssh-env
         # custom-shader = "${pkgs.ghostty-cursor-shaders}/cursor_warp.glsl";
         font-family = [
