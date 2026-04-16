@@ -6,30 +6,22 @@
         comigo
         kula
 
-        # AI
+        # [ AI ]
         codex
         opencode
         qwen-code
 
-        # obsidian
-        # joplin-desktop
+        # [ Social ]
         telegram-desktop # (webkitgtk)
         # vesktop # discord
         # fractal
         # fluffychat
         # newsflash
+        # yacreader
         venera
         jhentai
 
-        # Terminal
-        graphviz
-        # imagemagick
-        exiftool
-        ffmpegthumbnailer
-        # unar # free but oversize
-        unrar # unfree
-
-        # Multimedia
+        # [ Multimedia ]
         # mpd
         # rmpc
         # qmmp
@@ -52,10 +44,9 @@
         # ciano
         # video-trimmer
 
-        # Image manipulation
+        # [ Image Manipulation ]
         # shutter
         # pinta
-        # yacreader
         contrast
         # font-manager # (webkitgtk)
         # gcolor3
@@ -67,18 +58,19 @@
         # https://github.com/nix-community/home-manager/issues/5173
         (lib.hiPrio localsend)
         qbittorrent
-        # lock
         rclone-browser
+        # lock
         # deja-dup
         # vorta
-        # qalculate-gtk # scientific calculator
 
-        # OFFICE
+        # [ OFFICE ]
+        # obsidian
+        # joplin-desktop
         # libreoffice-fresh
         # drawio
         # rnote # handwritten note
         # foliate # (webkitgtk)
-        readest
+        # readest
         # koodo-reader
         # planify
         # ghostwriter # (qtwebengine)
@@ -86,8 +78,17 @@
         meld
         # textpieces
         # devtoolbox
+        # qalculate-gtk # scientific calculator
 
-        # HARDWARE TOOLS
+        # [ Terminal ]
+        graphviz
+        # imagemagick
+        exiftool
+        ffmpegthumbnailer
+        # unar # free but oversize
+        unrar # unfree
+
+        # [ HARDWARE TOOLS ]
         parted
         gptfdisk
         efibootmgr
