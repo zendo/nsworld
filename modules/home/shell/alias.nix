@@ -90,7 +90,7 @@
           ssr-chrome.body = "google-chrome-stable --temp-profile --proxy-server=$ssr_ip";
           ssr-nix-daemon.body = ''
             sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
-            echo " \
+            echo "\
             [Service]
             Environment="http_proxy=socks5h://$ssr_ip"
             Environment="https_proxy=socks5h://$ssr_ip"
