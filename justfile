@@ -44,9 +44,6 @@ up:
         git commit --amend --quiet -m "🚀 $OLD_MSG" -m "🔍 Nixpkgs Comparing changes: $ADD_MSG"
     fi
 
-nix-tree-with-gcroots:
-    nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree
-
 backup-my-data:
     #!/usr/bin/env bash
     BACKUP_DIR="$HOME/Documents/mybackup"
