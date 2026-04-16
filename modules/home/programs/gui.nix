@@ -18,7 +18,6 @@
         # fractal
         # fluffychat
         # newsflash
-        rclone-browser
         venera
         jhentai
 
@@ -68,12 +67,9 @@
         # https://github.com/nix-community/home-manager/issues/5173
         (lib.hiPrio localsend)
         qbittorrent
-        # motrix-next
-        # gopeed
         # lock
+        rclone-browser
         # deja-dup
-        # rclone
-        # rclone-browser
         # vorta
         # qalculate-gtk # scientific calculator
 
