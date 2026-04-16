@@ -18,7 +18,7 @@
         inherit pkgs;
         settings = {
           main = {
-            shell = "zsh -l";
+            # shell = "zsh -l";
             # xterm-256color for maximum compatibility
             # term = "xterm-256color";
             font = "JetBrains Mono:size=11";

@@ -63,7 +63,7 @@
         # Afterglow / vague / bl1nk
         # themeFile = "bl1nk";
         settings = {
-          shell = "zsh -l";
+          # shell = "zsh -l";
           # MAYBE
           # show right prompts
           shell_integration = "no-cursor no-sudo";

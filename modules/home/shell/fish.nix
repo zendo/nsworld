@@ -12,7 +12,10 @@
       programs.man.generateCaches = false;
 
       # https://carapace.sh/
-      programs.carapace.enable = true;
+      programs.carapace = {
+        enable = true;
+        ignoreCase = true;
+      };
 
       programs.fish = {
         enable = true;
