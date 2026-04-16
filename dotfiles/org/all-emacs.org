@@ -1786,77 +1786,6 @@ https://gitlab.com/jabranham/mixed-pitch
   (setq-default mixed-pitch-set-height t))
 #+end_src
 
-* File Manager
-** dired enhanced
-#+begin_src emacs-lisp
-(use-package diredfl
-  :config
-  (diredfl-global-mode 1))
-
-(use-package dired-git-info
-  :config (setq dgi-auto-hide-details-p nil)
-  :hook (dired-after-readin . dired-git-info-auto-enable))
-
-(use-package dired-x
-  :ensure nil)
-
-(use-package dired
-  :ensure nil
-  :custom ((dired-listing-switches "-lha --group-directories-first"))
-  :bind (("s-d" . dired-jump)
-         ("C-x C-d" . dired-jump)
-         :map dired-mode-map
-         ("f" . consult-find)
-         ("RET" . dired-find-alternate-file)
-         ("." . dired-omit-mode)
-         ("," . dired-do-print)
-         ("/" . funs/dired-filter-show-match)
-         ("b" . (lambda ()
-                  (interactive)
-                  (find-alternate-file ".."))))
-  :config
-  ;;;###autoload
-  (defun funs/dired-filter-show-match ()
-    "Only show filter file."
-    (interactive)
-    (call-interactively #'dired-mark-files-regexp)
-    (command-execute "tk")))
-#+end_src
-
-** dirvish
-#+begin_src emacs-lispxx
-(use-package dirvish
-  :hook (after-init . dirvish-override-dired-mode)
-  :bind (:map dired-mode-map
-              ("TAB" . dirvish-toggle-subtree)
-              ("SPC" . dirvish-show-history)
-              ("*"   . dirvish-mark-menu)
-              ("r"   . dirvish-roam)
-              ("b"   . dirvish-goto-bookmark)
-              ("f"   . dirvish-file-info-menu)
-              ("M-n" . dirvish-go-forward-history)
-              ("M-p" . dirvish-go-backward-history)
-              ("M-s" . dirvish-setup-menu)
-              ("M-f" . dirvish-toggle-fullscreen)
-              ([left] . dired-up-directory)
-              ([right] . dired-find-file)
-              ([remap dired-sort-toggle-or-edit] . dirvish-quicksort)
-              ([remap dired-do-redisplay] . dirvish-ls-switches-menu)
-              ([remap dired-summary] . dirvish-dispatch)
-              ([remap dired-do-copy] . dirvish-yank-menu)
-              ([remap mode-line-other-buffer] . dirvish-other-buffer))
-  :config
-  ; (dirvish-peek-mode) ;; file-preview cost a lot time
-  (setq dirvish-hide-details t)
-  )
-#+end_src
-
-** disk-usage
-#+begin_src emacs-lisp
-(use-package disk-usage
-  :commands disk-usage)
-#+end_src
-
 * Persistence
 ** auto-save
 #+begin_src emacs-lisp
@@ -2558,6 +2487,42 @@ hippie expand is dabbrev expand on steroids
 #+end_src
 
 * Projects And VCS
+** dired enhanced
+#+begin_src emacs-lisp
+(use-package diredfl
+  :config
+  (diredfl-global-mode 1))
+
+(use-package dired-git-info
+  :config (setq dgi-auto-hide-details-p nil)
+  :hook (dired-after-readin . dired-git-info-auto-enable))
+
+(use-package dired-x
+  :ensure nil)
+
+(use-package dired
+  :ensure nil
+  :custom ((dired-listing-switches "-lha --group-directories-first"))
+  :bind (("s-d" . dired-jump)
+         ("C-x C-d" . dired-jump)
+         :map dired-mode-map
+         ("f" . consult-find)
+         ("RET" . dired-find-alternate-file)
+         ("." . dired-omit-mode)
+         ("," . dired-do-print)
+         ("/" . funs/dired-filter-show-match)
+         ("b" . (lambda ()
+                  (interactive)
+                  (find-alternate-file ".."))))
+  :config
+  ;;;###autoload
+  (defun funs/dired-filter-show-match ()
+    "Only show filter file."
+    (interactive)
+    (call-interactively #'dired-mark-files-regexp)
+    (command-execute "tk")))
+#+end_src
+
 ** Project
 #+begin_src emacs-lisp
 ;; (define-key global-map (kbd "C-c p") project-prefix-map)
