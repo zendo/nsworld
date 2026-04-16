@@ -7,6 +7,7 @@
   flake.modules.homeManager.atuin = {
     programs.atuin = {
       enable = true;
+      enableBashIntegration = false;
       flags = [
         "--disable-up-arrow"
         # "--disable-ctrl-r"

@@ -15,6 +15,7 @@
       programs.carapace = {
         enable = true;
         ignoreCase = true;
+        enableBashIntegration = false;
       };
 
       programs.fish = {
