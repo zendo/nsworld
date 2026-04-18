@@ -1,6 +1,12 @@
 { inputs, ... }:
 {
-  # Collection of overlays definitions
+  perSystem =
+    { config, ... }:
+    {
+      # Export flake.packages to flake.overlays.default
+      overlayAttrs = config.packages // config.devshells;
+    };
+
   flake.overlays = {
     # =====================================================
     # Inputs Overlays

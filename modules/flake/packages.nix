@@ -23,9 +23,6 @@
       # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
       # legacyPackages = pkgs;
 
-      # Export flake.packages to flake.overlays.default
-      overlayAttrs = config.packages // config.devshells;
-
       # flake.packages
       packages =
         lib.packagesFromDirectoryRecursive {
