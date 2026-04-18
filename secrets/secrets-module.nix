@@ -48,19 +48,13 @@ in
       sops.defaultSopsFile = ./sopsnix.yaml;
       sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-      home.packages = with pkgs; [
-        age
-        # rage # age encrypt RIIR
-        ssh-to-age
-        sops
-        ragenix
-      ];
+      home.packages = pkgs.nsw-secrets.packages;
     };
 
   perSystem =
     { pkgs, ... }:
     {
-      devshells.per-secrets = {
+      devshells.nsw-secrets = {
         packages = with pkgs; [
           age
           # rage # age encrypt RIIR

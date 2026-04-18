@@ -71,7 +71,7 @@ in
   perSystem =
     { inputs', pkgs, ... }:
     {
-      devshells.per-deploy = {
+      devshells.nsw-deploy = {
         packages = [
           pkgs.disko
           pkgs.nixos-anywhere

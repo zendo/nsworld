@@ -24,7 +24,7 @@
       # legacyPackages = pkgs;
 
       # Export flake.packages to flake.overlays.default
-      overlayAttrs = config.packages;
+      overlayAttrs = config.packages // config.devshells;
 
       # flake.packages
       packages =
@@ -36,7 +36,7 @@
           # nix run .
           default = config.packages.kula;
 
-          appimage-run-extra = pkgs.appimage-run.override {
+          nsw-appimage-run = pkgs.appimage-run.override {
             extraPkgs =
               pkgs: with pkgs; [
                 libthai
