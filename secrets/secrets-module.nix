@@ -72,13 +72,19 @@ in
           {
             name = "secrets-hostkey-to-age";
             command = ''
-              echo "=> Generate host-key to age"
-              mkdir -p ~/.config/sops/age
-              sudo ssh-to-age -private-key -i /var/lib/ssh/ssh_host_ed25519_key \
-                                           -o ~/.config/sops/age/keys.txt
-              cat /var/lib/ssh/ssh_host_ed25519_key.pub | tee /dev/stderr | ssh-to-age
-              # same = sudo age-keygen -y ~/.config/sops/age/keys.txt
-              # sudo chmod 600 ~/.config/sops/age/keys.txt # hm permission denied
+              KEY_FILE="$HOME/.config/sops/age/keys.txt"
+              SSH_KEY="/var/lib/ssh/ssh_host_ed25519_key"
+              echo "=> Preparing age host-key"
+              if [ -f "$KEY_FILE" ]; then
+                  echo "Age key already exists. Skipping..."
+              else
+                  mkdir -p "$(dirname "$KEY_FILE")"
+                  sudo ssh-to-age -private-key -i "$SSH_KEY" -o "$KEY_FILE"
+                  sudo chown "$(id -u):$(id -g)" "$KEY_FILE"
+              fi
+              echo "Public Key ssh/age:"
+              cat "''${SSH_KEY}.pub"
+              ssh-to-age < "''${SSH_KEY}.pub"
             '';
           }
           # {
