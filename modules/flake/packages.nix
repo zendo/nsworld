@@ -19,14 +19,12 @@
         };
       };
 
-      # exposed packages
-      overlayAttrs = {
-        inherit (config.packages) appimage-run-extra;
-      };
-
       # nix build .#
       # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
       # legacyPackages = pkgs;
+
+      # Export flake.packages to flake.overlays.default
+      overlayAttrs = config.packages;
 
       # flake.packages
       packages =
