@@ -19,6 +19,11 @@
         };
       };
 
+      # exposed packages
+      overlayAttrs = {
+        inherit (config.packages) appimage-run-extra;
+      };
+
       # nix build .#
       # quickly access nixpkgs packages without specifying `legacyPackages.<arch>`
       # legacyPackages = pkgs;

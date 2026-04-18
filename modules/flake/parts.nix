@@ -1,7 +1,11 @@
 { inputs, ... }:
 {
-  # for dendritic pattern
-  imports = [ inputs.flake-parts.flakeModules.modules ];
+  imports = [
+    # for dendritic pattern
+    inputs.flake-parts.flakeModules.modules
+    # flake.overlays.default
+    inputs.flake-parts.flakeModules.easyOverlay
+  ];
 
   # for repl
   # flake.currentSystem / flake.debug
