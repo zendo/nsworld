@@ -5,6 +5,10 @@
     inputs.flake-parts.flakeModules.modules
     # flake.overlays.default
     inputs.flake-parts.flakeModules.easyOverlay
+    # flake.formatter
+    inputs.treefmt-nix.flakeModule
+    # flake.devShells
+    inputs.devshell.flakeModule
   ];
 
   # for repl

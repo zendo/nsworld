@@ -1,7 +1,4 @@
-{ inputs, ... }:
 {
-  imports = [ inputs.devshell.flakeModule ];
-
   perSystem =
     { pkgs, ... }:
     {
