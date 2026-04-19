@@ -43,7 +43,6 @@
         with pkgs;
         [
           # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
-          # [ nix tools ]
           inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
           nix-init
           nix-update

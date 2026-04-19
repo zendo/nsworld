@@ -3,6 +3,7 @@
   flake.modules.homeManager.default-imports =
     { lib, nixosConfig, ... }:
     {
+      # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'
       imports =
         lib.optionals nixosConfig.services.desktopManager.gnome.enable [
           config.flake.modules.homeManager.dconf
