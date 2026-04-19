@@ -11,7 +11,7 @@
 
       # https://carapace.sh/
       programs.carapace = {
-        enable = true;
+        # enable = true;
         ignoreCase = true;
         enableBashIntegration = false;
       };

@@ -48,8 +48,6 @@
         # shutter
         # pinta
         contrast
-        # font-manager # (webkitgtk)
-        # gcolor3
         gradia
         satty # annotation
 
@@ -73,7 +71,6 @@
         readest
         # koodo-reader
         # planify
-        # ghostwriter # (qtwebengine)
         clapgrep
         meld
         # textpieces
