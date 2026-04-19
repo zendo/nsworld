@@ -52,14 +52,12 @@
         satty # annotation
 
         # remmina # (webkitgtk)
-        # gnome-decoder
         # https://github.com/nix-community/home-manager/issues/5173
         (lib.hiPrio localsend)
         qbittorrent
         rclone-browser
-        # lock
         # deja-dup
-        # vorta
+        # vorta # borg backup
 
         # [ OFFICE ]
         # obsidian
