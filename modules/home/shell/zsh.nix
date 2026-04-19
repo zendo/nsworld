@@ -1,6 +1,5 @@
 {
   flake.modules.nixos.zsh = {
-    # Load configs from nixos/modules
     programs.zsh.enable = true;
   };
 

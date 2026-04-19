@@ -1,9 +1,7 @@
 {
   flake.modules.nixos.fish = {
-    # Load configs from nixos/modules
-    programs.fish.enable = true;
-
     documentation.man.cache.enable = false;
+    programs.fish.enable = true;
   };
 
   flake.modules.homeManager.fish =

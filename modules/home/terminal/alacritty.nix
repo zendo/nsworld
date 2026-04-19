@@ -30,10 +30,10 @@ in
             TERM = "xterm-256color";
           };
 
-          terminal.shell = {
-            program = "zsh";
-            args = [ "-l" ];
-          };
+          # terminal.shell = {
+          #   program = "zsh";
+          #   args = [ "-l" ];
+          # };
 
           font = {
             size = 11;
