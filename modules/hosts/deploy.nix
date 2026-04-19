@@ -45,7 +45,6 @@ in
   # │ deploy-rs                                           │
   # ╰─────────────────────────────────────────────────────╯
   flake.deploy = {
-    # sudo = "doas -u";
     sshUser = "root";
     autoRollback = false;
     magicRollback = false;

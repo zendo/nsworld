@@ -1,7 +1,6 @@
 {
   flake.modules.nixos.host-yoga = {
-    # No passwd on main machine
-    security.doas.wheelNeedsPassword = false;
+    # No passwd on my main machine
     security.sudo.wheelNeedsPassword = false;
     security.sudo-rs.wheelNeedsPassword = false;
   };
@@ -23,12 +22,7 @@
         # sudo-rs
         security.sudo-rs.enable = true;
 
-        # doas
-        # security.sudo.enable = false;
-        # security.doas.enable = true;
-        # environment.systemPackages = [ pkgs.doas-sudo-shim ];
-
-        # sudo rule
+        # rule
         security.sudo.execWheelOnly = true;
         security.sudo-rs.execWheelOnly = true;
 
