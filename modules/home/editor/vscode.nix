@@ -10,20 +10,23 @@
         # enable = true;
         profiles.default = {
           extensions = with pkgs.vscode-extensions; [
+            codeinchinese.englishchinesedictionary
             ms-ceintl.vscode-language-pack-zh-hans
-            file-icons.file-icons
-            eamodio.gitlens
+            kahole.magit
             editorconfig.editorconfig
-            foxundermoon.shell-format
             tamasfe.even-better-toml
-            # kdl-org.kdl
-            nefrob.vscode-just-syntax
-            esbenp.prettier-vscode
+            file-icons.file-icons
             golang.go
             mattn.lisp
-            ms-python.python
+            vadimmelnicuk.meo # markdown
             jnoortheen.nix-ide
-            # ms-vscode.cmake-tools
+            eserozvataf.one-dark-pro-monokai-darker # theme
+            tootone.org-mode
+            esbenp.prettier-vscode
+            ms-python.python
+            nefrob.vscode-just-syntax
+            foxundermoon.shell-format
+            # kdl-org.kdl
           ];
           userSettings = {
             "files.autoSave" = "onFocusChange";
