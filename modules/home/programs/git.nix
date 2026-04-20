@@ -43,7 +43,7 @@
           # core.editor = "vim";
           # safe.directory = [
           #   "${config.home.homeDirectory}/nsworld"
-          #   "${config.home.homeDirectory}/code/nixpkgs"
+          #   "${config.home.homeDirectory}/Projects/nixpkgs"
           # ];
           alias = {
             st = "status -sb";

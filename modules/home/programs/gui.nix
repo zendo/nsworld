@@ -5,6 +5,7 @@
       home.packages = with pkgs; [
         comigo
         kula
+        nano-ffmpeg
 
         # [ AI ]
         codex
@@ -42,7 +43,6 @@
         # vlc
         # ffmpeg
         # ciano
-        # video-trimmer
 
         # [ Image Manipulation ]
         # shutter

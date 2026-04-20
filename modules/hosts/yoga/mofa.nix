@@ -14,7 +14,7 @@
       services.sing-box = {
         # enable = true;
         settings = {
-          _secret = "/home/${config.myVars.user}/code/subs/config.jsonc";
+          _secret = "/home/${config.myVars.user}/Projects/subs/config.jsonc";
           quote = false;
         };
       };
@@ -23,13 +23,13 @@
         enable = true;
         tunMode = true;
         webui = pkgs.zashboard;
-        configFile = "/home/${config.myVars.user}/code/subs/config.yaml";
+        configFile = "/home/${config.myVars.user}/Projects/subs/config.yaml";
       };
 
       # services.daeWithConfig.enable = true;
       # services.dae = {
       #   enable = true;
-      #   configFile = "/home/${myvars.user}/code/subs/dae-config.dae";
+      #   configFile = "/home/${myvars.user}/Projects/subs/dae-config.dae";
       # };
 
       # Virtual network interfering Geoclue2's IP-based location
