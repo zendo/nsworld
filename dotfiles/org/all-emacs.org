@@ -1226,7 +1226,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   :defer t
   :when (eq system-type 'gnu/linux)
   :config
-  (setq vterm-shell "zsh")
+  (setq vterm-shell "fish")
   :bind (:map vterm-mode-map
               ;; default: ("C-c C-t" . vterm-copy-mode)
               ("<f2>" . shell-pop)))
@@ -1239,7 +1239,7 @@ https://github.com/dakra/ghostel
   :defer t
   :when (eq system-type 'gnu/linux)
   :config
-  (setq ghostel-shell "zsh")
+  (setq ghostel-shell "fish")
   :bind (:map ghostel-mode-map
               ;; default: ("C-c C-t" . vterm-copy-mode)
               ("<f2>" . shell-pop)))
@@ -1807,9 +1807,9 @@ https://gitlab.com/jabranham/mixed-pitch
 ;; after a period of idle time, directly saving to the file itself without
 ;; creating backup files.
 ;; OR `super-save`
-;; (setq auto-save-visited-interval 5) ; Save after 5 seconds if inactivity
-;; (auto-save-visited-mode 1)
-;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+(auto-save-visited-mode 1)
+(setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
 #+end_src
 
 ** super-save
@@ -3467,7 +3467,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-z" . undo)
  ("C-S-z" . undo-redo)
  ("C-s" . consult-line)
- ("M-m" . pop-to-mark-command)
+ ("M-m" . consult-mark)
+ ;; ("M-m" . pop-to-mark-command)
  ;; ("C-." . company-complete)
  ("C-." . hippie-expand)
  ("C-/" . comment-line) ;vscode

@@ -223,13 +223,6 @@
 * config.el - Header
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
 
 (setq confirm-kill-emacs nil
       ;; confirm-kill-processes nil
@@ -297,11 +290,8 @@
 ** Shell
 #+begin_src emacs-lisp
 ;; vterm or eshell
-(when (featurep :system 'windows)
-  (global-set-key (kbd "<f2>") '+eshell/toggle))
-
+(global-set-key (kbd "<f2>") '+vterm/toggle)
 (when (featurep :system 'linux)
-  (global-set-key (kbd "<f2>") '+vterm/toggle)
   (with-eval-after-load 'vterm
     (setq vterm-shell "fish")
     (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
@@ -316,14 +306,20 @@
 
 ;; doom-tomorrow-night / doom-vibrant
 (setq doom-theme 'doom-tomorrow-night)
+#+end_src
 
-;; treemacs
+** treemacs
+#+begin_src emacs-lisp
 (with-eval-after-load 'treemacs
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 #+end_src
 
 * Editor
 #+begin_src emacs-lisp
+(setq +default-want-RET-continue-comments nil ; 别在新行加注释
+      display-line-numbers-type 't ; t / nil / relative
+ )
+
 ;; Repeating C-SPC after popping mark pops
 (setq set-mark-command-repeat-pop t)
 
@@ -374,6 +370,7 @@
   (call-interactively #'dired-mark-files-regexp)
   (command-execute "tk"))
 #+end_src
+
 * Persistence
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
@@ -382,23 +379,20 @@
       recentf-exclude '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$"
                          "autosave$" "treemacs-persist" )
       )
+#+end_src
 
+** auto-save
+#+begin_src emacs-lisp
+(auto-save-visited-mode 1)
+(setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+#+end_src
+
+** vundo
+#+begin_src emacs-lisp
 (with-eval-after-load 'vundo
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (setq vundo-roll-back-on-quit nil))
-#+end_src
-
-** super-save
-https://github.com/bbatsov/super-save
-
-#+begin_src emacs-lisp
-(use-package super-save
-  :custom
-  (super-save-auto-save-when-idle t)
-  (super-save-idle-duration 3) ; default: 5
-  (super-save-all-buffers t)
-  :config
-  (super-save-mode +1))
 #+end_src
 
 * Org
@@ -414,28 +408,26 @@ https://github.com/bbatsov/super-save
 #+end_src
 
 * Development
-#+begin_src emacs-lisp
-(setq +default-want-RET-continue-comments nil ; 别在新行加注释
-      display-line-numbers-type 't ; t / nil / relative
- )
-#+end_src
-
 ** flycheck
 #+begin_src emacs-lisp
-;; disable flycheck in some mode
-(setq flycheck-disabled-checkers '(sh-shellscript
-                                   emacs-lisp
-                                   emacs-lisp-checkdoc))
+(with-eval-after-load 'flycheck
+  ;; disable flycheck in some mode
+  (setq flycheck-disabled-checkers '(sh-shellscript
+                                     emacs-lisp
+                                     emacs-lisp-checkdoc))
+  )
 #+end_src
 
 ** nix
 #+begin_src emacs-lisp
 (setq! lsp-nix-server-path "nixd")
-(use-package! nix-mode
-  :custom (nix-nixfmt-bin "nixfmt"))
+(use-package nix-mode
+  :custom
+  (nix-nixfmt-bin "nixfmt"))
 #+end_src
 
 * Keybindings
+** Global keymap
 #+begin_src emacs-lisp
 (ffap-bindings)
 (setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
@@ -443,10 +435,7 @@ https://github.com/bbatsov/super-save
 ;; (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-S-z") 'undo-redo)
-#+end_src
 
-** Global keymap
-#+begin_src emacs-lisp
 (map!
  "C-\\" #'align-regexp
  "M-s" #'avy-goto-word-1 ;默认 isearch 被覆盖
