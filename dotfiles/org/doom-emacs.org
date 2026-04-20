@@ -5,7 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/doom/config.el"
 #+AUTO_TANGLE: t
 
-* init
+* init.el
 #+begin_src emacs-lisp :tangle "~/.config/doom/init.el"
 ;;; $DOOMDIR/init.el -*- lexical-binding: t; -*-
 (doom! :input
@@ -196,7 +196,7 @@
        (default +bindings +smartparens))
 #+end_src
 
-* package
+* packages.el
 #+begin_src emacs-lisp :tangle "~/.config/doom/packages.el"
 ;;;; $DOOMDIR/packages.el -*- lexical-binding: t; -*-
 (package! crux)
@@ -220,7 +220,7 @@
 (package! org-modern :disable t)
 #+end_src
 
-* Header
+* config.el - Header
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -240,7 +240,7 @@
 (load "default" 'noerror 'nomessage)
 #+end_src
 
-* Systems
+* Platform
 ** Windows
 #+begin_src emacs-lisp
 (when (featurep :system 'windows)
@@ -303,11 +303,11 @@
 (when (featurep :system 'linux)
   (global-set-key (kbd "<f2>") '+vterm/toggle)
   (with-eval-after-load 'vterm
-    (setq vterm-shell "zsh")
+    (setq vterm-shell "fish")
     (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
 #+end_src
 
-* Interface
+* UI
 #+begin_src emacs-lisp
 ;; (add-to-list 'default-frame-alist '(height . 40))
 ;; (add-to-list 'default-frame-alist '(width . 80))
@@ -339,7 +339,7 @@
 (set-default 'truncate-lines nil) ;自动折行到下一行，可能影响性能
 #+end_src
 
-* Files
+* Projects
 ** projectile
 #+begin_src emacs-lisp
 (with-eval-after-load 'projectile
@@ -374,7 +374,7 @@
   (call-interactively #'dired-mark-files-regexp)
   (command-execute "tk"))
 #+end_src
-* Backup
+* Persistence
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
@@ -386,48 +386,34 @@
 (with-eval-after-load 'vundo
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (setq vundo-roll-back-on-quit nil))
-
-;; 窗口失去焦点时保存
-;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t)))
 #+end_src
 
 ** super-save
+https://github.com/bbatsov/super-save
+
 #+begin_src emacs-lisp
-(use-package! super-save
+(use-package super-save
+  :custom
+  (super-save-auto-save-when-idle t)
+  (super-save-idle-duration 3) ; default: 5
+  (super-save-all-buffers t)
   :config
-  (super-save-mode +1)
-  ;; Emacs空闲是否自动保存，这里不设置
-  (setq super-save-auto-save-when-idle nil)
-  ;; 切换窗口自动保存
-  (add-to-list 'super-save-triggers 'other-window)
-  ;; 查找文件时自动保存
-  (add-to-list 'super-save-hook-triggers 'find-file-hook)
-  ;; 远程文件编辑不自动保存
-  (setq super-save-remote-files nil)
-  ;; 特定后缀名的文件不自动保存
-  (setq super-save-exclude '(".gpg"))
-  ;; 自动保存时，保存所有缓冲区
-  (defun super-save/save-all-buffers ()
-    (save-excursion
-      (dolist (buf (buffer-list))
-        (set-buffer buf)
-        (when (and buffer-file-name
-                   (buffer-modified-p (current-buffer))
-                   (file-writable-p buffer-file-name)
-                   (if (file-remote-p buffer-file-name) super-save-remote-files t))
-          (save-buffer)))))
-  (advice-add 'super-save-command :override 'super-save/save-all-buffers)
-  )
+  (super-save-mode +1))
 #+end_src
 
 * Org
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (with-eval-after-load 'org
-
-  )
+  (map! :map org-mode-map
+        "C-c C-j" #'consult-outline
+        ;; "C-c a" #'org-agenda
+        ;; "C-c x" #'org-capture
+        ;; "C-c l" #'org-store-link
+        ;; "M-." #'find-function-at-point
+        ))
 #+end_src
 
-* Programming
+* Development
 #+begin_src emacs-lisp
 (setq +default-want-RET-continue-comments nil ; 别在新行加注释
       display-line-numbers-type 't ; t / nil / relative
@@ -494,7 +480,7 @@
  "C-}" #'mc/mark-next-like-this
  "C-{" #'mc/mark-previous-like-this
  "C-|" #'mc/mark-all-like-this-dwim
- "M-<mouse-1>" #'mc/toggle-cursor-on-click
+ ;; "M-<mouse-1>" #'mc/toggle-cursor-on-click
 
  "M-z" #'avy-zap-to-char
  [remap kill-ring-save] #'easy-kill
