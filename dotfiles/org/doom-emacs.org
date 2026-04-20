@@ -234,21 +234,6 @@
 #+end_src
 
 * Platform
-** Windows
-#+begin_src emacs-lisp
-(when (featurep :system 'windows)
-  (setq doom-font (font-spec :family "JetBrains Mono" :size 26)
-        doom-symbol-font (font-spec :family "Segoe UI Emoji")
-
-        default-directory "~/Desktop/"
-        org-directory "~/Documents/Notes/")
-  ;; https://emacs-china.org/t/doom-emacs/23513/10
-  (defun my-cjk-font()
-    (dolist (charset '(kana han cjk-misc symbol bopomofo))
-      (set-fontset-font t charset (font-spec :family "Microsoft Yahei"))))
-  (add-hook 'after-setting-font-hook #'my-cjk-font))
-#+end_src
-
 ** Linux
 #+begin_src emacs-lisp
 (when (featurep :system 'linux)
@@ -299,8 +284,6 @@
 
 * UI
 #+begin_src emacs-lisp
-;; (add-to-list 'default-frame-alist '(height . 40))
-;; (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
 
@@ -318,13 +301,9 @@
 #+begin_src emacs-lisp
 (setq +default-want-RET-continue-comments nil ; 别在新行加注释
       display-line-numbers-type 't ; t / nil / relative
- )
-
-;; Repeating C-SPC after popping mark pops
-(setq set-mark-command-repeat-pop t)
-
-;; 识别中文标点符号
-(setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
+      set-mark-command-repeat-pop t ; Repeating C-SPC after popping mark pops
+      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ; 识别中文标点符号
+)
 #+end_src
 
 ** word-wrap
@@ -340,8 +319,7 @@
 #+begin_src emacs-lisp
 (with-eval-after-load 'projectile
   ;; manual clear cache (M-x projectile-invalidate-cache) or
-  (setq projectile-enable-caching nil)
-  )
+  (setq projectile-enable-caching nil))
 #+end_src
 
 ** dired
