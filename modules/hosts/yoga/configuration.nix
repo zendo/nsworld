@@ -49,6 +49,7 @@
         ]
         ++ nsw-deploy.packages;
 
+      # nix.package = pkgs.lixPackageSets.stable.lix;
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
       # ╭─────────────────────────────────────────────────────╮

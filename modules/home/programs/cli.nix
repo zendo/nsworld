@@ -87,6 +87,7 @@
         # Networking
         wget
         curl
+        # ghgrab
         lsof
         bind
         doggo
