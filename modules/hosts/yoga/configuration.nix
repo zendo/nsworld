@@ -56,9 +56,7 @@
       # │ HOME-MANAGER                                        │
       # ╰─────────────────────────────────────────────────────╯
       home-manager.users.${config.myVars.user} = {
-        imports = [
-          inputs.self.modules.homeManager.default-imports
-        ];
+        imports = [ inputs.self.modules.homeManager.default-imports ];
 
         dconf.settings = {
           "org/gnome/settings-daemon/plugins/power" = {

@@ -34,10 +34,7 @@
   };
 
   flake.modules.nixos.host-svp =
-    {
-      config,
-      ...
-    }:
+    { config, ... }:
     {
       myVars.user = "zendo";
       networking.hostName = "svp";

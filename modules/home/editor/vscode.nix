@@ -9,24 +9,33 @@
       programs.vscode = {
         # enable = true;
         profiles.default = {
+          enableExtensionUpdateCheck = false;
+          enableUpdateCheck = false;
           extensions = with pkgs.vscode-extensions; [
-            codeinchinese.englishchinesedictionary
             ms-ceintl.vscode-language-pack-zh-hans
-            kahole.magit
-            editorconfig.editorconfig
-            tamasfe.even-better-toml
+            ms-azuretools.vscode-docker
+            ms-vscode-remote.remote-ssh
+            ms-vscode.cpptools
+            ms-vscode.cmake-tools
+            ms-vscode.makefile-tools
+            ms-python.python
+            ms-pyright.pyright
+
             file-icons.file-icons
+            editorconfig.editorconfig
+            # codeinchinese.englishchinesedictionary
+            # eserozvataf.one-dark-pro-monokai-darker # theme
+            # vadimmelnicuk.meo # markdown
             golang.go
             mattn.lisp
-            vadimmelnicuk.meo # markdown
+            tamasfe.even-better-toml
             jnoortheen.nix-ide
-            eserozvataf.one-dark-pro-monokai-darker # theme
-            tootone.org-mode
+            # tootone.org-mode
             esbenp.prettier-vscode
-            ms-python.python
             nefrob.vscode-just-syntax
             foxundermoon.shell-format
             # kdl-org.kdl
+            kahole.magit
           ];
           userSettings = {
             "files.autoSave" = "onFocusChange";

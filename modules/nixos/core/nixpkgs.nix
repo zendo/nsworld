@@ -16,18 +16,20 @@
             pkg:
             builtins.elem (lib.getName pkg) [
               "unrar"
-              "steam"
-              "vscode"
               "spotify"
               "qqmusic"
+              "vivaldi"
               "google-chrome"
               "microsoft-edge"
-              "vivaldi"
               "widevine-cdm"
+              "steam"
               "steam-unwrapped"
               "balatro"
               "memtest86-efi"
               "android-sdk-cmdline-tools"
+              "vscode"
+              "vscode-extension-ms-vscode-cpptools"
+              "vscode-extension-ms-vscode-remote-remote-ssh"
             ];
         };
       };

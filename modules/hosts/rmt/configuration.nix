@@ -31,18 +31,15 @@
   };
 
   flake.modules.nixos.host-rmt =
-    {
-      pkgs,
-      config,
-      ...
-    }:
+    { pkgs, config, ... }:
     {
       myVars.user = "aaa";
       networking.hostName = "rmt";
 
-      home-manager.users.${config.myVars.user}.imports = [
-        inputs.self.modules.homeManager.default-imports
-      ];
+      home-manager.users.${config.myVars.user} = {
+        imports = [ inputs.self.modules.homeManager.default-imports ];
+        # programs.vscode.enable = true;
+      };
 
       environment.systemPackages = with pkgs; [
         duf
