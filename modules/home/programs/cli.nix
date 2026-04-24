@@ -98,7 +98,7 @@
         snitch
         sniffglue
         # ipinfo # 62M
-        elinks
+        # elinks
         wthrr # weather
         dnspeep
         nethogs
