@@ -40,11 +40,6 @@
           # enable = true;
         };
 
-        command-not-found = {
-          # enable = true;
-          dbPath = inputs.nixpkgs + "/programs.sqlite";
-        };
-
         # Causes the `motd` not working
         nix-your-shell = {
           # enable = true;

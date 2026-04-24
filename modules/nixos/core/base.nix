@@ -12,6 +12,8 @@
         export XDG_DATA_DIRS="$XDG_DATA_DIRS:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
       '';
 
+      programs.command-not-found.enable = false;
+
       time.timeZone = lib.mkDefault "Asia/Shanghai";
       i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
       system.stateVersion = lib.mkDefault "26.05";
