@@ -52,7 +52,7 @@ backup-my-data:
     dconf read /org/gnome/shell/app-picker-layout > app-picker-layout-value.txt
     # dconf write /org/gnome/shell/app-picker-layout "$(cat app-picker-layout-value.txt)"
     rsync -av "$HOME/.ssh/" ssh/
-    rsync -av "$HOME/.mozilla/" mozilla/
+    rsync -av "$HOME/.config/mozilla/" mozilla/
 
 [group('emacs')]
 emacs-ob-tangle:
