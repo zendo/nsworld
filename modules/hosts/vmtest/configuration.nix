@@ -49,7 +49,7 @@ in
       # Clipboard shared for NixOS@Guest
       services.qemuGuest.enable = true;
       services.spice-vdagentd.enable = true;
-      services.spice-webdavd.enable = true;
+      # services.spice-webdavd.enable = true; # :davfs
 
       # ./result/bin/run-vm -m 4G -smp 4 -device virtio-vga-gl -display sdl,gl=on
       virtualisation = {

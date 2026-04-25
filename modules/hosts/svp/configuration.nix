@@ -39,9 +39,10 @@
       myVars.user = "zendo";
       networking.hostName = "svp";
 
-      home-manager.users.${config.myVars.user}.imports = [
-        inputs.self.modules.homeManager.default-imports
-      ];
+      home-manager.users.${config.myVars.user} = {
+        imports = [ inputs.self.modules.homeManager.default-imports ];
+        # programs.vscode.enable = true;
+      };
 
       users.users.${config.myVars.user} = {
         # pw: 123
