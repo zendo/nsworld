@@ -11,8 +11,8 @@
         # otree # tui tree for JSON/YAML/TOML
         sqlite
         openssl
-        discount # markdown
-        efm-langserver # markdown lsp
+        discount # :markdown
+        efm-langserver # :markdown lsp
         strace
         lurk # strace alternative
 
@@ -127,7 +127,7 @@
         # snowmachine
         # oneko
         nyancat
-        asciiquarium
+        # asciiquarium # :perl
       ];
 
       programs = {
@@ -144,7 +144,7 @@
         htop.enable = true;
         bottom.enable = true; # btm
         zoxide.enable = true; # z: autojump directory
-        # hstr.enable = true; # hh :history
+        # hstr.enable = true; # hh: history
         # pay-respects.enable = true;
       };
     };

@@ -13,7 +13,7 @@
         qwen-code
 
         # [ Social ]
-        telegram-desktop # (webkitgtk)
+        telegram-desktop # :webkitgtk
         # vesktop # discord
         # fractal
         # fluffychat
@@ -31,7 +31,7 @@
         goodvibes
         cliamp
         go-musicfox
-        splayer # (electron)
+        splayer # :electron
         # qqmusic
         spotify
         # mousai
@@ -51,7 +51,7 @@
         gradia
         satty # annotation
 
-        # remmina # (webkitgtk)
+        # remmina # :webkitgtk
         # https://github.com/nix-community/home-manager/issues/5173
         (lib.hiPrio localsend)
         qbittorrent
@@ -65,7 +65,7 @@
         # libreoffice-fresh
         # drawio
         # rnote # handwritten note
-        # foliate # (webkitgtk)
+        # foliate # :webkitgtk
         readest
         # koodo-reader
         # planify
@@ -81,7 +81,7 @@
         exiftool
         ffmpegthumbnailer
         # unar # free but oversize
-        unrar # unfree
+        unrar # :unfree
 
         # [ HARDWARE TOOLS ]
         parted
@@ -99,7 +99,7 @@
         usbutils
         dmidecode
         # glxinfo
-        # libva-utils #vainfo
+        # libva-utils # vainfo
         # vulkan-tools
         cpufrequtils
         pciutils
