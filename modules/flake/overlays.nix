@@ -28,24 +28,6 @@
     modifications = final: prev: {
       # foo = prev.callPackage ./foo/package.nix { };
 
-      # niri = prev.niri.overrideAttrs (
-      #   finalAttrs: prevAttrs: {
-      #     # version = "25.08-unstable-2025-11-24";
-      #     cargoHash = "sha256-wGqKiinu2K2uRapVSTpRekuwY9P2OukzL7H0R+VR8N8=";
-      #     src = prev.fetchFromGitHub {
-      #       owner = "YaLTeR";
-      #       repo = "niri";
-      #       rev = "79e41d7d88de44356b48400515076bf5593544e8";
-      #       hash = "sha256-TNtOfYXppR5ln5Go8ncQFMs5+xa3LqJWkaQq22ymAcI=";
-      #     };
-      #     doCheck = false;
-      #     cargoDeps = prev.rustPlatform.fetchCargoVendor {
-      #       inherit (finalAttrs) pname src version;
-      #       hash = finalAttrs.cargoHash;
-      #     };
-      #   }
-      # );
-
       # https://github.com/reF1nd/sing-box/tags
       # sing-box = prev.sing-box.overrideAttrs (oldAttrs: rec {
       #   version = "1.12.12-reF1nd";
@@ -113,22 +95,21 @@
       # ---------------------------------------------------
       # Gnome Extensions
       # ---------------------------------------------------
-      gnomeExtensions = prev.gnomeExtensions // {
-        # night-theme-switcher = prev.callPackage ./night-theme-switcher { };
-      };
+      # gnomeExtensions = prev.gnomeExtensions // {
+      #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
+      # };
 
       # ---------------------------------------------------
       # qt6Packages overrideScope
       # ---------------------------------------------------
       qt6Packages = prev.qt6Packages.overrideScope (
         qt6final: qt6prev: {
-          # Disable `fcitx5-configtool` to avoid pulling in KDE frameworks dependencies
-          # nix run n#qt6Packages.fcitx5-configtool
+          # qt6Packages.fcitx5-configtool has lot of KDE frameworks dependencies
           fcitx5-with-addons = qt6prev.fcitx5-with-addons.override { withConfigtool = false; };
         }
       );
 
-      # etc...
-    }; # end of modifications
-  }; # end of flake.overlays
+      # And etc...
+    };
+  };
 }
