@@ -3,10 +3,9 @@
   flake.modules.homeManager.cava =
     { pkgs, ... }:
     {
-      programs.cava = {
-        enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-cava;
-      };
+      home.packages = [
+        pkgs.wrap-cava
+      ];
     };
 
   perSystem =

@@ -7,7 +7,7 @@
     {
       programs.kitty = {
         enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-kitty;
+        package = pkgs.wrap-kitty;
       };
     };
 

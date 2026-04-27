@@ -25,10 +25,9 @@
   flake.modules.homeManager.helix =
     { pkgs, ... }:
     {
-      programs.helix = {
-        enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-helix;
-      };
+      home.packages = [
+        pkgs.wrap-helix
+      ];
     };
 
   perSystem =

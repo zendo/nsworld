@@ -7,10 +7,9 @@ in
   flake.modules.homeManager.alacritty =
     { pkgs, ... }:
     {
-      programs.alacritty = {
-        enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-alacritty;
-      };
+      home.packages = [
+        pkgs.wrap-alacritty
+      ];
     };
 
   perSystem =

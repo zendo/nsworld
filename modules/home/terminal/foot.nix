@@ -7,7 +7,7 @@
       programs.foot = {
         enable = true;
         # server.enable = true; # default: false
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-foot;
+        package = pkgs.wrap-foot;
       };
     };
 

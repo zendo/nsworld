@@ -3,10 +3,9 @@
   flake.modules.homeManager.mpv =
     { pkgs, ... }:
     {
-      programs.mpv = {
-        enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrap-mpv;
-      };
+      home.packages = [
+        pkgs.wrap-mpv
+      ];
     };
 
   perSystem =
