@@ -1815,7 +1815,7 @@ https://gitlab.com/jabranham/mixed-pitch
 ** super-save
 https://github.com/bbatsov/super-save
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package super-save
   :custom
   (super-save-auto-save-when-idle t)
@@ -2612,7 +2612,7 @@ hippie expand is dabbrev expand on steroids
 ** Browse-at-remote
 #+begin_src emacs-lisp
 (use-package browse-at-remote
-  :commands browser-at-remote)
+  :commands browse-at-remote)
 #+end_src
 
 ** ediff
@@ -2920,15 +2920,15 @@ Run code formatters on ~after-save-hook~
 ** Tooling
 *** prog-mode
 #+begin_src emacs-lisp
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (hl-line-mode)              ;高亮当前行
-            (whitespace-mode)           ;显示空格
-            (display-line-numbers-mode) ;显示行号
-            ;; word-wrap
-            (setq word-wrap nil)        ;在任意字符处拆分单词换行
-            (setq truncate-lines nil)   ;启用行截断
-            ))
+(defun my/prog-mode-defaults ()
+  "Default behaviors shared by programming modes."
+  (hl-line-mode 1) ;高亮当前行
+  (whitespace-mode 1) ;显示空格
+  (display-line-numbers-mode 1) ;显示行号
+  (setq-local word-wrap nil) ;在任意字符处拆分单词换行
+  (setq-local truncate-lines nil)) ;启用行截断
+
+(add-hook 'prog-mode-hook #'my/prog-mode-defaults)
 #+end_src
 
 *** compilation
@@ -3216,10 +3216,14 @@ https://github.com/renzmann/treesit-auto
 *** conf-mode
 #+begin_src emacs-lisp
 (use-package conf-mode
-  :mode
-  "/credentials$" "\\.accept_keywords$"
-  "\\lfrc$" "\\.keywords$" "\\.license$"
-  "\\.mask$" "\\.unmask$" "\\.use$")
+  :mode ("/credentials\\'"
+         "\\.accept_keywords\\'"
+         "\\.lfrc\\'"
+         "\\.keywords\\'"
+         "\\.license\\'"
+         "\\.mask\\'"
+         "\\.unmask\\'"
+         "\\.use\\'"))
 (global-set-key [remap conf-space-keywords] #'project-find-file)
 #+end_src
 
@@ -3677,7 +3681,7 @@ Show current command and its binding.
 
 * post-init.el - Footer
 #+begin_src emacs-lisp
-(provide 'post-init.el)
+(provide 'post-init)
 ;;; post-init.el ends here
 #+end_src
 
