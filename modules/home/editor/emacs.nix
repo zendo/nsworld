@@ -13,8 +13,8 @@
         extraPackages =
           epkgs: with epkgs; [
             jinx
-            vterm
-            # ghostel
+            # vterm
+            ghostel
             sqlite3
             # lsp-bridge
             # pdf-tools

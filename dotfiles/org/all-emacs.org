@@ -1221,8 +1221,9 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 
 ** Shell
 *** vterm
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package vterm
+  :ensure nil ; handle by nix
   :defer t
   :when (eq system-type 'gnu/linux)
   :config
@@ -1234,14 +1235,14 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 
 *** ghostel
 https://github.com/dakra/ghostel
-#+begin_src emacs-lispxx
+#+begin_src emacs-lisp
 (use-package ghostel
+  :ensure nil ; handle by nix
   :defer t
   :when (eq system-type 'gnu/linux)
-  :config
-  (setq ghostel-shell "fish")
+  ;; :config
+  ;; (setq ghostel-shell "fish")
   :bind (:map ghostel-mode-map
-              ;; default: ("C-c C-t" . vterm-copy-mode)
               ("<f2>" . shell-pop)))
 #+end_src
 
@@ -1252,7 +1253,7 @@ https://github.com/dakra/ghostel
   :init
   (setq shell-pop-window-size 30
         shell-pop-shell-type
-        (cond ((eq system-type 'gnu/linux) '("vterm" "*vterm*" #'vterm))
+        (cond ((eq system-type 'gnu/linux) '("ghostel" "*ghostel*" #'ghostel))
               (IS-WINDOWS '("eshell" "*eshell*" #'eshell))
               (t '("terminal" "*terminal*"
                    (lambda () (term shell-pop-term-shell)))))))
