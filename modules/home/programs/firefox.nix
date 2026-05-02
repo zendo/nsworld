@@ -10,12 +10,6 @@
         # Random Profiles Name
         profiles.huohu = {
           isDefault = true;
-          # userChrome = ''
-          #   @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
-          # '';
-          # userContent = ''
-          #   @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
-          # '';
           extraConfig = ''
             ${builtins.readFile "${pkgs.betterfox}/user.js"}
 
@@ -43,12 +37,8 @@
             "browser.tabs.closeTabByDblclick" = true;
             "browser.tabs.closeWindowWithLastTab" = false; # Prevent closing Firefox when closing the last tab
             "browser.tabs.selectOwnerOnClose" = false; # Closing tab and return to the adjacent tab
-            "browser.tabs.loadBookmarksInTabs" = true; # Open bookmarks in a new tab
             "browser.tabs.insertAfterCurrent" = true; # Open new tabs next to current
-            # "browser.tabs.loadBookmarksInBackground" = true;
             "browser.toolbars.bookmarks.visibility" = "always";
-            # "browser.urlbar.openintab" = true;
-            # "browser.search.openintab" = true;
             "browser.aboutwelcome.enabled" = false;
             "browser.aboutConfig.showWarning" = false;
 
@@ -74,12 +64,12 @@
               {
                 Name = "Nix Packages";
                 URLTemplate = "https://search.nixos.org/packages?channel=unstable&type=packages&query={searchTerms}";
-                Alias = "np";
+                Alias = "nsp";
               }
               {
-                Name = "Home Manager Options";
-                URLTemplate = "https://home-manager-options.extranix.com/?release=master&query={searchTerms}";
-                Alias = "hm";
+                Name = "Nixos Options";
+                URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
+                Alias = "nso";
               }
             ]; # Add
           }; # SearchEngines
