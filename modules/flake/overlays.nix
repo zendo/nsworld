@@ -4,7 +4,7 @@
     { config, ... }:
     {
       # Export flake.packages to flake.overlays.default
-      overlayAttrs = config.packages // config.devshells;
+      overlayAttrs = config.packages;
     };
 
   flake.overlays = {

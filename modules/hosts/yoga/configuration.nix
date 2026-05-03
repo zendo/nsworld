@@ -39,15 +39,17 @@
       myVars.user = "iab";
       networking.hostName = "yoga";
 
-      environment.systemPackages =
-        with pkgs;
-        [
-          # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
-          inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
-          nix-init
-          nix-update
-        ]
-        ++ nsw-deploy.packages;
+      environment.systemPackages = with pkgs; [
+        # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
+        inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+        nix-init
+        nix-update
+        # [ deploy ]
+        disko
+        nixos-anywhere
+        inputs.colmena.packages.${stdenv.hostPlatform.system}.colmena
+        # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-r
+      ];
 
       # nix.package = pkgs.lixPackageSets.stable.lix;
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
