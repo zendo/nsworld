@@ -38,6 +38,7 @@
             "browser.tabs.closeWindowWithLastTab" = false; # Prevent closing Firefox when closing the last tab
             "browser.tabs.selectOwnerOnClose" = false; # Closing tab and return to the adjacent tab
             "browser.tabs.insertAfterCurrent" = true; # Open new tabs next to current
+            "browser.tabs.loadBookmarksInTabs" = true; # Open bookmarks in a new tab
             "browser.toolbars.bookmarks.visibility" = "always";
             "browser.aboutwelcome.enabled" = false;
             "browser.aboutConfig.showWarning" = false;
