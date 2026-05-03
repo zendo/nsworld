@@ -4,9 +4,21 @@
     {
       manual.manpages.enable = false;
 
+      programs = {
+        fzf.enable = true;
+        skim.enable = true;
+        television.enable = true;
+        yazi.enable = true;
+        aria2.enable = true;
+        zoxide.enable = true; # z: autojump directory
+        # hstr.enable = true; # hh: history
+        # pay-respects.enable = true;
+      };
+
       home.packages = with pkgs; [
         # Developing
         yq
+        jq
         jql
         # otree # tui tree for JSON/YAML/TOML
         sqlite
@@ -25,9 +37,12 @@
         cdrtools # mkisofs
 
         # FileManager
+        eza
+        fd
+        ripgrep
         file
         tree
-        erdtree
+        # erdtree
         gdu
         duf
         dysk
@@ -53,6 +68,9 @@
 
         # System Monitor
         fastfetchMinimal
+        btop
+        htop
+        bottom
         ctop # containers monitor
         iotop-c
         dool # py fork of dstat
@@ -129,23 +147,5 @@
         nyancat
         # asciiquarium # :perl
       ];
-
-      programs = {
-        eza.enable = true;
-        fd.enable = true;
-        fzf.enable = true;
-        skim.enable = true;
-        ripgrep.enable = true;
-        television.enable = true;
-        jq.enable = true;
-        yazi.enable = true;
-        aria2.enable = true;
-        btop.enable = true;
-        htop.enable = true;
-        bottom.enable = true; # btm
-        zoxide.enable = true; # z: autojump directory
-        # hstr.enable = true; # hh: history
-        # pay-respects.enable = true;
-      };
     };
 }

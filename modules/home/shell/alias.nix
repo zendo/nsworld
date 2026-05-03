@@ -8,21 +8,32 @@
     }:
     {
       home.shellAliases = {
-        cat = "${lib.getExe pkgs.bat} -p";
-        cp = "${lib.getExe pkgs.xcp}";
-        l = "${lib.getExe pkgs.eza} -l --icons";
-        lm = "${lib.getExe pkgs.eza} -l -a --reverse --sort=modified";
+        # [ ls ]
+        ls = "${lib.getExe pkgs.eza}";
+        li = "ls -l --icons";
+        ll = "ls -l";
+        la = "ls -a";
+        lt = "ls --tree";
+        lla = "ls -la";
+        lm = "ls -l -a --reverse --sort=modified";
         "la." = "ls -d .*";
+
+        # [ rm ]
         rm = "${lib.getExe pkgs.gtrash} put";
         rm-empty = "${lib.getExe pkgs.gtrash} find --rm";
         rm-restore = "${lib.getExe pkgs.gtrash} restore";
-        fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
-        bc = "${lib.getExe pkgs.libqalculate}";
+
+        # [ systemd ]
         sc = "systemctl";
         scu = "systemctl --user";
         jlog = "journalctl";
         jlogu = "journalctl --user-unit";
         jlog-1h = ''journalctl -p err..alert --since "60 min ago"'';
+
+        cat = "${lib.getExe pkgs.bat} -p";
+        cp = "${lib.getExe pkgs.xcp}";
+        fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
+        bc = "${lib.getExe pkgs.libqalculate}";
         ii = "xdg-open"; # `Invoke-Item` powershell style
         inxi = "inxi -Fz";
         free = "free -h";
@@ -32,7 +43,7 @@
         psp = "${lib.getExe pkgs.procs} --sortd UsageMem";
         ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
 
-        # network
+        # [ network ]
         ip = "ip --color=auto";
         ip-api = "curl ip-api.com";
         ip-info = "curl ipinfo.io";
@@ -43,14 +54,14 @@
         download-doom = "git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d";
         download-astronvim = "git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim";
 
-        # emacs
+        # [ emacs ]
         e = "emacs -nw";
         ee = "emacsclient --create-frame";
         ee-config = "emacs --init-directory ~/.config/emacs";
         dired = ''emacsclient -nw -c -e "(dired default-directory)"'';
         magit = ''emacsclient -nw -c -e "(magit-status)"'';
 
-        # nix
+        # [ nix ]
         j = "just --justfile=${config.home.homeDirectory}/nsworld/justfile";
         nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
         # https://github.com/NixOS/nixpkgs/issues/308252#issuecomment-2543048917
@@ -58,10 +69,10 @@
       };
 
       programs.zsh.shellAliases = {
-        # nix
+        # [ nix ]
         nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
 
-        # proxy (move here because fish will complain)
+        # [ proxy ] (move here because fish will complain)
         # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
         ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
         ssr-chrome = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}"'';
