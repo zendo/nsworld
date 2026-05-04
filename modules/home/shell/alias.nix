@@ -68,11 +68,8 @@
         fixicons = "sed -i 's/file:\\/\\/\\/nix\\/store\\/[^\\/]*\\/share\\/applications\\//applications:/gi' ~/.config/plasma-org.kde.plasma.desktop-appletsrc && systemctl restart --user plasma-plasmashell && echo 'Iconfix!\n\n'";
       };
 
-      programs.zsh.shellAliases = {
-        # [ nix ]
-        nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
-
-        # [ proxy ] (move here because fish will complain)
+      programs.bash.shellAliases = {
+        # [ proxy ] (move here because fish incompatible complain)
         # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
         ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
         ssr-chrome = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}"'';
@@ -89,8 +86,19 @@
         '';
       };
 
+      programs.zsh.shellAliases = {
+        nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
+      }
+      // config.programs.bash.shellAliases;
+
       programs.fish = {
         functions = {
+          # [ nix ]
+          nix-build-ls.body = ''
+            nix build --print-out-paths --no-link nixpkgs#$argv[1] | xargs yazi
+          '';
+
+          # [ proxy ]
           # set ssr_ip localhost:7890; ssr ; ssr-nix-daemon
           ssr.body = ''
             set ip $argv[1]
