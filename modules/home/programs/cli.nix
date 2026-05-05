@@ -16,7 +16,7 @@
       };
 
       home.packages = with pkgs; [
-        # Developing
+        # [ Developing ]
         yq
         jq
         jql
@@ -28,7 +28,7 @@
         strace
         lurk # strace alternative
 
-        # Compressor / Archiver
+        # [ Compressor/Archiver ]
         p7zip
         unzip
         ouch
@@ -36,7 +36,7 @@
         # atool
         cdrtools # mkisofs
 
-        # FileManager
+        # [ FileManager ]
         eza
         fd
         ripgrep
@@ -66,7 +66,7 @@
         # magic-wormhole-rs
         sendme
 
-        # System Monitor
+        # [ System Monitor ]
         fastfetchMinimal
         btop
         htop
@@ -79,7 +79,7 @@
         procs
         ikill
 
-        # Utils
+        # [ Utils ]
         # (lib.hiPrio uutils-coreutils-noprefix) # riir
         bat
         just
@@ -102,7 +102,7 @@
         # zee
         tokei # count code
 
-        # Networking
+        # [ Networking ]
         wget
         curl
         # ghgrab

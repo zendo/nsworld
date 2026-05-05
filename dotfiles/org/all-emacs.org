@@ -2989,6 +2989,7 @@ https://github.com/renzmann/treesit-auto
 
 #+begin_src emacs-lisp
 (use-package treesit-auto
+  :when (eq system-type 'gnu/linux)
   ;; :custom
   ;; (treesit-auto-install 'prompt)
   :config
@@ -3228,7 +3229,7 @@ https://github.com/renzmann/treesit-auto
 (global-set-key [remap conf-space-keywords] #'project-find-file)
 #+end_src
 
-*** prettier :disable:
+*** prettier
 HTML/CSS/TS/JSON/YAML/MARKDOWN
 
 #+begin_src emacs-lispxx
@@ -3255,41 +3256,19 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 
 *** javaScript
 #+begin_src emacs-lispxx
-(use-package typescript-mode
-  :mode ("\\.ts[x]\\'" . typescript-mode))
-
-;; JavaScript
-(use-package js-mode
+(use-package js
   :ensure nil
-  :defines (js-indent-level flycheck-javascript-eslint-executable)
+  :mode (("\\.js\\'" . js-ts-mode)
+         ("\\.jsx\\'" . tsx-ts-mode))
   :config
-  (setq js-indent-level 2)
+  (setq js-indent-level 2))
 
-  (with-eval-after-load 'flycheck
-    ;; https://github.com/mantoni/eslint_d.js
-    ;; Install: npm -i -g eslint_d
-    (when (executable-find "eslint_d")
-      (setq flycheck-javascript-eslint-executable "eslint_d"))))
-
-
-(use-package js2-mode
-  :mode (("\\.js\\'" . js2-mode)
-         ("\\.jsx\\'" . js2-jsx-mode))
-  :interpreter (("node" . js2-mode)
-                ("node" . js2-jsx-mode))
-  :hook ((js2-mode . js2-imenu-extras-mode)
-         (js2-mode . js2-highlight-unused-variables-mode))
-  :config
-  (with-eval-after-load 'flycheck
-    (when (or (executable-find "eslint_d")
-              (executable-find "eslint")
-              (executable-find "jshint"))
-      (setq js2-mode-show-strict-warnings nil))))
-
+(use-package typescript-mode
+  :mode ("\\.ts[x]\\'"))
 
 ;; Adds node_modules/.bin directory to `exec_path'
-(use-package add-node-modules-path
-  :hook ((web-mode js-mode js2-mode) . add-node-modules-path))
+;; (use-package add-node-modules-path
+;;   :hook ((web-mode js-mode js2-mode) . add-node-modules-path))
 #+end_src
 
 *** php

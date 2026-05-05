@@ -27,6 +27,8 @@
                 tree-sitter-bash
                 tree-sitter-json
                 tree-sitter-json5
+                tree-sitter-javascript
+                tree-sitter-tsx
                 tree-sitter-yaml
                 tree-sitter-toml
                 tree-sitter-kdl
