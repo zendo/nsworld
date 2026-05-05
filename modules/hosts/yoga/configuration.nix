@@ -4,9 +4,9 @@
     modules =
       with inputs.self.modules.nixos;
       [
-        host-yoga
-
         # [ profiles ]
+        host-yoga
+        host-yoga-hm
         hmModule
         default-imports
         laptop
@@ -33,41 +33,52 @@
       ];
   };
 
+  flake.modules.nixos.host-yoga-hm =
+    { config, ... }:
+    {
+      home-manager.users.${config.myVars.user} =
+        { pkgs, ... }:
+        {
+          imports = [ inputs.self.modules.homeManager.default-imports ];
+
+          home.packages = with pkgs; [
+            # [ AI ]
+            codex
+            opencode
+            qwen-code
+          ];
+
+          dconf.settings = {
+            "org/gnome/settings-daemon/plugins/power" = {
+              # 修复恢复时蓝牙鼠标连接缓慢问题
+              # 电源 - 节电 - 自动挂起（插入电源时关闭）
+              sleep-inactive-ac-type = "nothing";
+            };
+          };
+        };
+    };
+
   flake.modules.nixos.host-yoga =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
       myVars.user = "iab";
       networking.hostName = "yoga";
 
       environment.systemPackages = with pkgs; [
-        # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
-        inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
-        nix-init
-        nix-update
         # [ deploy ]
         disko
         nixos-anywhere
         inputs.colmena.packages.${stdenv.hostPlatform.system}.colmena
         # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-r
+        # [ nix ]
+        nix-init
+        nix-update
+        inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+        # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
       ];
 
       # nix.package = pkgs.lixPackageSets.stable.lix;
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
-      # ╭─────────────────────────────────────────────────────╮
-      # │ HOME-MANAGER                                        │
-      # ╰─────────────────────────────────────────────────────╯
-      home-manager.users.${config.myVars.user} = {
-        imports = [ inputs.self.modules.homeManager.default-imports ];
-
-        dconf.settings = {
-          "org/gnome/settings-daemon/plugins/power" = {
-            # 修复恢复时蓝牙鼠标连接缓慢问题
-            # 电源 - 节电 - 自动挂起（插入电源时关闭）
-            sleep-inactive-ac-type = "nothing";
-          };
-        };
-      };
 
       # ╭─────────────────────────────────────────────────────╮
       # │ HARDWARE                                            │

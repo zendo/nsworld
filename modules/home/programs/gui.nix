@@ -7,11 +7,6 @@
         kula
         nano-ffmpeg
 
-        # [ AI ]
-        codex
-        opencode
-        qwen-code
-
         # [ Social ]
         telegram-desktop # :webkitgtk
         # vesktop # discord
