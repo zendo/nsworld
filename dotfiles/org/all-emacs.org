@@ -3225,6 +3225,7 @@ https://github.com/renzmann/treesit-auto
          "\\.license\\'"
          "\\.mask\\'"
          "\\.unmask\\'"
+         "\\.kbd\\'" ; kanata config
          "\\.use\\'"))
 (global-set-key [remap conf-space-keywords] #'project-find-file)
 #+end_src
