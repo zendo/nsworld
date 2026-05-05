@@ -2678,6 +2678,9 @@ hippie expand is dabbrev expand on steroids
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
+
+(use-package ox-json
+  :defer t)
 #+end_src
 
 ** org-agenda
@@ -3297,15 +3300,6 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 #+begin_src emacs-lisp
 (use-package json-mode
   :mode ("\\.json'"))
-
-(use-package json-reformat
-  :commands json-reformat-region)
-
-(use-package json-navigator
-  :commands json-navigator-navigate-region)
-
-(use-package ox-json
-  :defer t)
 #+end_src
 
 *** yaml
@@ -3330,12 +3324,6 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 #+begin_src emacs-lisp
 (use-package just-mode
   :mode ("\\.just'" "justfile\\'"))
-#+end_src
-
-*** license-templates
-#+begin_src emacs-lisp
-(use-package license-templates
-  :defer t)
 #+end_src
 
 * Functions
