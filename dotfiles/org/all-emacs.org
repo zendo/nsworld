@@ -2678,9 +2678,6 @@ hippie expand is dabbrev expand on steroids
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
-
-(use-package ox-json
-  :defer t)
 #+end_src
 
 ** org-agenda
