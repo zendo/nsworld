@@ -9,13 +9,6 @@
     {
       programs.man.generateCaches = false;
 
-      # https://carapace.sh/
-      programs.carapace = {
-        # enable = true;
-        ignoreCase = true;
-        enableBashIntegration = false;
-      };
-
       programs.fish = {
         enable = true;
         # generateCompletions = true;
