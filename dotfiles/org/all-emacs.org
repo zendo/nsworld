@@ -1792,8 +1792,9 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 * Persistence
-** auto-save
+** auto-save-mode #filename#
 #+begin_src emacs-lisp
+;; 传统备份机制，不覆盖原文件，只生成一个临时备份文件。
 ;; Enable `auto-save-mode' to prevent data loss. Use `recover-file' or
 ;; `recover-session' to restore unsaved changes. #file.txt#
 (setq auto-save-default nil)
@@ -1801,7 +1802,10 @@ https://gitlab.com/jabranham/mixed-pitch
 (setq auto-save-interval 300)
 ;; Trigger an auto-save 30 seconds of idle time.
 (setq auto-save-timeout 30)
-
+#+end_src
+** auto-save-visited-mode
+#+begin_src emacs-lisp
+;; 26.1+ 新备份机制，直接把你的修改写进原文件。
 ;; When auto-save-visited-mode is enabled, Emacs will auto-save file-visiting
 ;; buffers after a certain amount of idle time if the user forgets to save it
 ;; with save-buffer or C-x s for example.
@@ -1812,11 +1816,10 @@ https://gitlab.com/jabranham/mixed-pitch
 ;; after a period of idle time, directly saving to the file itself without
 ;; creating backup files.
 ;; OR `super-save`
-(auto-save-visited-mode 1)
-(setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
-(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+;; (auto-save-visited-mode 1)
+;; (setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
+;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
 #+end_src
-
 ** super-save
 https://github.com/bbatsov/super-save
 
@@ -1828,6 +1831,33 @@ https://github.com/bbatsov/super-save
   (super-save-all-buffers t)
   :config
   (super-save-mode +1))
+#+end_src
+
+** buffer-guardian
+https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
+#+begin_src emacs-lisp
+(use-package buffer-guardian
+  :custom
+  ;; When non-nil, include remote files in the auto-save process
+  (buffer-guardian-inhibit-saving-remote-files t)
+
+  ;; When non-nil, buffers visiting nonexistent files are not saved
+  (buffer-guardian-inhibit-saving-nonexistent-files nil)
+
+  ;; Save the buffer even if the window change results in the same buffer
+  (buffer-guardian-save-on-same-buffer-window-change t)
+
+  ;; Non-nil to enable verbose mode to log when a buffer is automatically saved
+  (buffer-guardian-verbose nil)
+
+  ;; Save all buffers after N seconds of user idle time. (Disabled by default)
+  ;; (buffer-guardian-save-all-buffers-idle 30)
+
+  ;; Save all buffers every N seconds. (Disabled by default)
+  ;; (setq buffer-guardian-save-all-buffers-interval (* 60 30))
+
+  :hook
+  (after-init . buffer-guardian-mode))
 #+end_src
 
 ** recentf、savehist、saveplace、auto-revert
