@@ -1243,14 +1243,14 @@ https://github.com/dakra/ghostel
   ;; :config
   ;; (setq ghostel-shell "fish")
   :bind (:map ghostel-mode-map
-              ("<f2>" . shell-pop)))
+              ("C-`" . shell-pop)))
 #+end_src
 
 *** shell-pop
 https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
 #+begin_src emacs-lisp
 (use-package shell-pop
-  :bind (("<f2>" . shell-pop))
+  :bind (("C-`" . shell-pop))
   :custom
   ;; (shell-pop-universal-key "C-c t") ; did't work?
   (shell-pop-window-size 30)
