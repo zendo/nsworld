@@ -55,6 +55,8 @@
           ];
         }; # end of settings
       }; # edd of nix
+
+      environment.etc."nix/current-flake".source = inputs.self;
     };
 
   # ╭─────────────────────────────────────────────────────╮
