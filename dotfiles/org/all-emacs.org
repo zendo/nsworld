@@ -1263,6 +1263,30 @@ https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
                    (lambda () (term shell-pop-term-shell)))))))
 #+end_src
 
+*** popper
+https://github.com/karthink/popper
+#+begin_src emacs-lispxx
+(use-package popper
+  :bind (("C-`"   . popper-toggle)
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode
+          "^\\*eshell.*\\*$" eshell-mode
+          "^\\*shell.*\\*$"  shell-mode
+          "^\\*term.*\\*$"   term-mode
+          "^\\*vterm.*\\*$"  vterm-mode
+          "^\\*ghostel.*\\*$" ghostel-mode
+          ))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
+#+end_src
+
 ** Tramp
 https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 
