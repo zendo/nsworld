@@ -1247,12 +1247,16 @@ https://github.com/dakra/ghostel
 #+end_src
 
 *** shell-pop
+https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
 #+begin_src emacs-lisp
 (use-package shell-pop
   :bind (("<f2>" . shell-pop))
-  :init
-  (setq shell-pop-window-size 30
-        shell-pop-shell-type
+  :custom
+  ;; (shell-pop-universal-key "C-c t") ; did't work?
+  (shell-pop-window-size 30)
+  (shell-pop-full-span nil) ; Don't stretches across the entire frame width
+  ;; (shell-pop-term-shell shell-file-name)
+  (shell-pop-shell-type
         (cond ((eq system-type 'gnu/linux) '("ghostel" "*ghostel*" #'ghostel))
               (IS-WINDOWS '("eshell" "*eshell*" #'eshell))
               (t '("terminal" "*terminal*"
