@@ -1105,6 +1105,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Vanilla Emacs configuration.
 
 ;;; Code:
+(setq confirm-kill-processes nil)
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+;; (setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名和路径
 (setq display-time-24hr-format t)
 ;; (setq system-time-locale "C") ;使用英文时间格式
 
@@ -1125,7 +1128,6 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 * Platform
 ** Variables
 Use ~getenv~ check the environment variables.
-
 #+begin_src emacs-lisp
 (defconst IS-MAC     (eq system-type 'darwin))
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
@@ -1134,7 +1136,6 @@ Use ~getenv~ check the environment variables.
 (defconst IS-WSL     (and IS-LINUX
                           (getenv "WSLENV")))
 #+end_src
-
 ** Linux
 #+begin_src emacs-lisp
 (when IS-LINUX
@@ -1148,7 +1149,6 @@ Use ~getenv~ check the environment variables.
        (font-spec :name "Noto Sans CJK SC")))))
 ;; 中英文字体缩放不一致：https://emacs-china.org/t/face-charset-size/16916
 #+end_src
-
 ** WSL
 #+begin_src emacs-lisp
 (when IS-WSL
@@ -1170,7 +1170,6 @@ Use ~getenv~ check the environment variables.
         select-enable-primary nil
         interprogram-cut-function #'gui-select-text))
 #+end_src
-
 ** Windows
 #+begin_src emacs-lisp
 (when IS-WINDOWS
@@ -1193,7 +1192,6 @@ Use ~getenv~ check the environment variables.
   ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
   )
 #+end_src
-
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
 
 ** TTY
@@ -1209,7 +1207,6 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
   (global-kkp-mode +1))
 #+end_src
-
 ** Encoding
 #+begin_src emacs-lisp
 ;; Set UTF-8 as the default coding system
@@ -1218,8 +1215,20 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
 #+end_src
-
 ** Shell
+*** eat
+#+begin_src emacs-lisp
+(use-package eat
+  :defer t
+  ;; :when (eq system-type 'gnu/linux)
+  :custom
+  (eat-kill-buffer-on-exit t)
+  (eat-enable-yank-to-terminal t)
+  (eat-enable-directory-tracking t)
+  (eat-enable-shell-command-history t)
+  (eat-enable-shell-prompt-annotation t)
+  (eat-term-scrollback-size nil))
+#+end_src
 *** vterm
 #+begin_src emacs-lispxx
 (use-package vterm
@@ -1232,7 +1241,6 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
               ;; default: ("C-c C-t" . vterm-copy-mode)
               ("<f2>" . shell-pop)))
 #+end_src
-
 *** ghostel
 https://github.com/dakra/ghostel
 #+begin_src emacs-lisp
@@ -1242,13 +1250,39 @@ https://github.com/dakra/ghostel
   :when (eq system-type 'gnu/linux)
   ;; :config
   ;; (setq ghostel-shell "fish")
-  :bind (:map ghostel-mode-map
-              ("C-`" . shell-pop)))
+  ;; :bind (:map ghostel-mode-map
+  ;;             ("C-`" . shell-pop))
+  )
 #+end_src
-
+*** popper
+https://github.com/karthink/popper
+#+begin_src emacs-lisp
+(use-package popper
+  :bind (("C-`"   . popper-toggle)
+         ;; ("M-`"   . popper-cycle)
+         ;; ("C-M-`" . popper-toggle-type)
+         )
+  :init
+  (setq popper-window-height 0.33)
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode
+          "^\\*eat.*\\*$"    eat-mode
+          "^\\*shell.*\\*$"  shell-mode
+          "^\\*eshell.*\\*$" eshell-mode
+          "^\\*term.*\\*$"   term-mode
+          "^\\*vterm.*\\*$"  vterm-mode
+          "^\\*ghostel.*\\*$" ghostel-mode
+          ))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
+#+end_src
 *** shell-pop
 https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package shell-pop
   :bind (("C-`" . shell-pop))
   :custom
@@ -1262,31 +1296,6 @@ https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
               (t '("terminal" "*terminal*"
                    (lambda () (term shell-pop-term-shell)))))))
 #+end_src
-
-*** popper
-https://github.com/karthink/popper
-#+begin_src emacs-lispxx
-(use-package popper
-  :bind (("C-`"   . popper-toggle)
-         ("M-`"   . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
-  :init
-  (setq popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
-          compilation-mode
-          "^\\*eshell.*\\*$" eshell-mode
-          "^\\*shell.*\\*$"  shell-mode
-          "^\\*term.*\\*$"   term-mode
-          "^\\*vterm.*\\*$"  vterm-mode
-          "^\\*ghostel.*\\*$" ghostel-mode
-          ))
-  (popper-mode +1)
-  (popper-echo-mode +1))                ; For echo area hints
-#+end_src
-
 ** Tramp
 https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 
@@ -1294,7 +1303,6 @@ https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 (setq tramp-default-method "ssh"
       password-cache-expiry 36000)
 #+end_src
-
 ** Server
 https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
@@ -1312,13 +1320,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
-
 * UI
-#+begin_src emacs-lisp
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
-(setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名
-#+end_src
-
 ** Themes
 #+begin_src emacs-lisp
 (mapc #'disable-theme custom-enabled-themes)  ; Disable all active minimal-emacs.d themes
@@ -1365,7 +1367,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;;   :config
 ;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+end_src
-
 ** emoji
 :) :-( :dog:
 #+begin_src emacs-lisp
@@ -1373,7 +1374,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :defer t
   :hook (after-init . global-emojify-mode))
 #+end_src
-
 ** Mode-line
 #+begin_src emacs-lisp
 ;; Handle by mood-modeline
@@ -1406,7 +1406,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 (use-package nyan-mode
   :commands nyan-mode)
 #+end_src
-
 ** Tab-bar
 #+begin_src emacs-lisp
 (use-package centaur-tabs
@@ -1423,7 +1422,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :config
   (centaur-tabs-mode t))
 #+end_src
-
 ** Dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
@@ -1447,7 +1445,6 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; bug: 会导致 magit comit save 后跳到 dashboard
 ;; (add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
-
 ** Treemacs
 #+begin_src emacs-lisp
 (use-package treemacs
@@ -1483,7 +1480,6 @@ Use `treemacs' command for old functionality."
            (message "No valid project in current buffer; opening last treemacs session")
            (treemacs))))))
 #+end_src
-
 ** perfect-margin
 #+begin_src emacs-lisp
 (use-package perfect-margin
@@ -1495,27 +1491,23 @@ Use `treemacs' command for old functionality."
   (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
 )
 #+end_src
-
 ** spatial-padding
 #+begin_src emacs-lisp
 (use-package spacious-padding
   :config
   (spacious-padding-mode +1))
 #+end_src
-
 ** indent-bars
 #+begin_src emacs-lisp
 (use-package indent-bars
   :commands indent-bars)
 #+end_src
-
 ** hl-todo
 #+begin_src emacs-lisp
 (use-package hl-todo
   :config
   (global-hl-todo-mode))
 #+end_src
-
 ** rainbow & colorful-mode
 #+begin_src emacs-lisp
 ;; rainbow 颜色代码显色 #00FF00
@@ -1537,7 +1529,6 @@ Use `treemacs' command for old functionality."
   (global-colorful-mode t)
   (add-to-list 'global-colorful-modes 'helpful-mode))
 #+end_src
-
 ** scrollkeeper
 like ~beacon~
 
