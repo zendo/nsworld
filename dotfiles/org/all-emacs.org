@@ -1220,7 +1220,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 #+begin_src emacs-lisp
 (use-package eat
   :defer t
-  ;; :when (eq system-type 'gnu/linux)
+  :when (eq system-type 'gnu/linux)
   :custom
   (eat-kill-buffer-on-exit t)
   (eat-enable-yank-to-terminal t)
@@ -1259,6 +1259,7 @@ https://github.com/karthink/popper
 #+begin_src emacs-lisp
 (use-package popper
   :bind (("C-`"   . popper-toggle)
+         ("C-<tab>" . popper-cycle)
          ;; ("M-`"   . popper-cycle)
          ;; ("C-M-`" . popper-toggle-type)
          )
@@ -1585,7 +1586,6 @@ like ~otree~
 ** buffer-terminator
 #+begin_src emacs-lisp
 (use-package buffer-terminator
-  :ensure t
   :custom
   ;; Enable/Disable verbose mode to log buffer cleanup events
   (buffer-terminator-verbose nil)
@@ -1955,7 +1955,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; The undo-fu package is a lightweight wrapper around Emacs' built-in undo
 ;; system, providing more convenient undo/redo functionality.
 (use-package undo-fu
-  :ensure t
   :commands (undo-fu-only-undo
              undo-fu-only-redo
              undo-fu-only-redo-all
@@ -1964,7 +1963,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; The undo-fu-session package complements undo-fu by enabling the saving
 ;; and restoration of undo history across Emacs sessions, even after restarting.
 (use-package undo-fu-session
-  :ensure t
   :commands undo-fu-session-global-mode
   :hook (after-init . undo-fu-session-global-mode))
 #+end_src
@@ -2494,7 +2492,6 @@ hippie expand is dabbrev expand on steroids
 #+begin_src emacs-lisp :tangle no
 ;; The official collection of snippets for yasnippet.
 (use-package yasnippet-snippets
-  :ensure t
   :after yasnippet)
 
 ;; YASnippet is a template system designed that enhances text editing by
@@ -2502,7 +2499,6 @@ hippie expand is dabbrev expand on steroids
 ;; abbreviation, YASnippet automatically expands it into a full template, which
 ;; can include placeholders, fields, and dynamic content.
 (use-package yasnippet
-  :ensure t
   :commands (yas-minor-mode
              yas-global-mode)
 
