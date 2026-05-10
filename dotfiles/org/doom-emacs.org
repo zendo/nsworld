@@ -216,6 +216,7 @@
 (package! casual)
 (package! kdl-mode)
 (package! eat)
+(package! buffer-guardian)
 ;; (package! this-package
 ;; :recipe (:host github :repo "camdez/goto-last-change"))
 (package! org-modern :disable t)
@@ -226,7 +227,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq confirm-kill-emacs nil
-      ;; confirm-kill-processes nil
+      confirm-kill-processes nil
       warning-minimum-level :emergency ; temp disable
       )
 
@@ -271,6 +272,11 @@
         select-enable-clipboard 't
         select-enable-primary nil
         interprogram-cut-function #'gui-select-text))
+#+end_src
+** eat
+#+begin_src emacs-lisp
+; doom 弹出窗口规则
+(set-popup-rule! "^\\*eat" :side 'bottom :height 0.4 :quit t :select t)
 #+end_src
 
 ** vterm
@@ -361,10 +367,30 @@
 #+end_src
 
 ** auto-save
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (auto-save-visited-mode 1)
 (setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
 (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+#+end_src
+
+** buffer-guardian
+https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
+#+begin_src emacs-lisp
+(with-eval-after-load 'buffer-guardian
+  ;; When non-nil, include remote files in the auto-save process
+  (setq buffer-guardian-inhibit-saving-remote-files t)
+  ;; When non-nil, buffers visiting nonexistent files are not saved
+  (setq buffer-guardian-inhibit-saving-nonexistent-files nil)
+  ;; Save the buffer even if the window change results in the same buffer
+  (setq buffer-guardian-save-on-same-buffer-window-change t)
+  ;; Non-nil to enable verbose mode to log when a buffer is automatically saved
+  (setq buffer-guardian-verbose nil)
+  ;; Save all buffers after N seconds of user idle time. (Disabled by default)
+  ;; (buffer-guardian-save-all-buffers-idle 30)
+  ;; Save all buffers every N seconds. (Disabled by default)
+  ;; (setq buffer-guardian-save-all-buffers-interval (* 60 30))
+  )
+(buffer-guardian-mode +1)
 #+end_src
 
 ** vundo
