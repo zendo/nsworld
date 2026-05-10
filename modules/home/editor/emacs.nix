@@ -13,9 +13,9 @@
         extraPackages =
           epkgs: with epkgs; [
             jinx
-            # vterm
-            ghostel
             sqlite3
+            ghostel
+            # vterm
             # lsp-bridge
             # pdf-tools
             # telega
