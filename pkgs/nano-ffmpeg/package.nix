@@ -8,16 +8,16 @@
 
 buildGoModule (finalAttrs: {
   pname = "nano-ffmpeg";
-  version = "0.4.0";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "dgr8akki";
     repo = "nano-ffmpeg";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-G5e+dAdissGB8ZMT5RTrXGfk6SWNDVOj+EH/+DWGXTs=";
+    hash = "sha256-4uZ2y+Qe4uMrnpzl8BHQEWFNkhwNBBwoxb5RMnLyGfM=";
   };
 
-  vendorHash = "sha256-irJksXupZGHzZ5vbFeI9laKi5+LyATc1lMxpMLLl69w=";
+  vendorHash = "sha256-AZzpINOagTfFPYOavp15oJD/LTlDoX4NfDA0DYV39NM=";
 
   ldflags = [
     "-s"
