@@ -100,6 +100,7 @@ in
           # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
           "acpi.prefer_microsoft_dsm_guid=1"
           # Fix touhpad multitouch somtimes unavailable
+          # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
           "psmouse.synaptics_intertouch=1"
         ];
 
@@ -187,7 +188,6 @@ in
           ];
           extraConfig = ''
             remember_last_entry: yes
-            # interface_help_hidden: yes
           '';
           extraEntries = ''
             /Windows

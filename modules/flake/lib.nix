@@ -17,7 +17,7 @@
           Use path relative to the root of the project
           Copy: https://github.com/EmergentMind/nix-config-starter/blob/master/lib/default.nix
         */
-        relativeToRoot = lib.path.append ../../.;
+        rootPath = lib.path.append ../../.;
         scanPaths =
           path:
           map (f: (path + "/${f}")) (
