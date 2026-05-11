@@ -1,15 +1,18 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  fm = config.flake.modules;
+in
 {
   flake.modules.nixos.wm =
     { pkgs, ... }:
     {
-      imports = with inputs.self.modules.nixos; [
-        dms
-        greetd
-        # ly
+      imports = [
+        fm.nixos.dms
+        fm.nixos.greetd
+        # fm.nixos.ly
       ];
 
-      home-manager.sharedModules = [ inputs.self.modules.homeManager.wm ];
+      home-manager.sharedModules = [ fm.homeManager.wm ];
 
       security = {
         soteria.enable = true; # Polkit agent
@@ -50,8 +53,8 @@
     { pkgs, ... }:
     {
       imports = [
-        inputs.self.modules.homeManager.hypridle
-        inputs.self.modules.homeManager.shikane
+        fm.homeManager.hypridle
+        fm.homeManager.shikane
       ];
 
       home.packages = with pkgs; [
@@ -133,7 +136,7 @@
   flake.modules.nixos.sway =
     { pkgs, ... }:
     {
-      imports = [ inputs.self.modules.nixos.wm ];
+      imports = [ fm.nixos.wm ];
       programs.sway = {
         enable = true;
         wrapperFeatures.gtk = true;
@@ -147,7 +150,7 @@
   # │ HYPRLAND                                 │
   # ╰──────────────────────────────────────────╯
   flake.modules.nixos.hyprland = {
-    imports = [ inputs.self.modules.nixos.wm ];
+    imports = [ fm.nixos.wm ];
     programs.hyprland = {
       enable = true;
       withUWSM = true;
@@ -158,7 +161,7 @@
   # │ NIRI                                     │
   # ╰──────────────────────────────────────────╯
   flake.modules.nixos.niri = {
-    imports = [ inputs.self.modules.nixos.wm ];
+    imports = [ fm.nixos.wm ];
     programs.niri.enable = true;
     services.displayManager.dms-greeter.compositor.name = "niri";
   };

@@ -1,13 +1,14 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 let
   userName = "test";
+  fm = config.flake.modules;
 in
 {
   # nixos-rebuild build-vm --flake .#vmtest
   # nix build .#nixosConfigurations.vmtest.config.system.build.vm
   flake.nixosConfigurations.vmtest = inputs.nixpkgs.lib.nixosSystem {
     modules =
-      with inputs.self.modules.nixos;
+      with fm.nixos;
       [
         host-vmtest
         hmModule
@@ -32,7 +33,7 @@ in
     {
       home-manager.users.${userName} = {
         imports = [
-          inputs.self.modules.homeManager.default-imports
+          fm.homeManager.default-imports
         ];
       };
 

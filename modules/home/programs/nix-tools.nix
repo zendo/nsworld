@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   flake.modules.homeManager.nix-tools =
     { pkgs, config, ... }:
@@ -17,9 +16,6 @@
         nix-output-monitor
         nix-search-tv
         # hydra-check
-
-        # persistent cache
-        inputs.self.formatter.${stdenv.hostPlatform.system}
 
         (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
         (writeScriptBin "nsa" (builtins.readFile "${nix-search-tv.src}/nixpkgs.sh"))

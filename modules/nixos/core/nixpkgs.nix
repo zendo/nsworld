@@ -1,10 +1,10 @@
-{ inputs, ... }:
+{ config, ... }:
 {
   flake.modules.nixos.nixpkgs =
     { lib, ... }:
     {
       nixpkgs = {
-        overlays = builtins.attrValues inputs.self.overlays;
+        overlays = builtins.attrValues config.flake.overlays;
 
         config = {
           # allowUnfree = true;

@@ -1,8 +1,13 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  userName = "aaa";
+  hostName = "rmt";
+  fm = config.flake.modules;
+in
 {
   # nixos-rebuild --target-host user@host -S --flake .#host switch
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
-    modules = with inputs.self.modules.nixos; [
+    modules = with fm.nixos; [
       host-rmt
       # host-rmt-disko-btrfs
       host-rmt-disko-bcachefs
@@ -33,11 +38,11 @@
   flake.modules.nixos.host-rmt =
     { pkgs, config, ... }:
     {
-      myVars.user = "aaa";
-      networking.hostName = "rmt";
+      myVars.user = userName;
+      networking.hostName = hostName;
 
       home-manager.users.${config.myVars.user} = {
-        imports = [ inputs.self.modules.homeManager.default-imports ];
+        imports = [ fm.homeManager.default-imports ];
         # programs.vscode.enable = true;
       };
 

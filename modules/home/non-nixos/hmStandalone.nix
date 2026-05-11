@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 let
   mkHome =
     {
@@ -12,7 +12,7 @@ let
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         inherit system;
-        overlays = builtins.attrValues inputs.self.overlays;
+        overlays = builtins.attrValues config.flake.overlays;
         config.allowUnfree = true;
       };
 
@@ -21,7 +21,7 @@ let
       };
 
       modules = [
-        inputs.self.modules.homeManager.non-nixos
+        config.flake.modules.homeManager.non-nixos
       ]
       ++ extraModules;
     };
@@ -35,8 +35,8 @@ in
         user = "iab";
       };
       extraModules = [
-        inputs.self.modules.homeManager.non-nixos-imports
-        inputs.self.modules.homeManager.dconf
+        config.flake.modules.homeManager.non-nixos-imports
+        config.flake.modules.homeManager.dconf
       ];
     };
 
@@ -45,9 +45,9 @@ in
         user = "guest";
       };
       extraModules = [
-        inputs.self.modules.homeManager.gui
-        inputs.self.modules.homeManager.bash
-        inputs.self.modules.homeManager.firefox
+        config.flake.modules.homeManager.gui
+        config.flake.modules.homeManager.bash
+        config.flake.modules.homeManager.firefox
       ];
     };
   };

@@ -1,61 +1,60 @@
+{ config, ... }:
 {
-  flake.modules.homeManager.non-nixos-imports =
-    { inputs, ... }:
-    {
-      imports = with inputs.self.modules.homeManager; [
-        secrets
-        ssh
-        nixconfig
-        # ╭──────────────────────────────────────────╮
-        # │ EDITOR                                   │
-        # ╰──────────────────────────────────────────╯
-        # dev
-        # emacs
-        micro
-        fresh-editor
-        # helix
-        nvim
-        # vscode
-        # zed
-        # ╭──────────────────────────────────────────╮
-        # │ PROGRAMS                                 │
-        # ╰──────────────────────────────────────────╯
-        cava
-        # chrome
-        cli
-        # .firefox
-        git
-        # gui
-        # mpv
-        nix-tools
-        # rclone
-        # vicinae
-        # ╭──────────────────────────────────────────╮
-        # │ SHELL                                    │
-        # ╰──────────────────────────────────────────╯
-        alias
-        atuin
-        # bash
-        # fish
-        starship
-        # zellij
-        zsh
-        # ╭──────────────────────────────────────────╮
-        # │ TERMINAL                                 │
-        # ╰──────────────────────────────────────────╯
-        # alacritty
-        foot
-        ghostty
-        # kitty
-        # ╭──────────────────────────────────────────╮
-        # │ XDG                                      │
-        # ╰──────────────────────────────────────────╯
-        env
-        files
-        # mime
-        xdg
-      ];
-    };
+  flake.modules.homeManager.non-nixos-imports = {
+    imports = with config.flake.modules.homeManager; [
+      secrets
+      ssh
+      nixconfig
+      # ╭──────────────────────────────────────────╮
+      # │ EDITOR                                   │
+      # ╰──────────────────────────────────────────╯
+      # dev
+      # emacs
+      micro
+      fresh-editor
+      # helix
+      nvim
+      # vscode
+      # zed
+      # ╭──────────────────────────────────────────╮
+      # │ PROGRAMS                                 │
+      # ╰──────────────────────────────────────────╯
+      cava
+      # chrome
+      cli
+      # .firefox
+      git
+      # gui
+      # mpv
+      nix-tools
+      # rclone
+      # vicinae
+      # ╭──────────────────────────────────────────╮
+      # │ SHELL                                    │
+      # ╰──────────────────────────────────────────╯
+      alias
+      atuin
+      # bash
+      fish
+      starship
+      # zellij
+      # zsh
+      # ╭──────────────────────────────────────────╮
+      # │ TERMINAL                                 │
+      # ╰──────────────────────────────────────────╯
+      # alacritty
+      foot
+      ghostty
+      # kitty
+      # ╭──────────────────────────────────────────╮
+      # │ XDG                                      │
+      # ╰──────────────────────────────────────────╯
+      env
+      files
+      # mime
+      xdg
+    ];
+  };
 
   flake.modules.homeManager.non-nixos =
     {

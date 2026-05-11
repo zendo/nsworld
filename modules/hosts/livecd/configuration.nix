@@ -4,11 +4,11 @@
   qemu-system-x86_64 -enable-kvm -m 8192 -cdrom result/iso/
   https://wiki.nixos.org/wiki/Creating_a_NixOS_live_CD
 */
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   flake.nixosConfigurations.livecd = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      inputs.self.modules.nixos.host-livecd
+      config.flake.modules.nixos.host-livecd
     ];
   };
 

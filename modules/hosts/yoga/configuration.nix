@@ -1,8 +1,13 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  userName = "iab";
+  hostName = "yoga";
+  fm = config.flake.modules;
+in
 {
   flake.nixosConfigurations.yoga = inputs.nixpkgs.lib.nixosSystem {
     modules =
-      with inputs.self.modules.nixos;
+      with fm.nixos;
       [
         # [ profiles ]
         host-yoga
@@ -39,7 +44,7 @@
       home-manager.users.${config.myVars.user} =
         { pkgs, ... }:
         {
-          imports = [ inputs.self.modules.homeManager.default-imports ];
+          imports = [ fm.homeManager.default-imports ];
 
           home.packages = with pkgs; [
             # [ AI ]
@@ -61,8 +66,8 @@
   flake.modules.nixos.host-yoga =
     { pkgs, ... }:
     {
-      myVars.user = "iab";
-      networking.hostName = "yoga";
+      myVars.user = userName;
+      networking.hostName = hostName;
 
       environment.systemPackages = with pkgs; [
         # [ deploy ]

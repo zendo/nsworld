@@ -1,6 +1,11 @@
-{ inputs, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
-  inherit (inputs.self) nixosConfigurations;
+  inherit (config.flake) nixosConfigurations;
 in
 {
   # ╭─────────────────────────────────────────────────────╮

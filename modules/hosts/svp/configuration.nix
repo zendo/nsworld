@@ -1,8 +1,13 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  userName = "zendo";
+  hostName = "svp";
+  fm = config.flake.modules;
+in
 {
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
     modules =
-      with inputs.self.modules.nixos;
+      with fm.nixos;
       [
         host-svp
         host-svp-disko-btrfs
@@ -36,11 +41,11 @@
   flake.modules.nixos.host-svp =
     { config, ... }:
     {
-      myVars.user = "zendo";
-      networking.hostName = "svp";
+      myVars.user = userName;
+      networking.hostName = hostName;
 
       home-manager.users.${config.myVars.user} = {
-        imports = [ inputs.self.modules.homeManager.default-imports ];
+        imports = [ fm.homeManager.default-imports ];
         # programs.vscode.enable = true;
       };
 

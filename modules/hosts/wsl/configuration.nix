@@ -1,12 +1,14 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 let
   userName = "zendo";
+  hostName = "wsl";
+  fm = config.flake.modules;
 in
 {
   # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
   flake.nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
     modules =
-      with inputs.self.modules.nixos;
+      with fm.nixos;
       [
         host-wsl
         hmModule
@@ -40,7 +42,7 @@ in
             goodvibes
           ];
 
-          imports = with inputs.self.modules.homeManager; [
+          imports = with fm.homeManager; [
             # [ common ]
             secrets
             ssh
@@ -105,7 +107,7 @@ in
 
       users.defaultUserShell = pkgs.fish;
 
-      networking.hostName = "wsl";
+      networking.hostName = hostName;
       nixpkgs.hostPlatform = "x86_64-linux";
 
       # https://github.com/K900/vscode-remote-workaround
