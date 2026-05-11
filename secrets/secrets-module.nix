@@ -1,5 +1,5 @@
 # https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
-{ inputs, ... }:
+{ inputs, withSystem, ... }:
 let
   agenixSecrets = {
     dae.file = ./dae.age;
@@ -48,13 +48,9 @@ in
       sops.defaultSopsFile = ./sopsnix.yaml;
       sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-      home.packages = with pkgs; [
-        age
-        # rage # age encrypt RIIR
-        ssh-to-age
-        sops
-        ragenix
-      ];
+      home.packages = withSystem pkgs.stdenv.hostPlatform.system (
+        { config, ... }: config.devshells.nsw-secrets.packages
+      );
     };
 
   perSystem =
