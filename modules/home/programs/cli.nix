@@ -67,6 +67,7 @@
         sendme
 
         # [ System Monitor ]
+        microfetch
         fastfetchMinimal
         btop
         htop
