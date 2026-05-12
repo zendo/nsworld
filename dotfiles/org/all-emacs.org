@@ -5,7 +5,8 @@
 #+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/post-init.el"
 #+AUTO_TANGLE: t
 
-* early-init.el
+* Bootstrapping
+** early-init.el
 https://github.com/jamescherti/minimal-emacs.d minimal-emacs.d
 Release: 1.4.1
 
@@ -505,7 +506,7 @@ this stage of initialization."
 ;;; early-init.el ends here
 #+end_src
 
-* init.el
+** init.el
 curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init.el | wl-copy
 #+begin_src emacs-lisp :tangle "~/.config/emacs/init.el"
 ;;; init.el --- Init -*- lexical-binding: t; -*-
@@ -1086,7 +1087,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;;; init.el ends here
 #+end_src
 
-* pre-early-init.el
+** pre-early-init.el
 #+begin_src emacs-lisp :tangle "~/.config/emacs/pre-early-init.el"
 ;;; pre-early-init.el --- DESCRIPTION -*- no-byte-compile: t; lexical-binding: t; -*-
 ;; (setq minimal-emacs-ui-features '(context-menu tool-bar menu-bar dialogs tooltips))
@@ -1125,7 +1126,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 (load custom-file 'noerror 'no-message)
 #+end_src
 
-* Platform
+* Environment
 ** Variables
 Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
@@ -1321,8 +1322,8 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
-* UI
-** Themes
+* UI & Aesthetics
+** themes
 #+begin_src emacs-lisp
 (mapc #'disable-theme custom-enabled-themes)  ; Disable all active minimal-emacs.d themes
 (use-package doom-themes
@@ -1344,7 +1345,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;;   (load-theme 'ef-frost t))
 #+end_src
 
-** Icons
+** icons
 #+begin_src emacs-lisp
 (use-package nerd-icons)
 
@@ -1375,7 +1376,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :defer t
   :hook (after-init . global-emojify-mode))
 #+end_src
-** Mode-line
+** mode-line
 #+begin_src emacs-lisp
 ;; Handle by mood-modeline
 ;; (column-number-mode t) ;显示列数
@@ -1407,7 +1408,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 (use-package nyan-mode
   :commands nyan-mode)
 #+end_src
-** Tab-bar
+** tab-bar
 #+begin_src emacs-lisp
 (use-package centaur-tabs
   :custom ((centaur-tabs-height 28)
@@ -1423,7 +1424,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :config
   (centaur-tabs-mode t))
 #+end_src
-** Dashboard
+** dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
   :when (display-graphic-p)
@@ -1446,7 +1447,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; bug: 会导致 magit comit save 后跳到 dashboard
 ;; (add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
-** Treemacs
+** treemacs
 #+begin_src emacs-lisp
 (use-package treemacs
   :bind (("<f1>" . +treemacs/toggle)
@@ -1565,8 +1566,9 @@ like ~otree~
   :commands writeroom-mode)
 #+end_src
 
-* Buffers And Windows
-** uniquify
+* Window & Buffer
+** Buffer Navigation
+*** uniquify
 #+begin_src emacs-lisp
 (use-package uniquify
   :ensure nil
@@ -1576,14 +1578,14 @@ like ~otree~
   (uniquify-after-kill-buffer-p t))
 #+end_src
 
-** ibuffer
+*** ibuffer
 #+begin_src emacs-lisp
 (defalias 'list-buffers 'ibuffer)
 (setq ibuffer-expert t) ; 直接操作不询问
 (setq ibuffer-use-other-window t)
 #+end_src
 
-** buffer-terminator
+*** buffer-terminator
 #+begin_src emacs-lisp
 (use-package buffer-terminator
   :custom
@@ -1611,25 +1613,35 @@ like ~otree~
 (winner-mode 1)
 #+end_src
 
-** ace-window
+*** ace-window
 #+begin_src emacs-lisp
 (use-package ace-window
   :bind ([remap other-window] . ace-window))
 #+end_src
 
-** rotate
+*** rotate
 #+begin_src emacs-lisp
 (use-package rotate
   :defer t)
 #+end_src
 
-** golden-ratio
+*** golden-ratio
 #+begin_src emacs-lispxx
 (use-package golden-ratio
   :config (golden-ratio-mode 1))
 #+end_src
 
-** persp-mode
+*** stillness-mode
+弹出 minibuffer 时候保持 window 稳定
+https://github.com/neeasade/stillness-mode.el
+#+begin_src emacs-lisp
+(use-package stillness-mode
+  :config
+  (stillness-mode +1))
+#+end_src
+
+** Workspace & Sessions
+*** persp-mode
 #+begin_src emacs-lispxx
 (use-package persp-mode
   :init (setq persp-keymap-prefix (kbd "C-c w w"))
@@ -1639,7 +1651,7 @@ like ~otree~
   (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
 #+end_src
 
-** easysession-mode
+*** easysession-mode
 #+begin_src emacs-lisp
 ;; The easysession Emacs package is a session manager for Emacs that can persist
 ;; and restore file editing buffers, indirect buffers/clones, Dired buffers,
@@ -1664,15 +1676,6 @@ like ~otree~
   ;; `file-name-handler-alist` at depth 101 during `emacs-startup-hook`.)
   ;; (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
   (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
-#+end_src
-
-** stillness-mode
-弹出 minibuffer 时候保持 window 稳定
-https://github.com/neeasade/stillness-mode.el
-#+begin_src emacs-lisp
-(use-package stillness-mode
-  :config
-  (stillness-mode +1))
 #+end_src
 
 * Core Editor
@@ -1806,7 +1809,7 @@ https://gitlab.com/jabranham/mixed-pitch
   (setq-default mixed-pitch-set-height t))
 #+end_src
 
-* Persistence
+* Persistence & History
 ** auto-save-mode #filename#
 #+begin_src emacs-lisp
 ;; 传统备份机制，不覆盖原文件，只生成一个临时备份文件。
@@ -1976,306 +1979,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (setq vundo-roll-back-on-quit nil))
 #+end_src
 
-* Navigation And Utilities
-** helpful
-#+begin_src emacs-lisp
-;; Helpful is an alternative to the built-in Emacs help that provides much more
-;; contextual information.
-(use-package helpful
-  :commands (helpful-callable
-             helpful-variable
-             helpful-key
-             helpful-command
-             helpful-at-point
-             helpful-function)
-  :bind
-  ([remap describe-command] . helpful-command)
-  ([remap describe-function] . helpful-callable)
-  ([remap describe-key] . helpful-key)
-  ([remap describe-symbol] . helpful-symbol)
-  ([remap describe-variable] . helpful-variable)
-  :custom
-  (helpful-max-buffers 7))
-#+end_src
-
-** avy
-#+begin_src emacs-lisp
-(use-package avy
-  :defer t)
-#+end_src
-
-** avy-zap
-#+begin_src emacs-lisp
-(use-package avy-zap
-  :bind ("M-z" . avy-zap-up-to-char-dwim))
-#+end_src
-
-** ialign
-#+begin_src emacs-lisp
-(use-package ialign
-  :commands ialign)
-#+end_src
-
-** mwim
-moving to the beginning/end code
-
-#+begin_src emacs-lisp
-(use-package mwim
-  :bind (("C-a" . mwim-beginning-of-code-or-line)
-         ("C-e" . mwim-end-of-code-or-line)))
-
-;; (use-package mosey
-;;   :bind (("C-a" . mosey-backward-bounce)
-;;          ("C-e" . mosey-forward-bounce)))
-#+end_src
-
-** iedit
-#+begin_src emacs-lisp
-(use-package iedit
-  :defer t)
-#+end_src
-
-** wgrep
-#+begin_src emacs-lisp
-;; Writable grep buffer
-(use-package wgrep
-  :defer t)
-#+end_src
-
-** move-text
-#+begin_src emacs-lisp
-;; move-text M-up/M-down
-(use-package move-text
-  :init
-  (move-text-default-bindings))
-#+end_src
-
-** easy-kill
-#+begin_src emacs-lisp
-(use-package easy-kill
-  :bind (([remap mark-sexp] . easy-mark)
-         ([remap kill-ring-save] . easy-kill)))
-#+end_src
-
-** multiple-cursors
-#+begin_src emacs-lisp
-(use-package multiple-cursors
-  :bind (("C-<f2>" . mc/mark-all-words-like-this)
-         ;; ("M-<mouse-1>" .  mc/toggle-cursor-on-click)
-         ("C-}" . mc/mark-next-like-this)
-         ("C-{" . mc/mark-previous-like-this)
-         ("C-|" . mc/mark-all-like-this-dwim)
-         ;; ("s-<mouse-1>" . mc/add-cursor-on-click)
-         ))
-#+end_src
-
-** expreg
-expand region alternative 
-
-#+begin_src emacs-lisp
-(use-package expreg
-  :bind (("C-=" . expreg-expand)
-         ("C--" . expreg-contract)))
-#+end_src
-
-** crux
-#+begin_src emacs-lisp
-(use-package crux
-  :bind
-  ([remap kill-line] . crux-smart-kill-line)
-  ([remap open-line] . crux-smart-open-line)
-  ("C-<return>" . crux-smart-open-line)
-  ("C-S-<return>" . crux-smart-open-line-above))
-#+end_src
-
-** deadgrep
-#+begin_src emacs-lisp
-(use-package deadgrep
-  :bind ("C-c C-s" . deadgrep))
-#+end_src
-
-** isl :disable:
-https://github.com/thierryvolpiatto/isearch-light
-
-#+begin_src emacs-lispxx
-(use-package isl
-  :bind
-  ("C-s" . isl-search)
-  ;; ([remap isearch-forward] . )
-  ;; ([remap isearch-backward] . )
-  ;; ([remap isearch-forward-regexp] . )
-  ;; ([remap isearch-forward-regexp] .)
-  )
-#+end_src
-
-** anzu
-#+begin_src emacs-lispxx
-(use-package anzu
-  :bind
-  ([remap query-replace] . anzu-query-replace)
-  ([remap query-replace-regexp] . anzu-query-replace-regexp))
-#+end_src
-
-** visual-replace
-#+begin_src emacs-lisp
-(use-package visual-replace
-  :bind (([remap query-replace] . visual-replace)
-         ;; ("C-c r" . visual-replace)
-         :map isearch-mode-map
-         ("C-c r" . visual-replace-from-isearch)))
-#+end_src
-
-** goto-last-change
-#+begin_src emacs-lisp
-(use-package goto-last-change
-  :bind ("M-g l" . goto-last-change))
-#+end_src
-
-** fanyi
-#+begin_src emacs-lisp
-(use-package fanyi
-  :bind ("C-c y" . fanyi-dwim2)
-  :custom
-  (fanyi-providers '(fanyi-haici-provider ;; 海词
-                     fanyi-youdao-thesaurus-provider ;; 有道同义词词典
-                     ;; fanyi-etymon-provider ;; Etymonline
-                     ;; fanyi-longman-provider ;; Longman
-                     )))
-#+end_src
-
-** maple-translate :disable:
-#+begin_src emacs-lispxx
-(use-package maple-translate
-  :vc (:url "https://github.com/honmaple/emacs-maple-translate"
-            :rev :newest)
-  :commands (maple-translate maple-translate+))
-#+end_src
-
-** pass
-#+begin_src emacs-lisp :tangle no
-(use-package pass
-  :commands pass)
-#+end_src
-
-** vlf
-#+begin_src emacs-lisp
-;; View Large Files
-(use-package vlf
-  :defer t)
-#+end_src
-
-** nov
-#+begin_src emacs-lisp :tangle no
-(use-package nov
-  :mode ("\\.epub\\'" . nov-mode)
-  :bind (:map nov-mode-map
-              ("j" . scroll-up-line)
-              ("k" . scroll-down-line))
-  )
-#+end_src
-
-** qrencode
-#+begin_src emacs-lisp
-(use-package qrencode
-  :defer t)
-#+end_src
-
-** esup
-#+begin_src emacs-lisp
-(use-package esup
-  :defer t)
-#+end_src
-
-* Completion And Search
-** Corfu、Cape
-#+begin_src emacs-lisp
-;; Corfu enhances in-buffer completion by displaying a compact popup with
-;; current candidates, positioned either below or above the point. Candidates
-;; can be selected by navigating up or down.
-(use-package corfu
-  :commands (corfu-mode global-corfu-mode)
-
-  :hook ((prog-mode . corfu-mode)
-         (shell-mode . corfu-mode)
-         (eshell-mode . corfu-mode))
-
-  :custom
-  ;; Hide commands in M-x which do not apply to the current mode.
-  (read-extended-command-predicate #'command-completion-default-include-p)
-  ;; Disable Ispell completion function. As an alternative try `cape-dict'.
-  (text-mode-ispell-word-completion nil)
-  (tab-always-indent 'complete)
-  (corfu-auto t) ; Enable auto completion
-  (corfu-cycle t) ; Allows cycling through candidates
-  (corfu-min-width 25)
-  (corfu-preview-current nil) ; Disable previewing the current candidate
-
-  ;; Enable Corfu
-  :config
-  (global-corfu-mode))
-
-;; Part of corfu
-;; (use-package corfu-popupinfo
-;;   :after corfu
-;;   :ensure nil
-;;   :hook (corfu-mode . corfu-popupinfo-mode)
-;;   :custom
-;;   (corfu-popupinfo-delay '(0.25 . 0.1))
-;;   (corfu-popupinfo-hide nil)
-;;   :config
-;;   (corfu-popupinfo-mode))
-
-;; Cape, or Completion At Point Extensions, extends the capabilities of
-;; in-buffer completion. It integrates with Corfu or the default completion UI,
-;; by providing additional backends through completion-at-point-functions.
-(use-package cape
-  :commands (cape-dabbrev cape-file cape-elisp-block)
-  :bind ("C-c ." . cape-prefix-map)
-  :init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  (add-hook 'completion-at-point-functions #'cape-keyword)
-  (add-hook 'completion-at-point-functions #'cape-history)
-  )
-#+end_src
-
-** Company
-http://company-mode.github.io/manual/Getting-Started.html
-
-#+begin_src emacs-lispxx
-(use-package company
-  :diminish company-mode
-  :hook
-  (prog-mode . company-mode)
-  (tex-mode . company-mode)
-  (special-mode . company-mode)
-  (comint-mode . company-mode)
-  :bind
-  (:map company-mode-map
-        ("C-i" . company-complete)
-        ("C-<space>" . company-complete))
-  :bind
-  (:map company-active-map
-        ("<tab>" . company-complete-selection)
-        ("TAB" . company-complete-selection))
-  :config
-  (setq company-minimum-prefix-length 1) ; 只需敲 1 个字母就开始进行自动补全
-  (setq company-tooltip-align-annotations t)
-  (setq company-idle-delay 0.0)
-  (setq company-show-numbers t) ;; 给选项编号 (按快捷键 M-1、M-2 等等来进行选择).
-  (setq company-selection-wrap-around t)
-  (setq company-transformers '(company-sort-by-occurrence)) ; 根据选择的频率进行排序，读者如果不喜欢可以去掉
-  )
-
-
-(use-package company-posframe
-  :config
-  (company-posframe-mode 1))
-#+end_src
-
+* Search & Completion
 ** Vertico、Consult、Embark
 #+begin_src emacs-lisp
 ;; Vertico provides a vertical completion interface, making it easier to
@@ -2448,6 +2152,118 @@ http://company-mode.github.io/manual/Getting-Started.html
 ;;             :around #'minibuffer-format-candidate)
 #+end_src
 
+** deadgrep
+#+begin_src emacs-lisp
+(use-package deadgrep
+  :bind ("C-c C-s" . deadgrep))
+#+end_src
+
+** anzu
+#+begin_src emacs-lispxx
+(use-package anzu
+  :bind
+  ([remap query-replace] . anzu-query-replace)
+  ([remap query-replace-regexp] . anzu-query-replace-regexp))
+#+end_src
+
+** visual-replace
+#+begin_src emacs-lisp
+(use-package visual-replace
+  :bind (([remap query-replace] . visual-replace)
+         ;; ("C-c r" . visual-replace)
+         :map isearch-mode-map
+         ("C-c r" . visual-replace-from-isearch)))
+#+end_src
+
+** Corfu、Cape
+#+begin_src emacs-lisp
+;; Corfu enhances in-buffer completion by displaying a compact popup with
+;; current candidates, positioned either below or above the point. Candidates
+;; can be selected by navigating up or down.
+(use-package corfu
+  :commands (corfu-mode global-corfu-mode)
+
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode . corfu-mode)
+         (eshell-mode . corfu-mode))
+
+  :custom
+  ;; Hide commands in M-x which do not apply to the current mode.
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  ;; Disable Ispell completion function. As an alternative try `cape-dict'.
+  (text-mode-ispell-word-completion nil)
+  (tab-always-indent 'complete)
+  (corfu-auto t) ; Enable auto completion
+  (corfu-cycle t) ; Allows cycling through candidates
+  (corfu-min-width 25)
+  (corfu-preview-current nil) ; Disable previewing the current candidate
+
+  ;; Enable Corfu
+  :config
+  (global-corfu-mode))
+
+;; Part of corfu
+;; (use-package corfu-popupinfo
+;;   :after corfu
+;;   :ensure nil
+;;   :hook (corfu-mode . corfu-popupinfo-mode)
+;;   :custom
+;;   (corfu-popupinfo-delay '(0.25 . 0.1))
+;;   (corfu-popupinfo-hide nil)
+;;   :config
+;;   (corfu-popupinfo-mode))
+
+;; Cape, or Completion At Point Extensions, extends the capabilities of
+;; in-buffer completion. It integrates with Corfu or the default completion UI,
+;; by providing additional backends through completion-at-point-functions.
+(use-package cape
+  :commands (cape-dabbrev cape-file cape-elisp-block)
+  :bind ("C-c ." . cape-prefix-map)
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-history)
+  )
+#+end_src
+
+** Company
+http://company-mode.github.io/manual/Getting-Started.html
+
+#+begin_src emacs-lispxx
+(use-package company
+  :diminish company-mode
+  :hook
+  (prog-mode . company-mode)
+  (tex-mode . company-mode)
+  (special-mode . company-mode)
+  (comint-mode . company-mode)
+  :bind
+  (:map company-mode-map
+        ("C-i" . company-complete)
+        ("C-<space>" . company-complete))
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-selection)
+        ("TAB" . company-complete-selection))
+  :config
+  (setq company-minimum-prefix-length 1) ; 只需敲 1 个字母就开始进行自动补全
+  (setq company-tooltip-align-annotations t)
+  (setq company-idle-delay 0.0)
+  (setq company-show-numbers t) ;; 给选项编号 (按快捷键 M-1、M-2 等等来进行选择).
+  (setq company-selection-wrap-around t)
+  (setq company-transformers '(company-sort-by-occurrence)) ; 根据选择的频率进行排序，读者如果不喜欢可以去掉
+  )
+
+
+(use-package company-posframe
+  :config
+  (company-posframe-mode 1))
+#+end_src
+
 ** dabbrev
 #+begin_src emacs-lisp
 (use-package dabbrev
@@ -2532,7 +2348,194 @@ hippie expand is dabbrev expand on steroids
 ;;   :after tempel)
 #+end_src
 
-* Projects And VCS
+* Navigation & Utilities
+** Multi-Edit
+*** multiple-cursors
+#+begin_src emacs-lisp
+(use-package multiple-cursors
+  :bind (("C-<f2>" . mc/mark-all-words-like-this)
+         ;; ("M-<mouse-1>" .  mc/toggle-cursor-on-click)
+         ("C-}" . mc/mark-next-like-this)
+         ("C-{" . mc/mark-previous-like-this)
+         ("C-|" . mc/mark-all-like-this-dwim)
+         ;; ("s-<mouse-1>" . mc/add-cursor-on-click)
+         ))
+#+end_src
+
+*** iedit
+#+begin_src emacs-lisp
+(use-package iedit
+  :defer t)
+#+end_src
+
+*** ialign
+#+begin_src emacs-lisp
+(use-package ialign
+  :commands ialign)
+#+end_src
+
+*** wgrep
+#+begin_src emacs-lisp
+;; Writable grep buffer
+(use-package wgrep
+  :defer t)
+#+end_src
+
+*** expreg
+expand region alternative 
+
+#+begin_src emacs-lisp
+(use-package expreg
+  :bind (("C-=" . expreg-expand)
+         ("C--" . expreg-contract)))
+#+end_src
+
+** helpful
+#+begin_src emacs-lisp
+;; Helpful is an alternative to the built-in Emacs help that provides much more
+;; contextual information.
+(use-package helpful
+  :commands (helpful-callable
+             helpful-variable
+             helpful-key
+             helpful-command
+             helpful-at-point
+             helpful-function)
+  :bind
+  ([remap describe-command] . helpful-command)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-key] . helpful-key)
+  ([remap describe-symbol] . helpful-symbol)
+  ([remap describe-variable] . helpful-variable)
+  :custom
+  (helpful-max-buffers 7))
+#+end_src
+** avy
+#+begin_src emacs-lisp
+(use-package avy
+  :defer t)
+#+end_src
+
+** avy-zap
+#+begin_src emacs-lisp
+(use-package avy-zap
+  :bind ("M-z" . avy-zap-up-to-char-dwim))
+#+end_src
+
+** mwim
+moving to the beginning/end code
+
+#+begin_src emacs-lisp
+(use-package mwim
+  :bind (("C-a" . mwim-beginning-of-code-or-line)
+         ("C-e" . mwim-end-of-code-or-line)))
+
+;; (use-package mosey
+;;   :bind (("C-a" . mosey-backward-bounce)
+;;          ("C-e" . mosey-forward-bounce)))
+#+end_src
+
+** move-text
+#+begin_src emacs-lisp
+;; move-text M-up/M-down
+(use-package move-text
+  :init
+  (move-text-default-bindings))
+#+end_src
+
+** easy-kill
+#+begin_src emacs-lisp
+(use-package easy-kill
+  :bind (([remap mark-sexp] . easy-mark)
+         ([remap kill-ring-save] . easy-kill)))
+#+end_src
+
+** crux
+#+begin_src emacs-lisp
+(use-package crux
+  :bind
+  ([remap kill-line] . crux-smart-kill-line)
+  ([remap open-line] . crux-smart-open-line)
+  ("C-<return>" . crux-smart-open-line)
+  ("C-S-<return>" . crux-smart-open-line-above))
+#+end_src
+
+** isl :disable:
+https://github.com/thierryvolpiatto/isearch-light
+
+#+begin_src emacs-lispxx
+(use-package isl
+  :bind
+  ("C-s" . isl-search)
+  ;; ([remap isearch-forward] . )
+  ;; ([remap isearch-backward] . )
+  ;; ([remap isearch-forward-regexp] . )
+  ;; ([remap isearch-forward-regexp] .)
+  )
+#+end_src
+
+** goto-last-change
+#+begin_src emacs-lisp
+(use-package goto-last-change
+  :bind ("M-g l" . goto-last-change))
+#+end_src
+
+** fanyi
+#+begin_src emacs-lisp
+(use-package fanyi
+  :bind ("C-c y" . fanyi-dwim2)
+  :custom
+  (fanyi-providers '(fanyi-haici-provider ;; 海词
+                     fanyi-youdao-thesaurus-provider ;; 有道同义词词典
+                     ;; fanyi-etymon-provider ;; Etymonline
+                     ;; fanyi-longman-provider ;; Longman
+                     )))
+#+end_src
+
+** maple-translate :disable:
+#+begin_src emacs-lispxx
+(use-package maple-translate
+  :vc (:url "https://github.com/honmaple/emacs-maple-translate"
+            :rev :newest)
+  :commands (maple-translate maple-translate+))
+#+end_src
+
+** pass
+#+begin_src emacs-lisp :tangle no
+(use-package pass
+  :commands pass)
+#+end_src
+
+** vlf
+#+begin_src emacs-lisp
+;; View Large Files
+(use-package vlf
+  :defer t)
+#+end_src
+
+** nov
+#+begin_src emacs-lisp :tangle no
+(use-package nov
+  :mode ("\\.epub\\'" . nov-mode)
+  :bind (:map nov-mode-map
+              ("j" . scroll-up-line)
+              ("k" . scroll-down-line))
+  )
+#+end_src
+
+** qrencode
+#+begin_src emacs-lisp
+(use-package qrencode
+  :defer t)
+#+end_src
+
+** esup
+#+begin_src emacs-lisp
+(use-package esup
+  :defer t)
+#+end_src
+
+* Projects & Version Control
 ** dired enhanced
 #+begin_src emacs-lisp
 (use-package diredfl
@@ -2569,7 +2572,7 @@ hippie expand is dabbrev expand on steroids
     (command-execute "tk")))
 #+end_src
 
-** Project
+** Project Management
 #+begin_src emacs-lisp
 ;; (define-key global-map (kbd "C-c p") project-prefix-map)
 
@@ -2669,7 +2672,7 @@ hippie expand is dabbrev expand on steroids
   (ediff-custom-diff-options "-u"))
 #+end_src
 
-* Writing And Notes
+* Org Knowledge
 ** org-mode
 #+begin_src emacs-lisp
 (use-package org
@@ -2875,94 +2878,6 @@ https://one.tonyaldon.com/
 https://github.com/kaorahi/howm
 
 * Development
-** eglot
-#+begin_src emacs-lisp
-(use-package eglot
-  :defer t
-  :custom
-  (eglot-autoshutdown t) ; shutdown after closing the last managed buffer
-  (eglot-sync-connect 0) ; async, do not block
-  (eglot-extend-to-xref t) ; can be interesting!
-  :hook ((prog-mode . eglot-ensure))
-  :config
-  (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
-  (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
-  (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
-  (add-to-list 'eglot-server-programs '(python-mode . ("pylyzer" "--server")))
-  (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
-  (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
-  (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
-  )
-
-;; (use-package consult-eglot
-;;   :after eglot)
-#+end_src
-
-** lsp-mode
-#+begin_src emacs-lisp :tangle no
-(use-package lsp-mode
-  :init
-  (defun my-lsp-hook ()
-    "Do not use lsp-mode with tramp"
-    (unless (file-remote-p default-directory)
-      (lsp)))
-  :config
-  (setq lsp-idle-delay 0.5
-        lsp-enable-symbol-highlighting t
-        lsp-headerline-breadcrumb-enable nil
-        lsp-enable-snippet nil)
-  :hook ((python-mode . my-lsp-hook)
-         (f90-mode . my-lsp-hook)
-         (haskell-mode . my-lsp-hook)
-         (lsp-mode . lsp-enable-which-key-integration)))
-
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-ui-sideline-enable nil
-        lsp-ui-doc-header nil
-        lsp-ui-doc-delay 0.5
-        lsp-ui-doc-position 'bottom
-        lsp-ui-doc-alignment 'frame
-        lsp-ui-doc-include-signature t
-        lsp-ui-doc-use-childframe t)
-  :commands lsp-ui-mode)
-#+end_src
-
-** lsp-booster
-https://github.com/blahgeek/emacs-lsp-booster
-
-** lsp-proxy
-https://github.com/jadestrong/lsp-proxy
-
-** apheleia
-Run code formatters on ~after-save-hook~
-
-#+begin_src emacs-lisp
-(use-package apheleia
-  :defer t
-  :commands (apheleia-mode
-             apheleia-global-mode)
-  :hook ((prog-mode . apheleia-mode)))
-#+end_src
-
-** reformatter
-#+begin_src emacs-lispxx
-(use-package reformatter
-  :defer t
-  :config
-  (reformatter-define nixfmt
-    :program "nixfmt"
-    )
-  ;; Experimental.
-  ;; (reformatter-define golint
-  ;;   :program "golint"
-  ;;   :stdin nil
-  ;;   :stdout nil
-  ;;   :args (list (buffer-file-name)))
-  )
-#+end_src
-
 ** Tooling
 *** prog-mode
 #+begin_src emacs-lisp
@@ -3368,7 +3283,95 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :mode ("\\.just'" "justfile\\'"))
 #+end_src
 
-* Functions
+** eglot
+#+begin_src emacs-lisp
+(use-package eglot
+  :defer t
+  :custom
+  (eglot-autoshutdown t) ; shutdown after closing the last managed buffer
+  (eglot-sync-connect 0) ; async, do not block
+  (eglot-extend-to-xref t) ; can be interesting!
+  :hook ((prog-mode . eglot-ensure))
+  :config
+  (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
+  (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
+  (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
+  (add-to-list 'eglot-server-programs '(python-mode . ("pylyzer" "--server")))
+  (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
+  (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
+  (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
+  )
+
+;; (use-package consult-eglot
+;;   :after eglot)
+#+end_src
+
+** lsp-mode
+#+begin_src emacs-lisp :tangle no
+(use-package lsp-mode
+  :init
+  (defun my-lsp-hook ()
+    "Do not use lsp-mode with tramp"
+    (unless (file-remote-p default-directory)
+      (lsp)))
+  :config
+  (setq lsp-idle-delay 0.5
+        lsp-enable-symbol-highlighting t
+        lsp-headerline-breadcrumb-enable nil
+        lsp-enable-snippet nil)
+  :hook ((python-mode . my-lsp-hook)
+         (f90-mode . my-lsp-hook)
+         (haskell-mode . my-lsp-hook)
+         (lsp-mode . lsp-enable-which-key-integration)))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-sideline-enable nil
+        lsp-ui-doc-header nil
+        lsp-ui-doc-delay 0.5
+        lsp-ui-doc-position 'bottom
+        lsp-ui-doc-alignment 'frame
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-use-childframe t)
+  :commands lsp-ui-mode)
+#+end_src
+
+** lsp-booster
+https://github.com/blahgeek/emacs-lsp-booster
+
+** lsp-proxy
+https://github.com/jadestrong/lsp-proxy
+
+** apheleia
+Run code formatters on ~after-save-hook~
+
+#+begin_src emacs-lisp
+(use-package apheleia
+  :defer t
+  :commands (apheleia-mode
+             apheleia-global-mode)
+  :hook ((prog-mode . apheleia-mode)))
+#+end_src
+
+** reformatter
+#+begin_src emacs-lispxx
+(use-package reformatter
+  :defer t
+  :config
+  (reformatter-define nixfmt
+    :program "nixfmt"
+    )
+  ;; Experimental.
+  ;; (reformatter-define golint
+  ;;   :program "golint"
+  ;;   :stdin nil
+  ;;   :stdout nil
+  ;;   :args (list (buffer-file-name)))
+  )
+#+end_src
+
+* Custom Functions
 *** make-parent-directory
 #+begin_src emacs-lisp
 ;;;###autoload
@@ -3598,7 +3601,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  )
 #+end_src
 
-** Mouse
+** mouse
 M-x ~describe-key~
 
 #+begin_src emacs-lisp
