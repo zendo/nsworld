@@ -2535,7 +2535,7 @@ https://github.com/thierryvolpiatto/isearch-light
   :defer t)
 #+end_src
 
-* Projects & Version Control
+* Projects & VCS
 ** dired enhanced
 #+begin_src emacs-lisp
 (use-package diredfl
@@ -3150,6 +3150,16 @@ https://github.com/renzmann/treesit-auto
 ;;   :when (eq system-type 'gnu/linux) ; Windows unsupport
 ;;   :config
 ;;   (direnv-mode))
+#+end_src
+
+** AI
+*** agent-shell
+https://github.com/xenodium/agent-shell
+#+begin_src emacs-lisp
+(use-package agent-shell
+  :defer t
+  :when (eq system-type 'gnu/linux)
+  )
 #+end_src
 
 ** Web And Data Formats

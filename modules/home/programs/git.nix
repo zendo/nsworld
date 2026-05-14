@@ -13,6 +13,7 @@
           ".csvignore"
           ".DS_Store"
           ".vscode"
+          ".agent-shell"
           # nix
           "*.drv"
           "*.qcow2"
