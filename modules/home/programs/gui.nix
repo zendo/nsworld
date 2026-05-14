@@ -5,7 +5,6 @@
       home.packages = with pkgs; [
         kula
         nano-ffmpeg
-        helium
 
         # [ Social ]
         telegram-desktop # :webkitgtk
