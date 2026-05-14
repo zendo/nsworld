@@ -3,7 +3,6 @@
     { lib, pkgs, ... }:
     {
       home.packages = with pkgs; [
-        comigo
         kula
         nano-ffmpeg
         helium
