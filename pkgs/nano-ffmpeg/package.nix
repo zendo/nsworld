@@ -19,6 +19,8 @@ buildGoModule (finalAttrs: {
 
   vendorHash = "sha256-AZzpINOagTfFPYOavp15oJD/LTlDoX4NfDA0DYV39NM=";
 
+  __structuredAttrs = true;
+
   ldflags = [
     "-s"
     "-w"

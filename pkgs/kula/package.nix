@@ -18,6 +18,8 @@ buildGo126Module (finalAttrs: {
 
   vendorHash = "sha256-Bx3CG0ZvMyEu4QJPM+f/AC5wDH2qqo3ByFUbQYB/MAo=";
 
+  __structuredAttrs = true;
+
   ldflags = [
     "-s"
     "-w"

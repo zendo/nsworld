@@ -15,6 +15,7 @@
         # yacreader
         venera
         jhentai
+        # comigo
 
         # [ Multimedia ]
         # mpd
