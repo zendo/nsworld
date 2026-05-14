@@ -5,7 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/emacs/post-init.el"
 #+AUTO_TANGLE: t
 
-* Bootstrapping
+* Bootstrap
 ** early-init.el
 https://github.com/jamescherti/minimal-emacs.d minimal-emacs.d
 Release: 1.4.1
@@ -1126,7 +1126,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 (load custom-file 'noerror 'no-message)
 #+end_src
 
-* Environment
+* Platform & Environment
 ** Variables
 Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
@@ -1322,7 +1322,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
-* UI & Aesthetics
+* Appearance & UI
 ** themes
 #+begin_src emacs-lisp
 (mapc #'disable-theme custom-enabled-themes)  ; Disable all active minimal-emacs.d themes
@@ -1678,7 +1678,7 @@ https://github.com/neeasade/stillness-mode.el
   (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
 #+end_src
 
-* Core Editor
+* Editing & Text
 ** basic
 #+begin_src emacs-lisp
 (show-paren-mode t) ;括号匹配 parens
@@ -2348,7 +2348,7 @@ hippie expand is dabbrev expand on steroids
 ;;   :after tempel)
 #+end_src
 
-* Navigation & Utilities
+* Movement & Utilities
 ** Multi-Edit
 *** multiple-cursors
 #+begin_src emacs-lisp
@@ -2672,7 +2672,7 @@ https://github.com/thierryvolpiatto/isearch-light
   (ediff-custom-diff-options "-u"))
 #+end_src
 
-* Org Knowledge
+* Org Mode
 ** org-mode
 #+begin_src emacs-lisp
 (use-package org
@@ -3382,7 +3382,7 @@ Run code formatters on ~after-save-hook~
 #+end_src
 
 * Custom Functions
-*** make-parent-directory
+** make-parent-directory
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun make-parent-directory ()
@@ -3391,7 +3391,7 @@ Run code formatters on ~after-save-hook~
 (add-hook 'find-file-not-found-functions #'make-parent-directory)
 #+end_src
 
-*** space to newline
+** space to newline
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun my/space-to-newline ()
@@ -3422,7 +3422,7 @@ Version 2017-08-19"
           (replace-match "\n" ))))))
 #+end_src
 
-*** insert-timestamp
+** insert-timestamp
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun my/insert-timestamp ()
@@ -3431,7 +3431,7 @@ Version 2017-08-19"
   (insert (format-time-string "[%02y-%02m-%02d %02H:%02M:%02S] ")))
 #+end_src
 
-*** backward-delete-word
+** backward-delete-word
 ~M-backspace~ 删除而非剪切
 
 #+begin_src emacs-lisp
@@ -3444,7 +3444,7 @@ Version 2017-08-19"
 (global-set-key [remap backward-kill-word] #'backward-delete-word)
 #+end_src
 
-*** proxy
+** proxy
 https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
 #+begin_src emacs-lisp
@@ -3464,7 +3464,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
             ("no_proxy" . "^\\(localhost\\|192.168.*\\|10.*\\)"))))))
 #+end_src
 
-*** pkill-emacs
+** pkill-emacs
 #+begin_src emacs-lisp
 ;;;###autoload
 (defun my/pkill-emacs ()
@@ -3711,7 +3711,7 @@ Show current command and its binding.
 ;;; post-init.el ends here
 #+end_src
 
-* Links
+* References
 - https://remacs.fun/posts/ 面向产品经理的 Emacs 教程
 - https://github.com/LionyxML/emacs-solo Pure Emacs (no external packages)
 - https://github.com/seagle0128/.emacs.d Centaur Emacs
