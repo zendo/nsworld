@@ -22,7 +22,6 @@ diff-dix:
     dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
 
 diff-commit:
-    #!/usr/bin/env bash
     git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
     -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)"
 
