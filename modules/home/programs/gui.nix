@@ -26,7 +26,7 @@
         goodvibes
         cliamp
         go-musicfox
-        splayer # :electron
+        # splayer # :electron
         # qqmusic
         spotify
         # mousai
@@ -114,8 +114,8 @@
       #   plugins = [ ];
       # };
 
-      programs.pandoc = {
-        enable = false;
-      };
+      # programs.pandoc = {
+      #   enable = true;
+      # };
     };
 }

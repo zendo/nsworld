@@ -92,7 +92,7 @@ in
         supportedFilesystems = [ "ntfs" ];
 
         # latest / zen / lqx / xanmod_latest
-        # kernelPackages = pkgs.linuxPackages_zen;
+        kernelPackages = pkgs.linuxPackages_zen;
 
         # for Lenovo Yoga/Xiaoxin
         kernelParams = [
