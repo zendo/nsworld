@@ -9,7 +9,6 @@
       # Sounds
       security.rtkit.enable = config.services.pipewire.enable;
       services.pipewire = {
-        # alsa.support32Bit = true;
         # jack.enable = true;
       };
 
