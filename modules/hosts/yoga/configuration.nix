@@ -172,7 +172,7 @@ in
         # ---------------------------------------
         # Limine
         # ---------------------------------------
-        # https://codeberg.org/Limine/Limine/src/branch/trunk/CONFIG.md
+        # https://github.com/Limine-Bootloader/Limine/blob/v12.x/CONFIG.md
         limine = {
           enable = true;
           maxGenerations = 8;
@@ -186,9 +186,9 @@ in
             # pkgs.nixos-artwork.wallpapers.gnome-dark.gnomeFilePath
             # pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath
           ];
-          extraConfig = ''
-            remember_last_entry: yes
-          '';
+          # extraConfig = ''
+          #   remember_last_entry: yes
+          # '';
           extraEntries = ''
             /Windows
                 protocol: efi
