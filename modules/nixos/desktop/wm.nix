@@ -55,6 +55,7 @@ in
       imports = [
         fm.homeManager.hypridle
         fm.homeManager.shikane
+        fm.homeManager.vicinae
       ];
 
       home.packages = with pkgs; [

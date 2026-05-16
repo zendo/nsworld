@@ -10,7 +10,6 @@
         night-theme-switcher
         # legacy-gtk3-theme-scheme-auto-switcher
         clipboard-history
-        vicinae
         # blur-my-shell
         # top-bar-organizer
         # just-perfection
@@ -86,10 +85,6 @@
           history-size = lib.hm.gvariant.mkUint32 800;
         };
 
-        "org/gnome/shell/extensions/vicinae" = {
-          show-status-indicator = false;
-        };
-
         ###############################################
         ##  Keybindings
         ###############################################
@@ -133,8 +128,6 @@
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
           ];
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -156,16 +149,6 @@
           binding = "<Super>w";
           command = "firefox";
           name = "open-web-browser";
-        };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
-          binding = "<Super>x";
-          command = "vicinae toggle";
-          name = "open-vicinae";
-        };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
-          binding = "<Super>v";
-          command = "vicinae vicinae://extensions/vicinae/clipboard/history";
-          name = "open-vicinae-clipboard";
         };
       };
     };
