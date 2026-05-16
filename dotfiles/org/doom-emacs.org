@@ -279,17 +279,12 @@
 (set-popup-rule! "^\\*eat" :side 'bottom :height 0.4 :quit t :select t)
 #+end_src
 
-** vterm
+** ghostel
 #+begin_src emacs-lisp
-;; vterm or eshell
-;; (global-set-key (kbd "<f2>") '+vterm/toggle)
-;; (when (featurep :system 'linux)
-;;   (with-eval-after-load 'vterm
-;;     (setq vterm-shell "fish")
-;;     (define-key vterm-mode-map (kbd "<f2>")  '+vterm/toggle)))
+(require 'ghostel)
+(set-popup-rule! "^\\*ghostel" :side 'bottom :size 0.4)
 #+end_src
-
-* UI
+* Appearance
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(alpha-background . 98))
@@ -298,13 +293,8 @@
 (setq doom-theme 'doom-tomorrow-night)
 #+end_src
 
-** treemacs
-#+begin_src emacs-lisp
-(with-eval-after-load 'treemacs
-  (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
-#+end_src
-
-* Editor
+* Editing
+** basic
 #+begin_src emacs-lisp
 (setq +default-want-RET-continue-comments nil ; 别在新行加注释
       display-line-numbers-type 't ; t / nil / relative
@@ -327,6 +317,12 @@
 (with-eval-after-load 'projectile
   ;; manual clear cache (M-x projectile-invalidate-cache) or
   (setq projectile-enable-caching nil))
+#+end_src
+
+** treemacs
+#+begin_src emacs-lisp
+(with-eval-after-load 'treemacs
+  (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 #+end_src
 
 ** dired
@@ -401,6 +397,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+end_src
 
 * Org
+** org-mode
 #+begin_src emacs-lisp
 (with-eval-after-load 'org
   (map! :map org-mode-map
@@ -622,4 +619,9 @@ https://github.com/kickingvegas/casual
   (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
 (global-set-key [remap backward-kill-word] #'backward-delete-word)
+#+end_src
+* config.el - Footer
+#+begin_src emacs-lisp
+;; (provide 'config) ?
+;;; config.el ends here
 #+end_src
