@@ -15,6 +15,7 @@
           allowUnfreePredicate =
             pkg:
             builtins.elem (lib.getName pkg) [
+              "replace"
               "unrar"
               "spotify"
               "qqmusic"
