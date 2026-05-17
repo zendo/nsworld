@@ -50,8 +50,9 @@ in
             # [ AI ]
             codex
             opencode
-            # gemini-cli
             # qwen-code
+            # gemini-cli
+            # claude-code
           ];
 
           dconf.settings = {

@@ -65,7 +65,6 @@
         readest
         # koodo-reader
         # planify
-        clapgrep
         meld
         # textpieces
         # devtoolbox

@@ -16,6 +16,7 @@
             pkg:
             builtins.elem (lib.getName pkg) [
               "replace"
+              "claude-code"
               "unrar"
               "spotify"
               "qqmusic"
