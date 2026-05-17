@@ -186,9 +186,9 @@ in
             # pkgs.nixos-artwork.wallpapers.gnome-dark.gnomeFilePath
             # pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath
           ];
-          # extraConfig = ''
-          #   remember_last_entry: yes
-          # '';
+          extraConfig = ''
+            remember_last_entry: yes
+          '';
           extraEntries = ''
             /Windows
                 protocol: efi
