@@ -11,6 +11,7 @@
     base
     boot
     fonts
+    keyboards
     nixconfig
     nixpkgs
     ssh
@@ -24,12 +25,6 @@
     firewall
     networkmanager
     # print
-
-    # [ services ]
-    dae # services.daeWithConfig
-    kanata
-    # keyd
-    sub-store # systemd.services.sub-store
 
     # [ desktop ]
     # [ profiles ]
