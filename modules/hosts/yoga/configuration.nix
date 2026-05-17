@@ -50,7 +50,8 @@ in
             # [ AI ]
             codex
             opencode
-            qwen-code
+            # gemini-cli
+            # qwen-code
           ];
 
           dconf.settings = {
@@ -101,7 +102,7 @@ in
           # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
           # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
           "acpi.prefer_microsoft_dsm_guid=1"
-          # Fix touhpad multitouch somtimes unavailable
+          # Fix touchpad multitouch sometimes unavailable
           # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
           "psmouse.synaptics_intertouch=1"
         ];

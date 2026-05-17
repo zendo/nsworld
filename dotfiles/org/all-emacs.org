@@ -1444,7 +1444,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :config
   (dashboard-setup-startup-hook))
 ;; Fix for emacsclient 启动打开 dashboard 而不是 scratch
-;; bug: 会导致 magit comit save 后跳到 dashboard
+;; bug: 会导致 magit commit save 后跳到 dashboard
 ;; (add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
 ** treemacs
@@ -3147,7 +3147,7 @@ https://github.com/renzmann/treesit-auto
   :mode ("\\.nix'"))
 
 ;; (use-package direnv
-;;   :when (eq system-type 'gnu/linux) ; Windows unsupport
+;;   :when (eq system-type 'gnu/linux) ; Windows unsupported
 ;;   :config
 ;;   (direnv-mode))
 #+end_src

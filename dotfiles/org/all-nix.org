@@ -149,7 +149,7 @@ https://github.com/nix-community/preservation
 https://elis.nu/blog/2020/05/nixos-tmpfs-as-root/
 https://lantian.pub/article/modify-computer/nixos-impermanence.lantian/
 
-** filesytem
+** filesystem
 https://haseebmajid.dev/posts/2024-07-30-how-i-setup-btrfs-and-luks-on-nixos-using-disko/
 
 https://linux-hardware.org/?probe=8e84498214   @opensuse

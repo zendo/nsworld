@@ -39,7 +39,7 @@
               ln -f "$filename" files
               popd > /dev/null
               ls -l ~/.cache/nix-index
-              echo -e "\033[32m \n nix-index datebase update successfully. \033[0m"
+              echo -e "\033[32m \n nix-index database update successfully. \033[0m"
             '';
           }
         ];
