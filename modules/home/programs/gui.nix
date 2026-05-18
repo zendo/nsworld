@@ -29,7 +29,6 @@
         # splayer # :electron
         # qqmusic
         spotify
-        blanket
         # mousai
         songrec
         kooha
