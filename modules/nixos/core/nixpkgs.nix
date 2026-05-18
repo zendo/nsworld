@@ -16,6 +16,7 @@
             pkg:
             builtins.elem (lib.getName pkg) [
               "claude-code"
+              "amp-cli"
               "unrar"
               "spotify"
               "qqmusic"

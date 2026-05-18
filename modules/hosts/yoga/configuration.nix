@@ -52,6 +52,7 @@ in
             opencode
             # qwen-code
             # gemini-cli
+            # pi-coding-agent
             # claude-code
           ];
 
