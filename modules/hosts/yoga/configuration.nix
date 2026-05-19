@@ -109,12 +109,13 @@ in
           "psmouse.synaptics_intertouch=1"
         ];
 
-        # zswap: grep -r . /sys/module/zswap/parameters/
-        kernel.sysfs.module.zswap.parameters = {
-          enabled = true;
-          compressor = "zstd";
-          shrinker_enabled = true;
-        };
+        # zswap + swapfile
+        # grep -r . /sys/module/zswap/parameters/
+        # kernel.sysfs.module.zswap.parameters = {
+        #   enabled = true;
+        #   compressor = "zstd";
+        #   shrinker_enabled = true;
+        # };
 
         # binfmt.emulatedSystems = [
         #   "aarch64-linux"
@@ -122,9 +123,10 @@ in
         # ];
       };
 
-      # zramSwap.enable = true;
+      # zram only, no swapfile
+      zramSwap.enable = true;
 
-      # swapfile
+      # swapfile + zswap
       # swapDevices = [
       #   {
       #     device = "/var/swapfile";
