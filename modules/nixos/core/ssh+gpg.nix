@@ -32,7 +32,7 @@
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "*" = {
           # --- 1. 保持连接（防掉线） ---
           serverAliveInterval = 60; # 每 60 秒发一次心跳包
@@ -69,12 +69,6 @@
           forwardAgent = true;
         };
       };
-      extraConfig = ''
-        Host example1
-          HostName 192.168.122.247
-          Port 22
-          User root
-      '';
     };
   };
 }
