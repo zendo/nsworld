@@ -2949,9 +2949,7 @@ https://github.com/renzmann/treesit-auto
 
 #+begin_src emacs-lisp
 (use-package treesit-auto
-  :when (and (eq system-type 'gnu/linux)
-             (fboundp 'treesit-available-p)
-             (treesit-available-p))
+  :when (eq system-type 'gnu/linux)
   ;; :custom
   ;; (treesit-auto-install 'prompt)
   :config
