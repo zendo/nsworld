@@ -7,9 +7,9 @@ $WScriptShell = New-Object -ComObject WScript.Shell
 # Create the shortcut
 $Shortcut = $WScriptShell.CreateShortcut("$startupFolder\kanata-daemon.lnk")
 $Shortcut.Description = "Kanata GUI"
-$Shortcut.TargetPath = "kanata_windows_gui_winIOv2_x64"
+$Shortcut.TargetPath = "$env:USERPROFILE\scoop\apps\kanata\current\kanata_windows_gui_winIOv2_x64.exe"
 $Shortcut.Arguments = "-c minimal.kbd"
-$Shortcut.WorkingDirectory = "$Home\nsworld\dotfiles\kanata"
+$Shortcut.WorkingDirectory = "$env:USERPROFILE\nsworld\dotfiles\kanata"
 $Shortcut.Save()
 
 Write-Output "Installation complete! Kanata GUI will start automatically with Windows."
