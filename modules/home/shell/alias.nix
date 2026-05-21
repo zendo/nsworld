@@ -53,6 +53,7 @@
         paste-rs = "curl --data-binary @- https://paste.rs/";
         download-doom = "git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d";
         download-astronvim = "git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim";
+        download-nvchad = "git clone https://github.com/NvChad/starter ~/.config/nvim";
 
         # [ emacs ]
         e = "emacs -nw";
