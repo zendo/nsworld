@@ -15,8 +15,8 @@ stdenv.mkDerivation (finalAttrs: {
   version = "8.0.12";
 
   src = fetchurl {
-    url = "https://github.com/jiangtian616/JHenTai/releases/download/v8.0.12/JHenTai-8.0.12+308-Linux-x64.deb";
-    hash = "sha256-ypH1R2d7GEqJ2aJUvFn/V2XIVBXJVPKOSKQ9qqssTxw=";
+    url = "https://github.com/jiangtian616/JHenTai/releases/download/v8.0.12%2B310/JHenTai-8.0.12+310-Linux-x64.deb";
+    hash = "sha256-2krAf2QV1EY46KzBLfpZ4AtT3o4+LfyOHVs3cJObuF0=";
   };
 
   nativeBuildInputs = [
