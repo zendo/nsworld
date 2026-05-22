@@ -1137,6 +1137,7 @@ Use ~getenv~ check the environment variables.
 (defconst IS-WSL     (and IS-LINUX
                           (getenv "WSLENV")))
 #+end_src
+
 ** Linux
 #+begin_src emacs-lisp
 (when IS-LINUX
@@ -1150,6 +1151,7 @@ Use ~getenv~ check the environment variables.
        (font-spec :name "Noto Sans CJK SC")))))
 ;; 中英文字体缩放不一致：https://emacs-china.org/t/face-charset-size/16916
 #+end_src
+
 ** WSL
 #+begin_src emacs-lisp
 (when IS-WSL
@@ -1171,6 +1173,7 @@ Use ~getenv~ check the environment variables.
         select-enable-primary nil
         interprogram-cut-function #'gui-select-text))
 #+end_src
+
 ** Windows
 #+begin_src emacs-lisp
 (when IS-WINDOWS
@@ -1208,6 +1211,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
   (global-kkp-mode +1))
 #+end_src
+
 ** Encoding
 #+begin_src emacs-lisp
 ;; Set UTF-8 as the default coding system
@@ -1216,6 +1220,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
 #+end_src
+
 ** Shell
 *** eat
 #+begin_src emacs-lisp
@@ -1230,6 +1235,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   (eat-enable-shell-prompt-annotation t)
   (eat-term-scrollback-size nil))
 #+end_src
+
 *** vterm
 #+begin_src emacs-lispxx
 (use-package vterm
@@ -1242,6 +1248,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
               ;; default: ("C-c C-t" . vterm-copy-mode)
               ("<f2>" . shell-pop)))
 #+end_src
+
 *** ghostel
 https://github.com/dakra/ghostel
 #+begin_src emacs-lisp
@@ -1255,6 +1262,7 @@ https://github.com/dakra/ghostel
   ;;             ("C-`" . shell-pop))
   )
 #+end_src
+
 *** popper
 https://github.com/karthink/popper
 #+begin_src emacs-lisp
@@ -1282,6 +1290,7 @@ https://github.com/karthink/popper
   (popper-mode +1)
   (popper-echo-mode +1))                ; For echo area hints
 #+end_src
+
 *** shell-pop
 https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
 #+begin_src emacs-lispxx
@@ -1298,6 +1307,7 @@ https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
               (t '("terminal" "*terminal*"
                    (lambda () (term shell-pop-term-shell)))))))
 #+end_src
+
 ** Tramp
 https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 
@@ -1305,6 +1315,7 @@ https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 (setq tramp-default-method "ssh"
       password-cache-expiry 36000)
 #+end_src
+
 ** Server
 https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
@@ -1322,6 +1333,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; fix recentf not load
 (add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
 #+END_SRC
+
 * Appearance & UI
 ** themes
 #+begin_src emacs-lisp
@@ -1369,6 +1381,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;;   :config
 ;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+end_src
+
 ** emoji
 :) :-( :dog:
 #+begin_src emacs-lisp
@@ -1376,6 +1389,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :defer t
   :hook (after-init . global-emojify-mode))
 #+end_src
+
 ** mode-line
 #+begin_src emacs-lisp
 ;; Handle by mood-modeline
@@ -1408,6 +1422,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 (use-package nyan-mode
   :commands nyan-mode)
 #+end_src
+
 ** tab-bar
 #+begin_src emacs-lisp
 (use-package centaur-tabs
@@ -1424,6 +1439,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :config
   (centaur-tabs-mode t))
 #+end_src
+
 ** dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
@@ -1447,6 +1463,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; bug: 会导致 magit commit save 后跳到 dashboard
 ;; (add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
+
 ** treemacs
 #+begin_src emacs-lisp
 (use-package treemacs
@@ -1482,6 +1499,7 @@ Use `treemacs' command for old functionality."
            (message "No valid project in current buffer; opening last treemacs session")
            (treemacs))))))
 #+end_src
+
 ** perfect-margin
 #+begin_src emacs-lisp
 (use-package perfect-margin
@@ -1493,23 +1511,27 @@ Use `treemacs' command for old functionality."
   (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
 )
 #+end_src
+
 ** spatial-padding
 #+begin_src emacs-lisp
 (use-package spacious-padding
   :config
   (spacious-padding-mode +1))
 #+end_src
+
 ** indent-bars
 #+begin_src emacs-lisp
 (use-package indent-bars
   :commands indent-bars)
 #+end_src
+
 ** hl-todo
 #+begin_src emacs-lisp
 (use-package hl-todo
   :config
   (global-hl-todo-mode))
 #+end_src
+
 ** rainbow & colorful-mode
 #+begin_src emacs-lisp
 ;; rainbow 颜色代码显色 #00FF00
@@ -1531,6 +1553,7 @@ Use `treemacs' command for old functionality."
   (global-colorful-mode t)
   (add-to-list 'global-colorful-modes 'helpful-mode))
 #+end_src
+
 ** scrollkeeper
 like ~beacon~
 
@@ -2650,6 +2673,19 @@ https://github.com/thierryvolpiatto/isearch-light
 #+begin_src emacs-lisp
 (use-package forge
   :after magit)
+#+end_src
+
+** blamer
+#+begin_src emacs-lisp
+(use-package blamer
+  :commands blamer-mode
+  :config
+  (setq blamer-idle-time 0.05)
+  (setq blamer-author-formatter "%s ")
+  (setq blamer-datetime-formatter "[%s]")
+  (setq blamer-commit-formatter ": %s")
+  (setq blamer-max-commit-message-length 100)
+  (setq blamer-min-offset 70))
 #+end_src
 
 ** Git-timemachine
