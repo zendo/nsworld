@@ -124,6 +124,21 @@ nix-build -A tagger.fetch-deps
 /nix/store/yvdrnzy78j26h1klklbjw0jdnm7pjysw-fetch-tagger-deps  pkgs/by-name/ta/tagger/deps.nix
 #+end_src
 
+** fix libEGL
+#+begin_src nix
+libs = [
+  libglvnd
+  vulkan-loader
+  wayland
+];
+
+  postFixup = ''
+    wrapProgram $out/bin/open-orpheus \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libs}"
+  '';
+#+end_src
+
+
 * Functions
 ** importModule
 Return a list of full paths for all entries in the given directory, excluding default.nix
