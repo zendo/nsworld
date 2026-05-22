@@ -68,7 +68,7 @@
 
         # [ System Monitor ]
         microfetch
-        fastfetchMinimal
+        fastfetch.minimal
         btop
         htop
         bottom
