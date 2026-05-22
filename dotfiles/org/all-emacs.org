@@ -1224,16 +1224,17 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 ** Shell
 *** eat
 #+begin_src emacs-lisp
-(use-package eat
-  :defer t
-  :when (eq system-type 'gnu/linux)
-  :custom
-  (eat-kill-buffer-on-exit t)
-  (eat-enable-yank-to-terminal t)
-  (eat-enable-directory-tracking t)
-  (eat-enable-shell-command-history t)
-  (eat-enable-shell-prompt-annotation t)
-  (eat-term-scrollback-size nil))
+(when (eq system-type 'gnu/linux)
+  (use-package eat
+    :defer t
+    :custom
+    (eat-kill-buffer-on-exit t)
+    (eat-enable-yank-to-terminal t)
+    (eat-enable-directory-tracking t)
+    (eat-enable-shell-command-history t)
+    (eat-enable-shell-prompt-annotation t)
+    (eat-term-scrollback-size nil))
+  )
 #+end_src
 
 *** vterm
@@ -1241,7 +1242,6 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (use-package vterm
   :ensure nil ; handle by nix
   :defer t
-  :when (eq system-type 'gnu/linux)
   :config
   (setq vterm-shell "fish")
   :bind (:map vterm-mode-map
@@ -1255,7 +1255,6 @@ https://github.com/dakra/ghostel
 (use-package ghostel
   :ensure nil ; handle by nix
   :defer t
-  :when (eq system-type 'gnu/linux)
   ;; :config
   ;; (setq ghostel-shell "fish")
   ;; :bind (:map ghostel-mode-map
@@ -2984,13 +2983,14 @@ https://github.com/svaante/dape
 https://github.com/renzmann/treesit-auto
 
 #+begin_src emacs-lisp
-(use-package treesit-auto
-  :when (eq system-type 'gnu/linux)
-  ;; :custom
-  ;; (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+(when (eq system-type 'gnu/linux)
+  (use-package treesit-auto
+    ;; :custom
+    ;; (treesit-auto-install 'prompt)
+    :config
+    (treesit-auto-add-to-auto-mode-alist 'all)
+    (global-treesit-auto-mode))
+  )
 #+end_src
 
 ** Languages
@@ -3190,9 +3190,9 @@ https://github.com/renzmann/treesit-auto
 *** agent-shell
 https://github.com/xenodium/agent-shell
 #+begin_src emacs-lisp
-(use-package agent-shell
-  :defer t
-  :when (eq system-type 'gnu/linux)
+(when (eq system-type 'gnu/linux)
+  (use-package agent-shell
+    :defer t)
   )
 #+end_src
 
