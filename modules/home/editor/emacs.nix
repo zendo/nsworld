@@ -33,6 +33,7 @@
                 tree-sitter-toml
                 tree-sitter-kdl
                 tree-sitter-markdown
+                tree-sitter-lua
                 tree-sitter-go
                 tree-sitter-rust
                 tree-sitter-python
