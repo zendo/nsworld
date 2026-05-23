@@ -1,12 +1,12 @@
--- https://github.com/hyprwm/Hyprland/blob/main/example/hyprland.lua
 ---@diagnostic disable: undefined-global
+-- https://github.com/hyprwm/Hyprland/blob/main/example/hyprland.lua
 
 -- -------===[ Variables ]===-------
 -- hl.env("XCURSOR_SIZE", "24")
 -- hl.env("HYPRCURSOR_SIZE", "24")
 
 -- -------===[ Programs ]===-------
-local term        = "kitty"
+local term        = "ghostty"
 local editor      = "emacs"
 local browser     = "firefox"
 local filemanager = "thunar"

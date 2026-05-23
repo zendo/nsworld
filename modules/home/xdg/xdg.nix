@@ -15,7 +15,7 @@
 
         autostart = {
           enable = true;
-          readOnly = true;
+          # readOnly = true; # !plasma-manager
           entries = [
             # "${pkgs.goodvibes}/share/applications/io.gitlab.Goodvibes.desktop"
           ];
