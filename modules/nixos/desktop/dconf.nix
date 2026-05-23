@@ -13,7 +13,7 @@
         # blur-my-shell
         # top-bar-organizer
         # just-perfection
-        # kimpanel
+        kimpanel
         # runcat
         caffeine
       ];
