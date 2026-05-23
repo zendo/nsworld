@@ -87,7 +87,7 @@
           enable = true;
           # mode = "location";
           temperature = {
-            night = 3000;
+            night = 3200;
           };
         };
       };
