@@ -48,13 +48,18 @@ in
 
           home.packages = with pkgs; [
             # [ AI ]
-            codex
             opencode
+            pi-coding-agent
+            pi-acp
+            codex
             # qwen-code
             # gemini-cli
-            # pi-coding-agent
             # claude-code
           ];
+
+          home.sessionVariables = {
+            PI_SKIP_VERSION_CHECK = "1";
+          };
 
           dconf.settings = {
             "org/gnome/settings-daemon/plugins/power" = {

@@ -3197,6 +3197,14 @@ https://github.com/xenodium/agent-shell
   )
 #+end_src
 
+*** pi
+#+begin_src emacs-lispxx
+(when (eq system-type 'gnu/linux)
+  (use-package pi-coding-agent
+    :defer t)
+  )
+#+end_src
+
 ** Web And Data Formats
 *** web-mode
 #+begin_src emacs-lispxx
