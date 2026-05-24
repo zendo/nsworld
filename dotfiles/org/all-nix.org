@@ -138,7 +138,6 @@ libs = [
   '';
 #+end_src
 
-
 * Functions
 ** importModule
 Return a list of full paths for all entries in the given directory, excluding default.nix
