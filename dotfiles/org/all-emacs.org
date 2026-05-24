@@ -1260,6 +1260,7 @@ https://github.com/dakra/ghostel
   ;; :bind (:map ghostel-mode-map
   ;;             ("C-`" . shell-pop))
   )
+(add-to-list 'package-pinned-packages '(ghostel . nil))
 #+end_src
 
 *** popper
