@@ -55,6 +55,12 @@ in
             # qwen-code
             # gemini-cli
             # claude-code
+
+            # [ ... ]
+            # yacreader
+            # venera
+            # jhentai
+            # comigo
           ];
 
           home.sessionVariables = {

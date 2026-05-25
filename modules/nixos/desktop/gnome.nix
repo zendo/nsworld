@@ -37,6 +37,7 @@
         gnome-power-manager
         gnome-sound-recorder
         # gnome-extension-manager
+        resources
         # adw-gtk3
         qadwaitadecorations-qt6
       ];

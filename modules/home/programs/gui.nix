@@ -13,10 +13,6 @@
         # fractal
         # fluffychat
         # newsflash
-        # yacreader
-        venera
-        jhentai
-        comigo
 
         # [ Multimedia ]
         # mpd
@@ -105,7 +101,6 @@
         # libinput
         android-tools
         # squirreldisk
-        resources
         # mission-center
       ];
 
