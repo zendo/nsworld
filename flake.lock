@@ -309,11 +309,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779700862,
-        "narHash": "sha256-sNwSRNBdaN//oU2aiIkpGkHK/Vr/h5HAjv4dINZc40E=",
+        "lastModified": 1779727079,
+        "narHash": "sha256-vE94Ufr0OLPZvtNGnI7ywzESnhleYW7P7e1nZBl99G8=",
         "owner": "feel-co",
         "repo": "ncro",
-        "rev": "a84140c21d6cc67fefcd291500b344772d339f56",
+        "rev": "63111673010c37dd713f5260093ca1ad4ab5969c",
         "type": "github"
       },
       "original": {
