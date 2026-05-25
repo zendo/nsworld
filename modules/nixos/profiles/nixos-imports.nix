@@ -12,8 +12,6 @@
     boot
     fonts
     keyboards
-    nixconfig
-    nixpkgs
     ssh
     # gpg
     user
@@ -25,6 +23,11 @@
     firewall
     networkmanager
     # print
+
+    # [ nix ]
+    nix-cache
+    nixconfig
+    nixpkgs
 
     # [ desktop ]
     # [ profiles ]
