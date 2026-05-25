@@ -52,6 +52,9 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
+    ncro.url = "github:feel-co/ncro";
+    ncro.inputs.nixpkgs.follows = "nixpkgs";
+
     # nur.url = "github:nix-community/NUR";
     nix-alien.url = "github:thiagokokada/nix-alien";
     import-tree.url = "github:vic/import-tree";

@@ -302,6 +302,26 @@
         "type": "github"
       }
     },
+    "ncro": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779700862,
+        "narHash": "sha256-sNwSRNBdaN//oU2aiIkpGkHK/Vr/h5HAjv4dINZc40E=",
+        "owner": "feel-co",
+        "repo": "ncro",
+        "rev": "a84140c21d6cc67fefcd291500b344772d339f56",
+        "type": "github"
+      },
+      "original": {
+        "owner": "feel-co",
+        "repo": "ncro",
+        "type": "github"
+      }
+    },
     "nix-alien": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -507,6 +527,7 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager_2",
         "import-tree": "import-tree",
+        "ncro": "ncro",
         "nix-alien": "nix-alien",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",

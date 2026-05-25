@@ -95,6 +95,7 @@ in
         nix-init
         nix-update
         inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+        inputs.ncro.packages.${stdenv.hostPlatform.system}.ncro
         # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
       ];
 
