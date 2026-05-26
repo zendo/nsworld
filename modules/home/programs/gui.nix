@@ -58,7 +58,7 @@
         # drawio
         # rnote # handwritten note
         # foliate # :webkitgtk
-        readest
+        readest # :webkitgtk
         # koodo-reader
         # planify
         meld

@@ -1,11 +1,12 @@
 { config, ... }:
 {
   flake.modules.nixos.default-imports.imports = with config.flake.modules.nixos; [
+    mods
     secrets
 
     # [ shell ]
     fish
-    # zsh
+    zsh
 
     # [ core ]
     base
@@ -15,8 +16,6 @@
     ssh
     # gpg
     user
-
-    mods
 
     # [ networking ]
     dns
