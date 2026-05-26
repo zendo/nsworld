@@ -30,7 +30,7 @@
                   # "applications:code.desktop"
                   "preferred://browser"
                   # "applications:firefox.desktop"
-                  "applications:org.telegram.desktop.desktop"
+                  # "applications:org.telegram.desktop.desktop"
                 ];
               };
             }
