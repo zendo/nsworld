@@ -57,16 +57,17 @@
               }
               {
                 url = "https://cache.nixos.org";
+                priority = 20;
               }
-              { url = "https://nix-community.cachix.org"; }
               {
                 url = "https://cache.garnix.io";
                 storage_url = "https://garnix-cache.com";
               }
+              { url = "https://nix-community.cachix.org"; }
             ];
           };
         };
       };
     in
-    selector4nix;
+    ncro;
 }

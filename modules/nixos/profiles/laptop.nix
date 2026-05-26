@@ -12,8 +12,9 @@
 
         # sudo scx_rusty --monitor 0.5
         scx = {
-          # enable = true;
-          scheduler = "scx_rusty";
+          enable = true;
+          scheduler = "scx_lavd"; # 游戏
+          # scheduler = "scx_rusty"; # 生产力兼游戏
           package = pkgs.scx.rustscheds;
         };
 

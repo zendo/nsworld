@@ -21,7 +21,7 @@
         audacious
         # rhythmbox
         goodvibes
-        cliamp
+        # cliamp
         go-musicfox
         # splayer # :electron
         # qqmusic
