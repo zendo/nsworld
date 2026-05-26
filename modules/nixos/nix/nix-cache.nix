@@ -24,12 +24,15 @@
                 }
                 {
                   url = "https://cache.nixos.org";
+                  priority = 20;
                 }
                 {
                   url = "https://cache.garnix.io";
+                  priority = 20;
                 }
                 {
                   url = "https://nix-community.cachix.org";
+                  priority = 20;
                 }
               ];
             };
@@ -57,7 +60,6 @@
               }
               {
                 url = "https://cache.nixos.org";
-                priority = 20;
               }
               {
                 url = "https://cache.garnix.io";
