@@ -3542,8 +3542,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-s" . consult-line)
  ("M-m" . consult-mark)
  ;; ("M-m" . pop-to-mark-command)
- ;; ("C-." . company-complete)
- ("C-." . hippie-expand)
+ ;; ("M-/" . hippie-expand)
  ("C-/" . comment-line) ;vscode
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)

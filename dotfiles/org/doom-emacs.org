@@ -459,7 +459,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
  [remap other-window] #'ace-window
  [remap kill-buffer] #'kill-current-buffer
 
- "C-." #'hippie-expand
+ ;; "C-." #'hippie-expand
  "C-," #'+company/complete
  "C-/" #'comment-line ;vscode
  "C-S-i" #'lsp-format-buffer ;vscode
