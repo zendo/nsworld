@@ -55,6 +55,9 @@
     ncro.url = "github:feel-co/ncro";
     ncro.inputs.nixpkgs.follows = "nixpkgs";
 
+    selector4nix.url = "github:StarryReverie/selector4nix";
+    selector4nix.inputs.nixpkgs.follows = "nixpkgs";
+
     # nur.url = "github:nix-community/NUR";
     nix-alien.url = "github:thiagokokada/nix-alien";
     import-tree.url = "github:vic/import-tree";
