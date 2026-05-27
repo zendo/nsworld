@@ -24,7 +24,7 @@
     # print
 
     # [ nix ]
-    # nix-cache
+    nix-cache
     nixconfig
     nixpkgs
 

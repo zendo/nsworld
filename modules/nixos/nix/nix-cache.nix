@@ -4,10 +4,12 @@
     let
       # https://github.com/feel-co/ncro
       ncro =
-        { lib, ... }:
+        { lib, config, ... }:
         {
           imports = [ inputs.ncro.nixosModules.default ];
-          nix.settings.substituters = lib.mkForce [ "http://localhost:8088" ];
+          nix.settings.substituters = lib.mkForce [
+            "http://localhost${config.services.ncro.settings.server.listen}"
+          ];
 
           services.ncro = {
             enable = true;
@@ -24,7 +26,7 @@
                 }
                 {
                   url = "https://cache.nixos.org";
-                  priority = 20;
+                  priority = 15;
                 }
                 {
                   url = "https://cache.garnix.io";
