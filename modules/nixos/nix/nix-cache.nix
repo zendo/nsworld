@@ -29,10 +29,6 @@
                   priority = 15;
                 }
                 {
-                  url = "https://cache.garnix.io";
-                  priority = 20;
-                }
-                {
                   url = "https://nix-community.cachix.org";
                   priority = 20;
                 }
@@ -62,10 +58,6 @@
               }
               {
                 url = "https://cache.nixos.org";
-              }
-              {
-                url = "https://cache.garnix.io";
-                storage_url = "https://garnix-cache.com";
               }
               { url = "https://nix-community.cachix.org"; }
             ];
