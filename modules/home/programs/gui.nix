@@ -5,7 +5,7 @@
       home.packages = with pkgs; [
         kula
         nano-ffmpeg
-        open-orpheus
+        # open-orpheus
 
         # [ Social ]
         telegram-desktop # :webkitgtk
