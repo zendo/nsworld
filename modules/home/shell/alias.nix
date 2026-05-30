@@ -70,6 +70,8 @@
       };
 
       programs.bash.shellAliases = {
+        # sudo = "sudo ";
+
         # [ proxy ] (move here because fish incompatible complain)
         # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
         ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
