@@ -12,11 +12,9 @@
       # Bashless Activation
       system.nixos-init.enable = true;
 
-      # https://github.com/hakavlad/nohang
-      # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/no/nohang/package.nix
-      # FIXME: hardcode sudo
       systemd.oomd.enable = false;
-      services.nohang.enable = true;
+      services.earlyoom.enable = true;
+      # services.nohang.enable = true;
 
       boot = {
         kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
