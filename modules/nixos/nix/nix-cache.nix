@@ -20,10 +20,10 @@
                   url = "https://mirrors.ustc.edu.cn/nix-channels/store";
                   priority = 10;
                 }
-                {
-                  url = "https://mirror.sjtu.edu.cn/nix-channels/store";
-                  priority = 10;
-                }
+                # {
+                #   url = "https://mirror.sjtu.edu.cn/nix-channels/store";
+                #   priority = 10;
+                # }
                 {
                   url = "https://cache.nixos.org";
                   priority = 15;
@@ -52,10 +52,10 @@
                 url = "https://mirrors.ustc.edu.cn/nix-channels/store";
                 priority = 10; # Default: 40
               }
-              {
-                url = "https://mirror.sjtu.edu.cn/nix-channels/store";
-                priority = 10;
-              }
+              # {
+              #   url = "https://mirror.sjtu.edu.cn/nix-channels/store";
+              #   priority = 10;
+              # }
               {
                 url = "https://cache.nixos.org";
               }
