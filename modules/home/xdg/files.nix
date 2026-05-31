@@ -8,6 +8,11 @@
         dir: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${dir}";
     in
     {
+      home.file = {
+        ".pi/agent/prompts".source = linkDot "pi/agent/prompts";
+      };
+
+      # ~/.config
       xdg.configFile = {
         "doom/config.org".source = linkDot "org/doom-emacs.org";
         "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
@@ -27,6 +32,7 @@
         '';
       };
 
+      # ~/.local/share
       xdg.dataFile = {
         "goodvibes".source = staticDot "goodvibes";
 
