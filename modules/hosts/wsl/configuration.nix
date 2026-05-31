@@ -19,7 +19,7 @@ in
         nixpkgs
         ssh
         fish
-        # zsh
+        zsh
       ]
       ++ [
         inputs.nixos-wsl.nixosModules.wsl
@@ -35,8 +35,6 @@ in
       home-manager.users.${userName} =
         { pkgs, ... }:
         {
-          xdg.enable = true;
-
           home.packages = with pkgs; [
             # cliamp
             goodvibes
@@ -79,7 +77,7 @@ in
             # [ xdg ]
             env
             files
-            # xdg
+            xdg
           ];
         };
 
