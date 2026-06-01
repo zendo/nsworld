@@ -59,7 +59,7 @@
         # sshfs [user@]hostname:[directory] mountpoint
         # umount mountpoint
         sshfs
-        dufs
+        # dufs
         goshs
         rclone
         simple-http-server
