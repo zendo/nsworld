@@ -8,7 +8,7 @@
 * Bootstrap
 ** early-init.el
 https://github.com/jamescherti/minimal-emacs.d minimal-emacs.d
-Release: 1.4.1
+Release: 1.5.0
 
 curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/early-init.el | wl-copy
 #+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
@@ -18,7 +18,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/earl
 ;; URL: https://github.com/jamescherti/minimal-emacs.d
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: maint
-;; Version: 1.4.2
+;; Version: 1.5.0
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
@@ -44,7 +44,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/earl
 
 ;; Temporarily raise the garbage collection threshold to its maximum value.
 ;; It will be restored later to controlled values.
-(setq gc-cons-threshold most-positive-fixnum)
+(if noninteractive
+    (setq gc-cons-threshold 268435456) ; 256 Mb
+  (setq gc-cons-threshold most-positive-fixnum))
 (setq gc-cons-percentage 1.0)
 
 ;;; Variables
@@ -208,10 +210,12 @@ pre-early-init.el, and post-early-init.el.")
 
 ;;; Native compilation and Byte compilation
 
-(unless (and (featurep 'native-compile)
-             (fboundp 'native-comp-available-p)
-             (native-comp-available-p))
+(if (and (featurep 'native-compile)
+         (fboundp 'native-comp-available-p)
+         (native-comp-available-p))
+    (setq package-native-compile t)
   ;; Deactivate the `native-compile' feature if it is not available
+  (setq native-comp-jit-compilation nil)
   (setq features (delq 'native-compile features)))
 
 (setq native-comp-warning-on-missing-source minimal-emacs-debug
@@ -226,7 +230,7 @@ pre-early-init.el, and post-early-init.el.")
 (set-language-environment "UTF-8")
 
 ;; Increase how much is read from processes in a single chunk
-(setq read-process-output-max (* 2 1024 1024))  ; 1024kb
+(setq read-process-output-max (* 4 1024 1024))  ; 4096kb
 
 (setq process-adaptive-read-buffering nil)
 
@@ -234,36 +238,53 @@ pre-early-init.el, and post-early-init.el.")
 (setq ffap-machine-p-known 'reject)
 
 (setq warning-minimum-level (if minimal-emacs-debug :warning :error))
-(setq warning-suppress-types '((lexical-binding)))
+
+;; Establish a strict baseline for suppressed warnings.
+;; - defvaralias: Emacs emits warnings when an alias is defined for a variable
+;;   that already exists. In modern, lazy-loaded configurations, this occurs
+;;   frequently and is almost always benign.
+;; - lexical-binding: Emacs warns about third-party packages that lack
+;;   lexical-binding. Because end users cannot easily fix upstream source code,
+;;   these warnings create noise without providing actionable value.
+(setq warning-suppress-types '((defvaralias) (lexical-binding)))
+(setq warning-inhibit-types '((files missing-lexbind-cookie)))
 
 (when minimal-emacs-debug
   (setq message-log-max 16384))
-
-;; In PGTK, this timeout introduces latency. Reducing it from the default 0.1
-;; improves responsiveness of childframes and related packages.
-(when (boundp 'pgtk-wait-for-event-timeout)
-  (setq pgtk-wait-for-event-timeout 0.001))
 
 ;; Disable warnings from the legacy advice API. They aren't useful.
 (setq ad-redefinition-action 'accept)
 
 ;;; Performance: Miscellaneous options
 
-;; Font compacting can be very resource-intensive, especially when rendering
-;; icon fonts on Windows. This will increase memory usage.
-(setq inhibit-compacting-font-caches t)
+;; A second, case-insensitive pass over `auto-mode-alist' is time wasted.
+;; No second pass of case-insensitive search over auto-mode-alist.
+(setq auto-mode-case-fold nil)
 
-(when (not noninteractive)
+(unless minimal-emacs-debug
+  ;; Unset command line options irrelevant to the current OS. These options
+  ;; are still processed by `command-line-1` but have no effect.
+  (unless (eq system-type 'darwin)
+    (setq command-line-ns-option-alist nil))
+  (unless (memq initial-window-system '(x pgtk))
+    (setq command-line-x-option-alist nil)))
+
+(unless noninteractive
+  ;; In PGTK, this timeout introduces latency. Reducing it from the default 0.1
+  ;; improves responsiveness of childframes and related packages.
+  (when (boundp 'pgtk-wait-for-event-timeout)
+    (setq pgtk-wait-for-event-timeout 0.001))
+
+  ;; Font compacting can be very resource-intensive, especially when rendering
+  ;; icon fonts on Windows. This will increase memory usage.
+  (setq inhibit-compacting-font-caches t)
+
   ;; Resizing the Emacs frame can be costly when changing the font. Disable this
   ;; to improve startup times with fonts larger than the system default.
   (setq frame-resize-pixelwise t)
 
   ;; Without this, Emacs will try to resize itself to a specific column size
   (setq frame-inhibit-implied-resize t)
-
-  ;; A second, case-insensitive pass over `auto-mode-alist' is time wasted.
-  ;; No second pass of case-insensitive search over auto-mode-alist.
-  (setq auto-mode-case-fold nil)
 
   ;; Reduce *Message* noise at startup. An empty scratch buffer (or the
   ;; dashboard) is more than enough, and faster to display.
@@ -272,6 +293,9 @@ pre-early-init.el, and post-early-init.el.")
   (setq initial-buffer-choice nil
         inhibit-startup-buffer-menu t
         inhibit-x-resources t)
+
+  ;; Disable startup screens and messages
+  (setq inhibit-splash-screen t)
 
   ;; Disable bidirectional text scanning for a modest performance boost.
   (setq-default bidi-display-reordering 'left-to-right
@@ -285,15 +309,7 @@ pre-early-init.el, and post-early-init.el.")
 
   ;; Suppress the vanilla startup screen completely. We've disabled it with
   ;; `inhibit-startup-screen', but it would still initialize anyway.
-  (advice-add 'display-startup-screen :override #'ignore)
-
-  (unless minimal-emacs-debug
-    ;; Unset command line options irrelevant to the current OS. These options
-    ;; are still processed by `command-line-1` but have no effect.
-    (unless (eq system-type 'darwin)
-      (setq command-line-ns-option-alist nil))
-    (unless (memq initial-window-system '(x pgtk))
-      (setq command-line-x-option-alist nil))))
+  (advice-add 'display-startup-screen :override #'ignore))
 
 ;;; Performance: File-name-handler-alist
 
@@ -320,7 +336,8 @@ this stage of initialization."
                         minimal-emacs--old-file-name-handler-alist))))
 
 (when (and minimal-emacs-optimize-file-name-handler-alist
-           (not minimal-emacs-debug))
+           (not minimal-emacs-debug)
+           (not noninteractive))
   ;; Determine the state of bundled libraries using calc-loaddefs.el. If
   ;; compressed, retain the gzip handler in `file-name-handler-alist`. If
   ;; compiled or neither, omit the gzip handler during startup for improved
@@ -417,22 +434,6 @@ this stage of initialization."
 
 ;;; UI elements
 
-(setq frame-title-format minimal-emacs-frame-title-format
-      icon-title-format minimal-emacs-frame-title-format)
-
-;; Disable startup screens and messages
-(setq inhibit-splash-screen t)
-
-;; I intentionally avoid calling `menu-bar-mode', `tool-bar-mode', and
-;; `scroll-bar-mode' because manipulating frame parameters can trigger or queue
-;; a superfluous and potentially expensive frame redraw at startup, depending
-;; on the window system. The variables must also be set to `nil' so users don't
-;; have to call the functions twice to re-enable them.
-(unless (memq 'menu-bar minimal-emacs-ui-features)
-  (push '(menu-bar-lines . 0) default-frame-alist)
-  (unless (memq window-system '(mac ns))
-    (setq menu-bar-mode nil)))
-
 (defun minimal-emacs--setup-toolbar (&rest _)
   "Setup the toolbar."
   (when (fboundp 'tool-bar-setup)
@@ -441,36 +442,49 @@ this stage of initialization."
       (funcall 'tool-bar-setup))))
 
 (unless noninteractive
+  (setq frame-title-format minimal-emacs-frame-title-format
+        icon-title-format minimal-emacs-frame-title-format)
+
+  ;; I intentionally avoid calling `menu-bar-mode', `tool-bar-mode', and
+  ;; `scroll-bar-mode' because manipulating frame parameters can trigger or queue
+  ;; a superfluous and potentially expensive frame redraw at startup, depending
+  ;; on the window system. The variables must also be set to `nil' so users don't
+  ;; have to call the functions twice to re-enable them.
+  (unless (memq 'menu-bar minimal-emacs-ui-features)
+    (push '(menu-bar-lines . 0) default-frame-alist)
+    (unless (memq window-system '(mac ns))
+      (setq menu-bar-mode nil)))
+
   (when (fboundp 'tool-bar-setup)
     ;; Temporarily override the tool-bar-setup function to prevent it from
     ;; running during the initial stages of startup
     (advice-add 'tool-bar-setup :override #'ignore)
 
     (advice-add 'startup--load-user-init-file :after
-                #'minimal-emacs--setup-toolbar)))
+                #'minimal-emacs--setup-toolbar))
 
-(unless (memq 'tool-bar minimal-emacs-ui-features)
-  (push '(tool-bar-lines . 0) default-frame-alist)
-  (setq tool-bar-mode nil))
+  (unless (memq 'tool-bar minimal-emacs-ui-features)
+    (push '(tool-bar-lines . 0) default-frame-alist)
+    (setq tool-bar-mode nil))
 
-(setq default-frame-scroll-bars 'right)
-(push '(vertical-scroll-bars) default-frame-alist)
-(push '(horizontal-scroll-bars) default-frame-alist)
-(setq scroll-bar-mode nil)
+  (setq default-frame-scroll-bars 'right)
+  (push '(vertical-scroll-bars) default-frame-alist)
+  (push '(horizontal-scroll-bars) default-frame-alist)
+  (setq scroll-bar-mode nil)
 
-(unless (memq 'tooltips minimal-emacs-ui-features)
-  (when (bound-and-true-p tooltip-mode)
-    (tooltip-mode -1)))
+  (unless (memq 'tooltips minimal-emacs-ui-features)
+    (when (bound-and-true-p tooltip-mode)
+      (tooltip-mode -1)))
 
-;; Disable GUIs because they are inconsistent across systems, desktop
-;; environments, and themes, and they don't match the look of Emacs.
-(unless (memq 'dialogs minimal-emacs-ui-features)
-  (setq use-file-dialog nil)
-  (setq use-dialog-box nil))
+  ;; Disable GUIs because they are inconsistent across systems, desktop
+  ;; environments, and themes, and they don't match the look of Emacs.
+  (unless (memq 'dialogs minimal-emacs-ui-features)
+    (setq use-file-dialog nil)
+    (setq use-dialog-box nil)))
 
 ;;; Security
-(setq gnutls-verify-error t)  ; Prompts user if there are certificate issues
-(setq tls-checktrust t)  ; Ensure SSL/TLS connections undergo trust verification
+(setq gnutls-verify-error t)  ; Prompts if there are cert issues
+(setq tls-checktrust gnutls-verify-error)  ; Ensure SSL/TLS connections checks
 (setq gnutls-min-prime-bits 3072)  ; Stronger GnuTLS encryption
 
 ;; This results in a more compact output that emphasizes performance
@@ -515,7 +529,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; URL: https://github.com/jamescherti/minimal-emacs.d
 ;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: maint
-;; Version: 1.4.2
+;; Version: 1.5.0
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
@@ -564,12 +578,6 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
     (setq use-short-answers t)
   (advice-add 'yes-or-no-p :override #'y-or-n-p))
 
-;;; Undo/redo
-
-(setq undo-limit (* 13 160000)
-      undo-strong-limit (* 13 240000)
-      undo-outer-limit (* 13 24000000))
-
 ;;; package.el
 
 (when (and (bound-and-true-p minimal-emacs-package-initialize-and-refresh)
@@ -582,6 +590,35 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
              (not (package-installed-p 'use-package)))
     (package-install 'use-package))
   (require 'use-package))
+
+;;; Misc
+
+(setq undo-limit (* 13 160000)
+      undo-strong-limit (* 13 240000)
+      undo-outer-limit (* 13 24000000))
+
+(setq whitespace-line-column nil)  ; Use the value of `fill-column'.
+
+;; Disable ellipsis when printing s-expressions in the message buffer
+(setq eval-expression-print-length nil
+      eval-expression-print-level nil)
+
+;; This directs gpg-agent to use the minibuffer for passphrase entry
+(setq epg-pinentry-mode 'loopback)
+
+;; By default, Emacs stores sensitive authinfo credentials as unencrypted text
+;; in your home directory. Use GPG to encrypt the authinfo file for enhanced
+;; security.
+(setq auth-sources (list "~/.authinfo.gpg"))
+
+;; Speed up 'find-library' and reduce completion clutter by excluding internal
+;; helper files. This provides a library-focused list.
+(setq find-library-include-other-files nil)
+
+;; Protect the system from code injection vulnerabilities when browsing files.
+;; Disabling local 'eval' expressions ensures that opening a malicious project
+;; or third-party script cannot execute arbitrary Lisp code on your machine.
+(setq enable-local-eval nil)
 
 ;;; Minibuffer
 
@@ -596,7 +633,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 ;; By default, Emacs "updates" its ui more often than it needs to
 (setq which-func-update-delay 1.0)
-(setq idle-update-delay which-func-update-delay)  ;; Obsolete in >= 30.1
+(with-no-warnings
+  ;; Obsolete in >= 30.1
+  (setq idle-update-delay which-func-update-delay))
 
 (defalias #'view-hello-file #'ignore)  ; Never show the hello file
 
@@ -610,6 +649,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 (setq truncate-string-ellipsis "…")
 
 (setq display-time-default-load-average nil) ; Omit load average
+
+;; Force the mouse to paste text at the active cursor position.
+(setq mouse-yank-at-point t)
 
 ;;; Show-paren
 
@@ -631,27 +673,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 (setq uniquify-buffer-name-style 'forward)
 
-(setq remote-file-name-inhibit-cache 50)
-
 ;; Disable fontification during user input to reduce lag in large buffers.
 ;; Also helps marginally with scrolling performance.
 (setq redisplay-skip-fontification-on-input t)
-
-;;; Misc
-
-(setq whitespace-line-column nil)  ; Use the value of `fill-column'.
-
-;; Disable ellipsis when printing s-expressions in the message buffer
-(setq eval-expression-print-length nil
-      eval-expression-print-level nil)
-
-;; This directs gpg-agent to use the minibuffer for passphrase entry
-(setq epg-pinentry-mode 'loopback)
-
-;; By default, Emacs stores sensitive authinfo credentials as unencrypted text
-;; in your home directory. Use GPG to encrypt the authinfo file for enhanced
-;; security.
-(setq auth-sources (list "~/.authinfo.gpg"))
 
 ;;; `display-line-numbers-mode'
 
@@ -669,7 +693,11 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 ;;; Tramp
 
-(setq tramp-verbose 1)
+(setq tramp-verbose 1
+      remote-file-name-inhibit-cache 50
+      ;; Disable lockfiles and auto-saves for remote files to eliminate lag
+      remote-file-name-inhibit-locks t
+      remote-file-name-inhibit-auto-save-visited t)
 
 ;;; Files
 
@@ -680,7 +708,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Ignoring this is acceptable since it will redirect to the buffer regardless.
 (setq find-file-suppress-same-file-warnings t)
 
-;; Resolve symlinks to avoid duplicate buffers
+;; Automatically resolve symlinks to their true paths. This sets the correct
+;; working directory so C-x C-f opens in the right folder and version control
+;; tools recognize the Git repository.
 (setq find-file-visit-truename t
       ;; Automatically follow a symlink to its source if that source is managed
       ;; by a version control system, rather than asking for permission.
@@ -689,6 +719,10 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Prefer vertical splits over horizontal ones
 (setq split-width-threshold 170
       split-height-threshold nil)
+
+;; Increase threshold for large-file warning to reduce prompts when opening
+;; moderately large files while still preserving safeguards for large files.
+(setq large-file-warning-threshold (* 100 1024 1024)) ; 100 Mb
 
 ;;; comint (general command interpreter in a window)
 
@@ -700,6 +734,9 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 
 (setq compilation-ask-about-save nil
       compilation-always-kill t
+      ;; Parse up to 2048 characters per line in compilation buffers. This
+      ;; safely catches deep errors and long paths without risking hangs.
+      compilation-max-output-line-length 2048
       compilation-scroll-output 'first-error)
 
 ;; Skip confirmation prompts when creating a new file or buffer
@@ -788,7 +825,6 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; `recentf' is an that maintains a list of recently accessed files.
 (setq recentf-max-saved-items 300) ; default is 20
 (setq recentf-max-menu-items 15)
-(setq recentf-auto-cleanup 'mode)
 
 ;;; saveplace
 
@@ -809,6 +845,7 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;;; Frames and windows
 
 (setq resize-mini-windows 'grow-only)
+(setq max-mini-window-height 0.33)
 
 ;; The native border "uses" a pixel of the fringe on the rightmost
 ;; splits, whereas `window-divider-mode' does not.
@@ -918,6 +955,18 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Eliminate delay before highlighting search matches
 (setq lazy-highlight-initial-delay 0)
 
+;; Only affect leading indentation. This prevents destroying mid-line visual
+;; alignments, such as aligning variable assignments or trailing comments, by
+;; ensuring spaces in the middle of a line are never converted to tabs.
+(setq tabify-regexp (rx line-start (zero-or-more ?\t) ?\s (one-or-more blank)))
+
+;; Prevent Emacs filling commands (such as `fill-paragraph', `fill-region',
+;; `auto-fill-mode', and Evil's `gq' operator) from inserting line breaks inside
+;; text that is currently hidden via text properties. This prevents accidental
+;; corruption of folded outlines (e.g., in Org or Outline mode) and concealed
+;; markup (e.g., hidden Markdown URLs).
+(setq fill-nobreak-invisible t)
+
 ;;; Filetype
 
 ;; Do not notify the user each time Python tries to guess the indentation offset
@@ -943,7 +992,21 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; files, wdired, unreadable dirs, and delegates to dired-directory-changed-p
 ;; for modification checks.
 (setq auto-revert-remote-files nil)
-(setq dired-auto-revert-buffer 'dired-buffer-stale-p)
+
+;; Auto refresh Dired buffers, but only if the directory's modification time has
+;; changed on disk. Using `dired-directory-changed-p' is efficient: it avoids
+;; the unconditional re-renders of `t', and skips the heavy overhead of
+;; `dired-buffer-stale-p' (which makes blocking I/O calls for every inserted
+;; subdirectory, causing UI freezes on remote/network drives).
+(setq dired-auto-revert-buffer 'dired-directory-changed-p)
+
+;; Automatically revert destination Dired buffers after file operations
+;; (e.g., copying or renaming), but skip remote directories to prevent
+;; TRAMP network latency and UI freezes.
+(defun minimal-emacs--local-dir-p (dir)
+  "Return non-nil if DIR is a local directory."
+  (not (file-remote-p dir)))
+(setq dired-do-revert-buffer #'minimal-emacs--local-dir-p)
 
 ;; dired-omit-mode
 (setq dired-omit-verbose nil
@@ -957,6 +1020,11 @@ curl -sL https://github.com/jamescherti/minimal-emacs.d/raw/refs/heads/main/init
 ;; Configure Ediff to use a single frame and split windows horizontally
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
+
+;;; Diff
+
+;; Move +/- indicators to the fringe for cleaner diffs
+(setq diff-font-lock-prettify t)
 
 ;;; Help
 
@@ -1745,8 +1813,7 @@ https://github.com/neeasade/stillness-mode.el
   :ensure nil
   :commands outline-minor-mode
   :hook
-  ((emacs-lisp-mode . outline-minor-mode)
-   ;; Use " ▼" instead of the default ellipsis "..." for folded text to make
+  (;; Use " ▼" instead of the default ellipsis "..." for folded text to make
    ;; folds more visually distinctive and readable.
    (outline-minor-mode
     .
@@ -1757,33 +1824,43 @@ https://github.com/neeasade/stillness-mode.el
         (set-display-table-slot display-table 'selective-display value)
         (setq buffer-display-table display-table))))))
 
+;; Enable the mode
+(add-hook 'emacs-lisp-mode-hook #'outline-minor-mode)
+(add-hook 'lisp-mode-hook #'outline-minor-mode)
+(add-hook 'conf-mode-hook #'outline-minor-mode)
+(add-hook 'markdown-mode-hook #'outline-minor-mode)
+(add-hook 'diff-mode-hook #'outline-minor-mode)
+
+(add-hook 'c-mode-hook #'hs-minor-mode)
+(add-hook 'c++-mode-hook #'hs-minor-mode)
+(add-hook 'java-mode-hook #'hs-minor-mode)
+(add-hook 'sh-mode-hook #'hs-minor-mode)
+(add-hook 'html-mode-hook #'hs-minor-mode)
+
+
 ;; The outline-indent Emacs package provides a minor mode that enables code
 ;; folding based on indentation levels.
-;;
-;; In addition to code folding, *outline-indent* allows:
+;; In addition to code folding, outline-indent allows:
 ;; - Moving indented blocks up and down
 ;; - Indenting/unindenting to adjust indentation levels
 ;; - Inserting a new line with the same indentation level as the current line
 ;; - Move backward/forward to the indentation level of the current line
 ;; - and other features.
 (use-package outline-indent
-  :ensure t
   :commands outline-indent-minor-mode
-
   :custom
-  (outline-indent-ellipsis " ▼")
+  (outline-indent-ellipsis " ▼"))
 
-  :init
-  ;; The minor mode can also be automatically activated for a certain modes.
-  (add-hook 'python-mode-hook #'outline-indent-minor-mode)
-  (add-hook 'python-ts-mode-hook #'outline-indent-minor-mode)
+;; Python
+(add-hook 'python-mode-hook #'outline-indent-minor-mode)
+(add-hook 'python-ts-mode-hook #'outline-indent-minor-mode)
 
-  (add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
-  (add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
+;; Yaml
+(add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
+(add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
 
-  (add-hook 'nix-mode-hook #'outline-indent-minor-mode)
-  (add-hook 'nix-ts-mode-hook #'outline-indent-minor-mode)
-  )
+;; Haskell
+(add-hook 'haskell-mode-hook #'outline-indent-minor-mode)
 #+end_src
 ** hideshow
 #+begin_src emacs-lisp
@@ -1844,6 +1921,7 @@ https://gitlab.com/jabranham/mixed-pitch
 ;; Trigger an auto-save 30 seconds of idle time.
 (setq auto-save-timeout 30)
 #+end_src
+
 ** auto-save-visited-mode
 #+begin_src emacs-lisp
 ;; 26.1+ 新备份机制，直接把你的修改写进原文件。
@@ -1861,6 +1939,7 @@ https://gitlab.com/jabranham/mixed-pitch
 ;; (setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
 ;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
 #+end_src
+
 ** super-save
 https://github.com/bbatsov/super-save
 
