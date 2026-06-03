@@ -2305,15 +2305,15 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (global-corfu-mode))
 
 ;; Part of corfu
-;; (use-package corfu-popupinfo
-;;   :after corfu
-;;   :ensure nil
-;;   :hook (corfu-mode . corfu-popupinfo-mode)
-;;   :custom
-;;   (corfu-popupinfo-delay '(0.25 . 0.1))
-;;   (corfu-popupinfo-hide nil)
-;;   :config
-;;   (corfu-popupinfo-mode))
+(use-package corfu-popupinfo
+  :after corfu
+  :ensure nil
+  :hook (corfu-mode . corfu-popupinfo-mode)
+  :custom
+  (corfu-popupinfo-delay '(0.25 . 0.1))
+  (corfu-popupinfo-hide nil)
+  :config
+  (corfu-popupinfo-mode))
 
 ;; Cape, or Completion At Point Extensions, extends the capabilities of
 ;; in-buffer completion. It integrates with Corfu or the default completion UI,
@@ -2370,9 +2370,6 @@ http://company-mode.github.io/manual/Getting-Started.html
 #+begin_src emacs-lisp
 (use-package dabbrev
   :ensure nil
-  ;; Swap M-/ and C-M-/
-  :bind (("M-/" . dabbrev-completion)
-         ("C-M-/" . dabbrev-expand))
   :config
   (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
   ;; Since 29.1, use `dabbrev-ignored-buffer-regexps' on older.
@@ -2384,8 +2381,8 @@ http://company-mode.github.io/manual/Getting-Started.html
 ** Hippie Expand
 hippie expand is dabbrev expand on steroids
 
-#+begin_src emacs-lispxx
-;; (global-set-key [remap dabbrev-expand] #'hippie-expand)
+#+begin_src emacs-lisp
+(global-set-key [remap dabbrev-expand] #'hippie-expand)
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
         try-expand-dabbrev-all-buffers     ;搜索所有 buffer
@@ -3621,7 +3618,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-s" . consult-line)
  ("M-m" . consult-mark)
  ;; ("M-m" . pop-to-mark-command)
- ;; ("M-/" . hippie-expand)
  ("C-/" . comment-line) ;vscode
  ("C-\\" . align-regexp)
  ("C-x \\" . toggle-input-method)
