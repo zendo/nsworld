@@ -132,6 +132,8 @@ libs = [
   wayland
 ];
 
+runtimeDependencies = [ (lib.getLib udev) ] ++ libs;
+
   postFixup = ''
     wrapProgram $out/bin/open-orpheus \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libs}"
