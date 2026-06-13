@@ -31,11 +31,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "open-orpheus";
-  version = "0.12.2";
+  version = "0.14.0";
 
   src = fetchurl {
     url = "https://github.com/YUCLing/open-orpheus/releases/download/v${finalAttrs.version}/open-orpheus_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-wmstKySkQnaO+UTBRNMdTfnetuQ/Bt/VseXmk6aVfoI=";
+    hash = "sha256-ffQRAE0XttkqtPXcw6cP5EABSAgT8jZRmDFs+kLlXHg=";
   };
 
   nativeBuildInputs = [
@@ -52,10 +52,9 @@ stdenv.mkDerivation (finalAttrs: {
     alsa-lib
     libdrm
     (lib.getLib stdenv.cc.cc)
-  ]
-  ++ libs;
+  ];
 
-  runtimeDependencies = [ (lib.getLib udev) ];
+  runtimeDependencies = [ (lib.getLib udev) ] ++ libs;
 
   installPhase = ''
     mkdir -p $out/bin
