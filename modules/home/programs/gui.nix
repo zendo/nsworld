@@ -7,6 +7,8 @@
         elio
         nano-ffmpeg
         # open-orpheus
+        # jhentai
+        venera-kyosee
 
         # [ Social ]
         telegram-desktop # :webkitgtk
@@ -52,15 +54,20 @@
         # deja-dup
         # vorta # borg backup
 
+        # [ Reader ]
+        # foliate # :webkitgtk
+        readest # :webkitgtk
+        # koodo-reader
+        # comigo
+        # yacreader
+        # venera
+
         # [ OFFICE ]
         # obsidian
         # joplin-desktop
         # libreoffice-fresh
         # drawio
         # rnote # handwritten note
-        # foliate # :webkitgtk
-        readest # :webkitgtk
-        # koodo-reader
         # planify
         meld
         # textpieces

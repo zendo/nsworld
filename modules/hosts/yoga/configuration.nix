@@ -57,10 +57,6 @@ in
             # claude-code
 
             # [ ... ]
-            # yacreader
-            # venera
-            # jhentai
-            # comigo
           ];
 
           home.sessionVariables = {
