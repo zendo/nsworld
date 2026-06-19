@@ -3,6 +3,7 @@
     # No passwd on my main machine
     security.sudo.wheelNeedsPassword = false;
     security.sudo-rs.wheelNeedsPassword = false;
+    security.run0.wheelNeedsPassword = false;
   };
 
   flake.modules.nixos.user =
@@ -21,6 +22,10 @@
 
         # sudo-rs
         security.sudo-rs.enable = true;
+
+        # run0
+        # security.run0.enable = true;
+        # security.run0.enableSudoAlias = true;
 
         # rule
         security.sudo.execWheelOnly = true;
