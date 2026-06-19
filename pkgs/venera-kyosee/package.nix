@@ -42,9 +42,10 @@ stdenv.mkDerivation (finalAttrs: {
       --replace-fail "/usr/local/lib/venera/venera" "venera"
   '';
 
-  postFixup = ''
-    wrapProgram $out/bin/venera \
+  preFixup = ''
+    gappsWrapperArgs+=(
       --prefix LD_LIBRARY_PATH : "$out/local/lib/venera/lib"
+    )
   '';
 
   meta = {
