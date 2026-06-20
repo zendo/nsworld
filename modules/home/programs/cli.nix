@@ -18,6 +18,7 @@
       home.packages = with pkgs; [
         # [ Developing ]
         yq
+        yq-go
         jq
         jql
         # otree # tui tree for JSON/YAML/TOML

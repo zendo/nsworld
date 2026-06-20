@@ -8,7 +8,7 @@
         nano-ffmpeg
         # open-orpheus
         # jhentai
-        venera-kyosee
+        # venera
 
         # [ Social ]
         telegram-desktop # :webkitgtk
