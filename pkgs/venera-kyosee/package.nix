@@ -7,16 +7,17 @@
   autoPatchelfHook,
   webkitgtk_4_1,
   glib-networking,
+  libayatana-appindicator,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "venera";
-  version = "2.0.11";
+  version = "2.0.12";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/Kyosee/venera/releases/download/v${finalAttrs.version}/venera_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-DMV3mIJEMqZKKEnz9pJW3FAEqSWCHZpapap3PPlNNLs=";
+    hash = "sha256-tOeeABdR0aUQC64p2gpEZ/f2/KP3Ymh1/a4ieqSFosM=";
   };
 
   nativeBuildInputs = [
@@ -28,6 +29,7 @@ stdenv.mkDerivation (finalAttrs: {
   buildInputs = [
     webkitgtk_4_1
     glib-networking
+    libayatana-appindicator
     (lib.getLib stdenv.cc.cc)
   ];
 
