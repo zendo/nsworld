@@ -17,7 +17,7 @@
 
       home.packages = with pkgs; [
         # [ Developing ]
-        yq
+        # yq
         yq-go
         jq
         jql

@@ -1,9 +1,9 @@
 {
-  flake.modules.nixos.host-yoga = {
+  flake.modules.nixos.host-yoga = { lib, config, ... }: {
     # No passwd on my main machine
     security.sudo.wheelNeedsPassword = false;
     security.sudo-rs.wheelNeedsPassword = false;
-    security.run0.wheelNeedsPassword = false;
+    security.run0.wheelNeedsPassword = lib.mkIf (config.security.run0.enable) false;
   };
 
   flake.modules.nixos.user =
