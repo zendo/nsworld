@@ -43,6 +43,9 @@ for size in 16 32 128 256 512; do
   install -D deps/${pname}/build/icon.iconset/icon_''${size}x''${size}.png \
     $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
 done
+
+    substituteInPlace $out/share/applications/app.desktop \
+      --replace-fail "/usr/local/lib/app" "app"
 #+end_src
 
 ** deb
@@ -85,6 +88,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   runtimeDependencies = [ (lib.getLib udev) ];
 
+  autoPatchelfIgnoreMissingDeps = [ "libjvm.so" ];
+
   installPhase = ''
     mkdir -p $out/bin
     cp -r usr/* $out
@@ -122,6 +127,15 @@ touch pkgs/by-name/ta/tagger/deps.nix
 git add .
 nix-build -A tagger.fetch-deps
 /nix/store/yvdrnzy78j26h1klklbjw0jdnm7pjysw-fetch-tagger-deps  pkgs/by-name/ta/tagger/deps.nix
+#+end_src
+
+** wrap
+#+begin_src nix
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --prefix LD_LIBRARY_PATH : "$out/usr/app/lib"
+    )
+  '';
 #+end_src
 
 ** fix libEGL
