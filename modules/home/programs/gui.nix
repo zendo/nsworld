@@ -3,9 +3,9 @@
     { lib, pkgs, ... }:
     {
       home.packages = with pkgs; [
-        kula
-        elio
-        nano-ffmpeg
+        # kula
+        # elio
+        # nano-ffmpeg
         # open-orpheus
         # jhentai
         # venera

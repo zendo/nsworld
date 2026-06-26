@@ -69,7 +69,7 @@
 
         # [ System Monitor ]
         # fastfetch -c examples/7 14
-        fastfetch.minimal
+        fastfetch-unwrapped
         btop
         htop
         bottom
@@ -103,6 +103,7 @@
         calcurse
         # zee
         tokei # count code
+        herdr
 
         # [ Networking ]
         wget

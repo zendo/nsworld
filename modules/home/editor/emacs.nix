@@ -14,7 +14,7 @@
           epkgs: with epkgs; [
             jinx
             sqlite3
-            ghostel
+            # ghostel
             # vterm
             # lsp-bridge
             # pdf-tools
