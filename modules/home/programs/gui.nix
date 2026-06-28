@@ -33,7 +33,7 @@
         songrec
         kooha
         # jamesdsp
-        kazumi # anime
+        # kazumi # anime
         # yt-dlp
         # vlc
         # ffmpeg
