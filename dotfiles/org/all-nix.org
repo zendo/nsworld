@@ -83,6 +83,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   buildInputs = [
     webkitgtk_4_1
+    glib-networking
     (lib.getLib stdenv.cc.cc)
   ];
 
