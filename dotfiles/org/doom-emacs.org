@@ -7,7 +7,7 @@
 
 * init.el
 #+begin_src emacs-lisp :tangle "~/.config/doom/init.el"
-;;; $DOOMDIR/init.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/init.el -*- lexical-binding: t; no-byte-compile: t; -*-
 (doom! :input
        ;;chinese
        ;;japanese
@@ -198,7 +198,7 @@
 
 * packages.el
 #+begin_src emacs-lisp :tangle "~/.config/doom/packages.el"
-;;;; $DOOMDIR/packages.el -*- lexical-binding: t; -*-
+;;;; $DOOMDIR/packages.el -*- lexical-binding: t; no-byte-compile: t; -*-
 (package! crux)
 (package! rotate)
 (package! easy-kill)
@@ -224,7 +224,7 @@
 
 * config.el - Header
 #+begin_src emacs-lisp
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/config.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 (setq confirm-kill-emacs nil
       confirm-kill-processes nil

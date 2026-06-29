@@ -51,7 +51,7 @@
         where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
         paste-termbin = "nc termbin.com 9999";
         paste-rs = "curl --data-binary @- https://paste.rs/";
-        download-doom = "git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d";
+        download-doom = "git clone --depth 1 https://github.com/doomemacs/core ~/.emacs.d";
         download-astronvim = "git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim";
         download-nvchad = "git clone https://github.com/NvChad/starter ~/.config/nvim";
 
