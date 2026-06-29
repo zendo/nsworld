@@ -57,6 +57,7 @@ in
             # claude-code
 
             # [ ... ]
+            pvzge
           ];
 
           home.sessionVariables = {

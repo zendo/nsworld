@@ -27,6 +27,8 @@
               "steam"
               "steam-unwrapped"
               "balatro"
+              "pvzge"
+              "pvz_logo.webp"
               "memtest86-efi"
               "android-sdk-cmdline-tools"
               "vscode"
