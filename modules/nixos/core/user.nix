@@ -21,15 +21,16 @@
         services.userborn.enable = lib.mkDefault true;
 
         # sudo-rs
-        security.sudo-rs.enable = true;
+        # security.sudo-rs.enable = true;
 
-        # run0
-        # security.run0.enable = true;
-        # security.run0.enableSudoAlias = true;
-
-        # rule
+        # Only allow `wheel` group execute sudo
         security.sudo.execWheelOnly = true;
         security.sudo-rs.execWheelOnly = true;
+
+        # run0
+        security.sudo.enable = false;
+        security.run0.enable = true;
+        security.run0.enableSudoAlias = true;
 
         users = {
           mutableUsers = lib.mkDefault false;
