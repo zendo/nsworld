@@ -253,11 +253,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782522538,
-        "narHash": "sha256-CvOaUvJ+mXlxU3m2cPWKcOAhtKETsPUYhq+Xa5ewBp4=",
+        "lastModified": 1782749631,
+        "narHash": "sha256-slFTUgDy0KTPA4LBAmC/9SngDq8GCPdX+ZR0yQHHN1E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8d8a6cc50ddc60748791a14ee1163c865ec57635",
+        "rev": "5d72a29fc36ac21adae6ae35568fe5ee6700850f",
         "type": "github"
       },
       "original": {
@@ -288,11 +288,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782302203,
-        "narHash": "sha256-ftzqz/MsXiCsbX2Mwh73e4x4jzI0/h2uwDHPT3kmVl0=",
+        "lastModified": 1782757446,
+        "narHash": "sha256-yYdmYOzP6cBIIAahyYjFpVE0cLEblaOHGOVyXXGdoB8=",
         "owner": "feel-co",
         "repo": "ncro",
-        "rev": "13153c506ae2e5ea0d072f1d0af0d923aefdf2e8",
+        "rev": "8b492b25e30fd228cca6a703b28af9a013a6a85e",
         "type": "github"
       },
       "original": {
@@ -437,11 +437,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1782467914,
-        "narHash": "sha256-inDx/w70OSJoJPqtKh0BrzAsbZZhpya7YgS43jHnhwg=",
-        "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
+        "lastModified": 1782723713,
+        "narHash": "sha256-T6OhkwGyyGHer1lr4GkbOp//7ii23xLE7HuMmjrdkXI=",
+        "rev": "b5aa0fbd538984f6e3d201be0005b4463d8b09f8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1022855.e73de5be04e0/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1024265.b5aa0fbd5389/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -503,11 +503,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782487288,
-        "narHash": "sha256-9G6hUCgfi3vfnWOKpatswh7JR4Sg6IwJH7JOVkYNYYQ=",
+        "lastModified": 1782705636,
+        "narHash": "sha256-7mUsStnOglE94cNFhKyUxX+psx2IZcQn/M4uq/KVZ14=",
         "owner": "StarryReverie",
         "repo": "selector4nix",
-        "rev": "c595743dd2523ea8561b0d32a679a187e26ba315",
+        "rev": "e974b8bb91f133b487c83e665cea4efaa1118128",
         "type": "github"
       },
       "original": {
