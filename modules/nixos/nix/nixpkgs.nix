@@ -24,6 +24,7 @@
               "google-chrome"
               "microsoft-edge"
               "widevine-cdm"
+              "keyguard"
               "steam"
               "steam-unwrapped"
               "balatro"

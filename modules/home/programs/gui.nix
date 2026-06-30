@@ -62,6 +62,8 @@
         # venera
 
         # [ OFFICE ]
+        # bitwarden-desktop
+        # keyguard
         # obsidian
         # joplin-desktop
         # libreoffice-fresh

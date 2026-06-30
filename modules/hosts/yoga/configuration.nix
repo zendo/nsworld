@@ -15,7 +15,7 @@ in
         hmModule
         default-imports
         laptop
-        steam
+        # steam
 
         # [ virt ]
         docker
@@ -105,7 +105,7 @@ in
         supportedFilesystems = [ "ntfs" ];
 
         # latest / zen / lqx / xanmod_latest
-        kernelPackages = pkgs.linuxPackages_latest;
+        kernelPackages = pkgs.linuxPackages_zen;
 
         # for Lenovo Yoga/Xiaoxin
         kernelParams = [
