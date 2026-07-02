@@ -7,6 +7,7 @@
         # elio
         # nano-ffmpeg
         # open-orpheus
+        folia-major
         # venera
 
         # [ Social ]
