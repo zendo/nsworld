@@ -3,6 +3,6 @@
 fetchFromGitHub {
   owner = "yokoffing";
   repo = "Betterfox";
-  tag = "150.0";
-  hash = "sha256-elGsTJu+eSzyS9IAnQuEppyhdDkRQwggUP7aypuXRh8=";
+  tag = "152.0";
+  hash = "sha256-QfisBzeoc8nUrgk/+PTvG9JATsVRWo7RDbohlxkNc+A=";
 }
