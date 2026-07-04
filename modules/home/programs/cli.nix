@@ -5,7 +5,6 @@
       manual.manpages.enable = false;
 
       programs = {
-        fzf.enable = true;
         skim.enable = true;
         television.enable = true;
         yazi.enable = true;
@@ -13,6 +12,11 @@
         zoxide.enable = true; # z: autojump directory
         # hstr.enable = true; # hh: history
         # pay-respects.enable = true;
+      };
+
+      programs.fzf = {
+        enable = true;
+        historyWidget.command = ""; # disable C-r binding
       };
 
       home.packages = with pkgs; [
@@ -56,7 +60,7 @@
         chafa # image viewer
         viu # image viewer
         gtrash
-        croc
+        # croc
         # sshfs [user@]hostname:[directory] mountpoint
         # umount mountpoint
         sshfs
