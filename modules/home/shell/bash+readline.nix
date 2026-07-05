@@ -1,10 +1,13 @@
 {
   flake.modules.homeManager.bash =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       programs.bash = {
         enable = true;
         historyFile = "${config.xdg.dataHome}/bash/history";
+        bashrcExtra = ''
+          enable -f ${pkgs.flyline}/lib/libflyline.so flyline
+        '';
       };
 
       # ~/.inputrc
