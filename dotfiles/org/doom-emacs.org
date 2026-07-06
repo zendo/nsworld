@@ -281,7 +281,7 @@
 
 ** ghostel
 #+begin_src emacs-lisp
-(require 'ghostel)
+(require 'ghostel nil t)
 (set-popup-rule! "^\\*ghostel" :side 'bottom :size 0.4)
 #+end_src
 
