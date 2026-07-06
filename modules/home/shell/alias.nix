@@ -91,7 +91,7 @@
 
       programs.bash.bashrcExtra = lib.mkAfter ''
         nix-build-ls() {
-            nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
+          nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
         }
       '';
 
