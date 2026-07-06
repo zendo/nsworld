@@ -2,7 +2,7 @@
   flake.modules.homeManager.starship = {
     programs.starship = {
       enable = true;
-      enableBashIntegration = false;
+      # enableBashIntegration = false;
       # enableFishIntegration = false;
       settings = {
         command_timeout = 3000; # Timeout for commands executed
