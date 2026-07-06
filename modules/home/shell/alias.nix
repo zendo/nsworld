@@ -89,6 +89,12 @@
         '';
       };
 
+      programs.bash.bashrcExtra = lib.mkAfter ''
+        nix-build-ls() {
+            nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
+        }
+      '';
+
       programs.zsh.shellAliases = {
         nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
       }
