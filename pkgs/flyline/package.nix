@@ -21,7 +21,11 @@ rustPlatform.buildRustPackage (finalAttrs: {
   doCheck = false;
 
   meta = {
-    description = "Flyline: a Bash plugin to replace readline for a modern line editing experience: syntax highlighting, agent integration, rich prompts, tooltips, fuzzy history search, and more";
+    description = "Bash plugin for modern command line editing";
+    longDescription = ''
+      Flyline: a Bash plugin to replace readline for a modern line editing experience:
+      syntax highlighting, agent integration, rich prompts, tooltips, fuzzy history search, and more.
+    '';
     homepage = "https://github.com/HalFrgrd/flyline";
     changelog = "https://github.com/HalFrgrd/flyline/releases/tag/${finalAttrs.src.tag}";
     license = with lib.licenses; [
@@ -29,6 +33,5 @@ rustPlatform.buildRustPackage (finalAttrs: {
       mit
     ];
     maintainers = with lib.maintainers; [ zendo ];
-    mainProgram = "flyline";
   };
 })
