@@ -15,6 +15,12 @@
           # export PS1='\n\[\e[36m\]\w\[\e[0m\] SS_GIT\n\[\e[35m\]❯ \[\e[0m\]'
           # flyline create-prompt-widget last-command-duration
           # export RPS1='\[\e[33m\]FLYLINE_LAST_COMMAND_DURATION\[\e[0m\]'
+
+          # Agent
+          flyline set-agent-mode \
+            --system-prompt "Be concise. Answer ONLY with a raw JSON array of at most 3 items with objects containing: command and description. Do not wrap in markdown code blocks. Command will be a Bash command." \
+            --trigger-prefix ': ' \
+            --command 'pi --mode text'
         '';
       };
 
