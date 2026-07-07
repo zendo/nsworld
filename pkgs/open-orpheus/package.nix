@@ -31,11 +31,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "open-orpheus";
-  version = "0.15.2";
+  version = "0.15.3";
 
   src = fetchurl {
     url = "https://github.com/YUCLing/open-orpheus/releases/download/v${finalAttrs.version}/open-orpheus_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-FT2GXMVjQDIQs46rwNpV+7kA48QsAZM5H/yHTpWkaes=";
+    hash = "sha256-FSgtk32FqG7aFpFLTLmjhjX7uLs2nrNh04GKI3TPtsk=";
   };
 
   nativeBuildInputs = [

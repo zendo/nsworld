@@ -29,11 +29,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "folia-major";
-  version = "0.5.19";
+  version = "0.5.23";
 
   src = fetchurl {
     url = "https://github.com/chthollyphile/folia-major/releases/download/v${finalAttrs.version}/folia-major-${finalAttrs.version}-linux-amd64.deb";
-    hash = "sha256-tNef9K7xPrKSlBcqoPaOmv8JhCfnvHhqoXWp/vG4fK8=";
+    hash = "sha256-6TAo1TaY4Bhccw7X8T9wq6Co2otaTNSAxiBZJ2h75G0=";
   };
 
   nativeBuildInputs = [
