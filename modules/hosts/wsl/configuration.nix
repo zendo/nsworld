@@ -103,7 +103,7 @@ in
         startMenuLaunchers = true;
       };
 
-      users.defaultUserShell = pkgs.fish;
+      # users.defaultUserShell = pkgs.fish;
 
       networking.hostName = hostName;
       nixpkgs.hostPlatform = "x86_64-linux";
