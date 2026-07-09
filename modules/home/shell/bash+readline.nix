@@ -7,6 +7,7 @@
         historyFile = "${config.xdg.dataHome}/bash/history";
         bashrcExtra = ''
           enable -f ${pkgs.flyline}/lib/libflyline.so flyline
+          flyline suggestions --auto-suggest false
 
           # Pure Prompt Style
           # flyline create-prompt-widget custom --name SS_GIT \

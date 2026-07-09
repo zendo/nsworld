@@ -1,4 +1,5 @@
 /*
+  rclone mount koofr:/ ~/.mnt/koofr --vfs-cache-mode full
   rclone mount infini:/ ~/.mnt/infini --vfs-cache-mode full
   rclone mount svp: ~/.mnt/svp
   rclone mount :sftp:/ ~/.mnt/rmt \
