@@ -9,6 +9,7 @@
         # open-orpheus
         folia-major
         # venera
+        lsq
 
         # [ Social ]
         telegram-desktop # :webkitgtk
