@@ -10,6 +10,7 @@
         folia-major
         # venera
         lsq
+        hunk # diff
 
         # [ Social ]
         telegram-desktop # :webkitgtk

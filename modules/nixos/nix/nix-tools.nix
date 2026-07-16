@@ -15,7 +15,7 @@
         dix # diff
         nix-output-monitor
         nix-search-tv
-        # nix-auth
+        nix-auth
         # hydra-check
 
         (writeScriptBin "nsearch" ''nix search nixpkgs "$@"'')
