@@ -19,6 +19,15 @@
         # fluffychat
         # newsflash
 
+        # [ AI ]
+        opencode
+        pi-coding-agent
+        pi-acp
+        codex
+        # qwen-code
+        # gemini-cli
+        # claude-code
+
         # [ Multimedia ]
         # mpd
         # rmpc
@@ -114,6 +123,9 @@
         android-tools
         # squirreldisk
         # mission-center
+
+        # [ Games ]
+        # pvzge
       ];
 
       # programs.obs-studio = {

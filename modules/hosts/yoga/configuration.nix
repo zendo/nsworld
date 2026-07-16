@@ -41,37 +41,17 @@ in
   flake.modules.nixos.host-yoga-hm =
     { config, ... }:
     {
-      home-manager.users.${config.myVars.user} =
-        { pkgs, ... }:
-        {
-          imports = [ fm.homeManager.default-imports ];
+      home-manager.users.${config.myVars.user} = {
+        imports = [ fm.homeManager.default-imports ];
 
-          home.packages = with pkgs; [
-            # [ AI ]
-            opencode
-            pi-coding-agent
-            pi-acp
-            codex
-            # qwen-code
-            # gemini-cli
-            # claude-code
-
-            # [ ... ]
-            pvzge
-          ];
-
-          home.sessionVariables = {
-            PI_SKIP_VERSION_CHECK = "1";
-          };
-
-          dconf.settings = {
-            "org/gnome/settings-daemon/plugins/power" = {
-              # 修复恢复时蓝牙鼠标连接缓慢问题
-              # 电源 - 节电 - 自动挂起（插入电源时关闭）
-              sleep-inactive-ac-type = "nothing";
-            };
+        dconf.settings = {
+          "org/gnome/settings-daemon/plugins/power" = {
+            # 修复恢复时蓝牙鼠标连接缓慢问题
+            # 电源 - 节电 - 自动挂起（插入电源时关闭）
+            sleep-inactive-ac-type = "nothing";
           };
         };
+      };
     };
 
   flake.modules.nixos.host-yoga =
