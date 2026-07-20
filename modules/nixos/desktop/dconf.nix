@@ -18,11 +18,6 @@
         caffeine
       ];
 
-      # MAYBE show hm .desktop real-time on gnome
-      xdg.systemDirs.data = [
-        "${pkgs.gnome-menus}/share/applications"
-      ];
-
       dconf.settings = {
         "org/gnome/system/location" = {
           enabled = true;
