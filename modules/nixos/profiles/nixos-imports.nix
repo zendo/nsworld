@@ -18,7 +18,7 @@
     user
 
     # [ networking ]
-    bittorrent
+    # bittorrent
     dns
     firewall
     networkmanager
