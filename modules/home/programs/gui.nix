@@ -8,7 +8,7 @@
         # nano-ffmpeg
         # open-orpheus
         folia-major
-        # venera
+        venerax
         lsq
         hunk # diff
 
