@@ -7,10 +7,8 @@
         # elio
         # nano-ffmpeg
         # open-orpheus
-        folia-major
         venerax
         lsq
-        hunk # diff
 
         # [ Social ]
         telegram-desktop # :webkitgtk
@@ -40,6 +38,7 @@
         # splayer # :electron
         # qqmusic
         spotify
+        folia-major
         # mousai
         songrec
         kooha
@@ -74,6 +73,7 @@
         # venera
 
         # [ OFFICE ]
+        aerion
         # bitwarden-desktop
         # keyguard
         # obsidian

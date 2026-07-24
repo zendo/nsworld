@@ -66,6 +66,7 @@
   flake.modules.homeManager.nixconfig =
     { config, ... }:
     {
+      # Use `nix-auth` instead
       nix.extraOptions = ''
         !include ${config.sops.secrets."access_tokens".path}
       '';
