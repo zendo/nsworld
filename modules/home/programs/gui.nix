@@ -7,7 +7,6 @@
         # elio
         # nano-ffmpeg
         # open-orpheus
-        venerax
         lsq
 
         # [ Social ]
