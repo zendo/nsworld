@@ -9,6 +9,7 @@
 buildGoModule (finalAttrs: {
   pname = "nano-ffmpeg";
   version = "0.5.0";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "dgr8akki";
@@ -18,8 +19,6 @@ buildGoModule (finalAttrs: {
   };
 
   vendorHash = "sha256-AZzpINOagTfFPYOavp15oJD/LTlDoX4NfDA0DYV39NM=";
-
-  __structuredAttrs = true;
 
   ldflags = [
     "-s"

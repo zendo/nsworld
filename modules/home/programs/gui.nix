@@ -4,7 +4,6 @@
     {
       home.packages = with pkgs; [
         # kula
-        # elio
         # nano-ffmpeg
         # open-orpheus
         lsq
