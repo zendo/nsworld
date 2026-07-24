@@ -33,7 +33,6 @@
         ++ (with config.flake.modules.homeManager; [
           secrets
           ssh
-          # nixconfig
           # ╭──────────────────────────────────────────╮
           # │ EDITOR                                   │
           # ╰──────────────────────────────────────────╯
