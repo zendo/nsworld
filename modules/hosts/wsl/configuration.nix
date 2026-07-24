@@ -44,7 +44,6 @@ in
             # [ common ]
             secrets
             ssh
-            nixconfig
 
             # [ editor ]
             dev
