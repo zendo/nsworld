@@ -7,6 +7,7 @@
         historyFile = "${config.xdg.dataHome}/bash/history";
         bashrcExtra = ''
           enable -f ${pkgs.flyline}/lib/libflyline.so flyline
+          flyline mouse --mode disabled
           flyline suggestions --auto-suggest false
 
           # Pure Prompt Style

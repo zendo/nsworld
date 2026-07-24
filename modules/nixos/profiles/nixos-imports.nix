@@ -5,8 +5,8 @@
     secrets
 
     # [ shell ]
-    fish
-    zsh
+    # fish
+    # zsh
 
     # [ core ]
     base
