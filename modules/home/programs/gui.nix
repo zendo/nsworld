@@ -73,7 +73,7 @@
         # venera
 
         # [ OFFICE ]
-        aerion
+        (aerion.override { withOAuth = true; })
         # bitwarden-desktop
         # keyguard
         # obsidian
