@@ -60,7 +60,7 @@ in
 
             # [ shell ]
             alias
-            atuin
+            # atuin
             bash
             fish
             starship
