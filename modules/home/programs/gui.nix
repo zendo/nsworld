@@ -5,7 +5,6 @@
       home.packages = with pkgs; [
         # kula
         # nano-ffmpeg
-        lsq
         open-orpheus
 
         # [ Social ]
