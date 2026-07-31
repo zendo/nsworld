@@ -5,6 +5,8 @@
       home.packages = with pkgs; [
         # kula
         # nano-ffmpeg
+        ttt
+        vib
         open-orpheus
 
         # [ Social ]
@@ -55,7 +57,7 @@
 
         # remmina # :webkitgtk
         # https://github.com/nix-community/home-manager/issues/5173
-        (lib.hiPrio localsend)
+        # (lib.hiPrio localsend)
         qbittorrent
         rclone-browser
         # deja-dup
