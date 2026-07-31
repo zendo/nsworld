@@ -456,11 +456,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1785318670,
-        "narHash": "sha256-JfsUqyQ4MGL0SvJNPFikXYlUdXg0xMzBdjwTPawZSl4=",
-        "rev": "0954f7ee2f6bb3dc7d4e3d0d8bcb8fd4bde4cfc5",
+        "lastModified": 1785454630,
+        "narHash": "sha256-Lr/ImHlbXabw7KPWfXWY4kkiiHb24PkmBZVVIm28V/c=",
+        "rev": "1559d3daa3ecc813a650b79375ea61b6741b8746",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1043649.0954f7ee2f6b/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1044798.1559d3daa3ec/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -523,11 +523,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785341577,
-        "narHash": "sha256-IS8kT2dEhGWwXsN+HJ7R87v/rXaxww9K3j+Y5S0VTkc=",
+        "lastModified": 1785490858,
+        "narHash": "sha256-5s6iWd9GFckWzvWUGHy2X2ySLpZf7bn/glApGvtOJhg=",
         "owner": "StarryReverie",
         "repo": "selector4nix",
-        "rev": "eaecfd1ef5ac7f5c98e61bf4126c742888ebca0a",
+        "rev": "269be303091ef27c1f44236987316f3c0377cb49",
         "type": "github"
       },
       "original": {
