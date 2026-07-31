@@ -5,7 +5,6 @@
       home.packages = with pkgs; [
         # kula
         # nano-ffmpeg
-        ttt
         vib
         open-orpheus
 
