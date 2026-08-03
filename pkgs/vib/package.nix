@@ -2,7 +2,6 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  nix-update-script,
 }:
 
 rustPlatform.buildRustPackage (finalAttrs: {
@@ -19,7 +18,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-0v+4dyYBHSnqoByC2Ok7ZVgVIV/1EBfFB2DzC4xeoKY=";
 
-  passthru.updateScript = nix-update-script { };
+  doCheck = false;
 
   meta = {
     description = "Sleek terminal file browser with LocalSend built in";
