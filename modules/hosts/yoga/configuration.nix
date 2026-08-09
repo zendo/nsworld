@@ -60,7 +60,7 @@ in
       myVars.user = userName;
       networking.hostName = hostName;
 
-      systemd.services.comigo.enable = true;
+      # systemd.services.comigo.enable = true;
 
       environment.systemPackages = with pkgs; [
         # [ deploy ]
