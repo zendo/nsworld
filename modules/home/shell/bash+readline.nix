@@ -9,6 +9,7 @@
           enable -f ${pkgs.flyline}/lib/libflyline.so flyline
           flyline mouse --mode disabled
           flyline suggestions --auto-suggest false
+          flyline key bind Ctrl+f inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAccept
 
           # Pure Prompt Style
           # flyline create-prompt-widget custom --name SS_GIT \
