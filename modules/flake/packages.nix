@@ -11,7 +11,10 @@
     {
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
-        # overlays = [ inputs.self.overlays.modifications ];
+        overlays = [
+          inputs.self.overlays.multiverse
+          inputs.self.overlays.modifications
+        ];
         config = {
           allowUnfree = true;
           # allowInsecure = true;

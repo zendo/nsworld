@@ -15,6 +15,7 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     # nixpkgs.url = "git+file:///home/iab/Projects/nixpkgs/?ref=pr-throne-430949";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

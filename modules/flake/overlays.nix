@@ -22,6 +22,12 @@
     #   };
     # };
 
+    # https://github.com/fzakaria/nixpkgs-multiverse
+    # flake.inputs.multiverse.multiverse.x86_64-linux.versionsOf "go"
+    multiverse = final: prev: {
+      multiverse = inputs.multiverse.multiverse.${final.stdenv.hostPlatform.system};
+    };
+
     # =====================================================
     # Modifying Packages
     # =====================================================
