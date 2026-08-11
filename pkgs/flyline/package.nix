@@ -6,17 +6,17 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "flyline";
-  version = "1.5.0";
+  version = "1.6.2";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "HalFrgrd";
     repo = "flyline";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-2apK1e/Hqb8bUj9Ng7cB+pz27Hv14MXMy2JYYI7nxKE=";
+    hash = "sha256-UAHb54S4WUu5IyYiqVvDQYTShaIaBBL78POqCEonEqc=";
   };
 
-  cargoHash = "sha256-Ci1PVqGZ4ttrkUAtePHKKsqI/SVoedlH4Mua7MzFDvo=";
+  cargoHash = "sha256-stbXuABQeHZuELxiWbjj26FSB8k4XtUgsa+0PFFYHaA=";
 
   doCheck = false;
 
