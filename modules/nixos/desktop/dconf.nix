@@ -3,19 +3,21 @@
     { lib, pkgs, ... }:
     rec {
       home.packages = with pkgs.gnomeExtensions; [
-        appindicator
+        # aurora-shell
+        # appindicator
         # dockng
-        dash-to-dock
+        # dash-to-dock
         # dash-to-panel
-        night-theme-switcher
+        # simple-taskbar
+        # night-theme-switcher
         # legacy-gtk3-theme-scheme-auto-switcher
-        clipboard-history
+        # clipboard-history
         # blur-my-shell
         # top-bar-organizer
         # just-perfection
         kimpanel
         # runcat
-        caffeine
+        # caffeine
       ];
 
       dconf.settings = {
