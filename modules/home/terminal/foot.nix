@@ -21,7 +21,7 @@
             # shell = "zsh -l";
             # xterm-256color for maximum compatibility
             # term = "xterm-256color";
-            font = "JetBrains Mono:size=11";
+            font = "JetBrains Mono:size=11, Maple mono:size=13";
             initial-window-size-pixels = "800x600";
             pad = "8x8";
           };
