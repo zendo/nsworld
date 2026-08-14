@@ -6,6 +6,7 @@
         # kula
         # nano-ffmpeg
         vib
+        localsend-cli
         open-orpheus
 
         # [ Social ]
