@@ -3,14 +3,14 @@
     { lib, pkgs, ... }:
     rec {
       home.packages = with pkgs.gnomeExtensions; [
-        # aurora-shell
-        appindicator
+        aurora-shell
+        # appindicator
         # dockng
-        dash-to-dock
+        # dash-to-dock
         # dash-to-panel
-        night-theme-switcher
+        # night-theme-switcher
         # legacy-gtk3-theme-scheme-auto-switcher
-        clipboard-history
+        # clipboard-history
         # blur-my-shell
         # top-bar-organizer
         # just-perfection
@@ -79,6 +79,17 @@
 
         "org/gnome/shell/extensions/gnome-clipboard" = {
           history-size = lib.hm.gvariant.mkUint32 800;
+        };
+
+        "org/gnome/shell/extensions/aurora-shell" = {
+          dock-intellihide = true;
+          dock-show-trash = false;
+          dock-show-external-storage = false;
+          module-aurora-menu = false;
+          module-weather-clock = false;
+          module-theme-changer = false;
+          module-auto-theme-switcher = false;
+          clipboard-history-shortcut = [ "<Super>v" ];
         };
 
         ###############################################

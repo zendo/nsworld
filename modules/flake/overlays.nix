@@ -101,9 +101,18 @@
       # ---------------------------------------------------
       # Gnome Extensions
       # ---------------------------------------------------
-      # gnomeExtensions = prev.gnomeExtensions // {
-      #   night-theme-switcher = prev.callPackage ./night-theme-switcher { };
-      # };
+      gnomeExtensions = prev.gnomeExtensions // {
+        # night-theme-switcher = prev.callPackage ./night-theme-switcher { };
+
+        aurora-shell = prev.gnomeExtensions.aurora-shell.overrideAttrs (oldAttrs: rec {
+          version = "29";
+          src = prev.fetchzip {
+            url = "https://extensions.gnome.org/extension-data/aurora-shellluminusos.github.io.v${version}.shell-extension.zip";
+            hash = "sha256-i/gf5Q+rFqfh0zUajEBfcooVvVpZilcfhBG4WHtAhg0=";
+            stripRoot = false;
+          };
+        });
+      };
 
       # ---------------------------------------------------
       # qt6Packages overrideScope
