@@ -2,6 +2,7 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
+  cacert,
   nix-update-script,
 }:
 
@@ -24,9 +25,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
     "localsend-cli"
   ];
 
+  checkInputs = [
+    cacert
+  ];
+
   # Error loading CA root certificate: failed to read PEM from file: \
   # No such file or directory (os error 2) at '/no-cert-file.crt'
-  doCheck = false;
+  # doCheck = false;
 
   passthru.updateScript = nix-update-script { };
 
