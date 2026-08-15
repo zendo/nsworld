@@ -5,7 +5,6 @@
       home.packages = with pkgs; [
         # kula
         # nano-ffmpeg
-        vib
         localsend-cli
         open-orpheus
 
