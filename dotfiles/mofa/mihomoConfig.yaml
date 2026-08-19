@@ -1,18 +1,28 @@
+#  ---------说明---------
+#  mihomo配置（全量版）
+#  作者：AIsouler
 #  原仓库：https://github.com/AIsouler/MyClash
-#  feat: add fake-ip-range6 e859d25
+#  配置链接：https://raw.githubusercontent.com/AIsouler/MyClash/main/Config/mihomoConfig.yaml
+#  友情推荐，非常好用、省电且内存占用低的代理软件：https://github.com/appshubcc/Bettbox
+#  ---------------------
+
+# --- 锚点定义 (通用属性) ---
 proxy_providers_common:
   &proxy_providers_common {
     type: http,
     interval: 86400,
     proxy: DIRECT,
+    exclude-type: 'direct|reject|rematch',
     health-check: { enable: true, url: https://g.cn/generate_204, interval: 600, lazy: true },
   }
 
+# 全局过滤节点
 global_exclude_filter:
   &global_exclude_filter {
     exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|选择|剩余|公益|发布|DIZTNA|通路|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|⚠️|@|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
   }
 
+# 订阅提供者，如果你想要添加多个订阅提供者，可以复制 provider1 的配置块，并修改 url 、 path 和 additional-prefix 字段。
 proxy-providers:
   provider1: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '① '}}
   provider2: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '② '}}
@@ -28,15 +38,17 @@ proxy-providers:
 
 # 节点配置，可添加自定义节点
 proxies:
-  - { name: '🇨🇳 直连 | IPv4优先', type: direct, ip-version: ipv4-prefer }
-  - { name: '🇨🇳 直连 | IPv6优先', type: direct, ip-version: ipv4-prefer } # :mod
   - { name: '🇨🇳 直连 | 双栈', type: direct }
+  - { name: '🇨🇳 直连 | IPv4优先', type: direct, ip-version: ipv4-prefer }
+  - { name: '🇨🇳 直连 | IPv6优先', type: direct, ip-version: ipv4-prefer }
+  - { name: '🇨🇳 直连 | 仅IPv4', type: direct, ip-version: ipv4 }
+  - { name: '🇨🇳 直连 | 仅IPv6', type: direct, ip-version: ipv4 }
 
 # --- 基础全局配置 ---
 
 mixed-port: 7890
 allow-lan: true
-ipv6: false # :mod
+ipv6: false
 mode: rule
 log-level: info
 bind-address: '*'
@@ -57,30 +69,29 @@ profile:
   store-fake-ip: true
 
 # 国内外 DNS 定义
-chinaDNS: &chinaDNS ['https://dns.alidns.com/dns-query#DIRECT', 'https://doh.pub/dns-query#DIRECT']
-foreignDNS: &foreignDNS ['https://dns.cloudflare.com/dns-query#默认代理', 'https://dns.google/dns-query#默认代理']
+chinaDNS: &chinaDNS ['223.5.5.5', '119.29.29.29']
+chinaDohDNS: &chinaDohDNS ['https://223.5.5.5/dns-query#DIRECT', 'https://1.12.12.12/dns-query#DIRECT']
+foreignDNS: &foreignDNS ['https://cloudflare-dns.com/dns-query#默认代理', 'https://dns.google/dns-query#默认代理']
 
 dns:
   enable: true
-  ipv6: false # :mod
+  ipv6: false
   use-hosts: true
   cache-algorithm: arc
   use-system-hosts: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/15
-  # fake-ip-range6: 2001:2::1/48 # :mod
-  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter']
-  proxy-server-nameserver: *chinaDNS
-  default-nameserver: ['223.5.5.5', '119.29.29.29']
+  fake-ip-range6: 2001:2::1/48
+  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn']
+  proxy-server-nameserver: *chinaDohDNS
+  default-nameserver: *chinaDNS
   nameserver: *foreignDNS
   nameserver-policy:
     'rule-set:cn': *chinaDNS
   direct-nameserver: ['system', '223.5.5.5', '119.29.29.29']
 
 hosts:
-  'dns.alidns.com': ['223.5.5.5', '223.6.6.6']
-  'doh.pub': ['1.12.12.12', '120.53.53.53']
-  'dns.cloudflare.com': ['1.1.1.1', '1.0.0.1']
+  'cloudflare-dns.com': ['1.1.1.1', '1.0.0.1']
   'dns.google': ['8.8.8.8', '8.8.4.4']
 
   # 解决谷歌商店无法下载的问题
@@ -101,7 +112,7 @@ ntp:
 
 tun:
   enable: true
-  # stack: system # :mod default=gvisor
+  # stack: system
   auto-route: true
   strict-route: true
   auto-redirect: true
@@ -287,6 +298,11 @@ rule-providers:
     url: 'https://fastly.jsdelivr.net/gh/666OS/rules@release/mihomo/domain/Emby.mrs'
     path: './ruleset/emby.mrs'
     path-in-bundle: 'geo/geosite/category-emby.mrs'
+  emos:
+    <<: *rule_providers_domain
+    url: 'https://fastly.jsdelivr.net/gh/binaryu/emos-proxy-rule@main/rules/emos-mihomo.mrs'
+    path: './ruleset/emos.mrs'
+    path-in-bundle: 'geo/geosite/category-emby.mrs'
   pikpak:
     <<: *rule_providers_domain
     url: 'https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/pikpak.mrs'
@@ -429,10 +445,13 @@ proxies_common:
 # 地区过滤器正则表达式定义
 group_filter:
   HK_filter: &HK_filter { filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong)' }
-  JP_filter: &JP_filter { filter: '(?i)(🇯🇵|日本|(?<![A-Za-z])JPN?(?![A-Za-z])|japan)' }
-  US_filter: &US_filter { filter: '(?i)(🇺🇸|美国|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states)' }
+  JP_filter: &JP_filter { filter: '(?i)(🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan)' }
+  US_filter:
+    &US_filter {
+      filter: '(?i)(🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states)',
+    }
   SG_filter: &SG_filter { filter: '(?i)(🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore)' }
-  TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
+  TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
   low_filter: &low_filter { filter: '^(?!.*(?:剩|期|客户端|软件)).*(?:(?<!\d)0\.[0-5]|下载|低倍)' }
   high_filter:
     &high_filter {
@@ -440,8 +459,8 @@ group_filter:
     }
   exclude_filter:
     &exclude_filter {
-      exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)',
-      exclude-type: 'DIRECT',
+      exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)',
+      exclude-type: 'direct',
     }
 
 # 定义分流策略组
@@ -553,7 +572,7 @@ proxy-groups:
 
   - name: '直连'
     <<: *group_common_select
-    proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先']
+    proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     url: 'https://connectivitycheck.platform.hicloud.com/generate_204'
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/China_Map.png'
 
@@ -627,7 +646,6 @@ proxy-groups:
 rules:
   # 私有网络直连
   - RULE-SET,private,直连
-  # :mod
   - DOMAIN-SUFFIX,api.beacondb.net,直连
   - DOMAIN-SUFFIX,ip-api.com,直连
 
@@ -668,6 +686,7 @@ rules:
   - RULE-SET,tiktok,TikTok
   - RULE-SET,twitter,Twitter
   - RULE-SET,emby,Emby
+  - RULE-SET,emos,Emby
   - DOMAIN-SUFFIX,mb3admin.com,Emby
   - DOMAIN-SUFFIX,nubebelle.com,Emby
   - DOMAIN-KEYWORD,emby,Emby
