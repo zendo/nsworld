@@ -16,10 +16,10 @@
         # newsflash
 
         # [ AI ]
-        opencode
+        # opencode
         pi-coding-agent
         pi-acp
-        codex
+        # codex
         # qwen-code
         # gemini-cli
         # claude-code
@@ -68,7 +68,6 @@
         # koodo-reader
         # comigo
         # yacreader
-        # venera
 
         # [ OFFICE ]
         # (aerion.override { withOAuth = true; }) # :mail
