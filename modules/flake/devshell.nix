@@ -130,7 +130,7 @@
       devShells.go = pkgs.mkShell {
         buildInputs = with pkgs; [
           go
-          # (multiverse.version "go" "1.20.2")
+          # multiverse.versions.go."1.20.2"
           gotools
           gccgo
           delve

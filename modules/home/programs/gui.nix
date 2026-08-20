@@ -105,7 +105,7 @@
         lshw
         kmon # kernel modules
         hwinfo
-        # (multiverse.version "hwinfo" "22.0")
+        # multiverse.versions.hwinfo."22.0"
         cpufetch
         usbutils
         dmidecode
