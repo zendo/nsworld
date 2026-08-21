@@ -6,7 +6,6 @@
         # kula
         # nano-ffmpeg
         localsend-cli
-        open-orpheus
 
         # [ Social ]
         telegram-desktop # :webkitgtk
