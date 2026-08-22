@@ -15,6 +15,7 @@ in
         hmModule
         default-imports
         laptop
+        amd
         # steam
 
         # [ virt ]
@@ -33,7 +34,6 @@ in
         # hyprland
       ]
       ++ [
-        inputs.nixos-hardware.nixosModules.common-gpu-amd
         # inputs.lanzaboote.nixosModules.lanzaboote
       ];
   };

@@ -6,36 +6,32 @@ let
 in
 {
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
-    modules =
-      with fm.nixos;
-      [
-        host-svp
-        host-svp-disko-btrfs
+    modules = with fm.nixos; [
+      host-svp
+      host-svp-disko-btrfs
 
-        # [ profiles ]
-        hmModule
-        default-imports
-        laptop
-        # steam
+      # [ profiles ]
+      hmModule
+      default-imports
+      laptop
+      intel
+      # steam
 
-        # [ virt ]
-        docker
-        # incus
-        # nix-ld
-        qemu
+      # [ virt ]
+      docker
+      # incus
+      # nix-ld
+      qemu
 
-        # [ desktop ]
-        graphical
-        gnome
-        # kde
-        # cosmic
-        # niri
-        # sway
-        # hyprland
-      ]
-      ++ [
-        inputs.nixos-hardware.nixosModules.common-gpu-intel
-      ];
+      # [ desktop ]
+      graphical
+      gnome
+      # kde
+      # cosmic
+      # niri
+      # sway
+      # hyprland
+    ];
   };
 
   flake.modules.nixos.host-svp =
