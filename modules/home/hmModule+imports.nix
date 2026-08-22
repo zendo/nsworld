@@ -24,10 +24,7 @@
     {
       # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'
       imports =
-        lib.optionals nixosConfig.services.desktopManager.gnome.enable [
-          config.flake.modules.homeManager.dconf
-        ]
-        ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [
+        lib.optionals nixosConfig.services.desktopManager.plasma6.enable [
           config.flake.modules.homeManager.plasma-manager
         ]
         ++ (with config.flake.modules.homeManager; [

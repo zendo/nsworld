@@ -1,0 +1,168 @@
+{
+  flake.modules.nixos.gnome =
+    { lib, pkgs, ... }:
+    rec {
+      environment.systemPackages = with pkgs.gnomeExtensions; [
+        aurora-shell
+        # appindicator
+        # dockng
+        # dash-to-dock
+        # dash-to-panel
+        # night-theme-switcher
+        # legacy-gtk3-theme-scheme-auto-switcher
+        # clipboard-history
+        # blur-my-shell
+        # top-bar-organizer
+        # just-perfection
+        kimpanel
+        # runcat
+        caffeine
+      ];
+
+      programs.dconf.profiles.user.databases = [
+        {
+          settings = {
+            "org/gnome/system/location" = {
+              enabled = true;
+            };
+
+            "org/gnome/settings-daemon/plugins/color" = {
+              night-light-enabled = true;
+              night-light-temperature = lib.gvariant.mkUint32 3500;
+            };
+
+            "org/gnome/desktop/interface" = {
+              clock-show-date = false;
+              cursor-theme = "Adwaita";
+              icon-theme = "Adwaita";
+            };
+
+            "org/gnome/mutter" = {
+              edge-tiling = true; # 多任务 - 激活屏幕边缘
+              dynamic-workspaces = true; # 多任务 - 动态工作空间
+            };
+
+            "org/gnome/desktop/session" = {
+              idle-delay = lib.gvariant.mkUint32 600; # 电源 - 10分钟熄屏
+            };
+
+            # "org/gnome/settings-daemon/plugins/power" = {
+            #   sleep-inactive-ac-type = "nothing"; # 电源 - 节电 - 自动挂起（插入电源时关闭）
+            # };
+
+            ###############################################
+            ##  Extensions
+            ###############################################
+            "org/gnome/shell" = {
+              # gnome-extensions list
+              enabled-extensions = map (extension: extension.extensionUuid) environment.systemPackages;
+              favorite-apps = [
+                # "foot.desktop"
+                # "kitty.desktop"
+                "com.mitchellh.ghostty.desktop"
+                "org.gnome.Nautilus.desktop"
+                "emacs.desktop"
+                "firefox.desktop"
+                # "google-chrome.desktop"
+                "org.telegram.desktop.desktop"
+              ];
+            };
+
+            "org/gnome/shell/extensions/dash-to-dock" = {
+              custom-theme-shrink = true;
+              apply-custom-theme = true;
+              hot-keys = false;
+              show-trash = false;
+              click-action = "focus-minimize-or-previews";
+            };
+
+            "org/gnome/shell/extensions/caffeine" = {
+              enable-fullscreen = false;
+            };
+
+            "org/gnome/shell/extensions/gnome-clipboard" = {
+              history-size = lib.gvariant.mkUint32 800;
+            };
+
+            "org/gnome/shell/extensions/aurora-shell" = {
+              dock-intellihide = true;
+              dock-show-trash = false;
+              dock-show-external-storage = false;
+              module-aurora-menu = false;
+              module-weather-clock = false;
+              module-theme-changer = false;
+              module-auto-theme-switcher = false;
+              clipboard-history-shortcut = [ "<Super>v" ];
+            };
+
+            ###############################################
+            ##  Keybindings
+            ###############################################
+            "org/gnome/desktop/peripherals/touchpad" = {
+              click-method = "areas";
+            };
+
+            # "org/gnome/desktop/input-sources" = {
+            #   xkb-options = [
+            #     "terminate:ctrl_alt_bksp"
+            #     "ctrl:swapcaps"
+            #   ];
+            # };
+
+            # dconf watch /
+            "org/gnome/desktop/wm/keybindings" = {
+              close = [ "<Super>q" ];
+              show-desktop = [ "<Super>d" ];
+              activate-window-menu = [ "" ]; # <Alt>space
+              switch-to-workspace-1 = [ "<Super>1" ];
+              switch-to-workspace-2 = [ "<Super>2" ];
+              switch-to-workspace-3 = [ "<Super>3" ];
+              switch-to-workspace-4 = [ "<Super>4" ];
+              move-to-workspace-1 = [ "<Alt>1" ];
+              move-to-workspace-2 = [ "<Alt>2" ];
+              move-to-workspace-3 = [ "<Alt>3" ];
+              move-to-workspace-4 = [ "<Alt>4" ];
+            };
+
+            "org/gnome/shell/keybindings" = {
+              toggle-message-tray = [ "" ]; # <Super>v
+              switch-to-application-1 = [ "" ];
+              switch-to-application-2 = [ "" ];
+              switch-to-application-3 = [ "" ];
+              switch-to-application-4 = [ "" ];
+            };
+
+            "org/gnome/settings-daemon/plugins/media-keys" = {
+              custom-keybindings = [
+                "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+                "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+                "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+                "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+              ];
+            };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+              binding = "<Super>Return";
+              command = "ghostty";
+              name = "open-terminal";
+            };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+              binding = "<Super>e";
+              command = "emacs";
+              name = "open-editor";
+            };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+              binding = "<Super>f";
+              command = "nautilus";
+              name = "open-file-browser";
+            };
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+              binding = "<Super>w";
+              command = "firefox";
+              name = "open-web-browser";
+            };
+          }; # settings
+        }
+      ]; # databases
+
+    };
+}

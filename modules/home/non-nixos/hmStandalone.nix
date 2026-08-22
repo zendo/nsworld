@@ -36,7 +36,6 @@ in
       };
       extraModules = [
         config.flake.modules.homeManager.non-nixos-imports
-        config.flake.modules.homeManager.dconf
       ];
     };
 
