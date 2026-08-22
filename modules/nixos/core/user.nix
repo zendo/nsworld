@@ -64,19 +64,6 @@
             ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
             ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
             ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ];
-
-            subUidRanges = [
-              {
-                startUid = 100000;
-                count = 65536;
-              }
-            ];
-            subGidRanges = [
-              {
-                startGid = 100000;
-                count = 65536;
-              }
-            ];
           };
 
           # users.guest = {
@@ -87,28 +74,6 @@
 
         # Allow non-root users use `--allow-other` in mounts
         programs.fuse.userAllowOther = true;
-
-        # Workaround for userborn: Generate subuid/subgid files from the user configuration
-        # https://github.com/nikstur/userborn/issues/7
-        system.activationScripts.podman-subid =
-          let
-            user = config.users.users.${config.myVars.user};
-            subuidContent = lib.concatMapStrings (
-              range: "${config.myVars.user}:${toString range.startUid}:${toString range.count}\n"
-            ) user.subUidRanges;
-            subgidContent = lib.concatMapStrings (
-              range: "${config.myVars.user}:${toString range.startGid}:${toString range.count}\n"
-            ) user.subGidRanges;
-          in
-          {
-            text = ''
-              if [ -L /etc/subuid ]; then rm /etc/subuid; fi
-              if [ -L /etc/subgid ]; then rm /etc/subgid; fi
-              cp -f ${pkgs.writeText "subuid" subuidContent} /etc/subuid
-              cp -f ${pkgs.writeText "subgid" subgidContent} /etc/subgid
-              chmod 644 /etc/subuid /etc/subgid
-            '';
-          };
       };
     };
 }
