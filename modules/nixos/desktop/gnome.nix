@@ -20,6 +20,7 @@
         gnome-tour
         gnome-music
         gnome-software
+        gnome-user-docs
         showtime
         simple-scan
       ];
