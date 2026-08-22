@@ -39,7 +39,7 @@
         ouch
         # patool
         # atool
-        cdrtools # mkisofs
+        # cdrtools # mkisofs
 
         # [ FileManager ]
         eza
@@ -61,12 +61,11 @@
         viu # image viewer
         gtrash
         # croc
-        # sshfs [user@]hostname:[directory] mountpoint
-        # umount mountpoint
+        #$: sshfs [user@]hostname:[directory] MOUNTPOINT
+        #$: umount MOUNTPOINT
         sshfs
         # dufs
         goshs
-        rclone
         simple-http-server
         # magic-wormhole-rs
         sendme
@@ -136,7 +135,7 @@
         # Game & fun
         clock-rs
         # curl parrot.live
-        # fortune | cowsay -f tux | lolcat
+        #$: fortune | cowsay -f tux | clolcat
         sl
         cowsay
         # xcowsay

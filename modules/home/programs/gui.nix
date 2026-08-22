@@ -57,6 +57,7 @@
         # https://github.com/nix-community/home-manager/issues/5173
         # (lib.hiPrio localsend)
         qbittorrent
+        rclone
         rclone-browser
         # deja-dup
         # vorta # borg backup
