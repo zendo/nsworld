@@ -45,22 +45,6 @@
         "type": "github"
       }
     },
-    "crane": {
-      "locked": {
-        "lastModified": 1784564969,
-        "narHash": "sha256-TkTWNhJV/8Wk3czlbz4bwHZkFCaCHPsOy+oJe4PUiXg=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "7930f6c291de6f83c257839d434592aa085f290a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "ref": "master",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -315,26 +299,6 @@
         "type": "github"
       }
     },
-    "ncro": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1786701834,
-        "narHash": "sha256-Ixz0rc6rnDEgNG6Cw2LJRdKxGjMbdy9bC9ncjAU+SmA=",
-        "owner": "feel-co",
-        "repo": "ncro",
-        "rev": "3cc83303cc859901eb4330e9c4319b61f6ba1ffc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "feel-co",
-        "repo": "ncro",
-        "type": "github"
-      }
-    },
     "nix-alien": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -496,39 +460,13 @@
         "home-manager": "home-manager_2",
         "import-tree": "import-tree",
         "multiverse": "multiverse",
-        "ncro": "ncro",
         "nix-alien": "nix-alien",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "plasma-manager": "plasma-manager",
-        "selector4nix": "selector4nix",
         "sops-nix": "sops-nix",
         "treefmt-nix": "treefmt-nix",
         "wrapper-modules": "wrapper-modules"
-      }
-    },
-    "selector4nix": {
-      "inputs": {
-        "crane": "crane",
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1787410551,
-        "narHash": "sha256-dn8EXXuhdnAjFrU0HWUYrv7R+vKwdOErk3DYbb8f9DM=",
-        "owner": "StarryReverie",
-        "repo": "selector4nix",
-        "rev": "1d0e20a66580ffc09a68ebee4814813036bb4747",
-        "type": "github"
-      },
-      "original": {
-        "owner": "StarryReverie",
-        "repo": "selector4nix",
-        "type": "github"
       }
     },
     "sops-nix": {

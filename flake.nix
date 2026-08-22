@@ -57,15 +57,15 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    ncro.url = "github:feel-co/ncro";
-    ncro.inputs.nixpkgs.follows = "nixpkgs";
-
-    selector4nix.url = "github:StarryReverie/selector4nix";
-    selector4nix.inputs.nixpkgs.follows = "nixpkgs";
-    selector4nix.inputs.flake-parts.follows = "flake-parts";
-
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
     wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
+
+    # ncro.url = "github:feel-co/ncro";
+    # ncro.inputs.nixpkgs.follows = "nixpkgs";
+
+    # selector4nix.url = "github:StarryReverie/selector4nix";
+    # selector4nix.inputs.nixpkgs.follows = "nixpkgs";
+    # selector4nix.inputs.flake-parts.follows = "flake-parts";
 
     # nur.url = "github:nix-community/NUR";
     nix-alien.url = "github:thiagokokada/nix-alien";
