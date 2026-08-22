@@ -5,6 +5,7 @@
       home.packages = with pkgs; [
         # kula
         # nano-ffmpeg
+        pigma
 
         # [ Social ]
         telegram-desktop # :webkitgtk
@@ -30,11 +31,11 @@
         # rhythmbox
         goodvibes
         # cliamp
-        go-musicfox
+        # go-musicfox
         # splayer # :electron
         # qqmusic
         spotify
-        folia-major
+        # folia-major
         # mousai
         songrec
         kooha
