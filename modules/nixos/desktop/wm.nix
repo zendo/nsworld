@@ -71,6 +71,7 @@ in
         wev # wayland event view
         # waypipe # proxy ?
         # wtype # xdotool
+        nirimod
 
         # Display
         avizo # lightctl / volumectl

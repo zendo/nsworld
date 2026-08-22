@@ -50,7 +50,7 @@
         # shutter
         # pinta
         contrast
-        gradia
+        # gradia # huge size
         satty # annotation
 
         # remmina # :webkitgtk
