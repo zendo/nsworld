@@ -43,14 +43,6 @@ in
     {
       home-manager.users.${config.myVars.user} = {
         imports = [ fm.homeManager.default-imports ];
-
-        dconf.settings = {
-          "org/gnome/settings-daemon/plugins/power" = {
-            # 修复恢复时蓝牙鼠标连接缓慢问题
-            # 电源 - 节电 - 自动挂起（插入电源时关闭）
-            sleep-inactive-ac-type = "nothing";
-          };
-        };
       };
     };
 
@@ -77,6 +69,18 @@ in
 
       # nix.package = pkgs.lixPackageSets.stable.lix;
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+      programs.dconf.profiles.user.databases = [
+        {
+          settings = {
+            "org/gnome/settings-daemon/plugins/power" = {
+              # 修复恢复时蓝牙鼠标连接缓慢问题
+              # 电源 - 节电 - 自动挂起（插入电源时关闭）
+              sleep-inactive-ac-type = "nothing";
+            };
+          };
+        }
+      ];
 
       # ╭─────────────────────────────────────────────────────╮
       # │ HARDWARE                                            │
