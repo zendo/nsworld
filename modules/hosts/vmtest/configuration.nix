@@ -33,7 +33,7 @@ in
     {
       home-manager.users.${userName} = {
         imports = [
-          fm.homeManager.default-imports
+          fm.homeManager.home-imports
         ];
       };
 

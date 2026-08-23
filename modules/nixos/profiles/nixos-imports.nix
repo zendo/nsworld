@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  flake.modules.nixos.default-imports.imports = with config.flake.modules.nixos; [
+  flake.modules.nixos.nixos-imports.imports = with config.flake.modules.nixos; [
     mods
     secrets
 

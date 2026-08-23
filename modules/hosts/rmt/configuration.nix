@@ -13,8 +13,8 @@ in
       host-rmt-disko-bcachefs
 
       # [ profiles ]
+      nixos-imports
       hmModule
-      default-imports
       # laptop
       # steam
 
@@ -42,7 +42,7 @@ in
       networking.hostName = hostName;
 
       home-manager.users.${config.myVars.user} = {
-        imports = [ fm.homeManager.default-imports ];
+        imports = [ fm.homeManager.home-imports ];
         # programs.vscode.enable = true;
       };
 

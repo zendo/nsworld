@@ -9,10 +9,11 @@ in
     modules =
       with fm.nixos;
       [
-        # [ profiles ]
         host-yoga
+
+        # [ profiles ]
+        nixos-imports
         hmModule
-        default-imports
         laptop
         amd
         # steam
@@ -44,7 +45,7 @@ in
       networking.hostName = hostName;
 
       home-manager.users.${userName} = {
-        imports = [ fm.homeManager.default-imports ];
+        imports = [ fm.homeManager.home-imports ];
       };
 
       # systemd.services.comigo.enable = true;
@@ -65,6 +66,7 @@ in
       # nix.package = pkgs.lixPackageSets.stable.lix;
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
+      # Fix on this machine
       programs.dconf.profiles.user.databases = [
         {
           settings = {

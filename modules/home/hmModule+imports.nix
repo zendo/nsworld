@@ -19,7 +19,7 @@
     };
   };
 
-  flake.modules.homeManager.default-imports =
+  flake.modules.homeManager.home-imports =
     { lib, nixosConfig, ... }:
     {
       # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'

@@ -11,8 +11,8 @@ in
       host-svp-disko-btrfs
 
       # [ profiles ]
+      nixos-imports
       hmModule
-      default-imports
       laptop
       intel
       # steam
@@ -41,7 +41,7 @@ in
       networking.hostName = hostName;
 
       home-manager.users.${config.myVars.user} = {
-        imports = [ fm.homeManager.default-imports ];
+        imports = [ fm.homeManager.home-imports ];
         # programs.vscode.enable = true;
       };
 
