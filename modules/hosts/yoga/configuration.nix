@@ -11,7 +11,6 @@ in
       [
         # [ profiles ]
         host-yoga
-        host-yoga-hm
         hmModule
         default-imports
         laptop
@@ -38,19 +37,15 @@ in
       ];
   };
 
-  flake.modules.nixos.host-yoga-hm =
-    { config, ... }:
-    {
-      home-manager.users.${config.myVars.user} = {
-        imports = [ fm.homeManager.default-imports ];
-      };
-    };
-
   flake.modules.nixos.host-yoga =
     { pkgs, lib, ... }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
+
+      home-manager.users.${userName} = {
+        imports = [ fm.homeManager.default-imports ];
+      };
 
       # systemd.services.comigo.enable = true;
 
