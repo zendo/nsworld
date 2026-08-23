@@ -15,7 +15,7 @@ in
         nixos-imports
         hmModule
         laptop
-        amd
+        gpu-amd
         # steam
 
         # [ virt ]

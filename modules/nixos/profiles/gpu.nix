@@ -1,7 +1,7 @@
 {
   # https://wiki.nixos.org/wiki/AMD_GPU
   # https://github.com/NixOS/nixos-hardware/blob/master/common/gpu/amd/default.nix
-  flake.modules.nixos.amd = {
+  flake.modules.nixos.gpu-amd = {
     hardware.graphics = {
       enable = true;
       # enable32Bit = true;
@@ -13,7 +13,7 @@
 
   # https://wiki.nixos.org/wiki/Intel_Graphics
   # https://github.com/NixOS/nixos-hardware/blob/master/common/gpu/intel/default.nix
-  flake.modules.nixos.intel = { pkgs, ... }: {
+  flake.modules.nixos.gpu-intel = { pkgs, ... }: {
     hardware.graphics = {
       enable = true;
       # enable32Bit = true;

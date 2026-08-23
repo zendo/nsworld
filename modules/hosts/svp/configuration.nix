@@ -14,7 +14,7 @@ in
       nixos-imports
       hmModule
       laptop
-      intel
+      gpu-intel
       # steam
 
       # [ virt ]
