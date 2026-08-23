@@ -20,7 +20,6 @@
       extraPackages = with pkgs; [
         # Older Intel GPUs
         intel-vaapi-driver
-        intel-media-sdk
 
         # Modern Intel GPUs
         # intel-media-driver # VA-API (iHD) userspace
