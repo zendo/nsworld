@@ -6,6 +6,7 @@
         # kula
         # nano-ffmpeg
         pigma
+        helixnotes
 
         # [ Social ]
         telegram-desktop # :webkitgtk
