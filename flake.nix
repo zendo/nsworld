@@ -20,14 +20,14 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # https://github.com/DeterminateSystems/nix-src/releases
-    # determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/3.14.0.tar.gz";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    # emacs-overlay.url = "github:nix-community/emacs-overlay";
-    # emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "";
 
-    # lanzaboote.url = "github:nix-community/lanzaboote";
-    # lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -41,15 +41,6 @@
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "";
@@ -66,6 +57,12 @@
     # selector4nix.url = "github:StarryReverie/selector4nix";
     # selector4nix.inputs.nixpkgs.follows = "nixpkgs";
     # selector4nix.inputs.flake-parts.follows = "flake-parts";
+
+    # lanzaboote.url = "github:nix-community/lanzaboote";
+    # lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
+    # https://github.com/DeterminateSystems/nix-src/releases
+    # determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/3.14.0.tar.gz";
 
     # nur.url = "github:nix-community/NUR";
     nix-alien.url = "github:thiagokokada/nix-alien";
