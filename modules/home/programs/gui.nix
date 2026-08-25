@@ -6,6 +6,7 @@
         # kula
         # nano-ffmpeg
         pigma
+        rustle
         helixnotes
 
         # [ Social ]
