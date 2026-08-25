@@ -7,17 +7,17 @@
 
 buildGo126Module (finalAttrs: {
   pname = "kula";
-  version = "0.18.6";
+  version = "0.18.8";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "c0m4r";
     repo = "kula";
     tag = finalAttrs.version;
-    hash = "sha256-2oIVAEM5xwC7WeACIj7ZLRPiQQtVZ7HYPWCHNdAvML0=";
+    hash = "sha256-K3bHs0FIVyWIUjDrmxcUsrISagcXlBVWkcea+tTcuVM=";
   };
 
-  vendorHash = "sha256-ZtRECNlt64BnO5Ixvu4S9kEvrrvEo0eiC71CnS3eIxg=";
+  vendorHash = "sha256-hhpEQNVfRYLQXiUjn9dicfshzXt3wRnXeqtOo5/ptxs=";
 
   ldflags = [
     "-s"
