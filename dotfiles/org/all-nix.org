@@ -161,6 +161,25 @@ runtimeDependencies = [ (lib.getLib udev) ] ++ libs;
   '';
 #+end_src
 
+** iced
+#+begin_src nix
+libs = [
+  libxkbcommon
+  vulkan-loader
+  wayland
+];
+
+  nativeBuildInputs = [
+    pkg-config
+    wrapGAppsHook3
+  ];
+
+  postFixup = ''
+    wrapProgram $out/bin/rustle \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libs}"
+  '';
+#+end_src
+
 * Functions
 ** importModule
 Return a list of full paths for all entries in the given directory, excluding default.nix
