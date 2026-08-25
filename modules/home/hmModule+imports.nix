@@ -39,13 +39,13 @@
           fresh-editor
           # helix
           # nvim
-          vscode
+          # vscode
           # zed
           # ╭──────────────────────────────────────────╮
           # │ PROGRAMS                                 │
           # ╰──────────────────────────────────────────╯
           cava
-          chrome
+          # chrome
           cli
           firefox
           git
