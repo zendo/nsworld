@@ -8,6 +8,7 @@
   udev,
   webkitgtk_4_1,
   glib-networking,
+  libayatana-appindicator,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -31,7 +32,10 @@ stdenv.mkDerivation (finalAttrs: {
     (lib.getLib stdenv.cc.cc)
   ];
 
-  runtimeDependencies = [ (lib.getLib udev) ];
+  runtimeDependencies = [
+    (lib.getLib udev)
+    libayatana-appindicator
+  ];
 
   installPhase = ''
     mkdir -p $out/bin
