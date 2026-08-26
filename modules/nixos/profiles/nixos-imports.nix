@@ -6,7 +6,7 @@
 
     # [ shell ]
     # fish
-    # zsh
+    zsh
 
     # [ core ]
     base
