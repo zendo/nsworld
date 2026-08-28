@@ -41,6 +41,7 @@
         songrec
         kooha
         # jamesdsp
+        # easyeffects
         # kazumi # anime
         # yt-dlp
         # vlc
