@@ -3088,11 +3088,11 @@ https://github.com/svaante/dape
 (editorconfig-mode t)
 #+end_src
 
-*** tree-sitter
+*** treesit-auto
 ~C-h v major-mode~
 https://github.com/renzmann/treesit-auto
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (when (eq system-type 'gnu/linux)
   (use-package treesit-auto
     ;; :custom
@@ -3100,6 +3100,15 @@ https://github.com/renzmann/treesit-auto
     :config
     (treesit-auto-add-to-auto-mode-alist 'all)
     (global-treesit-auto-mode))
+  )
+#+end_src
+
+*** treesit
+#+begin_src emacs-lisp
+(when (eq system-type 'gnu/linux)
+  (use-package treesit
+    :ensure nil
+    :custom (treesit-enabled-modes t))
   )
 #+end_src
 
