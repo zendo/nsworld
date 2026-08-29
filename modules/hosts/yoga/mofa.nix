@@ -27,10 +27,10 @@
       };
 
       # services.daeWithConfig.enable = true;
-      # services.dae = {
-      #   enable = true;
-      #   configFile = "/home/${myvars.user}/Projects/subs/dae-config.dae";
-      # };
+      services.dae = {
+        # enable = true;
+        configFile = "/home/${config.myVars.user}/Projects/subs/dae-config.dae";
+      };
 
       # Virtual network interfering Geoclue2's IP-based location
       services.geoclue2 = {
