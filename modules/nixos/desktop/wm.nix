@@ -7,8 +7,9 @@ in
     { pkgs, ... }:
     {
       imports = [
-        fm.nixos.dms
-        fm.nixos.greetd
+        # fm.nixos.dms
+        fm.nixos.noctalia
+        # fm.nixos.greetd
         # fm.nixos.ly
       ];
 
@@ -230,5 +231,19 @@ in
     };
 
     # programs.dsearch.enable = true;
+  };
+
+  # ╭──────────────────────────────────────────╮
+  # │ Noctalia                                 │
+  # ╰──────────────────────────────────────────╯
+  flake.modules.nixos.noctalia = {
+    programs.noctalia = {
+      enable = true;
+      systemd.enable = true;
+    };
+
+    services.displayManager.noctalia-greeter = {
+      enable = true;
+    };
   };
 }
