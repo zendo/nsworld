@@ -9,7 +9,7 @@
       programs.emacs = {
         enable = true;
         # package = pkgs.emacs-igc-pgtk;
-        package = pkgs.emacs31-pgtk;
+        package = pkgs.emacs-pgtk;
         extraPackages =
           epkgs: with epkgs; [
             jinx
