@@ -123,8 +123,15 @@
       # ---------------------------------------------------
       qt6Packages = prev.qt6Packages.overrideScope (
         qt6final: qt6prev: {
-          # qt6Packages.fcitx5-configtool has lot of KDE frameworks dependencies
+          # fcitx5-configtool has lot of KDE frameworks dependencies
           fcitx5-with-addons = qt6prev.fcitx5-with-addons.override { withConfigtool = false; };
+
+          # remove qtwebengine: 427 MiB
+          fcitx5-chinese-addons =
+            (qt6prev.fcitx5-chinese-addons.overrideAttrs (oldAttrs: {
+              cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DENABLE_BROWSER=Off" ];
+            })).override
+              { qtwebengine = null; };
         }
       );
 
