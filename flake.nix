@@ -15,6 +15,7 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     # nixpkgs.url = "git+file:///home/iab/Projects/nixpkgs/?ref=pr-throne-430949";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+
     multiverse.url = "github:fzakaria/nixpkgs-multiverse";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -48,8 +49,8 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-    wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
+    nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    nix-wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # ncro.url = "github:feel-co/ncro";
     # ncro.inputs.nixpkgs.follows = "nixpkgs";

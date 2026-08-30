@@ -33,7 +33,7 @@
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-helix = inputs.wrapper-modules.wrappers.helix.wrap {
+      packages.wrap-helix = inputs.nix-wrapper-modules.wrappers.helix.wrap {
         inherit pkgs;
         settings = {
           # everforest_dark / onedark

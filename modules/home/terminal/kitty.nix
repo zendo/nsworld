@@ -58,7 +58,7 @@
       '';
     in
     {
-      packages.wrap-kitty = inputs.wrapper-modules.wrappers.kitty.wrap {
+      packages.wrap-kitty = inputs.nix-wrapper-modules.wrappers.kitty.wrap {
         inherit pkgs;
         # Afterglow / vague / bl1nk
         # themeFile = "bl1nk";
