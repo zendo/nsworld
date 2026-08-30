@@ -1,4 +1,8 @@
+{ inputs, ... }:
 {
+  # flake.formatter
+  imports = [ inputs.treefmt-nix.flakeModule ];
+
   perSystem =
     { config, ... }:
     {

@@ -1,5 +1,8 @@
 { inputs, ... }:
 {
+  # flake.overlays.default
+  imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
+
   perSystem =
     { config, ... }:
     {

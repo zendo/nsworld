@@ -1,4 +1,8 @@
+{ inputs, ... }:
 {
+  # flake.devshells
+  imports = [ inputs.devshell.flakeModule ];
+
   perSystem =
     { pkgs, ... }:
     {
