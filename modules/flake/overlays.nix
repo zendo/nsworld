@@ -109,10 +109,10 @@
         # night-theme-switcher = prev.callPackage ./night-theme-switcher { };
 
         aurora-shell = prev.gnomeExtensions.aurora-shell.overrideAttrs (oldAttrs: rec {
-          version = "29";
+          version = "31";
           src = prev.fetchzip {
             url = "https://extensions.gnome.org/extension-data/aurora-shellluminusos.github.io.v${version}.shell-extension.zip";
-            hash = "sha256-i/gf5Q+rFqfh0zUajEBfcooVvVpZilcfhBG4WHtAhg0=";
+            hash = "sha256-EREkakgqA57hCN8yrXZaPw74QNMshTSY4NtmAHhAqZQ=";
             stripRoot = false;
           };
         });
