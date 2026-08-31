@@ -18,6 +18,6 @@ kanata-shortcut-startup:
 
 emacs-ob-tangle:
     emacs -Q --batch \
-    -l org \
-    --eval '(setq vc-follow-symlinks nil)' \
-    --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
+      -l org \
+      --eval '(setq vc-follow-symlinks nil)' \
+      --eval '(org-babel-tangle-file \"~/.config/emacs/all-emacs.org\")'
