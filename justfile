@@ -23,7 +23,7 @@ diff-dix:
 
 diff-commit:
     git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
-    -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)"
+      -m "$(dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2) | tail -n +3)"
 
 gca:
     nix-collect-garbage -d ; sudo nix-collect-garbage -d ; sudo /run/current-system/bin/switch-to-configuration boot
@@ -59,13 +59,13 @@ backup-my-data:
 [group('emacs')]
 emacs-ob-tangle:
     emacs -Q --batch \
-    -l org \
-    --eval '(setq vc-follow-symlinks nil)' \
-    --eval '(org-babel-tangle-file "~/.config/emacs/all-emacs.org")'
+      -l org \
+      --eval '(setq vc-follow-symlinks nil)' \
+      --eval '(org-babel-tangle-file "~/.config/emacs/all-emacs.org")'
 
 [group('emacs')]
 emacs-ob-tangle-doom:
     emacs -Q --batch \
-    -l org \
-    --eval '(setq vc-follow-symlinks nil)' \
-    --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
+      -l org \
+      --eval '(setq vc-follow-symlinks nil)' \
+      --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
