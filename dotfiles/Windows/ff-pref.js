@@ -6,7 +6,7 @@
 user_pref("browser.ai.control.default", "available")
 // PREF: restore Top Sites on New Tab page
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
-// PREF: restore search engine suggestions
+// PREF: restore live search suggestions
 user_pref("browser.search.suggest.enabled", true);
 // PREF: allow websites to ask you for your location
 user_pref("permissions.default.geo", 0);
