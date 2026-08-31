@@ -58,24 +58,15 @@
                 Alias = "gh";
               }
               {
-                Name = "Searchix";
-                URLTemplate = "https://searchix.ovh/?query={searchTerms}";
-                IconURL = "https://searchix.ovh/favicon.ico";
+                Name = "nixsearch";
+                URLTemplate = "https://nixsearch.thekoppe.com/?q={searchTerms}";
+                IconURL = "https://nixsearch.thekoppe.com/favicon.ico";
                 Alias = "nsa";
-              }
-              {
-                Name = "Nix Packages";
-                URLTemplate = "https://search.nixos.org/packages?channel=unstable&type=packages&query={searchTerms}";
-                Alias = "nsp";
-              }
-              {
-                Name = "Nixos Options";
-                URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
-                Alias = "nso";
               }
             ]; # Add
           }; # SearchEngines
         }; # policies
+
       }; # programs.firefox
     };
 }
