@@ -40,7 +40,7 @@ up:
         echo -e "\n ✅ Nixpkgs is no update."
     else
         OLD_MSG=$(git log -1 --pretty=%B)
-        ADD_MSG=$(https://github.com/NixOS/nixpkgs/compare/"${before_update:0:7}"..."${after_update:0:7}")
+        ADD_MSG=https://github.com/NixOS/nixpkgs/compare/"${before_update:0:7}"..."${after_update:0:7}"
         echo -e "\033[1;33m \n 🔍 Nixpkgs Comparing changes: \033[0m"
         echo -e "\033[32m $ADD_MSG \033[0m"
         git commit --amend --quiet -m "🚀 $OLD_MSG" -m "🔍 Nixpkgs Comparing changes: $ADD_MSG"
