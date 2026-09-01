@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   # for dendritic pattern
-  imports = [ inputs.flake-parts.flakeModules.modules ];
+  imports = [ inputs.omniflake.flakes.flake-parts.flakeModules.modules ];
 
   # for repl
   # flake.currentSystem / flake.debug

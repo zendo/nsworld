@@ -17,8 +17,8 @@ in
     { lib, config, ... }:
     {
       imports = [
-        inputs.agenix.nixosModules.default
-        inputs.sops-nix.nixosModules.sops
+        inputs.omniflake.flakes.agenix.nixosModules.default
+        inputs.omniflake.flakes.sops-nix.nixosModules.sops
       ];
 
       age.secrets = agenixSecrets;
@@ -36,8 +36,8 @@ in
     { config, pkgs, ... }:
     {
       imports = [
-        inputs.agenix.homeManagerModules.default
-        inputs.sops-nix.homeManagerModules.sops
+        inputs.omniflake.flakes.agenix.homeManagerModules.default
+        inputs.omniflake.flakes.sops-nix.homeManagerModules.sops
       ];
 
       age.secrets = agenixSecrets;

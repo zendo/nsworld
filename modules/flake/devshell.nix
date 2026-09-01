@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   # flake.devshells
-  imports = [ inputs.devshell.flakeModule ];
+  imports = [ inputs.omniflake.flakes.devshell.flakeModule ];
 
   perSystem =
     { pkgs, ... }:

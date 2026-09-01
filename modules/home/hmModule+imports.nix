@@ -1,7 +1,7 @@
 { inputs, config, ... }:
 {
   flake.modules.nixos.hmModule = {
-    imports = [ inputs.home-manager.nixosModules.home-manager ];
+    imports = [ inputs.omniflake.flakes.home-manager.nixosModules.home-manager ];
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;

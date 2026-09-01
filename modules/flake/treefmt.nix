@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   # flake.formatter
-  imports = [ inputs.treefmt-nix.flakeModule ];
+  imports = [ inputs.omniflake.flakes.treefmt-nix.flakeModule ];
 
   perSystem =
     { config, ... }:

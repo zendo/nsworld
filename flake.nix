@@ -2,11 +2,11 @@
   description = "NIX SAVE THE WORLD";
 
   outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    inputs@{ omniflake, ... }:
+    omniflake.flakes.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./secrets/secrets-module.nix
-        (inputs.import-tree ./modules)
+        (omniflake.flakes.import-tree ./modules)
       ];
     };
 
@@ -16,59 +16,8 @@
     # nixpkgs.url = "git+file:///home/iab/Projects/nixpkgs/?ref=pr-throne-430949";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
-    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
-
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-
-    colmena.url = "github:zhaofengli/colmena";
-    colmena.inputs.nixpkgs.follows = "nixpkgs";
-
-    deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
-
-    plasma-manager.url = "github:nix-community/plasma-manager";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
-    plasma-manager.inputs.home-manager.follows = "home-manager";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.inputs.nixpkgs.follows = "";
-
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-    nix-wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
-
-    # ncro.url = "github:feel-co/ncro";
-    # ncro.inputs.nixpkgs.follows = "nixpkgs";
-
-    # selector4nix.url = "github:StarryReverie/selector4nix";
-    # selector4nix.inputs.nixpkgs.follows = "nixpkgs";
-    # selector4nix.inputs.flake-parts.follows = "flake-parts";
-
-    # lanzaboote.url = "github:nix-community/lanzaboote";
-    # lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-
-    # https://github.com/DeterminateSystems/nix-src/releases
-    # determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/3.14.0.tar.gz";
-
-    # nur.url = "github:nix-community/NUR";
-    nix-alien.url = "github:thiagokokada/nix-alien";
-    import-tree.url = "github:vic/import-tree";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    omniflake.url = "github:fzakaria/omniflake";
+    omniflake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # Flake Local Nix Configuration

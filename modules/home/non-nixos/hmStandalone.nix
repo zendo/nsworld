@@ -27,7 +27,7 @@ let
     };
 in
 {
-  imports = [ inputs.home-manager.flakeModules.home-manager ];
+  imports = [ inputs.omniflake.flakes.home-manager.flakeModules.home-manager ];
 
   flake.homeConfigurations = {
     iab = mkHome {

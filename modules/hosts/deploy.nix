@@ -11,7 +11,7 @@ in
   # ╭─────────────────────────────────────────────────────╮
   # │ Colmena                                             │
   # ╰─────────────────────────────────────────────────────╯
-  flake.colmenaHive = inputs.colmena.lib.makeHive {
+  flake.colmenaHive = inputs.omniflake.flakes.colmena.lib.makeHive {
     meta = {
       nixpkgs = { inherit lib; };
       nodeNixpkgs = builtins.mapAttrs (_: v: v.pkgs) nixosConfigurations;
@@ -59,14 +59,14 @@ in
       "svp" = {
         hostname = "svp";
         profiles.system = {
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."svp";
+          path = inputs.omniflake.flakes.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."svp";
         };
       };
 
       "rmt" = {
         hostname = "rmt";
         profiles.system = {
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."rmt";
+          path = inputs.omniflake.flakes.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."rmt";
         };
       };
     };
@@ -79,7 +79,8 @@ in
         packages = [
           pkgs.disko
           pkgs.nixos-anywhere
-          inputs'.colmena.packages.colmena
+          inputs.omniflake.flakes.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena
+          # inputs'.colmena.packages.colmena
           # inputs'.deploy-rs.packages.deploy-rs
           inputs'.nixpkgs.legacyPackages.nixos-rebuild-ng
         ];

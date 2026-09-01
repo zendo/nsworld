@@ -11,7 +11,7 @@
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-cava = inputs.nix-wrapper-modules.wrappers.cava.wrap {
+      packages.wrap-cava = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.cava.wrap {
         inherit pkgs;
         settings = {
           general = {

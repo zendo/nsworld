@@ -54,12 +54,12 @@ in
         # [ deploy ]
         disko
         nixos-anywhere
-        inputs.colmena.packages.${stdenv.hostPlatform.system}.colmena
+        inputs.omniflake.flakes.colmena.packages.${stdenv.hostPlatform.system}.colmena
         # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-r
         # [ nix ]
         nix-init
         nix-update
-        inputs.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+        inputs.omniflake.pinned.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
         # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
       ];
 

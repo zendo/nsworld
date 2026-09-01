@@ -22,7 +22,7 @@ in
         zsh
       ]
       ++ [
-        inputs.nixos-wsl.nixosModules.wsl
+        inputs.omniflake.flakes.nixos-wsl.nixosModules.wsl
       ];
   };
 

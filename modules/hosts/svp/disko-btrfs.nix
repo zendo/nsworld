@@ -3,7 +3,7 @@
   flake.modules.nixos.host-svp-disko-btrfs = {
 
     imports = [
-      inputs.disko.nixosModules.disko
+      inputs.omniflake.flakes.disko.nixosModules.disko
     ];
 
     disko.devices = {

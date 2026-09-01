@@ -15,7 +15,7 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-alacritty = inputs.nix-wrapper-modules.wrappers.alacritty.wrap {
+      packages.wrap-alacritty = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.alacritty.wrap {
         inherit pkgs;
         settings = {
           general = {

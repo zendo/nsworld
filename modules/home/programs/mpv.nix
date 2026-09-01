@@ -11,7 +11,7 @@
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-mpv = inputs.nix-wrapper-modules.wrappers.mpv.wrap {
+      packages.wrap-mpv = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.mpv.wrap {
         inherit pkgs;
         package = (
           pkgs.mpv.override {
