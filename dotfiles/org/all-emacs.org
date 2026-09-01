@@ -1193,6 +1193,13 @@ This should be called after changing `auto-save-list-file-prefix'."
 (setq user-emacs-directory (expand-file-name "var/" minimal-emacs-user-directory))
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 
+;;; Windows Optimization
+(when (boundp 'w32-get-true-file-attributes)
+  (setq w32-get-true-file-attributes nil ; decrease file IO workload
+        w32-pipe-read-delay 0            ; faster IPC
+        w32-pipe-buffer-size (* 64 1024) ; read more at a time
+        ))
+
 ;; TEMP
 ;; Cache the contents of `load-path' directories so library loading can skip
 ;; directories that cannot contain the requested file (Emacs 31+).
@@ -1283,13 +1290,11 @@ Use ~getenv~ check the environment variables.
   (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
         org-directory "c:/Users/zendo/Documents/org/"
         package-check-signature nil ; 禁用elpa包签名验证
-        ;; Optimization
+        user-lisp-auto-scrape nil ; 禁用自动扫描lisp等用户目录
+        native-comp-deferred-compilation nil ; 禁用后台延迟编译
         projectile-git-submodule-command nil
-        w32-get-true-file-attributes nil   ; decrease file IO workload
-        w32-use-native-image-API t         ; use native w32 API
-        w32-pipe-read-delay 0              ; faster IPC
-        w32-pipe-buffer-size 65536)        ; read more at a time (64K, was 4K)
-  (set-selection-coding-system 'gbk-dos) ; encoding
+        )
+  (set-selection-coding-system 'utf-16le-dos) ; encoding
   (set-frame-font (font-spec :family "JetBrains Mono" :size 28))
   (dolist (script '(han cjk-misc bopomofo))
     (set-fontset-font
