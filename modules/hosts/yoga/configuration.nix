@@ -34,7 +34,7 @@ in
         # hyprland
       ]
       ++ [
-        # inputs.lanzaboote.nixosModules.lanzaboote
+        # inputs.omniflake.flakes.lanzaboote.nixosModules.lanzaboote
       ];
   };
 

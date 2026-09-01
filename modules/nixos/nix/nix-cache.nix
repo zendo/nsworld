@@ -6,7 +6,7 @@
       ncro =
         { lib, config, ... }:
         {
-          imports = [ inputs.ncro.nixosModules.default ];
+          imports = [ inputs.omniflake.flakes.ncro.nixosModules.default ];
           nix.settings.substituters = lib.mkForce [
             "http://localhost${config.services.ncro.settings.server.listen}"
           ];
@@ -39,7 +39,7 @@
 
       # https://github.com/StarryReverie/selector4nix/blob/master/docs/configuration.md
       selector4nix = {
-        imports = [ inputs.selector4nix.nixosModules.selector4nix ];
+        imports = [ inputs.omniflake.flakes.selector4nix.nixosModules.selector4nix ];
 
         services.selector4nix = {
           enable = true;
