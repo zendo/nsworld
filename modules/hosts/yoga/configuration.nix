@@ -51,6 +51,7 @@ in
       # systemd.services.comigo.enable = true;
 
       environment.systemPackages = with pkgs; [
+        inputs.omniflake.flakes.nix-packages-ccicnce113424.packages.x86_64-linux.open-orpheus
         # [ deploy ]
         disko
         nixos-anywhere
