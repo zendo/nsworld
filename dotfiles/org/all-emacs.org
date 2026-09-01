@@ -1192,6 +1192,13 @@ This should be called after changing `auto-save-list-file-prefix'."
 ;; NOTE: This must be placed in 'pre-early-init.el'.
 (setq user-emacs-directory (expand-file-name "var/" minimal-emacs-user-directory))
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
+
+;; TEMP
+;; Cache the contents of `load-path' directories so library loading can skip
+;; directories that cannot contain the requested file (Emacs 31+).
+(when (boundp 'load-path-filter-function)
+  (setq load-path-filter-function
+        #'load-path-filter-cache-directory-files))
 #+end_src
 
 * post-init.el - Header
