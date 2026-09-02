@@ -8,6 +8,7 @@
         rwx
         pigma
         helixnotes
+        breeze
 
         # [ Social ]
         telegram-desktop # :webkitgtk

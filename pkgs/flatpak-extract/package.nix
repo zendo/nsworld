@@ -10,6 +10,7 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "flatpak-extract";
   version = "0-unstable-2025-04-23";
+  __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "faveoled";
