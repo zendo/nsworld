@@ -14,6 +14,7 @@
           ".DS_Store"
           ".vscode"
           ".agent-shell"
+          ".sentry-native"
           # nix
           "*.drv"
           "*.qcow2"
