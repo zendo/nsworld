@@ -5,6 +5,7 @@
       home.packages = with pkgs; [
         # kula
         # nano-ffmpeg
+        rwx
         pigma
         helixnotes
 
