@@ -69,6 +69,7 @@
         simple-http-server
         # magic-wormhole-rs
         sendme
+        tailcat
 
         # [ System Monitor ]
         # fastfetch -c examples/7 14
