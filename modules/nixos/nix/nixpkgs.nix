@@ -19,6 +19,7 @@
               "spotify"
               "qqmusic"
               "keyguard"
+              "sublime-merge"
               "vivaldi"
               "google-chrome"
               "microsoft-edge"

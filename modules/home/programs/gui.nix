@@ -87,6 +87,7 @@
         meld
         # textpieces
         # devtoolbox
+        sublime-merge # fast for huge Monorepo
         # qalculate-gtk # scientific calculator
 
         # [ Terminal ]
