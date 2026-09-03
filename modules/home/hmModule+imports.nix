@@ -45,7 +45,7 @@
           # │ PROGRAMS                                 │
           # ╰──────────────────────────────────────────╯
           cava
-          # chrome
+          chrome
           cli
           firefox
           git

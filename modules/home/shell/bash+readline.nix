@@ -6,12 +6,13 @@
         enable = true;
         historyFile = "${config.xdg.dataHome}/bash/history";
         bashrcExtra = ''
+          # Flyline Setup
           enable -f ${pkgs.flyline}/lib/libflyline.so flyline
           flyline mouse --mode disabled
           flyline suggestions --auto-suggest false
           flyline key bind Ctrl+f inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAccept
 
-          # Pure Prompt Style
+          # Flyline Pure Prompt Style
           # flyline create-prompt-widget custom --name SS_GIT \
           #   --command "bash -c 'starship module git_branch && starship module git_status'" \
           #   --placeholder 0
@@ -19,7 +20,7 @@
           # flyline create-prompt-widget last-command-duration
           # export RPS1='\[\e[33m\]FLYLINE_LAST_COMMAND_DURATION\[\e[0m\]'
 
-          # Agent
+          # Flyline Agent
           flyline set-agent-mode \
             --system-prompt "Be concise. Answer ONLY with a raw JSON array of at most 3 items with objects containing: command and description. Do not wrap in markdown code blocks. Command will be a Bash command." \
             --trigger-prefix ': ' \
