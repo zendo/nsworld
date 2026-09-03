@@ -88,6 +88,7 @@
               dock-intellihide = true;
               dock-show-trash = false;
               dock-show-external-storage = false;
+              dock-window-previews = true;
               module-aurora-menu = false;
               module-weather-clock = false;
               module-theme-changer = false;
