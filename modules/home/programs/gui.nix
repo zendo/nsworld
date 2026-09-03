@@ -6,9 +6,10 @@
         # kula
         # nano-ffmpeg
         rwx
+        ttt
         pigma
-        helixnotes
         breeze
+        helixnotes
 
         # [ Social ]
         telegram-desktop # :webkitgtk
