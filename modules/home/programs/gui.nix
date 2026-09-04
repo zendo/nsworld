@@ -18,15 +18,6 @@
         # fluffychat
         # newsflash
 
-        # [ AI ]
-        # opencode
-        pi-coding-agent
-        pi-acp
-        # codex
-        # qwen-code
-        # gemini-cli
-        # claude-code
-
         # [ Multimedia ]
         # mpd
         # rmpc

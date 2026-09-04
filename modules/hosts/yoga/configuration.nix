@@ -45,7 +45,10 @@ in
       networking.hostName = hostName;
 
       home-manager.users.${userName} = {
-        imports = [ fm.homeManager.home-imports ];
+        imports = with fm.homeManager; [
+          home-imports
+          ai
+        ];
       };
 
       # systemd.services.comigo.enable = true;
