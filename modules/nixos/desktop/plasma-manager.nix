@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.homeManager.plasma-manager = {
-    imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
+    imports = [ inputs.omniflake.flakes.plasma-manager.homeModules.plasma-manager ];
 
     # rm .config/k* .config/plasma* .config/power*
     # rm .local/share/plasma-manager/last_run_* ; ~/.local/share/plasma-manager/run_all.sh
