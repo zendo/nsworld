@@ -2,7 +2,7 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
-  makeWrapper,
+  makeBinaryWrapper,
   gitMinimal,
   ripgrep,
   nix-update-script,
@@ -30,16 +30,16 @@ buildGoModule (finalAttrs: {
 
   subPackages = [ "cmd/ttt" ];
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeBinaryWrapper ];
 
-  preFixup = ''
-    wrapProgram $out/bin/ttt \
-      --prefix PATH ":" "${
+  postInstall = ''
+    wrapProgram $out/bin/${finalAttrs.meta.mainProgram} \
+      --prefix PATH : ${
         lib.makeBinPath [
           gitMinimal
           ripgrep
         ]
-      }";
+      }
   '';
 
   passthru.updateScript = nix-update-script { };
