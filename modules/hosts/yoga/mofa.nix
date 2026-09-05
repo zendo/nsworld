@@ -12,7 +12,7 @@
       systemd.services.sub-store.enable = true;
 
       services.sing-box = {
-        # enable = true;
+        enable = true;
         settings = {
           _secret = "/home/${config.myVars.user}/Projects/subs/config.jsonc";
           quote = false;
@@ -20,7 +20,7 @@
       };
 
       services.mihomo = {
-        enable = true;
+        # enable = true;
         tunMode = true;
         webui = pkgs.zashboard;
         configFile = "/home/${config.myVars.user}/Projects/subs/config.yaml";

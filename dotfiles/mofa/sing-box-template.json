@@ -5,11 +5,22 @@
     "output": "",
     "timestamp": true
   },
+  "services": [
+    {
+      "type": "api",
+      "listen": "127.0.0.1",
+      "listen_port": 9091,
+      "secret": "1984",
+      "dashboard": {
+        "enabled": true
+      }
+    }
+  ],
   "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
-      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/MetaCubeX/yacd/archive/gh-pages.zip",
       "external_ui_download_detour": "🎯 全球直连",
       "secret": "1984",
       "default_mode": "rule",
