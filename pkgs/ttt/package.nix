@@ -2,6 +2,9 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
+  makeWrapper,
+  gitMinimal,
+  ripgrep,
   nix-update-script,
 }:
 
@@ -27,12 +30,25 @@ buildGoModule (finalAttrs: {
 
   subPackages = [ "cmd/ttt" ];
 
+  nativeBuildInputs = [ makeWrapper ];
+
+  preFixup = ''
+    wrapProgram $out/bin/ttt \
+      --prefix PATH ":" "${
+        lib.makeBinPath [
+          gitMinimal
+          ripgrep
+        ]
+      }";
+  '';
+
   passthru.updateScript = nix-update-script { };
 
   meta = {
-    description = "Terminal text editor IDE.";
-    homepage = "https://github.com/eugenioenko/ttt";
-    changelog = "https://github.com/eugenioenko/ttt/releases/tag/${finalAttrs.src.tag}";
+    description = "Terminal Text Tool: The IDE that lives in your terminal.";
+    homepage = "http://tttedit.dev";
+    downloadPage = "https://github.com/eugenioenko/ttt";
+    changelog = "https://github.com/eugenioenko/ttt/releases/tag/v${finalAttrs.src.tag}";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "ttt";
