@@ -8,11 +8,11 @@ in
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
     modules = with fm.nixos; [
       host-svp
+      host-svp-hm
       host-svp-disko-btrfs
 
       # [ profiles ]
       nixos-imports
-      hmModule
       laptop
       gpu-intel
       # steam
@@ -34,16 +34,20 @@ in
     ];
   };
 
+  flake.modules.nixos.host-svp-hm = { config, ... }: {
+    imports = [ fm.nixos.hmModule ];
+
+    home-manager.users.${config.myVars.user} = {
+      imports = [ fm.homeManager.home-imports ];
+      # programs.vscode.enable = true;
+    };
+  };
+
   flake.modules.nixos.host-svp =
     { config, ... }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
-
-      home-manager.users.${config.myVars.user} = {
-        imports = [ fm.homeManager.home-imports ];
-        # programs.vscode.enable = true;
-      };
 
       users.users.${config.myVars.user} = {
         # pw: 123
