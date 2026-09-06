@@ -9,13 +9,12 @@ in
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
     modules = with fm.nixos; [
       host-rmt
+      host-rmt-hm
       # host-rmt-disko-btrfs
       host-rmt-disko-bcachefs
 
       # [ profiles ]
       nixos-imports
-      hmModule
-      # laptop
       # steam
 
       # [ virt ]
@@ -35,16 +34,20 @@ in
     ];
   };
 
+  flake.modules.nixos.host-rmt-hm = { config, ... }: {
+    imports = [ fm.nixos.hmModule ];
+
+    home-manager.users.${config.myVars.user} = {
+      imports = [ fm.homeManager.home-imports ];
+      # programs.vscode.enable = true;
+    };
+  };
+
   flake.modules.nixos.host-rmt =
     { pkgs, config, ... }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
-
-      home-manager.users.${config.myVars.user} = {
-        imports = [ fm.homeManager.home-imports ];
-        # programs.vscode.enable = true;
-      };
 
       environment.systemPackages = with pkgs; [
         duf
