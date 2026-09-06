@@ -42,7 +42,7 @@ sniffer:
 
 tun:
   enable: true
-  # stack: mixed # default: gvisor
+  stack: system # gvisor(default)/system/mixed
   # device: utun
   dns-hijack:
     - "any:53"
