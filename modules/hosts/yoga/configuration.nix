@@ -10,10 +10,10 @@ in
       with fm.nixos;
       [
         host-yoga
+        host-yoga-hm
 
         # [ profiles ]
         nixos-imports
-        hmModule
         laptop
         gpu-amd
         # steam
@@ -38,18 +38,22 @@ in
       ];
   };
 
+  flake.modules.nixos.host-yoga-hm = {
+    imports = [ fm.nixos.hmModule ];
+
+    home-manager.users.${userName} = {
+      imports = with fm.homeManager; [
+        home-imports
+        ai
+      ];
+    };
+  };
+
   flake.modules.nixos.host-yoga =
     { pkgs, lib, ... }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
-
-      home-manager.users.${userName} = {
-        imports = with fm.homeManager; [
-          home-imports
-          ai
-        ];
-      };
 
       # systemd.services.comigo.enable = true;
 
