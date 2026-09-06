@@ -11,14 +11,14 @@ in
       with fm.nixos;
       [
         host-wsl
-        hmModule
+        host-wsl-hm
 
         base
         fonts
         nixconfig
         nixpkgs
         ssh
-        fish
+        # fish
         zsh
       ]
       ++ [
@@ -26,63 +26,65 @@ in
       ];
   };
 
+  # ╭─────────────────────────────────────────────────────╮
+  # │  Home-manager                                       │
+  # ╰─────────────────────────────────────────────────────╯
+  flake.modules.nixos.host-wsl-hm = { config, pkgs, ... }: {
+    imports = [ fm.nixos.hmModule ];
+
+    home-manager.users.${config.myVars.user} = {
+      home.packages = with pkgs; [
+        # cliamp
+        goodvibes
+      ];
+
+      imports = with fm.homeManager; [
+        # [ common ]
+        secrets
+        ssh
+
+        # [ editor ]
+        dev
+        emacs
+        micro
+        fresh-editor
+        helix
+        # nvim
+
+        # [ programs ]
+        cli
+        git
+        nix-tools
+
+        # [ shell ]
+        alias
+        # atuin
+        bash
+        # fish
+        starship
+        # zellij
+        zsh
+
+        # [ terminal ]
+        # alacritty
+        foot
+        ghostty
+        # kitty
+
+        # [ xdg ]
+        env
+        files
+        xdg
+      ];
+    };
+  };
+
+  # ╭─────────────────────────────────────────────────────╮
+  # │ System-wide                                         │
+  # ╰─────────────────────────────────────────────────────╯
   flake.modules.nixos.host-wsl =
     { lib, pkgs, ... }:
     {
-      # ╭─────────────────────────────────────────────────────╮
-      # │  Home-manager                                       │
-      # ╰─────────────────────────────────────────────────────╯
-      home-manager.users.${userName} =
-        { pkgs, ... }:
-        {
-          home.packages = with pkgs; [
-            # cliamp
-            goodvibes
-          ];
-
-          imports = with fm.homeManager; [
-            # [ common ]
-            secrets
-            ssh
-
-            # [ editor ]
-            dev
-            emacs
-            micro
-            fresh-editor
-            helix
-            # nvim
-
-            # [ programs ]
-            cli
-            git
-            nix-tools
-
-            # [ shell ]
-            alias
-            # atuin
-            bash
-            fish
-            starship
-            # zellij
-            # zsh
-
-            # [ terminal ]
-            # alacritty
-            foot
-            ghostty
-            # kitty
-
-            # [ xdg ]
-            env
-            files
-            xdg
-          ];
-        };
-
-      # ╭─────────────────────────────────────────────────────╮
-      # │ System-wide                                         │
-      # ╰─────────────────────────────────────────────────────╯
       environment = {
         sessionVariables = {
           BROWSER = "wsl-open";
