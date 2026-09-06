@@ -5,6 +5,9 @@ let
   fm = config.flake.modules;
 in
 {
+  # ╭─────────────────────────────────────────────────────╮
+  # │  nixosConfigurations                                │
+  # ╰─────────────────────────────────────────────────────╯
   # sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
   flake.nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
     modules =
@@ -29,15 +32,10 @@ in
   # ╭─────────────────────────────────────────────────────╮
   # │  Home-manager                                       │
   # ╰─────────────────────────────────────────────────────╯
-  flake.modules.nixos.host-wsl-hm = { config, pkgs, ... }: {
+  flake.modules.nixos.host-wsl-hm = {
     imports = [ fm.nixos.hmModule ];
 
-    home-manager.users.${config.myVars.user} = {
-      home.packages = with pkgs; [
-        # cliamp
-        goodvibes
-      ];
-
+    home-manager.users.${userName} = {
       imports = with fm.homeManager; [
         # [ common ]
         secrets
@@ -48,7 +46,7 @@ in
         emacs
         micro
         fresh-editor
-        helix
+        # helix
         # nvim
 
         # [ programs ]
@@ -86,16 +84,16 @@ in
     { lib, pkgs, ... }:
     {
       environment = {
-        sessionVariables = {
-          BROWSER = "wsl-open";
-        };
-
         systemPackages = with pkgs; [
           dos2unix
           wsl-open
           xdg-utils # for git oauth
           wl-clipboard
         ];
+
+        sessionVariables = {
+          BROWSER = "wsl-open";
+        };
       };
 
       wsl = {
