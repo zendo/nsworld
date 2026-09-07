@@ -29,6 +29,9 @@
     nixconfig
     nixpkgs
 
+    # [ programs ]
+    firefox
+
     # [ desktop ]
     # [ profiles ]
     # [ virt ]

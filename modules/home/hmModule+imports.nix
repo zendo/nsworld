@@ -48,7 +48,7 @@
           cava
           chrome
           cli
-          firefox
+          # firefox
           git
           gui
           mpv
