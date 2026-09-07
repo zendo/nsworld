@@ -4,7 +4,8 @@ _default:
     @just --choose
 
 ff-pref:
-    Move-Item ff-pref.js $env:APPDATA\Mozilla\Firefox\Profiles -Force
+    Copy-Item -Path "ff-pref.js" -Destination "user.js"
+    Move-Item user.js $env:APPDATA\Mozilla\Firefox\Profiles -Force
     ii $env:APPDATA\Mozilla\Firefox\Profiles
     Write-Host "`n about:support`n" -ForegroundColor Green
 
