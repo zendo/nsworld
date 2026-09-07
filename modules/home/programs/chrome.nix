@@ -4,15 +4,10 @@
     let
       # https://wiki.nixos.org/wiki/Chromium
       chromeEnv = [
-        # Force GPU acceleration
-        "--ignore-gpu-blocklist"
         "--enable-zero-copy"
-        "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
-        "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
-        "--enable-features=UseMultiPlaneFormatForHardwareVideo"
-        # wayland supports
-        "--wayland-text-input-version=3"
-        "--enable-features=WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
+        "--enable-features=AcceleratedVideoEncoder"
+        "--enable-features=VaapiVideoDecoder,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+        # "--enable-features=WaylandWindowDecorations"
       ];
     in
     {
@@ -32,22 +27,25 @@
         # Enabling DRM
         package = pkgs.chromium.override { enableWideVine = true; };
         commandLineArgs = chromeEnv;
+        # Nixos option
         # extraOpts = {
         #   # ManifestV2 support
         #   "ExtensionManifestV2Availability" = 2;
         # };
         extensions = [
           "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-          "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-          "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-          "jlgkpaicikihijadgifklkbpdajbkhjo" # CrxMouse: Mouse Gestures
-          "hmbmmdjlcdediglgfcdkhinjdelkiock" # Font Rendering Enhancer
-          "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
-          "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
-          "laachonhdpgpkjkppmjebihlklbeekhm" # Simple Proxy Switcher
-          "edenohjoklbajppddnaimojnemafnkkg" # markab
-          "bpoadfkcbjbfhfodiogcnhhhpibjhbnh" # Immersive Translate
           "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+          # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+          "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
+          "edibdbjcniadpccecjdfdjjppcpchdlm" # I still don't care about cookies
+          "mpiodijhokgodhhofbcjdecpffjipkle" # SingleFile
+          "acclmfofilomofphlgfbkhheoakkannc" # Oasis Proxy 2
+          "nipdbleimjhfpfdkopbfeagjjkmcfhbj" # Mouse Gesture
+          "gkkkcomfmldkigajkmljnbpiajbpbgdg" # TWP - Translate Web Pages
+          "ndcooeababalnlpkfedmmbbbgkljhpjf" # ScriptCat
+          # "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
+          # "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
+          # "hmbmmdjlcdediglgfcdkhinjdelkiock" # Font Rendering Enhancer
         ];
       };
     };

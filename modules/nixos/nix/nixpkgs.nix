@@ -21,6 +21,8 @@
               "keyguard"
               "sublime-merge"
               "vivaldi"
+              "chromium"
+              "chromium-unwrapped"
               "google-chrome"
               "microsoft-edge"
               "widevine-cdm"
