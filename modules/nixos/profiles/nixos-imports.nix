@@ -30,6 +30,7 @@
     nixpkgs
 
     # [ programs ]
+    chrome
     firefox
 
     # [ desktop ]

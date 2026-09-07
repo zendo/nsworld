@@ -46,7 +46,7 @@
           # ╰──────────────────────────────────────────╯
           # ai
           cava
-          chrome
+          # chrome
           cli
           # firefox
           git

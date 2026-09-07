@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.chrome =
+  flake.modules.nixos.chrome =
     { pkgs, ... }:
     let
       # https://wiki.nixos.org/wiki/Chromium
@@ -11,8 +11,12 @@
       ];
     in
     {
-      home.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         (google-chrome.override { commandLineArgs = chromeEnv; })
+        # (chromium.override {
+        #   enableWideVine = true; # Enabling DRM
+        #   commandLineArgs = chromeEnv;
+        # })
         # (brave.override { commandLineArgs = chromeEnv; })
         # (vivaldi.override {
         #   proprietaryCodecs = true;
@@ -24,9 +28,10 @@
 
       programs.chromium = {
         # enable = true;
-        # Enabling DRM
-        package = pkgs.chromium.override { enableWideVine = true; };
-        commandLineArgs = chromeEnv;
+        # extraOpts = {
+        #   # ManifestV2 support
+        #   "ExtensionManifestV2Availability" = 2;
+        # };
         extensions = [
           "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
           "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
