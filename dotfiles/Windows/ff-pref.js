@@ -1,19 +1,15 @@
-//
-// https://github.com/yokoffing/Betterfox
+/** MY PREFERENCES ***/
 
-/** BETTERFOX OVERRIDES ***/
-// PREF: restore AI features
-user_pref("browser.ai.control.default", "available")
-// PREF: restore Top Sites on New Tab page
-user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
-// PREF: restore live search suggestions
-user_pref("browser.search.suggest.enabled", true);
-// PREF: allow websites to ask you for your location
-user_pref("permissions.default.geo", 0);
-// PREF: allow websites to ask you to receive site notifications
-// user_pref("permissions.default.desktop-notification", 0);
+// Prompts
+user_pref("browser.aboutConfig.showWarning", false);
+user_pref("signon.rememberSignons", false); // Don't ask to save passwords
+user_pref("browser.translations.automaticallyPopup", false); // Don't ask to translate
 
-/** MY OVERRIDES ***/
+// Bookmarks
+user_pref("browser.toolbars.bookmarks.visibility", "always");
+
+// Tabs
+user_pref("sidebar.verticalTabs", true);
 user_pref("browser.tabs.closeTabByDblclick", true);
 user_pref("browser.tabs.closeWindowWithLastTab", false); // Prevent closing Firefox when closing the last tab
 user_pref("browser.tabs.selectOwnerOnClose", false); // Closing tab and return to the adjacent tab
@@ -22,10 +18,9 @@ user_pref("browser.tabs.loadBookmarksInTabs", true); // Open bookmarks in a new 
 // user_pref("browser.tabs.loadBookmarksInBackground", true);
 // user_pref("browser.urlbar.openintab", true); // open in a new tab
 // user_pref("browser.search.openintab", true); // open in a new tab
-user_pref("browser.toolbars.bookmarks.visibility", "always");
-user_pref("browser.aboutConfig.showWarning", false);
 
-// https://github.com/yokoffing/Betterfox/wiki/Common-Overrides#font-improvement
+
+// Fonts: https://github.com/yokoffing/Betterfox/wiki/Common-Overrides#font-improvement
 // PREF: improve font rendering by using DirectWrite everywhere like Chrome [WINDOWS]
 user_pref("gfx.font_rendering.cleartype_params.rendering_mode", 5);
 user_pref("gfx.font_rendering.cleartype_params.cleartype_level", 100);
