@@ -46,9 +46,7 @@
           # ╰──────────────────────────────────────────╯
           # ai
           cava
-          # chrome
           cli
-          # firefox
           git
           gui
           mpv

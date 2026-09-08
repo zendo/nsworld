@@ -19,9 +19,7 @@
       # │ PROGRAMS                                 │
       # ╰──────────────────────────────────────────╯
       cava
-      # chrome
       cli
-      # .firefox
       git
       # gui
       # mpv
