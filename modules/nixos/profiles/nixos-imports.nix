@@ -18,7 +18,6 @@
     user
 
     # [ networking ]
-    # bittorrent
     dns
     firewall
     networkmanager
@@ -32,6 +31,9 @@
     # [ programs ]
     chrome
     firefox
+
+    # [ services ]
+    # bittorrent
 
     # [ desktop ]
     # [ profiles ]
