@@ -5,7 +5,7 @@ keys:
   - &rmt age1dcyjdpcfjav8dlnh383gq8ppp4y2k9ewjnuf5sggt35erh8svdrsysvrfj
   - &wsl age1jvqz7uyl5x23vzcuseuk363kzza869v9rh7nsqj4srqx6tyjhv2qsc32ww
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: modules/hosts/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *private-ssh

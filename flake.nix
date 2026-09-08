@@ -4,10 +4,7 @@
   outputs =
     inputs@{ omniflake, ... }:
     omniflake.flakes.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        ./secrets/secrets-module.nix
-        (omniflake.flakes.import-tree ./modules)
-      ];
+      imports = [ (omniflake.flakes.import-tree ./modules) ];
     };
 
   inputs = {
