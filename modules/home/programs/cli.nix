@@ -19,6 +19,24 @@
         historyWidget.command = ""; # disable C-r binding
       };
 
+      programs.micro = {
+        enable = true;
+        settings = {
+          autosu = true;
+          softwrap = true;
+          hlsearch = true;
+          saveundo = true;
+          scrollbar = true;
+          mkparents = true;
+          diffgutter = true;
+        };
+      };
+
+      programs.fresh-editor = {
+        enable = true;
+        # settings = { };
+      };
+
       home.packages = with pkgs; [
         # [ Developing ]
         # yq
