@@ -4,18 +4,10 @@ let
   themeName = "tomorrow_night_bright";
 in
 {
-  flake.modules.homeManager.alacritty =
-    { pkgs, ... }:
-    {
-      home.packages = [
-        pkgs.wrap-alacritty
-      ];
-    };
-
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-alacritty = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.alacritty.wrap {
+      packages.wrapper-alacritty = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.alacritty.wrap {
         inherit pkgs;
         settings = {
           general = {

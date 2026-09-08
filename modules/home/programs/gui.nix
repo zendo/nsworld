@@ -11,6 +11,15 @@
         breeze
         helixnotes
 
+        # [ wrapper ]
+        # wrapper-alacritty
+        wrapper-cava
+        wrapper-foot
+        wrapper-ghostty
+        # wrapper-helix
+        wrapper-kitty
+        wrapper-mpv
+
         # [ Social ]
         telegram-desktop # :webkitgtk
         # vesktop # discord

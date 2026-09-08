@@ -1,17 +1,9 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.mpv =
-    { pkgs, ... }:
-    {
-      home.packages = [
-        pkgs.wrap-mpv
-      ];
-    };
-
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-mpv = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.mpv.wrap {
+      packages.wrapper-mpv = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.mpv.wrap {
         inherit pkgs;
         package = (
           pkgs.mpv.override {

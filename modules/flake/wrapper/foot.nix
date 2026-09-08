@@ -1,20 +1,10 @@
 # https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
 { inputs, ... }:
 {
-  flake.modules.homeManager.foot =
-    { pkgs, ... }:
-    {
-      programs.foot = {
-        enable = true;
-        # server.enable = true; # default: false
-        package = pkgs.wrap-foot;
-      };
-    };
-
   perSystem =
     { pkgs, ... }:
     {
-      packages.wrap-foot = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.foot.wrap {
+      packages.wrapper-foot = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.foot.wrap {
         inherit pkgs;
         settings = {
           main = {

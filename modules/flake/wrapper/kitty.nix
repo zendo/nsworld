@@ -2,15 +2,6 @@
 # https://sw.kovidgoyal.net/kitty/_downloads/433dadebd0bf504f8b008985378086ce/kitty.conf
 { inputs, ... }:
 {
-  flake.modules.homeManager.kitty =
-    { pkgs, ... }:
-    {
-      programs.kitty = {
-        enable = true;
-        package = pkgs.wrap-kitty;
-      };
-    };
-
   perSystem =
     { pkgs, ... }:
     let
@@ -58,7 +49,7 @@
       '';
     in
     {
-      packages.wrap-kitty = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.kitty.wrap {
+      packages.wrapper-kitty = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.kitty.wrap {
         inherit pkgs;
         # Afterglow / vague / bl1nk
         # themeFile = "bl1nk";
