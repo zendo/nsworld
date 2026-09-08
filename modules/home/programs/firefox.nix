@@ -36,25 +36,6 @@
             "gfx.text.subpixel-position.force-enabled" = true;
             "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
           };
-          extraConfig = ''
-            ${builtins.readFile "${pkgs.betterfox}/user.js"}
-
-            // PREF: restore AI features
-            // user_pref("browser.ai.control.default", "available")
-
-            // PREF: restore Top Sites on New Tab page
-            user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
-
-            // PREF: restore live search suggestions
-            user_pref("browser.search.suggest.enabled", true);
-
-            // PREF: allow websites to ask you for your location
-            // 0:Ask 1:Allow 2:Block(default)
-            user_pref("permissions.default.geo", 0);
-
-            // PREF: allow websites to ask you to receive site notifications
-            // user_pref("permissions.default.desktop-notification", 0);
-          '';
         };
 
         # Administrator Group Policy
