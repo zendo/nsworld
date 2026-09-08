@@ -55,11 +55,11 @@
           # proxyCommand = "nc -X 5 -x 127.0.0.1:7890 %h %p";
         };
         yoga = {
-          hostname = "192.168.2.218";
+          hostname = "192.168.15.118";
           port = 22;
         };
         svp = {
-          hostname = "192.168.2.30";
+          hostname = "192.168.15.197";
           port = 22;
           forwardAgent = true;
         };
