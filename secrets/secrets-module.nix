@@ -1,11 +1,6 @@
 # https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
 { inputs, withSystem, ... }:
 let
-  agenixSecrets = {
-    dae.file = ./dae.age;
-    infini_pass.file = ./infini_pass.age;
-  };
-
   sopsSecrets = {
     rclone_infini_pass = { };
     rclone_koofr_pass = { };
@@ -16,13 +11,7 @@ in
   flake.modules.nixos.secrets =
     { lib, config, ... }:
     {
-      imports = [
-        inputs.omniflake.flakes.agenix.nixosModules.default
-        inputs.omniflake.flakes.sops-nix.nixosModules.sops
-      ];
-
-      age.secrets = agenixSecrets;
-      # age.identityPaths = [ ]; # defined already
+      imports = [ inputs.omniflake.flakes.sops-nix.nixosModules.sops ];
 
       sops.secrets = sopsSecrets;
       sops.defaultSopsFile = ./sopsnix.yaml;
@@ -35,13 +24,7 @@ in
   flake.modules.homeManager.secrets =
     { config, pkgs, ... }:
     {
-      imports = [
-        inputs.omniflake.flakes.agenix.homeManagerModules.default
-        inputs.omniflake.flakes.sops-nix.homeManagerModules.sops
-      ];
-
-      age.secrets = agenixSecrets;
-      age.identityPaths = [ "${config.home.homeDirectory}/.config/sops/age/keys.txt" ];
+      imports = [ inputs.omniflake.flakes.sops-nix.homeManagerModules.sops ];
 
       sops.secrets = sopsSecrets;
       sops.defaultSopsFile = ./sopsnix.yaml;
