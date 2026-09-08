@@ -44,9 +44,6 @@ in
         # [ editor ]
         dev
         emacs
-        micro
-        fresh-editor
-        # helix
         # nvim
 
         # [ programs ]
@@ -62,12 +59,6 @@ in
         starship
         # zellij
         zsh
-
-        # [ terminal ]
-        # alacritty
-        foot
-        ghostty
-        # kitty
 
         # [ xdg ]
         env
@@ -85,6 +76,11 @@ in
     {
       environment = {
         systemPackages = with pkgs; [
+          wrapper-cava
+          wrapper-foot
+          wrapper-ghostty
+
+          # [ WSL ]
           dos2unix
           wsl-open
           xdg-utils # for git oauth
