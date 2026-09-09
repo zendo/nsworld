@@ -5,8 +5,14 @@
   };
 
   flake.modules.homeManager.fish =
-    { pkgs, ... }:
     {
+      pkgs,
+      lib,
+      osConfig ? null,
+      ...
+    }:
+    lib.mkIf (if osConfig != null then osConfig.programs.fish.enable else true) {
+
       programs.man.generateCaches = false;
 
       programs.fish = {

@@ -52,7 +52,7 @@
           alias
           # atuin
           bash
-          # fish
+          fish
           starship
           # zellij
           zsh

@@ -4,8 +4,15 @@
   };
 
   flake.modules.homeManager.zsh =
-    { config, pkgs, ... }:
     {
+      config,
+      pkgs,
+      lib,
+      osConfig ? null,
+      ...
+    }:
+    lib.mkIf (if osConfig != null then osConfig.programs.zsh.enable else true) {
+
       # home.packages = with pkgs; [
       #   pure-prompt
       # ];
