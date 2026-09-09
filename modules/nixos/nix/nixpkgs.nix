@@ -20,13 +20,14 @@
               "qqmusic"
               "keyguard"
               "sublime-merge"
+              "memtest86-efi"
+              # ------
               "vivaldi"
               "chromium"
               "chromium-unwrapped"
               "google-chrome"
               "microsoft-edge"
               "widevine-cdm"
-              "memtest86-efi"
               # ------
               "android-sdk-cmdline-tools"
               "amp-cli"
