@@ -55,6 +55,8 @@ in
       myVars.user = userName;
       networking.hostName = hostName;
 
+      users.defaultUserShell = pkgs.zsh;
+
       # systemd.services.comigo.enable = true;
 
       environment.systemPackages = with pkgs; [
