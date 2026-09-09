@@ -32,12 +32,17 @@
     "cache_file": {
       "enabled": true,
       "path": "cache.db",
-      "cache_id": "ID_xpv7vkj9",
+      "cache_id": "ID_f00ihguw",
       "store_fakeip": true,
-      "store_rdrc": true,
-      "rdrc_timeout": "7d"
+      "store_dns": true
     }
   },
+  "http_clients": [
+    {
+      "tag": "🚀 节点选择",
+      "detour": "🚀 节点选择"
+    }
+  ],
   "inbounds": [
     {
       "type": "mixed",
@@ -207,47 +212,42 @@
         "tag": "Category-Ads",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
-        "format": "binary",
-        "download_detour": "🎯 全球直连"
+        "format": "binary"
       },
       {
         "tag": "GeoIP-Private",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs",
-        "format": "binary",
-        "download_detour": "🎯 全球直连"
+        "format": "binary"
       },
       {
         "tag": "GeoSite-Private",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs",
-        "format": "binary",
-        "download_detour": "🎯 全球直连"
+        "format": "binary"
       },
       {
         "tag": "GeoIP-CN",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
-        "format": "binary",
-        "download_detour": "🎯 全球直连"
+        "format": "binary"
       },
       {
         "tag": "GeoSite-CN",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
-        "format": "binary",
-        "download_detour": "🎯 全球直连"
+        "format": "binary"
       },
       {
         "tag": "GeoLocation-!CN",
         "type": "remote",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
-        "format": "binary",
-        "download_detour": "🎯 全球直连"
+        "format": "binary"
       }
     ],
     "auto_detect_interface": true,
     "final": "🐟 漏网之鱼",
+    "default_http_client": "🚀 节点选择",
     "default_domain_resolver": {
       "server": "Local-DNS"
     }
@@ -318,7 +318,10 @@
     ],
     "disable_cache": false,
     "disable_expire": false,
-    "independent_cache": false,
+    "optimistic": {
+      "enabled": false,
+      "timeout": "3d"
+    },
     "final": "Remote-DNS"
   }
 }
