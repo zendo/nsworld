@@ -9,7 +9,7 @@ let
       system ? "x86_64-linux",
       extraModules ? [ ],
     }:
-    inputs.home-manager.lib.homeManagerConfiguration {
+    inputs.omniflake.flakes.home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         inherit system;
         overlays = builtins.attrValues config.flake.overlays;
