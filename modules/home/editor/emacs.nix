@@ -2,15 +2,9 @@
   flake.modules.homeManager.emacs =
     { pkgs, ... }:
     {
-      # home.packages = with pkgs; [
-      #   vips # dirvish image
-      # ];
-
-      programs.emacs = {
-        enable = true;
-        # package = pkgs.emacs-igc-pgtk;
-        package = pkgs.emacs-pgtk;
-        extraPackages =
+      home.packages = with pkgs; [
+        # vips # dirvish image
+        ((pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
           epkgs: with epkgs; [
             jinx
             sqlite3
@@ -39,17 +33,25 @@
                 tree-sitter-python
               ]
             ))
-          ];
-        # extraConfig = ''
-        #   (display-time-mode 1)
-        #   ;; toggle-input-method
-        #   ;; cp ~/nsworld/dotfiles/rime/default.custom.yaml ~/.config/emacs/rime/
-        #   ;; touch ~/.config/emacs/rime/default.yaml
-        #   (setq rime-librime-root "${pkgs.librime}"
-        #         rime-emacs-module-header-root "${pkgs.emacs-pgtk}/include"
-        #         rime-share-data-dir "${pkgs.rime-ice}/share/rime-data")
-        # '';
-      };
+            # (trivialBuild {
+            #   pname = "default";
+            #   src = pkgs.writeText "default.el" ''
+            #     (display-time-mode 1)
+            #     ;; toggle-input-method
+            #     ;; cp ~/nsworld/dotfiles/rime/default.custom.yaml ~/.config/emacs/rime/
+            #     ;; touch ~/.config/emacs/rime/default.yaml
+            #     (setq rime-librime-root "${pkgs.librime}"
+            #           rime-emacs-module-header-root "${pkgs.emacs-pgtk}/include"
+            #           rime-share-data-dir "${pkgs.rime-ice}/share/rime-data")
+            #   '';
+            #   version = "1.0.0";
+            #   # packageRequires = [
+            #   #   librime
+            #   # ];
+            # })
+          ]
+        ))
+      ];
 
       services.emacs = {
         # enable = true;
