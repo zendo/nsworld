@@ -11,11 +11,11 @@ in
       [
         host-yoga
         host-yoga-hm
+        nixos-imports
 
         # [ profiles ]
-        nixos-imports
-        laptop
         gpu-amd
+        laptop
         # steam
 
         # [ virt ]

@@ -12,9 +12,9 @@ in
       host-rmt-hm
       # host-rmt-disko-btrfs
       host-rmt-disko-bcachefs
+      nixos-imports
 
       # [ profiles ]
-      nixos-imports
       # steam
 
       # [ virt ]

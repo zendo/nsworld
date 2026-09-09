@@ -10,11 +10,11 @@ in
       host-svp
       host-svp-hm
       host-svp-disko-btrfs
+      nixos-imports
 
       # [ profiles ]
-      nixos-imports
-      laptop
       gpu-intel
+      laptop
       # steam
 
       # [ virt ]
