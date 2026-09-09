@@ -15,6 +15,7 @@
         # wrapper-alacritty
         wrapper-cava
         wrapper-foot
+        # hm extraOutputsToInstall `man` cause rebuild
         wrapper-ghostty
         # wrapper-helix
         wrapper-kitty

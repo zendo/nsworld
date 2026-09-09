@@ -2,9 +2,10 @@
   flake.modules.homeManager.cli =
     { pkgs, ... }:
     {
-      manual.manpages.enable = false;
+      manual.manpages.enable = false; # HM manuals
 
       programs = {
+        man.enable = false; # man-db
         skim.enable = true;
         television.enable = true;
         yazi.enable = true;
