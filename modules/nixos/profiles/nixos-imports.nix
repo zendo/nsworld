@@ -34,6 +34,7 @@
 
     # [ services ]
     # bittorrent
+    emacs
 
     # [ desktop ]
     # [ profiles ]

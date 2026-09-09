@@ -1,10 +1,9 @@
 {
-  flake.modules.homeManager.emacs =
+  perSystem =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        # vips # dirvish image
-        ((pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
+      packages.wrapper-emacs = (
+        (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
           epkgs: with epkgs; [
             jinx
             sqlite3
@@ -50,17 +49,7 @@
             #   # ];
             # })
           ]
-        ))
-      ];
-
-      services.emacs = {
-        # enable = true;
-        client = {
-          enable = true;
-          arguments = [ "--create-frame" ];
-        };
-        startWithUserSession = true;
-        defaultEditor = true;
-      };
+        )
+      );
     };
 }
