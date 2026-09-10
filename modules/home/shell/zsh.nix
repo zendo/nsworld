@@ -11,7 +11,7 @@
       osConfig ? null,
       ...
     }:
-    lib.mkIf (if osConfig != null then osConfig.programs.zsh.enable else true) {
+    lib.mkIf (osConfig == null || osConfig.programs.zsh.enable) {
 
       # home.packages = with pkgs; [
       #   pure-prompt

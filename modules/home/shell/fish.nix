@@ -11,7 +11,7 @@
       osConfig ? null,
       ...
     }:
-    lib.mkIf (if osConfig != null then osConfig.programs.fish.enable else true) {
+    lib.mkIf (osConfig == null || osConfig.programs.fish.enable) {
 
       programs.man.generateCaches = false;
 
