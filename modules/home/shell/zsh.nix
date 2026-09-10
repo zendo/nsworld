@@ -21,8 +21,7 @@
         enable = true;
         enableCompletion = true;
         autosuggestion.enable = true;
-        # syntaxHighlighting.enable = true;
-        fastSyntaxHighlighting.enable = true;
+        fastSyntaxHighlighting.enable = true; # or zsh-patina
         history = {
           path = "${config.xdg.dataHome}/zsh/history";
           extended = true; # timestamp
