@@ -1,19 +1,10 @@
-{ inputs, ... }:
 {
-  flake.modules.nixos.keyboards = {
-
-    # https://github.com/jtroo/kanata
-    services.kanata = {
-      enable = true;
-      keyboards = {
-        default.configFile = (inputs.self + /dotfiles/kanata/minimal.kbd);
-      };
-    };
+  flake.modules.nixos.keyd = {
 
     # https://github.com/rvaiya/keyd
     # sudo nix run nixpkgs#keyd monitor
     services.keyd = {
-      # enable = true;
+      enable = true;
       keyboards = {
         default = {
           ids = [ "*" ];

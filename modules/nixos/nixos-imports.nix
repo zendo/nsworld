@@ -12,7 +12,6 @@
     base
     boot
     fonts
-    keyboards
     ssh
     # gpg
     user
@@ -35,6 +34,8 @@
     # [ services ]
     # bittorrent
     emacs
+    kanata
+    # keyd
 
     # [ desktop ]
     # [ profiles ]
