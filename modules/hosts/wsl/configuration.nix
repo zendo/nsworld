@@ -21,6 +21,7 @@ in
         nixconfig
         nixpkgs
         ssh
+        emacs
         # fish
         zsh
       ]
@@ -43,8 +44,6 @@ in
 
         # [ editor ]
         dev
-        emacs
-        # nvim
 
         # [ programs ]
         cli
@@ -55,7 +54,7 @@ in
         alias
         # atuin
         bash
-        # fish
+        fish
         starship
         # zellij
         zsh
