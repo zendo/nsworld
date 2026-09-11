@@ -106,6 +106,7 @@
 
         # [ Utils ]
         # (lib.hiPrio uutils-coreutils-noprefix) # riir
+        moor # modern pager
         bat
         just
         # igrep
