@@ -14,7 +14,7 @@
     # =====================================================
     # Inputs Overlays
     # =====================================================
-    # nur = inputs.nur.overlay;
+    # nur = inputs.omniflake.flakes.nur.overlays;
 
     # https://wiki.nixos.org/wiki/Flakes#Importing_packages_from_multiple_nixpkgs_branches
     # stable-packages = final: _prev: {
@@ -41,26 +41,6 @@
     modifications = final: prev: {
       # foo = prev.callPackage ./foo/package.nix { };
 
-      # https://github.com/reF1nd/sing-box/tags
-      # sing-box = prev.sing-box.overrideAttrs (oldAttrs: rec {
-      #   version = "1.12.12-reF1nd";
-      #   src = prev.fetchFromGitHub {
-      #     owner = "reF1nd";
-      #     repo = "sing-box";
-      #     tag = "v${version}";
-      #     hash = "sha256-7hV9cHXEEYXY6v/4v1z/QjnHgI13F1YLdFjW6giOzbI=";
-      #   };
-      #   vendorHash = "sha256-d44VxELcjgbP2Ei6gc/zh3Jg2b1N/gnSQf8vR5rCuBk=";
-      # });
-
-      # xwayland env for inputMethod & native CSD
-      # spotify = prev.spotify.overrideAttrs (oldAttrs: {
-      #   postFixup = ''
-      #     substituteInPlace $out/share/applications/spotify.desktop \
-      #       --replace-fail "Exec=spotify %U" "Exec=env NIXOS_OZONE_WL= spotify %U"
-      #   '';
-      # });
-
       # Remove attributes from set
       # gui-for-singbox = prev.gui-for-singbox.overrideAttrs (oldAttrs: {
       #   meta = builtins.removeAttrs oldAttrs.meta [
@@ -75,15 +55,15 @@
       # '';
 
       # wrapProgram $out/bin/telegram-desktop --set QT_QPA_PLATFORM xcb
-      logseq-wayland = prev.symlinkJoin {
-        name = "logseq";
-        paths = [ prev.logseq ];
-        nativeBuildInputs = [ prev.makeWrapper ];
-        postBuild = ''
-          wrapProgram $out/bin/logseq \
-            --add-flags "--socket=wayland --enable-features=UseOzonePlatform --ozone-platform=wayland"
-        '';
-      };
+      # logseq-wayland = prev.symlinkJoin {
+      #   name = "logseq";
+      #   paths = [ prev.logseq ];
+      #   nativeBuildInputs = [ prev.makeWrapper ];
+      #   postBuild = ''
+      #     wrapProgram $out/bin/logseq \
+      #       --add-flags "--socket=wayland --enable-features=UseOzonePlatform --ozone-platform=wayland"
+      #   '';
+      # };
 
       # ---------------------------------------------------
       # Python Module Overlays
