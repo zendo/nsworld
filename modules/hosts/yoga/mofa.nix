@@ -31,16 +31,5 @@
         # enable = true;
         configFile = "/home/${config.myVars.user}/Projects/subs/dae-config.dae";
       };
-
-      # Virtual network interfering Geoclue2's IP-based location
-      services.geoclue2 = {
-        # enableStatic = true;
-        staticAltitude = 10; # 海拔高度
-        staticAccuracy = 1000; # 精度半径
-      };
-      location = {
-        latitude = 23.38; # 纬度
-        longitude = 113.20; # 经度
-      };
     };
 }
