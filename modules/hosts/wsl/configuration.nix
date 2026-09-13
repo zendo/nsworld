@@ -25,6 +25,7 @@ in
         emacs
         # fish
         zsh
+        starship
       ]
       ++ [
         inputs.omniflake.flakes.nixos-wsl.nixosModules.wsl
@@ -51,7 +52,6 @@ in
         # atuin
         bash
         fish
-        starship
         # zellij
         zsh
 

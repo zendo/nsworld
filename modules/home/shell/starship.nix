@@ -1,5 +1,6 @@
-{
-  flake.modules.homeManager.starship = {
+rec {
+  # env | rg STARSHIP
+  flake.modules.nixos.starship = {
     programs.starship = {
       enable = true;
       # enableBashIntegration = false;
@@ -20,4 +21,6 @@
       };
     };
   };
+
+  flake.modules.homeManager.starship = flake.modules.nixos.starship;
 }

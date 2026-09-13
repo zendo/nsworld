@@ -7,6 +7,7 @@
     # [ shell ]
     # fish
     zsh
+    starship
 
     # [ core ]
     base

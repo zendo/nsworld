@@ -46,7 +46,6 @@
           # atuin
           bash
           fish
-          starship
           # zellij
           zsh
           # ╭──────────────────────────────────────────╮
