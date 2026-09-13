@@ -9,7 +9,6 @@
         skim.enable = true;
         television.enable = true;
         zoxide.enable = true; # z: autojump directory
-        # hstr.enable = true; # hh: history
         # pay-respects.enable = true;
       };
 
