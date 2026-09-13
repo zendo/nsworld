@@ -10,7 +10,6 @@
       cli
       git
       # gui
-      nix-tools
       # rclone
       # vicinae
       # ╭──────────────────────────────────────────╮

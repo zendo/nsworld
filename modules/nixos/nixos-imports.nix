@@ -24,6 +24,7 @@
 
     # [ nix ]
     # nix-cache
+    nix-tools
     nixconfig
     nixpkgs
 

@@ -29,7 +29,6 @@
         ]
         ++ (with config.flake.modules.homeManager; [
           secrets
-          nix-tools
           # ╭──────────────────────────────────────────╮
           # │ PROGRAMS                                 │
           # ╰──────────────────────────────────────────╯

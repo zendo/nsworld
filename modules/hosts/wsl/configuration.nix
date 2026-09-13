@@ -20,6 +20,7 @@ in
         fonts
         nixconfig
         nixpkgs
+        nix-tools
         ssh
         emacs
         # fish
@@ -40,7 +41,6 @@ in
       imports = with fm.homeManager; [
         # [ common ]
         secrets
-        nix-tools
 
         # [ programs ]
         cli

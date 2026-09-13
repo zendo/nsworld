@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.nix-tools =
-    { pkgs, config, ... }:
+  flake.modules.nixos.nix-tools =
+    { pkgs, ... }:
     {
-      home.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         # alejandra
         nixfmt
         # lorri
@@ -28,25 +28,16 @@
       programs = {
         nh = {
           enable = true;
-          clean.enable = true;
+          # clean.enable = true; # !conflict nix.gc.automatic
           clean.extraArgs = "--keep-since 4d --keep 3";
-          flake = "${config.home.homeDirectory}/nsworld";
+          flake = "~/nsworld";
         };
 
-        nix-index = {
-          # enable = true;
-        };
+        # devenv = {
+        #   enable = true;
+        # };
 
-        # Causes the `motd` not working
-        nix-your-shell = {
-          # enable = true;
-        };
-
-        devenv = {
-          # enable = true;
-        };
-
-        # echo "use flake" >> .envrc && direnv allow
+        # # echo "use flake" >> .envrc && direnv allow
         direnv = {
           enable = true;
           nix-direnv.enable = true;
