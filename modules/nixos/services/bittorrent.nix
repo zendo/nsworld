@@ -19,5 +19,9 @@
       #   # };
       #   openFirewall = config.networking.firewall.enable;
       # };
+
+      # services.aria2 = {
+      #   enable = true;
+      # };
     };
 }

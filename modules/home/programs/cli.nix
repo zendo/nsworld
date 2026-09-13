@@ -9,7 +9,6 @@
         skim.enable = true;
         television.enable = true;
         yazi.enable = true;
-        aria2.enable = true;
         zoxide.enable = true; # z: autojump directory
         # hstr.enable = true; # hh: history
         # pay-respects.enable = true;
@@ -133,6 +132,7 @@
         # [ Networking ]
         wget
         curl
+        aria2
         # ghgrab
         lsof
         bind
