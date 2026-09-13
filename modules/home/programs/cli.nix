@@ -7,7 +7,6 @@
       programs = {
         man.enable = false; # man-db
         skim.enable = true;
-        television.enable = true;
         zoxide.enable = true; # z: autojump directory
         # pay-respects.enable = true;
       };
