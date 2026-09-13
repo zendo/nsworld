@@ -1,6 +1,13 @@
 {
   flake.modules.nixos.terminal = {
-    programs.zoxide.enable = true; # z: autojump directory
+    # z: autojump directory
+    programs.zoxide.enable = true;
+
+    # Ctrl+r / Ctrl+t / Alt+c
+    programs.fzf = {
+      fuzzyCompletion = true;
+      keybindings = true;
+    };
 
     # env | rg STARSHIP
     programs.starship = {
@@ -29,6 +36,11 @@
     programs.bash.enable = true;
     programs.starship.enable = true;
     programs.zoxide.enable = true;
+
+    programs.fzf = {
+      enable = true;
+      # historyWidget.command = ""; # disable C-r binding
+    };
 
     programs.zellij = {
       enable = true;

@@ -5,11 +5,6 @@
       manual.manpages.enable = false; # HM manuals
       programs.man.enable = false; # man-db
 
-      programs.fzf = {
-        enable = true;
-        historyWidget.command = ""; # disable C-r binding
-      };
-
       programs.micro = {
         enable = true;
         settings = {
