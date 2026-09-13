@@ -3,6 +3,10 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
+        # [ ide ]
+        # zed-editor
+
+        # [ base ]
         gcc
         cmake
         gnumake
