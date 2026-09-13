@@ -39,7 +39,6 @@ in
     home-manager.users.${userName} = {
       imports = with fm.homeManager; [
         # [ common ]
-        ssh
         secrets
         nix-tools
 

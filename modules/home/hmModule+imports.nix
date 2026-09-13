@@ -28,7 +28,6 @@
           config.flake.modules.homeManager.plasma-manager
         ]
         ++ (with config.flake.modules.homeManager; [
-          ssh
           secrets
           nix-tools
           # ╭──────────────────────────────────────────╮
