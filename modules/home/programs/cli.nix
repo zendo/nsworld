@@ -7,7 +7,6 @@
       programs = {
         man.enable = false; # man-db
         zoxide.enable = true; # z: autojump directory
-        # pay-respects.enable = true;
       };
 
       programs.fzf = {
