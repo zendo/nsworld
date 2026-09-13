@@ -47,7 +47,6 @@ in
 
         # [ programs ]
         cli
-        git
         nix-tools
 
         # [ shell ]
@@ -78,6 +77,7 @@ in
           wrapper-cava
           wrapper-foot
           wrapper-ghostty
+          wrapper-git
 
           # [ WSL ]
           dos2unix

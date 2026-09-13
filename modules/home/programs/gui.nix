@@ -16,6 +16,7 @@
         wrapper-cava
         wrapper-foot
         wrapper-ghostty
+        wrapper-git
         # wrapper-helix
         wrapper-kitty
         wrapper-mpv
