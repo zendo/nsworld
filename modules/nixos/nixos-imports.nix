@@ -37,8 +37,8 @@
     # [ services ]
     # bittorrent
     emacs
-    kanata
-    # keyd
+    # kanata
+    keyd
 
     # [ desktop ]
     # [ profiles ]
