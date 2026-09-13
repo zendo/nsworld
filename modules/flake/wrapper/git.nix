@@ -1,4 +1,17 @@
-# WIP
+/*
+  [filter "lfs"]
+    clean = "/nix/store/znvkn5yky0cq9npv4xnii8dlq400lkr1-git-lfs-3.7.1/bin/git-lfs clean -- %f"
+    process = "/nix/store/znvkn5yky0cq9npv4xnii8dlq400lkr1-git-lfs-3.7.1/bin/git-lfs filter-process"
+    required = true
+    smudge = "/nix/store/znvkn5yky0cq9npv4xnii8dlq400lkr1-git-lfs-3.7.1/bin/git-lfs smudge -- %f"
+
+  [gpg]
+    format = "openpgp"
+
+  [gpg "openpgp"]
+    program = "/nix/store/0prm77nf3lpljd30wbvh7c3alv2glqc7-gnupg-2.4.9/bin/gpg"
+*/
+
 # git config --global --show-origin --list
 { inputs, ... }:
 let
@@ -71,5 +84,16 @@ in
 
         }
       );
+
+      packages.wrapper-jujutsu = inputs.omniflake.flakes.nix-wrapper-modules.wrappers.jujutsu.wrap {
+        inherit pkgs;
+        settings = {
+          user = {
+            name = gitName;
+            email = gitEmail;
+          };
+        };
+      };
+
     };
 }
