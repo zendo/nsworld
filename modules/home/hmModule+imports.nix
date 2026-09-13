@@ -28,22 +28,19 @@
           config.flake.modules.homeManager.plasma-manager
         ]
         ++ (with config.flake.modules.homeManager; [
-          secrets
           ssh
-          # ╭──────────────────────────────────────────╮
-          # │ EDITOR                                   │
-          # ╰──────────────────────────────────────────╯
-          dev
-          # vscode
+          secrets
+          nix-tools
           # ╭──────────────────────────────────────────╮
           # │ PROGRAMS                                 │
           # ╰──────────────────────────────────────────╯
           # ai
           cli
+          dev
           gui
-          nix-tools
           rclone
           # vicinae
+          # vscode
           # ╭──────────────────────────────────────────╮
           # │ SHELL                                    │
           # ╰──────────────────────────────────────────╯

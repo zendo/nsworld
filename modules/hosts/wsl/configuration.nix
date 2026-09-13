@@ -39,15 +39,13 @@ in
     home-manager.users.${userName} = {
       imports = with fm.homeManager; [
         # [ common ]
-        secrets
         ssh
-
-        # [ editor ]
-        dev
+        secrets
+        nix-tools
 
         # [ programs ]
         cli
-        nix-tools
+        dev
 
         # [ shell ]
         alias
