@@ -31,11 +31,6 @@
         };
       };
 
-      programs.fresh-editor = {
-        enable = true;
-        # settings = { };
-      };
-
       home.packages = with pkgs; [
         # [ Developing ]
         # yq
@@ -49,6 +44,7 @@
         efm-langserver # :markdown lsp
         strace
         lurk # strace alternative
+        fresh-editor
 
         # [ Compressor/Archiver ]
         p7zip
