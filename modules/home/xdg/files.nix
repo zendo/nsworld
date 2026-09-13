@@ -34,8 +34,6 @@
 
       # ~/.local/share
       xdg.dataFile = {
-        "goodvibes".source = staticDot "goodvibes";
-
         # rime for fcitx5
         "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
         "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
