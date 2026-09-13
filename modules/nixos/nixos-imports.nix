@@ -8,7 +8,7 @@
     bash
     # fish
     zsh
-    starship
+    terminal
 
     # [ core ]
     base

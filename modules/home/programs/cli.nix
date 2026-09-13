@@ -3,11 +3,7 @@
     { pkgs, ... }:
     {
       manual.manpages.enable = false; # HM manuals
-
-      programs = {
-        man.enable = false; # man-db
-        zoxide.enable = true; # z: autojump directory
-      };
+      programs.man.enable = false; # man-db
 
       programs.fzf = {
         enable = true;

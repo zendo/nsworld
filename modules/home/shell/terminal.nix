@@ -1,6 +1,8 @@
-rec {
-  # env | rg STARSHIP
-  flake.modules.nixos.starship = {
+{
+  flake.modules.nixos.terminal = {
+    programs.zoxide.enable = true; # z: autojump directory
+
+    # env | rg STARSHIP
     programs.starship = {
       enable = true;
       # enableBashIntegration = false;
@@ -22,5 +24,24 @@ rec {
     };
   };
 
-  flake.modules.homeManager.starship = flake.modules.nixos.starship;
+  # for non-nixos
+  flake.modules.homeManager.terminal = {
+    programs.bash.enable = true;
+    programs.starship.enable = true;
+    programs.zoxide.enable = true;
+
+    programs.zellij = {
+      enable = true;
+      settings = {
+        theme = "nord";
+        # default_shell = "zsh";
+        simplified_ui = true;
+        pane_frames = false;
+        keybinds = {
+          unbind = "Ctrl q";
+        };
+      };
+    };
+
+  };
 }

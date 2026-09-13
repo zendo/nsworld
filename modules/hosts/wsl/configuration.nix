@@ -26,7 +26,7 @@ in
         bash
         # fish
         zsh
-        starship
+        terminal
       ]
       ++ [
         inputs.omniflake.flakes.nixos-wsl.nixosModules.wsl
@@ -51,7 +51,6 @@ in
         # [ shell ]
         alias
         fish
-        # zellij
         zsh
 
         # [ xdg ]
