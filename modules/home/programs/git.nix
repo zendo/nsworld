@@ -85,10 +85,6 @@
         # enable = true;
       };
 
-      programs.lazygit = {
-        enable = true;
-      };
-
       programs.jujutsu = {
         # enable = true;
         settings = {

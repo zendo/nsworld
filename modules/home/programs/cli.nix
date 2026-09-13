@@ -127,6 +127,7 @@
         calcurse
         # zee
         tokei # count code
+        lazygit
         herdr
 
         # [ Networking ]
