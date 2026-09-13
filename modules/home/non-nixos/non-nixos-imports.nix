@@ -14,7 +14,6 @@
       # │ SHELL                                    │
       # ╰──────────────────────────────────────────╯
       alias
-      atuin
       # bash
       fish
       starship

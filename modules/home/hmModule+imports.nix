@@ -43,7 +43,6 @@
           # │ SHELL                                    │
           # ╰──────────────────────────────────────────╯
           alias
-          # atuin
           bash
           fish
           # zellij

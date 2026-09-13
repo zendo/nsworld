@@ -49,7 +49,6 @@ in
 
         # [ shell ]
         alias
-        # atuin
         bash
         fish
         # zellij
