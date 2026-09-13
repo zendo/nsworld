@@ -6,7 +6,6 @@
 
       programs = {
         man.enable = false; # man-db
-        skim.enable = true;
         zoxide.enable = true; # z: autojump directory
         # pay-respects.enable = true;
       };
@@ -59,6 +58,8 @@
         file
         tree
         # erdtree
+        fzf
+        skim
         yazi
         gdu
         duf
