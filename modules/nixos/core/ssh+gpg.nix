@@ -34,19 +34,8 @@
       enableDefaultConfig = false;
       settings = {
         "*" = {
-          # --- 1. 保持连接（防掉线） ---
-          serverAliveInterval = 60; # 每 60 秒发一次心跳包
-          serverAliveCountMax = 5; # 连续 5 次没响应才断开
-          # --- 2. 自动化密钥管理 ---
-          addKeysToAgent = "yes"; # 第一次解密私钥后，自动存入 ssh-agent
-          forwardAgent = false; # 默认关闭转发，仅在特定 host 下开启
-          # --- 3. 连接多路复用（秒连神器） ---
-          # 第一次连接会建立 Master，后续连接同一台机器将直接复用，无需握手
-          controlMaster = "auto";
-          controlPersist = "10m"; # 主连接关闭后，后台保持 10 分钟
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          # --- 4. 性能与安全性平衡 ---
-          # hashKnownHosts = true; # 开启哈希，保护你的 known_hosts 不被扫描
+          serverAliveInterval = 60;
+          serverAliveCountMax = 5;
         };
         "github.com" = {
           hostname = "ssh.github.com";
