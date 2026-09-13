@@ -8,7 +8,6 @@
         man.enable = false; # man-db
         skim.enable = true;
         television.enable = true;
-        yazi.enable = true;
         zoxide.enable = true; # z: autojump directory
         # hstr.enable = true; # hh: history
         # pay-respects.enable = true;
@@ -66,6 +65,7 @@
         file
         tree
         # erdtree
+        yazi
         gdu
         duf
         dysk
