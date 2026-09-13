@@ -3,14 +3,14 @@
     { lib, pkgs, ... }:
     rec {
       environment.systemPackages = with pkgs.gnomeExtensions; [
-        aurora-shell
-        # appindicator
+        # aurora-shell
+        appindicator
         # dockng
-        # dash-to-dock
+        dash-to-dock
         # dash-to-panel
-        # night-theme-switcher
+        night-theme-switcher
         # legacy-gtk3-theme-scheme-auto-switcher
-        # clipboard-history
+        clipboard-history
         # blur-my-shell
         # top-bar-organizer
         # just-perfection
