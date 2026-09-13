@@ -23,6 +23,7 @@ in
         nix-tools
         ssh
         emacs
+        bash
         # fish
         zsh
         starship
@@ -49,7 +50,6 @@ in
 
         # [ shell ]
         alias
-        bash
         fish
         # zellij
         zsh

@@ -5,6 +5,7 @@
     secrets
 
     # [ shell ]
+    bash
     # fish
     zsh
     starship

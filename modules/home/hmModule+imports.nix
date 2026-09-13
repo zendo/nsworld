@@ -13,6 +13,7 @@
           {
             # home.enableNixpkgsReleaseCheck = false;
             home.stateVersion = nixosConfig.system.stateVersion;
+            programs.bash.enable = true;
           }
         )
       ];
@@ -43,7 +44,6 @@
           # │ SHELL                                    │
           # ╰──────────────────────────────────────────╯
           alias
-          bash
           fish
           # zellij
           zsh
