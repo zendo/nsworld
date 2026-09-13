@@ -30,7 +30,7 @@
           enable = true;
           # clean.enable = true; # !conflict nix.gc.automatic
           clean.extraArgs = "--keep-since 4d --keep 3";
-          flake = "~/nsworld";
+          flake = "$HOME/nsworld";
         };
 
         # devenv = {
