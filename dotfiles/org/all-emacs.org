@@ -3468,6 +3468,8 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 #+end_src
 
 ** eglot
+https://www.jamescherti.com/emacs-eglot-performance/
+
 #+begin_src emacs-lisp
 (use-package eglot
   :defer t
@@ -3475,8 +3477,11 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   (eglot-autoshutdown t) ; shutdown after closing the last managed buffer
   (eglot-sync-connect 0) ; async, do not block
   (eglot-extend-to-xref t) ; can be interesting!
+  (eglot-code-action-indications nil) ; Disable automatic code action indicators
   :hook ((prog-mode . eglot-ensure))
   :config
+  ;; Disable live formatting
+  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider)
   (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
