@@ -3,12 +3,10 @@
   flake.modules.homeManager.non-nixos-imports = {
     imports = with config.flake.modules.homeManager; [
       secrets
-      ssh
       # ╭──────────────────────────────────────────╮
       # │ PROGRAMS                                 │
       # ╰──────────────────────────────────────────╯
       cli
-      git
       # gui
       # rclone
       # vicinae
