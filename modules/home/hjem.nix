@@ -1,4 +1,20 @@
 # WIP...
+/*
+    https://github.com/nix-community/home-manager/tree/master/modules/misc/xdg
+    .config/user-dirs.conf
+    enabled=False
+
+  .config/user-dirs.dirs
+  XDG_DESKTOP_DIR="/home/uuu/Desktop"
+  XDG_DOCUMENTS_DIR="/home/uuu/Documents"
+  XDG_DOWNLOAD_DIR="/home/uuu/Downloads"
+  XDG_MUSIC_DIR="/home/uuu/Music"
+  XDG_PICTURES_DIR="/home/uuu/Pictures"
+  XDG_PROJECTS_DIR="/home/uuu/Projects"
+  XDG_PUBLICSHARE_DIR="/home/uuu/Public"
+  XDG_TEMPLATES_DIR="/home/uuu/Templates"
+  XDG_VIDEOS_DIR="/home/uuu/Videos"
+*/
 { inputs, config, ... }:
 let
   fm = config.flake.modules;
@@ -44,7 +60,7 @@ in
   };
 
   flake.modules.hjem.env = {
-    environment.sessionVariables = {
+    environment.sessionVaruuules = {
       # EDITOR = "emacsclient -c -a emacs";
       EDITOR = "micro";
       VISUAL = "micro";

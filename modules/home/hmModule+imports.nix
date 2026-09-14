@@ -22,28 +22,19 @@
   flake.modules.homeManager.home-imports =
     { lib, nixosConfig, ... }:
     {
-      # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'
+      manual.manpages.enable = false; # HM manuals
+      programs.man.enable = false; # man-db
+      programs.bash.enable = true;
+
       imports =
         lib.optionals nixosConfig.services.desktopManager.plasma6.enable [
           config.flake.modules.homeManager.plasma-manager
         ]
         ++ (with config.flake.modules.homeManager; [
           secrets
-          # ╭──────────────────────────────────────────╮
-          # │ PROGRAMS                                 │
-          # ╰──────────────────────────────────────────╯
-          # ai
-          cli
-          dev
-          gui
-          rclone
-          # vicinae
+          # rclone
           # vscode
-          # ╭──────────────────────────────────────────╮
-          # │ XDG                                      │
-          # ╰──────────────────────────────────────────╯
           files
-          mime
           xdg
         ]);
     };

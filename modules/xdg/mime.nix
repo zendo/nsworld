@@ -1,10 +1,6 @@
 {
-  flake.modules.homeManager.mime =
-    {
-      lib,
-      nixosConfig,
-      ...
-    }:
+  flake.modules.nixos.mime =
+    { lib, config, ... }:
     let
       music = "audacious.desktop";
       browser = "firefox.desktop";
@@ -13,7 +9,7 @@
     in
     {
       # https://www.iana.org/assignments/media-types/media-types.xhtml
-      xdg.mimeApps = {
+      xdg.mime = {
         enable = true;
         defaultApplications = lib.mkMerge [
           {
@@ -31,10 +27,10 @@
 
             "application/pdf" = "org.gnome.Papers.desktop";
           }
-          (lib.mkIf nixosConfig.services.desktopManager.gnome.enable {
+          (lib.mkIf config.services.desktopManager.gnome.enable {
             "text/plain" = "org.gnome.TextEditor.desktop";
           })
-          (lib.mkIf nixosConfig.services.desktopManager.plasma6.enable {
+          (lib.mkIf config.services.desktopManager.plasma6.enable {
             "image/jpeg" = qt-image;
             "image/png" = qt-image;
             "image/webp" = qt-image;

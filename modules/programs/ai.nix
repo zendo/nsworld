@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.ai =
+  flake.modules.nixos.ai =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         nodejs
         pi-acp
         pi-coding-agent

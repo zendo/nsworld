@@ -10,7 +10,6 @@
     fish
     zsh
     terminal
-    env
 
     # [ core ]
     base
@@ -33,6 +32,8 @@
     nixpkgs
 
     # [ programs ]
+    cli
+    gui
     chrome
     firefox
 
@@ -41,6 +42,10 @@
     emacs
     # kanata
     keyd
+
+    # [ xdg ]
+    env
+    mime
 
     # [ desktop ]
     # [ profiles ]

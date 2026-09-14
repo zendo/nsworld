@@ -18,6 +18,10 @@ in
         laptop
         # steam
 
+        # [ programs ]
+        ai
+        dev
+
         # [ virt ]
         docker
         # incus
@@ -42,10 +46,7 @@ in
     imports = [ fm.nixos.hmModule ];
 
     home-manager.users.${userName} = {
-      imports = with fm.homeManager; [
-        home-imports
-        ai
-      ];
+      imports = [ fm.homeManager.home-imports ];
     };
   };
 

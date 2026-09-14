@@ -42,7 +42,6 @@
 
     environment.etc."zshrc.local".text = ''
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-      # eval "$(${pkgs.zsh-patina}/bin/zsh-patina activate)"
     '';
   };
 

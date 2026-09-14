@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.homeManager.files =
-    { config, ... }:
+    { config, lib, ... }:
     let
       staticDot = dir: (inputs.self + /dotfiles/${dir});
       linkDot =
@@ -21,6 +21,16 @@
         "niri/configs".source = linkDot "niri/configs";
         "niri/config.kdl".source = linkDot "niri/config.kdl";
         "hypr/hyprland.lua".source = linkDot "hypr/hyprland.lua";
+
+        "micro/settings.json".text = lib.generators.toJSON { } {
+          autosu = true;
+          softwrap = true;
+          hlsearch = true;
+          saveundo = true;
+          scrollbar = true;
+          mkparents = true;
+          diffgutter = true;
+        };
 
         # rime for ibus
         "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";

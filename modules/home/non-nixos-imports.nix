@@ -1,20 +1,24 @@
 { config, ... }:
 {
   flake.modules.homeManager.non-nixos-imports = {
+    manual.manpages.enable = false; # HM manuals
+    programs.man.enable = false; # man-db
+
+    # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'
     imports = with config.flake.modules.homeManager; [
       secrets
+      # vicinae
       # ╭──────────────────────────────────────────╮
       # │ PROGRAMS                                 │
       # ╰──────────────────────────────────────────╯
       cli
       # gui
       # rclone
-      # vicinae
       # ╭──────────────────────────────────────────╮
       # │ SHELL                                    │
       # ╰──────────────────────────────────────────╯
-      alias
-      fish
+      # alias
+      # fish
       # zsh
       terminal
       # ╭──────────────────────────────────────────╮
@@ -22,7 +26,6 @@
       # ╰──────────────────────────────────────────╯
       env
       files
-      # mime
       xdg
     ];
   };

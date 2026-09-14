@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.dev =
+  flake.modules.nixos.dev =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         # [ ide ]
         # zed-editor
 

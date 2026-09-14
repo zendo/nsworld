@@ -24,6 +24,10 @@ in
         ssh
         emacs
 
+        # [ programs ]
+        cli
+        dev
+
         # [ shell ]
         alias
         bash
@@ -45,14 +49,7 @@ in
 
     home-manager.users.${userName} = {
       imports = with fm.homeManager; [
-        # [ common ]
         secrets
-
-        # [ programs ]
-        cli
-        dev
-
-        # [ xdg ]
         files
         xdg
       ];

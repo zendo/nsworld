@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.gui =
-    { lib, pkgs, ... }:
+  flake.modules.nixos.gui =
+    { pkgs, lib, ... }:
     {
-      home.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         # kula
         # nano-ffmpeg
         rwx
@@ -131,14 +131,5 @@
         # [ Games ]
         # pvzge
       ];
-
-      # programs.obs-studio = {
-      #   enable = true;
-      #   plugins = [ ];
-      # };
-
-      # programs.pandoc = {
-      #   enable = true;
-      # };
     };
 }
