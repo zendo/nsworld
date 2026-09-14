@@ -5,7 +5,6 @@
       manual.manpages.enable = false; # HM manuals
       programs.man.enable = false; # man-db
       programs.bash.enable = true;
-      # programs.zsh.enable = true;
 
       programs.micro = {
         enable = true;
