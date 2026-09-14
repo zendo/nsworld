@@ -1,21 +1,28 @@
 { inputs, ... }:
+let
+  customVariables = {
+    # EDITOR = "emacsclient -c -a emacs";
+    EDITOR = "micro";
+    VISUAL = "micro";
+    PAGER = "moor";
+    TERMINAL = "ghostty";
+    PI_SKIP_VERSION_CHECK = "1";
+    NIXOS_OZONE_WL = 1; # Electron wayland native
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  };
+in
 {
-  flake.modules.homeManager.env =
-    { lib, ... }:
-    {
-      home.sessionPath = [
-        "${inputs.self}/dotfiles/bin"
-      ];
+  flake.modules.nixos.env = {
+    environment.localBinInPath = true;
 
-      home.sessionVariables = {
-        # EDITOR = "emacsclient -c -a emacs";
-        EDITOR = "micro";
-        VISUAL = "micro";
-        PAGER = "moor";
-        TERMINAL = "ghostty";
-        PI_SKIP_VERSION_CHECK = "1";
-        NIXOS_OZONE_WL = lib.mkDefault 1; # Electron wayland native
-        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-      };
-    };
+    environment.sessionVariables = customVariables;
+  };
+
+  flake.modules.homeManager.env = {
+    home.sessionPath = [
+      "${inputs.self}/dotfiles/bin"
+    ];
+
+    home.sessionVariables = customVariables;
+  };
 }

@@ -9,6 +9,7 @@
     # fish
     zsh
     terminal
+    env
 
     # [ core ]
     base

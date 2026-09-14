@@ -27,6 +27,7 @@ in
         # fish
         zsh
         terminal
+        env
       ]
       ++ [
         inputs.omniflake.flakes.nixos-wsl.nixosModules.wsl
@@ -53,7 +54,6 @@ in
         fish
 
         # [ xdg ]
-        env
         files
         xdg
       ];
