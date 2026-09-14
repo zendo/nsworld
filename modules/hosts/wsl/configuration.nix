@@ -23,6 +23,9 @@ in
         nix-tools
         ssh
         emacs
+
+        # [ shell ]
+        alias
         bash
         # fish
         zsh
@@ -48,10 +51,6 @@ in
         # [ programs ]
         cli
         dev
-
-        # [ shell ]
-        alias
-        fish
 
         # [ xdg ]
         files

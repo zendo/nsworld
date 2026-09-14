@@ -1,7 +1,19 @@
 {
-  flake.modules.nixos.fish = {
+  flake.modules.nixos.fish = { pkgs, ... }: {
+
     documentation.man.cache.enable = false;
-    programs.fish.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      fishPlugins.pure
+      # fishPlugins.tide
+    ];
+
+    programs.fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_greeting
+      '';
+    };
   };
 
   flake.modules.homeManager.fish =
@@ -17,7 +29,6 @@
 
       programs.fish = {
         enable = true;
-        # generateCompletions = true;
         plugins = [
           # {
           #   name = "pure";
