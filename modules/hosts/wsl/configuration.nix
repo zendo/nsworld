@@ -51,7 +51,6 @@ in
         # [ shell ]
         alias
         fish
-        zsh
 
         # [ xdg ]
         env

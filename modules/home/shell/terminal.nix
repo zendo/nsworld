@@ -14,6 +14,7 @@
     programs.starship = {
       enable = true;
       # enableBashIntegration = false;
+      enableZshIntegration = false;
       # enableFishIntegration = false;
       settings = {
         command_timeout = 3000; # Timeout for commands executed
