@@ -3,9 +3,10 @@
     # z: autojump directory
     programs.zoxide.enable = true;
 
-    # Ctrl+r / Ctrl+t / Alt+c
     programs.fzf = {
+      # ls **
       fuzzyCompletion = true;
+      # Ctrl+r / Ctrl+t / Alt+c
       keybindings = true;
     };
 
