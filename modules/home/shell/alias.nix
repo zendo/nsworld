@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.alias =
+  flake.modules.nixos.alias =
     {
       lib,
       pkgs,
@@ -7,7 +7,7 @@
       ...
     }:
     {
-      home.shellAliases = {
+      environment.shellAliases = {
         # [ ls ]
         ls = "${lib.getExe pkgs.eza}";
         li = "ls -l --icons";
@@ -89,7 +89,7 @@
         '';
       };
 
-      programs.bash.bashrcExtra = lib.mkAfter ''
+      programs.bash.interactiveShellInit = lib.mkAfter ''
         nix-build-ls() {
           nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
         }
@@ -101,7 +101,7 @@
       // config.programs.bash.shellAliases;
 
       programs.fish = {
-        functions = {
+        shellFunctions = {
           # [ nix ]
           nix-build-ls.body = ''
             nix build --print-out-paths --no-link nixpkgs#$argv[1] | xargs yazi

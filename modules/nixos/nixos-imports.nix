@@ -5,6 +5,7 @@
     secrets
 
     # [ shell ]
+    alias
     bash
     # fish
     zsh
