@@ -1,127 +1,157 @@
+let
+  commonAlias = {
+    # [ ls ]
+    ls = "eza";
+    li = "ls -l --icons";
+    ll = "ls -l";
+    la = "ls -a";
+    lt = "ls --tree";
+    lla = "ls -la";
+    lm = "ls -l -a --reverse --sort=modified";
+    "la." = "ls -d .*";
+
+    # [ rm ]
+    rm = "gtrash put";
+    rm-empty = "gtrash find --rm";
+    rm-restore = "gtrash restore";
+
+    # [ systemd ]
+    sc = "systemctl";
+    scu = "systemctl --user";
+    jlog = "journalctl";
+    jlogu = "journalctl --user-unit";
+    jlog-1h = ''journalctl -p err..alert --since "60 min ago"'';
+
+    cat = "bat -p";
+    cp = "xcp";
+    fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
+    bc = "qalc";
+    ii = "xdg-open"; # `Invoke-Item` powershell style
+    inxi = "inxi -Fz";
+    free = "free -h";
+    beep = ''echo -en "\007"'';
+    dd-log = "sudo dd bs=8M oflag=sync,direct conv=fsync status=progress";
+    psp = "procs --sortd UsageMem";
+    ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
+
+    # [ network ]
+    ip = "ip --color=auto";
+    ip-api = "curl ip-api.com";
+    ip-info = "curl ipinfo.io";
+    ip-location = "curl -s api.ip2location.io | jq .";
+    paste-termbin = "nc termbin.com 9999";
+    paste-rs = "curl --data-binary @- https://paste.rs/";
+
+    # [ emacs ]
+    e = "emacs -nw";
+    ee = "emacsclient --create-frame";
+    ee-init-config = "emacs --init-directory ~/.config/emacs";
+    dired = ''emacsclient -nw -c -e "(dired default-directory)"'';
+    magit = ''emacsclient -nw -c -e "(magit-status)"'';
+
+    # [ nix ]
+    j = "just --justfile=$HOME/nsworld/justfile";
+    nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
+    # https://github.com/NixOS/nixpkgs/issues/308252#issuecomment-2543048917
+    fixicons = "sed -i 's/file:\\/\\/\\/nix\\/store\\/[^\\/]*\\/share\\/applications\\//applications:/gi' ~/.config/plasma-org.kde.plasma.desktop-appletsrc && systemctl restart --user plasma-plasmashell && echo 'Iconfix!\n\n'";
+  };
+
+  commonBashAlias = {
+    # sudo = "sudo ";
+
+    # [ proxy ] (move here because fish incompatible complain)
+    # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
+    ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
+    ssr-chrome = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}"'';
+    ssr-nix-daemon = ''
+      sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
+      sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
+      [Service]
+      Environment="http_proxy=socks5h://''${ssr_ip}"
+      Environment="https_proxy=socks5h://''${ssr_ip}"
+      Environment="all_proxy=socks5h://''${ssr_ip}"
+      EOF
+      sudo systemctl daemon-reload
+      sudo systemctl restart nix-daemon
+    '';
+  };
+
+  commonFishFunctions = {
+    # [ nix ]
+    nix-build-ls.body = ''
+      nix build --print-out-paths --no-link nixpkgs#$argv[1] | xargs yazi
+    '';
+
+    # [ proxy ]
+    # set ssr_ip localhost:7890; ssr ; ssr-nix-daemon
+    ssr.body = ''
+      for key in http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY
+          set -gx $key "socks5h://$ssr_ip"
+      end
+    '';
+    ssr-chrome.body = "google-chrome-stable --temp-profile --proxy-server=$ssr_ip";
+    ssr-nix-daemon.body = ''
+      sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
+      echo "\
+      [Service]
+      Environment="http_proxy=socks5h://$ssr_ip"
+      Environment="https_proxy=socks5h://$ssr_ip"
+      Environment="all_proxy=socks5h://$ssr_ip"
+      " | sudo tee /run/systemd/system/nix-daemon.service.d/override.conf > /dev/null
+      sudo systemctl daemon-reload
+      sudo systemctl restart nix-daemon
+    '';
+  };
+in
 {
-  flake.modules.nixos.alias =
-    { lib, config, ... }:
-    {
-      environment.shellAliases = {
-        # [ ls ]
-        ls = "eza";
-        li = "ls -l --icons";
-        ll = "ls -l";
-        la = "ls -a";
-        lt = "ls --tree";
-        lla = "ls -la";
-        lm = "ls -l -a --reverse --sort=modified";
-        "la." = "ls -d .*";
+  flake.modules.nixos.alias = { lib, config, ... }: {
+    environment.shellAliases = commonAlias;
 
-        # [ rm ]
-        rm = "gtrash put";
-        rm-empty = "gtrash find --rm";
-        rm-restore = "gtrash restore";
-
-        # [ systemd ]
-        sc = "systemctl";
-        scu = "systemctl --user";
-        jlog = "journalctl";
-        jlogu = "journalctl --user-unit";
-        jlog-1h = ''journalctl -p err..alert --since "60 min ago"'';
-
-        cat = "bat -p";
-        cp = "xcp";
-        fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
-        bc = "qalc";
-        ii = "xdg-open"; # `Invoke-Item` powershell style
-        inxi = "inxi -Fz";
-        free = "free -h";
-        beep = ''echo -en "\007"'';
-        dd-log = "sudo dd bs=8M oflag=sync,direct conv=fsync status=progress";
-        psp = "procs --sortd UsageMem";
-        ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
-
-        # [ network ]
-        ip = "ip --color=auto";
-        ip-api = "curl ip-api.com";
-        ip-info = "curl ipinfo.io";
-        ip-location = "curl -s api.ip2location.io | jq .";
-        paste-termbin = "nc termbin.com 9999";
-        paste-rs = "curl --data-binary @- https://paste.rs/";
-
-        # [ emacs ]
-        e = "emacs -nw";
-        ee = "emacsclient --create-frame";
-        ee-init-config = "emacs --init-directory ~/.config/emacs";
-        dired = ''emacsclient -nw -c -e "(dired default-directory)"'';
-        magit = ''emacsclient -nw -c -e "(magit-status)"'';
-
-        # [ nix ]
-        j = "just --justfile=$HOME/nsworld/justfile";
-        nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
-        # https://github.com/NixOS/nixpkgs/issues/308252#issuecomment-2543048917
-        fixicons = "sed -i 's/file:\\/\\/\\/nix\\/store\\/[^\\/]*\\/share\\/applications\\//applications:/gi' ~/.config/plasma-org.kde.plasma.desktop-appletsrc && systemctl restart --user plasma-plasmashell && echo 'Iconfix!\n\n'";
-      };
-
-      programs.bash.shellAliases = {
-        # sudo = "sudo ";
-
-        # [ proxy ] (move here because fish incompatible complain)
-        # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
-        ssr = "export {http,https,all}_proxy=socks5h://\${ssr_ip} ;export {HTTP,HTTPS,ALL}_PROXY=socks5h://\${ssr_ip}";
-        ssr-chrome = ''google-chrome-stable --temp-profile --proxy-server="''${ssr_ip}"'';
-        ssr-nix-daemon = ''
-          sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
-          sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
-          [Service]
-          Environment="http_proxy=socks5h://''${ssr_ip}"
-          Environment="https_proxy=socks5h://''${ssr_ip}"
-          Environment="all_proxy=socks5h://''${ssr_ip}"
-          EOF
-          sudo systemctl daemon-reload
-          sudo systemctl restart nix-daemon
-        '';
-      };
-
-      programs.bash.interactiveShellInit = lib.mkAfter ''
-        nix-build-ls() {
-          nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
-        }
-      '';
-
-      programs.zsh.shellAliases = {
-        nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
+    programs.bash.shellAliases = commonBashAlias;
+    # bash functions
+    programs.bash.interactiveShellInit = lib.mkAfter ''
+      nix-build-ls() {
+        nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
       }
-      // config.programs.bash.shellAliases;
+    '';
 
-      programs.fish = {
-        shellFunctions = {
-          # [ nix ]
-          nix-build-ls.body = ''
-            nix build --print-out-paths --no-link nixpkgs#$argv[1] | xargs yazi
-          '';
+    programs.zsh.shellAliases = {
+      nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
+    }
+    // config.programs.bash.shellAliases;
 
-          # [ proxy ]
-          # set ssr_ip localhost:7890; ssr ; ssr-nix-daemon
-          ssr.body = ''
-            for key in http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY
-                set -gx $key "socks5h://$ssr_ip"
-            end
-          '';
-          ssr-chrome.body = "google-chrome-stable --temp-profile --proxy-server=$ssr_ip";
-          ssr-nix-daemon.body = ''
-            sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
-            echo "\
-            [Service]
-            Environment="http_proxy=socks5h://$ssr_ip"
-            Environment="https_proxy=socks5h://$ssr_ip"
-            Environment="all_proxy=socks5h://$ssr_ip"
-            " | sudo tee /run/systemd/system/nix-daemon.service.d/override.conf > /dev/null
-            sudo systemctl daemon-reload
-            sudo systemctl restart nix-daemon
-          '';
-        };
-        shellAbbrs = {
-          gst = "git status";
-        };
-        # shellAliases = { };
+    programs.fish = {
+      shellFunctions = commonFishFunctions;
+      shellAbbrs = {
+        gst = "git status";
       };
-
+      # shellAliases = { };
     };
+
+  };
+
+  flake.modules.homeManager.alias = { lib, config, ... }: {
+    home.shellAliases = commonAlias;
+
+    programs.bash.shellAliases = commonBashAlias;
+    # bash functions
+    programs.bash.bashrcExtra = lib.mkAfter ''
+      nix-build-ls() {
+        nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
+      }
+    '';
+
+    programs.zsh.shellAliases = {
+      nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
+    }
+    // config.programs.bash.shellAliases;
+
+    programs.fish = {
+      functions = commonFishFunctions;
+      shellAbbrs = {
+        gst = "git status";
+      };
+      # shellAliases = { };
+    };
+  };
 }
