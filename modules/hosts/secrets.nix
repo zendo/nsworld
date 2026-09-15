@@ -1,15 +1,28 @@
-# https://michael.stapelberg.ch/posts/2025-08-24-secret-management-with-sops-nix/
-{ inputs, withSystem, ... }:
+{ inputs, ... }:
 let
   sopsSecrets = {
     rclone_infini_pass = { };
     rclone_koofr_pass = { };
     dae_sub = { };
   };
+
+  secret-apps =
+    pkgs: with pkgs; [
+      age
+      # rage # age RIIR
+      ssh-to-age
+      # ragenix # agenix
+      sops
+    ];
 in
 {
   flake.modules.nixos.secrets =
-    { lib, config, ... }:
+    {
+      lib,
+      config,
+      pkgs,
+      ...
+    }:
     {
       imports = [ inputs.omniflake.flakes.sops-nix.nixosModules.sops ];
 
@@ -19,6 +32,8 @@ in
       sops.age.sshKeyPaths = map (e: e.path) (
         lib.filter (e: e.type == "rsa" || e.type == "ed25519") config.services.openssh.hostKeys
       );
+
+      environment.systemPackages = secret-apps pkgs;
     };
 
   flake.modules.homeManager.secrets =
@@ -30,22 +45,14 @@ in
       sops.defaultSopsFile = ./sopsnix.yaml;
       sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-      home.packages = withSystem pkgs.stdenv.hostPlatform.system (
-        { config, ... }: config.devshells.nsw-secrets.packages
-      );
+      home.packages = secret-apps pkgs;
     };
 
   perSystem =
     { pkgs, ... }:
     {
       devshells.nsw-secrets = {
-        packages = with pkgs; [
-          age
-          # rage # age RIIR
-          ssh-to-age
-          # ragenix # agenix
-          sops
-        ];
+        packages = secret-apps pkgs;
         commands = [
           {
             name = "secrets-hostkey-to-age";
