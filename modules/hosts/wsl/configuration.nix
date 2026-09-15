@@ -14,7 +14,8 @@ in
       with fm.nixos;
       [
         host-wsl
-        host-wsl-hm
+        # host-wsl-hm
+        host-wsl-hjem
 
         base
         fonts
@@ -53,6 +54,20 @@ in
         files
         xdg
       ];
+    };
+  };
+
+  # ╭─────────────────────────────────────────────────────╮
+  # │  Hjem                                               │
+  # ╰─────────────────────────────────────────────────────╯
+  flake.modules.nixos.host-wsl-hjem = {
+    imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
+
+    hjem.specialArgs.hjemUser = userName;
+
+    hjem.users.${userName} = {
+      directory = "/home/${userName}";
+      imports = [ fm.hjem.files ];
     };
   };
 

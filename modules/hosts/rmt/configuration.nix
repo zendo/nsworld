@@ -9,9 +9,10 @@ in
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
     modules = with fm.nixos; [
       host-rmt
-      # host-rmt-hm
       # host-rmt-disko-btrfs
       host-rmt-disko-bcachefs
+      hjemModule
+      # hm-imports
       nixos-imports
 
       # [ profiles ]
@@ -32,15 +33,6 @@ in
       # sway
       # hyprland
     ];
-  };
-
-  flake.modules.nixos.host-rmt-hm = { config, ... }: {
-    imports = [ fm.nixos.hmModule ];
-
-    home-manager.users.${config.myVars.user} = {
-      imports = [ fm.homeManager.home-imports ];
-      # programs.vscode.enable = true;
-    };
   };
 
   flake.modules.nixos.host-rmt =

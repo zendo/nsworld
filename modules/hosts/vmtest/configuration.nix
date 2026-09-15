@@ -11,7 +11,9 @@ in
       with fm.nixos;
       [
         host-vmtest
-        hmModule
+        # hjemModule
+        # hm-imports
+        # nixos-imports
 
         base
         fonts
@@ -31,12 +33,6 @@ in
   flake.modules.nixos.host-vmtest =
     { pkgs, ... }:
     {
-      home-manager.users.${userName} = {
-        imports = [
-          fm.homeManager.home-imports
-        ];
-      };
-
       disabledModules = [
         # "services/desktops/pipewire/pipewire.nix"
       ];

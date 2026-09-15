@@ -10,8 +10,8 @@ in
       with fm.nixos;
       [
         host-yoga
-        # host-yoga-hm
         hjemModule
+        # hm-imports
         nixos-imports
 
         # [ profiles ]
@@ -41,14 +41,6 @@ in
       ++ [
         # inputs.omniflake.flakes.lanzaboote.nixosModules.lanzaboote
       ];
-  };
-
-  flake.modules.nixos.host-yoga-hm = {
-    imports = [ fm.nixos.hmModule ];
-
-    home-manager.users.${userName} = {
-      imports = [ fm.homeManager.home-imports ];
-    };
   };
 
   flake.modules.nixos.host-yoga =
