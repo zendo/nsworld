@@ -1,15 +1,8 @@
 { config, ... }:
 {
   flake.modules.nixos.nixos-imports.imports = with config.flake.modules.nixos; [
-    mods
-    secrets
 
-    # [ shell ]
-    alias
-    bash
-    fish
-    zsh
-    terminal
+    secrets
 
     # [ core ]
     base
@@ -18,6 +11,10 @@
     ssh
     # gpg
     user
+
+    # [ desktop ]
+
+    mods
 
     # [ networking ]
     dns
@@ -37,18 +34,25 @@
     chrome
     firefox
 
+    # [ profiles ]
+
     # [ services ]
     # bittorrent
     emacs
     # kanata
     keyd
 
+    # [ shell ]
+    alias
+    bash
+    fish
+    zsh
+    terminal
+
+    # [ virt ]
+
     # [ xdg ]
     env
     mime
-
-    # [ desktop ]
-    # [ profiles ]
-    # [ virt ]
   ];
 }
