@@ -4,8 +4,12 @@
     let
       music = "audacious.desktop";
       browser = "firefox.desktop";
+
       gtk-image = "org.gnome.Loupe.desktop";
+      gtk-editor = "org.gnome.TextEditor.desktop";
+
       qt-image = "org.kde.gwenview.desktop";
+      qt-editor = "org.kde.kwrite.desktop";
     in
     {
       # https://www.iana.org/assignments/media-types/media-types.xhtml
@@ -28,14 +32,17 @@
             "application/pdf" = "org.gnome.Papers.desktop";
           }
           (lib.mkIf config.services.desktopManager.gnome.enable {
-            "text/plain" = "org.gnome.TextEditor.desktop";
+            "text/plain" = gtk-editor;
+            "text/markdown" = gtk-editor;
           })
           (lib.mkIf config.services.desktopManager.plasma6.enable {
             "image/jpeg" = qt-image;
             "image/png" = qt-image;
             "image/webp" = qt-image;
 
-            "text/plain" = "org.kde.kwrite.desktop";
+            "text/plain" = qt-editor;
+            "text/markdown" = qt-editor;
+
             "application/pdf" = "org.kde.okular.desktop";
           })
         ];
