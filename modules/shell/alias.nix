@@ -127,7 +127,6 @@ in
       };
       # shellAliases = { };
     };
-
   };
 
   flake.modules.homeManager.alias = { lib, config, ... }: {
