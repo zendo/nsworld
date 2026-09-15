@@ -1,7 +1,6 @@
 { config, ... }:
 {
   flake.modules.nixos.nixos-imports.imports = with config.flake.modules.nixos; [
-
     secrets
 
     # [ core ]
