@@ -53,12 +53,12 @@
   flake.modules.hjem.files =
     { hjemUser, lib, ... }:
     let
-      dotDir = "/home/${hjemUser}/nsworld/dotfiles";
+      linkDot = dir: ("/home/${hjemUser}/nsworld/dotfiles/${dir}");
     in
     {
       files = {
         # ".config/bar".source = pkgs.writeTextFile "file-foo" "file contents";
-        ".pi/agent/prompts".source = "${dotDir}/pi/agent/prompts";
+        ".pi/agent/prompts".source = linkDot "pi/agent/prompts";
       };
 
       # ~/.config
@@ -66,8 +66,13 @@
         # LC_ALL=C xdg-user-dirs-update --force
         # "user-dirs.conf".text = "enabled=False";
 
-        "doom/config.org".source = "${dotDir}/org/doom-emacs.org";
-        "emacs/all-emacs.org".source = "${dotDir}/org/all-emacs.org";
+        "doom/config.org".source = linkDot "org/doom-emacs.org";
+        "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
+
+        "sway/config".source = linkDot "sway/config";
+        "niri/configs".source = linkDot "niri/configs";
+        "niri/config.kdl".source = linkDot "niri/config.kdl";
+        "hypr/hyprland.lua".source = linkDot "hypr/hyprland.lua";
 
         "micro/settings.json" = {
           generator = lib.generators.toJSON { };
@@ -82,9 +87,8 @@
           };
         };
 
-        "ibus/rime/default.custom.yaml".source = "${dotDir}/rime/default.custom.yaml";
-        "ibus/rime/rime_ice.custom.yaml".source = "${dotDir}/rime/rime_ice.custom.yaml";
-
+        "ibus/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
+        "ibus/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
         "ibus/rime/ibus_rime.custom.yaml".text = ''
           patch:
             style:
@@ -94,8 +98,8 @@
 
       # ~/.local/share
       xdg.data.files = {
-        "fcitx5/rime/default.custom.yaml".source = "${dotDir}/rime/default.custom.yaml";
-        "fcitx5/rime/rime_ice.custom.yaml".source = "${dotDir}/rime/rime_ice.custom.yaml";
+        "fcitx5/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
+        "fcitx5/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
       };
     };
 }
