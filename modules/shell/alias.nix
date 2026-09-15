@@ -1,15 +1,10 @@
 {
   flake.modules.nixos.alias =
-    {
-      lib,
-      pkgs,
-      config,
-      ...
-    }:
+    { lib, config, ... }:
     {
       environment.shellAliases = {
         # [ ls ]
-        ls = "${lib.getExe pkgs.eza}";
+        ls = "eza";
         li = "ls -l --icons";
         ll = "ls -l";
         la = "ls -a";
@@ -19,9 +14,9 @@
         "la." = "ls -d .*";
 
         # [ rm ]
-        rm = "${lib.getExe pkgs.gtrash} put";
-        rm-empty = "${lib.getExe pkgs.gtrash} find --rm";
-        rm-restore = "${lib.getExe pkgs.gtrash} restore";
+        rm = "gtrash put";
+        rm-empty = "gtrash find --rm";
+        rm-restore = "gtrash restore";
 
         # [ systemd ]
         sc = "systemctl";
@@ -30,17 +25,16 @@
         jlogu = "journalctl --user-unit";
         jlog-1h = ''journalctl -p err..alert --since "60 min ago"'';
 
-        cat = "${lib.getExe pkgs.bat} -p";
-        cp = "${lib.getExe pkgs.xcp}";
+        cat = "bat -p";
+        cp = "xcp";
         fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
-        bc = "${lib.getExe pkgs.libqalculate}";
+        bc = "qalc";
         ii = "xdg-open"; # `Invoke-Item` powershell style
         inxi = "inxi -Fz";
         free = "free -h";
         beep = ''echo -en "\007"'';
-        mount-ls = "mount | column -t";
         dd-log = "sudo dd bs=8M oflag=sync,direct conv=fsync status=progress";
-        psp = "${lib.getExe pkgs.procs} --sortd UsageMem";
+        psp = "procs --sortd UsageMem";
         ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
 
         # [ network ]
@@ -48,17 +42,13 @@
         ip-api = "curl ip-api.com";
         ip-info = "curl ipinfo.io";
         ip-location = "curl -s api.ip2location.io | jq .";
-        where-am-i = "${pkgs.geoclue2-with-demo-agent}/libexec/geoclue-2.0/demos/where-am-i";
         paste-termbin = "nc termbin.com 9999";
         paste-rs = "curl --data-binary @- https://paste.rs/";
-        download-doom = "git clone --depth 1 https://github.com/doomemacs/core ~/.emacs.d";
-        download-astronvim = "git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim";
-        download-nvchad = "git clone https://github.com/NvChad/starter ~/.config/nvim";
 
         # [ emacs ]
         e = "emacs -nw";
         ee = "emacsclient --create-frame";
-        ee-config = "emacs --init-directory ~/.config/emacs";
+        ee-init-config = "emacs --init-directory ~/.config/emacs";
         dired = ''emacsclient -nw -c -e "(dired default-directory)"'';
         magit = ''emacsclient -nw -c -e "(magit-status)"'';
 

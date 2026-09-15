@@ -1,3 +1,4 @@
+# nix path-info -sh n#jq
 let
   cli-apps =
     pkgs: with pkgs; [
@@ -26,6 +27,7 @@ let
 
       # [ FileManager ]
       eza
+      bat
       fd
       ripgrep
       file
@@ -74,7 +76,6 @@ let
       # [ Utils ]
       # (lib.hiPrio uutils-coreutils-noprefix) # riir
       moor # modern pager
-      bat
       just
       # igrep
       cht-sh
@@ -91,6 +92,7 @@ let
       hunspell
       hunspellDicts.en_US
       # asciinema # record the terminal
+      libqalculate
       calcurse
       # zee
       tokei # count code
