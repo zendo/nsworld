@@ -1,16 +1,16 @@
+let
+  music = "audacious.desktop";
+  browser = "firefox.desktop";
+
+  gtk-image = "org.gnome.Loupe.desktop";
+  gtk-editor = "org.gnome.TextEditor.desktop";
+
+  qt-image = "org.kde.gwenview.desktop";
+  qt-editor = "org.kde.kwrite.desktop";
+in
 {
   flake.modules.nixos.mime =
     { lib, config, ... }:
-    let
-      music = "audacious.desktop";
-      browser = "firefox.desktop";
-
-      gtk-image = "org.gnome.Loupe.desktop";
-      gtk-editor = "org.gnome.TextEditor.desktop";
-
-      qt-image = "org.kde.gwenview.desktop";
-      qt-editor = "org.kde.kwrite.desktop";
-    in
     {
       # https://www.iana.org/assignments/media-types/media-types.xhtml
       xdg.mime = {
@@ -48,4 +48,17 @@
         ];
       };
     };
+
+  # flake.modules.homeManager.mime =
+  #   { lib, ... }:
+  #   {
+  #     xdg.mimeApps = {
+  #       enable = true;
+  #       defaultApplications = lib.mkMerge [ ];
+  #     };
+  #   };
+
+  # flake.modules.hjem.mime = {
+  #   xdg.mime-apps.default-applications = { };
+  # };
 }

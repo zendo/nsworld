@@ -49,4 +49,49 @@
         "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
       };
     };
+
+  flake.modules.hjem.files =
+    { hjemUser, lib, ... }:
+    let
+      dotDir = "/home/${hjemUser}/nsworld/dotfiles";
+    in
+    {
+      files = {
+        # ".config/bar".source = pkgs.writeTextFile "file-foo" "file contents";
+        ".pi/agent/prompts".source = "${dotDir}/pi/agent/prompts";
+      };
+      xdg.config.files = {
+        # LC_ALL=C xdg-user-dirs-update --force
+        # "user-dirs.conf".text = "enabled=False";
+
+        "doom/config.org".source = "${dotDir}/org/doom-emacs.org";
+        "emacs/all-emacs.org".source = "${dotDir}/org/all-emacs.org";
+
+        "micro/settings.json" = {
+          generator = lib.generators.toJSON { };
+          value = {
+            autosu = true;
+            softwrap = true;
+            hlsearch = true;
+            saveundo = true;
+            scrollbar = true;
+            mkparents = true;
+            diffgutter = true;
+          };
+        };
+
+        "ibus/rime/default.custom.yaml".source = "${dotDir}/rime/default.custom.yaml";
+        "ibus/rime/rime_ice.custom.yaml".source = "${dotDir}/rime/rime_ice.custom.yaml";
+
+        "ibus/rime/ibus_rime.custom.yaml".text = ''
+          patch:
+            style:
+              horizontal: true
+        '';
+      };
+      xdg.data.files = {
+        "fcitx5/rime/default.custom.yaml".source = "${dotDir}/rime/default.custom.yaml";
+        "fcitx5/rime/rime_ice.custom.yaml".source = "${dotDir}/rime/rime_ice.custom.yaml";
+      };
+    };
 }

@@ -25,4 +25,8 @@ in
 
     home.sessionVariables = customVariables;
   };
+
+  flake.modules.hjem.env = {
+    environment.sessionVarles = customVariables;
+  };
 }

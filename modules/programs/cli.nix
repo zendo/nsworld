@@ -158,4 +158,10 @@ in
     {
       home.packages = cli-apps pkgs;
     };
+
+  flake.modules.hjem.cli =
+    { pkgs, ... }:
+    {
+      packages = cli-apps pkgs;
+    };
 }

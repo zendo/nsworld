@@ -9,7 +9,8 @@ in
   flake.nixosConfigurations.rmt = inputs.nixpkgs.lib.nixosSystem {
     modules = with fm.nixos; [
       host-rmt
-      host-rmt-hm
+      # host-rmt-hm
+      host-rmt-hjem
       # host-rmt-disko-btrfs
       host-rmt-disko-bcachefs
       nixos-imports
@@ -40,6 +41,17 @@ in
     home-manager.users.${config.myVars.user} = {
       imports = [ fm.homeManager.home-imports ];
       # programs.vscode.enable = true;
+    };
+  };
+
+  flake.modules.nixos.host-rmt-hjem = {
+    imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
+
+    hjem.specialArgs.hjemUser = userName;
+
+    hjem.users.${userName} = {
+      directory = "/home/${userName}";
+      imports = [ fm.hjem.files ];
     };
   };
 
