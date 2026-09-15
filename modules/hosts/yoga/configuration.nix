@@ -10,7 +10,8 @@ in
       with fm.nixos;
       [
         host-yoga
-        host-yoga-hm
+        # host-yoga-hm
+        hjemModule
         nixos-imports
 
         # [ profiles ]
