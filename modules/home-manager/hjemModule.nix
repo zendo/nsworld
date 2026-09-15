@@ -7,6 +7,9 @@ in
 
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
+    # overwrite existing files
+    hjem.clobberByDefault = true;
+
     hjem.specialArgs.hjemUser = config.myVars.user;
 
     hjem.users.${config.myVars.user} = {
