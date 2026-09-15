@@ -44,7 +44,7 @@
     # [ shell ]
     alias
     bash
-    fish
+    # fish
     zsh
     terminal
 
