@@ -60,6 +60,8 @@
         # ".config/bar".source = pkgs.writeTextFile "file-foo" "file contents";
         ".pi/agent/prompts".source = "${dotDir}/pi/agent/prompts";
       };
+
+      # ~/.config
       xdg.config.files = {
         # LC_ALL=C xdg-user-dirs-update --force
         # "user-dirs.conf".text = "enabled=False";
@@ -89,6 +91,8 @@
               horizontal: true
         '';
       };
+
+      # ~/.local/share
       xdg.data.files = {
         "fcitx5/rime/default.custom.yaml".source = "${dotDir}/rime/default.custom.yaml";
         "fcitx5/rime/rime_ice.custom.yaml".source = "${dotDir}/rime/rime_ice.custom.yaml";
