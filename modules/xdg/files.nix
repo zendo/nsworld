@@ -53,7 +53,7 @@
   flake.modules.hjem.files =
     { hjemUser, lib, ... }:
     let
-      linkDot = dir: ("/home/${hjemUser}/nsworld/dotfiles/${dir}");
+      linkDot = dir: "/home/${hjemUser}/nsworld/dotfiles/${dir}";
     in
     {
       files = {
