@@ -1,12 +1,44 @@
 let
-  music = "audacious.desktop";
-  browser = "firefox.desktop";
+  app-music = "audacious.desktop";
+  app-browser = "firefox.desktop";
 
   gtk-image = "org.gnome.Loupe.desktop";
   gtk-editor = "org.gnome.TextEditor.desktop";
 
   qt-image = "org.kde.gwenview.desktop";
   qt-editor = "org.kde.kwrite.desktop";
+
+  commonDefaults = {
+    "audio/mpeg" = app-music;
+    "audio/flac" = app-music;
+    "audio/x-vorbis+ogg" = app-music;
+
+    "text/html" = app-browser;
+    "x-scheme-handler/http" = app-browser;
+    "x-scheme-handler/https" = app-browser;
+
+    "image/jpeg" = gtk-image;
+    "image/png" = gtk-image;
+    "image/webp" = gtk-image;
+
+    "application/pdf" = "org.gnome.Papers.desktop";
+  };
+
+  gnomeOverrides = {
+    "text/plain" = gtk-editor;
+    "text/markdown" = gtk-editor;
+  };
+
+  plasmaOverrides = {
+    "text/plain" = qt-editor;
+    "text/markdown" = qt-editor;
+
+    "image/jpeg" = qt-image;
+    "image/png" = qt-image;
+    "image/webp" = qt-image;
+
+    "application/pdf" = "org.kde.okular.desktop";
+  };
 in
 {
   flake.modules.nixos.mime =
@@ -16,49 +48,34 @@ in
       xdg.mime = {
         enable = true;
         defaultApplications = lib.mkMerge [
-          {
-            "audio/mpeg" = music;
-            "audio/flac" = music;
-            "audio/x-vorbis+ogg" = music;
-
-            "text/html" = browser;
-            "x-scheme-handler/http" = browser;
-            "x-scheme-handler/https" = browser;
-
-            "image/jpeg" = gtk-image;
-            "image/png" = gtk-image;
-            "image/webp" = gtk-image;
-
-            "application/pdf" = "org.gnome.Papers.desktop";
-          }
-          (lib.mkIf config.services.desktopManager.gnome.enable {
-            "text/plain" = gtk-editor;
-            "text/markdown" = gtk-editor;
-          })
-          (lib.mkIf config.services.desktopManager.plasma6.enable {
-            "image/jpeg" = qt-image;
-            "image/png" = qt-image;
-            "image/webp" = qt-image;
-
-            "text/plain" = qt-editor;
-            "text/markdown" = qt-editor;
-
-            "application/pdf" = "org.kde.okular.desktop";
-          })
+          commonDefaults
+          (lib.mkIf config.services.desktopManager.gnome.enable gnomeOverrides)
+          (lib.mkIf config.services.desktopManager.plasma6.enable plasmaOverrides)
         ];
       };
     };
 
-  # flake.modules.homeManager.mime =
-  #   { lib, ... }:
-  #   {
-  #     xdg.mimeApps = {
-  #       enable = true;
-  #       defaultApplications = lib.mkMerge [ ];
-  #     };
-  #   };
+  # :hmModule
+  flake.modules.homeManager.mime =
+    { lib, nixosConfig, ... }:
+    {
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplications = lib.mkMerge [
+          commonDefaults
+          (lib.mkIf nixosConfig.services.desktopManager.gnome.enable gnomeOverrides)
+          (lib.mkIf nixosConfig.services.desktopManager.plasma6.enable plasmaOverrides)
+        ];
+      };
+    };
 
-  # flake.modules.hjem.mime = {
-  #   xdg.mime-apps.default-applications = { };
-  # };
+  flake.modules.hjem.mime =
+    { lib, ... }:
+    {
+      xdg.mime-apps.default-applications = lib.mkMerge [
+        commonDefaults
+        gnomeOverrides
+        # plasmaOverrides
+      ];
+    };
 }
