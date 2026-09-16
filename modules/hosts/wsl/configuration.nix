@@ -64,10 +64,9 @@ in
   flake.modules.nixos.host-wsl-hjem = {
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
-    hjem.specialArgs.hjemUser = userName;
-
     hjem.users.${userName} = {
       directory = "/home/${userName}";
+      clobberByDefault = true;
       imports = [ fm.hjem.files ];
     };
   };

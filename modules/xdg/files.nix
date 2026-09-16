@@ -51,13 +51,12 @@
     };
 
   flake.modules.hjem.files =
-    { hjemUser, lib, ... }:
+    { config, lib, ... }:
     let
-      linkDot = dir: "/home/${hjemUser}/nsworld/dotfiles/${dir}";
+      linkDot = dir: "/home/${config.user}/nsworld/dotfiles/${dir}";
     in
     {
       files = {
-        # ".config/bar".source = pkgs.writeTextFile "file-foo" "file contents";
         ".pi/agent/prompts".source = linkDot "pi/agent/prompts";
       };
 

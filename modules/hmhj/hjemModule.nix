@@ -4,13 +4,10 @@ let
 in
 {
   flake.modules.nixos.hjemModule = { config, ... }: {
-
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
     # overwrite existing files
     hjem.clobberByDefault = true;
-
-    hjem.specialArgs.hjemUser = config.myVars.user;
 
     # nix eval --json .#modules.hjem --apply builtins.attrNames | jq -r '.[]'
     hjem.users.${config.myVars.user} = {
