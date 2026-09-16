@@ -292,6 +292,11 @@
 
 ;; doom-tomorrow-night / doom-vibrant
 (setq doom-theme 'doom-tomorrow-night)
+;; (setq doom-theme '(doom-one   . doom-one-light))   ; (DARK . LIGHT)
+
+;; If you're a dark-mode user who suffers from the "flash of white Emacs" when
+;; you first open Emacs, uncomment this (and adjust the color as you like).
+;; (add-to-list 'initial-frame-alist '(background-color . "#000000"))
 #+end_src
 
 * Editing
