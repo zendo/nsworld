@@ -2,9 +2,10 @@
 let
   mkHome =
     {
-      userName ? " ",
+      userName,
       nixpkgs ? inputs.nixpkgs,
       system ? "x86_64-linux",
+      stateVersion ? "26.11",
       extraModules ? [ ],
     }:
     inputs.omniflake.flakes.home-manager.lib.homeManagerConfiguration {
@@ -19,7 +20,7 @@ let
         {
           home.username = "${userName}";
           home.homeDirectory = "/home/${userName}";
-          home.stateVersion = "26.05";
+          home.stateVersion = stateVersion;
         }
       ]
       ++ extraModules;
