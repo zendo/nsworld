@@ -7,12 +7,7 @@
   };
 
   flake.modules.nixos.user =
-    {
-      lib,
-      config,
-      pkgs,
-      ...
-    }:
+    { lib, config, ... }:
     {
       options.myVars.user = lib.mkOption { type = lib.types.str; };
 
@@ -23,21 +18,21 @@
         # sudo-rs
         # security.sudo-rs.enable = true;
 
-        # Only allow `wheel` group execute sudo
-        security.sudo.execWheelOnly = true;
-        security.sudo-rs.execWheelOnly = true;
-
         # run0
         security.sudo.enable = false;
         security.run0.enable = true;
         security.run0.enableSudoAlias = true;
+
+        # Only allow `wheel` group execute sudo
+        security.sudo.execWheelOnly = true;
+        security.sudo-rs.execWheelOnly = true;
 
         users = {
           mutableUsers = lib.mkDefault false;
 
           users.root = {
             # initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
-            # copy ssh pub key to /etc/ssh/authorized_keys.d/root or ~/.ssh/authorized_keys
+            # Copy ssh pub key to /etc/ssh/authorized_keys.d/root or ~/.ssh/authorized_keys
             # ssh-copy-id -i ~/.ssh/id_ed25519.pub aaa@192.168.122.85
             openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
@@ -46,7 +41,6 @@
 
           users.${config.myVars.user} = {
             isNormalUser = true;
-            # shell = pkgs.fish;
             # `mkpasswd`
             initialHashedPassword = "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
             openssh.authorizedKeys.keys = [

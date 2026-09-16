@@ -53,6 +53,7 @@ backup-my-data:
     cd "$BACKUP_DIR"
     dconf read /org/gnome/shell/app-picker-layout > app-picker-layout-value.txt
     # dconf write /org/gnome/shell/app-picker-layout "$(cat app-picker-layout-value.txt)"
+    rsync -av "$HOME/.zsh_history" .
     rsync -av "$HOME/.ssh/" ssh/
     rsync -av "$HOME/.config/mozilla/" mozilla/
 

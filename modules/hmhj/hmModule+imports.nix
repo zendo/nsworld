@@ -30,7 +30,7 @@ in
 
     home-manager.users.${config.myVars.user} = { lib, nixosConfig, ... }: {
       imports = [
-        fm.homeManager.secrets
+        # fm.homeManager.secrets
         # fm.homeManager.rclone
         # fm.homeManager.vscode
         fm.homeManager.files
