@@ -68,9 +68,12 @@ profile:
   store-fake-ip: true
 
 # 国内外 DNS 定义
-chinaDNS: &chinaDNS ['223.5.5.5#DIRECT', '119.29.29.29#DIRECT']
-chinaDohDNS: &chinaDohDNS ['https://223.5.5.5/dns-query#DIRECT', 'https://1.12.12.12/dns-query#DIRECT']
-foreignDNS: &foreignDNS ['https://cloudflare-dns.com/dns-query#默认代理', 'https://dns.google/dns-query#默认代理']
+dns_common:
+  chinaDNS: &chinaDNS ['223.5.5.5#DIRECT', '119.29.29.29#DIRECT']
+  foreignDNS: &foreignDNS ['https://cloudflare-dns.com/dns-query#默认代理', 'https://dns.google/dns-query#默认代理']
+  defaultDNS: &defaultDNS ['114.114.114.114#DIRECT', 'tls://223.5.5.5#DIRECT', 'https://1.12.12.12#DIRECT']
+  proxyServerDNS:
+    &proxyServerDNS ['114.114.114.114#DIRECT', 'tls://223.5.5.5#DIRECT', 'https://doh.pub/dns-query#DIRECT']
 
 dns:
   enable: true
@@ -81,15 +84,16 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/15
   fake-ip-range6: 2001:2::1/48
-  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn']
-  proxy-server-nameserver: *chinaDohDNS
-  default-nameserver: *chinaDohDNS
+  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', 'rule-set:googlefcm']
+  default-nameserver: *defaultDNS
+  proxy-server-nameserver: *proxyServerDNS
   nameserver: *foreignDNS
   nameserver-policy:
     'rule-set:cn': *chinaDNS
-  direct-nameserver: ['system', '223.5.5.5#DIRECT', '119.29.29.29#DIRECT']
+  direct-nameserver: *chinaDNS
 
 hosts:
+  'doh.pub': ['1.12.12.12', '120.53.53.53']
   'cloudflare-dns.com': ['1.1.1.1', '1.0.0.1']
   'dns.google': ['8.8.8.8', '8.8.4.4']
 
@@ -111,7 +115,7 @@ ntp:
 
 tun:
   enable: true
-  stack: system
+  stack: mips
   auto-route: true
   strict-route: true
   auto-redirect: true
@@ -212,11 +216,21 @@ rule-providers:
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/microsoft.mrs'
     path: './ruleset/microsoft.mrs'
     path-in-bundle: 'geo/geosite/microsoft.mrs'
+  microsoft_ip:
+    <<: *rule_providers_ip
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geoip/microsoft.mrs'
+    path: './ruleset/microsoft_ip.mrs'
+    path-in-bundle: 'geo/geoip/microsoft.mrs'
   apple:
     <<: *rule_providers_domain
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/apple.mrs'
     path: './ruleset/apple.mrs'
     path-in-bundle: 'geo/geosite/apple.mrs'
+  apple_ip:
+    <<: *rule_providers_ip
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geoip/apple.mrs'
+    path: './ruleset/apple_ip.mrs'
+    path-in-bundle: 'geo/geoip/apple.mrs'
   telegram:
     <<: *rule_providers_domain
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/telegram.mrs'
@@ -257,11 +271,21 @@ rule-providers:
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geoip/twitter.mrs'
     path: './ruleset/twitter_ip.mrs'
     path-in-bundle: 'geo/geoip/twitter.mrs'
-  instagram:
+  meta:
     <<: *rule_providers_domain
-    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/instagram.mrs'
-    path: './ruleset/instagram.mrs'
-    path-in-bundle: 'geo/geosite/instagram.mrs'
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/meta.mrs'
+    path: './ruleset/meta.mrs'
+    path-in-bundle: 'geo/geosite/meta.mrs'
+  facebook_ip:
+    <<: *rule_providers_ip
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geoip/facebook.mrs'
+    path: './ruleset/facebook_ip.mrs'
+    path-in-bundle: 'geo/geoip/facebook.mrs'
+  line:
+    <<: *rule_providers_domain
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/line.mrs'
+    path: './ruleset/line.mrs'
+    path-in-bundle: 'geo/geosite/line.mrs'
   netflix:
     <<: *rule_providers_domain
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/netflix.mrs'
@@ -438,11 +462,11 @@ group_filter:
   TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
   low_filter:
     &low_filter {
-      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[ |｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[ |｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?= |倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
+      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[ \[\(|｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[ \[\(|｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?=[ \)\]]|倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
     }
   high_filter:
     &high_filter {
-      filter: '(?i)(?<=[ |｜丨∣┃\-‐–—−－﹣])((?:[*×✕✖⨯⨉x]\s*(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?\s*(?:倍|[*×✕✖⨯⨉x])))',
+      filter: '(?i)(?<=[ \[\(|｜丨∣┃\-‐–—−－﹣])((?:[*×✕✖⨯⨉x]\s*(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?\s*(?:倍|[*×✕✖⨯⨉x])))',
     }
   exclude_filter:
     &exclude_filter {
@@ -525,9 +549,13 @@ proxy-groups:
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Twitter.png'
 
-  - name: 'Instagram'
+  - name: 'Meta'
     <<: [*group_common_select, *proxies_default]
-    icon: 'https://fastly.jsdelivr.net/gh/MiToverG422/Qure@master/IconSet/Color/Instagram.png'
+    icon: 'https://fastly.jsdelivr.net/gh/lige47/QuanX-icon-rule@main/icon/04ProxySoft/meta.png'
+
+  - name: 'Line'
+    <<: [*group_common_select, *proxies_default]
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Line.png'
 
   - name: 'Netflix'
     <<: [*group_common_select, *proxies_default]
@@ -552,7 +580,7 @@ proxy-groups:
 
   - name: 'EHentai'
     default-selected: '美国'
-    <<: [*group_common_select, *proxies_default]
+    <<: [*group_common_select, *proxies_direct]
     icon: 'https://fastly.jsdelivr.net/gh/lige47/QuanX-icon-rule@main/icon/04ProxySoft/exhentai.png'
 
   - name: 'AdBlock'
@@ -666,7 +694,9 @@ rules:
   - RULE-SET,ai,AI
   - RULE-SET,github,默认代理
   - RULE-SET,microsoft,Microsoft
+  - RULE-SET,microsoft_ip,Microsoft,no-resolve
   - RULE-SET,apple,Apple
+  - RULE-SET,apple_ip,Apple,no-resolve
   - RULE-SET,telegram,Telegram
   - RULE-SET,telegram_ip,Telegram,no-resolve
   - RULE-SET,steam,Steam
@@ -675,7 +705,9 @@ rules:
   - RULE-SET,tiktok_ip,TikTok,no-resolve
   - RULE-SET,twitter,Twitter
   - RULE-SET,twitter_ip,Twitter,no-resolve
-  - RULE-SET,instagram,Instagram
+  - RULE-SET,meta,Meta
+  - RULE-SET,facebook_ip,Meta,no-resolve
+  - RULE-SET,line,Line
   - RULE-SET,netflix,Netflix
   - RULE-SET,netflix_ip,Netflix,no-resolve
   - RULE-SET,emby,Emby
