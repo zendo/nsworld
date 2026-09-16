@@ -34,7 +34,6 @@ in
         # fm.homeManager.rclone
         # fm.homeManager.vscode
         fm.homeManager.files
-        # fm.homeManager.mime
         fm.homeManager.xdg
       ]
       ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [

@@ -54,28 +54,4 @@ in
         ];
       };
     };
-
-  # :hmModule
-  flake.modules.homeManager.mime =
-    { lib, nixosConfig, ... }:
-    {
-      xdg.mimeApps = {
-        enable = true;
-        defaultApplications = lib.mkMerge [
-          commonDefaults
-          (lib.mkIf nixosConfig.services.desktopManager.gnome.enable gnomeOverrides)
-          (lib.mkIf nixosConfig.services.desktopManager.plasma6.enable plasmaOverrides)
-        ];
-      };
-    };
-
-  flake.modules.hjem.mime =
-    { lib, ... }:
-    {
-      xdg.mime-apps.default-applications = lib.mkMerge [
-        commonDefaults
-        gnomeOverrides
-        # plasmaOverrides
-      ];
-    };
 }
