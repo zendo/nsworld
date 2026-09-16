@@ -65,12 +65,15 @@
       devShells.gcc = pkgs.mkShell {
         buildInputs = with pkgs; [
           gcc
+          # clang
           gnumake
           cmake
           meson
           ninja
           pkg-config
           boost
+          glib
+          gtk3
         ];
         name = "gcc";
         shellHook = ''
