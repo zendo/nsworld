@@ -27,6 +27,7 @@
       };
 
       # services.daeWithConfig.enable = true;
+      # or
       services.dae = {
         # enable = true;
         configFile = "/home/${config.myVars.user}/Projects/subs/dae-config.dae";

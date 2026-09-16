@@ -1,75 +1,93 @@
 {
   flake.modules.nixos.mods =
-    { lib, config, ... }:
+    {
+      lib,
+      config,
+      options,
+      ...
+    }:
+    let
+      hasSops = options ? sops;
+    in
     {
       options.services.daeWithConfig = {
         enable = lib.mkEnableOption "dae encryption config.";
       };
 
-      config = lib.mkIf config.services.daeWithConfig.enable {
-        services.dae = {
-          enable = true;
-          configFile = config.sops.templates."daeConfig".path;
-        };
-
-        # https://github.com/daeuniverse/dae/blob/main/docs/en/README.md#minimal-configuration
-        sops.templates."daeConfig".content = ''
-          global {
-            # Bind to LAN and/or WAN as you want. Replace the interface name to your own.
-            #lan_interface: docker0
-            wan_interface: auto # Use "auto" to auto detect WAN interface.
-
-            log_level: info
-            allow_insecure: false
-            auto_config_kernel_parameter: true
-          }
-
-          subscription {
-            airport: '${config.sops.placeholder."dae_sub"}'
-          }
-
-          # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md for full examples.
-          dns {
-            upstream {
-              googledns: 'tcp+udp://dns.google:53'
-              alidns: 'udp://dns.alidns.com:53'
+      config = lib.mkIf config.services.daeWithConfig.enable (
+        {
+          assertions = [
+            {
+              assertion = hasSops;
+              message = "services.daeWithConfig requires sops-nix.";
             }
+          ];
+        }
+        // lib.optionalAttrs hasSops {
+          services.dae = {
+            enable = true;
+            configFile = config.sops.templates."daeConfig".path;
+          };
+
+          # https://github.com/daeuniverse/dae/blob/main/docs/en/README.md#minimal-configuration
+          sops.templates."daeConfig".content = ''
+            global {
+              # Bind to LAN and/or WAN as you want. Replace the interface name to your own.
+              #lan_interface: docker0
+              wan_interface: auto # Use "auto" to auto detect WAN interface.
+
+              log_level: info
+              allow_insecure: false
+              auto_config_kernel_parameter: true
+            }
+
+            subscription {
+              airport: '${config.sops.placeholder."dae_sub"}'
+            }
+
+            # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md for full examples.
+            dns {
+              upstream {
+                googledns: 'tcp+udp://dns.google:53'
+                alidns: 'udp://dns.alidns.com:53'
+              }
+              routing {
+                request {
+                  qtype(https) -> reject
+                  fallback: alidns
+                }
+                response {
+                  upstream(googledns) -> accept
+                  ip(geoip:private) && !qname(geosite:cn) -> googledns
+                  fallback: accept
+                }
+              }
+            }
+
+            group {
+              proxy {
+                #filter: name(keyword: HK, keyword: SG)
+                policy: min_moving_avg
+              }
+            }
+
+            # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/routing.md for full examples.
             routing {
-              request {
-                qtype(https) -> reject
-                fallback: alidns
-              }
-              response {
-                upstream(googledns) -> accept
-                ip(geoip:private) && !qname(geosite:cn) -> googledns
-                fallback: accept
-              }
+              pname(NetworkManager) -> direct
+              dip(224.0.0.0/3, 'ff00::/8') -> direct
+
+              ### Write your rules below.
+
+              # Disable h3 because it usually consumes too much cpu/mem resources.
+              l4proto(udp) && dport(443) -> block
+              dip(geoip:private) -> direct
+              dip(geoip:cn) -> direct
+              domain(geosite:cn) -> direct
+
+              fallback: proxy
             }
-          }
-
-          group {
-            proxy {
-              #filter: name(keyword: HK, keyword: SG)
-              policy: min_moving_avg
-            }
-          }
-
-          # See https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/routing.md for full examples.
-          routing {
-            pname(NetworkManager) -> direct
-            dip(224.0.0.0/3, 'ff00::/8') -> direct
-
-            ### Write your rules below.
-
-            # Disable h3 because it usually consumes too much cpu/mem resources.
-            l4proto(udp) && dport(443) -> block
-            dip(geoip:private) -> direct
-            dip(geoip:cn) -> direct
-            domain(geosite:cn) -> direct
-
-            fallback: proxy
-          }
-        '';
-      };
+          '';
+        }
+      );
     };
 }
