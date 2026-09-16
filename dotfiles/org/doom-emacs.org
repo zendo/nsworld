@@ -217,6 +217,7 @@
 (package! kdl-mode)
 (package! eat)
 (package! buffer-guardian)
+(package! rainbow-delimiters)
 ;; (package! this-package
 ;; :recipe (:host github :repo "camdez/goto-last-change"))
 (package! org-modern :disable t)
@@ -297,6 +298,16 @@
 ;; If you're a dark-mode user who suffers from the "flash of white Emacs" when
 ;; you first open Emacs, uncomment this (and adjust the color as you like).
 ;; (add-to-list 'initial-frame-alist '(background-color . "#000000"))
+#+end_src
+
+** rainbow-delimiters
+#+begin_src emacs-lisp
+(add-hook! 'prog-mode-hook #'rainbow-delimiters-mode)
+;; Or enable it in *most* places:
+;; (add-hook! '(prog-mode-hook
+;;              text-mode-hook
+;;              conf-mode-hook)
+;;            #'rainbow-delimiters-mode)
 #+end_src
 
 * Editing
