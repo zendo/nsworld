@@ -14,8 +14,8 @@ in
       with fm.nixos;
       [
         host-wsl
-        # host-wsl-hm
-        host-wsl-hjem
+        host-wsl-hm
+        # host-wsl-hjem
 
         base
         fonts
@@ -60,6 +60,7 @@ in
   # ╭─────────────────────────────────────────────────────╮
   # │  Hjem                                               │
   # ╰─────────────────────────────────────────────────────╯
+  # error: Could not determine XDG runtime directory XDG_RUNTIME_DIR
   flake.modules.nixos.host-wsl-hjem = {
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
