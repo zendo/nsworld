@@ -10,10 +10,12 @@ in
     hjem.clobberByDefault = true;
 
     # nix eval --json .#modules.hjem --apply builtins.attrNames | jq -r '.[]'
-    # \:p flake.homeConfigurations.iab.config.systemd.user.services.vicinae
     hjem.users.${config.myVars.user} = {
       directory = "/home/${config.myVars.user}";
-      imports = [ fm.hjem.files ];
+      imports = [
+        fm.hjem.files
+        # fm.hjem.systemd
+      ];
     };
 
   };
