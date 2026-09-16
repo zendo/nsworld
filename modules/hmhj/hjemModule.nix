@@ -12,6 +12,7 @@ in
 
     hjem.specialArgs.hjemUser = config.myVars.user;
 
+    # nix eval --json .#modules.hjem --apply builtins.attrNames | jq -r '.[]'
     hjem.users.${config.myVars.user} = {
       directory = "/home/${config.myVars.user}";
       imports = [ fm.hjem.files ];
