@@ -51,7 +51,12 @@
     };
 
   flake.modules.hjem.files =
-    { config, lib, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       linkDot = dir: "/home/${config.user}/nsworld/dotfiles/${dir}";
     in
@@ -64,6 +69,9 @@
       xdg.config.files = {
         # LC_ALL=C xdg-user-dirs-update --force
         # "user-dirs.conf".text = "enabled=False";
+
+        # AutoStart
+        # "autostart/helixnotes.desktop".source = "${pkgs.helixnotes}/share/applications/HelixNotes.desktop";
 
         "doom/config.org".source = linkDot "org/doom-emacs.org";
         "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
