@@ -1,56 +1,16 @@
-{ config, ... }:
+{ inputs, ... }:
 {
-  flake.modules.homeManager.non-nixos-imports = {
-    manual.manpages.enable = false; # HM manuals
-    programs.man.enable = false; # man-db
-
-    # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'
-    imports = with config.flake.modules.homeManager; [
-      secrets
-      # vicinae
-      # ╭──────────────────────────────────────────╮
-      # │ PROGRAMS                                 │
-      # ╰──────────────────────────────────────────╯
-      cli
-      # gui
-      # rclone
-      # ╭──────────────────────────────────────────╮
-      # │ SHELL                                    │
-      # ╰──────────────────────────────────────────╯
-      alias
-      # fish
-      zsh
-      terminal
-      # ╭──────────────────────────────────────────╮
-      # │ XDG                                      │
-      # ╰──────────────────────────────────────────╯
-      env
-      files
-      xdg
-    ];
-  };
-
   flake.modules.homeManager.non-nixos =
+    { pkgs, ... }:
     {
-      pkgs,
-      inputs,
-      myvars,
-      ...
-    }:
-    {
-      home = {
-        packages = with pkgs; [
-          dippi
-          goodvibes
-        ];
-
-        username = "${myvars.user}";
-        homeDirectory = "/home/${myvars.user}";
-        stateVersion = "26.05";
-      };
+      home.packages = with pkgs; [
+        dippi
+      ];
 
       news.display = "silent";
       programs.home-manager.enable = true;
+      manual.manpages.enable = false; # HM manuals
+      programs.man.enable = false; # man-db
       # https://github.com/nix-community/home-manager/blob/master/docs/manual/usage/gpu-non-nixos.md
       targets.genericLinux.gpu.enable = true;
 
@@ -105,6 +65,5 @@
           ];
         }; # end of defaultFonts
       }; # end of fontconfig
-
     };
 }

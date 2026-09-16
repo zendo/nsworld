@@ -2,9 +2,7 @@
 let
   mkHome =
     {
-      myvars ? {
-        user = "";
-      },
+      userName ? " ",
       nixpkgs ? inputs.nixpkgs,
       system ? "x86_64-linux",
       extraModules ? [ ],
@@ -16,38 +14,63 @@ let
         config.allowUnfree = true;
       };
 
-      extraSpecialArgs = {
-        inherit inputs myvars;
-      };
-
       modules = [
         config.flake.modules.homeManager.non-nixos
+        {
+          home.username = "${userName}";
+          home.homeDirectory = "/home/${userName}";
+          home.stateVersion = "26.05";
+        }
       ]
       ++ extraModules;
     };
 in
 {
-  imports = [ inputs.omniflake.flakes.home-manager.flakeModules.home-manager ];
+  # imports = [ inputs.omniflake.flakes.home-manager.flakeModules.home-manager ];
 
   flake.homeConfigurations = {
     iab = mkHome {
-      myvars = {
-        user = "iab";
-      };
+      userName = "iab";
       extraModules = [
         config.flake.modules.homeManager.non-nixos-imports
       ];
     };
 
     guest = mkHome {
-      myvars = {
-        user = "guest";
-      };
+      userName = "guest";
       extraModules = [
         config.flake.modules.homeManager.gui
-        config.flake.modules.homeManager.bash
-        config.flake.modules.homeManager.firefox
+        config.flake.modules.homeManager.zsh
+        config.flake.modules.homeManager.files
       ];
     };
   };
+
+  # nix eval --json .#modules.homeManager --apply builtins.attrNames | jq -r '.[]'
+  flake.modules.homeManager.non-nixos-imports = {
+    imports = with config.flake.modules.homeManager; [
+      secrets
+      # vicinae
+      # ╭──────────────────────────────────────────╮
+      # │ PROGRAMS                                 │
+      # ╰──────────────────────────────────────────╯
+      cli
+      # gui
+      # rclone
+      # ╭──────────────────────────────────────────╮
+      # │ SHELL                                    │
+      # ╰──────────────────────────────────────────╯
+      alias
+      # fish
+      zsh
+      terminal
+      # ╭──────────────────────────────────────────╮
+      # │ XDG                                      │
+      # ╰──────────────────────────────────────────╯
+      env
+      files
+      xdg
+    ];
+  };
+
 }
