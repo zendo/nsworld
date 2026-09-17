@@ -37,6 +37,8 @@ in
         # niri
         # sway
         # hyprland
+        ###########
+        # vicinae
       ]
       ++ [
         # inputs.omniflake.flakes.lanzaboote.nixosModules.lanzaboote
