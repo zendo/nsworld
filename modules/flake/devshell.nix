@@ -208,15 +208,10 @@
             p: with p; [
               numpy
               requests
-              pandas
               flask
-
-              scp
-              paramiko
-              chardet
-              cryptography
+              # playwright
+              # pandas
               pyaml
-              ruamel-yaml
             ]
           ))
         ];
@@ -227,10 +222,16 @@
         buildInputs = with pkgs; [
           python3
           virtualenv
+          uv
           python3Packages.pip
+          meson
+          ninja
+          libxml2
+          libxslt
         ];
         propagatedBuildInputs = with pkgs.python3.pkgs; [
           requests
+          lxml
           chardet
           docutils
           markdown
