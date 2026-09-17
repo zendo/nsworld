@@ -50,7 +50,7 @@ in
 
     home-manager.users.${userName} = {
       imports = with fm.homeManager; [
-        secrets
+        # secrets
         links
         xdg
       ];
