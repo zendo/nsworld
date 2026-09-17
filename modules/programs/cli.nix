@@ -14,6 +14,7 @@ let
       efm-langserver # :markdown lsp
       strace
       lurk # strace alternative
+      delta
       micro
       fresh-editor
 
