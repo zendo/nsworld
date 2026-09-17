@@ -54,9 +54,13 @@
       # ╰──────────────────────────────────────╯
       devShells.fhs = pkgs.buildFHSEnv {
         name = "demo";
-        targetPkgs = pkgs: [
-          pkgs.gcc
-        ];
+        targetPkgs =
+          p: with p; [
+            python3
+            gcc
+            glibc
+            zlib
+          ];
       };
 
       # ╭──────────────────────────────────────╮
