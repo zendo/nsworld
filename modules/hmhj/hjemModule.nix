@@ -11,7 +11,7 @@ in
       directory = "/home/${config.myVars.user}";
       clobberFiles = true; # overwrite existing files
       imports = [
-        fm.hjem.files
+        fm.hjem.links
         # fm.hjem.systemd
       ];
     };

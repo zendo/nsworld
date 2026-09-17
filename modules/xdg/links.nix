@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.files =
+  flake.modules.homeManager.links =
     { config, lib, ... }:
     let
       staticDot = dir: (inputs.self + /dotfiles/${dir});
@@ -50,7 +50,7 @@
       };
     };
 
-  flake.modules.hjem.files =
+  flake.modules.hjem.links =
     {
       config,
       lib,

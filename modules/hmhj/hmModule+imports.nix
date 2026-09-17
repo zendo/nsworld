@@ -33,7 +33,7 @@ in
         # fm.homeManager.secrets
         # fm.homeManager.rclone
         # fm.homeManager.vscode
-        fm.homeManager.files
+        fm.homeManager.links
         fm.homeManager.xdg
       ]
       ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [

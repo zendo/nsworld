@@ -51,7 +51,7 @@ in
     home-manager.users.${userName} = {
       imports = with fm.homeManager; [
         secrets
-        files
+        links
         xdg
       ];
     };
@@ -67,7 +67,7 @@ in
     hjem.users.${userName} = {
       directory = "/home/${userName}";
       clobberByDefault = true;
-      imports = [ fm.hjem.files ];
+      imports = [ fm.hjem.links ];
     };
   };
 
