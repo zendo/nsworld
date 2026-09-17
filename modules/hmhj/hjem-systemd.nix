@@ -1,5 +1,5 @@
 {
-  flake.modules.hjem.hj-systemd =
+  flake.modules.hjem.systemd =
     { lib, pkgs, ... }:
     {
       packages = with pkgs; [
