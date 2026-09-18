@@ -1,23 +1,23 @@
 {
   lib,
-  buildGo126Module,
+  buildGo127Module,
   fetchFromGitHub,
   writableTmpDirAsHomeHook,
 }:
 
-buildGo126Module (finalAttrs: {
+buildGo127Module (finalAttrs: {
   pname = "kula";
-  version = "0.18.8";
+  version = "0.20.1";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "c0m4r";
     repo = "kula";
     tag = finalAttrs.version;
-    hash = "sha256-K3bHs0FIVyWIUjDrmxcUsrISagcXlBVWkcea+tTcuVM=";
+    hash = "sha256-LdIMYk1HYjZsKEQaFOh6LGTbMZB27FmIg2Y9uJQ7i5I=";
   };
 
-  vendorHash = "sha256-hhpEQNVfRYLQXiUjn9dicfshzXt3wRnXeqtOo5/ptxs=";
+  vendorHash = "sha256-U7cOShly1jLvmHqJ9UBMXsX2+7b/ehaoF9R2XsBIb3I=";
 
   ldflags = [
     "-s"
