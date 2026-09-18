@@ -6,16 +6,16 @@
 
 buildNpmPackage (finalAttrs: {
   pname = "pi-acp";
-  version = "0.0.32";
+  version = "0.0.33";
 
   src = fetchFromGitHub {
     owner = "svkozak";
     repo = "pi-acp";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-NksKacRpopm8lAaOG9tbHxJAcr4rlU0uL3dl/VkFbAA=";
+    hash = "sha256-fENOOdooi4XbIDjcr02q8qzUCzdo2IW/Bca43SawZ44=";
   };
 
-  npmDepsHash = "sha256-sRBrTwBwo8pcOy5WGDxHE86fvldgOtlppuvcbiB+7uc=";
+  npmDepsHash = "sha256-/fX79XucKojL/6gZbK5eizEfrXso8rlTgiHfJffmDuY=";
 
   # npmFlags = [
   #   "--ignore-scripts"
