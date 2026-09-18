@@ -8,18 +8,18 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "pigma";
-  version = "0.2.13";
+  version = "0.2.14";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "akirco";
     repo = "pigma";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-Vx26PkLNt56zuhAFguDpi+nA8vPlFInwKREYS3pNpOA=";
+    hash = "sha256-pq5fDRh5h00jWcWnHdLJsq6H8lmI2XNAEG7NgqWTCvY=";
     fetchSubmodules = true;
   };
 
-  cargoHash = "sha256-iveDoONE4mn1sgEmThdP0d+NiYlvHA7xPtM27JmDnCE=";
+  cargoHash = "sha256-Q1xulLZtn5U7n9Gs0f+MvOeVwbLyObMBryH6uKADTBo=";
 
   nativeBuildInputs = [
     pkg-config
