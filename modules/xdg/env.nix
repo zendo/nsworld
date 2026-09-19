@@ -15,6 +15,7 @@ in
   flake.modules.nixos.env = {
     environment.sessionVariables = customVariables;
     environment.localBinInPath = true; # ~/.local/bin
+    environment.profiles = [ "$HOME/nsworld/dotfiles" ]; # Is this alright?
   };
 
   flake.modules.homeManager.env = {
