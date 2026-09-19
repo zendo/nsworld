@@ -33,14 +33,14 @@ up:
     before_update=$(get_rev)
     nix flake update --commit-lock-file
     after_update=$(get_rev)
-    if [[ "$before_update" = "$after_update" ]]; then
-        echo -e "\n ✅ Nixpkgs is no update."
+    if [[ "$before" == "$after" ]]; then
+        echo -e "\n✅ Nixpkgs is already up to date."
     else
-        OLD_MSG=$(git log -1 --pretty=%B)
-        ADD_MSG=https://github.com/NixOS/nixpkgs/compare/"${before_update:0:7}"..."${after_update:0:7}"
-        echo -e "\033[1;33m \n 🔍 Nixpkgs Comparing changes: \033[0m"
-        echo -e "\033[32m $ADD_MSG \033[0m"
-        git commit --amend --quiet -m "🚀 $OLD_MSG" -m "🔍 Nixpkgs Comparing changes: $ADD_MSG"
+        url="https://github.com/NixOS/nixpkgs/compare/${before:0:7}...${after:0:7}"
+        echo -e "\n🔍 Nixpkgs Comparing changes: $url"
+        git commit --amend --quiet \
+            -m "🚀 $(git log -1 --pretty=%B)" \
+            -m "🔍 Nixpkgs Comparing changes: $url"
     fi
 
 backup-my-data:
