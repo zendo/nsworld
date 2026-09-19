@@ -4,13 +4,15 @@ host := `uname -n`
 user := `id -un`
 home_dir := env_var('HOME')
 
+_elevate := if `command -v run0 2>/dev/null` != "" { "--elevate=run0" } else { "--sudo" }
+
 [private]
 _default:
     @just --choose --unsorted
 
 # switch/boot/test + |& nom / --install-bootloader
 os *args:
-    nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
+    nixos-rebuild {{ _elevate }} --flake .\#"{{ host }}" {{ args }}
 
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
