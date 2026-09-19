@@ -43,6 +43,7 @@
         bind
         wget
         curl
+        msedit
         micro
         fresh-editor
         parted

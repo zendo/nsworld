@@ -15,7 +15,7 @@ let
       strace
       lurk # strace alternative
       delta
-      # msedit
+      msedit
       micro
       fresh-editor
 
