@@ -10,11 +10,13 @@ _elevate := if `command -v run0 2>/dev/null` != "" { "--elevate=run0" } else { "
 _default:
     @just --choose --unsorted
 
-# switch/boot/test + |& nom / --install-bootloader
+# j os build/switch/boot/test |& nom --install-bootloader
 os *args:
     nixos-rebuild {{ _elevate }} --flake .\#"{{ host }}" {{ args }}
 
-diff:
+# nix store diff-closures /run/current-system ./result
+# dix /run/current-system ./result
+diff-all:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
 diff-dix:
