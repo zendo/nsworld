@@ -13,17 +13,13 @@ let
 in
 {
   flake.modules.nixos.env = {
-    environment.localBinInPath = true;
-
     environment.sessionVariables = customVariables;
+    environment.localBinInPath = true; # ~/.local/bin
   };
 
   flake.modules.homeManager.env = {
-    home.sessionPath = [
-      "${inputs.self}/dotfiles/bin"
-    ];
-
     home.sessionVariables = customVariables;
+    home.sessionPath = [ "${inputs.self}/dotfiles/bin" ];
   };
 
   flake.modules.hjem.env = {
