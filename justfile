@@ -20,7 +20,7 @@ diff-dix:
 
 diff-commit:
     git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
-      -m "$(just diff-dix | tail -n +3)"
+        -m "$(just diff-dix | tail -n +3)"
 
 gca:
     nix-collect-garbage -d ; sudo nix-collect-garbage -d ; sudo /run/current-system/bin/switch-to-configuration boot
