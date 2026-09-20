@@ -12,10 +12,7 @@ _default:
 
 # j os build/switch/boot/test |& nom --install-bootloader
 os *args:
-    next=$(nix build --print-out-paths --no-link \
-        '.#nixosConfigurations."{{ host }}".config.system.build.toplevel') && \
-    dix /run/current-system "$next" && \
-    nixos-rebuild {{ _elevate }} --flake .\#"{{ host }}" {{ args }}
+    nixos-rebuild {{ _elevate }} --diff --flake .\#"{{ host }}" {{ args }}
 
 # nix store diff-closures /run/current-system ./result
 diff:
