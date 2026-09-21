@@ -56,13 +56,15 @@ rustPlatform.buildRustPackage (finalAttrs: {
   cargoRoot = "src-tauri";
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
-  # Deactivate the upstream update mechanism
   postPatch = ''
+    # Disable upstream updates.
     jq '
       .bundle.createUpdaterArtifacts = false |
       .plugins.updater = {"active": false, "pubkey": "", "endpoints": []}
     ' \
     src-tauri/tauri.conf.json | sponge src-tauri/tauri.conf.json
+
+    # Fix the hardcoded library path in libappindicator-sys.
     substituteInPlace $cargoDepsCopy/*/libappindicator-sys-*/src/lib.rs \
       --replace-fail "libayatana-appindicator3.so.1" "${libayatana-appindicator}/lib/libayatana-appindicator3.so.1"
   '';
