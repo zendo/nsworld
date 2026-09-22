@@ -22,6 +22,7 @@
         security.sudo.enable = false;
         security.run0.enable = true;
         security.run0.enableSudoAlias = true;
+        # system.tools.nixos-rebuild.enableRun0Elevation = true;
 
         # Only allow `wheel` group execute sudo
         security.sudo.execWheelOnly = true;
