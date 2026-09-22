@@ -4,7 +4,7 @@ host := `uname -n`
 user := `id -un`
 home_dir := env_var('HOME')
 
-_elevate := if `command -v run0 2>/dev/null` != "" { "--elevate=run0" } else { "--elevate=sudo" }
+_elevate := `run0 --pipe true >/dev/null 2>&1 && printf %s --elevate=run0 || printf %s --elevate=sudo`
 
 [private]
 _default:
