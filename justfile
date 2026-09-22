@@ -10,8 +10,7 @@ _default:
 
 # j os build/switch/boot/test |& nom --install-bootloader
 os *args:
-    elevate=$(run0 --pipe true >/dev/null 2>&1 && printf %s --elevate=run0 || printf %s --elevate=sudo); \
-    nixos-rebuild "$elevate" --diff --flake .\#"{{ host }}" {{ args }}
+    nixos-rebuild --sudo --diff --flake .\#"{{ host }}" {{ args }}
 
 # nix store diff-closures /run/current-system ./result
 diff:
