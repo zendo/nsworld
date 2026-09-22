@@ -46,23 +46,11 @@ in
         gdu
       ];
 
-      # Desktop Environment
-      services = {
-        displayManager.autoLogin.user = "${config.myVars.user}";
-        xserver = {
-          # enable = true;
-          desktopManager = {
-            # gnome.enable = true;
-            # xfce.enable = true;
-            # budgie.enable = true;
-            # deepin.enable = true;
-            # cinnamon.enable = true;
-            # pantheon.enable = true;
-            # enlightenment.enable = true;
-            # mate.enable = true;
-            # lxqt.enable = true;
-          };
-        };
+      services.displayManager.autoLogin.user = "${config.myVars.user}";
+
+      users.users.${config.myVars.user} = {
+        # pw: 123
+        hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
       };
 
       # Clipboard shared for NixOS@Guest
@@ -85,11 +73,6 @@ in
         unitConfig = {
           ConditionPathExists = "/run/spice-vdagentd/spice-vdagent-sock";
         };
-      };
-
-      users.users.${config.myVars.user} = {
-        # pw: 123
-        hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
       };
 
       boot.loader = {
