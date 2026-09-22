@@ -1,4 +1,5 @@
 set shell := ["bash", "-uc"]
+set quiet
 
 host := `uname -n`
 user := `id -un`
@@ -10,11 +11,11 @@ _default:
 
 # j os build/switch/boot/test |& nom --install-bootloader
 os *args:
-    # next=$(nix build --print-out-paths --no-link \
-    #   '.#nixosConfigurations."{{ host }}".config.system.build.toplevel') && \
-    # dix /run/current-system "$next" && \
-    # nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
-    nixos-rebuild --sudo --diff --flake .\#"{{ host }}" {{ args }}
+    next=$(nix build --print-out-paths --no-link \
+      '.#nixosConfigurations."{{ host }}".config.system.build.toplevel') && \
+    dix /run/current-system "$next" && \
+    nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
+    # nixos-rebuild --sudo --diff --flake .\#"{{ host }}" {{ args }}
 
 # nix store diff-closures /run/current-system ./result
 diff:
