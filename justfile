@@ -4,15 +4,14 @@ host := `uname -n`
 user := `id -un`
 home_dir := env_var('HOME')
 
-_elevate := `run0 --pipe true >/dev/null 2>&1 && printf %s --elevate=run0 || printf %s --elevate=sudo`
-
 [private]
 _default:
     @just --choose --unsorted
 
 # j os build/switch/boot/test |& nom --install-bootloader
 os *args:
-    nixos-rebuild {{ _elevate }} --diff --flake .\#"{{ host }}" {{ args }}
+    elevate=$(run0 --pipe true >/dev/null 2>&1 && printf %s --elevate=run0 || printf %s --elevate=sudo); \
+    nixos-rebuild "$elevate" --diff --flake .\#"{{ host }}" {{ args }}
 
 # nix store diff-closures /run/current-system ./result
 diff:
