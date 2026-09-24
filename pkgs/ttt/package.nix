@@ -5,7 +5,6 @@
   makeBinaryWrapper,
   gitMinimal,
   ripgrep,
-  nix-update-script,
 }:
 
 buildGoModule (finalAttrs: {
@@ -42,10 +41,8 @@ buildGoModule (finalAttrs: {
       }
   '';
 
-  passthru.updateScript = nix-update-script { };
-
   meta = {
-    description = "Terminal Text Tool: The IDE that lives in your terminal.";
+    description = "Terminal Text Tool: The IDE that lives in your terminal";
     homepage = "http://tttedit.dev";
     downloadPage = "https://github.com/eugenioenko/ttt";
     changelog = "https://github.com/eugenioenko/ttt/releases/tag/v${finalAttrs.src.tag}";
