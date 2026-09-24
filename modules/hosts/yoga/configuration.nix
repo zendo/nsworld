@@ -61,7 +61,8 @@ in
         # [ deploy ]
         disko
         nixos-anywhere
-        inputs.omniflake.flakes.colmena.packages.${stdenv.hostPlatform.system}.colmena
+        colmena
+        # inputs.omniflake.flakes.colmena.packages.${stdenv.hostPlatform.system}.colmena
         # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-r
         # [ nix ]
         nix-init
