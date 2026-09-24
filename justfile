@@ -33,7 +33,7 @@ gca:
 up:
     #!/usr/bin/env bash
     get_rev() {
-        nix eval --raw .\#nixosConfigurations."{{ host }}".config.system.nixos.revision
+        jq -r '.nodes[.nodes.root.inputs.nixpkgs].locked.rev' flake.lock
     }
     before=$(get_rev)
     nix flake update --commit-lock-file
