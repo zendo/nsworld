@@ -4,7 +4,7 @@ let
     # EDITOR = "emacsclient -c -a emacs";
     EDITOR = "edit";
     VISUAL = "edit";
-    PAGER = "moor";
+    # PAGER = "moor";
     TERMINAL = "ghostty";
     PI_SKIP_VERSION_CHECK = "1";
     NIXOS_OZONE_WL = 1; # Electron wayland native

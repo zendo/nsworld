@@ -7,13 +7,16 @@
       ...
     }:
     {
-      # Perlless Activation
-      system.etc.overlay.enable = true;
-      # Bashless Activation
-      system.nixos-init.enable = true;
+      system.etc.overlay.enable = true; # Perlless Activation
+      system.nixos-init.enable = true; # Bashless Activation
 
-      systemd.oomd.enable = false;
-      services.earlyoom.enable = true;
+      # PSI: cat /proc/pressure/memory
+      systemd.oomd = {
+        enable = true;
+        enableUserSlices = true;
+      };
+      # systemd.oomd.enable = false;
+      # services.earlyoom.enable = true;
       # services.nohang.enable = true;
 
       boot = {

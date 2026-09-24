@@ -106,10 +106,10 @@ in
           "psmouse.synaptics_intertouch=1"
         ];
 
-        # zswap + swapfile
-        # grep -r . /sys/module/zswap/parameters/
-        # zswap.enable = true;
         # kernel.sysctl."vm.swappiness" = 100; # sysctl vm.swappiness
+
+        # grep -r . /sys/module/zswap/parameters/
+        # zswap.enable = true; # zswap + swapfile
 
         # binfmt.emulatedSystems = [
         #   "aarch64-linux"
@@ -120,7 +120,7 @@ in
       # zram only, no swapfile
       zramSwap.enable = true;
 
-      # swapfile + zswap
+      # zswap + swapfile
       # swapDevices = [
       #   {
       #     device = "/var/swapfile";
