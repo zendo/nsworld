@@ -16,6 +16,8 @@
     # =====================================================
     # nur = inputs.omniflake.flakes.nur.overlays;
 
+    bun2nix = inputs.omniflake.flakes.bun2nix.overlays.default;
+
     # https://wiki.nixos.org/wiki/Flakes#Importing_packages_from_multiple_nixpkgs_branches
     # stable-packages = final: _prev: {
     #   stable = import inputs.nixpkgs-stable {
