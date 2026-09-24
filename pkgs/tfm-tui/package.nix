@@ -5,7 +5,7 @@
 
   makeWrapper,
   _7zz,
-  ffmpeg,
+  ffmpeg-headless,
   glib,
   gnutar,
   imagemagick,
@@ -50,7 +50,7 @@ bun2nix.mkDerivation (finalAttrs: {
       --prefix PATH : ${
         lib.makeBinPath [
           _7zz
-          ffmpeg
+          ffmpeg-headless
           glib
           gnutar
           imagemagick
@@ -64,9 +64,14 @@ bun2nix.mkDerivation (finalAttrs: {
       }
   '';
 
+  passthru.updateScript = ''
+    bun2nix -o bun.nix
+  '';
+
   meta = {
     description = "Modern mouse-first terminal file manager";
-    homepage = "https://github.com/clarkarch/tfm-tui";
+    homepage = "https://clarkarch.github.io/tfm-tui";
+    downloadPage = "https://github.com/clarkarch/tfm-tui";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ zendo ];

@@ -7,6 +7,7 @@
         # nano-ffmpeg
         rwx
         ttt
+        tfm-tui
         pigma
         breeze
         helixnotes
