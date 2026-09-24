@@ -108,11 +108,8 @@ in
 
         # zswap + swapfile
         # grep -r . /sys/module/zswap/parameters/
-        # kernel.sysfs.module.zswap.parameters = {
-        #   enabled = true;
-        #   compressor = "zstd";
-        #   shrinker_enabled = true;
-        # };
+        # zswap.enable = true;
+        # kernel.sysctl."vm.swappiness" = 100; # sysctl vm.swappiness
 
         # binfmt.emulatedSystems = [
         #   "aarch64-linux"
