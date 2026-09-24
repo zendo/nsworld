@@ -3,7 +3,7 @@
   bun2nix,
   fetchFromGitHub,
 
-  makeWrapper,
+  makeBinaryWrapper,
   _7zz,
   ffmpeg-headless,
   glib,
@@ -33,7 +33,7 @@ bun2nix.mkDerivation (finalAttrs: {
     bunNix = ./bun.nix;
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeBinaryWrapper ];
 
   buildPhase = ''
     bun run compile
@@ -45,8 +45,8 @@ bun2nix.mkDerivation (finalAttrs: {
     ln -s $out/dist/tfm $out/bin/tfm
   '';
 
-  postFixup = ''
-    wrapProgram $out/bin/tfm \
+  postInstall = ''
+    wrapProgram $out/bin/${finalAttrs.meta.mainProgram} \
       --prefix PATH : ${
         lib.makeBinPath [
           _7zz
