@@ -19,16 +19,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-5Sm2UsyTpRx2061wOTFooTzL3fIPK/0qJxOtZvzcwgE=";
   };
 
-  nativeBuildInputs = [
-    makeWrapper
-  ];
+  nativeBuildInputs = [ makeWrapper ];
 
-  buildInputs = [
-    python3
-  ];
+  buildInputs = [ python3 ];
 
-  # 关键点：在 Nix 构建沙盒中，/build 目录不支持 xattr。
-  # 将 ostree 模式由 bare-user 修改为 archive 即可完美绕过该限制。
   postPatch = ''
     substituteInPlace local/flatpak-extract/flatpak-extract.py \
       --replace-fail "--mode=bare-user" "--mode=archive"
@@ -39,7 +33,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
     mkdir -p $out/bin
     install -Dm755 local/flatpak-extract/flatpak-extract.py $out/bin/$pname
-    # patchShebangs $out/bin/$pname
+
     wrapProgram $out/bin/$pname \
       --prefix PATH : ${lib.makeBinPath [ ostree ]}
 
