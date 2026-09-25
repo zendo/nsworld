@@ -1,5 +1,5 @@
 {
-  description = "NIX SAVE THE WORLD";
+  description = "NIX SAVE THE WORLD 🌏";
 
   outputs =
     inputs@{ omniflake, ... }:
