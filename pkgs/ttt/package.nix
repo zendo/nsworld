@@ -9,17 +9,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "ttt";
-  version = "1.5.0";
+  version = "1.6.0";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "eugenioenko";
     repo = "ttt";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-Gh3nfftPKM4wh7dYgtRs/vCEtyRc2YNfab+iQ5kSfDM=";
+    hash = "sha256-9ZtU93DZrojVzN2ry+sBkzFQfj3v2B8is1nKVkbhUvU=";
   };
 
-  vendorHash = "sha256-QKunMv+rv+a4ps+yXZVxr/MTOkp6c8mslH2BsHozIsY=";
+  vendorHash = "sha256-Kv/ztb2C2aj699EOC08AI09q3S+Bz6tGh9LeDlQhrac=";
 
   ldflags = [
     "-s"
