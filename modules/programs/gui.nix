@@ -8,6 +8,7 @@
         rwx
         ttt
         tfm-tui
+        sonicradio
         pigma
         breeze
         helixnotes
