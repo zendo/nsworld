@@ -4,8 +4,6 @@
   fetchFromGitHub,
   pkg-config,
   alsa-lib,
-  makeDesktopItem,
-  copyDesktopItems,
 }:
 
 buildGoModule (finalAttrs: {
@@ -21,41 +19,14 @@ buildGoModule (finalAttrs: {
 
   vendorHash = "sha256-iaRs3YESYRu4BQhnPJQXAU1xw1lEpY5Kf2U9KRIodNw=";
 
-  nativeBuildInputs = [
-    pkg-config
-    copyDesktopItems
-  ];
+  nativeBuildInputs = [ pkg-config ];
 
-  buildInputs = [
-    alsa-lib
-  ];
+  buildInputs = [ alsa-lib ];
 
   ldflags = [
     "-s"
     "-w"
     "-X main.version=${finalAttrs.version}"
-  ];
-
-  desktopItems = [
-    (makeDesktopItem {
-      name = "SonicRadio";
-      exec = "sonicradio";
-      terminal = true;
-      comment = finalAttrs.meta.description;
-      desktopName = "Sonic Radio";
-      genericName = "Terminal Radio Player";
-      categories = [
-        "AudioVideo"
-        "Audio"
-        "ConsoleOnly"
-      ];
-      keywords = [
-        "Radio"
-        "TUI"
-        "Internet"
-        "Streaming"
-      ];
-    })
   ];
 
   # Tests require music player binaries and networking
