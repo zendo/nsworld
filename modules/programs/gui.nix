@@ -10,6 +10,7 @@
         tfm-tui
         sonicradio
         pigma
+        rox
         breeze
         helixnotes
 
