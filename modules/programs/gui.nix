@@ -8,6 +8,7 @@
         rwx
         ttt
         tfm-tui
+        tanim
         sonicradio
         pigma
         rox
