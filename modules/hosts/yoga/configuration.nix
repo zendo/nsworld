@@ -67,7 +67,7 @@ in
         # [ nix ]
         nix-init
         nix-update
-        inputs.omniflake.pinned.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
+        # inputs.omniflake.pinned.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
         # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
       ];
 

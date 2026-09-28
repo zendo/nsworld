@@ -31,7 +31,7 @@
         }
         // {
           # nix run .
-          default = config.packages.kula;
+          default = config.packages.fhs-run;
         };
     };
 }

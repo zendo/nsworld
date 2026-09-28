@@ -50,20 +50,6 @@
       };
 
       # ╭──────────────────────────────────────╮
-      # │ FHS                                  │
-      # ╰──────────────────────────────────────╯
-      devShells.fhs = pkgs.buildFHSEnv {
-        name = "demo";
-        targetPkgs =
-          p: with p; [
-            python3
-            gcc
-            glibc
-            zlib
-          ];
-      };
-
-      # ╭──────────────────────────────────────╮
       # │ GCC                                  │
       # ╰──────────────────────────────────────╯
       devShells.gcc = pkgs.mkShell {
