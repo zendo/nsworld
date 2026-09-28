@@ -108,8 +108,9 @@ in
 
         # kernel.sysctl."vm.swappiness" = 100; # sysctl vm.swappiness
 
+        # zswap + swapfile
         # grep -r . /sys/module/zswap/parameters/
-        # zswap.enable = true; # zswap + swapfile
+        zswap.enable = true;
 
         # binfmt.emulatedSystems = [
         #   "aarch64-linux"
@@ -118,15 +119,15 @@ in
       };
 
       # zram only, no swapfile
-      zramSwap.enable = true;
+      # zramSwap.enable = true;
 
       # zswap + swapfile
-      # swapDevices = [
-      #   {
-      #     device = "/var/swapfile";
-      #     size = 1024 * 16;
-      #   }
-      # ];
+      swapDevices = [
+        {
+          device = "/var/swapfile";
+          size = 1024 * 16;
+        }
+      ];
 
       # ╭─────────────────────────────────────────────────────╮
       # │ BOOTLOADER                                          │
