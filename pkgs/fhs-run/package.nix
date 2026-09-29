@@ -18,25 +18,41 @@ pkgs.buildFHSEnv {
       fontconfig.lib
       glib
       zlib
+      nss
+      nspr
+      cups
       pcre2
+      dbus
+      udev
       openssl
+      expat
       curlMinimal
+      atk
       krb5
+      alsa-lib
+      pipewire
 
       # [ GTK ]
       gtk3
       gdk-pixbuf
       cairo
+      pango
       libsoup_3
       webkitgtk_4_1
 
       # [ OpenGL ]
       libGL
+      libgbm
 
       # [ X11 ]
       libx11
       libxcb
       libSM
+      libxext
+      libxfixes
+      libxrandr
+      libxdamage
+      libxcomposite
 
       # [ Wayland ]
       wayland
@@ -56,5 +72,6 @@ pkgs.buildFHSEnv {
       # [ Tools ]
       pax-utils # lddtree
       zenity
+      chafa
     ];
 }
