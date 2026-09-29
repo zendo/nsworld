@@ -5,10 +5,10 @@
       environment.systemPackages = with pkgs; [
         # kula
         # nano-ffmpeg
+        # tanim
         rwx
         ttt
         tfm-tui
-        tanim
         sonicradio
         pigma
         rox

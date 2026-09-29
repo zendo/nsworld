@@ -44,7 +44,7 @@ pkgs.buildFHSEnv {
 
       # [ Python ]
       # (python3.withPackages (
-      #   p: with p; [
+      #   py: with py; [
       #     pyyaml
       #   ]
       # ))
