@@ -2,6 +2,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 
+# https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/appimage/default.nix#L112
 pkgs.buildFHSEnv {
   name = "fhs-run";
   runScript = pkgs.writeShellScript "fhs-run" ''
@@ -27,14 +28,12 @@ pkgs.buildFHSEnv {
       openssl
       expat
       curlMinimal
-      atk
       krb5
-      alsa-lib
-      pipewire
 
       # [ GTK ]
       gtk3
       gdk-pixbuf
+      atk
       cairo
       pango
       libsoup_3
@@ -43,20 +42,32 @@ pkgs.buildFHSEnv {
       # [ OpenGL ]
       libGL
       libgbm
+      # vulkan-loader
 
       # [ X11 ]
       libx11
       libxcb
       libSM
+      libICE
       libxext
       libxfixes
-      libxrandr
       libxdamage
       libxcomposite
+      libxrandr
+      libxrender
+      libxcursor
+      libxi
+      libxtst
+      libxinerama
+      libxscrnsaver
 
       # [ Wayland ]
       wayland
       libxkbcommon
+
+      # [ Audio ]
+      alsa-lib
+      pipewire
 
       # [ Python ]
       # (python3.withPackages (
@@ -67,7 +78,6 @@ pkgs.buildFHSEnv {
 
       # [ .NET ]
       # icu
-      # libICE
 
       # [ Tools ]
       pax-utils # lddtree
