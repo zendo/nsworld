@@ -28,9 +28,11 @@ pkgs.buildFHSEnv {
       openssl
       expat
       curlMinimal
-      krb5
+      libkrb5
+      # krb5
 
       # [ GTK ]
+      glib
       gtk3
       gdk-pixbuf
       atk
@@ -53,6 +55,7 @@ pkgs.buildFHSEnv {
       libxfixes
       libxdamage
       libxcomposite
+      libxkbcommon
       libxrandr
       libxrender
       libxcursor
