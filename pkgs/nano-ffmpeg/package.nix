@@ -2,8 +2,8 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
-  makeWrapper,
-  ffmpeg,
+  makeBinaryWrapper,
+  ffmpeg-headless,
 }:
 
 buildGoModule (finalAttrs: {
@@ -26,11 +26,11 @@ buildGoModule (finalAttrs: {
     "-X=github.com/dgr8akki/nano-ffmpeg/cmd.Version=${finalAttrs.version}"
   ];
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeBinaryWrapper ];
 
-  preFixup = ''
-    wrapProgram $out/bin/nano-ffmpeg \
-      --prefix PATH ":" "${lib.makeBinPath [ ffmpeg ]}";
+  postInstall = ''
+    wrapProgram $out/bin/${finalAttrs.meta.mainProgram} \
+      --prefix PATH : ${lib.makeBinPath [ ffmpeg-headless ]};
   '';
 
   meta = {
