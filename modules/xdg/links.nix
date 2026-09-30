@@ -68,6 +68,7 @@
       # ~/.config
       xdg.config.files = {
         # LC_ALL=C xdg-user-dirs-update --force
+        # rm ~/.config/gtk-3.0/bookmarks ; xdg-user-dirs-gtk-update
         # "user-dirs.conf".text = "enabled=False";
 
         # AutoStart
