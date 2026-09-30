@@ -28,6 +28,7 @@
         ];
         settings.formatter.prettier.excludes = [
           "*secrets*"
+          "modules/hosts/*.yaml"
           "dotfiles/Windows/*"
           "dotfiles/mofa/*"
         ];

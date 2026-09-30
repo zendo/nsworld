@@ -9,7 +9,7 @@ const [, , templateFile, nodesFile] = process.argv;
 const config = JSON.parse(fs.readFileSync(templateFile, "utf8"));
 const nodes = JSON.parse(fs.readFileSync(nodesFile, "utf8"));
 
-const outbounds = config.outbounds ??= [];
+const outbounds = (config.outbounds ??= []);
 const nodesOutbounds = nodes.outbounds ?? [];
 const nodeTags = nodesOutbounds.map((out) => out.tag).filter(Boolean);
 
@@ -23,7 +23,4 @@ for (const tag of ["🎈 自动选择", "🚀 节点选择"]) {
   }
 }
 
-fs.writeFileSync(
-  "config.jsonc",
-  JSON.stringify(config, null, 2) + "\n"
-);
+fs.writeFileSync("config.jsonc", JSON.stringify(config, null, 2) + "\n");
