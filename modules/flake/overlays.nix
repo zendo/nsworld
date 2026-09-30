@@ -43,16 +43,16 @@
     modifications = final: prev: {
       # foo = prev.callPackage ./foo/package.nix { };
 
-      sing-box = prev.sing-box.overrideAttrs (finalAttrs: {
-        version = "1.15.0-alpha.5";
-        src = prev.fetchFromGitHub {
-          owner = "SagerNet";
-          repo = "sing-box";
-          tag = "v${finalAttrs.version}";
-          hash = "sha256-Ce1eukO8ERZEKUoqwcJEJIZcO6VcG/cRnfCdg4FCYJw=";
-        };
-        vendorHash = "sha256-ttkDc8vRomNMNwqrZcGuvS0/M7Yqrpkz/h8wO5IVRQ4=";
-      });
+      # sing-box = prev.sing-box.overrideAttrs (finalAttrs: {
+      #   version = "1.15.0-alpha.5";
+      #   src = prev.fetchFromGitHub {
+      #     owner = "SagerNet";
+      #     repo = "sing-box";
+      #     tag = "v${finalAttrs.version}";
+      #     hash = "sha256-Ce1eukO8ERZEKUoqwcJEJIZcO6VcG/cRnfCdg4FCYJw=";
+      #   };
+      #   vendorHash = "sha256-ttkDc8vRomNMNwqrZcGuvS0/M7Yqrpkz/h8wO5IVRQ4=";
+      # });
 
       # Remove attributes from set
       # gui-for-singbox = prev.gui-for-singbox.overrideAttrs (oldAttrs: {

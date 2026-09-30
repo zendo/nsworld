@@ -99,7 +99,7 @@ let
       # zee
       tokei # count code
       lazygit
-      herdr
+      # herdr
 
       # [ Networking ]
       wget
