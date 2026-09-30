@@ -216,18 +216,18 @@
           libxml2
           libxslt
         ];
-        propagatedBuildInputs = with pkgs.python3.pkgs; [
-          requests
-          lxml
-          chardet
-          docutils
-          markdown
-          markups
-          pyenchant
-          pygments
-          # pyqt5
-          # pyqt6
-        ];
+        # propagatedBuildInputs = with pkgs.python3.pkgs; [
+        #   requests
+        #   lxml
+        #   chardet
+        #   docutils
+        #   markdown
+        #   markups
+        #   pyenchant
+        #   pygments
+        #   # pyqt5
+        #   # pyqt6
+        # ];
         env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
           pkgs.stdenv.cc.cc.lib
           pkgs.libz
