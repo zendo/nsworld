@@ -148,6 +148,7 @@ pkgs.buildFHSEnv {
       alsa-lib
       pipewire # libpipewire-0.3 + Wayland screencast
       libpulseaudio # libpulse.so.0 - pipewire does NOT provide it
+      # pulseaudio
       # libjack2
       # libcanberra
       # flac
