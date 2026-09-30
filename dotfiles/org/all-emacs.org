@@ -1491,10 +1491,16 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 #+end_src
 
 ** emoji
-:) :-( :dog:
-#+begin_src emacs-lisp
+*) :) :-( :dog:
+#+begin_src emacs-lispxx
 (use-package emojify
   :defer t
+  :custom
+  (emojify-inhibit-functions
+   '(emojify-in-org-tags-p
+     emojify-in-org-list-p
+     (lambda (text _beg _end)
+       (string= text "*)"))))
   :hook (after-init . global-emojify-mode))
 #+end_src
 
