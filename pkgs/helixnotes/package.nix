@@ -18,22 +18,22 @@
 # Copy from: https://gitlab.com/ArkHost/HelixNotes/-/blob/main/flake.nix
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "helixnotes";
-  version = "1.3.5";
+  version = "1.3.6";
   __structuredAttrs = true;
 
   src = fetchFromGitLab {
     owner = "ArkHost";
     repo = "HelixNotes";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-hJZ93LctJxzeWcJ1CtIMFcKLIKNnd45JE8xEWu3/lW8=";
+    hash = "sha256-06U9404JTZju1fjMtzkncWjf2zuww1P+oDLcZak5XkA=";
   };
 
-  cargoHash = "sha256-Lf/2f+fyOz9/2XanNxzjImAtSRoDvrRZjzifiql+yI8=";
+  cargoHash = "sha256-t03bO221qKv0EL3h2e12G2qfKfaRW7BMYqTgKcYRYp8=";
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
     fetcherVersion = 4;
-    hash = "sha256-WOC49E5uuol+0Lb1ZKI10kFhKhXGesEfPg1eTPb1W10=";
+    hash = "sha256-jBPXRMh9w1Ph0d1XsjJZRABYDh0mJWiY7WCB7i9Wym0=";
   };
 
   nativeBuildInputs = [
