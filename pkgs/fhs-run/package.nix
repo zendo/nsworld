@@ -1,8 +1,18 @@
+/*
+  nix run ~/nsworld#fhs-run ./app
+
+  # https://nixmultiverse.com/
+  nix-build ~/nsworld/pkgs/fhs-run/package.nix --arg pkgs \
+    'import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz") {}'
+    'import (fetchTarball "https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz") {}'
+  ./result/bin/fhs-run ./app
+
+  https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/appimage/default.nix#L112
+*/
 {
   pkgs ? import <nixpkgs> { },
 }:
 
-# https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/appimage/default.nix#L112
 pkgs.buildFHSEnv {
   name = "fhs-run";
   runScript = pkgs.writeShellScript "fhs-run" ''
