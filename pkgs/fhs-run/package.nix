@@ -103,6 +103,7 @@ pkgs.buildFHSEnv {
       shared-mime-info # glib mime type lookups
       libsoup_3
       webkitgtk_4_1 # ±826 MiB of the whole closure, drop if nothing embeds a web view
+      glib-networking
 
       # --- X11 --------------------------------------------------------------
       libx11
