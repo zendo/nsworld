@@ -188,16 +188,17 @@
       # ╭──────────────────────────────────────╮
       # │ PYTHON                               │
       # ╰──────────────────────────────────────╯
-      devShells.py-withPackages = pkgs.mkShell {
+      devShells.py-pkgs = pkgs.mkShell {
         buildInputs = with pkgs; [
           (python3.withPackages (
             p: with p; [
-              numpy
               requests
-              flask
+              # numpy
+              # flask
               # playwright
               # pandas
               pyaml
+              # phonenumbers
             ]
           ))
         ];
