@@ -131,32 +131,32 @@ pkgs.buildFHSEnv {
       libdrm # runtime dep of libgbm/libGL, must be present for AppImages
       libgbm
       vulkan-loader # libvulkan.so.1; ICDs come from /run/opengl-driver
-      libGLU
-      libvdpau
+      # libGLU
+      # libvdpau
 
       # --- Audio / Video ----------------------------------------------------
       alsa-lib
       pipewire # libpipewire-0.3 + Wayland screencast
       libpulseaudio # libpulse.so.0 - pipewire does NOT provide it
-      libjack2
-      libcanberra
-      flac
-      libogg
-      libvorbis
-      libvpx
-      libtheora
-      speex
-      libsamplerate
-      libmpg123
-      gst_all_1.gstreamer # webkit/Electron media backend
-      gst_all_1.gst-plugins-base
-      gst_all_1.gst-plugins-ugly
+      # libjack2
+      # libcanberra
+      # flac
+      # libogg
+      # libvorbis
+      # libvpx
+      # libtheora
+      # speex
+      # libsamplerate
+      # libmpg123
+      # gst_all_1.gstreamer # webkit/Electron media backend
+      # gst_all_1.gst-plugins-base
+      # gst_all_1.gst-plugins-ugly
 
       # --- SDL (games) ------------------------------------------------------
-      SDL2
-      SDL2_image
-      SDL2_mixer
-      SDL2_ttf
+      # SDL2
+      # SDL2_image
+      # SDL2_mixer
+      # SDL2_ttf
 
       # --- commonly dlopen()ed helpers --------------------------------------
       libsecret # Electron safeStorage/keytar
@@ -165,26 +165,24 @@ pkgs.buildFHSEnv {
       libxcrypt # libcrypt.so.1, legacy binaries
 
       # --- legacy, for parity with nixpkgs' AppImage list -------------------
-      # needed by at least one AppImage in the wild, cheap to carry around
-      glew_1_10 # libGLEW.so.1.10
-      freeglut # libglut.so.3
-      libcaca # libcaca.so.0
-      dbus-glib # libdbus-glib-1.so.2
-      libtool.lib # libltdl.so.7
-      libmikmod # libmikmod.so.3
-      pciutils # libpci.so.3
-      libpciaccess # libpciaccess.so.0
-      libpng12 # libpng12.so.0, very old apps only
-      onetbb # libtbb.so.12
-      curlWithGnuTls # libcurl-gnutls.so.4
+      # glew_1_10 # libGLEW.so.1.10
+      # freeglut # libglut.so.3
+      # libcaca # libcaca.so.0
+      # dbus-glib # libdbus-glib-1.so.2
+      # libtool.lib # libltdl.so.7
+      # libmikmod # libmikmod.so.3
+      # pciutils # libpci.so.3
+      # libpciaccess # libpciaccess.so.0
+      # libpng12 # libpng12.so.0, very old apps only
+      # onetbb # libtbb.so.12
+      # curlWithGnuTls # libcurl-gnutls.so.4
 
       # --- tools (not libraries) --------------------------------------------
       xdg-utils # xdg-open
       xdg-user-dirs
       desktop-file-utils
-      zenity
-      which
       pax-utils # lddtree
+      zenity
       chafa
     ];
 }
