@@ -104,6 +104,7 @@ pkgs.buildFHSEnv {
       libsoup_3
       webkitgtk_4_1 # ±826 MiB of the whole closure, drop if nothing embeds a web view
       glib-networking
+      libayatana-appindicator
 
       # --- X11 --------------------------------------------------------------
       libx11
