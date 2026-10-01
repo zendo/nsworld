@@ -102,6 +102,7 @@ pkgs.buildFHSEnv {
       hicolor-icon-theme
       shared-mime-info # glib mime type lookups
       libsoup_3
+      libproxy
       webkitgtk_4_1 # ±826 MiB of the whole closure, drop if nothing embeds a web view
       glib-networking
       libayatana-appindicator
@@ -163,7 +164,10 @@ pkgs.buildFHSEnv {
       # libmpg123
       # gst_all_1.gstreamer # webkit/Electron media backend
       # gst_all_1.gst-plugins-base
+      # gst_all_1.gst-plugins-good
       # gst_all_1.gst-plugins-ugly
+      # gst_all_1.gst-plugins-bad
+      # gst_all_1.gst-plugins-rs
 
       # --- SDL (games) ------------------------------------------------------
       # SDL2
