@@ -70,6 +70,7 @@ pkgs.buildFHSEnv {
       keyutils.lib # libkeyutils.so.1
       libcap # libcap.so.2, libpsx.so.2
       libusb1 # libusb-1.0.so.0
+      sqlite
       gmp # libgmp.so.10
       brotli # libbrotli{common,dec,enc}
       libgcrypt # libgcrypt.so.20
