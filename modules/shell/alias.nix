@@ -30,12 +30,10 @@ let
     inxi = "inxi -Fz";
     free = "free -h";
     beep = ''echo -en "\007"'';
-    dd-log = "sudo dd bs=8M oflag=sync,direct conv=fsync status=progress";
     psp = "procs --sortd UsageMem";
     ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
 
     # [ network ]
-    ip = "ip --color=auto";
     ip-api = "curl ip-api.com";
     ip-info = "curl ipinfo.io";
     ip-location = "curl -s api.ip2location.io | jq .";
