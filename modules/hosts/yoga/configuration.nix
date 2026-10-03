@@ -58,6 +58,7 @@ in
       environment.systemPackages = with pkgs; [
         inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine
         # inputs.omniflake.flakes.nix-packages-ccicnce113424.packages.x86_64-linux.open-orpheus
+        # inputs.omniflake.flakes."github:xddxdd/nur-packages".packages.x86_64-linux.baidunetdisk
         # [ deploy ]
         disko
         nixos-anywhere
