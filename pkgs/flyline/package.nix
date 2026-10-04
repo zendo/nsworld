@@ -18,7 +18,14 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-6nEcshn1IuF1QHcsqoFbw/q7Px5CAYxqhOvU/twfyAs=";
 
-  doCheck = false;
+  checkFlags = [
+    # docker_integration_tests fails
+    "--skip=test_bash_3_2_57"
+    "--skip=test_bash_4_4_18"
+    "--skip=test_bash_4_4_rc1"
+    "--skip=test_bash_5_0"
+    "--skip=test_bash_5_3"
+  ];
 
   meta = {
     description = "Bash plugin for modern command line editing";

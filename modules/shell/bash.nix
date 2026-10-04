@@ -30,7 +30,7 @@
     in
     {
       programs.bash.interactiveShellInit = ''
-        ${bleshCfg}
+        ${flylineCfg}
 
         # Functions
         nix-build-ls() {
