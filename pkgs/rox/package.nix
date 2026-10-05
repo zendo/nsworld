@@ -1,3 +1,4 @@
+#/*
 {
   lib,
   stdenv,
@@ -22,11 +23,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "rox";
-  version = "1.30.1";
+  version = "1.30.2";
 
   src = fetchurl {
     url = "https://github.com/zealsprince/rox/releases/download/v${finalAttrs.version}/rox_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-jbB7VKBZAdqNonTmQFurFHpAvZKqwA7iqO4C2snVHE0=";
+    hash = "sha256-XbSFCNWuFWjXNAsVeMd2m4/TPmd2uBhvyLMV1k+Tn4M=";
   };
 
   nativeBuildInputs = [
@@ -63,7 +64,7 @@ stdenv.mkDerivation (finalAttrs: {
     mainProgram = "rox";
   };
 })
-
+#*/
 /*
   {
     lib,
@@ -121,16 +122,16 @@ stdenv.mkDerivation (finalAttrs: {
   in
   rustPlatform.buildRustPackage (finalAttrs: {
     pname = "rox";
-    version = "1.28.6";
+    version = "1.30.2";
 
     src = fetchFromGitHub {
       owner = "zealsprince";
       repo = "rox";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-DBwsrg/L5x9Y++pCBtW87ozQrVzwQJ4hI9Fu2a6G6nI=";
+      hash = "sha256-SJFOpZPoUHfc1fEk3mxAjwdAgFl5lgBumnQ02MQUE2Q=";
     };
 
-    cargoHash = "sha256-tPW+ycNfDhToANx/HlFVW0hWEFcoWiJI9UTwd+cAVyY=";
+    cargoHash = "sha256-mmHbCfjUD6UzOdBNpl84dbAheBfZqtZv/w2o9rzbLWY=";
 
     cargoBuildFlags = [
       "--package"
