@@ -70,12 +70,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
   '';
 
   meta = {
-    description = "Local Markdown note-taking app. No cloud, no account, no telemetry";
+    description = "Clean notes app with rich editing and plain Markdown files on your own disk";
     homepage = "https://helixnotes.com";
     downloadPage = "https://gitlab.com/ArkHost/HelixNotes";
+    changelog = "https://gitlab.com/ArkHost/HelixNotes/-/releases/v${finalAttrs.version}";
     license = lib.licenses.agpl3Only;
-    platforms = lib.platforms.linux ++ lib.platforms.darwin;
-    maintainers = with lib.maintainers; [ ];
+    platforms = lib.platforms.linux;
+    maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "helixnotes";
   };
 })
