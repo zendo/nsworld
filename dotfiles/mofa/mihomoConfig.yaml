@@ -48,7 +48,7 @@ proxies:
 
 mixed-port: 7890
 allow-lan: true
-ipv6: true
+# ipv6: true
 mode: rule
 log-level: info
 bind-address: '*'
@@ -77,7 +77,7 @@ dns_common:
 
 dns:
   enable: true
-  ipv6: true
+  # ipv6: true
   use-hosts: true
   cache-algorithm: arc
   use-system-hosts: true
@@ -89,8 +89,11 @@ dns:
   proxy-server-nameserver: *proxyServerDNS
   nameserver: *foreignDNS
   nameserver-policy:
+    'rule-set:private': 'system'
+    'rule-set:douyin': ['system', '180.184.1.1', '180.184.2.2']
     'rule-set:cn': *chinaDNS
   direct-nameserver: *chinaDNS
+  direct-nameserver-follow-policy: true
 
 hosts:
   'doh.pub': ['1.12.12.12', '120.53.53.53']
@@ -331,6 +334,11 @@ rule-providers:
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/paypal.mrs'
     path: './ruleset/paypal.mrs'
     path-in-bundle: 'geo/geosite/paypal.mrs'
+  patreon:
+    <<: *rule_providers_domain
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/patreon.mrs'
+    path: './ruleset/patreon.mrs'
+    path-in-bundle: 'geo/geosite/patreon.mrs'
   ehentai:
     <<: *rule_providers_domain
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/ehentai.mrs'
@@ -344,11 +352,11 @@ rule-providers:
 
   # --- 其他规则集 ---
 
-  adblockmihomolite:
+  category-ads:
     <<: *rule_providers_domain
-    url: 'https://fastly.jsdelivr.net/gh/217heidai/adblockfilters@main/rules/adblockmihomolite.mrs'
-    path: './ruleset/adblockmihomolite.mrs'
-    path-in-bundle: 'geo/geosite/category-ads-all.mrs'
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-ads.mrs'
+    path: './ruleset/category-ads.mrs'
+    path-in-bundle: 'geo/geosite/category-ads.mrs'
   fakeip_filter:
     <<: *rule_providers_domain
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/fakeip-filter.mrs'
@@ -364,6 +372,11 @@ rule-providers:
     url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/cn.mrs'
     path: './ruleset/cn.mrs'
     path-in-bundle: 'geo/geosite/cn.mrs'
+  douyin:
+    <<: *rule_providers_domain
+    url: 'https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/douyin.mrs'
+    path: './ruleset/douyin.mrs'
+    path-in-bundle: 'geo/geosite/douyin.mrs'
 
 # --- 策略组 (Proxy Groups) ---
 
@@ -467,11 +480,11 @@ group_filter:
   TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
   low_filter:
     &low_filter {
-      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[ \[\(|｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[ \[\(|｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?=[ \)\]]|倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
+      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[\s\[\(【|｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[\s\[\(【|｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?=[\s】\)\]]|倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
     }
   high_filter:
     &high_filter {
-      filter: '(?i)(?<=[ \[\(|｜丨∣┃\-‐–—−－﹣])((?:[*×✕✖⨯⨉x]\s*(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?\s*(?:倍|[*×✕✖⨯⨉x])))',
+      filter: '(?i)(?:(?<=[\s\[\(【|｜丨∣┃\-‐–—−－﹣])|^)((?:[*×✕✖⨯⨉x]\s*(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?\s*(?:倍|[*×✕✖⨯⨉x])))',
     }
   exclude_filter:
     &exclude_filter {
@@ -584,8 +597,14 @@ proxy-groups:
     icon: 'https://fastly.jsdelivr.net/gh/AIsouler/MyClash@main/Icons/svg/Bitcoin.svg'
 
   - name: 'PayPal'
+    default-selected: '美国'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/AIsouler/MyClash@main/Icons/svg/PayPal.svg'
+
+  - name: 'Patreon'
+    default-selected: '香港'
+    <<: [*group_common_select, *proxies_default]
+    icon: 'https://fastly.jsdelivr.net/gh/AIsouler/MyClash@main/Icons/svg/Patreon.svg'
 
   - name: 'EHentai'
     default-selected: '美国'
@@ -693,7 +712,7 @@ rules:
   - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_additional),(RULE-SET,cn_ip,no-resolve)))))),REJECT
 
   # 广告拦截
-  - RULE-SET,adblockmihomolite,AdBlock
+  - RULE-SET,category-ads,AdBlock
 
   # 代理规则
   - RULE-SET,googlefcm,FCM
@@ -736,6 +755,7 @@ rules:
   - RULE-SET,spotify_ip,Spotify,no-resolve
   - RULE-SET,cryptocurrency,Crypto
   - RULE-SET,paypal,PayPal
+  - RULE-SET,patreon,Patreon
   - RULE-SET,ehentai,EHentai
 
   # 兜底规则
