@@ -5,7 +5,7 @@
       packages.wrapper-emacs = (
         (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
           epkgs: with epkgs; [
-            jinx
+            # jinx
             sqlite3
             # ghostel
             # vterm
