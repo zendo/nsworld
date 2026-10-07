@@ -30,7 +30,6 @@
     # [ programs ]
     cli
     gui
-    emacs
     chrome
     firefox
 

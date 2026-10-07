@@ -20,6 +20,7 @@ in
         helixnotes
 
         # [ wrapper ]
+        sp.wrapper-emacs
         # sp.wrapper-alacritty
         sp.wrapper-cava
         sp.wrapper-foot
