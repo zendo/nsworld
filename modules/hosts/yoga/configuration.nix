@@ -22,6 +22,7 @@ in
         # [ programs ]
         ai
         dev
+        # vscode
 
         # [ virt ]
         docker

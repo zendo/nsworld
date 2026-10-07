@@ -30,6 +30,7 @@
     # [ programs ]
     cli
     gui
+    emacs
     chrome
     firefox
 
@@ -37,7 +38,6 @@
 
     # [ services ]
     # bittorrent
-    emacs
     # kanata
     keyd
 
