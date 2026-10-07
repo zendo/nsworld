@@ -1,10 +1,10 @@
 { inputs, ... }:
-let
-  sp = inputs.self.packages."x86_64-linux";
-in
 {
   flake.modules.nixos.gui =
     { pkgs, lib, ... }:
+    let
+      sp = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
+    in
     {
       environment.systemPackages = with pkgs; [
         # kula
