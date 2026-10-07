@@ -1,3 +1,7 @@
+{ inputs, ... }:
+let
+  sp = inputs.self.packages."x86_64-linux";
+in
 {
   flake.modules.nixos.gui =
     { pkgs, lib, ... }:
@@ -16,14 +20,14 @@
         helixnotes
 
         # [ wrapper ]
-        # wrapper-alacritty
-        wrapper-cava
-        wrapper-foot
-        wrapper-ghostty
-        wrapper-git
-        # wrapper-helix
-        wrapper-kitty
-        wrapper-mpv
+        # sp.wrapper-alacritty
+        sp.wrapper-cava
+        sp.wrapper-foot
+        sp.wrapper-ghostty
+        sp.wrapper-git
+        # sp.wrapper-helix
+        sp.wrapper-kitty
+        sp.wrapper-mpv
 
         # [ Social ]
         telegram-desktop # :webkitgtk

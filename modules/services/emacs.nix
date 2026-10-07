@@ -1,10 +1,11 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.emacs =
     { pkgs, config, ... }:
     {
       environment.systemPackages = with pkgs; [
         # vips # dirvish image
-        wrapper-emacs
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-emacs
       ];
 
       services.emacs = {

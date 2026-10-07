@@ -3,14 +3,25 @@
   # flake.overlays.default
   imports = [ inputs.omniflake.flakes.flake-parts.flakeModules.easyOverlay ];
 
-  perSystem =
-    { config, ... }:
-    {
-      # Export flake.packages to flake.overlays.default
-      overlayAttrs = config.packages;
-    };
+  # May cause nix-wrapper-modules gnused rebuild from source
+  # perSystem =
+  #   { config, ... }:
+  #   {
+  #     # Export flake.packages to flake.overlays.default
+  #     overlayAttrs = config.packages;
+  #   };
 
   flake.overlays = {
+    # =====================================================
+    # Adding Packages
+    # =====================================================
+    additions =
+      final: prev:
+      prev.lib.packagesFromDirectoryRecursive {
+        inherit (prev) callPackage;
+        directory = (inputs.self + /pkgs);
+      };
+
     # =====================================================
     # Inputs Overlays
     # =====================================================
