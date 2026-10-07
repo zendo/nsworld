@@ -164,6 +164,8 @@ stdenv.mkDerivation (finalAttrs: {
     ]
     ++ runtimeLibs;
 
+    runtimeDependencies = runtimeLibs;
+
     # Upstream vendor scripts modify the source tree in place. Recreate their
     # vendor trees here because Cargo requires the GPUI path patches, while
     # rox-milkdrop-sys expects ProjectM at build time.
@@ -187,9 +189,9 @@ stdenv.mkDerivation (finalAttrs: {
       done
     '';
 
-    postFixup = ''
-      patchelf --add-rpath ${lib.makeLibraryPath runtimeLibs} $out/bin/rox
-    '';
+    # postFixup = ''
+    #   patchelf --add-rpath ${lib.makeLibraryPath runtimeLibs} $out/bin/rox
+    # '';
 
     postInstall = ''
       install -Dm644 crates/rox/assets/app/rox.desktop $out/share/applications/rox.desktop
