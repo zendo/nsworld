@@ -23,7 +23,6 @@ in
         nixpkgs
         nix-tools
         ssh
-        emacs
 
         # [ programs ]
         cli
@@ -76,13 +75,17 @@ in
   # ╰─────────────────────────────────────────────────────╯
   flake.modules.nixos.host-wsl =
     { lib, pkgs, ... }:
+    let
+      sp = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
+    in
     {
       environment = {
         systemPackages = with pkgs; [
-          wrapper-cava
-          wrapper-foot
-          wrapper-ghostty
-          wrapper-git
+          sp.wrapper-cava
+          sp.wrapper-foot
+          sp.wrapper-ghostty
+          sp.wrapper-git
+          sp.wrapper-emacs
 
           # [ WSL ]
           dos2unix
