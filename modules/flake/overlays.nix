@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   # flake.overlays.default
-  imports = [ inputs.omniflake.flakes.flake-parts.flakeModules.easyOverlay ];
+  # imports = [ inputs.omniflake.flakes.flake-parts.flakeModules.easyOverlay ];
 
   # May cause nix-wrapper-modules gnused rebuild from source
   # perSystem =
@@ -71,12 +71,6 @@
       #     "hydraPlatforms"
       #   ];
       # });
-
-      # NPM/Node.js Tool Wrapper
-      # tool-name = prev.writeShellScriptBin "tool-name" ''
-      #   export PATH="${prev.nodejs}/bin:$PATH"
-      #   exec ${prev.nodejs}/bin/npx --yes package-name "$@"
-      # '';
 
       # wrapProgram $out/bin/telegram-desktop --set QT_QPA_PLATFORM xcb
       # logseq-wayland = prev.symlinkJoin {
