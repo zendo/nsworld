@@ -9,14 +9,14 @@
 
 buildGoModule (finalAttrs: {
   pname = "ttt";
-  version = "1.7.0";
+  version = "1.7.1";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "eugenioenko";
     repo = "ttt";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-0eJnOkdTrihtMWgZ0pJv80hPUk02ebGruJa3i82NxkQ=";
+    hash = "sha256-LcSmUntNXmw+2jA8NLMgnAKObSlF2wknLinAuJxD5aw=";
   };
 
   vendorHash = "sha256-+mbwJO7J6t584r3rhPsxj9eVfKFOffoWydKJrFNwA2c=";
