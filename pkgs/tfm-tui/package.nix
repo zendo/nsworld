@@ -15,6 +15,8 @@
   wl-clipboard,
   xdg-utils,
   zip,
+
+  writeShellScript,
 }:
 
 bun2nix.mkDerivation (finalAttrs: {
@@ -64,9 +66,9 @@ bun2nix.mkDerivation (finalAttrs: {
       }
   '';
 
-  passthru.updateScript = ''
-    bun2nix -o bun.nix
-  '';
+  # passthru.updateScript = writeShellScript "update-tfm-tui" ''
+  #   ${lib.getExe bun2nix} -o bun.nix
+  # '';
 
   meta = {
     description = "Modern mouse-first terminal file manager";
