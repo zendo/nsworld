@@ -33,8 +33,8 @@
         };
 
         # rime for ibus
-        "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
-        "ibus/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
+        # "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
+        # "ibus/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
         "ibus/rime/ibus_rime.custom.yaml".text = ''
           patch:
             style:
@@ -44,9 +44,8 @@
 
       # ~/.local/share
       xdg.dataFile = {
-        # rime for fcitx5
-        "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
-        "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
+        # "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
+        # "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
       };
     };
 
@@ -95,8 +94,8 @@
           };
         };
 
-        "ibus/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
-        "ibus/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
+        # "ibus/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
+        # "ibus/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
         "ibus/rime/ibus_rime.custom.yaml".text = ''
           patch:
             style:
@@ -106,8 +105,8 @@
 
       # ~/.local/share
       xdg.data.files = {
-        "fcitx5/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
-        "fcitx5/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
+        # "fcitx5/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
+        # "fcitx5/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
       };
     };
 }
