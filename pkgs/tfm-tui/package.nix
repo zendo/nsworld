@@ -1,5 +1,6 @@
 {
   lib,
+  stdenv,
   bun2nix,
   fetchFromGitHub,
 
@@ -17,9 +18,10 @@
   zip,
 
   writeShellScript,
+  nix-update,
 }:
 
-bun2nix.mkDerivation (finalAttrs: {
+stdenv.mkDerivation (finalAttrs: {
   pname = "tfm-tui";
   version = "0.1.0-beta.0";
   __structuredAttrs = true;
@@ -35,7 +37,10 @@ bun2nix.mkDerivation (finalAttrs: {
     bunNix = ./bun.nix;
   };
 
-  nativeBuildInputs = [ makeBinaryWrapper ];
+  nativeBuildInputs = [
+    bun2nix.hook
+    makeBinaryWrapper
+  ];
 
   buildPhase = ''
     bun run compile
@@ -66,9 +71,18 @@ bun2nix.mkDerivation (finalAttrs: {
       }
   '';
 
-  # passthru.updateScript = writeShellScript "update-tfm-tui" ''
-  #   ${lib.getExe bun2nix} -o bun.nix
-  # '';
+  # nix-update --flake tfm-tui --use-update-script
+  passthru.updateScript = writeShellScript "update-tfm-tui" ''
+    set -e
+
+    ${lib.getExe nix-update} --flake tfm-tui
+
+    src=$(nix eval --raw .#tfm-tui.src.outPath)
+
+    ${lib.getExe bun2nix} \
+      -l "$src/bun.lock" \
+      -o pkgs/tfm-tui/bun.nix
+  '';
 
   meta = {
     description = "Modern mouse-first terminal file manager";
