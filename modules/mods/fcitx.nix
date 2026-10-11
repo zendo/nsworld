@@ -28,6 +28,11 @@
           }
         ];
 
+        # https://github.com/azuwis/nix-config/blob/master/nixos/fcitx5/default.nix#L63
+        # environment.sessionVariables = {
+        #   FCITX_CONFIG_HOME = "${pkgs.emptyDirectory}";
+        # };
+
         i18n.inputMethod = {
           enable = true;
           type = "fcitx5";
@@ -88,20 +93,14 @@
             }
             (lib.mkIf cfg.withPinyin {
               inputMethod = {
-                "GroupOrder" = {
-                  "0" = "default";
-                };
+                "GroupOrder"."0" = "default";
                 "Groups/0" = {
                   "Name" = "default";
                   "DefaultIM" = "keyboard-us";
                   "Default Layout" = "us";
                 };
-                "Groups/0/Items/0" = {
-                  "Name" = "keyboard-us";
-                };
-                "Groups/0/Items/1" = {
-                  "Name" = "pinyin";
-                };
+                "Groups/0/Items/0"."Name" = "keyboard-us";
+                "Groups/0/Items/1"."Name" = "pinyin";
               };
               globalOptions = {
                 # 切换启用/禁用输入法
@@ -114,28 +113,22 @@
               addons = {
                 pinyin = {
                   globalSection = {
-                    "SymbolsEnabled" = "False";
-                    "CloudPinyinEnabled" = "False";
+                    "SymbolsEnabled" = false;
+                    "CloudPinyinEnabled" = false;
                   };
                 };
               };
             })
             (lib.mkIf cfg.withRime {
               inputMethod = {
-                "GroupOrder" = {
-                  "0" = "default";
-                };
+                "GroupOrder"."0" = "default";
                 "Groups/0" = {
                   "Name" = "default";
                   "DefaultIM" = "rime";
                   "Default Layout" = "us";
                 };
-                "Groups/0/Items/0" = {
-                  "Name" = "rime";
-                };
-                "Groups/0/Items/1" = {
-                  "Name" = "keyboard-us";
-                };
+                "Groups/0/Items/0"."Name" = "rime";
+                "Groups/0/Items/1"."Name" = "keyboard-us";
               };
               globalOptions = {
                 # 切换启用/禁用输入法
