@@ -2,8 +2,8 @@
 let
   customVariables = {
     # EDITOR = "emacsclient -c -a emacs";
-    EDITOR = "edit";
-    VISUAL = "edit";
+    EDITOR = "micro";
+    VISUAL = "micro";
     # PAGER = "moor";
     TERMINAL = "ghostty";
     PI_SKIP_VERSION_CHECK = "1";

@@ -12,12 +12,29 @@ let
       openssl
       discount # :markdown
       efm-langserver # :markdown lsp
+      shellcheck
       strace
       lurk # strace alternative
-      delta
-      msedit
+      herdr
+
+      # [ Editor ]
       micro
       fresh-editor
+      # zee
+      # msedit
+      typos
+      ydict
+      translate-shell
+      # aspell
+      # aspellDicts.en
+      hunspell
+      hunspellDicts.en_US
+
+      # [ Git ]
+      delta
+      # difftastic # too big
+      lazygit
+      tokei # count code
 
       # [ Compressor/Archiver ]
       p7zip
@@ -59,7 +76,7 @@ let
       simple-http-server
       # magic-wormhole-rs
       sendme
-      tailcat
+      # tailcat # 17.6 MiB
 
       # [ System Monitor ]
       # fastfetch -c examples/7 14
@@ -77,29 +94,16 @@ let
 
       # [ Utils ]
       # (lib.hiPrio uutils-coreutils-noprefix) # riir
-      moor # modern pager
+      # moor # modern pager 16.1 MiB
       just
       # igrep
       cht-sh
       tlrc # tldr
       # tealdeer # tldr
-      # difftastic # too big
-      # kalker # calculator
-      ydict
-      typos
-      shellcheck
-      translate-shell
-      # aspell
-      # aspellDicts.en
-      hunspell
-      hunspellDicts.en_US
       # asciinema # record the terminal
       libqalculate
       calcurse
-      # zee
-      tokei # count code
-      lazygit
-      herdr
+      # kalker # calculator
 
       # [ Networking ]
       wget
