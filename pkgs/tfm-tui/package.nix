@@ -23,14 +23,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "tfm-tui";
-  version = "0.1.0-beta.0";
+  version = "1.0.0";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "clarkarch";
     repo = "tfm-tui";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-XHpYJMcvBxL4x8JxO+RKE0ll/GtJljxVSqtl+aBrnRU=";
+    hash = "sha256-L60HP1q/xbOLeHK1Cfu7MnA6b9ZP0xXQnF8UvFCzARE=";
   };
 
   bunDeps = bun2nix.fetchBunDeps {
