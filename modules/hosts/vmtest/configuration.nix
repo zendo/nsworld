@@ -38,7 +38,7 @@ in
       ];
 
       environment.systemPackages = with pkgs; [
-        dippi
+        ttt
       ];
 
       environment.variables = { };
@@ -53,7 +53,6 @@ in
         memorySize = 1024 * 4;
         diskSize = 1024 * 8;
         cores = 8;
-        msize = 104857600; # 100M
         qemu = {
           options = [
             # Sounds

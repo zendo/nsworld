@@ -2,9 +2,6 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
-  makeBinaryWrapper,
-  gitMinimal,
-  ripgrep,
 }:
 
 buildGoModule (finalAttrs: {
@@ -23,26 +20,13 @@ buildGoModule (finalAttrs: {
 
   ldflags = [
     "-s"
-    "-w"
     "-X main.version=${finalAttrs.version}"
   ];
 
   subPackages = [ "cmd/ttt" ];
 
-  nativeBuildInputs = [ makeBinaryWrapper ];
-
-  postInstall = ''
-    wrapProgram $out/bin/${finalAttrs.meta.mainProgram} \
-      --prefix PATH : ${
-        lib.makeBinPath [
-          gitMinimal
-          ripgrep
-        ]
-      }
-  '';
-
   meta = {
-    description = "Terminal Text Tool: The IDE that lives in your terminal";
+    description = "IDE that lives in your terminal";
     homepage = "http://tttedit.dev";
     downloadPage = "https://github.com/eugenioenko/ttt";
     changelog = "https://github.com/eugenioenko/ttt/releases/tag/v${finalAttrs.src.tag}";
