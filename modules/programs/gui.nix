@@ -72,7 +72,6 @@
         # (lib.hiPrio localsend)
         qbittorrent
         rclone
-        rclone-browser
         # deja-dup
         # vorta # borg backup
 
