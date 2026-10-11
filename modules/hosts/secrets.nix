@@ -1,8 +1,6 @@
 { inputs, ... }:
 let
   sopsSecrets = {
-    rclone_infini_pass = { };
-    rclone_koofr_pass = { };
     dae_sub = { };
   };
 
