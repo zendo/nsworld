@@ -45,21 +45,8 @@ in
         # WLR_DRM_NO_ATOMIC = "1";
         WLR_NO_HARDWARE_CURSORS = "1";
       };
-    };
 
-  # ╭─────────────────────────────────────────────────────╮
-  # │  Home-manager                                       │
-  # ╰─────────────────────────────────────────────────────╯
-  flake.modules.homeManager.wm =
-    { pkgs, ... }:
-    {
-      imports = [
-        fm.homeManager.hypridle
-        fm.homeManager.shikane
-        fm.homeManager.vicinae
-      ];
-
-      home.packages = with pkgs; [
+      environment.systemPackages = with pkgs; [
         libnotify # notify-send
         wlogout
         swayidle
@@ -105,6 +92,19 @@ in
         # gthumb
         # kdePackages.gwenview
         gparted
+      ];
+    };
+
+  # ╭─────────────────────────────────────────────────────╮
+  # │  Home-manager                                       │
+  # ╰─────────────────────────────────────────────────────╯
+  flake.modules.homeManager.wm =
+    { pkgs, ... }:
+    {
+      imports = [
+        fm.homeManager.hypridle
+        fm.homeManager.shikane
+        fm.homeManager.vicinae
       ];
 
       services = {
