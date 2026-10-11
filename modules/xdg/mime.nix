@@ -16,17 +16,17 @@ let
     "text/html" = app-browser;
     "x-scheme-handler/http" = app-browser;
     "x-scheme-handler/https" = app-browser;
+  };
+
+  gnomeOverrides = {
+    "text/plain" = gtk-editor;
+    "text/markdown" = gtk-editor;
 
     "image/jpeg" = gtk-image;
     "image/png" = gtk-image;
     "image/webp" = gtk-image;
 
     "application/pdf" = "org.gnome.Papers.desktop";
-  };
-
-  gnomeOverrides = {
-    "text/plain" = gtk-editor;
-    "text/markdown" = gtk-editor;
   };
 
   plasmaOverrides = {

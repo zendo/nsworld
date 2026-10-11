@@ -5,6 +5,7 @@
       services.desktopManager.plasma6.enable = true;
       services.displayManager.plasma-login-manager.enable = true;
 
+      programs.kde-pim.enable = false;
       services.colord.enable = true;
       programs.kdeconnect.enable = true;
       programs.partition-manager.enable = true;
@@ -13,7 +14,9 @@
         with pkgs;
         [
           gparted
-          kurve # plasma widgets
+          # [ plasma widgets ]
+          kurve
+          plasmusic-toolbar
         ]
         ++ (with kdePackages; [
           # yakuake
