@@ -19,6 +19,7 @@
         monti
         breeze
         helixnotes
+        rclone-explorer
 
         # [ wrapper ]
         sp.wrapper-emacs

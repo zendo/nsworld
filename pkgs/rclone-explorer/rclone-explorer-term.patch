@@ -1,0 +1,16 @@
+diff --git a/src/main_window.cpp b/src/main_window.cpp
+index fb1f937..873153e 100644
+--- a/src/main_window.cpp
++++ b/src/main_window.cpp
+@@ -595,7 +595,10 @@ void MainWindow::rcloneConfig() {
+     }
+   }
+ 
+-  p->setArguments(QStringList() << "-e" << terminalRcloneCmd);
++  QStringList args;
++    args << "-e" << GetRclone() << "config";
++    args.append(GetRcloneConf());
++    p->setArguments(args);
+   p->setProgram(terminal);
+ #endif
+ 
