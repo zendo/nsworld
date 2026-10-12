@@ -14,7 +14,9 @@ in
   flake.colmenaHive = inputs.omniflake.flakes.colmena.lib.makeHive {
     meta = {
       nixpkgs = { inherit lib; };
-      nodeNixpkgs = builtins.mapAttrs (_: v: v.pkgs) nixosConfigurations;
+      nodeNixpkgs = builtins.mapAttrs (
+        _: v: inputs.nixpkgs.legacyPackages.${v.pkgs.stdenv.hostPlatform.system}
+      ) nixosConfigurations;
       # nodeSpecialArgs = builtins.mapAttrs (_: v: v._module.specialArgs) nixosConfigurations;
     };
 
