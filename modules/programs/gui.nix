@@ -19,6 +19,7 @@
         breeze
         helixnotes
         rclone-explorer
+        rclone-browser-ng
 
         # [ wrapper ]
         sp.wrapper-emacs
