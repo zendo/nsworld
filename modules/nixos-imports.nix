@@ -1,7 +1,7 @@
 { config, ... }:
 {
   flake.modules.nixos.nixos-imports.imports = with config.flake.modules.nixos; [
-    # secrets # Go 1.25 EOL
+    # secrets
 
     # [ core ]
     base

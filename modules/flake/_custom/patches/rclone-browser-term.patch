@@ -1,0 +1,15 @@
+diff --git a/src/main_window.cpp b/src/main_window.cpp
+--- a/src/main_window.cpp
++++ b/src/main_window.cpp
+@@ -766,4 +766,10 @@
+   }
+ 
+-  p->setArguments(QStringList() << "-e" << terminalRcloneCmd);
++  QStringList args;
++  args << "-e" << GetRclone() << "config";
++  if (!GetRcloneConf().isEmpty()) {
++    args << "--config" << GetRcloneConf().at(1);
++  }
++
+   p->setProgram(terminal);
++  p->setArguments(args);
