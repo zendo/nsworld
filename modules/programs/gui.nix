@@ -16,7 +16,6 @@
         sonicradio
         pigma
         rox
-        monti
         breeze
         helixnotes
         rclone-explorer
