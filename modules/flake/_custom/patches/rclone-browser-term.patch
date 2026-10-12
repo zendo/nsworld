@@ -1,7 +1,9 @@
 diff --git a/src/main_window.cpp b/src/main_window.cpp
+index 3bf6340..53bba92 100644
 --- a/src/main_window.cpp
 +++ b/src/main_window.cpp
-@@ -766,4 +766,10 @@
+@@ -765,9 +765,15 @@ void MainWindow::rcloneConfig() {
+     }
    }
  
 -  p->setArguments(QStringList() << "-e" << terminalRcloneCmd);
@@ -12,4 +14,9 @@ diff --git a/src/main_window.cpp b/src/main_window.cpp
 +  }
 +
    p->setProgram(terminal);
+-#endif
 +  p->setArguments(args);
++ #endif
+ 
+ #if !defined(Q_OS_WIN32) || (QT_VERSION >= QT_VERSION_CHECK(5, 7, 0))
+   UseRclonePassword(p);

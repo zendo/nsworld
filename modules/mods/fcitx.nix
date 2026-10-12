@@ -29,9 +29,9 @@
         ];
 
         # https://github.com/azuwis/nix-config/blob/master/nixos/fcitx5/default.nix#L63
-        # environment.sessionVariables = {
-        #   FCITX_CONFIG_HOME = "${pkgs.emptyDirectory}";
-        # };
+        environment.sessionVariables = {
+          FCITX_CONFIG_HOME = "${pkgs.emptyDirectory}";
+        };
 
         i18n.inputMethod = {
           enable = true;

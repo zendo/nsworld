@@ -33,7 +33,7 @@
           quick-terminal-autohide = true;
           keybind = [
             # "global:ctrl+grave_accent=toggle_quick_terminal"
-            "global:super+comma=toggle_quick_terminal"
+            # "global:super+comma=toggle_quick_terminal"
             "ctrl+enter=unbind"
             "f11=toggle_fullscreen"
             "alt+w=copy_to_clipboard"

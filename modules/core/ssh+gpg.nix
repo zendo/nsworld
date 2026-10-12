@@ -25,11 +25,11 @@
 
       Host svp
         forwardAgent yes
-        hostname 192.168.15.197
+        hostname 192.168.2.30
         port 22
 
       Host yoga
-        hostname 192.168.15.118
+        hostname 192.168.2.218
         port 22
 
       Host github.com
