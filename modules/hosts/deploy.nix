@@ -13,11 +13,10 @@ in
   # ╰─────────────────────────────────────────────────────╯
   flake.colmenaHive = inputs.omniflake.flakes.colmena.lib.makeHive {
     meta = {
-      nixpkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-      # nixpkgs = { inherit lib; };
-      # nodeNixpkgs = builtins.mapAttrs (
-      #   _: v: inputs.nixpkgs.legacyPackages.${v.pkgs.stdenv.hostPlatform.system}
-      # ) nixosConfigurations;
+      nixpkgs = import inputs.nixpkgs {
+        system = "x86_64-linux";
+        overlays = [ ];
+      };
       # nodeSpecialArgs = builtins.mapAttrs (_: v: v._module.specialArgs) nixosConfigurations;
     };
 
