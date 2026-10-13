@@ -17,7 +17,6 @@
         pigma
         rox
         breeze
-        helixnotes
         rclone-explorer
         rclone-browser-ng
 
@@ -90,6 +89,7 @@
         # bitwarden-desktop
         # keyguard
         # obsidian
+        helixnotes
         # joplin-desktop
         # libreoffice-fresh
         # drawio
