@@ -22,19 +22,10 @@ global_exclude_filter:
     exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|电报|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|优惠|福利|邀请|好友|失联|选择|剩余|公益|发布|DIZTNA|通路|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|过滤|⚠️|@|t\.me\/\+|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
   }
 
-# 订阅提供者，如果你想要添加多个订阅提供者，可以复制 provider1 的配置块，并修改 url 、 path 和 additional-prefix 字段。
 proxy-providers:
   provider1: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '① '}}
   provider2: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '② '}}
   provider3: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '③ '}}
-
-  # provider1:
-  #   <<: [*proxy_providers_common, *global_exclude_filter]
-  #   url: '' # 此处单引号中间填入机场订阅链接
-  #   age-secret-key: '' # 此处填入机场订阅链接解密私钥，如果机场订阅链接需要解密才能使用，请将解密私钥填入单引号中间，否则不要改动此项
-  #   path: ./proxy_provider/provider1.yaml
-  #   override:
-  #     additional-prefix: 'p1 | ' # 给节点名称添加前缀，防止不同订阅的节点重名导致出现问题
 
 # 节点配置，可添加自定义节点
 proxies:
@@ -60,8 +51,7 @@ external-controller: '127.0.0.1:9090'
 external-ui: ui
 external-ui-url: 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip'
 
-global-client-fingerprint: chrome
-global-ua: mihomo
+# global-ua: mihomo
 
 profile:
   store-selected: true
