@@ -81,7 +81,10 @@ pkgs.buildFHSEnv {
       iana-etc # /etc/protocols, /etc/services
 
       # --- GTK / GLib stack -------------------------------------------------
-      # runtime deps of cairo/pango/gdk-pixbuf are not pulled in automatically
+      gtk4
+      graphene
+      poppler
+      gtksourceview5
       gtk3
       gdk-pixbuf # loaders dlopen the image libs below
       atk
@@ -163,9 +166,9 @@ pkgs.buildFHSEnv {
       # speex
       # libsamplerate
       # libmpg123
-      # gst_all_1.gstreamer # webkit/Electron media backend
-      # gst_all_1.gst-plugins-base
-      # gst_all_1.gst-plugins-good
+      gst_all_1.gstreamer # webkit/Electron media backend
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
       # gst_all_1.gst-plugins-ugly
       # gst_all_1.gst-plugins-bad
       # gst_all_1.gst-plugins-rs
