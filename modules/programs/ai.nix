@@ -5,7 +5,6 @@
       environment.systemPackages = with pkgs; [
         nodejs
         omp
-        pi-acp
         pi-coding-agent
         opencode
         # codex
