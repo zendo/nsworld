@@ -7,7 +7,7 @@
         omp
         pi-acp
         pi-coding-agent
-        # opencode
+        opencode
         # codex
         # qwen-code
         # gemini-cli
