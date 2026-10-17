@@ -18,8 +18,9 @@ let
       herdr
 
       # [ Editor ]
-      micro
       fresh-editor
+      micro
+      ttt
       # zee
       # msedit
       typos
