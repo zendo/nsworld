@@ -77,7 +77,8 @@ in
 
       boot.loader = {
         efi.efiSysMountPoint = "/efi";
-        limine.enable = true;
+        # limine.enable = true;
+        sprout.enable = true;
       };
     };
 }
