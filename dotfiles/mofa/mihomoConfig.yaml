@@ -22,6 +22,7 @@ global_exclude_filter:
     exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|电报|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|优惠|福利|邀请|好友|失联|选择|剩余|公益|发布|DIZTNA|通路|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|过滤|⚠️|@|t\.me\/\+|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
   }
 
+# 订阅提供者，如果你想要添加多个订阅提供者，可以复制 provider1 的配置块，并修改 url 、 path 和 additional-prefix 字段。
 proxy-providers:
   provider1: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '① '}}
   provider2: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '② '}}
@@ -39,6 +40,7 @@ proxies:
 
 mixed-port: 7890
 allow-lan: true
+# global-ua: mihomo
 # ipv6: true
 mode: rule
 log-level: info
@@ -50,8 +52,6 @@ find-process-mode: strict
 external-controller: '127.0.0.1:9090'
 external-ui: ui
 external-ui-url: 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip'
-
-# global-ua: mihomo
 
 profile:
   store-selected: true
@@ -470,7 +470,7 @@ group_filter:
   TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
   low_filter:
     &low_filter {
-      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0(\.[0-5]|[*×✕✖⨯⨉x倍]))|(?:[*×✕✖⨯⨉x]0)|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
+      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<![\d.])0(\.[0-5]|[*×✕✖⨯⨉x倍]))|(?:[*×✕✖⨯⨉x]0)|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
     }
   high_filter:
     &high_filter {
@@ -531,6 +531,10 @@ proxy-groups:
     <<: [*group_common_select, *proxies_default]
     default-selected: '美国'
     icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/OpenAI.svg'
+
+  - name: 'GitHub'
+    <<: [*group_common_select, *proxies_default]
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/GitHub.svg'
 
   - name: 'Microsoft'
     <<: [*group_common_select, *proxies_direct]
@@ -683,6 +687,9 @@ proxy-groups:
 # --- 路由规则 (Rules) ---
 
 rules:
+  # 规则集下载域名，避免出现鸡蛋问题
+  - DOMAIN,cdn.jsdmirror.com,直连
+
   # 私有网络直连
   - RULE-SET,private,直连
   - DOMAIN-SUFFIX,api.beacondb.net,直连
@@ -710,7 +717,7 @@ rules:
   - RULE-SET,google,Google
   - RULE-SET,google_ip,Google,no-resolve
   - RULE-SET,ai,AI
-  - RULE-SET,github,默认代理
+  - RULE-SET,github,GitHub
   - RULE-SET,microsoft,Microsoft
   - RULE-SET,microsoft_ip,Microsoft,no-resolve
   - RULE-SET,apple,Apple
