@@ -20,7 +20,7 @@ let
       # [ Editor ]
       fresh-editor
       micro
-      ttt
+      # ttt
       # zee
       # msedit
       typos
