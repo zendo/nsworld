@@ -37,6 +37,10 @@
         # Disable EOF marker like "[ble: EOF]" '⏎'
         bleopt prompt_eol_mark=' '
 
+        # Not working
+        # export PS1='\n\g{fg=cyan}\w\g{none} \g{fg=blue}\q{contrib/git-branch}\g{none}\n\g{fg=green}❯ \g{none}'
+        # bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed}'
+
         bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed} \g{fg=7}\q{contrib/git-info}'
       '';
     in
