@@ -57,7 +57,7 @@
           # shell = "zsh -l";
           # MAYBE
           # show right prompts
-          shell_integration = "no-cursor no-sudo";
+          # shell_integration = "no-cursor no-sudo";
           # Theme
           include = "${theme-mountain}";
           background_opacity = "0.9";
