@@ -11,7 +11,6 @@
         # nano-ffmpeg
         # tanim
         rwx
-        tfm-tui
         sonicradio
         pigma
         rox
