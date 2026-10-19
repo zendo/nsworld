@@ -27,20 +27,13 @@
       bleshCfg = ''
         source ${pkgs.blesh}/share/blesh/ble.sh
 
-        # https://github.com/akinomyoga/blesh-contrib
         ble-import contrib/prompt-elapsed
         ble-import contrib/prompt-git
 
         # bleopt color_scheme=base16
         bleopt color_scheme=rosepine_moon
 
-        # Disable EOF marker like "[ble: EOF]" '⏎'
         bleopt prompt_eol_mark=' '
-
-        # Not working
-        # export PS1='\n\g{fg=cyan}\w\g{none} \g{fg=blue}\q{contrib/git-branch}\g{none}\n\g{fg=green}❯ \g{none}'
-        # bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed}'
-
         bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed} \g{fg=7}\q{contrib/git-info}'
       '';
     in
