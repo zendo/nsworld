@@ -50,7 +50,7 @@ pkgs.buildFHSEnv {
   '';
   targetPkgs =
     p: with p; [
-      # --- base: expected by nearly every binary (AppImage excludelist) ------
+      # --- base: expected by nearly every binary (AppImage excludelist) ----
       glib # libglib-2.0/libgobject/libgio
       zlib # libz
       bzip2 # libbz2
@@ -80,7 +80,7 @@ pkgs.buildFHSEnv {
       libidn
       iana-etc # /etc/protocols, /etc/services
 
-      # --- GTK / GLib stack -------------------------------------------------
+      # --- GTK / GLib stack ------------------------------------------------
       gtk4
       graphene
       poppler
@@ -111,7 +111,13 @@ pkgs.buildFHSEnv {
       glib-networking
       libayatana-appindicator
 
-      # --- X11 --------------------------------------------------------------
+      # --- KDE -------------------------------------------------------------
+      qt6.qtbase
+      qt6.qtsvg
+      # qt6.qtdeclarative # libQt6QuickControls2.so.6
+      # qt6.qtmultimedia
+
+      # --- X11 -------------------------------------------------------------
       libx11
       libxcb
       libxcb-util
@@ -138,12 +144,12 @@ pkgs.buildFHSEnv {
       libxmu
       xkeyboard-config # /usr/share/X11/xkb data, needed by libxkbcommon
 
-      # --- Wayland ----------------------------------------------------------
+      # --- Wayland ---------------------------------------------------------
       wayland
       libxkbcommon
       libdecor
 
-      # --- OpenGL / Vulkan --------------------------------------------------
+      # --- OpenGL / Vulkan -------------------------------------------------
       libGL # libglvnd: libGL/libEGL/libGLX/libOpenGL
       libdrm # runtime dep of libgbm/libGL, must be present for AppImages
       libgbm
@@ -151,7 +157,7 @@ pkgs.buildFHSEnv {
       # libGLU
       # libvdpau
 
-      # --- Audio / Video ----------------------------------------------------
+      # --- Audio / Video ---------------------------------------------------
       alsa-lib
       pipewire # libpipewire-0.3 + Wayland screencast
       libpulseaudio # libpulse.so.0 - pipewire does NOT provide it
@@ -173,19 +179,19 @@ pkgs.buildFHSEnv {
       # gst_all_1.gst-plugins-bad
       # gst_all_1.gst-plugins-rs
 
-      # --- SDL (games) ------------------------------------------------------
+      # --- SDL (games) -----------------------------------------------------
       # SDL2
       # SDL2_image
       # SDL2_mixer
       # SDL2_ttf
 
-      # --- commonly dlopen()ed helpers --------------------------------------
+      # --- commonly dlopen()ed helpers -------------------------------------
       libsecret # Electron safeStorage/keytar
       libnotify # libnotify.so.4
       libxml2
       libxcrypt # libcrypt.so.1, legacy binaries
 
-      # --- legacy, for parity with nixpkgs' AppImage list -------------------
+      # --- legacy, for parity with nixpkgs' AppImage list ------------------
       # glew_1_10 # libGLEW.so.1.10
       # freeglut # libglut.so.3
       # libcaca # libcaca.so.0
@@ -198,7 +204,7 @@ pkgs.buildFHSEnv {
       # onetbb # libtbb.so.12
       # curlWithGnuTls # libcurl-gnutls.so.4
 
-      # --- tools (not libraries) --------------------------------------------
+      # --- tools (not libraries) -------------------------------------------
       xdg-utils # xdg-open
       xdg-user-dirs
       desktop-file-utils
