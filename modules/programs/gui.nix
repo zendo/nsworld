@@ -9,6 +9,7 @@
       environment.systemPackages = with pkgs; [
         # kula
         # nano-ffmpeg
+        levi
         rwx
         rox
         sonicradio
@@ -137,6 +138,7 @@
 
         # [ Games ]
         # pvzge
+        mgba
       ];
     };
 }
