@@ -9,6 +9,7 @@
       environment.systemPackages = with pkgs; [
         # kula
         # nano-ffmpeg
+        tuiba
         rwx
         rox
         sonicradio
