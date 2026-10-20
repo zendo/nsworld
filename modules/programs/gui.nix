@@ -139,6 +139,9 @@
         # [ Games ]
         # pvzge
         mgba
+        # ppsspp
+        # melonds
+        # desmume
       ];
     };
 }
