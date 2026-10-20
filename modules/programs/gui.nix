@@ -9,11 +9,9 @@
       environment.systemPackages = with pkgs; [
         # kula
         # nano-ffmpeg
-        # tanim
         rwx
-        sonicradio
-        pigma
         rox
+        sonicradio
         breeze
         rclone-explorer
         rclone-browser-ng
