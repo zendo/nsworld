@@ -27,14 +27,14 @@
       bleshCfg = ''
         source ${pkgs.blesh}/share/blesh/ble.sh
 
-        ble-import contrib/prompt-elapsed
-        ble-import contrib/prompt-git
-
         # bleopt color_scheme=base16
         bleopt color_scheme=rosepine_moon
 
         bleopt prompt_eol_mark=' '
-        bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed} \g{fg=7}\q{contrib/git-info}'
+
+        # ble-import contrib/prompt-elapsed
+        # ble-import contrib/prompt-git
+        # bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed} \g{fg=7}\q{contrib/git-info}'
       '';
     in
     {
