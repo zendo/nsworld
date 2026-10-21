@@ -55,6 +55,17 @@ in
 
       # systemd.services.comigo.enable = true;
 
+      services.navidrome = {
+        enable = true;
+        # plugins = ;
+        # openFirewall = true;
+        settings = {
+          # Address = "0.0.0.0";
+          # Port = 4533;
+          MusicFolder = "/data/music";
+        };
+      };
+
       environment.systemPackages = with pkgs; [
         # inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine
         # inputs.omniflake.flakes.nix-packages-ccicnce113424.packages.x86_64-linux.open-orpheus
