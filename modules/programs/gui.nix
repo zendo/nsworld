@@ -12,6 +12,7 @@
         levi
         rwx
         rox
+        sonora
         breeze
         rclone-explorer
         rclone-browser-ng
