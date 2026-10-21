@@ -59,6 +59,7 @@ in
         enable = true;
         # plugins = with pkgs.pkgsCross.wasi32.navidromePlugins; [
         #   lyrics-plugin
+        #   listenbrainz-daily-playlist
         # ];
         # openFirewall = true;
         settings = {
