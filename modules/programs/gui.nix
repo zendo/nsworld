@@ -12,7 +12,6 @@
         levi
         rwx
         rox
-        sonicradio
         breeze
         rclone-explorer
         rclone-browser-ng
@@ -47,6 +46,7 @@
         # qqmusic
         spotify
         # folia-major
+        # feishin
         # mousai
         songrec
         kooha

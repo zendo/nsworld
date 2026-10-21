@@ -82,6 +82,7 @@ pkgs.buildFHSEnv {
 
       # --- GTK / GLib stack ------------------------------------------------
       gtk4
+      libadwaita
       graphene
       poppler
       gtksourceview5
@@ -172,6 +173,12 @@ pkgs.buildFHSEnv {
       # speex
       # libsamplerate
       # libmpg123
+      # libcdio
+      # lcms2
+      # libarchive
+      # libva
+      # libxv
+      # libvdpau
       gst_all_1.gstreamer # webkit/Electron media backend
       gst_all_1.gst-plugins-base
       gst_all_1.gst-plugins-good
