@@ -1,6 +1,8 @@
 {
-  flake.modules.nixos.data-center = { config, lib, ... }: {
-    config = lib.mkIf (config.fileSystems ? "/data") {
+  flake.modules.nixos.data-center =
+    { config, lib, ... }:
+    lib.mkIf (config.fileSystems ? "/data") {
+
       systemd.tmpfiles.rules = [
         "d /data/.Trash-1000 0700 ${config.myVars.user} users - -"
         "d /data/archive 0755 ${config.myVars.user} users - -"
@@ -15,13 +17,14 @@
         "d /data/temp 0755 ${config.myVars.user} users - -"
         "d /data/videos 0755 ${config.myVars.user} users - -"
       ];
+
     };
-  };
 
   flake.modules.hjem.data-center =
     { lib, osConfig, ... }:
-    {
-      files = lib.mkIf (osConfig.fileSystems ? "/data") {
+    lib.mkIf (osConfig.fileSystems ? "/data") {
+
+      files = {
         "Music".source = "/data/music";
         "Videos".source = "/data/videos";
 
@@ -29,5 +32,6 @@
         # rm ~/.config/gtk-3.0/bookmarks ; xdg-user-dirs-gtk-update
         # "user-dirs.conf".text = "enabled=False";
       };
+
     };
 }
