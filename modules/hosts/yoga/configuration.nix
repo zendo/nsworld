@@ -57,10 +57,12 @@ in
 
       services.navidrome = {
         enable = true;
-        # plugins = ;
+        # plugins = with pkgs.pkgsCross.wasi32.navidromePlugins; [
+        #   lyrics-plugin
+        # ];
         # openFirewall = true;
         settings = {
-          # Address = "0.0.0.0";
+          Address = "0.0.0.0";
           # Port = 4533;
           MusicFolder = "/data/music";
         };
