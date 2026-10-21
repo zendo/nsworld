@@ -49,6 +49,7 @@ let
 
     # [ nix ]
     j = "just --justfile=$HOME/nsworld/justfile";
+    nsr = "nix run ~/nsworld#fhs-run";
     nix-build-package = ''nix build --impure --expr "(import <nixpkgs> {}).callPackage ./package.nix {}" -L'';
     # https://github.com/NixOS/nixpkgs/issues/308252#issuecomment-2543048917
     fixicons = "sed -i 's/file:\\/\\/\\/nix\\/store\\/[^\\/]*\\/share\\/applications\\//applications:/gi' ~/.config/plasma-org.kde.plasma.desktop-appletsrc && systemctl restart --user plasma-plasmashell && echo 'Iconfix!\n\n'";
