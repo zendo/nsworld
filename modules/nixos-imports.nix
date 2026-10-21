@@ -50,6 +50,7 @@
     # [ virt ]
 
     # [ xdg ]
+    data-center
     env
     mime
   ];

@@ -41,6 +41,7 @@
           "subvol=data"
           "compress=zstd"
           "noatime"
+          "x-gvfs-trash"
         ];
       };
 

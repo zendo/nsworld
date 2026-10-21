@@ -4,8 +4,7 @@
     {
       services.rqbit = {
         enable = true;
-        user = "${config.myVars.user}";
-        downloadDir = "/home/${config.myVars.user}/Downloads";
+        downloadDir = "/data/temp";
         # httpHost = "127.0.0.1";
         # httpPort = 3030;
         openFirewall = config.networking.firewall.enable;

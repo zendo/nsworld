@@ -6,6 +6,10 @@ in
   flake.modules.nixos.hjemModule = { config, ... }: {
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
+    hjem.specialArgs = {
+      osConfig = config;
+    };
+
     # nix eval --json .#modules.hjem --apply builtins.attrNames | jq -r '.[]'
     hjem.users.${config.myVars.user} = {
       directory = "/home/${config.myVars.user}";
@@ -13,6 +17,7 @@ in
       imports = [
         fm.hjem.links
         # fm.hjem.systemd
+        fm.hjem.data-center
       ];
     };
 
