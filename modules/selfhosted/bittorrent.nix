@@ -1,23 +1,21 @@
 {
-  flake.modules.nixos.bittorrent =
+  flake.modules.nixos.selfhosted =
     { config, ... }:
     {
       services.rqbit = {
-        enable = true;
         downloadDir = "/data/temp";
         # httpHost = "127.0.0.1";
         # httpPort = 3030;
         openFirewall = config.networking.firewall.enable;
       };
 
-      # services.qui = {
-      #   enable = true;
-      #   # secretFile = "";
-      #   # settings = {
-      #   #   port = 7777;
-      #   # };
-      #   openFirewall = config.networking.firewall.enable;
-      # };
+      services.qui = {
+        # secretFile = "";
+        # settings = {
+        #   port = 7777;
+        # };
+        openFirewall = config.networking.firewall.enable;
+      };
 
       # services.aria2 = {
       #   enable = true;

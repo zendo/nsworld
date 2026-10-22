@@ -14,6 +14,7 @@
     # [ desktop ]
 
     mods
+    selfhosted
 
     # [ networking ]
     dns

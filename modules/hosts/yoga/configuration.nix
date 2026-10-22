@@ -53,21 +53,8 @@ in
 
       users.defaultUserShell = pkgs.zsh;
 
+      services.navidrome.enable = true;
       # systemd.services.comigo.enable = true;
-
-      services.navidrome = {
-        enable = true;
-        # plugins = with pkgs.pkgsCross.wasi32.navidromePlugins; [
-        #   lyrics-plugin
-        #   listenbrainz-daily-playlist
-        # ];
-        # openFirewall = true;
-        settings = {
-          Address = "0.0.0.0";
-          # Port = 4533;
-          MusicFolder = "/data/music";
-        };
-      };
 
       environment.systemPackages = with pkgs; [
         # inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine

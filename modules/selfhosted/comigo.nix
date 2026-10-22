@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.mods =
+  flake.modules.nixos.selfhosted =
     { lib, pkgs, ... }:
     {
       systemd.services.comigo = {
