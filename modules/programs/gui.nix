@@ -13,8 +13,8 @@
         rwx
         rox
         sonora
+        pigma
         breeze
-        rclone-explorer
         rclone-browser-ng
 
         # [ wrapper ]
