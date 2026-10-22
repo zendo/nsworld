@@ -55,6 +55,7 @@ in
 
       services.navidrome.enable = true;
       # systemd.services.comigo.enable = true;
+      systemd.user.services.neiro.enable = true;
 
       environment.systemPackages = with pkgs; [
         # inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine

@@ -14,6 +14,7 @@
         rox
         sonora
         pigma
+        neiro
         breeze
         rclone-browser-ng
 
