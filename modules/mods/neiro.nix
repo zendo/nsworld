@@ -10,8 +10,11 @@
           "wireplumber.service"
         ];
         requires = [ "pipewire.service" ];
-        wantedBy = [ "default.target" ];
-        path = [ pkgs.pipewire ];
+        wantedBy = [ "pipewire.service" ];
+        path = [
+          pkgs.pipewire
+          # pkgs.wireplumber
+        ];
         serviceConfig = {
           ExecStart = "${pkgs.neiro}/bin/neiro daemon";
           Restart = "on-failure";
