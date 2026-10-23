@@ -40,7 +40,7 @@
     # https://nixmultiverse.com/
     # flake.inputs.multiverse.multiverse.x86_64-linux.versionsOf "go"
     multiverse = final: prev: {
-      multiverse = inputs.omniflake.flakes.multiverse.lib.mkMultiverse {
+      multiverse = inputs.omniflake.flakes.nixpkgs-multiverse.lib.mkMultiverse {
         system = final.stdenv.hostPlatform.system;
         config.allowUnfree = true;
         # overlays = [
