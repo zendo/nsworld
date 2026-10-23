@@ -16,6 +16,7 @@
         pigma
         neiro
         breeze
+        venerax
         rclone-browser-ng
 
         # [ wrapper ]
