@@ -24,6 +24,7 @@ let
 
     cat = "bat -p";
     cp = "xcp";
+    cmx = "chmod +x";
     fcd = ''cd "$(find -type d | fzf --preview 'tree -C {} | head -200')"'';
     bc = "qalc";
     ii = "xdg-open"; # `Invoke-Item` powershell style

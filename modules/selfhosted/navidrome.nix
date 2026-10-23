@@ -13,9 +13,9 @@
           # Port = 4533;
           MusicFolder = "/data/media/music";
           Backup = {
-            Path = "/data/backups/navidrome";
+            Path = "/data/backups";
             Schedule = "0 22 * * *";
-            Count = 1;
+            Count = 3;
           };
         };
       };
