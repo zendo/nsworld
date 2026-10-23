@@ -53,9 +53,12 @@ in
 
       users.defaultUserShell = pkgs.zsh;
 
+      # [ services ]
+      systemd.user.services.neiro.enable = true;
+
+      # [ selfhosted ]
       services.navidrome.enable = true;
       # systemd.services.comigo.enable = true;
-      systemd.user.services.neiro.enable = true;
 
       environment.systemPackages = with pkgs; [
         # inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine
@@ -78,17 +81,17 @@ in
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
       # Fix on this machine
-      programs.dconf.profiles.user.databases = [
-        {
-          settings = {
-            "org/gnome/settings-daemon/plugins/power" = {
-              # 修复恢复时蓝牙鼠标连接缓慢问题
-              # 电源 - 节电 - 自动挂起（插入电源时关闭）
-              sleep-inactive-ac-type = "nothing";
-            };
-          };
-        }
-      ];
+      # programs.dconf.profiles.user.databases = [
+      #   {
+      #     settings = {
+      #       "org/gnome/settings-daemon/plugins/power" = {
+      #         # 修复恢复时蓝牙鼠标连接缓慢问题
+      #         # 电源 - 节电 - 自动挂起（插入电源时关闭）
+      #         sleep-inactive-ac-type = "nothing";
+      #       };
+      #     };
+      #   }
+      # ];
 
       # ╭─────────────────────────────────────────────────────╮
       # │ HARDWARE                                            │

@@ -1,10 +1,10 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.kanata = {
+  flake.modules.nixos.services = {
 
     # https://github.com/jtroo/kanata
     services.kanata = {
-      enable = true;
+      # enable = true;
       keyboards = {
         default.configFile = (inputs.self + /dotfiles/kanata/minimal.kbd);
       };

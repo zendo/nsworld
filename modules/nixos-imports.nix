@@ -15,6 +15,7 @@
 
     mods
     selfhosted
+    services
 
     # [ networking ]
     dns
@@ -35,11 +36,6 @@
     firefox
 
     # [ profiles ]
-
-    # [ services ]
-    # bittorrent
-    # kanata
-    keyd
 
     # [ shell ]
     alias
