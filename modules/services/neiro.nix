@@ -13,7 +13,7 @@
         wantedBy = [ "pipewire.service" ];
         path = [
           pkgs.pipewire
-          # pkgs.wireplumber
+          pkgs.wireplumber
         ];
         serviceConfig = {
           ExecStart = "${pkgs.neiro}/bin/neiro daemon";
