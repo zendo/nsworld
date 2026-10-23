@@ -49,7 +49,6 @@
         spotify
         # folia-major
         # feishin
-        # rufin
         # mousai
         songrec
         kooha
