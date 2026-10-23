@@ -11,7 +11,12 @@
         settings = {
           Address = "0.0.0.0";
           # Port = 4533;
-          MusicFolder = "/data/music";
+          MusicFolder = "/data/media/music";
+          Backup = {
+            Path = "/data/backups/navidrome";
+            Schedule = "0 22 * * *";
+            Count = 1;
+          };
         };
       };
     };

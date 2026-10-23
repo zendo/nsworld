@@ -5,17 +5,21 @@
 
       systemd.tmpfiles.rules = [
         "d /data/.Trash-1000 0700 ${config.myVars.user} users - -"
-        "d /data/archive 0755 ${config.myVars.user} users - -"
-        "d /data/backup 0755 ${config.myVars.user} users - -"
-        "d /data/books 0755 ${config.myVars.user} users - -"
+        "d /data/archives 0755 ${config.myVars.user} users - -"
+        "d /data/backups 0755 ${config.myVars.user} users - -"
+
         "d /data/docs 0755 ${config.myVars.user} users - -"
-        "d /data/manga 0755 ${config.myVars.user} users - -"
-        "d /data/music 0755 ${config.myVars.user} users - -"
+        "d /data/docs/books 0755 ${config.myVars.user} users - -"
+        "d /data/docs/manga 0755 ${config.myVars.user} users - -"
+
+        "d /data/media 0755 ${config.myVars.user} users - -"
+        "d /data/media/music 0755 ${config.myVars.user} users - -"
+        "d /data/media/videos 0755 ${config.myVars.user} users - -"
+
         "d /data/pics 0755 ${config.myVars.user} users - -"
-        "d /data/roms 0755 ${config.myVars.user} users - -"
-        "d /data/share 2770 ${config.myVars.user} users - -"
+        "d /data/projects 0755 ${config.myVars.user} users - -"
+        "d /data/shared 2770 ${config.myVars.user} users - -"
         "d /data/temp 0755 ${config.myVars.user} users - -"
-        "d /data/videos 0755 ${config.myVars.user} users - -"
       ];
 
     };
@@ -25,8 +29,8 @@
     lib.mkIf (osConfig.fileSystems ? "/data") {
 
       files = {
-        "Music".source = "/data/music";
-        "Videos".source = "/data/videos";
+        "Music".source = "/data/media/music";
+        "Videos".source = "/data/media/videos";
 
         # LC_ALL=C xdg-user-dirs-update --force
         # rm ~/.config/gtk-3.0/bookmarks ; xdg-user-dirs-gtk-update
