@@ -8,7 +8,7 @@
     }:
     let
       # https://docs.goshs.de/usage/config/index.html
-      goshsCfg = pkgs.writeText "goshsCfg.json" ''
+      goshsCfg = pkgs.writeText "config.json" ''
         {
           "interface": "0.0.0.0",
           "port": 8002,
@@ -28,7 +28,7 @@
           "auth_username": "",
           "auth_password": "",
           "certificate_auth": "",
-          "webdav": false,
+          "webdav": true,
           "webdav_port": 8001,
           "upload_only": false,
           "read_only": false,
