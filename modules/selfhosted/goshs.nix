@@ -1,0 +1,100 @@
+{
+  flake.modules.nixos.selfhosted =
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
+    let
+      # https://docs.goshs.de/usage/config/index.html
+      goshsCfg = pkgs.writeText "goshsCfg.json" ''
+        {
+          "interface": "0.0.0.0",
+          "port": 8002,
+          "directory": "/data",
+          "upload_folder": "/data/temp",
+          "ssl": false,
+          "self_signed": false,
+          "private_key": "",
+          "certificate": "",
+          "p12": "",
+          "p12_no_pass": false,
+          "letsencrypt": false,
+          "letsencrypt_domain": "",
+          "letsencrypt_email": "",
+          "letsencrypt_http_port": "80",
+          "letsencrypt_tls_port": "443",
+          "auth_username": "",
+          "auth_password": "",
+          "certificate_auth": "",
+          "webdav": false,
+          "webdav_port": 8001,
+          "upload_only": false,
+          "read_only": false,
+          "no_chat": false,
+          "persist_chat": false,
+          "persist_chat_images": false,
+          "no_delete": false,
+          "verbose": false,
+          "silent": false,
+          "invisible": false,
+          "running_user": "",
+          "cli": false,
+          "embedded": false,
+          "output": "",
+          "webhook_enabled": false,
+          "webhook_url": "",
+          "webhook_provider": "discord",
+          "webhook_events": [
+            "all"
+          ],
+          "whitelist": "",
+          "trusted_proxies": "",
+          "tunnel": false,
+          "dns_server": false,
+          "dns_port": 8053,
+          "dns_ip": "127.0.0.1",
+          "smtp_server": false,
+          "smtp_port": 2525,
+          "smtp_domain": "",
+          "smb_server": false,
+          "smb_port": 445,
+          "smb_domain": "",
+          "smb_share": "",
+          "smb_wordlist": "",
+          "max_upload_size": 0,
+          "catcher": false,
+          "ldap": false,
+          "ldap_port": 389,
+          "ldap_jndi": false,
+          "ldap_jndi_base": "",
+          "ldap_wordlist": "",
+          "ftp": false,
+          "ftp_port": 2121,
+          "ftp_sftp_mode": false,
+          "ftp_keyfile": "",
+          "ftp_host_keyfile": "",
+          "ttl": 0,
+          "tui": false,
+          "template": false,
+          "template_vars": []
+        }
+      '';
+    in
+    {
+      systemd.services.goshs = {
+        enable = lib.mkDefault false;
+        description = "goshs File Server";
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig = {
+          ExecStart = "${lib.getExe pkgs.goshs} -C ${goshsCfg}";
+          User = "${config.myVars.user}"; # dangerous!!!
+          Group = "users";
+          Restart = "on-failure";
+        };
+      };
+    };
+}
