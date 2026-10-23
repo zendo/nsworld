@@ -58,6 +58,7 @@ in
 
       # [ selfhosted ]
       services.navidrome.enable = true;
+      services.dufs.enable = true;
       # systemd.services.comigo.enable = true;
 
       environment.systemPackages = with pkgs; [
