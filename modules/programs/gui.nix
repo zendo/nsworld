@@ -18,6 +18,7 @@
         breeze
         venerax
         rclone-browser-ng
+        # pixora-icons
 
         # [ wrapper ]
         sp.wrapper-emacs
