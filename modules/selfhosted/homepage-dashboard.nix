@@ -2,6 +2,7 @@
   flake.modules.nixos.selfhosted =
     { config, ... }:
     let
+      hostIP = "192.168.2.218"; # or "dashboard-host"
       dufsPort = (toString config.services.dufs.port);
       memosPort = (toString config.services.memos.settings.MEMOS_PORT);
       navidromePort = (toString config.services.navidrome.settings.Port);
@@ -17,31 +18,31 @@
             Selfhosted = [
               {
                 Navidrome = {
-                  href = "http://dashboard-host:${navidromePort}";
+                  href = "http://${hostIP}:${navidromePort}";
                   description = "Music service";
                 };
               }
               {
                 goshs = {
-                  href = "http://dashboard-host:8009";
+                  href = "http://${hostIP}:8009";
                   description = "File server";
                 };
               }
               {
                 dufs = {
-                  href = "http://dashboard-host:${dufsPort}";
+                  href = "http://${hostIP}:${dufsPort}";
                   description = "File server";
                 };
               }
               {
                 comigo = {
-                  href = "http://dashboard-host:1239";
+                  href = "http://${hostIP}:1239";
                   description = "Comi reader";
                 };
               }
               {
                 sub-store = {
-                  href = "http://dashboard-host:3009";
+                  href = "http://${hostIP}:3009";
                   description = "Sub store";
                 };
               }
