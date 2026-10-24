@@ -18,9 +18,9 @@ let
       herdr
 
       # [ Editor ]
-      fresh-editor
-      micro
       ttt
+      # micro
+      fresh-editor
       # zee
       # msedit
       typos
@@ -69,14 +69,17 @@ let
       viu # image viewer
       gtrash
       # croc
-      #$: sshfs [user@]hostname:[directory] MOUNTPOINT
-      #$: umount MOUNTPOINT
+
+      # [ FileServer ]
+      # python -m http.server 8080
+      simple-http-server # :riir
+      # sshfs [user@]hostname:[directory] MOUNTPOINT
+      # umount MOUNTPOINT
       sshfs
       # dufs
       goshs
-      simple-http-server
-      # magic-wormhole-rs
       sendme
+      # magic-wormhole-rs
       # tailcat # 17.6 MiB
 
       # [ System Monitor ]

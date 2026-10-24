@@ -59,7 +59,7 @@ in
       # [ selfhosted ]
       services.homepage-dashboard.enable = true;
       services.navidrome.enable = true;
-      services.dufs.enable = true;
+      # services.dufs.enable = true;
       systemd.services.goshs.enable = true;
       systemd.services.comigo.enable = true;
 

@@ -28,12 +28,12 @@
                   description = "File server";
                 };
               }
-              {
-                dufs = {
-                  href = "http://${hostIP}:${dufsPort}";
-                  description = "File server";
-                };
-              }
+              # {
+              #   dufs = {
+              #     href = "http://${hostIP}:${dufsPort}";
+              #     description = "File server";
+              #   };
+              # }
               {
                 comigo = {
                   href = "http://${hostIP}:1239";
