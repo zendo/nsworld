@@ -18,6 +18,7 @@
         "d /data/media/videos 0755 ${config.myVars.user} users - -"
 
         "d /data/pics 0755 ${config.myVars.user} users - -"
+        "d /data/private 0700 ${config.myVars.user} users - -"
         "d /data/shared 2770 ${config.myVars.user} users - -"
         "d /data/temp 0755 ${config.myVars.user} users - -"
       ];
