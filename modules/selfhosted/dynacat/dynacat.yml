@@ -1,0 +1,66 @@
+pages:
+  - name: Startpage
+    width: slim
+    center-vertically: true
+    columns:
+      - size: full
+        widgets:
+          - type: search
+            autofocus: true
+
+          - type: monitor
+            cache: 1m
+            title: Services
+            sites:
+              - title: Navidrome
+                url: http://192.168.2.218:4539
+                icon: sh:navidrome
+
+              - title: Goshs
+                url: http://192.168.2.218:8009
+                icon: si:files
+
+              - title: Dufs
+                url: http://192.168.2.218:5009
+                icon: sh:dufs
+
+              - title: Comigo
+                url: http://192.168.2.218:1239
+                icon: sh:comicopds
+
+              - title: AdGuard Home
+                url: https://yourdomain.com/
+                icon: si:adguard
+
+              - title: Vaultwarden
+                url: https://yourdomain.com/
+                icon: si:vaultwarden
+
+          - type: bookmarks
+            groups:
+              - title: General
+                links:
+                  - title: Gmail
+                    url: https://mail.google.com/mail/u/0/
+                  - title: Amazon
+                    url: https://www.amazon.com/
+                  - title: Github
+                    url: https://github.com/
+
+              - title: Entertainment
+                links:
+                  - title: YouTube
+                    url: https://www.youtube.com/
+                  - title: Prime Video
+                    url: https://www.primevideo.com/
+                  - title: Disney+
+                    url: https://www.disneyplus.com/
+
+              - title: Social
+                links:
+                  - title: Reddit
+                    url: https://www.reddit.com/
+                  - title: Twitter
+                    url: https://twitter.com/
+                  - title: Instagram
+                    url: https://www.instagram.com/
