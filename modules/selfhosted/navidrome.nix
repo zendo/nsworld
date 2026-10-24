@@ -12,6 +12,8 @@
           Address = "0.0.0.0";
           # Port = 4533;
           MusicFolder = "/data/media/music";
+          DefaultLanguage = "zh-Hans";
+          DefaultTheme = "AMusic";
           Backup = {
             Path = "/data/backups";
             Schedule = "0 22 * * *";
