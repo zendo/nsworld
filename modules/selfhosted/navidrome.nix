@@ -10,7 +10,7 @@
         openFirewall = config.networking.firewall.enable;
         settings = {
           Address = "0.0.0.0";
-          # Port = 4533;
+          Port = 4539;
           MusicFolder = "/data/media/music";
           DefaultLanguage = "zh-Hans";
           DefaultTheme = "AMusic";

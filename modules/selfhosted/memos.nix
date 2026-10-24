@@ -8,7 +8,7 @@
         settings = {
           MEMOS_MODE = "prod";
           MEMOS_ADDR = "0.0.0.0";
-          MEMOS_PORT = "5230";
+          MEMOS_PORT = "5239";
           MEMOS_DATA = config.services.memos.dataDir;
           MEMOS_DRIVER = "sqlite";
           MEMOS_INSTANCE_URL = "http://localhost:5230";

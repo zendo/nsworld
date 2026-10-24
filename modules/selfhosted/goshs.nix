@@ -11,7 +11,7 @@
       goshsCfg = pkgs.writeText "config.json" ''
         {
           "interface": "0.0.0.0",
-          "port": 8002,
+          "port": 8009,
           "directory": "/data",
           "upload_folder": "/data/temp",
           "ssl": false,

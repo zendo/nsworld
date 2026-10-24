@@ -5,14 +5,14 @@
       services.rqbit = {
         downloadDir = "/data/temp";
         # httpHost = "127.0.0.1";
-        # httpPort = 3030;
+        # httpPort = 3039;
         openFirewall = config.networking.firewall.enable;
       };
 
       services.qui = {
         # secretFile = "";
         # settings = {
-        #   port = 7777;
+        #   port = 7779;
         # };
         openFirewall = config.networking.firewall.enable;
       };

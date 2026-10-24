@@ -1,10 +1,15 @@
 {
   flake.modules.nixos.selfhosted =
     { config, ... }:
+    let
+      dufsPort = (toString config.services.dufs.port);
+      memosPort = (toString config.services.memos.settings.MEMOS_PORT);
+      navidromePort = (toString config.services.navidrome.settings.Port);
+    in
     {
       services.homepage-dashboard = {
         openFirewall = config.networking.firewall.enable;
-        listenPort = 8080;
+        listenPort = 8089;
         allowedHosts = "*";
 
         services = [
@@ -12,31 +17,31 @@
             Selfhosted = [
               {
                 Navidrome = {
-                  href = "http://dashboard-host:4533";
+                  href = "http://dashboard-host:${navidromePort}";
                   description = "Music service";
                 };
               }
               {
                 goshs = {
-                  href = "http://dashboard-host:8002";
+                  href = "http://dashboard-host:8009";
                   description = "File server";
                 };
               }
               {
                 dufs = {
-                  href = "http://dashboard-host:5001";
+                  href = "http://dashboard-host:${dufsPort}";
                   description = "File server";
                 };
               }
               {
                 comigo = {
-                  href = "http://dashboard-host:1234";
+                  href = "http://dashboard-host:1239";
                   description = "Comi reader";
                 };
               }
               {
                 sub-store = {
-                  href = "http://dashboard-host:3000";
+                  href = "http://dashboard-host:3009";
                   description = "Sub store";
                 };
               }

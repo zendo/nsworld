@@ -8,7 +8,7 @@
         wants = [ "network.target" ];
         environment = {
           HOME = "%S/comigo";
-          COMIGO_PORT = "1234";
+          COMIGO_PORT = "1239";
           COMIGO_ENABLE_UPLOAD = "true";
         };
         serviceConfig = {

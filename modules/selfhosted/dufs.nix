@@ -7,7 +7,7 @@
         group = "users";
         servePath = "/data";
         bindAddresses = [ "0.0.0.0" ];
-        port = 5001;
+        port = 5009;
         openFirewall = config.networking.firewall.enable;
         settings = {
           allow-upload = true;

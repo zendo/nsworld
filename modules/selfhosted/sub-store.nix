@@ -11,7 +11,7 @@
           SUB_STORE_DATA_BASE_PATH = "%S/sub-store";
           SUB_STORE_FRONTEND_PATH = "${pkgs.sub-store-frontend}";
           SUB_STORE_BACKEND_API_HOST = "::";
-          SUB_STORE_BACKEND_API_PORT = "3000";
+          SUB_STORE_BACKEND_API_PORT = "3009";
           SUB_STORE_BACKEND_MERGE = "true";
           # openssl rand -base64 12
           SUB_STORE_FRONTEND_BACKEND_PATH = "/kewejyo3baNXPELk";
