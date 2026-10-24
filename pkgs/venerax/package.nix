@@ -15,12 +15,12 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "venerax";
-  version = "2.3.6";
+  version = "2.3.7";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/Kyosee/VeneraX/releases/download/v${finalAttrs.version}/VeneraX-${finalAttrs.version}-amd64.deb";
-    hash = "sha256-90k30+JqS0dHd+a0mD4Zb10gBd9IT242Ewv67URj3PE=";
+    hash = "sha256-xpv4o6RUYG6m5FsjEVQIp2E8QnY7t2/di9z13KEmFso=";
   };
 
   nativeBuildInputs = [
