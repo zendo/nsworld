@@ -4,7 +4,7 @@
     {
       services.homepage-dashboard = {
         openFirewall = config.networking.firewall.enable;
-        listenPort = 8082;
+        listenPort = 8080;
         allowedHosts = "*";
 
         services = [
@@ -45,6 +45,7 @@
         ];
 
         customJS = ''
+          // Replace the placeholder hostname in service links with the current page's hostname.
           (() => {
             const updateLinks = () => {
               document.querySelectorAll('a[href*="dashboard-host"]').forEach((link) => {
