@@ -61,6 +61,7 @@ in
       services.navidrome.enable = true;
       # services.dufs.enable = true;
       services.goshs.enable = true;
+      services.miniflux.enable = true;
       systemd.services.comigo.enable = true;
 
       environment.systemPackages = with pkgs; [

@@ -35,6 +35,12 @@
               #   };
               # }
               {
+                miniflux = {
+                  href = "http://${hostIP}:8088";
+                  description = "Rss reader";
+                };
+              }
+              {
                 comigo = {
                   href = "http://${hostIP}:1239";
                   description = "Comi reader";
