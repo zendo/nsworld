@@ -90,7 +90,7 @@
         # bitwarden-desktop
         # keyguard
         # obsidian
-        # helixnotes
+        helixnotes
         # joplin-desktop
         # libreoffice-fresh
         # drawio
