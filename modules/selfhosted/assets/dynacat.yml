@@ -34,6 +34,9 @@ pages:
               - title: miniflux
                 url: http://192.168.2.218:8081
                 icon: si:rss
+              - title: memos
+                url: http://192.168.2.218:5239
+                icon: sh:memos
               - title: comigo
                 url: http://192.168.2.218:1239
                 icon: sh:getcomics
