@@ -46,21 +46,22 @@
           type = settingsFormat.type;
           default = { };
           example = {
-            # needed
+            # Required
             interface = "0.0.0.0";
             port = 8000;
             directory = "/data";
             uploadFolder = "/data";
-            # others
+            # Optional
             auth = "";
             webdav = true;
             webdav_port = 8001;
             upload = true;
           };
           description = ''
-            Configuration file for goshs.
-            See <https://docs.goshs.de/usage/config/index.html> for available values.
-            interface, port, directory, and upload_folder is require.
+            Configuration for goshs. See <https://docs.goshs.de/usage/config/index.html>
+            for available options.
+
+            The interface, port, directory, and upload_folder fields are required.
           '';
         };
       };
@@ -126,6 +127,6 @@
         };
       };
 
-      meta.maintainers = [ lib.maintainers.zendo ];
+      meta.maintainers = with lib.maintainers; [ zendo ];
     };
 }
