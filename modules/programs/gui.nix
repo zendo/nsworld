@@ -17,7 +17,6 @@
         neiro
         breeze
         venerax
-        rclone-browser-ng
         # pixora-icons
 
         # [ wrapper ]
@@ -74,7 +73,7 @@
         # (lib.hiPrio localsend)
         qbittorrent
         rclone
-        # rclone-browser # TERMINAL=xterm rclone-explorer
+        rclone-browser # TERMINAL=xterm rclone-explorer
         # deja-dup
         # vorta # borg backup
 
