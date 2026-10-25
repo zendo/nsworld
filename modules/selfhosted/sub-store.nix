@@ -15,6 +15,7 @@
           SUB_STORE_BACKEND_MERGE = "true";
           # openssl rand -base64 12
           SUB_STORE_FRONTEND_BACKEND_PATH = "/kewejyo3baNXPELk";
+          SUB_STORE_CORS_ALLOWED_ORIGINS = "*";
           # SUB_STORE_BACKEND_SYNC_CRON = "55 23 * * *"; # 23:55
         };
         serviceConfig = {
