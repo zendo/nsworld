@@ -14,12 +14,12 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "breeze";
-  version = "3.0.35";
+  version = "3.0.36";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/deretame/Breeze/releases/download/v${finalAttrs.version}/breeze-v${finalAttrs.version}.flatpak";
-    hash = "sha256-jDjUuCyoLTxHaUIGXZIBju2I4uWmSskIofB1ymIri6Y=";
+    hash = "sha256-qoBH++ODrn35fZt9armLwJG50g+uxcSe3pA33Wo4/t4=";
   };
 
   nativeBuildInputs = [
