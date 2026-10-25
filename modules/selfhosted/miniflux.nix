@@ -10,7 +10,7 @@
       };
 
       environment.etc."miniflux-admin-credentials".text = ''
-        ADMIN_USERNAME=admin
+        ADMIN_USERNAME=demo
         ADMIN_PASSWORD=123456
       '';
     };
