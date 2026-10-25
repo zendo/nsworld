@@ -1,7 +1,8 @@
 {
   flake.modules.nixos.selfhosted =
     { config, lib, ... }:
-    {
+    lib.mkIf (config.services.rqbit.enable) {
+
       services.rqbit = {
         openFirewall = config.networking.firewall.enable;
         httpHost = "0.0.0.0";
@@ -10,20 +11,8 @@
       };
 
       # Allow rqbit to access downloadDir.
-      users.users.rqbit.extraGroups = lib.optionals config.services.rqbit.enable [ "users" ];
+      users.users.rqbit.extraGroups = [ "users" ];
       # Allow group members to modify downloaded files.
       systemd.services.rqbit.serviceConfig.UMask = lib.mkForce "0002";
-
-      services.qui = {
-        openFirewall = config.networking.firewall.enable;
-        # secretFile = "";
-        # settings = {
-        #   port = 7779;
-        # };
-      };
-
-      # services.aria2 = {
-      #   enable = true;
-      # };
     };
 }
