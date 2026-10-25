@@ -57,8 +57,9 @@ in
       # systemd.user.services.neiro.enable = true;
 
       # [ selfhosted ]
-      services.homepage-dashboard.enable = true;
-      services.navidrome.enable = true;
+      services.caddy.enable = true;
+      # services.homepage-dashboard.enable = true;
+      # services.navidrome.enable = true;
       # services.dufs.enable = true;
       services.goshs.enable = true;
       services.miniflux.enable = true;
