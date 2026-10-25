@@ -40,6 +40,9 @@ pages:
               - title: goshs
                 url: http://192.168.2.218:8009
                 icon: sh:gossa
+              - title: rqbit
+                url: http://192.168.2.218:3039
+                icon: sh:qbittorrent
               - title: sub-store
                 url: http://192.168.2.218:3009
                 icon: si:crayon

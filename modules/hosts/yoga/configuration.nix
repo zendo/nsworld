@@ -62,6 +62,7 @@ in
       # services.dufs.enable = true;
       services.goshs.enable = true;
       services.miniflux.enable = true;
+      services.rqbit.enable = true;
       systemd.services.comigo.enable = true;
       systemd.services.dynacat.enable = true;
 
