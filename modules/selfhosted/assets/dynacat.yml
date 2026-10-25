@@ -3,17 +3,14 @@ server:
   port: 8088
   cache-dir: /var/cache/dynacat
   db-path: /var/lib/dynacat/dynacat.db
-
 branding:
   hide-logo: true
-
 # auth:
 #   # generate with: ./dynacat secret:make
 #   secret-key: g9Gv4/KjPs4jX0KG2IO8lVobdLCVtteo8aBRMebxLZtG8yf9gH1MMUM0VuSuagNVOjGjZN2cQcfI69O2IBfF0g==
 #   users:
 #     admin:
 #     password: qwertyuiop[]
-
 pages:
   - name: Startpage
     width: slim
@@ -22,7 +19,9 @@ pages:
       - size: full
         widgets:
           - type: search
+            search-engine: google
             autofocus: true
+            new-tab: true
           - type: monitor
             cache: 1m
             title: Services
@@ -63,11 +62,13 @@ pages:
                     url: https://twitter.com/
                   - title: Instagram
                     url: https://www.instagram.com/
-              - title: Entertainment
-                links:
-                  - title: YouTube
-                    url: https://www.youtube.com/
-                  - title: Prime Video
-                    url: https://www.primevideo.com/
-                  - title: Disney+
-                    url: https://www.disneyplus.com/
+      - size: small
+        widgets:
+          - type: to-do
+            storage: local
+          - type: repository
+            repository: NixOS/nixpkgs
+          - type: clock
+            hour-format: 24h
+          - type: calendar
+            first-day-of-week: monday
