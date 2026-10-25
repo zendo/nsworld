@@ -36,7 +36,7 @@
               # }
               {
                 miniflux = {
-                  href = "http://${hostIP}:8088";
+                  href = "http://${hostIP}:8081";
                   description = "Rss reader";
                 };
               }

@@ -5,7 +5,7 @@
       services.miniflux = {
         adminCredentialsFile = "/etc/miniflux-admin-credentials";
         config = {
-          LISTEN_ADDR = "0.0.0.0:8088";
+          LISTEN_ADDR = "0.0.0.0:8081";
         };
       };
 

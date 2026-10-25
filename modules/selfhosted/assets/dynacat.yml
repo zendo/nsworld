@@ -1,3 +1,19 @@
+server:
+  host: 0.0.0.0
+  port: 8088
+  cache-dir: /var/cache/dynacat
+  db-path: /var/lib/dynacat/dynacat.db
+
+branding:
+  hide-logo: true
+
+# auth:
+#   # generate with: ./dynacat secret:make
+#   secret-key: g9Gv4/KjPs4jX0KG2IO8lVobdLCVtteo8aBRMebxLZtG8yf9gH1MMUM0VuSuagNVOjGjZN2cQcfI69O2IBfF0g==
+#   users:
+#     admin:
+#     password: qwertyuiop[]
+
 pages:
   - name: Startpage
     width: slim
@@ -7,7 +23,6 @@ pages:
         widgets:
           - type: search
             autofocus: true
-
           - type: monitor
             cache: 1m
             title: Services
@@ -15,47 +30,31 @@ pages:
               - title: Navidrome
                 url: http://192.168.2.218:4539
                 icon: sh:navidrome
-
-              - title: Goshs
-                url: http://192.168.2.218:8009
-                icon: si:files
-
-              - title: Dufs
-                url: http://192.168.2.218:5009
-                icon: sh:dufs
-
-              - title: Comigo
+              - title: miniflux
+                url: http://192.168.2.218:8081
+                icon: si:rss
+              - title: comigo
                 url: http://192.168.2.218:1239
-                icon: sh:comicopds
-
+                icon: sh:getcomics
+              - title: goshs
+                url: http://192.168.2.218:8009
+                icon: sh:gossa
               - title: AdGuard Home
                 url: https://yourdomain.com/
                 icon: si:adguard
-
               - title: Vaultwarden
                 url: https://yourdomain.com/
                 icon: si:vaultwarden
-
           - type: bookmarks
             groups:
               - title: General
                 links:
                   - title: Gmail
                     url: https://mail.google.com/mail/u/0/
-                  - title: Amazon
-                    url: https://www.amazon.com/
                   - title: Github
                     url: https://github.com/
-
-              - title: Entertainment
-                links:
-                  - title: YouTube
-                    url: https://www.youtube.com/
-                  - title: Prime Video
-                    url: https://www.primevideo.com/
-                  - title: Disney+
-                    url: https://www.disneyplus.com/
-
+                  - title: Nixsearch
+                    url: https://nixsearch.thekoppe.com/
               - title: Social
                 links:
                   - title: Reddit
@@ -64,3 +63,11 @@ pages:
                     url: https://twitter.com/
                   - title: Instagram
                     url: https://www.instagram.com/
+              - title: Entertainment
+                links:
+                  - title: YouTube
+                    url: https://www.youtube.com/
+                  - title: Prime Video
+                    url: https://www.primevideo.com/
+                  - title: Disney+
+                    url: https://www.disneyplus.com/

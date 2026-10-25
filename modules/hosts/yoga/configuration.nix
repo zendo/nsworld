@@ -63,6 +63,7 @@ in
       services.goshs.enable = true;
       services.miniflux.enable = true;
       systemd.services.comigo.enable = true;
+      systemd.services.dynacat.enable = true;
 
       environment.systemPackages = with pkgs; [
         # inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine
