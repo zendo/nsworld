@@ -5,6 +5,8 @@ server:
   db-path: /var/lib/dynacat/dynacat.db
 branding:
   hide-logo: true
+  custom-footer: |
+    <p>Powered by ❄️</p>
 # auth:
 #   # generate with: ./dynacat secret:make
 #   secret-key: g9Gv4/KjPs4jX0KG2IO8lVobdLCVtteo8aBRMebxLZtG8yf9gH1MMUM0VuSuagNVOjGjZN2cQcfI69O2IBfF0g==
