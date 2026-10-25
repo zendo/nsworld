@@ -14,6 +14,7 @@
           MusicFolder = "/data/media/music";
           DefaultLanguage = "zh-Hans";
           DefaultTheme = "AMusic";
+          Plugins.Enabled = false;
         };
       };
     };
