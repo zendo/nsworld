@@ -14,5 +14,17 @@
           LISTEN_ADDR = "0.0.0.0:8081";
         };
       };
+
+      # services.rsshub = {
+      #   enable = true;
+      #   openFirewall = config.networking.firewall.enable;
+      #   settings = {
+      #     PORT = 1209;
+      #     REQUEST_TIMEOUT = "3000";
+      #     REQUEST_RETRY = "10";
+      #     CHROMIUM_EXECUTABLE_PATH = lib.getExe pkgs.firefox;
+      #   };
+      # };
+
     };
 }

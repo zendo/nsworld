@@ -115,6 +115,7 @@ pkgs.buildFHSEnv {
       # --- KDE -------------------------------------------------------------
       qt6.qtbase
       qt6.qtsvg
+      qt6.qtwayland
       # qt6.qtdeclarative # libQt6QuickControls2.so.6
       # qt6.qtmultimedia
 
