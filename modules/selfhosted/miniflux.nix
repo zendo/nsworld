@@ -1,17 +1,18 @@
 {
   flake.modules.nixos.selfhosted =
-    { config, ... }:
+    { config, pkgs, ... }:
+    let
+      keyFile = pkgs.writeText "minifluxKeyFile" ''
+        ADMIN_USERNAME=demo
+        ADMIN_PASSWORD=123456
+      '';
+    in
     {
       services.miniflux = {
-        adminCredentialsFile = "/etc/miniflux-admin-credentials";
+        adminCredentialsFile = keyFile;
         config = {
           LISTEN_ADDR = "0.0.0.0:8081";
         };
       };
-
-      environment.etc."miniflux-admin-credentials".text = ''
-        ADMIN_USERNAME=demo
-        ADMIN_PASSWORD=123456
-      '';
     };
 }
