@@ -11,8 +11,12 @@
 */
 {
   pkgs ? import <nixpkgs> { },
+  multiverse ? null,
 }:
-
+# let
+#   # libxdo.so.3
+#   xdotool = multiverse.versions.xdotool."3.20211022.1";
+# in
 pkgs.buildFHSEnv {
   name = "fhs-run";
   runScript = pkgs.writeShellScript "fhs-run" ''
@@ -218,6 +222,7 @@ pkgs.buildFHSEnv {
       desktop-file-utils
       pax-utils # lddtree
       zenity
+      # xdotool
       chafa
     ];
 }
