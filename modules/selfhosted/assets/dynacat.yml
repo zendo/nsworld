@@ -49,6 +49,9 @@ pages:
               - title: sub-store
                 url: http://192.168.2.218:3009
                 icon: si:crayon
+              - title: Beszel Hub
+                url: http://192.168.2.218:8099
+                icon: sh:beszel
               - title: AdGuard Home
                 url: https://yourdomain.com/
                 icon: si:adguard
