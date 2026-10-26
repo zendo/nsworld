@@ -28,12 +28,12 @@ pages:
             cache: 1m
             title: Services
             sites:
-              - title: Navidrome
-                url: http://192.168.2.218:4539
-                icon: sh:navidrome
               - title: miniflux
                 url: http://192.168.2.218:51832
                 icon: si:rss
+              - title: Navidrome
+                url: http://192.168.2.218:4539
+                icon: sh:navidrome
               - title: memos
                 url: http://192.168.2.218:5239
                 icon: sh:memos
@@ -74,14 +74,14 @@ pages:
                     url: https://www.reddit.com/
                   - title: Twitter
                     url: https://twitter.com/
-                  - title: Instagram
-                    url: https://www.instagram.com/
+                  - title: Youtube
+                    url: https://www.youtube.com/
       - size: small
         widgets:
           - type: to-do
             storage: local
-          - type: repository
-            repository: NixOS/nixpkgs
+          # - type: repository
+          #   repository: NixOS/nixpkgs
           - type: clock
             hour-format: 24h
           - type: calendar

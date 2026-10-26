@@ -10,6 +10,7 @@
         # lazydocker
         # docker-compose
         podman-compose
+        pods
         distrobox
         # toolbox
       ];
