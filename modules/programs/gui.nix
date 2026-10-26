@@ -8,7 +8,6 @@
     {
       environment.systemPackages = with pkgs; [
         # kula
-        # nano-ffmpeg
         levi
         rwx
         rox
