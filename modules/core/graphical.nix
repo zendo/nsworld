@@ -1,7 +1,14 @@
 {
   flake.modules.nixos.graphical =
-    { pkgs, config, ... }:
     {
+      pkgs,
+      config,
+      lib,
+      ...
+    }:
+    {
+      i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
+
       # Bluetooth
       # services.blueman.enable = true;
       hardware.bluetooth.enable = true;

@@ -8,7 +8,10 @@
   flake.modules.nixos.ssh = {
     services.openssh = {
       enable = true;
-      # settings.PasswordAuthentication = lib.mkDefault false;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
       hostKeys = [
         {
           path = "/var/lib/ssh/ssh_host_ed25519_key";

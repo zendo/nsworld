@@ -24,10 +24,6 @@
         sp.wrapper-cava
         sp.wrapper-foot
         sp.wrapper-ghostty
-        sp.wrapper-git
-        # gh auth login
-        # gh api rate_limit
-        gh
         # sp.wrapper-helix
         sp.wrapper-kitty
         sp.wrapper-mpv

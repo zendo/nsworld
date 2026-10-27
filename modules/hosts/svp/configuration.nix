@@ -5,51 +5,83 @@ let
   fm = config.flake.modules;
 in
 {
+  # nixos-rebuild --target-host root@svp --flake .#svp boot --install-bootloader
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
     modules = with fm.nixos; [
       host-svp
       host-svp-disko-btrfs
       hjemModule
-      # hm-imports
-      nixos-imports
 
       # [ profiles ]
       gpu-intel
-      laptop
-      # steam
+
+      # [ core ]
+      base
+      boot
+      # fonts
+      ssh
+      # gpg
+      user
+
+      mods
+      selfhosted
+      services
+
+      # [ networking ]
+      dns
+      firewall
+      # networkmanager
+      # print
+
+      # [ nix ]
+      # nix-cache
+      # nix-tools
+      nixconfig
+      nixpkgs
+
+      # [ programs ]
+      cli
+
+      # [ shell ]
+      alias
+      bash
+      # fish
+      zsh
+      terminal
 
       # [ virt ]
       docker
-      # incus
-      # nix-ld
-      qemu
 
-      # [ desktop ]
-      graphical
-      gnome
-      # kde
-      # cosmic
-      # niri
-      # sway
-      # hyprland
+      # [ xdg ]
+      data-center
+      env
+      # mime
     ];
   };
 
   flake.modules.nixos.host-svp =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
 
+      users.defaultUserShell = pkgs.zsh;
       users.users.${config.myVars.user} = {
         # pw: 123
         hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
       };
 
-      # ╭─────────────────────────────────────────────────────╮
-      # │ HARDWARE                                            │
-      # ╰─────────────────────────────────────────────────────╯
-      boot.supportedFilesystems = [ "ntfs" ];
+      networking.wireless.iwd.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        impala # tui wifi
+        brightnessctl # brightnessctl set 50%
+      ];
+
+      environment.enableAllTerminfo = true;
+
+      # Blank the console after 10 minutes of inactivity.
+      boot.kernelParams = [ "consoleblank=600" ];
 
       zramSwap.enable = true;
 
@@ -61,16 +93,33 @@ in
         }
       ];
 
-      # ╭─────────────────────────────────────────────────────╮
-      # │ BOOTLOADER                                          │
-      # ╰─────────────────────────────────────────────────────╯
+      services.logind.settings.Login = {
+        HandleLidSwitch = "ignore";
+        HandleLidSwitchExternalPower = "ignore";
+      };
+
       boot.loader = {
         efi.efiSysMountPoint = "/efi";
-        limine = {
-          enable = true;
-          style.wallpapers = [ ];
-          style.interface.branding = " ";
-        };
+        systemd-boot.enable = true;
       };
+
+      # [ selfhosted ]
+      services.caddy.enable = true;
+      # services.homepage-dashboard.enable = true;
+      services.navidrome.enable = true;
+      # services.dufs.enable = true;
+      services.goshs.enable = true;
+      services.miniflux.enable = true;
+      services.memos.enable = true;
+      services.rqbit.enable = true;
+      # services.suwayomi-server.enable = true;
+      systemd.services.comigo.enable = true;
+      systemd.services.mango-manga.enable = true;
+      systemd.services.dynacat.enable = true;
+      services.beszel = {
+        hub.enable = true;
+        agent.enable = true;
+      };
+
     };
 }

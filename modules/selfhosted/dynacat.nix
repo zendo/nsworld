@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.selfhosted =
-    { lib, pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
     {
       systemd.services.dynacat = {
         enable = lib.mkDefault false;
@@ -13,7 +18,7 @@
         ];
 
         serviceConfig = {
-          ExecStart = "${lib.getExe pkgs.dynacat} --config /home/iab/nsworld/modules/selfhosted/assets/dynacat.yml";
+          ExecStart = "${lib.getExe pkgs.dynacat} --config /home/${config.myVars.user}/nsworld/modules/selfhosted/assets/dynacat.yml";
           Restart = "on-failure";
           WorkingDirectory = "/var/lib/dynacat";
           StateDirectory = "dynacat";

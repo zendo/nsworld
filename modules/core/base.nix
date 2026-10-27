@@ -8,7 +8,6 @@
     }:
     {
       time.timeZone = lib.mkDefault "Asia/Shanghai";
-      i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
       system.stateVersion = lib.mkDefault "26.05";
 
       services.btrfs.autoScrub.enable =
