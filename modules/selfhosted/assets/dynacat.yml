@@ -29,31 +29,31 @@ pages:
             title: Services
             sites:
               - title: Navidrome
-                url: http://192.168.2.218:4539
+                url: http://192.168.2.30:4539
                 icon: sh:navidrome
               - title: miniflux
-                url: http://192.168.2.218:51832
+                url: http://192.168.2.30:51832
                 icon: si:rss
               - title: memos
-                url: http://192.168.2.218:5239
+                url: http://192.168.2.30:5239
                 icon: sh:memos
               - title: comigo
-                url: http://192.168.2.218:1239
+                url: http://192.168.2.30:1239
                 icon: sh:getcomics
               - title: mango
-                url: http://192.168.2.218:8789
+                url: http://192.168.2.30:8789
                 icon: si:mihon
               - title: goshs
-                url: http://192.168.2.218:8009
+                url: http://192.168.2.30:8009
                 icon: sh:gossa
               - title: rqbit
-                url: http://192.168.2.218:3039
+                url: http://192.168.2.30:3039
                 icon: sh:qbittorrent
               - title: sub-store
-                url: http://192.168.2.218:3009
+                url: http://192.168.2.30:3009
                 icon: si:crayon
               - title: Beszel Hub
-                url: http://192.168.2.218:8099
+                url: http://192.168.2.30:8099
                 icon: sh:beszel
               - title: AdGuard Home
                 url: https://yourdomain.com/
