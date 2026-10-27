@@ -11,7 +11,7 @@ let
     "la." = "ls -d .*";
 
     # [ rm ]
-    rm = "gtrash put";
+    rm = ''GTRASH_HOME_TRASH_FALLBACK_COPY="true" gtrash put'';
     rm-empty = "gtrash find --rm";
     rm-restore = "gtrash restore";
 
