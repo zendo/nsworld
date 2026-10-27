@@ -17,6 +17,20 @@ nix eval --no-eval-cache .\#nixosConfigurations.yoga.config.system.build.topleve
 flamegraph.pl yoga > yoga.svg
 #+end_src
 
+** selfhosted
+#+begin_src bash
+sudo ss -lntup
+#+end_src
+
+| 端口范围   | 用途                  | 示例                |
+| 80, 443   | Web 统一入口           | Caddy / Nginx       |
+| 3000–3999 | Web 应用              | Dynacat、各类 Web UI |
+| 4000–4999 | 文件管理、下载服务      | dufs、下载器         |
+| 5000–5999 | 监控、管理面板          | Beszel Hub          |
+| 6000–6999 | 其他自建应用            | 按需分配             |
+| 9000–9999 | 预留、临时测试          | 开发测试服务          |
+| 8000–8999 | 传统 Web 服务、备用端口 | 兼容已有服务          |
+
 * Packaging
 ** nixpkgs
 #+begin_src nix
