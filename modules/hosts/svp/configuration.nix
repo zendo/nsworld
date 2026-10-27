@@ -13,7 +13,7 @@ in
       hjemModule
 
       # [ profiles ]
-      gpu-intel
+      # gpu-intel
 
       # [ core ]
       base
@@ -113,12 +113,16 @@ in
       services.memos.enable = true;
       services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
+      systemd.services.sub-store.enable = true;
       systemd.services.comigo.enable = true;
       systemd.services.mango-manga.enable = true;
       systemd.services.dynacat.enable = true;
       services.beszel = {
         hub.enable = true;
         agent.enable = true;
+        agent.environment = {
+          KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKRs2TkpwEXDkq96tZ7uflRsQHu1OgZb8fL/vxxu+kRY";
+        };
       };
 
     };

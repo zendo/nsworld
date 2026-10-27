@@ -9,10 +9,6 @@
 
       services.beszel.agent = {
         openFirewall = config.networking.firewall.enable;
-        environment = {
-          KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+TKipwAtOLgUUrHIXNb5AYxDNc1E63ELFT4XNOZlXF";
-        };
       };
-
     };
 }

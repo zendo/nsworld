@@ -20,6 +20,7 @@ flamegraph.pl yoga > yoga.svg
 ** selfhosted
 #+begin_src bash
 sudo ss -lntup
+chmod -R 0755 /data/media /data/docs /data/pics
 #+end_src
 
 | 端口范围   | 用途                  | 示例                |
@@ -30,6 +31,11 @@ sudo ss -lntup
 | 6000–6999 | 其他自建应用            | 按需分配             |
 | 9000–9999 | 预留、临时测试          | 开发测试服务          |
 | 8000–8999 | 传统 Web 服务、备用端口 | 兼容已有服务          |
+
+*** navidrome
+sudo sqlite3 /var/lib/navidrome/navidrome.db ".backup '/data/backups/linux/navidrome.db'"
+sc stop navidrome.service
+sudo navidrome backup restore --backup-file /data/backups/linux/navidrome.db
 
 * Packaging
 ** nixpkgs

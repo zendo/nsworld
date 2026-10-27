@@ -6,6 +6,7 @@
         enable = lib.mkDefault false;
         after = [ "network.target" ];
         wants = [ "network.target" ];
+        # https://comigo.xyz/manual/deployment#enviroment-variables
         environment = {
           HOME = "%S/comigo";
           COMIGO_PORT = "1239";
@@ -14,7 +15,7 @@
         serviceConfig = {
           StateDirectory = "comigo";
           StateDirectoryMode = "0700";
-          ExecStart = "${lib.getExe pkgs.comigo} --no-tui";
+          ExecStart = "${lib.getExe pkgs.comigo} start --no-tui /data/docs/manga";
           Restart = "on-failure";
           DynamicUser = true;
         };
