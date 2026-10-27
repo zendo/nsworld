@@ -66,6 +66,7 @@ in
       services.memos.enable = true;
       services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
+      # systemd.services.kula.enable = true;
       systemd.services.comigo.enable = true;
       systemd.services.mango-manga.enable = true;
       systemd.services.dynacat.enable = true;

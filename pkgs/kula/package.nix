@@ -1,11 +1,11 @@
 {
   lib,
-  buildGo127Module,
+  buildGoLatestModule,
   fetchFromGitHub,
   writableTmpDirAsHomeHook,
 }:
 
-buildGo127Module (finalAttrs: {
+buildGoLatestModule (finalAttrs: {
   pname = "kula";
   version = "0.21.0";
   __structuredAttrs = true;
