@@ -1,12 +1,5 @@
 {
   flake.modules.nixos.vicinae = { pkgs, ... }: {
-    environment.systemPackages = [ pkgs.vicinae ];
-
-    systemd.packages = [ pkgs.vicinae ];
-
-    systemd.user.services.vicinae = {
-      wantedBy = [ "graphical-session.target" ];
-    };
   };
 
   flake.modules.homeManager.vicinae = {
