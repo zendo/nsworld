@@ -19,6 +19,8 @@ user_pref("browser.tabs.loadBookmarksInTabs", true); // Open bookmarks in a new 
 // user_pref("browser.urlbar.openintab", true); // open in a new tab
 // user_pref("browser.search.openintab", true); // open in a new tab
 
+// Fixes
+user_pref("image.decode-immediately.enabled", true); // Prevent flickering when navigating manga pages
 
 // Fonts: https://github.com/yokoffing/Betterfox/wiki/Common-Overrides#font-improvement
 // PREF: improve font rendering by using DirectWrite everywhere like Chrome [WINDOWS]

@@ -7,6 +7,7 @@
         # package = pkgs.firefox-bin;
         languagePacks = [ "zh-CN" ];
 
+        # cat /etc/firefox/policies/policies.json
         preferencesStatus = "default";
         preferences = {
           # Languages
@@ -34,6 +35,12 @@
           "gfx.text.subpixel-position.force-enabled" = true;
           "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
         };
+
+        # not covered by the policies.json
+        autoConfig = ''
+          // Prevent flickering when navigating manga pages
+          pref("image.decode-immediately.enabled", true);
+        '';
 
         policies = {
           DisableTelemetry = true;
