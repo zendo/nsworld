@@ -9,6 +9,9 @@
     {
       i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
 
+      services.keyd.enable = true;
+      # services.kanata.enable = true;
+
       # Bluetooth
       # services.blueman.enable = true;
       hardware.bluetooth.enable = true;
