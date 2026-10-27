@@ -28,18 +28,21 @@ pages:
             cache: 1m
             title: Services
             sites:
-              - title: miniflux
-                url: http://192.168.2.218:51832
-                icon: si:rss
               - title: Navidrome
                 url: http://192.168.2.218:4539
                 icon: sh:navidrome
+              - title: miniflux
+                url: http://192.168.2.218:51832
+                icon: si:rss
               - title: memos
                 url: http://192.168.2.218:5239
                 icon: sh:memos
               - title: comigo
                 url: http://192.168.2.218:1239
                 icon: sh:getcomics
+              - title: mango
+                url: http://192.168.2.218:8789
+                icon: si:mihon
               - title: goshs
                 url: http://192.168.2.218:8009
                 icon: sh:gossa

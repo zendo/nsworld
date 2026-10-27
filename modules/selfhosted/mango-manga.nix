@@ -6,6 +6,7 @@
         enable = lib.mkDefault false;
         after = [ "network.target" ];
         wants = [ "network.target" ];
+        # https://github.com/apixelsnet/mango#settings
         environment = {
           MANGO_DATA = "/data/db/mango-manga";
           MANGO_LISTEN = "0.0.0.0:8789";
