@@ -18,7 +18,7 @@ let
     # [ systemd ]
     sc = "systemctl";
     scu = "systemctl --user";
-    jlog = "journalctl";
+    jlog = "journalctl --unit";
     jlogu = "journalctl --user-unit";
     jlog-1h = ''journalctl -p err..alert --since "60 min ago"'';
 

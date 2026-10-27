@@ -1,54 +1,5 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.links =
-    { config, lib, ... }:
-    let
-      staticDot = dir: (inputs.self + /dotfiles/${dir});
-      linkDot =
-        dir: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${dir}";
-    in
-    {
-      home.file = {
-        ".pi/agent/prompts".source = linkDot "pi/agent/prompts";
-      };
-
-      # ~/.config
-      xdg.configFile = {
-        "doom/config.org".source = linkDot "org/doom-emacs.org";
-        "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
-
-        "sway/config".source = linkDot "sway/config";
-        "niri/configs".source = linkDot "niri/configs";
-        "niri/config.kdl".source = linkDot "niri/config.kdl";
-        "hypr/hyprland.lua".source = linkDot "hypr/hyprland.lua";
-
-        "micro/settings.json".text = lib.generators.toJSON { } {
-          autosu = true;
-          softwrap = true;
-          hlsearch = true;
-          saveundo = true;
-          scrollbar = true;
-          mkparents = true;
-          diffgutter = true;
-        };
-
-        # rime for ibus
-        # "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
-        # "ibus/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
-        "ibus/rime/ibus_rime.custom.yaml".text = ''
-          patch:
-            style:
-              horizontal: true
-        '';
-      };
-
-      # ~/.local/share
-      xdg.dataFile = {
-        # "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
-        # "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
-      };
-    };
-
   flake.modules.hjem.links =
     {
       config,
@@ -103,6 +54,55 @@
       xdg.data.files = {
         # "fcitx5/rime/default.custom.yaml".source = linkDot "rime/default.custom.yaml";
         # "fcitx5/rime/rime_ice.custom.yaml".source = linkDot "rime/rime_ice.custom.yaml";
+      };
+    };
+
+  flake.modules.homeManager.links =
+    { config, lib, ... }:
+    let
+      staticDot = dir: (inputs.self + /dotfiles/${dir});
+      linkDot =
+        dir: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nsworld/dotfiles/${dir}";
+    in
+    {
+      home.file = {
+        ".pi/agent/prompts".source = linkDot "pi/agent/prompts";
+      };
+
+      # ~/.config
+      xdg.configFile = {
+        "doom/config.org".source = linkDot "org/doom-emacs.org";
+        "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
+
+        "sway/config".source = linkDot "sway/config";
+        "niri/configs".source = linkDot "niri/configs";
+        "niri/config.kdl".source = linkDot "niri/config.kdl";
+        "hypr/hyprland.lua".source = linkDot "hypr/hyprland.lua";
+
+        "micro/settings.json".text = lib.generators.toJSON { } {
+          autosu = true;
+          softwrap = true;
+          hlsearch = true;
+          saveundo = true;
+          scrollbar = true;
+          mkparents = true;
+          diffgutter = true;
+        };
+
+        # rime for ibus
+        # "ibus/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
+        # "ibus/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
+        "ibus/rime/ibus_rime.custom.yaml".text = ''
+          patch:
+            style:
+              horizontal: true
+        '';
+      };
+
+      # ~/.local/share
+      xdg.dataFile = {
+        # "fcitx5/rime/default.custom.yaml".source = staticDot "rime/default.custom.yaml";
+        # "fcitx5/rime/rime_ice.custom.yaml".source = staticDot "rime/rime_ice.custom.yaml";
       };
     };
 }

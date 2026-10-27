@@ -16,7 +16,6 @@ in
       clobberFiles = true; # overwrite existing files
       imports = [
         fm.hjem.links
-        # fm.hjem.systemd
         fm.hjem.data-center
       ];
     };
