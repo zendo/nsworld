@@ -64,34 +64,17 @@ in
     {
       myVars.user = userName;
       networking.hostName = hostName;
-
-      users.defaultUserShell = pkgs.zsh;
-      users.users.${config.myVars.user} = {
-        # pw: 123
-        hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
-      };
-
       networking.wireless.iwd.enable = true;
+      users.defaultUserShell = pkgs.zsh;
+      environment.enableAllTerminfo = true;
 
       environment.systemPackages = with pkgs; [
-        impala # tui wifi
+        impala # tui wifi for iwd
         brightnessctl # brightnessctl set 50%
       ];
 
-      environment.enableAllTerminfo = true;
-
       # Blank the console after 10 minutes of inactivity.
       boot.kernelParams = [ "consoleblank=600" ];
-
-      zramSwap.enable = true;
-
-      # Swapfile
-      swapDevices = [
-        {
-          device = "/var/swapfile";
-          size = 1024 * 8;
-        }
-      ];
 
       services.logind.settings.Login = {
         HandleLidSwitch = "ignore";
@@ -102,6 +85,14 @@ in
         efi.efiSysMountPoint = "/efi";
         systemd-boot.enable = true;
       };
+
+      zramSwap.enable = true;
+      swapDevices = [
+        {
+          device = "/var/swapfile";
+          size = 1024 * 8;
+        }
+      ];
 
       # [ selfhosted ]
       services.caddy.enable = true;
