@@ -55,14 +55,34 @@ in
     ];
   };
 
+  # https://github.com/nix-community/srvos/blob/main/nixos/server/default.nix
   flake.modules.nixos.host-svp =
-    { config, pkgs, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
       networking.wireless.iwd.enable = true;
       users.defaultUserShell = pkgs.zsh;
-      environment.enableAllTerminfo = true;
+
+      # No need for fonts on a server -230 KiB
+      fonts.fontconfig.enable = lib.mkDefault false;
+      # freedesktop xdg files -13.6 MiB
+      xdg.autostart.enable = lib.mkDefault false;
+      xdg.icons.enable = lib.mkDefault false;
+      xdg.menus.enable = lib.mkDefault false;
+      xdg.mime.enable = lib.mkDefault false;
+      xdg.sounds.enable = lib.mkDefault false;
+
+      environment = {
+        enableAllTerminfo = true;
+        variables.BROWSER = "echo";
+        # stub-ld.enable = lib.mkDefault false;
+      };
 
       environment.systemPackages = with pkgs; [
         impala # tui wifi for iwd
@@ -74,7 +94,8 @@ in
         sqlite
         openssl
         fresh-editor
-        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
+        # inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
+        gitMinimal # -30.1 MiB
         delta
         ouch
         # [ FileManager ]
