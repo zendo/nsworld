@@ -6,12 +6,12 @@
 }:
 
 let
-  version = "0.0.30";
+  version = "0.0.31";
 
   sources = {
     x86_64-linux = {
       asset = "sprout-x86_64.efi";
-      hash = "sha256-D8z0GT6edrz/YH23FqmhbRUU87Q4x7OtR6POjUTh0UI=";
+      hash = "sha256-/6BF8vkTN/OCa7sl18xqKJJ84dfv+yVi9dV6xug4kJU=";
     };
     aarch64-linux = {
       asset = "sprout-aarch64.efi";
