@@ -52,6 +52,9 @@ pages:
               - title: sub-store
                 url: http://192.168.2.30:3009
                 icon: si:crayon
+              - title: kula
+                url: http://192.168.2.30:27969
+                icon: si:ros
               - title: Beszel Hub
                 url: http://192.168.2.30:8099
                 icon: sh:beszel

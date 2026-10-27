@@ -61,11 +61,6 @@
             ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
             ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ];
           };
-
-          # users.guest = {
-          #   isNormalUser = true;
-          #   initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
-          # };
         };
 
         # Allow non-root users use `--allow-other` in mounts

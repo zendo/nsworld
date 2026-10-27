@@ -53,6 +53,11 @@ in
         hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
       };
 
+      # users.users.guest = {
+      #   isNormalUser = true;
+      #   initialHashedPassword = "$y$j9T$oznNwtFAUKqaYFuvQPnA0/$Etrip7WsJhPV64kBsW61fO.MUgB50eEJeUpXCA48cxC";
+      # };
+
       # Clipboard shared for NixOS@Guest
       services.qemuGuest.enable = true;
       services.spice-vdagentd.enable = true;

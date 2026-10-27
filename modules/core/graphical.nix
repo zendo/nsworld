@@ -12,6 +12,11 @@
       services.keyd.enable = true;
       # services.kanata.enable = true;
 
+      # FIXME: https://github.com/NixOS/nixpkgs/issues/149812
+      environment.extraInit = ''
+        export XDG_DATA_DIRS="$XDG_DATA_DIRS:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+      '';
+
       # Bluetooth
       # services.blueman.enable = true;
       hardware.bluetooth.enable = true;

@@ -18,7 +18,6 @@ in
       # [ core ]
       base
       boot
-      # fonts
       ssh
       # gpg
       user
@@ -38,9 +37,6 @@ in
       # nix-tools
       nixconfig
       nixpkgs
-
-      # [ programs ]
-      cli
 
       # [ shell ]
       alias
@@ -71,6 +67,58 @@ in
       environment.systemPackages = with pkgs; [
         impala # tui wifi for iwd
         brightnessctl # brightnessctl set 50%
+        dix
+        herdr
+        just
+        jq
+        sqlite
+        openssl
+        fresh-editor
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
+        delta
+        ouch
+        # [ FileManager ]
+        eza
+        bat
+        fd
+        ripgrep
+        file
+        tree
+        # erdtree
+        fzf
+        skim
+        yazi
+        gdu
+        duf
+        dysk
+        # f2
+        # sd
+        xcp
+        # choose
+        rsync
+        lazyssh
+        chafa # image viewer
+        # viu # image viewer
+        gtrash
+        # croc
+        sendme
+        # [ System Monitor ]
+        # fastfetch -c examples/7 14
+        fastfetch-unwrapped
+        btop
+        htop
+        # bottom
+        ctop # containers monitor
+        iotop-c
+        dool # py fork of dstat
+        powertop
+        # psmisc # pstree
+        procs
+        ikill
+        # [ Networking ]
+        wget
+        curl
+        aria2
       ];
 
       # Blank the console after 10 minutes of inactivity.

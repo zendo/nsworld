@@ -97,7 +97,7 @@ let
       iotop-c
       dool # py fork of dstat
       powertop
-      psmisc # pstree
+      # psmisc # pstree
       procs
       ikill
 
