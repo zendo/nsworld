@@ -41,8 +41,8 @@
                 };
               }
               {
-                comigo = {
-                  href = "http://${hostIP}:1239";
+                mango = {
+                  href = "http://${hostIP}:8789";
                   description = "Comi reader";
                 };
               }

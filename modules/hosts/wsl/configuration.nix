@@ -109,6 +109,7 @@ in
 
       networking.hostName = hostName;
       nixpkgs.hostPlatform = "x86_64-linux";
+      i18n.defaultLocale = "zh_CN.UTF-8";
 
       # https://github.com/K900/vscode-remote-workaround
       systemd.user = {

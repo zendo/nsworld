@@ -98,7 +98,7 @@ in
       systemd.services.kula.enable = true;
       systemd.services.sub-store.enable = true;
       systemd.services.comigo.enable = true;
-      systemd.services.mango-manga.enable = true;
+      # systemd.services.mango-manga.enable = true; # wall
       systemd.services.dynacat.enable = true;
       services.beszel = {
         hub.enable = true;
