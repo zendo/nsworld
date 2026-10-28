@@ -23,22 +23,4 @@
       ];
 
     };
-
-  flake.modules.hjem.data-center =
-    { lib, osConfig, ... }:
-    lib.mkIf (osConfig.fileSystems ? "/data") {
-
-      files = {
-        "Music".source = "/data/media/music";
-        "Videos".source = "/data/media/videos";
-        "Pictures".source = "/data/pics";
-        "Documents".source = "/data/docs";
-        "Downloads".source = "/data/temp";
-
-        # LC_ALL=C xdg-user-dirs-update --force
-        # rm ~/.config/gtk-3.0/bookmarks ; xdg-user-dirs-gtk-update
-        # "user-dirs.conf".text = "enabled=False";
-      };
-
-    };
 }

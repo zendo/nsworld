@@ -15,6 +15,10 @@
         ".pi/agent/prompts".source = linkDot "pi/agent/prompts";
       };
 
+      # LC_ALL=C xdg-user-dirs-update --force
+      # rm ~/.config/gtk-3.0/bookmarks ; xdg-user-dirs-gtk-update
+      # "user-dirs.conf".text = "enabled=False";
+
       # ~/.config
       xdg.config.files = {
         # AutoStart
