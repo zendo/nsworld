@@ -11,10 +11,8 @@ _default:
 
 # j os build/switch/boot/test |& nom --install-bootloader
 os *args:
-    next=$(nix build --print-out-paths --no-link \
-      '.#nixosConfigurations."{{ host }}".config.system.build.toplevel') && \
-    dix /run/current-system "$next" && \
-    nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }}
+    nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }} && \
+    dix last
 
 # nix store diff-closures /run/current-system ./result
 diff:
@@ -25,7 +23,8 @@ diff-commit:
         -m "$(dix last)"
 
 gca:
-    nix-collect-garbage -d ; sudo nix-collect-garbage -d ; sudo /run/current-system/bin/switch-to-configuration boot
+    nix-collect-garbage -d ; sudo nix-collect-garbage -d ; \
+    sudo /run/current-system/bin/switch-to-configuration boot
 
 up:
     #!/usr/bin/env bash
