@@ -22,12 +22,12 @@
         brightnessctl # brightnessctl set 50%
         dix
         nix-tree
-        herdr
         just
         jq
         sqlite
         openssl
         fresh-editor
+        herdr
         # inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
         gitMinimal # -30.1 MiB
         delta
@@ -78,11 +78,13 @@
 
       # No need for fonts on a server -230 KiB
       fonts.fontconfig.enable = lib.mkDefault false;
-      # freedesktop xdg files -13.6 MiB
+      # Freedesktop xdg files -13.6 MiB
       xdg.autostart.enable = lib.mkDefault false;
       xdg.icons.enable = lib.mkDefault false;
       xdg.menus.enable = lib.mkDefault false;
       xdg.mime.enable = lib.mkDefault false;
       xdg.sounds.enable = lib.mkDefault false;
+
+      documentation.man.enable = lib.mkDefault false;
     };
 }
