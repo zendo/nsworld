@@ -22,6 +22,7 @@
     firewall
     networkmanager
     # print
+    # samba
 
     # [ nix ]
     # nix-cache
