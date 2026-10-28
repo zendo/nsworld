@@ -21,6 +21,7 @@
         impala # tui wifi for iwd
         brightnessctl # brightnessctl set 50%
         dix
+        nix-tree
         herdr
         just
         jq

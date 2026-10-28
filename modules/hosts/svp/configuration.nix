@@ -6,6 +6,7 @@ let
 in
 {
   # nixos-rebuild --target-host root@svp --flake .#svp boot --install-bootloader
+  # colmena apply --no-substitutes --on svp && ssh zendo@svp dix last
   flake.nixosConfigurations.svp = inputs.nixpkgs.lib.nixosSystem {
     modules = with fm.nixos; [
       host-svp
