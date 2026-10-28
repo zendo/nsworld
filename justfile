@@ -20,12 +20,9 @@ os *args:
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
 
-diff-dix:
-    dix $(\ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
-
 diff-commit:
     git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
-        -m "$(just diff-dix | tail -n +3)"
+        -m "$(dix last)"
 
 gca:
     nix-collect-garbage -d ; sudo nix-collect-garbage -d ; sudo /run/current-system/bin/switch-to-configuration boot

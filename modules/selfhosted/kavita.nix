@@ -7,9 +7,9 @@
     in
     {
       services.kavita = {
-        tokenKeyFile = keyFile;
         settings = {
           Port = 5009;
+          TokenKey = keyFile;
         };
       };
     };

@@ -62,21 +62,21 @@ in
       services.navidrome.enable = true;
       # services.dufs.enable = true;
       services.goshs.enable = true;
-      # services.miniflux.enable = true;
-      services.memos.enable = true;
-      services.rqbit.enable = true;
+      services.miniflux.enable = true;
+      # services.memos.enable = true;
+      # services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
       # systemd.services.kula.enable = true;
-      systemd.services.comigo.enable = true;
+      # systemd.services.comigo.enable = true;
       systemd.services.mango-manga.enable = true;
-      systemd.services.dynacat.enable = true;
-      services.beszel = {
-        hub.enable = true;
-        agent.enable = true;
-        agent.environment = {
-          KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+TKipwAtOLgUUrHIXNb5AYxDNc1E63ELFT4XNOZlXF";
-        };
-      };
+      # systemd.services.dynacat.enable = true;
+      # services.beszel = {
+      #   hub.enable = true;
+      #   agent.enable = true;
+      #   agent.environment = {
+      #     KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+TKipwAtOLgUUrHIXNb5AYxDNc1E63ELFT4XNOZlXF";
+      #   };
+      # };
 
       environment.systemPackages = with pkgs; [
         # inputs.omniflake.flakes.helium-flake.packages.x86_64-linux.helium-widevine
