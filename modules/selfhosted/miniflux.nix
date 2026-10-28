@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.selfhosted =
-    { config, pkgs, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
       keyFile = pkgs.writeText "minifluxKeyFile" ''
         ADMIN_USERNAME=demo
@@ -13,6 +18,15 @@
         config = {
           LISTEN_ADDR = "0.0.0.0:8081";
         };
+      };
+
+      services.caddy = lib.mkIf config.services.miniflux.enable {
+        # reactflux http://localhost:51832
+        virtualHosts."http://:51832".extraConfig = ''
+          root * ${pkgs.reactflux}
+          try_files {path} {path}/ /index.html
+          file_server
+        '';
       };
 
       # services.rsshub = {

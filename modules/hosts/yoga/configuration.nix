@@ -62,7 +62,7 @@ in
       services.navidrome.enable = true;
       # services.dufs.enable = true;
       services.goshs.enable = true;
-      services.miniflux.enable = true;
+      # services.miniflux.enable = true;
       services.memos.enable = true;
       services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
