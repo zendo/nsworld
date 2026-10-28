@@ -7,8 +7,8 @@
     in
     {
       environment.systemPackages = with pkgs; [
-        # kula
         levi
+        spor
         rwx
         rox
         sonora
