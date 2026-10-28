@@ -59,7 +59,7 @@ in
       # [ selfhosted ]
       services.caddy.enable = true;
       services.homepage-dashboard.enable = true;
-      services.navidrome.enable = true;
+      # services.navidrome.enable = true;
       # services.dufs.enable = true;
       services.goshs.enable = true;
       services.miniflux.enable = true;
@@ -67,6 +67,7 @@ in
       # services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
       # systemd.services.kula.enable = true;
+      # systemd.services.sub-store.enable = true;
       # systemd.services.comigo.enable = true;
       systemd.services.mango-manga.enable = true;
       # systemd.services.dynacat.enable = true;

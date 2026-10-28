@@ -10,8 +10,6 @@
         # gui-for-clash
       ];
 
-      systemd.services.sub-store.enable = true;
-
       services.sing-box = {
         # enable = true;
         settings = {
