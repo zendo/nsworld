@@ -5,7 +5,7 @@
 
       services.suwayomi-server = {
         # https://github.com/NixOS/nixpkgs/pull/560397
-        # dataDir = "/data/docs/manga";
+        # dataDir = "/data/media/manga";
         openFirewall = config.networking.firewall.enable;
         settings = {
           server = {

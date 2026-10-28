@@ -8,15 +8,13 @@
         "d /data/archives 0755 ${config.myVars.user} users - -"
         "d /data/backups 0755 ${config.myVars.user} users - -"
         "d /data/code 0755 ${config.myVars.user} users - -"
-        "d /data/db 0755 ${config.myVars.user} users - -"
-
         "d /data/docs 0755 ${config.myVars.user} users - -"
-        "d /data/docs/books 0755 ${config.myVars.user} users - -"
-        "d /data/docs/manga 0755 ${config.myVars.user} users - -"
 
         "d /data/media 0755 ${config.myVars.user} users - -"
         "d /data/media/music 0755 ${config.myVars.user} users - -"
         "d /data/media/videos 0755 ${config.myVars.user} users - -"
+        "d /data/media/books 0755 ${config.myVars.user} users - -"
+        "d /data/media/manga 0755 ${config.myVars.user} users - -"
 
         "d /data/pics 0755 ${config.myVars.user} users - -"
         "d /data/private 0700 ${config.myVars.user} users - -"

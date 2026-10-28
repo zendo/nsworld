@@ -8,7 +8,7 @@
         wants = [ "network.target" ];
         # https://github.com/apixelsnet/mango#settings
         environment = {
-          MANGO_DATA = "/data/db/mango-manga";
+          MANGO_DATA = "/data/docs/mango-manga";
           MANGO_LISTEN = "0.0.0.0:8789";
           MANGO_PASSWORD = "12345678";
         };

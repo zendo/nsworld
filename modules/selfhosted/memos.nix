@@ -4,7 +4,7 @@
     {
       services.memos = {
         openFirewall = config.networking.firewall.enable;
-        dataDir = "/data/db/memos/";
+        # dataDir = "/var/lib/memos/";
         settings = {
           MEMOS_MODE = "prod";
           MEMOS_ADDR = "0.0.0.0";
