@@ -57,24 +57,19 @@ in
   };
 
   flake.modules.nixos.host-svp =
-    {
-      config,
-      pkgs,
-      lib,
-      ...
-    }:
+    { config, pkgs, ... }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
       users.defaultUserShell = pkgs.zsh;
 
-      # Blank the console after 10 minutes of inactivity.
-      boot.kernelParams = [ "consoleblank=600" ];
-
       services.logind.settings.Login = {
         HandleLidSwitch = "ignore";
         HandleLidSwitchExternalPower = "ignore";
       };
+
+      # Blank the console after 10 minutes of inactivity.
+      boot.kernelParams = [ "consoleblank=600" ];
 
       boot.loader = {
         efi.efiSysMountPoint = "/efi";

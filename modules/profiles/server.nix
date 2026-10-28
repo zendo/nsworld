@@ -8,6 +8,7 @@
       ...
     }:
     {
+      # iwctl -> station wlan0 connect SSID
       networking.wireless.iwd.enable = true;
 
       environment = {
