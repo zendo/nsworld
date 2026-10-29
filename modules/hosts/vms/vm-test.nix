@@ -4,13 +4,13 @@ let
   fm = config.flake.modules;
 in
 {
-  # nixos-rebuild build-vm --flake .#vmtest
-  # nix build .#nixosConfigurations.vmtest.config.system.build.vm
-  flake.nixosConfigurations.vmtest = inputs.nixpkgs.lib.nixosSystem {
+  # nixos-rebuild build-vm --flake .#vm-test
+  # nix build .#nixosConfigurations.vm-test.config.system.build.vm
+  flake.nixosConfigurations.vm-test = inputs.nixpkgs.lib.nixosSystem {
     modules =
       with fm.nixos;
       [
-        host-vmtest
+        host-vm-test
         # hjemModule
         # hm-imports
         # nixos-imports
@@ -30,7 +30,7 @@ in
       ];
   };
 
-  flake.modules.nixos.host-vmtest =
+  flake.modules.nixos.host-vm-test =
     { pkgs, ... }:
     {
       disabledModules = [
@@ -105,4 +105,9 @@ in
       };
 
     };
+
+  perSystem = {
+    # nix run .#vm-test
+    packages.vm-test = config.flake.nixosConfigurations.vm-test.config.system.build.vm;
+  };
 }
