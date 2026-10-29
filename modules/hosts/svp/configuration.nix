@@ -65,6 +65,14 @@ in
       networking.hostName = hostName;
       users.defaultUserShell = pkgs.zsh;
 
+      # iwctl -> station wlan0 connect SSID
+      networking.wireless.iwd.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        impala # tui wifi for iwd
+        brightnessctl # brightnessctl set 50%
+      ];
+
       services.logind.settings.Login = {
         HandleLidSwitch = "ignore";
         HandleLidSwitchExternalPower = "ignore";

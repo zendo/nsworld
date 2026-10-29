@@ -15,7 +15,7 @@ nixos-generate-config --flake --root /mnt
 disko -m disko hosts/rmt/disko-bcachefs.nix
 nixos-generate-config --no-filesystems --flake --root /mnt
 
-nmtui / cfdisk
+nmtui / iwctl / cfdisk
 sudo -i / passwd
 nixos-anywhere \
   # --disko-mode mount \

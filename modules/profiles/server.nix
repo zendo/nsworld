@@ -8,9 +8,6 @@
       ...
     }:
     {
-      # iwctl -> station wlan0 connect SSID
-      networking.wireless.iwd.enable = true;
-
       environment = {
         enableAllTerminfo = true;
         variables.BROWSER = "echo";
@@ -18,8 +15,6 @@
       };
 
       environment.systemPackages = with pkgs; [
-        impala # tui wifi for iwd
-        brightnessctl # brightnessctl set 50%
         dix
         nix-tree
         just
