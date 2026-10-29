@@ -28,6 +28,7 @@ in
         # incus
         # nix-ld
         qemu
+        # oci-papyra
 
         # [ desktop ]
         graphical

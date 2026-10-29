@@ -695,6 +695,11 @@ rules:
   - DOMAIN-SUFFIX,api.beacondb.net,直连
   - DOMAIN-SUFFIX,ip-api.com,直连
 
+  # Docker Hub
+  - DOMAIN-SUFFIX,docker.io,手动选择
+  - DOMAIN-SUFFIX,docker.com,手动选择
+  - DOMAIN-SUFFIX,dockerusercontent.com,手动选择
+
   # 国内直连
   - RULE-SET,geolocation-cn,直连
   - RULE-SET,games_cn,直连 # 已包含 steam 下载域名
