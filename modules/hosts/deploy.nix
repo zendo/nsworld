@@ -7,7 +7,7 @@
 let
   inherit (config.flake) nixosConfigurations;
 
-  # https://github.com/serokell/deploy-rs#overall-usage
+  # https://github.com/ulic-youthlic/flakes/blob/dev/core/deploy.nix#L15
   deployLib =
     pkgs:
     (inputs.omniflake.flakes.deploy-rs.overlays.default (
