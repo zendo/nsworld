@@ -10,6 +10,7 @@
         # lazydocker
         # docker-compose
         podman-compose
+        compose2nix # compose2nix -project=my
         pods
         distrobox
         # toolbox
@@ -27,14 +28,10 @@
           dockerCompat = true;
         };
 
-        # containers = {
-        #   enable = true;
-        #   registries.search = [
-        #     "docker.io"
-        #     "quay.io"
-        #     "registry.opensuse.org"
-        #   ];
-        # };
+        containers.registries.settings = {
+          unqualified-search-registries = [ "docker.io" ];
+        };
+
       };
     };
 }
