@@ -14,13 +14,8 @@ os *args:
     nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }} && \
     dix last
 
-# nix store diff-closures /run/current-system ./result
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
-
-diff-commit:
-    git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
-        -m "$(dix last)"
 
 gca:
     nix-collect-garbage -d ; sudo nix-collect-garbage -d ; \
@@ -43,6 +38,10 @@ up:
             -m "🚀 $(git log -1 --pretty=%B)" \
             -m "🔍 Nixpkgs Comparing changes: $url"
     fi
+
+commit-dix:
+    git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
+        -m "$(dix last)"
 
 [group('emacs')]
 emacs-ob-tangle:
