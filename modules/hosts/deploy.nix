@@ -6,6 +6,16 @@
 }:
 let
   inherit (config.flake) nixosConfigurations;
+
+  # https://github.com/serokell/deploy-rs#overall-usage
+  deployLib =
+    pkgs:
+    (inputs.omniflake.flakes.deploy-rs.overlays.default (
+      pkgs
+      // {
+        deploy-rs.deploy-rs = pkgs.deploy-rs;
+      }
+    ) pkgs).deploy-rs.lib;
 in
 {
   # ╭─────────────────────────────────────────────────────╮
@@ -55,18 +65,18 @@ in
     magicRollback = false;
     fastConnection = true; # copy from ssh
     nodes = {
-      # deploy -s .#svp
+      # deploy -s --fast-connection true .#svp
       "svp" = {
         hostname = "svp";
         profiles.system = {
-          path = inputs.omniflake.flakes.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."svp";
+          path = (deployLib nixosConfigurations."svp".pkgs).activate.nixos nixosConfigurations."svp";
         };
       };
 
       "rmt" = {
         hostname = "rmt";
         profiles.system = {
-          path = inputs.omniflake.flakes.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations."rmt";
+          path = (deployLib nixosConfigurations."rmt".pkgs).activate.nixos nixosConfigurations."rmt";
         };
       };
     };
@@ -79,7 +89,8 @@ in
         packages = [
           pkgs.disko
           pkgs.nixos-anywhere
-          inputs.omniflake.flakes.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena
+          pkgs.colmena
+          pkgs.deploy-rs
           # inputs'.colmena.packages.colmena
           # inputs'.deploy-rs.packages.deploy-rs
           inputs'.nixpkgs.legacyPackages.nixos-rebuild-ng

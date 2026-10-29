@@ -87,8 +87,7 @@ in
         disko
         nixos-anywhere
         colmena
-        # inputs.omniflake.flakes.colmena.packages.${stdenv.hostPlatform.system}.colmena
-        # inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-r
+        deploy-rs
         # [ nix ]
         nix-init
         nix-update
