@@ -19,36 +19,55 @@
         }
       ];
     };
+  };
 
-    programs.ssh.hosts = {
-      yoga = {
-        hostname = "192.168.2.218";
-        order = 100;
+  flake.modules.nixos.ssh-hosts =
+    { lib, config, ... }:
+    {
+      options.myVars.ip = lib.mkOption { type = lib.types.attrsOf lib.types.str; };
+
+      config.myVars.ip = {
+        yoga = "192.168.2.218";
+        svp = "192.168.2.30";
+        rmt = "192.168.122.86";
       };
 
-      svp = {
-        hostname = "192.168.2.30";
-        order = 200;
-      };
+      config = {
+        programs.ssh.hosts = {
+          # main
+          yoga = {
+            order = 100;
+            hostname = config.myVars.ip.yoga;
+          };
 
-      rmt = {
-        hostname = "192.168.122.86";
-        order = 300;
-      };
+          # server
+          svp = {
+            order = 200;
+            hostname = config.myVars.ip.svp;
+            forwardAgent = true;
+          };
 
-      "github.com" = {
-        hostname = "ssh.github.com";
-        port = 443;
-        order = 400;
-      };
+          # qemu
+          rmt = {
+            order = 300;
+            hostname = config.myVars.ip.rmt;
+            forwardAgent = true;
+          };
 
-      "*" = {
-        serverAliveInterval = 60;
-        serverAliveCountMax = 5;
-        order = 1000;
+          "github.com" = {
+            hostname = "ssh.github.com";
+            port = 443;
+            order = 400;
+          };
+
+          "*" = {
+            serverAliveInterval = 60;
+            serverAliveCountMax = 5;
+            order = 1000;
+          };
+        };
       };
     };
-  };
 
   flake.modules.nixos.gpg = {
     programs.gnupg.agent = {

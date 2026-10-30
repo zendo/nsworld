@@ -8,6 +8,7 @@
     boot
     fonts
     ssh
+    ssh-hosts
     # gpg
     user
 

@@ -21,6 +21,7 @@ in
       base
       boot
       ssh
+      ssh-hosts
       # gpg
       user
 
