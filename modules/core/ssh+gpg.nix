@@ -24,6 +24,7 @@
   flake.modules.nixos.ssh-hosts =
     { lib, config, ... }:
     {
+      # Overdesigned. Keep it as a template.
       options.myVars.ip = lib.mkOption { type = lib.types.attrsOf lib.types.str; };
 
       config.myVars.ip = {
