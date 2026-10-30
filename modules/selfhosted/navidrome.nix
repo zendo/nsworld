@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.selfhosted =
-    { config, ... }:
+    { config, lib, ... }:
     {
       services.navidrome = {
         # plugins = with pkgs.pkgsCross.wasi32.navidromePlugins; [
@@ -11,7 +11,7 @@
         settings = {
           Address = "0.0.0.0";
           Port = 4539;
-          MusicFolder = "/data/media/music";
+          MusicFolder = lib.mkDefault "/data/media/music";
           DefaultLanguage = "zh-Hans";
           DefaultTheme = "AMusic";
         };

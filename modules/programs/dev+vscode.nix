@@ -5,6 +5,7 @@
       environment.systemPackages = with pkgs; [
         # [ ide ]
         # zed-editor
+        # gram # zed fork without ai
         # vscode
 
         # [ base ]

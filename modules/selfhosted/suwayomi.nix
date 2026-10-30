@@ -1,11 +1,11 @@
 {
   flake.modules.nixos.selfhosted =
-    { config, ... }:
+    { config, lib, ... }:
     {
 
       services.suwayomi-server = {
         # https://github.com/NixOS/nixpkgs/pull/560397
-        # dataDir = "/data/media/manga";
+        # dataDir = lib.mkDefault "/data/media/manga";
         openFirewall = config.networking.firewall.enable;
         settings = {
           server = {

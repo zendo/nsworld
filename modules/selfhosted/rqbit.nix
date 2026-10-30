@@ -7,7 +7,7 @@
         openFirewall = config.networking.firewall.enable;
         httpHost = "0.0.0.0";
         httpPort = 3039;
-        downloadDir = "/data/temp";
+        downloadDir = lib.mkDefault "/data/temp";
       };
 
       # Allow rqbit to access downloadDir.
