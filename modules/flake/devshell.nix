@@ -293,7 +293,7 @@
               "3.22.1"
             ];
             includeEmulator = true;
-            emulatorVersion = "34.1.19";
+            emulatorVersion = "37.3.3";
             includeNDK = true;
             ndkVersions = [ ndkVersion ];
           };

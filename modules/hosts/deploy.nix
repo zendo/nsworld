@@ -85,6 +85,10 @@ in
   perSystem =
     { inputs', pkgs, ... }:
     {
+      # nix flake show
+      # nix build .#checks.x86_64-linux.deploy-schema
+      checks = (deployLib pkgs).deployChecks config.flake.deploy;
+
       devshells.nsw-deploy = {
         packages = [
           pkgs.disko
