@@ -31,9 +31,6 @@
         ];
       };
 
-      # btrfs subvolume create /mnt/data
-      # mount -o subvol=data /dev/nvme0n1p5 /mnt/data
-      # sudo chown -R iab:users /data
       fileSystems."/data" = {
         device = "/dev/disk/by-uuid/b97eb95a-fc74-42d2-b523-529f511abb15";
         fsType = "btrfs";

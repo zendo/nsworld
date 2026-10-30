@@ -21,6 +21,10 @@ flamegraph.pl yoga > yoga.svg
 #+begin_src bash
 sudo ss -lntup
 chmod -R 0755 /data/media /data/docs /data/pics
+
+btrfs subvolume create /mnt/data
+mount -o subvol=data /dev/nvme0n1p5 /mnt/data
+sudo chown -R me:users /data
 #+end_src
 
 | 端口范围   | 用途                  | 示例                |
