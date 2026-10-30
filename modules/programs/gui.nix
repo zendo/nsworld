@@ -70,8 +70,6 @@
         # https://github.com/nix-community/home-manager/issues/5173
         # (lib.hiPrio localsend)
         qbittorrent
-        rclone
-        rclone-browser # TERMINAL=xterm rclone-explorer
         # deja-dup
         # vorta # borg backup
 

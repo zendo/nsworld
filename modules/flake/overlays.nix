@@ -83,6 +83,7 @@
       #   '';
       # };
 
+      # TERMINAL=xterm rclone-explorer
       rclone-browser = prev.rclone-browser.overrideAttrs (old: {
         patches = (old.patches or [ ]) ++ [
           ./_custom/patches/rclone-browser-term.patch

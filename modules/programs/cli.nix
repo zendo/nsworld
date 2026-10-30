@@ -76,6 +76,7 @@ let
       # croc
 
       # [ FileServer ]
+      rclone
       # python -m http.server 8080
       simple-http-server # :riir
       # sshfs [user@]hostname:[directory] MOUNTPOINT
