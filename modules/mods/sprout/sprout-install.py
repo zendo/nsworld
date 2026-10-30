@@ -14,6 +14,7 @@ import sys
 import tempfile
 import tomllib
 from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -36,12 +37,40 @@ FIRMWARE_ENTRY_LABEL = @firmwareEntryLabel@
 
 DRIVERS: dict[str, str] = json.loads(r'''@drivers@''')
 
+EXTRA_FILES: dict[str, str] = json.loads(r'''@extraFiles@''')
+
+SETTINGS_FILE = Path("@settingsFile@")
+
+
+def load_custom_settings() -> dict[str, Any]:
+    if not SETTINGS_FILE.is_file():
+        raise RuntimeError(
+            f"custom settings file does not exist or is not a regular file: {SETTINGS_FILE}"
+        )
+    try:
+        content = SETTINGS_FILE.read_text(encoding="utf-8")
+        data = json.loads(content)
+    except Exception as exc:
+        raise RuntimeError(
+            f"failed to read custom settings from {SETTINGS_FILE}: {exc}"
+        ) from exc
+    if not isinstance(data, dict):
+        raise RuntimeError(
+            f"settings file {SETTINGS_FILE} did not contain a JSON object"
+        )
+    return data
+
 
 SPROUT_DIR = Path("EFI/Sprout")
 NIXOS_DIR = SPROUT_DIR / "nixos"
 DRIVERS_DIR = SPROUT_DIR / "drivers"
+EXTRA_FILES_DIR = SPROUT_DIR / "extra-files"
 SPROUT_BINARY = SPROUT_DIR / "sprout.efi"
 SPROUT_CONFIG = Path("sprout.toml")
+
+EXTRA_FILE_NAME_RE: re.Pattern[str] = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+VALUE_IDENTIFIER_RE: re.Pattern[str] = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+RESERVED_VALUE_PREFIX: str = "sprout_extra_file_"
 
 
 def esp_path(relative: Path | str) -> Path:
@@ -1144,11 +1173,294 @@ def install_drivers() -> dict[str, Path]:
     return installed
 
 
+def install_extra_files(
+    extra_files: dict[str, str | Path] | None = None,
+) -> dict[str, Path]:
+    if extra_files is None:
+        raw_files = EXTRA_FILES
+    else:
+        raw_files = {k: str(v) for k, v in extra_files.items()}
+
+    # Phase 1: Validate all names and source files, and prepare destination paths,
+    # before copying any custom files.
+    prepared: list[tuple[str, Path, Path, Path, str]] = []
+    for name, source_str in sorted(raw_files.items()):
+        if not isinstance(name, str) or not EXTRA_FILE_NAME_RE.fullmatch(name):
+            raise RuntimeError(
+                f"invalid extra file name {name!r}: must match [A-Za-z_][A-Za-z0-9_]*"
+            )
+
+        source_path = Path(source_str)
+        if not source_path.exists():
+            raise RuntimeError(
+                f"extra file {name!r} source does not exist: {source_path}"
+            )
+        if not source_path.is_file():
+            raise RuntimeError(
+                f"extra file {name!r} source is not a regular file: {source_path}"
+            )
+
+        hasher = hashlib.sha256()
+        try:
+            with source_path.open("rb") as file:
+                while chunk := file.read(65536):
+                    hasher.update(chunk)
+        except OSError as exc:
+            raise RuntimeError(
+                f"failed to read extra file {name!r} source {source_path}: {exc}"
+            ) from exc
+
+        digest = hasher.hexdigest()
+
+        # Preserve source filename suffixes where practical
+        source_suffixes = "".join(source_path.suffixes)
+        if "/" in source_suffixes or "\\" in source_suffixes or ".." in source_suffixes:
+            source_suffixes = ""
+
+        dest_filename = f"{name}-{digest}{source_suffixes}"
+        dest_rel = EXTRA_FILES_DIR / dest_filename
+        if dest_rel.parent != EXTRA_FILES_DIR or ".." in dest_rel.parts:
+            raise RuntimeError(
+                f"extra file {name!r} destination {dest_rel} escapes dedicated directory {EXTRA_FILES_DIR}"
+            )
+
+        target = esp_path(dest_rel)
+        prepared.append((name, source_path, dest_rel, target, digest))
+
+    # Phase 2: Copy or verify existing content-addressed files
+    installed: dict[str, Path] = {}
+    for name, source_path, dest_rel, target, digest in prepared:
+        already_existed = target.exists()
+        if already_existed:
+            if not target.is_file():
+                raise RuntimeError(
+                    f"destination for extra file {name!r} exists and is not a regular file: {target}"
+                )
+            target_hasher = hashlib.sha256()
+            try:
+                with target.open("rb") as file:
+                    while chunk := file.read(65536):
+                        target_hasher.update(chunk)
+            except OSError as exc:
+                raise RuntimeError(
+                    f"failed to read existing extra file at {target}: {exc}"
+                ) from exc
+            if target_hasher.hexdigest() != digest:
+                raise RuntimeError(
+                    f"existing file at destination {target} does not match expected SHA-256 digest {digest}"
+                )
+        else:
+            atomic_copy(
+                source_path,
+                target,
+                replace=False,
+            )
+            tx = StagedArtifactTransaction.current()
+            if tx is not None and target.exists():
+                tx.record_created(target)
+
+        installed[name] = dest_rel
+
+    return installed
+
+
 def generate_sprout_config(
     entries: Sequence[BootEntry],
     default_entry: str,
     drivers: dict[str, Path],
+    settings: dict[str, Any] | None = None,
+    extra_files: dict[str, Path] | None = None,
 ) -> str:
+    if settings is None:
+        settings = load_custom_settings()
+
+    for key in settings:
+        if key not in ("options", "entries", "actions", "phases", "values"):
+            raise RuntimeError(f"unsupported custom settings section: {key!r}")
+
+    options_cfg = settings.get("options", {})
+    if not isinstance(options_cfg, dict):
+        raise RuntimeError("custom settings 'options' must be a table")
+    for opt_key in options_cfg:
+        if opt_key != "menu-style":
+            raise RuntimeError(
+                f"unsupported or module-owned option in custom settings: {opt_key!r}"
+            )
+    menu_style = options_cfg.get("menu-style")
+    if menu_style is not None and menu_style not in ("simple", "basic"):
+        raise RuntimeError(f"invalid custom settings menu-style: {menu_style!r}")
+
+    custom_entries = settings.get("entries", {})
+    if not isinstance(custom_entries, dict):
+        raise RuntimeError("custom settings 'entries' must be a table")
+
+    custom_actions = settings.get("actions", {})
+    if not isinstance(custom_actions, dict):
+        raise RuntimeError("custom settings 'actions' must be a table")
+
+    generated_entry_ids = {entry.identifier for entry in entries}
+    generated_action_ids = set(generated_entry_ids)
+
+    for entry_id, entry_dict in custom_entries.items():
+        if not entry_id:
+            raise RuntimeError("custom entry identifier cannot be empty")
+        if entry_id.startswith("nixos-"):
+            raise RuntimeError(
+                f"custom entry identifier {entry_id!r} uses reserved 'nixos-' prefix"
+            )
+        if entry_id in generated_entry_ids:
+            raise RuntimeError(
+                f"custom entry identifier {entry_id!r} collides with generated NixOS entry"
+            )
+        if not isinstance(entry_dict, dict):
+            raise RuntimeError(f"custom entry {entry_id!r} must be a table")
+        if "title" not in entry_dict or not isinstance(entry_dict["title"], str):
+            raise RuntimeError(f"custom entry {entry_id!r} requires 'title' string")
+        acts = entry_dict.get("actions")
+        if not isinstance(acts, list) or not acts:
+            raise RuntimeError(
+                f"custom entry {entry_id!r} must have a non-empty 'actions' list"
+            )
+        for act in acts:
+            if not isinstance(act, str) or not act:
+                raise RuntimeError(
+                    f"custom entry {entry_id!r} contains invalid action reference {act!r}"
+                )
+            if act not in custom_actions:
+                raise RuntimeError(
+                    f"custom entry {entry_id!r} references unknown custom action {act!r}"
+                )
+        if entry_dict.get("values"):
+            if not isinstance(entry_dict["values"], dict):
+                raise RuntimeError(f"custom entry {entry_id!r} 'values' must be a table")
+            for vk in entry_dict["values"]:
+                if vk.startswith(RESERVED_VALUE_PREFIX):
+                    raise RuntimeError(
+                        f"custom entry {entry_id!r} value {vk!r} uses reserved {RESERVED_VALUE_PREFIX!r} prefix"
+                    )
+
+    for action_id, action_dict in custom_actions.items():
+        if not action_id:
+            raise RuntimeError("custom action identifier cannot be empty")
+        if action_id.startswith("nixos-"):
+            raise RuntimeError(
+                f"custom action identifier {action_id!r} uses reserved 'nixos-' prefix"
+            )
+        if action_id in generated_action_ids:
+            raise RuntimeError(
+                f"custom action identifier {action_id!r} collides with generated NixOS action"
+            )
+        if not isinstance(action_dict, dict):
+            raise RuntimeError(f"custom action {action_id!r} must be a table")
+
+        variants = [k for k in ("chainload", "print", "edera") if k in action_dict]
+        if len(variants) != 1:
+            raise RuntimeError(
+                f"custom action {action_id!r} must define exactly one variant (chainload, print, or edera); found {variants}"
+            )
+        for k in action_dict:
+            if k not in ("chainload", "print", "edera"):
+                raise RuntimeError(f"custom action {action_id!r} has unknown field: {k!r}")
+
+        variant = variants[0]
+        vdata = action_dict[variant]
+        if not isinstance(vdata, dict):
+            raise RuntimeError(f"custom action {action_id!r} variant {variant!r} must be a table")
+
+        if variant == "chainload":
+            if "path" not in vdata or not isinstance(vdata["path"], str):
+                raise RuntimeError(f"custom action {action_id!r} chainload requires 'path' string")
+            if vdata.get("linux-initrd") is not None and vdata.get("linux-initrd-chain"):
+                raise RuntimeError(
+                    f"custom action {action_id!r} specifies both 'linux-initrd' and 'linux-initrd-chain'"
+                )
+        elif variant == "print":
+            text = vdata.get("text", "")
+            if not isinstance(text, str):
+                raise RuntimeError(f"custom action {action_id!r} print 'text' must be a string")
+        elif variant == "edera":
+            if "xen" not in vdata or not isinstance(vdata["xen"], str):
+                raise RuntimeError(f"custom action {action_id!r} edera requires 'xen' string")
+            if "kernel" not in vdata or not isinstance(vdata["kernel"], str):
+                raise RuntimeError(f"custom action {action_id!r} edera requires 'kernel' string")
+            if vdata.get("initrd") is not None and vdata.get("initrd-chain"):
+                raise RuntimeError(
+                    f"custom action {action_id!r} specifies both 'initrd' and 'initrd-chain'"
+                )
+
+    custom_phases = settings.get("phases")
+    if custom_phases is not None:
+        if not isinstance(custom_phases, dict):
+            raise RuntimeError("custom settings 'phases' must be a table")
+        valid_phase_names = {"early", "startup", "late"}
+        for phase_name in custom_phases:
+            if phase_name not in valid_phase_names:
+                raise RuntimeError(
+                    f"unsupported custom settings phase: {phase_name!r}"
+                )
+        for phase_name, phase_items in custom_phases.items():
+            if not isinstance(phase_items, list):
+                raise RuntimeError(
+                    f"custom phase {phase_name!r} must be a list of phase configurations"
+                )
+            for item_idx, item in enumerate(phase_items):
+                if not isinstance(item, dict):
+                    raise RuntimeError(
+                        f"custom phase {phase_name!r} item {item_idx} must be a table"
+                    )
+                for item_key in item:
+                    if item_key not in ("actions", "values"):
+                        raise RuntimeError(
+                            f"custom phase {phase_name!r} item {item_idx} has unknown field: {item_key!r}"
+                        )
+                acts = item.get("actions")
+                if not isinstance(acts, list) or not acts:
+                    raise RuntimeError(
+                        f"custom phase {phase_name!r} item {item_idx} must have a non-empty 'actions' list"
+                    )
+                for act in acts:
+                    if not isinstance(act, str) or not act:
+                        raise RuntimeError(
+                            f"custom phase {phase_name!r} item {item_idx} contains invalid action reference {act!r}"
+                        )
+                    if act not in custom_actions:
+                        raise RuntimeError(
+                            f"custom phase {phase_name!r} item {item_idx} references unknown custom action {act!r}"
+                        )
+                vals = item.get("values")
+                if vals is not None:
+                    if not isinstance(vals, dict):
+                        raise RuntimeError(
+                            f"custom phase {phase_name!r} item {item_idx} 'values' must be a table"
+                        )
+                    for vk, vv in vals.items():
+                        if not isinstance(vk, str) or not isinstance(vv, str):
+                            raise RuntimeError(
+                                f"custom phase {phase_name!r} item {item_idx} contains invalid 'values' table entry {vk!r}"
+                            )
+                        if vk.startswith(RESERVED_VALUE_PREFIX):
+                            raise RuntimeError(
+                                f"custom phase {phase_name!r} item {item_idx} value {vk!r} uses reserved {RESERVED_VALUE_PREFIX!r} prefix"
+                            )
+
+    custom_values = settings.get("values")
+    if custom_values is not None:
+        if not isinstance(custom_values, dict):
+            raise RuntimeError("custom settings 'values' must be a table")
+        for vk, vv in custom_values.items():
+            if not isinstance(vk, str) or not VALUE_IDENTIFIER_RE.fullmatch(vk):
+                raise RuntimeError(
+                    f"custom settings value identifier {vk!r} must match [A-Za-z_][A-Za-z0-9_]*"
+                )
+            if vk.startswith(RESERVED_VALUE_PREFIX):
+                raise RuntimeError(
+                    f"custom settings value {vk!r} uses reserved {RESERVED_VALUE_PREFIX!r} prefix"
+                )
+            if not isinstance(vv, str):
+                raise RuntimeError(
+                    f"custom settings value {vk!r} must be a string, got {type(vv).__name__}"
+                )
+
     lines: list[str] = [
         "version = 1",
         "",
@@ -1156,6 +1468,43 @@ def generate_sprout_config(
         f"default-entry = {quote_toml(default_entry)}",
         f"menu-timeout = {TIMEOUT}",
     ]
+
+    if menu_style is not None:
+        lines.append(f"menu-style = {quote_toml(menu_style)}")
+
+    all_root_values: dict[str, str] = {}
+    if custom_values:
+        for vk, vv in custom_values.items():
+            all_root_values[vk] = vv
+    if extra_files:
+        for name, dest in extra_files.items():
+            val_name = f"{RESERVED_VALUE_PREFIX}{name}"
+            all_root_values[val_name] = uefi_path(dest)
+
+    if all_root_values:
+        lines.extend(
+            [
+                "",
+                "[values]",
+            ]
+        )
+        for vk, vv in sorted(all_root_values.items()):
+            lines.append(f"{quote_toml(vk)} = {quote_toml(vv)}")
+
+    if custom_phases:
+        for phase_name in ("early", "startup", "late"):
+            for item in custom_phases.get(phase_name, []):
+                lines.extend(
+                    [
+                        "",
+                        f"[[phases.{phase_name}]]",
+                        f"actions = {array_toml(item['actions'])}",
+                    ]
+                )
+                if item.get("values"):
+                    lines.append(f"[phases.{phase_name}.values]")
+                    for vk, vv in sorted(item["values"].items()):
+                        lines.append(f"{quote_toml(vk)} = {quote_toml(vv)}")
 
     for name, path in sorted(drivers.items()):
         lines.extend(
@@ -1176,6 +1525,22 @@ def generate_sprout_config(
                 f"sort-key = {quote_toml(entry.sort_key)}",
             ]
         )
+
+    for entry_id, entry_data in sorted(custom_entries.items()):
+        lines.extend(
+            [
+                "",
+                f"[entries.{quote_toml(entry_id)}]",
+                f"title = {quote_toml(entry_data['title'])}",
+                f"actions = {array_toml(entry_data['actions'])}",
+            ]
+        )
+        if entry_data.get("sort-key") is not None:
+            lines.append(f"sort-key = {quote_toml(entry_data['sort-key'])}")
+        if entry_data.get("values"):
+            lines.append(f"[entries.{quote_toml(entry_id)}.values]")
+            for vk, vv in sorted(entry_data["values"].items()):
+                lines.append(f"{quote_toml(vk)} = {quote_toml(vv)}")
 
     for entry in entries:
         lines.extend(
@@ -1205,6 +1570,40 @@ def generate_sprout_config(
                     [uefi_path(path) for path in entry.initrds]
                 )
             )
+
+    for action_id, action_data in sorted(custom_actions.items()):
+        lines.extend(
+            [
+                "",
+                f"[actions.{quote_toml(action_id)}]",
+            ]
+        )
+        if "chainload" in action_data:
+            cl = action_data["chainload"]
+            lines.append(f"chainload.path = {quote_toml(cl['path'])}")
+            if cl.get("options"):
+                lines.append(f"chainload.options = {array_toml(cl['options'])}")
+            if cl.get("linux-initrd") is not None:
+                lines.append(f"chainload.linux-initrd = {quote_toml(cl['linux-initrd'])}")
+            elif cl.get("linux-initrd-chain"):
+                lines.append(
+                    f"chainload.linux-initrd-chain = {array_toml(cl['linux-initrd-chain'])}"
+                )
+        elif "print" in action_data:
+            pr = action_data["print"]
+            lines.append(f"print.text = {quote_toml(pr.get('text', ''))}")
+        elif "edera" in action_data:
+            ed = action_data["edera"]
+            lines.append(f"edera.xen = {quote_toml(ed['xen'])}")
+            lines.append(f"edera.kernel = {quote_toml(ed['kernel'])}")
+            if ed.get("initrd") is not None:
+                lines.append(f"edera.initrd = {quote_toml(ed['initrd'])}")
+            elif ed.get("initrd-chain"):
+                lines.append(f"edera.initrd-chain = {array_toml(ed['initrd-chain'])}")
+            if ed.get("kernel-options"):
+                lines.append(f"edera.kernel-options = {array_toml(ed['kernel-options'])}")
+            if ed.get("xen-options"):
+                lines.append(f"edera.xen-options = {array_toml(ed['xen-options'])}")
 
     lines.append("")
 
@@ -1428,6 +1827,18 @@ def published_config_referenced_files() -> set[Path]:
             f"published Sprout configuration {config_path} is not valid UTF-8: {exc}"
         ) from exc
 
+    return parse_and_validate_sprout_config(
+        content,
+        config_path,
+        check_files_exist=False,
+    )
+
+
+def parse_and_validate_sprout_config(
+    content: str,
+    config_path: Path,
+    check_files_exist: bool = False,
+) -> set[Path]:
     try:
         data = tomllib.loads(content)
     except tomllib.TOMLDecodeError as exc:
@@ -1506,6 +1917,10 @@ def published_config_referenced_files() -> set[Path]:
                 raise RuntimeError(
                     f"published Sprout configuration {config_path} contains invalid 'values' table entry {val_key!r}"
                 )
+            if not VALUE_IDENTIFIER_RE.fullmatch(val_key):
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} root 'values' entry {val_key!r} must match [A-Za-z_][A-Za-z0-9_]*"
+                )
             raw_root_values[val_key] = val_val
 
     root_values = finalize_values(raw_root_values, "root 'values'")
@@ -1580,6 +1995,11 @@ def published_config_referenced_files() -> set[Path]:
                     raise RuntimeError(
                         f"published Sprout configuration {config_path} phase {phase_name!r} item {item_idx} is not a table"
                     )
+                for k in phase_item:
+                    if k not in ("actions", "values"):
+                        raise RuntimeError(
+                            f"published Sprout configuration {config_path} phase {phase_name!r} item {item_idx} contains unknown field {k!r}"
+                        )
                 phase_values_raw = phase_item.get("values")
                 phase_item_values: dict[str, str] = {}
                 if phase_values_raw is not None:
@@ -1592,15 +2012,19 @@ def published_config_referenced_files() -> set[Path]:
                             raise RuntimeError(
                                 f"published Sprout configuration {config_path} phase {phase_name!r} item {item_idx} contains invalid 'values' table entry {vk!r}"
                             )
+                        if vk.startswith(RESERVED_VALUE_PREFIX):
+                            raise RuntimeError(
+                                f"published Sprout configuration {config_path} phase {phase_name!r} item {item_idx} value {vk!r} uses reserved {RESERVED_VALUE_PREFIX!r} prefix"
+                            )
                         phase_item_values[vk] = vv
                 merged_phase_values = finalize_values(
                     {**raw_root_values, **phase_item_values},
                     f"phase {phase_name!r} item {item_idx} 'values'",
                 )
-                phase_actions = phase_item.get("actions", [])
-                if not isinstance(phase_actions, list):
+                phase_actions = phase_item.get("actions")
+                if not isinstance(phase_actions, list) or not phase_actions:
                     raise RuntimeError(
-                        f"published Sprout configuration {config_path} phase {phase_name!r} item {item_idx} 'actions' is not a list"
+                        f"published Sprout configuration {config_path} phase {phase_name!r} item {item_idx} 'actions' must be a non-empty list"
                     )
                 for act_idx, act_raw in enumerate(phase_actions):
                     if not isinstance(act_raw, str):
@@ -1649,6 +2073,10 @@ def published_config_referenced_files() -> set[Path]:
                         raise RuntimeError(
                             f"published Sprout configuration {config_path} entry {entry_name!r} contains invalid 'values' table entry {vk!r}"
                         )
+                    if vk.startswith(RESERVED_VALUE_PREFIX):
+                        raise RuntimeError(
+                            f"published Sprout configuration {config_path} entry {entry_name!r} value {vk!r} uses reserved {RESERVED_VALUE_PREFIX!r} prefix"
+                        )
                     entry_values[vk] = vv
             merged_entry_values = finalize_values(
                 {**raw_root_values, **entry_values},
@@ -1694,21 +2122,29 @@ def published_config_referenced_files() -> set[Path]:
     for action_name, context_values, context_desc in action_invocations:
         action_entry = actions_table_dict[action_name]
 
-        action_path = action_entry.get("path")
-        if action_path is not None:
-            if not isinstance(action_path, str):
-                raise RuntimeError(
-                    f"published Sprout configuration {config_path} {context_desc} path is not a string"
-                )
-            referenced.add(
-                resolve_stamped_path(
-                    action_path,
-                    context_values,
-                    config_path,
-                    context=context_desc,
-                    path_kind="path",
-                )
+        recognized_variants = [
+            k for k in ("chainload", "print", "edera") if k in action_entry
+        ]
+        if len(recognized_variants) == 0:
+            raise RuntimeError(
+                f"published Sprout configuration {config_path} {context_desc} must define exactly one action variant (chainload, print, or edera); found none"
             )
+        if len(recognized_variants) > 1:
+            raise RuntimeError(
+                f"published Sprout configuration {config_path} {context_desc} must define exactly one action variant (chainload, print, or edera); specifies multiple action variants: {recognized_variants}"
+            )
+
+        print_entry = action_entry.get("print")
+        if print_entry is not None:
+            if not isinstance(print_entry, dict):
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} {context_desc} contains invalid 'print' table"
+                )
+            print_text = print_entry.get("text", "")
+            if not isinstance(print_text, str):
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} {context_desc} print 'text' is not a string"
+                )
 
         chainload = action_entry.get("chainload")
         if chainload is not None:
@@ -1868,6 +2304,13 @@ def published_config_referenced_files() -> set[Path]:
                         )
                     )
 
+    if check_files_exist:
+        for ref_path in sorted(referenced):
+            if not ref_path.is_file():
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} references missing file {ref_path}"
+                )
+
     return referenced
 
 
@@ -1918,6 +2361,7 @@ class StagedArtifactTransaction:
         for directory in (
             esp_path(NIXOS_DIR),
             esp_path(DRIVERS_DIR),
+            esp_path(EXTRA_FILES_DIR),
         ):
             if directory.exists():
                 for path in directory.rglob("*"):
@@ -1954,6 +2398,7 @@ class StagedArtifactTransaction:
                 if parent not in (
                     esp_path(NIXOS_DIR),
                     esp_path(DRIVERS_DIR),
+                    esp_path(EXTRA_FILES_DIR),
                     esp_path(SPROUT_DIR),
                     EFI_SYS_MOUNT_POINT,
                 ):
@@ -2164,18 +2609,39 @@ def parse_nvram_entry(line: str) -> NvramEntry | None:
 
     label = raw_label.strip()
 
+    loader_path: str | None = None
     file_match = re.search(r"File\((.*?)\)", raw_device, re.IGNORECASE)
     if file_match:
         loader_path = file_match.group(1).strip()
     elif raw_device.strip().startswith(("\\", "/")):
         loader_path = raw_device.strip()
     else:
-        loader_path = None
+        hd_match = re.search(r"HD\([^)]*\)[/](.*)$", raw_device, re.IGNORECASE)
+        if hd_match:
+            candidate = hd_match.group(1).strip()
+            stripped = candidate.lstrip("\\/")
+            if stripped and not re.match(r"^[A-Za-z0-9_]+\(", stripped):
+                if candidate.startswith(("/\\", "//")):
+                    candidate = candidate[1:]
+                loader_path = candidate if candidate else None
+        else:
+            hd_match_bs = re.search(r"HD\([^)]*\)(\\.*)$", raw_device, re.IGNORECASE)
+            if hd_match_bs:
+                candidate = hd_match_bs.group(1).strip()
+                stripped = candidate.lstrip("\\/")
+                if stripped and not re.match(r"^[A-Za-z0-9_]+\(", stripped):
+                    loader_path = candidate if candidate else None
 
     return NvramEntry(label=label, loader_path=loader_path)
 
 
-def install_nvram_entry() -> None:
+class NvramStatus(Enum):
+    ABSENT = "absent"
+    MATCHING = "matching"
+    CONFLICT = "conflict"
+
+
+def inspect_nvram_entry(raise_on_conflict: bool = True) -> NvramStatus:
     check_efivars()
 
     existing = capture(
@@ -2188,8 +2654,8 @@ def install_nvram_entry() -> None:
     normalized_target_label = normalize_label(FIRMWARE_ENTRY_LABEL)
     normalized_target_loader = normalize_efi_path(FIRMWARE_LOADER_PATH)
 
-    label_seen = False
-    matching_loader = False
+    matching_seen = False
+    conflict_seen = False
 
     for line in existing.splitlines():
         entry = parse_nvram_entry(line)
@@ -2197,23 +2663,36 @@ def install_nvram_entry() -> None:
             continue
 
         if normalize_label(entry.label) == normalized_target_label:
-            label_seen = True
-
             if (
                 entry.loader_path is not None
                 and normalize_efi_path(entry.loader_path) == normalized_target_loader
             ):
-                matching_loader = True
-                break
+                matching_seen = True
+            else:
+                conflict_seen = True
 
-    if matching_loader:
+    if conflict_seen:
+        if raise_on_conflict:
+            raise RuntimeError(
+                f"an existing UEFI entry named {FIRMWARE_ENTRY_LABEL!r} "
+                f"does not point to {FIRMWARE_LOADER_PATH}"
+            )
+        return NvramStatus.CONFLICT
+
+    if matching_seen:
+        return NvramStatus.MATCHING
+
+    return NvramStatus.ABSENT
+
+
+def preflight_nvram() -> None:
+    inspect_nvram_entry(raise_on_conflict=True)
+
+
+def install_nvram_entry() -> None:
+    status = inspect_nvram_entry(raise_on_conflict=True)
+    if status == NvramStatus.MATCHING:
         return
-
-    if label_seen:
-        raise RuntimeError(
-            f"an existing UEFI entry named {FIRMWARE_ENTRY_LABEL!r} "
-            f"does not point to {FIRMWARE_LOADER_PATH}"
-        )
 
     disk, partition = get_esp_device()
 
@@ -2236,6 +2715,8 @@ def install_nvram_entry() -> None:
 def garbage_collect(
     entries: Sequence[BootEntry],
     drivers: dict[str, Path],
+    referenced_paths: set[Path],
+    extra_files: dict[str, Path] | None = None,
 ) -> None:
     keep = {
         esp_path(artifact.destination)
@@ -2248,6 +2729,12 @@ def garbage_collect(
         for path in drivers.values()
     )
 
+    if extra_files is not None:
+        keep.update(
+            esp_path(path)
+            for path in extra_files.values()
+        )
+
     for entry in entries:
         for initrd in entry.initrds:
             try:
@@ -2255,9 +2742,12 @@ def garbage_collect(
             except RuntimeError:
                 pass
 
+    keep.update(referenced_paths)
+
     for directory in (
         esp_path(NIXOS_DIR),
         esp_path(DRIVERS_DIR),
+        esp_path(EXTRA_FILES_DIR),
     ):
         if not directory.exists():
             continue
@@ -2303,6 +2793,9 @@ def install_bootloader(
 
     check_unique_identifiers(entries)
 
+    if CAN_TOUCH_EFI_VARIABLES:
+        preflight_nvram()
+
     esp_path(SPROUT_DIR).mkdir(
         parents=True,
         exist_ok=True,
@@ -2315,8 +2808,14 @@ def install_bootloader(
         parents=True,
         exist_ok=True,
     )
+    esp_path(EXTRA_FILES_DIR).mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
     with StagedArtifactTransaction() as artifact_tx:
+        extra_files = install_extra_files()
+
         entries = write_boot_files(entries)
 
         if not entries:
@@ -2340,7 +2839,19 @@ def install_bootloader(
                 entries,
                 default_entry.identifier,
                 drivers,
+                extra_files=extra_files,
             )
+
+            referenced_paths = parse_and_validate_sprout_config(
+                configuration,
+                esp_path(SPROUT_CONFIG),
+                check_files_exist=True,
+            )
+
+            declared_extra_file_paths = {
+                esp_path(dest) for dest in extra_files.values()
+            }
+            combined_keep_set = referenced_paths | declared_extra_file_paths
 
             # Atomically replace sprout.toml only after all referenced files are present.
             atomic_write_text(
@@ -2359,6 +2870,8 @@ def install_bootloader(
     garbage_collect(
         entries,
         drivers,
+        combined_keep_set,
+        extra_files,
     )
 
 
