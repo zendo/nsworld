@@ -198,6 +198,7 @@ pkgs.buildFHSEnv {
       # SDL2_mixer
       # SDL2_ttf
       # jdk_headless
+      # icu
 
       # --- commonly dlopen()ed helpers -------------------------------------
       libsecret # Electron safeStorage/keytar
