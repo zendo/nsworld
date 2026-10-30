@@ -21,6 +21,8 @@
       };
 
       services.caddy = lib.mkIf config.services.miniflux.enable {
+        enable = true;
+
         # reactflux http://localhost:51832
         virtualHosts."http://:51832".extraConfig = ''
           root * ${pkgs.reactflux}

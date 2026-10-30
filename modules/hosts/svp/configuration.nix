@@ -95,7 +95,6 @@ in
       ];
 
       # [ selfhosted ]
-      services.caddy.enable = true;
       # services.homepage-dashboard.enable = true;
       services.navidrome.enable = true;
       # services.dufs.enable = true;
