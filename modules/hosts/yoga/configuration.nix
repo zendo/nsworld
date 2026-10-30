@@ -61,7 +61,11 @@ in
       services.homepage-dashboard.enable = true;
       # services.navidrome.enable = true;
       # services.dufs.enable = true;
-      services.goshs.enable = true;
+      services.goshs = {
+        # enable = true;
+        settings.directory = "/home/${userName}/Downloads";
+        settings.uploadFolder = "/home/${userName}/Downloads";
+      };
       services.miniflux.enable = true;
       # services.memos.enable = true;
       # services.rqbit.enable = true;

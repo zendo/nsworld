@@ -1,11 +1,11 @@
 {
   flake.modules.nixos.selfhosted =
-    { config, ... }:
+    { config, lib, ... }:
     {
       services.dufs = {
         user = "${config.myVars.user}"; # dangerous!!!
         group = "users";
-        servePath = "/data";
+        servePath = lib.mkDefault "/data";
         bindAddresses = [ "0.0.0.0" ];
         port = 5009;
         openFirewall = config.networking.firewall.enable;

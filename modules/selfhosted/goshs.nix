@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.selfhosted =
-    { config, ... }:
+    { config, lib, ... }:
     {
       # https://docs.goshs.de/usage/config/index.html
       services.goshs = {
@@ -11,8 +11,8 @@
           # Required
           interface = "0.0.0.0";
           port = 8009;
-          directory = "/data";
-          uploadFolder = "/data";
+          directory = lib.mkDefault "/data";
+          uploadFolder = lib.mkDefault "/data";
           # Optional
           webdav = true;
           webdav_port = 8001;
