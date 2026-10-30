@@ -2,7 +2,7 @@
   flake.modules.nixos.selfhosted =
     { config, ... }:
     let
-      hostIP = "192.168.2.218"; # or "dashboard-host"
+      hostIP = config.myVars.ip.yoga; # or "dashboard-host"
       dufsPort = (toString config.services.dufs.port);
       memosPort = (toString config.services.memos.settings.MEMOS_PORT);
       navidromePort = (toString config.services.navidrome.settings.Port);
@@ -16,12 +16,12 @@
         services = [
           {
             Selfhosted = [
-              {
-                Navidrome = {
-                  href = "http://${hostIP}:${navidromePort}";
-                  description = "Music service";
-                };
-              }
+              # {
+              #   Navidrome = {
+              #     href = "http://${hostIP}:${navidromePort}";
+              #     description = "Music service";
+              #   };
+              # }
               {
                 goshs = {
                   href = "http://${hostIP}:8009";
@@ -38,18 +38,6 @@
                 miniflux = {
                   href = "http://${hostIP}:8081";
                   description = "Rss reader";
-                };
-              }
-              {
-                mango = {
-                  href = "http://${hostIP}:8789";
-                  description = "Comi reader";
-                };
-              }
-              {
-                sub-store = {
-                  href = "http://${hostIP}:3009";
-                  description = "Sub store";
                 };
               }
             ];
