@@ -56,6 +56,7 @@ in
 
       # [ services ]
       # systemd.user.services.neiro.enable = true;
+      systemd.user.services.rclone-gui.enable = true;
 
       # [ selfhosted ]
       services.homepage-dashboard.enable = true;
