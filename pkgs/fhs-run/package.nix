@@ -63,6 +63,7 @@ pkgs.buildFHSEnv {
       openssl # libssl/libcrypto
       curlMinimal # libcurl.so.4 (TLS yes; no idn/psl/brotli/zstd/http3, use `curl` for those)
       libkrb5 # libkrb5/libgssapi_krb5
+      libepoxy
       pcre2 # libpcre2-8 (glib)
       dbus
       udev # libudev.so.1
