@@ -20,31 +20,34 @@
       ];
     };
 
-    programs.ssh.extraConfig = ''
-      Host rmt
-        forwardAgent yes
-        hostname 192.168.122.86
-        port 22
+    programs.ssh.hosts = {
+      yoga = {
+        hostname = "192.168.2.218";
+        order = 100;
+      };
 
-      Host svp
-        forwardAgent yes
-        hostname 192.168.2.30
-        port 22
+      svp = {
+        hostname = "192.168.2.30";
+        order = 200;
+      };
 
-      Host yoga
-        hostname 192.168.2.218
-        port 22
+      rmt = {
+        hostname = "192.168.122.86";
+        order = 300;
+      };
 
-      Host github.com
-        hostname ssh.github.com
-        port 443
-        # 很多机场禁用 22 端口，代理一样无法连接
-        # proxyCommand nc -X 5 -x 127.0.0.1:7890 %h %p
+      "github.com" = {
+        hostname = "ssh.github.com";
+        port = 443;
+        order = 400;
+      };
 
-      Host *
-        serverAliveCountMax 5
-        serverAliveInterval 60
-    '';
+      "*" = {
+        serverAliveInterval = 60;
+        serverAliveCountMax = 5;
+        order = 1000;
+      };
+    };
   };
 
   flake.modules.nixos.gpg = {
