@@ -42,7 +42,7 @@ pages:
                 icon: sh:getcomics
               - title: suwayomi
                 url: http://192.168.2.30:8789
-                icon: si:suwayomi
+                icon: sh:suwayomi
               - title: goshs
                 url: http://192.168.2.30:8009
                 icon: sh:gossa
