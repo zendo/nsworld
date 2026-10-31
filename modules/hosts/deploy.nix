@@ -8,14 +8,23 @@ let
   inherit (config.flake) nixosConfigurations;
 
   # https://github.com/ulic-youthlic/flakes/blob/dev/core/deploy.nix#L15
+  # deploy-rs only exposes its lib through an overlay, and that overlay ignores
+  # `prev` (it always builds deploy-rs from the input's own source). Compose it
+  # with a second overlay that puts nixpkgs' deploy-rs back in place, so the lib
+  # (i.e. the `activate-rs` script it generates) uses `nixpkgs#deploy-rs`
+  # instead of building a second deploy-rs.
+  # NOTE: `prev` of the 2nd overlay is the result of the 1st one, hence `pkgs`.
   deployLib =
     pkgs:
-    (inputs.omniflake.flakes.deploy-rs.overlays.default (
-      pkgs
-      // {
-        deploy-rs.deploy-rs = pkgs.deploy-rs;
-      }
-    ) pkgs).deploy-rs.lib;
+    (pkgs.extend (
+      lib.composeExtensions inputs.omniflake.flakes.deploy-rs.overlays.default (
+        _: prev: {
+          deploy-rs = prev.deploy-rs // {
+            deploy-rs = pkgs.deploy-rs;
+          };
+        }
+      )
+    )).deploy-rs.lib;
 in
 {
   # ╭─────────────────────────────────────────────────────╮
