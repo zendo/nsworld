@@ -46,6 +46,9 @@ pages:
               - title: goshs
                 url: http://192.168.2.30:8009
                 icon: sh:gossa
+              - title: aria2
+                url: http://192.168.2.30:6819
+                icon: sh:aria2
               - title: rqbit
                 url: http://192.168.2.30:3039
                 icon: sh:qbittorrent

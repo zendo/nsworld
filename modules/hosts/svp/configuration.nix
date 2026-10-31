@@ -102,6 +102,7 @@ in
       services.goshs.enable = true;
       # services.miniflux.enable = true; # wall
       services.memos.enable = true;
+      services.aria2.enable = true;
       services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
       systemd.services.sub-store.enable = true;

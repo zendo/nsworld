@@ -54,7 +54,9 @@
               "video"
               "adbusers"
             ]
+            # [ selfhosted ]
             ++ lib.optionals config.services.samba.enable [ "samba" ]
+            # [ virt ]
             ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
             ++ lib.optionals config.virtualisation.podman.enable [ "podman" ]
             ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
