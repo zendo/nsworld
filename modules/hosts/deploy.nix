@@ -1,30 +1,6 @@
-{
-  config,
-  inputs,
-  lib,
-  ...
-}:
+{ config, inputs, ... }:
 let
   inherit (config.flake) nixosConfigurations;
-
-  # https://github.com/ulic-youthlic/flakes/blob/dev/core/deploy.nix#L15
-  # deploy-rs only exposes its lib through an overlay, and that overlay ignores
-  # `prev` (it always builds deploy-rs from the input's own source). Compose it
-  # with a second overlay that puts nixpkgs' deploy-rs back in place, so the lib
-  # (i.e. the `activate-rs` script it generates) uses `nixpkgs#deploy-rs`
-  # instead of building a second deploy-rs.
-  # NOTE: `prev` of the 2nd overlay is the result of the 1st one, hence `pkgs`.
-  deployLib =
-    pkgs:
-    (pkgs.extend (
-      lib.composeExtensions inputs.omniflake.flakes.deploy-rs.overlays.default (
-        _: prev: {
-          deploy-rs = prev.deploy-rs // {
-            deploy-rs = pkgs.deploy-rs;
-          };
-        }
-      )
-    )).deploy-rs.lib;
 in
 {
   # ╭─────────────────────────────────────────────────────╮
@@ -78,14 +54,14 @@ in
       "svp" = {
         hostname = "svp";
         profiles.system = {
-          path = (deployLib nixosConfigurations."svp".pkgs).activate.nixos nixosConfigurations."svp";
+          path = nixosConfigurations."svp".pkgs.deploy-rs.lib.activate.nixos nixosConfigurations."svp";
         };
       };
 
       "rmt" = {
         hostname = "rmt";
         profiles.system = {
-          path = (deployLib nixosConfigurations."rmt".pkgs).activate.nixos nixosConfigurations."rmt";
+          path = nixosConfigurations."rmt".pkgs.deploy-rs.lib.activate.nixos nixosConfigurations."rmt";
         };
       };
     };
@@ -96,7 +72,7 @@ in
     {
       # nix flake show
       # nix build .#checks.x86_64-linux.deploy-schema
-      checks = (deployLib pkgs).deployChecks config.flake.deploy;
+      checks = pkgs.deploy-rs.lib.deployChecks config.flake.deploy;
 
       devshells.nsw-deploy = {
         packages = [

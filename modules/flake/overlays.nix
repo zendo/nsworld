@@ -29,6 +29,14 @@
 
     bun2nix = inputs.omniflake.flakes.bun2nix.overlays.default;
 
+    # borrow deploy-rs' lib only, keep nixpkgs' deploy-rs package (no extra build)
+    deploy-rs = final: prev: {
+      deploy-rs = prev.deploy-rs // {
+        deploy-rs = prev.deploy-rs;
+        lib = (inputs.omniflake.flakes.deploy-rs.overlays.default final prev).deploy-rs.lib;
+      };
+    };
+
     # https://wiki.nixos.org/wiki/Flakes#Importing_packages_from_multiple_nixpkgs_branches
     # stable-packages = final: _prev: {
     #   stable = import inputs.nixpkgs-stable {
