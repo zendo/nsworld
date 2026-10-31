@@ -116,14 +116,14 @@
       gnomeExtensions = prev.gnomeExtensions // {
         # night-theme-switcher = prev.callPackage ./night-theme-switcher { };
 
-        aurora-shell = prev.gnomeExtensions.aurora-shell.overrideAttrs (oldAttrs: rec {
-          version = "35";
-          src = prev.fetchzip {
-            url = "https://extensions.gnome.org/extension-data/aurora-shellluminusos.github.io.v${version}.shell-extension.zip";
-            hash = "sha256-BRHuDfYJODSodY2pVnZpqTAfQBSgvQKEFpyb6fysM+Y=";
-            stripRoot = false;
-          };
-        });
+        # aurora-shell = prev.gnomeExtensions.aurora-shell.overrideAttrs (oldAttrs: rec {
+        #   version = "36";
+        #   src = prev.fetchzip {
+        #     url = "https://extensions.gnome.org/extension-data/aurora-shellluminusos.github.io.v${version}.shell-extension.zip";
+        #     hash = "sha256-vmp+oAbnlou4Jh6fSl8D5aKGqK1DxP/Ne1UjepXL5Bo=";
+        #     stripRoot = false;
+        #   };
+        # });
       };
 
       # ---------------------------------------------------
