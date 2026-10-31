@@ -54,10 +54,5 @@
           ];
         }; # end of settings
       }; # edd of nix
-
-      environment.etc = {
-        "nix/current-nixpkgs".source = inputs.nixpkgs;
-        "nix/current-flake".source = inputs.self;
-      };
     };
 }

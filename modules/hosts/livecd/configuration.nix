@@ -38,8 +38,6 @@
       };
 
       environment.systemPackages = with pkgs; [
-        # Make copying cache from local://
-        # (inputs.self.nixosConfigurations.yoga.config.system.build.toplevel)
         tree
         file
         bind
@@ -60,6 +58,11 @@
         btop
         ouch
       ];
+
+      # Make copying cache from local://
+      # system.extraDependencies = [
+      #   inputs.self.nixosConfigurations.yoga.config.system.build.toplevel
+      # ];
 
       nixpkgs = {
         hostPlatform = "x86_64-linux";
