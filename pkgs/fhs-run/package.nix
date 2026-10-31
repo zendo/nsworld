@@ -43,11 +43,16 @@ pkgs.buildFHSEnv {
     if [ -n "$appimage" ]; then
       # Extract AppImages instead of mounting them; allow environment overrides.
       export APPIMAGE_EXTRACT_AND_RUN="''${APPIMAGE_EXTRACT_AND_RUN:-1}"
+      # Let the AppImage use its own gdk-pixbuf loader configuration instead.
+      unset GDK_PIXBUF_MODULE_FILE GDK_PIXBUF_MODULEDIR
       # Preload the host Wayland library to avoid symbol conflicts with the bundled copy.
       export LD_PRELOAD="/usr/lib64/libwayland-client.so.0''${LD_PRELOAD:+:$LD_PRELOAD}"
-      # export __EGL_VENDOR_LIBRARY_DIRS="/run/opengl-driver/share/glvnd/egl_vendor.d''${__EGL_VENDOR_LIBRARY_DIRS:+:$__EGL_VENDOR_LIBRARY_DIRS}"
-      # export LIBGL_DRIVERS_PATH="/run/opengl-driver/lib/dri''${LIBGL_DRIVERS_PATH:+:$LIBGL_DRIVERS_PATH}"
-      # export LIBVA_DRIVERS_PATH="/run/opengl-driver/lib/dri''${LIBVA_DRIVERS_PATH:+:$LIBVA_DRIVERS_PATH}"
+      # Use the host's GL/EGL/Vulkan drivers; NixOS keeps them outside /usr.
+      if [ -d /run/opengl-driver ]; then
+        export __EGL_VENDOR_LIBRARY_DIRS="/run/opengl-driver/share/glvnd/egl_vendor.d''${__EGL_VENDOR_LIBRARY_DIRS:+:$__EGL_VENDOR_LIBRARY_DIRS}"
+        export LIBGL_DRIVERS_PATH="/run/opengl-driver/lib/dri''${LIBGL_DRIVERS_PATH:+:$LIBGL_DRIVERS_PATH}"
+        export LIBVA_DRIVERS_PATH="/run/opengl-driver/lib/dri''${LIBVA_DRIVERS_PATH:+:$LIBVA_DRIVERS_PATH}"
+      fi
     fi
 
     exec "$@"
@@ -58,7 +63,9 @@ pkgs.buildFHSEnv {
       glib # libglib-2.0/libgobject/libgio
       zlib # libz
       bzip2 # libbz2
+      bzip2.out # libbz2.so.1
       xz # liblzma
+      zstd
       expat
       openssl # libssl/libcrypto
       curlMinimal # libcurl.so.4 (TLS yes; no idn/psl/brotli/zstd/http3, use `curl` for those)
@@ -78,12 +85,21 @@ pkgs.buildFHSEnv {
       sqlite
       gmp # libgmp.so.10
       brotli # libbrotli{common,dec,enc}
+      lz4 # liblz4.so.1 (libarchive, ffmpeg)
+      libbsd # libbsd.so.0 (libmpv/ffmpeg)
+      libffi # libffi.so.8, dlopened/used by many binaries
       libgcrypt # libgcrypt.so.20
       libgpg-error # libgpg-error.so.0
       p11-kit # /etc/pkcs11 + libp11-kit + p11-kit-proxy
       libidn2
       libidn
       iana-etc # /etc/protocols, /etc/services
+
+      # libbz2.so.1.0
+      # (p.runCommand "libbz2-legacy-soname" { nativeBuildInputs = [ p.patchelf ]; } ''
+      #   install -Dm755 ${p.bzip2.out}/lib/libbz2.so.1.0.8 $out/lib/libbz2-legacy.so
+      #   patchelf --set-soname libbz2.so.1.0 $out/lib/libbz2-legacy.so
+      # '')
 
       # --- GTK / GLib stack ------------------------------------------------
       gtk4
@@ -105,6 +121,7 @@ pkgs.buildFHSEnv {
       fontconfig.lib # libfontconfig; /etc/fonts is bind mounted from the host
       libpng # libpng16.so.16
       libjpeg # libjpeg.so.62 (gdk-pixbuf jpeg loader, chafa)
+      libjpeg8 # libjpeg.so.8
       libtiff # libtiff.so.6
       libwebp # libwebp.so.7 + libwebpdemux (gdk-pixbuf, Electron)
       librsvg # librsvg-2.so.2 (gdk-pixbuf svg loader)
