@@ -40,9 +40,9 @@ pages:
               - title: comigo
                 url: http://192.168.2.30:1239
                 icon: sh:getcomics
-              - title: mango
+              - title: suwayomi
                 url: http://192.168.2.30:8789
-                icon: si:mihon
+                icon: si:suwayomi
               - title: goshs
                 url: http://192.168.2.30:8009
                 icon: sh:gossa
@@ -55,9 +55,6 @@ pages:
               - title: sub-store
                 url: http://192.168.2.30:3009
                 icon: si:crayon
-              - title: kula
-                url: http://192.168.2.30:27969
-                icon: si:ros
               - title: Beszel Hub
                 url: http://192.168.2.30:8099
                 icon: sh:beszel
