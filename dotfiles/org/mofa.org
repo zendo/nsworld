@@ -1,5 +1,8 @@
 #+STARTUP: show2levels indent hidestars
 
+* IPv6
+ping -6 2001:4860:4860::8888
+
 * sing-box
 Windows Tun 防火墙问题，需要手动运行一次提示放行：
 gsudo sing-box run -c coonfig.json

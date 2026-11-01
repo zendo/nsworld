@@ -116,5 +116,59 @@ in
         };
       };
 
+      # services.tailscale = {
+      #   enable = true;
+      # };
+
+      services.caddy = {
+        enable = true;
+        # /navidrome.home.arpa/goshs.home.arpa/miniflux.home.arpa/memos.home.arpa/aria2.home.arpa/rqbit.home.arpa/sub-store.home.arpa/comigo.home.arpa/beszel.home.arpa/192.168.2.30
+        virtualHosts = {
+          "http://navidrome.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:4539
+          '';
+
+          "http://goshs.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:8009
+          '';
+
+          "http://miniflux.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:51832
+          '';
+
+          "http://memos.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:5239
+          '';
+
+          # http://aria2.home.arpa:80/jsonrpc
+          "http://aria2.home.arpa".extraConfig = ''
+            handle /jsonrpc {
+              reverse_proxy 127.0.0.1:6800
+            }
+            handle {
+              root * ${pkgs.ariang}/share/ariang
+              encode zstd gzip
+              file_server
+            }
+          '';
+
+          "http://rqbit.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:3039
+          '';
+
+          "http://sub-store.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:3009
+          '';
+
+          "http://comigo.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:1239
+          '';
+
+          "http://beszel.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:8099
+          '';
+        };
+      };
+
     };
 }
