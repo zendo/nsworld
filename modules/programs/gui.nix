@@ -13,6 +13,7 @@
         rox
         sonora
         pigma
+        mygo-cloudmusic
         neiro
         breeze
         venerax
