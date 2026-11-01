@@ -27,14 +27,7 @@ buildGo127Module (finalAttrs: {
 
   vendorHash = "sha256-Rgn6r79jn4Am6fSEoX5xEzSmWViKJTQpYetKqDru0nI=";
 
-  nativeBuildInputs = [
-    makeWrapper
-  ];
-
-  env = {
-    CGO_ENABLED = "1";
-    GOFLAGS = "-buildvcs=false";
-  };
+  nativeBuildInputs = [ makeWrapper ];
 
   ldflags = [ "-s" ];
 
