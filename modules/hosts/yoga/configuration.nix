@@ -38,7 +38,6 @@ in
         # niri
         # sway
         # hyprland
-        ###########
         # vicinae
       ]
       ++ [
@@ -51,7 +50,6 @@ in
     {
       myVars.user = userName;
       networking.hostName = hostName;
-
       users.defaultUserShell = pkgs.zsh;
 
       # [ services ]
@@ -59,16 +57,13 @@ in
 
       # [ selfhosted ]
       services.homepage-dashboard.enable = true;
-      # services.navidrome.enable = true;
-      # services.dufs.enable = true;
+      services.miniflux.enable = true;
+      # services.suwayomi-server.enable = true;
       services.goshs = {
         # enable = true;
         settings.directory = "/home/${userName}/Downloads";
         settings.uploadFolder = "/home/${userName}/Downloads";
       };
-      services.miniflux.enable = true;
-      # services.rqbit.enable = true;
-      # services.suwayomi-server.enable = true;
       # services.beszel = {
       #   agent.enable = true;
       #   agent.environment = {
@@ -77,8 +72,8 @@ in
       # };
 
       system.extraDependencies = [
-        inputs.self.nixosConfigurations.svp.config.system.build.toplevel
         inputs.self.formatter.${pkgs.stdenv.hostPlatform.system}
+        inputs.self.nixosConfigurations.svp.config.system.build.toplevel
       ];
 
       environment.systemPackages = with pkgs; [
