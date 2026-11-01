@@ -71,6 +71,7 @@ in
       #   };
       # };
 
+      # Persistent Cache
       system.extraDependencies = [
         inputs.self.formatter.${pkgs.stdenv.hostPlatform.system}
         inputs.self.nixosConfigurations.svp.config.system.build.toplevel
