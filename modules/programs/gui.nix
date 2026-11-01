@@ -125,6 +125,7 @@
         # glxinfo
         # libva-utils # vainfo
         # vulkan-tools
+        pulseaudio # pactl list sink-inputs
         cpufrequtils
         pciutils
         edid-decode

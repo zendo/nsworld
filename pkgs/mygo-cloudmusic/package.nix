@@ -9,7 +9,6 @@
   libsecret,
   libayatana-appindicator,
   libpulseaudio,
-  alsa-lib,
   nix-update-script,
 }:
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=mygo-cloudmusic
@@ -28,7 +27,6 @@ let
     libsecret
     libayatana-appindicator
     libpulseaudio
-    alsa-lib
   ];
 in
 buildGo127Module (finalAttrs: {

@@ -12,6 +12,7 @@
         requires = [ "pipewire.service" ];
         wantedBy = [ "pipewire.service" ];
         path = [
+          pkgs.pulseaudio
           pkgs.pipewire
           pkgs.wireplumber
         ];
