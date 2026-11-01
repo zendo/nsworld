@@ -218,6 +218,15 @@ pkgs.buildFHSEnv {
       # jdk_headless
       # icu
 
+      # --- Windows Emulator -------------------------------------------------
+      # wimlib
+      # hivex
+      # spdlog
+      # fmt
+      # libvncserver
+      # libvirt
+      # libisofs
+
       # --- commonly dlopen()ed helpers -------------------------------------
       libsecret # Electron safeStorage/keytar
       libnotify # libnotify.so.4
