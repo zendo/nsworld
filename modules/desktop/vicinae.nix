@@ -1,4 +1,5 @@
 {
+  # https://github.com/AndreGeng/FelixDict
   flake.modules.nixos.vicinae = { pkgs, ... }: {
   };
 

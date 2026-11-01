@@ -12,7 +12,6 @@
         rwx
         rox
         sonora
-        pigma
         mygo-cloudmusic
         neiro
         breeze
