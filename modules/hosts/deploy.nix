@@ -1,6 +1,9 @@
 { config, inputs, ... }:
 let
   inherit (config.flake) nixosConfigurations;
+
+  mkDeployHost =
+    name: nixosConfigurations.${name}.pkgs.deploy-rs.lib.activate.nixos nixosConfigurations.${name};
 in
 {
   # ╭─────────────────────────────────────────────────────╮
@@ -54,14 +57,14 @@ in
       "svp" = {
         hostname = "svp";
         profiles.system = {
-          path = nixosConfigurations."svp".pkgs.deploy-rs.lib.activate.nixos nixosConfigurations."svp";
+          path = mkDeployHost "svp";
         };
       };
 
       "rmt" = {
         hostname = "rmt";
         profiles.system = {
-          path = nixosConfigurations."rmt".pkgs.deploy-rs.lib.activate.nixos nixosConfigurations."rmt";
+          path = mkDeployHost "rmt";
         };
       };
     };
