@@ -8,8 +8,8 @@
   gtk3,
   glib,
   libsecret,
-  libayatana-appindicator,
   libpulseaudio,
+  libayatana-appindicator,
   nix-update-script,
 }:
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=mygo-cloudmusic
@@ -61,8 +61,8 @@ buildGo127Module (finalAttrs: {
           gtk3
           glib
           libsecret
-          libayatana-appindicator
           libpulseaudio
+          libayatana-appindicator
         ]
       }"
   '';
