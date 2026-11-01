@@ -15,14 +15,14 @@
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=mygo-cloudmusic
 buildGo127Module (finalAttrs: {
   pname = "mygo-cloudmusic";
-  version = "0.1.22";
+  version = "0.1.24";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "egoist";
     repo = "mygo-cloudmusic";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-pr/rUFUiJiAYzIleKW5TIwlIiwjbRuveg/BFpYm6ZdI=";
+    hash = "sha256-DLPEHnlaAUhadY8Y++r71ak88IXMLHw7HxKw5X1z9Cc=";
   };
 
   vendorHash = "sha256-Rgn6r79jn4Am6fSEoX5xEzSmWViKJTQpYetKqDru0nI=";
