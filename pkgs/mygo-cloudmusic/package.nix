@@ -1,6 +1,7 @@
 {
   lib,
   stdenv,
+  go,
   buildGo127Module,
   fetchFromGitHub,
   makeWrapper,
@@ -12,23 +13,6 @@
   nix-update-script,
 }:
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=mygo-cloudmusic
-let
-  goArch =
-    if stdenv.hostPlatform.isx86_64 then
-      "amd64"
-    else if stdenv.hostPlatform.isAarch64 then
-      "arm64"
-    else
-      throw "Unsupported architecture: ${stdenv.hostPlatform.system}";
-
-  runtimeLibs = [
-    gtk3
-    glib
-    libsecret
-    libayatana-appindicator
-    libpulseaudio
-  ];
-in
 buildGo127Module (finalAttrs: {
   pname = "mygo-cloudmusic";
   version = "0.1.22";
@@ -57,9 +41,7 @@ buildGo127Module (finalAttrs: {
   buildPhase = ''
     runHook preBuild
 
-    go tool mygo build \
-      -platform "linux/${goArch}" \
-      -o "$PWD/build"
+    go tool mygo build
 
     runHook postBuild
   '';
@@ -67,13 +49,13 @@ buildGo127Module (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 build/linux-${goArch}/mygo-cloudmusic \
+    install -Dm755 build/linux-${go.GOARCH}/mygo-cloudmusic \
       $out/bin/mygo-cloudmusic
 
-    install -Dm644 build/linux-${goArch}/mygo-cloudmusic.png \
+    install -Dm644 build/linux-${go.GOARCH}/mygo-cloudmusic.png \
       $out/share/icons/hicolor/512x512/apps/mygo-cloudmusic.png
 
-    install -Dm644 build/linux-${goArch}/mygo-cloudmusic.desktop \
+    install -Dm644 build/linux-${go.GOARCH}/mygo-cloudmusic.desktop \
       $out/share/applications/mygo-cloudmusic.desktop
 
     runHook postInstall
@@ -81,7 +63,15 @@ buildGo127Module (finalAttrs: {
 
   postFixup = ''
     wrapProgram $out/bin/mygo-cloudmusic \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath runtimeLibs}"
+      --prefix LD_LIBRARY_PATH : "${
+        lib.makeLibraryPath [
+          gtk3
+          glib
+          libsecret
+          libayatana-appindicator
+          libpulseaudio
+        ]
+      }"
   '';
 
   passthru.updateScript = nix-update-script { };
@@ -91,10 +81,6 @@ buildGo127Module (finalAttrs: {
     homepage = "https://github.com/egoist/mygo-cloudmusic";
     changelog = "https://github.com/egoist/mygo-cloudmusic/blob/${finalAttrs.src.rev}/CHANGELOG.md";
     license = lib.licenses.agpl3Only;
-    platforms = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "mygo-cloudmusic";
   };
