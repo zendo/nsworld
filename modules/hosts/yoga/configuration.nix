@@ -56,7 +56,6 @@ in
 
       # [ services ]
       # systemd.user.services.neiro.enable = true;
-      systemd.user.services.rclone-gui.enable = true;
 
       # [ selfhosted ]
       services.homepage-dashboard.enable = true;
@@ -79,6 +78,7 @@ in
 
       system.extraDependencies = [
         inputs.self.nixosConfigurations.svp.config.system.build.toplevel
+        inputs.self.formatter.${pkgs.stdenv.hostPlatform.system}
       ];
 
       environment.systemPackages = with pkgs; [
