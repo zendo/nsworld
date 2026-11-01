@@ -4,6 +4,7 @@ let
 
   mkDeployHost =
     name: nixosConfigurations.${name}.pkgs.deploy-rs.lib.activate.nixos nixosConfigurations.${name};
+  # name: inputs.omniflake.flakes.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.${name};
 in
 {
   # ╭─────────────────────────────────────────────────────╮
