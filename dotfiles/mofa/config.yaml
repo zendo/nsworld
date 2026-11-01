@@ -1,7 +1,23 @@
+sel: &sel [默认, 自动选择, 香港, 台湾, 日本, 新加坡, 美国, 其他地区, 全部节点, 直连]
+
+proxy_providers_common:
+  &proxy_providers_common {
+    type: http,
+    interval: 86400,
+    proxy: DIRECT,
+    exclude-type: 'DIRECT|REJECT|REMATCH',
+    health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 600, lazy: true},
+  }
+
+global_exclude_filter:
+  &global_exclude_filter {
+    exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|电报|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|优惠|福利|邀请|好友|失联|选择|剩余|公益|发布|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|过滤|⚠️|@|t\.me\/\+|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
+  }
+
 proxy-providers:
-  provider1: {type: http, url: "", interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 600}, override: {additional-prefix: "① "}}
-  provider2: {type: http, url: "", interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 600}, override: {additional-prefix: "② "}}
-  provider3: {type: http, url: "", interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 600}, override: {additional-prefix: "③ "}}
+  provider1: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '① '}}
+  provider2: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '② '}}
+  provider3: {url: '', <<: [*proxy_providers_common, *global_exclude_filter], override: {additional-prefix: '③ '}}
 
 proxies:
   - name: "直连"
@@ -12,50 +28,82 @@ mixed-port: 7890
 allow-lan: true
 bind-address: '*'
 # global-ua: mihomo
+# 代理端口暴露在局域网时建议开启身份验证：
+# authentication: ["user:pass"]
+# lan-allowed-ips: ['192.168.0.0/16']
 ipv6: true
+log-level: info
 unified-delay: true
 tcp-concurrent: true
+keep-alive-interval: 30
 find-process-mode: strict
 external-controller: '127.0.0.1:9090'
 external-ui: ui
-external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+external-ui-url: "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+external-controller-cors: {allow-origins: ['*'], allow-private-network: true}
 
 profile:
   store-selected: true
   store-fake-ip: true
 
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP: {ports: [80, 8080-8880], override-destination: true}
+    TLS: {ports: [443, 8443]}
+    QUIC: {ports: [443, 8443]}
+  skip-domain: ["Mijia Cloud", "+.push.apple.com"]
+
 tun:
   enable: true
-  stack: mips
+  stack: mips # system / gvisor / mixed / mips
   # device: utun
   auto-route: true
   strict-route: true
-  auto-redirect: true
+  auto-redirect: true # 仅 Linux，需要 iptables 或 nftables 存在，否则 TUN 无法启动
   auto-detect-interface: true
+  dns-mode: hijack # 把系统 DNS 指向 tun 并额外劫持 53 端口，避免系统级 DNS 泄漏
   dns-hijack: ['any:53', 'tcp://any:53']
 
 dns:
   enable: true
   ipv6: true
+  cache-algorithm: arc
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/15
+  # ↑ 改这里会连带改 tun 地址
   fake-ip-range6: 2001:2::1/48
-  fake-ip-filter: ['rule-set:private_domain', 'rule-set:cn_domain']
+  fake-ip-filter:
+    - 'rule-set:private_domain,cn_domain'
+    - '+.lan'
+    - '+.local'
+    - '+.arpa'           
+    - 'localhost.ptlogin2.qq.com'
+    - '+.msftncsi.com'
+    - '+.msftconnecttest.com'
+    - 'time.*.com'
+    - 'ntp.*.com'
+    - '+.stun.*.*'
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
   nameserver-policy:
-    "cn_domain,private_domain":
+    'rule-set:cn_domain,private_domain':
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
-    "*.linux.do": "https://xxx.ddd.oaifree.com/query-dns"
-    "linux.do": "https://xxx.ddd.oaifree.com/query-dns"
+    "*.linux.do": ["https://xxx.ddd.oaifree.com/query-dns", "https://1.1.1.1/dns-query#RULES"]
+    "linux.do": ["https://xxx.ddd.oaifree.com/query-dns", "https://1.1.1.1/dns-query#RULES"]
   nameserver:
     - "https://1.1.1.1/dns-query#RULES"
     - "https://8.8.8.8/dns-query#RULES"
+  # 仅用于解析节点域名；用 DoH 代替明文 UDP，避免机场域名暴露给运营商
+  # （DoH 服务本身由 default-nameserver 引导解析）
   proxy-server-nameserver:
-    - 119.29.29.29
-    - 223.5.5.5
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
   direct-nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
@@ -65,7 +113,7 @@ proxy-groups:
 
   - name: 默认
     type: select
-    proxies: [自动选择,直连,香港,台湾,日本,新加坡,美国,其它地区,全部节点]
+    proxies: [自动选择, 香港, 台湾, 日本, 新加坡, 美国, 其他地区, 全部节点, 直连]
 
   - name: 全部节点
     type: select
@@ -76,85 +124,69 @@ proxy-groups:
     type: url-test
     include-all: true
     exclude-type: direct
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
     tolerance: 50
+    lazy: true
 
-  - name: Google
-    type: select
-    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
-
-  - name: Telegram
-    type: select
-    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
-
-  - name: Twitter
-    type: select
-    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
-
-  - name: YouTube
-    type: select
-    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
-
-  - name: NETFLIX
-    type: select
-    proxies: [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
-
-  - name: Spotify
-    type: select
-    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
-
-  - name: Github
-    type: select
-    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+  - {name: Google,   type: select, proxies: *sel}
+  - {name: Telegram, type: select, proxies: *sel}
+  - {name: Twitter,  type: select, proxies: *sel}
+  - {name: YouTube,  type: select, proxies: *sel}
+  - {name: NETFLIX,  type: select, proxies: *sel}
+  - {name: Spotify,  type: select, proxies: *sel}
+  - {name: Github,   type: select, proxies: *sel}
 
   - name: 国内
     type: select
-    proxies:  [直连,默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择]
+    proxies: [直连, 默认, 自动选择, 香港, 台湾, 日本, 新加坡, 美国, 其他地区, 全部节点]
 
   - name: 其他
     type: select
-    proxies:  [默认,香港,台湾,日本,新加坡,美国,其它地区,全部节点,自动选择,直连]
+    proxies: *sel
 
   #分隔,下面是地区分组
   - name: 香港
     type: select
     include-all: true
     exclude-type: direct
-    filter: "(?i)港|hk|hongkong|hong kong"
+    filter: '(?i)(港|🇭🇰|\bhk\b|hong ?kong)'
 
   - name: 台湾
     type: select
     include-all: true
     exclude-type: direct
-    filter: "(?i)台|tw|taiwan"
+    filter: '(?i)(台|🇹🇼|\btw\b|taiwan)'
 
   - name: 日本
     type: select
     include-all: true
     exclude-type: direct
-    filter: "(?i)日|jp|japan"
+    filter: '(?i)(日|🇯🇵|\bjp\b|japan)'
 
   - name: 美国
     type: select
     include-all: true
     exclude-type: direct
-    filter: "(?i)美|us|unitedstates|united states"
+    filter: '(?i)(美|🇺🇸|\bus\b|united ?states)'
 
   - name: 新加坡
     type: select
     include-all: true
     exclude-type: direct
-    filter: "(?i)(新|sg|singapore)"
+    filter: '(?i)(新|🇸🇬|\bsg\b|singapore)'
 
-  - name: 其它地区
+  # 必须与上面 5 个地区过滤保持同一套关键词，否则会出现节点同时进两个组/两边都没有
+  - name: 其他地区
     type: select
     include-all: true
     exclude-type: direct
-    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+    filter: '(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇹🇼|🇨🇳|港|日|美|新|台|\bhk\b|\bjp\b|\bus\b|\bsg\b|\btw\b|hong ?kong|taiwan|japan|singapore|united ?states)).*'
 
 rules:
   # 局域网与基础过滤
   - RULE-SET,private_ip,直连,no-resolve
-  - RULE-SET,private_domain,直连,no-resolve
+  - RULE-SET,private_domain,直连
   - DOMAIN-SUFFIX,api.beacondb.net,直连
   - DOMAIN-SUFFIX,ip-api.com,直连
 
@@ -173,67 +205,68 @@ rules:
   - RULE-SET,spotify_domain,Spotify
 
   # IP 规则（防止漏网之鱼）
-  - RULE-SET,telegram_ip,Telegram
-  - RULE-SET,google_ip,Google
-  - RULE-SET,netflix_ip,NETFLIX
-  - RULE-SET,twitter_ip,Twitter
+  - RULE-SET,telegram_ip,Telegram,no-resolve
+  - RULE-SET,google_ip,Google,no-resolve
+  - RULE-SET,netflix_ip,NETFLIX,no-resolve
+  - RULE-SET,twitter_ip,Twitter,no-resolve
 
-  # 兜底逻辑：国内 -> 其他 -> MATCH
+  # 可选：拦截应用自己发起的 DoT（853），避免绕过内部 DNS 导致 fake-ip 分流不一致
+  # 注意：仅拦截 DoT，DoH(443) 无法按端口区分，需要的话可按域名单独写规则
+  # - DST-PORT,853,REJECT
+
+  # 兜底逻辑：国内 -> 其他
   - RULE-SET,cn_domain,国内
   - RULE-SET,cn_ip,国内
-  - RULE-SET,geolocation-!cn,其他
   - MATCH,其他
 
 rule-anchor:
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  # proxy: DIRECT 让规则集下载走直连，不跟着分流链路（否则 url-test 选中坏节点/被墙节点时规则集会全部下载失败）
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: DIRECT}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs, proxy: DIRECT}
 rule-providers:
   private_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
   cn_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
   github_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
   twitter_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
   youtube_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
   google_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
   telegram_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
   netflix_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
   spotify_domain:
     <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
-  geolocation-!cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
 
   private_ip:
     <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
   cn_ip:
     <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
   google_ip:
     <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
   netflix_ip:
     <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
   twitter_ip:
     <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
   telegram_ip:
     <<: *ip
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
