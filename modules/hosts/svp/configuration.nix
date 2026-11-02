@@ -35,6 +35,7 @@ in
       # networkmanager
       # print
       samba
+      # tailscale
 
       # [ nix ]
       # nix-cache
@@ -115,10 +116,6 @@ in
           KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKRs2TkpwEXDkq96tZ7uflRsQHu1OgZb8fL/vxxu+kRY";
         };
       };
-
-      # services.tailscale = {
-      #   enable = true;
-      # };
 
     };
 }
