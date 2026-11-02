@@ -3,15 +3,16 @@
     { config, ... }:
     {
       services.memos = {
-        openFirewall = config.networking.firewall.enable;
+        # openFirewall = config.networking.firewall.enable; # 由 Caddy 反代,不再直接放行
         # dataDir = "/var/lib/memos/";
         settings = {
           MEMOS_MODE = "prod";
-          MEMOS_ADDR = "0.0.0.0";
-          MEMOS_PORT = "5239";
+          MEMOS_ADDR = "127.0.0.1";
+          MEMOS_PORT = toString config.myVars.ports.memos;
           MEMOS_DATA = config.services.memos.dataDir;
           MEMOS_DRIVER = "sqlite";
-          MEMOS_INSTANCE_URL = "http://localhost:5230";
+          # 分享链接 / Webhook 里用的对外地址
+          MEMOS_INSTANCE_URL = "http://memos.home.arpa";
         };
       };
     };

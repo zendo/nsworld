@@ -1,15 +1,17 @@
 {
   flake.modules.nixos.selfhosted =
-    { lib, pkgs, ... }:
+    { config, lib, pkgs, ... }:
     {
       systemd.services.comigo = {
         enable = lib.mkDefault false;
         after = [ "network.target" ];
         wants = [ "network.target" ];
         # https://comigo.xyz/manual/deployment#enviroment-variables
+        # 注意: comigo 不支持指定监听地址,固定 0.0.0.0,
+        # 只能靠防火墙 / 不要把 networking.firewall.enable 关掉来收口。
         environment = {
           HOME = "%S/comigo";
-          COMIGO_PORT = "1239";
+          COMIGO_PORT = toString config.myVars.ports.comigo;
           COMIGO_ENABLE_UPLOAD = "true";
         };
         serviceConfig = {

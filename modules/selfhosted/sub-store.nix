@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.selfhosted =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       # REF: https://surge.tel/08/2930 & https://hub.docker.com/r/xream/sub-store
       systemd.services.sub-store = {
@@ -10,8 +15,8 @@
         environment = {
           SUB_STORE_DATA_BASE_PATH = "%S/sub-store";
           SUB_STORE_FRONTEND_PATH = "${pkgs.sub-store-frontend}";
-          SUB_STORE_BACKEND_API_HOST = "::";
-          SUB_STORE_BACKEND_API_PORT = "3009";
+          SUB_STORE_BACKEND_API_HOST = "127.0.0.1";
+          SUB_STORE_BACKEND_API_PORT = toString config.myVars.ports.sub-store;
           SUB_STORE_BACKEND_MERGE = "true";
           # openssl rand -base64 12
           SUB_STORE_FRONTEND_BACKEND_PATH = "/kewejyo3baNXPELk";

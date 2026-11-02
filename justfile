@@ -43,6 +43,20 @@ commit-dix:
     git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
         -m "$(dix last)"
 
+[group('selfhosted')]
+selfhosted-list:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    cfg=.\#"nixosConfigurations.svp.config"
+    nix eval --json "$cfg" --apply '
+      c: {
+        domains = builtins.attrNames c.services.caddy.virtualHosts;
+        ip = c.myVars.ip.svp;
+      }' \
+      | jq -r '(.domains | map(sub("^https?://"; "")) | sort | .[]), .ip' \
+      | paste -sd'/' - \
+      | sed 's|^|/|'
+
 [group('emacs')]
 emacs-ob-tangle:
     emacs -Q --batch \

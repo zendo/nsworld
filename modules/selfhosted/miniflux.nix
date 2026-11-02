@@ -1,34 +1,17 @@
 {
   flake.modules.nixos.selfhosted =
-    {
-      config,
-      pkgs,
-      lib,
-      ...
-    }:
-    let
-      keyFile = pkgs.writeText "minifluxKeyFile" ''
-        ADMIN_USERNAME=demo
-        ADMIN_PASSWORD=123456
-      '';
-    in
+    { config, pkgs, ... }:
     {
       services.miniflux = {
-        adminCredentialsFile = keyFile;
+        adminCredentialsFile = pkgs.writeText "minifluxKeyFile" ''
+          ADMIN_USERNAME=demo
+          ADMIN_PASSWORD=123456
+        '';
         config = {
-          LISTEN_ADDR = "0.0.0.0:8081";
+          LISTEN_ADDR = "127.0.0.1:${toString config.myVars.ports.miniflux}";
+          # 生成 Feed 里的绝对链接用,必须是外部访问地址
+          BASE_URL = "http://miniflux.home.arpa";
         };
-      };
-
-      services.caddy = lib.mkIf config.services.miniflux.enable {
-        enable = true;
-
-        # reactflux http://192.168.2.30:51832
-        # virtualHosts."http://:51832".extraConfig = ''
-        #   root * ${pkgs.reactflux}
-        #   try_files {path} {path}/ /index.html
-        #   file_server
-        # '';
       };
 
       # services.rsshub = {

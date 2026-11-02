@@ -3,14 +3,12 @@
     { config, ... }:
     let
       hostIP = config.myVars.ip.yoga; # or "dashboard-host"
-      dufsPort = (toString config.services.dufs.port);
-      memosPort = (toString config.services.memos.settings.MEMOS_PORT);
-      navidromePort = (toString config.services.navidrome.settings.Port);
+      p = config.myVars.ports;
     in
     {
       services.homepage-dashboard = {
         openFirewall = config.networking.firewall.enable;
-        listenPort = 8089;
+        listenPort = p.homepage;
         allowedHosts = "*";
 
         services = [
@@ -18,25 +16,25 @@
             Selfhosted = [
               # {
               #   Navidrome = {
-              #     href = "http://${hostIP}:${navidromePort}";
+              #     href = "http://${hostIP}:${toString p.navidrome}";
               #     description = "Music service";
               #   };
               # }
               {
                 goshs = {
-                  href = "http://${hostIP}:8009";
+                  href = "http://${hostIP}:${toString p.goshs}";
                   description = "File server";
                 };
               }
               # {
               #   dufs = {
-              #     href = "http://${hostIP}:${dufsPort}";
+              #     href = "http://${hostIP}:${toString p.dufs}";
               #     description = "File server";
               #   };
               # }
               {
                 miniflux = {
-                  href = "http://${hostIP}:8081";
+                  href = "http://${hostIP}:${toString p.miniflux}";
                   description = "Rss reader";
                 };
               }

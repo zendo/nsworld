@@ -1,6 +1,6 @@
 server:
-  host: 0.0.0.0
-  port: 8088
+  host: 127.0.0.1
+  port: 4301
   cache-dir: /var/cache/dynacat
   db-path: /var/lib/dynacat/dynacat.db
 branding:
@@ -29,41 +29,42 @@ pages:
             title: Services
             sites:
               - title: Navidrome
-                url: http://192.168.2.30:4539
+                url: http://navidrome.home.arpa
                 icon: sh:navidrome
               - title: miniflux
-                url: http://192.168.2.30:51832
+                url: http://miniflux.home.arpa
                 icon: si:rss
               - title: memos
-                url: http://192.168.2.30:5239
+                url: http://memos.home.arpa
                 icon: sh:memos
               - title: comigo
-                url: http://192.168.2.30:1239
+                url: http://comigo.home.arpa
                 icon: sh:getcomics
               - title: suwayomi
-                url: http://192.168.2.30:8789
+                url: http://suwayomi.home.arpa
                 icon: sh:suwayomi
               - title: goshs
-                url: http://192.168.2.30:8009
+                url: http://goshs.home.arpa
                 icon: sh:gossa
               - title: aria2
-                url: http://192.168.2.30:6819
+                url: http://aria2.home.arpa
                 icon: sh:aria2
               - title: rqbit
-                url: http://192.168.2.30:3039
+                url: http://rqbit.home.arpa
                 icon: sh:qbittorrent
               - title: sub-store
-                url: http://192.168.2.30:3009
+                url: http://sub-store.home.arpa
                 icon: si:crayon
               - title: Beszel Hub
-                url: http://192.168.2.30:8099
+                url: http://beszel.home.arpa
                 icon: sh:beszel
-              - title: AdGuard Home
-                url: https://yourdomain.com/
-                icon: si:adguard
-              - title: Vaultwarden
-                url: https://yourdomain.com/
-                icon: si:vaultwarden
+              # 还没上线,先注释掉,免得 monitor 一直显示 down
+              # - title: AdGuard Home
+              #   url: http://adguard.home.arpa
+              #   icon: si:adguard
+              # - title: Vaultwarden
+              #   url: http://vaultwarden.home.arpa
+              #   icon: si:vaultwarden
           - type: bookmarks
             groups:
               - title: General

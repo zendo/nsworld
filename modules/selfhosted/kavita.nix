@@ -1,15 +1,15 @@
 {
   flake.modules.nixos.selfhosted =
     { config, pkgs, ... }:
-    let
-      # head -c 64 /dev/urandom | base64 --wrap=0
-      keyFile = pkgs.writeText "kavitaKeyFile" "RSNAYvtNYEuH9qKqQMmJYVI7IGQqcD25AYmhW82BlqHnh/qkq0FIHErXu/mUGMg0X1AbcYxucC1RPPDvlQAn9w==";
-    in
     {
       services.kavita = {
         settings = {
-          Port = 5009;
-          TokenKey = keyFile;
+          IpAddresses = "127.0.0.1";
+          Port = config.myVars.ports.kavita;
+          # head -c 64 /dev/urandom | base64 --wrap=0
+          TokenKey = pkgs.writeText
+            "kavitaKeyFile"
+            "RSNAYvtNYEuH9qKqQMmJYVI7IGQqcD25AYmhW82BlqHnh/qkq0FIHErXu/mUGMg0X1AbcYxucC1RPPDvlQAn9w==";
         };
       };
     };

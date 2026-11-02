@@ -3,19 +3,18 @@
     { config, ... }:
     {
       services.beszel.hub = {
-        host = "0.0.0.0";
-        port = 8099;
+        host = "127.0.0.1";
+        port = config.myVars.ports.beszel;
       };
 
-      services.beszel.agent = {
-        openFirewall = config.networking.firewall.enable;
-      };
+      # agent 与 hub 在同一台机器,走 127.0.0.1,不需要开端口
+      # services.beszel.agent.openFirewall = true;
 
       # services.grafana = {
       #   enable = true;
       #   settings = {
       #     server = {
-      #       http_addr = "0.0.0.0";
+      #       http_addr = "127.0.0.1";
       #       http_port = 3019;
       #     };
       #     security.secret_key = "123";
