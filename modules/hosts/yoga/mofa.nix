@@ -15,6 +15,12 @@
         # gui-for-clash
       ];
 
+      networking.firewall = {
+        # mihomo 给 LAN 里其它设备当代理用。UDP 也得开,mixed-port 同时提供 UDP relay。
+        allowedTCPPorts = [ 7890 ];
+        allowedUDPPorts = [ 7890 ];
+      };
+
       services.sing-box = {
         # enable = true;
         settings = {

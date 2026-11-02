@@ -117,5 +117,14 @@ in
         };
       };
 
+      # [ firewall ]
+      # BT 对等端口必须对外,反代救不了。端口直接取服务选项,不和 ports.nix / 服务配置漂移。
+      networking.firewall = {
+        allowedTCPPorts = [ config.services.rqbit.peerPort ];
+        allowedUDPPorts = [ config.services.rqbit.peerPort ];
+        allowedTCPPortRanges = config.services.aria2.settings.listen-port;
+        allowedUDPPortRanges = config.services.aria2.settings.listen-port;
+      };
+
     };
 }

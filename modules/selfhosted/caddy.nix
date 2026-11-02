@@ -22,6 +22,13 @@
         openFirewall = true;
 
         virtualHosts = {
+          # 兜底: 裸 IP 或任何没匹配上的 Host 都送去导航页。
+          # :80 = 匹配所有 Host;具体域名优先级更高,不影响下面那些站。
+          # 用 302 而不是 301,免得浏览器永久缓存(以后想看板换了也不用清缓存)
+          ":80".extraConfig = ''
+            redir * http://dynacat.home.arpa{uri} 302
+          '';
+
           "http://navidrome.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.navidrome}
           '';

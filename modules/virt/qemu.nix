@@ -42,6 +42,20 @@
         # yuzu
       ];
 
+      networking.firewall = {
+        # libvirt:虚拟网段 192.168.122.0/24。NixOS 的 libvirtd 模块只写自己的
+        # table ip libvirt_network(只有 forward/nat hook),不管 INPUT。
+        # 虚拟机向 192.168.122.1 要 DHCP(67)和 DNS(53)是 INPUT,
+        # 不放行的话虚拟机开机就拿不到 IP / 解析不了域名。
+        interfaces."virbr0" = {
+          allowedTCPPorts = [ 53 ];
+          allowedUDPPorts = [
+            53
+            67
+          ];
+        };
+      };
+
       virtualisation = {
         spiceUSBRedirection.enable = true; # USB passthrough
         libvirtd = {
