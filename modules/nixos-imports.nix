@@ -21,7 +21,6 @@
     # [ networking ]
     dns
     firewall
-    networkmanager
     # print
     # samba
 

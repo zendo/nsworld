@@ -9,6 +9,11 @@
     {
       i18n.defaultLocale = lib.mkDefault "zh_CN.UTF-8";
 
+      networking.networkmanager = {
+        enable = true; # conflict with `networking.wireless`
+        wifi.backend = "iwd"; # replace "wpa_supplicant"
+      };
+
       services.keyd.enable = true;
       # services.kanata.enable = true;
 
