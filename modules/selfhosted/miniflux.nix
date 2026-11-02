@@ -24,12 +24,12 @@
         enable = true;
 
         # reactflux http://192.168.2.30:51832
-      #   virtualHosts."http://:51832".extraConfig = ''
-      #     root * ${pkgs.reactflux}
-      #     try_files {path} {path}/ /index.html
-      #     file_server
-      #   '';
-      # };
+        # virtualHosts."http://:51832".extraConfig = ''
+        #   root * ${pkgs.reactflux}
+        #   try_files {path} {path}/ /index.html
+        #   file_server
+        # '';
+      };
 
       # services.rsshub = {
       #   enable = true;
