@@ -56,8 +56,8 @@ in
       # systemd.user.services.neiro.enable = true;
 
       # [ selfhosted ]
-      services.homepage-dashboard.enable = true;
-      services.miniflux.enable = true;
+      # services.homepage-dashboard.enable = true;
+      # services.miniflux.enable = true;
       # services.suwayomi-server.enable = true;
       services.goshs = {
         # enable = true;
