@@ -132,6 +132,10 @@ in
             reverse_proxy 127.0.0.1:8009
           '';
 
+          "http://webdav.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:8001
+          '';
+
           # demo / 123456
           "http://miniflux.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:8081
