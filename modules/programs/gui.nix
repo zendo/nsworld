@@ -8,6 +8,7 @@
     {
       environment.systemPackages = with pkgs; [
         levi
+        gitkwaken
         spor
         rwx
         rox
