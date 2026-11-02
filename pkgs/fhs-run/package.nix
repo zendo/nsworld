@@ -250,7 +250,7 @@ pkgs.buildFHSEnv {
       xdg-utils # xdg-open
       xdg-user-dirs
       desktop-file-utils
-      pax-utils # lddtree
+      # pax-utils # lddtree
       zenity
       # xdotool
       chafa
