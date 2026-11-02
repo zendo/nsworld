@@ -41,22 +41,22 @@
       # Allow aria2 to access downloadDir.
       users.users.aria2.extraGroups = [ "users" ];
 
-      services.caddy = {
-        enable = true;
-
-        # http://192.168.2.30:6819
-        virtualHosts.":6819".extraConfig = ''
-          handle /jsonrpc {
-            reverse_proxy 127.0.0.1:6800
-          }
-
-          handle {
-            root * ${pkgs.ariang}/share/ariang
-            encode zstd gzip
-            file_server
-          }
-        '';
-      };
+      # services.caddy = {
+      #   enable = true;
+      #
+      #   # http://192.168.2.30:6819
+      #   virtualHosts.":6819".extraConfig = ''
+      #     handle /jsonrpc {
+      #       reverse_proxy 127.0.0.1:6800
+      #     }
+      #
+      #     handle {
+      #       root * ${pkgs.ariang}/share/ariang
+      #       encode zstd gzip
+      #       file_server
+      #     }
+      #   '';
+      # };
 
     };
 }

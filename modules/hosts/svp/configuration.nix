@@ -132,8 +132,9 @@ in
             reverse_proxy 127.0.0.1:8009
           '';
 
+          # demo / 123456
           "http://miniflux.home.arpa".extraConfig = ''
-            reverse_proxy 127.0.0.1:51832
+            reverse_proxy 127.0.0.1:8081
           '';
 
           "http://memos.home.arpa".extraConfig = ''
