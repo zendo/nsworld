@@ -1,7 +1,5 @@
 /*
-  后端 = nftables (networking.firewall.backend 默认就是 "nftables")。
-
-  排查用的命令(真出问题的时候按顺序看):
+    排查用的命令(出问题的时候按顺序看):
     sudo nft list tables | grep nixos-fw            # 防火墙有没有真的加载
     sudo nft list chain inet nixos-fw input         # policy drop + 命中计数
     sudo nft list chain inet nixos-fw input-allow   # 端口白名单(全部真相都在这)
@@ -14,18 +12,19 @@
     #   journalctl -kf | grep "refused connection"
 */
 {
-  flake.modules.nixos.firewall =
-    { ... }:
-    {
-      networking.nftables.enable = true;
+  flake.modules.nixos.firewall = {
 
-      networking.firewall = {
-        enable = true;
-        # 默认就是 "loose",显式写出来:TUN(mihomo)、tailscale 子网路由、libvirt
-        # 这类非对称路由场景不会被 rp_filter 误杀。
-        checkReversePath = "loose";
-        # 被拒连接不写 journal(默认就是 false,写出来免得以后莫名被打开刷屏)
-        logRefusedConnections = false;
-      };
+    networking.nftables.enable = true;
+
+    networking.firewall = {
+      enable = true;
+      # backend = "nftables"; # 默认后端
+      # 默认就是 "loose",显式写出来:TUN(mihomo)、tailscale 子网路由、libvirt
+      # 这类非对称路由场景不会被 rp_filter 误杀。
+      checkReversePath = "loose";
+      # 被拒连接不写 journal(默认就是 false,写出来免得以后莫名被打开刷屏)
+      logRefusedConnections = false;
     };
+
+  };
 }
