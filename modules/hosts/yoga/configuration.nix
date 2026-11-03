@@ -125,7 +125,6 @@ in
           "acpi.prefer_microsoft_dsm_guid=1"
           # Fix touchpad multitouch sometimes unavailable
           # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
-          "psmouse.synaptics_intertouch=1"
         ];
 
         # kernel.sysctl."vm.swappiness" = 100; # sysctl vm.swappiness
