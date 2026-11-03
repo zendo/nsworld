@@ -65,14 +65,14 @@
       # foo = prev.callPackage ./foo/package.nix { };
 
       # sing-box = prev.sing-box.overrideAttrs (finalAttrs: {
-      #   version = "1.15.0-alpha.5";
+      #   version = "1.15.0-alpha.13";
       #   src = prev.fetchFromGitHub {
       #     owner = "SagerNet";
       #     repo = "sing-box";
       #     tag = "v${finalAttrs.version}";
-      #     hash = "sha256-Ce1eukO8ERZEKUoqwcJEJIZcO6VcG/cRnfCdg4FCYJw=";
+      #     hash = "sha256-1tP0gXUTLGVR32c11nypsZSx2FtBOmKMTJkt+7j/fJU=";
       #   };
-      #   vendorHash = "sha256-ttkDc8vRomNMNwqrZcGuvS0/M7Yqrpkz/h8wO5IVRQ4=";
+      #   vendorHash = "sha256-xZWWzvyTrbaxqHG1UdKOVLOd5dPf9z6JfPJf3WeTm5Y=";
       # });
 
       # Remove attributes from set
