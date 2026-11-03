@@ -51,6 +51,7 @@
             reverse_proxy 127.0.0.1:${toString p.memos}
           '';
 
+          # http://aria2.home.arpa:80/jsonrpc 123
           "http://aria2.home.arpa".extraConfig = ''
             handle /jsonrpc {
               reverse_proxy 127.0.0.1:${toString p.aria2}
