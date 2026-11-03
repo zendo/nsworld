@@ -34,22 +34,11 @@
 
       networking.firewall = {
         enable = true;
-
         # 默认就是 "loose",显式写出来:TUN(mihomo)、tailscale 子网路由、libvirt
         # 这类非对称路由场景不会被 rp_filter 误杀。
         checkReversePath = "loose";
-
         # 被拒连接不写 journal(默认就是 false,写出来免得以后莫名被打开刷屏)
         logRefusedConnections = false;
       };
-
-      # https://github.com/evilsocket/opensnitch
-      # services.opensnitch.enable = true;
-
-      # firewalld 保持关闭。
-      # ⚠ 一旦 services.firewalld.enable = true,networking.firewall.backend 会自动变成
-      #   "firewalld",那时 interfaces.* 直接断言失败、extraInputRules 静默失效。
-      #   真要用 firewalld,规则得改写成 services.firewalld.zones。
-      services.firewalld.enable = false;
     };
 }
