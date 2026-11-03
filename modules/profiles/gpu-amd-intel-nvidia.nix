@@ -1,3 +1,9 @@
+/*
+  lspci -k | grep -EA3 'VGA|Display'
+  nix shell nixpkgs#mesa-demos nixpkgs#vulkan-tools
+  glxinfo -B
+  vulkaninfo --summary
+*/
 {
   # https://wiki.nixos.org/wiki/AMD_GPU
   # https://github.com/NixOS/nixos-hardware/blob/master/common/gpu/amd/default.nix
