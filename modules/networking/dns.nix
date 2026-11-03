@@ -27,11 +27,8 @@
 */
 {
   flake.modules.nixos.dns = {
-    # ------------------------------------------------------------------ resolved
-    # 只管单播 DNS + 缓存;mDNS 归 avahi
     services.resolved = {
       enable = true;
-
       settings.Resolve = {
         # 一旦这里为 true,resolved 自己会去 bind 5353/udp 做 mDNS,
         # 和 avahi 抢端口,.local 解析会随机失败
@@ -48,9 +45,6 @@
         # 等换成本地 unbound / 公共 DoT 再打开
         DNSOverTLS = false;
 
-        # 只在没有任何 link 下发 DNS 时兜底。
-        # ⚠ 不要写 DNS = [...]:那会覆盖 DHCP 下发的 DNS(路由器),
-        #    home.arpa 也就没人回答了。
         FallbackDNS = [
           "223.5.5.5" # AliDNS
           "119.29.29.29" # DNSPod
@@ -58,17 +52,13 @@
       };
     };
 
-    # --------------------------------------------------------------------- avahi
-    # 只在 .local 上工作:宣告 svp.local,并解析别人的 *.local
+    # 宣告 svp.local,并解析别人的 *.local
     services.avahi = {
-      enable = true;
-
       # nsswitch: 插入 mdns4_minimal [NOTFOUND=return]
       nssmdns4 = true;
       # 家庭网段是纯 IPv4。开 IPv6 mDNS 只会让每次解析先等一次 AAAA 超时
       nssmdns6 = false;
-
-      # 5353/udp(防火墙开启时才生效)
+      # 5353/udp (防火墙开启时才生效)
       openFirewall = true;
 
       settings.server = {
@@ -76,7 +66,6 @@
         domain-name = "local"; # mDNS 就该用 .local,别改成 home.arpa
         use-ipv4 = true;
         use-ipv6 = false;
-
         # 把 mDNS 挡在 tailnet 和容器网桥之外:
         # 远程访问走 tailnet 的 split DNS(单播),容器里也没有 avahi 客户端。
         # 用 deny 而不是 allow:网卡改名/插网线都不会把 DNS 弄断。
@@ -94,23 +83,17 @@
         #   disable-publishing 默认 true —— 即默认【不宣告自己】,
         #   只解析别人。不改成 false 的话,别的机器 ping svp.local 是不通的。
         disable-publishing = false;
-
         # 服务器上没人跑桌面程序,不需要给 user service 留发布通道
         disable-user-service-publishing = true;
-
         # 宣告所有本地地址(192.168.2.30),这样 svp.local 能正查到 A 记录
         publish-addresses = true;
-
         # 让 Finder / 资源管理器 的"网络"里能看到这台机器
         publish-workstation = true;
-
         # 宣告本地域名,方便别人浏览
         publish-domain = true;
-
         # HINFO 会广播 CPU 型号和操作系统,纯属多余的信息泄露
         publish-hinfo = false;
       };
-
       # 两个都别开:
       #   reflector     把 mDNS 转发到别的网段(等于跨网桥接广播)
       #   wideArea      中心化 DNS-SD,牵涉 CVE-2024-52615
@@ -126,7 +109,7 @@
       # hosts = { "20.205.243.166" = [ "github.com" ]; };
     };
 
-    # ⚠ 联动提醒:modules/networking/tailscale.nix 里有一个 dnsmasq(给 tailnet 做
+    # ⚠ 联动提醒 tailscale.nix 里有一个 dnsmasq(给 tailnet 做
     #   home.arpa 的 split DNS)。必须保持 services.dnsmasq.resolveLocalQueries = false,
     #   因为它默认 true 会把 networking.nameservers 改成 127.0.0.1,
     #   而 resolved 的 DNS 默认就是取 networking.nameservers —— 会自己咬自己。
