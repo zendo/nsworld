@@ -4,6 +4,7 @@
     {
       environment.systemPackages = with pkgs; [
         nodejs
+        paseo
         # omp
         pi-coding-agent
         opencode

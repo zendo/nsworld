@@ -44,7 +44,7 @@ commit-dix:
         -m "$(dix last)"
 
 [group('selfhosted')]
-selfhosted-list:
+selfhosted-domains:
     #!/usr/bin/env bash
     set -euo pipefail
     cfg=.\#"nixosConfigurations.svp.config"
