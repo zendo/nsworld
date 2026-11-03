@@ -54,6 +54,17 @@
             67
           ];
         };
+        # 以下是为了访问宿主机的 mihomo tun
+        # 关键：将 virbr0 和 mihomo 的 TUN 设备加入信任
+        trustedInterfaces = [
+          "virbr0"
+          "Meta" # mihomo TUN
+        ];
+        # 关键：显式放行 virbr0 的转发流量
+        extraForwardRules = ''
+          iifname "virbr0" accept
+          oifname "virbr0" ct state established,related accept
+        '';
       };
 
       virtualisation = {
