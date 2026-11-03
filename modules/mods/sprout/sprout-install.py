@@ -9,6 +9,7 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -27,7 +28,8 @@ EFIBOOTMGR = "@efibootmgr@/bin/efibootmgr"
 FINDMNT = "@util-linux@/bin/findmnt"
 LSBLK = "@util-linux@/bin/lsblk"
 
-TIMEOUT = int("@timeout@")
+LOADER_TIMEOUT: str = json.loads(r'''@loaderTimeout@''')
+LOADER_REBOOT_ON_ERROR: str = json.loads(r'''@loaderRebootOnError@''')
 CONFIGURATION_LIMIT = int("@configurationLimit@")
 
 CAN_TOUCH_EFI_VARIABLES = "@canTouchEfiVariables@" == "1"
@@ -36,6 +38,7 @@ EFI_INSTALL_AS_REMOVABLE = "@efiInstallAsRemovable@" == "1"
 FIRMWARE_ENTRY_LABEL = @firmwareEntryLabel@
 
 DRIVERS: dict[str, str] = json.loads(r'''@drivers@''')
+DRIVER_PROVIDES: dict[str, str] = json.loads(r'''@driverProvides@''')
 
 EXTRA_FILES: dict[str, str] = json.loads(r'''@extraFiles@''')
 
@@ -67,6 +70,7 @@ DRIVERS_DIR = SPROUT_DIR / "drivers"
 EXTRA_FILES_DIR = SPROUT_DIR / "extra-files"
 SPROUT_BINARY = SPROUT_DIR / "sprout.efi"
 SPROUT_CONFIG = Path("sprout.toml")
+LOADER_CONF = Path("loader/loader.conf")
 
 EXTRA_FILE_NAME_RE: re.Pattern[str] = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 VALUE_IDENTIFIER_RE: re.Pattern[str] = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
@@ -1264,18 +1268,46 @@ def install_extra_files(
     return installed
 
 
+def validate_loader_conf_params(timeout: str, reboot_on_error: str) -> None:
+    if not isinstance(timeout, str):
+        raise RuntimeError(
+            f"loader timeout must be a string, got {type(timeout).__name__}"
+        )
+    if timeout != "menu-force" and not (timeout.isascii() and timeout.isdigit()):
+        raise RuntimeError(
+            f"invalid loader timeout: {timeout!r}; expected 'menu-force' or non-negative ASCII decimal integer"
+        )
+    if not isinstance(reboot_on_error, str):
+        raise RuntimeError(
+            f"loader reboot-on-error must be a string, got {type(reboot_on_error).__name__}"
+        )
+    if reboot_on_error not in ("auto", "yes", "no"):
+        raise RuntimeError(
+            f"invalid loader reboot-on-error: {reboot_on_error!r}; expected 'auto', 'yes', or 'no'"
+        )
+
+
+def generate_loader_conf(
+    timeout: str = LOADER_TIMEOUT,
+    reboot_on_error: str = LOADER_REBOOT_ON_ERROR,
+) -> str:
+    validate_loader_conf_params(timeout, reboot_on_error)
+    return f"timeout {timeout}\nreboot-on-error {reboot_on_error}\n"
+
+
 def generate_sprout_config(
     entries: Sequence[BootEntry],
     default_entry: str,
     drivers: dict[str, Path],
     settings: dict[str, Any] | None = None,
     extra_files: dict[str, Path] | None = None,
+    driver_provides: dict[str, Any] | None = None,
 ) -> str:
     if settings is None:
         settings = load_custom_settings()
 
     for key in settings:
-        if key not in ("options", "entries", "actions", "phases", "values"):
+        if key not in ("options", "entries", "actions", "phases", "values", "menu-styles"):
             raise RuntimeError(f"unsupported custom settings section: {key!r}")
 
     options_cfg = settings.get("options", {})
@@ -1287,8 +1319,53 @@ def generate_sprout_config(
                 f"unsupported or module-owned option in custom settings: {opt_key!r}"
             )
     menu_style = options_cfg.get("menu-style")
-    if menu_style is not None and menu_style not in ("simple", "basic"):
+    if menu_style is not None and menu_style not in ("simple", "basic", "graphical"):
         raise RuntimeError(f"invalid custom settings menu-style: {menu_style!r}")
+
+    custom_menu_styles = settings.get("menu-styles")
+    if custom_menu_styles is not None:
+        if not isinstance(custom_menu_styles, dict):
+            raise RuntimeError("custom settings 'menu-styles' must be a table")
+        for ms_key in custom_menu_styles:
+            if ms_key != "graphical":
+                raise RuntimeError(
+                    f"unsupported custom settings menu-style: {ms_key!r}"
+                )
+        graphical_cfg = custom_menu_styles.get("graphical")
+        if graphical_cfg is not None:
+            if not isinstance(graphical_cfg, dict):
+                raise RuntimeError(
+                    "custom settings 'menu-styles.graphical' must be a table"
+                )
+            for g_key in graphical_cfg:
+                if g_key not in ("enable-mouse", "enable-logo", "enable-animation"):
+                    raise RuntimeError(
+                        f"unknown field in custom settings 'menu-styles.graphical': {g_key!r}"
+                    )
+            for g_key, g_val in graphical_cfg.items():
+                if not isinstance(g_val, bool):
+                    raise RuntimeError(
+                        f"custom settings 'menu-styles.graphical.{g_key}' must be a boolean"
+                    )
+
+    effective_driver_provides = (
+        DRIVER_PROVIDES if driver_provides is None else driver_provides
+    )
+    if not isinstance(effective_driver_provides, dict):
+        raise RuntimeError("driver metadata must be a table")
+    for d_name, d_prov in effective_driver_provides.items():
+        if not isinstance(d_name, str) or not isinstance(d_prov, str):
+            raise RuntimeError(
+                "driver metadata entries must be string key-value pairs"
+            )
+        if d_name not in drivers:
+            raise RuntimeError(
+                f"driver metadata references undeclared driver: {d_name!r}"
+            )
+        if d_prov not in ("any", "filesystems"):
+            raise RuntimeError(
+                f"invalid 'provides' for driver {d_name!r}: {d_prov!r}; expected 'any' or 'filesystems'"
+            )
 
     custom_entries = settings.get("entries", {})
     if not isinstance(custom_entries, dict):
@@ -1374,6 +1451,15 @@ def generate_sprout_config(
                 raise RuntimeError(
                     f"custom action {action_id!r} specifies both 'linux-initrd' and 'linux-initrd-chain'"
                 )
+            if "devicetree" in vdata and vdata["devicetree"] is not None and not isinstance(vdata["devicetree"], str):
+                raise RuntimeError(
+                    f"custom action {action_id!r} chainload 'devicetree' must be a string"
+                )
+            for cl_k in vdata:
+                if cl_k not in ("path", "options", "linux-initrd", "linux-initrd-chain", "devicetree"):
+                    raise RuntimeError(
+                        f"custom action {action_id!r} chainload has unknown field: {cl_k!r}"
+                    )
         elif variant == "print":
             text = vdata.get("text", "")
             if not isinstance(text, str):
@@ -1466,11 +1552,25 @@ def generate_sprout_config(
         "",
         "[options]",
         f"default-entry = {quote_toml(default_entry)}",
-        f"menu-timeout = {TIMEOUT}",
     ]
 
     if menu_style is not None:
         lines.append(f"menu-style = {quote_toml(menu_style)}")
+
+    if custom_menu_styles and "graphical" in custom_menu_styles:
+        graphical_cfg = custom_menu_styles["graphical"]
+        if graphical_cfg:
+            lines.extend(
+                [
+                    "",
+                    "[menu-styles.graphical]",
+                ]
+            )
+            for g_key in ("enable-mouse", "enable-logo", "enable-animation"):
+                if g_key in graphical_cfg:
+                    lines.append(
+                        f"{g_key} = {'true' if graphical_cfg[g_key] else 'false'}"
+                    )
 
     all_root_values: dict[str, str] = {}
     if custom_values:
@@ -1507,6 +1607,7 @@ def generate_sprout_config(
                         lines.append(f"{quote_toml(vk)} = {quote_toml(vv)}")
 
     for name, path in sorted(drivers.items()):
+        provides = effective_driver_provides.get(name, "any")
         lines.extend(
             [
                 "",
@@ -1514,6 +1615,8 @@ def generate_sprout_config(
                 f"path = {quote_toml(uefi_path(path))}",
             ]
         )
+        if provides == "filesystems":
+            lines.append(f"provides = {quote_toml('filesystems')}")
 
     for entry in entries:
         lines.extend(
@@ -1589,6 +1692,8 @@ def generate_sprout_config(
                 lines.append(
                     f"chainload.linux-initrd-chain = {array_toml(cl['linux-initrd-chain'])}"
                 )
+            if cl.get("devicetree") is not None:
+                lines.append(f"chainload.devicetree = {quote_toml(cl['devicetree'])}")
         elif "print" in action_data:
             pr = action_data["print"]
             lines.append(f"print.text = {quote_toml(pr.get('text', ''))}")
@@ -1654,6 +1759,31 @@ def fixed_loader_paths() -> list[Path]:
     return paths
 
 
+def fixed_transaction_paths() -> list[Path]:
+    return fixed_loader_paths() + [
+        esp_path(SPROUT_CONFIG),
+        esp_path(LOADER_CONF),
+    ]
+
+
+def files_identical(path1: Path, path2: Path) -> bool:
+    try:
+        s1 = path1.stat()
+        s2 = path2.stat()
+        if s1.st_size != s2.st_size:
+            return False
+        with path1.open("rb") as f1, path2.open("rb") as f2:
+            while True:
+                c1 = f1.read(65536)
+                c2 = f2.read(65536)
+                if c1 != c2:
+                    return False
+                if not c1:
+                    return True
+    except OSError:
+        return False
+
+
 class FixedLoaderTransaction:
     """Manages backup and atomic restoration of fixed-path bootloaders."""
 
@@ -1669,12 +1799,28 @@ class FixedLoaderTransaction:
         try:
             temp_path = Path(self._temp_dir.name)
             for index, path in enumerate(self.paths):
-                if path.is_file():
-                    backup_file = temp_path / f"loader_{index}.efi"
-                    atomic_copy(path, backup_file, replace=True)
-                    self.backups.append((path, backup_file))
-                else:
+                try:
+                    st = path.lstat()
+                except FileNotFoundError:
                     self.backups.append((path, None))
+                    continue
+
+                if stat.S_ISDIR(st.st_mode):
+                    raise RuntimeError(
+                        f"transaction path is an existing directory: {path}"
+                    )
+                if stat.S_ISLNK(st.st_mode):
+                    raise RuntimeError(
+                        f"transaction path is a symbolic link: {path}"
+                    )
+                if not stat.S_ISREG(st.st_mode):
+                    raise RuntimeError(
+                        f"transaction path is not a regular file: {path}"
+                    )
+
+                backup_file = temp_path / f"loader_{index}.efi"
+                atomic_copy(path, backup_file, replace=True)
+                self.backups.append((path, backup_file))
             return self
         except BaseException:
             if self._temp_dir is not None:
@@ -1700,6 +1846,8 @@ class FixedLoaderTransaction:
         for path, backup_file in reversed(self.backups):
             try:
                 if backup_file is not None:
+                    if path.is_file() and files_identical(backup_file, path):
+                        continue
                     atomic_copy(backup_file, path, replace=True)
                 else:
                     path.unlink(missing_ok=True)
@@ -1867,6 +2015,16 @@ def parse_and_validate_sprout_config(
             raise RuntimeError(
                 f"published Sprout configuration {config_path} contains invalid 'options' table"
             )
+        menu_style_val = options_table.get("menu-style")
+        if menu_style_val is not None:
+            if not isinstance(menu_style_val, str) or menu_style_val not in (
+                "simple",
+                "basic",
+                "graphical",
+            ):
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} has invalid 'options.menu-style': {menu_style_val!r}"
+                )
         autoconfigure_val = options_table.get("autoconfigure")
         if autoconfigure_val is not None:
             if not isinstance(autoconfigure_val, bool):
@@ -1877,6 +2035,31 @@ def parse_and_validate_sprout_config(
                 raise RuntimeError(
                     f"published Sprout configuration {config_path} enables 'options.autoconfigure', which introduces dynamic runtime references that cannot be statically protected"
                 )
+
+    menu_styles_table = data.get("menu-styles")
+    if menu_styles_table is not None:
+        if not isinstance(menu_styles_table, dict):
+            raise RuntimeError(
+                f"published Sprout configuration {config_path} contains invalid 'menu-styles' table"
+            )
+        for ms_name, ms_entry in menu_styles_table.items():
+            if ms_name != "graphical":
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} contains unsupported menu-style {ms_name!r}"
+                )
+            if not isinstance(ms_entry, dict):
+                raise RuntimeError(
+                    f"published Sprout configuration {config_path} 'menu-styles.graphical' is not a table"
+                )
+            for k, v in ms_entry.items():
+                if k not in ("enable-mouse", "enable-logo", "enable-animation"):
+                    raise RuntimeError(
+                        f"published Sprout configuration {config_path} 'menu-styles.graphical' contains unknown field {k!r}"
+                    )
+                if not isinstance(v, bool):
+                    raise RuntimeError(
+                        f"published Sprout configuration {config_path} 'menu-styles.graphical.{k}' is not a boolean"
+                    )
 
     if data.get("autoconfigure") is True:
         raise RuntimeError(
@@ -1944,11 +2127,25 @@ def parse_and_validate_sprout_config(
                 raise RuntimeError(
                     f"published Sprout configuration {config_path} contains invalid driver entry {driver_name!r}"
                 )
+            for dk in driver_entry:
+                if dk not in ("path", "provides"):
+                    raise RuntimeError(
+                        f"published Sprout configuration {config_path} driver {driver_name!r} contains unknown field {dk!r}"
+                    )
             driver_path_str = driver_entry.get("path")
             if not isinstance(driver_path_str, str):
                 raise RuntimeError(
                     f"published Sprout configuration {config_path} driver {driver_name!r} has missing or non-string path"
                 )
+            driver_provides_str = driver_entry.get("provides")
+            if driver_provides_str is not None:
+                if not isinstance(driver_provides_str, str) or driver_provides_str not in (
+                    "any",
+                    "filesystems",
+                ):
+                    raise RuntimeError(
+                        f"published Sprout configuration {config_path} driver {driver_name!r} has invalid 'provides': {driver_provides_str!r}; expected 'any' or 'filesystems'"
+                    )
             referenced.add(
                 resolve_stamped_path(
                     driver_path_str,
@@ -2827,40 +3024,50 @@ def install_bootloader(
 
         drivers = install_drivers()
 
-        # Install the loader before publishing the new configuration. At this
-        # point all boot artifacts needed by the new configuration already exist.
-        with FixedLoaderTransaction(fixed_loader_paths()) as transaction:
+        configuration = generate_sprout_config(
+            entries,
+            default_entry.identifier,
+            drivers,
+            extra_files=extra_files,
+            driver_provides=DRIVER_PROVIDES,
+        )
+
+        loader_conf_content = generate_loader_conf(
+            LOADER_TIMEOUT,
+            LOADER_REBOOT_ON_ERROR,
+        )
+
+        referenced_paths = parse_and_validate_sprout_config(
+            configuration,
+            esp_path(SPROUT_CONFIG),
+            check_files_exist=True,
+        )
+
+        declared_extra_file_paths = {
+            esp_path(dest) for dest in extra_files.values()
+        }
+        combined_keep_set = referenced_paths | declared_extra_file_paths
+
+        # Install the loader and publish both configuration files transactionally.
+        with FixedLoaderTransaction(fixed_transaction_paths()) as transaction:
             install_sprout_binary()
 
             if EFI_INSTALL_AS_REMOVABLE:
                 install_removable_loader()
 
-            configuration = generate_sprout_config(
-                entries,
-                default_entry.identifier,
-                drivers,
-                extra_files=extra_files,
-            )
-
-            referenced_paths = parse_and_validate_sprout_config(
-                configuration,
-                esp_path(SPROUT_CONFIG),
-                check_files_exist=True,
-            )
-
-            declared_extra_file_paths = {
-                esp_path(dest) for dest in extra_files.values()
-            }
-            combined_keep_set = referenced_paths | declared_extra_file_paths
-
-            # Atomically replace sprout.toml only after all referenced files are present.
+            # Atomically replace sprout.toml and loader/loader.conf
             atomic_write_text(
                 esp_path(SPROUT_CONFIG),
                 configuration,
             )
 
-            transaction.commit()
+            atomic_write_text(
+                esp_path(LOADER_CONF),
+                loader_conf_content,
+            )
+
             artifact_tx.commit()
+            transaction.commit()
 
     sync_filesystem(EFI_SYS_MOUNT_POINT)
 

@@ -18,6 +18,12 @@
       cfg = config.boot.loader.sprout;
       efi = config.boot.loader.efi;
 
+      graphicalSettings = cfg.settings.menu-styles.graphical;
+      hasNonDefaultGraphicalSettings =
+        graphicalSettings.enable-mouse != false
+        || graphicalSettings.enable-logo != true
+        || graphicalSettings.enable-animation != true;
+
       normalizedSettings = {
         options = lib.filterAttrs (_k: v: v != null) cfg.settings.options;
         entries = lib.mapAttrs (
@@ -44,6 +50,9 @@
               })
               // (lib.optionalAttrs (action.chainload.linux-initrd-chain != [ ]) {
                 inherit (action.chainload) linux-initrd-chain;
+              })
+              // (lib.optionalAttrs (action.chainload.devicetree != null) {
+                inherit (action.chainload) devicetree;
               });
             }
           else if action.print != null then
@@ -76,6 +85,17 @@
       }
       // (lib.optionalAttrs (cfg.settings.values != { }) {
         inherit (cfg.settings) values;
+      })
+      // (lib.optionalAttrs hasNonDefaultGraphicalSettings {
+        menu-styles = {
+          graphical = {
+            inherit (graphicalSettings)
+              enable-mouse
+              enable-logo
+              enable-animation
+              ;
+          };
+        };
       })
       // (lib.optionalAttrs
         (
@@ -117,15 +137,11 @@
           efiSysMountPoint = toString efi.efiSysMountPoint;
           sproutBinary = "${cfg.package}/lib/sprout/sprout.efi";
 
-          timeout =
-            if config.boot.loader.timeout == null then
-              throw ''
-                boot.loader.sprout requires boot.loader.timeout to be non-null.
-                Sprout's native configuration format currently has no equivalent
-                for NixOS's null timeout.
-              ''
-            else
-              toString config.boot.loader.timeout;
+          loaderTimeout = builtins.toJSON (
+            if config.boot.loader.timeout == null then "menu-force" else toString config.boot.loader.timeout
+          );
+
+          loaderRebootOnError = builtins.toJSON cfg.loaderConf.reboot-on-error;
 
           configurationLimit =
             if cfg.configurationLimit == null then "0" else toString cfg.configurationLimit;
@@ -136,7 +152,9 @@
 
           firmwareEntryLabel = builtins.toJSON cfg.firmwareEntryLabel;
 
-          drivers = builtins.toJSON (lib.mapAttrs (_name: path: toString path) cfg.drivers);
+          drivers = builtins.toJSON (lib.mapAttrs (_name: driver: toString driver.path) cfg.drivers);
+
+          driverProvides = builtins.toJSON (lib.mapAttrs (_name: driver: driver.provides) cfg.drivers);
 
           extraFiles = builtins.toJSON (lib.mapAttrs (_name: path: toString path) cfg.extraFiles);
 
@@ -193,11 +211,38 @@
         };
 
         drivers = mkOption {
-          type = types.attrsOf types.path;
+          type = types.attrsOf (
+            types.coercedTo types.path (p: { path = p; }) (
+              types.submodule {
+                options = {
+                  path = mkOption {
+                    type = types.path;
+                    description = ''
+                      Path to the EFI driver binary.
+                    '';
+                  };
+
+                  provides = mkOption {
+                    type = types.enum [
+                      "any"
+                      "filesystems"
+                    ];
+                    default = "any";
+                    description = ''
+                      Driver capability classification: "any" or "filesystems".
+                    '';
+                  };
+                };
+              }
+            )
+          );
           default = { };
           example = lib.literalExpression ''
             {
-              btrfs = pkgs.btrfs-efi-driver;
+              btrfs = {
+                path = pkgs.btrfs-efi-driver;
+                provides = "filesystems";
+              };
             }
           '';
           description = ''
@@ -205,6 +250,9 @@
 
             Each attribute name becomes the Sprout driver name and the installed
             filename under `EFI/Sprout/drivers/`.
+
+            Accepts either a path directly (normalized to `provides = "any"`), or
+            a structured attribute set with `path` and `provides`.
           '';
         };
 
@@ -229,6 +277,31 @@
           '';
         };
 
+        loaderConf = mkOption {
+          type = types.submodule {
+            options = {
+              reboot-on-error = mkOption {
+                type = types.enum [
+                  "auto"
+                  "yes"
+                  "no"
+                ];
+                default = "auto";
+                description = ''
+                  Whether Sprout should reboot when an entry fails to start:
+                  - `auto`: reboot only when a boot-counted entry has consumed a try and still has tries remaining.
+                  - `yes`: reboot after every failed entry start. This can cause an endless reboot loop.
+                  - `no`: never reboot after an entry fails to start.
+                '';
+              };
+            };
+          };
+          default = { };
+          description = ''
+            Configuration options for Sprout's `loader/loader.conf`.
+          '';
+        };
+
         settings = mkOption {
           type = types.submodule {
             options = {
@@ -240,11 +313,12 @@
                         types.enum [
                           "simple"
                           "basic"
+                          "graphical"
                         ]
                       );
                       default = null;
                       description = ''
-                        Sprout menu style: "simple" or "basic".
+                        Sprout menu style: "simple", "basic", or "graphical".
                       '';
                     };
                   };
@@ -252,6 +326,50 @@
                 default = { };
                 description = ''
                   Static Sprout menu options.
+                '';
+              };
+
+              menu-styles = mkOption {
+                type = types.submodule {
+                  options = {
+                    graphical = mkOption {
+                      type = types.submodule {
+                        options = {
+                          enable-mouse = mkOption {
+                            type = types.bool;
+                            default = false;
+                            description = ''
+                              Enable mouse support in the graphical menu.
+                            '';
+                          };
+
+                          enable-logo = mkOption {
+                            type = types.bool;
+                            default = true;
+                            description = ''
+                              Enable display of the built-in Sprout logo in the graphical menu.
+                            '';
+                          };
+
+                          enable-animation = mkOption {
+                            type = types.bool;
+                            default = true;
+                            description = ''
+                              Enable animations in the graphical menu.
+                            '';
+                          };
+                        };
+                      };
+                      default = { };
+                      description = ''
+                        Settings for the graphical menu style.
+                      '';
+                    };
+                  };
+                };
+                default = { };
+                description = ''
+                  Menu style configurations for Sprout.
                 '';
               };
 
@@ -336,6 +454,17 @@
                                   default = [ ];
                                   description = ''
                                     List of paths to Linux initrds. Mutually exclusive with `linux-initrd`.
+                                  '';
+                                };
+
+                                devicetree = mkOption {
+                                  type = types.nullOr types.str;
+                                  default = null;
+                                  description = ''
+                                    Optional ESP-relative path to a flattened devicetree passed to the chainloaded EFI image.
+
+                                    Note: Sprout v0.0.31 cannot verify a devicetree under Secure Boot and therefore ignores
+                                    it with a warning in Secure Boot mode.
                                   '';
                                 };
                               };
@@ -583,11 +712,10 @@
           }
 
           {
-            assertion = config.boot.loader.timeout != null && config.boot.loader.timeout >= 0;
+            assertion = config.boot.loader.timeout == null || config.boot.loader.timeout >= 0;
 
             message = ''
-              boot.loader.timeout must be non-null and non-negative. Sprout does not
-              support null / an indefinitely displayed boot menu.
+              boot.loader.timeout must be null or a non-negative integer.
             '';
           }
 

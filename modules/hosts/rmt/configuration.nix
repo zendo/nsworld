@@ -83,7 +83,17 @@ in
       boot.loader = {
         efi.efiSysMountPoint = "/efi";
         # limine.enable = true;
-        sprout.enable = true;
+        sprout = {
+          enable = true;
+          settings = {
+            options.menu-style = "graphical";
+            menu-styles.graphical = {
+              enable-mouse = false;
+              enable-logo = true;
+              enable-animation = true;
+            };
+          };
+        };
       };
     };
 }
