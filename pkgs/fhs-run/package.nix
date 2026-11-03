@@ -130,7 +130,8 @@ pkgs.buildFHSEnv {
       shared-mime-info # glib mime type lookups
       libsoup_3
       libproxy
-      webkitgtk_4_1 # ±826 MiB of the whole closure, drop if nothing embeds a web view
+      webkitgtk_4_1 # ±826 MiB
+      # webkitgtk_6_0
       glib-networking
       libayatana-appindicator
 
@@ -140,6 +141,7 @@ pkgs.buildFHSEnv {
       qt6.qtwayland
       # qt6.qtdeclarative # libQt6QuickControls2.so.6
       # qt6.qtmultimedia
+      # kdePackages.mpvqt # libMpvQt.so.4
 
       # --- X11 -------------------------------------------------------------
       libx11

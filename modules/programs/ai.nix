@@ -5,6 +5,7 @@
       environment.systemPackages = with pkgs; [
         nodejs
         paseo
+        # t3code
         # omp
         pi-coding-agent
         opencode
