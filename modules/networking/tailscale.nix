@@ -30,6 +30,7 @@
     tailscale status           # 确认在线
 */
 {
+  # https://chatgpt.com/s/t_6ae875b28f448191a6c25d4dbca68fb8
   flake.modules.nixos.tailscale =
     { config, lib, ... }:
     {

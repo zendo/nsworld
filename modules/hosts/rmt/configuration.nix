@@ -88,7 +88,7 @@ in
           settings = {
             options.menu-style = "graphical";
             menu-styles.graphical = {
-              enable-mouse = false;
+              enable-mouse = true;
               enable-logo = true;
               enable-animation = true;
             };

@@ -23,6 +23,8 @@
     {
       options.myVars.ports = lib.mkOption { type = lib.types.attrsOf lib.types.port; };
 
+      # ssh -N -L 4201:localhost:4202 user@ip
+      # web browser http://localhost:4202
       config.myVars.ports = {
         # 40xx 媒体 / 阅读
         navidrome = 4001;
