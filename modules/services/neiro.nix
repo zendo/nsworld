@@ -11,10 +11,12 @@
         ];
         requires = [ "pipewire.service" ];
         wantedBy = [ "pipewire.service" ];
+        # pw-dump/pw-metadata/pw-play from pipewire, wpctl from wireplumber,
+        # and ffmpeg for the in-daemon A/B tuner (Clip::from_sample).
         path = [
-          pkgs.pulseaudio
           pkgs.pipewire
           pkgs.wireplumber
+          # pkgs.ffmpeg-headless
         ];
         serviceConfig = {
           ExecStart = "${pkgs.neiro}/bin/neiro daemon";

@@ -53,7 +53,7 @@ in
       users.defaultUserShell = pkgs.zsh;
 
       # [ services ]
-      # systemd.user.services.neiro.enable = true;
+      systemd.user.services.neiro.enable = true;
 
       # [ selfhosted ]
       # services.homepage-dashboard.enable = true;
