@@ -1,18 +1,5 @@
 /*
-  后端 = nftables(services.firewalld.enable = false 且 networking.nftables.enable = true
-  时,networking.firewall.backend 默认就是 "nftables")。
-
-  为什么不用 firewalld:
-    - 所有 nixpkgs 模块的 openFirewall 都往 networking.firewall.* 写,nftables 后端全兑现;
-      切成 firewalld 后端后 interfaces.* 会直接断言失败,extraInputRules 是静默丢弃
-    - 规则声明式、进 git、nft list ruleset 就是全部真相
-    - firewalld 的运行时改动(firewall-cmd)重启就没了,加了 --permanent 又不在 git 里
-
-  ⚠ 这个组是通用的:svp 直接引入,rmt / yoga 通过 modules/nixos-imports.nix 引入。
-    所以这里只放"每台机器都要的",具体端口一律交给各服务模块的 openFirewall;
-    只属于某台机器的端口写在那台的 host 模块里,例如:
-      svp  的 BT 对等端口(6881-6890)→ modules/hosts/svp/configuration.nix
-      yoga 的 mihomo 7890 / libvirt virbr0 → modules/hosts/yoga/configuration.nix
+  后端 = nftables (networking.firewall.backend 默认就是 "nftables")。
 
   排查用的命令(真出问题的时候按顺序看):
     sudo nft list tables | grep nixos-fw            # 防火墙有没有真的加载

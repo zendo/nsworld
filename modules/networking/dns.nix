@@ -100,15 +100,6 @@
       settings.reflector.enable-reflector = false;
     };
 
-    networking = {
-      # 写了这个就会覆盖 DHCP 下发的 DNS,home.arpa 立刻没人回答。
-      # 想换上游请改用 resolved 的 FallbackDNS / 路由器 DHCP 设置。
-      # nameservers = [ "223.5.5.5" "119.29.29.29" ];
-
-      # 域名解析统一交给路由器,这里不写死 IP
-      # hosts = { "20.205.243.166" = [ "github.com" ]; };
-    };
-
     # ⚠ 联动提醒 tailscale.nix 里有一个 dnsmasq(给 tailnet 做
     #   home.arpa 的 split DNS)。必须保持 services.dnsmasq.resolveLocalQueries = false,
     #   因为它默认 true 会把 networking.nameservers 改成 127.0.0.1,
