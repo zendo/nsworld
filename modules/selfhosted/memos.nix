@@ -3,7 +3,6 @@
     { config, ... }:
     {
       services.memos = {
-        # openFirewall = config.networking.firewall.enable; # 由 Caddy 反代,不再直接放行
         # dataDir = "/var/lib/memos/";
         settings = {
           MEMOS_MODE = "prod";

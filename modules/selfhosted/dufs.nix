@@ -8,7 +8,6 @@
         servePath = lib.mkDefault "/data";
         bindAddresses = [ "127.0.0.1" ];
         port = config.myVars.ports.dufs;
-        # openFirewall = config.networking.firewall.enable; # 由 Caddy 反代,不再直接放行
         settings = {
           allow-upload = true;
           allow-delete = true;

@@ -60,7 +60,8 @@ sniffer:
 tun:
   enable: true
   stack: mips # system / gvisor / mixed / mips
-  # device: utun
+  mtu: 1500
+  # device: utun0
   auto-route: true
   strict-route: true
   auto-redirect: true # 仅 Linux，需要 iptables 或 nftables 存在，否则 TUN 无法启动

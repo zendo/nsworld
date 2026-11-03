@@ -1,17 +1,17 @@
-/*
-  curl http://127.0.0.1:4104/jsonrpc \
-    -H 'Content-Type: application/json' \
-    -d '{"jsonrpc":"2.0","id":"test","method":"aria2.getVersion","params":["token:123"]}'
-*/
 {
   flake.modules.nixos.selfhosted =
-    { config, lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       aria2File = pkgs.writeText "aria2File" "123";
     in
     {
       services.aria2 = {
-        # openPorts = config.networking.firewall.enable; # RPC 走 loopback,由 Caddy 反代
+        # openPorts = true; # RPC 走 loopback,由 Caddy 反代
         rpcSecretFile = aria2File;
         serviceUMask = "0002";
         downloadDirPermission = "0775";

@@ -108,6 +108,7 @@ ntp:
 tun:
   enable: true
   stack: mips
+  mtu: 1500
   auto-route: true
   strict-route: true
   auto-redirect: true

@@ -3,7 +3,7 @@
     { config, lib, ... }:
     {
       services.rqbit = {
-        # openFirewall = config.networking.firewall.enable; # HTTP 走 loopback,由 Caddy 反代
+        # openFirewall = true; # HTTP 走 loopback,由 Caddy 反代
         httpHost = "127.0.0.1";
         httpPort = config.myVars.ports.rqbit;
         # BT 对等端口,不属于 ports.nix 的方案(见那边的"例外")

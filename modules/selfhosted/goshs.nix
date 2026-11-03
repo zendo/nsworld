@@ -4,7 +4,6 @@
     {
       # https://docs.goshs.de/usage/config/index.html
       services.goshs = {
-        # openFirewall = config.networking.firewall.enable; # 由 Caddy 反代,不再直接放行
         user = "${config.myVars.user}"; # dangerous!!!
         group = "users";
         settings = {

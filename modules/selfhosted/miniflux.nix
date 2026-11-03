@@ -16,7 +16,6 @@
 
       # services.rsshub = {
       #   enable = true;
-      #   openFirewall = config.networking.firewall.enable;
       #   settings = {
       #     PORT = 1209;
       #     REQUEST_TIMEOUT = "3000";

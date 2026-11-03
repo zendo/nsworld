@@ -7,9 +7,6 @@
         port = config.myVars.ports.beszel;
       };
 
-      # agent 与 hub 在同一台机器,走 127.0.0.1,不需要开端口
-      # services.beszel.agent.openFirewall = true;
-
       # services.grafana = {
       #   enable = true;
       #   settings = {
