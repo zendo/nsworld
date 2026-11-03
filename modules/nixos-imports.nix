@@ -21,7 +21,6 @@
     # [ networking ]
     dns
     firewall
-    # print
     # samba
 
     # [ nix ]
