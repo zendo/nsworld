@@ -35,6 +35,10 @@
             Requires = cfg.systemd.target;
             After = cfg.systemd.target;
           };
+          # vicinae launches apps by bare command name (e.g. "thunar").
+          # The NixOS unit default PATH only has coreutils/findutils/grep/sed/systemd,
+          # so inherit the user manager PATH which contains /run/current-system/sw/bin.
+          enableDefaultPath = false;
           serviceConfig = {
             Type = "simple";
             ExecStart = "${lib.getExe cfg.package} server";
