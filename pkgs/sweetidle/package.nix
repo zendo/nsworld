@@ -2,9 +2,6 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  pkg-config,
-  stdenv,
-  wayland,
   nix-update-script,
 }:
 
