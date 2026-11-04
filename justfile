@@ -32,7 +32,7 @@ up:
     if [[ "$before" == "$after" ]]; then
         echo -e "\n✅ Nixpkgs is already up to date."
     else
-        url="https://github.com/NixOS/nixpkgs/compare/${before:0:12}...${after:0:12}"
+        url="https://diffshub.com/NixOS/nixpkgs/compare/${before:0:12}...${after:0:12}"
         echo -e "\n🔍 Nixpkgs Comparing changes: $url"
         git commit --amend --quiet \
             -m "🚀 $(git log -1 --pretty=%B)" \
