@@ -1,6 +1,0 @@
-# https://naurissteins.com/veila/docs/configuration
-
-[idle]
-enabled = true
-lock_after_seconds = 120
-lock_before_sleep = true

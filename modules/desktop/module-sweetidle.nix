@@ -27,6 +27,9 @@
           documentation = [ "https://github.com/naurissteins/sweetidle" ];
           partOf = [ "graphical-session.target" ];
           after = [ "graphical-session.target" ];
+          # hooks run through `sh -c` and need the user's PATH, not the minimal
+          # NixOS unit default (which has neither `sh` nor /run/current-system/sw/bin)
+          enableDefaultPath = false;
           unitConfig = {
             ConditionEnvironment = "WAYLAND_DISPLAY";
             StartLimitIntervalSec = "60s";

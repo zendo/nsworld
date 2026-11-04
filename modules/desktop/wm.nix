@@ -22,7 +22,6 @@ in
 
       services'.shikane.enable = true;
       services'.sweetidle.enable = true; # idle
-      services'.veila.enable = true; # locker
       services'.vicinae.enable = true;
 
       services = {

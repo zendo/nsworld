@@ -27,7 +27,6 @@
         "doom/config.org".source = linkDot "org/doom-emacs.org";
         "emacs/all-emacs.org".source = linkDot "org/all-emacs.org";
 
-        "veila".source = linkDot "veila";
         "sweetidle".source = linkDot "sweetidle";
         "sway/config".source = linkDot "sway/config";
         "niri/configs".source = linkDot "niri/configs";
