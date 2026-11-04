@@ -20,8 +20,10 @@
 
     # [ networking ]
     dns
+    # avahi
     firewall
     # samba
+    # tailscale
 
     # [ nix ]
     # nix-cache

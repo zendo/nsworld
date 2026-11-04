@@ -31,9 +31,8 @@ in
 
       # [ networking ]
       dns
+      avahi
       firewall
-      # networkmanager
-      # print
       samba
       # tailscale
 
@@ -65,7 +64,6 @@ in
     {
       myVars.user = userName;
       networking.hostName = hostName;
-      users.defaultUserShell = pkgs.zsh;
 
       # iwctl -> station wlan0 connect SSID
       networking.wireless.iwd.enable = true;

@@ -51,9 +51,12 @@
         ];
       };
     };
+  };
 
+  flake.modules.nixos.avahi = {
     # 宣告 svp.local,并解析别人的 *.local
     services.avahi = {
+      enable = true;
       # nsswitch: 插入 mdns4_minimal [NOTFOUND=return]
       nssmdns4 = true;
       # 家庭网段是纯 IPv4。开 IPv6 mDNS 只会让每次解析先等一次 AAAA 超时
@@ -99,10 +102,10 @@
       #   wideArea      中心化 DNS-SD,牵涉 CVE-2024-52615
       settings.reflector.enable-reflector = false;
     };
-
-    # ⚠ 联动提醒 tailscale.nix 里有一个 dnsmasq(给 tailnet 做
-    #   home.arpa 的 split DNS)。必须保持 services.dnsmasq.resolveLocalQueries = false,
-    #   因为它默认 true 会把 networking.nameservers 改成 127.0.0.1,
-    #   而 resolved 的 DNS 默认就是取 networking.nameservers —— 会自己咬自己。
   };
+
+  # ⚠ 联动提醒 tailscale.nix 里有一个 dnsmasq(给 tailnet 做
+  #   home.arpa 的 split DNS)。必须保持 services.dnsmasq.resolveLocalQueries = false,
+  #   因为它默认 true 会把 networking.nameservers 改成 127.0.0.1,
+  #   而 resolved 的 DNS 默认就是取 networking.nameservers —— 会自己咬自己。
 }
