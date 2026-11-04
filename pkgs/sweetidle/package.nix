@@ -22,6 +22,11 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-m6fb9t93Q6xwKvTW0FNzCqAgDD/427dJ4weM3VilSrs=";
 
+  postInstall = ''
+    install -Dm644 man/sweetidle.1 -t $out/share/man/man1
+    install -Dm644 config/example.toml -t $out/share/doc/sweetidle
+  '';
+
   passthru.updateScript = nix-update-script { };
 
   meta = {
