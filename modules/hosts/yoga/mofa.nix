@@ -29,7 +29,7 @@
         };
       };
 
-      services'.mihomo = {
+      services.mihomo = {
         enable = true;
         tunMode = true;
         webui = pkgs.zashboard;

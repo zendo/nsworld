@@ -8,7 +8,7 @@
         # t3code
         # omp
         pi-coding-agent
-        opencode
+        # opencode
         # codex
         # qwen-code
         # gemini-cli
