@@ -21,8 +21,9 @@ in
       };
 
       services'.shikane.enable = true;
+      services'.sweetidle.enable = true; # idle
+      services'.veila.enable = true; # locker
       services'.vicinae.enable = true;
-      services'.veila.enable = true;
 
       services = {
         gvfs.enable = true; # (webkitgtk)
@@ -53,10 +54,7 @@ in
       environment.systemPackages = with pkgs; [
         libnotify # notify-send
         wlogout
-        swayidle
-        hypridle
         hyprlock
-        stasis # idle manager
         wf-recorder
         uwsm
         xwayland-satellite
