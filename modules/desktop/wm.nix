@@ -13,12 +13,14 @@ in
         # fm.nixos.ly
       ];
 
-      home-manager.sharedModules = [ fm.homeManager.wm ];
+      # home-manager.sharedModules = [ fm.homeManager.wm ];
 
       security = {
         soteria.enable = true; # Polkit agent
         pam.services.hyprlock = { };
       };
+
+      services'.shikane.enable = true;
 
       services = {
         gvfs.enable = true; # (webkitgtk)
@@ -67,6 +69,7 @@ in
         wlsunset
         wl-gammactl
         wlr-randr
+        wdisplays
 
         # Media
         # grim # grab image
@@ -103,7 +106,7 @@ in
     {
       imports = [
         fm.homeManager.hypridle
-        fm.homeManager.shikane
+        # fm.homeManager.shikane
         fm.homeManager.vicinae
       ];
 
@@ -166,7 +169,7 @@ in
   flake.modules.nixos.niri = {
     imports = [ fm.nixos.wm ];
     programs.niri.enable = true;
-    services.displayManager.dms-greeter.compositor.name = "niri";
+    services.displayManager.dux-greeter.compositor.name = "niri";
   };
 
   # ╭──────────────────────────────────────────╮
@@ -220,13 +223,13 @@ in
   # │ DMS                                      │
   # ╰──────────────────────────────────────────╯
   flake.modules.nixos.dms = {
-    programs.dms-shell = {
+    programs.dux-shell = {
       enable = true;
     };
 
     # include fonts:
     # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/display-managers/dms-greeter.nix#L210
-    services.displayManager.dms-greeter = {
+    services.displayManager.dux-greeter = {
       # enable = true;
     };
 

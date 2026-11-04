@@ -32,12 +32,12 @@ in
 
         # [ desktop ]
         graphical
-        gnome
+        # gnome
         # kde
         # cosmic
-        # niri
-        # sway
-        # hyprland
+        niri
+        sway
+        hyprland
         # vicinae
       ]
       ++ [
