@@ -22,6 +22,7 @@ in
 
       services'.shikane.enable = true;
       services'.vicinae.enable = true;
+      services'.veila.enable = true;
 
       services = {
         gvfs.enable = true; # (webkitgtk)
@@ -106,7 +107,7 @@ in
     { pkgs, ... }:
     {
       imports = [
-        fm.homeManager.hypridle
+        # fm.homeManager.hypridle
         # fm.homeManager.shikane
         # fm.homeManager.vicinae
       ];
