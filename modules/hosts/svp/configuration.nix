@@ -11,7 +11,6 @@ in
     modules = with fm.nixos; [
       host-svp
       host-svp-disko-btrfs
-      hjemModule
 
       # [ profiles ]
       # gpu-intel
@@ -46,7 +45,7 @@ in
       alias
       bash
       # fish
-      zsh
+      # zsh
       terminal
 
       # [ virt ]
