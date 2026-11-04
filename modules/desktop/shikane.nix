@@ -22,7 +22,7 @@
         };
       };
       config = {
-        environment.systemPackages = [ pkgs.shikane ];
+        environment.systemPackages = [ cfg.package ];
 
         systemd.user.services.shikane = {
           unitConfig = {
