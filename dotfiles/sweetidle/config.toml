@@ -1,0 +1,29 @@
+# sweetidle configuration
+# Place this file at ~/.config/sweetidle/config.toml.
+
+[general]
+lock_command = "veila lock --wait-ready"
+# Set this when the locker exposes a safe external unlock command.
+# unlock_command = "your-locker-control unlock"
+# before_sleep_command = "veila lock --wait-ready"
+after_resume_command = "sweets msg output-power '*' on"
+wait_before_sleep = true
+ignore_dbus_inhibit = false
+ignore_systemd_inhibit = false
+
+# Report the session as idle to logind after five minutes.
+[idle_hint]
+timeout = 300
+
+[[listener]]
+timeout = 300
+on_timeout = "veila lock --wait-ready"
+# Lock even when media playback or another application inhibits idle actions
+ignore_inhibit = true
+
+[[listener]]
+timeout = 600
+on_timeout = "sweets msg output-power '*' off"
+on_resume = "sweets msg output-power '*' on"
+# Keep outputs on while any compositor, D-Bus, or systemd inhibitor is active
+ignore_inhibit = false
