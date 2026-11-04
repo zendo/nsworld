@@ -9,6 +9,7 @@
       environment.systemPackages = with pkgs; [
         levi
         gitkwaken
+        slimdeer
         spor
         rwx
         rox
