@@ -30,17 +30,64 @@
         # Enable alias command completion
         shopt -s progcomp_alias
 
-        # bleopt color_scheme=base16
+        # ble.sh binds these to copy-backward-sword; restore readline's
+        # backward-kill-word (Alt+Backspace / Alt+Ctrl+H)
+        ble-bind -f 'M-C-?' kill-backward-cword # Alt+Backspace (ESC DEL)
+        ble-bind -f 'M-DEL' kill-backward-cword # Alt+Backspace (DEL)
+        ble-bind -f 'M-BS'  kill-backward-cword # Alt+Backspace (ESC BS)
+        ble-bind -f 'M-C-h' kill-backward-cword # Alt+Ctrl+H (ESC Ctrl+H)
+
         bleopt color_scheme=rosepine_moon
 
         bleopt prompt_eol_mark=' '
 
-        # ble-import contrib/prompt-elapsed
-        # ble-import contrib/prompt-git
-        # bleopt prompt_rps1='\g{fg=244,italic}\q{contrib/elapsed} \g{fg=7}\q{contrib/git-info}'
+        # Pure-style prompt:
+        #   ~/nsworld main* 42s
+        #   ❯
+        ble-import contrib/prompt-git
+        ble-import contrib/prompt-elapsed
+
+        # Exit status of the last command, captured before the prompt is built
+        pure_status=0
+        function pure/precmd { pure_status=$?; }
+        blehook PRECMD=pure/precmd
+
+        # Git branch + dirty marker (`main*`): gray branch, pink `*` when dirty
+        function ble/prompt/backslash:pure-git {
+          local "''${_ble_contrib_prompt_git_vars[@]/%/=}" dirty_mark
+          ble/contrib/prompt-git/initialize || return 0
+          ble/contrib/prompt-git/update-head-information
+          [[ $branch ]] || return 0
+          ble/contrib/prompt-git/get-dirty-mark
+          local gray=$'\e[38;5;242m' pink=$'\e[38;5;218m' reset=$'\e[m'
+          [[ $dirty_mark ]] && dirty_mark="''${pink}*"
+          ble/prompt/print " ''${gray}''${branch}''${dirty_mark}''${reset}"
+        }
+
+        # Elapsed time of the last command (from contrib/prompt-elapsed),
+        # only shown when it took > 5s
+        function ble/prompt/backslash:pure-elapsed {
+          ((_ble_exec_time_ata > 5000000)) || return 1
+          ble/prompt/print ' '
+          ble/prompt/backslash:contrib/elapsed
+        }
+
+        # ❯ in magenta, or red if the previous command failed
+        function ble/prompt/backslash:pure-prompt {
+          if ((pure_status)); then
+            ble/prompt/print $'\e[31m❯\e[m'
+          else
+            ble/prompt/print $'\e[35m❯\e[m'
+          fi
+        }
+
+        PS1='\n\g{fg=4}\w\g{}\q{pure-git}\g{fg=3}\q{pure-elapsed}\g{}\n\q{pure-prompt} '
       '';
     in
     {
+      # NixOS's default prompt would otherwise overwrite the pure-style PS1
+      programs.bash.promptInit = "";
+
       programs.bash.interactiveShellInit = ''
         ${bleshCfg}
 
