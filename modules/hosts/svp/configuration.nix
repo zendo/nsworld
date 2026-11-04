@@ -65,33 +65,9 @@ in
       myVars.user = userName;
       networking.hostName = hostName;
 
-      # iwctl -> station wlan0 connect SSID
-      networking.wireless.iwd.enable = true;
-
       environment.systemPackages = with pkgs; [
         impala # tui wifi for iwd
         brightnessctl # brightnessctl set 50%
-      ];
-
-      services.logind.settings.Login = {
-        HandleLidSwitch = "ignore";
-        HandleLidSwitchExternalPower = "ignore";
-      };
-
-      # Blank the console after 10 minutes of inactivity.
-      boot.kernelParams = [ "consoleblank=600" ];
-
-      boot.loader = {
-        efi.efiSysMountPoint = "/efi";
-        systemd-boot.enable = true;
-      };
-
-      zramSwap.enable = true;
-      swapDevices = [
-        {
-          device = "/var/swapfile";
-          size = 1024 * 8;
-        }
       ];
 
       # [ selfhosted ]
@@ -123,6 +99,29 @@ in
         allowedTCPPortRanges = config.services.aria2.settings.listen-port;
         allowedUDPPortRanges = config.services.aria2.settings.listen-port;
       };
+
+      # iwctl -> station wlan0 connect SSID
+      networking.wireless.iwd.enable = true;
+
+      services.logind.settings.Login = {
+        HandleLidSwitch = "ignore";
+        HandleLidSwitchExternalPower = "ignore";
+      };
+
+      # Blank the console after 10 minutes of inactivity.
+      boot.kernelParams = [ "consoleblank=600" ];
+      boot.loader = {
+        efi.efiSysMountPoint = "/efi";
+        systemd-boot.enable = true;
+      };
+
+      zramSwap.enable = true;
+      swapDevices = [
+        {
+          device = "/var/swapfile";
+          size = 1024 * 8;
+        }
+      ];
 
     };
 }

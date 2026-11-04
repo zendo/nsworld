@@ -22,6 +22,17 @@
         # [ forntend ]
         # nodejs
 
+        # [ docker ]
+        # lazydocker
+        # docker-compose
+        podman-compose
+        compose2nix # compose2nix -project=my
+        pods
+        # distrobox create -i archlinux
+        distrobox
+        # toolbox create -i quay.io/toolbx/arch-toolbox  / ubuntu-toolbox
+        # toolbox
+
         # [ lsp ]
         bash-language-server
         # typescript-language-server
