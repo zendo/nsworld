@@ -21,7 +21,6 @@ in
       };
 
       services'.shikane.enable = true;
-      services'.sweetidle.enable = true; # idle
       services'.vicinae.enable = true;
 
       services = {
