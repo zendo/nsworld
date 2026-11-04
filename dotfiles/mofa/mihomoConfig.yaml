@@ -706,6 +706,7 @@ rules:
   - RULE-SET,private,直连
   - DOMAIN-SUFFIX,api.beacondb.net,直连
   - DOMAIN-SUFFIX,ip-api.com,直连
+  - DOMAIN-SUFFIX,noctalia.dev,直连
 
   # Docker Hub
   - DOMAIN-SUFFIX,docker.io,默认代理

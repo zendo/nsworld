@@ -23,6 +23,10 @@ in
         ai
         dev
 
+        # [ shell ]
+        # fish
+        # zsh
+
         # [ virt ]
         docker
         # incus
@@ -32,12 +36,12 @@ in
 
         # [ desktop ]
         graphical
-        gnome
+        # gnome
         # kde
         # cosmic
-        # niri
-        # sway
-        # hyprland
+        niri
+        sway
+        hyprland
       ]
       ++ [
         # inputs.omniflake.flakes.lanzaboote.nixosModules.lanzaboote
