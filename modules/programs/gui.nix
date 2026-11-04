@@ -14,10 +14,10 @@
         rwx
         rox
         sonora
-        mygo-cloudmusic
         neiro
         breeze
-        venerax
+        # venerax
+        # mygo-cloudmusic
         # pixora-icons
 
         # [ wrapper ]

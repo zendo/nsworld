@@ -36,12 +36,12 @@ in
 
         # [ desktop ]
         graphical
-        # gnome
+        gnome
         # kde
         # cosmic
-        niri
-        sway
-        hyprland
+        # niri
+        # sway
+        # hyprland
       ]
       ++ [
         # inputs.omniflake.flakes.lanzaboote.nixosModules.lanzaboote
@@ -77,7 +77,7 @@ in
       # Persistent Cache
       system.extraDependencies = [
         inputs.self.formatter.${pkgs.stdenv.hostPlatform.system}
-        inputs.self.nixosConfigurations.svp.config.system.build.toplevel
+        # inputs.self.nixosConfigurations.svp.config.system.build.toplevel
       ];
 
       environment.systemPackages = with pkgs; [
