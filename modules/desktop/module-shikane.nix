@@ -28,7 +28,8 @@
           default = "graphical-session.target";
         };
       };
-      config = {
+
+      config = lib.mkIf cfg.enable {
         environment.systemPackages = [ cfg.package ];
 
         systemd.user.services.shikane = {
