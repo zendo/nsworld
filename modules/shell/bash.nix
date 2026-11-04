@@ -3,21 +3,48 @@
     { modulesPath, pkgs, ... }:
     let
       flylineCfg = ''
-        # Flyline Setup
         enable -f ${pkgs.flyline}/lib/libflyline.so flyline
-        flyline mouse --mode disabled
+
         # flyline suggestions --auto-suggest false
+
+        flyline mouse --mode disabled
+        flyline key bind Right inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAcceptOneWord
         flyline key bind Ctrl+f inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAccept
 
-        # Flyline Pure Prompt Style
-        # flyline create-prompt-widget custom --name SS_GIT \
-        #   --command "bash -c 'starship module git_branch && starship module git_status'" \
-        #   --placeholder 0
-        # export PS1='\n\[\e[36m\]\w\[\e[0m\] SS_GIT\n\[\e[35m\]❯ \[\e[0m\]'
-        # flyline create-prompt-widget last-command-duration
-        # export RPS1='\[\e[33m\]FLYLINE_LAST_COMMAND_DURATION\[\e[0m\]'
+        # Pure-style prompt
+        __flyline_pure_status=0
+        __flyline_pure_precmd() { __flyline_pure_status=$?; }
+        if [[ ''${PROMPT_COMMAND@a} == *a* ]]; then
+          PROMPT_COMMAND=(__flyline_pure_precmd "''${PROMPT_COMMAND[@]}")
+        else
+          PROMPT_COMMAND="__flyline_pure_precmd''${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+        fi
 
-        # Flyline Agent
+        __flyline_pure_git() {
+          local branch dirty
+          branch=$(git branch --show-current 2>/dev/null) || return 0
+          [[ $branch ]] || return 0
+          dirty=$(git status --porcelain --ignore-submodules=untracked 2>/dev/null)
+          local gray=$'\e[90m' cyan=$'\e[36m' red=$'\e[31m' reset=$'\e[m'
+          if [[ $dirty ]]; then
+            printf ' %sgit:(%s%s%s) %s✘%s' "$gray" "$cyan" "$branch" "$gray" "$red" "$reset"
+          else
+            printf ' %sgit:(%s%s%s)%s' "$gray" "$cyan" "$branch" "$gray" "$reset"
+          fi
+        }
+
+        __flyline_pure_char() {
+          if ((__flyline_pure_status)); then
+            printf '\e[31m❯\e[m'
+          else
+            printf '\e[35m❯\e[m'
+          fi
+        }
+
+        flyline create-prompt-widget last-command-duration
+        PS1='\n\e[34m\w\e[0m$(__flyline_pure_git) \e[33mFLYLINE_LAST_COMMAND_DURATION\e[0m\n$(__flyline_pure_char) '
+
+        # Agent mode
         flyline set-agent-mode \
           --system-prompt "Be concise. Answer ONLY with a raw JSON array of at most 3 items with objects containing: command and description. Do not wrap in markdown code blocks. Command will be a Bash command." \
           --trigger-prefix ': ' \
@@ -41,9 +68,7 @@
 
         bleopt prompt_eol_mark=' '
 
-        # Pure-style prompt:
-        #   ~/nsworld main* 42s
-        #   ❯
+        # Pure-style prompt
         ble-import contrib/prompt-git
         ble-import contrib/prompt-elapsed
 
@@ -89,7 +114,7 @@
       programs.bash.promptInit = "";
 
       programs.bash.interactiveShellInit = ''
-        ${bleshCfg}
+        ${flylineCfg}
 
         # Functions
         nix-build-ls() {

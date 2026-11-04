@@ -13,7 +13,7 @@
     # env | rg STARSHIP
     programs.starship = {
       # enable = true;
-      # enableBashIntegration = false;
+      enableBashIntegration = true;
       enableZshIntegration = false;
       enableFishIntegration = false;
       settings = {
