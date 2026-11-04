@@ -1,3 +1,10 @@
+/*
+  wdisplays // set the right outputs
+  install -Dm644 /dev/null ~/.config/shikane/config.toml
+  shikane &
+  shikanectl export $(uname -n)
+  fg shikane
+*/
 {
   flake.modules.nixos.services =
     {

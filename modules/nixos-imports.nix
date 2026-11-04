@@ -43,7 +43,7 @@
     alias
     bash
     # fish
-    zsh
+    # zsh
     terminal
 
     # [ virt ]
