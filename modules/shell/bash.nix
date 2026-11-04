@@ -6,7 +6,7 @@
         # Flyline Setup
         enable -f ${pkgs.flyline}/lib/libflyline.so flyline
         flyline mouse --mode disabled
-        flyline suggestions --auto-suggest false
+        # flyline suggestions --auto-suggest false
         flyline key bind Ctrl+f inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAccept
 
         # Flyline Pure Prompt Style
@@ -27,6 +27,9 @@
       bleshCfg = ''
         source ${pkgs.blesh}/share/blesh/ble.sh
 
+        # Enable alias command completion
+        shopt -s progcomp_alias
+
         # bleopt color_scheme=base16
         bleopt color_scheme=rosepine_moon
 
@@ -39,7 +42,7 @@
     in
     {
       programs.bash.interactiveShellInit = ''
-        ${flylineCfg}
+        ${bleshCfg}
 
         # Functions
         nix-build-ls() {
