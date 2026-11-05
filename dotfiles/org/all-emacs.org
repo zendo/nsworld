@@ -1728,8 +1728,7 @@ like ~otree~
   :ensure nil
   :custom
   (uniquify-buffer-name-style 'reverse)
-  (uniquify-separator "•")
-  (uniquify-after-kill-buffer-p t))
+  (uniquify-separator "•"))
 #+end_src
 
 *** ibuffer
@@ -1790,8 +1789,7 @@ like ~otree~
 https://github.com/neeasade/stillness-mode.el
 #+begin_src emacs-lisp
 (use-package stillness-mode
-  :config
-  (stillness-mode +1))
+  :hook (after-init . stillness-mode))
 #+end_src
 
 ** Workspace & Sessions
