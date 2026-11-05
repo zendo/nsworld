@@ -24,6 +24,8 @@ in
         nix-tools
         ssh
 
+        mods
+
         # [ programs ]
         cli
         dev
