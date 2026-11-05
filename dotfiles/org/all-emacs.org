@@ -2440,18 +2440,6 @@ http://company-mode.github.io/manual/Getting-Started.html
   (company-posframe-mode 1))
 #+end_src
 
-** dabbrev
-#+begin_src emacs-lisp
-(use-package dabbrev
-  :ensure nil
-  :config
-  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
-  ;; Since 29.1, use `dabbrev-ignored-buffer-regexps' on older.
-  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
-#+end_src
-
 ** Hippie Expand
 hippie expand is dabbrev expand on steroids
 
