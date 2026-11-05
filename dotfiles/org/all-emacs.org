@@ -2014,7 +2014,7 @@ https://github.com/AmaiKinono/puni
       whitespace-style '(face trailing empty))
 
 ;; `whitespace-mode' 是 buffer-local，在 init 里直接调用只对 *scratch* 生效
-(global-whitespace-mode 1)
+(whitespace-mode 1)
 #+end_src
 
 ** Mixed Fonts (mixed-pitch) :off:
@@ -3452,8 +3452,8 @@ https://github.com/renzmann/treesit-auto
   ;;             ("C-c e" . fc-eval-and-replace))
   )
 
-(use-package slime
-  :commands slime)
+;; (use-package slime
+;;   :commands slime)
 
 (use-package macrostep
   ;; `elisp-mode-map' 不存在（会静默丢失绑定）；正确的是 `emacs-lisp-mode-map'。
