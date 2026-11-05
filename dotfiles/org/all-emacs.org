@@ -1561,7 +1561,8 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
            (centaur-tabs-modified-marker "●"))
   :hook
   (dashboard-mode . centaur-tabs-local-mode) ;; Disable centaur-tabs in selected buffers
-  (after-init . centaur-tabs-mode))          ; 延迟到启动完成再开，加快启动
+  :config
+  (centaur-tabs-mode t))
 #+end_src
 
 ** dashboard
