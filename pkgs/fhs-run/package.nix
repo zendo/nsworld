@@ -102,12 +102,12 @@ pkgs.buildFHSEnv {
       # '')
 
       # --- GTK / GLib stack ------------------------------------------------
-      gtk4
+      gtk4 # 30.7 MiB
       libadwaita
       graphene
-      poppler
-      gtksourceview5
-      gtk3
+      # poppler # optional: PDF rendering, only document apps
+      # gtksourceview5 # optional: source editor widget, rare outside GNOME editor apps
+      gtk3 # 42.0 MiB
       gdk-pixbuf # loaders dlopen the image libs below
       atk
       at-spi2-atk # GTK accessibility, dlopened
@@ -121,22 +121,22 @@ pkgs.buildFHSEnv {
       fontconfig.lib # libfontconfig; /etc/fonts is bind mounted from the host
       libpng # libpng16.so.16
       libjpeg # libjpeg.so.62 (gdk-pixbuf jpeg loader, chafa)
-      libjpeg8 # libjpeg.so.8
+      # libjpeg8 # optional: legacy libjpeg.so.8; most apps use libjpeg.so.62
       libtiff # libtiff.so.6
       libwebp # libwebp.so.7 + libwebpdemux (gdk-pixbuf, Electron)
-      librsvg # librsvg-2.so.2 (gdk-pixbuf svg loader)
+      librsvg # 15.7 MiB; librsvg-2.so.2 (gdk-pixbuf svg loader)
       gsettings-desktop-schemas # GTK apps abort on missing schemas
       hicolor-icon-theme
       shared-mime-info # glib mime type lookups
       libsoup_3
       libproxy
-      webkitgtk_4_1 # ±826 MiB
+      webkitgtk_4_1 # 175.6 MiB
       # webkitgtk_6_0
       glib-networking
       libayatana-appindicator
 
       # --- KDE -------------------------------------------------------------
-      qt6.qtbase
+      qt6.qtbase # 86.6 MiB
       qt6.qtsvg
       qt6.qtwayland
       # qt6.qtdeclarative # libQt6QuickControls2.so.6
@@ -168,7 +168,7 @@ pkgs.buildFHSEnv {
       libxft
       libxt
       libxmu
-      xkeyboard-config # /usr/share/X11/xkb data, needed by libxkbcommon
+      xkeyboard-config # 10.3 MiB; /usr/share/X11/xkb data, needed by libxkbcommon
 
       # --- Wayland ---------------------------------------------------------
       wayland
@@ -185,7 +185,7 @@ pkgs.buildFHSEnv {
 
       # --- Audio / Video ---------------------------------------------------
       alsa-lib # libasound.so.2
-      pipewire # libpipewire-0.3 + Wayland screencast
+      pipewire # 16.9 MiB; libpipewire-0.3 + Wayland screencast
       libpulseaudio # libpulse.so.0 - pipewire does NOT provide it
       # pulseaudio
       # wireplumber
@@ -206,7 +206,7 @@ pkgs.buildFHSEnv {
       # libxv
       # libvdpau
       # ffmpeg-headless
-      mpv-unwrapped
+      # mpv-unwrapped # optional: libmpv, heavy; only media apps
       gst_all_1.gstreamer # webkit/Electron media backend
       gst_all_1.gst-plugins-base
       gst_all_1.gst-plugins-good
@@ -257,6 +257,6 @@ pkgs.buildFHSEnv {
       # pax-utils # lddtree
       zenity
       # xdotool
-      chafa
+      # chafa # optional: CLI image viewer tool, not a runtime dependency
     ];
 }
