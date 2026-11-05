@@ -1242,23 +1242,26 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (defconst IS-MAC     (eq system-type 'darwin))
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
-(defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
+;; 不含 cygwin：Cygwin Emacs 走 POSIX 路径/编码，套用下面的 Windows 设置会出错
+(defconst IS-WINDOWS (memq system-type '(windows-nt ms-dos)))
 (defconst IS-BSD     (or IS-MAC (eq system-type 'berkeley-unix)))
+;; `WSLENV' 不保证存在，优先用 WSL 一定会设的变量；返回 t
 (defconst IS-WSL     (and IS-LINUX
-                          (getenv "WSLENV")))
+                          (or (getenv "WSL_DISTRO_NAME")
+                              (getenv "WSL_INTEROP")
+                              (getenv "WSLENV"))
+                          t))
 #+end_src
 
 ** Linux
 #+begin_src emacs-lisp
 (when IS-LINUX
-  (setq org-directory "~/Documents/org")
-  (set-frame-font (font-spec :family "JetBrains Mono" :size 14))
   (when (display-graphic-p)
+    (set-frame-font (font-spec :family "JetBrains Mono" :size 14))
+    ;; FONTSET 用 `t'（默认 fontset）：传 (frame-parameter nil 'font) 在 TTY 下是
+    ;; "tty"（会报错），GUI 下是字体名而非 fontset 名；用 `t' 在 daemon 下也生效。
     (dolist (script '(han cjk-misc bopomofo))
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       script
-       (font-spec :name "Noto Sans CJK SC")))))
+      (set-fontset-font t script (font-spec :name "Noto Sans CJK SC")))))
 ;; 中英文字体缩放不一致：https://emacs-china.org/t/face-charset-size/16916
 #+end_src
 
@@ -1272,35 +1275,35 @@ Use ~getenv~ check the environment variables.
     (when (file-exists-p cmd-exe)
       (setq browse-url-generic-program  cmd-exe
             browse-url-generic-args     cmd-args
-            browse-url-browser-function 'browse-url-generic
-            search-web-default-browser 'browse-url-generic)))
-  ;; 解决从 Windows 复制中文到 WSLg 乱码
-  (set-clipboard-coding-system 'gbk-dos)
-  ;; 解决从 Emacs 复制内容到 Windows 剪贴板
-  ;; https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
-  (setq select-active-regions nil
-        select-enable-clipboard 't
-        select-enable-primary nil
-        interprogram-cut-function #'gui-select-text))
+            browse-url-browser-function 'browse-url-generic)))
+  ;; WSLg 的剪贴板是 X/Wayland（UTF-8），用 gbk-dos 反而会乱码
+  (set-clipboard-coding-system 'utf-8)
+  ;; 选中即复制（Windows 习惯）；不需要的话删掉这行
+  ;; 注意：`interprogram-cut-function' 保持默认 — GUI 下已是 `gui-select-text'，
+  ;; TTY 下是 OSC52 处理器，强行覆盖会破坏终端内复制。
+  (setq select-active-regions nil))
 #+end_src
 
 ** Windows
 #+begin_src emacs-lisp
 (when IS-WINDOWS
-  (setq default-directory "C:/Users/zendo/Desktop/" ;主目录
-        org-directory "c:/Users/zendo/Documents/org/"
-        package-check-signature nil ; 禁用elpa包签名验证
-        user-lisp-auto-scrape nil ; 禁用自动扫描lisp等用户目录
-        native-comp-deferred-compilation nil ; 禁用后台延迟编译
-        projectile-git-submodule-command nil
-        )
+  (setq package-check-signature nil ; 禁用 elpa 签名验证（MELPA 不签名；也会关掉 GNU ELPA 校验）
+        projectile-git-submodule-command nil)
+  ;; 说明：
+  ;; - `user-lisp-auto-scrape' 的 docstring 要求设在 early-init（这里太晚）；
+  ;;   且 `~/.config/emacs/user-lisp/' 不存在时本来也不会扫描，故不再设置。
+  ;; - `native-comp-deferred-compilation' 自 29.1 起已废弃（见 early-init 的处理），
+  ;;   真要禁用应写 `native-comp-jit-compilation' 到 early-init。
+  ;; - `default-directory' 是 buffer-local，在这里 setq 只影响 `*scratch*' 及其
+  ;;   派生 buffer。想让 `C-x C-f' 从桌面开始，设启动快捷方式的“起始位置”，或：
+  ;;   (add-hook 'emacs-startup-hook
+  ;;             (lambda () (setq default-directory "C:/Users/zendo/Desktop/")))
+  ;; - `org-directory' 已统一到 Org Mode 段。
   (set-selection-coding-system 'utf-16le-dos) ; encoding
-  (set-frame-font (font-spec :family "JetBrains Mono" :size 28))
-  (dolist (script '(han cjk-misc bopomofo))
-    (set-fontset-font
-     (frame-parameter nil 'font)
-     script
-     (font-spec :name "Microsoft YaHei")))
+  (when (display-graphic-p)
+    (set-frame-font (font-spec :family "JetBrains Mono" :size 28))
+    (dolist (script '(han cjk-misc bopomofo))
+      (set-fontset-font t script (font-spec :name "Microsoft YaHei"))))
   ;; (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-11"))
   )
 #+end_src
@@ -1309,10 +1312,13 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 ** TTY
 #+begin_src emacs-lisp
 ;; Mouse active in tty mode.
+;; Emacs 31 对已知终端（kitty/alacritty/contour…）会自动开启；
+;; 保留这行以覆盖其他终端。
 (unless (display-graphic-p)
   (xterm-mouse-mode 1))
 
 ;; Support for the Kitty Keyboard Protocol in Emacs
+;; `global-kkp-mode' 内部只对非 GUI terminal 生效，daemon 下也安全。
 (use-package kkp
   :unless (display-graphic-p)
   :config
@@ -1332,7 +1338,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 ** Shell
 *** eat
 #+begin_src emacs-lisp
-(when (eq system-type 'gnu/linux)
+(when IS-LINUX
   (use-package eat
     :defer t
     :custom
@@ -1341,11 +1347,12 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
     (eat-enable-directory-tracking t)
     (eat-enable-shell-command-history t)
     (eat-enable-shell-prompt-annotation t)
-    (eat-term-scrollback-size nil))
+    (eat-term-scrollback-size 10000)) ; nil = 无限，长会话内存会一直涨
   )
 #+end_src
 
 *** vterm
+注意：本块是 ~emacs-lispxx~（`:tangle no`），不会生效，仅作记录。
 #+begin_src emacs-lispxx
 (use-package vterm
   :ensure nil ; handle by nix
@@ -1368,7 +1375,9 @@ https://github.com/dakra/ghostel
   ;; :bind (:map ghostel-mode-map
   ;;             ("C-`" . shell-pop))
   )
-(add-to-list 'package-pinned-packages '(ghostel . nil))
+;; ghostel 由 nix 提供，`:ensure nil' 已阻止 package.el 安装。
+;; 原来这里是 (add-to-list 'package-pinned-packages '(ghostel . nil))，
+;; 但该变量要求 ARCHIVE 是字符串；nil 会让 package.el 对所有 archive 跳过 ghostel。
 #+end_src
 
 *** popper
@@ -1401,6 +1410,8 @@ https://github.com/karthink/popper
 
 *** shell-pop
 https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
+注意：本块是 ~emacs-lispxx~（`:tangle no`），不会生效，仅作记录。上面 popper 已经把
+C-` 绑到 `popper-toggle`；另外本块依赖 nix 提供的 ghostel。
 #+begin_src emacs-lispxx
 (use-package shell-pop
   :bind (("C-`" . shell-pop))
@@ -1420,27 +1431,27 @@ https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
 https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 
 #+begin_src emacs-lisp
-(setq tramp-default-method "ssh"
-      password-cache-expiry 36000)
+(setq tramp-default-method "ssh" ; 已是默认值，保留以示意
+      password-cache-expiry 36000) ; 10 小时；也影响 auth-source/sudo 密码缓存
+;; `tramp-verbose' / `remote-file-name-inhibit-cache' 已在上面的上游段设置，
+;; 这里只补远程复制相关的性能项（见开头链接）。
+(setq tramp-use-scp-direct-remote-copying t
+      tramp-copy-size-limit (* 1024 1024))
 #+end_src
 
 ** Server
 https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package server
   :ensure nil
-  :if window-system
-  :defer 2
-  :config
-  ;; remove client startup messages
-  (setq server-client-instructions nil)
-  (unless (server-running-p)
-    (server-start)))
-
-;; fix recentf not load
-(add-hook 'delete-terminal-functions (lambda (terminal) (recentf-save-list)))
-#+END_SRC
+  ;; daemon 自己会启动 server；这里覆盖 GUI 和 `emacs -nw'（emacsclient 也能连 TTY）
+  :if (not (daemonp))
+  :init
+  ;; 必须在 `server-start' 之前设置
+  (setq server-client-instructions nil) ; remove client startup messages
+  :hook (after-init . server-start))
+#+end_src
 
 * Appearance & UI
 ** themes
@@ -2065,7 +2076,13 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   ;; `recentf-save-list', allowing stale entries to be removed before the list
   ;; is saved by `recentf-save-list', which is automatically added to
   ;; `kill-emacs-hook' by `recentf-mode'.
-  (add-hook 'kill-emacs-hook #'recentf-cleanup -90))
+  (add-hook 'kill-emacs-hook #'recentf-cleanup -90)
+  ;; 关闭最后一个终端（daemon/emacsclient 退出）时 `kill-emacs-hook' 不会触发，
+  ;; 在这里补存一次（原在 Platform 段的 Server 小节）。
+  (add-hook 'delete-terminal-functions
+            (lambda (_terminal)
+              (when (bound-and-true-p recentf-mode)
+                (recentf-save-list)))))
 
 ;; savehist is an Emacs feature that preserves the minibuffer history between
 ;; sessions. It saves the history of inputs in the minibuffer, such as commands,
@@ -2857,6 +2874,12 @@ https://github.com/thierryvolpiatto/isearch-light
 
 * Org Mode
 ** org-mode
+
+#+begin_src emacs-lisp
+;; 统一在这里设置（原先只在 Linux/Windows 分支设置，macOS 等平台会落到默认 ~/org）
+(setq org-directory (expand-file-name "~/Documents/org/"))
+#+end_src
+
 #+begin_src emacs-lisp
 (use-package org
   :ensure nil
