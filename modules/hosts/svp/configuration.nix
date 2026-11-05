@@ -12,6 +12,9 @@ in
       host-svp
       host-svp-disko-btrfs
 
+      myvars
+      # secrets
+
       # [ profiles ]
       # gpu-intel
       server

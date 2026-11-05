@@ -9,64 +9,60 @@
   flake.modules.nixos.user =
     { lib, config, ... }:
     {
-      options.myVars.user = lib.mkOption { type = lib.types.str; };
+      # Declaratively users and groups
+      services.userborn.enable = lib.mkDefault true;
 
-      config = {
-        # Declaratively users and groups
-        services.userborn.enable = lib.mkDefault true;
+      # sudo-rs
+      # security.sudo-rs.enable = true;
 
-        # sudo-rs
-        # security.sudo-rs.enable = true;
+      # run0
+      security.sudo.enable = false;
+      security.run0.enable = true;
+      security.run0.enableSudoAlias = true;
+      # system.tools.nixos-rebuild.enableRun0Elevation = true;
 
-        # run0
-        security.sudo.enable = false;
-        security.run0.enable = true;
-        security.run0.enableSudoAlias = true;
-        # system.tools.nixos-rebuild.enableRun0Elevation = true;
+      # Only allow `wheel` group execute sudo
+      security.sudo.execWheelOnly = true;
+      security.sudo-rs.execWheelOnly = true;
 
-        # Only allow `wheel` group execute sudo
-        security.sudo.execWheelOnly = true;
-        security.sudo-rs.execWheelOnly = true;
+      users = {
+        mutableUsers = lib.mkDefault false;
 
-        users = {
-          mutableUsers = lib.mkDefault false;
-
-          users.root = {
-            # initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
-            # Copy ssh pub key to /etc/ssh/authorized_keys.d/root or ~/.ssh/authorized_keys
-            # ssh-copy-id -i ~/.ssh/id_ed25519.pub aaa@192.168.122.85
-            openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
-            ];
-          };
-
-          users.${config.myVars.user} = {
-            isNormalUser = true;
-            # `mkpasswd`
-            initialHashedPassword = "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
-            openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
-            ];
-            extraGroups = [
-              "wheel"
-              "networkmanager"
-              "input"
-              "video"
-              "adbusers"
-            ]
-            # [ selfhosted ]
-            ++ lib.optionals config.services.samba.enable [ "samba" ]
-            # [ virt ]
-            ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
-            ++ lib.optionals config.virtualisation.podman.enable [ "podman" ]
-            ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
-            ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
-            ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ];
-          };
+        users.root = {
+          # initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
+          # Copy ssh pub key to /etc/ssh/authorized_keys.d/root or ~/.ssh/authorized_keys
+          # ssh-copy-id -i ~/.ssh/id_ed25519.pub aaa@192.168.122.85
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
+          ];
         };
 
-        # Allow non-root users use `--allow-other` in mounts
-        programs.fuse.userAllowOther = true;
+        users.${config.myVars.user} = {
+          isNormalUser = true;
+          # `mkpasswd`
+          initialHashedPassword = "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
+          ];
+          extraGroups = [
+            "wheel"
+            "networkmanager"
+            "input"
+            "video"
+            "adbusers"
+          ]
+          # [ selfhosted ]
+          ++ lib.optionals config.services.samba.enable [ "samba" ]
+          # [ virt ]
+          ++ lib.optionals config.virtualisation.docker.enable [ "docker" ]
+          ++ lib.optionals config.virtualisation.podman.enable [ "podman" ]
+          ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
+          ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
+          ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ];
+        };
       };
+
+      # Allow non-root users use `--allow-other` in mounts
+      programs.fuse.userAllowOther = true;
     };
 }

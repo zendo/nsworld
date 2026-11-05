@@ -1,6 +1,7 @@
 { config, ... }:
 {
   flake.modules.nixos.nixos-imports.imports = with config.flake.modules.nixos; [
+    myvars
     # secrets
 
     # [ core ]
