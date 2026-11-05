@@ -2456,18 +2456,30 @@ http://company-mode.github.io/manual/Getting-Started.html
 hippie expand is dabbrev expand on steroids
 
 #+begin_src emacs-lisp
-(global-set-key [remap dabbrev-expand] #'hippie-expand)
+;; M-/：用 remap 而非直接绑 M-/，这样绑到 `dabbrev-expand' 的 mode 键也生效
+(keymap-global-set "<remap> <dabbrev-expand>" #'hippie-expand)
+
+(setq hippie-expand-verbose nil) ; 不在 echo area 报告正在试哪一项
+
+;; 注意：hippie-expand 的 -all-buffers 函数不走 dabbrev.el，
+;; 上面的 `dabbrev-ignored-buffer-*' 对它无效，需要单独限制搜索范围。
+(setq hippie-expand-max-buffers 20) ; 默认 nil = 扫描所有 buffer
+(setq hippie-expand-ignore-buffers
+      '("^ \\*.*\\*$" dired-mode pdf-view-mode doc-view-mode
+        archive-mode tags-table-mode))
+
+;; 顺序：当前 buffer → 可见区域 → 其它 buffer → kill-ring → abbrev → Lisp 符号。
+;; 已去掉 `try-expand-line'（常把整行贴进来，很意外）以及
+;; `try-complete-file-name*'（与 Cape 的 `cape-file' 重复）。
 (setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev                 ;搜索当前 buffer, expand word "dynamically"
-        try-expand-dabbrev-all-buffers     ;搜索所有 buffer
-        try-expand-dabbrev-from-kill       ;从 kill-ring 中搜索
-        try-complete-file-name-partially   ;文件名部分匹配
-        try-complete-file-name             ;文件名匹配
-        try-expand-all-abbrevs             ;匹配所有缩写词, according to all abbrev tables
-        try-expand-list                    ;补全一个列表
-        try-expand-line                    ;补全当前行
-        try-complete-lisp-symbol-partially ;部分补全 lisp symbol
-        try-complete-lisp-symbol))         ;补全 lisp symbol
+      '(try-expand-dabbrev              ; 当前 buffer 中动态展开
+        try-expand-dabbrev-visible      ; 当前可见窗口，比全 buffer 快且更相关
+        try-expand-dabbrev-all-buffers  ; 其它 buffer
+        try-expand-dabbrev-from-kill    ; 从 kill-ring 中搜索
+        try-expand-all-abbrevs          ; 所有 abbrev 表
+        try-complete-lisp-symbol-partially ; 部分补全 lisp symbol
+        try-complete-lisp-symbol        ; 补全 lisp symbol
+        try-expand-list))               ; 补全一个列表，仅 Lisp/TeX 偶尔有用
 #+end_src
 
 ** completion-preview-mode
