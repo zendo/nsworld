@@ -1236,8 +1236,8 @@ This should be called after changing `auto-save-list-file-prefix'."
 (load custom-file 'noerror 'no-message)
 #+end_src
 
-* Platform & Environment
-** Variables
+* Platform & System
+** Platform Detection
 Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (defconst IS-MAC     (eq system-type 'darwin))
@@ -1253,7 +1253,7 @@ Use ~getenv~ check the environment variables.
                           t))
 #+end_src
 
-** Linux
+** Linux Setup
 #+begin_src emacs-lisp
 (when IS-LINUX
   (when (display-graphic-p)
@@ -1265,7 +1265,7 @@ Use ~getenv~ check the environment variables.
 ;; 中英文字体缩放不一致：https://emacs-china.org/t/face-charset-size/16916
 #+end_src
 
-** WSL
+** WSL Setup
 #+begin_src emacs-lisp
 (when IS-WSL
   ;; open links in Windows browser
@@ -1284,7 +1284,7 @@ Use ~getenv~ check the environment variables.
   (setq select-active-regions nil))
 #+end_src
 
-** Windows
+** Windows Setup
 #+begin_src emacs-lisp
 (when IS-WINDOWS
   (setq package-check-signature nil ; 禁用 elpa 签名验证（MELPA 不签名；也会关掉 GNU ELPA 校验）
@@ -1309,7 +1309,7 @@ Use ~getenv~ check the environment variables.
 #+end_src
 https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: An Installation Guide
 
-** TTY
+** Terminal (TTY)
 #+begin_src emacs-lisp
 ;; Mouse active in tty mode.
 ;; Emacs 31 对已知终端（kitty/alacritty/contour…）会自动开启；
@@ -1326,7 +1326,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   (global-kkp-mode +1))
 #+end_src
 
-** Encoding
+** Encoding & Locale
 #+begin_src emacs-lisp
 ;; Set UTF-8 as the default coding system
 (when (fboundp 'set-charset-priority)
@@ -1335,8 +1335,8 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (setq locale-coding-system 'utf-8)
 #+end_src
 
-** Shell
-*** eat
+** Terminals & Shells
+*** Eat (terminal emulator)
 #+begin_src emacs-lisp
 (when IS-LINUX
   (use-package eat
@@ -1351,7 +1351,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
   )
 #+end_src
 
-*** vterm
+*** Vterm (terminal emulator)
 注意：本块是 ~emacs-lispxx~（`:tangle no`），不会生效，仅作记录。
 #+begin_src emacs-lispxx
 (use-package vterm
@@ -1364,7 +1364,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
               ("<f2>" . shell-pop)))
 #+end_src
 
-*** ghostel
+*** Ghostel (terminal emulator)
 https://github.com/dakra/ghostel
 #+begin_src emacs-lisp
 (use-package ghostel
@@ -1380,7 +1380,7 @@ https://github.com/dakra/ghostel
 ;; 但该变量要求 ARCHIVE 是字符串；nil 会让 package.el 对所有 archive 跳过 ghostel。
 #+end_src
 
-*** popper
+*** Popper (popup manager)
 https://github.com/karthink/popper
 #+begin_src emacs-lisp
 (use-package popper
@@ -1408,7 +1408,7 @@ https://github.com/karthink/popper
   (popper-echo-mode +1))                ; For echo area hints
 #+end_src
 
-*** shell-pop
+*** Shell-Pop
 https://www.jamescherti.com/emacs-toggle-a-shell-window-shell-pop/
 注意：本块是 ~emacs-lispxx~（`:tangle no`），不会生效，仅作记录。上面 popper 已经把
 C-` 绑到 `popper-toggle`；另外本块依赖 nix 提供的 ghostel。
@@ -1427,7 +1427,7 @@ C-` 绑到 `popper-toggle`；另外本块依赖 nix 提供的 ghostel。
                    (lambda () (term shell-pop-term-shell)))))))
 #+end_src
 
-** Tramp
+** TRAMP
 https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 
 #+begin_src emacs-lisp
@@ -1439,7 +1439,7 @@ https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
       tramp-copy-size-limit (* 1024 1024))
 #+end_src
 
-** Server
+** Emacs Server (emacsclient)
 https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html
 
 #+begin_src emacs-lisp
@@ -1454,7 +1454,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 #+end_src
 
 * Appearance & UI
-** themes
+** Themes
 #+begin_src emacs-lisp
 (mapc #'disable-theme (copy-sequence custom-enabled-themes)) ; Disable all active minimal-emacs.d themes
 (use-package doom-themes
@@ -1476,7 +1476,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;;   (load-theme 'ef-frost t))
 #+end_src
 
-** icons
+** Icons
 #+begin_src emacs-lisp
 (use-package nerd-icons :defer t) ; 由 dashboard/centaur-tabs/corfu 等按需 require
 
@@ -1502,7 +1502,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+end_src
 
-** emoji
+** Emoji :off:
 *) :) :-( :dog:
 #+begin_src emacs-lispxx
 (use-package emojify
@@ -1516,7 +1516,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :hook (after-init . global-emojify-mode))
 #+end_src
 
-** mode-line
+** Mode Line
 #+begin_src emacs-lisp
 ;; Handle by mood-modeline
 ;; (column-number-mode t) ;显示列数
@@ -1548,7 +1548,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :commands nyan-mode)
 #+end_src
 
-** tab-bar
+** Tab Bar (centaur-tabs)
 #+begin_src emacs-lisp
 (use-package centaur-tabs
   :custom ((centaur-tabs-height 28)
@@ -1565,7 +1565,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   (centaur-tabs-mode t))
 #+end_src
 
-** dashboard
+** Dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
   ;; 不要用 `:when (display-graphic-p)'：daemon 下 post-init 时没有 GUI frame，
@@ -1590,7 +1590,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; (add-hook 'server-after-make-frame-hook (lambda () (dashboard-refresh-buffer)))
 #+end_src
 
-** treemacs
+** Sidebar (treemacs)
 #+begin_src emacs-lisp
 (use-package treemacs
   :bind (("<f1>" . +treemacs/toggle)
@@ -1627,7 +1627,7 @@ Use `treemacs' command for old functionality."
            (treemacs))))))
 #+end_src
 
-** perfect-margin
+** Perfect Margin (perfect-margin)
 #+begin_src emacs-lisp
 (use-package perfect-margin
   :custom
@@ -1639,13 +1639,13 @@ Use `treemacs' command for old functionality."
   :hook (after-init . perfect-margin-mode)) ; 延迟到启动完成再开，加快启动
 #+end_src
 
-** spatial-padding
+** Spacious Padding (spacious-padding)
 #+begin_src emacs-lisp
 (use-package spacious-padding
   :hook (after-init . spacious-padding-mode)) ; 延迟到启动完成再开，加快启动
 #+end_src
 
-** indent-bars
+** Indent Guides (indent-bars) :off:
 #+begin_src emacs-lisp
 (use-package indent-bars
   ;; 1.0.1 里只有 `indent-bars-mode'，没有 `indent-bars' 命令；
@@ -1654,14 +1654,14 @@ Use `treemacs' command for old functionality."
   :commands indent-bars-mode)
 #+end_src
 
-** hl-todo
+** TODO Highlights (hl-todo)
 #+begin_src emacs-lisp
 (use-package hl-todo
   ;; 挂到 `after-init-hook'（只跑一次，无参调用即开启）；这样启动时不加载 hl-todo。
   :hook (after-init . global-hl-todo-mode))
 #+end_src
 
-** rainbow & colorful-mode
+** Color Previews (rainbow / colorful)
 #+begin_src emacs-lisp
 ;; rainbow 颜色代码显色 #00FF00
 (use-package rainbow-mode
@@ -1683,7 +1683,7 @@ Use `treemacs' command for old functionality."
   :hook (after-init . global-colorful-mode)) ; 延迟到启动完成再开
 #+end_src
 
-** scrollkeeper
+** Smooth Scrolling (scrollkeeper)
 like ~beacon~
 
 #+begin_src emacs-lisp
@@ -1693,7 +1693,7 @@ like ~beacon~
    ([remap scroll-down-command] . scrollkeeper-contents-down)))
 #+end_src
 
-** breadcrumb
+** Breadcrumbs (breadcrumb)
 Display the structure path below the tab bar.
 like ~otree~
 
@@ -1704,7 +1704,7 @@ like ~otree~
   :hook (prog-mode . breadcrumb-local-mode))
 #+end_src
 
-** idle-highlight-mode :disable:
+** Idle Highlight (idle-highlight) :off:
 #+begin_src emacs-lispxx
 (use-package idle-highlight-mode
   :hook ((prog-mode text-mode) . idle-highlight-mode)
@@ -1714,15 +1714,15 @@ like ~otree~
         idle-highlight-exceptions-syntax nil))
 #+end_src
 
-** writeroom-mode
+** Reading & Writing Room (writeroom)
 #+begin_src emacs-lisp
 (use-package writeroom-mode
   :commands writeroom-mode)
 #+end_src
 
-* Window & Buffer
-** Buffer Navigation
-*** uniquify
+* Windows & Buffers
+** Buffer Management
+*** Uniquify
 #+begin_src emacs-lisp
 (use-package uniquify
   :ensure nil
@@ -1731,14 +1731,14 @@ like ~otree~
   (uniquify-separator "•"))
 #+end_src
 
-*** ibuffer
+*** Ibuffer
 #+begin_src emacs-lisp
 (defalias 'list-buffers 'ibuffer)
 (setq ibuffer-expert t) ; 直接操作不询问
 ;; (setq ibuffer-use-other-window t)
 #+end_src
 
-*** buffer-terminator
+*** Buffer Terminator
 #+begin_src emacs-lisp
 (use-package buffer-terminator
   :custom
@@ -1766,25 +1766,25 @@ like ~otree~
 (winner-mode 1)
 #+end_src
 
-*** ace-window
+*** Ace Window
 #+begin_src emacs-lisp
 (use-package ace-window
   :bind ([remap other-window] . ace-window))
 #+end_src
 
-*** rotate
+*** Rotate
 #+begin_src emacs-lisp
 (use-package rotate
   :defer t)
 #+end_src
 
-*** golden-ratio
+*** Golden Ratio :off:
 #+begin_src emacs-lispxx
 (use-package golden-ratio
   :config (golden-ratio-mode 1))
 #+end_src
 
-*** stillness-mode
+*** Stillness Mode
 弹出 minibuffer 时候保持 window 稳定
 https://github.com/neeasade/stillness-mode.el
 #+begin_src emacs-lisp
@@ -1792,8 +1792,8 @@ https://github.com/neeasade/stillness-mode.el
   :hook (after-init . stillness-mode))
 #+end_src
 
-** Workspace & Sessions
-*** persp-mode
+** Sessions & Workspaces
+*** Persp Mode :off:
 #+begin_src emacs-lispxx
 (use-package persp-mode
   :init (setq persp-keymap-prefix (kbd "C-c w w"))
@@ -1803,7 +1803,7 @@ https://github.com/neeasade/stillness-mode.el
   (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
 #+end_src
 
-*** easysession-mode
+*** Easysession
 #+begin_src emacs-lisp
 ;; The easysession Emacs package is a session manager for Emacs that can persist
 ;; and restore file editing buffers, indirect buffers/clones, Dired buffers,
@@ -1831,7 +1831,7 @@ https://github.com/neeasade/stillness-mode.el
 #+end_src
 
 * Editing & Text
-** basic
+** Editing Basics
 #+begin_src emacs-lisp
 (electric-pair-mode t) ;自动补全括号
 
@@ -1848,7 +1848,7 @@ https://github.com/neeasade/stillness-mode.el
 (global-so-long-mode t)
 #+end_src
 
-** word-wrap
+** Line Wrapping :off:
 #+begin_src emacs-lisp
 ;; (global-visual-line-mode 1) ;视觉换行
 ;; Better word wrapping for CJK characters
@@ -1859,7 +1859,7 @@ https://github.com/neeasade/stillness-mode.el
 ;; ~display-fill-column-indicator-mode~
 ;; (setq-default fill-column 80) ; default: 70 init: 80
 #+end_src
-** outline
+** Code Folding: Outline
 #+begin_src emacs-lisp
 ;; The built-in outline-minor-mode provides structured code folding in modes
 ;; such as Emacs Lisp and Python, allowing users to collapse and expand sections
@@ -1920,13 +1920,13 @@ https://github.com/neeasade/stillness-mode.el
 ;; Haskell
 (add-hook 'haskell-mode-hook #'outline-indent-minor-mode)
 #+end_src
-** hideshow
+** Code Folding: Hideshow
 #+begin_src emacs-lisp
 (use-package hideshow
   :hook
   (prog-mode . hs-minor-mode))
 #+end_src
-** occult
+** Code Folding: Occult :off:
 https://github.com/agzam/occult.el
 
 #+begin_src emacs-lispxx
@@ -1938,7 +1938,7 @@ https://github.com/agzam/occult.el
   )
 #+end_src
 
-** puni
+** Structural Editing: Puni :off:
 soft kill line.
 https://github.com/AmaiKinono/puni
 
@@ -1949,7 +1949,7 @@ https://github.com/AmaiKinono/puni
   (puni-global-mode +1))
 #+end_src
 
-** whitespace
+** Whitespace Cleanup
 #+begin_src emacs-lisp
 (setq whitespace-action '(auto-cleanup)  ; 保存时自动清理（仅下面 style 里的项）
       ;; 只清理行尾空白和首尾空行。不要加 `indentation'/`space-*-tab`：
@@ -1960,7 +1960,7 @@ https://github.com/AmaiKinono/puni
 (global-whitespace-mode 1)
 #+end_src
 
-** mixed-pitch
+** Mixed Fonts (mixed-pitch) :off:
 https://gitlab.com/jabranham/mixed-pitch
 
 #+begin_src emacs-lispxx
@@ -1969,8 +1969,8 @@ https://gitlab.com/jabranham/mixed-pitch
   (setq-default mixed-pitch-set-height t))
 #+end_src
 
-* Persistence & History
-** auto-save-mode
+* Saving & History
+** Auto-Save (#file#)
 #+begin_src emacs-lisp
 ;; 传统备份机制，不覆盖原文件，只生成一个临时备份文件（#file#）。
 ;; 注意：`auto-save-default' 为 nil 时，新文件 buffer 不会默认开 `auto-save-mode'，
@@ -1983,7 +1983,7 @@ https://gitlab.com/jabranham/mixed-pitch
 (setq auto-save-timeout 30)
 #+end_src
 
-** auto-save-visited-mode
+** Auto-Save-Visited :off:
 #+begin_src emacs-lisp
 ;; 26.1+ 新备份机制，直接把你的修改写进原文件。
 ;; When auto-save-visited-mode is enabled, Emacs will auto-save file-visiting
@@ -2001,7 +2001,7 @@ https://gitlab.com/jabranham/mixed-pitch
 ;; (add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
 #+end_src
 
-** super-save
+** Super-Save :off:
 https://github.com/bbatsov/super-save
 
 #+begin_src emacs-lispxx
@@ -2014,7 +2014,7 @@ https://github.com/bbatsov/super-save
   (super-save-mode +1))
 #+end_src
 
-** buffer-guardian
+** Buffer Guardian
 https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+begin_src emacs-lisp
 (use-package buffer-guardian
@@ -2042,7 +2042,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (buffer-guardian-mode 1))
 #+end_src
 
-** recentf、savehist、saveplace、auto-revert
+** Recent Files, History, Places & Auto-Revert
 #+begin_src emacs-lisp
 ;; Auto-revert in Emacs is a feature that automatically updates the
 ;; contents of a buffer to reflect changes made to the underlying file
@@ -2110,13 +2110,13 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (save-place-mode 1))
 #+end_src
 
-** bookmark
+** Visible Bookmarks (bm)
 #+begin_src emacs-lisp
 (use-package bm
   :defer t)
 #+end_src
 
-** undo-fu
+** Undo & Redo (undo-fu)
 #+begin_src emacs-lisp
 ;; The undo-fu package is a lightweight wrapper around Emacs' built-in undo
 ;; system, providing more convenient undo/redo functionality.
@@ -2134,7 +2134,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (undo-fu-session-global-mode 1))
 #+end_src
 
-** vundo
+** Undo Tree (vundo)
 #+begin_src emacs-lisp
 (use-package vundo
   :bind (("C-x u" . vundo))
@@ -2144,7 +2144,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+end_src
 
 * Search & Completion
-** Vertico、Consult、Embark
+** Minibuffer Completion & Commands (vertico / consult / marginalia / embark)
 #+begin_src emacs-lisp
 ;; Vertico provides a vertical completion interface, making it easier to
 ;; navigate and select from completion candidates (e.g., when `M-x` is pressed).
@@ -2346,13 +2346,13 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;;             :around #'minibuffer-format-candidate)
 #+end_src
 
-** deadgrep
+** Deadgrep
 #+begin_src emacs-lisp
 (use-package deadgrep
   :bind ("C-c C-s" . deadgrep))
 #+end_src
 
-** anzu
+** Anzu :off:
 #+begin_src emacs-lispxx
 (use-package anzu
   :bind
@@ -2360,7 +2360,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   ([remap query-replace-regexp] . anzu-query-replace-regexp))
 #+end_src
 
-** visual-replace
+** Visual Replace
 #+begin_src emacs-lisp
 (use-package visual-replace
   :bind (([remap query-replace] . visual-replace)
@@ -2369,7 +2369,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
          ("C-c r" . visual-replace-from-isearch)))
 #+end_src
 
-** Corfu、Cape
+** In-Buffer Completion (corfu / cape)
 #+begin_src emacs-lisp
 ;; Corfu enhances in-buffer completion by displaying a compact popup with
 ;; current candidates, positioned either below or above the point. Candidates
@@ -2447,7 +2447,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   )
 #+end_src
 
-** Company
+** Company :off:
 http://company-mode.github.io/manual/Getting-Started.html
 
 #+begin_src emacs-lispxx
@@ -2511,14 +2511,14 @@ hippie expand is dabbrev expand on steroids
         try-expand-list))               ; 补全一个列表，仅 Lisp/TeX 偶尔有用
 #+end_src
 
-** completion-preview-mode
+** Inline Preview (completion-preview) :off:
 #+begin_src emacs-lisp :tangle no
 (add-hook 'prog-mode-hook #'completion-preview-mode)
 (keymap-set completion-preview-active-mode-map "M-n" #'completion-preview-next-candidate)
 (keymap-set completion-preview-active-mode-map "M-p" #'completion-preview-prev-candidate)
 #+end_src
 
-** Yasnippet
+** Snippets: Yasnippet :off:
 #+begin_src emacs-lisp :tangle no
 ;; The official collection of snippets for yasnippet.
 (use-package yasnippet-snippets)
@@ -2546,7 +2546,7 @@ hippie expand is dabbrev expand on steroids
   (yas-global-mode 1))
 #+end_src
 
-** Tempel
+** Snippets: Tempel :off:
 #+begin_src emacs-lisp :tangle no
 (use-package tempel
   :bind (("M-+" . tempel-complete)
@@ -2561,7 +2561,7 @@ hippie expand is dabbrev expand on steroids
 
 * Movement & Utilities
 ** Multi-Edit
-*** multiple-cursors
+*** Multiple Cursors
 #+begin_src emacs-lisp
 (use-package multiple-cursors
   :bind (("C-<f2>" . mc/mark-all-words-like-this)
@@ -2573,26 +2573,26 @@ hippie expand is dabbrev expand on steroids
          ))
 #+end_src
 
-*** iedit
+*** Iedit
 #+begin_src emacs-lisp
 (use-package iedit
   :defer t)
 #+end_src
 
-*** ialign
+*** Ialign
 #+begin_src emacs-lisp
 (use-package ialign
   :commands ialign)
 #+end_src
 
-*** wgrep
+*** Wgrep
 #+begin_src emacs-lisp
 ;; Writable grep buffer
 (use-package wgrep
   :defer t)
 #+end_src
 
-*** expreg
+*** Expreg
 expand region alternative
 
 #+begin_src emacs-lisp
@@ -2601,7 +2601,7 @@ expand region alternative
          ("C--" . expreg-contract)))
 #+end_src
 
-** helpful
+** Help (helpful)
 #+begin_src emacs-lisp
 ;; Helpful is an alternative to the built-in Emacs help that provides much more
 ;; contextual information.
@@ -2621,19 +2621,19 @@ expand region alternative
   :custom
   (helpful-max-buffers 7))
 #+end_src
-** avy
+** Jumping (avy)
 #+begin_src emacs-lisp
 (use-package avy
   :defer t)
 #+end_src
 
-** avy-zap
+** Avy Zap
 #+begin_src emacs-lisp
 (use-package avy-zap
   :bind ("M-z" . avy-zap-up-to-char-dwim))
 #+end_src
 
-** mwim
+** Line Motions (mwim)
 moving to the beginning/end code
 
 #+begin_src emacs-lisp
@@ -2646,7 +2646,7 @@ moving to the beginning/end code
 ;;          ("C-e" . mosey-forward-bounce)))
 #+end_src
 
-** move-text
+** Move Text
 #+begin_src emacs-lisp
 ;; move-text M-up/M-down
 (use-package move-text
@@ -2654,14 +2654,14 @@ moving to the beginning/end code
   (move-text-default-bindings))
 #+end_src
 
-** easy-kill
+** Kill Ring (easy-kill)
 #+begin_src emacs-lisp
 (use-package easy-kill
   :bind (([remap mark-sexp] . easy-mark)
          ([remap kill-ring-save] . easy-kill)))
 #+end_src
 
-** crux
+** Crux Helpers
 #+begin_src emacs-lisp
 (use-package crux
   :bind
@@ -2671,7 +2671,7 @@ moving to the beginning/end code
   ("C-S-<return>" . crux-smart-open-line-above))
 #+end_src
 
-** isl :disable:
+** Isearch-Light (isl) :off:
 https://github.com/thierryvolpiatto/isearch-light
 
 #+begin_src emacs-lispxx
@@ -2685,13 +2685,13 @@ https://github.com/thierryvolpiatto/isearch-light
   )
 #+end_src
 
-** goto-last-change
+** Jump to Last Change
 #+begin_src emacs-lisp
 (use-package goto-last-change
   :bind ("M-g l" . goto-last-change))
 #+end_src
 
-** fanyi
+** Translation (fanyi)
 #+begin_src emacs-lisp
 (use-package fanyi
   :bind ("C-c y" . fanyi-dwim2)
@@ -2703,7 +2703,7 @@ https://github.com/thierryvolpiatto/isearch-light
                      )))
 #+end_src
 
-** maple-translate :disable:
+** Translation (maple) :off:
 #+begin_src emacs-lispxx
 (use-package maple-translate
   :vc (:url "https://github.com/honmaple/emacs-maple-translate"
@@ -2711,20 +2711,20 @@ https://github.com/thierryvolpiatto/isearch-light
   :commands (maple-translate maple-translate+))
 #+end_src
 
-** pass
+** Password Store (pass) :off:
 #+begin_src emacs-lisp :tangle no
 (use-package pass
   :commands pass)
 #+end_src
 
-** vlf
+** Large Files (vlf)
 #+begin_src emacs-lisp
 ;; View Large Files
 (use-package vlf
   :defer t)
 #+end_src
 
-** nov
+** EPUB (nov) :off:
 #+begin_src emacs-lisp :tangle no
 (use-package nov
   :mode ("\\.epub\\'" . nov-mode)
@@ -2734,20 +2734,20 @@ https://github.com/thierryvolpiatto/isearch-light
   )
 #+end_src
 
-** qrencode
+** QR Codes (qrencode)
 #+begin_src emacs-lisp
 (use-package qrencode
   :defer t)
 #+end_src
 
-** esup
+** Startup Profiler (esup)
 #+begin_src emacs-lisp
 (use-package esup
   :defer t)
 #+end_src
 
-* Projects & VCS
-** dired enhanced
+* Projects & Version Control
+** Dired
 #+begin_src emacs-lisp
 (use-package diredfl
   :config
@@ -2783,7 +2783,7 @@ https://github.com/thierryvolpiatto/isearch-light
     (command-execute "tk")))
 #+end_src
 
-** Project Management
+** Project Management (project.el / disproject)
 #+begin_src emacs-lisp
 ;; (define-key global-map (kbd "C-c p") project-prefix-map)
 
@@ -2830,7 +2830,7 @@ https://github.com/thierryvolpiatto/isearch-light
     (remove-hook 'with-editor-filter-visit-hook 'magit-commit-diff)))
 #+end_src
 
-** Git-gutter
+** Git Gutter :off:
 #+begin_src emacs-lispxx
 (use-package git-gutter
   :diminish (git-gutter-mode)
@@ -2846,7 +2846,7 @@ https://github.com/thierryvolpiatto/isearch-light
   (global-git-gutter-mode 1))
 #+end_src
 
-** diff-hl
+** Diff Margins (diff-hl)
 #+begin_src emacs-lisp
 (use-package diff-hl
   :hook (dired-mode . diredfl-mode)
@@ -2863,7 +2863,7 @@ https://github.com/thierryvolpiatto/isearch-light
   :after magit)
 #+end_src
 
-** blamer
+** Blame in Echo Area (blamer) :off:
 #+begin_src emacs-lisp
 (use-package blamer
   :commands blamer-mode
@@ -2876,19 +2876,19 @@ https://github.com/thierryvolpiatto/isearch-light
   (setq blamer-min-offset 70))
 #+end_src
 
-** Git-timemachine
+** Git Timemachine
 #+begin_src emacs-lisp
 (use-package git-timemachine
   :commands  git-timemachine)
 #+end_src
 
-** Browse-at-remote
+** Browse at Remote
 #+begin_src emacs-lisp
 (use-package browse-at-remote
   :commands browse-at-remote)
 #+end_src
 
-** ediff
+** Ediff
 #+begin_src emacs-lisp
 (use-package ediff
   :ensure nil
@@ -2896,8 +2896,8 @@ https://github.com/thierryvolpiatto/isearch-light
   (ediff-custom-diff-options "-u"))
 #+end_src
 
-* Org Mode
-** org-mode
+* Org
+** Core Settings
 
 #+begin_src emacs-lisp
 ;; 统一在这里设置（原先只在 Linux/Windows 分支设置，macOS 等平台会落到默认 ~/org）
@@ -2944,7 +2944,7 @@ https://github.com/thierryvolpiatto/isearch-light
   ))
 #+end_src
 
-** org-babel
+** Babel & Auto-Tangle
 #+begin_src emacs-lisp
 (setq org-src-fontify-natively t                ; Fontify code in code blocks.
       org-adapt-indentation nil                 ; Adaptive indentation
@@ -2957,7 +2957,7 @@ https://github.com/thierryvolpiatto/isearch-light
   :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
-** org-agenda
+** Agenda :off:
 #+begin_src emacs-lisp :tangle no
 (setq org-agenda-files (list "~/Documents/org/agenda.org"
                              "~/Documents/org/students.org"
@@ -2977,10 +2977,10 @@ https://github.com/thierryvolpiatto/isearch-light
 )
 #+end_src
 
-** org-super-agenda
+** Super Agenda :off:
 https://github.com/alphapapa/org-super-agenda
 
-** org-capture
+** Capture Templates
 emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (org-capture))'
 
 #+begin_src emacs-lisp
@@ -3009,7 +3009,7 @@ emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (or
                            ))
 #+end_src
 
-** org-modern
+** Org-Modern :off:
 #+begin_src emacs-lisp
 (use-package org-modern
   :disabled
@@ -3017,7 +3017,7 @@ emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (or
   :hook (org-mode . org-modern-mode))
 #+end_src
 
-** org-roam
+** Org-Roam :off:
 https://zhuanlan.zhihu.com/p/633047823
 
 #+begin_src emacs-lisp :tangle no
@@ -3039,7 +3039,7 @@ https://zhuanlan.zhihu.com/p/633047823
   (require 'org-roam-protocol))
 #+end_src
 
-** org-appear
+** Org-Appear
 Make invisible parts of Org elements appear visible.
 
 #+begin_src emacs-lisp
@@ -3054,7 +3054,7 @@ Make invisible parts of Org elements appear visible.
   )
 #+end_src
 
-** denote :disable:
+** Denote :off:
 #+begin_src emacs-lisp :tangle no
 (use-package denote
   :hook (dired-mode . denote-dired-mode-in-directories)
@@ -3099,17 +3099,17 @@ Make invisible parts of Org elements appear visible.
   )
 #+end_src
 
-** one.el
+** one.el (Not Configured)
 Static Site Generator for Emacs Lisp programmers.
 
 https://one.tonyaldon.com/
 
-** note-taking
+** howm (Not Configured)
 https://github.com/kaorahi/howm
 
-* Development
-** Tooling
-*** prog-mode
+* Programming
+** Editing & Tooling
+*** Prog-Mode Defaults
 #+begin_src emacs-lisp
 (defun my/prog-mode-defaults ()
   "Default behaviors shared by programming modes."
@@ -3122,7 +3122,7 @@ https://github.com/kaorahi/howm
 (add-hook 'prog-mode-hook #'my/prog-mode-defaults)
 #+end_src
 
-*** compilation
+*** Compilation
 #+begin_src emacs-lisp
 (setq compilation-ask-about-save nil  ;Just save before compiling
       compilation-always-kill t       ;kill old compile processes before new one
@@ -3130,7 +3130,7 @@ https://github.com/kaorahi/howm
       )
 #+end_src
 
-*** flycheck
+*** Flycheck
 #+begin_src emacs-lisp
 (use-package flycheck
   :defer t
@@ -3145,7 +3145,7 @@ https://github.com/kaorahi/howm
                                      )))
 #+end_src
 
-*** flymake
+*** Flymake :off:
 #+begin_src emacs-lisp
 (use-package flymake
   :disabled
@@ -3159,21 +3159,21 @@ https://github.com/kaorahi/howm
   (setq-default flymake-no-changes-timeout 1.0))
 #+end_src
 
-*** dape
+*** Dape (Not Configured)
 https://github.com/svaante/dape
 
-*** quick-run
+*** Quickrun
 #+begin_src emacs-lisp
 (use-package quickrun
   :defer t)
 #+end_src
 
-*** editorconfig
+*** Editorconfig
 #+begin_src emacs-lisp
 (editorconfig-mode t)
 #+end_src
 
-*** treesit-auto
+*** Treesit-Auto :off:
 ~C-h v major-mode~
 https://github.com/renzmann/treesit-auto
 
@@ -3188,7 +3188,7 @@ https://github.com/renzmann/treesit-auto
   )
 #+end_src
 
-*** treesit
+*** Treesit (Grammars Missing) :off:
 #+begin_src emacs-lisp
 ;; 暂不启用：这台机器上 `treesit-language-available-p' 对所有语言都是 nil（没有 grammar），
 ;; 而 `treesit-enabled-modes t' 会通过 `major-mode-remap-alist' 把 python/c/go... 重映射到
@@ -3201,13 +3201,13 @@ https://github.com/renzmann/treesit-auto
 #+end_src
 
 ** Languages
-*** lua
+*** Lua
 #+begin_src emacs-lisp
 (use-package lua-mode
   :mode ("\\.lua\\'"))
 #+end_src
 
-*** sql
+*** SQL
 #+begin_src emacs-lisp
 (use-package sql-indent
   ;; `sql-indent' 不是 major mode（正确入口是 `sqlind-minor-mode'）；
@@ -3219,13 +3219,13 @@ https://github.com/renzmann/treesit-auto
 ;;   (setq sqlformat-command "sqlfluff"))
 #+end_src
 
-*** dockerfile
+*** Dockerfile
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
   :mode ("Dockerfile\\'"))
 #+end_src
 
-*** powershell
+*** PowerShell
 #+begin_src emacs-lisp
 (use-package powershell
   ;; 包子带 `.ps1 -> powershell-mode' 的映射；不要再写 `:mode "\\.ps1\\'"'，
@@ -3233,7 +3233,7 @@ https://github.com/renzmann/treesit-auto
   )
 #+end_src
 
-*** python
+*** Python
 #+begin_src emacs-lisp
 (use-package python-mode
   :mode ("\\.py\\'")
@@ -3254,7 +3254,7 @@ https://github.com/renzmann/treesit-auto
                                         ; or lsp-deferred
 #+end_src
 
-*** go
+*** Go
 #+begin_src emacs-lisp
 (use-package go-mode
   :commands go-mode
@@ -3263,7 +3263,7 @@ https://github.com/renzmann/treesit-auto
   (add-hook 'before-save-hook 'gofmt-before-save))
 #+end_src
 
-*** rust
+*** Rust
 #+begin_src emacs-lisp
 (use-package rustic
   ;; 包名是 `rustic'，但 major mode 叫 `rustic-mode'；`:mode "\\.rs$"' 会把 .rs
@@ -3284,7 +3284,7 @@ https://github.com/renzmann/treesit-auto
   (cargo-transient-buffer-name-function #'project-prefixed-buffer-name))
 #+end_src
 
-*** ruby
+*** Ruby
 #+begin_src emacs-lisp
   ;; (use-package ruby-mode
   ;;   :defvar ruby-mode-map
@@ -3296,7 +3296,7 @@ https://github.com/renzmann/treesit-auto
   ;;     :hook (ruby-mode-hook . inf-ruby-minor-mode)))
 #+end_src
 
-*** C
+*** C / C++
 #+begin_src emacs-lisp :tangle no
 (use-package cc-mode
   :bind (:map c-mode-base-map
@@ -3309,12 +3309,12 @@ https://github.com/renzmann/treesit-auto
   :commands lsp)
 #+end_src
 
-*** java & android
+*** Groovy
 #+begin_src emacs-lisp
 (use-package groovy-mode)
 #+end_src
 
-*** haskell
+*** Haskell :off:
 #+begin_src emacs-lisp :tangle no
 (use-package haskell-mode
   :init
@@ -3328,7 +3328,7 @@ https://github.com/renzmann/treesit-auto
 (use-package lsp-haskell)
 #+end_src
 
-*** elisp
+*** Emacs Lisp
 #+begin_src emacs-lisp
 (use-package elisp-mode
   :ensure nil
@@ -3350,7 +3350,7 @@ https://github.com/renzmann/treesit-auto
               ("C-c e" . macrostep-expand)))
 #+end_src
 
-*** paredit、aggressive-indent、highlight-defined
+*** Emacs Lisp Extras (paredit / aggressive-indent / highlight-defined) :off:
 #+begin_src emacs-lispxx
 ;; Prevent parenthesis imbalance
 (use-package paredit
@@ -3394,7 +3394,7 @@ https://github.com/renzmann/treesit-auto
   (emacs-lisp-mode . highlight-defined-mode))
 #+end_src
 
-*** nix
+*** Nix
 #+begin_src emacs-lisp
 (use-package nix-mode
   :mode ("\\.nix\\'"))
@@ -3405,8 +3405,8 @@ https://github.com/renzmann/treesit-auto
 ;;   (direnv-mode))
 #+end_src
 
-** Web And Data Formats
-*** web-mode
+** Web & Data Formats
+*** Web (web-mode) :off:
 #+begin_src emacs-lispxx
 (use-package web-mode
   :mode ("\\.[agj]sp\\'"
@@ -3430,7 +3430,7 @@ https://github.com/renzmann/treesit-auto
         web-mode-indent-style 2))
 #+end_src
 
-*** conf-mode
+*** Config Files (conf-mode)
 #+begin_src emacs-lisp
 (use-package conf-mode
   :mode ("/credentials\\'"
@@ -3445,7 +3445,7 @@ https://github.com/renzmann/treesit-auto
 (global-set-key [remap conf-space-keywords] #'project-find-file)
 #+end_src
 
-*** prettier
+*** Prettier :off:
 HTML/CSS/TS/JSON/YAML/MARKDOWN
 
 #+begin_src emacs-lispxx
@@ -3455,7 +3455,7 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :init (setq prettier-pre-warm 'none))
 #+end_src
 
-*** css, scss
+*** CSS & SCSS :off:
 #+begin_src emacs-lispxx
 (use-package css-mode
   :ensure nil
@@ -3470,7 +3470,7 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   (use-package less-css-mode))
 #+end_src
 
-*** javaScript
+*** JavaScript & TypeScript :off:
 #+begin_src emacs-lispxx
 (use-package js
   :ensure nil
@@ -3487,13 +3487,13 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 ;;   :hook ((web-mode js-mode js2-mode) . add-node-modules-path))
 #+end_src
 
-*** php
+*** PHP
 #+begin_src emacs-lisp
 (use-package php-mode
   :mode "\\.php$")
 #+end_src
 
-*** markdown
+*** Markdown
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :config
@@ -3506,13 +3506,13 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :defer t)
 #+end_src
 
-*** json
+*** JSON
 #+begin_src emacs-lisp
 (use-package json-mode
   :mode ("\\.json\\'"))
 #+end_src
 
-*** yaml
+*** YAML
 #+begin_src emacs-lisp
 (use-package yaml-mode
   ;; Emacs 31 内置映射是 `yaml-ts-mode-maybe'：没有 grammar 且没装 `yaml-mode' 时
@@ -3526,25 +3526,25 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :hook (yaml-mode . yaml-pro-mode))
 #+end_src
 
-*** toml
+*** TOML
 #+begin_src emacs-lisp
 (use-package toml-mode
   :mode ("\\.toml\\'"))
 #+end_src
 
-*** kdl
+*** KDL
 #+begin_src emacs-lisp
 (use-package kdl-mode
   :mode ("\\.kdl\\'"))
 #+end_src
 
-*** just
+*** Just
 #+begin_src emacs-lisp
 (use-package just-mode
   :mode ("\\.just\\'" "justfile\\'"))
 #+end_src
 
-** eglot
+** Eglot (LSP Client)
 https://www.jamescherti.com/emacs-eglot-performance/
 
 #+begin_src emacs-lisp
@@ -3614,7 +3614,7 @@ https://www.jamescherti.com/emacs-eglot-performance/
 ;;   :after eglot)
 #+end_src
 
-** lsp-mode
+** LSP-Mode :off:
 #+begin_src emacs-lisp :tangle no
 (use-package lsp-mode
   :init
@@ -3645,13 +3645,13 @@ https://www.jamescherti.com/emacs-eglot-performance/
   :commands lsp-ui-mode)
 #+end_src
 
-** lsp-booster
+** LSP Booster (Not Configured)
 https://github.com/blahgeek/emacs-lsp-booster
 
-** lsp-proxy
+** LSP Proxy (Not Configured)
 https://github.com/jadestrong/lsp-proxy
 
-** apheleia
+** Code Formatting (apheleia)
 Run code formatters on ~after-save-hook~
 
 #+begin_src emacs-lisp
@@ -3662,7 +3662,7 @@ Run code formatters on ~after-save-hook~
   :hook ((prog-mode . apheleia-mode)))
 #+end_src
 
-** reformatter
+** Reformatter :off:
 #+begin_src emacs-lispxx
 (use-package reformatter
   :defer t
@@ -3679,7 +3679,7 @@ Run code formatters on ~after-save-hook~
   )
 #+end_src
 
-* Custom Functions
+* Custom Commands
 ** make-parent-directory
 #+begin_src emacs-lisp
 (defun make-parent-directory ()
@@ -3688,7 +3688,7 @@ Run code formatters on ~after-save-hook~
 (add-hook 'find-file-not-found-functions #'make-parent-directory)
 #+end_src
 
-** space to newline
+** my/space-to-newline
 #+begin_src emacs-lisp
 (defun my/space-to-newline ()
   "Replace space sequence to a newline char.
@@ -3718,7 +3718,7 @@ Version 2017-08-19"
           (replace-match "\n" ))))))
 #+end_src
 
-** insert-timestamp
+** my/insert-timestamp
 #+begin_src emacs-lisp
 (defun my/insert-timestamp ()
   "Insert string for the current time."
@@ -3726,7 +3726,7 @@ Version 2017-08-19"
   (insert (format-time-string "[%02y-%02m-%02d %02H:%02M:%02S] ")))
 #+end_src
 
-** backward-delete-word
+** my/backward-delete-word
 ~M-backspace~ 删除而非剪切
 
 #+begin_src emacs-lisp
@@ -3738,7 +3738,7 @@ Version 2017-08-19"
 (global-set-key [remap backward-kill-word] #'my/backward-delete-word)
 #+end_src
 
-** proxy
+** my/toggle-url-proxy
 https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
 #+begin_src emacs-lisp
@@ -3758,7 +3758,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 #+end_src
 
 * Keybindings
-** bind-keys
+** Global & Prefix Bindings
 #+begin_src emacs-lisp
 (which-key-mode)
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
@@ -3903,7 +3903,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  )
 #+end_src
 
-** mouse
+** Mouse
 M-x ~describe-key~
 
 #+begin_src emacs-lisp
@@ -3924,7 +3924,7 @@ M-x ~describe-key~
 (pixel-scroll-precision-mode t)
 #+end_src
 
-** anju :mouse:
+** Context Menu (anju) :off:
 https://github.com/kickingvegas/anju
 
 #+begin_src emacs-lispxx
@@ -3935,7 +3935,7 @@ https://github.com/kickingvegas/anju
   (anju-init))
 #+end_src
 
-** inhibit-mouse :mouse:
+** Inhibit Mouse :off:
 禁用所有鼠标
 
 #+begin_src emacs-lisp
@@ -3947,7 +3947,7 @@ https://github.com/kickingvegas/anju
     (inhibit-mouse-mode 1)))
 #+end_src
 
-** casual
+** Casual Menus
 https://github.com/kickingvegas/casual
 
 #+begin_src emacs-lisp
@@ -3959,7 +3959,7 @@ https://github.com/kickingvegas/casual
          :map Info-mode-map ("C-o" . casual-info-tmenu)))
 #+end_src
 
-** view-mode
+** View Mode
 #+begin_src emacs-lisp
 (use-package view
   :ensure nil
@@ -3974,7 +3974,7 @@ https://github.com/kickingvegas/casual
   (setq view-read-only t))
 #+end_src
 
-** devil
+** Devil :off:
 #+begin_src emacs-lisp :tangle no
 (use-package devil
   :config
@@ -3982,7 +3982,7 @@ https://github.com/kickingvegas/casual
   (global-set-key (kbd "C-,") 'global-devil-mode))
 #+end_src
 
-** keycast
+** Keycast
 Show current command and its binding.
 
 #+begin_src emacs-lisp
@@ -3990,7 +3990,7 @@ Show current command and its binding.
   :defer t)
 #+end_src
 
-** rime
+** Rime Input Method
 #+begin_src emacs-lisp
 (use-package rime
   :custom
