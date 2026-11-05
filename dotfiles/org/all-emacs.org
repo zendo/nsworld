@@ -1203,9 +1203,27 @@ This should be called after changing `auto-save-list-file-prefix'."
 ;; TEMP
 ;; Cache the contents of `load-path' directories so library loading can skip
 ;; directories that cannot contain the requested file (Emacs 31+).
-(when (boundp 'load-path-filter-function)
-  (setq load-path-filter-function
-        #'load-path-filter-cache-directory-files))
+;;; 启动优化：启用 package-quickstart（autoload 合并成一个文件），
+;;; 并跳过 `package-initialize' 里的 `package-read-all-archive-contents'
+;;; （读 4 个 archive 缓存约 0.14s）。`minimal-emacs-package-initialize-and-refresh'
+;;; 会在 early-init 里 defvar，这里先 setq，`defvar' 不会覆盖已有值。
+(setq package-quickstart t
+      package-quickstart-file (expand-file-name "package-quickstart.el"
+                                                user-emacs-directory)
+      minimal-emacs-package-initialize-and-refresh nil)
+(require 'package)
+(package-load-all-descriptors)
+(package-activate-all)
+(require 'use-package)
+
+;; `package-quickstart' 不会在装/删包后自动刷新，这里补上；
+;; 否则新装的包在下次启动时 autoload 会缺失。
+(dolist (cmd '(package-install package-delete package-vc-install package-autoremove))
+  (when (fboundp cmd)
+    (advice-add cmd :after
+                (lambda (&rest _)
+                  (when (bound-and-true-p package-quickstart)
+                    (package-quickstart-refresh))))))
 #+end_src
 
 * post-init.el - Header
@@ -1464,15 +1482,16 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   (dired-mode . nerd-icons-dired-mode))
 
 (use-package nerd-icons-completion
+  ;; 首次打开 minibuffer 时才加载（避免启动时拉起 nerd-icons，约 0.13s）
   :after marginalia
-  :config
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+  :hook (minibuffer-setup . nerd-icons-completion-marginalia-setup))
 
 ;; VSCode 风格：在补全弹窗左侧为变量/函数/类型等显示图标
+;; 只注册 formatter 符号，第一次弹补全时才 autoload（避免启动时加载 nerd-icons）
 (use-package nerd-icons-corfu
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+  :commands nerd-icons-corfu-formatter
+  :init (with-eval-after-load 'corfu
+          (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)))
 
 ;; (use-package kind-icon
 ;;   :if (display-graphic-p)
@@ -1552,11 +1571,12 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ;; :diminish (dashboard-mode page-break-lines-mode)
   :custom
   (dashboard-startup-banner 2)
-  (dashboard-set-heading-icons t)
-  (dashboard-set-file-icons t)
+  ;; 图标关掉：`:custom (dashboard-icon-type 'nerd-icons)' 会在启动时
+  ;; 立即 require nerd-icons（约 0.13s），图标本身对 dashboard 不是必需的。
+  (dashboard-set-heading-icons nil)
+  (dashboard-set-file-icons nil)
   (dashboard-set-footer nil)
   (dashboard-center-content t)
-  (dashboard-icon-type 'nerd-icons)
   (dashboard-projects-backend 'project-el)
   (dashboard-banner-logo-title nil) ; "Welcome to Emacs!"
   (dashboard-items  '((recents  . 12)
@@ -2289,7 +2309,8 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
                  nil
                  (window-parameters (mode-line-format . none)))))
 
-(use-package embark-consult)
+(use-package embark-consult
+  :after (embark consult))
 #+end_src
 
 ** Search Commands (consult)
@@ -2813,15 +2834,15 @@ https://github.com/thierryvolpiatto/isearch-light
 ** Dired
 #+begin_src emacs-lisp
 (use-package diredfl
-  :config
-  (diredfl-global-mode 1))
+  :hook (dired-mode . diredfl-mode))
 
 (use-package dired-git-info
   :config (setq dgi-auto-hide-details-p nil)
   :hook (dired-after-readin . dired-git-info-auto-enable))
 
 (use-package dired-x
-  :ensure nil)
+  :ensure nil
+  :defer t)
 
 (use-package dired
   :ensure nil
@@ -2955,6 +2976,7 @@ https://github.com/thierryvolpiatto/isearch-light
 #+begin_src emacs-lisp
 (use-package ediff
   :ensure nil
+  :defer t   ; 启动时不加载（ediff 只在 M-x ediff* 时才需要）
   :custom
   (ediff-custom-diff-options "-u"))
 #+end_src
@@ -3293,7 +3315,8 @@ https://github.com/renzmann/treesit-auto
 (use-package powershell
   ;; 包子带 `.ps1 -> powershell-mode' 的映射；不要再写 `:mode "\\.ps1\\'"'，
   ;; 那会被映射到同名命令 `powershell'（启动 PowerShell 子进程，结果进 shell-mode）。
-  )
+  ;; 启动时不加载（否则会顺带 require shell/comint，约 0.1s）。
+  :defer t)
 #+end_src
 
 *** Python
@@ -3343,6 +3366,7 @@ https://github.com/renzmann/treesit-auto
   (push 'rustic-clippy flycheck-checkers))
 
 (use-package cargo-transient
+  :defer t   ; 启动时不加载
   :custom
   (cargo-transient-buffer-name-function #'project-prefixed-buffer-name))
 #+end_src
@@ -3374,7 +3398,8 @@ https://github.com/renzmann/treesit-auto
 
 *** Groovy
 #+begin_src emacs-lisp
-(use-package groovy-mode)
+(use-package groovy-mode
+  :defer t)
 #+end_src
 
 *** Haskell :off:
