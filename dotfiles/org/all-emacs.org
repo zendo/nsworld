@@ -1970,11 +1970,12 @@ https://gitlab.com/jabranham/mixed-pitch
 #+end_src
 
 * Persistence & History
-** auto-save-mode #filename#
+** auto-save-mode
 #+begin_src emacs-lisp
-;; 传统备份机制，不覆盖原文件，只生成一个临时备份文件。
-;; Enable `auto-save-mode' to prevent data loss. Use `recover-file' or
-;; `recover-session' to restore unsaved changes. #file.txt#
+;; 传统备份机制，不覆盖原文件，只生成一个临时备份文件（#file#）。
+;; 注意：`auto-save-default' 为 nil 时，新文件 buffer 不会默认开 `auto-save-mode'，
+;; 下面两个 interval/timeout 也就形同虚设；保持 t 才有 300 键 / 30s 空闲自动保存。
+;; 用 `recover-file' / `recover-session' 恢复。
 (setq auto-save-default nil)
 ;; Trigger an auto-save after 300 keystrokes
 (setq auto-save-interval 300)
@@ -2018,11 +2019,12 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+begin_src emacs-lisp
 (use-package buffer-guardian
   :custom
-  ;; When non-nil, include remote files in the auto-save process
+  ;; 非 nil 时「不」自动保存远程文件（默认就是 t，这里显式写出来）
   (buffer-guardian-inhibit-saving-remote-files t)
 
-  ;; When non-nil, buffers visiting nonexistent files are not saved
-  (buffer-guardian-inhibit-saving-nonexistent-files nil)
+  ;; 非 nil 时「不」保存磁盘上不存在的文件（被删/改名/还没保存过的）。
+  ;; 默认就是 t；改成 nil 会让这些文件在切窗口时被自动创建/复活。
+  (buffer-guardian-inhibit-saving-nonexistent-files t)
 
   ;; Save the buffer even if the window change results in the same buffer
   (buffer-guardian-save-on-same-buffer-window-change t)
@@ -2067,7 +2069,8 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
               "\\.bz$" "\\.gz$" "\\.gzip$" "\\.xz$" "\\.zip$"
               "\\.7z$" "\\.rar$"
               "COMMIT_EDITMSG\\'" "persp-auto-save" "\\.cache"
-              "~/.config/emacs"
+              ;; recentf 存绝对路径，`~' 不会展开，必须用展开后的目录
+              (regexp-quote (expand-file-name user-emacs-directory))
               "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
               "-autoloads\\.el$" "autoload\\.el$"))
   ;; Enable `recentf-mode'
@@ -2113,12 +2116,16 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   :defer t)
 #+end_src
 
-**
-undo-fu
+** undo-fu
 #+begin_src emacs-lisp
 ;; The undo-fu package is a lightweight wrapper around Emacs' built-in undo
 ;; system, providing more convenient undo/redo functionality.
 (use-package undo-fu
+  ;; 之前只有 `:commands'、没有任何绑定，等于没启用；这里接上按键。
+  ;; `C-?' 在终端里可能发不出去，所以额外给个 `M-_'。
+  :bind (("C-/" . undo-fu-only-undo)
+         ("C-?" . undo-fu-only-redo)
+         ("M-_" . undo-fu-only-redo))
   :commands (undo-fu-only-undo
              undo-fu-only-redo
              undo-fu-only-redo-all
