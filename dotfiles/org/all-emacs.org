@@ -1203,6 +1203,10 @@ This should be called after changing `auto-save-list-file-prefix'."
 ;; TEMP
 ;; Cache the contents of `load-path' directories so library loading can skip
 ;; directories that cannot contain the requested file (Emacs 31+).
+(when (boundp 'load-path-filter-function)
+  (setq load-path-filter-function
+        #'load-path-filter-cache-directory-files))
+
 ;;; 启动优化：启用 package-quickstart（autoload 合并成一个文件），
 ;;; 并跳过 `package-initialize' 里的 `package-read-all-archive-contents'
 ;;; （读 4 个 archive 缓存约 0.14s）。`minimal-emacs-package-initialize-and-refresh'
@@ -1216,14 +1220,34 @@ This should be called after changing `auto-save-list-file-prefix'."
 (package-activate-all)
 (require 'use-package)
 
-;; `package-quickstart' 不会在装/删包后自动刷新，这里补上；
-;; 否则新装的包在下次启动时 autoload 会缺失。
+;; `package-quickstart' 不会在装/删包后自动刷新。但不能每次 install 都刷新：
+;; 全新安装要装几十个包，每装一个都重写一遍 600KB 的 quickstart、重读一遍
+;; archive 缓存，还会刷出几十条 "Unnecessary call to package-initialize" 警告。
+;; 所以：启动期间只打标记，`emacs-startup-hook' 时统一刷新一次；
+;; 启动完成后的运行期安装才立即刷新。
+(defvar my/package-quickstart-dirty nil
+  "Non-nil if `package-quickstart-file' needs to be regenerated.")
+
+(defun my/package-quickstart-refresh-maybe ()
+  "Regenerate the quickstart file if it is missing or outdated."
+  (when (bound-and-true-p package-quickstart)
+    (when (or my/package-quickstart-dirty
+              (not (file-exists-p package-quickstart-file)))
+      (setq my/package-quickstart-dirty nil)
+      (condition-case err
+          (package-quickstart-refresh)
+        (error (message "package-quickstart-refresh failed: %S" err))))))
+
+(add-hook 'emacs-startup-hook #'my/package-quickstart-refresh-maybe)
+
 (dolist (cmd '(package-install package-delete package-vc-install package-autoremove))
   (when (fboundp cmd)
     (advice-add cmd :after
                 (lambda (&rest _)
-                  (when (bound-and-true-p package-quickstart)
-                    (package-quickstart-refresh))))))
+                  (setq my/package-quickstart-dirty t)
+                  ;; 启动结束后（运行期安装）立即刷新；启动期间交给上面的 hook
+                  (when (bound-and-true-p after-init-time)
+                    (my/package-quickstart-refresh-maybe))))))
 #+end_src
 
 * post-init.el - Header
@@ -2660,7 +2684,10 @@ hippie expand is dabbrev expand on steroids
 *** Iedit
 #+begin_src emacs-lisp
 (use-package iedit
-  :defer t)
+  :defer t
+  ;; iedit 默认会把自己的 `C-;' 绑到全局并检查是否被占用；`C-;' 已经是
+  ;; `embark-dwim'，所以会刷警告。设为 nil 不自动绑键（`M-x iedit-mode' 照常可用）。
+  :init (setq iedit-toggle-key-default nil))
 #+end_src
 
 *** Ialign
