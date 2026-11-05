@@ -2256,7 +2256,8 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
          ;; M-g bindings in `goto-map'
          ("M-g e" . consult-compile-error)
          ("M-g r" . consult-grep-match)
-         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+         ("M-g f" . consult-flycheck)              ;; 主力 linter 是 flycheck（见下方 flycheck 段）
+         ("M-g F" . consult-flymake)               ;; eglot 的诊断走 flymake，用大写 F 补一份
          ("M-g g" . consult-goto-line)             ;; orig. goto-line
          ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
          ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
@@ -2312,7 +2313,8 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   ;; For some commands and buffer sources it is useful to configure the
   ;; :preview-key on a per-command basis using the `consult-customize' macro.
   (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
+   ;; 主题预览只在 `M-.' 触发：用 `any' 会在每次按键时完整加载一个主题，很卡
+   consult-theme :preview-key "M-."
    consult-ripgrep consult-git-grep consult-grep consult-man
    consult-bookmark consult-recent-file consult-xref
    consult-source-bookmark consult-source-file-register
@@ -2328,6 +2330,11 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
 )
+
+;; 走 flycheck（`*** flycheck' 段在 prog-mode 启用），所以错误列表用 consult-flycheck；
+;; flycheck 自带 `C-c ! n/p/l' 上下错误/列表。
+(use-package consult-flycheck
+  :after (consult flycheck))
 
 ;;----------------------------------------------------------------------------
 ;; Functions
@@ -2419,16 +2426,28 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; in-buffer completion. It integrates with Corfu or the default completion UI,
 ;; by providing additional backends through completion-at-point-functions.
 (use-package cape
-  :commands (cape-dabbrev cape-file cape-elisp-block)
+  :commands (cape-dabbrev cape-file cape-elisp-block cape-keyword cape-history)
   :bind ("C-c ." . cape-prefix-map)
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.
+  ;; 顺序有意义：排在前面的 capf 先给出候选、后面的就轮不到。
+  ;; `cape-dabbrev' 最贵且最“万能”，所以放到最后。
+  ;; 注意 `add-hook' 是前插，所以要按“倒序”写：
+  ;; 最终全局列表为 cape-elisp-block → cape-keyword → cape-dabbrev。
+  ;; （eglot/elisp buffer 不受影响：它们自己的 capf 在 buffer-local 列表里排第一。）
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block)
   (add-hook 'completion-at-point-functions #'cape-keyword)
-  (add-hook 'completion-at-point-functions #'cape-history)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+
+  ;; `cape-file' / `cape-history' 只在相关模式里挂：全局挂会让每个弹窗都混进
+  ;; 文件路径/历史条目，噪音大而且增加开销量。
+  (dolist (hook '(conf-mode-hook sh-mode-hook eshell-mode-hook comint-mode-hook))
+    (add-hook hook (lambda () (add-hook 'completion-at-point-functions
+                                        #'cape-file nil t))))
+  (dolist (hook '(eshell-mode-hook comint-mode-hook))
+    (add-hook hook (lambda () (add-hook 'completion-at-point-functions
+                                        #'cape-history nil t))))
   )
 #+end_src
 
@@ -3558,8 +3577,10 @@ https://www.jamescherti.com/emacs-eglot-performance/
   (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
   (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
-  ;; Eglot 会自动使用 yasnippet（上面的 Yasnippet 段已启用），
-  ;; 因此函数补全会像 VSCode 一样带参数占位符（snippet）。
+  ;; 注意：没有启用 yasnippet（`** Yasnippet' 块是 `:tangle no'，该包也未安装），
+  ;; 所以 `(fboundp 'yas-expand-snippet)' 为 nil → Eglot 不会声明 snippetSupport，
+  ;; 函数补全只插入纯文本，没有参数占位符。想要 VSCode 那样的占位符 надо装并启用
+  ;; yasnippet（或 tempel）。
   )
 
 ;; (use-package consult-eglot
