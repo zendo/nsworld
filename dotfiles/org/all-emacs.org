@@ -3120,8 +3120,8 @@ https://github.com/kaorahi/howm
   (hl-line-mode 1) ;高亮当前行
   (whitespace-mode 1) ;显示空格
   (display-line-numbers-mode 1) ;显示行号
-  (setq-local word-wrap nil) ;在任意字符处拆分单词换行
-  (setq-local truncate-lines nil)) ;启用行截断
+  (setq-local word-wrap nil)       ; 不按单词边界折行
+  (setq-local truncate-lines nil)) ; nil = 不截断（长行自动换行，配合上一行在窗口边缘折行）
 
 (add-hook 'prog-mode-hook #'my/prog-mode-defaults)
 #+end_src
@@ -3194,25 +3194,29 @@ https://github.com/renzmann/treesit-auto
 
 *** treesit
 #+begin_src emacs-lisp
-(when (eq system-type 'gnu/linux)
-  (use-package treesit
-    :ensure nil
-    :custom (treesit-enabled-modes t))
-  )
+;; 暂不启用：这台机器上 `treesit-language-available-p' 对所有语言都是 nil（没有 grammar），
+;; 而 `treesit-enabled-modes t' 会通过 `major-mode-remap-alist' 把 python/c/go... 重映射到
+;; *-ts-mode，打开文件时弹出 "Tree-sitter grammar ... is missing; install it?"。
+;; 装好 grammar（或设好 `treesit-extra-load-path'）后再取消注释。
+;; (when IS-LINUX
+;;   (use-package treesit
+;;     :ensure nil
+;;     :custom (treesit-enabled-modes t)))
 #+end_src
 
 ** Languages
 *** lua
 #+begin_src emacs-lisp
 (use-package lua-mode
-  :mode ("\\.lua'"))
+  :mode ("\\.lua\\'"))
 #+end_src
 
 *** sql
 #+begin_src emacs-lisp
 (use-package sql-indent
-  :mode ("\\.sql\\'")
-  :interpreter (("sql" . sql-mode)))
+  ;; `sql-indent' 不是 major mode（正确入口是 `sqlind-minor-mode'）；
+  ;; 写成 `:mode' 会让 .sql 打开时报 "failed to define function sql-indent" 并落到 fundamental-mode。
+  :hook (sql-mode . sqlind-minor-mode))
 
 ;; (use-package sqlformat
 ;;   :init
@@ -3228,7 +3232,9 @@ https://github.com/renzmann/treesit-auto
 *** powershell
 #+begin_src emacs-lisp
 (use-package powershell
-  :mode ("\\.ps1'"))
+  ;; 包子带 `.ps1 -> powershell-mode' 的映射；不要再写 `:mode "\\.ps1\\'"'，
+  ;; 那会被映射到同名命令 `powershell'（启动 PowerShell 子进程，结果进 shell-mode）。
+  )
 #+end_src
 
 *** python
@@ -3236,11 +3242,12 @@ https://github.com/renzmann/treesit-auto
 (use-package python-mode
   :mode ("\\.py\\'")
   :config
+  ;; `indent-tabs-mode' 是 buffer-local，必须用 setq-default；
+  ;; `python-indent'/`default-tab-width' 在 Emacs 31 已不存在。
   (setq python-indent-offset 4
-        python-indent 4
-        indent-tabs-mode nil
-        default-tab-width 4
-        python-shell-interpreter "python3"))
+        python-shell-interpreter "python3")
+  (setq-default indent-tabs-mode nil
+                tab-width 4))
 
 ;; (use-package live-py-mode)
 
@@ -3263,10 +3270,15 @@ https://github.com/renzmann/treesit-auto
 *** rust
 #+begin_src emacs-lisp
 (use-package rustic
-  :mode "\\.rs$"
+  ;; 包名是 `rustic'，但 major mode 叫 `rustic-mode'；`:mode "\\.rs$"' 会把 .rs
+  ;; 映射到不存在的函数 `rustic'，打开时直接报错并落到 fundamental-mode。
+  :mode ("\\.rs\\'" . rustic-mode)
   :custom
   (rustic-format-display-method 'ignore) ; Rustfmtのメッセージをポップアップしない
   (rustic-format-trigger 'on-save)
+  ;; rustic 默认 `rustic-lsp-client' 是 lsp-mode；没装 lsp-mode 时每次打开 .rs
+  ;; 都会问 "lsp-mode not found. Install it ?"。我们用 eglot。
+  (rustic-lsp-client 'eglot)
   :after flycheck
   :config
   (push 'rustic-clippy flycheck-checkers))
@@ -3324,8 +3336,10 @@ https://github.com/renzmann/treesit-auto
 #+begin_src emacs-lisp
 (use-package elisp-mode
   :ensure nil
-  :hook (elisp-mode . (lambda () (setq mode-name "ξ ")))
-  ;; :bind (:map elisp-mode-map
+  ;; 没有 `elisp-mode-hook'（只有 `emacs-lisp-mode-hook' / `lisp-interaction-mode-hook'）
+  :hook ((emacs-lisp-mode . (lambda () (setq mode-name "ξ ")))
+         (lisp-interaction-mode . (lambda () (setq mode-name "ξ "))))
+  ;; :bind (:map emacs-lisp-mode-map
   ;;             ("C-c e" . fc-eval-and-replace))
   )
 
@@ -3333,7 +3347,8 @@ https://github.com/renzmann/treesit-auto
   :commands slime)
 
 (use-package macrostep
-  :bind (:map elisp-mode-map
+  ;; `elisp-mode-map' 不存在（会静默丢失绑定）；正确的是 `emacs-lisp-mode-map'。
+  :bind (:map emacs-lisp-mode-map
               ("C-c e" . macrostep-expand)
               :map lisp-interaction-mode-map
               ("C-c e" . macrostep-expand)))
@@ -3386,7 +3401,7 @@ https://github.com/renzmann/treesit-auto
 *** nix
 #+begin_src emacs-lisp
 (use-package nix-mode
-  :mode ("\\.nix'"))
+  :mode ("\\.nix\\'"))
 
 ;; (use-package direnv
 ;;   :when (eq system-type 'gnu/linux) ; Windows unsupported
@@ -3498,31 +3513,39 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 *** json
 #+begin_src emacs-lisp
 (use-package json-mode
-  :mode ("\\.json'"))
+  :mode ("\\.json\\'"))
 #+end_src
 
 *** yaml
 #+begin_src emacs-lisp
+(use-package yaml-mode
+  ;; Emacs 31 内置映射是 `yaml-ts-mode-maybe'：没有 grammar 且没装 `yaml-mode' 时
+  ;; 会落到 fundamental-mode。这里显式装并用 `yaml-mode'（yaml-pro 的正常搭配）。
+  :mode "\\.ya?ml\\'")
+
 (use-package yaml-pro
-  :mode ("\\.yml'" "\\.yaml'"))
+  ;; `yaml-pro-mode' 是 minor mode，挂到 yaml-mode 上；
+  ;; 原来写成 `:mode' 会把 .yml 映射到不存在的函数 `yaml-pro'。
+  :after yaml-mode
+  :hook (yaml-mode . yaml-pro-mode))
 #+end_src
 
 *** toml
 #+begin_src emacs-lisp
 (use-package toml-mode
-  :mode ("\\.toml'"))
+  :mode ("\\.toml\\'"))
 #+end_src
 
 *** kdl
 #+begin_src emacs-lisp
 (use-package kdl-mode
-  :mode ("\\.kdl'"))
+  :mode ("\\.kdl\\'"))
 #+end_src
 
 *** just
 #+begin_src emacs-lisp
 (use-package just-mode
-  :mode ("\\.just'" "justfile\\'"))
+  :mode ("\\.just\\'" "justfile\\'"))
 #+end_src
 
 ** eglot
@@ -3565,7 +3588,15 @@ https://www.jamescherti.com/emacs-eglot-performance/
   ;; 缓存一次 completion 请求的结果，后续输入只在本地过滤（VSCode 的做法），
   ;; 避免每次按键都向 LSP 服务器发请求。
   (eglot-cache-session-completions t)
-  :hook ((prog-mode . eglot-ensure)
+  ;; 不要挂到 `prog-mode'：eglot 自己的 docstring 建议只在你确认每个 buffer 都能
+  ;; 启动 server 时用 `eglot-ensure'，否则每个没配 server 的文件都会产生警告。
+  :hook ((c-mode . eglot-ensure)
+         (c++-mode . eglot-ensure)
+         (go-mode . eglot-ensure)
+         (python-mode . eglot-ensure)
+         (rust-mode . eglot-ensure)   ; `rustic-mode' 派生自 rust-mode，也会触发
+         (nix-mode . eglot-ensure)
+         (markdown-mode . eglot-ensure)
          (eglot-managed-mode . my/eglot-vscode-completion))
   :config
   ;; Disable live formatting
