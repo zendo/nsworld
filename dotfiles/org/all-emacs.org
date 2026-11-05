@@ -1456,7 +1456,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 * Appearance & UI
 ** themes
 #+begin_src emacs-lisp
-(mapc #'disable-theme custom-enabled-themes)  ; Disable all active minimal-emacs.d themes
+(mapc #'disable-theme (copy-sequence custom-enabled-themes)) ; Disable all active minimal-emacs.d themes
 (use-package doom-themes
   :hook
   ;; doom-badger
@@ -1478,7 +1478,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 
 ** icons
 #+begin_src emacs-lisp
-(use-package nerd-icons)
+(use-package nerd-icons :defer t) ; 由 dashboard/centaur-tabs/corfu 等按需 require
 
 (use-package nerd-icons-dired
   :hook
@@ -1529,10 +1529,9 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   ;; :disabled
   :hook
   (after-init . doom-modeline-mode)
+  ;; `line-number-mode' / `column-number-mode' 默认就是开的，不必在这里设
   :custom ((doom-modeline-buffer-file-name-style 'relative-to-project)
-           (doom-modeline-icon nil)
-           (line-number-mode 1)
-           (column-number-mode 1)))
+           (doom-modeline-icon nil)))
 
 (use-package mood-line
   :disabled
@@ -1562,14 +1561,14 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
            (centaur-tabs-modified-marker "●"))
   :hook
   (dashboard-mode . centaur-tabs-local-mode) ;; Disable centaur-tabs in selected buffers
-  :config
-  (centaur-tabs-mode t))
+  (after-init . centaur-tabs-mode))          ; 延迟到启动完成再开，加快启动
 #+end_src
 
 ** dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
-  :when (display-graphic-p)
+  ;; 不要用 `:when (display-graphic-p)'：daemon 下 post-init 时没有 GUI frame，
+  ;; 整个 use-package 会被跳过，导致 GUI client 连进来看到的是 *scratch*。
 ;; :diminish (dashboard-mode page-break-lines-mode)
   :custom
   (dashboard-startup-banner 2)
@@ -1598,13 +1597,14 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
                ("<mouse-1>" . treemacs-single-click-expand-action)))
   :config
   (setq treemacs-follow-after-init t
-        treemacs-project-follow-mode t
-        treemacs-git-commit-diff-mode t
         treemacs-file-follow-delay 2
-        treemacs-collapse-dirs 0
+        treemacs-collapse-dirs 2
         treemacs-show-cursor nil
         treemacs-silent-filewatch t
-        treemacs-silent-refresh t))
+        treemacs-silent-refresh t)
+  ;; 下面两个是 global minor mode，必须调用函数；用 `setq' 只会改变量、不会真正开启
+  (treemacs-project-follow-mode 1)
+  (treemacs-git-commit-diff-mode 1))
 
 ;; https://github.com/doomemacs/doomemacs/blob/master/modules/ui/treemacs/autoload.el
 ;;;###autoload
@@ -1629,33 +1629,35 @@ Use `treemacs' command for old functionality."
 ** perfect-margin
 #+begin_src emacs-lisp
 (use-package perfect-margin
-  ;; :custom
+  :custom
   ;; (perfect-margin-visible-width 128)
-  :config
-  (perfect-margin-mode t)
-  (setq perfect-margin-ignore-filters nil) ;; auto-center minibuffer windows
-  (setq perfect-margin-ignore-regexps nil) ;; auto-center special windows
-)
+  ;; 注意：`window-list' 默认不含 minibuffer，所以 `ignore-filters' 对 minibuffer 无效；
+  ;; 这两个 nil 的实际作用是让 `*Help*'/`*Messages*' 等特殊 buffer 也居中。
+  (perfect-margin-ignore-filters nil)
+  (perfect-margin-ignore-regexps nil)
+  :hook (after-init . perfect-margin-mode)) ; 延迟到启动完成再开，加快启动
 #+end_src
 
 ** spatial-padding
 #+begin_src emacs-lisp
 (use-package spacious-padding
-  :config
-  (spacious-padding-mode +1))
+  :hook (after-init . spacious-padding-mode)) ; 延迟到启动完成再开，加快启动
 #+end_src
 
 ** indent-bars
 #+begin_src emacs-lisp
 (use-package indent-bars
-  :commands indent-bars)
+  ;; 1.0.1 里只有 `indent-bars-mode'，没有 `indent-bars' 命令；
+  ;; 目前靠 `C-c t i' 手动切换。想默认开启就改用：
+  ;;   :hook (prog-mode . indent-bars-mode)
+  :commands indent-bars-mode)
 #+end_src
 
 ** hl-todo
 #+begin_src emacs-lisp
 (use-package hl-todo
-  :config
-  (global-hl-todo-mode))
+  ;; 挂到 `after-init-hook'（只跑一次，无参调用即开启）；这样启动时不加载 hl-todo。
+  :hook (after-init . global-hl-todo-mode))
 #+end_src
 
 ** rainbow & colorful-mode
@@ -1675,9 +1677,9 @@ Use `treemacs' command for old functionality."
   (colorful-use-prefix t)
   (colorful-only-strings 'only-prog)
   (css-fontify-colors nil)
-  :config
-  (global-colorful-mode t)
-  (add-to-list 'global-colorful-modes 'helpful-mode))
+  ;; `helpful-mode' 派生自 `help-mode'，已在默认 `global-colorful-modes' 里，
+  ;; 且该列表用 `derived-mode-p' 匹配，无需 add-to-list。
+  :hook (after-init . global-colorful-mode)) ; 延迟到启动完成再开
 #+end_src
 
 ** scrollkeeper
@@ -1696,7 +1698,9 @@ like ~otree~
 
 #+begin_src emacs-lisp
 (use-package breadcrumb
-  :commands breadcrumb-mode)
+  ;; `breadcrumb-mode' 是 globalized minor mode，`:commands' 只会注册 autoload、永不启用；
+  ;; 这里用 local 版按 major mode 开启（显示在 tab line 下方的 header line 里）。
+  :hook (prog-mode . breadcrumb-local-mode))
 #+end_src
 
 ** idle-highlight-mode :disable:
@@ -3843,10 +3847,12 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("c" . global-display-fill-column-indicator-mode)
  ("f" . flycheck)
  ("z" . writeroom-mode)
- ("p" . perfect-margin)
+ ("p" . perfect-margin-mode)
  ("i" . indent-bars-mode)
- ("k" . keycast)
- ("u" . disk-usage)
+ ;; `keycast' 这个命令不存在；`keycast-mode-line-mode' 要求
+ ;; `mode-line-buffer-identification' 在 `mode-line-format' 里，与 doom-modeline 不兼容。
+ ("k" . keycast-log-mode)
+ ;; ("u" . disk-usage) ; disk-usage 包未安装，命令不存在
  )
 #+end_src
 
