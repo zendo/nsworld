@@ -2121,11 +2121,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; The undo-fu package is a lightweight wrapper around Emacs' built-in undo
 ;; system, providing more convenient undo/redo functionality.
 (use-package undo-fu
-  ;; 之前只有 `:commands'、没有任何绑定，等于没启用；这里接上按键。
-  ;; `C-?' 在终端里可能发不出去，所以额外给个 `M-_'。
-  :bind (("C-/" . undo-fu-only-undo)
-         ("C-?" . undo-fu-only-redo)
-         ("M-_" . undo-fu-only-redo))
+  ;; 按键统一在 Keybindings 段绑（`C-z' / `C-S-z'），这里只声明命令。
   :commands (undo-fu-only-undo
              undo-fu-only-redo
              undo-fu-only-redo-all
@@ -3767,7 +3763,21 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 (which-key-mode)
 (ffap-bindings) ;find-file-at-point, smarter C-x C-f when point on path or URL
 
+(defun my/split-window-below-and-select ()
+  "Split the current window below and select the new window."
+  (interactive)
+  (select-window (split-window-below)))
+
+(defun my/split-window-right-and-select ()
+  "Split the current window to the right and select the new window."
+  (interactive)
+  (select-window (split-window-right)))
+
 (bind-keys
+ ;; 普通 buffer 里 `C-s' 用 consult-line。**不能**放进 `bind-keys*'：
+ ;; `bind-keys*' 写的是 `override-global-map'，会盖掉 `isearch-mode-map'，
+ ;; 导致 isearch 里再按 `C-s' 无法继续搜索。
+ ("C-s" . consult-line)
  ;; Built-in: M-s
  :map search-map
  ("s" . deadgrep)
@@ -3781,9 +3791,8 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
 (bind-keys*
  ;; ("C-z" . nil) ;unbind C-z
- ("C-z" . undo)
- ("C-S-z" . undo-redo)
- ("C-s" . consult-line)
+ ("C-z" . undo-fu-only-undo)     ; 用 undo-fu 统一 undo/redo 模型
+ ("C-S-z" . undo-fu-only-redo)
  ("M-m" . consult-mark)
  ;; ("M-m" . pop-to-mark-command)
  ("C-/" . comment-line) ;vscode
@@ -3806,14 +3815,10 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("M-+" . text-scale-increase)
  ("M-_" . text-scale-decrease)
 
- ("C-x 2" . (lambda()
-              (interactive)
-              (split-window-below)
-              (select-window (next-window))))
- ("C-x 3" . (lambda()
-              (interactive)
-              (split-window-right)
-              (select-window (next-window))))
+ ;; 命名函数（不要用匿名 lambda，且 `split-window-*' 会返回新窗口，
+ ;; 用 `next-window' 在多窗口时可能选错）。
+ ("C-x 2" . my/split-window-below-and-select)
+ ("C-x 3" . my/split-window-right-and-select)
 
  ("C-x 4 x" . ace-swap-window)
 
@@ -3827,7 +3832,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  :prefix "C-c b"
  ("i" . ibuffer)
  ("b" . consult-buffer)
- ("k". kill-current-buffer)
+ ("k" . kill-current-buffer)
  ("r" . revert-buffer)
  ("s" . save-some-buffers)
  ("D" . crux-delete-file-and-buffer)
@@ -3887,7 +3892,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  :prefix-map toggle-map
  :prefix "C-c t"
  ("c" . global-display-fill-column-indicator-mode)
- ("f" . flycheck)
+ ("f" . flycheck-buffer)
  ("z" . writeroom-mode)
  ("p" . perfect-margin-mode)
  ("i" . indent-bars-mode)
