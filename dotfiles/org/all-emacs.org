@@ -2008,9 +2008,9 @@ https://github.com/AmaiKinono/puni
 
 ** Whitespace Cleanup
 #+begin_src emacs-lisp
-(setq whitespace-action '(auto-cleanup)  ; 保存时自动清理（仅下面 style 里的项）
-      ;; 只清理行尾空白和首尾空行。不要加 `indentation'/`space-*-tab`：
-      ;; 那些会在保存时把 TAB/空格互相转换（`whitespace-cleanup'），容易产生大 diff。
+;; `auto-cleanup' 会在**每次保存**时删掉行尾空白/首尾空行，于是任何一次保存都会
+;; 产生「只改了空格」的 git diff。这里只高亮提示，不自动改文件。
+(setq whitespace-action nil
       whitespace-style '(face trailing empty))
 
 ;; `whitespace-mode' 是 buffer-local，在 init 里直接调用只对 *scratch* 生效
