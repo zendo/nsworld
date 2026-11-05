@@ -31,10 +31,11 @@
         enable = true;
         enablePurePrompt = true;
         settings = ''
+          bleopt color_scheme=rosepine_moon
+          bleopt prompt_eol_mark=' '
+
           # Enable alias command completion
           shopt -s progcomp_alias
-          bleopt prompt_eol_mark=' '
-          bleopt color_scheme=rosepine_moon
 
           # ble.sh binds these to copy-backward-sword; restore readline's
           # backward-kill-word (Alt+Backspace / Alt+Ctrl+H)
@@ -46,7 +47,7 @@
           # Right inserts one word of the auto-complete suggestion (like Tab),
           # instead of the whole suggested command.
           # Use insert-cword instead of insert-word for finer word boundaries.
-          ble-bind -m auto_complete -f right 'auto_complete/@end insert-word'
+          # ble-bind -m auto_complete -f right 'auto_complete/@end insert-word'
         '';
       };
 
