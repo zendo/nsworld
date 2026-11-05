@@ -205,6 +205,8 @@ pkgs.buildFHSEnv {
       # libva
       # libxv
       # libvdpau
+      # ffmpeg-headless
+      mpv-unwrapped
       gst_all_1.gstreamer # webkit/Electron media backend
       gst_all_1.gst-plugins-base
       gst_all_1.gst-plugins-good
