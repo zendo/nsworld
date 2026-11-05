@@ -2597,7 +2597,7 @@ hippie expand is dabbrev expand on steroids
 #+end_src
 
 *** expreg
-expand region alternative 
+expand region alternative
 
 #+begin_src emacs-lisp
 (use-package expreg
@@ -2853,7 +2853,7 @@ https://github.com/thierryvolpiatto/isearch-light
 ** diff-hl
 #+begin_src emacs-lisp
 (use-package diff-hl
-  :config (global-diff-hl-mode)
+  :hook (dired-mode . diredfl-mode)
   :init
   (setq diff-hl-flydiff-delay 0.4)  ; Faster
   (setq diff-hl-show-staged-changes nil)  ; Realtime feedback
@@ -2872,7 +2872,7 @@ https://github.com/thierryvolpiatto/isearch-light
 (use-package blamer
   :commands blamer-mode
   :config
-  (setq blamer-idle-time 0.05)
+  (setq blamer-idle-time 0.5)
   (setq blamer-author-formatter "%s ")
   (setq blamer-datetime-formatter "[%s]")
   (setq blamer-commit-formatter ": %s")
@@ -3993,4 +3993,3 @@ Show current command and its binding.
 - https://orgmode.org/quickstart.html
 - https://orgmode.org/manual/Working-with-Source-Code.html
 - https://jwiegley.github.io/use-package/keywords/
-   
