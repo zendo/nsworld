@@ -1720,10 +1720,8 @@ like ~beacon~
 Display the structure path below the tab bar.
 like ~otree~
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package breadcrumb
-  ;; `breadcrumb-mode' 是 globalized minor mode，`:commands' 只会注册 autoload、永不启用；
-  ;; 这里用 local 版按 major mode 开启（显示在 tab line 下方的 header line 里）。
   :hook (prog-mode . breadcrumb-local-mode))
 #+end_src
 
@@ -2159,8 +2157,8 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
               "\\.bz$" "\\.gz$" "\\.gzip$" "\\.xz$" "\\.zip$"
               "\\.7z$" "\\.rar$"
               "COMMIT_EDITMSG\\'" "persp-auto-save" "\\.cache"
-              ;; recentf 存绝对路径，`~' 不会展开，必须用展开后的目录
-              (regexp-quote (expand-file-name user-emacs-directory))
+              ;; recentf 存的是 `~' 缩略名，正则要按缩略名写
+              "\\`~/\\.config/emacs/"
               "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
               "-autoloads\\.el$" "autoload\\.el$"))
   ;; Enable `recentf-mode'
