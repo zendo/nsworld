@@ -55,15 +55,11 @@
       devShells.gcc = pkgs.mkShell {
         buildInputs = with pkgs; [
           gcc
-          # clang
           gnumake
           cmake
           meson
           ninja
           pkg-config
-          boost
-          glib
-          gtk3
         ];
         name = "gcc";
         shellHook = ''
@@ -77,19 +73,12 @@
       devShells.qt6 = pkgs.mkShell {
         buildInputs = with pkgs; [
           qt6.qmake
-          pkg-config
-          qt6.wrapQtAppsHook
-
           qt6.qtbase
           qt6.qttools
           qt6.qtsvg
           qt6.qtwayland
-          qt6.qt5compat
-          qt6.qtmultimedia
-          qt6.qtimageformats
-          libGLU
-          libunarr
-          qt6Packages.poppler
+          qt6.wrapQtAppsHook
+          pkg-config
         ];
       };
 
@@ -98,25 +87,10 @@
       # ╰──────────────────────────────────────╯
       devShells.nodejs = pkgs.mkShell {
         buildInputs = with pkgs; [
-          yarn
           nodejs
+          yarn
           electron
           python3
-
-          ## cargo-tauri
-          # cargo
-          # rustc
-          # openssl
-          # pkg-config
-          # gobject-introspection
-          # atk
-          # libsoup
-          # glib
-          # gtk3
-          # webkitgtk
-          # quickjs
-          # libappindicator-gtk3
-          # libayatana-appindicator
         ];
         # ELECTRON_OVERRIDE_DIST_PATH = "${pkgs.electron_20}/bin";
       };
@@ -127,13 +101,9 @@
       devShells.go = pkgs.mkShell {
         buildInputs = with pkgs; [
           go
-          # multiverse.versions.go."1.20.2"
           gotools
-          gccgo
           delve
           pkg-config
-          alsa-lib
-          flac
         ];
       };
 
@@ -148,40 +118,12 @@
         buildInputs = with pkgs; [
           cargo
           rustc
+          clang
+          cmake
           meson
           ninja
-          clang
-          openssl
           pkg-config
-          curl
-          cmake
-
-          gtk4
-          glib
-          libadwaita
-          wrapGAppsHook4
-          appstream-glib
-          desktop-file-utils
-          libxml2
-          dbus
-
-          gst_all_1.gstreamer
-          gst_all_1.gst-plugins-base
-          gst_all_1.gst-plugins-good
-          gst_all_1.gst-plugins-bad
-          gst_all_1.gst-plugins-ugly
-
-          alsa-lib
-          lame
-          # libxkbcommon
-          # xorg.libX11
-          # xorg.libxcb
-          # xorg.xcbutil
-          # xorg.xcbutilwm
-          # xorg.xcbutilimage
-          # xorg.xcbutilkeysyms
-          # freetype
-          # fontconfig
+          openssl
         ];
       };
 
@@ -193,12 +135,7 @@
           (python3.withPackages (
             p: with p; [
               requests
-              # numpy
-              # flask
-              # playwright
-              # pandas
               pyaml
-              # phonenumbers
             ]
           ))
         ];
@@ -213,21 +150,7 @@
           python3Packages.pip
           meson
           ninja
-          libxml2
-          libxslt
         ];
-        # propagatedBuildInputs = with pkgs.python3.pkgs; [
-        #   requests
-        #   lxml
-        #   chardet
-        #   docutils
-        #   markdown
-        #   markups
-        #   pyenchant
-        #   pygments
-        #   # pyqt5
-        #   # pyqt6
-        # ];
         env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
           pkgs.stdenv.cc.cc.lib
           pkgs.libz
@@ -241,17 +164,11 @@
       # cp Gemfile Gemfile.lock gemset.nix
       devShells.ruby = pkgs.mkShell {
         buildInputs = with pkgs; [
-          # ruby.devEnv
           ruby
           bundix
           gnumake
           pkg-config
           git
-          sqlite
-          postgresql
-          libpcap
-          libxml2
-          libxslt
         ];
       };
 
@@ -262,55 +179,39 @@
         buildInputs = with pkgs; [
           jdk
           gradle
-          libxrender
         ];
       };
 
       # ╭──────────────────────────────────────╮
       # │ ANDROID                              │
       # ╰──────────────────────────────────────╯
-      # https://discourse.nixos.org/t/building-expo-react-native-android-app-on-nixos/38194/3
+      # Android APK build shell (Flutter).
       devShells.apk =
         let
           pinnedJDK = pkgs.jdk17;
           buildToolsVersion = "34.0.0";
-          ndkVersion = "25.1.8937393";
           androidComposition = pkgs.androidenv.composeAndroidPackages {
-            buildToolsVersions = [
-              buildToolsVersion
-              "33.0.1"
-            ];
-            platformVersions = [
-              "34"
-              "33"
-              "32"
-              "31"
-            ];
-            # armeabi-v7a (ARM 32-bit), arm64-v8a (ARM 64-bit), and x86-64 (x86 64-bit)
-            abiVersions = [ "arm64-v8a" ];
-            cmakeVersions = [
-              "3.10.2"
-              "3.22.1"
-            ];
-            includeEmulator = true;
-            emulatorVersion = "37.3.3";
-            includeNDK = true;
-            ndkVersions = [ ndkVersion ];
+            buildToolsVersions = [ buildToolsVersion ];
+            platformVersions = [ "34" ];
+            # Uncomment these only if the project has native C/C++ modules.
+            # includeNDK = true;
+            # ndkVersions = [ "25.1.8937393" ];
+            # cmakeVersions = [ "3.22.1" ];
           };
+          androidSdkRoot = "${androidComposition.androidsdk}/libexec/android-sdk";
         in
-        pkgs.mkShell rec {
+        pkgs.mkShell {
           buildInputs = with pkgs; [
             pinnedJDK
             androidComposition.androidsdk
-            pkg-config
             flutter
           ];
 
-          JAVA_HOME = pinnedJDK;
-          ANDROID_SDK_ROOT = "${androidComposition.androidsdk}/libexec/android-sdk";
-          ANDROID_NDK_ROOT = "${ANDROID_SDK_ROOT}/ndk-bundle";
-
-          GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_SDK_ROOT}/build-tools/${buildToolsVersion}/aapt2";
+          JAVA_HOME = "${pinnedJDK}";
+          ANDROID_HOME = androidSdkRoot;
+          ANDROID_SDK_ROOT = androidSdkRoot;
+          # ANDROID_NDK_ROOT = "${androidSdkRoot}/ndk-bundle";
+          GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${androidSdkRoot}/build-tools/${buildToolsVersion}/aapt2";
         };
 
       /*
