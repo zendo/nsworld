@@ -10,6 +10,7 @@
         levi
         gitkwaken
         slimdeer
+        portop
         spor
         rwx
         rox
