@@ -2958,7 +2958,6 @@ https://github.com/thierryvolpiatto/isearch-light
       org-fontify-whole-block-delimiter-line t) ; Fontify whole block
 
 (use-package org-auto-tangle
-  :defer t
   :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
@@ -2989,7 +2988,8 @@ https://github.com/alphapapa/org-super-agenda
 emacsclient -n -c -e '(progn (select-frame-set-input-focus (selected-frame)) (org-capture))'
 
 #+begin_src emacs-lisp
-(setq org-capture-templates `(("t" "Tasks" entry (file+headline "tasks.org" "Reminders")
+(setq org-capture-templates '(;; 以下相对路径会按 `org-directory' 展开
+                            ("t" "Tasks" entry (file+headline "tasks.org" "Reminders")
                             "* TODO %i%?"
                             :empty-lines-after 1
                             :prepend t)
@@ -3043,7 +3043,7 @@ https://zhuanlan.zhihu.com/p/633047823
   (require 'org-roam-protocol))
 #+end_src
 
-** org-apper
+** org-appear
 Make invisible parts of Org elements appear visible.
 
 #+begin_src emacs-lisp
