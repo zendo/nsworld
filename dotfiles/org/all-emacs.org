@@ -1478,10 +1478,11 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   :config
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
-;; (use-package nerd-icons-corfu
-;;   :after corfu
-;;   :config
-;;   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+;; VSCode 风格：在补全弹窗左侧为变量/函数/类型等显示图标
+(use-package nerd-icons-corfu
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 ;; (use-package kind-icon
 ;;   :if (display-graphic-p)
@@ -2352,9 +2353,25 @@ undo-fu
   (text-mode-ispell-word-completion nil)
   (tab-always-indent 'complete)
   (corfu-auto t) ; Enable auto completion
+  (corfu-auto-delay 0.1) ; 更快的弹出（VSCode 的 quickSuggestionsDelay 是 10ms）
+  (corfu-auto-prefix 2) ; 全局至少2个字符；Eglot 缓冲区里会降为1（见 eglot 段）
   (corfu-cycle t) ; Allows cycling through candidates
+  (corfu-preselect 'first) ; 默认选中第一个候选，回车即接受（VSCode 行为）
+  (corfu-on-exact-match nil) ; 精确匹配时仍保留弹窗，便于继续确认
+  (corfu-quit-no-match 'separator) ; 没有候选时自动关闭，避免残留
   (corfu-min-width 25)
   (corfu-preview-current nil) ; Disable previewing the current candidate
+
+  ;; VSCode 里 Tab/Enter 都是接受当前候选，C-n/C-p 上下移动。
+  ;; 手动触发补全（类似 VSCode 的 Ctrl+Space）用 `C-M-i'（即 M-TAB）。
+  ;; 注意：TAB 绑定为接受后，弹窗打开时无法用 TAB 缩进（与 VSCode 一致）。
+  :bind (:map corfu-map
+              ("TAB" . corfu-insert)
+              ("<tab>" . corfu-insert)
+              ("<backtab>" . corfu-previous)
+              ("S-TAB" . corfu-previous)
+              ("C-n" . corfu-next)
+              ("C-p" . corfu-previous))
 
   :init
   (global-corfu-mode 1))
@@ -2365,8 +2382,10 @@ undo-fu
   :ensure nil
   :hook (corfu-mode . corfu-popupinfo-mode)
   :custom
+  ;; 选中候选后几乎立刻显示文档（VSCode 的补全文档侧栏效果）
   (corfu-popupinfo-delay '(0.25 . 0.1))
   (corfu-popupinfo-hide nil)
+  (corfu-popupinfo-max-height 15)
   :config
   (corfu-popupinfo-mode))
 
@@ -3459,6 +3478,32 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
 https://www.jamescherti.com/emacs-eglot-performance/
 
 #+begin_src emacs-lisp
+;; VSCode 风格的补全：Emacs 31 的 Eglot 已经为 `eglot-capf' 注册了
+;; `eglot--dumb-flex'（子序列/模糊匹配，相当于 VSCode 的 fuzzy filtering），
+;; 并通过 `display-sort-function' 保留 LSP 服务器的 `sortText' 排序。
+;; 这里在 Eglot 管理的缓冲区里再补充几点，使其行为更接近 VSCode：
+;;   1. 过滤大小写不敏感（VSCode 默认）；
+;;   2. 输入 1 个字符就弹出候选（VSCode 默认），而不是 Corfu 默认的 2-3 个；
+;;   3. 缩短延迟，并且 `.` 等 LSP 触发字符能立即弹出
+;;      （Eglot 提供的 `:company-prefix-length' 已处理触发字符）。
+(defun my/eglot-vscode-completion ()
+  "Make in-buffer completion in Eglot buffers behave like VSCode."
+  (when (eglot-managed-p)
+    ;; 大小写不敏感，例如输入 `btn' 能匹配 `getButton'
+    (setq-local completion-ignore-case t)
+    (when (fboundp 'eglot--dumb-flex)
+      (add-to-list 'completion-styles-alist
+                   '(eglot--dumb-flex eglot--dumb-tryc eglot--dumb-allc))
+      ;; 放进 overrides，避免被全局的 `completion-styles'（orderless/basic）覆盖
+      (setq-local completion-category-overrides
+                  (cons '(eglot-capf (styles eglot--dumb-flex))
+                        (assq-delete-all
+                         'eglot-capf completion-category-overrides))))
+    ;; 配合 corfu：输入 1 个字符即弹出，延迟更短
+    (when (boundp 'corfu-auto-prefix)
+      (setq-local corfu-auto-prefix 1)
+      (setq-local corfu-auto-delay 0.1))))
+
 (use-package eglot
   :defer t
   :custom
@@ -3466,7 +3511,11 @@ https://www.jamescherti.com/emacs-eglot-performance/
   (eglot-sync-connect 0) ; async, do not block
   (eglot-extend-to-xref t) ; can be interesting!
   (eglot-code-action-indications nil) ; Disable automatic code action indicators
-  :hook ((prog-mode . eglot-ensure))
+  ;; 缓存一次 completion 请求的结果，后续输入只在本地过滤（VSCode 的做法），
+  ;; 避免每次按键都向 LSP 服务器发请求。
+  (eglot-cache-session-completions t)
+  :hook ((prog-mode . eglot-ensure)
+         (eglot-managed-mode . my/eglot-vscode-completion))
   :config
   ;; Disable live formatting
   (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider)
@@ -3477,6 +3526,8 @@ https://www.jamescherti.com/emacs-eglot-performance/
   (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
   (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
+  ;; Eglot 会自动使用 yasnippet（上面的 Yasnippet 段已启用），
+  ;; 因此函数补全会像 VSCode 一样带参数占位符（snippet）。
   )
 
 ;; (use-package consult-eglot
