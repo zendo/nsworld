@@ -1335,6 +1335,13 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 (setq locale-coding-system 'utf-8)
 #+end_src
 
+** Rime Input Method
+#+begin_src emacs-lisp
+(use-package rime
+  :custom
+  (default-input-method "rime"))
+#+end_src
+
 ** Terminals & Shells
 *** Eat (terminal emulator)
 #+begin_src emacs-lisp
@@ -1378,34 +1385,6 @@ https://github.com/dakra/ghostel
 ;; ghostel 由 nix 提供，`:ensure nil' 已阻止 package.el 安装。
 ;; 原来这里是 (add-to-list 'package-pinned-packages '(ghostel . nil))，
 ;; 但该变量要求 ARCHIVE 是字符串；nil 会让 package.el 对所有 archive 跳过 ghostel。
-#+end_src
-
-*** Popper (popup manager)
-https://github.com/karthink/popper
-#+begin_src emacs-lisp
-(use-package popper
-  :bind (("C-`"   . popper-toggle)
-         ("C-<tab>" . popper-cycle)
-         ;; ("M-`"   . popper-cycle)
-         ;; ("C-M-`" . popper-toggle-type)
-         )
-  :init
-  (setq popper-window-height 0.33)
-  (setq popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
-          compilation-mode
-          "^\\*eat.*\\*$"    eat-mode
-          "^\\*shell.*\\*$"  shell-mode
-          "^\\*eshell.*\\*$" eshell-mode
-          "^\\*term.*\\*$"   term-mode
-          "^\\*vterm.*\\*$"  vterm-mode
-          "^\\*ghostel.*\\*$" ghostel-mode
-          ))
-  (popper-mode +1)
-  (popper-echo-mode +1))                ; For echo area hints
 #+end_src
 
 *** Shell-Pop
@@ -1704,6 +1683,14 @@ like ~otree~
   :hook (prog-mode . breadcrumb-local-mode))
 #+end_src
 
+** Keycast
+Show current command and its binding.
+
+#+begin_src emacs-lisp
+(use-package keycast
+  :defer t)
+#+end_src
+
 ** Idle Highlight (idle-highlight) :off:
 #+begin_src emacs-lispxx
 (use-package idle-highlight-mode
@@ -1790,6 +1777,34 @@ https://github.com/neeasade/stillness-mode.el
 #+begin_src emacs-lisp
 (use-package stillness-mode
   :hook (after-init . stillness-mode))
+#+end_src
+
+*** Popper (popup manager)
+https://github.com/karthink/popper
+#+begin_src emacs-lisp
+(use-package popper
+  :bind (("C-`"   . popper-toggle)
+         ("C-<tab>" . popper-cycle)
+         ;; ("M-`"   . popper-cycle)
+         ;; ("C-M-`" . popper-toggle-type)
+         )
+  :init
+  (setq popper-window-height 0.33)
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode
+          "^\\*eat.*\\*$"    eat-mode
+          "^\\*shell.*\\*$"  shell-mode
+          "^\\*eshell.*\\*$" eshell-mode
+          "^\\*term.*\\*$"   term-mode
+          "^\\*vterm.*\\*$"  vterm-mode
+          "^\\*ghostel.*\\*$" ghostel-mode
+          ))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
 #+end_src
 
 ** Sessions & Workspaces
@@ -1969,6 +1984,34 @@ https://gitlab.com/jabranham/mixed-pitch
   (setq-default mixed-pitch-set-height t))
 #+end_src
 
+** Code Formatting (apheleia)
+Run code formatters on ~after-save-hook~
+
+#+begin_src emacs-lisp
+(use-package apheleia
+  :defer t
+  :commands (apheleia-mode
+             apheleia-global-mode)
+  :hook ((prog-mode . apheleia-mode)))
+#+end_src
+
+** Reformatter :off:
+#+begin_src emacs-lispxx
+(use-package reformatter
+  :defer t
+  :config
+  (reformatter-define nixfmt
+    :program "nixfmt"
+    )
+  ;; Experimental.
+  ;; (reformatter-define golint
+  ;;   :program "golint"
+  ;;   :stdin nil
+  ;;   :stdout nil
+  ;;   :args (list (buffer-file-name)))
+  )
+#+end_src
+
 * Saving & History
 ** Auto-Save (#file#)
 #+begin_src emacs-lisp
@@ -2042,7 +2085,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (buffer-guardian-mode 1))
 #+end_src
 
-** Recent Files, History, Places & Auto-Revert
+** Auto-Revert (autorevert)
 #+begin_src emacs-lisp
 ;; Auto-revert in Emacs is a feature that automatically updates the
 ;; contents of a buffer to reflect changes made to the underlying file
@@ -2056,7 +2099,10 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (setq auto-revert-use-notify t)
   (setq auto-revert-avoid-polling nil)
   (global-auto-revert-mode 1))
+#+end_src
 
+** Recent Files (recentf)
+#+begin_src emacs-lisp
 ;; Recentf is an Emacs package that maintains a list of recently
 ;; accessed files, making it easier to reopen files you have worked on
 ;; recently.
@@ -2088,7 +2134,10 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
             (lambda (_terminal)
               (when (bound-and-true-p recentf-mode)
                 (recentf-save-list)))))
+#+end_src
 
+** Minibuffer History (savehist)
+#+begin_src emacs-lisp
 ;; savehist is an Emacs feature that preserves the minibuffer history between
 ;; sessions. It saves the history of inputs in the minibuffer, such as commands,
 ;; search strings, and other prompts, to a file. This allows users to retain
@@ -2099,7 +2148,10 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (setq history-length 300)
   (setq savehist-autosave-interval 600)
   (savehist-mode 1))
+#+end_src
 
+** Saved Places (saveplace)
+#+begin_src emacs-lisp
 ;; save-place-mode enables Emacs to remember the last location within a file
 ;; upon reopening. This feature is particularly beneficial for resuming work at
 ;; the precise point where you previously left off.
@@ -2144,7 +2196,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+end_src
 
 * Search & Completion
-** Minibuffer Completion & Commands (vertico / consult / marginalia / embark)
+** Minibuffer UI (vertico / orderless / marginalia)
 #+begin_src emacs-lisp
 ;; Vertico provides a vertical completion interface, making it easier to
 ;; navigate and select from completion candidates (e.g., when `M-x` is pressed).
@@ -2189,6 +2241,22 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   ;; package.
   (marginalia-mode 1))
 
+;;----------------------------------------------------------------------------
+;; Functions
+;;----------------------------------------------------------------------------
+;; Prefix the current candidate 箭头显示当前项
+;; (defun minibuffer-format-candidate (orig cand prefix suffix index _start)
+;;   (let ((prefix (if (= vertico--index index)
+;;                     " » "
+;;                   "   ")))
+;;     (funcall orig cand prefix suffix index _start)))
+;;
+;; (advice-add #'vertico--format-candidate
+;;             :around #'minibuffer-format-candidate)
+#+end_src
+
+** Context Actions (embark)
+#+begin_src emacs-lisp
 ;; Embark integrates with Consult and Vertico to provide context-sensitive
 ;; actions and quick access to commands based on the current selection, further
 ;; improving user efficiency and workflow within Emacs. Together, they create a
@@ -2222,7 +2290,10 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult)
+#+end_src
 
+** Search Commands (consult)
+#+begin_src emacs-lisp
 ;; Consult offers a suite of commands for efficient searching, previewing, and
 ;; interacting with buffers, file contents, and more, improving various tasks.
 (use-package consult
@@ -2331,19 +2402,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; flycheck 自带 `C-c ! n/p/l' 上下错误/列表。
 (use-package consult-flycheck
   :after (consult flycheck))
-
-;;----------------------------------------------------------------------------
-;; Functions
-;;----------------------------------------------------------------------------
-;; Prefix the current candidate 箭头显示当前项
-;; (defun minibuffer-format-candidate (orig cand prefix suffix index _start)
-;;   (let ((prefix (if (= vertico--index index)
-;;                     " » "
-;;                   "   ")))
-;;     (funcall orig cand prefix suffix index _start)))
-;;
-;; (advice-add #'vertico--format-candidate
-;;             :around #'minibuffer-format-candidate)
 #+end_src
 
 ** Deadgrep
@@ -2369,7 +2427,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
          ("C-c r" . visual-replace-from-isearch)))
 #+end_src
 
-** In-Buffer Completion (corfu / cape)
+** In-Buffer Completion (corfu)
 #+begin_src emacs-lisp
 ;; Corfu enhances in-buffer completion by displaying a compact popup with
 ;; current candidates, positioned either below or above the point. Candidates
@@ -2417,7 +2475,10 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (corfu-popupinfo-max-height 15)
   :config
   (corfu-popupinfo-mode))
+#+end_src
 
+** Completion Backends (cape)
+#+begin_src emacs-lisp
 ;; Cape, or Completion At Point Extensions, extends the capabilities of
 ;; in-buffer completion. It integrates with Corfu or the default completion UI,
 ;; by providing additional backends through completion-at-point-functions.
@@ -2518,7 +2579,9 @@ hippie expand is dabbrev expand on steroids
 (keymap-set completion-preview-active-mode-map "M-p" #'completion-preview-prev-candidate)
 #+end_src
 
-** Snippets: Yasnippet :off:
+* Snippets
+
+** Yasnippet :off:
 #+begin_src emacs-lisp :tangle no
 ;; The official collection of snippets for yasnippet.
 (use-package yasnippet-snippets)
@@ -2546,7 +2609,7 @@ hippie expand is dabbrev expand on steroids
   (yas-global-mode 1))
 #+end_src
 
-** Snippets: Tempel :off:
+** Tempel :off:
 #+begin_src emacs-lisp :tangle no
 (use-package tempel
   :bind (("M-+" . tempel-complete)
@@ -3544,7 +3607,9 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   :mode ("\\.just\\'" "justfile\\'"))
 #+end_src
 
-** Eglot (LSP Client)
+** LSP
+
+*** Eglot (Client)
 https://www.jamescherti.com/emacs-eglot-performance/
 
 #+begin_src emacs-lisp
@@ -3614,7 +3679,7 @@ https://www.jamescherti.com/emacs-eglot-performance/
 ;;   :after eglot)
 #+end_src
 
-** LSP-Mode :off:
+*** LSP-Mode :off:
 #+begin_src emacs-lisp :tangle no
 (use-package lsp-mode
   :init
@@ -3645,39 +3710,9 @@ https://www.jamescherti.com/emacs-eglot-performance/
   :commands lsp-ui-mode)
 #+end_src
 
-** LSP Booster (Not Configured)
+*** LSP Extras (Not Configured)
 https://github.com/blahgeek/emacs-lsp-booster
-
-** LSP Proxy (Not Configured)
 https://github.com/jadestrong/lsp-proxy
-
-** Code Formatting (apheleia)
-Run code formatters on ~after-save-hook~
-
-#+begin_src emacs-lisp
-(use-package apheleia
-  :defer t
-  :commands (apheleia-mode
-             apheleia-global-mode)
-  :hook ((prog-mode . apheleia-mode)))
-#+end_src
-
-** Reformatter :off:
-#+begin_src emacs-lispxx
-(use-package reformatter
-  :defer t
-  :config
-  (reformatter-define nixfmt
-    :program "nixfmt"
-    )
-  ;; Experimental.
-  ;; (reformatter-define golint
-  ;;   :program "golint"
-  ;;   :stdin nil
-  ;;   :stdout nil
-  ;;   :args (list (buffer-file-name)))
-  )
-#+end_src
 
 * Custom Commands
 ** make-parent-directory
@@ -3980,21 +4015,6 @@ https://github.com/kickingvegas/casual
   :config
   (global-devil-mode)
   (global-set-key (kbd "C-,") 'global-devil-mode))
-#+end_src
-
-** Keycast
-Show current command and its binding.
-
-#+begin_src emacs-lisp
-(use-package keycast
-  :defer t)
-#+end_src
-
-** Rime Input Method
-#+begin_src emacs-lisp
-(use-package rime
-  :custom
-  (default-input-method "rime"))
 #+end_src
 
 * post-init.el - Footer
