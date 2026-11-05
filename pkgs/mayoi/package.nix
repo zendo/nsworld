@@ -2,9 +2,9 @@
   lib,
   buildGo127Module,
   fetchFromGitHub,
+  fetchurl,
+  go,
   makeWrapper,
-  wrapGAppsHook3,
-  makeDesktopItem,
   gtk3,
   glib,
   gdk-pixbuf,
@@ -13,14 +13,11 @@
   atk,
   libepoxy,
   libGL,
-  libX11,
   webkitgtk_4_1,
   libsoup_3,
-  libayatana-appindicator,
   fontconfig,
-  freetype,
   harfbuzz,
-  wayland,
+  libsecret,
   nix-update-script,
 }:
 
@@ -34,29 +31,36 @@ let
     atk
     libepoxy
     libGL
-    libX11
     webkitgtk_4_1
     libsoup_3
-    libayatana-appindicator
     fontconfig
-    freetype
     harfbuzz
-    wayland
+    libsecret
   ];
 
-  desktopItem = makeDesktopItem {
-    name = "mayoi";
-    desktopName = "Mayoi";
-    comment = "A small, fast code editor";
-    exec = "mayoi %F";
-    icon = "mayoi";
-    categories = [
-      "Development"
-      "TextEditor"
-      "Utility"
-    ];
-    mimeTypes = [ "text/plain" ];
-  };
+  # The libghostty-vt this pinned MyGo binds: the build CLI copies it into
+  # the app's resources, but it has to be in the cache because the Nix
+  # sandbox has no network.
+  ghosttyVt =
+    if go.GOARCH == "amd64" then
+      fetchurl {
+        url = "https://github.com/sorrycc/mygo/releases/download/libghostty-vt-9cd19b40de63/libghostty-vt-linux-amd64.so";
+        hash = "sha256-sDciJTyhZkZllUwMMNLC+fDUMfsgdCJYqSlZJ/oA7HQ=";
+      }
+    else if go.GOARCH == "arm64" then
+      fetchurl {
+        url = "https://github.com/sorrycc/mygo/releases/download/libghostty-vt-9cd19b40de63/libghostty-vt-linux-arm64.so";
+        hash = "sha256-lamRp48gDd1KrnmMQw8I0xIq7dmRvezbGQxLvGb0RrQ=";
+      }
+    else
+      throw "Mayoi: no libghostty-vt build for linux/${go.GOARCH}";
+  ghosttySha =
+    {
+      amd64 = "b03722253ca1664665954c0c30d2c2f9f0d431fb20742258a9295927fa00ec74";
+      arm64 = "95a991a78f200ddd4aae798c430f08d3122aedd991bdecdb190c4bbc66f446b4";
+    }
+    .${go.GOARCH};
+
 in
 buildGo127Module (finalAttrs: {
   pname = "mayoi";
@@ -72,37 +76,47 @@ buildGo127Module (finalAttrs: {
 
   vendorHash = "sha256-vDt22hyHn/g9gfv4DV7EY3kM02rjfn72cUcFGvU3PFA=";
 
-  subPackages = [ "cmd/mayoi" ];
-  env.CGO_ENABLED = "0";
-  ldflags = [
-    "-s"
-    "-w"
-    "-X=github.com/egoist/mygo.packageName=Mayoi"
-    "-X=github.com/egoist/mygo.packageVersion=${finalAttrs.version}"
-    "-X=github.com/egoist/mygo.packageIdentifier=dev.mayoi.editor"
-  ];
+  nativeBuildInputs = [ makeWrapper ];
 
-  nativeBuildInputs = [
-    makeWrapper
-    wrapGAppsHook3
-  ];
+  preBuild = ''
+    export HOME="$TMPDIR/home"
+    export XDG_CACHE_HOME="$TMPDIR/cache"
+    mkdir -p "$HOME" "$XDG_CACHE_HOME/mygo/natives/${ghosttySha}"
+    cp ${ghosttyVt} "$XDG_CACHE_HOME/mygo/natives/${ghosttySha}/libghostty-vt.so"
+  '';
 
-  buildInputs = runtimeLibs;
+  buildPhase = ''
+    runHook preBuild
 
-  # MyGo loads GTK, WebKitGTK and the other libraries with purego at run
-  # time, so their directories must be on LD_LIBRARY_PATH.
-  dontWrapGApps = true;
+    go tool mygo build
+
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+
+    install -Dm755 build/linux-${go.GOARCH}/mayoi "$out/bin/mayoi"
+    install -Dm755 build/linux-${go.GOARCH}/libghostty-vt.so "$out/bin/libghostty-vt.so"
+    install -Dm644 build/linux-${go.GOARCH}/mayoi.png "$out/share/icons/hicolor/512x512/apps/mayoi.png"
+    install -Dm644 build/linux-${go.GOARCH}/mayoi.desktop "$out/share/applications/mayoi.desktop"
+
+    runHook postInstall
+  '';
+
   postFixup = ''
     wrapProgram "$out/bin/mayoi" \
-      "''${gappsWrapperArgs[@]}" \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath runtimeLibs}"
   '';
 
-  postInstall = ''
-    install -Dm644 ${desktopItem}/share/applications/mayoi.desktop "$out/share/applications/mayoi.desktop"
-    install -Dm644 resources/icon.png "$out/share/icons/hicolor/1024x1024/apps/mayoi.png"
-  '';
-
+  # No buildInputs or wrapGAppsHook3: MyGo links nothing and loads GTK,
+  # WebKitGTK and the rest through purego at run time. The wrapper only
+  # supplies their directories.
+  # Upstream's tests are UI tests: they measure rendered text, start
+  # terminals, use SSH and Git, and open local sockets. They depend on the
+  # host's fonts and a writable session and fail in the Nix build sandbox
+  # (layout assertions, localhost/network, and native terminal libraries).
+  # Run `go test` in a real desktop session instead.
   doCheck = false;
 
   passthru.updateScript = nix-update-script { };
@@ -113,6 +127,9 @@ buildGo127Module (finalAttrs: {
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ ];
     mainProgram = "mayoi";
-    platforms = lib.platforms.linux;
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 })
