@@ -1833,11 +1833,8 @@ https://github.com/neeasade/stillness-mode.el
 * Editing & Text
 ** basic
 #+begin_src emacs-lisp
-(show-paren-mode t) ;括号匹配 parens
 (electric-pair-mode t) ;自动补全括号
 
-;; 滚动时保持显示稳定
-(setq display-line-numbers-width-start nil)
 (setq display-line-numbers-grow-only t)
 
 ;; save system clipboard before emacs clipboard
@@ -1846,8 +1843,6 @@ https://github.com/neeasade/stillness-mode.el
 (delete-selection-mode t)
 
 (global-prettify-symbols-mode 1) ;Show lambda as λ.
-;; 识别中文标点符号
-(setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 
 ;;Don't hang when visiting files with extremely long lines
 (global-so-long-mode t)
@@ -1865,11 +1860,17 @@ https://github.com/neeasade/stillness-mode.el
 ;; (setq-default fill-column 80) ; default: 70 init: 80
 #+end_src
 ** outline
-#+begin_src emacs-lispxx
+#+begin_src emacs-lisp
 ;; The built-in outline-minor-mode provides structured code folding in modes
 ;; such as Emacs Lisp and Python, allowing users to collapse and expand sections
 ;; based on headings or indentation levels. This feature enhances navigation and
 ;; improves the management of large files with hierarchical structures.
+;;
+;; `hs-minor-mode'（`prog-mode' 全局开启）和 `outline-minor-mode' 默认共用
+;; `C-c @' 前缀，同时开启时 `C-c @ C-c' 会被 outline 抢走；把 outline 的
+;; 前缀改成 `C-c o' 两者就能共存（必须在 outline 加载前设置）。
+(setq outline-minor-mode-prefix (kbd "C-c o"))
+
 (use-package outline
   :ensure nil
   :commands outline-minor-mode
@@ -1892,11 +1893,7 @@ https://github.com/neeasade/stillness-mode.el
 (add-hook 'markdown-mode-hook #'outline-minor-mode)
 (add-hook 'diff-mode-hook #'outline-minor-mode)
 
-(add-hook 'c-mode-hook #'hs-minor-mode)
-(add-hook 'c++-mode-hook #'hs-minor-mode)
-(add-hook 'java-mode-hook #'hs-minor-mode)
-(add-hook 'sh-mode-hook #'hs-minor-mode)
-(add-hook 'html-mode-hook #'hs-minor-mode)
+;; c/c++/java/sh/html 的 `hs-minor-mode' 见下面 `** hideshow' 段
 
 
 ;; The outline-indent Emacs package provides a minor mode that enables code
@@ -1954,11 +1951,13 @@ https://github.com/AmaiKinono/puni
 
 ** whitespace
 #+begin_src emacs-lisp
-(setq whitespace-action '(auto-cleanup)  ;automatically clean up bad whitespace
-      whitespace-style '(face
-                         trailing space-before-tab
-                         indentation empty space-after-tab))
-(whitespace-mode 1)
+(setq whitespace-action '(auto-cleanup)  ; 保存时自动清理（仅下面 style 里的项）
+      ;; 只清理行尾空白和首尾空行。不要加 `indentation'/`space-*-tab`：
+      ;; 那些会在保存时把 TAB/空格互相转换（`whitespace-cleanup'），容易产生大 diff。
+      whitespace-style '(face trailing empty))
+
+;; `whitespace-mode' 是 buffer-local，在 init 里直接调用只对 *scratch* 生效
+(global-whitespace-mode 1)
 #+end_src
 
 ** mixed-pitch
