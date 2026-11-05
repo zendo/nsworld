@@ -49,11 +49,8 @@ selfhosted-domains:
     set -euo pipefail
     cfg=.\#"nixosConfigurations.svp.config"
     nix eval --json "$cfg" --apply '
-      c: {
-        domains = builtins.attrNames c.services.caddy.virtualHosts;
-        ip = c.myVars.ip.svp;
-      }' \
-      | jq -r '(.domains | map(sub("^https?://"; "")) | sort | .[]), .ip' \
+      c: builtins.attrNames c.services.caddy.virtualHosts' \
+      | jq -r 'map(sub("^https?://"; "")) | map(select(test("^[A-Za-z0-9.-]+$"))) | sort | .[], "192.168.2.99"' \
       | paste -sd'/' - \
       | sed 's|^|/|'
 
