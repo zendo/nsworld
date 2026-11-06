@@ -17,6 +17,7 @@ in
 
         myvars
         mods
+        services
         selfhosted
 
         base
