@@ -16,6 +16,7 @@
         rox
         sonora
         neiro
+        fusion
         breeze
         # venerax
         # mygo-cloudmusic

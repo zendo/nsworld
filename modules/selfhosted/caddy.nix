@@ -75,6 +75,10 @@
             reverse_proxy 127.0.0.1:${toString p.comigo}
           '';
 
+          "http://fusion.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:${toString p.fusion}
+          '';
+
           "http://dynacat.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.dynacat}
           '';

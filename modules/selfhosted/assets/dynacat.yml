@@ -34,6 +34,9 @@ pages:
               - title: miniflux
                 url: http://miniflux.home.arpa
                 icon: si:rss
+              - title: fusion
+                url: http://fusion.home.arpa
+                icon: si:rss
               - title: memos
                 url: http://memos.home.arpa
                 icon: sh:memos

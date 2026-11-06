@@ -53,6 +53,7 @@
           memos = 4201;
           miniflux = 4202;
           sub-store = 4203;
+          fusion = 4204; # RSS 阅读器
 
           # 43xx 运维 / 面板
           dynacat = 4301;
