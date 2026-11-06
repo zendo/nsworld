@@ -64,7 +64,8 @@
           wayland_titlebar_color = "background";
           hide_window_decorations = "yes";
           # Fonts: JetBrains Mono / Maple Mono
-          font_family = "Maple Mono";
+          # 用 NL-NF-CN 变体（无连字 / Nerd 图标 / 含 CJK）
+          font_family = "Maple Mono NL NF CN";
           font_size = "11";
           # 禁用连字
           disable_ligatures = "always";

@@ -12,8 +12,10 @@
           shell-integration-features = "no-cursor,sudo"; # ssh-terminfo,ssh-env
           # custom-shader = "${pkgs.ghostty-cursor-shaders}/cursor_warp.glsl";
           font-family = [
-            "Maple mono"
-            "Noto Sans SC"
+            "Maple Mono NL NF CN" # 拉丁 + CJK + Nerd 图标
+            "Maple Mono"
+            "Noto Sans CJK SC" # 注意：不存在 "Noto Sans SC"
+            "Symbols Nerd Font Mono"
           ];
           font-size = "11";
           cursor-style = "block";

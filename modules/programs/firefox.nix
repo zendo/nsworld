@@ -30,10 +30,6 @@
           "browser.tabs.selectOwnerOnClose" = false; # Closing tab and return to the adjacent tab
           "browser.tabs.insertAfterCurrent" = true; # Open new tabs next to current
           "browser.tabs.loadBookmarksInTabs" = true; # Open bookmarks in a new tab
-
-          # Fonts: https://pandasauce.org/get-fonts-done/
-          "gfx.text.subpixel-position.force-enabled" = true;
-          "gfx.webrender.quality.force-subpixel-aa-where-possible" = true;
         };
 
         # not covered by the policies.json

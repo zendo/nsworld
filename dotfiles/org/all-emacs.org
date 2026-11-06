@@ -1299,7 +1299,12 @@ Use ~getenv~ check the environment variables.
 #+begin_src emacs-lisp
 (when IS-LINUX
   (when (display-graphic-p)
-    (set-frame-font (font-spec :family "JetBrains Mono" :size 14))
+    ;; FRAMES 传 `t'：除了作用于所有现有 frame，还会写进 `default' 面，
+    ;; 新建 frame（C-x 5 2）也继承，否则会回落到 pgtk 的默认字体。
+    ;; 注意 pgtk 的默认字体取自 GTK/GDK，即 dconf
+    ;; `org.gnome.desktop.interface monospace-font-name'（Refine/GNOME Tweaks
+    ;; 改等宽字体时会被写掉），所以务必保持 FRAMES 非 nil。
+    (set-frame-font (font-spec :family "JetBrains Mono" :size 14) nil t)
     ;; FONTSET 用 `t'（默认 fontset）：传 (frame-parameter nil 'font) 在 TTY 下是
     ;; "tty"（会报错），GUI 下是字体名而非 fontset 名；用 `t' 在 daemon 下也生效。
     (dolist (script '(han cjk-misc bopomofo))
