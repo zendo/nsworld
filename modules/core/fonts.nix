@@ -51,16 +51,24 @@
         fonts.fontconfig = {
           # ── 渲染参数 ─────────────────────────────────────────────
           # ⚠️ 改这里必须先确认硬件与缩放。本机：yoga，2880x1800 14" ≈ 242 PPI，
-          # GNOME scale=2 → 逻辑 ≈ 121 PPI，故取「灰度 AA + slight」：
-          #   - 242 PPI 下次像素渲染没有清晰度收益，只剩边缘彩边；
-          #   - OLED 子像素多非标准 RGB stripe，Wayland 又拿不到子像素几何；
-          #   - 若开分数缩放（1.25/1.333/1.5），mutter 是整数倍渲染再下采样，
-          #     子像素结构被破坏，rgb 会变成明显错误彩边 ⇒ 保持 none。
+          # GNOME scale=2 → 逻辑 ≈ 121 PPI，且 monitors.xml 是整数 2×（未用
+          # fractional scaling），面板为 IPS（subpixel 为标 RGB stripe）。
           #
-          # 想切次像素时，必须同时改 GTK 侧的 dconf，否则会出现
-          # 「GTK 有彩边、终端没有」的不一致：
+          # 理论上 242 PPI 下 subpixel AA 收益很小，但实测 grayscale AA 的
+          # 边缘对比偏低、主观上“发虚/眩晕”，换成 subpixel 反而更舒服；
+          # 面板排列与缩放倍数都支持，所以按主观偏好开启。
+          #
+          # ⚠️ 必须与 GTK 侧 dconf 同步，否则会出现
+          # 「GTK 有 color fringing、终端没有」的观感跳变：
           #   gsettings set org.gnome.desktop.interface font-antialiasing rgba
           #   gsettings set org.gnome.desktop.interface font-rgba-order rgb
+          #
+          # 若以后改用 fractional scaling（1.25/1.333/1.5）：mutter 是整数倍
+          # 渲染再下采样，subpixel 结构被破坏、rgb 会变成明显的错误 color
+          # fringing ⇒ 应改回 subpixel.rgba = "none"（同时改 dconf）。
+          #
+          # 另：subpixel AA 只在完全不透明背景上生效，本机 kitty/ghostty 是
+          # background opacity 0.9，那里会自动退回 grayscale（有意为之）。
           #
           # antialias = true; # default: true
           # hinting = {
@@ -69,11 +77,12 @@
           #   style = "slight"; # none|slight|medium|full，default: slight；
           #                     # HiDPI 下别用 medium/full，笔画粗细会不均
           # };
-          # subpixel = {
-          #   rgba = "none"; # default: none，即灰度抗锯齿（推荐值，见上）
-          #   # lcdfilter 只在 rgba != "none" 时才有意义，灰度下设置是空转
-          #   lcdfilter = "default"; # default: default
-          # };
+          subpixel = {
+            rgba = "rgb"; # default: none
+            # 只在 rgba != "none" 时生效：none|default|light|legacy
+            # default 最锐；轻一点、color fringing 更弱可用 light
+            lcdfilter = "default"; # default: default
+          };
 
           defaultFonts = {
             # emoji = [ "Noto Color Emoji" ]; # 默认值
