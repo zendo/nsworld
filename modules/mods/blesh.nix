@@ -50,20 +50,7 @@
                 function pure/precmd { pure_status=$?; }
                 blehook PRECMD=pure/precmd
 
-                # Git branch + dirty marker (`main*`): gray branch, pink `*` when dirty
-                function ble/prompt/backslash:pure-git {
-                  local "''${_ble_contrib_prompt_git_vars[@]/%/=}" dirty_mark
-                  ble/contrib/prompt-git/initialize || return 0
-                  ble/contrib/prompt-git/update-head-information
-                  [[ $branch ]] || return 0
-                  ble/contrib/prompt-git/get-dirty-mark
-                  local gray=$'\e[38;5;242m' pink=$'\e[38;5;218m' reset=$'\e[m'
-                  [[ $dirty_mark ]] && dirty_mark="''${pink}*"
-                  ble/prompt/print " ''${gray}''${branch}''${dirty_mark}''${reset}"
-                }
-
-                # Elapsed time of the last command (from contrib/prompt-elapsed),
-                # only shown when it took > 5s
+                # Elapsed time only shown when it took > 5s
                 function ble/prompt/backslash:pure-elapsed {
                   ((_ble_exec_time_ata > 5000000)) || return 1
                   ble/prompt/print ' '
@@ -79,7 +66,7 @@
                   fi
                 }
 
-                PS1='\n\g{fg=4}\w\g{}\q{pure-git}\g{fg=3}\q{pure-elapsed}\g{}\n\q{pure-prompt} '
+                PS1='\n\g{fg=4}\w\g{} \q{contrib/git-branch}\g{fg=3}\q{pure-elapsed}\g{}\n\q{pure-prompt} '
               ''
             ))
             (lib.mkOrder 1500 cfg.settings)
