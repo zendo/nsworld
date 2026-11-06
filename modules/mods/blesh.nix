@@ -66,7 +66,14 @@
                   fi
                 }
 
-                PS1='\n\g{fg=4}\w\g{} \q{contrib/git-branch}\g{fg=3}\q{pure-elapsed}\g{}\n\q{pure-prompt} '
+                # pure 提示默认不含 user@host（本地终端不需要）。SSH 会话里补上，
+                # 只拼接前缀，提示主体仍然只有下面这一处定义，避免两份 PS1 失同步。
+                pure_prompt_host=
+                if [[ -n ''${SSH_CONNECTION-} ]]; then
+                  pure_prompt_host='\g{fg=2}\u@\h\g{} '
+                fi
+
+                PS1='\n'$pure_prompt_host'\g{fg=4}\w\g{} \q{contrib/git-branch}\g{fg=3}\q{pure-elapsed}\g{}\n\q{pure-prompt} '
               ''
             ))
             (lib.mkOrder 1500 cfg.settings)

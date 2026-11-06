@@ -71,7 +71,15 @@
                 }
 
                 flyline create-prompt-widget last-command-duration
-                PS1='\n\e[34m\w\e[0m$(__flyline_pure_git) \e[33mFLYLINE_LAST_COMMAND_DURATION\e[0m\n$(__flyline_pure_char) '
+
+                # pure 提示默认不含 user@host（本地终端不需要）。SSH 会话里补上，
+                # 与 mods/blesh.nix 保持同样的行为。
+                __flyline_pure_host=
+                if [[ -n ''${SSH_CONNECTION-} ]]; then
+                  __flyline_pure_host='\e[32m\u@\h\e[0m '
+                fi
+
+                PS1='\n'$__flyline_pure_host'\e[34m\w\e[0m$(__flyline_pure_git) \e[33mFLYLINE_LAST_COMMAND_DURATION\e[0m\n$(__flyline_pure_char) '
               ''
             ))
             (lib.mkOrder 1500 cfg.settings)
