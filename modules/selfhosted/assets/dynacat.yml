@@ -58,6 +58,9 @@ pages:
               - title: Beszel Hub
                 url: http://beszel.home.arpa
                 icon: sh:beszel
+              - title: scrutiny
+                url: http://scrutiny.home.arpa
+                icon: sh:scrutiny
               # 还没上线,先注释掉,免得 monitor 一直显示 down
               # - title: AdGuard Home
               #   url: http://adguard.home.arpa

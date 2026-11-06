@@ -73,6 +73,7 @@ in
       ];
 
       # [ selfhosted ]
+      services.caddy.enable = true;
       # services.homepage-dashboard.enable = true;
       services.navidrome.enable = true;
       # services.dufs.enable = true;
@@ -85,6 +86,7 @@ in
       systemd.services.sub-store.enable = true;
       systemd.services.comigo.enable = true;
       systemd.services.dynacat.enable = true;
+      services.scrutiny.enable = true;
       services.beszel = {
         hub.enable = true;
         agent.enable = true;

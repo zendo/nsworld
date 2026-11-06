@@ -56,6 +56,7 @@
           # 43xx 运维 / 面板
           dynacat = 4301;
           homepage = 4302;
+          scrutiny = 4303; # 硬盘 SMART
           beszel = 4309; # hub
         };
       };

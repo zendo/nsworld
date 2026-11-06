@@ -16,8 +16,8 @@
       p = config.myVars.ports;
     in
     {
+      # 启用在 host 侧: services.caddy.enable = true;
       services.caddy = {
-        enable = true;
         # 唯一需要放行的东西(防火墙开启时才有意义);nixpkgs 默认是 false
         openFirewall = true;
 
@@ -77,6 +77,10 @@
 
           "http://dynacat.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.dynacat}
+          '';
+
+          "http://scrutiny.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:${toString p.scrutiny}
           '';
 
           "http://beszel.home.arpa".extraConfig = ''
