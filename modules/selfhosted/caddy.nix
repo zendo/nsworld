@@ -99,6 +99,11 @@
             reverse_proxy 127.0.0.1:${toString p.kavita}
           '';
 
+          # 需要 websocket(App 同步/上传进度)和大 body,reverse_proxy 默认都放行
+          # "http://immich.home.arpa".extraConfig = ''
+          #   reverse_proxy 127.0.0.1:${toString p.immich}
+          # '';
+
           "http://homepage.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.homepage}
           '';

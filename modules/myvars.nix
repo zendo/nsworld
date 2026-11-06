@@ -40,6 +40,7 @@
           kavita = 4002;
           suwayomi = 4003;
           comigo = 4004;
+          immich = 4005;
 
           # 41xx 文件 / 下载
           webdav = 4101;
