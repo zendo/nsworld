@@ -28,12 +28,9 @@
           }
         ];
 
-        # FCITX_CONFIG_HOME=/usr fcitx5 -d -r
-        # pkill fcitx5; FCITX_CONFIG_HOME=/usr fcitx5 -d
-        # https://github.com/azuwis/nix-config/blob/master/nixos/fcitx5/default.nix#L63
-        # environment.sessionVariables = {
-        #   FCITX_CONFIG_HOME = "${pkgs.emptyDirectory}";
-        # };
+        # 把 fcitx5 的用户配置目录重定向到会话私有 tmpfs，避免首次启动生成的
+        # ~/.config/fcitx5 遮蔽 /etc/xdg/fcitx5（声明式配置）；词库在 ~/.local/share 不受影响。
+        environment.sessionVariables.FCITX_CONFIG_HOME = "$XDG_RUNTIME_DIR/fcitx5";
 
         i18n.inputMethod = {
           enable = true;
@@ -117,6 +114,9 @@
                   globalSection = {
                     "SymbolsEnabled" = false;
                     "CloudPinyinEnabled" = false;
+                    # 关云拼音时，“首次运行”会弹是否启用云拼音的提示；该标志
+                    # 原存于用户 conf/pinyin.conf（现己重定向到 tmpfs，每次登录都重置）。
+                    "FirstRun" = false;
                   };
                 };
               };

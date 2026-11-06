@@ -15,13 +15,19 @@ in
         # hm-imports
         # nixos-imports
 
+        myvars
+        mods
+        selfhosted
+
         base
+        boot
+        user
         fonts
         nixconfig
         nixpkgs
         ssh
-        zsh
         # nix-ld
+        graphical
         gnome
       ]
       ++ [
@@ -33,6 +39,8 @@ in
   flake.modules.nixos.host-vm-test =
     { pkgs, ... }:
     {
+      myVars.user = userName;
+
       disabledModules = [
         # "services/desktops/pipewire/pipewire.nix"
       ];
@@ -53,6 +61,18 @@ in
         memorySize = 1024 * 4;
         diskSize = 1024 * 8;
         cores = 8;
+
+        # 宿主机 127.0.0.1:2222 -> guest:22，用于 ssh 进本 VM。
+        # slirp 的 10.0.2.15 在宿主机不可达，必须由 QEMU 做端口转发；
+        # 绑 127.0.0.1 表示只允许本机访问，不暴露给 LAN。
+        forwardPorts = [
+          {
+            from = "host";
+            host.address = "127.0.0.1";
+            host.port = 2222;
+            guest.port = 22;
+          }
+        ];
         qemu = {
           options = [
             # Sounds
@@ -69,21 +89,6 @@ in
       };
 
       nixpkgs.hostPlatform = "x86_64-linux";
-
-      users.users.root.initialPassword = "root";
-      users.users.${userName} = {
-        isNormalUser = true;
-        initialPassword = "test";
-        extraGroups = [
-          "wheel"
-          "networkmanager"
-          "input"
-          "video"
-          "adbusers"
-          "docker"
-          "podman"
-        ];
-      };
 
       security.sudo.wheelNeedsPassword = false;
       security.sudo-rs.wheelNeedsPassword = false;

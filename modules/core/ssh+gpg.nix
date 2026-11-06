@@ -45,6 +45,12 @@
           forwardAgent = true;
         };
 
+        vm-test = {
+          order = 350;
+          hostname = "127.0.0.1";
+          port = 2222;
+        };
+
         "github.com" = {
           hostname = "ssh.github.com";
           port = 443;
