@@ -100,7 +100,6 @@ let
       powertop
       # psmisc # pstree
       procs
-      ikill
 
       # [ Utils ]
       # (lib.hiPrio uutils-coreutils-noprefix) # riir
