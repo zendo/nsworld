@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  userName = "aaa";
+  userName = "test";
   hostName = "rmt";
   fm = config.flake.modules;
 in
@@ -41,17 +41,14 @@ in
       myVars.user = userName;
       networking.hostName = hostName;
 
+      users.users.${userName}.password = "123";
+
+      services.displayManager.autoLogin.user = "${config.myVars.user}";
+
       environment.systemPackages = with pkgs; [
         duf
         gdu
       ];
-
-      services.displayManager.autoLogin.user = "${config.myVars.user}";
-
-      users.users.${config.myVars.user} = {
-        # pw: 123
-        hashedPassword = "$y$j9T$HMRcTJOCJnmqDmH2cPVGF.$ZeGBjMnWDDpnicBGlVGZGNSkEXxdI7jLvm3GHK8eqVA";
-      };
 
       # users.users.guest = {
       #   isNormalUser = true;

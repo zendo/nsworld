@@ -40,6 +40,8 @@ in
     { pkgs, ... }:
     {
       myVars.user = userName;
+      users.users.${userName}.password = "123";
+      # users.defaultUserShell = pkgs.zsh;
 
       disabledModules = [
         # "services/desktops/pipewire/pipewire.nix"

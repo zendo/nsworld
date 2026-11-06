@@ -67,6 +67,10 @@ in
       myVars.user = userName;
       networking.hostName = hostName;
 
+      # `mkpasswd`
+      users.users.${userName}.initialHashedPassword =
+        "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
+
       environment.systemPackages = with pkgs; [
         impala # tui wifi for iwd
         brightnessctl # brightnessctl set 50%
