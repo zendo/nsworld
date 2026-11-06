@@ -87,6 +87,11 @@
             reverse_proxy 127.0.0.1:${toString p.beszel}
           '';
 
+          # websocket(/notifications/hub)由 reverse_proxy 自动处理 Upgrade
+          # "http://vaultwarden.home.arpa".extraConfig = ''
+          #   reverse_proxy 127.0.0.1:${toString p.vaultwarden}
+          # '';
+
           "http://suwayomi.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.suwayomi}
           '';

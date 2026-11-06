@@ -92,6 +92,7 @@ in
       systemd.services.dynacat.enable = true;
       services.scrutiny.enable = true;
       # services.immich.enable = true;
+      # services.vaultwarden.enable = true;
       services.beszel = {
         hub.enable = true;
         agent.enable = true;

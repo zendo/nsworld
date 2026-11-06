@@ -58,6 +58,7 @@
           dynacat = 4301;
           homepage = 4302;
           scrutiny = 4303; # 硬盘 SMART
+          vaultwarden = 4304;
           beszel = 4309; # hub
         };
       };
