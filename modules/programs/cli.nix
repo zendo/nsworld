@@ -5,27 +5,27 @@ let
     pkgs: with pkgs; [
       # [ Developing ]
       # yq
-      yq-go
+      yq-go # ~14 MiB
       jq
       jql
       # otree # tui tree for JSON/YAML/TOML
       sqlite
-      openssl
+      openssl # ~16 MiB
       discount # :markdown
       efm-langserver # :markdown lsp
       shellcheck
       strace
       lurk # strace alternative
-      herdr
+      herdr # ~30 MiB
 
       # [ Editor ]
-      ttt
+      ttt # ~17 MiB
       # micro
-      fresh-editor
+      fresh-editor # ~40 MiB
       # zee
       # msedit
-      typos
-      ydict
+      typos # ~18 MiB
+      ydict # ~11 MiB
       translate-shell
       # aspell
       # aspellDicts.en
@@ -36,14 +36,14 @@ let
       inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
       # gh auth login
       # gh api rate_limit
-      gh
+      gh # ~43 MiB
       delta
       # difftastic # too big
-      lazygit
+      lazygit # ~22 MiB
       tokei # count code
 
       # [ Compressor/Archiver ]
-      p7zip
+      p7zip # ~11 MiB
       unzip
       ouch
       # patool
@@ -55,13 +55,13 @@ let
       bat
       fd
       ripgrep
-      file
+      file # ~11 MiB
       tree
       # erdtree
       fzf
       skim
       yazi
-      gdu
+      gdu # ~21 MiB
       duf
       dysk
       f2
@@ -76,15 +76,15 @@ let
       # croc
 
       # [ FileServer ]
-      rclone
+      rclone # ~108 MiB
       # python -m http.server 8080
       simple-http-server # :riir
       # sshfs [user@]hostname:[directory] MOUNTPOINT
       # umount MOUNTPOINT
       sshfs
       # dufs
-      goshs
-      sendme
+      goshs # ~23 MiB
+      sendme # ~13 MiB
       # magic-wormhole-rs
       # tailcat # 17.6 MiB
 
@@ -94,7 +94,7 @@ let
       btop
       htop
       bottom
-      ctop # containers monitor
+      ctop # containers monitor (~14 MiB)
       iotop-c
       dool # py fork of dstat
       powertop
@@ -110,7 +110,7 @@ let
       tlrc # tldr
       # tealdeer # tldr
       # asciinema # record the terminal
-      libqalculate
+      libqalculate # ~11 MiB
       calcurse
       # kalker # calculator
 
@@ -121,8 +121,8 @@ let
       # ghgrab
       lsof
       bind
-      doggo
-      q # dns
+      doggo # ~14 MiB
+      q # dns (~11 MiB)
       # nali
       mtr
       nload
