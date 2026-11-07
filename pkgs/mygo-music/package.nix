@@ -1,6 +1,5 @@
 {
   lib,
-  stdenv,
   go,
   buildGo127Module,
   fetchFromGitHub,
@@ -36,7 +35,7 @@ buildGo127Module (finalAttrs: {
   ldflags = [ "-s" ];
 
   buildPhase = ''
-    go tool mygo build
+    go tool mygo build -platform "linux/${go.GOARCH}"
   '';
 
   doCheck = true;
@@ -50,11 +49,17 @@ buildGo127Module (finalAttrs: {
     install -Dm755 build/linux-${go.GOARCH}/mygo-music \
       $out/bin/mygo-music
 
-    install -Dm644 build/linux-${go.GOARCH}/mygo-music.png \
+    install -Dm644 build/linux-${go.GOARCH}/mygo-music-256x256.png \
+      $out/share/icons/hicolor/256x256/apps/mygo-music.png
+
+    install -Dm644 build/linux-${go.GOARCH}/mygo-music-512x512.png \
       $out/share/icons/hicolor/512x512/apps/mygo-music.png
 
     install -Dm644 build/linux-${go.GOARCH}/mygo-music.desktop \
       $out/share/applications/mygo-music.desktop
+
+    install -Dm644 LICENSE \
+      $out/share/licenses/mygo-music/LICENSE
   '';
 
   postFixup = ''
@@ -79,5 +84,9 @@ buildGo127Module (finalAttrs: {
     license = lib.licenses.agpl3Only;
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "mygo-music";
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 })
