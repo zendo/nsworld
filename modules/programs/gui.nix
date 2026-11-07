@@ -17,7 +17,7 @@
         sonora
         neiro
         fusion
-        agent-one
+        # agent-one
         breeze
         # venerax
         # mygo-cloudmusic
