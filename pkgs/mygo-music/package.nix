@@ -16,17 +16,17 @@
 
 buildGo127Module (finalAttrs: {
   pname = "mygo-music";
-  version = "0.1.9";
+  version = "0.1.21";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "egoist";
     repo = "mygo-music";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-8eJw32TfmJ8nLhOW0cnrea9GirLyQrzRSNosyjrt4nY=";
+    hash = "sha256-bNo12h7OZnJ6330MWspIdnC5Q1ZN+hKjyTG6ApJALis=";
   };
 
-  vendorHash = "sha256-Cq2mujbu3e1eAXMr72SufOXpA6ShqqYQTiu5cBmpFRk=";
+  vendorHash = "sha256-tLLF3QNjZSaZPFt4R+hdS8YsVm9sM17gZvcceTLcZz4=";
 
   nativeBuildInputs = [
     makeWrapper
@@ -36,11 +36,7 @@ buildGo127Module (finalAttrs: {
   ldflags = [ "-s" ];
 
   buildPhase = ''
-    runHook preBuild
-
     go tool mygo build
-
-    runHook postBuild
   '';
 
   # The custom buildPhase above replaces buildGoModule's Go build hook,
@@ -48,8 +44,6 @@ buildGo127Module (finalAttrs: {
   doCheck = false;
 
   installPhase = ''
-    runHook preInstall
-
     install -Dm755 build/linux-${go.GOARCH}/mygo-music \
       $out/bin/mygo-music
 
@@ -58,8 +52,6 @@ buildGo127Module (finalAttrs: {
 
     install -Dm644 build/linux-${go.GOARCH}/mygo-music.desktop \
       $out/share/applications/mygo-music.desktop
-
-    runHook postInstall
   '';
 
   postFixup = ''

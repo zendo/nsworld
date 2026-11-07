@@ -16,11 +16,11 @@
         rox
         sonora
         neiro
+        mygo-music
         fusion
         # agent-one
         breeze
         # venerax
-        # mygo-cloudmusic
         # pixora-icons
 
         # [ wrapper ]
