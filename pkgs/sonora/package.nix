@@ -50,22 +50,14 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   unpackPhase = ''
-    runHook preUnpack
-
     flatpak-extract "$src" --outdir extracted
     cd extracted/files
-
-    runHook postUnpack
   '';
 
   installPhase = ''
-    runHook preInstall
-
     mkdir -p $out/{bin,share}
     cp bin/sonora $out/bin/
     cp -r share $out/
-
-    runHook postInstall
   '';
 
   meta = {

@@ -29,15 +29,11 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   installPhase = ''
-    runHook preInstall
-
     mkdir -p $out/bin
     install -Dm755 local/flatpak-extract/flatpak-extract.py $out/bin/$pname
 
     wrapProgram $out/bin/$pname \
       --prefix PATH : ${lib.makeBinPath [ ostree ]}
-
-    runHook postInstall
   '';
 
   meta = {

@@ -44,17 +44,11 @@ stdenv.mkDerivation (finalAttrs: {
   autoPatchelfIgnoreMissingDeps = [ "libjvm.so" ];
 
   unpackPhase = ''
-    runHook preUnpack
-
     flatpak-extract "$src" --outdir extracted
     cd extracted/files/breeze
-
-    runHook postUnpack
   '';
 
   installPhase = ''
-    runHook preInstall
-
     mkdir -p $out/bin
     cp -a . $out/breeze
 
@@ -65,8 +59,6 @@ stdenv.mkDerivation (finalAttrs: {
 
     makeWrapper "$out/breeze/breeze" "$out/bin/breeze" \
       --prefix LD_LIBRARY_PATH : "$out/breeze/lib"
-
-    runHook postInstall
   '';
 
   meta = {

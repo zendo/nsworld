@@ -16,12 +16,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   };
 
   installPhase = ''
-    runHook preInstall
-
     mkdir -p $out/share/icons
     cp -a pixora pixora-dark pixora-accent $out/share/icons/
-
-    runHook postInstall
   '';
 
   meta = {

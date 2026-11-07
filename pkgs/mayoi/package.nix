@@ -86,22 +86,14 @@ buildGo127Module (finalAttrs: {
   '';
 
   buildPhase = ''
-    runHook preBuild
-
     go tool mygo build
-
-    runHook postBuild
   '';
 
   installPhase = ''
-    runHook preInstall
-
     install -Dm755 build/linux-${go.GOARCH}/mayoi "$out/bin/mayoi"
     install -Dm755 build/linux-${go.GOARCH}/libghostty-vt.so "$out/bin/libghostty-vt.so"
     install -Dm644 build/linux-${go.GOARCH}/mayoi.png "$out/share/icons/hicolor/512x512/apps/mayoi.png"
     install -Dm644 build/linux-${go.GOARCH}/mayoi.desktop "$out/share/applications/mayoi.desktop"
-
-    runHook postInstall
   '';
 
   postFixup = ''

@@ -43,19 +43,11 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   buildPhase = ''
-    runHook preBuild
-
     pnpm run build --base=/
-
-    runHook postBuild
   '';
 
   installPhase = ''
-    runHook preInstall
-
     cp -r build $out
-
-    runHook postInstall
   '';
 
   meta = {
