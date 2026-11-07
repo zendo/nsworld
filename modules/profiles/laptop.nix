@@ -11,12 +11,9 @@
         thermald.enable = config.hardware.cpu.intel.updateMicrocode;
 
         # sudo scx_rusty --monitor 0.5
-        scx = {
-          # enable = true;
-          scheduler = "scx_lavd"; # 游戏
-          # scheduler = "scx_rusty"; # 生产力兼游戏
-          package = pkgs.scx.rustscheds;
-        };
+        # scx-loader = {
+        #   enable = true;
+        # };
 
         # Conflicts with auto-cpufreq
         power-profiles-daemon.enable = !config.services.auto-cpufreq.enable;
