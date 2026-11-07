@@ -54,10 +54,6 @@
           # GNOME scale=2 → 逻辑 ≈ 121 PPI，且 monitors.xml 是整数 2×（未用
           # fractional scaling），面板为 IPS（subpixel 为标 RGB stripe）。
           #
-          # 理论上 242 PPI 下 subpixel AA 收益很小，但实测 grayscale AA 的
-          # 边缘对比偏低、主观上“发虚/眩晕”，换成 subpixel 反而更舒服；
-          # 面板排列与缩放倍数都支持，所以按主观偏好开启。
-          #
           # ⚠️ 必须与 GTK 侧 dconf 同步，否则会出现
           # 「GTK 有 color fringing、终端没有」的观感跳变：
           #   gsettings set org.gnome.desktop.interface font-antialiasing rgba
@@ -67,9 +63,6 @@
           # 渲染再下采样，subpixel 结构被破坏、rgb 会变成明显的错误 color
           # fringing ⇒ 应改回 subpixel.rgba = "none"（同时改 dconf）。
           #
-          # 另：subpixel AA 只在完全不透明背景上生效，本机 kitty/ghostty 是
-          # background opacity 0.9，那里会自动退回 grayscale（有意为之）。
-          #
           # antialias = true; # default: true
           # hinting = {
           #   enable = true; # default: true
@@ -77,12 +70,12 @@
           #   style = "slight"; # none|slight|medium|full，default: slight；
           #                     # HiDPI 下别用 medium/full，笔画粗细会不均
           # };
-          subpixel = {
-            rgba = "rgb"; # default: none
-            # 只在 rgba != "none" 时生效：none|default|light|legacy
-            # default 最锐；轻一点、color fringing 更弱可用 light
-            lcdfilter = "default"; # default: default
-          };
+          # subpixel = {
+          #   rgba = "rgb"; # default: none
+          #   # 只在 rgba != "none" 时生效：none|default|light|legacy
+          #   # default 最锐；轻一点、color fringing 更弱可用 light
+          #   lcdfilter = "default"; # default: default
+          # };
 
           defaultFonts = {
             # emoji = [ "Noto Color Emoji" ]; # 默认值
