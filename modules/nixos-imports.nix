@@ -3,6 +3,9 @@
   flake.modules.nixos.nixos-imports.imports = with config.flake.modules.nixos; [
     myvars
     # secrets
+    programs
+    services
+    selfhosted
 
     # [ core ]
     base
@@ -14,10 +17,6 @@
     user
 
     # [ desktop ]
-
-    mods
-    selfhosted
-    services
 
     # [ networking ]
     dns

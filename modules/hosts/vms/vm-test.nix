@@ -16,7 +16,8 @@ in
         # nixos-imports
 
         myvars
-        mods
+        # secrets
+        programs
         services
         selfhosted
 

@@ -14,6 +14,9 @@ in
 
       myvars
       # secrets
+      programs
+      services
+      selfhosted
 
       # [ profiles ]
       # gpu-intel
@@ -26,10 +29,6 @@ in
       ssh-hosts
       # gpg
       user
-
-      mods
-      selfhosted
-      services
 
       # [ networking ]
       dns

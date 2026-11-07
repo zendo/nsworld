@@ -17,14 +17,18 @@ in
         host-wsl-hm
         # host-wsl-hjem
 
+        myvars
+        # secrets
+        programs
+        # services
+        # selfhosted
+
         base
         fonts
         nixconfig
         nixpkgs
         nix-tools
         ssh
-
-        mods
 
         # [ programs ]
         cli

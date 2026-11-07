@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.mods =
+  flake.modules.nixos.programs =
     {
       lib,
       pkgs,
