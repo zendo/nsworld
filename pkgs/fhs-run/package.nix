@@ -95,12 +95,6 @@ pkgs.buildFHSEnv {
       libidn
       iana-etc # /etc/protocols, /etc/services
 
-      # libbz2.so.1.0
-      # (p.runCommand "libbz2-legacy-soname" { nativeBuildInputs = [ p.patchelf ]; } ''
-      #   install -Dm755 ${p.bzip2.out}/lib/libbz2.so.1.0.8 $out/lib/libbz2-legacy.so
-      #   patchelf --set-soname libbz2.so.1.0 $out/lib/libbz2-legacy.so
-      # '')
-
       # --- GTK / GLib stack ------------------------------------------------
       gtk4 # 30.7 MiB
       libadwaita
