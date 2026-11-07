@@ -10,6 +10,9 @@
   libsecret,
   libpulseaudio,
   libayatana-appindicator,
+  webkitgtk_4_1,
+  glib-networking,
+  libsoup_3,
   nix-update-script,
 }:
 
@@ -71,8 +74,13 @@ buildGo127Module (finalAttrs: {
           libsecret
           libpulseaudio
           libayatana-appindicator
+          # Plugins' embedded login pages (host.webSignIn) need WebKitGTK and its TLS stack.
+          webkitgtk_4_1
+          glib-networking
+          libsoup_3
         ]
-      }"
+      }" \
+      --prefix GIO_EXTRA_MODULES : "${glib-networking}/lib/gio/modules"
   '';
 
   passthru.updateScript = nix-update-script { };
