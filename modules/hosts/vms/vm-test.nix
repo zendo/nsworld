@@ -13,7 +13,7 @@ in
         host-vm-test
         # hjemModule
         # hm-imports
-        # nixos-imports
+        # workstation
 
         myvars
         # secrets

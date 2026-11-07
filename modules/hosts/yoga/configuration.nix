@@ -12,11 +12,11 @@ in
         host-yoga
         hjemModule
         # hm-imports
-        nixos-imports
 
         # [ profiles ]
         gpu-amd
         laptop
+        workstation
         # steam
 
         # [ programs ]

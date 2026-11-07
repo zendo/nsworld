@@ -37,7 +37,7 @@
 
       # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       # flatpak install flathub io.github.kolunmi.Bazaar
-      services.flatpak.enable = true;
+      # services.flatpak.enable = true;
 
       mods.fcitx = {
         enable = true;

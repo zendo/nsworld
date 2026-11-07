@@ -13,9 +13,9 @@ in
       host-rmt-disko-bcachefs
       hjemModule
       # hm-imports
-      nixos-imports
 
       # [ profiles ]
+      workstation
       # steam
 
       # [ virt ]

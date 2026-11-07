@@ -102,20 +102,9 @@ in
   flake.modules.homeManager.wm =
     { pkgs, ... }:
     {
-      imports = [
-        # fm.homeManager.hypridle
-        # fm.homeManager.shikane
-        # fm.homeManager.vicinae
-      ];
-
-      services = {
-        # network-manager-applet.enable = true;
-        # playerctld.enable = true;
-
-        cliphist = {
-          enable = true;
-          allowImages = true;
-        };
+      services.cliphist = {
+        enable = true;
+        allowImages = true;
       };
 
       # qt = {
