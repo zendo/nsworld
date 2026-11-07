@@ -104,6 +104,11 @@
             reverse_proxy 127.0.0.1:${toString p.dufs}
           '';
 
+          # 同步协议(22000/21027)不走反代,由 services.syncthing.openDefaultPorts 放行
+          "http://syncthing.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:${toString p.syncthing}
+          '';
+
           "http://kavita.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.kavita}
           '';

@@ -48,6 +48,7 @@
           dufs = 4103;
           aria2 = 4104; # JSON-RPC
           rqbit = 4105;
+          syncthing = 4106; # Web UI
 
           # 42xx 信息 / 订阅
           memos = 4201;

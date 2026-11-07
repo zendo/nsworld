@@ -89,6 +89,7 @@ in
       systemd.services.sub-store.enable = true;
       systemd.services.comigo.enable = true;
       systemd.services.fusion.enable = true;
+      # services.syncthing.enable = true;
       systemd.services.dynacat.enable = true;
       services.scrutiny.enable = true;
       # services.immich.enable = true;

@@ -77,6 +77,16 @@ in
       #   };
       # };
 
+      # 用户级 syncthing:登录后才跑,配置在 ~/.config/syncthing,GUI 127.0.0.1:8384
+      # (user 级实例不吃 services.syncthing.dataDir/guiAddress 这些系统级选项)
+      # services.syncthing = {
+      #   enable = true;
+      #   systemService = false;
+      #   # 只放行同步端口(22000 TCP/UDP + 21027 UDP),方便 LAN 直连和发现
+      #   openDefaultPorts = true;
+      # };
+      # systemd.user.services.syncthing.wantedBy = [ "default.target" ];
+
       # Persistent Cache
       system.extraDependencies = [
         inputs.self.formatter.${pkgs.stdenv.hostPlatform.system}
