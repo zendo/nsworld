@@ -39,9 +39,12 @@ buildGo127Module (finalAttrs: {
     go tool mygo build
   '';
 
-  # The custom buildPhase above replaces buildGoModule's Go build hook,
-  # so its getGoDirs-based checkPhase is not available here.
-  doCheck = false;
+  doCheck = true;
+  checkPhase = ''
+    runHook preCheck
+    go test ./...
+    runHook postCheck
+  '';
 
   installPhase = ''
     install -Dm755 build/linux-${go.GOARCH}/mygo-music \
