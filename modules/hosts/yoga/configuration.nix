@@ -59,7 +59,7 @@ in
         "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
 
       # [ services ]
-      systemd.user.services.neiro.enable = true;
+      # systemd.user.services.neiro.enable = true;
 
       # [ selfhosted ]
       # services.homepage-dashboard.enable = true;
