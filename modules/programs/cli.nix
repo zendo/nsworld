@@ -94,7 +94,7 @@ let
       btop
       htop
       bottom
-      ctop # containers monitor (~14 MiB)
+      # ctop # containers monitor (~14 MiB)
       iotop-c
       dool # py fork of dstat
       powertop
@@ -111,7 +111,7 @@ let
       # tealdeer # tldr
       # asciinema # record the terminal
       libqalculate # ~11 MiB
-      calcurse
+      # calcurse
       # kalker # calculator
 
       # [ Networking ]
