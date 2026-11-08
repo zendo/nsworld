@@ -55,6 +55,7 @@
           miniflux = 4202;
           sub-store = 4203;
           fusion = 4204; # RSS 阅读器
+          karakeep = 4205; # 书签/网页存档
 
           # 43xx 运维 / 面板
           dynacat = 4301;

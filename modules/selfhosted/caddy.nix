@@ -79,6 +79,10 @@
             reverse_proxy 127.0.0.1:${toString p.fusion}
           '';
 
+          "http://karakeep.home.arpa".extraConfig = ''
+            reverse_proxy 127.0.0.1:${toString p.karakeep}
+          '';
+
           "http://dynacat.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.dynacat}
           '';
@@ -92,9 +96,9 @@
           '';
 
           # websocket(/notifications/hub)由 reverse_proxy 自动处理 Upgrade
-          # "http://vaultwarden.home.arpa".extraConfig = ''
-          #   reverse_proxy 127.0.0.1:${toString p.vaultwarden}
-          # '';
+          "http://vaultwarden.home.arpa".extraConfig = ''
+              reverse_proxy 127.0.0.1:${toString p.vaultwarden}
+            # '';
 
           "http://suwayomi.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.suwayomi}
@@ -114,9 +118,9 @@
           '';
 
           # 需要 websocket(App 同步/上传进度)和大 body,reverse_proxy 默认都放行
-          # "http://immich.home.arpa".extraConfig = ''
-          #   reverse_proxy 127.0.0.1:${toString p.immich}
-          # '';
+          "http://immich.home.arpa".extraConfig = ''
+              reverse_proxy 127.0.0.1:${toString p.immich}
+            # '';
 
           "http://homepage.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.homepage}

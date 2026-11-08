@@ -94,6 +94,7 @@ in
       services.scrutiny.enable = true;
       # services.immich.enable = true;
       # services.vaultwarden.enable = true;
+      # services.karakeep.enable = true; # 1.85 GiB
       services.beszel = {
         hub.enable = true;
         agent.enable = true;
