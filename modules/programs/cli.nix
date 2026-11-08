@@ -21,7 +21,7 @@ let
       # [ Editor ]
       ttt # ~17 MiB
       # micro
-      fresh-editor # ~40 MiB
+      # fresh-editor # ~40 MiB
       # zee
       # msedit
       typos # ~18 MiB

@@ -21,7 +21,7 @@
         jq
         sqlite
         openssl
-        fresh-editor
+        # fresh-editor
         herdr
         # inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
         gitMinimal # -30.1 MiB

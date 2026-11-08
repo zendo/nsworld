@@ -84,7 +84,7 @@ in
       # services.miniflux.enable = true; # wall
       services.memos.enable = true;
       services.aria2.enable = true;
-      services.rqbit.enable = true;
+      # services.rqbit.enable = true;
       # services.suwayomi-server.enable = true;
       systemd.services.sub-store.enable = true;
       systemd.services.comigo.enable = true;
@@ -94,7 +94,7 @@ in
       services.scrutiny.enable = true;
       # services.immich.enable = true;
       # services.vaultwarden.enable = true;
-      # services.karakeep.enable = true; # 1.85 GiB
+      # services.karakeep.enable = true; # 2.15 GiB
       services.beszel = {
         hub.enable = true;
         agent.enable = true;
