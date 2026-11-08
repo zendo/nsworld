@@ -18,17 +18,17 @@
 
 buildGo127Module (finalAttrs: {
   pname = "mygo-music";
-  version = "0.1.21";
+  version = "0.1.22";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "egoist";
     repo = "mygo-music";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-bNo12h7OZnJ6330MWspIdnC5Q1ZN+hKjyTG6ApJALis=";
+    hash = "sha256-Cgp1qLckpUTOJfY9PZzhcHqknjqjPIbGDAuCj1M03sk=";
   };
 
-  vendorHash = "sha256-tLLF3QNjZSaZPFt4R+hdS8YsVm9sM17gZvcceTLcZz4=";
+  vendorHash = "sha256-SHmrMG6tYzGSBhvLMdIikLonjeR3r7IOeJiaGE+srik=";
 
   nativeBuildInputs = [
     makeWrapper
