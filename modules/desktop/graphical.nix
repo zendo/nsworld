@@ -41,8 +41,8 @@
 
       mods.fcitx = {
         enable = true;
-        withPinyin = true;
-        # withRime = true;
+        # withPinyin = true;
+        withRime = true;
       };
       # or ibus
       # i18n.inputMethod = {
