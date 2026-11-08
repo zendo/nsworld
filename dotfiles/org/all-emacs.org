@@ -3877,7 +3877,16 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("g" . consult-grep)
  ("f" . consult-fd)
  ("r" . consult-ripgrep)
- ("p" . consult-isearch-history))
+ ("p" . consult-isearch-history)
+
+ ;; 回到 global-map 再定义前缀（否则会绑进上面的 search-map）
+ :map global-map
+ ;; `C-c -' 放 global-map：org 里仍是 org-ctrl-c-minus
+ :prefix-map remove-map
+ :prefix "C-c -"
+ ("b" . bookmark-delete)
+ ("r" . recentf-edit-list)
+ ("p" . project-forget-project))
 
 (bind-keys*
  ;; ("C-z" . nil) ;unbind C-z
@@ -3886,8 +3895,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("M-m" . consult-mark)
  ;; ("M-m" . pop-to-mark-command)
  ("C-/" . comment-line) ;vscode
- ("C-\\" . align-regexp)
- ("C-x \\" . toggle-input-method)
  ("C-S-i" . eglot-format) ;vscode
  ("C-S-t" . tab-new)
  ("C-x C-r" . recentf)
@@ -3897,9 +3904,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-c <SPC>" . project-find-file)
  ("C-c C-<SPC>" . project-find-file)
  ;; ("C-c ." . find-file)
- ("C-c /" . consult-ripgrep)
- ("C-c ," . project-switch-to-buffer)
- ("C-x b" . project-switch-to-buffer)
  ;; ("C-<tab>" . project-switch-to-buffer)
 
  ("M-+" . text-scale-increase)
@@ -3973,11 +3977,6 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("o" . browse-at-remote)
  ("f" . forge-dispatch)
 
- :prefix-map remove-map
- :prefix "C-c -"
- ("b" . bookmark-delete)
- ("r" . recentf-edit-list)
- ("p" . project-forget-project)
 
  :prefix-map toggle-map
  :prefix "C-c t"
@@ -4042,7 +4041,7 @@ https://github.com/kickingvegas/casual
 
 #+begin_src emacs-lisp
 (use-package casual
-  :bind (("C-c o" . #'casual-editkit-main-tmenu)
+  :bind (("M-o" . #'casual-editkit-main-tmenu)
          :map dired-mode-map ("C-o" . casual-dired-tmenu)
          :map isearch-mode-map ("C-o" . casual-isearch-tmenu)
          :map calc-mode-map ("C-o" . casual-calc-tmenu)
