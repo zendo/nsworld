@@ -121,21 +121,15 @@ let
       # ghgrab
       lsof
       bind
-      doggo # ~14 MiB
-      q # dns (~11 MiB)
-      # nali
-      mtr
-      nload
-      snitch
-      sniffglue
+      # doggo # ~14 MiB
+      # q # dns (~11 MiB)
+      # snitch
+      # sniffglue
       # ipinfo # 62M
       # elinks
-      wthrr # weather
-      dnspeep
-      nethogs
-      bandwhich
-      traceroute
-      speedtest-cli
+      # wthrr # weather
+      # dnspeep
+      # bandwhich
       # proxychains-ng
       # airgeddon # wifi crack
 
