@@ -15,7 +15,6 @@
       # };
 
       environment.gnome.excludePackages = with pkgs; [
-        sushi # heavyweight
         yelp
         gnome-tour
         gnome-music
