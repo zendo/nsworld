@@ -21,7 +21,7 @@
         serviceConfig = {
           StateDirectory = "comigo";
           StateDirectoryMode = "0700";
-          ExecStart = "${lib.getExe pkgs.comigo} start --no-tui /data/media/manga";
+          ExecStart = "${lib.getExe pkgs.comigo} run --no-tui --no-default-library";
           Restart = "on-failure";
           DynamicUser = true;
         };
