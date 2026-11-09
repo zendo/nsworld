@@ -3618,7 +3618,10 @@ HTML/CSS/TS/JSON/YAML/MARKDOWN
   (setq markdown-hide-urls nil
         markdown-fontify-code-blocks-natively t)
   :mode (("\\.md\\'" . gfm-mode)
-         ("README\\'" . gfm-mode)))
+         ("README\\'" . gfm-mode))
+  :hook (
+         ;; (gfm-mode . visual-line-mode)
+         (gfm-mode . display-line-numbers-mode)))
 
 (use-package markdown-preview-mode
   :defer t)
