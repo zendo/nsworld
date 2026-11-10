@@ -53,13 +53,10 @@ in
   flake.modules.nixos.host-wsl-hjem = {
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
-    hjem = {
-      clobberByDefault = true;
-
-      users.${userName} = {
-        directory = "/home/${userName}";
-        imports = [ fm.hjem.links ];
-      };
+    hjem.users.${userName} = {
+      directory = "/home/${userName}";
+      clobberFiles = true; # overwrite existing files
+      imports = [ fm.hjem.links ];
     };
 
     # WSL 里 wsl.exe 不经过 logind,没有登录会话就没有 /run/user/$UID,

@@ -6,11 +6,9 @@ in
   flake.modules.nixos.git =
     { lib, pkgs, ... }:
     {
-      # git config --global --show-origin --list
       programs.git = {
         enable = true;
 
-        # [filter "lfs"] 段由 lfs.enable 生成
         lfs.enable = true;
 
         config = {
