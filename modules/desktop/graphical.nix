@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.graphical =
     {
@@ -40,9 +41,16 @@
       # services.flatpak.enable = true;
 
       mods.fcitx = {
-        enable = true;
+        # enable = true;
         # withPinyin = true;
         withRime = true;
+      };
+
+      i18n.inputMethod = {
+        enable = true;
+        type = "fcitx5";
+        fcitx5.waylandFrontend = true;
+        fcitx5.addons = [ inputs.wowtype.packages.${pkgs.stdenv.hostPlatform.system}.default ];
       };
       # or ibus
       # i18n.inputMethod = {

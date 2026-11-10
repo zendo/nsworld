@@ -106,7 +106,8 @@
     "root": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "omniflake": "omniflake"
+        "omniflake": "omniflake",
+        "wowtype": "wowtype"
       }
     },
     "systems": {
@@ -136,6 +137,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "wowtype": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794315238,
+        "narHash": "sha256-q1zd4J3q/bqbw6X8QAgvm556RPOiGqDkI73JXuOGj1E=",
+        "owner": "Gloridust",
+        "repo": "WowType",
+        "rev": "8eb88ac8b1236542048c217b1f589489d606a8a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gloridust",
+        "repo": "WowType",
         "type": "github"
       }
     }
