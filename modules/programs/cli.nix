@@ -1,4 +1,3 @@
-{ inputs, ... }:
 # nix path-info -sh n#jq
 let
   cli-apps =
@@ -33,7 +32,7 @@ let
       hunspellDicts.en_US
 
       # [ Git ]
-      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.wrapper-git
+      git
       # gh auth login
       # gh api rate_limit
       gh # ~43 MiB

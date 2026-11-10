@@ -35,6 +35,7 @@
 
       # [ programs ]
       cli
+      git
       gui
       chrome
       firefox

@@ -1,0 +1,72 @@
+let
+  gitName = "zendo";
+  gitEmail = "linzway@qq.com";
+in
+{
+  flake.modules.nixos.git =
+    { lib, pkgs, ... }:
+    {
+      # git config --global --show-origin --list
+      programs.git = {
+        enable = true;
+
+        # [filter "lfs"] 段由 lfs.enable 生成
+        lfs.enable = true;
+
+        config = {
+          user = {
+            name = gitName;
+            email = gitEmail;
+          };
+
+          column.ui = "auto";
+          init.defaultBranch = "main";
+          # pull.rebase = true;
+          # merge.ff = "only";
+
+          core = {
+            excludesfile = "/etc/gitignore";
+            pager = lib.getExe pkgs.delta;
+          };
+          interactive.diffFilter = "${lib.getExe pkgs.delta} --color-only";
+          credential.helper = lib.getExe pkgs.git-credential-oauth;
+
+          # safe.directory = [
+          #   "~/nsworld"
+          #   "~/Projects/nixpkgs"
+          # ];
+
+          alias = {
+            st = "status -sb";
+            ds = "diff --stat";
+            unstage = "reset HEAD --";
+            undo = "reset --hard HEAD~1";
+            patch = "format-patch --stdout HEAD~1";
+            rpatch = "reset --hard HEAD~1";
+            rank = "shortlog -s -n --no-merges";
+            ls = "log --stat --abbrev-commit";
+            lg = "log --graph --decorate --all --oneline";
+            ll = "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative";
+            pr-pull = "!f() { git fetch upstream pull/$1/head:pr-$2-$1 && git checkout pr-$2-$1; }; f";
+          };
+        };
+      };
+
+      environment.etc.gitignore.text = ''
+        .csvignore
+        .DS_Store
+        .vscode
+        .agent-shell
+        .sentry-native
+        *.drv
+        *.qcow2
+        result
+        result-*
+        .direnv
+        .envrc
+        *.py?
+        __pycache__/
+        .venv/
+      '';
+    };
+}
