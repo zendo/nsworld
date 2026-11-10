@@ -47,31 +47,4 @@ in
       source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
     '';
   };
-
-  flake.modules.homeManager.zsh =
-    {
-      config,
-      pkgs,
-      ...
-    }:
-    {
-      programs.zsh = {
-        enable = true;
-        enableCompletion = true;
-        autosuggestion.enable = true;
-        fastSyntaxHighlighting.enable = true;
-        history = {
-          path = "${config.xdg.dataHome}/zsh/history";
-          extended = true; # timestamp
-          expireDuplicatesFirst = true;
-        };
-        initContent = ''
-          fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
-          autoload -U promptinit && promptinit
-          prompt pure
-
-        ''
-        + customZshrc;
-      };
-    };
 }

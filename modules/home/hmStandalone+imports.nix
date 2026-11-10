@@ -51,23 +51,7 @@ in
   flake.modules.homeManager.non-nixos-imports = {
     imports = with config.flake.modules.homeManager; [
       secrets
-      # vicinae
-      # ╭──────────────────────────────────────────╮
-      # │ PROGRAMS                                 │
-      # ╰──────────────────────────────────────────╯
-      cli
-      # gui
-      # ╭──────────────────────────────────────────╮
-      # │ SHELL                                    │
-      # ╰──────────────────────────────────────────╯
       alias
-      # fish
-      zsh
-      terminal
-      # ╭──────────────────────────────────────────╮
-      # │ XDG                                      │
-      # ╰──────────────────────────────────────────╯
-      env
       links
       xdg
     ];

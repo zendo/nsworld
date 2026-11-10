@@ -32,29 +32,4 @@
       };
     };
   };
-
-  # for non-nixos
-  flake.modules.homeManager.terminal = {
-    programs.zoxide.enable = true;
-    # programs.starship.enable = true;
-
-    programs.fzf = {
-      enable = true;
-      # historyWidget.command = ""; # disable C-r binding
-    };
-
-    programs.zellij = {
-      enable = true;
-      settings = {
-        theme = "nord";
-        # default_shell = "zsh";
-        simplified_ui = true;
-        pane_frames = false;
-        keybinds = {
-          unbind = "Ctrl q";
-        };
-      };
-    };
-
-  };
 }
