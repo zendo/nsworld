@@ -14,8 +14,7 @@ in
       with fm.nixos;
       [
         host-wsl
-        host-wsl-hm
-        # host-wsl-hjem
+        host-wsl-hjem
 
         myvars
         # secrets
@@ -33,6 +32,7 @@ in
         # [ programs ]
         cli
         dev
+        git
 
         # [ shell ]
         alias
@@ -48,32 +48,24 @@ in
   };
 
   # ╭─────────────────────────────────────────────────────╮
-  # │  Home-manager                                       │
-  # ╰─────────────────────────────────────────────────────╯
-  flake.modules.nixos.host-wsl-hm = {
-    imports = [ fm.nixos.hmModule ];
-
-    home-manager.users.${userName} = {
-      imports = with fm.homeManager; [
-        # secrets
-        links
-        xdg
-      ];
-    };
-  };
-
-  # ╭─────────────────────────────────────────────────────╮
   # │  Hjem                                               │
   # ╰─────────────────────────────────────────────────────╯
-  # error: Could not determine XDG runtime directory XDG_RUNTIME_DIR
   flake.modules.nixos.host-wsl-hjem = {
     imports = [ inputs.omniflake.flakes.hjem.nixosModules.default ];
 
-    hjem.users.${userName} = {
-      directory = "/home/${userName}";
+    hjem = {
       clobberByDefault = true;
-      imports = [ fm.hjem.links ];
+
+      users.${userName} = {
+        directory = "/home/${userName}";
+        imports = [ fm.hjem.links ];
+      };
     };
+
+    # WSL 里 wsl.exe 不经过 logind,没有登录会话就没有 /run/user/$UID,
+    # hjem-reload@ 会打印 "Could not determine XDG runtime directory" 并 skip(exit 0)。
+    # linger 让 systemd --user 开机即启动,RuntimePath 存在,reload 和 systemctl --user 才能用。
+    users.users.${userName}.linger = true;
   };
 
   # ╭─────────────────────────────────────────────────────╮
@@ -90,7 +82,6 @@ in
           sp.wrapper-cava
           sp.wrapper-foot
           sp.wrapper-ghostty
-          sp.wrapper-git
           sp.wrapper-emacs
 
           # [ WSL ]
