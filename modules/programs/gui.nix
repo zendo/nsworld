@@ -17,6 +17,7 @@
         rox
         sonora
         neiro
+        bearwave
         mygo-music
         fusion
         # agent-one
