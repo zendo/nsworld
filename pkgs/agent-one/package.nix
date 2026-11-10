@@ -13,11 +13,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "agent-one";
-  version = "1.1.3";
+  version = "1.2.2";
 
   src = fetchurl {
     url = "https://github.com/The-Best-Codes/agent-one/releases/download/agent-one-v${finalAttrs.version}/AgentOne_${finalAttrs.version}_amd64.deb";
-    sha256 = "sha256-HsZUO7in7arMh4goQN5dEk0N1B6y1LdhJuPPIHmAcRk=";
+    sha256 = "sha256-fz6W2Y6o44I1GYUYFtlThczleMfFDgGllMDqd1KGtzo=";
   };
 
   nativeBuildInputs = [

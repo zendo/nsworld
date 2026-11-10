@@ -8,7 +8,7 @@
     {
       environment.systemPackages = with pkgs; [
         levi
-        gitkwaken
+        # gitkwaken # 49.4 MiB
         slimdeer
         portop
         spor
@@ -74,7 +74,8 @@
         # remmina # :webkitgtk
         # https://github.com/nix-community/home-manager/issues/5173
         # (lib.hiPrio localsend)
-        qbittorrent
+        # qbittorrent
+        qbittorrent-enhanced
         # deja-dup
         # vorta # borg backup
 

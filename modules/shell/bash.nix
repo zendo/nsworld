@@ -10,7 +10,7 @@
       '';
 
       programs'.bash.flyline = {
-        # enable = true;
+        enable = true;
         enablePurePrompt = true;
         settings = ''
           # flyline suggestions --auto-suggest false
@@ -28,7 +28,7 @@
       };
 
       programs'.bash.blesh = {
-        enable = true;
+        # enable = true;
         enablePurePrompt = true;
         settings = ''
           bleopt color_scheme=rosepine_moon
