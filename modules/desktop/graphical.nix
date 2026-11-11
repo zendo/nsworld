@@ -40,18 +40,11 @@
       # services.flatpak.enable = true;
 
       mods.fcitx = {
-        # enable = true;
-        # withPinyin = true;
-        withRime = true;
-      };
-
-      i18n.inputMethod = {
         enable = true;
-        type = "fcitx5";
-        fcitx5.waylandFrontend = true;
-        fcitx5.addons = [ pkgs.wowtype ];
+        withWow = true;
+        # withPinyin = true;
+        # withRime = true;
       };
-
       # or ibus
       # i18n.inputMethod = {
       #   enable = true;

@@ -12,6 +12,7 @@
     {
       options.mods.fcitx = {
         enable = lib.mkEnableOption "fcitx5 customize.";
+        withWow = lib.mkEnableOption "wowtype customize.";
         withPinyin = lib.mkEnableOption "pinyin customize.";
         withRime = lib.mkEnableOption "rime customize.";
       };
@@ -19,7 +20,7 @@
       config = lib.mkIf cfg.enable {
         assertions = [
           {
-            assertion = cfg.withPinyin || cfg.withRime;
+            assertion = cfg.withPinyin || cfg.withRime || cfg.withWow;
             message = "Options `mods.fcitx` requires at least one input schema to be enabled!";
           }
           {
@@ -36,22 +37,25 @@
           enable = true;
           type = "fcitx5";
           fcitx5.waylandFrontend = true;
+          fcitx5.addons = lib.mkMerge [
+            (lib.mkIf cfg.withWow [
+              pkgs.wowtype
+            ])
 
-          fcitx5.addons =
-            with pkgs;
-            [
-              fcitx5-fluent
-              fcitx5-mellow-themes
-            ]
-            ++ lib.optionals cfg.withPinyin [
-              qt6Packages.fcitx5-chinese-addons
-              fcitx5-pinyin-zhwiki
-            ]
-            ++ lib.optionals cfg.withRime [
+            (lib.mkIf cfg.withPinyin [
+              pkgs.fcitx5-fluent
+              pkgs.fcitx5-mellow-themes
+              pkgs.qt6Packages.fcitx5-chinese-addons
+              pkgs.fcitx5-pinyin-zhwiki
+            ])
+
+            (lib.mkIf cfg.withRime [
+              pkgs.fcitx5-fluent
+              pkgs.fcitx5-mellow-themes
               # 命令行手动部署
               # nix shell nixpkgs#librime --command rime_deployer --build \
               # ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
-              (fcitx5-rime.override {
+              (pkgs.fcitx5-rime.override {
                 rimeDataPkgs = [
                   # 换个输入法方案需要重启再部署，不然环境不干净
                   # /run/current-system/sw/share/rime-data/
@@ -59,7 +63,9 @@
                   # pkgs.rime-wanxiang
                 ];
               })
-            ];
+            ])
+
+          ];
 
           fcitx5.settings = lib.mkMerge [
             {
@@ -90,6 +96,7 @@
                 };
               };
             }
+
             (lib.mkIf cfg.withPinyin {
               inputMethod = {
                 "GroupOrder"."0" = "default";
@@ -121,6 +128,7 @@
                 };
               };
             })
+
             (lib.mkIf cfg.withRime {
               inputMethod = {
                 "GroupOrder"."0" = "default";
@@ -144,6 +152,28 @@
                 };
               };
             })
+
+            (lib.mkIf cfg.withWow {
+              inputMethod = {
+                "GroupOrder"."0" = "default";
+                "Groups/0" = {
+                  "Name" = "default";
+                  "DefaultIM" = "wowtype";
+                  "Default Layout" = "us";
+                };
+                "Groups/0/Items/0"."Name" = "wowtype";
+                "Groups/0/Items/1"."Name" = "keyboard-us";
+              };
+              globalOptions = {
+                "Hotkey/TriggerKeys" = {
+                  "0" = "";
+                };
+                "Hotkey/AltTriggerKeys" = {
+                  "0" = "";
+                };
+              };
+            })
+
           ]; # end of fcitx5.settings
         }; # end of i18n.inputMethod
       }; # end of config
