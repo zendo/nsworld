@@ -19,12 +19,12 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "sonora";
-  version = "0.47.0";
+  version = "0.48.1";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/sonorahq/sonora/releases/download/v${finalAttrs.version}/sonora-v${finalAttrs.version}-x86_64.flatpak";
-    hash = "sha256-3qwF9hw+5a7eYLEtCcjc9GzPrlbCyMJWD2A88dGACgI=";
+    hash = "sha256-N+z8E4Al1tC/KdHPvCBueXB+jfkYhvmOSHFUtlLbIRk=";
   };
 
   nativeBuildInputs = [
