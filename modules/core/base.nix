@@ -10,6 +10,17 @@
       time.timeZone = lib.mkDefault "Asia/Shanghai";
       system.stateVersion = lib.mkDefault "26.05";
 
+      environment.localBinInPath = true; # ~/.local/bin
+      environment.sessionVariables = {
+        # EDITOR = "emacsclient -c -a emacs";
+        EDITOR = "fresh";
+        VISUAL = "fresh";
+        # PAGER = "moor";
+        TERMINAL = "ghostty";
+        NIXOS_OZONE_WL = 1; # Electron wayland native
+        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      };
+
       services.btrfs.autoScrub.enable =
         config.fileSystems ? "/" && config.fileSystems."/".fsType == "btrfs";
       services.bcachefs.autoScrub.enable =

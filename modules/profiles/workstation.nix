@@ -53,7 +53,6 @@
 
       # [ xdg ]
       data-center
-      env
       mime
     ];
   };

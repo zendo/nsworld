@@ -40,7 +40,6 @@ in
         # fish
         zsh
         terminal
-        env
       ]
       ++ [
         inputs.omniflake.flakes.nixos-wsl.nixosModules.wsl
