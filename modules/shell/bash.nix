@@ -16,7 +16,7 @@
           # flyline suggestions --auto-suggest false
 
           flyline mouse --mode disabled
-          flyline key bind Right inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAcceptOneWord
+          # flyline key bind Right inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAcceptOneWord
           flyline key bind Ctrl+f inlineSuggestionAvailable+cursorAtEnd+!tabCompletionMultiColAvailable=inlineSuggestionAccept
 
           # Agent mode

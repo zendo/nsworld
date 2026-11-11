@@ -21,6 +21,7 @@
         mygo-music
         fusion
         # agent-one
+        bowel
         breeze
         # venerax
         # pixora-icons
