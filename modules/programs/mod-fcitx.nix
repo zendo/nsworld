@@ -74,10 +74,6 @@
                   Font = "Noto Sans CJK SC 12";
                   # MenuFont = "Sans Serif 12";
                   # TrayFont = "Sans Serif 12";
-                  # FluentDark-solid / mellow-youlan-dark / winter
-                  Theme = "mellow-youlan-dark";
-                  # DarkTheme = "mellow-youlan-dark";
-                  # UseDarkTheme = true; # 跟随系统浅色/深色设置
                 };
                 clipboard = {
                   globalSection = {
@@ -96,6 +92,17 @@
                 };
               };
             }
+
+            (lib.mkIf (cfg.withPinyin || cfg.withRime) {
+              addons = {
+                classicui.globalSection = {
+                  # FluentDark-solid / mellow-youlan-dark / winter
+                  Theme = "mellow-youlan-dark";
+                  # DarkTheme = "mellow-youlan-dark";
+                  # UseDarkTheme = true; # 跟随系统浅色/深色设置
+                };
+              };
+            })
 
             (lib.mkIf cfg.withPinyin {
               inputMethod = {
