@@ -16,7 +16,7 @@ netstat -ano | findstr :7890 // windows
 #+end_src
 
 ** GUI.for.SingBox
-日志时间戳 / api地址 9090 / api密钥 1984 / ui路径 ui / 允许私有网络访问
+日志时间戳 / api地址：9090 / api密钥：无 / ui路径：ui / 允许私有网络访问
 https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 mixed-in 监听地址改 :: 7890
 出站设置：🚀 节点选择 🎈 自动选择 分别选择订阅节点
@@ -33,38 +33,7 @@ mixed-in 监听地址改 :: 7890
       }
 #+end_src
 
-** providers
-outbounds —— 节点选择和自动选择分别添加：
-
-#+begin_src json
-"outbounds" 替换成：
-"use_all_providers": true
-#+end_src
-
-#+begin_src json
-  "providers": [
-    {
-      "type": "remote",
-      "tag": "sub1",
-      "url": "",
-      "user_agent": "mihomo",
-      "health_check": {
-        "enabled": true,
-        "url": "https://cp.cloudflare.com/generate_204"
-      }
-    }
-  ],
-#+end_src
-
-** Links
-https://sing-box.sagernet.org/zh/configuration/
-https://icloudnative.io/posts/sing-box-tutorial/
-https://github.com/Toperlock/sing-box-subscribe 模板
-https://linux.do/t/topic/938696 gui-for-singbox 教程
-https://idcflare.com/t/topic/38725 gui-for-singbox 分流规则
-
 * mihomo
-** setup
 Chrome 隐私与安全 —— 使用安全DNS
 Chrome等浏览器可能会使用自己的DNS来解析域名，这对于fake-ip来说是多余且有损性能的。
 
@@ -74,21 +43,3 @@ https://linux.do/t/topic/1212835 极简防DNS泄漏配置
 https://linux.do/t/topic/1229287 小白也能轻松手搓分流规则
 https://linux.do/t/topic/1460117 关于Clash配置的侧面
 
-* sub-store
-
-脚本安装：
-#+begin_src bash
-wget https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js
-wget https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip && unzip dist.zip && rm dist.zip && mv dist frontend
-pushd ~/code/subs/sub-store > /dev/null && xdg-open http://127.0.0.1:3000 ; node sub-store.bundle.js & ; popd > /dev/null
-#+end_src
-
-文件管理 - 创建文件:
-
-模板：https://raw.githubusercontent.com/zendo/nsworld/refs/heads/main/dotfiles/mofa/sing-box-template.json
-
-单条订阅脚本：
-https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#name=wcloud&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
-
-组合订阅脚本：
-https://raw.githubusercontent.com/xream/scripts/main/surge/modules/sub-store-scripts/sing-box/template.js#type=组合订阅&name=all&outbound=🕳ℹ️all|all-auto🕳ℹ️🎈 自动选择🕳ℹ️🚀 节点选择
