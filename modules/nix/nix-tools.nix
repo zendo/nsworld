@@ -13,7 +13,8 @@
         # nix-prefetch
         # nix-template
         dix # diff
-        nix-output-monitor
+        rom
+        # nix-output-monitor
         nix-auth
         # hydra-check
 

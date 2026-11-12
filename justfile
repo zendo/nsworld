@@ -9,10 +9,14 @@ home_dir := env_var('HOME')
 _default:
     @just --choose --unsorted
 
-# j os build/switch/boot/test |& nom --install-bootloader
+# j os build/switch/boot/test --install-bootloader
 os *args:
-    nixos-rebuild --sudo --flake .\#"{{ host }}" {{ args }} && \
-    dix last
+    nixos-rebuild \
+      --sudo \
+      --flake .\#"{{ host }}" \
+      --log-format internal-json \
+      {{ args }} 2>&1 | rom && \
+      dix last
 
 diff:
     nix profile diff-closures --profile /nix/var/nix/profiles/system
