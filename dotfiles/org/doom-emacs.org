@@ -5,7 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :results silent :tangle "~/.config/doom/config.el"
 #+AUTO_TANGLE: t
 
-* init.el
+* Doom init.el
 #+begin_src emacs-lisp :tangle "~/.config/doom/init.el"
 ;;; $DOOMDIR/init.el -*- lexical-binding: t; no-byte-compile: t; -*-
 (doom! :input
@@ -201,7 +201,7 @@
 ;; (add-to-list 'initial-frame-alist '(background-color . "#000000"))
 #+end_src
 
-* packages.el
+* Doom packages.el
 #+begin_src emacs-lisp :tangle "~/.config/doom/packages.el"
 ;;;; $DOOMDIR/packages.el -*- lexical-binding: t; no-byte-compile: t; -*-
 (package! crux)
@@ -228,7 +228,7 @@
 (package! org-modern :disable t)
 #+end_src
 
-* config.el - Header
+* config.el (Header)
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
@@ -239,7 +239,7 @@
 (load! "default" (dir!) t)
 #+end_src
 
-* Platform
+* Platform & System
 ** Linux
 #+begin_src emacs-lisp
 (when (featurep :system 'linux)
@@ -274,19 +274,20 @@
   ;; `gui-select-text'，TTY 下是 OSC52 处理器，覆盖会坏）
   (setq select-active-regions nil))
 #+end_src
-** eat
+** Terminals
+*** Eat
 #+begin_src emacs-lisp
 ; doom 弹出窗口规则
 (set-popup-rule! "^\\*eat" :side 'bottom :height 0.4 :quit t :select t)
 #+end_src
 
-** ghostel
+*** Ghostel :off:
 #+begin_src emacs-lisp
 (require 'ghostel nil t)
 (set-popup-rule! "^\\*ghostel" :side 'bottom :size 0.4)
 #+end_src
 
-* Appearance
+* Appearance & UI
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; (add-to-list 'default-frame-alist '(alpha-background . 98))
@@ -300,7 +301,7 @@
 ;; (add-to-list 'initial-frame-alist '(background-color . "#000000"))
 #+end_src
 
-** rainbow-delimiters
+** Rainbow Delimiters
 #+begin_src emacs-lisp
 (add-hook! 'prog-mode-hook #'rainbow-delimiters-mode)
 ;; Or enable it in *most* places:
@@ -311,36 +312,30 @@
 #+end_src
 
 * Editing
-** basic
 #+begin_src emacs-lisp
 (setq +default-want-RET-continue-comments nil ; 别在新行加注释
       display-line-numbers-type t ; t / nil / relative
       set-mark-command-repeat-pop t ; Repeating C-SPC after popping mark pops
 )
+
+(set-default 'word-wrap nil)
 #+end_src
 
-** word-wrap
-#+begin_src emacs-lisp
-;; (when (modulep! :editor word-wrap)
-;;   (+global-word-wrap-mode +1))
-(set-default 'word-wrap nil) ;在任意字符处拆分单词换行
-#+end_src
-
-* Projects
-** projectile
+* Files & Projects
+** Projectile
 #+begin_src emacs-lisp
 (with-eval-after-load 'projectile
   ;; manual clear cache (M-x projectile-invalidate-cache) or
   (setq projectile-enable-caching nil))
 #+end_src
 
-** treemacs
+** Treemacs
 #+begin_src emacs-lisp
 (with-eval-after-load 'treemacs
   (define-key! treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 #+end_src
 
-** dired
+** Dired
 #+begin_src emacs-lisp
 (with-eval-after-load 'dired
   (setq dired-listing-switches "-aBhlv --group-directories-first"
@@ -364,7 +359,7 @@
   (command-execute "tk"))
 #+end_src
 
-* Persistence
+* Saving & Undo
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
@@ -377,14 +372,7 @@
                 recentf-exclude)))
 #+end_src
 
-** auto-save
-#+begin_src emacs-lispxx
-(auto-save-visited-mode 1)
-(setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
-(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
-#+end_src
-
-** buffer-guardian
+** Buffer Guardian
 https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+begin_src emacs-lisp
 (with-eval-after-load 'buffer-guardian
@@ -403,8 +391,14 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   )
 (buffer-guardian-mode +1)
 #+end_src
+** Auto Save
+#+begin_src emacs-lispxxx
+(auto-save-visited-mode 1)
+(setq auto-save-visited-interval 3) ; Save after 5 seconds if inactivity
+(add-function :after after-focus-change-function (lambda () (save-some-buffers t))) ; 失去焦点便自动保存
+#+end_src
 
-** vundo
+** Undo Tree (vundo)
 #+begin_src emacs-lisp
 (with-eval-after-load 'vundo
   (setq vundo-glyph-alist vundo-unicode-symbols)
@@ -412,7 +406,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+end_src
 
 * Org
-** org-mode
 #+begin_src emacs-lisp
 (with-eval-after-load 'org
   (map! :map org-mode-map
@@ -424,8 +417,8 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
         ))
 #+end_src
 
-* Development
-** flycheck
+* Programming
+** Flycheck
 #+begin_src emacs-lisp
 (with-eval-after-load 'flycheck
   ;; disable flycheck in some mode
@@ -435,7 +428,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   )
 #+end_src
 
-** nix
+** Nix
 #+begin_src emacs-lisp
 (use-package nix-mode
   :custom
@@ -443,7 +436,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+end_src
 
 * Keybindings
-** Global keymap
+** Global Keymap
 #+begin_src emacs-lisp
 (ffap-bindings)
 (setq ffap-machine-p-known 'reject) ; Don't ping things that look like domain names.
@@ -515,7 +508,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
   (select-window (split-window-right)))
 #+end_src
 
-** Emacs leader key
+** Leader (Emacs)
 #+begin_src emacs-lisp
 (unless (modulep! :editor evil +everywhere)
   ;; (setq doom-leader-alt-key "C-c")
@@ -558,7 +551,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
    ))
 #+end_src
 
-** Evil leader key
+** Leader (Evil) :off:
 #+begin_src emacs-lisp
 (when (modulep! :editor evil +everywhere)
   (map!
@@ -608,7 +601,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 (pixel-scroll-precision-mode t)
 #+end_src
 
-** casual
+** Casual Menus
 https://github.com/kickingvegas/casual
 
 #+begin_src emacs-lisp
@@ -620,7 +613,7 @@ https://github.com/kickingvegas/casual
          :map Info-mode-map ("C-o" . casual-info-tmenu)))
 #+end_src
 
-* Functions
+* Helper Functions
 ** backward-delete-word
 ~M-backspace~ 删除而非剪切
 
@@ -633,7 +626,7 @@ https://github.com/kickingvegas/casual
 (global-set-key [remap backward-kill-word] #'backward-delete-word)
 #+end_src
 
-* config.el - Footer
+* config.el (Footer)
 #+begin_src emacs-lisp
 ;; (provide 'config) ?
 ;;; config.el ends here
