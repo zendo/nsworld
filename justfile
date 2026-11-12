@@ -67,3 +67,29 @@ emacs-ob-tangle-doom:
       -l org \
       --eval '(setq vc-follow-symlinks nil)' \
       --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
+
+[group('desktop')]
+gnome-reset-dconf:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # kde-gtk-config（系统设置 → 应用程序风格 → GTK 应用外观）会把这些键写成
+    # Breeze，切回 GNOME 后鼠标/图标/字体就错乱。reset 掉用户值，让系统级 dconf
+    # profile 里声明的值（Adwaita 等）重新生效。
+    # 用 dconf 而不是 gsettings：KDE 会话里 gsettings 不在 PATH，且它需要 schema。
+    keys=(
+      /org/gnome/desktop/interface/cursor-theme
+      /org/gnome/desktop/interface/icon-theme
+      /org/gnome/desktop/interface/font-name
+      /org/gnome/desktop/interface/document-font-name
+      /org/gnome/desktop/interface/monospace-font-name
+      /org/gnome/desktop/peripherals/mouse/cursor-size
+      /org/gnome/desktop/sound/theme-name
+      /org/gnome/desktop/wm/preferences/button-layout
+    )
+    for k in "${keys[@]}"; do
+      dconf reset "$k" 2>/dev/null || true
+    done
+    for k in "${keys[@]}"; do
+      v=$(dconf read "$k" 2>/dev/null || true)
+      printf '%-22s %s\n' "${k##*/}" "${v:-（空 = 用系统默认）}"
+    done
