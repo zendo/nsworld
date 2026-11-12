@@ -1,4 +1,4 @@
-set shell := ["bash", "-uc"]
+set shell := ["bash", "-euc"]
 # set quiet
 
 host := `uname -n`
@@ -47,17 +47,6 @@ commit-dix:
     git commit --allow-empty -m "📦 host.{{ host }}: Update details" \
         -m "$(dix last)"
 
-[group('selfhosted')]
-selfhosted-domains:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    cfg=.\#"nixosConfigurations.svp.config"
-    nix eval --json "$cfg" --apply '
-      c: builtins.attrNames c.services.caddy.virtualHosts' \
-      | jq -r 'map(sub("^https?://"; "")) | map(select(test("^[A-Za-z0-9.-]+$"))) | sort | .[], "192.168.2.99"' \
-      | paste -sd'/' - \
-      | sed 's|^|/|'
-
 [group('emacs')]
 emacs-ob-tangle:
     emacs -Q --batch \
@@ -71,6 +60,17 @@ emacs-ob-tangle-doom:
       -l org \
       --eval '(setq vc-follow-symlinks nil)' \
       --eval '(org-babel-tangle-file "~/.config/doom/config.org")'
+
+[group('selfhosted')]
+selfhosted-domains:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    cfg=.\#"nixosConfigurations.svp.config"
+    nix eval --json "$cfg" --apply '
+      c: builtins.attrNames c.services.caddy.virtualHosts' \
+      | jq -r 'map(sub("^https?://"; "")) | map(select(test("^[A-Za-z0-9.-]+$"))) | sort | .[], "192.168.2.99"' \
+      | paste -sd'/' - \
+      | sed 's|^|/|'
 
 [group('desktop')]
 gnome-reset-dconf:
