@@ -29,29 +29,26 @@
           }
         ];
 
-        # 把 fcitx5 的用户配置目录重定向到会话私有 tmpfs，避免首次启动生成的
-        # ~/.config/fcitx5 遮蔽 /etc/xdg/fcitx5（声明式配置）；词库在 ~/.local/share 不受影响。
-        environment.sessionVariables.FCITX_CONFIG_HOME = "$XDG_RUNTIME_DIR/fcitx5";
-
         i18n.inputMethod = {
           enable = true;
           type = "fcitx5";
           fcitx5.waylandFrontend = true;
           fcitx5.addons = lib.mkMerge [
+            ([
+              pkgs.fcitx5-fluent
+              pkgs.fcitx5-mellow-themes
+            ])
+
             (lib.mkIf cfg.withWow [
               pkgs.wowtype
             ])
 
             (lib.mkIf cfg.withPinyin [
-              pkgs.fcitx5-fluent
-              pkgs.fcitx5-mellow-themes
               pkgs.qt6Packages.fcitx5-chinese-addons
               pkgs.fcitx5-pinyin-zhwiki
             ])
 
             (lib.mkIf cfg.withRime [
-              pkgs.fcitx5-fluent
-              pkgs.fcitx5-mellow-themes
               # 命令行手动部署
               # nix shell nixpkgs#librime --command rime_deployer --build \
               # ~/.local/share/fcitx5/rime /run/current-system/sw/share/rime-data ~/.local/share/fcitx5/rime/build
@@ -74,6 +71,10 @@
                   Font = "Noto Sans CJK SC 12";
                   # MenuFont = "Sans Serif 12";
                   # TrayFont = "Sans Serif 12";
+                  # FluentDark-solid / mellow-youlan-dark / winter
+                  Theme = "mellow-youlan-dark";
+                  # DarkTheme = "mellow-youlan-dark";
+                  # UseDarkTheme = true; # 跟随系统浅色/深色设置
                 };
                 clipboard = {
                   globalSection = {
@@ -92,17 +93,6 @@
                 };
               };
             }
-
-            (lib.mkIf (cfg.withPinyin || cfg.withRime) {
-              addons = {
-                classicui.globalSection = {
-                  # FluentDark-solid / mellow-youlan-dark / winter
-                  Theme = "mellow-youlan-dark";
-                  # DarkTheme = "mellow-youlan-dark";
-                  # UseDarkTheme = true; # 跟随系统浅色/深色设置
-                };
-              };
-            })
 
             (lib.mkIf cfg.withPinyin {
               inputMethod = {
