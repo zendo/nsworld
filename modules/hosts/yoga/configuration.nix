@@ -36,8 +36,8 @@ in
 
         # [ desktop ]
         graphical
-        gnome
-        # kde
+        # gnome
+        kde
         # cosmic
         # niri
         # sway

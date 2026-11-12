@@ -17,6 +17,7 @@
           # [ plasma widgets ]
           kurve
           plasmusic-toolbar
+          oger-dock
         ]
         ++ (with kdePackages; [
           # yakuake
