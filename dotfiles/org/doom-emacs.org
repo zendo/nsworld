@@ -79,7 +79,8 @@
        eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       ;; vterm             ; the best terminal emulation in Emacs
+       ;;vterm             ; the best terminal emulation in Emacs
+       ;;ghostel           ; the best terminal emulation in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -194,6 +195,10 @@
        :config
        literate
        (default +bindings +smartparens))
+
+;; If you're a dark-mode user who suffers from the "flash of white Emacs" when
+;; you first open Emacs, uncomment this (and adjust the color as you like).
+;; (add-to-list 'initial-frame-alist '(background-color . "#000000"))
 #+end_src
 
 * packages.el
@@ -289,11 +294,11 @@
 * Appearance
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(alpha-background . 98))
+;; (add-to-list 'default-frame-alist '(alpha-background . 98))
 
 ;; doom-tomorrow-night / doom-vibrant
 (setq doom-theme 'doom-tomorrow-night)
-;; (setq doom-theme '(doom-one   . doom-one-light))   ; (DARK . LIGHT)
+;; (setq doom-theme '(doom-tomorrow-night   . doom-flatwhite))   ; (DARK . LIGHT)
 
 ;; If you're a dark-mode user who suffers from the "flash of white Emacs" when
 ;; you first open Emacs, uncomment this (and adjust the color as you like).
@@ -616,7 +621,7 @@ https://github.com/kickingvegas/casual
 
 #+begin_src emacs-lisp
 (use-package casual
-  :bind (("C-c o o" . #'casual-editkit-main-tmenu)
+  :bind (("M-o" . #'casual-editkit-main-tmenu)
          :map dired-mode-map ("C-o" . casual-dired-tmenu)
          :map isearch-mode-map ("C-o" . casual-isearch-tmenu)
          :map calc-mode-map ("C-o" . casual-calc-tmenu)

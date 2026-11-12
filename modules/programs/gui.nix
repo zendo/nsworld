@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.nixos.gui =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     let
       sp = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
     in
