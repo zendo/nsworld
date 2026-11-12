@@ -90,10 +90,11 @@ buildGo127Module (finalAttrs: {
   '';
 
   installPhase = ''
-    install -Dm755 build/linux-${go.GOARCH}/mayoi "$out/bin/mayoi"
-    install -Dm755 build/linux-${go.GOARCH}/libghostty-vt.so "$out/bin/libghostty-vt.so"
-    install -Dm644 build/linux-${go.GOARCH}/mayoi.png "$out/share/icons/hicolor/512x512/apps/mayoi.png"
-    install -Dm644 build/linux-${go.GOARCH}/mayoi.desktop "$out/share/applications/mayoi.desktop"
+    stage=build/linux-${go.GOARCH}
+    install -Dm755 "$stage/mayoi" "$out/bin/mayoi"
+    install -Dm755 "$stage/libghostty-vt.so" "$out/bin/libghostty-vt.so"
+    install -Dm644 "$stage/mayoi.png" "$out/share/icons/hicolor/512x512/apps/mayoi.png"
+    install -Dm644 "$stage/mayoi.desktop" "$out/share/applications/mayoi.desktop"
   '';
 
   postFixup = ''
