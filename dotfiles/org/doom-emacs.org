@@ -233,12 +233,10 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 (setq confirm-kill-emacs nil
-      confirm-kill-processes nil
-      warning-minimum-level :emergency ; temp disable
-      )
+      confirm-kill-processes nil)
 
-;; Load the default init file
-(load "default" 'noerror 'nomessage)
+;; 可选：加载 $DOOMDIR/default.el（没有就静默跳过）
+(load! "default" (dir!) t)
 #+end_src
 
 * Platform
@@ -253,7 +251,7 @@
         org-directory "~/Documents/Notes/")
 
   (defun my-cjk-font()
-    (dolist (charset '(kana han cjk-misc symbol bopomofo))
+    (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font t charset (font-spec :family "Noto Sans CJK SC"))))
   (add-hook 'after-setting-font-hook #'my-cjk-font))
 #+end_src
@@ -270,14 +268,11 @@
   ;;           browse-url-generic-args     cmd-args
   ;;           browse-url-browser-function 'browse-url-generic
   ;;           search-web-default-browser 'browse-url-generic)))
-  ;; 解决从 Windows 复制中文到 WSLg 乱码
-  (set-clipboard-coding-system 'gbk-dos)
-  ;; 解决从 Emacs 复制内容到 Windows 剪贴板
-  ;; https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
-  (setq select-active-regions nil
-        select-enable-clipboard 't
-        select-enable-primary nil
-        interprogram-cut-function #'gui-select-text))
+  ;; WSLg 的剪贴板是 X/Wayland（UTF-8），不是 GBK
+  (set-clipboard-coding-system 'utf-8)
+  ;; 选中即复制；`interprogram-cut-function' 保持默认（GUI 下已是
+  ;; `gui-select-text'，TTY 下是 OSC52 处理器，覆盖会坏）
+  (setq select-active-regions nil))
 #+end_src
 ** eat
 #+begin_src emacs-lisp
@@ -321,7 +316,6 @@
 (setq +default-want-RET-continue-comments nil ; 别在新行加注释
       display-line-numbers-type t ; t / nil / relative
       set-mark-command-repeat-pop t ; Repeating C-SPC after popping mark pops
-      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*" ; 识别中文标点符号
 )
 #+end_src
 
@@ -330,7 +324,6 @@
 ;; (when (modulep! :editor word-wrap)
 ;;   (+global-word-wrap-mode +1))
 (set-default 'word-wrap nil) ;在任意字符处拆分单词换行
-(set-default 'truncate-lines nil) ;自动折行到下一行，可能影响性能
 #+end_src
 
 * Projects
@@ -349,24 +342,21 @@
 
 ** dired
 #+begin_src emacs-lisp
-;; recentf 不要保存 dired 记录
-(define-advice doom--recentf-add-dired-directory-h (:override ()))
-
 (with-eval-after-load 'dired
   (setq dired-listing-switches "-aBhlv --group-directories-first"
         dired-omit-files "\\`[.]?#\\|\\`[.][.]?"  ; hide dot files
         )
   (map! :map dired-mode-map
-        "f" #'ido-find-file
         "<RET>" #'dired-find-alternate-file
-        "<SPC>" #'dired-find-alternate-file
         "." #'dired-omit-mode
         "/" #'funs/dired-filter-show-match
-        "b" #'(lambda ()
-                (interactive)
-                (find-alternate-file ".."))
-        ))
-;;;###autoload
+        "b" #'funs/dired-up-directory))
+
+(defun funs/dired-up-directory ()
+  "Jump to the parent directory in the same buffer."
+  (interactive)
+  (find-alternate-file ".."))
+
 (defun funs/dired-filter-show-match ()
   "Only show filter file"
   (interactive)
@@ -378,10 +368,13 @@
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
-      undo-in-region t
-      recentf-exclude '( "^/tmp/" "\\.?ido\\.last$" "\\.revive$"
-                         "autosave$" "treemacs-persist" )
-      )
+      undo-in-region t)
+
+(after! recentf
+  (setq recentf-exclude
+        (append '("^/tmp/" "\\.?ido\\.last$" "\\.revive$"
+                  "autosave$" "treemacs-persist")
+                recentf-exclude)))
 #+end_src
 
 ** auto-save
@@ -395,10 +388,10 @@
 https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 #+begin_src emacs-lisp
 (with-eval-after-load 'buffer-guardian
-  ;; When non-nil, include remote files in the auto-save process
+  ;; 非 nil 时「不」自动保存远程文件（默认 t）
   (setq buffer-guardian-inhibit-saving-remote-files t)
-  ;; When non-nil, buffers visiting nonexistent files are not saved
-  (setq buffer-guardian-inhibit-saving-nonexistent-files nil)
+  ;; 非 nil 时「不」保存磁盘上不存在的文件（默认 t；设 nil 会复活被删的文件）
+  (setq buffer-guardian-inhibit-saving-nonexistent-files t)
   ;; Save the buffer even if the window change results in the same buffer
   (setq buffer-guardian-save-on-same-buffer-window-change t)
   ;; Non-nil to enable verbose mode to log when a buffer is automatically saved
@@ -444,7 +437,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 
 ** nix
 #+begin_src emacs-lisp
-(setq! lsp-nix-server-path "nixd")
 (use-package nix-mode
   :custom
   (nix-nixfmt-bin "nixfmt"))
@@ -461,8 +453,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 (global-set-key (kbd "C-S-z") 'undo-redo)
 
 (map!
- "C-\\" #'align-regexp
- "M-s" #'avy-goto-word-1 ;默认 isearch 被覆盖
+ "M-g w" #'avy-goto-word-1 ;别抢 M-s（search-map 前缀）
  "<f1>" #'+treemacs/toggle
  "C-<tab>" #'consult-buffer
 
@@ -480,9 +471,9 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
  [remap other-window] #'ace-window
  [remap kill-buffer] #'kill-current-buffer
 
- "C-," #'+company/complete
+ "C-," #'completion-at-point ;company 模块没启用（用的是 corfu）
  "C-/" #'comment-line ;vscode
- "C-S-i" #'lsp-format-buffer ;vscode
+ "C-S-i" #'eglot-format-buffer ;vscode（:tools lsp +eglot）
 
  "C-k" #'crux-smart-kill-line
  "C-x u" #'vundo
@@ -497,30 +488,31 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
  "M-z" #'avy-zap-to-char
  [remap kill-ring-save] #'easy-kill
  [remap mark-sexp] #'easy-mark-sexp
- [remap mark-word] #'easy-mark-word
  [remap query-replace] #'anzu-query-replace
  [remap query-replace-regexp] #'anzu-query-replace-regexp
 
- "s-w" #'+hydra/window-nav/body
- "s-=" #'+hydra/text-zoom/body
+ "s-w" #'ace-window
+ "s-=" #'text-scale-increase
+ "s--" #'text-scale-decrease
  "s-d" #'dired-jump
 
  "s-g" #'magit-status
  ;; :map magit-status-mode-map
  ;; "p" 'magit-push
 
- "C-x 2" #'(lambda()
-             "split windows and switch"
-             (interactive)
-             (split-window-below)
-             (select-window (next-window)))
-
- "C-x 3" #'(lambda()
-             "split windows and switch"
-             (interactive)
-             (split-window-right)
-             (select-window (next-window)))
+ "C-x 2" #'funs/split-window-below-and-select
+ "C-x 3" #'funs/split-window-right-and-select
  )
+
+(defun funs/split-window-below-and-select ()
+  "Split the current window below and select the new window."
+  (interactive)
+  (select-window (split-window-below)))
+
+(defun funs/split-window-right-and-select ()
+  "Split the current window right and select the new window."
+  (interactive)
+  (select-window (split-window-right)))
 #+end_src
 
 ** Emacs leader key
@@ -633,7 +625,6 @@ https://github.com/kickingvegas/casual
 ~M-backspace~ 删除而非剪切
 
 #+begin_src emacs-lisp
-;;;###autoload
 (defun backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
   With argument ARG, do this that many times."
