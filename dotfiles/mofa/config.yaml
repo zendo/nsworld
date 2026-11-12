@@ -92,7 +92,8 @@ dns:
     - 119.29.29.29
     - 223.5.5.5
   nameserver-policy:
-    'rule-set:cn_domain,private_domain':
+    'rule-set:private_domain': 'system'
+    'rule-set:cn_domain':
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
     "*.linux.do": ["https://xxx.ddd.oaifree.com/query-dns", "https://1.1.1.1/dns-query#RULES"]
