@@ -18,17 +18,17 @@
 
 buildGo127Module (finalAttrs: {
   pname = "mygo-music";
-  version = "0.1.22";
+  version = "0.1.24";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "egoist";
     repo = "mygo-music";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-Cgp1qLckpUTOJfY9PZzhcHqknjqjPIbGDAuCj1M03sk=";
+    hash = "sha256-RYaMXsrdVpjNogrJjgBh4llu1ldffRtzuly9s88CZ7A=";
   };
 
-  vendorHash = "sha256-SHmrMG6tYzGSBhvLMdIikLonjeR3r7IOeJiaGE+srik=";
+  vendorHash = "sha256-CgAnPtjfDxOxjVvIG8zvMXwbrqjhF3spEqXEagQSIvE=";
 
   nativeBuildInputs = [
     makeWrapper
@@ -41,7 +41,6 @@ buildGo127Module (finalAttrs: {
     go tool mygo build -platform "linux/${go.GOARCH}"
   '';
 
-  doCheck = true;
   checkPhase = ''
     runHook preCheck
     go test ./...
@@ -49,16 +48,17 @@ buildGo127Module (finalAttrs: {
   '';
 
   installPhase = ''
-    install -Dm755 build/linux-${go.GOARCH}/mygo-music \
-      $out/bin/mygo-music
+    stage=build/linux-${go.GOARCH}
 
-    install -Dm644 build/linux-${go.GOARCH}/mygo-music-256x256.png \
+    install -Dm755 "$stage/mygo-music" $out/bin/mygo-music
+
+    install -Dm644 "$stage/mygo-music-256x256.png" \
       $out/share/icons/hicolor/256x256/apps/mygo-music.png
 
-    install -Dm644 build/linux-${go.GOARCH}/mygo-music-512x512.png \
+    install -Dm644 "$stage/mygo-music-512x512.png" \
       $out/share/icons/hicolor/512x512/apps/mygo-music.png
 
-    install -Dm644 build/linux-${go.GOARCH}/mygo-music.desktop \
+    install -Dm644 "$stage/mygo-music.desktop" \
       $out/share/applications/mygo-music.desktop
 
     install -Dm644 LICENSE \
