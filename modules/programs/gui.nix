@@ -16,12 +16,14 @@
         rwx
         rox
         sonora
-        neiro
+        # neiro
         bearwave
         mygo-music
         fusion
         # agent-one
-        bowel
+        # bowel
+        # zen-notes
+        # zfiletimemachine
         breeze
         # venerax
         # pixora-icons
