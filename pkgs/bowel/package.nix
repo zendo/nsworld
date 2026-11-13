@@ -26,17 +26,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "bowel";
-  version = "0.4.0";
+  version = "0.4.3";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "21stware";
     repo = "bowel";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-1HBBP7HWJSnHRSREjbC76iGHfZY57xqNyfcKmQfWGlI=";
+    hash = "sha256-cHujIsoQ+ooCMcooi4tTup3SZWAD09xR+vtPa9Rggp4=";
   };
 
-  vendorHash = "sha256-U4oLaySI+aELJNaQe5GbZKcRyb3nc3zTYFKhlnkvlqo=";
+  vendorHash = "sha256-R0dRempB8iU0z5HnDPZZYWOAmt0psFVU+YTtDYrJYdc=";
 
   nativeBuildInputs = [ makeWrapper ];
 
@@ -61,7 +61,8 @@ buildGoModule (finalAttrs: {
     # cp -r "$stage/fonts" $out/share/bowel/fonts
     # ln -s $out/share/bowel/fonts $out/bin/fonts
 
-    install -Dm644 "$stage/bowel.png" $out/share/icons/hicolor/512x512/apps/bowel.png
+    install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
+    install -Dm644 "$stage/bowel-512x512.png" $out/share/icons/hicolor/512x512/apps/bowel.png
     install -Dm644 "$stage/bowel.desktop" $out/share/applications/bowel.desktop
   '';
 
