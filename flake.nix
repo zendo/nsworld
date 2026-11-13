@@ -8,7 +8,7 @@
     };
 
   inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs.url = "git+file:///home/iab/Projects/nixpkgs/?ref=unstable";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";

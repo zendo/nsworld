@@ -19,6 +19,9 @@
       # services.earlyoom.enable = true;
       # services.nohang.enable = true;
 
+      # No Plymouth
+      services.bootvine.enable = true;
+
       boot = {
         kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
@@ -28,10 +31,8 @@
           cleanOnBoot = lib.mkDefault true;
         };
 
-        # pr-check 586741
-        # services.bootvine.enable = true;
         # Plymouth
-        plymouth.enable = config.services.graphical-desktop.enable;
+        # plymouth.enable = config.services.graphical-desktop.enable;
         # Silent Boot
         consoleLogLevel = 0;
         kernelParams = lib.optionals config.boot.plymouth.enable [
