@@ -21,6 +21,7 @@
 
       # No Plymouth
       services.bootvine.enable = true;
+      # boot.consoleLogLevel = 3;
 
       boot = {
         kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
@@ -31,18 +32,17 @@
           cleanOnBoot = lib.mkDefault true;
         };
 
-        # Plymouth
         # plymouth.enable = config.services.graphical-desktop.enable;
-        # Silent Boot
-        consoleLogLevel = 0;
-        kernelParams = lib.optionals config.boot.plymouth.enable [
-          "quiet"
-          "splash"
-          "boot.shell_on_fail"
-          "rd.systemd.show_status=false"
-          "rd.udev.log_level=3"
-          "udev.log_priority=3"
-        ];
+        # consoleLogLevel = 0; # Silent Boot
+        # kernelParams = lib.optionals config.boot.plymouth.enable [
+        #   "quiet"
+        #   "splash"
+        #   "boot.shell_on_fail"
+        #   "rd.systemd.show_status=false"
+        #   "rd.udev.log_level=3"
+        #   "udev.log_priority=3"
+        # ];
+
       };
     };
 }
