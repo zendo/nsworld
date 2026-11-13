@@ -22,17 +22,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "viff";
-  version = "0.4.5";
+  version = "0.4.6";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "1lck";
     repo = "viff";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-kLXQm37iDpQ0K6rOqKwYYLjFiwpt7swShsJRZfGdfPc=";
+    hash = "sha256-SoJf31g6bcioD3Sx41XnuZWlnr3loWyWjGqkdpvSR/8=";
   };
 
-  vendorHash = "sha256-lv9NcXFhxLpWXeYox+ZzOePKkaedpvDuL5gsE8e9zSE=";
+  vendorHash = "sha256-mionDqQuqPKBvKL43ULf7/ARxacG3kYg4XjOzANIAFw=";
 
   subPackages = [ "cmd/viff" ];
 
