@@ -66,6 +66,9 @@ buildGoModule (finalAttrs: {
     install -Dm644 "$stage/bowel.desktop" $out/share/applications/bowel.desktop
   '';
 
+  # install -Dm644 "$src/assets/icon/AppIcon.icon/Assets/Image 2.svg" \
+  #               $out/share/icons/hicolor/scalable/apps/bowel.svg
+
   postFixup = ''
     # MyGo records os.Executable() in the autostart entry, which makeWrapper has
     # renamed to .bowel-wrapped and which starts without LD_LIBRARY_PATH or
