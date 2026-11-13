@@ -1,4 +1,4 @@
-set shell := ["bash", "-euc"]
+set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 # set quiet
 
 host := `uname -n`
@@ -75,7 +75,6 @@ selfhosted-domains:
 [group('desktop')]
 gnome-reset-dconf:
     #!/usr/bin/env bash
-    set -euo pipefail
     # kde-gtk-config（系统设置 → 应用程序风格 → GTK 应用外观）会把这些键写成
     # Breeze，切回 GNOME 后鼠标/图标/字体就错乱。reset 掉用户值，让系统级 dconf
     # profile 里声明的值（Adwaita 等）重新生效。
