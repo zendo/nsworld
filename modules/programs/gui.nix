@@ -9,7 +9,6 @@
       environment.systemPackages = with pkgs; [
         levi
         viff
-        # gitkwaken # 49.4 MiB
         slimdeer
         portop
         spor
