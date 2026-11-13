@@ -66,6 +66,19 @@
     modifications = final: prev: {
       # foo = prev.callPackage ./foo/package.nix { };
 
+      # Nix 2.35 leaves a flake's source out of the store: `nix flake metadata`
+      # reports a /nix/store/...-source path without adding it, and nix-update
+      # hands that path to builtins.getFlake, so every `nix-update --flake`
+      # dies with "No such file or directory". Prefetch instead: same path,
+      # now materialised, and its JSON spells it storePath.
+      nix-update = prev.nix-update.overrideAttrs (old: {
+        postPatch = (old.postPatch or "") + ''
+          substituteInPlace nix_update/options.py \
+            --replace-fail '"flake", "metadata"' '"flake", "prefetch"' \
+            --replace-fail 'metadata.get("path")' 'metadata.get("storePath")'
+        '';
+      });
+
       # sing-box = prev.sing-box.overrideAttrs (finalAttrs: {
       #   version = "1.15.0-alpha.13";
       #   src = prev.fetchFromGitHub {
