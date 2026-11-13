@@ -1,3 +1,7 @@
+/*
+  kscreen-doctor -o
+  sa
+*/
 {
   flake.modules.nixos.kde =
     { pkgs, ... }:
