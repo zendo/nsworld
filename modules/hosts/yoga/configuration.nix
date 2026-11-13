@@ -49,7 +49,12 @@ in
   };
 
   flake.modules.nixos.host-yoga =
-    { pkgs, lib, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     {
       myVars.user = userName;
       networking.hostName = hostName;
@@ -234,8 +239,8 @@ in
           '';
           extraEntries = ''
             /Windows
-                protocol: efi
-                path: boot(1):/EFI/Microsoft/Boot/bootmgfw.efi
+              protocol: efi
+              path: boot(1):/EFI/Microsoft/Boot/bootmgfw.efi
           '';
         };
         # ---------------------------------------
@@ -250,14 +255,14 @@ in
           # extraEntriesBeforeNixOS = true;
           extraEntries = ''
             menuentry "Windows" {
-             search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-             chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+              search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+              chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
             }
             menuentry "Firmware" {
-             fwsetup
+              fwsetup
             }
             menuentry "Shutdown" {
-             halt
+              halt
             }
           '';
           # theme = pkgs.fetchzip {
