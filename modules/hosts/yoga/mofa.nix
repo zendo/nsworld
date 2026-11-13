@@ -30,7 +30,7 @@
       };
 
       services.mihomo = {
-        enable = true;
+        # enable = true;
         tunMode = true;
         webui = pkgs.zashboard;
         configFile = "/home/${config.myVars.user}/Projects/subs/config.yaml";

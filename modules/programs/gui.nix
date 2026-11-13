@@ -20,7 +20,7 @@
         mygo-music
         fusion
         # agent-one
-        # bowel
+        bowel
         # zen-notes
         # zfiletimemachine
         breeze
