@@ -313,8 +313,7 @@
 
 * Editing
 #+begin_src emacs-lisp
-(setq +default-want-RET-continue-comments nil ; 别在新行加注释
-      display-line-numbers-type t ; t / nil / relative
+(setq display-line-numbers-type t ; t / nil / relative
       set-mark-command-repeat-pop t ; Repeating C-SPC after popping mark pops
 )
 
