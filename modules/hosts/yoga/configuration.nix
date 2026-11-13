@@ -132,6 +132,7 @@ in
         supportedFilesystems = [ "ntfs" ];
 
         # latest / zen / lqx / xanmod_latest
+        # pr-check 586820
         # kernelPackages = pkgs.linuxPackages_zen;
 
         # for Lenovo Yoga/Xiaoxin

@@ -28,6 +28,8 @@
           cleanOnBoot = lib.mkDefault true;
         };
 
+        # pr-check 586741
+        # services.bootvine.enable = true;
         # Plymouth
         plymouth.enable = config.services.graphical-desktop.enable;
         # Silent Boot
