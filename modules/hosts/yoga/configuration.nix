@@ -57,6 +57,10 @@ in
       # `mkpasswd`
       users.users.${userName}.initialHashedPassword =
         "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
+      # No passwd on my main machine
+      security.sudo.wheelNeedsPassword = false;
+      security.sudo-rs.wheelNeedsPassword = false;
+      security.run0.wheelNeedsPassword = lib.mkIf (config.security.run0.enable) false;
 
       # [ services ]
       # systemd.user.services.neiro.enable = true;
