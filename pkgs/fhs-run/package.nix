@@ -25,6 +25,8 @@ pkgs.buildFHSEnv {
       exit 1
     fi
 
+    export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
+
     # Detect AppImages by filename or magic bytes.
     appimage=
     case "$1" in
@@ -127,6 +129,7 @@ pkgs.buildFHSEnv {
       webkitgtk_4_1 # 175.6 MiB
       # webkitgtk_6_0
       glib-networking
+      # cacert
       libayatana-appindicator
 
       # --- KDE -------------------------------------------------------------
