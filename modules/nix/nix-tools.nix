@@ -8,7 +8,7 @@
         # lorri
         # cachix
         # comma # ,
-        nix-tree
+        # nix-tree
         nurl
         # nix-prefetch
         # nix-template
