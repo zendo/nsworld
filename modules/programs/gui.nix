@@ -16,6 +16,7 @@
         rwx
         rox
         sonora
+        muffon
         # neiro
         bearwave
         mygo-music
