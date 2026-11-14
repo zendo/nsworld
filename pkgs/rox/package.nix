@@ -22,11 +22,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "rox";
-  version = "1.34.1";
+  version = "1.34.3";
 
   src = fetchurl {
     url = "https://github.com/zealsprince/rox/releases/download/v${finalAttrs.version}/rox_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-cn30fy40ZYjuGjg2NqyB/Jz4el2BaaIwjSzipBt4dHU=";
+    hash = "sha256-6VZ7G3Nm/nmuNjjRAEfJIE4BljK+hAHXlbFGzz8JpkI=";
   };
 
   nativeBuildInputs = [
