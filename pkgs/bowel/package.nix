@@ -59,26 +59,19 @@ buildGoModule (finalAttrs: {
     install -Dm755 "$stage/bowel" $out/libexec/bowel
 
     # MyGo's resource directory on Linux is the executable's own directory, and
-    # the bundled OPPO Sans face is the only resource read at run time. The face
-    # lives in share/ and libexec/fonts only points at it, where MyGo looks.
-    # mkdir -p $out/share/bowel
-    # cp -r "$stage/fonts" $out/share/bowel/fonts
-    # ln -s $out/share/bowel/fonts $out/libexec/fonts
+    # the bundled OPPO Sans face is the only resource read at run time.
+    cp -r "$stage/fonts" $out/libexec
 
     install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
     install -Dm644 "$stage/bowel-512x512.png" $out/share/icons/hicolor/512x512/apps/bowel.png
     install -Dm644 "$stage/bowel.desktop" $out/share/applications/bowel.desktop
   '';
 
-  # install -Dm644 "$src/assets/icon/AppIcon.icon/Assets/Image 2.svg" \
-  #               $out/share/icons/hicolor/scalable/apps/bowel.svg
-
   postFixup = ''
     # MyGo records os.Executable() in the autostart entry, which is a store
     # path without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for
     # naming the launcher instead: a bare command, so PATH finds the current
-    # build and the entry outlives rebuilds. It also makes the in-app updater
-    # refuse, which it must here.
+    # build and the entry outlives rebuilds.
     makeWrapper $out/libexec/bowel $out/bin/bowel \
       --set MOHO_CORE "${mihomo}/bin/mihomo" \
       --set APPIMAGE "bowel" \
