@@ -60,11 +60,7 @@
             CLI earlier on PATH.
           '';
 
-        users.groups.kiri = { };
-
-        users.users = lib.genAttrs cfg.users (user: {
-          extraGroups = [ "kiri" ];
-        });
+        users.groups.kiri.members = cfg.users;
 
         systemd.services.kiri = {
           description = "Kiri container engine";
