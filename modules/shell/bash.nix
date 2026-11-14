@@ -2,16 +2,9 @@
   flake.modules.nixos.bash =
     { modulesPath, ... }:
     {
-      # Functions
-      programs.bash.interactiveShellInit = ''
-        nix-build-ls() {
-          nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
-        }
-      '';
-
       programs'.bash.flyline = {
         enable = true;
-        enablePurePrompt = true;
+        # enablePurePrompt = true;
         settings = ''
           # flyline suggestions --auto-suggest false
 
@@ -29,7 +22,7 @@
 
       programs'.bash.blesh = {
         # enable = true;
-        enablePurePrompt = true;
+        # enablePurePrompt = true;
         settings = ''
           bleopt color_scheme=rosepine_moon
           bleopt prompt_eol_mark=' '

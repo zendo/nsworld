@@ -110,15 +110,10 @@ let
   };
 in
 {
-  flake.modules.nixos.alias = { lib, config, ... }: {
+  flake.modules.nixos.alias = { config, ... }: {
     environment.shellAliases = commonAlias;
-
     programs.bash.shellAliases = commonBashAlias;
-
-    programs.zsh.shellAliases = {
-      nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
-    }
-    // config.programs.bash.shellAliases;
+    programs.zsh.shellAliases = config.programs.bash.shellAliases;
 
     programs.fish = {
       shellFunctions = commonFishFunctions;
@@ -129,21 +124,10 @@ in
     };
   };
 
-  flake.modules.homeManager.alias = { lib, config, ... }: {
+  flake.modules.homeManager.alias = { config, ... }: {
     home.shellAliases = commonAlias;
-
     programs.bash.shellAliases = commonBashAlias;
-    # bash functions
-    programs.bash.bashrcExtra = lib.mkAfter ''
-      nix-build-ls() {
-        nix build --print-out-paths --no-link "nixpkgs#$1" | xargs yazi
-      }
-    '';
-
-    programs.zsh.shellAliases = {
-      nix-build-ls = "f() { nix build --print-out-paths --no-link nixpkgs#\$1 | xargs yazi }; f";
-    }
-    // config.programs.bash.shellAliases;
+    programs.zsh.shellAliases = config.programs.bash.shellAliases;
 
     programs.fish = {
       functions = commonFishFunctions;
