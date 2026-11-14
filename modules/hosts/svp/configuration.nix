@@ -48,7 +48,7 @@ in
       bash
       # fish
       # zsh
-      terminal
+      # terminal
 
       # [ virt ]
       docker

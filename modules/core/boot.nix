@@ -20,7 +20,7 @@
       # services.nohang.enable = true;
 
       # No Plymouth
-      services.bootvine.enable = true;
+      services.bootvine.enable = config.services.graphical-desktop.enable;
       # boot.consoleLogLevel = 3;
 
       boot = {
