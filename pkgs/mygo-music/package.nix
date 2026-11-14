@@ -18,14 +18,14 @@
 
 buildGo127Module (finalAttrs: {
   pname = "mygo-music";
-  version = "0.1.24";
+  version = "0.1.25";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "egoist";
     repo = "mygo-music";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-RYaMXsrdVpjNogrJjgBh4llu1ldffRtzuly9s88CZ7A=";
+    hash = "sha256-SDzmceRbQ8uPgWHQhhhHB55ZYIgsHQct0QGPGblGEmc=";
   };
 
   vendorHash = "sha256-CgAnPtjfDxOxjVvIG8zvMXwbrqjhF3spEqXEagQSIvE=";
@@ -90,8 +90,11 @@ buildGo127Module (finalAttrs: {
     homepage = "https://github.com/egoist/mygo-music";
     changelog = "https://github.com/egoist/mygo-music/blob/${finalAttrs.src.rev}/CHANGELOG.md";
     license = lib.licenses.agpl3Only;
-    platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "mygo-music";
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 })

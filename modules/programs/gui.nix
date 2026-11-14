@@ -131,6 +131,7 @@
         # multiverse.versions.hwinfo."22.0"
         cpufetch
         usbutils
+        nvme-rs
         dmidecode
         # glxinfo
         # libva-utils # vainfo

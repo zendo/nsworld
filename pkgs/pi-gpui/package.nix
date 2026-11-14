@@ -71,8 +71,11 @@ rustPlatform.buildRustPackage (finalAttrs: {
     homepage = "https://pi-gpui.dev";
     downloadPage = "https://github.com/bytesbay/pi-gpui";
     license = lib.licenses.mit;
-    platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "pi-gpui";
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 })
