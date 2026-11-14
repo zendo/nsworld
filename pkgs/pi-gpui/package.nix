@@ -45,9 +45,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
   nativeInstallCheckInputs = [ versionCheckHook ];
   doInstallCheck = true;
 
+  # gpui enables zed-font-kit's fontconfig dlopen feature, so fontconfig joins
+  # the Vulkan loader, libGL and libwayland: nothing links against them, the
+  # loader finds them only through the executable's RUNPATH.
   postFixup = ''
     patchelf --add-rpath ${
       lib.makeLibraryPath [
+        (lib.getLib fontconfig)
         libglvnd
         vulkan-loader
         wayland
