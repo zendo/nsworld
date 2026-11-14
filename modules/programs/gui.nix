@@ -14,7 +14,7 @@
         portop
         spor
         rwx
-        rox
+        # rox
         sonora
         # neiro
         bearwave
