@@ -117,11 +117,8 @@ buildGoModule (finalAttrs: {
     #   url = "https://polyformproject.org/licenses/noncommercial/1.0.0";
     #   free = false; # noncommercial use only, so not an open source license
     # };
+    platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "bowel";
-    platforms = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
   };
 })

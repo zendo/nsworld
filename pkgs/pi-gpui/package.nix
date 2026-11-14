@@ -45,9 +45,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   nativeInstallCheckInputs = [ versionCheckHook ];
   doInstallCheck = true;
 
-  # The Vulkan loader, libGL/libEGL and libwayland are opened with dlopen: the
-  # executable's RUNPATH is what the loader consults for them, so the rpath has
-  # to name them even though nothing links against them.
   postFixup = ''
     patchelf --add-rpath ${
       lib.makeLibraryPath [
@@ -60,23 +57,18 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   postInstall = ''
     install -Dm644 resources/linux/pi-gpui.desktop $out/share/applications/pi-gpui.desktop
-    install -Dm644 resources/linux/pi-gpui.png \
-      $out/share/icons/hicolor/512x512/apps/pi-gpui.png
-    # The app embeds the JetBrains Mono fonts; ship the licenses beside it as the
-    # upstream tarball does.
+    install -Dm644 resources/linux/pi-gpui.png $out/share/icons/hicolor/512x512/apps/pi-gpui.png
     install -Dm644 LICENSE $out/share/pi-gpui/LICENSE
     install -Dm644 assets/fonts/OFL.txt $out/share/pi-gpui/JetBrainsMono-OFL.txt
   '';
 
   meta = {
     description = "Native GUI for the pi coding agent, built with GPUI";
-    homepage = "https://github.com/bytesbay/pi-gpui";
-    downloadPage = "https://pi-gpui.dev";
+    homepage = "https://pi-gpui.dev";
+    downloadPage = "https://github.com/bytesbay/pi-gpui";
     license = lib.licenses.mit;
-    platforms = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
+    platforms = lib.platforms.linux;
+    maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "pi-gpui";
   };
 })

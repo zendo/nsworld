@@ -90,11 +90,8 @@ buildGo127Module (finalAttrs: {
     homepage = "https://github.com/egoist/mygo-music";
     changelog = "https://github.com/egoist/mygo-music/blob/${finalAttrs.src.rev}/CHANGELOG.md";
     license = lib.licenses.agpl3Only;
+    platforms = lib.platforms.linux;
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "mygo-music";
-    platforms = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
   };
 })
