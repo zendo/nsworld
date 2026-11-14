@@ -22,9 +22,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-zYHkfntI7KAHUA3/11StA09IWJnsiA9axkwec51utss=";
 
-  # Upstream takes the version from the release tag at release time, so a
-  # build from a tag still reports 0.0.0 (Cargo.toml says so on purpose).
-
   nativeBuildInputs = [
     pkg-config
     wrapGAppsHook3
@@ -36,8 +33,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
     glib-networking
   ];
 
-  # The Linux package ships two binaries: the host engine/CLI/window and the
-  # agent it spawns as root (kiri looks for kiri-init beside itself).
   cargoBuildFlags = [
     "-p"
     "kiri"
@@ -52,12 +47,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   doCheck = false;
 
   postInstall = ''
-    install -Dm644 contrib/linux/dev.kiri.Kiri.metainfo.xml \
-      $out/share/metainfo/dev.kiri.Kiri.metainfo.xml
-    substituteInPlace $out/share/metainfo/dev.kiri.Kiri.metainfo.xml \
-      --replace-fail '@VERSION@' '${finalAttrs.version}' \
-      --replace-fail '@DATE@' '2026-11-10'
-
     install -Dm644 contrib/linux/kiri.desktop $out/share/applications/kiri.desktop
     substituteInPlace $out/share/applications/kiri.desktop \
       --replace-fail '/usr/lib/kiri/kiri-window ui' 'kiri ui' \
