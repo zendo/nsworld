@@ -12,9 +12,13 @@
       networking.networkmanager = {
         enable = true; # conflict with `networking.wireless`
         wifi.backend = "iwd"; # replace "wpa_supplicant"
-        # iwlwifi 在握手阶段进省电偶尔让首次关联 auth 超时,开机掉一次网
-        wifi.powersave = false;
       };
+
+      # 不设国家码时 cfg80211 用 regdom 00(世界域),5GHz 全部标 NO-IR,
+      # 只能被动扫描:开机首次找 AP 慢/怪。
+      boot.extraModprobeConfig = ''
+        options cfg80211 ieee80211_regdom=CN
+      '';
 
       services.keyd.enable = true;
       # services.kanata.enable = true;
