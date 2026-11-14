@@ -50,7 +50,7 @@ buildGo127Module (finalAttrs: {
   installPhase = ''
     stage=build/linux-${go.GOARCH}
 
-    install -Dm755 "$stage/mygo-music" $out/bin/mygo-music
+    install -Dm755 "$stage/mygo-music" $out/libexec/mygo-music
 
     install -Dm644 "$stage/mygo-music-256x256.png" \
       $out/share/icons/hicolor/256x256/apps/mygo-music.png
@@ -66,7 +66,7 @@ buildGo127Module (finalAttrs: {
   '';
 
   postFixup = ''
-    wrapProgram $out/bin/mygo-music \
+    makeWrapper $out/libexec/mygo-music $out/bin/mygo-music \
       --prefix LD_LIBRARY_PATH : "${
         lib.makeLibraryPath [
           gtk3

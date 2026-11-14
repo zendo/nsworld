@@ -52,14 +52,18 @@ buildGoModule (finalAttrs: {
   installPhase = ''
     stage=build/linux-${go.GOARCH}
 
-    install -Dm755 "$stage/bowel" $out/bin/bowel
+    # Not in bin/: MyGo names the window class, the Wayland app id and the
+    # desktop entry after the basename of its own executable, and makeWrapper
+    # renames whatever it wraps to .<name>-wrapped, which would leave GTK
+    # announcing ".bowel-wrapped" to the dock: no StartupWMClass, no icon.
+    install -Dm755 "$stage/bowel" $out/libexec/bowel
 
     # MyGo's resource directory on Linux is the executable's own directory, and
     # the bundled OPPO Sans face is the only resource read at run time. The face
-    # lives in share/ and bin/fonts only points at it, where MyGo looks.
+    # lives in share/ and libexec/fonts only points at it, where MyGo looks.
     # mkdir -p $out/share/bowel
     # cp -r "$stage/fonts" $out/share/bowel/fonts
-    # ln -s $out/share/bowel/fonts $out/bin/fonts
+    # ln -s $out/share/bowel/fonts $out/libexec/fonts
 
     install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
     install -Dm644 "$stage/bowel-512x512.png" $out/share/icons/hicolor/512x512/apps/bowel.png
@@ -70,12 +74,12 @@ buildGoModule (finalAttrs: {
   #               $out/share/icons/hicolor/scalable/apps/bowel.svg
 
   postFixup = ''
-    # MyGo records os.Executable() in the autostart entry, which makeWrapper has
-    # renamed to .bowel-wrapped and which starts without LD_LIBRARY_PATH or
-    # MOHO_CORE. $APPIMAGE is its hook for naming the launcher instead: a bare
-    # command, so PATH finds the current build and the entry outlives rebuilds.
-    # It also makes the in-app updater refuse, which it must here.
-    wrapProgram $out/bin/bowel \
+    # MyGo records os.Executable() in the autostart entry, which is a store
+    # path without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for
+    # naming the launcher instead: a bare command, so PATH finds the current
+    # build and the entry outlives rebuilds. It also makes the in-app updater
+    # refuse, which it must here.
+    makeWrapper $out/libexec/bowel $out/bin/bowel \
       --set MOHO_CORE "${mihomo}/bin/mihomo" \
       --set APPIMAGE "bowel" \
       --prefix LD_LIBRARY_PATH : "${
