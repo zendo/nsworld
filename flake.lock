@@ -147,11 +147,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794523261,
-        "narHash": "sha256-Syqyqxp1DhM6GBcuP9L7wzUZTj90sePeovlpeZsEEM8=",
+        "lastModified": 1794593300,
+        "narHash": "sha256-6CkBErlMDBCbq+j5UJWJWWrhUexICVa5eAsC7lyvMN4=",
         "owner": "Gloridust",
         "repo": "WowType",
-        "rev": "ebb10573594e90ed56c2989d33e01b0d092529cc",
+        "rev": "38eb269989a4c54c96c4b5749a13294750498b5e",
         "type": "github"
       },
       "original": {
