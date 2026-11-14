@@ -28,7 +28,8 @@ in
         # zsh
 
         # [ virt ]
-        docker
+        # docker
+        kiri
         # incus
         # nix-ld
         qemu
@@ -69,6 +70,11 @@ in
 
       # [ services ]
       # systemd.user.services.neiro.enable = true;
+
+      virtualisation.kiri = {
+        enable = true;
+        users = [ "${userName}" ];
+      };
 
       # [ selfhosted ]
       # services.homepage-dashboard.enable = true;
