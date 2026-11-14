@@ -12,6 +12,8 @@
       networking.networkmanager = {
         enable = true; # conflict with `networking.wireless`
         wifi.backend = "iwd"; # replace "wpa_supplicant"
+        # iwlwifi 在握手阶段进省电偶尔让首次关联 auth 超时,开机掉一次网
+        wifi.powersave = false;
       };
 
       services.keyd.enable = true;
