@@ -318,6 +318,11 @@
 )
 
 (set-default 'word-wrap nil)
+
+;; 注释行按 RET 不要自动续写注释：Doom 在 :emacs electric 与 :config default
+;; 各有一层 advice（见 +electric-continue-comments / +default-want-RET-continue-comments）
+(setq +electric-continue-comments nil
+      +default-want-RET-continue-comments nil)
 #+end_src
 
 * Files & Projects
