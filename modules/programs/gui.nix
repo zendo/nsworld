@@ -9,6 +9,7 @@
       environment.systemPackages = with pkgs; [
         levi
         viff
+        image-combine
         slimdeer
         portop
         spor
