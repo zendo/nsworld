@@ -16,6 +16,7 @@
         # gemini-cli
         # claude-code
         # omp
+        pilo
         pi-gpui
         pi-coding-agent
         # (pkgs.symlinkJoin {
