@@ -26,14 +26,14 @@
 
 buildGoModule (finalAttrs: {
   pname = "bowel";
-  version = "0.4.3";
+  version = "0.4.4";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "21stware";
     repo = "bowel";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-cHujIsoQ+ooCMcooi4tTup3SZWAD09xR+vtPa9Rggp4=";
+    hash = "sha256-vRK9qIA8Sp/HtoY2fTcoeezl4ra5fDw2VYBMElpJ+TU=";
   };
 
   vendorHash = "sha256-R0dRempB8iU0z5HnDPZZYWOAmt0psFVU+YTtDYrJYdc=";
@@ -49,17 +49,14 @@ buildGoModule (finalAttrs: {
   # The tests draw UI and open sockets; upstream runs none of them in CI.
   doCheck = false;
 
+  # Not in bin/: MyGo names the window class, the Wayland app id and the
+  # desktop entry after the basename of its own executable, and makeWrapper
+  # renames whatever it wraps to .<name>-wrapped, which would leave GTK
+  # announcing ".bowel-wrapped" to the dock: no StartupWMClass, no icon.
   installPhase = ''
     stage=build/linux-${go.GOARCH}
 
-    # Not in bin/: MyGo names the window class, the Wayland app id and the
-    # desktop entry after the basename of its own executable, and makeWrapper
-    # renames whatever it wraps to .<name>-wrapped, which would leave GTK
-    # announcing ".bowel-wrapped" to the dock: no StartupWMClass, no icon.
     install -Dm755 "$stage/bowel" $out/libexec/bowel
-
-    # MyGo's resource directory on Linux is the executable's own directory, and
-    # the bundled OPPO Sans face is the only resource read at run time.
     cp -r "$stage/fonts" $out/libexec
 
     install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
@@ -67,11 +64,11 @@ buildGoModule (finalAttrs: {
     install -Dm644 "$stage/bowel.desktop" $out/share/applications/bowel.desktop
   '';
 
+  # MyGo records os.Executable() in the autostart entry, which is a store
+  # path without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for
+  # naming the launcher instead: a bare command, so PATH finds the current
+  # build and the entry outlives rebuilds.
   postFixup = ''
-    # MyGo records os.Executable() in the autostart entry, which is a store
-    # path without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for
-    # naming the launcher instead: a bare command, so PATH finds the current
-    # build and the entry outlives rebuilds.
     makeWrapper $out/libexec/bowel $out/bin/bowel \
       --set MOHO_CORE "${mihomo}/bin/mihomo" \
       --set APPIMAGE "bowel" \
