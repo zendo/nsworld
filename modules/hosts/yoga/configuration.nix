@@ -151,13 +151,13 @@ in
         kernelPackages = pkgs.linuxPackages_zen;
 
         # for Lenovo Yoga/Xiaoxin
-        kernelParams = [
-          # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
-          # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
-          "acpi.prefer_microsoft_dsm_guid=1"
-          # Fix touchpad multitouch sometimes unavailable
-          # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
-        ];
+        # kernelParams = [
+        #   # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
+        #   # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
+        #   # "acpi.prefer_microsoft_dsm_guid=1" # AI say: no need
+        #   # Fix touchpad multitouch sometimes unavailable
+        #   # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
+        # ];
 
         # kernel.sysctl."vm.swappiness" = 100; # sysctl vm.swappiness
 
