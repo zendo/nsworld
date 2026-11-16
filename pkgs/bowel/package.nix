@@ -100,7 +100,7 @@ buildGoModule (finalAttrs: {
     description = "Desktop client for mihomo";
     homepage = "https://github.com/21stware/bowel";
     changelog = "https://github.com/21stware/bowel/blob/${finalAttrs.src.tag}/CHANGELOG.md";
-    license = lib.licenses.mit;
+    license = lib.licenses.mit; # fake license
     # license = lib.licenses.mkLicense {
     #   shortName = "polyformNoncommercial1_0_0";
     #   fullName = "PolyForm Noncommercial License 1.0.0";
