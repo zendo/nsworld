@@ -5,26 +5,27 @@
       # Declaratively users and groups
       services.userborn.enable = lib.mkDefault true;
 
+      # Vanilla sudo
+      # Only allow `wheel` group execute sudo
+      security.sudo.execWheelOnly = true;
+
       # sudo-rs
       # security.sudo-rs.enable = true;
+      # security.sudo-rs.execWheelOnly = true;
 
       # run0
       security.sudo.enable = false;
-      security.run0.enable = true;
-      security.run0.enableSudoAlias = true;
+      security.run0 = {
+        enable = true;
+        enableSudoAlias = true;
+        persistentAuth.enable = true;
+      };
       # system.tools.nixos-rebuild.enableRun0Elevation = true;
-
-      # Only allow `wheel` group execute sudo
-      security.sudo.execWheelOnly = true;
-      security.sudo-rs.execWheelOnly = true;
 
       users = {
         mutableUsers = lib.mkDefault false;
 
         users.root = {
-          # initialHashedPassword = "$y$j9T$ADp.JgagrVYSV4dPkJbKv/$INtu0eR/6.xYHzKlFmlTBWNFuAEkXnLMOU5hPYY8GM9";
-          # Copy ssh pub key to /etc/ssh/authorized_keys.d/root or ~/.ssh/authorized_keys
-          # ssh-copy-id -i ~/.ssh/id_ed25519.pub aaa@192.168.122.85
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz"
           ];
@@ -40,7 +41,6 @@
             "networkmanager"
             "input"
             "video"
-            "adbusers"
           ]
           # [ selfhosted ]
           ++ lib.optionals config.services.samba.enable [ "samba" ]
@@ -50,6 +50,7 @@
           ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
           ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
           ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ]
+          # [ ... ]
           ++ lib.optionals config.services.keyd.enable [ "keyd" ];
         };
       };
