@@ -63,7 +63,6 @@
         powertop
         # psmisc # pstree
         procs
-        ikill
         # [ Networking ]
         wget
         curl

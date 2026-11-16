@@ -49,7 +49,8 @@
           ++ lib.optionals config.virtualisation.podman.enable [ "podman" ]
           ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
           ++ lib.optionals config.virtualisation.incus.enable [ "incus-admin" ]
-          ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ];
+          ++ lib.optionals config.virtualisation.virtualbox.host.enable [ "vboxusers" ]
+          ++ lib.optionals config.services.keyd.enable [ "keyd" ];
         };
       };
 
