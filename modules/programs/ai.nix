@@ -20,5 +20,16 @@
         pi-gpui
         pi-coding-agent
       ];
+
+      # http://127.0.0.1:31415
+      systemd.user.services.pi-ui = {
+        description = "pi-ui";
+        wantedBy = [ "default.target" ];
+        serviceConfig = {
+          ExecStart = "${pkgs.pi-ui}/bin/pi-ui";
+          Restart = "on-failure";
+          RestartSec = 2;
+        };
+      };
     };
 }
