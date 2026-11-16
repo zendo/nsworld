@@ -159,7 +159,9 @@ in
         #   # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
         # ];
 
-        # kernel.sysctl."vm.swappiness" = 100; # sysctl vm.swappiness
+        # zram 是唯一 swap（zstd 压缩比约 3.5x），换出成本低于从 SSD 读回文件页，
+        # 默认 60 会过度回收 page cache（见 /proc/vmstat 的 workingset_refault_file）
+        kernel.sysctl."vm.swappiness" = 100;
 
         # zswap + swapfile
         # grep -r . /sys/module/zswap/parameters/
