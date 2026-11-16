@@ -11,27 +11,8 @@
           git
           just
           nixfmt
-          home-manager
         ];
         commands = [
-          {
-            name = "nix-tree-with-gcroots";
-            category = "nix tools";
-            command = ''
-              nix-store --gc --print-roots | rg -v '/proc/' | rg -Po '(?<= -> ).*' | xargs -o nix-tree
-            '';
-          }
-          {
-            name = "non-nixos-setup";
-            category = "nix tools";
-            command = ''
-              sudo tee -a /etc/nix/nix.conf <<EOF
-              experimental-features = nix-command flakes
-              trusted-users = root @wheel {{ user }}
-              substituters = https://mirror.sjtu.edu.cn/nix-channels/store
-              EOF
-            '';
-          }
           {
             name = "nix-index-database-update";
             category = "nix tools";
