@@ -66,7 +66,7 @@ in
       # No passwd on my main machine
       security.sudo.wheelNeedsPassword = false;
       security.sudo-rs.wheelNeedsPassword = false;
-      security.run0.wheelNeedsPassword = lib.mkIf (config.security.run0.enable) false;
+      security.run0.wheelNeedsPassword = false;
 
       # [ services ]
       # systemd.user.services.neiro.enable = true;
@@ -148,7 +148,7 @@ in
         supportedFilesystems = [ "ntfs" ];
 
         # latest / zen / lqx / xanmod_latest
-        kernelPackages = pkgs.linuxPackages_zen;
+        # kernelPackages = pkgs.linuxPackages_zen;
 
         # for Lenovo Yoga/Xiaoxin
         # kernelParams = [
@@ -173,16 +173,23 @@ in
         # ];
       };
 
-      # zswap + swapfile
-      # swapDevices = [
-      #   {
-      #     device = "/var/swapfile";
-      #     size = 1024 * 16;
-      #   }
-      # ];
+      # 磁盘 swap 兜底。zram 优先级更高，正常使用下这里永远不会被碰；
+      # 只有 zram 压满后才溢出到这里，避免直接 OOM 杀进程。
+      swapDevices = [
+        {
+          device = "/var/swapfile";
+          size = 1024 * 4;
+        }
+      ];
 
-      # zram only, no swapfile
-      zramSwap.enable = true;
+      # zram 是主力 swap，swapfile 只兜底。
+      # 默认 50% 在这台 14 GiB 机器上等于 7.2 GiB 的压缩块设备，真被填满会先挤掉
+      # page cache（workingset_refault_file 上涨，切窗口变慢）；zstd 对匿名页约 2-3x，
+      # 25%(≈3.6 GiB) 能装下 7-10 GiB 的换出页，够用且把上限压到 1/4 RAM。
+      zramSwap = {
+        enable = true;
+        memoryPercent = 25;
+      };
 
       # ╭─────────────────────────────────────────────────────╮
       # │ BOOTLOADER                                          │
@@ -249,9 +256,10 @@ in
             remember_last_entry: yes
           '';
           extraEntries = ''
-            /Windows
-              protocol: efi
-              path: boot(1):/EFI/Microsoft/Boot/bootmgfw.efi
+            /+Other systems
+              //Windows
+                protocol: efi
+                path: boot(1):/EFI/Microsoft/Boot/bootmgfw.efi
           '';
         };
         # ---------------------------------------
