@@ -5,18 +5,19 @@
   makeWrapper,
   python3,
   ostree,
+  nix-update-script,
 }:
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "flatpak-extract";
-  version = "0-unstable-2025-04-23";
+  version = "0-unstable-2026-11-06";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "faveoled";
     repo = "flatpak-extract";
-    rev = "6b3d9df404b95998530de82c7a59d7a20228a5f1";
-    hash = "sha256-5Sm2UsyTpRx2061wOTFooTzL3fIPK/0qJxOtZvzcwgE=";
+    rev = "80913c082264bf667d41e5816f8ba5eb4e76f8c9";
+    hash = "sha256-wE0RWJJQJMMMXQgU/wWvhps1Cwr+14GGiuPow18Q5M8=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
@@ -35,6 +36,13 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     wrapProgram $out/bin/$pname \
       --prefix PATH : ${lib.makeBinPath [ ostree ]}
   '';
+
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--flake"
+      "--version=branch"
+    ];
+  };
 
   meta = {
     description = "CLI app for extracting .flatpak files";
