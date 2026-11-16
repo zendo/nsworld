@@ -1,24 +1,29 @@
-/*
-  pi install npm:@keywaytech/pi-provider-manager
-  pi install npm:@kkkiio/pi-web-ui
-*/
 {
   flake.modules.nixos.ai =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
         nodejs
+
         # paseo
         # t3code
+
         # opencode
-        # codex
         # qwen-code
         # gemini-cli
         # claude-code
-        # omp
-        # pilo
-        # pi-gpui
+        # codex
+
+        /*
+          pi install npm:@keywaytech/pi-provider-manager
+          pi install npm:@kkkiio/pi-web-ui
+        */
         pi-coding-agent
+        # pi-gpui
+        # pilo
+        # omp
+
+        # llm-agents.dsh
       ];
 
       # http://127.0.0.1:31415
@@ -31,5 +36,6 @@
           RestartSec = 2;
         };
       };
+
     };
 }

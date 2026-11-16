@@ -31,6 +31,8 @@
 
     bun2nix = inputs.omniflake.flakes.bun2nix.overlays.default;
 
+    llm-agents = inputs.omniflake.flakes.llm-agents-nix.overlays.shared-nixpkgs;
+
     # borrow deploy-rs' lib only, keep nixpkgs' deploy-rs package (no extra build)
     # nix eval .#nixosConfigurations.svp.pkgs.deploy-rs.deploy-rs.drvPath
     # nix eval nixpkgs#deploy-rs.drvPath
