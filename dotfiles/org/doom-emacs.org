@@ -368,12 +368,6 @@
 (setq delete-by-moving-to-trash t
       save-interprogram-paste-before-kill t ;save clipboard
       undo-in-region t)
-
-(after! recentf
-  (setq recentf-exclude
-        (append '("^/tmp/" "\\.?ido\\.last$" "\\.revive$"
-                  "autosave$" "treemacs-persist")
-                recentf-exclude)))
 #+end_src
 
 ** Buffer Guardian
