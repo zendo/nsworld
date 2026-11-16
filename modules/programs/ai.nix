@@ -1,6 +1,6 @@
 /*
+  pi install npm:@keywaytech/pi-provider-manager
   pi install npm:@kkkiio/pi-web-ui
-  ...
 */
 {
   flake.modules.nixos.ai =
@@ -19,16 +19,6 @@
         pilo
         pi-gpui
         pi-coding-agent
-        # (pkgs.symlinkJoin {
-        #   name = "pi-coding-agent";
-        #   buildInputs = [ pkgs.makeWrapper ];
-        #   paths = [ pkgs.pi-coding-agent ];
-        #   postBuild = ''
-        #         wrapProgram $out/bin/pi \
-        #           --set NPM_CONFIG_PREFIX /home/${config.myVars.user}/.pi/agent/npm/ \
-        #           --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.nodejs ]}
-        #     #   '';
-        # })
       ];
     };
 }
