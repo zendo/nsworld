@@ -21,11 +21,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "geetree";
-  version = "0.6.1";
+  version = "0.6.2";
 
   src = fetchurl {
     url = "https://github.com/cmzy/geetree/releases/download/v${finalAttrs.version}/GeeTree_amd64.deb";
-    hash = "sha256-+HJlBDJ6bWyRYoGBmptGvBz5hXHaPb2nyFppR/fOXmQ=";
+    hash = "sha256-YAzJefqjQO1BHXb0FIa6SzLCqcDWcyFltKy7S6aU60A=";
   };
 
   nativeBuildInputs = [
