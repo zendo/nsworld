@@ -7,13 +7,12 @@
     in
     {
       environment.systemPackages = with pkgs; [
-        levi
-        viff
         geetree
         image-combine
         slimdeer
         portop
         spor
+        # zfiletimemachine
         rwx
         # rox
         sonora
@@ -24,7 +23,6 @@
         # agent-one
         bowel
         # zen-notes
-        # zfiletimemachine
         breeze
         # venerax
         # pixora-icons
