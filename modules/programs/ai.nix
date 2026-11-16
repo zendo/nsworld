@@ -16,8 +16,8 @@
         # gemini-cli
         # claude-code
         # omp
-        pilo
-        pi-gpui
+        # pilo
+        # pi-gpui
         pi-coding-agent
       ];
 

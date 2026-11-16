@@ -2,15 +2,15 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  bun2nix,
-  makeWrapper,
   bun,
+  cacert,
+  makeWrapper,
   nix-update-script,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pi-ui";
-  version = "0.67.0";
+  version = "0.68.0";
   __structuredAttrs = true;
   strictDeps = true;
 
@@ -18,27 +18,49 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "hyperpuncher";
     repo = "pi-ui";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-TDyQ0iJxEDqOI9fiQGiCttCATsaXp/ycCd3ieEwBCns=";
+    hash = "sha256-8m2BSTthoqCTZulkgKKEjl3vrpvxdpb6cAunMF5NbdE=";
   };
 
-  # bun.nix is bun.lock pruned to what the build imports; see its header.
-  bunDeps = bun2nix.fetchBunDeps {
-    bunNix = ./bun.nix;
+  # bun2nix cannot read this project's lockfile (bun 1.4 writes lockfile v2),
+  # so dependencies are resolved by bun itself in a fixed-output derivation.
+  # Keeping that a plain FOD rather than a bun2nix-generated cache also keeps
+  # `nix-update` usable: it prefetches the hash like any other dependency.
+  bunDeps = stdenv.mkDerivation {
+    pname = "pi-ui-bun-deps";
+    inherit (finalAttrs) version src;
+
+    nativeBuildInputs = [
+      bun
+      cacert
+    ];
+
+    # The natives in node_modules ship prebuilt; patching them would only make
+    # the output depend on the fixup of the day.
+    dontFixup = true;
+
+    buildPhase = ''
+      runHook preBuild
+      # --cpu=*/--os=* pull the optional bindings of every platform, which
+      # keeps the hash stable across hosts.
+      bun install --frozen-lockfile --no-progress --cpu="*" --os="*"
+      runHook postBuild
+    '';
+
+    installPhase = ''
+      runHook preInstall
+      cp -r node_modules $out
+      runHook postInstall
+    '';
+
+    outputHashMode = "recursive";
+    outputHashAlgo = "sha256";
+    outputHash = "sha256-kfT+y25MUZeQ74oZDUnKLO5uNz2vOp/vzkZ7XpyPyTI=";
   };
 
   nativeBuildInputs = [
-    bun2nix.hook
     bun
     makeWrapper
   ];
-
-  dontUseBunCheck = true;
-  dontUseBunInstall = true;
-
-  # The client bundles come from the same sources the server reads. The wasm
-  # asset import needs the real package directory, which the isolated linker
-  # replaces with a symlink bun's resolver will not follow.
-  bunInstallFlags = [ "--linker=hoisted" ];
 
   buildPhase = ''
     runHook preBuild
@@ -46,6 +68,7 @@ stdenv.mkDerivation (finalAttrs: {
     # `bun build --compile` embeds the Bun runtime and fails without network,
     # so build the server bundle the npm release uses instead and run it with
     # nixpkgs' bun.
+    cp -r ${finalAttrs.bunDeps} node_modules
     bun run assets:build
     bun scripts/build-npm.ts
 
@@ -55,7 +78,7 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/share/pi-ui $out/bin
+    mkdir -p $out/share/pi-ui
     cp -r dist static package.json $out/share/pi-ui/
 
     makeWrapper ${lib.getExe bun} $out/bin/pi-ui \
@@ -65,7 +88,17 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  passthru.updateScript = nix-update-script { };
+  # nix-update only knows the npmDeps/pnpmDeps/... attribute names, so the
+  # dependency FOD is also exposed as npmDeps: that is where `nix-update
+  # --flake pi-ui` looks, and it rewrites the hash in bunDeps.
+  passthru.npmDeps = finalAttrs.bunDeps;
+
+  passthru.updateScript = nix-update-script {
+    attrPath = "pi-ui";
+    # The script runs nix-update on its own; without --flake it would look for
+    # a default.nix in the repo root.
+    extraArgs = [ "--flake" ];
+  };
 
   meta = {
     description = "Keyboard-first minimal GUI for the pi coding agent";
