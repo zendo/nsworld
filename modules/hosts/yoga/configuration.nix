@@ -234,15 +234,17 @@ in
           enable = true;
           maxGenerations = 8;
           # secureBoot.enable = true;
-          style.interface = {
-            branding = " ";
-            helpHidden = true;
+          style = {
+            interface = {
+              branding = " ";
+              helpHidden = true;
+            };
+            wallpapers = [
+              # pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath
+              # pkgs.nixos-artwork.wallpapers.gnome-dark.gnomeFilePath
+              # pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath
+            ];
           };
-          style.wallpapers = [
-            # pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath
-            # pkgs.nixos-artwork.wallpapers.gnome-dark.gnomeFilePath
-            # pkgs.nixos-artwork.wallpapers.stripes-logo.gnomeFilePath
-          ];
           extraConfig = ''
             remember_last_entry: yes
           '';
