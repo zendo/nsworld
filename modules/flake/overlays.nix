@@ -27,7 +27,7 @@
     # =====================================================
     # nur = inputs.omniflake.flakes.nur.overlays;
 
-    wowtype = inputs.wowtype.overlays.default;
+    # wowtype = inputs.wowtype.overlays.default;
 
     bun2nix = inputs.omniflake.flakes.bun2nix.overlays.default;
 
