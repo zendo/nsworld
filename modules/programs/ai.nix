@@ -19,6 +19,7 @@
           pi install npm:@kkkiio/pi-web-ui
         */
         pi-coding-agent
+        prometheus-agent
         # pi-gpui
         # pilo
         # omp
