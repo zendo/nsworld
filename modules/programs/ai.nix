@@ -17,10 +17,10 @@
         /*
           pi install npm:@keywaytech/pi-provider-manager
           pi install npm:@kkkiio/pi-web-ui
+          pi install npm:pi-web-access
+          pi install npm:pi-mcp-adapter
         */
         pi-coding-agent
-        prometheus-agent
-        # pilo
         # omp
 
         # llm-agents.dsh
