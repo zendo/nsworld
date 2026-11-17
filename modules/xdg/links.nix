@@ -31,6 +31,7 @@
         "niri/configs".source = linkDot "niri/configs";
         "niri/config.kdl".source = linkDot "niri/config.kdl";
         "hypr/hyprland.lua".source = linkDot "hypr/hyprland.lua";
+        "umbriel/config.toml".source = linkDot "umbriel/config.toml";
 
         "micro/settings.json" = {
           generator = lib.generators.toJSON { };

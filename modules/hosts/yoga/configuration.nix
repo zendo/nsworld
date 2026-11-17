@@ -38,12 +38,12 @@ in
         # [ desktop ]
         graphical
         # gnome
-        kde
+        # kde
         # cosmic
         # niri
         # sway
         # hyprland
-        # umbriel
+        umbriel
       ]
       ++ [
         # inputs.omniflake.flakes.lanzaboote.nixosModules.lanzaboote
