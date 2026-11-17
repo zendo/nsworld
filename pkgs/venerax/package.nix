@@ -8,11 +8,8 @@
   webkitgtk_4_1,
   glib-networking,
   libayatana-appindicator,
-  multiverse,
 }:
-let
-  onnxruntime = multiverse.versions.onnxruntime."1.22.0";
-in
+
 stdenv.mkDerivation (finalAttrs: {
   pname = "venerax";
   version = "3.0.0";
@@ -33,7 +30,6 @@ stdenv.mkDerivation (finalAttrs: {
     webkitgtk_4_1
     glib-networking
     libayatana-appindicator
-    onnxruntime
     (lib.getLib stdenv.cc.cc)
   ];
 
