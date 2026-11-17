@@ -159,6 +159,11 @@ in
     services.displayManager.dux-greeter.compositor.name = "niri";
   };
 
+  flake.modules.nixos.umbriel = {
+    imports = [ fm.nixos.wm ];
+    programs.umbriel.enable = true;
+  };
+
   # ╭──────────────────────────────────────────╮
   # │ GREETD                                   │
   # ╰──────────────────────────────────────────╯
