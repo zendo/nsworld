@@ -30,7 +30,7 @@ in
         # [ virt ]
         # docker
         kiri
-        # incus
+        incus
         # nix-ld
         qemu
         # oci-papyra
