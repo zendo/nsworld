@@ -23,6 +23,7 @@
         pi-coding-agent
         # omp
 
+        llm-agents.zcode
         # llm-agents.dsh
       ];
 
