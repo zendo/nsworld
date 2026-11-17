@@ -13,11 +13,6 @@
     # nixpkgs.url = "git+file:///home/iab/Projects/nixpkgs/?ref=unstable";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
-    # wowtype = {
-    #   url = "github:Gloridust/WowType";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     omniflake.url = "github:fzakaria/omniflake";
     omniflake.inputs.nixpkgs.follows = "nixpkgs";
   };

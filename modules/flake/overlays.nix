@@ -26,11 +26,7 @@
     # Inputs Overlays
     # =====================================================
     # nur = inputs.omniflake.flakes.nur.overlays;
-
-    # wowtype = inputs.wowtype.overlays.default;
-
     bun2nix = inputs.omniflake.flakes.bun2nix.overlays.default;
-
     llm-agents = inputs.omniflake.flakes.llm-agents-nix.overlays.shared-nixpkgs;
 
     # borrow deploy-rs' lib only, keep nixpkgs' deploy-rs package (no extra build)
