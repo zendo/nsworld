@@ -20,7 +20,6 @@
         */
         pi-coding-agent
         prometheus-agent
-        # pi-gpui
         # pilo
         # omp
 
