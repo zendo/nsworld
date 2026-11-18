@@ -144,7 +144,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   meta = {
     description = "Reader for PDFs and EPUBs, with a four-pane workspace, notes and read-aloud";
-    homepage = "https://github.com/codewiththiha/mareader";
+    homepage = "https://mareader.vercel.app";
+    downloadPage = "https://github.com/codewiththiha/mareader";
     changelog = "https://github.com/codewiththiha/mareader/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
