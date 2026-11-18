@@ -102,11 +102,6 @@ in
   flake.modules.homeManager.wm =
     { pkgs, ... }:
     {
-      services.cliphist = {
-        enable = true;
-        allowImages = true;
-      };
-
       # qt = {
       #   enable = true;
       #   platformTheme.name = "adwaita";
