@@ -22,6 +22,7 @@
               "sublime-merge"
               "memtest86-efi"
               "geetree"
+              "bowel"
               # ------
               "vivaldi"
               "chromium"

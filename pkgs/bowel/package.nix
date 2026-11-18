@@ -7,20 +7,7 @@
   mihomo,
   gtk3,
   glib,
-  gdk-pixbuf,
-  cairo,
-  pango,
-  atk,
-  libepoxy,
-  libGL,
-  fontconfig,
-  harfbuzz,
-  libsecret,
   libayatana-appindicator,
-  libdbusmenu-gtk3,
-  wayland,
-  libx11,
-  libxtst,
   nix-update-script,
 }:
 
@@ -57,17 +44,28 @@ buildGoModule (finalAttrs: {
     stage=build/linux-${go.GOARCH}
 
     install -Dm755 "$stage/bowel" $out/libexec/bowel
-    cp -r "$stage/fonts" $out/libexec
+    # cp -r "$stage/fonts" $out/libexec
 
     install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
     install -Dm644 "$stage/bowel-512x512.png" $out/share/icons/hicolor/512x512/apps/bowel.png
     install -Dm644 "$stage/bowel.desktop" $out/share/applications/bowel.desktop
-  '';
 
-  # MyGo records os.Executable() in the autostart entry, which is a store
-  # path without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for
-  # naming the launcher instead: a bare command, so PATH finds the current
-  # build and the entry outlives rebuilds.
+    install -Dm644 LICENSE $out/share/licenses/bowel/LICENSE
+    install -Dm644 PACKAGING-EXCEPTION.md $out/share/licenses/bowel/PACKAGING-EXCEPTION.md
+    install -Dm644 assets/flags/LICENSE.md $out/share/licenses/bowel/flags-LICENSE.md
+  '';
+  # install -Dm644 "$stage/fonts/OPPO Sans License.txt" $out/share/licenses/bowel/OPPO-Sans-License.txt
+
+  # MyGo records os.Executable() in the autostart entry, which is a store path
+  # without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for naming the
+  # launcher instead: a bare command, so PATH finds the current build and the
+  # entry outlives rebuilds.
+  #
+  # Only the libraries MyGo dlopen()s by name need to be on LD_LIBRARY_PATH: the
+  # binary itself links nothing but glibc. Everything else GTK needs (cairo,
+  # pango, atk, gdk-pixbuf, epoxy, fontconfig, harfbuzz, wayland, X11, GL) is
+  # reached through libgtk-3's own RUNPATH, so listing it here is redundant —
+  # checked by running the app with each entry removed.
   postFixup = ''
     makeWrapper $out/libexec/bowel $out/bin/bowel \
       --set MOHO_CORE "${mihomo}/bin/mihomo" \
@@ -76,20 +74,7 @@ buildGoModule (finalAttrs: {
         lib.makeLibraryPath [
           gtk3
           glib
-          gdk-pixbuf
-          cairo
-          pango
-          atk
-          libepoxy
-          libGL
-          fontconfig
-          harfbuzz
-          libsecret
-          libayatana-appindicator # the tray icon
-          libdbusmenu-gtk3 # its menu
-          wayland
-          libx11
-          libxtst # global hotkeys
+          libayatana-appindicator
         ]
       }"
   '';
@@ -100,13 +85,16 @@ buildGoModule (finalAttrs: {
     description = "Desktop client for mihomo";
     homepage = "https://github.com/21stware/bowel";
     changelog = "https://github.com/21stware/bowel/blob/${finalAttrs.src.tag}/CHANGELOG.md";
-    license = lib.licenses.mit; # fake license
-    # license = lib.licenses.mkLicense {
-    #   shortName = "polyformNoncommercial1_0_0";
-    #   fullName = "PolyForm Noncommercial License 1.0.0";
-    #   url = "https://polyformproject.org/licenses/noncommercial/1.0.0";
-    #   free = false; # noncommercial use only, so not an open source license
-    # };
+    license = [
+      (lib.licenses.mkLicense {
+        shortName = "polyformNoncommercial1_0_0";
+        fullName = "PolyForm Noncommercial License 1.0.0 (with bowel Packaging Exception)";
+        url = "https://polyformproject.org/licenses/noncommercial/1.0.0";
+        free = false; # noncommercial use only, so not an open source license
+        redistributable = true;
+      })
+      lib.licenses.mit # the flags embedded from assets/flags (circle-flags)
+    ];
     maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "bowel";
     platforms = [
