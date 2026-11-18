@@ -23,8 +23,8 @@
         pi-coding-agent
         # omp
 
-        llm-agents.zcode
         # llm-agents.dsh
+        # llm-agents.zcode
       ];
 
       # http://127.0.0.1:31415

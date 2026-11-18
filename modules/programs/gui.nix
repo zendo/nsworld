@@ -23,6 +23,7 @@
         # agent-one
         bowel
         # zen-notes
+        mareader
         breeze
         # venerax
         # pixora-icons
@@ -85,7 +86,7 @@
 
         # [ Reader ]
         # foliate # :webkitgtk
-        readest # :webkitgtk
+        # readest # :webkitgtk
         # koodo-reader
         # comigo
         # yacreader
