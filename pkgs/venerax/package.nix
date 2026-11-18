@@ -1,16 +1,17 @@
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
   dpkg,
   wrapGAppsHook3,
   autoPatchelfHook,
+  libgcc,
   webkitgtk_4_1,
   glib-networking,
   libayatana-appindicator,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "venerax";
   version = "3.0.0";
   __structuredAttrs = true;
@@ -27,19 +28,24 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   buildInputs = [
+    libgcc.lib
     webkitgtk_4_1
     glib-networking
     libayatana-appindicator
-    (lib.getLib stdenv.cc.cc)
   ];
 
   autoPatchelfIgnoreMissingDeps = [ "libjvm.so" ];
 
+  # The payload lives under $out/local, which stripDebugList does not cover.
+  stripAllList = [ "local" ];
+
   installPhase = ''
     mkdir -p $out/bin
-    cp -r usr/* $out
-    rm -f $out/local/lib/venera/lib/libonnxruntime.so
+    cp -a usr/. $out/
     ln -s $out/local/lib/venera/venera $out/bin
+
+    install -Dm644 $out/share/icons/venera.png $out/share/icons/hicolor/512x512/apps/venera.png
+    rm $out/share/icons/venera.png
 
     substituteInPlace $out/share/applications/venera.desktop \
       --replace-fail "/usr/local/lib/venera/venera" "venera"
