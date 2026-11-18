@@ -20,41 +20,90 @@
 pkgs.buildFHSEnv {
   name = "fhs-run";
   runScript = pkgs.writeShellScript "fhs-run" ''
+    set -euo pipefail
+
     if [ $# -eq 0 ]; then
       echo "Usage: fhs-run command-to-run args..." >&2
       exit 1
     fi
 
-    export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules''${GIO_EXTRA_MODULES:+:$GIO_EXTRA_MODULES}"
-
-    # Detect AppImages by filename or magic bytes.
-    appimage=
-    case "$1" in
-      *.AppImage | *.appimage)
-        appimage=1
-        ;;
-    *)
-      case "$(od -An -tx1 -j 8 -N 3 "$1" 2>/dev/null | tr -d ' \n')" in
-      414901 | 414902)
-        appimage=1
-        ;;
-      esac
-      ;;
+    gio_modules="${pkgs.glib-networking}/lib/gio/modules"
+    case ":''${GIO_EXTRA_MODULES:-}:" in
+      *":$gio_modules:"*) ;;
+      *) export GIO_EXTRA_MODULES="$gio_modules''${GIO_EXTRA_MODULES:+:$GIO_EXTRA_MODULES}" ;;
     esac
 
+    appimage=
+    if [ -f "$1" ]; then
+      case "$1" in
+        *.AppImage | *.appimage)
+          appimage=1
+          ;;
+        *)
+          case "$(od -An -tx1 -j 8 -N 3 "$1" 2>/dev/null | tr -d ' \n')" in
+          414901 | 414902)
+            appimage=1
+            ;;
+          esac
+          ;;
+      esac
+    fi
+
     if [ -n "$appimage" ]; then
-      # Extract AppImages instead of mounting them; allow environment overrides.
-      export APPIMAGE_EXTRACT_AND_RUN="''${APPIMAGE_EXTRACT_AND_RUN:-1}"
-      # Let the AppImage use its own gdk-pixbuf loader configuration instead.
-      unset GDK_PIXBUF_MODULE_FILE GDK_PIXBUF_MODULEDIR
-      # Preload the host Wayland library to avoid symbol conflicts with the bundled copy.
-      export LD_PRELOAD="/usr/lib64/libwayland-client.so.0''${LD_PRELOAD:+:$LD_PRELOAD}"
-      # Use the host's GL/EGL/Vulkan drivers; NixOS keeps them outside /usr.
+      appimage_path="$(realpath "$1")"
+      shift
+
+      cache_root="''${XDG_CACHE_HOME:-''${HOME:-/tmp}/.cache}"
+      appdir="$cache_root/fhs-run/appimage/$(sha256sum "$appimage_path" | cut -d' ' -f1)"
+      if [ ! -x "$appdir/AppRun" ]; then
+        partial="$appdir.tmp.$$"
+        trap 'rm -rf "$partial"' EXIT
+        mkdir -p "$(dirname "$appdir")"
+        appimage-exec.sh -x "$partial" "$appimage_path"
+        if ! mv -T "$partial" "$appdir" 2>/dev/null; then
+          rm -rf "$appdir"
+          mv -T "$partial" "$appdir" 2>/dev/null || rm -rf "$partial"
+        fi
+        trap - EXIT
+      fi
+      if [ ! -x "$appdir/AppRun" ]; then
+        echo "fhs-run: $appimage_path: failed to unpack into $appdir" >&2
+        exit 1
+      fi
+
+      OWD="$(pwd)"
+      export APPDIR="$appdir" APPIMAGE="$appimage_path" OWD
+      unset QT_PLUGIN_PATH QML2_IMPORT_PATH QTWEBKIT_PLUGIN_PATH GTK_PATH GTK_EXE_PREFIX GTK_DATA_PREFIX \
+        GDK_PIXBUF_MODULE_FILE GDK_PIXBUF_MODULEDIR PYTHONPATH PYTHONHOME
+      if [ "''${FHS_RUN_WAYLAND_PRELOAD:-1}" != 0 ]; then
+        export LD_PRELOAD="/usr/lib64/libwayland-client.so.0''${LD_PRELOAD:+:$LD_PRELOAD}"
+      fi
+      # Use the host's GL/EGL/VA/Vulkan drivers; NixOS keeps them outside /usr.
       if [ -d /run/opengl-driver ]; then
         export __EGL_VENDOR_LIBRARY_DIRS="/run/opengl-driver/share/glvnd/egl_vendor.d''${__EGL_VENDOR_LIBRARY_DIRS:+:$__EGL_VENDOR_LIBRARY_DIRS}"
         export LIBGL_DRIVERS_PATH="/run/opengl-driver/lib/dri''${LIBGL_DRIVERS_PATH:+:$LIBGL_DRIVERS_PATH}"
         export LIBVA_DRIVERS_PATH="/run/opengl-driver/lib/dri''${LIBVA_DRIVERS_PATH:+:$LIBVA_DRIVERS_PATH}"
+        # VK_DRIVER_FILES wants the json files, not their directory, so list them.
+        vk_icds=
+        for icd in /run/opengl-driver/share/vulkan/icd.d/*.json; do
+          [ -e "$icd" ] || continue
+          vk_icds="''${vk_icds:+$vk_icds:}$icd"
+        done
+        if [ -n "$vk_icds" ]; then
+          export VK_DRIVER_FILES="''${VK_DRIVER_FILES:+$VK_DRIVER_FILES:}$vk_icds"
+        fi
       fi
+
+      set -- "$appdir/AppRun" "$@"
+    fi
+
+    if ! command -v "$1" >/dev/null 2>&1; then
+      if [ -e "$1" ]; then
+        echo "fhs-run: $1: not executable" >&2
+      else
+        echo "fhs-run: $1: command not found" >&2
+      fi
+      exit 127
     fi
 
     exec "$@"
@@ -235,19 +284,19 @@ pkgs.buildFHSEnv {
       libxcrypt # libcrypt.so.1, legacy binaries
 
       # --- legacy, for parity with nixpkgs' AppImage list ------------------
-      # glew_1_10 # libGLEW.so.1.10
-      # freeglut # libglut.so.3
-      # libcaca # libcaca.so.0
-      # dbus-glib # libdbus-glib-1.so.2
-      # libtool.lib # libltdl.so.7
-      # libmikmod # libmikmod.so.3
-      # pciutils # libpci.so.3
-      # libpciaccess # libpciaccess.so.0
-      # libpng12 # libpng12.so.0, very old apps only
-      # onetbb # libtbb.so.12
-      # curlWithGnuTls # libcurl-gnutls.so.4
+      glew_1_10 # libGLEW.so.1.10
+      freeglut # libglut.so.3
+      libcaca # libcaca.so.0
+      dbus-glib # libdbus-glib-1.so.2
+      libtool.lib # libltdl.so.7
+      libmikmod # libmikmod.so.3
+      pciutils # libpci.so.3
+      libpciaccess # libpciaccess.so.0
+      onetbb # libtbb.so.12
+      curlWithGnuTls # libcurl-gnutls.so.4
 
       # --- tools (not libraries) -------------------------------------------
+      appimageTools.appimage-exec # unpacks AppImages into the fhs-run cache
       xdg-utils # xdg-open
       xdg-user-dirs
       desktop-file-utils
