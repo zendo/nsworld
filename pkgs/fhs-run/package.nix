@@ -25,7 +25,7 @@ pkgs.buildFHSEnv {
       exit 1
     fi
 
-    export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules"
+    export GIO_EXTRA_MODULES="${pkgs.glib-networking}/lib/gio/modules''${GIO_EXTRA_MODULES:+:$GIO_EXTRA_MODULES}"
 
     # Detect AppImages by filename or magic bytes.
     appimage=
