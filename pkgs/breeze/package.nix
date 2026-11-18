@@ -1,6 +1,6 @@
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
   makeWrapper,
   flatpak-extract,
@@ -8,11 +8,10 @@
   gtk3,
   webkitgtk_4_1,
   glib-networking,
-  libayatana-appindicator,
-  udev,
+  libgcc,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "breeze";
   version = "3.0.38";
   __structuredAttrs = true;
@@ -32,13 +31,7 @@ stdenv.mkDerivation (finalAttrs: {
     gtk3
     webkitgtk_4_1
     glib-networking
-    libayatana-appindicator
-    (lib.getLib stdenv.cc.cc)
-  ];
-
-  runtimeDependencies = [
-    (lib.getLib udev)
-    libayatana-appindicator
+    libgcc.lib
   ];
 
   autoPatchelfIgnoreMissingDeps = [ "libjvm.so" ];
