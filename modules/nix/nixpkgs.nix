@@ -21,6 +21,7 @@
               "keyguard"
               "sublime-merge"
               "memtest86-efi"
+              "geetree"
               # ------
               "vivaldi"
               "chromium"

@@ -6,6 +6,14 @@ strace-tui
 
 strace --trace=file,process -f -s 200 app >strace.log
 strace -o trace.txt -tt -k -f -s 1024 app
+** binary
+buildInputs:
+readelf -d breeze
+objdump -p breeze
+
+runtimeDependencies(dlopen):
+strings -a -n 4 breeze | grep -oE 'lib[a-zA-Z0-9_+-]+\.so(\.[0-9]+)*' | sort -u
+LD_DEBUG=libs breeze 2>&1 | grep 'calling init:' | awk '{print $NF}' | sort -u
 
 ** profiler
 https://github.com/NixOS/nix/pull/13220
@@ -72,7 +80,7 @@ dpkg --fsys-tarfile ./*.deb | tar --extract
 #+begin_src nix
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
   dpkg,
   wrapGAppsHook3,
@@ -83,7 +91,7 @@ dpkg --fsys-tarfile ./*.deb | tar --extract
   libayatana-appindicator,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "zenus";
   version = "0.2.6";
 
@@ -91,6 +99,8 @@ stdenv.mkDerivation (finalAttrs: {
     url = "https://github.com/skorotkiewicz/zenus/releases/download/${finalAttrs.version}/zenus_${finalAttrs.version}_amd64.deb";
     hash = "sha256-OkjMNB0TDm4V+AuinEBrHFn/q2GFokE6PsCb1IGGbEY=";
   };
+
+  sourceRoot = "root";
 
   nativeBuildInputs = [
     dpkg
@@ -101,7 +111,7 @@ stdenv.mkDerivation (finalAttrs: {
   buildInputs = [
     webkitgtk_4_1
     glib-networking
-    (lib.getLib stdenv.cc.cc)
+    libgcc.lib
   ];
 
   runtimeDependencies = [
