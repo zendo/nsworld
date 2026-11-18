@@ -30,11 +30,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   installPhase = ''
-    mkdir -p $out/bin
     install -Dm755 local/flatpak-extract/flatpak-extract.py $out/bin/$pname
-
-    wrapProgram $out/bin/$pname \
-      --prefix PATH : ${lib.makeBinPath [ ostree ]}
+    wrapProgram $out/bin/$pname --prefix PATH : ${lib.makeBinPath [ ostree ]}
   '';
 
   passthru.updateScript = nix-update-script {

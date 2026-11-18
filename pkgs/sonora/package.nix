@@ -1,23 +1,22 @@
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
   makeWrapper,
   flatpak-extract,
   autoPatchelfHook,
-  gtk3,
+  libgcc,
   alsa-lib,
   sqlite,
+  libxcb,
   wayland,
   libxkbcommon,
   vulkan-loader,
-  webkitgtk_4_1,
+  libglvnd,
   glib-networking,
-  libayatana-appindicator,
-  udev,
 }:
 
-stdenv.mkDerivation (finalAttrs: {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "sonora";
   version = "0.48.1";
   __structuredAttrs = true;
@@ -34,18 +33,16 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   buildInputs = [
-    gtk3
+    libgcc.lib
     alsa-lib
     sqlite
-    libayatana-appindicator
-    (lib.getLib stdenv.cc.cc)
+    libxcb
+    libxkbcommon
   ];
 
   runtimeDependencies = [
-    (lib.getLib udev)
-    libayatana-appindicator
+    libglvnd
     wayland
-    libxkbcommon
     vulkan-loader
   ];
 
@@ -56,8 +53,13 @@ stdenv.mkDerivation (finalAttrs: {
 
   installPhase = ''
     mkdir -p $out/{bin,share}
-    cp bin/sonora $out/bin/
-    cp -r share $out/
+    cp -a bin/sonora $out/bin/
+    cp -a share $out/
+  '';
+
+  postFixup = ''
+    wrapProgram $out/bin/sonora \
+      --prefix GIO_EXTRA_MODULES : "${glib-networking}/lib/gio/modules"
   '';
 
   meta = {

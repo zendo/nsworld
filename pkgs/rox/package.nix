@@ -1,26 +1,19 @@
 {
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
   dpkg,
-  wrapGAppsHook3,
   autoPatchelfHook,
-  udev,
+  libgcc,
   alsa-lib,
-  glib-networking,
-  libayatana-appindicator,
+  libxcb,
+  libxkbcommon,
   libglvnd,
   vulkan-loader,
   wayland,
 }:
-let
-  libs = [
-    libglvnd
-    vulkan-loader
-    wayland
-  ];
-in
-stdenv.mkDerivation (finalAttrs: {
+
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "rox";
   version = "1.34.3";
 
@@ -31,25 +24,25 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [
     dpkg
-    wrapGAppsHook3
     autoPatchelfHook
   ];
 
   buildInputs = [
+    libgcc.lib
     alsa-lib
-    glib-networking
-    (lib.getLib stdenv.cc.cc)
+    libxcb
+    libxkbcommon
   ];
 
   runtimeDependencies = [
-    (lib.getLib udev)
-    libayatana-appindicator
-  ]
-  ++ libs;
+    libglvnd
+    vulkan-loader
+    wayland
+  ];
 
   installPhase = ''
     mkdir -p $out/bin
-    cp -r usr/* $out
+    cp -a usr/. $out/
   '';
 
   meta = {
