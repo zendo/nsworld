@@ -100,8 +100,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-OkjMNB0TDm4V+AuinEBrHFn/q2GFokE6PsCb1IGGbEY=";
   };
 
-  sourceRoot = "root";
-
   nativeBuildInputs = [
     dpkg
     wrapGAppsHook3

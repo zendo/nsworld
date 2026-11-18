@@ -23,8 +23,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-YAzJefqjQO1BHXb0FIa6SzLCqcDWcyFltKy7S6aU60A=";
   };
 
-  sourceRoot = "root";
-
   nativeBuildInputs = [
     dpkg
     autoPatchelfHook
