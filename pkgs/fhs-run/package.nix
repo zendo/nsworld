@@ -30,7 +30,7 @@ pkgs.buildFHSEnv {
       glib # libglib-2.0/libgobject/libgio
       zlib # libz
       bzip2 # libbz2
-      bzip2.out # libbz2.so.1
+      # bzip2.out # libbz2.so.1
       xz # liblzma
       zstd
       expat
