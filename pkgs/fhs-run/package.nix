@@ -1,23 +1,42 @@
 /*
-  nix run ~/nsworld#fhs-run ./app
-
   # https://nixmultiverse.com/
   nix-build ~/nsworld/pkgs/fhs-run/package.nix --arg pkgs \
     'import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz") {}'
     'import (fetchTarball "https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz") {}'
   ./result/bin/fhs-run ./app
-
-  https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/appimage/default.nix#L112
 */
 {
   pkgs ? import <nixpkgs> { },
   multiverse ? null,
 }:
-# let
-#   # libxdo.so.3
-#   xdotool = multiverse.versions.xdotool."3.20211022.1";
-# in
-pkgs.buildFHSEnv {
+let
+  # buildFHSEnv hard-codes `glibcLocales` (every locale, 222 MiB) into its base
+  # paths. Merge a trimmed copy into the package set it builds from: a plain
+  # attrset merge rather than `pkgs.extend`, because extending changes the
+  # fixpoint and stdenv with it, which rebuilds everything that uses stdenv.
+  fhsPkgs =
+    pkgs
+    // {
+      glibcLocales = pkgs.glibcLocales.override {
+        allLocales = false;
+        # nix eval .#nixosConfigurations.yoga.config.i18n.supportedLocales
+        locales = [
+          "C.UTF-8/UTF-8"
+          "en_US.UTF-8/UTF-8"
+          "zh_CN.UTF-8/UTF-8"
+        ];
+      };
+    }
+    // {
+      pkgs = fhsPkgs;
+      pkgsHostTarget = fhsPkgs;
+    };
+  fhsCallPackage = pkgs.lib.callPackageWith fhsPkgs;
+  buildFHSEnv = fhsCallPackage "${pkgs.path}/pkgs/build-support/build-fhsenv-bubblewrap/default.nix" {
+    callPackage = fhsCallPackage;
+  };
+in
+buildFHSEnv {
   name = "fhs-run";
   runScript = pkgs.replaceVarsWith {
     src = ./fhs-run.sh;
