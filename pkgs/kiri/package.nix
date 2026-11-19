@@ -11,16 +11,23 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "kiri";
-  version = "0.2.0";
+  version = "0.2.2";
 
   src = fetchFromGitHub {
     owner = "libracoder";
     repo = "kiri";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-6sEa+kgfJoZjUuAPWMZc1jbjXjw1B/aBRZkY+O1rgRo=";
+    hash = "sha256-NsBH+3HfrTjN2j+3gSFj5vivG/a7A8KVb8v5PxDA2Fg=";
   };
 
-  cargoHash = "sha256-zYHkfntI7KAHUA3/11StA09IWJnsiA9axkwec51utss=";
+  cargoHash = "sha256-92B5sB7WHDH2vhX8sk95Vcb3GAcDanO8VTGVf1IXcg4=";
+
+  # The tag carries no version: upstream's release build writes it into
+  # [workspace.package] (RELEASES.md), so a bare checkout builds as 0.0.0.
+  postPatch = ''
+    substituteInPlace Cargo.toml \
+      --replace-fail 'version = "0.0.0"' 'version = "${finalAttrs.version}"'
+  '';
 
   nativeBuildInputs = [
     pkg-config
