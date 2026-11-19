@@ -125,13 +125,6 @@
           "http://homepage.home.arpa".extraConfig = ''
             reverse_proxy 127.0.0.1:${toString p.homepage}
           '';
-
-          # 备用: reactflux 前端
-          # "http://reactflux.home.arpa".extraConfig = ''
-          #   root * ${pkgs.reactflux}
-          #   try_files {path} {path}/ /index.html
-          #   file_server
-          # '';
         };
       };
     };
