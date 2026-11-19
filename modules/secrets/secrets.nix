@@ -14,11 +14,14 @@ let
     ];
 in
 {
+  # 和下面的 sops-nix 模块互不依赖：哪个 host 要试就在它的模块列表里加
+  # `nix-secrets`，不加不影响现有链路。identityPaths 直接用机器自己的 SSH key，
+  # 不需要往机器上额外放 age 私钥文件。
   flake.modules.nixos.nix-secrets =
     {
       lib,
       config,
-      pkgs,
+      options,
       ...
     }:
     {
@@ -26,20 +29,30 @@ in
 
       security.nix-secrets = {
         enable = true;
-        storage = ../secrets; # Relative path to your `secrets` (copied to /nix/store)
-        identityPaths = [
-          "/home/user/keys.txt" # Path to your age private key
-          "/home/user/.ssh/id_ed25519" # You can also use SSH keys
-        ];
+        storage = ../secrets; # 每个 secret 对应 secrets/<name>.enc
+
+        # 列出本机真实存在的身份文件：openssh 没开的机器不写 host key，
+        # 没有 myvars 的机器不猜用户名，否则激活时找不到文件会报错。
+        identityPaths =
+          map (key: key.path) (
+            lib.filter (key: key.type == "rsa" || key.type == "ed25519") config.services.openssh.hostKeys
+          )
+          ++ lib.optionals (options ? myVars) [
+            "/home/${config.myVars.user}/.ssh/id_ed25519"
+          ];
+
+        # 接收人就是各机/各用户的 SSH 公钥。加新机器：把公钥写进别名，
+        # 再 `nix-secrets rekey --storage secrets` 重加密已有的 secret。
         recipientAliases = {
-          first = "age14e2jdmau7tpau9emcn6gmg26vfl0uyf6cfd9lz85jml6ttv9wq2qphps4t"; # Your age recipient (public key)
-          ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuUsB0HH//1qkvgQMWTEoNd0riZpk+8A5w1Ep2vGKk0"; # Or your SSH public key
+          yoga-host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOaubBTa8qwJcVxuukrSQkEM3wQmaqI0RQHUyEADpz/7";
+          yoga-user = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMLrQVhdLD9o1Iq17LKFNQ21PaHIAylizOFkvh74FUrz";
+          yoga = [
+            "yoga-host"
+            "yoga-user"
+          ];
         };
-        # Add your secrets here...
-        secrets = {
-          password.recipients = [ "first" ];
-          signingKey.recipients = [ "ssh" ];
-        };
+
+        secrets.dae_sub.recipients = [ "yoga" ];
       };
     };
 
