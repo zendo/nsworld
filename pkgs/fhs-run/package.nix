@@ -34,7 +34,9 @@ pkgs.buildFHSEnv {
       xz # liblzma
       zstd
       expat
-      openssl # libssl/libcrypto
+      # getLib pins the library output, otherwise meta.outputsToInstall drags the
+      # man pages (45 MiB) and CLI tools of these into the runtime rootfs.
+      (p.lib.getLib p.openssl) # libssl/libcrypto
       curlMinimal # libcurl.so.4 (TLS yes; no idn/psl/brotli/zstd/http3, use `curl` for those)
       libkrb5 # libkrb5/libgssapi_krb5
       libepoxy
@@ -53,7 +55,7 @@ pkgs.buildFHSEnv {
       gmp # libgmp.so.10
       brotli # libbrotli{common,dec,enc}
       lz4 # liblz4.so.1 (libarchive, ffmpeg)
-      libbsd # libbsd.so.0 (libmpv/ffmpeg)
+      (p.lib.getLib p.libbsd) # libbsd.so.0 (libmpv/ffmpeg)
       libffi # libffi.so.8, dlopened/used by many binaries
       libgcrypt # libgcrypt.so.20
       libgpg-error # libgpg-error.so.0
@@ -105,8 +107,8 @@ pkgs.buildFHSEnv {
       # kdePackages.mpvqt # libMpvQt.so.4
 
       # --- X11 -------------------------------------------------------------
-      libx11
-      libxcb
+      (p.lib.getLib p.libx11)
+      (p.lib.getLib p.libxcb)
       libxcb-util
       libxcb-wm # libxcb-ewmh/icccm
       libxcb-image
