@@ -1261,7 +1261,6 @@ This should be called after changing `auto-save-list-file-prefix'."
 (setq confirm-kill-processes nil)
 ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
 ;; (setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名和路径
-(setq display-time-24hr-format t)
 ;; (setq system-time-locale "C") ;使用英文时间格式
 
 (use-package bind-key)
@@ -1324,11 +1323,7 @@ Use ~getenv~ check the environment variables.
             browse-url-generic-args     cmd-args
             browse-url-browser-function 'browse-url-generic)))
   ;; WSLg 的剪贴板是 X/Wayland（UTF-8），用 gbk-dos 反而会乱码
-  (set-clipboard-coding-system 'utf-8)
-  ;; 选中即复制（Windows 习惯）；不需要的话删掉这行
-  ;; 注意：`interprogram-cut-function' 保持默认 — GUI 下已是 `gui-select-text'，
-  ;; TTY 下是 OSC52 处理器，强行覆盖会破坏终端内复制。
-  (setq select-active-regions nil))
+  (set-clipboard-coding-system 'utf-8))
 #+end_src
 
 ** Windows Setup
@@ -1457,8 +1452,7 @@ C-` 绑到 `popper-toggle`；另外本块依赖 nix 提供的 ghostel。
 https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
 
 #+begin_src emacs-lisp
-(setq tramp-default-method "ssh" ; 已是默认值，保留以示意
-      password-cache-expiry 36000) ; 10 小时；也影响 auth-source/sudo 密码缓存
+(setq password-cache-expiry 36000) ; 10 小时；也影响 auth-source/sudo 密码缓存
 ;; `tramp-verbose' / `remote-file-name-inhibit-cache' 已在上面的上游段设置，
 ;; 这里只补远程复制相关的性能项（见开头链接）。
 (setq tramp-use-scp-direct-remote-copying t
@@ -2017,9 +2011,6 @@ https://github.com/AmaiKinono/puni
 ;; 产生「只改了空格」的 git diff。这里只高亮提示，不自动改文件。
 (setq whitespace-action nil
       whitespace-style '(face trailing empty))
-
-;; `whitespace-mode' 是 buffer-local，在 init 里直接调用只对 *scratch* 生效
-(whitespace-mode 1)
 #+end_src
 
 ** Mixed Fonts (mixed-pitch) :off:
@@ -2061,11 +2052,8 @@ Run code formatters on ~after-save-hook~
 
 * Saving & History
 ** Auto-Save (#file#)
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 ;; 传统备份机制，不覆盖原文件，只生成一个临时备份文件（#file#）。
-;; 注意：`auto-save-default' 为 nil 时，新文件 buffer 不会默认开 `auto-save-mode'，
-;; 下面两个 interval/timeout 也就形同虚设；保持 t 才有 300 键 / 30s 空闲自动保存。
-;; 用 `recover-file' / `recover-session' 恢复。
 (setq auto-save-default nil)
 ;; Trigger an auto-save after 300 keystrokes
 (setq auto-save-interval 300)
@@ -2205,7 +2193,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 (use-package saveplace
   :ensure nil
   :init
-  (setq save-place-limit 400)
   (save-place-mode 1))
 #+end_src
 
@@ -2712,7 +2699,7 @@ expand region alternative
 #+begin_src emacs-lisp
 (use-package expreg
   :bind (("C-=" . expreg-expand)
-         ("C--" . expreg-contract)))
+         ("M-=" . expreg-contract)))
 #+end_src
 
 ** Help (helpful)
@@ -2883,18 +2870,23 @@ https://github.com/thierryvolpiatto/isearch-light
          ("f" . consult-find)
          ("RET" . dired-find-alternate-file)
          ("." . dired-omit-mode)
-         ("," . dired-do-print)
          ("/" . funs/dired-filter-show-match)
-         ("b" . (lambda ()
-                  (interactive)
-                  (find-alternate-file ".."))))
+         ("b" . my/dired-up-directory))
   :config
-  ;;;###autoload
-  (defun funs/dired-filter-show-match ()
-    "Only show filter file."
-    (interactive)
-    (call-interactively #'dired-mark-files-regexp)
-    (command-execute "tk")))
+  (put 'dired-find-alternate-file 'disabled nil))
+
+(defun my/dired-up-directory ()
+  "Go to the parent directory, reusing the current dired buffer."
+  (interactive)
+  (find-alternate-file ".."))
+
+;;;###autoload
+(defun funs/dired-filter-show-match ()
+  "Only show files matching a regexp."
+  (interactive)
+  (call-interactively #'dired-mark-files-regexp)
+  (dired-toggle-marks)
+  (dired-do-kill-lines))
 #+end_src
 
 ** Project Management (project.el / disproject)
@@ -2963,12 +2955,14 @@ https://github.com/thierryvolpiatto/isearch-light
 ** Diff Margins (diff-hl)
 #+begin_src emacs-lisp
 (use-package diff-hl
-  :hook (dired-mode . diredfl-mode)
+  :hook (dired-mode . diff-hl-dired-mode)
   :init
   (setq diff-hl-flydiff-delay 0.4)  ; Faster
   (setq diff-hl-show-staged-changes nil)  ; Realtime feedback
   (setq diff-hl-update-async t)  ; Do not block Emacs
-  (setq diff-hl-global-modes '(not pdf-view-mode image-mode)))
+  (setq diff-hl-global-modes '(not pdf-view-mode image-mode))
+  :config
+  (global-diff-hl-mode 1))
 #+end_src
 
 ** Forge
@@ -3028,8 +3022,9 @@ https://github.com/thierryvolpiatto/isearch-light
              ("C-c a" . org-agenda)
              ("C-c x" . org-capture)
              ;; ("C-c l" . org-store-link)
-             ("C-c C-j" . consult-outline)
-             ("M-." . find-function-at-point))
+             ("C-c C-j" . consult-outline))
+  ;; 不要绑 `M-.'：`find-function-at-point' 是 elisp 专用命令，在 org buffer 里没意义；
+  ;; org 里跟链/跳转用 `C-c C-o'（`org-open-at-point'）。
   :config
   (setq
    ;; Start collapsed for speed
@@ -3037,8 +3032,9 @@ https://github.com/thierryvolpiatto/isearch-light
    ;; org-startup-indented t
    org-startup-truncated nil
    org-hide-leading-stars t
-   org-refile-targets (quote ((nil :maxlevel . 9)
-                              (org-agenda-files :maxlevel . 9)))
+   ;; Agenda 段是 `:tangle no'（`org-agenda-files' 从未设置），引用它只会让
+   ;; refile 目标变空，所以这里只保留「当前文件」这一种来源。
+   org-refile-targets '((nil :maxlevel . 9))
 
    ;; Edit settings
    org-support-shift-select t
@@ -3351,15 +3347,18 @@ https://github.com/renzmann/treesit-auto
 
 *** Python
 #+begin_src emacs-lisp
-(use-package python-mode
+(defun my/python-mode-defaults ()
+  "Per-buffer defaults for Python modes."
+  (setq-local indent-tabs-mode nil)
+  (setq-local tab-width 4))
+
+(use-package python
+  :ensure nil
   :mode ("\\.py\\'")
+  :hook ((python-mode python-base-mode) . my/python-mode-defaults)
   :config
-  ;; `indent-tabs-mode' 是 buffer-local，必须用 setq-default；
-  ;; `python-indent'/`default-tab-width' 在 Emacs 31 已不存在。
   (setq python-indent-offset 4
-        python-shell-interpreter "python3")
-  (setq-default indent-tabs-mode nil
-                tab-width 4))
+        python-shell-interpreter "python3"))
 
 ;; (use-package live-py-mode)
 
@@ -3372,11 +3371,14 @@ https://github.com/renzmann/treesit-auto
 
 *** Go
 #+begin_src emacs-lisp
+(defun my/go-mode-setup ()
+  "Format with goimports on save, in Go buffers only."
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook #'gofmt-before-save nil t))
+
 (use-package go-mode
   :commands go-mode
-  :config
-  (setq gofmt-command "goimports")
-  (add-hook 'before-save-hook 'gofmt-before-save))
+  :hook (go-mode . my/go-mode-setup))
 #+end_src
 
 *** Rust
@@ -3560,7 +3562,6 @@ https://github.com/renzmann/treesit-auto
          "\\.unmask\\'"
          "\\.kbd\\'" ; kanata config
          "\\.use\\'"))
-(global-set-key [remap conf-space-keywords] #'project-find-file)
 #+end_src
 
 *** Prettier :off:
@@ -3696,6 +3697,15 @@ https://www.jamescherti.com/emacs-eglot-performance/
     (when (boundp 'corfu-auto-prefix)
       (setq-local corfu-auto-prefix 1)
       (setq-local corfu-auto-delay 0.1))))
+
+(defun my/eglot-format ()
+  "Format the current buffer through Eglot, if it has a server."
+  (interactive)
+  (if (and (fboundp 'eglot-managed-p) (eglot-managed-p))
+      (eglot-format)
+    ;; 直接绑 `eglot-format' 时，在普通 buffer 里按会抛
+    ;; `(jsonrpc-error "No current JSON-RPC connection")'。
+    (user-error "This buffer is not managed by Eglot")))
 
 (use-package eglot
   :defer t
@@ -3866,6 +3876,12 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
   (interactive)
   (select-window (split-window-right)))
 
+(defun my/save-and-recompile ()
+  "Save the current buffer and rerun the last compilation."
+  (interactive)
+  (save-buffer)
+  (recompile))
+
 (bind-keys
  ;; 普通 buffer 里 `C-s' 用 consult-line。**不能**放进 `bind-keys*'：
  ;; `bind-keys*' 写的是 `override-global-map'，会盖掉 `isearch-mode-map'，
@@ -3892,16 +3908,22 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("p" . project-forget-project))
 
 (bind-keys*
+ ;; 这里只放「必须压过任何 mode-local 键」的绑定：`bind-keys*' 写的是
+ ;; `override-global-map'，优先级高于所有 buffer-local keymap。
  ;; ("C-z" . nil) ;unbind C-z
  ("C-z" . undo-fu-only-undo)     ; 用 undo-fu 统一 undo/redo 模型
  ("C-S-z" . undo-fu-only-redo)
  ("M-m" . consult-mark)
  ;; ("M-m" . pop-to-mark-command)
  ("C-/" . comment-line) ;vscode
- ("C-S-i" . eglot-format) ;vscode
- ("C-S-t" . tab-new)
+ ("C-S-i" . my/eglot-format) ;vscode
  ("C-x C-r" . recentf)
  ([remap kill-buffer] . kill-current-buffer)
+
+ ;; 以下回到 global-map：`C-x 2'、`C-c xxx' 这类键让 mode-local keymap 优先，
+ ;; 否则 `C-c l' 会盖掉 org-mode 的 `org-store-link'，其它前缀同理。
+ :map global-map
+ ("C-S-t" . tab-new)
 
  ;; doom-like
  ("C-c <SPC>" . project-find-file)
@@ -3920,10 +3942,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
  ("C-x 4 x" . ace-swap-window)
 
  ("<f7>" . compile)
- ("<C-f7>" . (lambda()
-               (interactive)
-               (save-buffer)
-               (recompile)))
+ ("<C-f7>" . my/save-and-recompile)
 
  :prefix-map buffer-map
  :prefix "C-c b"
@@ -3968,7 +3987,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 
  :prefix-map lsp-map
  :prefix "C-c l"
- ("f" . eglot-format)
+ ("f" . my/eglot-format)
 
  :prefix-map git-mode
  :prefix "C-c v"
@@ -3999,7 +4018,7 @@ https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-funcs.el#L663
 M-x ~describe-key~
 
 #+begin_src emacs-lisp
-(fset 'mouse-save-then-kill 'ignore) ;禁用鼠标右键双击剪切
+(advice-add 'mouse-save-then-kill :override #'ignore) ;禁用鼠标右键双击剪切
 ;; (setq mouse-yank-at-point nil)
 (global-unset-key (kbd "<mouse-2>")) ;禁用鼠标中键
 (global-unset-key (kbd "C-<wheel-up>"))
