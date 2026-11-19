@@ -18,13 +18,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoHash = "sha256-4ifX9N1OnIxwNRy4rWBZSqE0460G/dx+N8N4ZHInBpk=";
 
+  # The integration tests need docker.
   checkFlags = [
-    # docker_integration_tests fails
-    "--skip=test_bash_3_2_57"
-    "--skip=test_bash_4_4_18"
-    "--skip=test_bash_4_4_rc1"
-    "--skip=test_bash_5_0"
-    "--skip=test_bash_5_3"
+    "--skip"
+    "test_bash"
   ];
 
   meta = {
