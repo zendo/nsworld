@@ -3,7 +3,6 @@
   buildGoModule,
   fetchFromGitHub,
   makeWrapper,
-  go,
   mihomo,
   gtk3,
   glib,
@@ -29,7 +28,7 @@ buildGoModule (finalAttrs: {
 
   buildPhase = ''
     runHook preBuild
-    go tool mygo build -platform linux/${go.GOARCH} .
+    go tool mygo build -platform linux/$GOARCH .
     runHook postBuild
   '';
 
@@ -43,7 +42,7 @@ buildGoModule (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    stage=build/linux-${go.GOARCH}
+    stage=build/linux-$GOARCH
 
     install -Dm755 "$stage/bowel" $out/libexec/bowel
 

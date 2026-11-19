@@ -1,6 +1,5 @@
 {
   lib,
-  go,
   buildGo127Module,
   fetchFromGitHub,
   makeWrapper,
@@ -38,7 +37,7 @@ buildGo127Module (finalAttrs: {
   ldflags = [ "-s" ];
 
   buildPhase = ''
-    go tool mygo build -platform "linux/${go.GOARCH}"
+    go tool mygo build -platform "linux/$GOARCH"
   '';
 
   checkPhase = ''
@@ -48,7 +47,7 @@ buildGo127Module (finalAttrs: {
   '';
 
   installPhase = ''
-    stage=build/linux-${go.GOARCH}
+    stage=build/linux-$GOARCH
 
     install -Dm755 "$stage/mygo-music" $out/libexec/mygo-music
 
