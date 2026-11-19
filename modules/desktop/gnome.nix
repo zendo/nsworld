@@ -27,9 +27,9 @@
       environment.systemPackages = with pkgs; [
         # authenticator
         refine
-        # file-roller
+        file-roller
         # peazip
-        xarchiver
+        # xarchiver # 17.2 MiB
         gthumb
         gparted
         dconf-editor
