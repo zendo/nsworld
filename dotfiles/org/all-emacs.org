@@ -1362,10 +1362,13 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 ;; Support for the Kitty Keyboard Protocol in Emacs
 ;; `global-kkp-mode' 内部只对非 GUI terminal 生效，daemon 下也安全。
 (use-package kkp
+  ;; 不在 post-init 里就 `require'：交到 `after-init'，那时还没处理过任何按键，
+  ;; 不会漏掉 kitty 序列，而且不占启动关键路径。
+  ;; 不能用空闲定时器：键盘解析必须在第一次输入前就位。
   :unless (display-graphic-p)
-  :config
+  :hook (after-init . global-kkp-mode)
   ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
-  (global-kkp-mode +1))
+  )
 #+end_src
 
 ** Encoding & Locale
@@ -1378,7 +1381,7 @@ https://lucidmanager.org/productivity/emacs-windows/ Using Emacs on Windows 11: 
 #+end_src
 
 ** Rime Input Method
-#+begin_src emacs-lisp
+#+begin_src emacs-lispxx
 (use-package rime
   :custom
   (default-input-method "rime"))
@@ -1772,17 +1775,13 @@ Show current command and its binding.
   :custom
   ;; Enable/Disable verbose mode to log buffer cleanup events
   (buffer-terminator-verbose nil)
-
   ;; Set the inactivity timeout (in seconds) after which buffers are considered
   ;; inactive (default is 30 minutes):
   (buffer-terminator-inactivity-timeout (* 30 60)) ; 30 minutes
-
   ;; Define how frequently the cleanup process should run (default is every 10
   ;; minutes):
   (buffer-terminator-interval (* 10 60)) ; 10 minutes
-
-  :init
-  (buffer-terminator-mode 1))
+  :hook (after-init . buffer-terminator-mode))
 #+end_src
 
 ** Window Layout
@@ -2115,9 +2114,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 
   ;; Save all buffers every N seconds. (Disabled by default)
   ;; (setq buffer-guardian-save-all-buffers-interval (* 60 30))
-
-  :init
-  (buffer-guardian-mode 1))
+  :hook (after-init . buffer-guardian-mode))
 #+end_src
 
 ** Auto-Revert (autorevert)
@@ -2216,8 +2213,7 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; The undo-fu-session package complements undo-fu by enabling the saving
 ;; and restoration of undo history across Emacs sessions, even after restarting.
 (use-package undo-fu-session
-  :init
-  (undo-fu-session-global-mode 1))
+  :hook (after-init . undo-fu-session-global-mode))
 #+end_src
 
 ** Undo Tree (vundo)
@@ -2469,10 +2465,6 @@ https://www.jamescherti.com/buffer-guardian-el-automatically-save-emacs-buffers/
 ;; can be selected by navigating up or down.
 (use-package corfu
   :custom
-  ;; Hide commands in M-x which do not apply to the current mode.
-  (read-extended-command-predicate #'command-completion-default-include-p)
-  ;; Disable Ispell completion function. As an alternative try `cape-dict'.
-  (text-mode-ispell-word-completion nil)
   (tab-always-indent 'complete)
   (corfu-auto t) ; Enable auto completion
   (corfu-auto-delay 0.1) ; 更快的弹出（VSCode 的 quickSuggestionsDelay 是 10ms）
@@ -2859,6 +2851,8 @@ https://github.com/thierryvolpiatto/isearch-light
 
 (use-package dired-x
   :ensure nil
+  ;; `:defer t' 不是多余的：去掉它 use-package 会在启动时直接 `(require 'dired-x)'
+  ;; （连带 dired，约 16ms）。dired-x 的命令都有 autoload，按需加载即可。
   :defer t)
 
 (use-package dired
@@ -2927,10 +2921,12 @@ https://github.com/thierryvolpiatto/isearch-light
   ;; Magit status fullscreen
   ;; (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 
+  ;; 下面两项是 magit 手册推荐的提速项，跟平台无关，不要只在 Windows 生效。
+  (setq magit-refresh-status-buffer nil)
+  (setq auto-revert-buffer-list-filter
+        'magit-auto-revert-repository-buffer-p)
+
   (when IS-WINDOWS
-    (setq magit-refresh-status-buffer nil)
-    (setq auto-revert-buffer-list-filter
-          'magit-auto-revert-repository-buffer-p)
     (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
     (remove-hook 'server-switch-hook 'magit-commit-diff)
     (remove-hook 'with-editor-filter-visit-hook 'magit-commit-diff)))
@@ -3730,12 +3726,11 @@ https://www.jamescherti.com/emacs-eglot-performance/
   :config
   ;; Disable live formatting
   (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider)
-  (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
-  (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
-  (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
+  ;; 内置 `eglot-server-programs' 已经覆盖了 c-mode/c++-mode(clangd)、go-mode(gopls)、
+  ;; rust-mode(rust-analyzer)、nix-mode(nixd) 和 markdown-mode(marksman)，
+  ;; 这里只保留真正改掉默认行为的项，避免往列表里塞重复条目
+  ;; （重复项会盖掉内置的备选命令，比如 nix 的 rnix-lsp）。
   (add-to-list 'eglot-server-programs '(python-mode . ("pylyzer" "--server")))
-  (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
-  (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
   (add-to-list 'eglot-server-programs '(markdown-mode . ("efm-langserver")))
   ;; 注意：没有启用 yasnippet（`** Yasnippet' 块是 `:tangle no'，该包也未安装），
   ;; 所以 `(fboundp 'yas-expand-snippet)' 为 nil → Eglot 不会声明 snippetSupport，
