@@ -56,10 +56,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
     hash = "sha256-ZWuM5f60/ASqyJk32q3P8gGuuuzHPzMzT98nT3b+HGQ=";
   };
 
-  # Three workspace crates live in git repos, not on crates.io, so each locked
-  # rev needs its own tree hash. The rest is plain crates.io tarballs.
   cargoDeps = rustPlatform.importCargoLock {
-    lockFile = "${finalAttrs.src}/Cargo.lock";
+    lockFile = ./Cargo.lock;
     outputHashes = {
       "ai-pool-0.4.0" = "sha256-irWWIvyXLaaD2HZgTz/NTS+C9cjUaAyCEh6Wn+sX9eA=";
       "cefr-0.3.0" = "sha256-dn78fdCdIiOGIvuLBEZlBtP+zlWtDbeG5riEae9x96M=";
