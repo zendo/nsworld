@@ -33,6 +33,7 @@ let
     beep = ''echo -en "\007"'';
     psp = "procs --sortd UsageMem";
     ps-sort = ''ps -ewwo pid,%cpu,%mem,nice,pri,rtprio,args --sort=-pcpu,-pid | awk -v filter="$1" 'NR==1 || tolower($0) ~ tolower(filter)' | less -e --header=1'';
+    ikill = "ps -eo pid=,comm=,args= | awk -vOFS='\\t' '{$1=$1; print}' | fzf -m --delimiter='\\t' --header=\"$(printf 'PID\\tNAME\\tCOMMAND')\" | cut -f1 | xargs -r kill -9";
 
     # [ network ]
     ip-api = "curl ip-api.com";
@@ -59,12 +60,6 @@ let
 
   commonBashAlias = {
     # sudo = "sudo ";
-
-    ikill = ''
-      ps -eo pid=,comm=,args= | awk -vOFS='\t' '{$1=$1; print}' \
-        | fzf -m --delimiter='\t' --header=$'PID\tNAME\tCOMMAND' \
-        | cut -f1 | xargs -r kill -9
-    '';
 
     # [ proxy ] (move here because fish incompatible complain)
     # ssr_ip=localhost:7890 ; ssr ; ssr-nix-daemon
