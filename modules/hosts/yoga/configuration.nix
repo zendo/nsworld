@@ -153,8 +153,6 @@ in
         #   # Fix s2idle: https://www.phoronix.com/news/More-s2idle-Rembrandt-Linux
         #   # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/yoga/7/14ARH7/shared.nix#L25
         #   # "acpi.prefer_microsoft_dsm_guid=1" # AI say: no need
-        #   # Fix touchpad multitouch sometimes unavailable
-        #   # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
         # ];
 
         kernel.sysctl."vm.swappiness" = 100;
@@ -185,6 +183,51 @@ in
       zramSwap = {
         enable = true;
         memoryPercent = 25;
+      };
+
+      # 触摸板 06CB:CE44 (Synaptics) 会卡在传统鼠标模式：固件只上报 REL_X/REL_Y，
+      # hid-multitouch 建出来的 Touchpad 节点一条 ABS_MT_* 都没有，libinput 只能把它
+      # 当普通鼠标，于是双指滚动/双指点击全失效，单指移动和按键照旧。
+      # 重载一次模块就能让固件切回多点触控模式，所以开机和唤醒后各做一次。
+      # sudo modprobe -r hid-multitouch && sudo modprobe hid-multitouch
+      # systemd.services.hid-multitouch-reload = {
+      #   description = "Reload hid-multitouch so the touchpad leaves mouse mode";
+      #   # MT 节点是 udev 建的，等设备枚举完再插模块，否则重载可能落在设备出现之前。
+      #   wants = [ "systemd-udev-settle.service" ];
+      #   after = [
+      #     "systemd-udevd.service"
+      #     "systemd-udev-settle.service"
+      #   ];
+      #   wantedBy = [ "multi-user.target" ];
+      #   serviceConfig = {
+      #     Type = "oneshot";
+      #     RemainAfterExit = true;
+      #     # 模块本来没加载时 modprobe -r 返回非 0，前置 "-" 让 systemd 忽略。
+      #     ExecStartPre = "-${pkgs.kmod}/bin/modprobe -r hid-multitouch";
+      #     ExecStart = "${pkgs.kmod}/bin/modprobe hid-multitouch";
+      #   };
+      # };
+
+      # suspend.target 之后的单元接在 suspend.target 上，wakeup 时才执行。
+      systemd.services.hid-multitouch-reload-resume = {
+        description = "Reload hid-multitouch after resume";
+        wants = [ "systemd-udev-settle.service" ];
+        after = [
+          "suspend.target"
+          "hibernate.target"
+          "hybrid-sleep.target"
+        ];
+        wantedBy = [
+          "suspend.target"
+          "hibernate.target"
+          "hybrid-sleep.target"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStartPre = "-${pkgs.kmod}/bin/modprobe -r hid-multitouch";
+          ExecStart = "${pkgs.kmod}/bin/modprobe hid-multitouch";
+        };
       };
 
       # ╭─────────────────────────────────────────────────────╮
