@@ -73,7 +73,7 @@ buildGo127Module (finalAttrs: {
           libsecret
           libpulseaudio
           libayatana-appindicator
-          # Plugins' embedded login pages (host.webSignIn) need WebKitGTK and its TLS stack.
+          # Plugin login pages (host.webSignIn) need WebKitGTK + TLS.
           webkitgtk_4_1
           glib-networking
           libsoup_3

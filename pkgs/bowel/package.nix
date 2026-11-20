@@ -12,14 +12,14 @@
 
 buildGoModule (finalAttrs: {
   pname = "bowel";
-  version = "0.4.5";
+  version = "0.4.6";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "21stware";
     repo = "bowel";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-Y5Ozk6b7D+wRIXgvljl0t2HyEFhUjZu5kijIlaSeyCw=";
+    hash = "sha256-2e4QjIAcgyuZ7L1Fs5W3l0XG7benizQfR5LmiJWwcb0=";
   };
 
   vendorHash = "sha256-Ya2PWmFqEUArZ5HcydGajksLGCc0+HLhvljPwfNEnpk=";
@@ -32,13 +32,11 @@ buildGoModule (finalAttrs: {
     runHook postBuild
   '';
 
-  # The tests draw UI and open sockets; upstream runs none of them in CI.
+  # Tests need a display and network access.
   doCheck = false;
 
-  # Not in bin/: MyGo names the window class, the Wayland app id and the
-  # desktop entry after the basename of its own executable, and makeWrapper
-  # renames whatever it wraps to .<name>-wrapped, which would leave GTK
-  # announcing ".bowel-wrapped" to the dock: no StartupWMClass, no icon.
+  # Kept out of bin/: MyGo derives the window class and app id from its own
+  # filename, which makeWrapper renames to .bowel-wrapped.
   installPhase = ''
     runHook preInstall
 
@@ -59,10 +57,8 @@ buildGoModule (finalAttrs: {
   # cp -r "$stage/fonts" $out/libexec
   # install -Dm644 "$stage/fonts/OPPO Sans License.txt" $out/share/licenses/bowel/OPPO-Sans-License.txt
 
-  # MyGo records os.Executable() in the autostart entry, which is a store path
-  # without LD_LIBRARY_PATH or MOHO_CORE. $APPIMAGE is its hook for naming the
-  # launcher instead: a bare command, so PATH finds the current build and the
-  # entry outlives rebuilds.
+  # MOHO_CORE: the mihomo core bowel launches. APPIMAGE: a bare launcher name,
+  # so the autostart entry does not pin this build's store path.
   postFixup = ''
     makeWrapper $out/libexec/bowel $out/bin/bowel \
       --set MOHO_CORE "${mihomo}/bin/mihomo" \
