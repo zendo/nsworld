@@ -10,7 +10,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pi-ui";
-  version = "0.69.0";
+  version = "0.70.0";
   __structuredAttrs = true;
   strictDeps = true;
 
@@ -18,7 +18,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "hyperpuncher";
     repo = "pi-ui";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-3joBExajxn9+aTAPmLxjhCs9RZnPnhbvs29436RPF60=";
+    hash = "sha256-H++VcpAZGMpPlxRj9YigcHd2D9claHrsEzLeMTtlRpU=";
   };
 
   # bun2nix cannot read this project's lockfile (bun 1.4 writes lockfile v2),
@@ -54,7 +54,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash = "sha256-kfT+y25MUZeQ74oZDUnKLO5uNz2vOp/vzkZ7XpyPyTI=";
+    outputHash = "sha256-fdYttIBjTIrcnSMBjiHSgaD7rBiw8l3VF4gSqNHf0hM=";
   };
 
   nativeBuildInputs = [
