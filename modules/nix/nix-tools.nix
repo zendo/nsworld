@@ -4,7 +4,8 @@
     {
       environment.systemPackages = with pkgs; [
         # alejandra
-        nixfmt
+        # nixfmt
+        nixfmt-rs
         # lorri
         # cachix
         # comma # ,
