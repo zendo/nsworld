@@ -1543,7 +1543,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
 ** Mode Line
 #+begin_src emacs-lisp
 ;; Handle by mood-modeline
-;; (column-number-mode t) ;显示列数
+(column-number-mode 1)
 ;; (size-indication-mode t) ;显示文件大小
 ;; (display-time-mode t) ;显示时间
 ;; (unless (string-match-p "^Power N/A" (battery))
@@ -1553,9 +1553,11 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.ht
   ;; :disabled
   :hook
   (after-init . doom-modeline-mode)
-  ;; `line-number-mode' / `column-number-mode' 默认就是开的，不必在这里设
   :custom ((doom-modeline-buffer-file-name-style 'relative-to-project)
-           (doom-modeline-icon nil)))
+           (doom-modeline-icon nil)
+           ;; 列号从 1 开始数（跟 VSCode / 常规编辑器一致），
+           ;; 默认值 t 是 0 起始的。
+           (doom-modeline-column-zero-based nil)))
 
 (use-package mood-line
   :disabled
