@@ -108,6 +108,7 @@ buildFHSEnv {
       librsvg # 15.7 MiB; librsvg-2.so.2 (gdk-pixbuf svg loader)
       gsettings-desktop-schemas # GTK apps abort on missing schemas
       hicolor-icon-theme
+      adwaita-icon-theme
       shared-mime-info # glib mime type lookups
       libsoup_3
       libproxy

@@ -24,6 +24,7 @@
       # boot.consoleLogLevel = 3;
 
       boot = {
+        # latest / zen / lqx / xanmod_latest
         kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
         # /tmp
