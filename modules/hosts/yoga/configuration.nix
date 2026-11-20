@@ -24,8 +24,8 @@ in
         dev
 
         # [ shell ]
-        fish
-        # zsh
+        # fish
+        zsh
 
         # [ virt ]
         # docker
@@ -60,7 +60,7 @@ in
     {
       myVars.user = userName;
       networking.hostName = hostName;
-      users.defaultUserShell = pkgs.fish;
+      users.defaultUserShell = pkgs.zsh;
       # `mkpasswd`
       users.users.${userName}.initialHashedPassword =
         "$y$j9T$aNhZV153pAbvGMeFqjGmn.$iH18jxovF5Huof8U4NNPK/EVWHH75o5x8lRzq8IHZO3";
