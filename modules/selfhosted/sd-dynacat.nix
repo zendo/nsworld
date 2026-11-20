@@ -16,7 +16,10 @@
           "network-online.target"
           "nss-user-lookup.target"
         ];
-
+        environment = {
+          DYNACAT_HOST = "127.0.0.1";
+          DYNACAT_PORT = toString config.myVars.ports.dynacat;
+        };
         serviceConfig = {
           ExecStart = "${lib.getExe pkgs.dynacat} --config /home/${config.myVars.user}/nsworld/modules/selfhosted/assets/dynacat.yml";
           Restart = "on-failure";

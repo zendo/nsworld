@@ -1,6 +1,6 @@
 server:
-  host: 127.0.0.1
-  port: 4301
+  host: ${DYNACAT_HOST}
+  port: ${DYNACAT_PORT}
   cache-dir: /var/cache/dynacat
   db-path: /var/lib/dynacat/dynacat.db
 branding:
@@ -9,10 +9,11 @@ branding:
     <p>Powered by ❄️</p>
 # auth:
 #   # generate with: ./dynacat secret:make
-#   secret-key: g9Gv4/KjPs4jX0KG2IO8lVobdLCVtteo8aBRMebxLZtG8yf9gH1MMUM0VuSuagNVOjGjZN2cQcfI69O2IBfF0g==
+#   # ${secret:NAME} 读 /run/secrets/NAME，用 sops-nix/agenix 落盘
+#   secret-key: ${secret:dynacat-secret}
 #   users:
 #     admin:
-#     password: qwertyuiop[]
+#       password: ${secret:dynacat-admin-password}
 pages:
   - name: Startpage
     width: slim
