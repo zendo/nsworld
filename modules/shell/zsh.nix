@@ -1,9 +1,7 @@
 let
   customZshrc = ''
-    unsetopt correct  # Disable AutoCorrect
-
     # Completions
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case insensitive
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}'  # Case insensitive
     zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}" # Colored
     zstyle ':completion:*' menu select                        # Hit 'TAB' to select
 
@@ -13,9 +11,6 @@ let
 
     # Keybindings
     bindkey -e                                        # Emacs keybinding
-    bindkey "^[[3~" delete-char                       # Del key
-    bindkey "^[[H" beginning-of-line                  # Home key
-    bindkey "^[[F" end-of-line                        # End key
     bindkey "^[[5~" history-beginning-search-backward # Page up key
     bindkey "^[[6~" history-beginning-search-forward  # Page down key
     bindkey "\e[27;2;13~" accept-line                 # Shift - enter
@@ -31,20 +26,23 @@ let
 in
 {
   flake.modules.nixos.zsh = { pkgs, ... }: {
+
+    environment.systemPackages = [ pkgs.pure-prompt ];
+
     programs.zsh = {
       enable = true;
       autosuggestions.enable = true;
       # syntaxHighlighting.enable = true;
-      promptInit = ''
-        fpath+=("${pkgs.pure-prompt}/share/zsh/site-functions")
-        autoload -U promptinit && promptinit
-        prompt pure
-      '';
-      interactiveShellInit = customZshrc;
-    };
 
-    environment.etc."zshrc.local".text = ''
-      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-    '';
+      promptInit = ''
+        autoload -U promptinit && promptinit && prompt pure
+      '';
+
+      interactiveShellInit = ''
+        ${customZshrc}
+
+        source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+      '';
+    };
   };
 }
