@@ -22,8 +22,6 @@
   curl,
   libx11,
   libxi,
-  copyDesktopItems,
-  makeDesktopItem,
 }:
 
 let
@@ -112,7 +110,6 @@ flutter350.buildFlutterApplication (finalAttrs: {
   '';
 
   nativeBuildInputs = [
-    copyDesktopItems
     patchelf
   ];
 
@@ -148,23 +145,11 @@ flutter350.buildFlutterApplication (finalAttrs: {
       $out/app/breeze/lib/libwindcore.so
 
     install -Dm644 asset/image/app-icon.png \
-      $out/share/icons/hicolor/512x512/apps/breeze.png
-  '';
+      $out/share/icons/hicolor/512x512/apps/io.github.windy.breeze.png
 
-  desktopItems = [
-    (makeDesktopItem {
-      name = "breeze";
-      exec = "breeze";
-      icon = "breeze";
-      desktopName = "Breeze";
-      comment = finalAttrs.meta.description;
-      categories = [
-        "Network"
-        "Graphics"
-      ];
-      startupWMClass = "breeze";
-    })
-  ];
+    install -Dm644 flatpak/io.github.windy.breeze.desktop \
+      $out/share/applications/io.github.windy.breeze.desktop
+  '';
 
   meta = {
     description = "使用 Flutter 构建的漫画阅读器，通过插件提供漫画源支持";
