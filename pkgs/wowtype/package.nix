@@ -20,12 +20,12 @@
 }:
 
 let
-  version = "0.5.1";
-  dataVersion = "2026.11.11.7";
+  version = "0.7.3";
+  dataVersion = "2026.11.11.8";
 
   data = fetchurl {
     url = "https://github.com/Gloridust/WowType/releases/download/v${version}/wowtype-data-rime-ice-${dataVersion}.tar.gz";
-    hash = "sha256-s1pK92Vz67HHtALFKF0zu7HOKzJEdwvvnpCCbD/PyKo=";
+    hash = "sha256-uF18Z955bV8tjfrNdc6m4tbVPDNSqi6ZC5qqSnEFVkA=";
   };
 
   pythonEnv = python3.withPackages (ps: [ ps.pygobject3 ]);
@@ -40,12 +40,12 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "Gloridust";
     repo = "WowType";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-J0/zu43MA/TOunMfgLM1kavP2xTAuEJR0i16EWj4rH8=";
+    hash = "sha256-wr5f2E67Q5PsjwDJo3KSo2T+xbvoZa4vpfga9YGwtjA=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-IPoQFvULOjT7Y9waZy7sdexGp9/Z4qVBw5I4rAJDu3M=";
+    hash = "sha256-J90jh1/2zM3Lxp8WnbAOOaOahrnTKGXdyDSMrIfU4o8=";
   };
 
   nativeBuildInputs = [

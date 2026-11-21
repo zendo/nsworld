@@ -41,7 +41,6 @@ buildGoModule (finalAttrs: {
     runHook preInstall
 
     stage=build/linux-$GOARCH
-
     install -Dm755 "$stage/bowel" $out/libexec/bowel
 
     install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
