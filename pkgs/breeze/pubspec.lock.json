@@ -41,14 +41,14 @@
       "version": "2.0.3"
     },
     "archive": {
-      "dependency": "transitive",
+      "dependency": "direct dev",
       "description": {
         "name": "archive",
-        "sha256": "de5ac590b8155e4e676088d714bd41ea620449a6adc0f7950c5073874b287ddb",
+        "sha256": "2fda90592c0afd219c5e285618a98da835cd10df38372666093d25dfe457a2d0",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "4.6.0"
+      "version": "4.7.1"
     },
     "args": {
       "dependency": "transitive",
@@ -284,11 +284,11 @@
       "dependency": "transitive",
       "description": {
         "name": "cnativeapi",
-        "sha256": "bcf1d65504a397cd1b1eeaea582baf08250f38d46074739fddb3c5437f1b9e06",
+        "sha256": "510107ee007a7b4a01aa1eaec3ed097007d65760be6b272f093c4ca34a0d12ff",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "0.6.0"
+      "version": "0.6.1"
     },
     "code_assets": {
       "dependency": "direct main",
@@ -393,11 +393,11 @@
       "dependency": "transitive",
       "description": {
         "name": "cupertino_ui",
-        "sha256": "369e39a1c5c030a6212589c3da1809920b1c2cfade7b02aade7695bfa4b88c3a",
+        "sha256": "c3eaf7f5bdfee36deb0b14a4cbf7602f1b6b8d8b8576b81f38fc08c25881c94c",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "1.1.6"
+      "version": "1.1.7"
     },
     "dart_style": {
       "dependency": "transitive",
@@ -589,7 +589,7 @@
       "version": "0.9.5+2"
     },
     "file_selector_platform_interface": {
-      "dependency": "transitive",
+      "dependency": "direct main",
       "description": {
         "name": "file_selector_platform_interface",
         "sha256": "35e0bd61ebcdb91a3505813b055b09b79dfdc7d0aee9c09a7ba59ae4bb13dc85",
@@ -627,16 +627,6 @@
       },
       "source": "hosted",
       "version": "1.1.1"
-    },
-    "flat_buffers": {
-      "dependency": "transitive",
-      "description": {
-        "name": "flat_buffers",
-        "sha256": "7c1de2d6eb5f3e61e5c50040841109f509deaaf2b12ec0d57b92456d9ea50345",
-        "url": "https://pub.dev"
-      },
-      "source": "hosted",
-      "version": "25.9.23"
     },
     "flutter": {
       "dependency": "direct main",
@@ -804,11 +794,11 @@
       "dependency": "direct main",
       "description": {
         "name": "flutter_local_notifications",
-        "sha256": "58f9ea245d7194363c05f7a012bbc73291736c2d8b5f555a8e0ea3f9121868b4",
+        "sha256": "7d37d69ded3028af4f22531a0097a3baa478a384dff2e23e873707c93df3b704",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "23.0.1"
+      "version": "23.0.3"
     },
     "flutter_local_notifications_linux": {
       "dependency": "transitive",
@@ -1098,11 +1088,11 @@
       "dependency": "transitive",
       "description": {
         "name": "image",
-        "sha256": "89ed75b2f8231fe676808c5564f9590d728024ded7ac782a7ed8474f1c95b72a",
+        "sha256": "bc13f61f0f5cb77936e78ae5dae3800f442718dac5d2bc4654f03c239230ed0c",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "4.12.0"
+      "version": "4.13.1"
     },
     "injector": {
       "dependency": "transitive",
@@ -1144,21 +1134,21 @@
       "dependency": "transitive",
       "description": {
         "name": "jni",
-        "sha256": "2e91e6087291affd10b31b6c872f3e3ac7dc5d93b51b5ba485d930c8f08bde6c",
+        "sha256": "19764f78f6b9e0d40f6395b04649d1046eb57f5ccf05afce50cc63e5a82777b0",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "1.1.2"
+      "version": "1.2.1"
     },
     "jni_flutter": {
       "dependency": "transitive",
       "description": {
         "name": "jni_flutter",
-        "sha256": "0dd33d67797560f66e961a6053882d4df54bd345bf063b8fe7ea133f7ad8b191",
+        "sha256": "586594ad345b403bda8a794b0b8a9e34298238b86c2a7d7f15160b092fe9ef3d",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "1.0.4+1"
+      "version": "1.1.0"
     },
     "jni_util": {
       "dependency": "transitive",
@@ -1324,11 +1314,11 @@
       "dependency": "direct main",
       "description": {
         "name": "material_ui",
-        "sha256": "474c135fd46b56ff1d35ca982155e8863d28fbc6464d1192acf4ee53a738680e",
+        "sha256": "a6b19012df437a356cbc01f8ea22a105e07194c47c9a6009da0032a0ce35c4ab",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "1.11.0"
+      "version": "1.11.1"
     },
     "meta": {
       "dependency": "direct overridden",
@@ -1374,31 +1364,31 @@
       "dependency": "direct main",
       "description": {
         "name": "native_toolchain_rust",
-        "sha256": "dc8e5f20c0cb7052372bc302f075607086d86354b37199e89ec9d3d35589e519",
+        "sha256": "17d083e9d2375d9371b7e23f950746d3dfacc512431f4418a5aa953a73af69a8",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "1.0.7"
+      "version": "1.1.1"
     },
     "nativeapi": {
       "dependency": "transitive",
       "description": {
         "name": "nativeapi",
-        "sha256": "c71a5e10aacd177fe1c3eef279179beeba6fd08132f0d36e0a7e081e13906749",
+        "sha256": "c0c566cf6788a6b6a32ce2666f02364b7fb50133f07a744bc1e793b5b8bb2c78",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "0.6.0"
+      "version": "0.6.1"
     },
     "nativeapi_flutter": {
       "dependency": "transitive",
       "description": {
         "name": "nativeapi_flutter",
-        "sha256": "3709b58224473298349375c8a0404d19dc0b5f151397cae2f127fe49a3a1a491",
+        "sha256": "3bb647f299932a4a19aa066051aabc6872f6876fa50c38a0ef132da414e9db26",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "0.6.0"
+      "version": "0.6.1"
     },
     "nested": {
       "dependency": "transitive",
@@ -1419,37 +1409,6 @@
       },
       "source": "hosted",
       "version": "0.5.0"
-    },
-    "objectbox": {
-      "dependency": "direct main",
-      "description": {
-        "name": "objectbox",
-        "sha256": "f68d74bfdfa6758cebf4cd319db1f4a4386c79ba8896d19e2e999faf041bac78",
-        "url": "https://pub.dev"
-      },
-      "source": "hosted",
-      "version": "5.3.2"
-    },
-    "objectbox_flutter_libs": {
-      "dependency": "direct main",
-      "description": {
-        "name": "objectbox_flutter_libs",
-        "sha256": "604d26fac4548693449c9ea802e007d4adf7f31e361ae3ebf362ac142295078d",
-        "url": "https://pub.dev"
-      },
-      "source": "hosted",
-      "version": "5.3.2"
-    },
-    "objectbox_generator": {
-      "dependency": "direct dev",
-      "description": {
-        "path": "generator",
-        "ref": "d28e393de3e7dbba1e0925999fd9dfeb9f9a721c",
-        "resolved-ref": "d28e393de3e7dbba1e0925999fd9dfeb9f9a721c",
-        "url": "https://github.com/objectbox/objectbox-dart.git"
-      },
-      "source": "git",
-      "version": "5.3.2"
     },
     "objective_c": {
       "dependency": "transitive",
@@ -1642,7 +1601,7 @@
       "version": "2.2.2"
     },
     "path_provider_platform_interface": {
-      "dependency": "transitive",
+      "dependency": "direct main",
       "description": {
         "name": "path_provider_platform_interface",
         "sha256": "484838772624c3a4b94f1e44a3e19897fee738f2d5c4ce448443b0417f7c9dda",
@@ -1916,31 +1875,31 @@
       "dependency": "transitive",
       "description": {
         "name": "sentry",
-        "sha256": "de233eb7a4d30e8fc18dafffde344b1846f92ffd079f454c56872e064145e396",
+        "sha256": "2e81b9ec260e4ef7174feb0a599f69e74f3f38d713058df9576a86856afa84bf",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "10.3.0"
+      "version": "10.6.0"
     },
     "sentry_dart_plugin": {
       "dependency": "direct dev",
       "description": {
         "name": "sentry_dart_plugin",
-        "sha256": "da9c1d0b3c87a251bfc36301f16af090a88c2d59128fe9a6f908f5ac20340c97",
+        "sha256": "cc1adb7588488b397ba89ef72ba50eaa5852e44602094319128e95a9296e2a2e",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "3.4.0"
+      "version": "3.6.0"
     },
     "sentry_flutter": {
       "dependency": "direct main",
       "description": {
         "name": "sentry_flutter",
-        "sha256": "798acb5d181869403828a0c0ac54989c9b1f7189efd13cc2a55102d18454bf23",
+        "sha256": "6bc012fec2357471cb4a8370e32cf4ffb4d63684c6df66c2df09cee314cf4ce4",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "10.3.0"
+      "version": "10.6.0"
     },
     "serial_csv": {
       "dependency": "transitive",
@@ -1993,7 +1952,7 @@
       "version": "2.4.1"
     },
     "shared_preferences_platform_interface": {
-      "dependency": "transitive",
+      "dependency": "direct main",
       "description": {
         "name": "shared_preferences_platform_interface",
         "sha256": "649dc798a33931919ea356c4305c2d1f81619ea6e92244070b520187b5140ef9",
@@ -2263,11 +2222,11 @@
       "dependency": "transitive",
       "description": {
         "name": "url_launcher_android",
-        "sha256": "611e87fb320b70d1dd721dc46af89c98aceccea9b31fde49e084591414e0c610",
+        "sha256": "b8073b1e5173d63afe1a18985a75896d72f759d3bc1817eb1ae8d26e8527cceb",
         "url": "https://pub.dev"
       },
       "source": "hosted",
-      "version": "6.3.33"
+      "version": "6.3.35"
     },
     "url_launcher_ios": {
       "dependency": "transitive",
