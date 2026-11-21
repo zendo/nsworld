@@ -32,11 +32,11 @@ buildGoModule (finalAttrs: {
     runHook postBuild
   '';
 
-  # Tests need a display and network access.
+  # Tests need a display and network access
   doCheck = false;
 
-  # Kept out of bin/: MyGo derives the window class and app id from its own
-  # filename, which makeWrapper renames to .bowel-wrapped.
+  # Kept out of bin/, MyGo uses its executable name as window class
+  # and app id, which makeWrapper would change to .bowel-wrapped
   installPhase = ''
     runHook preInstall
 
@@ -56,8 +56,8 @@ buildGoModule (finalAttrs: {
   # cp -r "$stage/fonts" $out/libexec
   # install -Dm644 "$stage/fonts/OPPO Sans License.txt" $out/share/licenses/bowel/OPPO-Sans-License.txt
 
-  # MOHO_CORE: the mihomo core bowel launches. APPIMAGE: a bare launcher name,
-  # so the autostart entry does not pin this build's store path.
+  # MOHO_CORE: use system mihomo instead of the bundled core
+  # APPIMAGE: keep the autostart entry a bare command, not a /nix/store path
   postFixup = ''
     makeWrapper $out/libexec/bowel $out/bin/bowel \
       --set MOHO_CORE "${mihomo}/bin/mihomo" \
