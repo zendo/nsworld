@@ -1259,7 +1259,7 @@ This should be called after changing `auto-save-list-file-prefix'."
 
 ;;; Code:
 (setq confirm-kill-processes nil)
-;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
 ;; (setq-default frame-title-format "%b (%f)") ;标题栏显示正在编辑的文件名和路径
 ;; (setq system-time-locale "C") ;使用英文时间格式
 
