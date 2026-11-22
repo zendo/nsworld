@@ -68,7 +68,7 @@ selfhosted-domains:
     cfg=.\#"nixosConfigurations.svp.config"
     nix eval --json "$cfg" --apply '
       c: builtins.attrNames c.services.caddy.virtualHosts' \
-      | jq -r 'map(sub("^https?://"; "")) | map(select(test("^[A-Za-z0-9.-]+$"))) | sort | .[], "192.168.2.99"' \
+      | jq -r 'map(sub("^https?://"; "")) | map(select(test("^[A-Za-z0-9.-]+$"))) | sort | .[], "192.168.2.30"' \
       | paste -sd'/' - \
       | sed 's|^|/|'
 
