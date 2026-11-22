@@ -9,11 +9,14 @@
   因为后端只绑 loopback,各服务模块里的 openFirewall 全部注释掉了:
   反代走 127.0.0.1,NixOS 防火墙对 loopback 无条件放行,不需要开端口。
 */
+{ inputs, ... }:
 {
   flake.modules.nixos.host-svp =
     { config, pkgs, ... }:
     let
       p = config.myVars.ports;
+      # 纯静态单页,没有后端进程,所以不占 myvars 里的端口
+      webRoot = inputs.self + /dotfiles/web;
     in
     {
       # 启用在 host 侧: services.caddy.enable = true;
@@ -27,6 +30,13 @@
           # 用 302 而不是 301,免得浏览器永久缓存(以后想看板换了也不用清缓存)
           ":80".extraConfig = ''
             redir * http://dynacat.home.arpa{uri} 302
+          '';
+
+          "http://radio.home.arpa".extraConfig = ''
+            root * ${webRoot}
+            encode zstd gzip
+            try_files {path} /iradio.html
+            file_server
           '';
 
           "http://navidrome.home.arpa".extraConfig = ''

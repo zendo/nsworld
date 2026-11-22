@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iRadio — 网络电台</title>
+<!-- favicon：Material Symbols "radio"（Apache-2.0），内联为 data URI，无额外请求 -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI3IiBmaWxsPSIjZjBhNjNjIi8+PHN2ZyB4PSI0IiB5PSI0IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIj48cGF0aCBmaWxsPSIjMWExMjA2IiBkPSJNMTYwLTgwcS0zMyAwLTU2LjUtMjMuNVQ4MC0xNjB2LTQ4MHEwLTI1IDEzLjUtNDV0MzYuNS0yOWw1MDYtMjA2IDI2IDY2LTMzMCAxMzRoNDY4cTMzIDAgNTYuNSAyMy41VDg4MC02NDB2NDgwcTAgMzMtMjMuNSA1Ni41VDgwMC04MEgxNjBabTAtODBoNjQwdi0yODBIMTYwdjI4MFptMjMxLTY5cTI5LTI5IDI5LTcxdC0yOS03MXEtMjktMjktNzEtMjl0LTcxIDI5cS0yOSAyOS0yOSA3MXQyOSA3MXEyOSAyOSA3MSAyOXQ3MS0yOVpNMTYwLTUyMGg0ODB2LTgwaDgwdjgwaDgwdi0xMjBIMTYwdjEyMFptMCAzNjB2LTI4MCAyODBaIi8+PC9zdmc+PC9zdmc+">
+<meta name="description" content="单文件网络电台播放器：Radio Browser 浏览、收藏、我的电台。">
+<style>
+:root{
+  --bg:#0d0f14; --panel:#141821; --panel-2:#1b2029; --panel-3:#232936;
+  --border:#242a35; --text:#e7ecf3; --muted:#8b95a7;
+  --accent:#f0a63c; --accent-2:#39c7b0; --danger:#e05561; --ok:#4cc38a;
+  --radius:12px; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --bg:#f4f6f9; --panel:#ffffff; --panel-2:#eef1f6; --panel-3:#e3e8f0;
+  --border:#dbe1ea; --text:#161b23; --muted:#5d6675;
+  --shadow:0 10px 26px rgba(20,30,50,.12);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:14px/1.45 "Inter","Noto Sans SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--panel-3);border-radius:10px;border:2px solid var(--bg)}
+::-webkit-scrollbar-track{background:transparent}
+
+.app{
+  display:grid; height:100vh; overflow:hidden;
+  grid-template-columns:224px minmax(0,1fr) 336px;
+  grid-template-rows:minmax(0,1fr) auto;
+  grid-template-areas:"side main stage" "bar bar bar";
+}
+
+/* ---------- sidebar ---------- */
+.side{
+  grid-area:side; border-right:1px solid var(--border); background:var(--panel);
+  display:flex; flex-direction:column; min-height:0; padding:14px 10px 10px;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 16px}
+.brand-mark{
+  width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--accent),#e0603a); color:#1a1206; font-weight:800;font-size:15px;
+}
+.brand-name{font-weight:700;letter-spacing:.2px}
+.brand-sub{font-size:11px;color:var(--muted);margin-top:-2px}
+.nav{overflow:auto;flex:1;display:flex;flex-direction:column;gap:2px;padding-bottom:8px}
+.nav-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:14px 10px 6px}
+.nav-item{
+  display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;text-align:left;
+  color:var(--muted); font-weight:500; width:100%;
+}
+.nav-item:hover{background:var(--panel-2);color:var(--text)}
+.nav-item.active{background:var(--panel-2);color:var(--text);box-shadow:inset 0 0 0 1px var(--border)}
+.nav-item .ico{width:16px;text-align:center;flex:none;opacity:.9}
+.nav-item .cnt{margin-left:auto;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- main ---------- */
+.main{grid-area:main;display:flex;flex-direction:column;min-width:0;min-height:0}
+.topbar{
+  display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--border);
+  background:color-mix(in srgb,var(--bg) 80%, transparent);flex:none;flex-wrap:wrap;
+}
+.search{
+  flex:1;min-width:180px;display:flex;align-items:center;gap:8px;
+  background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:0 10px;height:36px;
+}
+.search:focus-within{border-color:color-mix(in srgb,var(--accent) 55%,var(--border))}
+.search input{flex:1;background:none;border:0;outline:0;min-width:0}
+.search input::placeholder{color:var(--muted)}
+.search .kbd{font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+.sel{
+  height:36px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:0 8px;outline:0;
+}
+.btn{
+  height:36px;padding:0 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel);
+  font-weight:600;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+}
+.btn:hover{background:var(--panel-2)}
+.btn.primary{background:var(--accent);color:#1a1206;border-color:transparent}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.ghost{background:none}
+.btn.sm{height:30px;padding:0 10px;font-size:13px;border-radius:8px}
+
+.pagebar{display:flex;align-items:baseline;gap:10px;padding:16px 18px 8px;flex:none}
+.page-title{font-size:19px;font-weight:700;margin:0}
+.page-sub{color:var(--muted);font-size:12px}
+
+.listwrap{flex:1;overflow:auto;padding:0 10px 18px;min-height:0}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+
+.station{
+  display:grid;grid-template-columns:40px minmax(0,1fr) auto auto;align-items:center;gap:12px;
+  padding:8px 10px;border-radius:10px;border:1px solid transparent;
+}
+.station:hover{background:var(--panel);border-color:var(--border)}
+.station.playing{background:color-mix(in srgb,var(--accent) 12%,transparent);border-color:color-mix(in srgb,var(--accent) 40%,var(--border))}
+.station-main{display:flex;align-items:center;gap:10px;min-width:0;text-align:left;width:100%}
+.logo{
+  width:40px;height:40px;border-radius:9px;flex:none;object-fit:cover;background:var(--panel-3);
+  display:grid;place-items:center;font-weight:700;font-size:14px;color:var(--muted);overflow:hidden;
+}
+.logo img{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.logo{font-weight:700;position:relative;isolation:isolate}
+/* 无台标时的水印收音机字形（Material Symbols “radio”, Apache-2.0） */
+.logo-glyph{
+  position:absolute;inset:0;margin:auto;width:88%;height:88%;fill:currentColor;opacity:.18;
+  pointer-events:none;z-index:0;
+}
+.logo-ini{position:relative;z-index:1;line-height:1}
+.stage-art{position:relative}
+.stage-art .logo-glyph{width:52%;height:52%;opacity:.14}
+.stage-art .logo-ini{font-size:52px}
+.st-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-sub{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips{display:flex;gap:4px;align-items:center;flex:none}
+.chip{font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:1px 7px;white-space:nowrap}
+.chip.acc{color:var(--accent-2);border-color:color-mix(in srgb,var(--accent-2) 40%,var(--border))}
+.iconbtn{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--muted);flex:none}
+.iconbtn:hover{background:var(--panel-2);color:var(--text)}
+.iconbtn.on{color:var(--accent)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;padding:0 8px}
+.tile{
+  text-align:left;padding:12px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:3px;min-height:64px;justify-content:center;
+}
+.tile:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));background:var(--panel-2)}
+.tile b{font-weight:600}
+.tile span{font-size:12px;color:var(--muted)}
+
+.empty{padding:36px 18px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--text);margin-bottom:6px;font-size:15px}
+.skeleton{height:56px;border-radius:10px;background:linear-gradient(90deg,var(--panel),var(--panel-2),var(--panel));background-size:200% 100%;animation:sk 1.2s linear infinite}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* ---------- now playing stage ---------- */
+.stage{
+  grid-area:stage;border-left:1px solid var(--border);background:var(--panel);
+  display:flex;flex-direction:column;min-height:0;overflow:auto;padding:18px;
+}
+.stage-art{
+  aspect-ratio:1;width:100%;border-radius:16px;background:var(--panel-3);overflow:hidden;
+  display:grid;place-items:center;font-size:44px;font-weight:800;color:var(--muted);border:1px solid var(--border);
+}
+.stage-art img{width:100%;height:100%;object-fit:cover}
+.stage-name{font-size:17px;font-weight:700;margin:14px 0 3px;word-break:break-word}
+.stage-sub{font-size:12px;color:var(--muted);word-break:break-word}
+.stage-block{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.stage-h{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.track-title{font-size:15px;font-weight:600;word-break:break-word}
+.track-title.dim{color:var(--muted);font-weight:500;font-size:13px}
+.history{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.history li{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:12px;position:relative}
+.history li:before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--panel-3)}
+.history li:first-child{color:var(--text)}
+.history li:first-child:before{background:var(--accent)}
+
+/* ---------- player bar ---------- */
+.bar{
+  grid-area:bar;border-top:1px solid var(--border);background:var(--panel);
+  display:flex;align-items:center;gap:14px;padding:10px 16px;
+}
+.bar-now{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.bar-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-status{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--muted);flex:none}
+.dot.play{background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
+.dot.busy{background:var(--accent);animation:pulse 1s infinite}
+.dot.err{background:var(--danger)}
+@keyframes pulse{50%{opacity:.3}}
+.transport{display:flex;align-items:center;gap:6px;flex:none}
+.tbtn{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--border);
+  background:var(--panel-2);color:var(--text);
+}
+.tbtn:hover{background:var(--panel-3)}
+.tbtn.main{width:46px;height:46px;background:var(--accent);color:#1a1206;border-color:transparent}
+.tbtn.main:hover{filter:brightness(1.07)}
+.tbtn:disabled{opacity:.4;cursor:not-allowed}
+.vol{display:flex;align-items:center;gap:8px;width:150px;flex:none;color:var(--muted)}
+.vol input{width:100%;accent-color:var(--accent)}
+
+.toast{
+  position:fixed;left:50%;bottom:88px;transform:translate(-50%,14px);opacity:0;pointer-events:none;
+  background:var(--panel-3);color:var(--text);border:1px solid var(--border);border-radius:10px;
+  padding:9px 14px;font-size:13px;box-shadow:var(--shadow);transition:.18s;z-index:60;max-width:80vw;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+dialog{
+  border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:14px;
+  padding:0;box-shadow:var(--shadow);width:min(420px,92vw);
+}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.dlg-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700}
+.dlg-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+.dlg-body label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:5px}
+.dlg-body input{
+  height:36px;background:var(--panel-2);border:1px solid var(--border);border-radius:9px;padding:0 10px;outline:0;
+}
+.dlg-body input:focus{border-color:color-mix(in srgb,var(--accent) 55%,var(--border))}
+.dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:0 16px 16px}
+.io-note{font-size:12px;color:var(--muted);line-height:1.6}
+.io-note code{background:var(--panel-2);padding:1px 5px;border-radius:5px;font-size:11.5px;word-break:break-all}
+.io-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.io-status{font-size:12px;color:var(--accent-2);min-height:16px}
+
+@media (max-width:1180px){
+  .app{grid-template-columns:224px minmax(0,1fr);grid-template-areas:"side main" "bar bar"}
+  .stage{display:none}
+}
+@media (max-width:780px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "bar"}
+  .side{display:none}
+  .vol{display:none}
+  .station{grid-template-columns:36px minmax(0,1fr) auto}
+  .station .chips{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-mark">iR</div>
+      <div>
+        <div class="brand-name">iRadio</div>
+        <div class="brand-sub">Web · 单文件版</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="top"><span class="ico">▲</span>排行 Top</button>
+      <button class="nav-item" data-view="country:CN"><span class="ico">CN</span>中国</button>
+      <button class="nav-item" data-view="world"><span class="ico">◎</span>World 浏览</button>
+      <div class="nav-label">我的</div>
+      <button class="nav-item" data-view="favorites"><span class="ico">♥</span>收藏<span class="cnt" id="favCount">0</span></button>
+      <button class="nav-item" data-view="mine"><span class="ico">＋</span>我的电台<span class="cnt" id="mineCount">0</span></button>
+    </nav>
+    <button class="btn sm ghost" id="ioBtn">导入 / 导出</button>
+    <button class="btn sm ghost" id="aboutBtn">关于 / 已知限制</button>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="search">
+        <span style="color:var(--muted)">⌕</span>
+        <input id="search" placeholder="搜索电台名、风格、国家" autocomplete="off">
+        <span class="kbd">Ctrl F</span>
+      </div>
+      <select class="sel" id="sortSel" title="排序">
+        <option value="votes">投票</option>
+        <option value="name">名称</option>
+        <option value="bitrate">码率</option>
+      </select>
+      <button class="btn sm ghost" id="orderBtn" title="切换升序 / 降序">↓</button>
+      <button class="btn sm ghost" id="themeBtn" title="主题：跟随系统 — 点击切换">◐</button>
+      <button class="btn sm primary" id="addBtn">添加电台</button>
+    </div>
+    <div class="pagebar">
+      <h1 class="page-title" id="pageTitle">排行 Top</h1>
+      <div class="page-sub" id="pageSub"></div>
+    </div>
+    <div class="listwrap" id="listwrap">
+      <ul class="list" id="list"></ul>
+      <div class="grid" id="grid" hidden></div>
+      <div class="empty" id="empty" hidden></div>
+    </div>
+  </main>
+
+  <aside class="stage" id="stage">
+    <div class="stage-art" id="stageArt">i</div>
+    <div class="stage-name" id="stageName">未在播放</div>
+    <div class="stage-sub" id="stageSub">从左侧选一个电台开始</div>
+    <div class="stage-block">
+      <div class="stage-h">当前曲目</div>
+      <div class="track-title dim" id="trackTitle">—</div>
+      <div class="stage-sub" id="trackNote" style="margin-top:6px"></div>
+    </div>
+    <div class="stage-block">
+      <div class="stage-h">本次会话曲目历史</div>
+      <ul class="history" id="history"><li>暂无</li></ul>
+    </div>
+  </aside>
+
+  <footer class="bar">
+    <div class="bar-now">
+      <div class="logo" id="barLogo">i</div>
+      <div style="min-width:0">
+        <div class="bar-name" id="barName">未在播放</div>
+        <div class="bar-status"><span class="dot" id="barDot"></span><span id="barStatus">就绪</span></div>
+      </div>
+    </div>
+    <div class="transport">
+      <button class="tbtn" id="prevBtn" title="上一个电台">⏮</button>
+      <button class="tbtn main" id="playBtn" title="播放 / 暂停">▶</button>
+      <button class="tbtn" id="stopBtn" title="停止">⏹</button>
+      <button class="tbtn" id="nextBtn" title="下一个电台">⏭</button>
+    </div>
+    <button class="iconbtn" id="favBtn" title="收藏当前电台">♡</button>
+    <div class="vol" title="音量"><span style="font-size:12px">VOL</span><input id="vol" type="range" min="0" max="100" value="80"></div>
+  </footer>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" class="dlg-head">
+    <span id="dlgTitle">添加电台</span>
+    <button class="iconbtn" value="cancel" title="关闭">✕</button>
+  </form>
+  <form class="dlg-body" id="dlgForm" onsubmit="return false">
+    <label>名称<input id="dlgName" placeholder="例如 My Jazz Stream" required></label>
+    <label>流地址<input id="dlgUrl" placeholder="https://example.com/stream.mp3" required></label>
+    <label>风格标签（可选）<input id="dlgTags" placeholder="jazz, smooth"></label>
+    <label>国家（可选）<input id="dlgCountry" placeholder="Germany"></label>
+  </form>
+  <div class="dlg-foot">
+    <button class="btn sm ghost" id="dlgCancel">取消</button>
+    <button class="btn sm primary" id="dlgSave">保存</button>
+  </div>
+</dialog>
+
+<dialog id="aboutDlg">
+  <form method="dialog" class="dlg-head"><span>关于 iRadio</span><button class="iconbtn" value="cancel">✕</button></form>
+  <div class="dlg-body" style="font-size:13px;line-height:1.6;color:var(--muted)">
+    <p style="margin:0;color:var(--text)">单文件网页版网络电台播放器，数据来自 Radio Browser API。</p>
+    <p style="margin:0">与 Qt 版 BearWave 的差距：</p>
+    <ul style="margin:0;padding-left:18px">
+      <li>曲目元数据（ICY）依赖流服务器开放 CORS，多数电台拿不到</li>
+      <li>没有系统托盘、后台常驻、MPRIS 名称与开机自启</li>
+      <li>https 页面无法播放 http 流（混合内容拦截）</li>
+      <li>HLS（.m3u8）在 Chrome / Edge 142+ 与 Safari 原生可播，Firefox 桌面不行</li>
+    </ul>
+    <p style="margin:0">建议用 <code>python3 -m http.server</code> 本地启动，这样能播放 http 电台。</p>
+  </div>
+</dialog>
+
+<dialog id="ioDlg">
+  <form method="dialog" class="dlg-head"><span>导入 / 导出</span><button class="iconbtn" value="cancel">✕</button></form>
+  <div class="dlg-body">
+    <div class="io-note">
+      导出格式与原生 BearWave 一致：JSON 数组，每项 <code>uuid</code> <code>name</code> <code>url</code> <code>urlResolved</code> <code>country</code>，按名称排序。
+      直接覆盖到 <code>~/.config/bearwave/favorites.json</code> 即可（Flatpak 为
+      <code>~/.var/app/de.nerdbear.bearwave/config/bearwave/</code>）。
+    </div>
+    <div class="io-row">
+      <button class="btn sm" id="expFavBtn">导出 favorites.json</button>
+      <button class="btn sm" id="expMineBtn">导出 my_stations.json</button>
+      <button class="btn sm ghost" id="copyFavBtn">复制收藏 JSON</button>
+    </div>
+    <div class="io-row" style="margin-top:4px">
+      <span style="font-size:12px;color:var(--muted)">导入到</span>
+      <select class="sel" id="ioTarget" style="height:30px">
+        <option value="favorites">收藏</option>
+        <option value="mine">我的电台</option>
+      </select>
+      <button class="btn sm ghost" id="logoBtn">补齐缺失台标</button>
+      <button class="btn sm primary" id="impBtn">选择 JSON 文件…</button>
+      <input type="file" id="impFile" accept=".json,application/json" hidden>
+    </div>
+    <div class="io-status" id="ioStatus"></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast"></div><audio id="audio" preload="none"></audio>
+
+<script>
+'use strict';
+
+/* ---------- tiny helpers ---------- */
+const $ = (id) => document.getElementById(id);
+const audio = $('audio');
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
+  { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+));
+
+const API_HOSTS = [
+  'https://de1.api.radio-browser.info',
+  'https://de2.api.radio-browser.info',
+  'https://nl1.api.radio-browser.info',
+  'https://at1.api.radio-browser.info',
+];
+let apiHost = API_HOSTS[0];
+
+async function api(path) {
+  const order = [apiHost, ...API_HOSTS.filter((h) => h !== apiHost)];
+  let lastErr = null;
+  for (const host of order) {
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), 9000);
+    try {
+      const res = await fetch(host + path, { signal: ac.signal, headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      apiHost = host;
+      return data;
+    } catch (e) {
+      lastErr = e;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw new Error('Radio Browser API 不可用：' + (lastErr && lastErr.message ? lastErr.message : '网络错误'));
+}
+
+/* ---------- persistence ---------- */
+const LS = {
+  fav: 'iradio.favorites',
+  mine: 'iradio.mine',
+  state: 'iradio.state',
+  theme: 'iradio.theme',
+};
+
+// 旧版本用的是 bearwave.* 键名，首次启动时搬一次，避免收藏丢失
+(function migrateLegacyKeys() {
+  const legacy = {
+    fav: 'bearwave.favorites',
+    mine: 'bearwave.mine',
+    state: 'bearwave.state',
+    theme: 'bearwave.theme',
+  };
+  for (const key of Object.keys(LS)) {
+    try {
+      if (localStorage.getItem(LS[key]) === null) {
+        const old = localStorage.getItem(legacy[key]);
+        if (old !== null) localStorage.setItem(LS[key], old);
+      }
+    } catch { /* 隐私模式忽略 */ }
+  }
+})();
+function load(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function save(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* quota / private mode */ }
+}
+
+/* ---------- state ---------- */
+const S = {
+  view: 'top',
+  stations: [],
+  visible: [],
+  query: '',
+  sort: 'votes',
+  desc: true,
+  current: null,
+  playing: false,
+  favorites: load(LS.fav, []),
+  mine: load(LS.mine, []),
+  history: [],
+  world: { countries: [], tags: [] },
+  editingId: null,
+};
+
+const savedState = load(LS.state, null);
+
+/* ---------- station helpers ---------- */
+function norm(s) {
+  const url = (s.url || '').trim();
+  const resolved = (s.url_resolved || s.urlResolved || '').trim();
+  const playable = resolved || url;
+  return {
+    id: s.stationuuid || s.uuid || s.id || playable,
+    name: (s.name || '').trim() || '未命名电台',
+    url: url || playable,
+    urlResolved: playable,
+    favicon: (s.favicon || '').trim(),
+    tags: (s.tags || '').trim(),
+    country: (s.country || '').trim(),
+    countrycode: (s.countrycode || '').trim(),
+    codec: (s.codec || '').trim(),
+    bitrate: Number(s.bitrate) || 0,
+    votes: Number(s.votes) || 0,
+    homepage: (s.homepage || '').trim(),
+    hls: s.hls === 1 || s.hls === true || /\.m3u8(\?|$)/i.test(playable),
+  };
+}
+const streamUrl = (st) => (st && (st.urlResolved || st.url)) || '';
+function normList(list) {
+  const seen = new Set();
+  const out = [];
+  for (const raw of list || []) {
+    if (raw && raw.lastcheckok === 0) continue;
+    const st = norm(raw);
+    if (!streamUrl(st) || seen.has(st.id)) continue;
+    seen.add(st.id);
+    out.push(st);
+  }
+  return out;
+}
+const keyOf = (st) => st.id || st.url || st.name;
+
+// 国家代码 → 中文名（Intl 拿不到就退回代码本身）
+function regionName(cc) {
+  try {
+    return new Intl.DisplayNames(['zh'], { type: 'region' }).of(cc) || cc;
+  } catch {
+    return cc;
+  }
+}
+const isFav = (st) => S.favorites.some((f) => keyOf(f) === keyOf(st));
+const initials = (name) => {
+  const s = String(name || '').trim();
+  if (!s) return '?';
+  // 中日韩名称取前两个字（「中国之声」→「中国」）
+  if (/^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(s)) {
+    return [...s.replace(/[\s\p{P}]/gu, '')].slice(0, 2).join('');
+  }
+  return s
+    .replace(/[^\p{L}\p{N} ]/gu, ' ')
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0] || '')
+    .join('')
+    .toUpperCase();
+};
+
+/* ---------- toast / theme ---------- */
+let toastTimer = null;
+function toast(msg) {
+  const el = $('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+}
+/* ---------- theme：auto 跟随系统 / light / dark ---------- */
+const THEME_MODES = ['auto', 'light', 'dark'];
+const THEME_META = {
+  auto: { icon: '◐', title: '主题：跟随系统' },
+  light: { icon: '☀', title: '主题：浅色' },
+  dark: { icon: '☾', title: '主题：深色' },
+};
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+const storedTheme = load(LS.theme, 'auto');
+let themeMode = THEME_MODES.includes(storedTheme) ? storedTheme : 'auto';
+
+function resolvedTheme() {
+  return themeMode === 'auto' ? (darkQuery.matches ? 'dark' : 'light') : themeMode;
+}
+// 只应用，不写存储（系统切换刷新时也会调它）
+function syncTheme() {
+  document.documentElement.dataset.theme = resolvedTheme();
+  const btn = $('themeBtn');
+  if (!btn) return;
+  const meta = THEME_META[themeMode];
+  btn.textContent = meta.icon;
+  btn.title = meta.title + (themeMode === 'auto' ? '（当前 ' + resolvedTheme() + '）' : '') +
+    ' — 点击切换';
+}
+function setThemeMode(mode) {
+  themeMode = THEME_MODES.includes(mode) ? mode : 'auto';
+  save(LS.theme, themeMode);
+  syncTheme();
+}
+// 系统光暗变化时，只有 auto 模式跟着变
+const onSchemeChange = () => { if (themeMode === 'auto') syncTheme(); };
+if (darkQuery.addEventListener) darkQuery.addEventListener('change', onSchemeChange);
+else if (darkQuery.addListener) darkQuery.addListener(onSchemeChange);
+syncTheme();
+
+
+/* ---------- data loading ---------- */
+const VIEW_TITLES = {
+  top: ['排行 Top', '按投票数排名的全球电台'],
+  favorites: ['收藏', '本地保存，不会同步'],
+  mine: ['我的电台', '手动添加的流地址'],
+  world: ['World 浏览', '按国家或风格浏览'],
+  search: ['搜索结果', ''],
+};
+
+let loadToken = 0;
+
+async function loadView(view, opts = {}) {
+  S.view = view;
+  if (!opts.keepQuery) { S.query = ''; $('search').value = ''; }
+  syncNav();
+  if (view === 'favorites') { S.stations = S.favorites.slice(); return render(); }
+  if (view === 'mine') { S.stations = S.mine.slice(); return render(); }
+  if (view === 'world') return loadWorld();
+
+  const token = ++loadToken;
+  skeleton();
+  try {
+    let data = [];
+    if (view === 'top') {
+      data = await api('/json/stations/topvote/80?hidebroken=true');
+    } else if (view.startsWith('country:')) {
+      const cc = view.split(':')[1];
+      data = await api('/json/stations/bycountrycodeexact/' + encodeURIComponent(cc) +
+        '?limit=80&order=votes&reverse=true&hidebroken=true');
+    } else if (view.startsWith('tag:')) {
+      const tag = view.split(':').slice(1).join(':');
+      data = await api('/json/stations/search?tagList=' + encodeURIComponent(tag) +
+        '&limit=80&order=votes&reverse=true&hidebroken=true');
+    } else if (view === 'search') {
+      data = await searchStations(S.query);
+    }
+    if (token !== loadToken) return;
+    S.stations = normList(data);
+    render();
+  } catch (e) {
+    if (token !== loadToken) return;
+    S.stations = [];
+    const wrap = $('listwrap');
+    $('list').innerHTML = '';
+    $('grid').hidden = true;
+    $('empty').hidden = false;
+    $('empty').innerHTML = '<b>加载失败</b>' + esc(e.message) +
+      '<div style="margin-top:12px"><button class="btn sm primary" id="retryBtn">重试</button></div>';
+    $('retryBtn').onclick = () => loadView(S.view, { keepQuery: true });
+    setHeading(S.view, 0);
+    return;
+  }
+}
+
+async function searchStations(q) {
+  const enc = encodeURIComponent(q);
+  const base = '&limit=60&order=votes&reverse=true&hidebroken=true';
+  const results = await Promise.allSettled([
+    api('/json/stations/search?name=' + enc + base),
+    api('/json/stations/search?tagList=' + enc + base),
+    api('/json/stations/search?country=' + enc + base),
+  ]);
+  const merged = [];
+  for (const r of results) if (r.status === 'fulfilled') merged.push(...r.value);
+  if (!merged.length && results.every((r) => r.status === 'rejected')) {
+    throw results[0].reason || new Error('搜索失败');
+  }
+  return merged;
+}
+
+async function loadWorld() {
+  const token = ++loadToken;
+  skeleton();
+  try {
+    const [countries, tags] = await Promise.all([
+      api('/json/countries?limit=40&order=stationcount&reverse=true&hidebroken=true'),
+      api('/json/tags?limit=24&order=stationcount&reverse=true&hidebroken=true'),
+    ]);
+    if (token !== loadToken) return;
+    S.world.countries = countries || [];
+    S.world.tags = tags || [];
+    renderWorld();
+  } catch (e) {
+    if (token !== loadToken) return;
+    $('list').innerHTML = '';
+    $('grid').hidden = true;
+    $('empty').hidden = false;
+    $('empty').innerHTML = '<b>加载失败</b>' + esc(e.message);
+  }
+}
+
+/* ---------- rendering ---------- */
+function setHeading(view, count) {
+  const [title, sub] = VIEW_TITLES[view] ||
+    (view.startsWith('country:') ? ['国家 · ' + regionName(view.split(':')[1]), '按投票排序']
+      : view.startsWith('tag:') ? ['风格 · ' + view.split(':').slice(1).join(':'), '按投票排序']
+        : [view, '']);
+  $('pageTitle').textContent = title;
+  $('pageSub').textContent = [sub, count ? count + ' 个电台' : ''].filter(Boolean).join(' · ');
+}
+
+function sorted(list) {
+  const dir = S.desc ? -1 : 1;
+  return list.slice().sort((a, b) => {
+    if (S.sort === 'name') return a.name.localeCompare(b.name, 'zh-Hans-CN') * dir;
+    if (S.sort === 'bitrate') return ((a.bitrate || 0) - (b.bitrate || 0)) * dir;
+    return ((a.votes || 0) - (b.votes || 0)) * dir;
+  });
+}
+
+function hashHue(s) {
+  let h = 0;
+  for (const ch of String(s || '')) h = (h * 31 + ch.codePointAt(0)) % 360;
+  return h;
+}
+
+// 没有台标时用名称哈希出一个稳定的渐变块，比纯灰字更像图标
+function tileBg(name) {
+  const h = hashHue(name);
+  return 'background:linear-gradient(140deg,hsl(' + h + ' 58% 46%),hsl(' + ((h + 40) % 360) + ' 58% 32%));color:#fff';
+}
+
+// Material Symbols 的 radio 字形（Apache-2.0），用作无台标时的水印
+const RADIO_GLYPH = 'M160-80q-33 0-56.5-23.5T80-160v-480q0-25 13.5-45t36.5-29l506-206 26 66-330 134h468q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-280H160v280Zm231-69q29-29 29-71t-29-71q-29-29-71-29t-71 29q-29 29-29 71t29 71q29 29 71 29t71-29ZM160-520h480v-80h80v80h80v-120H160v120Zm0 360v-280 280Z';
+
+function tileInner(name) {
+  return '<svg class="logo-glyph" viewBox="0 -960 960 960" aria-hidden="true"><path d="' +
+    RADIO_GLYPH + '"/></svg>' +
+    '<span class="logo-ini">' + esc(initials(name)) + '</span>';
+}
+
+// 台标 404 时由内联 onerror 调用（需全局，所以放顶层 function 声明）
+function logoFallback(img) {
+  const box = img.parentNode;
+  if (!box) return;
+  img.remove();
+  box.innerHTML = tileInner(box.dataset.name || '');
+}
+
+// 有图就用图；没有就用「水印收音机 + 首字母」块
+function logoParts(st) {
+  const style = tileBg(st.name);
+  const html = st.favicon && /^https?:\/\//i.test(st.favicon)
+    ? '<img src="' + esc(st.favicon) + '" alt="" loading="lazy" referrerpolicy="no-referrer" ' +
+      'onerror="logoFallback(this)">'
+    : tileInner(st.name);
+  return { style, html, name: esc(st.name) };
+}
+
+function rowHTML(st) {
+  const fav = isFav(st);
+  const playing = S.current && keyOf(S.current) === keyOf(st);
+  const chips = [];
+  if (st.bitrate) chips.push('<span class="chip">' + st.bitrate + ' kbps</span>');
+  if (st.codec) chips.push('<span class="chip">' + esc(st.codec.toUpperCase()) + '</span>');
+  if (st.country) chips.push('<span class="chip">' + esc(st.country) + '</span>');
+  const tags = st.tags ? st.tags.split(',').map((t) => t.trim()).filter(Boolean).slice(0, 2) : [];
+  for (const t of tags) chips.push('<span class="chip acc">' + esc(t) + '</span>');
+  const isMine = S.view === 'mine';
+  const lp = logoParts(st);
+  return '<li class="station' + (playing ? ' playing' : '') + '" data-key="' + esc(keyOf(st)) + '">' +
+    '<button class="logo" data-act="play" title="播放" data-name="' + lp.name + '" style="' + lp.style + '">' +
+      lp.html +
+    '</button>' +
+    '<button class="station-main" data-act="play">' +
+      '<span style="min-width:0">' +
+        '<span class="st-name" style="display:block">' + esc(st.name) + '</span>' +
+        '<span class="st-sub" style="display:block">' +
+          (st.hls ? 'HLS 流' : (st.homepage ? esc(st.homepage.replace(/^https?:\/\//, '')) : '网络电台')) +
+        '</span>' +
+      '</span>' +
+    '</button>' +
+    '<div class="chips">' + chips.join('') + '</div>' +
+    '<div style="display:flex;flex:none">' +
+      '<button class="iconbtn' + (fav ? ' on' : '') + '" data-act="fav" title="收藏">' + (fav ? '♥' : '♡') + '</button>' +
+      (isMine ? '<button class="iconbtn" data-act="edit" title="编辑">✎</button>' +
+                '<button class="iconbtn" data-act="del" title="删除">✕</button>' : '') +
+    '</div>' +
+  '</li>';
+}
+
+function render() {
+  const list = $('list');
+  const grid = $('grid');
+  const empty = $('empty');
+  const keepScroll = $('listwrap').scrollTop;
+  $('favCount').textContent = S.favorites.length;
+  $('mineCount').textContent = S.mine.length;
+
+  if (S.view === 'world') return;
+
+  const items = sorted(S.stations);
+  S.visible = items;
+  grid.hidden = true;
+  grid.innerHTML = '';
+  setHeading(S.view, items.length);
+
+  if (!items.length) {
+    list.innerHTML = '';
+    empty.hidden = false;
+    if (S.view === 'favorites') empty.innerHTML = '<b>还没有收藏</b>在电台行上点 ♡ 加入收藏';
+    else if (S.view === 'mine') empty.innerHTML = '<b>还没有自己的电台</b><div style="margin-top:12px"><button class="btn sm primary" id="emptyAdd">添加一个</button></div>';
+    else if (S.view === 'search') empty.innerHTML = '<b>没有找到「' + esc(S.query) + '」</b>试试别的关键词或国家的英文名';
+    else empty.innerHTML = '<b>这里是空的</b>换个分类看看';
+    const add = $('emptyAdd');
+    if (add) add.onclick = openAddDialog;
+    return;
+  }
+  empty.hidden = true;
+  list.innerHTML = items.map(rowHTML).join('');
+  $('listwrap').scrollTop = keepScroll;
+}
+
+function renderWorld() {
+  const list = $('list');
+  const grid = $('grid');
+  const empty = $('empty');
+  list.innerHTML = '';
+  empty.hidden = true;
+  grid.hidden = false;
+  setHeading('world', 0);
+  const countries = S.world.countries.map((c) =>
+    '<button class="tile" data-cc="' + esc(c.iso_3166_1) + '"><b>' + esc(c.name) + '</b><span>' +
+    (c.stationcount || 0) + ' 个电台</span></button>').join('');
+  const tags = S.world.tags.map((t) =>
+    '<button class="tile" data-tag="' + esc(t.name) + '"><b>' + esc(t.name) + '</b><span>' +
+    (t.stationcount || 0) + ' 个电台</span></button>').join('');
+  grid.innerHTML =
+    '<div style="grid-column:1/-1;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 4px 2px">热门国家</div>' +
+    countries +
+    '<div style="grid-column:1/-1;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:16px 4px 2px">热门风格</div>' +
+    tags;
+}
+
+function skeleton() {
+  $('grid').hidden = true;
+  $('empty').hidden = true;
+  $('list').innerHTML = Array.from({ length: 8 }, () => '<li><div class="skeleton"></div></li>').join('');
+}
+
+function syncNav() {
+  for (const btn of document.querySelectorAll('#nav .nav-item')) {
+    btn.classList.toggle('active', btn.dataset.view === S.view);
+  }
+}
+
+
+/* ---------- playback ---------- */
+const STATUS = {
+  idle:    ['', '就绪'],
+  busy:    ['busy', '连接中…'],
+  buffering:['busy', '缓冲中…'],
+  playing: ['play', '正在播放'],
+  paused:  ['', '已暂停'],
+  error:   ['err', '无法播放'],
+};
+
+function setStatus(kind, text) {
+  const [cls, label] = STATUS[kind] || STATUS.idle;
+  $('barDot').className = 'dot ' + cls;
+  $('barStatus').textContent = text || label;
+  $('playBtn').textContent = kind === 'playing' ? '❚❚' : (kind === 'busy' || kind === 'buffering') ? '⋯' : '▶';
+  $('playBtn').title = kind === 'playing' ? '暂停' : '播放';
+}
+
+function updateBarLogo(st) {
+  const el = $('barLogo');
+  if (!st) {
+    el.removeAttribute('style');
+    el.textContent = 'i';
+    return;
+  }
+  const lp = logoParts(st);
+  el.dataset.name = lp.name;
+  el.setAttribute('style', lp.style);
+  el.innerHTML = lp.html;
+}
+
+function updateStage() {
+  const st = S.current;
+  const art = $('stageArt');
+  if (!st) {
+    art.removeAttribute('style');
+    art.innerHTML = 'i';
+    $('stageName').textContent = '未在播放';
+    $('stageSub').textContent = '从左侧选一个电台开始';
+    return;
+  }
+  const lp = logoParts(st);
+  art.dataset.name = lp.name;
+  art.setAttribute('style', lp.style);
+  art.innerHTML = lp.html;
+  $('stageName').textContent = st.name;
+  const bits = [st.country, st.bitrate ? st.bitrate + ' kbps' : '', st.codec ? st.codec.toUpperCase() : ''];
+  $('stageSub').textContent = bits.filter(Boolean).join(' · ') || '网络电台';
+}
+
+function setTrack(title, note) {
+  const el = $('trackTitle');
+  if (title) {
+    el.textContent = title;
+    el.classList.remove('dim');
+  } else {
+    el.textContent = '—';
+    el.classList.add('dim');
+  }
+  $('trackNote').textContent = note || '';
+  updateMediaSession();
+}
+
+function renderHistory() {
+  const ul = $('history');
+  ul.innerHTML = S.history.length
+    ? S.history.map((t) => '<li>' + esc(t) + '</li>').join('')
+    : '<li>暂无</li>';
+}
+
+function pushHistory(title) {
+  if (!title) return;
+  if (S.history[0] === title) return;
+  S.history = [title, ...S.history.filter((t) => t !== title)].slice(0, 30);
+  renderHistory();
+}
+
+async function playStation(st) {
+  if (!st) return;
+  const url = streamUrl(st).trim();
+  if (!url) { setStatus('error', '没有可用的流地址'); toast('这个电台没有流地址'); return; }
+  if (location.protocol === 'https:' && url.startsWith('http:')) {
+    setStatus('error', '被混合内容拦截');
+    toast('https 页面无法播放 http 流，请用本地 http 服务器打开本页');
+    return;
+  }
+
+  S.current = st;
+  S.history = [];
+  blocked = false;
+  renderHistory();
+  setTrack(null, '正在尝试读取曲目信息…');
+  setStatus('busy');
+  updateStage();
+  updateBarLogo(st);
+  $('barName').textContent = st.name;
+
+  // HLS 且浏览器没有原生支持 → 走 hls.js；否则普通 <audio> 流程
+  if (st.hls && !nativeHls()) {
+    const ok = await attachHls(st, url);
+    if (!ok) { persist(); render(); return; }
+  } else {
+    destroyHls();
+    audio.src = url;
+    audio.load();
+    try {
+      await audio.play();
+    } catch (err) {
+      const name = err && err.name;
+      if (name === 'AbortError') return; // 被新的播放请求取代
+      if (name === 'NotAllowedError') {
+        blocked = true;
+        setStatus('paused', '已就绪 · 点击播放');
+        toast('浏览器要求先点击一下页面才能播放');
+      } else {
+        setStatus('error', '无法开始播放');
+      }
+    }
+  }
+  startIcy(st);
+  startWatchdog();
+  persist();
+  render();
+}
+
+function togglePlay() {
+  if (!S.current) {
+    const first = S.visible[0] || S.stations[0];
+    if (first) playStation(first);
+    else toast('先选一个电台');
+    return;
+  }
+  if (audio.paused) {
+    if (!audio.src && S.current) { playStation(S.current); return; }
+    audio.play().catch(() => {});
+  } else {
+    audio.pause();
+  }
+}
+
+function stopPlayback() {
+  stopIcy();
+  destroyHls();
+  clearWatchdog();
+  blocked = false;
+  audio.pause();
+  audio.removeAttribute('src');
+  audio.load();
+  S.playing = false;
+  setStatus('idle');
+  setTrack(null, '');
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
+}
+
+function skip(delta) {
+  const list = S.visible.length ? S.visible : S.stations;
+  if (!list.length) return;
+  const i = S.current ? list.findIndex((s) => keyOf(s) === keyOf(S.current)) : -1;
+  const next = list[(i + delta + list.length) % list.length] || list[0];
+  playStation(next);
+}
+
+/* ---------- 连接看门狗 ---------- */
+let watchdog = null;
+let blocked = false;
+
+function startWatchdog(ms = 20000) {
+  clearWatchdog();
+  watchdog = setTimeout(() => {
+    if (blocked || S.playing || !S.current) return;
+    setStatus('error', '连接超时');
+    toast('20 秒内没有声音：可能是流已下线或网络被拦');
+    setTrack(null, '连接超时，可换个电台试试');
+  }, ms);
+}
+
+function clearWatchdog() {
+  if (watchdog) { clearTimeout(watchdog); watchdog = null; }
+}
+
+/* ---------- HLS：无原生支持时用 hls.js 兜底（CDN 按需加载） ---------- */
+const HLS_CDNS = [
+  'https://cdn.jsdelivr.net/npm/hls.js@1.7.4/dist/hls.light.min.mjs',
+  'https://unpkg.com/hls.js@1.7.4/dist/hls.light.min.mjs',
+  'https://cdn.jsdelivr.net/npm/hls.js@1.7.4/+esm',
+];
+let hlsInstance = null;
+let hlsLibPromise = null;
+
+// Chrome/Edge 返回 "maybe"（真的能放），Firefox 桌面返回 ""
+function nativeHls() {
+  return audio.canPlayType('application/vnd.apple.mpegurl') !== '';
+}
+
+function loadHlsLib() {
+  if (window.Hls) return Promise.resolve(window.Hls);
+  if (!hlsLibPromise) {
+    hlsLibPromise = (async () => {
+      let lastErr = null;
+      for (const href of HLS_CDNS) {
+        try {
+          const mod = await import(href);
+          const Hls = mod.default || mod.Hls || mod;
+          if (Hls && typeof Hls.isSupported === 'function') return Hls;
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      throw lastErr || new Error('hls.js 加载失败');
+    })().catch((err) => { hlsLibPromise = null; throw err; });
+  }
+  return hlsLibPromise;
+}
+
+function destroyHls() {
+  if (!hlsInstance) return;
+  try { hlsInstance.destroy(); } catch { /* 忽略 */ }
+  hlsInstance = null;
+}
+
+async function attachHls(st, url) {
+  let Hls;
+  try {
+    Hls = await loadHlsLib();
+  } catch {
+    setStatus('error', 'hls.js 加载失败');
+    toast('无法加载 hls.js（离线或被拦），这个 HLS 台播不了');
+    return false;
+  }
+  if (st !== S.current) return false; // 等待期间用户已换台
+  if (!Hls.isSupported()) {
+    setStatus('error', 'HLS 不受支持');
+    toast('这个浏览器没有 MSE，播不了 HLS');
+    return false;
+  }
+  destroyHls();
+  setStatus('busy', '加载 HLS…');
+  hlsInstance = new Hls({ enableWorker: true });
+  hlsInstance.on(Hls.Events.ERROR, (_evt, data) => {
+    if (!data || !data.fatal) return;
+    const code = data.response && data.response.code;
+    const REASONS = {
+      manifestLoadError: '播放列表取不到',
+      manifestParsingError: '播放列表格式无法解析',
+      manifestIncompatibleCodecsError: '流的编码不受支持',
+      levelLoadError: '码率列表加载失败',
+      levelParsingError: '码率列表解析失败',
+      fragLoadError: '分片加载失败',
+      fragParsingError: '分片解析失败',
+      bufferStalledError: '缓冲卡住（网络太慢）',
+      bufferAppendError: '浏览器拒绝该编码的音频数据',
+    };
+    const reason = REASONS[data.details] || data.details || data.type;
+    setStatus('error', 'HLS 失败' + (code ? ' HTTP ' + code : ''));
+    // 403 + manifestLoadError = 对方用 Origin 白名单挡掉了跨域请求，网页侧无解
+    if (code === 403 && data.details === 'manifestLoadError') {
+      toast('该电台只允许在自己的网站播放（Origin 白名单 403），网页里无法绕过');
+    } else if (data.details === 'manifestLoadError' && !code) {
+      // 跨域失败时浏览器不把状态码交给 JS，所以 code 为空也算同类嫌疑
+      toast('播放列表取不到：多半是对服务器不允许跨站读取（跨域白名单）');
+    } else {
+      toast('HLS 播放失败：' + reason + (code ? '（HTTP ' + code + '）' : ''));
+    }
+  });
+  hlsInstance.attachMedia(audio);
+  hlsInstance.loadSource(url);
+  try {
+    await audio.play();
+  } catch (err) {
+    if (err && err.name === 'NotAllowedError') {
+      blocked = true;
+      setStatus('paused', '已就绪 · 点击播放');
+      toast('浏览器要求先点击一下页面才能播放');
+    } else if (!(err && err.name === 'AbortError')) {
+      setStatus('error', '无法开始播放');
+    }
+  }
+  return true;
+}
+
+/* ---------- ICY (best effort) ---------- */
+let icyAbort = null;
+let icyTimer = null;
+
+function stopIcy() {
+  if (icyAbort) { try { icyAbort.abort(); } catch {} icyAbort = null; }
+  if (icyTimer) { clearInterval(icyTimer); icyTimer = null; }
+}
+
+function startIcy(st) {
+  stopIcy();
+  if (st && st.hls) {
+    // HLS 是分片传输，流里没有 ICY 元数据
+    setTrack(null, 'HLS 流不提供 ICY 曲目信息');
+    return;
+  }
+  probeIcy(st);
+  icyTimer = setInterval(() => probeIcy(st), 45000);
+}
+
+async function probeIcy(st) {
+  if (!st || st !== S.current) return;
+  stopIcy();
+  icyAbort = new AbortController();
+  const signal = icyAbort.signal;
+  let res;
+  try {
+    res = await fetch(streamUrl(st), {
+      signal,
+      mode: 'cors',
+      cache: 'no-store',
+      headers: { 'Icy-MetaData': '1' },
+    });
+  } catch {
+    setTrack(null, '曲目信息不可用：流的跨域请求被拒绝');
+    return;
+  }
+  const metaint = parseInt(res.headers.get('icy-metaint') || '', 10);
+  if (!res.ok || !res.body || !metaint) {
+    setTrack(null, res.ok ? '该电台未提供曲目元数据（ICY）' : '曲目信息不可用：HTTP ' + res.status);
+    return;
+  }
+
+  const reader = res.body.getReader();
+  let remaining = metaint;
+  let metaLen = 0;
+  let metaGot = 0;
+  let chunks = [];
+  let phase = 'audio';
+  let done = false;
+
+  const onMeta = () => {
+    const bytes = new Uint8Array(chunks.reduce((n, c) => n + c.length, 0));
+    let p = 0;
+    for (const c of chunks) { bytes.set(c, p); p += c.length; }
+    chunks = [];
+    const text = new TextDecoder('utf-8').decode(bytes).replace(/\0+$/, '');
+    const m = /StreamTitle='([^']*)'/.exec(text);
+    const title = m && m[1].trim();
+    if (title) {
+      setTrack(title, '来自流内 ICY 元数据');
+      pushHistory(title);
+      done = true;
+    }
+  };
+
+  try {
+    while (!done) {
+      const { value, done: eof } = await reader.read();
+      if (eof || !value) break;
+      let i = 0;
+      while (i < value.length && !done) {
+        if (phase === 'audio') {
+          const step = Math.min(remaining, value.length - i);
+          i += step;
+          remaining -= step;
+          if (remaining === 0) phase = 'len';
+        } else if (phase === 'len') {
+          metaLen = value[i] * 16;
+          i += 1;
+          metaGot = 0;
+          phase = metaLen > 0 ? 'meta' : 'audio';
+          if (metaLen === 0) remaining = metaint;
+        } else {
+          const take = Math.min(metaLen - metaGot, value.length - i);
+          chunks.push(value.subarray(i, i + take));
+          i += take;
+          metaGot += take;
+          if (metaGot >= metaLen) {
+            onMeta();
+            phase = 'audio';
+            remaining = metaint;
+          }
+        }
+      }
+    }
+  } catch {
+    if (!done) setTrack(null, '曲目信息中断（连接关闭）');
+  } finally {
+    try { await reader.cancel(); } catch {}
+    if (S.current === st && icyTimer === null) return;
+  }
+}
+
+/* ---------- media session ---------- */
+function updateMediaSession() {
+  if (!('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+  const st = S.current;
+  if (!st) { navigator.mediaSession.metadata = null; return; }
+  const artwork = st.favicon && /^https?:\/\//i.test(st.favicon)
+    ? [{ src: st.favicon, sizes: '512x512' }] : [];
+  const now = $('trackTitle').classList.contains('dim') ? st.name : $('trackTitle').textContent;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: now,
+      artist: st.name,
+      album: st.country || 'iRadio',
+      artwork,
+    });
+    navigator.mediaSession.playbackState = S.playing ? 'playing' : 'paused';
+  } catch {}
+}
+
+function setupMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+  const ms = navigator.mediaSession;
+  const safe = (action, fn) => { try { ms.setActionHandler(action, fn); } catch {} };
+  safe('play', () => audio.play().catch(() => {}));
+  safe('pause', () => audio.pause());
+  safe('stop', stopPlayback);
+  safe('nexttrack', () => skip(1));
+  safe('previoustrack', () => skip(-1));
+}
+
+/* ---------- favorites / my stations ---------- */
+function toggleFav(st) {
+  if (!st) return;
+  const wasFav = isFav(st);
+  if (wasFav) {
+    S.favorites = S.favorites.filter((f) => keyOf(f) !== keyOf(st));
+    toast('已从收藏移除');
+  } else {
+    S.favorites = [st, ...S.favorites];
+    toast('已加入收藏');
+  }
+  save(LS.fav, S.favorites);
+  $('favCount').textContent = S.favorites.length;
+  if (S.view === 'favorites') {
+    // 在收藏页取消收藏会改变列表内容，需要重绘；其余情况只改这一行，不丢滚动位置
+    S.stations = S.favorites.slice();
+    render();
+  } else {
+    const row = document.querySelector('#list .station[data-key="' + cssEsc(keyOf(st)) + '"]');
+    const btn = row && row.querySelector('[data-act="fav"]');
+    if (btn) {
+      const on = isFav(st);
+      btn.textContent = on ? '♥' : '♡';
+      btn.classList.toggle('on', on);
+    }
+  }
+  syncBarFav();
+}
+
+function cssEsc(s) { return String(s).replace(/["\\]/g, '\\$&'); }
+
+function syncBarFav() {
+  const on = S.current && isFav(S.current);
+  $('favBtn').textContent = on ? '♥' : '♡';
+  $('favBtn').classList.toggle('on', !!on);
+}
+
+function persist() {
+  save(LS.state, {
+    last: S.current ? keyOf(S.current) : null,
+    station: S.current,
+    volume: audio.volume,
+  });
+}
+
+/* ---------- dialogs ---------- */
+let editingKey = null;
+
+function openAddDialog() {
+  editingKey = null;
+  $('dlgTitle').textContent = '添加电台';
+  $('dlgName').value = '';
+  $('dlgUrl').value = '';
+  $('dlgTags').value = '';
+  $('dlgCountry').value = '';
+  $('dlg').showModal();
+  setTimeout(() => $('dlgName').focus(), 30);
+}
+
+function openEditDialog(st) {
+  editingKey = keyOf(st);
+  $('dlgTitle').textContent = '编辑电台';
+  $('dlgName').value = st.name;
+  $('dlgUrl').value = st.url;
+  $('dlgTags').value = st.tags || '';
+  $('dlgCountry').value = st.country || '';
+  $('dlg').showModal();
+}
+
+function saveDialog() {
+  const name = $('dlgName').value.trim();
+  const url = $('dlgUrl').value.trim();
+  if (!name || !url) { toast('名称和流地址都不能为空'); return; }
+  if (!/^https?:\/\//i.test(url)) { toast('流地址需要以 http:// 或 https:// 开头'); return; }
+  const entry = norm({
+    id: 'local-' + (editingKey ? editingKey.replace(/^local-/, '') : Date.now().toString(36)),
+    name,
+    url,
+    url_resolved: url,
+    tags: $('dlgTags').value.trim(),
+    country: $('dlgCountry').value.trim(),
+    favicon: '',
+    votes: 0,
+  });
+  if (editingKey) {
+    S.mine = S.mine.map((m) => (keyOf(m) === editingKey ? entry : m));
+    if (S.current && keyOf(S.current) === editingKey) { S.current = entry; stopPlayback(); }
+  } else {
+    S.mine = [entry, ...S.mine];
+  }
+  save(LS.mine, S.mine);
+  $('dlg').close();
+  toast(editingKey ? '已保存修改' : '已添加电台');
+  if (S.view === 'mine') { S.stations = S.mine.slice(); render(); }
+  $('mineCount').textContent = S.mine.length;
+}
+
+
+/* ---------- import / export：对齐 BearWave favorites.json ---------- */
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+// 原生版需要 UUID；手动电台没有就从 id 派一个并记住，保证反复导出稳定
+function exportUuid(st, kind) {
+  if (UUID_RE.test(st.id || '')) return st.id;
+  if (!UUID_RE.test(st.uuid || '')) {
+    st.uuid = crypto.randomUUID();
+    save(kind === 'mine' ? LS.mine : LS.fav, kind === 'mine' ? S.mine : S.favorites);
+  }
+  return st.uuid;
+}
+
+// 字段与 Qt 版一致，且按 QJsonObject 的字母序输出（country, name, url, urlResolved, uuid）
+function exportArray(kind) {
+  const list = kind === 'mine' ? S.mine : S.favorites;
+  const arr = list.filter((st) => streamUrl(st)).map((st) => ({
+    country: st.country || '',
+    name: st.name || '',
+    url: st.url || streamUrl(st),
+    urlResolved: streamUrl(st),
+    uuid: exportUuid(st, kind),
+  }));
+  arr.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+  return arr;
+}
+
+// Qt 用 QJsonDocument::Indented（4 空格 + 末尾换行）
+const exportText = (kind) => JSON.stringify(exportArray(kind), null, 4) + '\n';
+
+function downloadJson(filename, text) {
+  const blob = new Blob([text], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+}
+
+// 原生 JSON 只有 5 个字段，没有 favicon：导入后向 Radio Browser 回填台标
+async function enrichMissingLogos(list) {
+  const missing = (list || []).filter(
+    (st) => st && (!st.favicon || !/^https?:\/\//i.test(st.favicon))
+  );
+  if (!missing.length) return 0;
+  const found = new Map();
+
+  // 1) 有 uuid 的批量查（一次最多 50 个）
+  const byUuid = missing.filter((st) => UUID_RE.test(st.id || ''));
+  for (let i = 0; i < byUuid.length; i += 50) {
+    const batch = byUuid.slice(i, i + 50).map((st) => st.id);
+    try {
+      const data = await api('/json/stations/byuuid?uuids=' + encodeURIComponent(batch.join(',')));
+      for (const s of data || []) {
+        if (s && s.stationuuid && /^https?:\/\//i.test(s.favicon || '')) found.set(s.stationuuid, s.favicon);
+      }
+    } catch { /* 单个批次失败就跳过 */ }
+  }
+
+  // 2) 剩下没 uuid 的按名称匹配（限制数量，避免刷爆 API）
+  const rest = missing.filter((st) => !found.has(st.id)).slice(0, 25);
+  for (const st of rest) {
+    try {
+      const data = await api('/json/stations/byname/' + encodeURIComponent(st.name) +
+        '?limit=15&hidebroken=true');
+      const arr = Array.isArray(data) ? data : [];
+      const hit = arr.find((s) => (s.url_resolved || s.url) === streamUrl(st)) || arr[0];
+      if (hit && /^https?:\/\//i.test(hit.favicon || '')) found.set(st.id, hit.favicon);
+    } catch { /* 忽略 */ }
+  }
+
+  let n = 0;
+  for (const st of list) {
+    const favicon = found.get(st.id);
+    if (favicon && favicon !== st.favicon) {
+      st.favicon = favicon;
+      n++;
+    }
+  }
+  return n;
+}
+
+function persistPools(refresh) {
+  save(LS.fav, S.favorites);
+  save(LS.mine, S.mine);
+  $('favCount').textContent = S.favorites.length;
+  $('mineCount').textContent = S.mine.length;
+  if (S.view === 'favorites') S.stations = S.favorites.slice();
+  else if (S.view === 'mine') S.stations = S.mine.slice();
+  if (refresh !== false && (S.view === 'favorites' || S.view === 'mine')) render();
+}
+
+async function importJson(text) {
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error('不是合法 JSON');
+  }
+  if (!Array.isArray(data)) throw new Error('顶层需要是数组');
+
+  const target = $('ioTarget').value;
+  const pool = target === 'mine' ? S.mine : S.favorites;
+  let added = 0;
+  let skipped = 0;
+  const newOnes = [];
+  for (const o of data) {
+    if (!o || typeof o !== 'object') { skipped++; continue; }
+    const playable = (o.urlResolved || o.url || '').trim();
+    if (!/^https?:\/\//i.test(playable)) { skipped++; continue; }
+    const st = norm({
+      stationuuid: o.uuid, name: o.name, url: o.url, url_resolved: playable, country: o.country,
+      favicon: o.favicon, tags: o.tags, bitrate: o.bitrate, codec: o.codec,
+    });
+    if (!streamUrl(st) || pool.some((x) => keyOf(x) === keyOf(st))) { skipped++; continue; }
+    st.uuid = o.uuid || undefined;
+    pool.push(st);
+    newOnes.push(st);
+    added++;
+  }
+  persistPools(false);
+  return { added, skipped, newOnes, target };
+}
+
+/* ---------- station lookup ---------- */
+function findStation(key) {
+  const pools = [S.stations, S.visible, S.favorites, S.mine];
+  for (const pool of pools) {
+    const hit = (pool || []).find((s) => keyOf(s) === key);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+/* ---------- events ---------- */
+function wire() {
+  $('nav').addEventListener('click', (e) => {
+    const btn = e.target.closest('.nav-item');
+    if (btn) loadView(btn.dataset.view);
+  });
+
+  $('list').addEventListener('click', (e) => {
+    const li = e.target.closest('.station');
+    if (!li) return;
+    const st = findStation(li.dataset.key);
+    if (!st) return;
+    const actEl = e.target.closest('[data-act]');
+    const act = actEl ? actEl.dataset.act : 'play';
+    if (act === 'fav') return toggleFav(st);
+    if (act === 'edit') return openEditDialog(st);
+    if (act === 'del') {
+      S.mine = S.mine.filter((m) => keyOf(m) !== keyOf(st));
+      save(LS.mine, S.mine);
+      S.stations = S.mine.slice();
+      render();
+      toast('已删除');
+      return;
+    }
+    playStation(st);
+  });
+
+  $('grid').addEventListener('click', (e) => {
+    const tile = e.target.closest('.tile');
+    if (!tile) return;
+    if (tile.dataset.cc) loadView('country:' + tile.dataset.cc);
+    else if (tile.dataset.tag) loadView('tag:' + tile.dataset.tag);
+  });
+
+  let searchTimer = null;
+  $('search').addEventListener('input', (e) => {
+    clearTimeout(searchTimer);
+    const q = e.target.value.trim();
+    searchTimer = setTimeout(() => {
+      if (!q) return loadView(S.view === 'search' ? 'top' : S.view, { keepQuery: true });
+      S.query = q;
+      S.view = 'search';
+      syncNav();
+      loadView('search', { keepQuery: true });
+    }, 350);
+  });
+
+  $('sortSel').addEventListener('change', (e) => { S.sort = e.target.value; render(); });
+  $('orderBtn').addEventListener('click', () => {
+    S.desc = !S.desc;
+    $('orderBtn').textContent = S.desc ? '↓' : '↑';
+    render();
+  });
+  $('themeBtn').addEventListener('click', () => {
+    // 循环：跟随系统 → 浅色 → 深色
+    setThemeMode(THEME_MODES[(THEME_MODES.indexOf(themeMode) + 1) % THEME_MODES.length]);
+  });
+  $('addBtn').addEventListener('click', openAddDialog);
+  $('aboutBtn').addEventListener('click', () => $('aboutDlg').showModal());
+
+  $('ioBtn').addEventListener('click', () => {
+    $('ioStatus').textContent = '';
+    $('ioDlg').showModal();
+  });
+  $('expFavBtn').addEventListener('click', () => {
+    downloadJson('favorites.json', exportText('favorites'));
+    $('ioStatus').textContent = '已导出 ' + S.favorites.length + ' 个收藏到 favorites.json';
+    toast('favorites.json 已下载，可直接覆盖到 ~/.config/bearwave/');
+  });
+  $('expMineBtn').addEventListener('click', () => {
+    downloadJson('my_stations.json', exportText('mine'));
+    $('ioStatus').textContent = '已导出 ' + S.mine.length + ' 个自建电台到 my_stations.json';
+  });
+  $('copyFavBtn').addEventListener('click', async () => {
+    const text = exportText('favorites');
+    try {
+      await navigator.clipboard.writeText(text);
+      $('ioStatus').textContent = '已复制 ' + S.favorites.length + ' 个收藏到剪贴板';
+    } catch {
+      downloadJson('favorites.json', text);
+      $('ioStatus').textContent = '剪贴板不可用，已改为下载文件';
+    }
+  });
+  $('impBtn').addEventListener('click', () => $('impFile').click());
+  $('logoBtn').addEventListener('click', async () => {
+    $('ioStatus').textContent = '正在向 Radio Browser 查台标…';
+    const list = [...S.favorites, ...S.mine];
+    const filled = await enrichMissingLogos(list).catch(() => 0);
+    persistPools(true);
+    if (S.current) { updateStage(); updateBarLogo(S.current); }
+    $('ioStatus').textContent = filled ? '已补齐 ' + filled + ' 个台标' : '没有找到可补的台标（原格式本身不存台标）';
+    if (filled) toast('已补齐 ' + filled + ' 个台标');
+  });
+  $('impFile').addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    try {
+      const { added, skipped, newOnes } = await importJson(await file.text());
+      $('ioStatus').textContent = '导入 ' + added + ' 个，正在补齐台标…';
+      const filled = added ? await enrichMissingLogos(newOnes).catch(() => 0) : 0;
+      persistPools(true);
+      $('ioStatus').textContent = '导入完成：新增 ' + added +
+        (filled ? '（已补齐 ' + filled + ' 个台标）' : '（原格式不存台标，显示首字母块）') +
+        '，跳过 ' + skipped + '（重复或地址无效）';
+      toast('导入完成：新增 ' + added + ' 个');
+    } catch (err) {
+      $('ioStatus').textContent = '导入失败：' + err.message;
+      toast('导入失败：' + err.message);
+    } finally {
+      e.target.value = '';
+    }
+  });
+
+  $('playBtn').addEventListener('click', togglePlay);
+  $('stopBtn').addEventListener('click', stopPlayback);
+  $('nextBtn').addEventListener('click', () => skip(1));
+  $('prevBtn').addEventListener('click', () => skip(-1));
+  $('favBtn').addEventListener('click', () => {
+    if (!S.current) return toast('还没有选中的电台');
+    toggleFav(S.current);
+  });
+
+  $('vol').addEventListener('input', (e) => {
+    audio.volume = Number(e.target.value) / 100;
+    persist();
+  });
+
+  $('dlgSave').addEventListener('click', saveDialog);
+  $('dlgCancel').addEventListener('click', () => $('dlg').close());
+  $('dlgForm').addEventListener('submit', (e) => { e.preventDefault(); saveDialog(); });
+
+  audio.addEventListener('loadstart', () => { if (!blocked) setStatus('busy', '连接中…'); });
+  audio.addEventListener('waiting', () => { if (!blocked) setStatus('buffering', '缓冲中…'); });
+  audio.addEventListener('stalled', () => { if (!blocked) setStatus('buffering', '缓冲中…'); });
+  audio.addEventListener('playing', () => {
+    S.playing = true;
+    blocked = false;
+    clearWatchdog();
+    setStatus('playing');
+    updateMediaSession();
+  });
+  audio.addEventListener('pause', () => {
+    S.playing = false;
+    if (audio.currentSrc) setStatus('paused');
+    updateMediaSession();
+  });
+  audio.addEventListener('error', () => {
+    S.playing = false;
+    const map = {
+      1: '播放被中断',
+      2: '网络错误（流可能需要 CORS / 并非真的音频流）',
+      3: '解码失败（可能是 HLS 或不支持的编码）',
+      4: '流地址不可用或格式不支持',
+    };
+    const code = audio.error ? audio.error.code : 4;
+    const msg = map[code] || '无法播放';
+    setStatus('error', msg);
+    if (S.current && S.current.hls && (code === 3 || code === 4)) {
+      toast('这个 HLS 流在当前浏览器里播不了：Chrome / Edge 142+ 与 Safari 支持，Firefox 桌面不支持');
+    } else {
+      toast('无法播放：' + msg);
+    }
+    updateMediaSession();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    const typing = tag === 'input' || tag === 'select' || tag === 'textarea';
+    if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f')) {
+      e.preventDefault();
+      $('search').focus();
+      $('search').select();
+      return;
+    }
+    if (e.code === 'Space' && !typing) {
+      e.preventDefault();
+      togglePlay();
+    }
+  });
+
+  setupMediaSession();
+}
+
+/* ---------- boot ---------- */
+wire();
+setStatus('idle');
+renderHistory();
+// 默认落在收藏页（没有收藏时才回退到排行，避免新用户打开是一片空页）
+const startView = S.favorites.length ? 'favorites' : 'top';
+setHeading(startView, startView === 'favorites' ? S.favorites.length : 0);
+$('favCount').textContent = S.favorites.length;
+$('mineCount').textContent = S.mine.length;
+
+// 音量：默认 80%，有保存值就用保存值（与滑块始终保持一致）
+const DEFAULT_VOLUME = 0.8;
+const savedVolume = savedState && typeof savedState.volume === 'number'
+  ? savedState.volume : DEFAULT_VOLUME;
+audio.volume = Math.min(1, Math.max(0, savedVolume));
+$('vol').value = String(Math.round(audio.volume * 100));
+
+if (savedState && savedState.station && streamUrl(savedState.station)) {
+  S.current = norm(savedState.station);
+  updateStage();
+  updateBarLogo(S.current);
+  $('barName').textContent = S.current.name;
+  setStatus('paused', '上次播放 · 按播放继续');
+  syncBarFav();
+}
+
+loadView(startView);
+
+// 后台补齐收藏 / 自建电台缺失的台标（原生 JSON 不存 favicon）
+if (S.favorites.length || S.mine.length) {
+  enrichMissingLogos([...S.favorites, ...S.mine])
+    .then((filled) => {
+      if (!filled) return;
+      persistPools(false);
+      if (S.view === 'favorites' || S.view === 'mine') render();
+      if (S.current) { updateStage(); updateBarLogo(S.current); }
+    })
+    .catch(() => {});
+}
+
+</script>
+</body>
+</html>
