@@ -69,13 +69,13 @@
       # hands that path to builtins.getFlake, so every `nix-update --flake`
       # dies with "No such file or directory". Prefetch instead: same path,
       # now materialised, and its JSON spells it storePath.
-      nix-update = prev.nix-update.overrideAttrs (old: {
-        postPatch = (old.postPatch or "") + ''
-          substituteInPlace nix_update/options.py \
-            --replace-fail '"flake", "metadata"' '"flake", "prefetch"' \
-            --replace-fail 'metadata.get("path")' 'metadata.get("storePath")'
-        '';
-      });
+      # nix-update = prev.nix-update.overrideAttrs (old: {
+      #   postPatch = (old.postPatch or "") + ''
+      #     substituteInPlace nix_update/options.py \
+      #       --replace-fail '"flake", "metadata"' '"flake", "prefetch"' \
+      #       --replace-fail 'metadata.get("path")' 'metadata.get("storePath")'
+      #   '';
+      # });
 
       # sing-box = prev.sing-box.overrideAttrs (finalAttrs: {
       #   version = "1.15.0-alpha.13";
