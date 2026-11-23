@@ -213,6 +213,10 @@ dialog::backdrop{background:rgba(0,0,0,.55)}
 .io-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .io-status{font-size:12px;color:var(--accent-2);min-height:16px}
 
+/* 桌面用侧栏，手机用横向导航条（基础隐藏，媒体查询里打开） */
+.mnav{display:none}
+.mobile-only{display:none!important}
+
 @media (max-width:1180px){
   .app{grid-template-columns:224px minmax(0,1fr);grid-template-areas:"side main" "bar bar"}
   .stage{display:none}
@@ -223,6 +227,33 @@ dialog::backdrop{background:rgba(0,0,0,.55)}
   .vol{display:none}
   .station{grid-template-columns:36px minmax(0,1fr) auto}
   .station .chips{display:none}
+
+  /* 手机上侧栏隐藏，改用横向滚动的导航条 */
+  .mnav{
+    display:flex;flex:none;gap:6px;padding:8px 12px;overflow-x:auto;
+    border-bottom:1px solid var(--border);background:var(--panel);
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .mnav::-webkit-scrollbar{display:none}
+  .mnav .nav-item{
+    width:auto;flex:none;padding:7px 12px;border-radius:999px;font-size:13px;white-space:nowrap;
+    color:var(--text);background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--border);
+  }
+  .mnav .nav-item.active{background:var(--accent);color:#1a1206;box-shadow:none;font-weight:600}
+  .mnav .nav-item .ico{display:none}
+  .mobile-only{display:inline-block!important;width:auto;padding:0 11px}
+  .mnav .nav-item .cnt{margin-left:5px;font-size:10px;opacity:.7;font-variant-numeric:tabular-nums}
+
+  .topbar{padding:10px 12px;gap:8px}
+  .mnav{gap:5px;padding:8px 10px}
+  .search .kbd{display:none}
+  .pagebar{padding:10px 14px}
+  .bar{gap:8px;padding:8px 12px}
+  .bar .logo{width:36px;height:36px}
+  .bar-name{font-size:13.5px}
+  .bar-status{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tbtn{width:34px;height:34px}
+  .tbtn.main{width:42px;height:42px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -242,14 +273,21 @@ dialog::backdrop{background:rgba(0,0,0,.55)}
       <button class="nav-item" data-view="country:CN"><span class="ico">CN</span>中国</button>
       <button class="nav-item" data-view="world"><span class="ico">◎</span>World 浏览</button>
       <div class="nav-label">我的</div>
-      <button class="nav-item" data-view="favorites"><span class="ico">♥</span>收藏<span class="cnt" id="favCount">0</span></button>
-      <button class="nav-item" data-view="mine"><span class="ico">＋</span>我的电台<span class="cnt" id="mineCount">0</span></button>
+      <button class="nav-item" data-view="favorites"><span class="ico">♥</span>收藏<span class="cnt" id="favCount" data-cnt="fav">0</span></button>
+      <button class="nav-item" data-view="mine"><span class="ico">＋</span>我的电台<span class="cnt" id="mineCount" data-cnt="mine">0</span></button>
     </nav>
     <button class="btn sm ghost" id="ioBtn">导入 / 导出</button>
     <button class="btn sm ghost" id="aboutBtn">关于 / 已知限制</button>
   </aside>
 
   <main class="main">
+    <nav class="mnav" id="mnav">
+      <button class="nav-item" data-view="top"><span class="ico">▲</span>Top</button>
+      <button class="nav-item" data-view="country:CN"><span class="ico">CN</span>中国</button>
+      <button class="nav-item" data-view="world"><span class="ico">◎</span>World</button>
+      <button class="nav-item" data-view="favorites"><span class="ico">♥</span>收藏<span class="cnt" data-cnt="fav">0</span></button>
+      <button class="nav-item" data-view="mine"><span class="ico">＋</span>我的<span class="cnt" data-cnt="mine">0</span></button>
+    </nav>
     <div class="topbar">
       <div class="search">
         <span style="color:var(--muted)">⌕</span>
@@ -263,6 +301,8 @@ dialog::backdrop{background:rgba(0,0,0,.55)}
       </select>
       <button class="btn sm ghost" id="orderBtn" title="切换升序 / 降序">↓</button>
       <button class="btn sm ghost" id="themeBtn" title="主题：跟随系统 — 点击切换">◐</button>
+      <button class="btn sm ghost mobile-only" id="ioBtnM" title="导入 / 导出收藏与自建电台">导入</button>
+      <button class="btn sm ghost mobile-only" id="aboutBtnM" title="关于 / 已知限制">关于</button>
       <button class="btn sm primary" id="addBtn">添加电台</button>
     </div>
     <div class="pagebar">
@@ -759,8 +799,8 @@ function render() {
   const grid = $('grid');
   const empty = $('empty');
   const keepScroll = $('listwrap').scrollTop;
-  $('favCount').textContent = S.favorites.length;
-  $('mineCount').textContent = S.mine.length;
+  setCount('fav', S.favorites.length);
+  setCount('mine', S.mine.length);
 
   if (S.view === 'world') return;
 
@@ -813,8 +853,14 @@ function skeleton() {
   $('list').innerHTML = Array.from({ length: 8 }, () => '<li><div class="skeleton"></div></li>').join('');
 }
 
+// 计数同时更新侧栏与手机导航条（两处都有 [data-cnt]）
+function setCount(kind, n) {
+  for (const el of document.querySelectorAll('[data-cnt="' + kind + '"]')) el.textContent = n;
+}
+
 function syncNav() {
-  for (const btn of document.querySelectorAll('#nav .nav-item')) {
+  // 侧栏和手机导航条共用同一套 .nav-item[data-view]
+  for (const btn of document.querySelectorAll('.nav-item[data-view]')) {
     btn.classList.toggle('active', btn.dataset.view === S.view);
   }
 }
@@ -1246,7 +1292,7 @@ function toggleFav(st) {
     toast('已加入收藏');
   }
   save(LS.fav, S.favorites);
-  $('favCount').textContent = S.favorites.length;
+  setCount('fav', S.favorites.length);
   if (S.view === 'favorites') {
     // 在收藏页取消收藏会改变列表内容，需要重绘；其余情况只改这一行，不丢滚动位置
     S.stations = S.favorites.slice();
@@ -1328,7 +1374,7 @@ function saveDialog() {
   $('dlg').close();
   toast(editingKey ? '已保存修改' : '已添加电台');
   if (S.view === 'mine') { S.stations = S.mine.slice(); render(); }
-  $('mineCount').textContent = S.mine.length;
+  setCount('mine', S.mine.length);
 }
 
 
@@ -1419,8 +1465,8 @@ async function enrichMissingLogos(list) {
 function persistPools(refresh) {
   save(LS.fav, S.favorites);
   save(LS.mine, S.mine);
-  $('favCount').textContent = S.favorites.length;
-  $('mineCount').textContent = S.mine.length;
+  setCount('fav', S.favorites.length);
+  setCount('mine', S.mine.length);
   if (S.view === 'favorites') S.stations = S.favorites.slice();
   else if (S.view === 'mine') S.stations = S.mine.slice();
   if (refresh !== false && (S.view === 'favorites' || S.view === 'mine')) render();
@@ -1470,10 +1516,12 @@ function findStation(key) {
 
 /* ---------- events ---------- */
 function wire() {
-  $('nav').addEventListener('click', (e) => {
+  const onNav = (e) => {
     const btn = e.target.closest('.nav-item');
-    if (btn) loadView(btn.dataset.view);
-  });
+    if (btn && btn.dataset.view) loadView(btn.dataset.view);
+  };
+  $('nav').addEventListener('click', onNav);
+  $('mnav').addEventListener('click', onNav);
 
   $('list').addEventListener('click', (e) => {
     const li = e.target.closest('.station');
@@ -1526,12 +1574,14 @@ function wire() {
     setThemeMode(THEME_MODES[(THEME_MODES.indexOf(themeMode) + 1) % THEME_MODES.length]);
   });
   $('addBtn').addEventListener('click', openAddDialog);
-  $('aboutBtn').addEventListener('click', () => $('aboutDlg').showModal());
+  const openAbout = () => $('aboutDlg').showModal();
+  for (const id of ['aboutBtn', 'aboutBtnM']) $(id).addEventListener('click', openAbout);
 
-  $('ioBtn').addEventListener('click', () => {
+  const openIo = () => {
     $('ioStatus').textContent = '';
     $('ioDlg').showModal();
-  });
+  };
+  for (const id of ['ioBtn', 'ioBtnM']) $(id).addEventListener('click', openIo);
   $('expFavBtn').addEventListener('click', () => {
     downloadJson('favorites.json', exportText('favorites'));
     $('ioStatus').textContent = '已导出 ' + S.favorites.length + ' 个收藏到 favorites.json';
@@ -1658,8 +1708,8 @@ renderHistory();
 // 默认落在收藏页（没有收藏时才回退到排行，避免新用户打开是一片空页）
 const startView = S.favorites.length ? 'favorites' : 'top';
 setHeading(startView, startView === 'favorites' ? S.favorites.length : 0);
-$('favCount').textContent = S.favorites.length;
-$('mineCount').textContent = S.mine.length;
+setCount('fav', S.favorites.length);
+setCount('mine', S.mine.length);
 
 // 音量：默认 80%，有保存值就用保存值（与滑块始终保持一致）
 const DEFAULT_VOLUME = 0.8;
