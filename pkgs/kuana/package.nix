@@ -1,5 +1,6 @@
 {
   lib,
+  stdenv,
   rustPlatform,
   fetchFromGitHub,
   pkg-config,
@@ -7,12 +8,13 @@
   fontconfig,
   freetype,
   zstd,
+  sqlite,
   aws-lc,
   rust-jemalloc-sys,
   alsa-lib,
   libxkbcommon,
   wayland,
-  xorg,
+  libxcb,
   libglvnd,
   vulkan-loader,
   makeWrapper,
@@ -51,6 +53,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
     fontconfig
     freetype
     zstd
+    # rusqlite asks upstream for its bundled copy; Nix's cargo hook points it at
+    # the system SQLite instead.
+    sqlite
     alsa-lib
     # rustls, which the database and SSH clients bring in, signs with AWS-LC;
     # nixpkgs' crate override links that instead of a bundled copy.
@@ -60,7 +65,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     rust-jemalloc-sys
     libxkbcommon
     wayland
-    xorg.libxcb
+    libxcb
   ];
 
   env = {
@@ -76,8 +81,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 target/release/kuana $out/bin/kuana
-    install -Dm755 target/release/kuana-server $out/bin/kuana-server
+    bin=target/${stdenv.hostPlatform.rust.cargoShortTarget}/release
+    install -Dm755 $bin/kuana $out/bin/kuana
+    install -Dm755 $bin/kuana-server $out/bin/kuana-server
 
     install -Dm644 assets/app-icon/linux/dev.kuana.editor.desktop \
       $out/share/applications/dev.kuana.editor.desktop
@@ -88,11 +94,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
     runHook postInstall
   '';
 
-  # Vulkan and glvnd are dlopen'd, so they are not in the binary's RPATH.
+  # GPUI loads its Wayland client, Vulkan and GL at run time, so they are not in
+  # the binary's RPATH and have to be on LD_LIBRARY_PATH.
   postFixup = ''
     wrapProgram $out/bin/kuana \
       --prefix LD_LIBRARY_PATH : "${
         lib.makeLibraryPath [
+          wayland
           libglvnd
           vulkan-loader
         ]
@@ -108,7 +116,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       ofl
     ];
     platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ zendo ];
     mainProgram = "kuana";
   };
 })
