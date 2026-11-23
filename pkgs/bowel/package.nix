@@ -12,17 +12,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "bowel";
-  version = "0.4.6";
+  version = "0.4.7";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "21stware";
     repo = "bowel";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-2e4QjIAcgyuZ7L1Fs5W3l0XG7benizQfR5LmiJWwcb0=";
+    hash = "sha256-EHpwcStVX9XqV5k+g8nHqgWpjakOwlcmYf6nzpIAFpY=";
   };
 
-  vendorHash = "sha256-Ya2PWmFqEUArZ5HcydGajksLGCc0+HLhvljPwfNEnpk=";
+  vendorHash = "sha256-ynTnuxL3yU7mbOocW+7a0u2TyiEQC25X7aiztq3FiYg=";
 
   nativeBuildInputs = [ makeWrapper ];
 
