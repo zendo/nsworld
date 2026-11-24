@@ -12,14 +12,14 @@
 
 buildGoModule (finalAttrs: {
   pname = "bowel";
-  version = "0.4.7";
+  version = "0.4.8";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "21stware";
     repo = "bowel";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-EHpwcStVX9XqV5k+g8nHqgWpjakOwlcmYf6nzpIAFpY=";
+    hash = "sha256-3ldqmd+Ex+i2HC9YEqzlcqMG9uSxBrH6gMl+NR/+JSo=";
   };
 
   vendorHash = "sha256-ynTnuxL3yU7mbOocW+7a0u2TyiEQC25X7aiztq3FiYg=";
