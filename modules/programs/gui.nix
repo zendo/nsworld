@@ -16,6 +16,7 @@
         rwx
         # rox
         sonora
+        yunting
         # neiro
         bearwave
         mygo-music
