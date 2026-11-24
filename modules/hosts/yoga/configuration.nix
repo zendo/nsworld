@@ -37,8 +37,8 @@ in
 
         # [ desktop ]
         graphical
-        gnome
-        # kde
+        # gnome
+        kde
         # cosmic
         # niri
         # sway
@@ -122,9 +122,22 @@ in
         # [ nix ]
         nix-init
         nix-update
+        # Qt 文字渲染 hook，见下面 environment.variables
+        fontreal
         # inputs.omniflake.pinned.nix-alien.packages.${stdenv.hostPlatform.system}.nix-alien
         # inputs.nixpkgs-pr.legacyPackages.${stdenv.hostPlatform.system}.apps
       ];
+
+      # fontreal 是 Qt 通用插件（generic plugin），会话里只要有 Qt6 程序就会加载。
+      # Qt 在 QT_PLUGIN_PATH 的每一项下面找子目录 generic/，所以这里给的是
+      # plugins 目录，不是 plugins/generic（给错一层就会静默地什么都不加载）。
+      # 追加搜索路径，不会顶掉 Qt 默认的插件目录；fcitx5 已用列表形式定义它，
+      # 这里也必须是列表才能合并。
+      environment.variables = {
+        QT_PLUGIN_PATH = [ "${pkgs.fontreal}/lib/fontreal/qt6/plugins" ];
+        QT_QPA_GENERIC_PLUGINS = "fontreal-cached-probe,fontreal-quick-default-probe";
+        FONTREAL_QUAL_TONE = "1";
+      };
 
       # nix.package = pkgs.lixPackageSets.stable.lix;
       # nix.package = inputs.determinate.packages.${pkgs.stdenv.hostPlatform.system}.default;
