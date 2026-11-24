@@ -15,6 +15,7 @@
         # zfiletimemachine
         rwx
         # rox
+        pigma
         sonora
         yunting
         # neiro
