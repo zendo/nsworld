@@ -47,10 +47,12 @@ rustPlatform.buildRustPackage (finalAttrs: {
   '';
 
   meta = {
-    description = "Bash plugin for modern command line editing";
+    description = "Bash plugin to replace readline for a modern line editing experience";
     longDescription = ''
-      Flyline: a Bash plugin to replace readline for a modern line editing experience:
-      syntax highlighting, agent integration, rich prompts, tooltips, fuzzy history search, and more.
+      Flyline is a Bash loadable builtin (a dynamic library dlopen()ed by Bash)
+      that adds a rich line editor: inline suggestions, fuzzy tab completion,
+      configurable keybindings and prompts. Enable it in an interactive shell
+      with `enable -f ''${pkgs.flyline}/lib/libflyline.so flyline`.
     '';
     homepage = "https://github.com/HalFrgrd/flyline";
     changelog = "https://github.com/HalFrgrd/flyline/releases/tag/${finalAttrs.src.tag}";
