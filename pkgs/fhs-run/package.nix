@@ -125,6 +125,7 @@ buildFHSEnv {
       # qt6.qtdeclarative # libQt6QuickControls2.so.6
       # qt6.qtmultimedia
       # kdePackages.mpvqt # libMpvQt.so.4
+      # kdePackages.qtpositioning
 
       # --- X11 -------------------------------------------------------------
       (p.lib.getLib p.libx11)
