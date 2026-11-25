@@ -31,6 +31,7 @@
           # alegreya # for comfortable reading
           lexend # improve reading fluency
           goeist-font
+          nordwand-mono
         ];
       }
 
