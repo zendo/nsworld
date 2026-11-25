@@ -27,6 +27,7 @@
         mareader
         breeze
         # venerax
+        ghost-downloader
         # pixora-icons
 
         # [ wrapper ]
