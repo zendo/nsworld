@@ -70,7 +70,13 @@
                 while True:
                     if not select.select([fd], [], [], 5)[0]:
                         continue
-                    data = os.read(fd, 24 * 256)
+                    try:
+                        data = os.read(fd, 24 * 256)
+                    except OSError:
+                        # 节点被重载/设备重新枚举，回外层重新找。-ENODEV 不会返回空串，
+                        # 只能靠异常判断，否则整个服务会以 status=1 掉一次。
+                        log("节点失效，重新查找")
+                        break
                     if not data:
                         break
                     if not any(
@@ -101,6 +107,9 @@
       systemd.services.touchpad-watch = {
         description = "Reload hid-multitouch when the touchpad falls back to mouse mode";
         wantedBy = [ "graphical.target" ];
+        # 开机那次重载会把节点号换掉，先让它跑完再开始监视。
+        wants = [ "touchpad-reload-boot.service" ];
+        after = [ "touchpad-reload-boot.service" ];
         serviceConfig = {
           ExecStart = watch;
           Restart = "always";
