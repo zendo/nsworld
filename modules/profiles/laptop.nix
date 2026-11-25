@@ -4,7 +4,7 @@
     {
       services = {
         # 固件更新服务
-        fwupd.enable = true;
+        # fwupd.enable = true;
         # 只服务 Intel 热管理，AMD 上的对应物是 amd_pstate + PPD
         # thermald.enable = true;
 
