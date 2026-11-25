@@ -17,14 +17,14 @@
 
 buildGo127Module (finalAttrs: {
   pname = "mygo-music";
-  version = "0.1.25";
+  version = "0.1.26";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "egoist";
     repo = "mygo-music";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-SDzmceRbQ8uPgWHQhhhHB55ZYIgsHQct0QGPGblGEmc=";
+    hash = "sha256-mZAOGMnOSLmxR61iEjt7pp0TosA0oBwMel9xvuQHyws=";
   };
 
   vendorHash = "sha256-CgAnPtjfDxOxjVvIG8zvMXwbrqjhF3spEqXEagQSIvE=";
