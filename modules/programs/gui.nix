@@ -17,7 +17,6 @@
         # rox
         pigma
         sonora
-        yunting
         # neiro
         bearwave
         mygo-music
