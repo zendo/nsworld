@@ -6,8 +6,16 @@
     programs.fzf = {
       # ls **
       fuzzyCompletion = true;
-      # Ctrl+r / Ctrl+t / Alt+c
-      keybindings = true;
+      # Ctrl-r/Ctrl-t/Alt-c
+      keybindings = false;
+    };
+
+    # sqlite-backed history: Ctrl-R
+    programs.stinkpot = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
     };
 
     # env | rg STARSHIP
