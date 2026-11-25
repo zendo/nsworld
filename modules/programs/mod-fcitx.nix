@@ -29,6 +29,10 @@
           }
         ];
 
+        # 把 fcitx5 的用户配置目录重定向到会话私有 tmpfs，避免首次启动生成的
+        # ~/.config/fcitx5 遮蔽 /etc/xdg/fcitx5（声明式配置）；词库在 ~/.local/share 不受影响。
+        # environment.sessionVariables.FCITX_CONFIG_HOME = "$XDG_RUNTIME_DIR/fcitx5";
+
         i18n.inputMethod = {
           enable = true;
           type = "fcitx5";
