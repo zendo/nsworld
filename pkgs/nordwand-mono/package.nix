@@ -1,7 +1,7 @@
 {
   lib,
-  stdenvNoCC,
   fetchzip,
+  stdenvNoCC,
   installFonts,
 }:
 

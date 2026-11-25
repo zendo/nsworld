@@ -12,6 +12,7 @@
           shell-integration-features = "no-cursor,sudo"; # ssh-terminfo,ssh-env
           # custom-shader = "${pkgs.ghostty-cursor-shaders}/cursor_warp.glsl";
           font-family = [
+            "Nordwand Mono"
             "Maple Mono NL NF CN" # 拉丁 + CJK + Nerd 图标
             "Maple Mono"
             "Noto Sans CJK SC" # 注意：不存在 "Noto Sans SC"
