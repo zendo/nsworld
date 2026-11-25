@@ -24,6 +24,10 @@
       checkReversePath = "loose";
       # 被拒连接不写 journal(默认就是 false,写出来免得以后莫名被打开刷屏)
       logRefusedConnections = false;
+
+      # mihomo 给 LAN 里其它设备当代理用。UDP 也得开,mixed-port 同时提供 UDP relay。
+      allowedTCPPorts = [ 7890 ];
+      allowedUDPPorts = [ 7890 ];
     };
 
   };
