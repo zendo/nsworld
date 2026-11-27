@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Motty
+Comment=Desktop SSH client with terminal, SFTP, port forwarding and an AI assistant
+Exec=@out@/bin/motty %U
+Icon=motty
+Terminal=false
+Categories=System;Network;
+Keywords=ssh;sftp;terminal;remote;
+MimeType=text/markdown;x-scheme-handler/ssh;x-scheme-handler/telnet;x-scheme-handler/sftp;
+StartupWMClass=motty
