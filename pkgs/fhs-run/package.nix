@@ -1,12 +1,10 @@
-/*
-  # https://nixmultiverse.com/
-  nix-build ~/nsworld/pkgs/fhs-run/package.nix --arg pkgs \
-    'import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz") {}'
-    'import (fetchTarball "https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz") {}'
-  ./result/bin/fhs-run ./app
-*/
 {
-  pkgs ? import <nixpkgs> { },
+  # https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz
+  pkgs ?
+    import
+      (fetchTarball "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz")
+      { },
+  # https://nixmultiverse.com/
   multiverse ? null,
 }:
 let
