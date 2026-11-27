@@ -1,9 +1,10 @@
 {
   # https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz
-  pkgs ?
-    import
-      (fetchTarball "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz")
-      { },
+  # pkgs ?
+  #   import
+  #     (fetchTarball "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz")
+  #     { },
+  pkgs ? import <nixpkgs> { },
   # https://nixmultiverse.com/
   multiverse ? null,
 }:
@@ -124,6 +125,9 @@ buildFHSEnv {
       # qt6.qtmultimedia
       # kdePackages.mpvqt # libMpvQt.so.4
       # kdePackages.qtpositioning
+      # kdePackages.kirigami.unwrapped
+      # kdePackages.kcoreaddons
+      # kdePackages.knotifications
 
       # --- X11 -------------------------------------------------------------
       (p.lib.getLib p.libx11)
