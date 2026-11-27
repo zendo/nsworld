@@ -33,9 +33,6 @@ in
         # fm.homeManager.secrets
         fm.homeManager.links
         fm.homeManager.xdg
-      ]
-      ++ lib.optionals nixosConfig.services.desktopManager.plasma6.enable [
-        fm.homeManager.plasma-manager
       ];
     };
   };
