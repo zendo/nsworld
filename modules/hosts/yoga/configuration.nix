@@ -69,6 +69,21 @@ in
       security.sudo-rs.wheelNeedsPassword = false;
       security.run0.wheelNeedsPassword = false;
 
+      /*
+        ssh-add ~/.ssh/id_ed25519
+        ssh-add -l
+        echo "$SSH_AUTH_SOCK"
+        ssh -T git@ssh.github.com -p 443
+      */
+      programs.ssh.startAgent = !config.services.gnome.gcr-ssh-agent.enable;
+      # OpenSSH 的 ssh-agent 不预加载任何 key,不自动添加的话 forwardAgent
+      # 转发出去的是空 agent,远端照样拿不到 key。这里的 key 没有 passphrase,
+      # 所以登录时静默添加;主机上没有这个 key 时，不能让 unit 失败,
+      # 否则 Restart=on-failure 会反复重启。
+      systemd.user.services.ssh-agent = lib.mkIf config.programs.ssh.startAgent {
+        serviceConfig.ExecStartPost = "${pkgs.bash}/bin/bash -c 'SSH_AUTH_SOCK=%t/ssh-agent ${pkgs.openssh}/bin/ssh-add -q %h/.ssh/id_ed25519 || true'";
+      };
+
       # [ services ]
       # systemd.user.services.neiro.enable = true;
 
