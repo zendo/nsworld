@@ -17,7 +17,7 @@
       environment.systemPackages =
         with pkgs;
         [
-          gparted
+          kde-backup
           # [ plasma widgets ]
           kurve
           plasmusic-toolbar
