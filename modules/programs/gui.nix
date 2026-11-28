@@ -20,6 +20,7 @@
         # neiro
         bearwave
         # mygo-music
+        yesplaymusic
         # fusion
         # agent-one
         bowel
