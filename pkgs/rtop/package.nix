@@ -8,16 +8,16 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "rtop";
-  version = "1.0.0";
+  version = "1.2.0";
 
   src = fetchFromGitHub {
     owner = "swedishembedded";
     repo = "rtop";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-h+d9g0zaZrENOhV3ynbYF3WZxI1h+S5eDOfSG5WieQI=";
+    hash = "sha256-hi7T5HhmTjpAQC9lsiAV/z2CKbwwiSHp/2kyoXDoJYo=";
   };
 
-  cargoHash = "sha256-KYJcy46TLSG943qwaVDLAyfkKQDYdr4LOEDyL4BDzmo=";
+  cargoHash = "sha256-cF6t0+2pM0gRLwd8TX4IliAg2pgno/+jlrH+wG+uLQU=";
 
   nativeBuildInputs = [ installShellFiles ];
 
