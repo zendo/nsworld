@@ -18,12 +18,12 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "sonora";
-  version = "0.48.1";
+  version = "0.50.3";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/sonorahq/sonora/releases/download/v${finalAttrs.version}/sonora-v${finalAttrs.version}-x86_64.flatpak";
-    hash = "sha256-N+z8E4Al1tC/KdHPvCBueXB+jfkYhvmOSHFUtlLbIRk=";
+    hash = "sha256-mBJ6n2ByOFsbLclD+XQ+xOvdpXi1uJ0wz99+4dHBfPc=";
   };
 
   nativeBuildInputs = [
