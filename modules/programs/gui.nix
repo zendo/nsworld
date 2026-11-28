@@ -20,6 +20,7 @@
         # neiro
         bearwave
         # mygo-music
+        rustle
         yesplaymusic
         # fusion
         # agent-one
