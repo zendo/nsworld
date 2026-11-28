@@ -41,7 +41,11 @@ buildGoModule (finalAttrs: {
     stage=build/linux-$GOARCH
     install -Dm755 "$stage/sshyard" $out/libexec/sshyard
 
-    install -Dm644 "$stage/sshyard.png" $out/share/icons/hicolor/1024x1024/apps/sshyard.png
+    # The stage carries the single 1024x1024 source icon. Icon themes only
+    # look up the sizes their index declares (hicolor stops at 512), so a
+    # 1024x1024 directory is never found and desktop entries and window
+    # lists show no icon. Loaders scale the one file down as needed.
+    install -Dm644 "$stage/sshyard.png" $out/share/icons/hicolor/512x512/apps/sshyard.png
     install -Dm644 "$stage/sshyard.desktop" $out/share/applications/sshyard.desktop
 
     install -Dm644 LICENSE $out/share/licenses/sshyard/LICENSE
