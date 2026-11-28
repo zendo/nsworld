@@ -32,9 +32,6 @@ buildGoModule (finalAttrs: {
     runHook postBuild
   '';
 
-  # Tests need a display and network access
-  doCheck = false;
-
   # Kept out of bin/, MyGo uses its executable name as window class
   # and app id, which makeWrapper would change to .bowel-wrapped
   installPhase = ''
@@ -70,11 +67,15 @@ buildGoModule (finalAttrs: {
       }"
   '';
 
+  # Tests need network access
+  doCheck = false;
+
   passthru.updateScript = nix-update-script { };
 
   meta = {
-    description = "Desktop client for mihomo";
-    homepage = "https://github.com/21stware/bowel";
+    description = "Cross-platform mihomo proxy client";
+    homepage = "https://bowel.dev";
+    downloadPage = "https://github.com/21stware/bowel";
     changelog = "https://github.com/21stware/bowel/blob/${finalAttrs.src.tag}/CHANGELOG.md";
     license = [
       (lib.licenses.mkLicense {
@@ -84,8 +85,8 @@ buildGoModule (finalAttrs: {
         free = false;
         redistributable = true;
       })
-      lib.licenses.mit # Round country flag icons from circle-flags by HatScripts
-      lib.licenses.ofl # the bundled fonts: Raise Sans, Jost, IBM Plex Mono
+      lib.licenses.mit # round country flag icons from circle-flags by HatScripts
+      lib.licenses.ofl # bundled fonts: Raise Sans, Jost, IBM Plex Mono
     ];
     platforms = [
       "x86_64-linux"
