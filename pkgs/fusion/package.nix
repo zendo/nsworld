@@ -13,17 +13,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "fusion";
-  version = "1.3.0";
+  version = "1.3.2";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "0x2E";
     repo = "fusion";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-C37NsdddzSgpoj+/+k1EcVVInXDu4REBvhGYGgYHwuE=";
+    hash = "sha256-dEblOBZCJJmxzhhGdaEh3pGnzxWJWuKkmGj00MUKg1k=";
   };
 
-  vendorHash = "sha256-kemQKSbqFj5Z6unZGjPGKW718DeH2IJXsdZOQmBCiJA=";
+  vendorHash = "sha256-SImLr9AKkXuhvT/2dEB0V0X40ZYeUSYA9goPzqFQZso=";
 
   modRoot = "backend";
   subPackages = [ "cmd/fusion" ];
