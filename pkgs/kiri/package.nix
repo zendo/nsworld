@@ -17,7 +17,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "libracoder";
     repo = "kiri";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-NsBH+3HfrTjN2j+3gSFj5vivG/a7A8KVb8v5PxDA2Fg=";
+    hash = "sha256-2+LeqhRGaI1Pj9+1ebCPs9Hvddo23cQ0MXkzZFYdDow=";
   };
 
   cargoHash = "sha256-92B5sB7WHDH2vhX8sk95Vcb3GAcDanO8VTGVf1IXcg4=";
