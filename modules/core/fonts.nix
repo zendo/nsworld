@@ -30,7 +30,7 @@
           # comic-relief
           # alegreya # for comfortable reading
           lexend # improve reading fluency
-          goeist-font
+          # goeist-font
           nordwand-mono
         ];
       }

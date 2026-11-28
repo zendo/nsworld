@@ -87,10 +87,10 @@ in
       # [ services ]
       # systemd.user.services.neiro.enable = true;
 
-      virtualisation.kiri = {
-        enable = true;
-        users = [ "${userName}" ];
-      };
+      # virtualisation.kiri = {
+      #   enable = true;
+      #   users = [ "${userName}" ];
+      # };
 
       # [ selfhosted ]
       # services.homepage-dashboard.enable = true;

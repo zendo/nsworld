@@ -8,19 +8,19 @@
     {
       environment.systemPackages = with pkgs; [
         geetree
-        image-combine
-        slimdeer
+        # image-combine
+        # slimdeer
         portop
-        spor
+        # spor
         # zfiletimemachine
-        rwx
+        # rwx
         # rox
         pigma
         sonora
         # neiro
         bearwave
-        mygo-music
-        fusion
+        # mygo-music
+        # fusion
         # agent-one
         bowel
         # zen-notes
