@@ -28,7 +28,7 @@
         mareader
         breeze
         # venerax
-        # motty
+        sshyard
         # ghost-downloader
         # pixora-icons
 
