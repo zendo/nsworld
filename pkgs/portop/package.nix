@@ -7,14 +7,14 @@
 
 buildGoModule (finalAttrs: {
   pname = "portop";
-  version = "0.4.0";
+  version = "0.4.1";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "padovanl";
     repo = "portop";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-rKojm88W+3t46RpyPjicuHtxTrnZmrhrRw+HhESti+I=";
+    hash = "sha256-O/nsdJcbSGhO6rPAR8cBmvvZOSaQjvzMP/EvnNMqlXQ=";
   };
 
   vendorHash = "sha256-rx7CH/P9gm5fq+91sFs07qz+ElI06aUzNTptMfWRS4w=";
