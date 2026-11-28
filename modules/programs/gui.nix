@@ -23,7 +23,6 @@
         fusion
         # agent-one
         bowel
-        nutstore
         # zen-notes
         mareader
         breeze
