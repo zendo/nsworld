@@ -13,12 +13,12 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "venerax";
-  version = "3.0.0";
+  version = "3.0.3";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/Kyosee/VeneraX/releases/download/v${finalAttrs.version}/VeneraX-${finalAttrs.version}-amd64.deb";
-    hash = "sha256-ltJHNhFe6SQTbYW2t067wsBiwszhe10fsOu+HryBiLg=";
+    hash = "sha256-f14etEzLwj2otk2ktriU2pBYhxgoEigQf6YX3T26J1o=";
   };
 
   nativeBuildInputs = [
