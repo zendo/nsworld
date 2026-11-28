@@ -7,13 +7,13 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "pixora-icons";
-  version = "0-unstable-2026-11-15";
+  version = "0-unstable-2026-11-20";
 
   src = fetchFromGitHub {
     owner = "tsora1603";
     repo = "pixora-icons";
-    rev = "5fa28ec084a74c2742adf3609b5b2d3ed79b9f05";
-    hash = "sha256-WBojo7YufvjIjKSm2qevcM0NDAs/cTsySk8hm6pCtU0=";
+    rev = "4b3ba3616e128a893730d85dcbf0227f61699d0c";
+    hash = "sha256-HbGzGEXp1cHbMl7uKm744eCXGibRx1bB6npeLqziW0o=";
   };
 
   installPhase = ''
