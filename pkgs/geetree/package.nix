@@ -15,12 +15,12 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "geetree";
-  version = "0.7.0";
+  version = "0.7.1";
   __structuredAttrs = true;
 
   src = fetchurl {
     url = "https://github.com/cmzy/geetree/releases/download/v${finalAttrs.version}/GeeTree_amd64.deb";
-    hash = "sha256-rS0AVW+Z3ue4LVn+jZW8zLOneyLLWZXWs8vvLvIkDs0=";
+    hash = "sha256-vQ6BQR9dFYjFHas9Idy7hW7/pyZS7z3FqiTV+yfckRU=";
   };
 
   nativeBuildInputs = [
