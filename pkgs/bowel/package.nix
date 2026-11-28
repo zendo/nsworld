@@ -48,13 +48,9 @@ buildGoModule (finalAttrs: {
     install -Dm644 "$stage/bowel-512x512.png" $out/share/icons/hicolor/512x512/apps/bowel.png
     install -Dm644 "$stage/bowel.desktop" $out/share/applications/bowel.desktop
 
-    install -Dm644 LICENSE $out/share/licenses/bowel/LICENSE
-    install -Dm644 PACKAGING-EXCEPTION.md $out/share/licenses/bowel/PACKAGING-EXCEPTION.md
+    install -Dm644 LICENSE PACKAGING-EXCEPTION.md -t $out/share/licenses/bowel
+    install -Dm644 "$stage/fonts/"*License.txt -t $out/share/licenses/bowel
     install -Dm644 assets/flags/LICENSE.md $out/share/licenses/bowel/flags-LICENSE.md
-
-    install -Dm644 "$stage/fonts/Raise Sans License.txt" $out/share/licenses/bowel/Raise-Sans-License.txt
-    install -Dm644 "$stage/fonts/Jost License.txt" $out/share/licenses/bowel/Jost-License.txt
-    install -Dm644 "$stage/fonts/IBM Plex Mono License.txt" $out/share/licenses/bowel/IBM-Plex-Mono-License.txt
 
     runHook postInstall
   '';
