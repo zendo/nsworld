@@ -20,24 +20,24 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "zfiletimemachine";
-  version = "0.2.0";
+  version = "0.3.0";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "TheHolyOneZ";
     repo = "ZFileTimeMachine";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-vrPUzKH/Vf9qUC914ZPpa8vclFLJmfK8cOZKdSPLEgw=";
+    hash = "sha256-KCrt79ZxNz0bP/XNQ1D3897fehrO3Tdp4mMWSxFEcSw=";
   };
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
     pnpm = pnpm_10;
     fetcherVersion = 4;
-    hash = "sha256-aGimEKX6mcyKmcUP+GbKWtIORS1XrKbnXrPI4rkomL8=";
+    hash = "sha256-5Xc6nyz7lFuBybVZitQ/5MSRuIf0VomWUm0DIResEA8=";
   };
 
-  cargoHash = "sha256-b1VpMIDAz0A+rqk1dH7V4m1JBjimJyTN1RYvSKEv5jQ=";
+  cargoHash = "sha256-hbCTPtY30CbWF4AiejBmSVMXcgMRVsr+mWh23JIoxqw=";
 
   cargoRoot = "src-tauri";
   buildAndTestSubdir = finalAttrs.cargoRoot;
