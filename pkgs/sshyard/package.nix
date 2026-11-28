@@ -12,17 +12,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "sshyard";
-  version = "1.7.0";
+  version = "1.8.0";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "Licoy";
     repo = "sshyard";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-d/aUkc+9oBPFLelDBVi3T3UBVHFSD2gJQT8tUYZOKuo=";
+    hash = "sha256-tIM1lBDdGh6r7XwA2PtiqjjSUAiDi2XIY59smwYzX6k=";
   };
 
-  vendorHash = "sha256-Wg7iSL8Ve6edMLAvPHoYFhS1lhSUHpaFSRC3sQYmb80=";
+  vendorHash = "sha256-CWtoEdL5+XKkDbW0DpGXDUHeCR2i6dt9BBVJjfnp36Q=";
 
   nativeBuildInputs = [ makeWrapper ];
 
