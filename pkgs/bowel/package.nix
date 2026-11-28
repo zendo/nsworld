@@ -12,17 +12,17 @@
 
 buildGoModule (finalAttrs: {
   pname = "bowel";
-  version = "0.4.9";
+  version = "0.4.10";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "21stware";
     repo = "bowel";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-4IcagFr8RRqrsB6025cMKoKJZ/nBOZAt5xWhA2+cjKo=";
+    hash = "sha256-+M0CqvreVCNZrmlwOD+YLYAl03UsCkYQNTjKR7HNALQ=";
   };
 
-  vendorHash = "sha256-ynTnuxL3yU7mbOocW+7a0u2TyiEQC25X7aiztq3FiYg=";
+  vendorHash = "sha256-VyppSQJJnwhmo5bAUHBudchucBR+if4wJp9uhXThmhQ=";
 
   nativeBuildInputs = [ makeWrapper ];
 
@@ -42,6 +42,7 @@ buildGoModule (finalAttrs: {
 
     stage=build/linux-$GOARCH
     install -Dm755 "$stage/bowel" $out/libexec/bowel
+    cp -r "$stage/fonts" $out/libexec/fonts
 
     install -Dm644 "$stage/bowel-256x256.png" $out/share/icons/hicolor/256x256/apps/bowel.png
     install -Dm644 "$stage/bowel-512x512.png" $out/share/icons/hicolor/512x512/apps/bowel.png
@@ -51,10 +52,12 @@ buildGoModule (finalAttrs: {
     install -Dm644 PACKAGING-EXCEPTION.md $out/share/licenses/bowel/PACKAGING-EXCEPTION.md
     install -Dm644 assets/flags/LICENSE.md $out/share/licenses/bowel/flags-LICENSE.md
 
+    install -Dm644 "$stage/fonts/Raise Sans License.txt" $out/share/licenses/bowel/Raise-Sans-License.txt
+    install -Dm644 "$stage/fonts/Jost License.txt" $out/share/licenses/bowel/Jost-License.txt
+    install -Dm644 "$stage/fonts/IBM Plex Mono License.txt" $out/share/licenses/bowel/IBM-Plex-Mono-License.txt
+
     runHook postInstall
   '';
-  # cp -r "$stage/fonts" $out/libexec
-  # install -Dm644 "$stage/fonts/OPPO Sans License.txt" $out/share/licenses/bowel/OPPO-Sans-License.txt
 
   # MOHO_CORE: use system mihomo instead of the bundled core
   # APPIMAGE: keep the autostart entry a bare command, not a /nix/store path
@@ -86,6 +89,7 @@ buildGoModule (finalAttrs: {
         redistributable = true;
       })
       lib.licenses.mit # Round country flag icons from circle-flags by HatScripts
+      lib.licenses.ofl # the bundled fonts: Raise Sans, Jost, IBM Plex Mono
     ];
     platforms = [
       "x86_64-linux"
